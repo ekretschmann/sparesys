@@ -24,10 +24,53 @@
 			</li>
 		</ul>
 		<ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
-			<li class="dropdown">
+
+            <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown" >
+                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                    Administration <b class="caret"></b>
+                </a>
+                <ul class="dropdown-menu">
+                    <!--<li>-->
+                    <!--<a href="/#!/courses">Find</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="/#!/users">Users</a>
+                    </li>
+                    <!--<li class="divider"></li>-->
+                    <!--<li>-->
+                    <!--<a href="/#!/courses-info">Info</a>-->
+                    <!--</li>-->
+                </ul>
+            </li>
+
+
+            <!--<li ui-route="/courses" ng-class="{active: $uiRoute}" class="dropdown">-->
+                <!--<a href="#" class="dropdown-toggle" data-toggle="dropdown">-->
+                    <!--Master Courses <b class="caret"></b>-->
+                <!--</a>-->
+                <!--<ul class="dropdown-menu">-->
+                    <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a href="/#!/courses">Find</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                    <!--<li>-->
+                        <!--<a href="/#!/courses/create">Create</a>-->
+                    <!--</li>-->
+                    <!--&lt;!&ndash;<li class="divider"></li>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<li>&ndash;&gt;-->
+                        <!--&lt;!&ndash;<a href="/#!/courses-info">Info</a>&ndash;&gt;-->
+                    <!--&lt;!&ndash;</li>&ndash;&gt;-->
+                <!--</ul>-->
+            <!--</li>-->
+
+
+            <li class="dropdown">
 				<a href="#" class="dropdown-toggle" data-toggle="dropdown">
                     {{authentication.user.displayName}} <b class="caret"></b>
                 </a>
+
+
+
+
 				<ul class="dropdown-menu">
 					<li>
 						<a href="/#!/settings/profile">Edit Profile</a>

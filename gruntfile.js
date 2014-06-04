@@ -19,7 +19,7 @@ module.exports = function(grunt) {
                 }
             },
             clientViews: {
-                files: ['public/modules/**/views/*.html'],
+                files: ['public/modules/**/views/**/*.html'],
                 options: {
                     livereload: true
                 }

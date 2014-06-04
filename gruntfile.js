@@ -8,34 +8,34 @@ module.exports = function(grunt) {
             serverViews: {
                 files: ['app/views/**'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             },
             serverJS: {
                 files: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js'],
                 tasks: ['jshint'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             },
             clientViews: {
                 files: ['public/modules/**/views/*.html'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             },
             clientJS: {
                 files: ['public/js/**/*.js', 'public/modules/**/*.js'],
                 tasks: ['jshint'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             },
             clientCSS: {
                 files: ['public/**/css/*.css'],
                 tasks: ['csslint'],
                 options: {
-                    livereload: true,
+                    livereload: true
                 }
             }
         },
@@ -49,7 +49,7 @@ module.exports = function(grunt) {
         },
         csslint: {
             options: {
-                csslintrc: '.csslintrc',
+                csslintrc: '.csslintrc'
             },
             all: {
                 src: ['public/modules/**/css/*.css']
@@ -100,7 +100,8 @@ module.exports = function(grunt) {
         },
         karma: {
             unit: {
-                configFile: 'karma.conf.js'
+                configFile: 'karma.conf.js',
+                autoWatch: true
             }
         }
     });
@@ -113,7 +114,7 @@ module.exports = function(grunt) {
 
     // A Task for loading the configuration object
     grunt.task.registerTask('loadConfig', 'Task that loads the config into a grunt option.', function() {
-    	var init = require('./config/init')();
+//    	var init = require('./config/init')();
     	var config = require('./config/config');
 
     	grunt.config.set('applicationJavaScriptFiles', config.assets.js);
@@ -131,4 +132,6 @@ module.exports = function(grunt) {
 
     // Test task.
     grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+
+    grunt.loadNpmTasks('grunt-karma');
 };

@@ -1,0 +1,14 @@
+<section data-ng-controller="CoursesController" data-ng-init="find()">
+    <div class="page-header">
+        <h1>Courses</h1>
+    </div>
+    <div class="list-group">
+        <a data-ng-repeat="course in courses" data-ng-href="#!/courses/{{course._id}}" class="list-group-item">
+            <small class="list-group-item-text">{{course.created | date:'medium'}} / {{course.user.displayName}}</small>
+            <h4 class="list-group-item-heading">{{course.name}}</h4>
+        </a>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!courses.$resolved || courses.length">
+    	No Courses yet, why don't you <a href="/#!/courses/create">create one</a>?
+    </div>
+</section>

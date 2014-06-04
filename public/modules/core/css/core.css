@@ -59,10 +59,10 @@ body {
     border-bottom: 1px solid #e5e5e5;
 
 }
-.jumbotron .btn {
-    font-size: 21px;
-    padding: 14px 24px;
-}
+/*.jumbotron .btn {*/
+    /*font-size: 21px;*/
+    /*padding: 14px 24px;*/
+/*}*/
 
 /* Supporting marketing content */
 .marketing {
@@ -95,36 +95,36 @@ body {
 
 /* Custom dialog/modal headers */
 
-.dialog-header-error { background-color: #d2322d; }
-.dialog-header-wait { background-color: #428bca; }
-.dialog-header-notify { background-color: #eeeeee; }
-.dialog-header-confirm { background-color: #333333; }
-.dialog-header-error span, .dialog-header-error h4,
-.dialog-header-wait span, .dialog-header-wait h4,
-.dialog-header-confirm span, .dialog-header-confirm h4 { color: #ffffff; }
+/*.dialog-header-error { background-color: #d2322d; }*/
+/*.dialog-header-wait { background-color: #428bca; }*/
+/*.dialog-header-notify { background-color: #eeeeee; }*/
+/*.dialog-header-confirm { background-color: #333333; }*/
+/*.dialog-header-error span, .dialog-header-error h4,*/
+/*.dialog-header-wait span, .dialog-header-wait h4,*/
+/*.dialog-header-confirm span, .dialog-header-confirm h4 { color: #ffffff; }*/
 
 /* Ease Display */
 
-.pad { padding: 25px; }
+/*.pad { padding: 25px; }*/
 
-.item {
-    width: 95%;
-    height: 40px;
-    padding: 2px 4px;
-    margin: 2px 0;
-    border: 1px solid #444;
-    border-radius: 3px;
-    background-color: #DDDDDD;
+/*.item {*/
+    /*width: 95%;*/
+    /*height: 40px;*/
+    /*padding: 2px 4px;*/
+    /*margin: 2px 0;*/
+    /*border: 1px solid #444;*/
+    /*border-radius: 3px;*/
+    /*background-color: #DDDDDD;*/
 
-    font-size: 1.1em;
-    font-weight: bold;
-    text-align: left;
-    cursor: move;
-}
+    /*font-size: 1.1em;*/
+    /*font-weight: bold;*/
+    /*text-align: left;*/
+    /*cursor: move;*/
+/*}*/
 
-.list {
-    padding-top: 10px;
-}
+/*.list {*/
+    /*padding-top: 10px;*/
+/*}*/
 
 /* Fix for Bootstrap 3 with Angular UI Bootstrap */
 /*.modal {*/

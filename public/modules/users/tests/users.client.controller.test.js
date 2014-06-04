@@ -70,25 +70,25 @@
 			expect(scope.users).toEqualData(sampleUsers);
 		}));
 
-//		it('$scope.findOne() should create an array with one Course object fetched from XHR using a courseId URL parameter', inject(function(Courses) {
-//			// Define a sample Course object
-//			var sampleCourse = new Courses({
-//				name: 'New Course'
-//			});
-//
-//			// Set the URL parameter
-//			$stateParams.courseId = '525a8422f6d0f87f0e407a33';
-//
-//			// Set GET response
-//			$httpBackend.expectGET(/courses\/([0-9a-fA-F]{24})$/).respond(sampleCourse);
-//
-//			// Run controller functionality
-//			scope.findOne();
-//			$httpBackend.flush();
-//
-//			// Test scope value
-//			expect(scope.course).toEqualData(sampleCourse);
-//		}));
+		it('$scope.findOne() should create an array with one User object fetched from XHR using a courseId URL parameter', inject(function(Users) {
+			// Define a sample User object
+			var sampleUser = new Users({
+                firstName: 'John'
+			});
+
+			// Set the URL parameter
+			$stateParams.userId = '525a8422f6d0f87f0e407a33';
+
+			// Set GET response
+			$httpBackend.expectGET(/users\/([0-9a-fA-F]{24})$/).respond(sampleUser);
+
+			// Run controller functionality
+			scope.findOne();
+			$httpBackend.flush();
+
+			// Test scope value
+			expect(scope.user).toEqualData(sampleUser);
+		}));
 //
 //		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Courses) {
 //			// Create a sample Course object

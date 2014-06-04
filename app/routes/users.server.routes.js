@@ -10,6 +10,8 @@ module.exports = function(app) {
 	var users = require('../../app/controllers/users');
 
 
+    app.route('/users/:userId').get(users.read);
+
 	app.route('/users/me').get(users.me);
 	app.route('/users').put(users.update)
         .get(users.list);

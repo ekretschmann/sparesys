@@ -380,7 +380,7 @@ exports.removeOAuthProvider = function(req, res, next) {
 };
 
 /**
- * List of Courses
+ * List of Users
  */
 exports.list = function(req, res) {
     User.find().sort('-created').populate('_id').exec(function(err, users) {
@@ -392,4 +392,11 @@ exports.list = function(req, res) {
             res.jsonp(users);
         }
     });
+};
+
+/**
+ * Show the current User
+ */
+exports.read = function(req, res) {
+    res.jsonp(req.user);
 };

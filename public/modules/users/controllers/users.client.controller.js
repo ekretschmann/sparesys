@@ -57,11 +57,11 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
             $scope.users = Users.query();
         };
 
-//        // Find existing Course
-//        $scope.findOne = function() {
-//            $scope.course = Courses.get({
-//                courseId: $stateParams.courseId
-//            });
-//        };
+        // Find existing User
+        $scope.findOne = function() {
+            $scope.user = Users.get({
+                userId: $stateParams.userId
+            });
+        };
     }
 ]);

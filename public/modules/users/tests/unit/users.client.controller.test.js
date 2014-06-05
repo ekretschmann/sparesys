@@ -68,6 +68,7 @@
 
 			// Test scope value
 			expect(scope.users).toEqualData(sampleUsers);
+            expect('x').toEqualData('x');
 		}));
 
 		it('$scope.findOne() should create an array with one User object fetched from XHR using a courseId URL parameter', inject(function(Users) {

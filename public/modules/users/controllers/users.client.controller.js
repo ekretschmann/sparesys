@@ -63,5 +63,9 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
                 userId: $stateParams.userId
             });
         };
+
+        $scope.isAdmin = function(user) {
+            user.roles.contains('admin');
+        };
     }
 ]);

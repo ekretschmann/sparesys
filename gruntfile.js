@@ -103,6 +103,13 @@ module.exports = function(grunt) {
                 configFile: 'karma.conf.js',
                 autoWatch: true
             }
+        },
+        protractor: {
+            options: {
+                keepAlive: true,
+                configFile: "protractor.conf.js"
+            },
+            run: {}
         }
     });
 
@@ -131,7 +138,7 @@ module.exports = function(grunt) {
     grunt.registerTask('build', ['jshint', 'csslint', 'loadConfig' ,'uglify', 'cssmin']);
 
     // Test task.
-    grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit']);
+    grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit', 'protractor:run']);
 
     grunt.loadNpmTasks('grunt-karma');
 };

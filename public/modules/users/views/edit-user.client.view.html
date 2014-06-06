@@ -18,8 +18,15 @@
 
                     <label class="control-label" for="lastName">Roles</label>
                     <div class="controls">
-                        <input type="checkbox" data-ng-model="user.roles" id="user">User
-                        <input type="checkbox" data-ng-model="user.roles.contains('user')" id="admin">Admin
+                        <label ng-repeat="role in roles">
+                            <input
+                                    type="checkbox"
+                                    name="selectedRole[]"
+                                    value="{{role}}"
+                                    ng-checked="user.roles.indexOf(role) > -1"
+                                    ng-click="toggleSelection(fruitName)"
+                                    > {{role}}
+                        </label>
                     </div>
                 </div>
                 <div class="form-group">

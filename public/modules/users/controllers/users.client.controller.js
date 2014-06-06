@@ -64,8 +64,42 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
             });
         };
 
-        // fruits
+        // Update existing User
+        $scope.update = function() {
+            var user = $scope.user;
+
+            $scope.user.$update(function() {
+                $location.path('users' );
+            }, function(errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+        };
+
+        // Role management
         $scope.roles = ['admin', 'user'];
+
+        // toggle selection for a given fruit by name
+        $scope.toggleSelection = function toggleSelection(toggledRole) {
+
+            if (userHasToggledRole()) {
+                removeToggledRole();
+            } else {
+                addToggledRole();
+            }
+
+            function userHasToggledRole() {
+                return $scope.user.roles.indexOf(toggledRole) >= 0;
+            }
+
+            function removeToggledRole() {
+                $scope.user.roles.splice(user.roles.indexOf(toggledRole), 1);
+            }
+
+            function addToggledRole() {
+                $scope.user.roles.push(toggledRole);
+            }
+
+        };
 
         // selected fruits
        // $scope.selection = user.roles;

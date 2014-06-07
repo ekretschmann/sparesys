@@ -41,7 +41,7 @@ module.exports = function(grunt) {
         },
         jshint: {
             all: {
-                src: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', 'public/js/**/*.js', 'public/modules/**/*.js'],
+                src: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', 'public/js/**/*.js', 'public/modules/**/*.js', '!**/e2e/**'],
                 options: {
                     jshintrc: true
                 }
@@ -107,7 +107,7 @@ module.exports = function(grunt) {
         protractor: {
             options: {
                 keepAlive: true,
-                configFile: "protractor.conf.js"
+                configFile: 'protractor.conf.js'
             },
             run: {}
         }

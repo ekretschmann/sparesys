@@ -12,7 +12,6 @@
     "test": "grunt test",
     "postinstall": "bower install --config.interactive=false",
     "install": "node_modules/protractor/bin/webdriver-manager update"
-
   },
   "dependencies": {
     "express": "~4.1.0",

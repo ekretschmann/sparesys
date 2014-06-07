@@ -103,6 +103,8 @@ exports.update = function(req, res) {
 	// For security measurement we remove the roles from the req.body object
 //	delete req.body.roles;
 
+
+
 	if (user) {
 		// Merge existing user
 		user = _.extend(user, req.body);
@@ -401,5 +403,6 @@ exports.list = function(req, res) {
  * Show the current User
  */
 exports.read = function(req, res) {
-    res.jsonp(req.user);
+//console.log(req)
+//    res.jsonp(req.profiles);
 };

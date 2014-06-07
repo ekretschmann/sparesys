@@ -59,19 +59,20 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
 
         // Find existing User
         $scope.findOne = function() {
-            $scope.user = Users.get({
+            $scope.otherUser = Users.get({
                 userId: $stateParams.userId
+            }, function() {
+                console.log($scope.otherUser);
             });
+
         };
 
         // Update existing User
         $scope.update = function() {
-            var user = $scope.user;
+           // var user = $scope.otherUser;
 
-            $scope.user.$update(function() {
+            $scope.otherUser.$update(function() {
                 $location.path('users' );
-            }, function(errorResponse) {
-                $scope.error = errorResponse.data.message;
             });
         };
 
@@ -81,23 +82,25 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
         // toggle selection for a given fruit by name
         $scope.toggleSelection = function toggleSelection(toggledRole) {
 
+            function userHasToggledRole() {
+                return $scope.otherUser.roles.indexOf(toggledRole) >= 0;
+            }
+
+            function removeToggledRole() {
+                $scope.otherUser.roles.splice($scope.otherUser.roles.indexOf(toggledRole), 1);
+            }
+
+            function addToggledRole() {
+                $scope.otherUser.roles.push(toggledRole);
+            }
+
+
             if (userHasToggledRole()) {
                 removeToggledRole();
             } else {
                 addToggledRole();
             }
 
-            function userHasToggledRole() {
-                return $scope.user.roles.indexOf(toggledRole) >= 0;
-            }
-
-            function removeToggledRole() {
-                $scope.user.roles.splice(user.roles.indexOf(toggledRole), 1);
-            }
-
-            function addToggledRole() {
-                $scope.user.roles.push(toggledRole);
-            }
 
         };
 

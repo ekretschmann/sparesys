@@ -88,7 +88,7 @@
 			$httpBackend.flush();
 
 			// Test scope value
-			expect(scope.user).toEqualData(sampleUser);
+			expect(scope.otherUser).toEqualData(sampleUser);
 		}));
 //
 //		it('$scope.create() with valid form data should send a POST request with the form input values and then locate to new object URL', inject(function(Courses) {

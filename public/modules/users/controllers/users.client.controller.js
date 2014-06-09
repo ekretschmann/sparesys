@@ -69,7 +69,7 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
         // Role management
         $scope.roles = ['admin', 'user'];
 
-        // toggle selection for a given fruit by name
+        // toggle selection for a given user role
         $scope.toggleSelection = function toggleSelection(toggledRole) {
 
             function userHasToggledRole() {
@@ -90,11 +90,7 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
             } else {
                 addToggledRole();
             }
-
-
         };
 
-        // selected fruits
-        // $scope.selection = user.roles;
     }
 ]);

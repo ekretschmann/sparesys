@@ -5,6 +5,8 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         watch: {
+
+
             serverViews: {
                 files: ['app/views/**'],
                 options: {
@@ -25,7 +27,7 @@ module.exports = function(grunt) {
                 }
             },
             clientJS: {
-                files: ['public/js/**/*.js', 'public/modules/**/*.js'],
+                files: ['public/js/**/*.js', 'public/modules/**/*.js', '!public/modules/**/e2e/**'],
                 tasks: ['jshint'],
                 options: {
                     livereload: true
@@ -41,7 +43,7 @@ module.exports = function(grunt) {
         },
         jshint: {
             all: {
-                src: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', 'public/js/**/*.js', 'public/modules/**/*.js', '!**/e2e/**'],
+                src: ['gruntfile.js', 'server.js', 'config/**/*.js', 'app/**/*.js', 'public/js/**/*.js', 'public/modules/**/*.js', '!public/modules/**/e2e/**'],
                 options: {
                     jshintrc: true
                 }

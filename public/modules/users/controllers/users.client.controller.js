@@ -2,7 +2,7 @@
 
 // Courses controller
 angular.module('courses').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
-    function($scope, $stateParams, $location, Authentication, Users) {
+    function ($scope, $stateParams, $location, Authentication, Users) {
         $scope.authentication = Authentication;
 
 //        // Create new Course
@@ -23,22 +23,14 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
 //            this.name = '';
 //        };
 //
-//        // Remove existing Course
-//        $scope.remove = function(course) {
-//            if (course) {
-//                course.$remove();
-//
-//                for (var i in $scope.courses) {
-//                    if ($scope.courses[i] === course) {
-//                        $scope.courses.splice(i, 1);
-//                    }
-//                }
-//            } else {
-//                $scope.course.$remove(function() {
-//                    $location.path('courses');
-//                });
-//            }
-//        };
+        // Remove existing User
+        $scope.remove = function (otherUser) {
+            if (otherUser) {
+                otherUser.$remove(function () {
+                    $location.path('users');
+                });
+            }
+        };
 
 //        // Update existing Course
 //        $scope.update = function() {
@@ -52,27 +44,25 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
 //        };
 
         // Find a list of Courses
-        $scope.find = function() {
+        $scope.find = function () {
 
             $scope.users = Users.query();
         };
 
         // Find existing User
-        $scope.findOne = function() {
+        $scope.findOne = function () {
             $scope.otherUser = Users.get({
                 userId: $stateParams.userId
-            }, function() {
-                console.log($scope.otherUser);
             });
 
         };
 
         // Update existing User
-        $scope.update = function() {
-           // var user = $scope.otherUser;
+        $scope.update = function () {
 
-            $scope.otherUser.$update(function() {
-                $location.path('users' );
+
+            $scope.otherUser.$update(function () {
+                $location.path('users');
             });
         };
 
@@ -105,6 +95,6 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
         };
 
         // selected fruits
-       // $scope.selection = user.roles;
+        // $scope.selection = user.roles;
     }
 ]);

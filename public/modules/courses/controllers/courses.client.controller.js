@@ -15,7 +15,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
             // Redirect after save
             course.$save(function(response) {
-                $location.path('courses/' + response._id);
+                $location.path('courses/' + response._id+"/edit");
             }, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});
@@ -63,5 +63,9 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
                 courseId: $stateParams.courseId
             });
         };
+
+        $scope.infoCreateCourse = function() {
+            // Todo: implement me
+        }
     }
 ]);

@@ -1,18 +1,23 @@
 <section data-ng-controller="CoursesController">
 
-    <div class="pull-right">
-        <!--TODO: Add help-->
-        <!--<a class="btn btn-primary" data-ng-click="infoCreate();">-->
-            <!--<i class="glyphicon glyphicon-info-sign"></i>-->
-        <!--</a>-->
+
+    <div class="sparesys-header">
+        <div class="pull-right">
+            <!--Todo: Implements create course info-->
+            <a class="btn btn-primary" data-ng-click="infoCreateCourse()">
+                <i class="glyphicon glyphicon-info-sign"></i>
+            </a>
+        </div>
+
+        <div class="sparesys-title">
+            New Course
+        </div>
+        <div class="sparesys-subtitle">
+            Create a new Course
+        </div>
     </div>
 
-    <div class="sparesys-title">
-        New Course
-    </div>
-    <div class="sparesys-subtitle">
-        Create a new Course
-    </div>
+
     <div class="col-md-12">
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>

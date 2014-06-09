@@ -27,7 +27,7 @@
 
 
             <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown" data-ng-show="authentication.user.roles.indexOf('admin') > -1">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle" id="admin-dropdown-toggle" data-toggle="dropdown">
                     Administration <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
@@ -50,9 +50,9 @@
                     My Courses <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
-                    <!--<li>-->
-                        <!--<a href="/#!/courses">Find</a>-->
-                    <!--</li>-->
+                    <li>
+                        <a href="/#!/courses">Show All</a>
+                    </li>
                     <li>
                         <a href="/#!/courses/create">Create</a>
                     </li>

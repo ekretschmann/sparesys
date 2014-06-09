@@ -4,9 +4,12 @@ describe('User tests:', function () {
     describe('Administration: ', function () {
         it('As an administrator, I can change the roles of users.', function () {
             browser.get('/#!');
+            browser.waitForAngular();
             var link = element(by.id('signin-link'));
-//            expect(element.isDisplayed()).toBe(true);
-//            expect(element.getText()).toBe('Signin');
+            expect(link.isDisplayed()).toBe(true);
+            expect(link.getText()).toBe('Signin');
+
+            link.click();
             browser.waitForAngular();
             var header = element(by.id('signin-header'));
             expect(header.isDisplayed()).toBe(true);
@@ -20,17 +23,26 @@ describe('User tests:', function () {
             loginButton.click();
 
             browser.waitForAngular();
-            var header = element(by.id('signin-header'));
+//
+//            console.log("XXXXXXXXXXXXXX")
 
             var welcome = element(by.id('home-welcome'));
             expect(welcome.isDisplayed()).toBe(true);
             expect(welcome.getText()).toBe('Welcome protractor protractor');
 
-            var dropdownToggle = element(by.css('dropdown-toggle'));
+//            console.log("AAAAAAAAAAAAAAAAAAAAAAA")
+
+            var dropdownToggle = element(by.id('admin-dropdown-toggle'));
+
+
             expect(dropdownToggle.isDisplayed()).toBe(true);
 
+            var usersEntry = dropdownToggle.element(By.xpath('//option[text() = \'Users\']'));
 
+            usersEntry.click();
+            browser.waitForAngular();
 
+            var welcome = element(by.id('home-welcome'));
 
 //            .then(function(options){
 //                console.log("XXXXXXXXXX")

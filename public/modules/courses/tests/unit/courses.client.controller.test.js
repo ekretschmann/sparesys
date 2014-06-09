@@ -116,7 +116,7 @@
 			expect(scope.name).toEqual('');
 
 			// Test URL redirection after the Course was created
-			expect($location.path()).toBe('/courses/' + sampleCourseResponse._id);
+			expect($location.path()).toBe('/courses/' + sampleCourseResponse._id + '/edit');
 		}));
 
 		it('$scope.update() should update a valid Course', inject(function(Courses) {

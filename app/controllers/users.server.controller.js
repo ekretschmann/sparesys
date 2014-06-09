@@ -425,8 +425,6 @@ exports.read = function (req, res) {
 exports.delete = function(req, res) {
     var usr = req.profile;
 
-    console.log('DELETING');
-    console.log(usr);
     usr.remove(function(err) {
         if (err) {
             return res.send(400, {

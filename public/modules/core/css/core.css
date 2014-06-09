@@ -97,14 +97,19 @@ body {
 }
 
 .sparesys-subtitle {
+    font-size: large;
     font-style: italic;
 }
 
 .sparesys-header {
     margin-bottom: 10px;
+    padding-bottom: 5px;
     border-bottom: black solid 1px;
 }
 
+.sparesys-button {
+    width: 80px;
+}
 
 /* Custom dialog/modal headers */
 

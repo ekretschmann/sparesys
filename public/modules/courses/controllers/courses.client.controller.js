@@ -1,31 +1,48 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Courses',
-    function($scope, $stateParams, $location, Authentication, Courses) {
+angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses',
+    function ($scope, $stateParams, $location, $modal, Authentication, Courses) {
         $scope.authentication = Authentication;
 
+
+        // Controller for popup window displayed when deleting the course
+        var AreYouSureToDeleteCourseCtrl = function ($scope, $state, $modalInstance, course) {
+
+            $scope.course = course;
+
+            $scope.ok = function () {
+        //        CoursesService.remove(course);
+                $modalInstance.close();
+
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
+        };
+
         // Create new Course
-        $scope.create = function() {
-        	// Create new Course object
+        $scope.create = function () {
+            // Create new Course object
             var course = new Courses({
                 name: this.name,
                 description: this.description
             });
 
             // Redirect after save
-            course.$save(function(response) {
-                $location.path('courses/' + response._id+"/edit");
-            }, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+            course.$save(function (response) {
+                $location.path('courses/' + response._id + "/edit");
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
 
             // Clear form fields
             this.name = '';
         };
 
         // Remove existing Course
-        $scope.remove = function(course) {
+        $scope.remove = function (course) {
             if (course) {
                 course.$remove();
 
@@ -35,37 +52,52 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
                     }
                 }
             } else {
-                $scope.course.$remove(function() {
+                $scope.course.$remove(function () {
                     $location.path('courses');
                 });
             }
         };
 
         // Update existing Course
-        $scope.update = function() {
+        $scope.update = function () {
             var course = $scope.course;
 
-            course.$update(function() {
+            course.$update(function () {
                 $location.path('courses/' + course._id);
-            }, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
         };
 
         // Find a list of Courses
-        $scope.find = function() {
+        $scope.find = function () {
             $scope.courses = Courses.query();
         };
 
         // Find existing Course
-        $scope.findOne = function() {
+        $scope.findOne = function () {
             $scope.course = Courses.get({
                 courseId: $stateParams.courseId
             });
         };
 
-        $scope.infoCreateCourse = function() {
+        $scope.infoCreateCourse = function () {
             // Todo: implement me
-        }
+        };
+
+        $scope.areYouSureToDeleteCourse = function (course) {
+
+            $scope.course = course;
+            var modalInstance = $modal.open({
+                templateUrl: 'areYouSureToDeleteCourse.html',
+                controller: AreYouSureToDeleteCourseCtrl,
+                resolve: {
+
+                    course: function () {
+                        return $scope.course;
+                    }
+                }
+            });
+        };
     }
 ]);

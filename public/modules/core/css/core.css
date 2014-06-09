@@ -91,6 +91,14 @@ body {
     }
 }
 
+.sparesys-title {
+    font-size: x-large;
+    font-weight: bold;
+}
+
+.sparesys-subtitle {
+    font-style: italic;
+}
 
 
 /* Custom dialog/modal headers */

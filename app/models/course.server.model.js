@@ -16,6 +16,12 @@ var CourseSchema = new Schema({
 		required: 'Please fill Course name',
 		trim: true
 	},
+    description: {
+        type: String,
+        default: '',
+        required: 'Please fill Course description',
+        trim: true
+    },
 	created: {
 		type: Date,
 		default: Date.now

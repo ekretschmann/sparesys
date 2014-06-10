@@ -1,8 +1,9 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('CoursesController', ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses',
-    function ($scope, $stateParams, $location, $modal, Authentication, Courses) {
+angular.module('courses').controller('CoursesController',
+    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService',
+    function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService) {
         $scope.authentication = Authentication;
 
 
@@ -12,7 +13,8 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
             $scope.course = course;
 
             $scope.ok = function () {
-        //        CoursesService.remove(course);
+                CoursesService.remove(course);
+                $location.path('courses');
                 $modalInstance.close();
 
             };
@@ -32,7 +34,7 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
 
             // Redirect after save
             course.$save(function (response) {
-                $location.path('courses/' + response._id + "/edit");
+                $location.path('courses/' + response._id + '/edit');
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
@@ -72,6 +74,13 @@ angular.module('courses').controller('CoursesController', ['$scope', '$statePara
         // Find a list of Courses
         $scope.find = function () {
             $scope.courses = Courses.query();
+        };
+
+        // Find list for current user
+        $scope.findForCurrentUser = function () {
+            $scope.courses = Courses.query({
+                userId: $scope.authentication.user._id
+            });
         };
 
         // Find existing Course

@@ -107,6 +107,10 @@ body {
     border-bottom: black solid 1px;
 }
 
+.sparesys-emphasize {
+    font-style: italic;
+}
+
 .sparesys-button {
     width: 80px;
 }

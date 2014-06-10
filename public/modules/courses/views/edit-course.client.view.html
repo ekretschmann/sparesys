@@ -3,33 +3,27 @@
 
     <script type="text/ng-template" id="areYouSureToDeleteCourse.html">
 
+
         <div class="modal-body">
-        <div class="sparesys-header">
 
-            <div class="sparesys-title">
-                Delete course {{course.name}}
+                <div class="sparesys-title">
+                    Delete course <span class="sparesys-emphasize">"{{course.name}}"</span>
+                </div>
+                <div class="sparesys-subtitle">
+                    Are you sure?
+                </div>
+            <div class="modal-footer">
+                <button class="btn sparesys-button" ng-click="ok()">OK</button>
+                <button class="btn sparesys-button" ng-click="cancel()">Cancel</button>
             </div>
-            <div class="sparesys-subtitle">
-                Are you sure?
-            </div>
-        </div>
-        <!--<div class="modal-header">-->
-            <!--<h3 class="modal-title">Delete Course</h3>-->
-        <!--</div>-->
-        <!--<div class="modal-body">-->
-            <!--Are you sure you want to delete Course <i>"{{course.name}}"</i>-->
-
-        <!--</div>-->
-        <!--<div class="modal-footer">-->
-            <button class="btn sparesys-button" ng-click="ok()">OK</button>
-            <button class="btn sparesys-button" ng-click="cancel()">Cancel</button>
         </div>
     </script>
 
     <div class="sparesys-header">
         <div class="pull-right">
             <!--TODO: Add delete course-->
-            <a class="btn btn-primary" data-ng-click="areYouSureToDeleteCourse(course);" data-ng-show="authentication.user._id == course.user._id">
+            <a class="btn btn-primary" data-ng-click="areYouSureToDeleteCourse(course);"
+               data-ng-show="authentication.user._id == course.user._id">
                 <i class="glyphicon glyphicon-trash"></i>
             </a>
 
@@ -52,20 +46,24 @@
             <fieldset>
                 <div class="form-group">
                     <label class="control-label" for="name">Name</label>
+
                     <div class="controls">
-                        <input type="text" data-ng-model="course.name" id="name" class="form-control" placeholder="Name" required>
+                        <input type="text" data-ng-model="course.name" id="name" class="form-control" placeholder="Name"
+                               required>
                     </div>
                     <label class="control-label" for="name">Description</label>
+
                     <div class="controls">
-                        <input type="text" data-ng-model="course.description" id="description" class="form-control" placeholder="Description" required>
+                        <input type="text" data-ng-model="course.description" id="description" class="form-control"
+                               placeholder="Description" required>
                     </div>
                 </div>
                 <div class="form-group">
                     <input type="submit" value="Update" class="btn btn-default">
                 </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong>{{error}}</strong>
-				</div>
+                <div data-ng-show="error" class="text-danger">
+                    <strong>{{error}}</strong>
+                </div>
             </fieldset>
         </form>
     </div>

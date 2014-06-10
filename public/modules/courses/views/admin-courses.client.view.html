@@ -1,4 +1,7 @@
 <section data-ng-controller="CoursesController" data-ng-init="find()">
+
+    <div data-ng-show="authentication.user" ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
+
     <div class="sparesys-header">
         <div class="pull-right">
 
@@ -12,16 +15,23 @@
         </div>
     </div>
     <div class="list-group">
-        <a data-ng-repeat="course in courses" data-ng-href="#!/courses/{{course._id}}/edit" class="list-group-item">
+        <div data-ng-repeat="course in courses" data-ng-href="#!/courses/{{course._id}}/edit" class="list-group-item">
+
+            <div class="pull-right">
+                <a class="btn btn-primary" data-ng-click="areYouSureToDeleteCourse(course);">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+
             <h4 class="list-group-item-heading">{{course.name}} - {{course.description}}</h4>
 
             <div data-ng-hide="!course.user">by {{course.user.displayName}}</div>
             <div data-ng-hide="course.user" class="alert-warning">no user</div>
 
 
-        </a>
+        </div>
     </div>
     <div class="alert alert-warning text-center" data-ng-hide="!courses.$resolved || courses.length">
-    	No Courses yet, why don't you <a href="/#!/courses/create">create one</a>?
+        No Courses yet, why don't you <a href="/#!/courses/create">create one</a>?
     </div>
 </section>

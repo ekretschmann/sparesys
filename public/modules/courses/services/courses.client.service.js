@@ -17,11 +17,11 @@ angular.module('courses').factory('CoursesService', [
     function () {
         return {
 
-            remove: function (course) {
+            remove: function (course, callback) {
 
                 if (course) {
 //              Todo: remove the packs
-                    course.$remove();
+                    course.$remove(callback);
 
                 }
                 return true;

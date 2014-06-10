@@ -136,16 +136,15 @@ exports.courseByID = function (req, res, next, id) {
     });
 };
 
-exports.courseByUser = function (req, res, next, id) {
-
-    console.log("Hurray!");
-}
 /**
  * Course authorization middleware
  */
 exports.hasAuthorization = function (req, res, next) {
-    if (req.course.user.id !== req.user.id) {
+    if (req.user.roles.indexOf('admin') > -1) {
+        next();
+    } else if  (req.course.user && (req.course.user.id !== req.user.id)) {
         return res.send(403, 'User is not authorized');
+    } else {
+        next();
     }
-    next();
 };

@@ -1,7 +1,8 @@
 <section data-ng-controller="CoursesController" data-ng-init="findOne()">
 
 
-    <div data-ng-show="authentication.user" ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
+    <div data-ng-show="authentication.user"
+         ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
     <div class="sparesys-header">
         <div class="pull-right">
@@ -25,30 +26,31 @@
         </div>
     </div>
 
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
+    <form class="form-horizontal" data-ng-submit="update()" novalidate>
+        <fieldset>
+            <table class="sparesys-view-object-table">
+                <tr class="controls">
+                    <td for="name" class="sparesys-view-object-label-cell">Name</td>
+                    <td class="sparesys-view-object-content-cell"><input type="text" data-ng-model="course.name"
+                                                                         id="name" class="form-control"
+                                                                         placeholder="Name"
+                                                                         required></td>
+                </tr>
 
-                    <div class="controls">
-                        <input type="text" data-ng-model="course.name" id="name" class="form-control" placeholder="Name"
-                               required>
-                    </div>
-                    <label class="control-label" for="name">Description</label>
+                <tr class="controls">
 
-                    <div class="controls">
-                        <input type="text" data-ng-model="course.description" id="description" class="form-control"
-                               placeholder="Description" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
-                </div>
-                <div data-ng-show="error" class="text-danger">
-                    <strong>{{error}}</strong>
-                </div>
-            </fieldset>
-        </form>
-    </div>
+                    <td for="name" class="sparesys-view-object-label-cell">Description</td>
+                    <td class="sparesys-view-object-content-cell"><input type="text" data-ng-model="course.description"
+                                                                         id="description" class="form-control"
+                                                                         placeholder="Description" required></td>
+                </tr>
+            </table>
+            <div class="pull-right">
+                <input type="submit" value="Update" class="btn btn-default">
+            </div>
+            <div data-ng-show="error" class="text-danger">
+                <strong>{{error}}</strong>
+            </div>
+        </fieldset>
+    </form>
 </section>

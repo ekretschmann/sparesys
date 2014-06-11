@@ -137,7 +137,7 @@
 			$httpBackend.flush();
 
 			// Test URL location to new object
-			expect($location.path()).toBe('/courses/' + sampleCoursePutData._id);
+			expect($location.path()).toBe('/courses');
 		}));
 
 		it('$scope.remove() should send a DELETE request with a valid courseId and remove the Course from the scope', inject(function(Courses) {

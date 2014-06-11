@@ -13,7 +13,6 @@ angular.module('courses').config(['$stateProvider',
                 url: '/courses/admin',
                 templateUrl: 'modules/courses/views/admin-courses.client.view.html'
             }).
-
             state('createCourse', {
                 url: '/courses/create',
                 templateUrl: 'modules/courses/views/create-course.client.view.html'

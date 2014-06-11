@@ -1,0 +1,30 @@
+.sparesys-view-courses-course-column {
+    padding-right: 10px;
+}
+
+.sparesys-view-courses-description-column {
+    width: 100%;
+}
+
+.sparesys-view-courses-date-cell {
+    white-space: nowrap;
+}
+
+.sparesys-view-courses-name-cell {
+    white-space: nowrap;
+    padding-right: 10px;
+}
+
+.sparesys-view-object-table {
+    width: 100%;
+    margin: 2px 0 2px 0;
+}
+
+.sparesys-view-object-label-cell {
+    padding: 2px 10px 2px 0;
+}
+
+.sparesys-view-object-content-cell {
+    width: 100%;
+    padding: 2px 0 2px 0;
+}

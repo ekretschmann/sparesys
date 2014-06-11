@@ -1,7 +1,7 @@
 <section data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
     <div class="sparesys-header">
         <div class="pull-right">
-
+            Search: <input ng-model="searchText">
         </div>
 
         <div class="sparesys-title">
@@ -11,13 +11,31 @@
             The courses you have subscribed to
         </div>
     </div>
-    <div class="list-group">
-        <a data-ng-repeat="course in courses" data-ng-href="#!/courses/{{course._id}}/edit" class="list-group-item">
-            <h4 class="list-group-item-heading">{{course.name}} - {{course.description}}</h4>
-            <small class="list-group-item-text">{{course.created | date:'medium'}}</small>
 
-        </a>
-    </div>
+    <table id="searchTextResults" class="table-striped" style="width: 100%">
+        <thead>
+        <tr>
+            <th>Course</th>
+            <th>Description</th>
+            <th>Created</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="course in courses | filter:searchText">
+            <td><a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></td>
+            <td>{{course.description}}</td>
+            <td>{{course.created | date:'medium'}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--<div class="list-group">-->
+        <!--<a data-ng-repeat="course in courses" data-ng-href="#!/courses/{{course._id}}/edit" class="list-group-item">-->
+            <!--<h4 class="list-group-item-heading">{{course.name}} - {{course.description}}</h4>-->
+            <!--<small class="list-group-item-text">{{course.created | date:'medium'}}</small>-->
+
+        <!--</a>-->
+    <!--</div>-->
     <div class="alert alert-warning text-center" data-ng-hide="!courses.$resolved || courses.length">
     	No Courses yet, why don't you <a href="/#!/courses/create">create one</a>?
     </div>

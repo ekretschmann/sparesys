@@ -2,7 +2,7 @@
 
     <div class="sparesys-header">
         <div class="pull-right">
-            <!--stays empty for user list-->
+            Search: <input ng-model="searchText">
         </div>
 
         <div class="sparesys-title">
@@ -13,19 +13,29 @@
         </div>
     </div>
 
-    <!--Todo: have a sortable and pageable table here-->
-    <div class="list-group">
-        <a data-ng-repeat="user in users" data-ng-href="#!/users/{{user._id}}/edit" class="list-group-item">
 
 
-            <small class="list-group-item-text">{{user.created | date:'medium'}}</small>
-            <h4 class="list-group-item-heading">{{user.firstName}} {{user.lastName}}</h4>
-
-            <div>roles: {{user.roles}}</div>
-            <div>email: {{user.email}}</div>
-            <div>username: {{user.username}}</div>
-
-        </a>
-    </div>
+    <table id="searchTextResults" class="table-striped" style="width: 100%">
+        <thead>
+        <tr>
+            <th>User</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>email</th>
+            <th>created</th>
+            <th>roles</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="user in users | filter:searchText">
+            <td><a data-ng-href="#!/users/{{user._id}}/edit">{{user.username}}</a></td>
+            <td>{{user.firstName}}</td>
+            <td>{{user.lastName}}</td>
+            <td>{{user.email}}</td>
+            <td>{{user.created | date:'medium'}}</td>
+            <td>{{user.roles}}</td>
+        </tr>
+        </tbody>
+    </table>
 
 </section>

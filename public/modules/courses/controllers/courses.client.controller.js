@@ -74,8 +74,7 @@ angular.module('courses').controller('CoursesController',
                 var course = $scope.course;
 
                 course.$update(function () {
-                    console.log("HERER")
-                    $location.path('courses/' + course._id);
+                    $location.path('courses');
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
                 });

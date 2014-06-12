@@ -104,36 +104,37 @@ exports.update = function (req, res) {
 //	delete req.body.roles;
 
 
+    function updateUser(theUser) {
+        theUser = _.extend(theUser, req.body);
+        theUser.updated = Date.now();
+        theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
+        theUser.save(function (err) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                req.login(user, function (err) {
+                    if (err) {
+                        res.send(400, err);
+                    } else {
+                        res.jsonp(user);
+                    }
+                });
+            }
+        });
+    }
+
     if (user) {
-        // Merge existing user
-
-        console.log(req)
-        console.log(user);
-
-        user = _.extend(user, req.body);
-        user.updated = Date.now();
-        user.displayName = user.firstName + ' ' + user.lastName;
-//        user.__v = user.__v + 1;
-
-//        user.__v = 2;
-        console.log(user);
-
-		user.save(function(err) {
-            console.log(err);
-			if (err) {
-				return res.send(400, {
-					message: getErrorMessage(err)
-				});
-			} else {
-				req.login(user, function(err) {
-					if (err) {
-						res.send(400, err);
-					} else {
-						res.jsonp(user);
-					}
-				});
-			}
-		});
+        if(req.body._id != user._id) {
+            User.findById(req.body._id, function (err, otherUser) {
+                if (!err && otherUser) {
+                    updateUser(otherUser);
+                }
+            });
+        } else {
+            updateUser(user);
+        }
     } else {
         res.send(400, {
             message: 'User is not signed in'
@@ -415,6 +416,7 @@ exports.read = function (req, res) {
         _id: req.profile.id,
         displayName: req.profile.displayName,
         provider: req.profile.provider,
+        __v: req.profile.__v,
         username: req.profile.username,
         created: req.profile.created,
         roles: req.profile.roles,

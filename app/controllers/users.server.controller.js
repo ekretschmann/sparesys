@@ -103,15 +103,23 @@ exports.update = function (req, res) {
     // For security measurement we remove the roles from the req.body object
 //	delete req.body.roles;
 
+
     if (user) {
         // Merge existing user
+
+        console.log(req)
+        console.log(user);
+
         user = _.extend(user, req.body);
         user.updated = Date.now();
         user.displayName = user.firstName + ' ' + user.lastName;
+//        user.__v = user.__v + 1;
 
+//        user.__v = 2;
         console.log(user);
 
 		user.save(function(err) {
+            console.log(err);
 			if (err) {
 				return res.send(400, {
 					message: getErrorMessage(err)
@@ -408,7 +416,6 @@ exports.read = function (req, res) {
         displayName: req.profile.displayName,
         provider: req.profile.provider,
         username: req.profile.username,
-        __v: req.profile.__v,
         created: req.profile.created,
         roles: req.profile.roles,
         email: req.profile.email,

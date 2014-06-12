@@ -29,3 +29,7 @@
     width: 100%;
     padding: 2px 0 2px 0;
 }
+
+.sparesys-view-object-right-padded-element {
+   padding-right: 10px;
+}

@@ -39,10 +39,13 @@ describe('User tests:', function () {
 
             var usersEntry = dropdownToggle.element(By.xpath('//option[text() = \'Users\']'));
 
-            usersEntry.click();
-            browser.waitForAngular();
+            console.log(usersEntry);
 
-            var welcome = element(by.id('home-welcome'));
+//
+//            usersEntry.click();
+//            browser.waitForAngular();
+//
+//            var welcome = element(by.id('home-welcome'));
 
 //            .then(function(options){
 //                console.log("XXXXXXXXXX")

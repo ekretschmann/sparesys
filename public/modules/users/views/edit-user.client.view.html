@@ -19,7 +19,7 @@
         <fieldset>
             <table class="sparesys-view-object-table">
                 <tr class="controls">
-                    <td for="username" class="sparesys-view-object-label-cell">Username</td>
+                    <td class="sparesys-view-object-label-cell">Username</td>
                     <td class="sparesys-view-object-content-cell">
                         <input type="text" data-ng-model="otherUser.username"
                                id="username" class="form-control"
@@ -29,7 +29,7 @@
                 </tr>
 
                 <tr class="controls">
-                    <td for="firstName" class="sparesys-view-object-label-cell">First Name</td>
+                    <td class="sparesys-view-object-label-cell">First Name</td>
                     <td class="sparesys-view-object-content-cell">
                         <input type="text" data-ng-model="otherUser.firstName"
                                id="firstName" class="form-control"
@@ -40,7 +40,7 @@
 
                 <tr class="controls">
 
-                    <td for="lastName" class="sparesys-view-object-label-cell">Last Name</td>
+                    <td class="sparesys-view-object-label-cell">Last Name</td>
                     <td class="sparesys-view-object-content-cell">
                         <input type="text" data-ng-model="otherUser.lastName"
                                id="description" class="form-control"
@@ -50,7 +50,17 @@
 
                 <tr class="controls">
 
-                    <td for="name" class="sparesys-view-object-label-cell">Roles</td>
+                    <td class="sparesys-view-object-label-cell">Email</td>
+                    <td class="sparesys-view-object-content-cell">
+                        <input type="text" data-ng-model="otherUser.email"
+                               id="email" class="form-control"
+                               placeholder="email" required>
+                    </td>
+                </tr>
+
+                <tr class="controls">
+
+                    <td class="sparesys-view-object-label-cell">Roles</td>
                     <td class="sparesys-view-object-content-cell">
                         <div class="controls">
                             <label class="sparesys-view-object-right-padded-element" ng-repeat="role in roles">
@@ -65,6 +75,22 @@
 
                             </label>
                         </div>
+                    </td>
+                </tr>
+
+                <tr class="controls">
+
+                    <td class="sparesys-view-object-label-cell">Created</td>
+                    <td class="sparesys-view-object-content-cell">
+                        {{otherUser.created | date: 'medium'}}
+                    </td>
+                </tr>
+
+                <tr class="controls">
+
+                    <td class="sparesys-view-object-label-cell">Updated</td>
+                    <td class="sparesys-view-object-content-cell">
+                        {{otherUser.updated | date: 'medium'}}
                     </td>
                 </tr>
 

@@ -136,13 +136,28 @@ exports.courseByID = function (req, res, next, id) {
     });
 };
 
+exports.courseByUser = function (req, res, next, id) {
+
+    Course.find()
+        .where('user').equals(id)
+        .exec(function (err, courses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(courses);
+            }
+        });
+};
+
 /**
  * Course authorization middleware
  */
 exports.hasAuthorization = function (req, res, next) {
     if (req.user.roles.indexOf('admin') > -1) {
         next();
-    } else if  (req.course.user && (req.course.user.id !== req.user.id)) {
+    } else if (req.course.user && (req.course.user.id !== req.user.id)) {
         return res.send(403, 'User is not authorized');
     } else {
         next();

@@ -36,23 +36,23 @@
             </td>
         </tr>
 
-        <tr class="controls">
+        <!--<tr class="controls">-->
 
-            <td for="name" class="sparesys-view-object-label-cell">Roles</td>
-            <td class="sparesys-view-object-content-cell">
-                <div class="controls">
-                    <label ng-repeat="role in roles">
-                        <input
-                                type="checkbox"
-                                name="selectedRole[]"
-                                value="{{role}}"
-                                ng-checked="otherUser.roles.indexOf(role) > -1"
-                                ng-click="toggleSelection(role)"
-                                > {{role}}
-                    </label>
-                </div>
-             </td>
-        </tr>
+            <!--<td for="name" class="sparesys-view-object-label-cell">Roles</td>-->
+            <!--<td class="sparesys-view-object-content-cell">-->
+                <!--<div class="controls">-->
+                    <!--<label ng-repeat="role in otherUser.roles">-->
+                        <!--<input-->
+                                <!--type="checkbox"-->
+                                <!--name="selectedRole[]"-->
+                                <!--value="{{role}}"-->
+                                <!--ng-checked="otherUser.roles.indexOf(role) > -1"-->
+                                <!--ng-click="toggleSelection(role)"-->
+                                 <!--{{role}}-->
+                    <!--</label>-->
+                <!--</div>-->
+             <!--</td>-->
+        <!--</tr>-->
 
     </table>
     <div class="pull-right">
@@ -63,21 +63,21 @@
         <!--<form class="form-horizontal" data-ng-submit="update()" novalidate>-->
             <!--<fieldset>-->
                 <!--<div class="form-group">-->
-                    <!--&lt;!&ndash;<label class="control-label" for="firstName">First Name</label>&ndash;&gt;-->
+                    <!--<!--<label class="control-label" for="firstName">First Name</label>-->-->
 
-                    <!--&lt;!&ndash;<div class="controls">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" data-ng-model="otherUser.firstName" id="firstName" class="form-control"&ndash;&gt;-->
-                               <!--&lt;!&ndash;placeholder="First Name" required>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--<!--<div class="controls">-->-->
+                        <!--<!--<input type="text" data-ng-model="otherUser.firstName" id="firstName" class="form-control"-->-->
+                               <!--<!--placeholder="First Name" required>-->-->
+                    <!--<!--</div>-->-->
 
-                    <!--&lt;!&ndash;<label class="control-label" for="lastName">Last Name</label>&ndash;&gt;-->
+                    <!--<!--<label class="control-label" for="lastName">Last Name</label>-->-->
 
-                    <!--&lt;!&ndash;<div class="controls">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<input type="text" data-ng-model="otherUser.lastName" id="lastName" class="form-control"&ndash;&gt;-->
-                               <!--&lt;!&ndash;placeholder="Last Name" required>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                    <!--<!--<div class="controls">-->-->
+                        <!--<!--<input type="text" data-ng-model="otherUser.lastName" id="lastName" class="form-control"-->-->
+                               <!--<!--placeholder="Last Name" required>-->-->
+                    <!--<!--</div>-->-->
 
-                    <!--&lt;!&ndash;<label class="control-label" for="lastName">Roles</label>&ndash;&gt;-->
+                    <!--<!--<label class="control-label" for="lastName">Roles</label>-->-->
 
                     <!---->
                 <!--</div>-->

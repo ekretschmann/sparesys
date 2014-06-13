@@ -99,6 +99,13 @@ angular.module('courses').controller('CoursesController',
                 });
             };
 
+            // Find existing Course
+            $scope.findById = function (id) {
+                $scope.course = Courses.get({
+                    courseId: id
+                });
+            };
+
             $scope.infoCreateCourse = function () {
                 // Todo: implement me
             };

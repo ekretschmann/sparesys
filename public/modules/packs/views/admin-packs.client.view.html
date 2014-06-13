@@ -1,6 +1,6 @@
 <section data-ng-controller="PacksController" data-ng-init="find()">
 
-    <div data-ng-show="authentication.user" ng-include="'/modules/courses/views/partial/delete-pack.modal.client.view.html'"></div>
+    <!--<div data-ng-show="authentication.user" ng-include="'/modules/courses/views/partial/delete-pack.modal.client.view.html'"></div>-->
 
     <div class="sparesys-header">
         <div class="pull-right">
@@ -14,24 +14,37 @@
 
         </div>
     </div>
-    <div class="list-group">
-        <div data-ng-repeat="pack in packs" data-ng-href="#!/packs/{{pack._id}}/edit" class="list-group-item">
 
-            <div class="pull-right">
-                <a class="btn btn-primary" data-ng-click="areYouSureToDeletePack(pack);">
-                    <i class="glyphicon glyphicon-trash"></i>
-                </a>
-            </div>
+    <table id="searchTextResults" class="table-striped" style="width: 100%">
+        <thead>
+        <tr>
+            <!--<th class="sparesys-view-courses-course-column"></th>-->
+            <th class="sparesys-view-courses-course-column">Pack</th>
+            <th class="sparesys-view-courses-description-column">Course</th>
+            <!--<th class="sparesys-view-courses-description-column">By</th>-->
+            <!--<th>Created</th>-->
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="pack in packs | filter:searchText">
+            <!--<td class="sparesys-view-courses-name-cell">-->
+                <!--<a href="">-->
+                    <!--<i data-ng-click="areYouSureToDeletePack(pack)"-->
+                       <!--class="glyphicon glyphicon-remove-sign">-->
+                    <!--</i>-->
+                <!--</a>-->
+                <!--<a data-ng-href="#!/packs/{{pack._id}}/edit">-->
+                    <!--<i class="glyphicon glyphicon-edit"></i>-->
+                <!--</a>-->
+            <!--</td>-->
+            <td class="sparesys-view-courses-name-cell">{{pack.name}}</td>
+            <td class="sparesys-view-courses-name-cell"
+                data-ng-controller="CoursesController" data-ng-init="findById(pack.course)">{{course.name}}</td>
+            <!--<td class="sparesys-view-courses-name-cell">{{pack.course.user.displayName}}</td>-->
+            <!--<td class="sparesys-view-courses-date-cell">{{pack.created | date:'shortDate'}}</td>-->
+        </tr>
+        </tbody>
+    </table>
 
-            <h4 class="list-group-item-heading">{{pack.name}} - {{course.description}}</h4>
 
-            <div data-ng-hide="!course.user">by {{course.user.displayName}}</div>
-            <div data-ng-hide="course.user" class="alert-warning">no user</div>
-
-
-        </div>
-    </div>
-    <div class="alert alert-warning text-center" data-ng-hide="!courses.$resolved || courses.length">
-        No Courses yet, why don't you <a href="/#!/courses/create">create one</a>?
-    </div>
 </section>

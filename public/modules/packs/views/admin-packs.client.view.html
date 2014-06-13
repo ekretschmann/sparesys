@@ -1,0 +1,37 @@
+<section data-ng-controller="PacksController" data-ng-init="find()">
+
+    <div data-ng-show="authentication.user" ng-include="'/modules/courses/views/partial/delete-pack.modal.client.view.html'"></div>
+
+    <div class="sparesys-header">
+        <div class="pull-right">
+
+        </div>
+
+        <div class="sparesys-title">
+            Packs Administration
+        </div>
+        <div class="sparesys-subtitle">
+
+        </div>
+    </div>
+    <div class="list-group">
+        <div data-ng-repeat="pack in packs" data-ng-href="#!/packs/{{pack._id}}/edit" class="list-group-item">
+
+            <div class="pull-right">
+                <a class="btn btn-primary" data-ng-click="areYouSureToDeletePack(pack);">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </a>
+            </div>
+
+            <h4 class="list-group-item-heading">{{pack.name}} - {{course.description}}</h4>
+
+            <div data-ng-hide="!course.user">by {{course.user.displayName}}</div>
+            <div data-ng-hide="course.user" class="alert-warning">no user</div>
+
+
+        </div>
+    </div>
+    <div class="alert alert-warning text-center" data-ng-hide="!courses.$resolved || courses.length">
+        No Courses yet, why don't you <a href="/#!/courses/create">create one</a>?
+    </div>
+</section>

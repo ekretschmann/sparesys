@@ -23,7 +23,10 @@ var PackSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+    course: {
+        type: Schema.ObjectId
+    }
 });
 
 mongoose.model('Pack', PackSchema);

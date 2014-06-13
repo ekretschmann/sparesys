@@ -7,20 +7,21 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
         // Create new Pack
         $scope.create = function() {
-        	// Create new Pack object
-            var pack = new Packs({
-                name: this.name
-            });
-
-            // Redirect after save
-            pack.$save(function(response) {
-                $location.path('packs/' + response._id);
-            }, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-
-            // Clear form fields
-            this.name = '';
+            console.log("CREATING")
+//        	// Create new Pack object
+//            var pack = new Packs({
+//                name: this.name
+//            });
+//
+//            // Redirect after save
+//            pack.$save(function(response) {
+//                $location.path('packs/' + response._id);
+//            }, function(errorResponse) {
+//				$scope.error = errorResponse.data.message;
+//			});
+//
+//            // Clear form fields
+//            this.name = '';
         };
 
         // Remove existing Pack

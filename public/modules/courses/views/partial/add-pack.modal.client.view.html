@@ -1,0 +1,28 @@
+<form class="form-horizontal" data-ng-submit="addPackToCourse()" novalidate>
+    <fieldset>
+        <div class="sparesys-header">
+            <table class="sparesys-view-object-table">
+                <tr class="controls">
+                    <td class="sparesys-view-object-label-cell">Name</td>
+                    <td class="sparesys-view-object-content-cell">
+                        <input type="text" data-ng-model="name"
+                               id="packname" class="form-control"
+                               placeholder="Name"
+
+                               required></td>
+                </tr>
+            </table>
+        </div>
+
+        <button class="btn btn-primary sparesys-button"
+                type="submit"
+                class="btn btn-default"
+                ng-click="ok()">
+            Add
+        </button>
+
+        <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+
+
+    </fieldset>
+</form>

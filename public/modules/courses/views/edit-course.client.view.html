@@ -4,6 +4,54 @@
     <div data-ng-show="authentication.user"
          ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
+    <script type="text/ng-template" id="addPackToCourse.html">
+        <div>
+
+            <div class="modal-body">
+                <div class="sparesys-header">
+                    <div class="sparesys-title">
+                        Add pack to course <span class="sparesys-emphasize">"{{course.name}}"</span>
+                    </div>
+                </div>
+
+                    <!--<div ng-include src="'/modules/packs/views/create-pack.client.view.html'"></div>-->
+                    <!--<div ng-include src="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>-->
+
+                <form class="form-horizontal" data-ng-submit="addPackToCourse()" novalidate>
+                    <fieldset>
+                        <div class="sparesys-header">
+                            <table class="sparesys-view-object-table">
+                                <tr class="controls">
+                                    <td class="sparesys-view-object-label-cell">Name</td>
+                                    <td class="sparesys-view-object-content-cell">
+                                        <input type="text" data-ng-model="name"
+                                               id="packname" class="form-control"
+                                               placeholder="Name"
+
+                                               required></td>
+                                </tr>
+                            </table>
+                        </div>
+
+                        <button class="btn btn-primary sparesys-button"
+                                type="submit"
+                                class="btn btn-default"
+                                ng-click="ok()">
+                            Add
+                        </button>
+
+                        <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+
+
+                    </fieldset>
+                </form>
+
+            </div>
+
+
+        </div>
+    </script>
+
     <div class="sparesys-header">
         <div class="pull-right">
 
@@ -55,4 +103,60 @@
             </div>
         </fieldset>
     </form>
+
+
+    <div class="sparesys-region">
+
+        <div data-ng-hide="courses.pack.length == 0">
+            No Packs yet, why don't you <a href="" ng-click="addPackToCoursePopup()">add one</a>?
+        </div>
+        <div data-ng-show="courses.pack.length == 0">
+            Packs in this Course
+            <div class="pull-right">
+                <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == course.user._id">(Add a
+                    Pack)</a>
+            </div>
+        </div>
+
+
+        <!--<section data-ng-controller="PacksController" data-ng-init="find_for_course()">-->
+
+
+        <!--<ol data-ng-model="packs" ui-sortable="sortableOptions" class="list">-->
+        <!--<li data-ng-repeat="pack in packs" class="item">-->
+
+        <!--<span style="float: left">-->
+        <!--{{pack.name}}-->
+        <!--</span>-->
+
+        <!--<span style="float: right; padding-right: 2px"-->
+        <!--data-ng-show="authentication.user._id == course.user._id">-->
+        <!--<a class="btn btn-primary" href="/#!/packs/{{pack._id}}">-->
+        <!--<i class="glyphicon glyphicon-arrow-right"></i>-->
+        <!--</a>-->
+        <!--</span>-->
+
+        <!--<span style="float: right; padding-right: 5px"-->
+        <!--data-ng-show="authentication.user._id == course.user._id">-->
+        <!--<a class="btn btn-primary" data-ng-click="are_you_sure(pack);">-->
+        <!--<i class="glyphicon glyphicon-trash"></i>-->
+        <!--</a>-->
+        <!--</span>-->
+
+        <!--<span style="float: right; padding-right: 5px">-->
+        <!--<a class="btn btn-primary" href="/#!/packs/{{pack._id}}"-->
+        <!--data-ng-show="authentication.user._id != course.user._id">-->
+        <!--<i class="glyphicon glyphicon-zoom-in"></i>-->
+        <!--</a>-->
+        <!--</span>-->
+        <!--</li>-->
+        <!--</ol>-->
+
+        <!--</section>-->
+    </div>
+
+
+    <small>
+        <em class="text-muted">Created on {{course.created | date:'mediumDate'}} by {{course.user.displayName}}</em>
+    </small>
 </section>

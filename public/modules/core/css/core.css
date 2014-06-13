@@ -107,12 +107,28 @@ body {
     border-bottom: black solid 1px;
 }
 
+.sparesys-region {
+    margin-bottom: 10px;
+    margin-top: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
+    border-bottom: black solid 1px;
+    border-top: black solid 1px;
+}
+
 .sparesys-emphasize {
     font-style: italic;
 }
 
 .sparesys-button {
     width: 80px;
+    /*background-image: -webkit-linear-gradient(top, #428bca 0%, #2d6ca2 100%);*/
+    /*background-image:         linear-gradient(to bottom, #428bca 0%, #2d6ca2 100%);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff428bca', endColorstr='#ff2d6ca2', GradientType=0);*/
+    /*filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);*/
+    /*background-repeat: repeat-x;*/
+    /*border-color: #2b669a;*/
+    /*color: white;*/
 }
 
 /* Custom dialog/modal headers */

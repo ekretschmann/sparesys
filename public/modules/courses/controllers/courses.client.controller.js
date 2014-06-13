@@ -2,8 +2,8 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesController',
-    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService',
-        function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService) {
+    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'CoursesService',
+        function ($scope, $stateParams, $location, $modal, Authentication, Courses, Packs, CoursesService) {
             $scope.authentication = Authentication;
 
 
@@ -115,6 +115,100 @@ angular.module('courses').controller('CoursesController',
                             return $scope.course;
                         }
                     }
+                });
+            };
+
+            // Create new Pack
+            $scope.addPackToCourse = function () {
+                console.log("Adding")
+                // Create new Pack object
+//                var pack = new Packs({
+//                    name: this.name,
+//                    course: this.course._id
+//                });
+
+
+                // Redirect after save
+//                pack.$save(function (response) {
+//                    var packid = response._id;
+//
+//                    var c = $scope.course;
+//                    c.packs.push(packid);
+//
+//                    c.$update(function (response) {
+//                        $state.go($state.$current, null, { reload: true });
+//                    }, function (errorResponse) {
+//                        $scope.error = errorResponse.data.message;
+//                    });
+//
+//                }, function (errorResponse) {
+//                    $scope.error = errorResponse.data.message;
+//                });
+//                $scope.name = '';
+
+            };
+
+            var AddPackToCourseCtrl = function ($scope, $modalInstance, course) {
+
+                $scope.course = course;
+
+                $scope.ok = function () {
+//                    angular.element('.hasfocus').trigger('focus');
+                    $scope.addPackToCourse();
+                };
+
+                $scope.cancel = function () {
+                    $modalInstance.dismiss('cancel');
+                };
+
+                $scope.addPackToCourse = function () {
+
+                // Create new Pack object
+                var pack = new Packs({
+                    name: this.name,
+                    course: this.course._id
+                });
+
+
+                // Redirect after save
+                pack.$save(function (response) {
+                    var packid = response._id;
+
+                    var c = $scope.course;
+                    c.packs.push(packid);
+
+                    c.$update(function (response) {
+                        $state.go($state.$current, null, { reload: true });
+                    }, function (errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                    });
+
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+                $scope.name = '';
+
+                };
+            };
+
+
+            $scope.addPackToCoursePopup = function (size) {
+
+                var modalInstance = $modal.open({
+                    templateUrl: 'addPackToCourse.html',
+                    controller: AddPackToCourseCtrl,
+                    size: size,
+                    resolve: {
+                        course: function () {
+                            return $scope.course;
+                        }
+                    }
+                });
+
+                modalInstance.result.then(function (selectedItem) {
+//                $scope.selected = selectedItem;
+                }, function () {
+//                $log.info('Modal dismissed at: ' + new Date());
                 });
             };
         }

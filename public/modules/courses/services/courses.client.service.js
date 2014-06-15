@@ -25,6 +25,15 @@ angular.module('courses').factory('CoursesService', [
 
                 }
                 return true;
+            },
+            removePack: function (pack, callback) {
+
+                if (pack) {
+//              Todo: remove the packs
+                    pack.$remove(callback);
+
+                }
+                return true;
             }
         };
     }

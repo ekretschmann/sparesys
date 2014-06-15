@@ -1,6 +1,6 @@
 <section data-ng-controller="PacksController" data-ng-init="find()">
 
-    <!--<div data-ng-show="authentication.user" ng-include="'/modules/courses/views/partial/delete-pack.modal.client.view.html'"></div>-->
+    <div data-ng-show="authentication.user" ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
 
     <div class="sparesys-header">
         <div class="pull-right">
@@ -18,30 +18,29 @@
     <table id="searchTextResults" class="table-striped" style="width: 100%">
         <thead>
         <tr>
-            <!--<th class="sparesys-view-courses-course-column"></th>-->
+            <th class="sparesys-view-courses-course-column"></th>
             <th class="sparesys-view-courses-course-column">Pack</th>
             <th class="sparesys-view-courses-description-column">Course</th>
-            <!--<th class="sparesys-view-courses-description-column">By</th>-->
-            <!--<th>Created</th>-->
+            <th class="sparesys-view-courses-description-column">By</th>
+            <th>Created</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="pack in packs | filter:searchText">
-            <!--<td class="sparesys-view-courses-name-cell">-->
-                <!--<a href="">-->
-                    <!--<i data-ng-click="areYouSureToDeletePack(pack)"-->
-                       <!--class="glyphicon glyphicon-remove-sign">-->
-                    <!--</i>-->
-                <!--</a>-->
-                <!--<a data-ng-href="#!/packs/{{pack._id}}/edit">-->
-                    <!--<i class="glyphicon glyphicon-edit"></i>-->
-                <!--</a>-->
-            <!--</td>-->
+            <td class="sparesys-view-courses-name-cell">
+                <a href="">
+                    <i data-ng-click="areYouSureToDeletePack(pack)"
+                       class="glyphicon glyphicon-remove-sign">
+                    </i>
+                </a>
+                <a data-ng-href="#!/packs/{{pack._id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+            </td>
             <td class="sparesys-view-courses-name-cell">{{pack.name}}</td>
-            <td class="sparesys-view-courses-name-cell"
-                data-ng-controller="CoursesController" data-ng-init="findById(pack.course)">{{course.name}}</td>
-            <!--<td class="sparesys-view-courses-name-cell">{{pack.course.user.displayName}}</td>-->
-            <!--<td class="sparesys-view-courses-date-cell">{{pack.created | date:'shortDate'}}</td>-->
+            <td class="sparesys-view-courses-name-cell" data-ng-init="getCourseName(pack)">{{pack.courseName}}</td>
+            <td class="sparesys-view-courses-name-cell">{{pack.user.displayName}}</td>
+            <td class="sparesys-view-courses-date-cell">{{pack.created | date:'shortDate'}}</td>
         </tr>
         </tbody>
     </table>

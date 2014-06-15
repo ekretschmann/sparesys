@@ -201,7 +201,7 @@ angular.module('courses').controller('CoursesController',
 
             $scope.addPackToCoursePopup = function (size) {
 
-                var modalInstance = $modal.open({
+               $modal.open({
                     templateUrl: 'addPackToCourse.html',
                     controller: AddPackToCourseCtrl,
                     size: size,
@@ -212,11 +212,6 @@ angular.module('courses').controller('CoursesController',
                     }
                 });
 
-                modalInstance.result.then(function (selectedItem) {
-//                $scope.selected = selectedItem;
-                }, function () {
-//                $log.info('Modal dismissed at: ' + new Date());
-                });
             };
         }
     ]);

@@ -1,13 +1,30 @@
 'use strict';
 
 // Packs controller
-angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$location', 'Authentication', 'Packs',
-    function($scope, $stateParams, $location, Authentication, Packs) {
+angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'CoursesService',
+    function ($scope, $stateParams, $location, $modal, Authentication, Courses, Packs, CoursesService) {
         $scope.authentication = Authentication;
 
+        // Controller for popup window displayed when deleting the course
+        var AreYouSureToDeletePackCtrl = function ($scope, $state, $modalInstance, pack) {
+
+            $scope.pack = pack;
+
+            $scope.ok = function () {
+                CoursesService.removePack(pack, function () {
+                    $state.go($state.$current, null, { reload: true });
+                });
+                $modalInstance.close();
+            };
+
+            $scope.cancel = function () {
+                $modalInstance.dismiss('cancel');
+            };
+        };
+
         // Create new Pack
-        $scope.create = function() {
-            console.log("CREATING")
+        $scope.create = function () {
+            console.log('CREATING');
 //        	// Create new Pack object
 //            var pack = new Packs({
 //                name: this.name
@@ -25,7 +42,7 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         };
 
         // Remove existing Pack
-        $scope.remove = function(pack) {
+        $scope.remove = function (pack) {
             if (pack) {
                 pack.$remove();
 
@@ -35,32 +52,62 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                     }
                 }
             } else {
-                $scope.pack.$remove(function() {
+                $scope.pack.$remove(function () {
                     $location.path('packs');
                 });
             }
         };
 
         // Update existing Pack
-        $scope.update = function() {
+        $scope.update = function () {
             var pack = $scope.pack;
 
-            pack.$update(function() {
+            pack.$update(function () {
                 $location.path('packs/' + pack._id);
-            }, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
         };
 
         // Find a list of Packs
-        $scope.find = function() {
+        $scope.find = function () {
             $scope.packs = Packs.query();
         };
 
         // Find existing Pack
-        $scope.findOne = function() {
+        $scope.findOne = function () {
             $scope.pack = Packs.get({
                 packId: $stateParams.packId
+            });
+        };
+
+        $scope.getCourseName = function (pack) {
+            Courses.query({
+                _id: pack.course
+            }, function (courses) {
+                if (courses.length === 1) {
+                    pack.courseName = courses[0].name;
+                } else {
+                    pack.courseName = 'undefined';
+                }
+            });
+
+
+        };
+
+
+        $scope.areYouSureToDeletePack = function (pack) {
+
+            $scope.pack = pack;
+            $modal.open({
+                templateUrl: 'areYouSureToDeletePack.html',
+                controller: AreYouSureToDeletePackCtrl,
+                resolve: {
+
+                    pack: function () {
+                        return $scope.pack;
+                    }
+                }
             });
         };
     }

@@ -98,19 +98,28 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
 
     if (req.query.userId) {
-        Course.find()
-            .where('user').equals(req.query.userId)
-            .exec(function (err, courses) {
-                if (err) {
-                    return res.send(400, {
-                        message: getErrorMessage(err)
-                    });
-                } else {
-                    res.jsonp(courses);
-                }
-            });
-    } else {
 
+        Course.find({'user': req.query.userId}).exec(function (err, courses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(courses);
+            }
+        });
+    } else if (req.query._id) {
+
+        Course.find({'_id': req.query._id}).exec(function (err, courses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(courses);
+            }
+        });
+    } else {
         Course.find().sort('-created').populate('user', 'displayName').exec(function (err, courses) {
             if (err) {
                 return res.send(400, {

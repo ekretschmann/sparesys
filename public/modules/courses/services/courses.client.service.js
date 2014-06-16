@@ -26,11 +26,26 @@ angular.module('courses').factory('CoursesService', [
                 }
                 return true;
             },
-            removePack: function (pack, callback) {
+            removePack: function (Courses, pack, callback) {
 
                 if (pack) {
-//              Todo: remove the packs
+                    Courses.query({
+                        _id: pack.course
+                    }, function (courses) {
+                        if (courses.length === 1) {
+                            var course = courses[0];
+                            for (var i in course.packs) {
+                                if (course.packs[i] === pack._id) {
+                                    course.packs.splice(i, 1);
+                                }
+                            }
+                            course.$update();
+                        }
+                    });
+
+
                     pack.$remove(callback);
+
 
                 }
                 return true;

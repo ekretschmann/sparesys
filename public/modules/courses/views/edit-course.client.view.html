@@ -4,6 +4,8 @@
     <div data-ng-show="authentication.user"
          ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
+    <div data-ng-show="authentication.user" ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
+
     <script type="text/ng-template" id="addPackToCourse.html">
         <div>
 
@@ -105,17 +107,48 @@
     </form>
 
 
+
     <div class="sparesys-region">
 
-        <div data-ng-hide="courses.pack.length == 0">
+        <div data-ng-hide="course.packs.length > 0">
             No Packs yet, why don't you <a href="" ng-click="addPackToCoursePopup()">add one</a>?
         </div>
-        <div data-ng-show="courses.pack.length == 0">
-            Packs in this Course
+        <div data-ng-show="course.packs.length > 0">
+
             <div class="pull-right">
-                <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == course.user._id">(Add a
-                    Pack)</a>
+                <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == course.user._id">
+                    (Add a Pack)
+                </a>
             </div>
+            <table id="searchTextResults" class="table-striped" style="width: 100%">
+                <thead>
+                <tr>
+                    <th class="sparesys-view-courses-course-column"></th>
+                    <th class= "sparesys-view-courses-course-column">Pack</th>
+                    <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
+                    <!--<th>Created</th>-->
+                </tr>
+                </thead>
+                <tbody >
+                <tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController" data-ng-init="findById(packId)">
+                    <td  class="sparesys-view-courses-name-cell">
+                        <a href="">
+                            <i data-ng-click="areYouSureToDeletePack(pack)"
+                               class="glyphicon glyphicon-remove-sign">
+                            </i>
+                        </a>
+                        <a data-ng-href="#!/packs/{{pack._id}}/edit">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                    </td>
+
+                    <td class="sparesys-view-object-content-cell" data-ng-controller="PacksController" >
+                        <a>{{pack.name}}</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
         </div>
 
 

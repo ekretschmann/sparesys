@@ -11,7 +11,9 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             $scope.pack = pack;
 
             $scope.ok = function () {
-                CoursesService.removePack(pack, function () {
+                CoursesService.removePack(Courses, pack, function () {
+//                    console.log('REFRESH STATE');
+//                    console.log($state.current.name);
                     $state.go($state.$current, null, { reload: true });
                 });
                 $modalInstance.close();
@@ -80,6 +82,23 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                 packId: $stateParams.packId
             });
         };
+
+        // Find existing Pack
+        $scope.findById = function (packId) {
+            $scope.pack = Packs.get({
+                packId: packId
+            });
+        };
+
+//        $scope.getPackName = function (packId) {
+//            console.log(packId);
+//            Packs.get({
+//                packId: packId
+//            }, function(pack) {
+//                console.log(pack);
+//                return pack.name;
+//            });
+//        };
 
         $scope.getCourseName = function (pack) {
             Courses.query({

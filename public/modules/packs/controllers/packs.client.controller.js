@@ -1,46 +1,13 @@
 'use strict';
 
 // Packs controller
-angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'CoursesService',
-    function ($scope, $stateParams, $location, $modal, Authentication, Courses, Packs, CoursesService) {
+angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs',
+    function ($scope, $stateParams, $location, $modal, Authentication, Courses, Packs) {
         $scope.authentication = Authentication;
 
-        // Controller for popup window displayed when deleting the course
-        var AreYouSureToDeletePackCtrl = function ($scope, $state, $modalInstance, pack, course) {
 
-            $scope.pack = pack;
-            $scope.course = course;
 
-            $scope.ok = function () {
-                CoursesService.removePack(Courses, pack, function () {
-                    $state.go($state.$current, null, { reload: true });
-                });
-                $modalInstance.close();
-            };
 
-            $scope.cancel = function () {
-                $modalInstance.dismiss('cancel');
-            };
-        };
-
-        // Create new Pack
-        $scope.create = function () {
-            console.log('CREATING');
-//        	// Create new Pack object
-//            var pack = new Packs({
-//                name: this.name
-//            });
-//
-//            // Redirect after save
-//            pack.$save(function(response) {
-//                $location.path('packs/' + response._id);
-//            }, function(errorResponse) {
-//				$scope.error = errorResponse.data.message;
-//			});
-//
-//            // Clear form fields
-//            this.name = '';
-        };
 
         // Remove existing Pack
         $scope.remove = function (pack) {
@@ -119,7 +86,7 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             $scope.pack = pack;
             $modal.open({
                 templateUrl: 'areYouSureToDeletePack.html',
-                controller: AreYouSureToDeletePackCtrl,
+                controller: 'DeletePackController',
                 resolve: {
 
                     pack: function () {

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('courses').controller('DeleteCourseModalControllerController', ['$scope', '$state', '$modalInstance', 'course', 'CoursesService',
+angular.module('courses').controller('DeleteCourseModalController', ['$scope', '$state', '$modalInstance', 'course', 'CoursesService',
 	function($scope, $state, $modalInstance, course, CoursesService) {
         $scope.course = course;
 

@@ -90,7 +90,7 @@ angular.module('courses').controller('CoursesController',
                 $scope.course = course;
                 $modal.open({
                     templateUrl: 'areYouSureToDeleteCourse.html',
-                    controller: 'DeleteCourseModalControllerController',
+                    controller: 'DeleteCourseModalController',
                     resolve: {
 
                         course: function () {

@@ -113,7 +113,7 @@ angular.module('courses').controller('CoursesController',
             $scope.areYouSureToDeleteCourse = function (course) {
 
                 $scope.course = course;
-                var modalInstance = $modal.open({
+                $modal.open({
                     templateUrl: 'areYouSureToDeleteCourse.html',
                     controller: AreYouSureToDeleteCourseCtrl,
                     resolve: {
@@ -123,6 +123,7 @@ angular.module('courses').controller('CoursesController',
                         }
                     }
                 });
+
             };
 
 
@@ -131,11 +132,13 @@ angular.module('courses').controller('CoursesController',
 
                 $scope.course = course;
 
+                $scope.setFocus = function() {
+                    //document.element('.hasfocus').trigger('focus');
+                };
+
                 $scope.ok = function () {
-                  //  console.log('ok');
-                    angular.element('.hasfocus').trigger('focus');
-                    console.log(this.name);
-//                    $scope.addPackToCourse();
+                    this.name = '';
+                    //$state.go($state.$current, null, { reload: false });
                 };
 
                 $scope.cancel = function () {
@@ -157,7 +160,7 @@ angular.module('courses').controller('CoursesController',
                         var packid = response._id;
                         var c = $scope.course;
                         c.packs.push(packid);
-                        c.$update(function (response) {
+                        c.$update(function () {
                             $scope.name = '';
                             $state.go($state.$current, null, { reload: true });
                         }, function (errorResponse) {

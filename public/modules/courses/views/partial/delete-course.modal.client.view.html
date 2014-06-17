@@ -1,15 +1,15 @@
 <script type="text/ng-template" id="areYouSureToDeleteCourse.html">
     <div class="modal-body">
 
-        <div class="sparesys-title">
-            Delete course <span class="sparesys-emphasize">"{{course.name}}"</span>
+        <div class="sparesys-header">
+            <div class="sparesys-title">
+                Delete course <span class="sparesys-emphasize">"{{course.name}}"</span>
+            </div>
+            <div class="sparesys-subtitle">
+                Are you sure?
+            </div>
         </div>
-        <div class="sparesys-subtitle">
-            Are you sure?
-        </div>
-        <div class="modal-footer">
-            <button class="btn sparesys-button" ng-click="ok()">OK</button>
-            <button class="btn sparesys-button" ng-click="cancel()">Cancel</button>
-        </div>
+            <button class="btn btn-primary sparesys-button" ng-click="ok()">OK</button>
+            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
     </div>
 </script>

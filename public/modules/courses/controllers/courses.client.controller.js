@@ -14,13 +14,7 @@ angular.module('courses').controller('CoursesController',
 
                 $scope.ok = function () {
                     CoursesService.remove(course, function () {
-
-                        if ($state.current.name === 'adminCourses') {
-                            $state.go($state.$current, null, { reload: true });
-                        } else {
-
-                            $location.path('courses');
-                        }
+                        $state.go($state.$current, null, { reload: true });
                     });
 
 
@@ -127,12 +121,11 @@ angular.module('courses').controller('CoursesController',
             };
 
 
-
             var AddPackToCourseCtrl = function ($scope, $state, $modalInstance, course) {
 
                 $scope.course = course;
 
-                $scope.setFocus = function() {
+                $scope.setFocus = function () {
                     //document.element('.hasfocus').trigger('focus');
                 };
 
@@ -188,7 +181,6 @@ angular.module('courses').controller('CoursesController',
                         }
                     }
                 });
-
 
 
             };

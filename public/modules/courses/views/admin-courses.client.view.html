@@ -1,7 +1,6 @@
 <section data-ng-controller="CoursesController" data-ng-init="find()">
 
-    <div data-ng-show="authentication.user"
-         ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
+    <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
     <div class="sparesys-header">
         <div class="pull-right">
@@ -39,8 +38,7 @@
                     </a>
             </td>
             <td class="sparesys-view-courses-name-cell">
-                <a
-                        data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></td>
+               {{course.name}}</td>
             <td>{{course.description}}</td>
             <td class="sparesys-view-courses-name-cell">{{course.user.displayName}}</td>
             <td class="sparesys-view-courses-date-cell">{{course.created | date:'shortDate'}}</td>

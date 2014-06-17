@@ -6,14 +6,13 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.authentication = Authentication;
 
         // Controller for popup window displayed when deleting the course
-        var AreYouSureToDeletePackCtrl = function ($scope, $state, $modalInstance, pack) {
+        var AreYouSureToDeletePackCtrl = function ($scope, $state, $modalInstance, pack, course) {
 
             $scope.pack = pack;
+            $scope.course = course;
 
             $scope.ok = function () {
                 CoursesService.removePack(Courses, pack, function () {
-//                    console.log('REFRESH STATE');
-//                    console.log($state.current.name);
                     $state.go($state.$current, null, { reload: true });
                 });
                 $modalInstance.close();
@@ -125,6 +124,9 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
                     pack: function () {
                         return $scope.pack;
+                    },
+                    course: function () {
+                        return $scope.course;
                     }
                 }
             });

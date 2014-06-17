@@ -4,7 +4,8 @@
     <div data-ng-show="authentication.user"
          ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
-    <div data-ng-show="authentication.user" ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
+    <div data-ng-show="authentication.user"
+         ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
 
     <script type="text/ng-template" id="addPackToCourse.html">
         <div>
@@ -16,8 +17,8 @@
                     </div>
                 </div>
 
-                    <!--<div ng-include src="'/modules/packs/views/create-pack.client.view.html'"></div>-->
-                    <!--<div ng-include src="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>-->
+                <!--<div ng-include src="'/modules/packs/views/create-pack.client.view.html'"></div>-->
+                <!--<div ng-include src="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>-->
 
                 <form class="form-horizontal" data-ng-submit="addPackToCourse()" novalidate>
                     <fieldset>
@@ -27,9 +28,8 @@
                                     <td class="sparesys-view-object-label-cell">Name</td>
                                     <td class="sparesys-view-object-content-cell">
                                         <input type="text" data-ng-model="name"
-                                               id="packname" class="form-control"
+                                               id="packname" class="form-control hasfocus"
                                                placeholder="Name"
-
                                                required></td>
                                 </tr>
                             </table>
@@ -38,7 +38,7 @@
                         <button class="btn btn-primary sparesys-button"
                                 type="submit"
                                 class="btn btn-default"
-                                ng-click="ok()">
+                                >
                             Add
                         </button>
 
@@ -107,7 +107,6 @@
     </form>
 
 
-
     <div class="sparesys-region">
 
         <div data-ng-hide="course.packs.length > 0">
@@ -117,21 +116,26 @@
 
             <div class="pull-right">
                 <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == course.user._id">
-                    (Add a Pack)
+                    Add Packs
+                    <i class="glyphicon glyphicon-plus-sign">
+                    </i>
+
                 </a>
             </div>
             <table id="searchTextResults" class="table-striped" style="width: 100%">
                 <thead>
                 <tr>
-                    <th class="sparesys-view-courses-course-column"></th>
-                    <th class= "sparesys-view-courses-course-column">Pack</th>
+                    <th class="sparesys-view-courses-course-column">
+                    </th>
+                    <th class="sparesys-view-courses-course-column">Pack</th>
                     <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
                     <!--<th>Created</th>-->
                 </tr>
                 </thead>
-                <tbody >
-                <tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController" data-ng-init="findById(packId)">
-                    <td  class="sparesys-view-courses-name-cell">
+                <tbody>
+                <tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"
+                    data-ng-init="findById(packId)">
+                    <td class="sparesys-view-courses-name-cell">
                         <a href="">
                             <i data-ng-click="areYouSureToDeletePack(pack)"
                                class="glyphicon glyphicon-remove-sign">
@@ -142,7 +146,7 @@
                         </a>
                     </td>
 
-                    <td class="sparesys-view-object-content-cell" data-ng-controller="PacksController" >
+                    <td class="sparesys-view-object-content-cell" data-ng-controller="PacksController">
                         <a>{{pack.name}}</a>
                     </td>
                 </tr>

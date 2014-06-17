@@ -132,19 +132,18 @@ angular.module('courses').controller('CoursesController',
                 $scope.course = course;
 
                 $scope.ok = function () {
-                    console.log('ok');
-//                    angular.element('.hasfocus').trigger('focus');
-                    $scope.addPackToCourse();
+                  //  console.log('ok');
+                    angular.element('.hasfocus').trigger('focus');
+                    console.log(this.name);
+//                    $scope.addPackToCourse();
                 };
 
                 $scope.cancel = function () {
-                    console.log('Cancel');
                     $modalInstance.dismiss('cancel');
                 };
 
                 $scope.addPackToCourse = function () {
 
-                    console.log('ADDING');
                     // Create new Pack object
                     var pack = new Packs({
                         name: this.name,
@@ -152,16 +151,14 @@ angular.module('courses').controller('CoursesController',
                     });
 
 
+                    console.log(this.name);
                     // Redirect after save
                     pack.$save(function (response) {
                         var packid = response._id;
-
                         var c = $scope.course;
                         c.packs.push(packid);
-
                         c.$update(function (response) {
-//                        console.log(c);
-//                        console.log(c.packs);
+                            $scope.name = '';
                             $state.go($state.$current, null, { reload: true });
                         }, function (errorResponse) {
                             $scope.error = errorResponse.data.message;
@@ -188,6 +185,8 @@ angular.module('courses').controller('CoursesController',
                         }
                     }
                 });
+
+
 
             };
         }

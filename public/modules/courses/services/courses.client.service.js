@@ -39,12 +39,14 @@ angular.module('courses').factory('CoursesService', [
                                     course.packs.splice(i, 1);
                                 }
                             }
-                            course.$update();
+                            course.$update(function() {
+                                pack.$remove(callback);
+                            });
                         }
                     });
 
 
-                    pack.$remove(callback);
+
 
 
                 }

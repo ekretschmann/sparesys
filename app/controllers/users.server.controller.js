@@ -126,7 +126,7 @@ exports.update = function (req, res) {
     }
 
     if (user) {
-        if(req.body._id != user._id) {
+        if(req.body._id !== user._id) {
             User.findById(req.body._id, function (err, otherUser) {
                 if (!err && otherUser) {
                     updateUser(otherUser);

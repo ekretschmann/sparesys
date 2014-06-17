@@ -1,5 +1,6 @@
 'use strict';
 
+
 // Courses controller
 angular.module('courses').controller('CoursesController',
     ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'CoursesService',
@@ -109,7 +110,7 @@ angular.module('courses').controller('CoursesController',
                 $scope.course = course;
                 $modal.open({
                     templateUrl: 'areYouSureToDeleteCourse.html',
-                    controller: AreYouSureToDeleteCourseCtrl,
+                    controller: 'DeleteCourseModalControllerController',
                     resolve: {
 
                         course: function () {

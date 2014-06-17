@@ -8,26 +8,6 @@ angular.module('courses').controller('CoursesController',
             $scope.authentication = Authentication;
 
 
-            // Controller for popup window displayed when deleting the course
-            var AreYouSureToDeleteCourseCtrl = function ($scope, $state, $modalInstance, course) {
-
-                $scope.course = course;
-
-                $scope.ok = function () {
-                    CoursesService.remove(course, function () {
-                        $state.go($state.$current, null, { reload: true });
-                    });
-
-
-                    $modalInstance.close();
-
-                };
-
-                $scope.cancel = function () {
-                    $modalInstance.dismiss('cancel');
-                };
-            };
-
             // Create new Course
             $scope.create = function () {
                 // Create new Course object
@@ -122,59 +102,11 @@ angular.module('courses').controller('CoursesController',
             };
 
 
-            var AddPackToCourseCtrl = function ($scope, $state, $modalInstance, course) {
-
-                $scope.course = course;
-
-                $scope.setFocus = function () {
-                    //document.element('.hasfocus').trigger('focus');
-                };
-
-                $scope.ok = function () {
-                    this.name = '';
-                    //$state.go($state.$current, null, { reload: false });
-                };
-
-                $scope.cancel = function () {
-                    $modalInstance.dismiss('cancel');
-                };
-
-                $scope.addPackToCourse = function () {
-
-                    // Create new Pack object
-                    var pack = new Packs({
-                        name: this.name,
-                        course: this.course._id
-                    });
-
-
-                    console.log(this.name);
-                    // Redirect after save
-                    pack.$save(function (response) {
-                        var packid = response._id;
-                        var c = $scope.course;
-                        c.packs.push(packid);
-                        c.$update(function () {
-                            $scope.name = '';
-                            $state.go($state.$current, null, { reload: true });
-                        }, function (errorResponse) {
-                            $scope.error = errorResponse.data.message;
-                        });
-
-                    }, function (errorResponse) {
-                        $scope.error = errorResponse.data.message;
-                    });
-                    $scope.name = '';
-
-                };
-            };
-
-
             $scope.addPackToCoursePopup = function (size) {
 
                 $modal.open({
                     templateUrl: 'addPackToCourse.html',
-                    controller: AddPackToCourseCtrl,
+                    controller: 'AddPackToCourseCtroller',
                     size: size,
                     resolve: {
                         course: function () {

@@ -106,7 +106,7 @@ angular.module('courses').controller('CoursesController',
 
                 $modal.open({
                     templateUrl: 'addPackToCourse.html',
-                    controller: 'AddPackToCourseCtroller',
+                    controller: 'AddPackToCourseController',
                     size: size,
                     resolve: {
                         course: function () {

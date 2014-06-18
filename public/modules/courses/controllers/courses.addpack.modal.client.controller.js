@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('courses').controller('AddPackToCourseCtroller', ['$scope', '$state', '$modalInstance', 'course', 'Packs',
+angular.module('courses').controller('AddPackToCourseController', ['$scope', '$state', '$modalInstance', 'course', 'Packs',
 	function($scope, $state, $modalInstance, course, Packs) {
         $scope.course = course;
 

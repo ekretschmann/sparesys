@@ -1,0 +1,45 @@
+<script type="text/ng-template" id="addCardToPack.html">
+
+    <div>
+
+        <div class="modal-body">
+            <div class="sparesys-header">
+                <div class="sparesys-title">
+                    Add card to pack <span class="sparesys-emphasize">"{{pack.name}}"</span>
+                </div>
+            </div>
+
+            <form class="form-horizontal"  novalidate>
+                <fieldset>
+                    <div class="sparesys-header">
+                        <table class="sparesys-view-object-table">
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Name</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="name"
+                                           id="cardname" class="form-control hasfocus"
+                                           placeholder="Name"
+                                           data-ng-init="setFocus()"
+                                           required></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary sparesys-button"
+                            type="submit"
+                            ng-click="addCardToPack()"
+                            >
+                        Add
+                    </button>
+
+                    <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+
+
+                </fieldset>
+            </form>
+
+        </div>
+
+
+    </div>
+</script>

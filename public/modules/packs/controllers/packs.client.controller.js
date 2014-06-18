@@ -100,5 +100,21 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                 }
             });
         };
+
+        $scope.addCardToPackPopup = function (size) {
+
+            $modal.open({
+                templateUrl: 'addCardToPack.html',
+                controller: 'AddCardToPackController',
+                size: size,
+                resolve: {
+                    pack: function () {
+                        return $scope.pack;
+                    }
+                }
+            });
+
+
+        };
     }
 ]);

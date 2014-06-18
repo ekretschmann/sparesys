@@ -117,5 +117,13 @@ angular.module('courses').controller('CoursesController',
 
 
             };
+
+            $scope.sortableOptions = {
+
+                stop: function (e, ui) {
+                    var course = $scope.course;
+                    course.$update();
+                }
+            };
         }
     ]);

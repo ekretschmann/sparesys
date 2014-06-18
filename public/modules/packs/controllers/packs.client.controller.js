@@ -46,6 +46,8 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.findOne = function () {
             $scope.pack = Packs.get({
                 packId: $stateParams.packId
+            }, function(pack) {
+                $scope.getCourseName(pack);
             });
         };
 

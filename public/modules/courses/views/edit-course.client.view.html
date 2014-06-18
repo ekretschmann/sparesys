@@ -23,10 +23,10 @@
         </div>
 
         <div class="sparesys-title">
-            Edit Course
+            {{course.name}}
         </div>
         <div class="sparesys-subtitle">
-            Maintain course and add packs
+            {{course.description}}
         </div>
     </div>
 
@@ -109,41 +109,6 @@
 
         </div>
 
-
-        <!--<section data-ng-controller="PacksController" data-ng-init="find_for_course()">-->
-
-
-        <!--<ol data-ng-model="packs" ui-sortable="sortableOptions" class="list">-->
-        <!--<li data-ng-repeat="pack in packs" class="item">-->
-
-        <!--<span style="float: left">-->
-        <!--{{pack.name}}-->
-        <!--</span>-->
-
-        <!--<span style="float: right; padding-right: 2px"-->
-        <!--data-ng-show="authentication.user._id == course.user._id">-->
-        <!--<a class="btn btn-primary" href="/#!/packs/{{pack._id}}">-->
-        <!--<i class="glyphicon glyphicon-arrow-right"></i>-->
-        <!--</a>-->
-        <!--</span>-->
-
-        <!--<span style="float: right; padding-right: 5px"-->
-        <!--data-ng-show="authentication.user._id == course.user._id">-->
-        <!--<a class="btn btn-primary" data-ng-click="are_you_sure(pack);">-->
-        <!--<i class="glyphicon glyphicon-trash"></i>-->
-        <!--</a>-->
-        <!--</span>-->
-
-        <!--<span style="float: right; padding-right: 5px">-->
-        <!--<a class="btn btn-primary" href="/#!/packs/{{pack._id}}"-->
-        <!--data-ng-show="authentication.user._id != course.user._id">-->
-        <!--<i class="glyphicon glyphicon-zoom-in"></i>-->
-        <!--</a>-->
-        <!--</span>-->
-        <!--</li>-->
-        <!--</ol>-->
-
-        <!--</section>-->
     </div>
 
 

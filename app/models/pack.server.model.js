@@ -26,6 +26,10 @@ var PackSchema = new Schema({
 	},
     course: {
         type: Schema.ObjectId
+    },
+    cards: {
+        type: [Schema.Types.ObjectId],
+        default: []
     }
 });
 

@@ -2,12 +2,16 @@
 
 //Setting up route
 angular.module('packs').config(['$stateProvider',
-	function($stateProvider) {
-		// Packs state routing
-		$stateProvider.
+    function ($stateProvider) {
+        // Packs state routing
+        $stateProvider.
             state('adminPacks', {
                 url: '/packs/admin',
                 templateUrl: 'modules/packs/views/admin-packs.client.view.html'
+            }).
+            state('editPack', {
+                url: '/packs/:packId/edit',
+                templateUrl: 'modules/packs/views/edit-pack.client.view.html'
             });
 
 //		state('listPacks', {
@@ -26,5 +30,5 @@ angular.module('packs').config(['$stateProvider',
 //			url: '/packs/:packId/edit',
 //			templateUrl: 'modules/packs/views/edit-pack.client.view.html'
 //		});
-	}
+    }
 ]);

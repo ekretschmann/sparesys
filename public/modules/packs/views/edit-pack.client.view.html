@@ -1,23 +1,100 @@
 <section data-ng-controller="PacksController" data-ng-init="findOne()">
-    <div class="page-header">
-        <h1>Edit Pack</h1>
+    <div class="sparesys-header">
+        <div class="pull-right">
+
+            <a class="btn btn-primary" data-ng-click="areYouSureToDeletePack(pack)"
+               data-ng-show="authentication.user._id == pack.user._id">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+
+            <!--TODO: Add publish course-->
+        </div>
+
+        <div class="sparesys-title">
+            {{pack.name}}
+        </div>
+        <div class="sparesys-subtitle">
+            {{pack.courseName}}
+        </div>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="pack.name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong>{{error}}</strong>
-				</div>
-            </fieldset>
-        </form>
+
+    <form class="form-horizontal" data-ng-submit="update()" novalidate>
+        <fieldset>
+            <table class="sparesys-view-object-table">
+                <tr class="controls">
+                    <td class="sparesys-view-object-label-cell">Name</td>
+                    <td class="sparesys-view-object-content-cell">
+                        <input type="text" data-ng-model="pack.name"
+                               id="name" class="form-control"
+                               placeholder="Name"
+                               required></td>
+                </tr>
+
+
+            </table>
+            <div class="pull-right">
+                <input type="submit" value="Update" class="btn btn-default">
+            </div>
+            <div data-ng-show="error" class="text-danger">
+                <strong>{{error}}</strong>
+            </div>
+        </fieldset>
+    </form>
+
+    <div class="sparesys-region">
+
+        <div data-ng-hide="pack.cards.length > 0">
+            No Packs yet, why don't you <a href="" ng-click="addCardToPackPopup()">add one</a>?
+        </div>
+        <div data-ng-show="pack.cards.length > 0">
+
+            <div class="pull-right">
+                <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == course.user._id">
+                    Add Packs
+                    <i class="glyphicon glyphicon-plus-sign">
+                    </i>
+
+                </a>
+            </div>
+
+            <!--<table id="searchTextResults" class="table-striped" style="width: 100%">-->
+                <!--<thead>-->
+                <!--<tr>-->
+                    <!--<th class="sparesys-view-courses-course-column">-->
+                    <!--</th>-->
+                    <!--<th class="sparesys-view-courses-course-column">Pack</th>-->
+                    <!--&lt;!&ndash;<th class= "sparesys-view-courses-description-column">Description</th>&ndash;&gt;-->
+                    <!--&lt;!&ndash;<th>Created</th>&ndash;&gt;-->
+                <!--</tr>-->
+                <!--</thead>-->
+                <!--<tbody>-->
+                <!--<tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"-->
+                    <!--data-ng-init="findById(packId)">-->
+                    <!--<td class="sparesys-view-courses-name-cell">-->
+                        <!--<a href="">-->
+                            <!--<i data-ng-click="areYouSureToDeletePack(pack)"-->
+                               <!--class="glyphicon glyphicon-remove-sign">-->
+                            <!--</i>-->
+                        <!--</a>-->
+                        <!--<a data-ng-href="#!/packs/{{pack._id}}/edit">-->
+                            <!--<i class="glyphicon glyphicon-edit"></i>-->
+                        <!--</a>-->
+                    <!--</td>-->
+
+                    <!--<td class="sparesys-view-object-content-cell" data-ng-controller="PacksController">-->
+                        <!--{{pack.name}}-->
+                    <!--</td>-->
+                <!--</tr>-->
+                <!--</tbody>-->
+            <!--</table>-->
+
+        </div>
+
     </div>
+
+
+    <small>
+        <em class="text-muted">Created on {{pack.created | date:'mediumDate'}} by {{pack.user.displayName}}</em>
+    </small>
+
 </section>

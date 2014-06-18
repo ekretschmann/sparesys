@@ -71,9 +71,10 @@
                     <th class="sparesys-view-object-content-cell">Answer</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
                 <tr data-ng-repeat="cardId in pack.cards" data-ng-controller="CardsController"
-                    data-ng-init="findById(cardId)">
+                    data-ng-init="findById(cardId)"
+                    style="cursor: move">
                     <td class="sparesys-view-courses-name-cell">
                         <a href="">
                             <i data-ng-click="areYouSureToDeleteCard(card)"

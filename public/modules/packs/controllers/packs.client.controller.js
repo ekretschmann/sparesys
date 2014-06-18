@@ -114,9 +114,14 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                 }
             });
 
-
         };
 
+        $scope.sortableOptions = {
 
+            stop: function (e, ui) {
+                var pack = $scope.pack;
+                pack.$update();
+            }
+        };
     }
 ]);

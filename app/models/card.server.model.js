@@ -10,12 +10,18 @@ var mongoose = require('mongoose'),
  * Card Schema
  */
 var CardSchema = new Schema({
-	name: {
+	question: {
 		type: String,
 		default: '',
-		required: 'Please fill Card name',
+		required: 'Please fill Card question',
 		trim: true
 	},
+    answer: {
+        type: String,
+        default: '',
+        required: 'Please fill Card answer',
+        trim: true
+    },
 	created: {
 		type: Date,
 		default: Date.now
@@ -23,7 +29,11 @@ var CardSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+    packs: {
+        type: [Schema.Types.ObjectId],
+        default: []
+    }
 });
 
 mongoose.model('Card', CardSchema);

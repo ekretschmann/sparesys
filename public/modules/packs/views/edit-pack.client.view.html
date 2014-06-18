@@ -55,43 +55,46 @@
 
             <div class="pull-right">
                 <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == pack.user._id">
-                    Add Packs
+                    Add Cards
                     <i class="glyphicon glyphicon-plus-sign">
                     </i>
 
                 </a>
             </div>
 
-            <!--<table id="searchTextResults" class="table-striped" style="width: 100%">-->
-                <!--<thead>-->
-                <!--<tr>-->
-                    <!--<th class="sparesys-view-courses-course-column">-->
-                    <!--</th>-->
-                    <!--<th class="sparesys-view-courses-course-column">Pack</th>-->
-                    <!--&lt;!&ndash;<th class= "sparesys-view-courses-description-column">Description</th>&ndash;&gt;-->
-                    <!--&lt;!&ndash;<th>Created</th>&ndash;&gt;-->
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-                <!--<tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"-->
-                    <!--data-ng-init="findById(packId)">-->
-                    <!--<td class="sparesys-view-courses-name-cell">-->
-                        <!--<a href="">-->
-                            <!--<i data-ng-click="areYouSureToDeletePack(pack)"-->
-                               <!--class="glyphicon glyphicon-remove-sign">-->
-                            <!--</i>-->
-                        <!--</a>-->
-                        <!--<a data-ng-href="#!/packs/{{pack._id}}/edit">-->
-                            <!--<i class="glyphicon glyphicon-edit"></i>-->
-                        <!--</a>-->
-                    <!--</td>-->
+            <table id="searchTextResults" class="table-striped" style="width: 100%">
+                <thead>
+                <tr>
+                    <th class="sparesys-view-courses-course-column">
+                    </th>
+                    <th class="sparesys-view-courses-course-column">Question</th>
+                    <th class="sparesys-view-courses-course-column">Answer</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="cardId in pack.cards" data-ng-controller="CardsController"
+                    data-ng-init="findById(cardId)">
+                    <td class="sparesys-view-courses-name-cell">
+                        <a href="">
+                            <i data-ng-click="areYouSureToDeleteCard(card)"
+                               class="glyphicon glyphicon-remove-sign">
+                            </i>
+                        </a>
+                        <a data-ng-href="#!/cards/{{card._id}}/edit">
+                            <i class="glyphicon glyphicon-edit"></i>
+                        </a>
+                    </td>
 
-                    <!--<td class="sparesys-view-object-content-cell" data-ng-controller="PacksController">-->
-                        <!--{{pack.name}}-->
-                    <!--</td>-->
-                <!--</tr>-->
-                <!--</tbody>-->
-            <!--</table>-->
+                    <td class="sparesys-view-object-content-cell">
+                        {{card.question}}
+                    </td>
+
+                    <td class="sparesys-view-object-content-cell">
+                        {{card.answer}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
 
         </div>
 

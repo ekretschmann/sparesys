@@ -14,11 +14,21 @@
                     <div class="sparesys-header">
                         <table class="sparesys-view-object-table">
                             <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Name</td>
+                                <td class="sparesys-view-object-label-cell">Question</td>
                                 <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="name"
-                                           id="cardname" class="form-control hasfocus"
-                                           placeholder="Name"
+                                    <input type="text" data-ng-model="question"
+                                           id="cardquestion" class="form-control hasfocus"
+                                           placeholder="Question"
+                                           data-ng-init="setFocus()"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Answer</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="answer"
+                                           id="cardanswer" class="form-control hasfocus"
+                                           placeholder="Answer"
                                            data-ng-init="setFocus()"
                                            required></td>
                             </tr>

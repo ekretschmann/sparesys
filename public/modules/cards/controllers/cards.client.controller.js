@@ -62,5 +62,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
                 cardId: $stateParams.cardId
             });
         };
+
+        // Find existing Pack
+        $scope.findById = function (cardId) {
+            $scope.card = Cards.get({
+                cardId: cardId
+            });
+        };
     }
 ]);

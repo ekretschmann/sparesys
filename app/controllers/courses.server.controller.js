@@ -64,9 +64,6 @@ exports.update = function (req, res) {
 
     course = _.extend(course, req.body);
 
-    console.log(course);
-    console.log(course.packs);
-
     course.save(function (err) {
         if (err) {
             return res.send(400, {

@@ -120,7 +120,11 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
             stop: function (e, ui) {
                 var pack = $scope.pack;
-                pack.$update();
+                var courseName = pack.courseName;
+                pack.$update(function() {
+                    $scope.pack.courseName = courseName;
+                });
+
             }
         };
     }

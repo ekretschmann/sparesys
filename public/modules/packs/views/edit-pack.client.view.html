@@ -19,7 +19,7 @@
             Pack <i>{{pack.name}}</i>
         </div>
         <div class="sparesys-subtitle">
-            {{pack.courseName}}
+            <a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.courseName}}</a>
         </div>
     </div>
 
@@ -81,13 +81,11 @@
                                class="glyphicon glyphicon-remove-sign">
                             </i>
                         </a>
-                        <a data-ng-href="#!/cards/{{card._id}}/edit">
-                            <i class="glyphicon glyphicon-edit"></i>
-                        </a>
+
                     </td>
 
                     <td class="sparesys-view-object-right-padded-element">
-                        {{card.question}}
+                        <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
                     </td>
 
                     <td class="sparesys-view-object-content-cell">

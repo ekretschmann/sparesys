@@ -95,13 +95,11 @@
                                class="glyphicon glyphicon-remove-sign">
                             </i>
                         </a>
-                        <a data-ng-href="#!/packs/{{pack._id}}/edit">
-                            <i class="glyphicon glyphicon-edit"></i>
-                        </a>
+
                     </td>
 
                     <td class="sparesys-view-object-content-cell">
-                        {{pack.name}}
+                        <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
                     </td>
                 </tr>
                 </tbody>

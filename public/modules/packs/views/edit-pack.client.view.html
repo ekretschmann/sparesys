@@ -49,12 +49,12 @@
     <div class="sparesys-region">
 
         <div data-ng-hide="pack.cards.length > 0">
-            No Packs yet, why don't you <a href="" ng-click="addCardToPackPopup()">add one</a>?
+            No cards yet, why don't you <a href="" ng-click="addCardToPackPopup()">add one</a>?
         </div>
         <div data-ng-show="pack.cards.length > 0">
 
             <div class="pull-right">
-                <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == pack.user._id">
+                <a href="" ng-click="addCardToPackPopup()" data-ng-show="authentication.user._id == pack.user._id">
                     Add Cards
                     <i class="glyphicon glyphicon-plus-sign">
                     </i>

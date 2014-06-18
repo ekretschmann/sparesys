@@ -1,17 +1,16 @@
 'use strict';
 
-angular.module('packs').controller('AddCardToPackController', ['$scope', '$state', '$modalInstance', 'pack', 'Cards',
-	function($scope, $state, $modalInstance, pack, Cards) {
+angular.module('packs').controller('AddCardToPackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'Cards',
+	function($scope, $state, $timeout, $modalInstance, pack, Cards) {
         $scope.pack = pack;
 
         $scope.setFocus = function () {
-            //document.element('.hasfocus').trigger('focus');
+            $timeout(function(){
+                angular.element('.addcardfocus').trigger('focus');
+            },100);
         };
 
-        $scope.ok = function () {
-            this.name = '';
-            //$state.go($state.$current, null, { reload: false });
-        };
+
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -33,7 +32,6 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
                 var p = $scope.pack;
                 p.cards.push(cardid);
                 p.$update(function () {
-                    $scope.name = '';
                     $state.go($state.$current, null, { reload: true });
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
@@ -42,8 +40,9 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-            $scope.name = '';
-
+            this.question = '';
+            this.answer = '';
+            angular.element('.addcardfocus').trigger('focus');
         };
 	}
 ]);

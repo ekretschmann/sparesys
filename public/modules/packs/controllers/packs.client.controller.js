@@ -116,5 +116,24 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
 
         };
+
+        $scope.sortableOptions = {
+
+            stop: function (e, ui) {
+                var course = $scope.course;
+
+                course.packs = [];
+                $scope.packs.forEach(function (entry) {
+                    course.packs.push(entry._id);
+                });
+
+
+                course.$update(function () {
+
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+            }
+        };
     }
 ]);

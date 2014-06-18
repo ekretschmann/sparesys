@@ -7,7 +7,6 @@
     <div ng-include="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>
 
 
-
     <div class="sparesys-header">
         <div class="pull-right">
 
@@ -86,9 +85,10 @@
                     <!--<th>Created</th>-->
                 </tr>
                 </thead>
-                <tbody>
+                <tbody ui-sortable="sortableOptions" data-ng-model="course.packs">
                 <tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"
-                    data-ng-init="findById(packId)">
+                    data-ng-init="findById(packId)"
+                    style="cursor: move">
                     <td class="sparesys-view-courses-name-cell">
                         <a href="">
                             <i data-ng-click="areYouSureToDeletePack(pack)"
@@ -100,12 +100,22 @@
                         </a>
                     </td>
 
-                    <td class="sparesys-view-object-content-cell" data-ng-controller="PacksController">
-                       {{pack.name}}
+                    <td class="sparesys-view-object-content-cell">
+                        {{pack.name}}
                     </td>
                 </tr>
                 </tbody>
             </table>
+
+            <!--<section data-ng-controller="PacksController" >-->
+            <!--<ol ui-sortable="sortableOptions" data-ng-model="course.packs">-->
+            <!--<li data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"-->
+            <!--data-ng-init="findById(packId)">-->
+            <!--{{pack.name}}-->
+
+            <!--</li>-->
+            <!--</ol>-->
+            <!--</section>-->
 
         </div>
 

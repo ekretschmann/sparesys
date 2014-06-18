@@ -1,16 +1,13 @@
 'use strict';
 
-angular.module('courses').controller('AddPackToCourseController', ['$scope', '$state', '$modalInstance', 'course', 'Packs',
-	function($scope, $state, $modalInstance, course, Packs) {
+angular.module('courses').controller('AddPackToCourseController', ['$scope', '$state', '$timeout', '$modalInstance', 'course', 'Packs',
+	function($scope, $state, $timeout, $modalInstance, course, Packs) {
         $scope.course = course;
 
         $scope.setFocus = function () {
-            //document.element('.hasfocus').trigger('focus');
-        };
-
-        $scope.ok = function () {
-            this.name = '';
-            //$state.go($state.$current, null, { reload: false });
+            $timeout(function(){
+                angular.element('.addpackfocus').trigger('focus');
+            },100);
         };
 
         $scope.cancel = function () {
@@ -26,7 +23,6 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
             });
 
 
-            console.log(this.name);
             // Redirect after save
             pack.$save(function (response) {
                 var packid = response._id;
@@ -42,8 +38,8 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-            $scope.name = '';
-
+            this.name = '';
+            angular.element('.addpackfocus').trigger('focus');
         };
 	}
 ]);

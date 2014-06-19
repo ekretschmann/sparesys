@@ -122,12 +122,13 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                 controller: 'EditPackController',
                 size: size,
                 resolve: {
-                    course: function () {
-                        return $scope.course;
+                    pack: function () {
+                        return $scope.pack;
                     }
                 }
             });
         };
+
 
         $scope.sortableOptions = {
 

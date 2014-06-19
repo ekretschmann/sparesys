@@ -8,6 +8,11 @@
     <div class="sparesys-header">
         <div class="pull-right">
 
+            <a class="btn btn-primary" data-ng-click="editPackPopup(pack)"
+               data-ng-show="authentication.user._id == pack.user._id">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+
             <a class="btn btn-primary" data-ng-click="areYouSureToDeletePack(pack)"
                data-ng-show="authentication.user._id == pack.user._id">
                 <i class="glyphicon glyphicon-trash"></i>
@@ -24,30 +29,30 @@
         </div>
     </div>
 
-    <form class="form-horizontal" data-ng-submit="update()" novalidate>
-        <fieldset>
-            <table class="sparesys-view-object-table">
-                <tr class="controls">
-                    <td class="sparesys-view-object-label-cell">Name</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <input type="text" data-ng-model="pack.name"
-                               id="name" class="form-control"
-                               placeholder="Name"
-                               required></td>
-                </tr>
+    <!--<form class="form-horizontal" data-ng-submit="update()" novalidate>-->
+        <!--<fieldset>-->
+            <!--<table class="sparesys-view-object-table">-->
+                <!--<tr class="controls">-->
+                    <!--<td class="sparesys-view-object-label-cell">Name</td>-->
+                    <!--<td class="sparesys-view-object-content-cell">-->
+                        <!--<input type="text" data-ng-model="pack.name"-->
+                               <!--id="name" class="form-control"-->
+                               <!--placeholder="Name"-->
+                               <!--required></td>-->
+                <!--</tr>-->
 
 
-            </table>
-            <div class="pull-right">
-                <input type="submit" value="Update" class="btn btn-default">
-            </div>
-            <div data-ng-show="error" class="text-danger">
-                <strong>{{error}}</strong>
-            </div>
-        </fieldset>
-    </form>
+            <!--</table>-->
+            <!--<div class="pull-right">-->
+                <!--<input type="submit" value="Update" class="btn btn-default">-->
+            <!--</div>-->
+            <!--<div data-ng-show="error" class="text-danger">-->
+                <!--<strong>{{error}}</strong>-->
+            <!--</div>-->
+        <!--</fieldset>-->
+    <!--</form>-->
 
-    <div class="sparesys-region">
+    <!--<div class="sparesys-region">-->
 
         <div data-ng-hide="pack.cards.length > 0">
             No cards yet, why don't you <a href="" ng-click="addCardToPackPopup()">add one</a>?
@@ -98,7 +103,7 @@
 
         </div>
 
-    </div>
+    <!--</div>-->
 
 
     <small>

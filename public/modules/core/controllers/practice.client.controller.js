@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('PracticeController',
-    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards',
-        function ($scope, $stateParams, $location, $modal, Authentication, Courses, Packs, Cards) {
+    ['$scope', '$stateParams', '$location', '$modal', '$timeout','Authentication', 'Courses', 'Packs', 'Cards',
+        function ($scope, $stateParams, $location, $modal, $timeout, Authentication, Courses, Packs, Cards) {
             $scope.authentication = Authentication;
 
 
@@ -25,11 +25,11 @@ angular.module('core').controller('PracticeController',
                                Cards.get({
                                    cardId: cardId
                                }, function(card) {
-//                                   console.log(card);
                                    $scope.cards.push(card);
-                                   cardsLoaded = true;
                                });
                             });
+                            console.log('done')
+                            console.log($scope.cards)
 
                         });
                     });
@@ -38,8 +38,12 @@ angular.module('core').controller('PracticeController',
 
             $scope.nextCard = function() {
 //                while(!cardsLoaded) {
+//                    $timeout(function(){
+////                    angular.element('.addpackfocus').trigger('focus');
 //
+//                    },1000);
 //                }
+
                 console.log($scope.cards);
             };
         }

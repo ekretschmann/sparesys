@@ -1,0 +1,45 @@
+<script type="text/ng-template" id="editCourse.html">
+    <div>
+
+        <div class="modal-body">
+            <div class="sparesys-header">
+                <div class="sparesys-title">
+                    Edit pack <span class="sparesys-emphasize">"{{pack.name}}"</span>
+                </div>
+            </div>
+
+            <form class="form-horizontal"  novalidate>
+                <fieldset>
+                    <div class="sparesys-header">
+                        <table class="sparesys-view-object-table">
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Name</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="name"
+                                           id="packname" class="form-control editCoursefocus"
+                                           placeholder="{{pack.name}}"
+                                           data-ng-init="setFocus()"
+                                           required></td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary sparesys-button"
+                            type="submit"
+                            ng-click="ok()"
+                            >
+                        Change
+                    </button>
+
+                    <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+
+
+                </fieldset>
+            </form>
+
+        </div>
+
+
+    </div>
+</script>

@@ -1,0 +1,53 @@
+<script type="text/ng-template" id="editCourse.html">
+    <div>
+
+        <div class="modal-body">
+            <div class="sparesys-header">
+                <div class="sparesys-title">
+                    Edit course <span class="sparesys-emphasize">"{{course.name}}"</span>
+                </div>
+            </div>
+
+            <form class="form-horizontal"  novalidate>
+                <fieldset>
+                    <div class="sparesys-header">
+                        <table class="sparesys-view-object-table">
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Name</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="name"
+                                           id="coursename" class="form-control editCoursefocus"
+                                           placeholder="{{course.name}}"
+                                           data-ng-init="setFocus()"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Description</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="description"
+                                           id="coursedescription" class="form-control"
+                                           placeholder="{{course.description}}"
+                                           required></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <button class="btn btn-primary sparesys-button"
+                            type="submit"
+                            ng-click="ok()"
+                            >
+                        Change
+                    </button>
+
+                    <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+
+
+                </fieldset>
+            </form>
+
+        </div>
+
+
+    </div>
+</script>

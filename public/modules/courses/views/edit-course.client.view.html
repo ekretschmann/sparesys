@@ -2,6 +2,7 @@
 
 
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
+    <div ng-include="'/modules/courses/views/partial/edit-course.modal.client.view.html'"></div>
 
     <div ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>
@@ -9,6 +10,12 @@
 
     <div class="sparesys-header">
         <div class="pull-right">
+
+            <a class="btn btn-primary" data-ng-click="editCoursePopup(course)"
+               data-ng-show="authentication.user._id == course.user._id">
+                <i class="glyphicon glyphicon-edit"></i>
+            </a>
+
 
             <a class="btn btn-primary" data-ng-click="areYouSureToDeleteCourse(course)"
                data-ng-show="authentication.user._id == course.user._id">
@@ -29,38 +36,38 @@
         </div>
     </div>
 
-    <form class="form-horizontal" data-ng-submit="update()" novalidate>
-        <fieldset>
-            <table class="sparesys-view-object-table">
-                <tr class="controls">
-                    <td class="sparesys-view-object-label-cell">Name</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <input type="text" data-ng-model="course.name"
-                               id="name" class="form-control"
-                               placeholder="Name"
-                               required></td>
-                </tr>
+    <!--<form class="form-horizontal" data-ng-submit="update()" novalidate>-->
+        <!--<fieldset>-->
+            <!--<table class="sparesys-view-object-table">-->
+                <!--<tr class="controls">-->
+                    <!--<td class="sparesys-view-object-label-cell">Name</td>-->
+                    <!--<td class="sparesys-view-object-content-cell">-->
+                        <!--<input type="text" data-ng-model="course.name"-->
+                               <!--id="name" class="form-control"-->
+                               <!--placeholder="Name"-->
+                               <!--required></td>-->
+                <!--</tr>-->
 
-                <tr class="controls">
+                <!--<tr class="controls">-->
 
-                    <td class="sparesys-view-object-label-cell">Description</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <input type="text" data-ng-model="course.description"
-                               id="description" class="form-control"
-                               placeholder="Description" required></td>
-                </tr>
-            </table>
-            <div class="pull-right">
-                <input type="submit" value="Update" class="btn btn-default">
-            </div>
-            <div data-ng-show="error" class="text-danger">
-                <strong>{{error}}</strong>
-            </div>
-        </fieldset>
-    </form>
+                    <!--<td class="sparesys-view-object-label-cell">Description</td>-->
+                    <!--<td class="sparesys-view-object-content-cell">-->
+                        <!--<input type="text" data-ng-model="course.description"-->
+                               <!--id="description" class="form-control"-->
+                               <!--placeholder="Description" required></td>-->
+                <!--</tr>-->
+            <!--</table>-->
+            <!--<div class="pull-right">-->
+                <!--<input type="submit" value="Update" class="btn btn-default">-->
+            <!--</div>-->
+            <!--<div data-ng-show="error" class="text-danger">-->
+                <!--<strong>{{error}}</strong>-->
+            <!--</div>-->
+        <!--</fieldset>-->
+    <!--</form>-->
 
 
-    <div class="sparesys-region">
+    <!--<div class="sparesys-region">-->
 
         <div data-ng-hide="course.packs.length > 0">
             No Packs yet, why don't you <a href="" ng-click="addPackToCoursePopup()">add one</a>?
@@ -117,7 +124,7 @@
 
         </div>
 
-    </div>
+    <!--</div>-->
 
 
     <small>

@@ -116,6 +116,19 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
         };
 
+        $scope.editPackPopup = function (size) {
+            $modal.open({
+                templateUrl: 'editPack.html',
+                controller: 'EditPackController',
+                size: size,
+                resolve: {
+                    course: function () {
+                        return $scope.course;
+                    }
+                }
+            });
+        };
+
         $scope.sortableOptions = {
 
             stop: function (e, ui) {

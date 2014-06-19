@@ -103,7 +103,6 @@ angular.module('courses').controller('CoursesController',
 
 
             $scope.addPackToCoursePopup = function (size) {
-
                 $modal.open({
                     templateUrl: 'addPackToCourse.html',
                     controller: 'AddPackToCourseController',
@@ -114,9 +113,21 @@ angular.module('courses').controller('CoursesController',
                         }
                     }
                 });
-
-
             };
+
+            $scope.editCoursePopup = function (size) {
+                $modal.open({
+                    templateUrl: 'editCourse.html',
+                    controller: 'EditCourseController',
+                    size: size,
+                    resolve: {
+                        course: function () {
+                            return $scope.course;
+                        }
+                    }
+                });
+            };
+
 
             $scope.sortableOptions = {
 

@@ -1,4 +1,59 @@
 <div class="sparesys-header">
-<div class="sparesys-title" id="home-welcome">Welcome {{authentication.user.displayName}}</div>
+    <div class="sparesys-title" id="home-welcome">Welcome {{authentication.user.firstName}}</div>
+
+    <div class="sparesys-subtitle">
+        Your Courses:
+    </div>
 </div>
+
+
+<section data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
+
+
+    <div data-ng-repeat="course in courses">
+
+        <div class="sparesys-header">
+            <div>{{course.name}}
+                <span class="pull-right">
+                    <a data-ng-href="#!/practice/{{course._id}}">practice</a>
+                </span>
+            </div>
+
+            <div><span class="sparesys-view-object-right-padded-element">Number of cards:</span><span>56</span></div>
+            <div><span class="sparesys-view-object-right-padded-element">Due Date:</span><span>01/07/2014</span></div>
+            <div><span class="sparesys-view-object-right-padded-element">On Track:</span><span>87%</span></div>
+        </div>
+        <!--<span style="float: right; padding-right: 2px"-->
+        <!--data-ng-show="authentication.user._id == course.user._id">-->
+        <!--<a class="btn btn-primary" href="/#!/packs/{{pack._id}}">-->
+        <!--<i class="glyphicon glyphicon-arrow-right"></i>-->
+        <!--</a>-->
+        <!--</span>-->
+
+        <!--<span style="float: right; padding-right: 5px"-->
+        <!--data-ng-show="authentication.user._id == course.user._id">-->
+        <!--<a class="btn btn-primary" data-ng-click="are_you_sure(pack);">-->
+        <!--<i class="glyphicon glyphicon-trash"></i>-->
+        <!--</a>-->
+        <!--</span>-->
+
+        <!--<span style="float: right; padding-right: 5px">-->
+        <!--<a class="btn btn-primary" href="/#!/packs/{{pack._id}}"-->
+        <!--data-ng-show="authentication.user._id != course.user._id">-->
+        <!--<i class="glyphicon glyphicon-zoom-in"></i>-->
+        <!--</a>-->
+        <!--</span>-->
+    </div>
+
+
+</section>
+
+
+
+
+
+
+
+
+
 

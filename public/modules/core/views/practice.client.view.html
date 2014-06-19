@@ -1,0 +1,27 @@
+<section data-ng-controller="PracticeController" data-ng-init="findOne()">
+
+    <div class="sparesys-header">
+
+        <div class="sparesys-title">
+            {{course.name}}
+        </div>
+
+    </div>
+
+
+    <form class="form-horizontal" data-ng-submit="answer()" data-ng-init="nextCard()" novalidate>
+        <fieldset>
+            <table class="sparesys-view-object-table">
+                <tr class="controls">
+                    <td class="sparesys-view-object-label-cell">Name</td>
+                    <td class="sparesys-view-object-content-cell">
+                        {{card.question}}
+                    </td>
+                </tr>
+            </table>
+            <input type="submit" value="Ok" class="btn btn-default">
+
+        </fieldset>
+    </form>
+
+</section>

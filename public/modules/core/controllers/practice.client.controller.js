@@ -8,18 +8,43 @@ angular.module('core').controller('PracticeController',
             $scope.authentication = Authentication;
 
 
-            $scope.showAnswer = false;
+            $scope.state = 'question';
             $scope.cards = [];
             $scope.card = undefined;
 
             $document.bind('keypress', function (event) {
-                if (event.keyCode === 13) {
-                    $scope.toggleAnswer();
+                if ($scope.state === 'question' && event.key === 'Enter') {
+                    $scope.showAnswer();
+                } else if ($scope.state === 'answer') {
+                    if (event.key === '1') {
+                        $scope.rateCard(1);
+                    }
+                    if (event.key === '2') {
+                        $scope.rateCard(2);
+                    }
+                    if (event.key === '3') {
+                        $scope.rateCard(3);
+                    }
+                    if (event.key === '0') {
+                        $scope.rateCard(0);
+                    }
                 }
+
             });
 
 
-            $scope.loadCards = function (callback) {
+            $scope.showAnswer = function () {
+                $scope.state = 'answer';
+                $state.go($state.current);
+            };
+
+            $scope.rateCard = function (rating) {
+                $scope.state = 'question';
+                $scope.card = $scope.dealer.nextCard();
+                $state.go($state.current);
+            };
+
+            $scope.loadCards = function () {
                 var deferred = $q.defer();
                 $scope.course = Courses.get({
                     courseId: $stateParams.courseId
@@ -43,39 +68,33 @@ angular.module('core').controller('PracticeController',
 
                 return deferred.promise;
             };
+
+
+            var nextCard = function () {
+                this.index = this.index + 1;
+                if (this.cards.length <= this.index) {
+                    this.index = 0;
+                }
+
+                return this.cards[this.index];
+            };
+
+            function Dealer(cards) {
+                this.cards = cards;
+                this.index = 0;
+                this.nextCard = nextCard;
+            }
+
             // Find existing Course
             $scope.init = function () {
                 $scope.loadCards().then(function () {
+                     $scope.dealer = new Dealer($scope.cards);
 
-                    $scope.card = $scope.cards[0];
+                    $scope.card = $scope.dealer.nextCard();
+                    $scope.state = 'question';
                     $state.go($state.current);
                 });
-
-
             };
-
-
-            $scope.index = 0;
-            $scope.nextCard = function () {
-                $scope.index = $scope.index + 1;
-                if ($scope.cards.length <= $scope.index) {
-                    $scope.index = 0;
-                }
-
-                return $scope.cards[$scope.index];
-
-            };
-
-            $scope.toggleAnswer = function () {
-
-                if ($scope.showAnswer) {
-                    $scope.card = $scope.nextCard();
-                }
-                $scope.showAnswer = !$scope.showAnswer;
-                $state.go($state.current);
-            };
-
-
         }
     ])
 ;

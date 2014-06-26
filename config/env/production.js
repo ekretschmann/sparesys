@@ -1,8 +1,11 @@
 'use strict';
 
 module.exports = {
-	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/sparesys',
-	assets: {
+//	db: process.env.MONGOHQ_URL || process.env.MONGOLAB_URI || 'mongodb://localhost/sparesys',
+    db: 'mongodb://heroku_app25596613:dbd6taoclcp567vcvhaptre40t@ds033569.mongolab.com:33569/heroku_app25596613',
+
+
+    assets: {
 		lib: {
 			css: [
 				'public/lib/bootstrap/dist/css/bootstrap.min.css',

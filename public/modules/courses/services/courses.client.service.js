@@ -39,18 +39,39 @@ angular.module('courses').factory('CoursesService', [
                                     course.packs.splice(i, 1);
                                 }
                             }
-                            course.$update(function() {
+                            course.$update(function () {
                                 pack.$remove(callback);
                             });
                         }
                     });
 
 
-
-
-
                 }
                 return true;
+            },
+            loadCards: function () {
+                var deferred = $q.defer();
+                $scope.course = Courses.get({
+                    courseId: $stateParams.courseId
+                }, function (course) {
+                    course.packs.forEach(function (packId) {
+                        var packs = Packs.get({
+                            packId: packId
+                        }, function (pack) {
+                            pack.cards.forEach(function (cardId) {
+                                Cards.get({
+                                    cardId: cardId
+                                }, function (card) {
+                                    $scope.cards.push(card);
+                                    deferred.resolve();
+                                });
+                            });
+
+                        });
+                    });
+                });
+
+                return deferred.promise;
             }
         };
     }

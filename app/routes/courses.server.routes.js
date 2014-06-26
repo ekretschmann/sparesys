@@ -8,7 +8,9 @@ module.exports = function(app) {
 	app.route('/courses')
 		.get(courses.list)
 		.post(users.requiresLogin, courses.create);
-	
+
+
+
 	app.route('/courses/:courseId')
 		.get(courses.read)
 		.put(users.requiresLogin, courses.hasAuthorization, courses.update)

@@ -172,3 +172,11 @@ exports.hasAuthorization = function (req, res, next) {
         next();
     }
 };
+
+exports.getCards = function(req, res, next) {
+    console.log('worked');
+    console.log(req.course._id);
+
+};
+
+

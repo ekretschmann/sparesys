@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('PracticeController',
-    ['$scope', '$q', '$stateParams', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards',
-        function ($scope, $q, $stateParams, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards) {
+    ['$scope', '$q', '$stateParams', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'Scheduler',
+        function ($scope, $q, $stateParams, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, Scheduler) {
             $scope.authentication = Authentication;
 
 
@@ -40,7 +40,7 @@ angular.module('core').controller('PracticeController',
 
             $scope.rateCard = function (rating) {
                 $scope.state = 'question';
-                $scope.card = $scope.dealer.nextCard();
+                $scope.card = Scheduler.nextCard();
                 $state.go($state.current);
             };
 
@@ -88,9 +88,10 @@ angular.module('core').controller('PracticeController',
             // Find existing Course
             $scope.init = function () {
                 $scope.loadCards().then(function () {
-                     $scope.dealer = new Dealer($scope.cards);
+                    Scheduler.init($scope.cards);
+                     //$scope.dealer = new Dealer($scope.cards);
 
-                    $scope.card = $scope.dealer.nextCard();
+                    $scope.card = Scheduler.nextCard();
                     $scope.state = 'question';
                     $state.go($state.current);
                 });

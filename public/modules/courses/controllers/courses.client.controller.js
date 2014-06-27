@@ -9,6 +9,9 @@ angular.module('courses').controller('CoursesController',
 
 
             $scope.doSomething = function() {
+                if ($scope.authentication.user.roles.indexOf('feature1') === -1) {
+                    return;
+                }
                 console.log('doing something');
                 $scope.courses.newField = "new field";
             };

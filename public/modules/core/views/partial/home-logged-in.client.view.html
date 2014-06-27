@@ -9,9 +9,11 @@
 
 <section data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
 
-    <div style="background-color: red" data-ng-show="authentication.user.roles.indexOf('feature1') > -1" data-ng-init="doSomething()">
-        Test
-        x{{courses.newField}}x
+    <div style="background-color: red" data-ng-show="authentication.user.roles.indexOf('feature1') > -1">
+        <div data-ng-init="doSomething()">
+            Test
+            x{{courses.newField}}x
+        </div>
     </div>
 
     <div style="background-color: green" data-ng-hide="authentication.user.roles.indexOf('feature1') > -1">

@@ -8,13 +8,18 @@ angular.module('courses').controller('CoursesController',
             $scope.authentication = Authentication;
 
 
+//            $scope.check
+
             $scope.doSomething = function() {
-                if ($scope.authentication.user.roles.indexOf('feature1') === -1) {
-                    return;
-                }
+//                console.log($scope.doSomething.features);
+//                if ($scope.authentication.user.roles.indexOf('feature1') === -1) {
+//                    return;
+//                }
                 console.log('doing something');
                 $scope.courses.newField = "new field";
             };
+
+            $scope.doSomething.features = ['feature1'];
 
             // Create new Course
             $scope.create = function () {

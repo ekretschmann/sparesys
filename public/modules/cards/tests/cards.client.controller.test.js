@@ -138,7 +138,9 @@
 
 			// Test URL location to new object
 			expect($location.path()).toBe('/cards/' + sampleCardPutData._id);
-		}));
+
+
+        }));
 
 		it('$scope.remove() should send a DELETE request with a valid cardId and remove the Card from the scope', inject(function(Cards) {
 			// Create new Card object

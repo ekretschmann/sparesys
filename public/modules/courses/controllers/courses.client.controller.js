@@ -8,6 +8,11 @@ angular.module('courses').controller('CoursesController',
             $scope.authentication = Authentication;
 
 
+            $scope.doSomething = function() {
+                console.log('doing something');
+                $scope.courses.newField = "new field";
+            };
+
             // Create new Course
             $scope.create = function () {
                 // Create new Course object

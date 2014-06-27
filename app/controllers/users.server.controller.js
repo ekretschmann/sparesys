@@ -105,6 +105,8 @@ exports.update = function (req, res) {
 
 
     function updateUser(theUser) {
+        console.log('updating')
+        console.log(theUser)
         theUser = _.extend(theUser, req.body);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
@@ -127,8 +129,9 @@ exports.update = function (req, res) {
 
     if (user) {
         if(req.body._id !== user._id) {
-            User.findById(req.body._id, function (err, otherUser) {
+            User.findById(req.body._id, 'username roles email lastName firstName', function (err, otherUser) {
                 if (!err && otherUser) {
+
                     updateUser(otherUser);
                 }
             });

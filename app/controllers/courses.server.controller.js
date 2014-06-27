@@ -5,6 +5,8 @@
  */
 var mongoose = require('mongoose'),
     Course = mongoose.model('Course'),
+    Pack = mongoose.model('Pack'),
+    Card = mongoose.model('Card'),
     _ = require('lodash');
 
 /**
@@ -173,10 +175,43 @@ exports.hasAuthorization = function (req, res, next) {
     }
 };
 
-exports.getCards = function(req, res, next) {
-    console.log('worked');
-    console.log(req.course._id);
+exports.getCards = function(req, res, next, id) {
+    var result = [];
+    Course.find({'_id': id}).exec(function (err, courses) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            courses[0].packs.forEach(function(packId) {
+                Pack.find({'_id': packId}).exec(function (err, packs) {
+                    if (err) {
+                        return res.send(400, {
+                            message: getErrorMessage(err)
+                        });
+                    } else {
+                        packs.forEach(function(pack) {
+                            pack.cards.forEach(function(cardId){
+                                Card.find({'_id': cardId}).exec(function (err, cards) {
+                                    if (err) {
+                                        return res.send(400, {
+                                            message: getErrorMessage(err)
+                                        });
+                                    } else {
+                                        result = result.concat(cards);
 
+                                    }
+                                });
+                            });
+                        });
+
+                    }
+                });
+            });
+//            console.log(result);
+            res.jsonp(result);
+        }
+    });
 };
 
 

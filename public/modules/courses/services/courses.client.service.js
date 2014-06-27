@@ -13,8 +13,8 @@ angular.module('courses').factory('Courses', ['$resource', function ($resource) 
 }]);
 
 
-angular.module('courses').factory('CoursesService', [
-    function () {
+angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses', 'Packs', 'Cards',
+    function ($q, $resource, Courses, Packs, Cards) {
         return {
 
             remove: function (course, callback) {
@@ -49,20 +49,24 @@ angular.module('courses').factory('CoursesService', [
                 }
                 return true;
             },
-            loadCards: function () {
+            loadCards: function (courseId, cards) {
                 var deferred = $q.defer();
-                $scope.course = Courses.get({
-                    courseId: $stateParams.courseId
+
+
+                Courses.get({
+                    courseId: courseId
                 }, function (course) {
                     course.packs.forEach(function (packId) {
+                        console.log(course.packs.length);
                         var packs = Packs.get({
                             packId: packId
                         }, function (pack) {
+
                             pack.cards.forEach(function (cardId) {
                                 Cards.get({
                                     cardId: cardId
                                 }, function (card) {
-                                    $scope.cards.push(card);
+                                    cards.push(card);
                                     deferred.resolve();
                                 });
                             });
@@ -72,6 +76,23 @@ angular.module('courses').factory('CoursesService', [
                 });
 
                 return deferred.promise;
+            },
+            serverLoadCards: function(courseId, cards) {
+                var CardsResource = $resource('courses/cards/'+courseId, {
+                    courseId: '@_id',
+                    userId: '@userId'
+                }, {
+                    get: {
+                        method: 'GET',
+                        isArray: true
+                    }
+                });
+                var cardsResource = new CardsResource();
+
+                var test = cardsResource.$get(function(res) {
+
+                    console.log(res);
+                });
             }
         };
     }

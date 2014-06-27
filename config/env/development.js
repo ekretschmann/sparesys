@@ -1,8 +1,8 @@
 'use strict';
 
 module.exports = {
-//	db: 'mongodb://localhost/sparesys-dev',
-	db: 'mongodb://heroku_app25596613:dbd6taoclcp567vcvhaptre40t@ds033569.mongolab.com:33569/heroku_app25596613',
+	db: 'mongodb://localhost/sparesys-dev',
+//	db: 'mongodb://heroku_app25596613:dbd6taoclcp567vcvhaptre40t@ds033569.mongolab.com:33569/heroku_app25596613',
 	app: {
 		title: 'sparesys - Development Environment'
 	},

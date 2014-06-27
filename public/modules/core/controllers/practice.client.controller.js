@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('PracticeController',
-    ['$scope', '$q', '$stateParams', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'Scheduler',
-        function ($scope, $q, $stateParams, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, Scheduler) {
+    ['$scope', '$q', '$stateParams', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'Scheduler', 'CoursesService',
+        function ($scope, $q, $stateParams, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, Scheduler, CoursesService) {
             $scope.authentication = Authentication;
 
 
@@ -87,9 +87,11 @@ angular.module('core').controller('PracticeController',
 
             // Find existing Course
             $scope.init = function () {
+//                console.log(CoursesService.serverLoadCards($stateParams.courseId));
+
                 $scope.loadCards().then(function () {
                     Scheduler.init($scope.cards);
-                     //$scope.dealer = new Dealer($scope.cards);
+//                     $scope.dealer = new Dealer($scope.cards);
 
                     $scope.card = Scheduler.nextCard();
                     $scope.state = 'question';

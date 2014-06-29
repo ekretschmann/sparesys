@@ -9,16 +9,7 @@
 
 <section data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
 
-    <div style="background-color: red" data-ng-if="authentication.user.roles.indexOf('feature1') > -1">
-        <div data-ng-init="doSomething()">
-            Test
-            x{{courses.newField}}x
-        </div>
-    </div>
 
-    <div style="background-color: green" data-ng-if="authentication.user.roles.indexOf('feature1') === -1">
-        Test old
-    </div>
 
     <div data-ng-repeat="course in courses">
 

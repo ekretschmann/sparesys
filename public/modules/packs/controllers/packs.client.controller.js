@@ -58,16 +58,6 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             });
         };
 
-//        $scope.getPackName = function (packId) {
-//            console.log(packId);
-//            Packs.get({
-//                packId: packId
-//            }, function(pack) {
-//                console.log(pack);
-//                return pack.name;
-//            });
-//        };
-
         $scope.getCourseName = function (pack) {
             Courses.query({
                 _id: pack.course

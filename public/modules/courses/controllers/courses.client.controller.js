@@ -8,19 +8,6 @@ angular.module('courses').controller('CoursesController',
             $scope.authentication = Authentication;
 
 
-//            $scope.check
-
-            $scope.doSomething = function() {
-//                console.log($scope.doSomething.features);
-//                if ($scope.authentication.user.roles.indexOf('feature1') === -1) {
-//                    return;
-//                }
-                console.log('doing something');
-                $scope.courses.newField = "new field";
-            };
-
-            $scope.doSomething.features = ['feature1'];
-
             // Create new Course
             $scope.create = function () {
                 // Create new Course object
@@ -75,9 +62,11 @@ angular.module('courses').controller('CoursesController',
 
             // Find list for current user
             $scope.findForCurrentUser = function () {
-                $scope.courses = Courses.query({
-                    userId: $scope.authentication.user._id
-                });
+                if ($scope.authentication.user) {
+                    $scope.courses = Courses.query({
+                        userId: $scope.authentication.user._id
+                    });
+                }
             };
 
             // Find existing Course

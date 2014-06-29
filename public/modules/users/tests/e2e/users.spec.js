@@ -24,13 +24,11 @@ describe('User tests:', function () {
 
             browser.waitForAngular();
 //
-//            console.log("XXXXXXXXXXXXXX")
 
             var welcome = element(by.id('home-welcome'));
             expect(welcome.isDisplayed()).toBe(true);
             expect(welcome.getText()).toBe('Welcome protractor protractor');
 
-//            console.log("AAAAAAAAAAAAAAAAAAAAAAA")
 
             var dropdownToggle = element(by.id('admin-dropdown-toggle'));
 
@@ -41,28 +39,6 @@ describe('User tests:', function () {
 
             console.log(usersEntry);
 
-//
-//            usersEntry.click();
-//            browser.waitForAngular();
-//
-//            var welcome = element(by.id('home-welcome'));
-
-//            .then(function(options){
-//                console.log("XXXXXXXXXX")
-//                console.log(options);
-//            });
-//            dropdownToggle.click();
-//
-//            browser.waitForAngular();
-
-//            var userAdminLink = element(by.id('user-admin-link'));
-
-//            .then(function(options){
-//                console.log("XXXXXXXXXX")
-////                console.log(options);
-//            });
-
-//            expect(userAdminLink.isDisplayed()).toBe(true);
 
         });
     });

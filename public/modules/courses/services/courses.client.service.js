@@ -57,7 +57,6 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                     courseId: courseId
                 }, function (course) {
                     course.packs.forEach(function (packId) {
-                        console.log(course.packs.length);
                         var packs = Packs.get({
                             packId: packId
                         }, function (pack) {

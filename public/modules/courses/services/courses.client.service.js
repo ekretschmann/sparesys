@@ -32,6 +32,9 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                     Courses.query({
                         _id: pack.course
                     }, function (courses) {
+                        if (courses.length === 0) {
+                            pack.$remove(callback);
+                        }
                         if (courses.length === 1) {
                             var course = courses[0];
                             for (var i in course.packs) {

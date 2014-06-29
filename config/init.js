@@ -14,8 +14,6 @@ module.exports = function() {
      * We'll Look for a valid NODE_ENV variable and if one cannot be found load the development NODE_ENV
      */
 
-    process.env.NODE_ENV = 'production';
-    console.log( process.env.NODE_ENV);
 
     glob('./config/env/' + process.env.NODE_ENV + '.js', {
         sync: true

@@ -6,7 +6,7 @@ angular.module('core').service('RoundRobinSchedulerService', [
 		return {
             init: function(cards) {
                 this.cards = cards;
-                this.index = 0;
+                this.index = -1;
             },
 
 			nextCard: function() {

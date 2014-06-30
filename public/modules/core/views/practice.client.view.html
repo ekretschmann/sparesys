@@ -10,34 +10,40 @@
     </div>
 
 
-    <div class="jumbotron" style="height:320px">
+    <div data-ng-if="cards.length > 0">
+        <div class="jumbotron" style="height:320px">
 
-        <h2>{{card.question}}</h2>
+            <h2>{{card.question}}</h2>
 
 
-        <div style="height: 100px">
+            <div style="height: 100px">
             <span>
                 <h3>
                     <span style="color: #0078ae" data-ng-show="state == 'answer'">{{card.answer}}</span>
                 </h3>
             </span>
 
+            </div>
+
+
         </div>
 
+        <div style="text-align: center">
+            <div data-ng-show="state == 'answer'">
+                <button data-ng-click="rateCard(0)">0</button>
+                <button data-ng-click="rateCard(0)">1</button>
+                <button data-ng-click="rateCard(0)">2</button>
+                <button data-ng-click="rateCard(0)">3</button>
+                <div style="color: #999999">rate yourself</div>
+            </div>
 
+            <div data-ng-show="state == 'question'">
+                <button data-ng-click="showAnswer()">Enter</button>
+            </div>
+        </div>
     </div>
 
-    <div style="text-align: center">
-        <div data-ng-show="state == 'answer'">
-            <button data-ng-click="rateCard(0)">0</button>
-            <button data-ng-click="rateCard(0)">1</button>
-            <button data-ng-click="rateCard(0)">2</button>
-            <button data-ng-click="rateCard(0)">3</button>
-            <div style="color: #999999">rate yourself</div>
-        </div>
-
-        <div data-ng-show="state == 'question'">
-            <button data-ng-click="showAnswer()">Enter</button>
-        </div>
+    <div data-ng-if="cards.length === 0">
+        There are no cards in this course.
     </div>
 </section>

@@ -53,6 +53,12 @@ angular.module('core').controller('PracticeController',
                     SchedulerService.init($scope.cards);
                     $scope.card = SchedulerService.nextCard();
                 });
+
+                Courses.get({
+                    courseId: $stateParams.courseId
+                }, function(course) {
+                    $scope.course = course;
+                });
             };
         }
     ])

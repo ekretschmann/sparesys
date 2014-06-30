@@ -175,43 +175,55 @@ exports.hasAuthorization = function (req, res, next) {
     }
 };
 
-exports.getCards = function(req, res, next, id) {
+
+
+exports.getCardsForCourse = function (req, res, next, id) {
+
     var result = [];
-    Course.find({'_id': id}).exec(function (err, courses) {
+    var expectedCards = 0;
+    var loadCourse = Course.find({'_id': id}).exec(function (err) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
             });
-        } else {
-            courses[0].packs.forEach(function(packId) {
-                Pack.find({'_id': packId}).exec(function (err, packs) {
-                    if (err) {
-                        return res.send(400, {
-                            message: getErrorMessage(err)
-                        });
-                    } else {
-                        packs.forEach(function(pack) {
-                            pack.cards.forEach(function(cardId){
-                                Card.find({'_id': cardId}).exec(function (err, cards) {
-                                    if (err) {
-                                        return res.send(400, {
-                                            message: getErrorMessage(err)
-                                        });
-                                    } else {
-                                        result = result.concat(cards);
-
-                                    }
-                                });
-                            });
-                        });
-
-                    }
-                });
-            });
-//            console.log(result);
-            res.jsonp(result);
         }
     });
+
+    loadCourse.then(function (courses) {
+        courses[0].packs.forEach(function (packId) {
+            var loadPack = Pack.find({'_id': packId}).exec(function (err) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                }
+            });
+            loadPack.then(function (packs) {
+                expectedCards += packs[0].cards.length;
+                packs[0].cards.forEach(function (cardId) {
+                    var loadCard = Card.find({'_id': cardId}).exec(function (err) {
+                        if (err) {
+                            return res.send(400, {
+                                message: getErrorMessage(err)
+                            });
+                        }
+                    });
+                    loadCard.then(function (card) {
+                        result = result.concat(card);
+                        if (result.length === expectedCards) {
+                            res.jsonp(result);
+                        }
+                    });
+
+                });
+            });
+        });
+
+    });
+
+
 };
+
+
 
 

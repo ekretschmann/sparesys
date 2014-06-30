@@ -79,21 +79,12 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
 
                 return deferred.promise;
             },
-            serverLoadCards: function(courseId, cards) {
-                var CardsResource = $resource('courses/cards/'+courseId, {
-                    courseId: '@_id',
-                    userId: '@userId'
-                }, {
+            serverLoadCards: function () {
+                return $resource('courses/cards/:courseId', [], {
                     get: {
                         method: 'GET',
                         isArray: true
                     }
-                });
-                var cardsResource = new CardsResource();
-
-                var test = cardsResource.$get(function(res) {
-
-                    console.log(res);
                 });
             }
         };

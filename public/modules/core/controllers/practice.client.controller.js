@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('PracticeController',
-    ['$scope', '$q', '$stateParams', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'Scheduler', 'CoursesService',
-        function ($scope, $q, $stateParams, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, Scheduler, CoursesService) {
+    ['$scope', '$q', '$stateParams', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'RoundRobinSchedulerService', 'CoursesService',
+        function ($scope, $q, $stateParams, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, SchedulerService, CoursesService) {
             $scope.authentication = Authentication;
 
 
@@ -40,62 +40,18 @@ angular.module('core').controller('PracticeController',
 
             $scope.rateCard = function (rating) {
                 $scope.state = 'question';
-                $scope.card = Scheduler.nextCard();
+                $scope.card = SchedulerService.nextCard();
                 $state.go($state.current);
             };
 
-            $scope.loadCards = function () {
-                var deferred = $q.defer();
-                $scope.course = Courses.get({
-                    courseId: $stateParams.courseId
-                }, function (course) {
-                    course.packs.forEach(function (packId) {
-                        var packs = Packs.get({
-                            packId: packId
-                        }, function (pack) {
-                            pack.cards.forEach(function (cardId) {
-                                Cards.get({
-                                    cardId: cardId
-                                }, function (card) {
-                                    $scope.cards.push(card);
-                                    deferred.resolve();
-                                });
-                            });
-
-                        });
-                    });
-                });
-
-                return deferred.promise;
-            };
-
-
-            var nextCard = function () {
-                this.index = this.index + 1;
-                if (this.cards.length <= this.index) {
-                    this.index = 0;
-                }
-
-                return this.cards[this.index];
-            };
-
-            function Dealer(cards) {
-                this.cards = cards;
-                this.index = 0;
-                this.nextCard = nextCard;
-            }
 
             // Find existing Course
             $scope.init = function () {
-//                console.log(CoursesService.serverLoadCards($stateParams.courseId));
-
-                $scope.loadCards().then(function () {
-                    Scheduler.init($scope.cards);
-//                     $scope.dealer = new Dealer($scope.cards);
-
-                    $scope.card = Scheduler.nextCard();
-                    $scope.state = 'question';
-                    $state.go($state.current);
+                var res = CoursesService.serverLoadCards();
+                res.get({courseId: $stateParams.courseId}).$promise.then(function(cards) {
+                    $scope.cards = cards;
+                    SchedulerService.init($scope.cards);
+                    $scope.card = SchedulerService.nextCard();
                 });
             };
         }

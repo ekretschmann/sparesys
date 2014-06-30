@@ -10,8 +10,8 @@ module.exports = function(app) {
 		.post(users.requiresLogin, courses.create);
 
 //
-//    app.route('/courses/cards/:courseId')
-//        .get(courses.getCards);
+    app.route('/courses/cards/:cId')
+        .get(courses.getCardsForCourse);
 
 	app.route('/courses/:courseId')
 		.get(courses.read)
@@ -20,5 +20,5 @@ module.exports = function(app) {
 
 	// Finish by binding the Course middleware
 	app.param('courseId', courses.courseByID);
-//	app.param('courseId', courses.getCards);
+	app.param('cId', courses.getCardsForCourse);
 };

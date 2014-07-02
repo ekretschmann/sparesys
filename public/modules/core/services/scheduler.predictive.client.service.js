@@ -13,7 +13,7 @@ angular.module('core').service('PredictiveSchedulerService', [
                 if (!card.hrt) {
                     return 0.0;
                 }
-                var lastRep = card.history.lastRep;
+                var lastRep = card.lastRep;
                 var hrt = card.hrt;
                 var result = Math.exp((time - lastRep) / hrt * Math.log(0.5));
                 return result;

@@ -19,8 +19,15 @@
             <div style="height: 100px">
             <span>
                 <h3>
-                    <span style="color: #0078ae" data-ng-show="state == 'answer'">{{card.answer}}</span>
+                    <span style="color: #0078ae" data-ng-if="state == 'answer'">
+                        <span data-ng-init="loadSound(card.answer)">{{card.answer}}</span>
+                    </span>
                 </h3>
+
+<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
+<!--<audio controls="controls" autoplay="autoplay" style="display:none;">-->
+    <!--<source src="http://translate.google.com/translate_tts?tl=en&q=the%20brown%20fox%20jumped%20over%20the%20lazy%20dog." type="audio/mpeg" />-->
+<!--</audio>-->
             </span>
 
             </div>

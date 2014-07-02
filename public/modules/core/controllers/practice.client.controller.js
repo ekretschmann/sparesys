@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('PracticeController',
-    ['$scope', '$q', '$stateParams', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'RoundRobinSchedulerService', 'CoursesService',
-        function ($scope, $q, $stateParams, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, SchedulerService, CoursesService) {
+    ['$scope', '$q', '$stateParams', '$http', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'RoundRobinSchedulerService', 'CoursesService',
+        function ($scope, $q, $stateParams, $http, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, SchedulerService, CoursesService) {
             $scope.authentication = Authentication;
 
 
@@ -45,10 +45,37 @@ angular.module('core').controller('PracticeController',
             };
 
 
+            $scope.loadSound = function (answer) {
+//                console.log('loading sound ' + answer);
+
+//                $http({method: 'GET',
+//                    url: 'http://translate.google.com/translate_tts?tl=en&q=the%20brown%20fox.',
+//                    headers: {'User-Agent': 'Mozilla'}}).
+//                    success(function (data, status, headers, config) {
+//                        console.log('success');
+//                        console.log(data);
+//                        console.log(status);
+//                        console.log(headers);
+//                        console.log(config);
+//
+//                        // this callback will be called asynchronously
+//                        // when the response is available
+//                    }).
+//                    error(function (data, status, headers, config) {
+//                        console.log('failed');
+//                        console.log(data);
+//                        console.log(status);
+//                        console.log(headers);
+//                        console.log(config);
+//                    });
+
+
+            };
+
             // Find existing Course
             $scope.init = function () {
                 var res = CoursesService.serverLoadCards();
-                res.get({courseId: $stateParams.courseId}).$promise.then(function(cards) {
+                res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
                     $scope.cards = cards;
                     SchedulerService.init($scope.cards);
                     $scope.card = SchedulerService.nextCard();
@@ -56,7 +83,7 @@ angular.module('core').controller('PracticeController',
 
                 Courses.get({
                     courseId: $stateParams.courseId
-                }, function(course) {
+                }, function (course) {
                     $scope.course = course;
                 });
             };

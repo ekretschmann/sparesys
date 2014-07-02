@@ -20,18 +20,16 @@ angular.module('core').service('PredictiveSchedulerService', [
             },
             nextCard: function(time) {
 
-
-                var obj = this;
                 var bestValue = 1.0;
                 var bestCard;
-
                 this.cards.forEach(function(card) {
-                    var pr = obj.getPredictedRetention(card, time);
+
+                    var pr = this.getPredictedRetention(card, time);
                     if (Math.abs(pr-0.4) < bestValue) {
                         bestCard = card;
                         bestValue = Math.abs(pr-0.4);
                     }
-                });
+                }, this);
                 return bestCard;
             }
         };

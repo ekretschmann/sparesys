@@ -15,9 +15,9 @@ angular.module('core').service('ForgettingIndexCalculatorService', [
 
                 if (card.history.length === 0) {
                     if (assessment === 0) {
-                        card.hrt = 1*60000;
+                        card.hrt = 1*10000;
                     } else if (assessment === 1) {
-                        card.hrt = 5*60000;
+                        card.hrt = 60000;
                     } else if (assessment === 2) {
                         card.hrt = 60*24*60000;
                     } else if (assessment === 3) {
@@ -25,9 +25,9 @@ angular.module('core').service('ForgettingIndexCalculatorService', [
                     }
                 } else {
                     if (assessment === 0) {
-                        card.hrt = 1*60000;
+                        card.hrt = 1*10000;
                     } else if (assessment === 1) {
-                        card.hrt = 5*60000;
+                        card.hrt = 60000;
                     } else if (assessment === 3) {
                         card.hrt *= 10*60000;
                     }

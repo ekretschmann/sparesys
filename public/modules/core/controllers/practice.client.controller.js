@@ -77,6 +77,16 @@ angular.module('core').controller('PracticeController',
 
             };
 
+            $scope.getPredictedCardRetention = function() {
+
+                return Math.round(SchedulerService.getPredictedRetention($scope.card, Date.now())*100);
+            };
+
+            $scope.getPredictedCourseRetention = function() {
+
+                return Math.round(SchedulerService.getPredictedCourseRetention(Date.now())*100);
+            };
+
             // Find existing Course
             $scope.init = function () {
                 var res = CoursesService.serverLoadCards();

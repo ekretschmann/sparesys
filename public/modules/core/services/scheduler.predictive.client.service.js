@@ -8,6 +8,20 @@ angular.module('core').service('PredictiveSchedulerService', [
                 this.cards = cards;
             },
 
+            getPredictedCourseRetention: function(time) {
+                var sum = 0.0;
+                var cardNum = 0;
+                this.cards.forEach(function(card) {
+                    if (card.lastRep) {
+                        sum += this.getPredictedRetention(card, time);
+                        cardNum ++;
+                    }
+                }, this);
+                if (cardNum === 0) {
+                    return 0.0;
+                }
+                return sum/cardNum;
+            },
             getPredictedRetention: function(card, time) {
 
                 if (!card.hrt) {

@@ -24,10 +24,6 @@
                     </span>
                 </h3>
 
-<!--<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.min.js"></script>-->
-<!--<audio controls="controls" autoplay="autoplay" style="display:none;">-->
-    <!--<source src="http://translate.google.com/translate_tts?tl=en&q=the%20brown%20fox%20jumped%20over%20the%20lazy%20dog." type="audio/mpeg" />-->
-<!--</audio>-->
             </span>
 
             </div>
@@ -48,6 +44,9 @@
                 <button data-ng-click="showAnswer()">Enter</button>
             </div>
         </div>
+
+        <div>Predicted card retention: {{getPredictedCardRetention()}}%</div>
+        <div>Predicted course retention: {{getPredictedCourseRetention()}}%</div>
     </div>
 
     <div data-ng-if="cards.length === 0">

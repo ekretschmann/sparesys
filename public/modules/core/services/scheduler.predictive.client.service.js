@@ -13,23 +13,37 @@ angular.module('core').service('PredictiveSchedulerService', [
                 if (!card.hrt) {
                     return 0.0;
                 }
+                if (!card.lastRep) {
+                    card.lastRep = 0;
+                }
                 var lastRep = card.lastRep;
                 var hrt = card.hrt;
+
+//                console.log(time);
+//                console.log(lastRep);
+//                console.log("  "+(time-lastRep));
+
                 var result = Math.exp((time - lastRep) / hrt * Math.log(0.5));
                 return result;
             },
             nextCard: function(time) {
+
+                if (!time) {
+                    time = Date.now();
+                }
 
                 var bestValue = 1.0;
                 var bestCard;
                 this.cards.forEach(function(card) {
 
                     var pr = this.getPredictedRetention(card, time);
+//                    console.log(card.question+" - "+pr);
                     if (Math.abs(pr-0.4) < bestValue) {
                         bestCard = card;
                         bestValue = Math.abs(pr-0.4);
                     }
                 }, this);
+//                console.log('best card: '+bestCard.question);
                 return bestCard;
             }
         };

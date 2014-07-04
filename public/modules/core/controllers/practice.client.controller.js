@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('PracticeController',
-    ['$scope', '$q', '$stateParams', '$http', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'RoundRobinSchedulerService', 'CoursesService',
-        function ($scope, $q, $stateParams, $http, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, SchedulerService, CoursesService) {
+    ['$scope', '$q', '$stateParams', '$http', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'PredictiveSchedulerService', 'CoursesService', 'ForgettingIndexCalculatorService',
+        function ($scope, $q, $stateParams, $http, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, SchedulerService, CoursesService, ForgettingIndexCalculator) {
             $scope.authentication = Authentication;
 
 
@@ -40,8 +40,13 @@ angular.module('core').controller('PracticeController',
 
             $scope.rateCard = function (rating) {
                 $scope.state = 'question';
+                ForgettingIndexCalculator.record($scope.card, Date.now(), rating);
                 $scope.card = SchedulerService.nextCard();
                 $state.go($state.current);
+
+//                $scope.card.history.push([Date.now, rating]);
+//                console.log($scope.card);
+
             };
 
 

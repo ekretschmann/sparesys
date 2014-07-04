@@ -18,66 +18,66 @@
             var card1 = new Cards({question: 'c1', history:[[10,3],[20,2],[30,3]], hrt: 10});
             ForgettingIndexCalculator.record(card1, 40, 3);
 
-            expect(card1.hrt).toBe(100);
+            expect(card1.hrt).toBe(100*60000);
 
             var card2 = new Cards({question: 'c2', history:[[10,3],[20,2],[30,3]], hrt: 100});
             ForgettingIndexCalculator.record(card2, 40, 3);
 
-            expect(card2.hrt).toBe(1000);
+            expect(card2.hrt).toBe(1000*60000);
         });
 
         it('should keep forgetting index when assessment is 2', function () {
-            var card1 = new Cards({question: 'c1', history:[[10,3],[20,2],[30,3]], hrt: 10});
+            var card1 = new Cards({question: 'c1', history:[[10,3],[20,2],[30,3]], hrt: 10*60000});
             ForgettingIndexCalculator.record(card1, 40, 2);
 
-            expect(card1.hrt).toBe(10);
+            expect(card1.hrt).toBe(10*60000);
 
-            var card2 = new Cards({question: 'c2', history:[[10,3],[20,2],[30,3]], hrt: 100});
+            var card2 = new Cards({question: 'c2', history:[[10,3],[20,2],[30,3]], hrt: 100*60000});
             ForgettingIndexCalculator.record(card2, 40, 2);
 
-            expect(card2.hrt).toBe(100);
+            expect(card2.hrt).toBe(100*60000);
         });
 
         it('should set forgetting index to five minutes when assessment is 1', function () {
             var card1 = new Cards({question: 'c1', history:[[10,3],[20,2],[30,3]], hrt: 0});
             ForgettingIndexCalculator.record(card1, 40, 1);
 
-            expect(card1.hrt).toBe(5);
+            expect(card1.hrt).toBe(5*60000);
         });
 
         it('should set forgetting index to one minute when assessment is 0', function () {
             var card1 = new Cards({question: 'c1', history:[[10,3],[20,2],[30,3]], hrt: 0});
             ForgettingIndexCalculator.record(card1, 40, 0);
 
-            expect(card1.hrt).toBe(1);
+            expect(card1.hrt).toBe(1*60000);
         });
 
         it('should set forgetting index to five days on empty history when assessment is 3', function () {
             var card1 = new Cards({question: 'c1', history:[], hrt: 0, created: 0});
             ForgettingIndexCalculator.record(card1, 10, 3);
 
-            expect(card1.hrt).toBe(60*24*5);
+            expect(card1.hrt).toBe(60*24*5*60000);
         });
 
         it('should set forgetting index to one day on empty history when assessment is 2', function () {
             var card1 = new Cards({question: 'c1', history:[], hrt: 0});
             ForgettingIndexCalculator.record(card1, 0, 2);
 
-            expect(card1.hrt).toBe(60*24);
+            expect(card1.hrt).toBe(60*24*60000);
         });
 
         it('should set forgetting index to five minutes on empty history when assessment is 1', function () {
             var card1 = new Cards({question: 'c1', history:[], hrt: 0});
             ForgettingIndexCalculator.record(card1, 0, 1);
 
-            expect(card1.hrt).toBe(5);
+            expect(card1.hrt).toBe(5*60000);
         });
 
         it('should set forgetting index to one minute on empty history when assessment is 0', function () {
             var card1 = new Cards({question: 'c1', history:[], hrt: 0});
             ForgettingIndexCalculator.record(card1, 0, 0);
 
-            expect(card1.hrt).toBe(1);
+            expect(card1.hrt).toBe(1*60000);
         });
 
         it('should return the card whose predicted retention is closest to 0.4 ', function () {

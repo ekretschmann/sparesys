@@ -9,6 +9,9 @@ angular.module('core').service('PredictiveSchedulerService', [
             },
 
             getPredictedCourseRetention: function(time) {
+                if (!this.cards) {
+                    return 0.0;
+                }
                 var sum = 0.0;
                 var cardNum = 0;
                 this.cards.forEach(function(card) {
@@ -24,6 +27,9 @@ angular.module('core').service('PredictiveSchedulerService', [
             },
             getPredictedRetention: function(card, time) {
 
+                if (!card) {
+                    return 0.0;
+                }
                 if (!card.hrt) {
                     return 0.0;
                 }
@@ -37,8 +43,7 @@ angular.module('core').service('PredictiveSchedulerService', [
 //                console.log(lastRep);
 //                console.log("  "+(time-lastRep));
 
-                var result = Math.exp((time - lastRep) / hrt * Math.log(0.5));
-                return result;
+                return Math.exp((time - lastRep) / hrt * Math.log(0.5));
             },
             nextCard: function(time) {
 

@@ -33,6 +33,19 @@ var CardSchema = new Schema({
     packs: {
         type: [Schema.Types.ObjectId],
         default: []
+    },
+    hrt: {
+        type: Number,
+        default: 0.0
+    },
+    lastRep: {
+        type: Number,
+        default: 0.0
+    },
+    history: {
+        type: [{when: Number, assessment: Number}],
+        default: [],
+        _id: false
     }
 });
 

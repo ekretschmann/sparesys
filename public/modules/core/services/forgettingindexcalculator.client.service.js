@@ -32,7 +32,9 @@ angular.module('core').service('ForgettingIndexCalculatorService', [
                         card.hrt *= 10*60000;
                     }
                 }
-                card.history.push([time, assessment]);
+                console.log('pushing');
+                card.history.push({when: time, assessment: assessment});
+                console.log(card.history);
 
                 card.lastRep = time;
 //                console.log(card.history);

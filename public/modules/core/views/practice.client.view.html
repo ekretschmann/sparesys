@@ -1,12 +1,16 @@
 <section data-ng-controller="PracticeController" data-ng-init="init()">
 
 
+    <div class="pull-right">
+        <div>Predicted card retention: {{getPredictedCardRetention()}}%</div>
+        <div>Predicted course retention: {{getPredictedCourseRetention()}}%</div>
+    </div>
+
     <div class="sparesys-header">
 
         <div class="sparesys-title">
             {{course.name}}
         </div>
-
     </div>
 
 
@@ -45,8 +49,8 @@
             </div>
         </div>
 
-        <div>Predicted card retention: {{getPredictedCardRetention()}}%</div>
-        <div>Predicted course retention: {{getPredictedCourseRetention()}}%</div>
+
+        <div>history: {{card.history}}</div>
     </div>
 
     <div data-ng-if="cards.length === 0">

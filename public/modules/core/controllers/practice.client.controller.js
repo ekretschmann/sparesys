@@ -41,8 +41,21 @@ angular.module('core').controller('PracticeController',
             $scope.rateCard = function (rating) {
                 $scope.state = 'question';
                 ForgettingIndexCalculator.record($scope.card, Date.now(), rating);
-                $scope.card = SchedulerService.nextCard();
-                $state.go($state.current);
+
+
+                Cards.get({
+                    cardId: $scope.card._id
+                }, function(thecard) {
+                    thecard.hrt = $scope.card.hrt;
+                    thecard.history = $scope.card.history;
+                    thecard.lastRep = $scope.card.lastRep;
+                    thecard.$update();
+                    $scope.card = SchedulerService.nextCard();
+                    $state.go($state.current);
+                });
+
+
+
 
 //                $scope.card.history.push([Date.now, rating]);
 //                console.log($scope.card);

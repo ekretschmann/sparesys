@@ -9,7 +9,7 @@
                 </div>
             </div>
 
-            <form class="form-horizontal"  novalidate>
+            <form class="form-horizontal" novalidate>
                 <fieldset>
                     <div class="sparesys-header">
                         <table class="sparesys-view-object-table">
@@ -35,15 +35,19 @@
                         </table>
                     </div>
 
-                    <button class="btn btn-primary sparesys-button"
-                            type="submit"
-                            ng-click="addCardToPack()"
-                            >
-                        Add
-                    </button>
+                    <div>
+                        <button class="btn btn-primary sparesys-button"
+                                type="submit"
+                                ng-click="addCardToPack()"
+                                >
+                            Add
+                        </button>
 
-                    <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+                        <div class="pull-right">
+                            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Done</button>
+                        </div>
 
+                    </div>
 
                 </fieldset>
             </form>

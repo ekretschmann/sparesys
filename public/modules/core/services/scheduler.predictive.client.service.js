@@ -67,7 +67,6 @@ angular.module('core').service('PredictiveSchedulerService', [
             },
             record: function(card, time, assessment) {
 
-                console.log('recording '+assessment);
 
                 // setting init values for first iteration
                 if (! card.history) {
@@ -95,16 +94,10 @@ angular.module('core').service('PredictiveSchedulerService', [
                         var pr = this.getPredictedRetention(card, time);
                         var weight = 0.0;
                         if (pr >=0.4) {
-                            console.log('above');
                             weight = 5/3 - 1/0.6*pr;
                         } else {
-                            console.log('below');
                             weight = 2 - (5/3-1/0.6*pr);
                         }
-
-                        console.log('pr =' + pr);
-                        console.log('w  =' + weight);
-
                         card.hrt *= 10*weight;
                     }
                 }

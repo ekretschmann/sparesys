@@ -64,23 +64,19 @@ exports.update = function(req, res) {
 	var card = req.card;
 
 
-    console.log('---- before ----');
-    console.log(card);
 
 	card = _.extend(card, req.body);
 
-    console.log('---- after ----');
-    console.log(card);
 
-//	card.save(function(err) {
-//		if (err) {
-//			return res.send(400, {
-//				message: getErrorMessage(err)
-//			});
-//		} else {
-//			res.jsonp(card);
-//		}
-//	});
+	card.save(function(err) {
+		if (err) {
+			return res.send(400, {
+				message: getErrorMessage(err)
+			});
+		} else {
+			res.jsonp(card);
+		}
+	});
 };
 
 /**

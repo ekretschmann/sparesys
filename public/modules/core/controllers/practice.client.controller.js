@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('PracticeController',
-    ['$scope', '$q', '$stateParams', '$http', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'PredictiveSchedulerService', 'CoursesService', 'ForgettingIndexCalculatorService',
-        function ($scope, $q, $stateParams, $http, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, SchedulerService, CoursesService, ForgettingIndexCalculator) {
+    ['$scope', '$q', '$stateParams', '$http', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'PredictiveSchedulerService', 'CoursesService',
+        function ($scope, $q, $stateParams, $http, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, SchedulerService, CoursesService) {
             $scope.authentication = Authentication;
 
 
@@ -38,9 +38,27 @@ angular.module('core').controller('PracticeController',
                 $state.go($state.current);
             };
 
+            $scope.clearHistory = function(card) {
+                $scope.card.history = [];
+                $scope.card.lastRep = undefined;
+                $scope.card.hrt = 0.0;
+
+                Cards.get({
+                    cardId: $scope.card._id
+                }, function(thecard) {
+                    thecard.hrt = $scope.card.hrt;
+                    thecard.history = $scope.card.history;
+                    thecard.lastRep = $scope.card.lastRep;
+                    thecard.$update();
+
+                });
+            };
+
+
+
             $scope.rateCard = function (rating) {
                 $scope.state = 'question';
-                ForgettingIndexCalculator.record($scope.card, Date.now(), rating);
+                SchedulerService.record($scope.card, Date.now(), rating);
 
 
                 Cards.get({

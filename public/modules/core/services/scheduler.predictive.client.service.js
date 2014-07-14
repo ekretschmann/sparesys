@@ -64,6 +64,55 @@ angular.module('core').service('PredictiveSchedulerService', [
                 }, this);
 //                console.log('best card: '+bestCard.question);
                 return bestCard;
+            },
+            record: function(card, time, assessment) {
+
+                console.log('recording '+assessment);
+
+                // setting init values for first iteration
+                if (! card.history) {
+                    card.history = [];
+                }
+
+                if (card.history.length === 0) {
+                    if (assessment === 0) {
+                        card.hrt = 10000;
+                    } else if (assessment === 1) {
+                        card.hrt = 60000;
+                    } else if (assessment === 2) {
+                        card.hrt = 60*24*60000;
+                    } else if (assessment === 3) {
+                        card.hrt = 60*24*5*60000;
+                    }
+                } else {
+                    if (assessment === 0) {
+                        card.hrt = 10000;
+                    } else if (assessment === 1) {
+                        card.hrt = 60000;
+                    } else if (assessment === 3) {
+                        if (card.hrt === 0) {card.hrt = 10000;}
+
+                        var pr = this.getPredictedRetention(card, time);
+                        var weight = 0.0;
+                        if (pr >=0.4) {
+                            console.log('above');
+                            weight = 5/3 - 1/0.6*pr;
+                        } else {
+                            console.log('below');
+                            weight = 2 - (5/3-1/0.6*pr);
+                        }
+
+                        console.log('pr =' + pr);
+                        console.log('w  =' + weight);
+
+                        card.hrt *= 10*weight;
+                    }
+                }
+                card.history.push({when: time, assessment: assessment});
+
+                card.lastRep = time;
+
+
             }
         };
 	}

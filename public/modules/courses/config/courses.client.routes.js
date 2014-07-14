@@ -20,6 +20,14 @@ angular.module('courses').config(['$stateProvider',
             state('editCourse', {
                 url: '/courses/:courseId/edit',
                 templateUrl: 'modules/courses/views/edit-course.client.view.html'
+            }).
+            state('viewCourse', {
+                url: '/courses/:courseId/view',
+                templateUrl: 'modules/courses/views/view-course.client.view.html'
+            }).
+            state('searchCourse', {
+                url: '/courses/search',
+                templateUrl: 'modules/courses/views/search-courses.client.view.html'
             });
     }
 ]);

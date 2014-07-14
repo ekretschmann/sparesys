@@ -10,6 +10,10 @@ var mongoose = require('mongoose'),
  * Course Schema
  */
 var CourseSchema = new Schema({
+    published: {
+        type: Boolean,
+        default: false
+    },
     name: {
         type: String,
         default: '',

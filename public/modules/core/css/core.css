@@ -22,6 +22,8 @@ body {
 .footer {
     padding-left: 15px;
     padding-right: 15px;
+
+    height: 4em;
 }
 
 /* Custom page header */
@@ -40,7 +42,7 @@ body {
 .footer {
     padding-top: 19px;
     color: #777;
-    border-top: 1px solid #e5e5e5;
+    /*border-top: 1px solid #e5e5e5;*/
 }
 
 /* Customize container */
@@ -178,3 +180,22 @@ body {
     /*position: relative;*/
     /*padding: 10px;*/
 /*}*/
+
+* {
+    margin: 0;
+}
+
+html, body {
+    height: 100%;
+}
+
+.wrapper {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -4em;
+}
+
+.footer, .push {
+    height: 4em;
+}

@@ -3,6 +3,7 @@
 
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/edit-course.modal.client.view.html'"></div>
+    <div ng-include="'/modules/courses/views/partial/publish-course.modal.client.view.html'"></div>
 
     <div ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>
@@ -22,8 +23,7 @@
                 <i class="glyphicon glyphicon-trash"></i>
             </a>
 
-            <!--TODO: Add publish course-->
-            <a class="btn btn-primary" data-ng-click="subscribe();">
+            <a class="btn btn-primary" data-ng-click="areYouSureToPublishCourse(course)">
                 <i class="glyphicon glyphicon-upload"></i>
             </a>
         </div>
@@ -33,6 +33,8 @@
         </div>
         <div class="sparesys-subtitle">
             {{course.description}}
+            <span data-ng-if="course.published">(published course)</span>
+            <span data-ng-if="!course.published">(private course)</span>
         </div>
     </div>
 

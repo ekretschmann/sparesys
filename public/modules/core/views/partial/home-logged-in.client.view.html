@@ -1,14 +1,26 @@
-<div class="sparesys-header">
-    <div class="sparesys-title" id="home-welcome">Welcome {{authentication.user.firstName}}</div>
-
-    <div class="sparesys-subtitle">
-        Your Courses:
-    </div>
-</div>
-
-
 <section data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
 
+    <div class="sparesys-header">
+        <div class="sparesys-title" id="home-welcome">Welcome {{authentication.user.firstName}}</div>
+
+        <div class="sparesys-subtitle" data-ng-if="courses.length>0">
+            Your Courses:
+        </div>
+
+        <!--<div class="sparesys-subtitle" data-ng-if="!courses || courses.length===0">-->
+        <!--You have not subscribed to any courses-->
+        <!--</div>-->
+
+        <div data-ng-if="!courses || courses.length===0">
+            Welcome ot sparesys! You have not subscribed to any courses. You can start with creating your own
+            private
+            sparesys course (My Courses -> Create) or by searching for a published course and subscribing
+            to it (My Courses -> Search).
+            <div style="height: 500px"></div>
+        </div>
+
+
+    </div>
 
 
     <div data-ng-repeat="course in courses">
@@ -20,8 +32,10 @@
                 </span>
             </div>
 
-            <div><span class="sparesys-view-object-right-padded-element">Number of cards:</span><span>56</span></div>
-            <div><span class="sparesys-view-object-right-padded-element">Due Date:</span><span>01/07/2014</span></div>
+            <div><span class="sparesys-view-object-right-padded-element">Number of cards:</span><span>56</span>
+            </div>
+            <div><span class="sparesys-view-object-right-padded-element">Due Date:</span><span>01/07/2014</span>
+            </div>
             <div><span class="sparesys-view-object-right-padded-element">On Track:</span><span>87%</span></div>
         </div>
         <!--<span style="float: right; padding-right: 2px"-->

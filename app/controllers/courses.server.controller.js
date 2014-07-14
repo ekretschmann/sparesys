@@ -99,6 +99,8 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
 
+
+
     if (req.query.userId) {
 
         Course.find({'user': req.query.userId}).exec(function (err, courses) {
@@ -121,7 +123,19 @@ exports.list = function (req, res) {
                 res.jsonp(courses);
             }
         });
+    } else if (req.query.published) {
+
+        Course.find({'published': req.query.published}).exec(function (err, courses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(courses);
+            }
+        });
     } else {
+        console.log(req.query)
         Course.find().sort('-created').populate('user', 'displayName').exec(function (err, courses) {
             if (err) {
                 return res.send(400, {

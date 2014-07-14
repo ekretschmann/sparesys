@@ -1,0 +1,57 @@
+<section data-ng-controller="CoursesController" data-ng-init="findOne()">
+
+
+
+
+    <div class="sparesys-header">
+
+        <div class="pull-right">
+            <a class="btn btn-primary" data-ng-click="copy(course)">
+                <i class="glyphicon glyphicon-download"></i>
+            </a>
+        </div>
+
+        <div class="sparesys-title">
+            {{course.name}}
+        </div>
+        <div class="sparesys-subtitle">
+            {{course.description}}
+        </div>
+    </div>
+
+
+    <div data-ng-hide="course.packs.length > 0">
+        This is an empty course.
+    </div>
+    <div data-ng-show="course.packs.length > 0">
+
+
+        <table id="searchTextResults" class="table-striped" style="width: 100%">
+            <thead>
+            <tr>
+                <th class="sparesys-view-courses-course-column">Pack</th>
+                <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
+                <!--<th>Created</th>-->
+            </tr>
+            </thead>
+            <tbody ui-sortable="sortableOptions" data-ng-model="course.packs">
+            <tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"
+                data-ng-init="findById(packId)"
+                style="cursor: move">
+
+                <td class="sparesys-view-object-content-cell">
+                    {{pack.name}}
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
+
+    <small>
+        <em class="text-muted">Created on {{course.created | date:'mediumDate'}} by {{course.user.displayName}}</em>
+
+    </small>
+</section>

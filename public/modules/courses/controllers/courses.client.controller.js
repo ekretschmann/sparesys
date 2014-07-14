@@ -69,6 +69,12 @@ angular.module('courses').controller('CoursesController',
                 }
             };
 
+            $scope.findPublished = function () {
+                $scope.courses = Courses.query({
+                    published: true
+                });
+            };
+
             // Find existing Course
             $scope.findOne = function () {
 
@@ -95,6 +101,22 @@ angular.module('courses').controller('CoursesController',
                 $modal.open({
                     templateUrl: 'areYouSureToDeleteCourse.html',
                     controller: 'DeleteCourseModalController',
+                    resolve: {
+
+                        course: function () {
+                            return $scope.course;
+                        }
+                    }
+                });
+
+            };
+
+            $scope.areYouSureToPublishCourse = function (course) {
+
+                $scope.course = course;
+                $modal.open({
+                    templateUrl: 'areYouSureToPublishCourse.html',
+                    controller: 'PublishCourseModalController',
                     resolve: {
 
                         course: function () {

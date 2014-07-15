@@ -14,7 +14,6 @@ angular.module('courses').controller('CoursesController',
 
 
                 });
-                console.log('modal should open');
                 $modal.open({
                     templateUrl: 'copiedCourse.html',
                     controller: 'CopiedCourseModalController',

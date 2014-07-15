@@ -3,7 +3,7 @@
 (function () {
     describe('PredictiveSchedulerService', function () {
         //Initialize global variables
-        var SchedulerService, Cards, SchedulerService;
+        var SchedulerService, Cards;
 
         // Load the main application module
         beforeEach(module(ApplicationConfiguration.applicationModuleName));

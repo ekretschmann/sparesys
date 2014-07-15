@@ -3,10 +3,18 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesController',
-    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'CoursesService',
-        function ($scope, $stateParams, $location, $modal, Authentication, Courses, Packs, CoursesService) {
+    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService',
+        function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService) {
             $scope.authentication = Authentication;
 
+            $scope.copy = function () {
+
+                var res = CoursesService.copyCourse($scope.course._id);
+                res.get({courseId: $stateParams.courseId}).$promise.then(function () {
+                    console.log('copy done');
+                });
+
+            };
 
             // Create new Course
             $scope.create = function () {

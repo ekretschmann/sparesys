@@ -52,38 +52,18 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                 }
                 return true;
             },
-            loadCards: function (courseId, cards) {
-                var deferred = $q.defer();
-
-
-                Courses.get({
-                    courseId: courseId
-                }, function (course) {
-                    course.packs.forEach(function (packId) {
-                        var packs = Packs.get({
-                            packId: packId
-                        }, function (pack) {
-
-                            pack.cards.forEach(function (cardId) {
-                                Cards.get({
-                                    cardId: cardId
-                                }, function (card) {
-                                    cards.push(card);
-                                    deferred.resolve();
-                                });
-                            });
-
-                        });
-                    });
-                });
-
-                return deferred.promise;
-            },
             serverLoadCards: function () {
                 return $resource('courses/cards/:courseId', [], {
                     get: {
                         method: 'GET',
                         isArray: true
+                    }
+                });
+            },
+            copyCourse: function () {
+                return $resource('courses/copy/:courseId', [], {
+                    get: {
+                        method: 'GET'
                     }
                 });
             }

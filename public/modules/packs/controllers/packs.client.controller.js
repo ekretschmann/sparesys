@@ -51,6 +51,17 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             });
         };
 
+        $scope.clearPacks = function() {
+          console.log('clearing');
+            $scope.packs.forEach(function(pack) {
+                if (pack.courseName === 'undefined') {
+                    pack.$remove();
+//                    console.log('remove '+pack.name);
+
+                }
+            });
+        };
+
         // Find existing Pack
         $scope.findById = function (packId) {
             $scope.pack = Packs.get({

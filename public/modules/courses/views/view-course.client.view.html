@@ -30,6 +30,7 @@
             <thead>
             <tr>
                 <th class="sparesys-view-courses-course-column">Pack</th>
+                <th class="sparesys-view-courses-course-column">Cards</th>
                 <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
                 <!--<th>Created</th>-->
             </tr>
@@ -41,6 +42,9 @@
 
                 <td class="sparesys-view-object-content-cell">
                     {{pack.name}}
+                </td>
+                <td class="sparesys-view-object-content-cell">
+                    {{pack.cards.length}}
                 </td>
             </tr>
             </tbody>

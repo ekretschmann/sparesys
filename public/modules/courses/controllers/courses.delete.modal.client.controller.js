@@ -6,6 +6,7 @@ angular.module('courses').controller('DeleteCourseModalController', ['$scope', '
 
         $scope.ok = function () {
             CoursesService.remove(course, function () {
+
                 $state.go($state.$current, null, { reload: true });
             });
 

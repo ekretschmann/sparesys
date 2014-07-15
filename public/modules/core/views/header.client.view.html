@@ -53,7 +53,7 @@
 
             <li ui-route="/courses" ng-class="{active: $uiRoute}" class="dropdown">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                    My Courses <b class="caret"></b>
+                    Courses <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
@@ -91,6 +91,9 @@
 					<li data-ng-show="authentication.user.provider === 'local'">
 						<a href="/#!/settings/password">Change Password</a>
 					</li>
+                    <li>
+                        <a href="/#!/settings/teacher">Find Teacher</a>
+                    </li>
 					<li class="divider"></li>
 					<li>
 						<a href="/auth/signout">Signout</a>

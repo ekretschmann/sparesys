@@ -20,13 +20,22 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
             remove: function (course, callback) {
 
                 if (course) {
-//              Todo: remove the packs
-                    course.$remove(callback);
 
+                    course.packs.forEach(function (packId) {
+
+                        var self = this;
+                        Packs.query({
+                            _id: packId
+                        }, function (pack) {
+                            self.removePack(pack[0], function(){});
+                        });
+                    }, this);
+                   course.$remove(callback);
+                    console.log('remove cours '+course.name);
                 }
                 return true;
             },
-            removePack: function (Courses, pack, callback) {
+            removePack: function (pack, callback) {
 
                 if (pack) {
                     Courses.query({
@@ -35,6 +44,7 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                         if (courses.length === 0) {
 
                             pack.$remove(callback);
+                            console.log('remove dangling pack '+pack.name);
                         }
                         if (courses.length === 1) {
                             var course = courses[0];
@@ -44,17 +54,19 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                                 }
                             }
                             course.$update(function () {
-                                pack.cards.forEach(function(cardId) {
+                                pack.cards.forEach(function (cardId) {
 
                                     Cards.query({
                                         _id: cardId
-                                    }, function(cards) {
+                                    }, function (cards) {
                                         if (cards.length === 1) {
+                                            console.log('remove '+cards[0].question);
                                             cards[0].$remove();
                                         }
                                     });
                                 });
                                 pack.$remove(callback);
+                                console.log('remove pack '+pack.name);
                             });
                         }
                     });

@@ -6,7 +6,7 @@ angular.module('packs').controller('DeletePackController', ['$scope', '$state', 
         $scope.course = course;
 
         $scope.ok = function () {
-            CoursesService.removePack(Courses, pack, function () {
+            CoursesService.removePack(pack, function () {
                 $state.go($state.$current, null, { reload: true });
             });
             $modalInstance.close();

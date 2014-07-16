@@ -33,6 +33,7 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                         _id: pack.course
                     }, function (courses) {
                         if (courses.length === 0) {
+
                             pack.$remove(callback);
                         }
                         if (courses.length === 1) {
@@ -43,6 +44,16 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                                 }
                             }
                             course.$update(function () {
+                                pack.cards.forEach(function(cardId) {
+
+                                    Cards.query({
+                                        _id: cardId
+                                    }, function(cards) {
+                                        if (cards.length === 1) {
+                                            cards[0].$remove();
+                                        }
+                                    });
+                                });
                                 pack.$remove(callback);
                             });
                         }

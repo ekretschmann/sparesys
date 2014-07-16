@@ -1,16 +1,17 @@
 'use strict';
 
 // Cards controller
-angular.module('cards').controller('CardsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Packs', 'Cards',
-    function($scope, $stateParams, $location, Authentication, Packs, Cards) {
+angular.module('cards').controller('CardsController', ['$scope', '$stateParams', '$state', '$location', 'Authentication', 'Packs', 'Cards',
+    function($scope, $stateParams, $state, $location, Authentication, Packs, Cards) {
         $scope.authentication = Authentication;
 
 
         $scope.clearCards = function() {
             $scope.cards.forEach(function(card) {
                 if (card.packName === 'undefined') {
-                    //card.$remove();
-                    console.log('remove '+card.question);
+                    card.$remove(function() {
+                        $state.go($state.$current, null, { reload: true });
+                    });
                 }
             });
         };

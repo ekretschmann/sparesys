@@ -100,15 +100,30 @@ exports.delete = function(req, res) {
  * List of Cards
  */
 exports.list = function(req, res) {
-	Card.find().sort('-created').populate('user', 'displayName').exec(function(err, cards) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(cards);
-		}
-	});
+
+    if (req.query._id) {
+
+        Card.find({'_id': req.query._id}).exec(function (err, packs) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(packs);
+            }
+        });
+    } else {
+
+        Card.find().sort('-created').populate('user', 'displayName').exec(function (err, cards) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(cards);
+            }
+        });
+    }
 };
 
 /**

@@ -127,8 +127,11 @@ exports.cardByID = function(req, res, next, id) {
  * Card authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.card.user.id !== req.user.id) {
-		return res.send(403, 'User is not authorized');
-	}
-	next();
+    if (req.user.roles.indexOf('admin') > -1) {
+        next();
+    } else if (req.pack.user && (req.pack.user.id !== req.user.id)) {
+        return res.send(403, 'User is not authorized');
+    } else {
+        next();
+    }
 };

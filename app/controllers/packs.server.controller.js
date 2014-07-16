@@ -96,15 +96,28 @@ exports.delete = function(req, res) {
  * List of Packs
  */
 exports.list = function(req, res) {
-	Pack.find().sort('-created').populate('user', 'displayName').exec(function(err, packs) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(packs);
-		}
-	});
+    if (req.query._id) {
+
+        Pack.find({'_id': req.query._id}).exec(function (err, packs) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(packs);
+            }
+        });
+    } else {
+        Pack.find().sort('-created').populate('user', 'displayName').exec(function (err, packs) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(packs);
+            }
+        });
+    }
 };
 
 /**

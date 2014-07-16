@@ -83,12 +83,9 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
 
         $scope.getPackName = function (card) {
 
-            console.log(card.packs[0]);
             Packs.query({
                 _id: card.packs[0]
             }, function (packs) {
-//                console.log(packs[0]);
-//                console.log(packs[1]);
                 if (packs.length === 1) {
                     card.packName = packs[0].name;
                 } else {

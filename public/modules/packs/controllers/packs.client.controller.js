@@ -85,19 +85,30 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.areYouSureToDeletePack = function (pack) {
 
             $scope.pack = pack;
-            $modal.open({
-                templateUrl: 'areYouSureToDeletePack.html',
-                controller: 'DeletePackController',
-                resolve: {
 
-                    pack: function () {
-                        return $scope.pack;
-                    },
-                    course: function () {
-                        return $scope.course;
-                    }
+            Courses.query({
+                _id: pack.course
+            }, function (courses) {
+                if (courses.length === 1) {
+                    $scope.course = courses[0];
+
+                    $modal.open({
+                        templateUrl: 'areYouSureToDeletePack.html',
+                        controller: 'DeletePackController',
+                        resolve: {
+
+                            pack: function () {
+                                return $scope.pack;
+                            },
+                            course: function () {
+                                return $scope.course;
+                            }
+                        }
+                    });
                 }
             });
+
+
         };
 
         $scope.addCardToPackPopup = function (size) {

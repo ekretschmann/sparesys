@@ -1,8 +1,8 @@
 'use strict';
 
 // Packs controller
-angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs',
-    function ($scope, $stateParams, $location, $modal, Authentication, Courses, Packs) {
+angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs',
+    function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs) {
         $scope.authentication = Authentication;
 
 
@@ -54,7 +54,9 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.clearPacks = function() {
             $scope.packs.forEach(function(pack) {
                 if (pack.courseName === 'undefined') {
-                    pack.$remove();
+                    pack.$remove(function() {
+                        $state.go($state.$current, null, { reload: true });
+                    });
 
                 }
             });

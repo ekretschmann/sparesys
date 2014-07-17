@@ -3,9 +3,16 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesController',
-    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService',
-        function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService) {
+    ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService',
+        function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, CoursesService) {
             $scope.authentication = Authentication;
+
+            $scope.createDummyCourse = function() {
+
+                CoursesService.createDummmyCourse(function() {
+                    $state.go($state.$current, null, { reload: true });
+                });
+            };
 
             $scope.copy = function () {
 

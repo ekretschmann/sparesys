@@ -9,7 +9,9 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
 		$scope.create = function() {
 			// Create new School object
 			var school = new Schools ({
-				name: this.name
+				name: this.name,
+                city: this.city,
+                country: this.country
 			});
 
 			// Redirect after save

@@ -23,7 +23,19 @@ var SchoolSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+    country: {
+        type: String,
+        default: '',
+        required: 'Please fill Country',
+        trim: true
+    },
+    city: {
+        type: String,
+        default: '',
+        required: 'Please fill City',
+        trim: true
+    }
 });
 
 mongoose.model('School', SchoolSchema);

@@ -56,6 +56,34 @@
                     </td>
                 </tr>
 
+                <tr class="controls" style="height: 40px">
+
+                    <td class="sparesys-view-object-label-cell">Teacher</td>
+
+                    <td style="vertical-align: middle">
+
+                        <input
+                                type="checkbox"
+                                data-ng-model="teacher"
+                                ng-checked="user.roles.indexOf('teacher') > -1"
+                                > <span style="padding-left: 10px">(You plan to teach one or more students)</span>
+                    </td>
+                </tr>
+
+                <tr class="controls">
+
+                    <td class="sparesys-view-object-label-cell">Headmaster</td>
+
+                    <td style="vertical-align: middle">
+                        <input
+                                style="padding-right: 10px"
+                                type="checkbox"
+                                data-ng-model="headmaster"
+                                ng-checked="user.roles.indexOf('headmaster') > -1"
+                                > <span style="padding-left: 10px">(You plan to organize teachers and students)</span>
+                    </td>
+                </tr>
+
 
             </table>
 

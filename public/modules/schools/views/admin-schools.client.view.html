@@ -8,4 +8,38 @@
 
         </div>
     </div>
+
+    <table id="searchTextResults" class="table-striped" style="width: 100%">
+        <thead>
+        <tr>
+            <th class="sparesys-view-courses-course-column"></th>
+            <th class="sparesys-view-courses-description-column">School</th>
+            <th class="sparesys-view-courses-course-column">City</th>
+            <th class="sparesys-view-courses-course-column">Country</th>
+            <th class="sparesys-view-courses-course-column">By</th>
+            <th>Created</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="school in schools | filter:searchText">
+            <td class="sparesys-view-courses-name-cell">
+                <a href="">
+                    <i data-ng-click="areYouSureToDeleteSchool(school)"
+                       class="glyphicon glyphicon-remove-sign">
+                    </i>
+                </a>
+                <a data-ng-href="#!/schools/{{school._id}}/edit">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </a>
+            </td>
+            <td class="sparesys-view-courses-name-cell">
+                {{school.name}}</td>
+            <td>{{school.city}}</td>
+            <td>{{school.country}}</td>
+
+            <td class="sparesys-view-courses-name-cell">{{school.user.displayName}}</td>
+            <td class="sparesys-view-courses-date-cell">{{school.created | date:'shortDate'}}</td>
+        </tr>
+        </tbody>
+    </table>
 </section>

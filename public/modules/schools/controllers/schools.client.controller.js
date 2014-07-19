@@ -5,6 +5,16 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
 	function($scope, $stateParams, $location, Authentication, Schools ) {
 		$scope.authentication = Authentication;
 
+
+        // Find list for current user
+        $scope.findForCurrentUser = function () {
+            if ($scope.authentication.user) {
+                $scope.schools = Schools.query({
+                    userId: $scope.authentication.user._id
+                });
+            }
+        };
+
 		// Create new School
 		$scope.create = function() {
 			// Create new School object

@@ -20,6 +20,7 @@ module.exports = {
                 'public/lib/jquery/dist/jquery.js',
                 'public/lib/jquery-ui/ui/jquery-ui.js',
 				'public/lib/angular/angular.js',
+				'public/lib/q/q.js',
 				'public/lib/angular-resource/angular-resource.js', 
 				'public/lib/angular-cookies/angular-cookies.js',  
 				'public/lib/angular-animate/angular-animate.js', 

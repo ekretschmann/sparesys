@@ -126,7 +126,7 @@ exports.update = function (req, res) {
     }
 
     if (user) {
-        if(req.body._id != user._id) {
+        if(req.body._id.toString() !== user._id.toString()) {
             User.findById(req.body._id, 'username roles email lastName firstName', function (err, otherUser) {
                 if (!err && otherUser) {
 
@@ -134,7 +134,6 @@ exports.update = function (req, res) {
                 }
             });
         } else {
-            console.log('updating this user')
             updateUser(user);
         }
     } else {

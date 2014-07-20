@@ -11,6 +11,7 @@ var mongoose = require('mongoose'),
     q = require('q');
 
 /**
+/**
  * Get the error message from error object
  */
 var getErrorMessage = function (err) {

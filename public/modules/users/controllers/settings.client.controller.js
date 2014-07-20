@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$location', 'Users', 'Authentication',
-    function ($scope, $http, $location, Users, Authentication) {
+angular.module('users').controller('SettingsController', ['$scope', '$http', '$state','$location', 'Users', 'Authentication',
+    function ($scope, $http, $state, $location, Users, Authentication) {
         $scope.user = Authentication.user;
         $scope.headmaster = $scope.user.roles.indexOf('headmaster')>0;
         $scope.teacher = $scope.user.roles.indexOf('teacher')>0;
@@ -44,7 +44,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
         $scope.updateUserProfile = function () {
             $scope.success = $scope.error = null;
             var user = new Users($scope.user);
-            console.log(user.roles);
+
 
             if ($scope.teacher === true) {
                 if (user.roles.indexOf('teacher')<0) {
@@ -71,9 +71,11 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$l
                 }
             }
 
+
             user.$update(function (response) {
                 $scope.success = true;
                 Authentication.user = response;
+                $state.go($state.$current, null, { reload: true });
             }, function (response) {
                 $scope.error = response.data.message;
             });

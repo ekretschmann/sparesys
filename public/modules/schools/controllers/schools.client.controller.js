@@ -1,9 +1,22 @@
 'use strict';
 
 // Schools controller
-angular.module('schools').controller('SchoolsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Schools',
-	function($scope, $stateParams, $location, Authentication, Schools ) {
+angular.module('schools').controller('SchoolsController', ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Schools',
+	function($scope, $stateParams, $location, $modal, Authentication, Schools ) {
 		$scope.authentication = Authentication;
+
+        $scope.addTeacherToSchoolPopup = function (size) {
+            $modal.open({
+                templateUrl: 'addTeacherToSchool.html',
+                controller: 'AddTeacherToSchoolController',
+                size: size,
+                resolve: {
+                    course: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+        };
 
 
         // Find list for current user
@@ -11,6 +24,10 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
             if ($scope.authentication.user) {
                 $scope.schools = Schools.query({
                     userId: $scope.authentication.user._id
+                }, function(schools) {
+                    if (schools.length === 1) {
+                        $location.path('schools/'+schools[0]._id);
+                    }
                 });
             }
         };

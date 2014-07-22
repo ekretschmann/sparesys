@@ -1,0 +1,46 @@
+<script type="text/ng-template" id="addTeacherToSchool.html">
+    <div>
+
+        <div class="modal-body">
+            <div class="sparesys-header">
+                <div class="sparesys-title">
+                    Add teacher to school <span class="sparesys-emphasize">{{school.name}}</span>
+                </div>
+            </div>
+
+            <form class="form-horizontal" novalidate>
+                <fieldset>
+                    <div class="sparesys-header">
+                        <table class="sparesys-view-object-table">
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Login</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="username"
+                                           id="username" class="form-control addpackfocus"
+                                           placeholder="Username"
+                                           data-ng-init="setFocus()"
+                                           required></td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div>
+                        <button class="btn btn-primary sparesys-button"
+                                type="submit"
+                                ng-click="addTeacherToSchool()"
+                                >
+                            Add
+                        </button>
+
+                        <div class="pull-right">
+                            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Done</button>
+                        </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+
+
+    </div>
+</script>

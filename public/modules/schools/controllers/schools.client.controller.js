@@ -60,7 +60,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
 
 			// Redirect after save
 			school.$save(function(response) {
-				$location.path('schools/' + response._id);
+				$location.path('schools/' + response._id +'/edit');
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

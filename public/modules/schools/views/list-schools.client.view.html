@@ -9,7 +9,8 @@
         </div>
     </div>
 
-    <table id="searchTextResults" class="table-striped" style="width: 100%">
+
+    <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-hide="schools.length === 0">
         <thead>
         <tr>
             <th class="sparesys-view-courses-course-column"></th>
@@ -42,4 +43,9 @@
         </tr>
         </tbody>
     </table>
+
+
+    <div class="alert alert-warning text-center" data-ng-hide="!schools.$resolved || schools.length">
+        No Schools yet, why don't you <a href="/#!/schools/register">create one</a>?
+    </div>
 </section>

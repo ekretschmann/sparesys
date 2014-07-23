@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '$state', '$modalInstance', 'school', 'Schools',
-	function($scope, $state, $modalInstance, school, Schools) {
+angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '$location', '$modalInstance', 'school', 'Schools',
+	function($scope, $location, $modalInstance, school, Schools) {
         $scope.school = school;
 
         $scope.ok = function () {
-            Schools.remove(school, function () {
+            school.$remove(school, function () {
 
-                $state.go($state.$current, null, { reload: true });
+                $location.path('schools');
             });
 
 

@@ -18,6 +18,23 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
             });
         };
 
+        $scope.areYouSureToDeleteSchool = function (school) {
+
+            $scope.school = school;
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteSchool.html',
+                controller: 'DeleteSchoolModalController',
+                resolve: {
+
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+
+        };
+
+
 
         // Find list for current user
         $scope.findForCurrentUser = function () {
@@ -26,7 +43,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
                     userId: $scope.authentication.user._id
                 }, function(schools) {
                     if (schools.length === 1) {
-                        $location.path('schools/'+schools[0]._id);
+                        $location.path('schools/'+schools[0]._id+'/edit');
                     }
                 });
             }

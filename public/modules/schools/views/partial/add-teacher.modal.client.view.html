@@ -13,12 +13,48 @@
                     <div class="sparesys-header">
                         <table class="sparesys-view-object-table">
                             <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Login</td>
+                                <td class="sparesys-view-object-label-cell">First Name</td>
                                 <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="username"
-                                           id="username" class="form-control addpackfocus"
-                                           placeholder="Username"
+                                    <input type="text" data-ng-model="credentials.firstName"
+                                           class="form-control addpackfocus"
+                                           placeholder="First Name"
                                            data-ng-init="setFocus()"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Last Name</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="credentials.lastName"
+                                           class="form-control"
+                                           placeholder="Last Name"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Email</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="credentials.email"
+                                           class="form-control"
+                                           placeholder="Email"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Username</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="credentials.username"
+                                           class="form-control"
+                                           placeholder="Email"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Password</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="credentials.password"
+                                           class="form-control"
+                                           placeholder="Password"
                                            required></td>
                             </tr>
                         </table>
@@ -35,7 +71,11 @@
                         <div class="pull-right">
                             <button class="btn btn-primary sparesys-button" ng-click="cancel()">Done</button>
                         </div>
+                    </div>
 
+                    <div data-ng-show="error" class="text-center text-danger">
+                        <strong>{{error}}</strong>
+                    </div>
                 </fieldset>
             </form>
 

@@ -17,32 +17,42 @@
         </div>
     </div>
 
-    <div data-ng-hide="school.teachers.length === 0">
+    <div data-ng-show="school.teachers.length === 0">
         This school has no teachers, yet. Why don't you <a href="" ng-click="addTeacherToSchoolPopup()">add one</a>?
     </div>
     <div data-ng-show="school.teachers.length > 0">
+        <div class="pull-right">
+            <a href="" ng-click="addTeacherToSchoolPopup()" >
+                Add Teacher
+                <i class="glyphicon glyphicon-plus-sign">
+                </i>
+
+            </a>
+        </div>
 
 
         <table id="searchTextResults" class="table-striped" style="width: 100%">
             <thead>
             <tr>
                 <th class="sparesys-view-courses-course-column">Teacher</th>
-                <th class="sparesys-view-courses-course-column">email</th>
+                <th class="sparesys-view-courses-course-column">User Name</th>
                 <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
                 <!--<th>Created</th>-->
             </tr>
             </thead>
             <tbody ui-sortable="sortableOptions" data-ng-model="course.packs">
-            <tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"
-                data-ng-init="findById(packId)"
+            <tr data-ng-repeat="teacher in school.teachers" data-ng-controller="UsersController"
+                data-ng-init="findTeacher(teacher)"
                 style="cursor: move">
 
-                <td class="sparesys-view-object-content-cell">
-                    {{pack.name}}
+                <td class="sparesys-view-courses-name-cell">
+                    {{teacher.displayName}}
                 </td>
+
                 <td class="sparesys-view-object-content-cell">
-                    {{pack.cards.length}}
+                    {{teacher.username}}
                 </td>
+
             </tr>
             </tbody>
         </table>

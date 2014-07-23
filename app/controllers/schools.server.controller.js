@@ -62,6 +62,8 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var school = req.school ;
 
+
+
 	school = _.extend(school , req.body);
 
 	school.save(function(err) {

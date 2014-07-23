@@ -35,6 +35,10 @@ var SchoolSchema = new Schema({
         default: '',
         required: 'Please fill City',
         trim: true
+    },
+    teachers: {
+        type: [Schema.Types.ObjectId],
+        default: []
     }
 });
 

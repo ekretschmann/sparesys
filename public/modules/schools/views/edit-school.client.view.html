@@ -1,23 +1,83 @@
 <section data-ng-controller="SchoolsController" data-ng-init="findOne()">
-    <div class="page-header">
-        <h1>Edit School</h1>
+    <div class="sparesys-header">
+
+        <div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>
+        <div ng-include="'/modules/schools/views/partial/add-teacher.modal.client.view.html'"></div>
+
+        <div class="pull-right">
+            <a class="btn btn-primary" ng-click="areYouSureToDeleteSchool(school)">
+                <i class="glyphicon glyphicon-trash"></i>
+            </a>
+        </div>
+
+        <div class="sparesys-title">
+            {{school.name}}
+        </div>
+        <div class="sparesys-subtitle">
+            {{school.city}}, {{school.country}}
+        </div>
     </div>
-    <div class="col-md-12">
-        <form class="form-horizontal" data-ng-submit="update()" novalidate>
-            <fieldset>
-                <div class="form-group">
-                    <label class="control-label" for="name">Name</label>
-                    <div class="controls">
-                        <input type="text" data-ng-model="school.name" id="name" class="form-control" placeholder="Name" required>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <input type="submit" value="Update" class="btn btn-default">
-                </div>
-				<div data-ng-show="error" class="text-danger">
-					<strong data-ng-bind="error"></strong>
-				</div>
-            </fieldset>
-        </form>
+
+    <div data-ng-show="school.teachers.length === 0">
+        This school has no teachers, yet. Why don't you <a href="" ng-click="addTeacherToSchoolPopup()">add one</a>?
     </div>
+    <!--<div data-ng-show="school.teachers.length > 0">-->
+        <!--<div class="pull-right">-->
+            <!--<a href="" ng-click="addTeacherToSchoolPopup()" >-->
+                <!--Add Teacher-->
+                <!--<i class="glyphicon glyphicon-plus-sign">-->
+                <!--</i>-->
+
+            <!--</a>-->
+        <!--</div>-->
+
+
+        <!--<table id="searchTextResults" class="table-striped" style="width: 100%">-->
+            <!--<thead>-->
+            <!--<tr>-->
+                <!--<th class="sparesys-view-courses-course-column"></th>-->
+                <!--<th class="sparesys-view-courses-course-column">Teacher</th>-->
+                <!--<th class="sparesys-view-courses-course-column">User Name</th>-->
+                <!--&lt;!&ndash;<th class= "sparesys-view-courses-description-column">Description</th>&ndash;&gt;-->
+                <!--&lt;!&ndash;<th>Created</th>&ndash;&gt;-->
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody ui-sortable="sortableOptions" data-ng-model="course.packs">-->
+            <!--<tr data-ng-repeat="teacher in school.teachers" data-ng-controller="UsersController"-->
+                <!--data-ng-init="findTeacher(teacher)"-->
+                <!--style="cursor: move">-->
+
+                <!--<td class="sparesys-view-courses-name-cell">-->
+                    <!--<a href="">-->
+                        <!--<i data-ng-click="areYouSureToDeleteTeacher(teacher)"-->
+                           <!--class="glyphicon glyphicon-remove-sign">-->
+                        <!--</i>-->
+                    <!--</a>-->
+
+                <!--</td>-->
+
+                <!--<td class="sparesys-view-courses-name-cell">-->
+                    <!--{{teacher.displayName}}-->
+                <!--</td>-->
+
+                <!--<td class="sparesys-view-object-content-cell">-->
+                    <!--{{teacher.username}}-->
+                <!--</td>-->
+
+            <!--</tr>-->
+            <!--</tbody>-->
+        <!--</table>-->
+
+
+    <!--</div>-->
+
+
+    <small>
+        <em class="text-muted">
+            Created on
+            <span data-ng-bind="school.created | date:'mediumDate'"></span>
+            by
+            <span data-ng-bind="school.user.displayName"></span>
+        </em>
+    </small>
 </section>

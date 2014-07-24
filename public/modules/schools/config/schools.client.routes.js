@@ -8,6 +8,9 @@ angular.module('schools').config(['$stateProvider',
             state('listSchools', {
                 url: '/schools',
                 templateUrl: 'modules/schools/views/list-schools.client.view.html'
+            }).state('manageSchools', {
+                url: '/schools/manage',
+                templateUrl: 'modules/schools/views/manage-schools.client.view.html'
             }).
             state('adminSchools', {
                 url: '/schools/admin',

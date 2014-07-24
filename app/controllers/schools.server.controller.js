@@ -97,15 +97,30 @@ exports.delete = function(req, res) {
 /**
  * List of Schools
  */
-exports.list = function(req, res) { School.find().sort('-created').populate('user', 'displayName').exec(function(err, schools) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(schools);
-		}
-	});
+exports.list = function(req, res) {
+
+    if (req.query.userId) {
+
+        School.find({'user': req.query.userId}).exec(function (err, courses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(courses);
+            }
+        });
+    } else {
+        School.find().sort('-created').populate('user', 'displayName').exec(function (err, schools) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(schools);
+            }
+        });
+    }
 };
 
 /**

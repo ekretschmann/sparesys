@@ -7,7 +7,7 @@ angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '
         $scope.ok = function () {
             school.$remove(school, function () {
 
-                $location.path('schools');
+                $location.path('schools/manage');
             });
 
 

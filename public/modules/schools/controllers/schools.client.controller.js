@@ -18,6 +18,23 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
             });
         };
 
+
+        $scope.areYouSureToSubscribePopoup = function (school) {
+
+            $scope.school = school;
+            $modal.open({
+                templateUrl: 'areYouSureToSubscribeToSchool.html',
+                controller: 'SubscribeToSchoolModalController',
+                resolve: {
+
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+
+        };
+
         $scope.areYouSureToDeleteSchool = function (school) {
 
             $scope.school = school;

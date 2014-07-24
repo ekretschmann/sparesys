@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 	app.route('/schools/:schoolId')
 		.get(schools.read)
-		.put(users.requiresLogin, schools.hasAuthorization, schools.update)
+		.put(users.requiresLogin, schools.update)
 		.delete(users.requiresLogin, schools.hasAuthorization, schools.delete);
 
 	// Finish by binding the School middleware

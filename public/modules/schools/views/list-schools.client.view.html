@@ -1,6 +1,11 @@
 <section data-ng-controller="SchoolsController" data-ng-init="find()">
-    <div class="sparesys-header">
 
+    <div ng-include="'/modules/schools/views/partial/subscribe-to-school.modal.client.view.html'"></div>
+
+    <div class="sparesys-header">
+        <div class="pull-right">
+            Search: <input ng-model="searchText">
+        </div>
         <div class="sparesys-title">
             Schools
         </div>
@@ -24,7 +29,7 @@
         <tr data-ng-repeat="school in schools | filter:searchText">
 
             <td class="sparesys-view-courses-name-cell">
-                {{school.name}}</td>
+                <a href="" data-ng-click="areYouSureToSubscribePopoup(school)">{{school.name}}</a></td>
             <td class="sparesys-view-courses-course-column">{{school.city}}</td>
             <td class="sparesys-view-courses-course-column">{{school.country}}</td>
 

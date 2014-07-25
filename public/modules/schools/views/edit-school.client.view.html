@@ -18,6 +18,8 @@
         </div>
     </div>
 
+
+
     <div data-ng-show="school.teachers.length === 0">
         This school has no teachers, yet. Why don't you <a href="" ng-click="addTeacherToSchoolPopup()">add one</a>?
     </div>
@@ -32,7 +34,7 @@
         </div>
 
 
-        <table id="searchTextResults" class="table-striped" style="width: 100%">
+        <table  class="table-striped" style="width: 100%">
             <thead>
             <tr>
                 <th class="sparesys-view-courses-course-column"></th>
@@ -69,10 +71,63 @@
         </table>
 
 
+
+
+
     </div>
 
 
-    students: {{school.students}}
+    <div data-ng-show="school.teachers.length === 0">
+        This school has no students.
+    </div>
+
+    <div data-ng-show="school.teachers.length > 0">
+
+
+        <table class="table-striped" style="width: 100%">
+            <thead>
+            <tr>
+                <th class="sparesys-view-courses-course-column"></th>
+                <th class="sparesys-view-courses-course-column">Studernt</th>
+                <th class="sparesys-view-courses-course-column">User Name</th>
+                <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
+                <!--<th>Created</th>-->
+            </tr>
+            </thead>
+            <tbody ui-sortable="sortableOptions" data-ng-model="course.packs">
+            <tr data-ng-repeat="student in school.students" data-ng-controller="UsersController"
+                data-ng-init="findStudent(student)"
+                style="cursor: move">
+
+                <td class="sparesys-view-courses-name-cell">
+                    <a href="">
+                        <i data-ng-click="areYouSureToDeleteStudent(student)"
+                           class="glyphicon glyphicon-remove-sign">
+                        </i>
+                    </a>
+
+                </td>
+
+                <td class="sparesys-view-courses-name-cell">
+                    {{student.displayName}}
+                </td>
+
+                <td class="sparesys-view-object-content-cell">
+                    {{student.username}}
+                </td>
+
+            </tr>
+            </tbody>
+        </table>
+
+
+
+
+
+    </div>
+
+
+    <!--students: {{school.students}}-->
     <small>
         <em class="text-muted">
             Created on

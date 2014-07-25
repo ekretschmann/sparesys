@@ -63,6 +63,13 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
             });
         };
 
+        $scope.findStudent = function (userId) {
+            $scope.student = Users.get({
+                userId: userId
+            });
+        };
+
+
         // Update existing User
         $scope.update = function () {
 

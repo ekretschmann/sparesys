@@ -59,7 +59,7 @@
             </li>
 
             <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown"
-                data-ng-show="authentication.user.roles.indexOf('headmaster') > -1 ">
+                data-ng-show="authentication.user.roles.indexOf('headmaster') > -1 ||authentication.user.roles.indexOf('teacher') > -1">
                 <a href="#" class="dropdown-toggle" id="headmaster-dropdown-toggle" data-toggle="dropdown">
                     Teaching <b class="caret"></b>
                 </a>
@@ -73,6 +73,17 @@
                     <li>
                         <a href="/#!/schools/manage">Manage Schools</a>
                     </li>
+                </ul>
+
+
+                <ul class="dropdown-menu" data-ng-show="authentication.user.roles.indexOf('teacher') > -1">
+                    <!--<li>-->
+                    <!--<a href="/#!/courses">Find</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="/#!/schools/class/create">Manage Classes</a>
+                    </li>
+
                 </ul>
 
             </li>

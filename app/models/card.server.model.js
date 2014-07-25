@@ -46,6 +46,11 @@ var CardSchema = new Schema({
         type: [{when: Number, assessment: Number}],
         default: [],
         _id: false
+    },
+    style: {
+        type: [Boolean],
+        // read - write - listen - multiple-choice
+        default: [true, true, false, false]
     }
 });
 

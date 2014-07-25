@@ -6,6 +6,26 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
         $scope.authentication = Authentication;
 
 
+        $scope.toggleRead = function(card) {
+            card.style[0] = !card.style[0];
+            card.$update();
+        };
+
+        $scope.toggleWrite = function(card) {
+            card.style[1] = !card.style[1];
+            card.$update();
+        };
+
+        $scope.toggleListen = function(card) {
+            card.style[2] = !card.style[2];
+            card.$update();
+        };
+
+        $scope.multipleChoice = function(card) {
+            card.style[3] = !card.style[3];
+            card.$update();
+        };
+
         $scope.clearCards = function() {
             $scope.cards.forEach(function(card) {
                 if (card.packName === 'undefined') {

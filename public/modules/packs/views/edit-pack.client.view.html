@@ -29,79 +29,68 @@
         </div>
     </div>
 
-    <!--<form class="form-horizontal" data-ng-submit="update()" novalidate>-->
-        <!--<fieldset>-->
-            <!--<table class="sparesys-view-object-table">-->
-                <!--<tr class="controls">-->
-                    <!--<td class="sparesys-view-object-label-cell">Name</td>-->
-                    <!--<td class="sparesys-view-object-content-cell">-->
-                        <!--<input type="text" data-ng-model="pack.name"-->
-                               <!--id="name" class="form-control"-->
-                               <!--placeholder="Name"-->
-                               <!--required></td>-->
-                <!--</tr>-->
 
+    <div data-ng-hide="pack.cards.length > 0">
+        No cards yet, why don't you <a href="" ng-click="addCardToPackPopup()">add one</a>?
+    </div>
+    <div data-ng-show="pack.cards.length > 0">
 
-            <!--</table>-->
-            <!--<div class="pull-right">-->
-                <!--<input type="submit" value="Update" class="btn btn-default">-->
-            <!--</div>-->
-            <!--<div data-ng-show="error" class="text-danger">-->
-                <!--<strong>{{error}}</strong>-->
-            <!--</div>-->
-        <!--</fieldset>-->
-    <!--</form>-->
+        <div class="pull-right">
+            <a href="" ng-click="addCardToPackPopup()" data-ng-show="authentication.user._id == pack.user._id">
+                Add Cards
+                <i class="glyphicon glyphicon-plus-sign">
+                </i>
 
-    <!--<div class="sparesys-region">-->
-
-        <div data-ng-hide="pack.cards.length > 0">
-            No cards yet, why don't you <a href="" ng-click="addCardToPackPopup()">add one</a>?
+            </a>
         </div>
-        <div data-ng-show="pack.cards.length > 0">
 
-            <div class="pull-right">
-                <a href="" ng-click="addCardToPackPopup()" data-ng-show="authentication.user._id == pack.user._id">
-                    Add Cards
-                    <i class="glyphicon glyphicon-plus-sign">
-                    </i>
+        <table id="searchTextResults" class="table-striped" style="width: 100%">
+            <thead>
+            <tr style="height: 20px"><td>&nbsp;</td></tr>
+            <tr>
+                <th class="sparesys-view-courses-course-column">
+                </th>
+                <th class="sparesys-view-object-right-padded-element">Question</th>
+                <th class="sparesys-view-object-content-cell">Answer</th>
+                <th class="sparesys-view-object-content-cell">Style</th>
+            </tr>
+            </thead>
+            <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
+            <tr data-ng-repeat="cardId in pack.cards" data-ng-controller="CardsController"
+                data-ng-init="findById(cardId)"
+                style="cursor: move">
+                <td class="sparesys-view-courses-name-cell">
+                    <a href="">
+                        <i data-ng-click="areYouSureToDeleteCard(card)"
+                           class="glyphicon glyphicon-remove-sign">
+                        </i>
+                    </a>
 
-                </a>
-            </div>
+                </td>
 
-            <table id="searchTextResults" class="table-striped" style="width: 100%">
-                <thead>
-                <tr>
-                    <th class="sparesys-view-courses-course-column">
-                    </th>
-                    <th class="sparesys-view-object-right-padded-element">Question</th>
-                    <th class="sparesys-view-object-content-cell">Answer</th>
-                </tr>
-                </thead>
-                <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
-                <tr data-ng-repeat="cardId in pack.cards" data-ng-controller="CardsController"
-                    data-ng-init="findById(cardId)"
-                    style="cursor: move">
-                    <td class="sparesys-view-courses-name-cell">
-                        <a href="">
-                            <i data-ng-click="areYouSureToDeleteCard(card)"
-                               class="glyphicon glyphicon-remove-sign">
-                            </i>
-                        </a>
+                <td class="sparesys-view-object-right-padded-element">
+                    <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+                </td>
 
-                    </td>
+                <td class="sparesys-view-object-content-cell">
+                    {{card.answer}}
+                </td>
 
-                    <td class="sparesys-view-object-right-padded-element">
-                        <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
-                    </td>
+                <td class="sparesys-view-object-label-cell">
 
-                    <td class="sparesys-view-object-content-cell">
-                        {{card.answer}}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
 
-        </div>
+                    <span data-ng-if="card.style[0]" style="color:green; cursor: pointer" data-ng-click="toggleRead(card)">Read</span>
+                    <span data-ng-if="!card.style[0]" style="color:red; cursor: pointer" data-ng-click="toggleRead(card)">Read</span>
+
+                    <span data-ng-if="card.style[1]" style="color:green; cursor: pointer" data-ng-click="toggleWrite(card)">Write</span>
+                    <span data-ng-if="!card.style[1]" style="color:red; cursor: pointer" data-ng-click="toggleWrite(card)">Write</span>
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
 
     <!--</div>-->
 

@@ -7,23 +7,51 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
 
 
         $scope.toggleRead = function(card) {
+
             card.style[0] = !card.style[0];
-            card.$update();
+            if ($scope.validateToggle(card)) {
+                card.$update();
+            } else {
+                card.style[0] = !card.style[0];
+            }
         };
 
         $scope.toggleWrite = function(card) {
+
             card.style[1] = !card.style[1];
-            card.$update();
+            if ($scope.validateToggle(card)) {
+                card.$update();
+            } else {
+                card.style[1] = !card.style[1];
+            }
+
         };
 
         $scope.toggleListen = function(card) {
             card.style[2] = !card.style[2];
-            card.$update();
+            if ($scope.validateToggle(card)) {
+                card.$update();
+            } else {
+                card.style[2] = !card.style[2];
+            }
         };
 
         $scope.multipleChoice = function(card) {
             card.style[3] = !card.style[3];
-            card.$update();
+            if ($scope.validateToggle(card)) {
+                card.$update();
+            } else {
+                card.style[3] = !card.style[3];
+            }
+        };
+
+        $scope.validateToggle = function(card) {
+            if (!card.style[0] && !card.style[1] && !card.style[2] && !card.style[3]) {
+                console.log('here');
+                $scope.error = 'You have to leave at least one style switched on';
+                return false;
+            }
+            return true;
         };
 
         $scope.clearCards = function() {

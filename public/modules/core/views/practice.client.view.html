@@ -11,48 +11,121 @@
         <div class="sparesys-title">
             {{course.name}}
         </div>
+
+        <div class="sparesys-subtitle">
+            {{state}} - {{style}}
+        </div>
     </div>
 
 
     <div data-ng-if="cards.length > 0">
-        <div class="jumbotron" style="height:320px">
+        <div data-ng-if="getStyle() === 'read'">
+            <div class="jumbotron" style="height:320px">
 
-            <h2>{{card.question}}</h2>
+                <h2>{{card.question}}</h2>
 
 
-            <div style="height: 100px">
+                <div style="height: 100px">
             <span>
                 <h3>
                     <span style="color: #0078ae" data-ng-if="state == 'answer'">
-                        <span data-ng-init="loadSound(card.answer)">{{card.answer}}</span>
+                        <span>{{card.answer}}</span>
                     </span>
                 </h3>
 
             </span>
 
+                </div>
+
+
             </div>
 
+            <div style="text-align: center">
+                <div data-ng-show="state == 'answer'">
+                    <button data-ng-click="processCard(0)">0</button>
+                    <button data-ng-click="processCard(1)">1</button>
+                    <button data-ng-click="processCard(2)">2</button>
+                    <button data-ng-click="processCard(3)">3</button>
+                    <div style="color: #999999">rate yourself</div>
+                </div>
 
+                <div data-ng-show="state == 'question'">
+                    <button data-ng-click="showAnswer()">Enter</button>
+                </div>
+            </div>
         </div>
 
-        <div style="text-align: center">
-            <div data-ng-show="state == 'answer'">
-                <button data-ng-click="rateCard(0)">0</button>
-                <button data-ng-click="rateCard(1)">1</button>
-                <button data-ng-click="rateCard(2)">2</button>
-                <button data-ng-click="rateCard(3)">3</button>
-                <div style="color: #999999">rate yourself</div>
+        <div data-ng-if="getStyle() === 'write'">
+            <div class="jumbotron" style="height:320px">
+
+                <h2>{{card.question}}</h2>
+
+
+                <div>
+                    <div class="form-group">
+                        <input data-ng-if="state == 'question'" type="text" required id="answer" name="answer"
+                               class="answer form-control"
+                               data-ng-model="answer.text" data-ng-init="setFocus()">
+
+                        <div data-ng-if="state == 'question'" style="padding-top: 10px">
+                            <button data-ng-click="submitAnswer()" class="btn btn-large btn-primary">submit</button>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <span>
+
+                    <h3>
+                    <span style="color: #0078ae" data-ng-if="state == 'answer'">
+                        your answer: {{answer.text}}
+                    </span>
+                    </h3>
+                <h3>
+                    <span style="color: #0078ae" data-ng-if="state == 'answer'">
+                        correct answer: {{card.answer}}
+                    </span>
+                </h3>
+
+                    <button data-ng-if="state == 'answer'" data-ng-click="nextCard()" class="btn btn-large btn-primary">
+                        next
+                    </button>
+            </span>
             </div>
 
-            <div data-ng-show="state == 'question'">
-                <button data-ng-click="showAnswer()">Enter</button>
+            <div style="text-align: center">
+                <div data-ng-show="state == 'answer'">
+
+                </div>
+
             </div>
         </div>
+    </div>
+    <!--<div>hrt: {{card.hrt}}</div>-->
+    <!--<div>history: {{card.history}}</div>-->
 
+    <table class="table-striped" style="width: 100%" >
+        <thead>
+        <tr>
+            <th class="sparesys-view-courses-description-column">Card</th>
+            <th class="sparesys-view-courses-course-column">PR</th>
+            <th class="sparesys-view-courses-course-column">HRT</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="c in cards">
 
-        <div>hrt: {{card.hrt}}</div>
-        <div>history: {{card.history}}</div>
-        <button data-ng-click="clearHistory(card)">Clear History</button>
+            <td class="sparesys-view-courses-name-cell">
+
+                {{c.question}}</td>
+            <td class="sparesys-view-courses-course-column">{{getPredictedRetention(c)}}</td>
+            <td class="sparesys-view-courses-course-column">{{c.hrt}}</td>
+        </tr>
+        </tbody>
+    </table>
+    <button data-ng-click="clearHistory(card)">Clear Card History</button>
+    <button data-ng-click="clearCourseHistory()">Clear Course History</button>
 
     </div>
 

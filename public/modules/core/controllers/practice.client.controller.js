@@ -86,7 +86,6 @@ angular.module('core').controller('PracticeController',
                 }
 
                 $scope.style = 'write';
-                return;
             };
 //
 //

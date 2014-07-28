@@ -70,6 +70,16 @@ angular.module('core').service('PredictiveSchedulerService', [
             getAnalysis: function() {
                 return this.analysis;
             },
+            getMaxHrt: function(card, time) {
+                var pr = this.getPredictedRetention(card, time);
+                var weight = 0.0;
+                if (pr >=0.4) {
+                    weight = 5/3 - 1/0.6*pr;
+                } else {
+                    weight = 2 - (5/3-1/0.6*pr);
+                }
+                return card.hrt * (1 + weight*10);
+            },
             record: function(card, time, assessment) {
 
 

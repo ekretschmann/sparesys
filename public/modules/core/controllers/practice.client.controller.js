@@ -15,6 +15,8 @@ angular.module('core').controller('PracticeController',
             $scope.answer = {};
             $scope.analysis = {};
             $scope.keys = [];
+            $scope.lastRating = 0;
+            $scope.style = 'read';
 
             $scope.setFocus = function () {
                 $timeout(function () {
@@ -24,21 +26,67 @@ angular.module('core').controller('PracticeController',
 //
             $scope.submitAnswer = function () {
 
-                if ($scope.card.answer.toString() === $scope.answer.text) {
+
+                var expected = $scope.card.answer.toString();
+                var dist = $scope.levenshteinDistance(expected, $scope.answer.text) / expected.length;
+
+                if (dist === 0) {
                     $scope.rateCard(3);
+                    $scope.lastRating = 3;
+                } else if (dist <= 0.2) {
+                    $scope.rateCard(2);
+                    $scope.lastRating = 2;
+                } else if (dist <= 0.4) {
+                    $scope.rateCard(1);
+                    $scope.lastRating = 1;
                 } else {
                     $scope.rateCard(0);
+                    $scope.lastRating = 0;
                 }
                 $scope.showAnswer();
             };
-//
-            $scope.getStyle = function () {
-                if ($scope.card.style[0]) {
-                    $scope.style = 'read';
-                    return 'read';
+
+            $scope.levenshteinDistance  = function (s, t) {
+                if (s.length === 0) return t.length;
+                if (t.length === 0) return s.length;
+
+                return Math.min(
+                        $scope.levenshteinDistance(s.substr(1), t) + 1,
+                        $scope.levenshteinDistance(t.substr(1), s) + 1,
+                        $scope.levenshteinDistance(s.substr(1), t.substr(1)) + (s[0] !== t[0] ? 1 : 0)
+                );
+            };
+
+            $scope.getMaxHrt = function() {
+//                    return SchedulerService.getMaxHrt($scope.card, Date.now());
+
+                if ($scope.card) {
+                    return SchedulerService.getMaxHrt($scope.card, Date.now());
                 }
+                return 8;
+            };
+
+            $scope.getStyle = function () {
+//                console.log('getstyle');
+                if ($scope.card.style[0] && !$scope.card.style[1]) {
+                    $scope.style = 'read';
+                    return;
+                }
+
+                if ($scope.card.style[0] && $scope.card.style[1]) {
+//                    console.log('  '+$scope.card.hrt / 60000);
+//                    console.log('  '+SchedulerService.getMaxHrt($scope.card, Date.now()) / (60000*60*24*7));
+                    if (SchedulerService.getMaxHrt($scope.card, Date.now()) > 1000 * 60 *24 * 7) {
+
+                        $scope.style = 'write';
+                        return;
+                    }
+                    $scope.style = 'read';
+                    return;
+                }
+
                 $scope.style = 'write';
-                return 'write';
+                return;
             };
 //
 //
@@ -68,20 +116,25 @@ angular.module('core').controller('PracticeController',
                 if ($scope.state === 'answer') {
                     if (event.key === '1') {
                         $scope.processCard(1);
+                        $scope.lastRating = 1;
                     }
                     if (event.key === '2') {
                         $scope.processCard(2);
+                        $scope.lastRating = 2;
                     }
                     if (event.key === '3') {
                         $scope.processCard(3);
+                        $scope.lastRating = 3;
                     }
                     if (event.key === '0') {
                         $scope.processCard(0);
+                        $scope.lastRating = 0;
                     }
                 }
 
             });
             $scope.showAnswer = function () {
+
                 $scope.state = 'answer';
                 $state.go($state.current);
             };
@@ -89,6 +142,7 @@ angular.module('core').controller('PracticeController',
             $scope.clearCourseHistory = function () {
                 $scope.cards.forEach(function (card) {
                     $scope.clearHistory(card);
+                    $state.go($state.$current, null, { reload: true });
                 });
             };
 
@@ -135,6 +189,7 @@ angular.module('core').controller('PracticeController',
                     thecard.lastRep = $scope.card.lastRep;
                     thecard.$update();
                     $scope.card = SchedulerService.nextCard();
+                    $scope.getStyle();
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
                     $scope.state = 'question';
@@ -146,6 +201,7 @@ angular.module('core').controller('PracticeController',
             $scope.nextCard = function () {
                 $scope.answer.text = '';
                 $scope.card = SchedulerService.nextCard();
+                $scope.getStyle();
                 $scope.analysis = SchedulerService.getAnalysis();
                 $scope.keys = Object.keys($scope.analysis);
                 $scope.state = 'question';
@@ -161,7 +217,6 @@ angular.module('core').controller('PracticeController',
 
             $scope.getCardOrder = function() {
                 $scope.cardOrder = SchedulerService.getCardOrder();
-                console.log($scope.cardOrder);
             };
 
             $scope.getPredictedCardRetention = function () {
@@ -181,6 +236,7 @@ angular.module('core').controller('PracticeController',
                     $scope.cards = cards;
                     SchedulerService.init($scope.cards);
                     $scope.card = SchedulerService.nextCard();
+                    $scope.getStyle();
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
                 });

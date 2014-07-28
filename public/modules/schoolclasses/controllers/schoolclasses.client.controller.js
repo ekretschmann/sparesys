@@ -61,5 +61,19 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 				schoolclassId: $stateParams.schoolclassId
 			});
 		};
+
+        // Find list for current user
+        $scope.findForCurrentUser = function () {
+            if ($scope.authentication.user) {
+                $scope.schoolclasses = Schoolclasses.query({
+                    userId: $scope.authentication.user._id
+                }, function(schoolclasses) {
+                    console.log(schoolclasses);
+//                    if (schoolclasses.length === 1) {
+//                        $location.path('schools/'+schools[0]._id+'/edit');
+//                    }
+                });
+            }
+        };
 	}
 ]);

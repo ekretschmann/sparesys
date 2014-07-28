@@ -42,59 +42,50 @@ angular.module('core').controller('PracticeController',
 //
             $document.bind('keypress', function (event) {
 
+                if ($scope.state === 'question' && $scope.style === 'write' && event.key === 'Enter') {
+                    $scope.submitAnswer();
+                    return;
+                }
+
+                if ($scope.state === 'question' && $scope.style === 'read' && event.key === 'Enter') {
+                    $scope.showAnswer();
+                    return;
+                }
+
+                if ($scope.state === 'answer' && $scope.style === 'write' && event.key === 'Enter') {
+                    $scope.nextCard();
+                    return;
+                }
+
+
                 if ($scope.state === 'question') {
                     return;
                 }
-                console.log(event.key);
-                console.log($scope.state);
-                console.log($scope.style);
-//                if ($scope.state === 'answer' && $scope.style === 'write' &&  event.key === 'Enter') {
-//                   console.log('next card');
-//                    $scope.nextCard();
-//                }
-//
-//
-//                if ($scope.state === 'question' && event.key === 'Enter') {
-//                    $scope.showAnswer();
-//                } else if ($scope.state === 'answer') {
-//                    if (event.key === '1') {
-//                        $scope.rateCard(1);
-//
-//                        $scope.card = SchedulerService.nextCard();
-//                        $scope.state = 'question';
-//                        $state.go($state.current);
-//                    }
-//                    if (event.key === '2') {
-//                        $scope.rateCard(2);
-//                        $scope.card = SchedulerService.nextCard();
-//                        $scope.state = 'question';
-//                        $state.go($state.current);
-//                    }
-//                    if (event.key === '3') {
-//                        $scope.rateCard(3);
-//                        $scope.card = SchedulerService.nextCard();
-//                        $scope.state = 'question';
-//                        $state.go($state.current);
-//                    }
-//                    if (event.key === '0') {
-//                        $scope.rateCard(0);
-//                        $scope.card = SchedulerService.nextCard();
-//                        $scope.state = 'question';
-//                        $state.go($state.current);
-//                    }
-//                }
+
+
+                if ($scope.state === 'answer') {
+                    if (event.key === '1') {
+                        $scope.processCard(1);
+                    }
+                    if (event.key === '2') {
+                        $scope.processCard(2);
+                    }
+                    if (event.key === '3') {
+                        $scope.processCard(3);
+                    }
+                    if (event.key === '0') {
+                        $scope.processCard(0);
+                    }
+                }
 
             });
-//
-//
             $scope.showAnswer = function () {
                 $scope.state = 'answer';
                 $state.go($state.current);
             };
-//
 
             $scope.clearCourseHistory = function () {
-                $scope.cards.forEach(function(card) {
+                $scope.cards.forEach(function (card) {
                     $scope.clearHistory(card);
                 });
             };
@@ -147,15 +138,18 @@ angular.module('core').controller('PracticeController',
                     $scope.card = SchedulerService.nextCard();
                     $scope.state = 'question';
                     $state.go($state.current);
+//                    $state.go($state.current, {}, { reload: true });
                 });
 
             };
 //
             $scope.nextCard = function () {
+                $scope.answer.text = '';
                 $scope.card = SchedulerService.nextCard();
                 $scope.state = 'question';
 
-                $state.go($state.current, {}, { reload: true });
+//                $state.go($state.current, {}, { reload: true });
+                $state.go($state.current);
 
             };
 //
@@ -189,7 +183,7 @@ angular.module('core').controller('PracticeController',
 
             $scope.getPredictedRetention = function (card) {
 
-                return Math.round(SchedulerService.getPredictedRetention(card, Date.now()) * 100000)/1000;
+                return Math.round(SchedulerService.getPredictedRetention(card, Date.now()) * 100000) / 1000;
             };
 
             $scope.getPredictedCardRetention = function () {

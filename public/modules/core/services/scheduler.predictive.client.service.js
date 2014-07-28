@@ -6,6 +6,7 @@ angular.module('core').service('PredictiveSchedulerService', [
         return {
             init: function(cards) {
                 this.cards = cards;
+                this.analysis = {};
             },
 
             getPredictedCourseRetention: function(time) {
@@ -56,6 +57,7 @@ angular.module('core').service('PredictiveSchedulerService', [
                 this.cards.forEach(function(card) {
 
                     var pr = this.getPredictedRetention(card, time);
+                    this.analysis[card.question] = pr;
 //                    console.log(card.question+" - "+pr);
                     if (Math.abs(pr-0.4) < bestValue) {
                         bestCard = card;
@@ -64,6 +66,9 @@ angular.module('core').service('PredictiveSchedulerService', [
                 }, this);
 //                console.log('best card: '+bestCard.question);
                 return bestCard;
+            },
+            getAnalysis: function() {
+                return this.analysis;
             },
             record: function(card, time, assessment) {
 

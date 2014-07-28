@@ -13,6 +13,7 @@ angular.module('core').controller('PracticeController',
             $scope.cards = [];
             $scope.card = undefined;
             $scope.answer = {};
+            $scope.analysis = {};
 
             $scope.setFocus = function () {
                 $timeout(function () {
@@ -110,7 +111,6 @@ angular.module('core').controller('PracticeController',
 
                 SchedulerService.record($scope.card, Date.now(), rating);
 
-
                 Cards.get({
                     cardId: $scope.card._id
                 }, function (thecard) {
@@ -136,9 +136,10 @@ angular.module('core').controller('PracticeController',
                     thecard.lastRep = $scope.card.lastRep;
                     thecard.$update();
                     $scope.card = SchedulerService.nextCard();
+                    $scope.analysis = SchedulerService.getAnalysis();
+                    console.log($scope.analysis.keys);
                     $scope.state = 'question';
                     $state.go($state.current);
-//                    $state.go($state.current, {}, { reload: true });
                 });
 
             };
@@ -146,13 +147,54 @@ angular.module('core').controller('PracticeController',
             $scope.nextCard = function () {
                 $scope.answer.text = '';
                 $scope.card = SchedulerService.nextCard();
+                $scope.analysis = SchedulerService.getAnalysis();
+                console.log($scope.analysis.keys);
                 $scope.state = 'question';
 
-//                $state.go($state.current, {}, { reload: true });
                 $state.go($state.current);
 
             };
-//
+
+            $scope.getPredictedRetention = function (card) {
+
+                return Math.round(SchedulerService.getPredictedRetention(card, Date.now()) * 100000) / 1000;
+            };
+
+            $scope.getCardOrder = function() {
+                $scope.cardOrder = SchedulerService.getCardOrder();
+                console.log($scope.cardOrder);
+            };
+
+            $scope.getPredictedCardRetention = function () {
+
+                return Math.round(SchedulerService.getPredictedRetention($scope.card, Date.now()) * 100);
+            };
+
+            $scope.getPredictedCourseRetention = function () {
+
+                return Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100);
+            };
+
+            // Find existing Course
+            $scope.init = function () {
+                console.log('INIT');
+                var res = CoursesService.serverLoadCards();
+                res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
+                    $scope.cards = cards;
+                    SchedulerService.init($scope.cards);
+                    $scope.card = SchedulerService.nextCard();
+                    $scope.analysis = SchedulerService.getAnalysis();
+                    console.log($scope.analysis.keySet());
+                });
+
+                Courses.get({
+                    courseId: $stateParams.courseId
+                }, function (course) {
+                    $scope.course = course;
+                });
+            };
+
+            //
 //            $scope.loadSound = function (answer) {
 ////                console.log('loading sound ' + answer);
 //
@@ -181,37 +223,6 @@ angular.module('core').controller('PracticeController',
 //            };
 //
 
-            $scope.getPredictedRetention = function (card) {
-
-                return Math.round(SchedulerService.getPredictedRetention(card, Date.now()) * 100000) / 1000;
-            };
-
-            $scope.getPredictedCardRetention = function () {
-
-                return Math.round(SchedulerService.getPredictedRetention($scope.card, Date.now()) * 100);
-            };
-
-            $scope.getPredictedCourseRetention = function () {
-
-                return Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100);
-            };
-
-            // Find existing Course
-            $scope.init = function () {
-                console.log('INIT');
-                var res = CoursesService.serverLoadCards();
-                res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
-                    $scope.cards = cards;
-                    SchedulerService.init($scope.cards);
-                    $scope.card = SchedulerService.nextCard();
-                });
-
-                Courses.get({
-                    courseId: $stateParams.courseId
-                }, function (course) {
-                    $scope.course = course;
-                });
-            };
         }
     ])
 ;

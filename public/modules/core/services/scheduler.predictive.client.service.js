@@ -57,7 +57,7 @@ angular.module('core').service('PredictiveSchedulerService', [
                 this.cards.forEach(function(card) {
 
                     var pr = this.getPredictedRetention(card, time);
-                    this.analysis[card.question] = pr;
+                    this.analysis[card.question] = {pr: Math.round(pr*100000)/1000, hrt: Math.round(card.hrt / 60000)}
 //                    console.log(card.question+" - "+pr);
                     if (Math.abs(pr-0.4) < bestValue) {
                         bestCard = card;
@@ -94,7 +94,7 @@ angular.module('core').service('PredictiveSchedulerService', [
                     } else if (assessment === 1) {
                         card.hrt = 60000;
                     } else if (assessment === 3) {
-                        if (card.hrt === 0) {card.hrt = 10000;}
+                        if (card.hrt < 10000) {card.hrt = 10000;}
 
                         var pr = this.getPredictedRetention(card, time);
                         var weight = 0.0;
@@ -103,7 +103,7 @@ angular.module('core').service('PredictiveSchedulerService', [
                         } else {
                             weight = 2 - (5/3-1/0.6*pr);
                         }
-                        card.hrt *= 10*weight;
+                        card.hrt *= 1 + weight*10;
                     }
                 }
                 card.history.push({when: time, assessment: assessment});

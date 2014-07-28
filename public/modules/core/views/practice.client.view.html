@@ -75,7 +75,6 @@
 
 
                 <div data-ng-if="state == 'answer'">
-
                     <h3>
                     <span style="color: #0078ae">
                         your answer: {{answer.text}}
@@ -114,19 +113,21 @@
         <!--</tr>-->
         <!--</thead>-->
         <!--<tbody>-->
-        <!--<tr data-ng-repeat="c in cards">-->
+        <!--<tr data-ng-repeat="k in keys">-->
 
             <!--<td class="sparesys-view-courses-name-cell">-->
 
-                <!--{{c.question}}-->
+                <!--{{k}}-->
             <!--</td>-->
-            <!--<td class="sparesys-view-courses-course-column">{{getPredictedRetention(c)}}</td>-->
-            <!--<td class="sparesys-view-courses-course-column">{{c.hrt}}</std>-->
+            <!--<td class="sparesys-view-courses-course-column">{{analysis[k].pr}}</td>-->
+            <!--<td class="sparesys-view-courses-course-column">{{analysis[k].hrt}}</td>-->
         <!--</tr>-->
         <!--</tbody>-->
     <!--</table>-->
     <!--<button data-ng-click="clearHistory(c)">Clear Card History</button>-->
     <!--<button data-ng-click="clearCourseHistory()">Clear Course History</button>-->
+
+
 
     </div>
 

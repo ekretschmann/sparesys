@@ -14,6 +14,7 @@ angular.module('core').controller('PracticeController',
             $scope.card = undefined;
             $scope.answer = {};
             $scope.analysis = {};
+            $scope.keys = [];
 
             $scope.setFocus = function () {
                 $timeout(function () {
@@ -108,9 +109,7 @@ angular.module('core').controller('PracticeController',
             };
 
             $scope.rateCard = function (rating) {
-
                 SchedulerService.record($scope.card, Date.now(), rating);
-
                 Cards.get({
                     cardId: $scope.card._id
                 }, function (thecard) {
@@ -137,7 +136,7 @@ angular.module('core').controller('PracticeController',
                     thecard.$update();
                     $scope.card = SchedulerService.nextCard();
                     $scope.analysis = SchedulerService.getAnalysis();
-                    console.log($scope.analysis.keys);
+                    $scope.keys = Object.keys($scope.analysis);
                     $scope.state = 'question';
                     $state.go($state.current);
                 });
@@ -148,7 +147,7 @@ angular.module('core').controller('PracticeController',
                 $scope.answer.text = '';
                 $scope.card = SchedulerService.nextCard();
                 $scope.analysis = SchedulerService.getAnalysis();
-                console.log($scope.analysis.keys);
+                $scope.keys = Object.keys($scope.analysis);
                 $scope.state = 'question';
 
                 $state.go($state.current);
@@ -177,14 +176,13 @@ angular.module('core').controller('PracticeController',
 
             // Find existing Course
             $scope.init = function () {
-                console.log('INIT');
                 var res = CoursesService.serverLoadCards();
                 res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
                     $scope.cards = cards;
                     SchedulerService.init($scope.cards);
                     $scope.card = SchedulerService.nextCard();
                     $scope.analysis = SchedulerService.getAnalysis();
-                    console.log($scope.analysis.keySet());
+                    $scope.keys = Object.keys($scope.analysis);
                 });
 
                 Courses.get({

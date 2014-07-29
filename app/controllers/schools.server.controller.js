@@ -99,7 +99,21 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
 
-    if (req.query.userId) {
+//    console.log(req.query.teachers);
+
+    if (req.query.teachers) {
+        School.find({'teachers': req.query.teachers}).exec(function (err, schools) {
+//            console.log(err);
+//            console.log(schools);
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(schools);
+            }
+        });
+    } else if (req.query.userId) {
 
         School.find({'user': req.query.userId}).exec(function (err, courses) {
             if (err) {

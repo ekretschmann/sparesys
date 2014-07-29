@@ -114,9 +114,19 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
 		};
 
 		// Find a list of Schools
-		$scope.find = function() {
-			$scope.schools = Schools.query();
+		$scope.findForUser = function() {
+            console.log('here');
+            console.log( Authentication.user._id);
+            $scope.school = Schools.query({
+                teachers: Authentication.user._id
+            }, function(schools) {
+                $scope.school= schools[0];
+            });
 		};
+
+        $scope.find = function() {
+            $scope.schools = Schools.query();
+        };
 
 		// Find existing School
 		$scope.findOne = function() {

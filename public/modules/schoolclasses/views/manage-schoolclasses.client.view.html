@@ -1,0 +1,57 @@
+<section data-ng-controller="SchoolclassesController" data-ng-init="findForCurrentUser()">
+
+    <!--<div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>-->
+
+    <div ng-include="'/modules/schoolclasses/views/partial/add-class.modal.client.view.html'"></div>
+
+    <div class="sparesys-header">
+
+        <div class="sparesys-title">
+            Manage Classes
+        </div>
+        <div class="sparesys-subtitle">
+            Sort students into classes that receive the same coursework
+        </div>
+    </div>
+
+    <div class="pull-right">
+        <a href="" ng-click="addClassPopup()" >
+            Create another Class
+            <i class="glyphicon glyphicon-plus-sign">
+            </i>
+
+        </a>
+    </div>
+
+    <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-hide="schoolclasses.length === 0">
+        <thead>
+        <tr>
+            <th class="sparesys-view-courses-course-column"></th>
+            <th class="sparesys-view-courses-description-column">Class</th>
+            <th class="sparesys-view-courses-course-column">Students</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="schoolclass in schoolclasses">
+            <td class="sparesys-view-courses-name-cell">
+                <a href="">
+                    <i data-ng-click="areYouSureToDeleteSchool(schoolclass)"
+                       class="glyphicon glyphicon-remove-sign">
+                    </i>
+                </a>
+                <!--<a data-ng-href="#!/schools/{{school._id}}/edit">-->
+                    <!--<i class="glyphicon glyphicon-edit"></i>-->
+                <!--</a>-->
+            </td>
+            <td class="sparesys-view-courses-name-cell">
+                <a href="#!/schools/{{school._id}}/edit">{{schoolclass.name}}</a></td>
+            <td class="sparesys-view-courses-course-column">{{schoolclass.students}}</td>
+        </tr>
+        </tbody>
+    </table>
+
+
+    <div class="alert alert-warning text-center" data-ng-hide="!schoolclasses.$resolved || schoolclasses.length">
+        No Classes yet, why don't you <a href="" ng-click="addClassPopup()">create one</a>?
+    </div>
+</section>

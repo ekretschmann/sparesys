@@ -57,7 +57,7 @@ angular.module('core').service('PredictiveSchedulerService', [
                 this.cards.forEach(function(card) {
 
                     var pr = this.getPredictedRetention(card, time);
-                    this.analysis[card.question] = {pr: Math.round(pr*100000)/1000, hrt: Math.round(card.hrt / 60000)}
+                    this.analysis[card.question] = {pr: Math.round(pr*100000)/1000, hrt: Math.round(card.hrt / 60000)};
 //                    console.log(card.question+" - "+pr);
                     if (Math.abs(pr-0.4) < bestValue) {
                         bestCard = card;

@@ -1,8 +1,8 @@
 'use strict';
 
 // Schoolclasses controller
-angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Schoolclasses',
-	function($scope, $stateParams, $location, Authentication, Schoolclasses ) {
+angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$modal','$stateParams', '$location', 'Authentication', 'Schoolclasses',
+	function($scope, $modal, $stateParams, $location, Authentication, Schoolclasses ) {
 		$scope.authentication = Authentication;
 
 		// Create new Schoolclass
@@ -68,12 +68,27 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 $scope.schoolclasses = Schoolclasses.query({
                     userId: $scope.authentication.user._id
                 }, function(schoolclasses) {
-                    console.log(schoolclasses);
+//                    console.log(schoolclasses);
 //                    if (schoolclasses.length === 1) {
 //                        $location.path('schools/'+schools[0]._id+'/edit');
 //                    }
                 });
             }
+        };
+
+        $scope.addClassPopup = function (size) {
+
+            $modal.open({
+                templateUrl: 'addClass.html',
+                controller: 'AddClassController',
+                size: size,
+                resolve: {
+                    classlist: function () {
+                        return $scope.schoolclasses;
+                    }
+                }
+            });
+
         };
 	}
 ]);

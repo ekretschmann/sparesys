@@ -36,29 +36,6 @@ angular.module('schools').controller('AddTeacherToSchoolController', ['$scope', 
 
             });
 
-//            // Create new Pack object
-//            var teacher = new Users({
-//                name: this.name,
-//                course: this.course._id
-//            });
-//
-//
-//            // Redirect after save
-//            pack.$save(function (response) {
-//                var packid = response._id;
-//                var c = $scope.course;
-//                c.packs.push(packid);
-//                c.$update(function () {
-//                    $scope.name = '';
-//                    $state.go($state.$current, null, { reload: true });
-//                }, function (errorResponse) {
-//                    $scope.error = errorResponse.data.message;
-//                });
-//
-//            }, function (errorResponse) {
-//                $scope.error = errorResponse.data.message;
-//            });
-//            this.name = '';
             angular.element('.addpackfocus').trigger('focus');
         };
 	}

@@ -10,7 +10,7 @@ angular.module('schoolclasses').config(['$stateProvider',
                 templateUrl: 'modules/schoolclasses/views/list-schoolclasses.client.view.html'
             }).state('manageClasses', {
                 url: '/schools/classes/manage',
-                templateUrl: 'modules/schoolclasses/views/manage-classes.client.view.html'
+                templateUrl: 'modules/schoolclasses/views/manage-schoolclasses.client.view.html'
             }).
             state('createSchoolclass', {
                 url: '/schoolclasses/create',

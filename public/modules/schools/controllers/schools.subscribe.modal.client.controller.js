@@ -8,9 +8,6 @@ angular.module('schools').controller('SubscribeToSchoolModalController', ['$scop
 
         $scope.ok = function () {
 
-            console.log('subscribe now');
-
-            console.log(school.students);
 
             if (school.students.indexOf($scope.authentication.user._id) === -1) {
                 school.students.push($scope.authentication.user._id);

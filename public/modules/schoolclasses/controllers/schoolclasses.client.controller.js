@@ -90,5 +90,21 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             });
 
         };
+
+        $scope.areYouSureToDeleteClass = function (schoolclass) {
+
+            $scope.schoolclass = schoolclass;
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteClass.html',
+                controller: 'DeleteClassModalController',
+                resolve: {
+
+                    schoolclass: function () {
+                        return $scope.schoolclass;
+                    }
+                }
+            });
+
+        };
 	}
 ]);

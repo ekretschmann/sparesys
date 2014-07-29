@@ -3,6 +3,7 @@
     <!--<div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>-->
 
     <div ng-include="'/modules/schoolclasses/views/partial/add-class.modal.client.view.html'"></div>
+    <div ng-include="'/modules/schoolclasses/views/partial/delete-class.modal.client.view.html'"></div>
 
     <div class="sparesys-header">
 
@@ -35,7 +36,7 @@
         <tr data-ng-repeat="schoolclass in schoolclasses">
             <td class="sparesys-view-courses-name-cell">
                 <a href="">
-                    <i data-ng-click="areYouSureToDeleteSchool(schoolclass)"
+                    <i data-ng-click="areYouSureToDeleteClass(schoolclass)"
                        class="glyphicon glyphicon-remove-sign">
                     </i>
                 </a>

@@ -60,6 +60,8 @@ exports.read = function(req, res) {
  * Update a Schoolclass
  */
 exports.update = function(req, res) {
+
+
 	var schoolclass = req.schoolclass ;
 
 	schoolclass = _.extend(schoolclass , req.body);

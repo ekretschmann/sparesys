@@ -47,7 +47,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
 
         $scope.validateToggle = function(card) {
             if (!card.style[0] && !card.style[1] && !card.style[2] && !card.style[3]) {
-                console.log('here');
                 $scope.error = 'You have to leave at least one style switched on';
                 return false;
             }

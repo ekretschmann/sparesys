@@ -23,7 +23,11 @@ var SchoolclassSchema = new Schema({
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
-	}
+	},
+    students: {
+        type: [Schema.Types.ObjectId],
+        default: []
+    }
 });
 
 mongoose.model('Schoolclass', SchoolclassSchema);

@@ -3,6 +3,7 @@
 // Schoolclasses controller
 angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$modal','$stateParams', '$location', 'Authentication', 'Schoolclasses',
 	function($scope, $modal, $stateParams, $location, Authentication, Schoolclasses ) {
+
 		$scope.authentication = Authentication;
 
 		// Create new Schoolclass
@@ -57,6 +58,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 		// Find existing Schoolclass
 		$scope.findOne = function() {
+
 			$scope.schoolclass = Schoolclasses.get({ 
 				schoolclassId: $stateParams.schoolclassId
 			});
@@ -107,21 +109,19 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         };
 
+
         $scope.removeFromClass = function(student) {
-
-
             for (var i in $scope.schoolclass.students) {
-                if ($scope.schoolclass.students[i] === student._id) {
-                    $scope.schoolclass.students.splice(i, 1);
+                if ($scope.schoolclass.students[i] === student) {
+                    $scope.schoolclass.students.splice(i,1);
                 }
             }
 
-            $scope.schoolclass.$update(function() {
-                //$location.path('schoolclasses/' + schoolclass._id);
-            }, function(errorResponse) {
-                $scope.error = errorResponse.data.message;
+            $scope.schoolclass.$update(function(res) {
+
+            }, function(err) {
+                console.log(err);
             });
-//            $scope.schoolclass.$update();
         };
 
         $scope.addToClass = function(student) {

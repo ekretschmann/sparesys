@@ -115,6 +115,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
 
 		// Find a list of Schools
 		$scope.findForUser = function() {
+
             $scope.school = Schools.query({
                 teachers: Authentication.user._id
             }, function(schools) {

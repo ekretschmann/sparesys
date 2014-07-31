@@ -3,6 +3,7 @@
 //Setting up route
 angular.module('schoolclasses').config(['$stateProvider',
     function ($stateProvider) {
+
         // Schoolclasses state routing
         $stateProvider.
             state('listSchoolclasses', {

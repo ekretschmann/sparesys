@@ -70,6 +70,8 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
         };
 
 
+
+
         // Update existing User
         $scope.update = function () {
 

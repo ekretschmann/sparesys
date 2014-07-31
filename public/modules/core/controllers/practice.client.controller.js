@@ -46,7 +46,7 @@ angular.module('core').controller('PracticeController',
                 $scope.showAnswer();
             };
 
-            $scope.levenshteinDistance  = function (s, t) {
+            $scope.levenshteinDistance = function (s, t) {
                 if (s.length === 0) return t.length;
                 if (t.length === 0) return s.length;
 
@@ -57,7 +57,7 @@ angular.module('core').controller('PracticeController',
                 );
             };
 
-            $scope.getMaxHrt = function() {
+            $scope.getMaxHrt = function () {
 //                    return SchedulerService.getMaxHrt($scope.card, Date.now());
 
                 if ($scope.card) {
@@ -76,7 +76,7 @@ angular.module('core').controller('PracticeController',
                 if ($scope.card.style[0] && $scope.card.style[1]) {
 //                    console.log('  '+$scope.card.hrt / 60000);
 //                    console.log('  '+SchedulerService.getMaxHrt($scope.card, Date.now()) / (60000*60*24*7));
-                    if (SchedulerService.getMaxHrt($scope.card, Date.now()) > 1000 * 60 *24 * 7) {
+                    if (SchedulerService.getMaxHrt($scope.card, Date.now()) > 1000 * 60 * 24 * 7) {
 
                         $scope.style = 'write';
                         return;
@@ -91,17 +91,18 @@ angular.module('core').controller('PracticeController',
 //
             $document.bind('keypress', function (event) {
 
-                if ($scope.state === 'question' && $scope.style === 'write' && event.key === 'Enter') {
+
+                if ($scope.state === 'question' && $scope.style === 'write' && event.keyCode === 13) {
                     $scope.submitAnswer();
                     return;
                 }
 
-                if ($scope.state === 'question' && $scope.style === 'read' && event.key === 'Enter') {
+                if ($scope.state === 'question' && $scope.style === 'read' && event.keyCode === 13) {
                     $scope.showAnswer();
                     return;
                 }
 
-                if ($scope.state === 'answer' && $scope.style === 'write' && event.key === 'Enter') {
+                if ($scope.state === 'answer' && $scope.style === 'write' && event.keyCode === 13) {
                     $scope.nextCard();
                     return;
                 }
@@ -113,19 +114,19 @@ angular.module('core').controller('PracticeController',
 
 
                 if ($scope.state === 'answer') {
-                    if (event.key === '1') {
+                    if (event.charCode === 49) {
                         $scope.processCard(1);
                         $scope.lastRating = 1;
                     }
-                    if (event.key === '2') {
+                    if (event.charCode === 50) {
                         $scope.processCard(2);
                         $scope.lastRating = 2;
                     }
-                    if (event.key === '3') {
+                    if (event.charCode === 51) {
                         $scope.processCard(3);
                         $scope.lastRating = 3;
                     }
-                    if (event.key === '0') {
+                    if (event.charCode === 48) {
                         $scope.processCard(0);
                         $scope.lastRating = 0;
                     }
@@ -214,7 +215,7 @@ angular.module('core').controller('PracticeController',
                 return Math.round(SchedulerService.getPredictedRetention(card, Date.now()) * 100000) / 1000;
             };
 
-            $scope.getCardOrder = function() {
+            $scope.getCardOrder = function () {
                 $scope.cardOrder = SchedulerService.getCardOrder();
             };
 
@@ -247,34 +248,19 @@ angular.module('core').controller('PracticeController',
                 });
             };
 
-            //
-//            $scope.loadSound = function (answer) {
-////                console.log('loading sound ' + answer);
-//
-////                $http({method: 'GET',
-////                    url: 'http://translate.google.com/translate_tts?tl=en&q=the%20brown%20fox.',
-////                    headers: {'User-Agent': 'Mozilla'}}).
-////                    success(function (data, status, headers, config) {
-////                        console.log('success');
-////                        console.log(data);
-////                        console.log(status);
-////                        console.log(headers);
-////                        console.log(config);
-////
-////                        // this callback will be called asynchronously
-////                        // when the response is available
-////                    }).
-////                    error(function (data, status, headers, config) {
-////                        console.log('failed');
-////                        console.log(data);
-////                        console.log(status);
-////                        console.log(headers);
-////                        console.log(config);
-////                    });
-//
-//
-//            };
-//
+
+            $scope.playSound = function (answer) {
+
+                /* jshint ignore:start */
+                if (window.SpeechSynthesisUtterance !== undefined) {
+                    var msg = new SpeechSynthesisUtterance(answer);
+
+                    msg.lang = 'es-ES';
+                    window.speechSynthesis.speak(msg);
+                }
+                /* jshint ignore:end */
+
+            };
 
         }
     ])

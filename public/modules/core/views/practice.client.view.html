@@ -23,11 +23,13 @@
 
                 <h2>{{card.question}}</h2>
 
+                <span  data-ng-init="playSound(card.question)" data-ng-if="state == 'question'" ></span>
+
 
                 <div style="height: 100px">
             <span>
                 <h3>
-                    <span style="color: #0078ae" data-ng-if="state == 'answer'">
+                    <span style="color: #0078ae" data-ng-if="state == 'answer'" >
                         <span>{{card.answer}}</span>
                     </span>
                 </h3>
@@ -59,6 +61,7 @@
 
                 <h2>{{card.question}}</h2>
 
+                <span  data-ng-init="playSound(card.question)" data-ng-if="state == 'question'" ></span>
 
                 <div data-ng-if="state == 'question'" class="form-group">
                     <input type="text" required id="answer" name="answer"

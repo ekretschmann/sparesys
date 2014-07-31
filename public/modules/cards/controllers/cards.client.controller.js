@@ -1,12 +1,12 @@
 'use strict';
 
 // Cards controller
-angular.module('cards').controller('CardsController', ['$scope', '$stateParams', '$state', '$location', 'Authentication', 'Packs', 'Cards',
-    function($scope, $stateParams, $state, $location, Authentication, Packs, Cards) {
+angular.module('cards').controller('CardsController', ['$scope', '$modal', '$stateParams', '$state', '$location', 'Authentication', 'Packs', 'Cards',
+    function ($scope, $modal, $stateParams, $state, $location, Authentication, Packs, Cards) {
         $scope.authentication = Authentication;
 
 
-        $scope.toggleRead = function(card) {
+        $scope.toggleRead = function (card) {
 
             card.style[0] = !card.style[0];
             if ($scope.validateToggle(card)) {
@@ -16,7 +16,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
             }
         };
 
-        $scope.toggleWrite = function(card) {
+        $scope.toggleWrite = function (card) {
 
             card.style[1] = !card.style[1];
             if ($scope.validateToggle(card)) {
@@ -27,7 +27,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
 
         };
 
-        $scope.toggleListen = function(card) {
+        $scope.toggleListen = function (card) {
             card.style[2] = !card.style[2];
             if ($scope.validateToggle(card)) {
                 card.$update();
@@ -36,7 +36,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
             }
         };
 
-        $scope.multipleChoice = function(card) {
+        $scope.multipleChoice = function (card) {
             card.style[3] = !card.style[3];
             if ($scope.validateToggle(card)) {
                 card.$update();
@@ -45,7 +45,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
             }
         };
 
-        $scope.validateToggle = function(card) {
+        $scope.validateToggle = function (card) {
             if (!card.style[0] && !card.style[1] && !card.style[2] && !card.style[3]) {
                 $scope.error = 'You have to leave at least one style switched on';
                 return false;
@@ -53,10 +53,10 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
             return true;
         };
 
-        $scope.clearCards = function() {
-            $scope.cards.forEach(function(card) {
+        $scope.clearCards = function () {
+            $scope.cards.forEach(function (card) {
                 if (card.packName === 'undefined') {
-                    card.$remove(function() {
+                    card.$remove(function () {
                         $state.go($state.$current, null, { reload: true });
                     });
                 }
@@ -65,25 +65,25 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
 
 
         // Create new Card
-        $scope.create = function() {
-        	// Create new Card object
+        $scope.create = function () {
+            // Create new Card object
             var card = new Cards({
                 name: this.name
             });
 
             // Redirect after save
-            card.$save(function(response) {
+            card.$save(function (response) {
                 $location.path('cards/' + response._id);
-            }, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
 
             // Clear form fields
             this.name = '';
         };
 
         // Remove existing Card
-        $scope.remove = function(card) {
+        $scope.remove = function (card) {
             if (card) {
                 card.$remove();
 
@@ -93,30 +93,30 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
                     }
                 }
             } else {
-                $scope.card.$remove(function() {
+                $scope.card.$remove(function () {
                     $location.path('cards');
                 });
             }
         };
 
         // Update existing Card
-        $scope.update = function() {
+        $scope.update = function () {
             var card = $scope.card;
 
-            card.$update(function() {
+            card.$update(function () {
                 $location.path('cards/' + card._id);
-            }, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
         };
 
         // Find a list of Cards
-        $scope.find = function() {
+        $scope.find = function () {
             $scope.cards = Cards.query();
         };
 
         // Find existing Card
-        $scope.findOne = function() {
+        $scope.findOne = function () {
             $scope.card = Cards.get({
                 cardId: $stateParams.cardId
             });
@@ -144,5 +144,22 @@ angular.module('cards').controller('CardsController', ['$scope', '$stateParams',
 
         };
 
+
+        $scope.areYouSureToDeleteCard = function (card) {
+
+            $scope.card = card;
+
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteCard.html',
+                controller: 'DeleteCardController',
+                resolve: {
+                    card: function () {
+                        return $scope.card;
+                    }
+                }
+            });
+
+
+        };
     }
 ]);

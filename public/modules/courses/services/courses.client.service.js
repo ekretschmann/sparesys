@@ -16,6 +16,27 @@ angular.module('courses').factory('Courses', ['$resource', function ($resource) 
 angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses', 'Packs', 'Cards',
     function ($q, $resource, Courses, Packs, Cards) {
         return {
+            removeCard: function(card, callback) {
+                var id = card.packs[0];
+                Packs.query({
+                    _id: id
+                }, function(packs) {
+
+                    packs.forEach(function(pack) {
+                        for (var i in pack.cards) {
+                            if (pack.cards[i] === card._id) {
+                                pack.cards.splice(i, 1);
+                            }
+                        }
+                        pack.$update(function() {
+                            card.$remove(function() {
+                                callback();
+                            });
+                        });
+                    });
+                });
+
+            },
             removeCards: function(cards) {
 
 

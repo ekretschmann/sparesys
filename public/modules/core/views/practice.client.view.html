@@ -3,7 +3,7 @@
 
     <div class="pull-right">
         <div>Predicted card retention: {{getPredictedCardRetention()}}%</div>
-        <div>Predicted course retention: {{getPredictedCourseRetention()}}%</div>
+        <!--<div>Predicted course retention: {{getPredictedCourseRetention()}}%</div>-->
     </div>
 
     <div class="sparesys-header">
@@ -12,7 +12,7 @@
             {{course.name}}
         </div>
         <div class="sparesys-subtitle">
-            {{style}}
+            Memorized: {{getPredictedCourseRetention()}}%
         </div>
     </div>
 

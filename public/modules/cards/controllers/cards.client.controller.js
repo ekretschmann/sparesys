@@ -104,7 +104,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$sta
             var card = $scope.card;
 
             card.$update(function () {
-                $location.path('cards/' + card._id);
+                $location.path('packs/' + card.packs[0]+'/edit');
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });

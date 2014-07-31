@@ -30,6 +30,12 @@
                                            placeholder="{{course.description}}"
                                            required></td>
                             </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Read Questions Language</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <select ng-model="language" ng-options="lan.name for lan in languages"></select>
+                            </tr>
                         </table>
                     </div>
 

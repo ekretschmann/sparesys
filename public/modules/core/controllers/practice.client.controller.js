@@ -251,11 +251,18 @@ angular.module('core').controller('PracticeController',
 
             $scope.playSound = function (answer) {
 
+//                if ($scope.course.language === '') {
+//                    return;
+//                }
+
                 /* jshint ignore:start */
                 if (window.SpeechSynthesisUtterance !== undefined) {
+
+
                     var msg = new SpeechSynthesisUtterance(answer);
 
-                    msg.lang = 'es-ES';
+//                    console.log($scope.course.language);
+                    msg.lang = $scope.course.language;
                     window.speechSynthesis.speak(msg);
                 }
                 /* jshint ignore:end */

@@ -7,6 +7,8 @@ angular.module('courses').controller('CoursesController',
         function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, CoursesService) {
             $scope.authentication = Authentication;
 
+
+
             $scope.createDummyCourse = function() {
 
                 CoursesService.createDummmyCourse(function() {

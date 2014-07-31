@@ -37,6 +37,10 @@ var CourseSchema = new Schema({
     packs: {
         type: [Schema.Types.ObjectId],
         default: []
+    },
+    language: {
+        type: String,
+        default: ''
     }
 });
 

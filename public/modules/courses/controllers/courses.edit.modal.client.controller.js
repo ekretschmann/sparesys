@@ -4,6 +4,14 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
 	function($scope, $state, $timeout, $modalInstance, course) {
         $scope.course = course;
 
+        $scope.languages = [
+            {name:'none', code:''},
+            {name:'English', code:'en-GB'},
+            {name:'German', code:'de-DE'},
+            {name:'Spanish', shade:'es-ES'}
+        ];
+        $scope.language = $scope.languages[0];
+
         $scope.setFocus = function () {
             $timeout(function(){
                 angular.element('.editCoursefocus').trigger('focus');
@@ -18,6 +26,7 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
 
             course.name = this.name;
             course.description = this.description;
+            course.language = this.language.code;
             $scope.course.$update();
             $modalInstance.dismiss('cancel');
         };

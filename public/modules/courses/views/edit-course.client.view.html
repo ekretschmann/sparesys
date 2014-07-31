@@ -35,8 +35,12 @@
             {{course.description}}
             <span data-ng-if="course.published">(published course)</span>
             <span data-ng-if="!course.published">(private course)</span>
+            <div>Language: {{course.language}}</div>
         </div>
     </div>
+
+
+
 
 
     <div data-ng-hide="course.packs.length > 0">

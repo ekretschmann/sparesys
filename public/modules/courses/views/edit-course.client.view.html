@@ -35,7 +35,7 @@
             {{course.description}}
             <span data-ng-if="course.published">(published course)</span>
             <span data-ng-if="!course.published">(private course)</span>
-            <div>Language: {{course.language}}</div>
+            <div data-ng-if="course.language !== ''">Language: {{course.language}}</div>
         </div>
     </div>
 
@@ -56,12 +56,14 @@
 
             </a>
         </div>
-        <table id="searchTextResults" class="table-striped" style="width: 100%">
+        <div style="height: 10px"></div>
+        <table id="searchTextResults" class="table-striped" style="width: 100%; margin-top: 20px">
             <thead>
             <tr>
                 <th class="sparesys-view-courses-course-column">
                 </th>
                 <th class="sparesys-view-courses-course-column">Pack</th>
+                <th class="sparesys-view-object-label-cell">Number of Cards</th>
                 <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
                 <!--<th>Created</th>-->
             </tr>
@@ -81,6 +83,9 @@
 
                 <td class="sparesys-view-object-content-cell">
                     <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
+                </td>
+                <td class="sparesys-view-object-content-cell" style="text-align: right">
+                    {{pack.cards.length}}
                 </td>
             </tr>
             </tbody>

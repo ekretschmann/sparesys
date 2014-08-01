@@ -38,7 +38,7 @@
                     </a>
             </td>
             <td class="sparesys-view-courses-name-cell">
-               {{course.name}}</td>
+                <a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></td>
             <td>{{course.description}}</td>
             <td class="sparesys-view-courses-name-cell">{{course.user.displayName}}</td>
             <td class="sparesys-view-courses-date-cell">{{course.created | date:'shortDate'}}</td>

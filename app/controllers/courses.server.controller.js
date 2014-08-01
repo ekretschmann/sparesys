@@ -200,6 +200,7 @@ var copyCards = function (pack, originalCards, req) {
 
     if (originalCards.length === 0) {
         deferred.resolve(true);
+        return deferred.promise;
     }
 
     originalCards.forEach(function (cardId) {
@@ -220,9 +221,7 @@ var copyCards = function (pack, originalCards, req) {
 
 
             cardCopy.save(function () {
-//                pack.cards.push(cardCopy._id);
                 cardMap[cards[0]._id]  = cardCopy._id;
-
                 cardsLoaded ++;
                 if (cardsLoaded === originalCards.length) {
                     originalCards.forEach(function(originalCardId) {
@@ -230,7 +229,7 @@ var copyCards = function (pack, originalCards, req) {
                     });
 
                     pack.save();
-                    deferred.resolve(true);
+
                 }
 
             });
@@ -259,13 +258,15 @@ var copyPacks = function (course, originalPacks, req) {
 
         loadPack.then(function (packs) {
 
+
             var packCopy = new Pack();
             packCopy.user = req.user;
             packCopy.name = packs[0].name;
             packCopy.course = course._id;
 
             packCopy.save(function () {
-                packMap[packs[0]._id]  = packId;
+
+                packMap[packs[0]._id]  = packCopy._id;
                 packagesLoaded ++;
 
                 var cardForPackMap = copyCards(packCopy, packs[0].cards, req);
@@ -278,8 +279,11 @@ var copyPacks = function (course, originalPacks, req) {
                             course.packs.push(packMap[originalPackId]);
                         });
 
-                        course.save();
-                        deferred.resolve(true);
+
+                        course.save(function(result){
+                            deferred.resolve(true);
+                        });
+
                     }
                 });
 

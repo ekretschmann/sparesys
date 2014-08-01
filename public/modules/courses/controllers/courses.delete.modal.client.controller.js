@@ -7,7 +7,10 @@ angular.module('courses').controller('DeleteCourseModalController', ['$scope', '
         $scope.ok = function () {
             CoursesService.remove(course, function () {
 
-                $location.path('courses');
+
+//                console.log($state.$current);
+//                $location.path('courses');
+//                $state.go($state.$current, null, {reload: true});
             });
 
 

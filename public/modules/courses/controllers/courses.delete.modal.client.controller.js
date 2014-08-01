@@ -8,15 +8,20 @@ angular.module('courses').controller('DeleteCourseModalController', ['$scope', '
             CoursesService.remove(course, function () {
 
 
-//                console.log($state.$current);
-//                $location.path('courses');
-//                $state.go($state.$current, null, {reload: true});
+
+                if($state.$current.url.source === '/courses') {
+                    $state.go($state.$current, null, {reload: true});
+                } else {
+                    $location.path('courses');
+                }
             });
 
 
             $modalInstance.close();
 
         };
+
+
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

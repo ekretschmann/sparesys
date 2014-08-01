@@ -16,9 +16,10 @@ angular.module('packs').controller('EditPackController', ['$scope', '$state', '$
 
         $scope.ok = function () {
 
-            pack.name = this.name;
+//            $scope.pack.name = this.packname;
+//            console.log($scope.pack.name);
             var courseName = pack.courseName;
-            $scope.pack.$update(function(pack) {
+            $scope.pack.$update(function() {
                 pack.courseName = courseName;
             });
 

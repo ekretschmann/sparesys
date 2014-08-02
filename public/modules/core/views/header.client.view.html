@@ -1,12 +1,12 @@
 <div class="container" data-ng-controller="HeaderController">
-    <div class="navbar-header">
+    <div class="navbar-header ">
         <button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
         </button>
-        <a href="/#!/" class="navbar-brand">sparesys</a>
+        <a href="/#!/" class="navbar-brand font-l">Rememberators</a>
     </div>
     <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
         <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
@@ -17,11 +17,11 @@
         </ul>
         <ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
             <li ui-route="/signup" ng-class="{active: $uiRoute}">
-                <a id="signup-link" href="/#!/signup">Signup</a>
+                <a id="signup-link font-l" href="/#!/signup" class="font-m">Signup</a>
             </li>
             <li class="divider-vertical"></li>
             <li ui-route="/signin" ng-class="{active: $uiRoute}">
-                <a id="signin-link" href="/#!/signin">Signin</a>
+                <a id="signin-link" href="/#!/signin" class="font-m">Signin</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">
@@ -29,7 +29,7 @@
 
             <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown"
                 data-ng-show="authentication.user.roles.indexOf('admin') > -1">
-                <a href="#" class="dropdown-toggle" id="admin-dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle font-m" id="admin-dropdown-toggle" data-toggle="dropdown">
                     Administration <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
@@ -37,19 +37,19 @@
                     <!--<a href="/#!/courses">Find</a>-->
                     <!--</li>-->
                     <li>
-                        <a id="user-admin-link" href="/#!/users">Users</a>
+                        <a id="user-admin-link" href="/#!/users" class="font-m">Users</a>
                     </li>
                     <li>
-                        <a href="/#!/schools/admin">Schools</a>
+                        <a href="/#!/schools/admin" class="font-m">Schools</a>
                     </li>
                     <li>
-                        <a id="courses-admin-link" href="/#!/courses/admin">Courses</a>
+                        <a id="courses-admin-link" href="/#!/courses/admin" class="font-m">Courses</a>
                     </li>
                     <li>
-                        <a href="/#!/packs/admin">Packs</a>
+                        <a href="/#!/packs/admin" class="font-m">Packs</a>
                     </li>
                     <li>
-                        <a href="/#!/cards/admin">Cards</a>
+                        <a href="/#!/cards/admin" class="font-m">Cards</a>
                     </li>
                     <!--<li class="divider"></li>-->
                     <!--<li>-->
@@ -60,7 +60,7 @@
 
             <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown"
                 data-ng-show="authentication.user.roles.indexOf('headmaster') > -1 ||authentication.user.roles.indexOf('teacher') > -1">
-                <a href="#" class="dropdown-toggle" id="headmaster-dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle font-m" id="headmaster-dropdown-toggle" data-toggle="dropdown">
                     Teaching <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu" >
@@ -68,16 +68,16 @@
                     <!--<a href="/#!/courses">Find</a>-->
                     <!--</li>-->
                     <li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1">
-                        <a href="/#!/schools/register">Register School</a>
+                        <a href="/#!/schools/register" class="font-m">Register School</a>
                     </li>
                     <li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1">
-                        <a href="/#!/schools/manage">Manage Schools</a>
+                        <a href="/#!/schools/manage" class="font-m">Manage Schools</a>
                     </li>
 
                     <li class="divider" data-ng-show="authentication.user.roles.indexOf('teacher') > -1 && authentication.user.roles.indexOf('headmaster') > -1"></li>
 
                     <li data-ng-show="authentication.user.roles.indexOf('teacher') > -1">
-                        <a href="/#!/schools/classes/manage">Manage Classes</a>
+                        <a href="/#!/schools/classes/manage" class="font-m">Manage Classes</a>
                     </li>
 
 
@@ -89,22 +89,22 @@
 
 
             <li ui-route="/courses" ng-class="{active: $uiRoute}" class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle font-m" data-toggle="dropdown">
                     Courses <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="/#!/courses">Manage</a>
+                        <a href="/#!/courses" class="font-m">Manage</a>
                     </li>
                     <li>
-                        <a href="/#!/courses/create">Create</a>
+                        <a href="/#!/courses/create" class="font-m">Create</a>
                     </li>
                     <li>
-                        <a href="/#!/courses/search">Search</a>
+                        <a href="/#!/courses/search" class="font-m">Search</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="/#!/schools">Subscribe to School</a>
+                        <a href="/#!/schools" class="font-m">Subscribe to School</a>
                     </li>
                     <!--<li class="divider"></li>-->
                     <!--<li>-->
@@ -115,26 +115,26 @@
 
 
             <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                <a href="#" class="dropdown-toggle font-m" data-toggle="dropdown">
                     {{authentication.user.displayName}} <b class="caret"></b>
                 </a>
 
 
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="/#!/settings/profile">Edit Profile</a>
+                        <a href="/#!/settings/profile" class="font-m">Edit Profile</a>
                     </li>
                     <li>
-                        <a href="/#!/settings/accounts">Manage Social Accounts</a>
+                        <a href="/#!/settings/accounts" class="font-m">Manage Social Accounts</a>
                     </li>
                     <li data-ng-show="authentication.user.provider === 'local'">
-                        <a href="/#!/settings/password">Change Password</a>
+                        <a href="/#!/settings/password" class="font-m">Change Password</a>
                     </li>
 
 
                     <li class="divider"></li>
                     <li>
-                        <a href="/auth/signout">Signout</a>
+                        <a href="/auth/signout" class="font-m">Signout</a>
                     </li>
                 </ul>
             </li>

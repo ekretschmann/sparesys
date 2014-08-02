@@ -2,9 +2,9 @@
 
 module.exports = {
 	app: {
-		title: 'sparesys',
-		description: 'Spaced Repetition System',
-		keywords: 'Flashcards, Learning'
+		title: 'Rememberators',
+		description: 'Heuristic Repetition System',
+		keywords: 'Flashcards, Learning, Teaching'
 	},
 	port: process.env.PORT || 3000,
 	templateEngine: 'swig',

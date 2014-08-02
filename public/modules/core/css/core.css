@@ -199,3 +199,55 @@ html, body {
 .footer, .push {
     height: 4em;
 }
+
+@font-face {
+    font-family: 'Grinched';
+    src: url('Grinched.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Comic';
+    src: url('ArchitectsDaughter.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+.font-xxl{
+    font-family:'Grinched';
+    font-size: 64pt;
+
+}
+
+.font-xl{
+    font-family:'Grinched';
+    font-size: 36pt;
+}
+
+.font-l{
+    font-family:'Grinched';
+    font-size: 20pt;
+    color: white;
+}
+
+.font-m{
+    font-family:'Grinched';
+    font-size: 14pt;
+    color: white;
+}
+
+div {
+    font-family:'Comic';
+    font-size: 12pt;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+.navbar-header, .nav, .collapse, .navbar-collapse, .navbar-inverse {
+    background-color: darkblue;
+    background-image: linear-gradient(to bottom, darkblue 0%, darkblue 100%);
+    border-color: darkblue;
+}

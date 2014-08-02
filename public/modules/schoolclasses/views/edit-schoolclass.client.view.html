@@ -22,27 +22,11 @@
 
     </div>
 
-    <!--<div class="span4 offset2">-->
-    <!--<ul id="sourceList"-->
-    <!--dnd-between-list="source,targetList"-->
-    <!--ng-class="{'minimalList':sourceEmpty()}">-->
-    <!--<li class="alert alert-error nomargin"-->
-    <!--ng-repeat="item in source">{{item.value}}</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-    <!--<div class="span4">-->
 
-    <!--<ul id="targetList"-->
-    <!--dnd-between-list="model,sourceList"-->
-    <!--ng-class="{'minimalList':sourceEmpty()}">-->
-    <!--<li class="alert alert-info nomargin"-->
-    <!--ng-repeat="item in model">{{item.value}}</li>-->
-    <!--</ul>-->
-    <!--</div>-->
-
-
-    <div>
+    <div style="width: 100%; background-color: yellow">
         <div style="float: left; width: 50%; padding-right:5px">
+
+
             <table id="searchTextResults" class="table-striped" style="width: 100%"
                    data-ng-controller="SchoolsController"
                    data-ng-init="findForUser()">
@@ -50,8 +34,53 @@
                 <tr>
                     <th class="sparesys-view-courses-course-column"></th>
                     <th class="sparesys-view-courses-course-column">Available Students</th>
-                    <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
-                    <!--<th>Created</th>-->
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="student in school.students"
+                    data-ng-controller="UsersController"
+                    data-ng-init="findStudent(student)"
+                    style="cursor: move">
+
+                    <td class="sparesys-view-courses-name-cell">
+                        <a href="">
+                            <i data-ng-click="addToClass(student)"
+                               class="glyphicon glyphicon-plus-sign">
+                            </i>
+                        </a>
+
+                    </td>
+
+                    <td class="sparesys-view-object-content-cell">
+                        {{student.displayName}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div style="float:right; width: 50%; padding-left:5px">
+            bbbb
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+    <div style="width: 100%; background-color: red">
+        <div style="float: left; width: 50%; padding-right:5px">
+
+
+            <table id="searchTextResults" class="table-striped" style="width: 100%"
+                   data-ng-controller="SchoolsController"
+                   data-ng-init="findForUser()">
+                <thead>
+                <tr>
+                    <th class="sparesys-view-courses-course-column"></th>
+                    <th class="sparesys-view-courses-course-column">Available Students</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -82,13 +111,11 @@
                 <tr>
                     <th class="sparesys-view-courses-course-column"></th>
                     <th class="sparesys-view-courses-course-column">In class {{schoolclass.name}}</th>
-                    <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
-                    <!--<th>Created</th>-->
                 </tr>
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="student in schoolclass.students"
-                    >
+                        >
 
 
                     <td class="sparesys-view-courses-name-cell">
@@ -109,5 +136,6 @@
             </table>
         </div>
     </div>
+
 
 </section>

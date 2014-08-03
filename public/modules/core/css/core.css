@@ -200,18 +200,19 @@ html, body {
     height: 4em;
 }
 
-@font-face {
-    font-family: 'Grinched';
-    src: url('Grinched.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-}
+/*@font-face {*/
+    /*font-family: 'Comic';*/
+    /*src: url('ArchitectsDaughter.ttf') format('truetype');*/
+    /*font-weight: normal;*/
+    /*font-style: normal;*/
+/*}*/
 
 @font-face {
-    font-family: 'Comic';
-    src: url('ArchitectsDaughter.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'Grinched';
+    src: url('Grinchedt.eot?#iefix') format('embedded-opentype'),
+    url('Grinched.woff') format('woff'),
+    url('Grinched.ttf')  format('truetype'),
+    url('Grinched.svg#svgFontName') format('svg');
 }
 
 .font-xxl{
@@ -228,17 +229,17 @@ html, body {
 .font-l{
     font-family:'Grinched';
     font-size: 20pt;
-    color: white;
+
 }
 
 .font-m{
     font-family:'Grinched';
     font-size: 14pt;
-    color: white;
+
 }
 
 div {
-    font-family:'Comic';
+    font-family: 'PT Sans', sans-serif;
     font-size: 12pt;
 }
 
@@ -246,8 +247,12 @@ body {
     background-color: aliceblue;
 }
 
+/*.navbar-inverse .navbar-brand {*/
+    /*color: white*/
+/*}*/
 .navbar-header, .nav, .collapse, .navbar-collapse, .navbar-inverse {
     background-color: darkblue;
     background-image: linear-gradient(to bottom, darkblue 0%, darkblue 100%);
     border-color: darkblue;
+
 }

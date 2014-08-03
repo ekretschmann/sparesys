@@ -33,7 +33,8 @@ module.exports = {
 			]
 		},
 		css: [
-			'public/modules/**/css/*.css'
+			'public/modules/**/css/*.css',
+            'http://fonts.googleapis.com/css?family=PT+Sans'
 		],
 		js: [
 			'public/config.js',

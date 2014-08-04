@@ -1,13 +1,26 @@
 'use strict';
 
-angular.module('courses').controller('DeleteCourseModalController', ['$scope', '$location', '$state', '$modalInstance', 'course', 'CoursesService',
-	function($scope, $location, $state, $modalInstance, course, CoursesService) {
+angular.module('courses').controller('DeleteCourseModalController', ['$scope', '$location', '$state', '$modalInstance', 'course', 'CoursesService', 'Schoolclasses',
+	function($scope, $location, $state, $modalInstance, course, CoursesService, Schoolclasses) {
         $scope.course = course;
 
         $scope.ok = function () {
+
+            Schoolclasses.query({
+                courses: $scope.course._id
+            }, function(schoolclasses) {
+                schoolclasses.forEach(function(schoolClass){
+
+                    for (var i in schoolClass.courses) {
+                        if (schoolClass.courses[i] === $scope.course._id) {
+                            schoolClass.courses.splice(i, 1);
+                        }
+                    }
+                    schoolClass.$update();
+                });
+            });
+
             CoursesService.remove(course, function () {
-
-
 
                 if($state.$current.url.source === '/courses') {
                     $state.go($state.$current, null, {reload: true});

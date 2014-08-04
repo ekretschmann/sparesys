@@ -138,9 +138,6 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                         method: 'GET'
                     }
                 });
-            },
-            copyCourse2: function () {
-                return $resource('/courses/copy/:userId', {userId:'@id'});
             }
         };
     }

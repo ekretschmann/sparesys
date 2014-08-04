@@ -22,6 +22,7 @@
             <th class="sparesys-view-courses-course-column">Course</th>
             <th class="sparesys-view-courses-description-column">Description</th>
             <th class="sparesys-view-courses-description-column">By</th>
+            <th class="sparesys-view-courses-description-column">Visible</th>
             <th>Created</th>
         </tr>
         </thead>
@@ -41,6 +42,7 @@
                 <a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></td>
             <td>{{course.description}}</td>
             <td class="sparesys-view-courses-name-cell">{{course.user.displayName}}</td>
+            <td class="sparesys-view-courses-name-cell">{{course.visible}}</td>
             <td class="sparesys-view-courses-date-cell">{{course.created | date:'shortDate'}}</td>
         </tr>
         </tbody>

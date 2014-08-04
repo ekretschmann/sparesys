@@ -16,49 +16,68 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 
             $scope.schoolclass.$update();
+
+            $scope.schoolclass.students.forEach(function (studentId) {
+
+                Courses.query({
+                    userId: studentId
+                }).$promise.then(function (studentCourses) {
+                        studentCourses.forEach(function (studentCourse) {
+                            if (studentCourse.master.toString() === course.toString()) {
+                                studentCourse.visible = false;
+                                studentCourse.$update();
+                            }
+                        });
+                    });
+            }, this);
+
         };
 
         $scope.addCourseToClass = function (course) {
-//            console.log(course);
-//            console.log($scope.schoolclass);
+
 
             if ($scope.schoolclass.courses.indexOf(course._id) === -1) {
                 $scope.schoolclass.courses.push(course._id);
                 $scope.schoolclass.$update();
 
-                $scope.schoolclass.students.forEach(function(studentId) {
-                    console.log(studentId);
+                $scope.schoolclass.students.forEach(function (studentId) {
 
 
+                    Courses.query({
+                        userId: studentId
+                    }).$promise.then(function (studentCourses) {
+                            var setVisible = false;
+                            studentCourses.forEach(function (studentCourse) {
 
-                    var res = CoursesService.copyCourse(course._id);
-                    var promise = res.get({courseId: course._id}).$promise;
+                                // if the course existed, then just set it visible
 
-                    promise.then(function (returnedCourse) {
+                                if (studentCourse.master.toString() === course._id) {
+                                    studentCourse.visible = true;
+                                    studentCourse.$update();
+                                    setVisible = true;
+                                }
+                            });
+                            if (!setVisible) {
+//                                create the course
+                                var res = CoursesService.copyCourse(course._id);
+                                var promise = res.get({courseId: course._id}).$promise;
 
-                       Courses.get({
-                            courseId: returnedCourse._id
-                        }).$promise.then(function(copiedCourse) {
-                           copiedCourse.user = studentId;
-                           copiedCourse.$save(function(){
-                           });
-                       });
+                                promise.then(function (returnedCourse) {
 
-                    });
-//
-//                    promise.catch(function () {
-//                        console.log('catch');
-//                        copiedCourse.user = studentId;
-//                        copiedCourse.$save();
+                                    Courses.get({
+                                        courseId: returnedCourse._id
+                                    }).$promise.then(function (copiedCourse) {
+                                            copiedCourse.user = studentId;
+                                            copiedCourse.master = course._id;
+                                            copiedCourse.$save(function () {
+                                            });
+                                        });
 
-//                    });
-//
-//                    promise.finally(function () {
-//                        console.log('finally');
-//                        copiedCourse.user = studentId;
-//                        copiedCourse.$save();
+                                });
+                            }
+                        });
 
-//                    });
+
                 });
             }
         };
@@ -120,6 +139,13 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             $scope.schoolclass = Schoolclasses.get({
                 schoolclassId: $stateParams.schoolclassId
+            });
+        };
+
+        $scope.findForCourse = function (courseId) {
+
+            $scope.schoolclass = Schoolclasses.get({
+                courseId: courseId
             });
         };
 

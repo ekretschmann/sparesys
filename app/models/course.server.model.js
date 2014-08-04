@@ -41,6 +41,13 @@ var CourseSchema = new Schema({
     language: {
         type: String,
         default: ''
+    },
+    master: {
+        type: [Schema.Types.ObjectId]
+    },
+    visible: {
+        type: Boolean,
+        default: true
     }
 });
 

@@ -232,6 +232,14 @@ html, body {
 
 }
 
+.navbar-inverse .navbar-brand{
+    color: #DDDDDD;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+    color: #DDDDDD;
+}
+
 .font-m{
     font-family:'Grinched';
     font-size: 14pt;
@@ -247,6 +255,11 @@ body {
     background-color: aliceblue;
     font-family: 'PT Sans', sans-serif;
     font-size: 12pt;
+    color: #333333;
+}
+
+.navbar-inverse {
+    color: red;
 }
 
 /*.navbar-inverse .navbar-brand {*/

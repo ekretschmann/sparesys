@@ -268,3 +268,16 @@ body {
     border-color: darkblue;
 
 }
+
+.dropdown-menu {
+    background-color: aliceblue;
+}
+
+.dropdown-menu > li > a {
+    color: #333333;
+}
+
+.dropdown-menu > li {
+    background-color: aliceblue
+}
+

@@ -6,62 +6,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$sta
         $scope.authentication = Authentication;
 
 
-        $scope.toggleRead = function (card) {
-
-            card.style[0] = !card.style[0];
-            if ($scope.validateToggle(card)) {
-                card.$update();
-            } else {
-                card.style[0] = !card.style[0];
-            }
-        };
-
-        $scope.toggleWrite = function (card) {
-
-            card.style[1] = !card.style[1];
-            if ($scope.validateToggle(card)) {
-                card.$update();
-            } else {
-                card.style[1] = !card.style[1];
-            }
-
-        };
-
-        $scope.toggleListen = function (card) {
-            card.style[2] = !card.style[2];
-            if ($scope.validateToggle(card)) {
-                card.$update();
-            } else {
-                card.style[2] = !card.style[2];
-            }
-        };
-
-        $scope.multipleChoice = function (card) {
-            card.style[3] = !card.style[3];
-            if ($scope.validateToggle(card)) {
-                card.$update();
-            } else {
-                card.style[3] = !card.style[3];
-            }
-        };
-
-        $scope.validateToggle = function (card) {
-            if (!card.style[0] && !card.style[1] && !card.style[2] && !card.style[3]) {
-                $scope.error = 'You have to leave at least one style switched on';
-                return false;
-            }
-            return true;
-        };
-
-        $scope.clearCards = function () {
-            $scope.cards.forEach(function (card) {
-                if (card.packName === 'undefined') {
-                    card.$remove(function () {
-                        $state.go($state.$current, null, { reload: true });
-                    });
-                }
-            });
-        };
 
 
         // Create new Card
@@ -119,6 +63,15 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$sta
         $scope.findOne = function () {
             $scope.card = Cards.get({
                 cardId: $stateParams.cardId
+            }, function() {
+                Packs.get({
+                    packId: $scope.card.packs[0]
+                }, function(pack) {
+
+
+                    $scope.pack = pack;
+
+                });
             });
         };
 

@@ -17,9 +17,10 @@
         <div class="sparesys-title">
             {{card.question}}: {{card.answer}}
         </div>
-        <!--<div class="sparesys-subtitle">-->
-        <!--<a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.courseName}}</a>-->
-        <!--</div>-->
+        <div class="sparesys-subtitle">
+
+            <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
+        </div>
     </div>
     <form class="form-horizontal" data-ng-submit="update()" novalidate>
         <fieldset>
@@ -40,6 +41,23 @@
                                id="answer" class="form-control"
                                placeholder="Answer"
                                required>
+                    </td>
+                </tr>
+
+                <tr class="controls" data-ng-controller="DateDropdownController" data-ng-init="setDate(card.due)">
+                    <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Due date</td>
+                    <td>
+                        <p class="input-group">
+                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="card.due"
+                                   is-open="opened" min-date="minDate" max-date="'2015-06-22'"
+                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                   ng-required="false" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                        </p>
+
                     </td>
                 </tr>
             </table>

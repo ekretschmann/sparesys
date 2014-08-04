@@ -51,6 +51,9 @@ var CardSchema = new Schema({
         type: [Boolean],
         // read - write - listen - multiple-choice
         default: [true, true, false, false]
+    },
+    due: {
+        type: Date
     }
 });
 

@@ -48,7 +48,7 @@
                 </div>
             </td>
             <td class="sparesys-view-courses-date-cell" style="vertical-align: top">
-                {{schoolclass.courses}}
+
                 <div data-ng-repeat="course in schoolclass.courses">
                     <div data-ng-controller="CoursesController" data-ng-init="findById(course)">
                         {{course}}

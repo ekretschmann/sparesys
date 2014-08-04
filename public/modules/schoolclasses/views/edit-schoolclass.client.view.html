@@ -16,12 +16,18 @@
         <div class="sparesys-title">
             {{schoolclass.name}}
         </div>
+
+        <div class="sparesys-subtitle">
+            Sort students into classes that receive the same coursework
+        </div>
+
+
     </div>
 
 
     <table style="width: 100%">
         <tr>
-            <td style="width: 50%">
+            <td style="width: 50%; vertical-align: top">
                 <table class="table-striped" style="width: 100%"
                        data-ng-controller="CoursesController"
                        data-ng-init="findForCurrentUser()">
@@ -43,7 +49,7 @@
 
                         </td>
 
-                        <td class="sparesys-view-object-content-cell">
+                        <td class="sparesys-view-object-content-cell" >
                             {{course.name}}
                         </td>
                     </tr>

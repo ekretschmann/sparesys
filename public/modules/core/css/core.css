@@ -233,11 +233,11 @@ html, body {
 }
 
 .navbar-inverse .navbar-brand{
-    color: #DDDDDD;
+    color: #d0d8dd;
 }
 
 .navbar-inverse .navbar-nav > li > a{
-    color: #DDDDDD;
+    color: #d0d8dd;
 }
 
 .font-m{
@@ -258,9 +258,6 @@ body {
     color: #333333;
 }
 
-.navbar-inverse {
-    color: red;
-}
 
 /*.navbar-inverse .navbar-brand {*/
     /*color: white*/

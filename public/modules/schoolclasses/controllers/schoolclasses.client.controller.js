@@ -6,7 +6,28 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 		$scope.authentication = Authentication;
 
-		// Create new Schoolclass
+
+        $scope.removeCourseFromClass = function(course) {
+            console.log(course);
+            for (var i in $scope.schoolclass.courses) {
+                if ($scope.schoolclass.courses[i] === course) {
+                    $scope.schoolclass.courses.splice(i, 1);
+                }
+            }
+
+            $scope.schoolclass.$update();
+        };
+
+        $scope.addCourseToClass = function(course) {
+//            console.log(course);
+//            console.log($scope.schoolclass);
+
+            $scope.schoolclass.courses.push(course._id);
+            $scope.schoolclass.$update();
+        };
+
+
+        // Create new Schoolclass
 		$scope.create = function() {
 			// Create new Schoolclass object
 			var schoolclass = new Schoolclasses ({

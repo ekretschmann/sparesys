@@ -5,6 +5,8 @@ angular.module('schoolclasses').controller('AddClassController', ['$scope', '$st
 
         $scope.schoolclasses = classlist;
 
+
+
         $scope.setFocus = function () {
             $timeout(function(){
                 angular.element('.focus').trigger('focus');

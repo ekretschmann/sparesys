@@ -43,7 +43,7 @@ var CourseSchema = new Schema({
         default: ''
     },
     master: {
-        type: [Schema.Types.ObjectId]
+        type: Schema.Types.ObjectId
     },
     visible: {
         type: Boolean,

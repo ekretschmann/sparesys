@@ -9,15 +9,37 @@
     <div class="sparesys-header">
         <div class="pull-right">
 
-            <a class="btn btn-primary" data-ng-click="editPackPopup(pack)"
-               data-ng-show="authentication.user._id == pack.user._id">
-                <i class="glyphicon glyphicon-edit"></i>
+
+
+
+            <a href="" data-ng-click="editPackPopup(pack)" data-ng-show="authentication.user._id == pack.user._id"
+                    style="padding-right: 20px">
+                Edit
+            </a>
+            <a href="" ng-click="setDueDate()" data-ng-show="authentication.user._id == pack.user._id"
+               style="padding-right: 20px">
+                Set Due Date
             </a>
 
-            <a class="btn btn-primary" data-ng-click="areYouSureToDeletePack(pack)"
-               data-ng-show="authentication.user._id == pack.user._id">
-                <i class="glyphicon glyphicon-trash"></i>
+            <a href="" ng-click="addCardToPackPopup()" data-ng-show="authentication.user._id == pack.user._id"
+               style="padding-right: 20px">
+                Add Cards
             </a>
+
+            <a href="" data-ng-click="areYouSureToDeletePack(pack)" data-ng-show="authentication.user._id == pack.user._id">
+                Delete
+            </a>
+
+
+            <!--<a class="btn btn-primary" data-ng-click="editPackPopup(pack)"-->
+               <!--data-ng-show="authentication.user._id == pack.user._id">-->
+                <!--<i class="glyphicon glyphicon-edit"></i>-->
+            <!--</a>-->
+
+            <!--<a class="btn btn-primary" data-ng-click="areYouSureToDeletePack(pack)"-->
+               <!--data-ng-show="authentication.user._id == pack.user._id">-->
+                <!--<i class="glyphicon glyphicon-trash"></i>-->
+            <!--</a>-->
 
         </div>
 
@@ -35,23 +57,15 @@
     </div>
     <div data-ng-show="pack.cards.length > 0">
 
-        <div class="pull-right">
-            <a href="" ng-click="addCardToPackPopup()" data-ng-show="authentication.user._id == pack.user._id">
-                Add Cards
-                <i class="glyphicon glyphicon-plus-sign">
-                </i>
-
-            </a>
-        </div>
 
         <table id="searchTextResults" class="table-striped" style="width: 100%">
             <thead>
-            <tr style="height: 20px"><td>&nbsp;</td></tr>
             <tr>
                 <th class="sparesys-view-courses-course-column">
                 </th>
                 <th class="sparesys-view-object-right-padded-element">Question</th>
                 <th class="sparesys-view-object-content-cell">Answer</th>
+                <th class="sparesys-view-object-content-cell">Due</th>
                 <th class="sparesys-view-object-content-cell">Style</th>
             </tr>
             </thead>
@@ -74,6 +88,15 @@
 
                 <td class="sparesys-view-object-content-cell">
                     {{card.answer}}
+                </td>
+
+                <td class="sparesys-view-object-content-cell" style="white-space: nowrap; padding-right:5px">
+                    <span data-ng-if="card.due">
+                        {{card.due | date:'mediumDate'}}
+                    </span>
+                    <span data-ng-if="!card.due">
+                        never
+                    </span>
                 </td>
 
                 <td class="sparesys-view-object-label-cell">

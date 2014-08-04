@@ -17,6 +17,10 @@ angular.module('schoolclasses').config(['$stateProvider',
                 url: '/schoolclasses/create',
                 templateUrl: 'modules/schoolclasses/views/create-schoolclass.client.view.html'
             }).
+            state('adminSchoolclass', {
+                url: '/schoolclasses/admin',
+                templateUrl: 'modules/schoolclasses/views/admin-schoolclasses.client.view.html'
+            }).
             state('viewSchoolclass', {
                 url: '/schoolclasses/:schoolclassId',
                 templateUrl: 'modules/schoolclasses/views/view-schoolclass.client.view.html'

@@ -1,8 +1,8 @@
 'use strict';
 
 // Schoolclasses controller
-angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses',
-    function ($scope, $modal, $stateParams, $location, Authentication, Schoolclasses) {
+angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Courses', 'CoursesService',
+    function ($scope, $modal, $stateParams, $location, Authentication, Schoolclasses, Courses, CoursesService) {
 
         $scope.authentication = Authentication;
 
@@ -25,6 +25,41 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             if ($scope.schoolclass.courses.indexOf(course._id) === -1) {
                 $scope.schoolclass.courses.push(course._id);
                 $scope.schoolclass.$update();
+
+                $scope.schoolclass.students.forEach(function(studentId) {
+                    console.log(studentId);
+
+
+
+                    var res = CoursesService.copyCourse(course._id);
+                    var promise = res.get({courseId: course._id}).$promise;
+
+                    promise.then(function (returnedCourse) {
+
+                       Courses.get({
+                            courseId: returnedCourse._id
+                        }).$promise.then(function(copiedCourse) {
+                           copiedCourse.user = studentId;
+                           copiedCourse.$save(function(){
+                           });
+                       });
+
+                    });
+//
+//                    promise.catch(function () {
+//                        console.log('catch');
+//                        copiedCourse.user = studentId;
+//                        copiedCourse.$save();
+
+//                    });
+//
+//                    promise.finally(function () {
+//                        console.log('finally');
+//                        copiedCourse.user = studentId;
+//                        copiedCourse.$save();
+
+//                    });
+                });
             }
         };
 

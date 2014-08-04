@@ -318,7 +318,8 @@ exports.copyCourse = function (req, res, next, id) {
         courseCopy.save(function () {
 
             copyPacks(courseCopy, courses[0].packs, req).then(function (result) {
-                console.log(result);
+//                console.log(result);
+                res.jsonp(courseCopy);
             });
         });
 

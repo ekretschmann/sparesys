@@ -2,8 +2,8 @@
 
 // Schools controller
 angular.module('schools').controller('SchoolsController', ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Schools',
-	function($scope, $stateParams, $location, $modal, Authentication, Schools ) {
-		$scope.authentication = Authentication;
+    function ($scope, $stateParams, $location, $modal, Authentication, Schools) {
+        $scope.authentication = Authentication;
 
         $scope.addTeacherToSchoolPopup = function (size) {
             $modal.open({
@@ -52,86 +52,95 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
         };
 
 
-
         // Find list for current user
         $scope.findForCurrentUser = function () {
             if ($scope.authentication.user) {
                 $scope.schools = Schools.query({
                     userId: $scope.authentication.user._id
-                }, function(schools) {
+                }, function (schools) {
                     if (schools.length === 1) {
-                        $location.path('schools/'+schools[0]._id+'/edit');
+                        $location.path('schools/' + schools[0]._id + '/edit');
                     }
                 });
             }
         };
 
-		// Create new School
-		$scope.create = function() {
-			// Create new School object
-			var school = new Schools ({
-				name: this.name,
+        // Create new School
+        $scope.create = function () {
+            // Create new School object
+            var school = new Schools({
+                name: this.name,
                 city: this.city,
                 country: this.country
-			});
+            });
 
-			// Redirect after save
-			school.$save(function(response) {
-				$location.path('schools/' + response._id +'/edit');
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
+            // Redirect after save
+            school.$save(function (response) {
+                $location.path('schools/' + response._id + '/edit');
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
 
-			// Clear form fields
-			this.name = '';
-		};
+            // Clear form fields
+            this.name = '';
+        };
 
-		// Remove existing School
-		$scope.remove = function( school ) {
-			if ( school ) { school.$remove();
+        // Remove existing School
+        $scope.remove = function (school) {
+            if (school) {
+                school.$remove();
 
-				for (var i in $scope.schools ) {
-					if ($scope.schools [i] === school ) {
-						$scope.schools.splice(i, 1);
-					}
-				}
-			} else {
-				$scope.school.$remove(function() {
-					$location.path('schools');
-				});
-			}
-		};
+                for (var i in $scope.schools) {
+                    if ($scope.schools [i] === school) {
+                        $scope.schools.splice(i, 1);
+                    }
+                }
+            } else {
+                $scope.school.$remove(function () {
+                    $location.path('schools');
+                });
+            }
+        };
 
-		// Update existing School
-		$scope.update = function() {
-			var school = $scope.school ;
+        // Update existing School
+        $scope.update = function () {
+            var school = $scope.school;
 
-			school.$update(function() {
-				$location.path('schools/' + school._id);
-			}, function(errorResponse) {
-				$scope.error = errorResponse.data.message;
-			});
-		};
+            school.$update(function () {
+                $location.path('schools/' + school._id);
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+        };
 
-		// Find a list of Schools
-		$scope.findForUser = function() {
+        // Find a list of Schools
+        $scope.findForUser = function () {
 
             $scope.school = Schools.query({
                 teachers: Authentication.user._id
-            }, function(schools) {
-                $scope.school= schools[0];
+            }, function (schools) {
+                $scope.school = schools[0];
             });
-		};
+        };
 
-        $scope.find = function() {
+        $scope.find = function () {
             $scope.schools = Schools.query();
         };
 
-		// Find existing School
-		$scope.findOne = function() {
-			$scope.school = Schools.get({ 
-				schoolId: $stateParams.schoolId
-			});
-		};
-	}
+        // Find existing School
+        $scope.findById = function (id) {
+            if (id) {
+                $scope.school = Schools.get({
+                    schoolId: id
+                });
+            }
+        };
+
+        // Find existing School
+        $scope.findOne = function () {
+            $scope.school = Schools.get({
+                schoolId: $stateParams.schoolId
+            });
+        };
+    }
 ]);

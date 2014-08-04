@@ -99,7 +99,7 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
 
-//    console.log(req.query.teachers);
+    console.log(req);
 
     if (req.query.teachers) {
         School.find({'teachers': req.query.teachers}).exec(function (err, schools) {

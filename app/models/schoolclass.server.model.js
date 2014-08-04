@@ -31,6 +31,9 @@ var SchoolclassSchema = new Schema({
     courses: {
         type: [Schema.Types.ObjectId],
         default: []
+    },
+    school: {
+        type: Schema.ObjectId
     }
 });
 

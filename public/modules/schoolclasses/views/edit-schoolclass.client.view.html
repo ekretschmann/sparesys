@@ -54,8 +54,8 @@
                 <table class="table-striped" style="width: 100%">
                     <thead>
                     <tr>
-                        <th></th>
-                        <th style="width: 100%">In class {{schoolclass.name}}</th>
+                        <th class="sparesys-view-courses-course-column"></th>
+                        <th class="sparesys-view-courses-course-column" style="width: 100%">In class {{schoolclass.name}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -63,7 +63,8 @@
 
 
                         <td class="sparesys-view-courses-name-cell">
-                            <a href="#">
+
+                            <a href="#!/schoolclasses/{{schoolclass._id}}/edit">
                                 <i data-ng-click="removeCourseFromClass(course)"
                                    class="glyphicon glyphicon-minus-sign">
                                 </i>
@@ -84,68 +85,68 @@
             </td>
         </tr>
 
-        <tr >
-            <td>
-                <table id="searchTextResults" class="table-striped" style="width: 100%; margin-top: 15px"
-                       data-ng-controller="SchoolsController"
-                       data-ng-init="findForUser()">
-                    <thead>
-                    <tr>
-                        <th class="sparesys-view-courses-course-column"></th>
-                        <th class="sparesys-view-courses-course-column">Students</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr data-ng-repeat="student in school.students"
-                        data-ng-controller="UsersController"
-                        data-ng-init="findStudent(student)">
+        <!--<tr >-->
+            <!--<td>-->
+                <!--<table id="searchTextResults" class="table-striped" style="width: 100%; margin-top: 15px"-->
+                       <!--data-ng-controller="SchoolsController"-->
+                       <!--data-ng-init="findForUser()">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th class="sparesys-view-courses-course-column"></th>-->
+                        <!--<th class="sparesys-view-courses-course-column">Students</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr data-ng-repeat="student in school.students"-->
+                        <!--data-ng-controller="UsersController"-->
+                        <!--data-ng-init="findStudent(student)">-->
 
-                        <td class="sparesys-view-courses-name-cell">
-                            <a href="">
-                                <i data-ng-click="addToClass(student)"
-                                   class="glyphicon glyphicon-plus-sign">
-                                </i>
-                            </a>
-                        </td>
-                        <td class="sparesys-view-object-content-cell">
-                            {{student.displayName}}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        <!--<td class="sparesys-view-courses-name-cell">-->
+                            <!--<a href="">-->
+                                <!--<i data-ng-click="addToClass(student)"-->
+                                   <!--class="glyphicon glyphicon-plus-sign">-->
+                                <!--</i>-->
+                            <!--</a>-->
+                        <!--</td>-->
+                        <!--<td class="sparesys-view-object-content-cell">-->
+                            <!--{{student.displayName}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
 
-            </td>
-            <td style="vertical-align: top">
-                <table class="table-striped" style="width: 100%; margin-top: 15px">
-                    <thead>
-                    <tr>
-                        <th class="sparesys-view-courses-course-column"></th>
-                        <th class="sparesys-view-courses-course-column">In class {{schoolclass.name}}</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr data-ng-repeat="student in schoolclass.students">
+            <!--</td>-->
+            <!--<td style="vertical-align: top">-->
+                <!--<table class="table-striped" style="width: 100%; margin-top: 15px">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+                        <!--<th class="sparesys-view-courses-course-column"></th>-->
+                        <!--<th class="sparesys-view-courses-course-column" style="width: 100%">In class {{schoolclass.name}}</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr data-ng-repeat="student in schoolclass.students">-->
 
 
-                        <td class="sparesys-view-courses-name-cell">
-                            <a href="#">
-                                <i data-ng-click="removeFromClass(student)"
-                                   class="glyphicon glyphicon-minus-sign">
-                                </i>
-                            </a>
+                        <!--<td class="sparesys-view-courses-name-cell">-->
+                            <!--<a href="">-->
+                                <!--<i data-ng-click="removeFromClass(student)"-->
+                                   <!--class="glyphicon glyphicon-minus-sign">-->
+                                <!--</i>-->
+                            <!--</a>-->
 
-                        </td>
+                        <!--</td>-->
 
-                        <td data-ng-controller="UsersController"
-                            data-ng-init="findStudent(student)" class="sparesys-view-object-content-cell">
-                            {{student.displayName}}
-                        </td>
-                    </tr>
-                    </tbody>
-                </table>
+                        <!--<td data-ng-controller="UsersController"-->
+                            <!--data-ng-init="findStudent(student)" class="sparesys-view-object-content-cell">-->
+                            <!--{{student.displayName}}-->
+                        <!--</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
 
-            </td>
-        </tr>
+            <!--</td>-->
+        <!--</tr>-->
     </table>
 
 

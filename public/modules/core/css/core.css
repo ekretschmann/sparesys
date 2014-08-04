@@ -245,6 +245,8 @@ div {
 
 body {
     background-color: aliceblue;
+    font-family: 'PT Sans', sans-serif;
+    font-size: 12pt;
 }
 
 /*.navbar-inverse .navbar-brand {*/

@@ -4,7 +4,7 @@ module.exports = {
 	db: 'mongodb://localhost/sparesys-test',
 	port: 3001,
 	app: {
-		title: 'sparesys - Test Environment'
+		title: 'Rememberators - Test Environment'
 	},
 	facebook: {
 		clientID: process.env.FACEBOOK_ID || 'APP_ID',

@@ -54,7 +54,7 @@
                 <table class="table-striped" style="width: 100%">
                     <thead>
                     <tr>
-                        <th class="sparesys-view-courses-course-column"></th>
+                        <th class="sparesys-view-courses-course-column"><span class="glyphicon glyphicon-minus-sign" style="visibility: hidden"></span></th>
                         <th class="sparesys-view-courses-course-column" style="width: 100%">In class {{schoolclass.name}}</th>
                     </tr>
                     </thead>
@@ -120,13 +120,14 @@
                 <table class="table-striped" style="width: 100%; margin-top: 15px">
                     <thead>
                     <tr>
-                        <th class="sparesys-view-courses-course-column"></th>
+                        <th class="sparesys-view-courses-course-column">
+                            <span class="glyphicon glyphicon-minus-sign" style="visibility: hidden"></span>
+                        </th>
                         <th class="sparesys-view-courses-course-column" style="width: 100%">In class {{schoolclass.name}}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr data-ng-repeat="student in schoolclass.students">
-
 
                         <td class="sparesys-view-courses-name-cell">
                             <a href="#!/schoolclasses/{{schoolclass._id}}/edit">
@@ -134,7 +135,6 @@
                                    class="glyphicon glyphicon-minus-sign">
                                 </i>
                             </a>
-
                         </td>
 
                         <td data-ng-controller="UsersController"

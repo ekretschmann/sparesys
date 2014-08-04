@@ -11,6 +11,8 @@ angular.module('courses').controller('DeleteCourseModalController', ['$scope', '
 
                 if($state.$current.url.source === '/courses') {
                     $state.go($state.$current, null, {reload: true});
+                } else if($state.$current.url.source === '/courses/admin') {
+                    $state.go($state.$current, null, {reload: true});
                 } else {
                     $location.path('courses');
                 }

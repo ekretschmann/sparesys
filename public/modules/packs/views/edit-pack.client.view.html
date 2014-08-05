@@ -48,8 +48,13 @@
         </div>
 
         <div class="sparesys-title" >{{pack.name}}</div>
-        <div class="sparesys-subtitle">
-            <a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.courseName}}</a>
+
+        <div>
+            Course:  <a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.courseName}}</a>
+        </div>
+        <div>
+            Due: <span data-ng-if="pack.due">{{pack.due | date:'mediumDate'}}</span>
+            <span data-ng-if="!pack.due">never</span>
         </div>
     </div>
 

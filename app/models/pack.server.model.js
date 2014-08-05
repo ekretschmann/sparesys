@@ -30,6 +30,9 @@ var PackSchema = new Schema({
     cards: {
         type: [Schema.Types.ObjectId],
         default: []
+    },
+    due: {
+        type: Date
     }
 });
 

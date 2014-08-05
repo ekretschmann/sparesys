@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('packs').controller('EditPackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack',
-	function($scope, $state, $timeout, $modalInstance, pack) {
+angular.module('packs').controller('EditPackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'Cards',
+    function ($scope, $state, $timeout, $modalInstance, pack, Cards) {
         $scope.pack = pack;
 
         $scope.setFocus = function () {
-            $timeout(function(){
+            $timeout(function () {
                 angular.element('.editPackFocus').trigger('focus');
-            },100);
+            }, 100);
         };
 
         $scope.cancel = function () {
@@ -16,14 +16,29 @@ angular.module('packs').controller('EditPackController', ['$scope', '$state', '$
 
         $scope.ok = function () {
 
-//            $scope.pack.name = this.packname;
-//            console.log($scope.pack.name);
             var courseName = pack.courseName;
-            $scope.pack.$update(function() {
+            $scope.pack.$update(function () {
                 pack.courseName = courseName;
+            });
+
+
+            var cardsToUpdate = pack.cards.length;
+            var cardsUpdated = 0;
+            pack.cards.forEach(function (card) {
+                Cards.get({
+                    cardId: card
+                }, function (card) {
+                    card.due = pack.due;
+                    card.$update(function() {
+                        cardsUpdated++;
+                        if (cardsUpdated === cardsToUpdate) {
+                            $state.go($state.$current, null, {reload:true});
+                        }
+                    });
+                });
             });
 
             $modalInstance.dismiss('cancel');
         };
-	}
+    }
 ]);

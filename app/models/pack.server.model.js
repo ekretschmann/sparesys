@@ -36,6 +36,9 @@ var PackSchema = new Schema({
     },
     due: {
         type: Date
+    },
+    after: {
+        type: Date
     }
 });
 

@@ -29,6 +29,7 @@ angular.module('packs').controller('EditPackController', ['$scope', '$state', '$
                     cardId: card
                 }, function (card) {
                     card.due = pack.due;
+                    card.after = pack.after;
                     card.$update(function() {
                         cardsUpdated++;
                         if (cardsUpdated === cardsToUpdate) {

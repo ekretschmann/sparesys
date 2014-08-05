@@ -92,7 +92,7 @@
 
 
 
-                <tr class="controls" data-ng-controller="DateDropdownController" data-ng-init="setDate(card.due)">
+                <tr class="controls" data-ng-controller="DateDropdownController">
                     <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Due date</td>
                     <td class="input-group">
 
@@ -108,8 +108,8 @@
                     </td>
                 </tr>
 
-                <tr class="controls" data-ng-controller="DateDropdownController" data-ng-init="setDate(card.after)">
-                    <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Not Before</td>
+                <tr class="controls" data-ng-controller="DateDropdownController">
+                    <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Start</td>
                     <td class="input-group" style="padding-top: 3px">
 
                         <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="card.after"

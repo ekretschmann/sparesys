@@ -4,11 +4,12 @@
     <div ng-include="'/modules/packs/views/partial/add-card.modal.client.view.html'"></div>
     <div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
     <div ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
+    <div ng-include="'/modules/packs/views/partial/edit-pack.modal.client.view.html'"></div>
     <div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
 
 
     <div class="sparesys-header">
-        <div class="pull-right">
+        <div class="pull-right" style="padding-top: 5px">
 
 
 
@@ -17,18 +18,20 @@
                     style="padding-right: 20px">
                 Edit
             </a>
-            <a href="" ng-click="setDueDate()" data-ng-show="authentication.user._id == pack.user._id"
+            <!--<a href="" ng-click="setDueDate()" data-ng-show="authentication.user._id == pack.user._id"-->
+               <!--style="padding-right: 20px">-->
+                <!--Set Due Date-->
+            <!--</a>-->
+
+
+            <a href="" data-ng-click="areYouSureToDeletePack(pack)" data-ng-show="authentication.user._id == pack.user._id"
                style="padding-right: 20px">
-                Set Due Date
+                Delete
             </a>
 
             <a href="" ng-click="addCardToPackPopup()" data-ng-show="authentication.user._id == pack.user._id"
-               style="padding-right: 20px">
+              >
                 Add Cards
-            </a>
-
-            <a href="" data-ng-click="areYouSureToDeletePack(pack)" data-ng-show="authentication.user._id == pack.user._id">
-                Delete
             </a>
 
 
@@ -44,9 +47,7 @@
 
         </div>
 
-        <div class="sparesys-title">
-            {{pack.name}}
-        </div>
+        <div class="sparesys-title" >{{pack.name}}</div>
         <div class="sparesys-subtitle">
             <a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.courseName}}</a>
         </div>

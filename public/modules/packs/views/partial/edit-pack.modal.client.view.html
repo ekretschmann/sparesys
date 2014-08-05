@@ -19,8 +19,25 @@
                                            id="packname" class="form-control editPackFocus"
                                            data-ng-init="setFocus()"
                                            required></td>
+
+
+
                             </tr>
 
+                            <tr class="controls" data-ng-controller="DateDropdownController" data-ng-init="setDate(card.due)">
+                                <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Due date</td>
+                                <td class="input-group" style="vertical-align: middle; background-color: yellow">
+                                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="pack.due"
+                                               is-open="opened" min-date="minDate" max-date="'2015-06-22'"
+                                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                               ng-required="false" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+
+                                </td>
+                            </tr>
                         </table>
                     </div>
 

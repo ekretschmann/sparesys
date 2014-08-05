@@ -53,17 +53,15 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             }
         };
 
+
         $scope.updateAlternative = function (index, alt) {
-
             $scope.card.alternatives[index] = alt;
-
             var alts = [];
             $scope.card.alternatives.forEach(function (alt) {
                 if (alt !== undefined && alt !== '') {
                     alts.push(alt);
                 }
             });
-
             $scope.card.alternatives = alts;
         };
 
@@ -73,7 +71,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 $scope.nextAlternative = undefined;
 
                 $timeout(function () {
-
                     angular.element('#alternative').trigger('focus');
                 }, 100);
 
@@ -85,14 +82,14 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         // Update existing Card
         $scope.update = function () {
 
+            console.log('updating');
+
             var card = $scope.card;
             card.updated = Date.now();
 
             if ($scope.nextAlternative) {
                 card.alternatives.push($scope.nextAlternative);
             }
-
-
 
             card.$update(function (c) {
                 $location.path('packs/' + card.packs[0]+'/edit');
@@ -111,6 +108,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             $scope.card = Cards.get({
                 cardId: $stateParams.cardId
             }, function() {
+
                 Packs.get({
                     packId: $scope.card.packs[0]
                 }, function(pack) {

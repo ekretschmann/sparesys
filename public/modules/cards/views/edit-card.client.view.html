@@ -55,7 +55,7 @@
                     </td>
                 </tr>
 
-                <tr class="controls" data-ng-repeat="alt in card.alternatives">
+                <tr class="controls" data-ng-repeat="alt in card.alternatives track by $index">
                     <td class="sparesys-view-object-label-cell"></td>
                     <td class="sparesys-view-object-content-cell">
                         <input type="text" data-ng-model="alt"

@@ -86,14 +86,19 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
             },
             removePack: function (pack, callback) {
 
+                var self = this;
                 if (pack) {
                     Courses.query({
                         _id: pack.course
                     }, function (courses) {
                         if (courses.length === 0) {
 
-//                            pack.$remove(callback);
+//                           not sure this can happen?
                             console.log('remove dangling pack ' + pack.name);
+                            self.removeCards(pack.cards).then(function(){
+                                pack.$remove();
+                                callback();
+                            });
                         }
                         if (courses.length === 1) {
                             var course = courses[0];
@@ -103,19 +108,10 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                                 }
                             }
                             course.$update(function () {
-                                pack.cards.forEach(function (cardId) {
-
-                                    Cards.query({
-                                        _id: cardId
-                                    }, function (cards) {
-                                        if (cards.length === 1) {
-                                            console.log('remove ' + cards[0].question);
-//                                            cards[0].$remove();
-                                        }
-                                    });
+                                self.removeCards(pack.cards).then(function(){
+                                    pack.$remove();
+                                    callback();
                                 });
-//                                pack.$remove(callback);
-                                console.log('remove pack ' + pack.name);
                             });
                         }
                     });
@@ -138,6 +134,9 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                         method: 'GET'
                     }
                 });
+            },
+            findSchoolclasses: function () {
+                return $resource('/courses/copy/:userId', {userId:'@id'});
             }
         };
     }

@@ -45,12 +45,18 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$sta
 
         // Update existing Card
         $scope.update = function () {
+//            console.log($scope.nextAlternative);
+            console.log($scope.card.answer);
+
             var card = $scope.card;
             card.updated = Date.now();
 
-            card.$update(function () {
+
+            card.$update(function (c) {
+                console.log(c);
                 $location.path('packs/' + card.packs[0]+'/edit');
             }, function (errorResponse) {
+                console.log(errorResponse);
                 $scope.error = errorResponse.data.message;
             });
         };

@@ -13,14 +13,18 @@ var CardSchema = new Schema({
 	question: {
 		type: String,
 		default: '',
-		required: 'Please fill Card question',
+		required: 'Please fill out Card Question',
 		trim: true
 	},
     answer: {
         type: String,
         default: '',
-        required: 'Please fill Card answer',
+        required: 'Please fill out Card Answer',
         trim: true
+    },
+    alternatives: {
+        type: [String],
+        default: []
     },
 	created: {
 		type: Date,

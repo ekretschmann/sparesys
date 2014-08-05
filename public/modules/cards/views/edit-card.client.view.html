@@ -45,7 +45,7 @@
                     </td>
 
                 <tr class="controls">
-                    <td class="sparesys-view-object-label-cell">Answer</td>
+                    <td class="sparesys-view-object-label-cell">Answers</td>
                     <td class="sparesys-view-object-content-cell">
                         <input type="text" data-ng-model="card.answer"
                                id="answer" class="form-control"
@@ -53,6 +53,25 @@
                                required>
                     </td>
                 </tr>
+
+                <tr class="controls" data-ng-repeat="alt in card.alternatives">
+                    <td class="sparesys-view-object-label-cell"></td>
+                    <td class="sparesys-view-object-content-cell">
+                        <input type="text" data-ng-model="alt"
+                               id="alternatives" class="form-control"
+                               placeholder="Alternative Answer">
+                    </td>
+                </tr>
+
+                <tr class="controls">
+                    <td class="sparesys-view-object-label-cell"></td>
+                    <td class="sparesys-view-object-content-cell">
+                        <input type="text" data-ng-model="nextAlternative"
+                               id="alternative" class="form-control"
+                               placeholder="Next Alternative Answer">
+                    </td>
+                </tr>
+
 
                 <tr class="controls" data-ng-controller="DateDropdownController" data-ng-init="setDate(card.due)">
                     <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Due date</td>
@@ -86,12 +105,14 @@
                     </td>
                 </tr>
             </table>
-            <div class="pull-right">
+            <div class="pull-right" style="padding-top: 2px">
                 <input type="submit" value="Update" class="btn btn-default">
             </div>
         </fieldset>
     </form>
-
+    <div data-ng-show="error" class="text-danger" style="text-align: center">
+        <strong>Error: {{error}}</strong>
+    </div>
 
     <div class="footer">
 

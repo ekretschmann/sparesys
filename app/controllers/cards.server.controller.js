@@ -67,6 +67,13 @@ exports.update = function(req, res) {
 
 	card = _.extend(card, req.body);
 
+    if(!req.body.answer) {
+        card.answer = undefined;
+    }
+
+    if(!req.body.question) {
+        card.question = undefined;
+    }
 
 	card.save(function(err) {
 		if (err) {

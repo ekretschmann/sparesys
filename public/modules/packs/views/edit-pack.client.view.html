@@ -40,6 +40,10 @@
             Due: <span data-ng-if="pack.due">{{pack.due | date:'mediumDate'}}</span>
             <span data-ng-if="!pack.due">never</span>
         </div>
+        <div>
+            Start: <span data-ng-if="pack.after">{{pack.due | date:'mediumDate'}}</span>
+            <span data-ng-if="!pack.after">now</span>
+        </div>
     </div>
 
 
@@ -56,7 +60,8 @@
                 </th>
                 <th class="sparesys-view-object-right-padded-element">Question</th>
                 <th class="sparesys-view-object-content-cell">Answer</th>
-                <th class="sparesys-view-object-content-cell">Due</th>
+                <th class="sparesys-view-object-content-cell" style="padding-right:5px">Due</th>
+                <th class="sparesys-view-object-content-cell">Start</th>
                 <th class="sparesys-view-object-content-cell">Style</th>
             </tr>
             </thead>
@@ -86,7 +91,16 @@
                         {{card.due | date:'mediumDate'}}
                     </span>
                     <span data-ng-if="!card.due">
-                        never
+                        -
+                    </span>
+                </td>
+
+                <td class="sparesys-view-object-content-cell" style="white-space: nowrap; padding-right:5px">
+                    <span data-ng-if="card.after">
+                        {{card.after | date:'mediumDate'}}
+                    </span>
+                    <span data-ng-if="!card.after">
+                        now
                     </span>
                 </td>
 
@@ -110,11 +124,18 @@
 
 
 
-    <!--</div>-->
+    <div class="footer">
 
+        <div>
+            <small>
+                <em class="text-muted">Created on {{pack.created | date:'medium'}}</em>
+            </small>
+        </div>
+        <div data-ng-if="pack.updated">
+            <small>
+                <em class="text-muted">Updated on {{pack.updated | date:'medium'}}</em>
+            </small>
+        </div>
 
-    <small>
-        <em class="text-muted">Created on {{pack.created | date:'mediumDate'}} by {{pack.user.displayName}}</em>
-    </small>
-
+    </div>
 </section>

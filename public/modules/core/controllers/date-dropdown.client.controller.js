@@ -36,6 +36,10 @@ angular.module('core').controller('DateDropdownController', ['$scope',  function
         startingDay: 1
     };
 
+    $scope.closeDateDropdown = function() {
+        $scope.opened = false;
+    };
+
     $scope.dt = undefined;
     $scope.formats = ['dd-MMMM-yyyy', 'yyyy/MM/dd', 'dd.MM.yyyy', 'shortDate'];
     $scope.format = $scope.formats[0];

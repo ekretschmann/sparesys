@@ -1,11 +1,12 @@
 'use strict';
 
 // Cards controller
-angular.module('cards').controller('CardsController', ['$scope', '$modal', '$stateParams', '$state', '$location', 'Authentication', 'Packs', 'Cards',
-    function ($scope, $modal, $stateParams, $state, $location, Authentication, Packs, Cards) {
+angular.module('cards').controller('CardsController', ['$scope', '$modal', '$timeout', '$stateParams', '$state', '$location', 'Authentication', 'Packs', 'Cards',
+    function ($scope, $modal, $timeout, $stateParams, $state, $location, Authentication, Packs, Cards) {
         $scope.authentication = Authentication;
 
 
+        $scope.nextAlternative = undefined;
 
 
         // Create new Card
@@ -43,20 +44,59 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$sta
             }
         };
 
+        $scope.updateAnswer = function() {
+            if (!$scope.card.answer) {
+                if ($scope.card.alternatives[0]) {
+                    $scope.card.answer = $scope.card.alternatives[0];
+                    $scope.card.alternatives.splice(0,1);
+                }
+            }
+        };
+
+        $scope.updateAlternative = function (index, alt) {
+
+            $scope.card.alternatives[index] = alt;
+
+            var alts = [];
+            $scope.card.alternatives.forEach(function (alt) {
+                if (alt !== undefined && alt !== '') {
+                    alts.push(alt);
+                }
+            });
+
+            $scope.card.alternatives = alts;
+        };
+
+        $scope.updateNextAlternative = function () {
+            if ($scope.nextAlternative) {
+                $scope.card.alternatives.push($scope.nextAlternative);
+                $scope.nextAlternative = undefined;
+
+                $timeout(function () {
+
+                    angular.element('#alternative').trigger('focus');
+                }, 100);
+
+            }
+        };
+
+
+
         // Update existing Card
         $scope.update = function () {
-//            console.log($scope.nextAlternative);
-            console.log($scope.card.answer);
 
             var card = $scope.card;
             card.updated = Date.now();
 
+            if ($scope.nextAlternative) {
+                card.alternatives.push($scope.nextAlternative);
+            }
+
+
 
             card.$update(function (c) {
-                console.log(c);
                 $location.path('packs/' + card.packs[0]+'/edit');
             }, function (errorResponse) {
-                console.log(errorResponse);
                 $scope.error = errorResponse.data.message;
             });
         };

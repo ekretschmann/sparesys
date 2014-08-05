@@ -26,6 +26,9 @@ var CardSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+    updated: {
+        type: Date
+    },
 	user: {
 		type: Schema.ObjectId,
 		ref: 'User'
@@ -53,6 +56,9 @@ var CardSchema = new Schema({
         default: [true, true, false, false]
     },
     due: {
+        type: Date
+    },
+    after: {
         type: Date
     }
 });

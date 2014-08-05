@@ -46,6 +46,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$sta
         // Update existing Card
         $scope.update = function () {
             var card = $scope.card;
+            card.updated = Date.now();
 
             card.$update(function () {
                 $location.path('packs/' + card.packs[0]+'/edit');

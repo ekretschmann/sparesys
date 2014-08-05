@@ -1,25 +1,35 @@
 <section data-ng-controller="CardsController" data-ng-init="findOne()">
+
+    <div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
+
     <div class="sparesys-header">
-        <div class="pull-right">
+        <div class="pull-right" style="padding-top: 5px">
 
-            <a class="btn btn-primary" data-ng-click="editPackPopup(pack)"
-               data-ng-show="authentication.user._id == pack.user._id">
-                <i class="glyphicon glyphicon-edit"></i>
+
+            <a href="" data-ng-click="areYouSureToDeleteCard(card)"
+               data-ng-show="authentication.user._id == card.user._id">
+                Delete
             </a>
 
-            <a class="btn btn-primary" data-ng-click="areYouSureToDeletePack(pack)"
-               data-ng-show="authentication.user._id == pack.user._id">
-                <i class="glyphicon glyphicon-trash"></i>
-            </a>
+
+            <!--<a class="btn btn-primary" data-ng-click="editPackPopup(pack)"-->
+            <!--data-ng-show="authentication.user._id == pack.user._id">-->
+            <!--<i class="glyphicon glyphicon-edit"></i>-->
+            <!--</a>-->
+
+            <!--<a class="btn btn-primary" data-ng-click="areYouSureToDeletePack(pack)"-->
+            <!--data-ng-show="authentication.user._id == pack.user._id">-->
+            <!--<i class="glyphicon glyphicon-trash"></i>-->
+            <!--</a>-->
 
         </div>
 
         <div class="sparesys-title">
-            {{card.question}}: {{card.answer}}
+            {{card.question}} &#8594; {{card.answer}}
         </div>
-        <div class="sparesys-subtitle">
+        <div>
 
-            <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
+            Pack: <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
         </div>
     </div>
     <form class="form-horizontal" data-ng-submit="update()" novalidate>
@@ -48,10 +58,26 @@
                     <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Due date</td>
                     <td class="input-group">
 
-                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="card.due"
-                                   is-open="opened" min-date="minDate" max-date="'2015-06-22'"
-                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
-                                   ng-required="false" close-text="Close"/>
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="card.due"
+                               is-open="opened" min-date="minDate"
+                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               ng-required="false" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+
+                    </td>
+                </tr>
+
+                <tr class="controls" data-ng-controller="DateDropdownController" data-ng-init="setDate(card.after)">
+                    <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Not Before</td>
+                    <td class="input-group" style="padding-top: 3px">
+
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="card.after"
+                               is-open="opened" min-date="minDate"
+                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                               ng-required="false" close-text="Close"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open($event)"><i
                         class="glyphicon glyphicon-calendar"></i></button>
@@ -66,4 +92,19 @@
         </fieldset>
     </form>
 
+
+    <div class="footer">
+
+        <div>
+            <small>
+                <em class="text-muted">Created on {{card.created | date:'medium'}}</em>
+            </small>
+        </div>
+        <div data-ng-if="card.updated">
+            <small>
+                <em class="text-muted">Updated on {{card.updated | date:'medium'}}</em>
+            </small>
+        </div>
+
+    </div>
 </section>

@@ -1,12 +1,19 @@
 'use strict';
 
-angular.module('packs').controller('DeleteCardController', ['$scope', '$state', '$modalInstance', 'card', 'CoursesService',
-	function($scope, $state, $modalInstance, card, CoursesService) {
+angular.module('packs').controller('DeleteCardController', ['$scope', '$state', '$location','$modalInstance', 'card', 'CoursesService',
+	function($scope, $state, $location, $modalInstance, card, CoursesService) {
         $scope.card = card;
 
         $scope.ok = function () {
+            var packId = $scope.card.packs[0];
             CoursesService.removeCard(card, function () {
-                $state.go($state.$current, null, { reload: true });
+                if ($state.$current.url.source === '/packs/:packId/edit') {
+                    $state.go($state.$current, null, {reload:true});
+                } else {
+                    $location.path('packs/' + packId + '/edit');
+                }
+
+//                $state.go($state.$current, null, { reload: true });
             });
             $modalInstance.close();
         };

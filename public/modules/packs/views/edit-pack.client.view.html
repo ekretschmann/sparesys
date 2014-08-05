@@ -33,17 +33,30 @@
 
         <div class="sparesys-title" >{{pack.name}}</div>
 
-        <div>
-            Course:  <a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.courseName}}</a>
-        </div>
-        <div>
-            Due: <span data-ng-if="pack.due">{{pack.due | date:'mediumDate'}}</span>
-            <span data-ng-if="!pack.due">never</span>
-        </div>
-        <div>
-            Start: <span data-ng-if="pack.after">{{pack.due | date:'mediumDate'}}</span>
-            <span data-ng-if="!pack.after">now</span>
-        </div>
+        <table>
+            <tr>
+                <td>Course</td>
+                <td style="padding-left: 5px">:</td>
+                <td style="padding-left: 5px"><a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.courseName}}</a></td>
+            </tr>
+            <tr>
+                <td>Due</td>
+                <td style="padding-left: 5px">:</td>
+                <td style="padding-left: 5px">
+                    <span data-ng-if="pack.due">{{pack.due | date:'mediumDate'}}</span>
+                    <span data-ng-if="!pack.due">never</span>
+                </td>
+            </tr>
+            <tr>
+                <td>Start</td>
+                <td style="padding-left: 5px">:</td>
+                <td style="padding-left: 5px">
+                    <span data-ng-if="pack.after">{{pack.due | date:'mediumDate'}}</span>
+                    <span data-ng-if="!pack.after">now</span>
+                </td>
+            </tr>
+        </table>
+
     </div>
 
 

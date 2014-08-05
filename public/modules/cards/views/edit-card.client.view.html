@@ -74,6 +74,23 @@
                     </td>
                 </tr>
 
+                <tr class="controls">
+                    <td class="sparesys-view-object-label-cell">Style</td>
+                    <td class="sparesys-view-object-content-cell">
+                        <input type="radio" data-ng-model="card.style[0]"
+                               id="read" ><span style="padding-left: 5px">Self Certify (Read) {{card.style[0]}}</span>
+                    </td>
+                </tr>
+
+                <tr class="controls">
+                    <td class="sparesys-view-object-label-cell"></td>
+                    <td class="sparesys-view-object-content-cell">
+                        <input type="radio" data-ng-model="card.style[1]"
+                               id="write" ><span style="padding-left: 5px">Validated Input (Write)</span>
+                    </td>
+                </tr>
+
+
 
                 <tr class="controls" data-ng-controller="DateDropdownController" data-ng-init="setDate(card.due)">
                     <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Due date</td>

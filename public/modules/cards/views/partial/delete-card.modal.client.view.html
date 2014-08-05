@@ -1,20 +1,20 @@
 <script type="text/ng-template" id="areYouSureToDeleteCard.html">
-    <div class="modal-body">
+    <div class="modal-body" >
 
         <div class="sparesys-header">
-            <div class="sparesys-title">
-                Delete card <span class="sparesys-emphasize">"{{card.question}} &#8594; {{card.answer}}"</span>
+            <div class="sparesys-title" style="text-align: center">
+                Delete Card: {{card.question}} &#8594; {{card.answer}}
             </div>
         </div>
-        <div class="sparesys-header">
+        <!--<div class="sparesys-header">-->
 
-            <div class="sparesys-subtitle">
-                Are you sure?
-            </div>
-        </div>
-        <!--<div class="modal-footer">-->
+            <!--<div class="sparesys-subtitle">-->
+                <!--Are you sure?-->
+            <!--</div>-->
+        <!--</div>-->
+        <div style="text-align: center">
         <button class="btn btn-primary sparesys-button" ng-click="ok()">OK</button>
         <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
-        <!--</div>-->
+        </div>
     </div>
 </script>

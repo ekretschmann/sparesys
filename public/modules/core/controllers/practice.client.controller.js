@@ -19,6 +19,7 @@ angular.module('core').controller('PracticeController',
 
             $scope.inPlay = 0;
             $scope.score = 0;
+            $scope.cardScore = 0;
 
             $scope.setFocus = function () {
                 $timeout(function () {
@@ -204,7 +205,7 @@ angular.module('core').controller('PracticeController',
                         $scope.inPlay ++;
                     }
                     $scope.setScore();
-
+                    $scope.setCardScore();
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
                     $scope.state = 'question';
@@ -221,6 +222,7 @@ angular.module('core').controller('PracticeController',
                     $scope.inPlay ++;
                 }
                 $scope.setScore();
+                $scope.setCardScore();
                 $scope.analysis = SchedulerService.getAnalysis();
                 $scope.keys = Object.keys($scope.analysis);
                 $scope.state = 'question';
@@ -238,9 +240,9 @@ angular.module('core').controller('PracticeController',
                 $scope.cardOrder = SchedulerService.getCardOrder();
             };
 
-            $scope.getPredictedCardRetention = function () {
+            $scope.setCardScore = function () {
 
-                return Math.round(SchedulerService.getPredictedRetention($scope.card, Date.now()) * 100);
+                $scope.cardScore = Math.round(SchedulerService.getPredictedRetention($scope.card, Date.now()) * 100);
             };
 
             $scope.setScore = function () {
@@ -268,6 +270,7 @@ angular.module('core').controller('PracticeController',
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
                     $scope.setScore();
+                    $scope.setCardScore();
                 });
 
                 Courses.get({

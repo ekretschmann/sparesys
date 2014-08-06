@@ -21,7 +21,7 @@
             </li>
             <li class="divider-vertical"></li>
             <li ui-route="/signin" ng-class="{active: $uiRoute}">
-                <a id="signin-link" href="/#!/signin" class="font-m">Signin</a>
+                <a id="signin-link" data-ng-controller="HomeController" href="" ng-click="signinPopup()" class="font-m">Signin</a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user">

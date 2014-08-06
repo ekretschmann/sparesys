@@ -31,7 +31,7 @@ angular.module('users').config(['$stateProvider',
             }).
             state('signin', {
                 url: '/signin',
-                templateUrl: 'modules/users/views/signin.client.view.html'
+                templateUrl: '../views/partial/signin.client.view.html'
             });
     }
 ]);

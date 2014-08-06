@@ -1,38 +1,13 @@
-<!--<div class="container slider" style="width: 100%; text-align: center">-->
 
-    <!-- enumerate all photos -->
+<div ng-include="'/modules/users/views/partial/signin.client.view.html'"></div>
 
-    <!--<div style="width:10%; float: left">test</div>-->
-    <!--<div ng-repeat="photo in photos">-->
-        <!--<img class="slide" ng-swipe-right="showPrev()" ng-swipe-left="showNext()"-->
-             <!--ng-show="isActive($index)" ng-src="{{photo.src}}"/>-->
-
-        <!--<div ng-show="isActive($index)">x{{photo.text}}x</div>-->
-
-
-        <!--&lt;!&ndash;<div style="width:10%; float: right">test</div>&ndash;&gt;-->
-
-        <!--&lt;!&ndash; prev / next controls &ndash;&gt;-->
-        <!--<a class="arrow prev" href="#" ng-click="showPrev()"></a>-->
-        <!--<a class="arrow next" href="#" ng-click="showNext()"></a>-->
-
-        <!--&lt;!&ndash; extra navigation controls &ndash;&gt;-->
-        <!--&lt;!&ndash;<ul class="slider-nav">&ndash;&gt;-->
-        <!--&lt;!&ndash;<li ng-repeat="photo in photos" ng-class="{'active':isActive($index)}">&ndash;&gt;-->
-        <!--&lt;!&ndash;<img src="{{photo.src}}" alt="{{photo.desc}}" title="{{photo.desc}}" ng-click="showPhoto($index);" />&ndash;&gt;-->
-        <!--&lt;!&ndash;</li>&ndash;&gt;-->
-        <!--&lt;!&ndash;</ul>&ndash;&gt;-->
-
-    <!--</div>-->
-
-
-    <div class="jumbotron" style="background-color: #26b3f7">
+    <div class="flashcard" >
 
 
         <div class="font-xxl">Rememberators!</div>
 
 
-        <div>
+        <div data-ng-if="index == 1">
             <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
                 <img src="/modules/core/img/brand/superhero-girl-medium.gif" alt="Rememberators"><br>
             </p>
@@ -40,63 +15,50 @@
             <div class="font-xl">You won't forget this. Ever.</div>
         </div>
 
-        <!--<div>-->
-        <!--<p class="lead" style="padding-top: 10px; padding-bottom: 10px">-->
-        <!--<img src="/modules/core/img/brand/superhero-boy-medium.gif" alt="Rememberators"><br>-->
-        <!--</p>-->
+        <div data-ng-if="index == 2">
+        <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
+        <img src="/modules/core/img/brand/superhero-boy-medium.gif" alt="Rememberators"><br>
+        </p>
 
-        <!--<div class="font-xl">I dare you to become a Rememberator.</div>-->
-        <!--</div>-->
+        <div class="font-xl">I dare you to become a Rememberator.</div>
+        </div>
 
-        <!--<div>-->
-        <!--<p class="lead" style="padding-left:40px; padding-top: 10px; padding-bottom: 10px">-->
-        <!--<img src="/modules/core/img/brand/guru-medium.gif" alt="Rememberators"><br>-->
-        <!--</p>-->
+        <div  data-ng-if="index == 3">
+        <p class="lead" style="padding-left:40px; padding-top: 10px; padding-bottom: 10px">
+        <img src="/modules/core/img/brand/guru-medium.gif" alt="Rememberators"><br>
+        </p>
 
-        <!--<div class="font-xl">Unleash your brainpower!</div>-->
-        <!--</div>-->
+        <div class="font-xl">Unleash your brainpower!</div>
+        </div>
 
-        <!--<div>-->
-        <!--<p class="lead" style="padding-top: 10px; padding-bottom: 10px">-->
-        <!--<img src="/modules/core/img/brand/philoshopher-medium.gif" alt="Rememberators"><br>-->
-        <!--</p>-->
+        <div data-ng-if="index == 4">
+        <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
+        <img src="/modules/core/img/brand/philosopher-medium.gif" alt="Rememberators"><br>
+        </p>
 
-        <!--<div class="font-xl">I remember, therefore I am.</div>-->
-        <!--</div>-->
+        <div class="font-xl">I remember, therefore I am.</div>
+        </div>
 
 
-        <!--<div>-->
-        <!--<p class="lead" style="padding-top: 10px; padding-bottom: 10px">-->
-        <!--<img src="/modules/core/img/brand/teacher-woman-medium.gif" alt="Rememberators"><br>-->
-        <!--</p>-->
+        <div  data-ng-if="index == 5">
+        <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
+        <img src="/modules/core/img/brand/teacher-woman-medium.gif" alt="Rememberators"><br>
+        </p>
 
-        <!--<div class="font-xl">The beautiful thing about learning is that no one can take it away from you.</div>-->
-        <!--</div>-->
+        <div class="font-xl">The beautiful thing about learning is that no one can take it away from you.</div>
+        </div>
 
-        <!--<div>-->
-        <!--<p class="lead" style="padding-top: 10px; padding-bottom: 10px">-->
-        <!--<img src="/modules/core/img/brand/teacher-man-medium.gif" alt="Rememberators"><br>-->
-        <!--</p>-->
+        <div data-ng-if="index == 6">
+        <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
+        <img src="/modules/core/img/brand/teacher-man-medium.gif" alt="Rememberators"><br>
+        </p>
 
-        <!--<div class="font-xl">That will teach you!</div>-->
-        <!--</div>-->
+        <div class="font-xl">That will teach you!</div>
+        </div>
 
-        <!--<div>-->
-        <!--<p class="lead" style="padding-top: 30px; padding-bottom: 30px">-->
-        <!--<img src="/modules/core/img/brand/superhero-boy-medium.gif" alt="Rememberators"><br>-->
-        <!--</p>-->
 
-        <!--<h2>I'll be back</h2>-->
-        <!--</div>-->
-
-        <!--<div>-->
-        <!--<p class="lead" style="padding-top: 30px; padding-bottom: 30px">-->
-        <!--<img src="/modules/core/img/brand/superhero-girl-medium.gif" alt="Rememberators"><br>-->
-        <!--</p>-->
-
-        <!--<h2>I will never let you forget</h2>-->
     </div>
-</div>
+
 
 
 <p style="width: 100%; text-align: center"><a class="btn btn-lg btn-success font-l" ng-href="#!/signup">I'll give it a

@@ -292,7 +292,7 @@ body {
     border-radius: 12px;
     text-align: center;
     box-shadow: 5px 5px 5px #CCC;
-    height:320px;
+    min-height:320px;
 }
 
 .answer {

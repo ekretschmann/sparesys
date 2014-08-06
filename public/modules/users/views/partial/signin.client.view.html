@@ -1,0 +1,73 @@
+<script type="text/ng-template" id="signin.html">
+
+    <div class="modal-body">
+        <div class="sparesys-header">
+            <div class="sparesys-title" style="text-align: center">
+                Sign in to Rememberators
+            </div>
+        </div>
+
+        <form class="signin form-horizontal" autocomplete="off">
+            <fieldset>
+                <div class="sparesys-header">
+
+                    <table class="sparesys-view-object-table">
+                        <tr class="controls">
+                            <td class="sparesys-view-object-label-cell">Username</td>
+                            <td class="sparesys-view-object-content-cell">
+                                <input type="text" data-ng-model="credentials.username"
+                                       id="username" class="form-control addcardfocus"
+                                       name="username"
+                                       placeholder="Username"
+                                       data-ng-init="setFocus()"
+                                       required></td>
+                        </tr>
+
+                        <tr class="controls">
+                            <td class="sparesys-view-object-label-cell">Password</td>
+                            <td class="sparesys-view-object-content-cell">
+                                <input type="password" data-ng-model="credentials.password"
+                                       id="password" name="password" class="form-control"
+                                       placeholder="Password"
+                                       required></td>
+                        </tr>
+                    </table>
+
+                    <!--<div class="form-group">-->
+                    <!--<label for="username">Username</label>-->
+                    <!--<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">-->
+                    <!--</div>-->
+                    <!--<div class="form-group">-->
+                    <!--<label for="password">Password</label>-->
+                    <!--<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">-->
+                    <!--</div>-->
+
+                    <!--<div class="text-center form-group">-->
+                    <!--<button id="signin-button" type="submit" class="btn btn-primary">Sign in</button>&nbsp; or&nbsp;-->
+                    <!--<button href="/#!/signup">Sign up</button>-->
+                    <!--</div>-->
+
+                    </div>
+
+                    <div style="text-align: center">
+                        <button class="btn btn-primary sparesys-button"
+                                type="submit"
+                                ng-click="signin()"
+                                >
+                            Sign In
+                        </button>
+
+
+                        <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+
+                    </div>
+
+                    <div data-ng-show="error" class="text-center text-danger">
+                        <strong>{{error}}</strong>
+                    </div>
+
+            </fieldset>
+        </form>
+
+    </div>
+</script>

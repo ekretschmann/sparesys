@@ -1,6 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', 'Authentication', function ($scope, Authentication) {
+angular.module('core').controller('HomeController', ['$scope', '$modal', 'Authentication',
+    function ($scope, $modal, Authentication) {
     $scope.authentication = Authentication;
 
     // Set of Photos
@@ -14,26 +15,26 @@ angular.module('core').controller('HomeController', ['$scope', 'Authentication',
     ];
 
     // initial image index
-    $scope._Index = 0;
+    $scope.index = Math.floor((Math.random() * 6) + 1);
 
-    // if a current image is the same as requested image
-    $scope.isActive = function (index) {
-        return $scope._Index === index;
+
+    $scope.signinPopup = function() {
+        console.log('signin');
     };
 
-    // show prev image
-    $scope.showPrev = function () {
-        $scope._Index = ($scope._Index > 0) ? --$scope._Index : $scope.photos.length - 1;
-    };
+    $scope.signinPopup = function (size) {
 
-    // show next image
-    $scope.showNext = function () {
-        $scope._Index = ($scope._Index < $scope.photos.length - 1) ? ++$scope._Index : 0;
-    };
+        $modal.open({
+            templateUrl: 'signin.html',
+            controller: 'AuthenticationController',
+            size: size,
+            resolve: {
+                pack: function () {
+                    return $scope.pack;
+                }
+            }
+        });
 
-    // show a certain image
-    $scope.showPhoto = function (index) {
-        $scope._Index = index;
     };
 
 }]);

@@ -51,7 +51,7 @@
                 <td>Start</td>
                 <td style="padding-left: 5px">:</td>
                 <td style="padding-left: 5px">
-                    <span data-ng-if="pack.after">{{pack.due | date:'mediumDate'}}</span>
+                    <span data-ng-if="pack.after">{{pack.after | date:'mediumDate'}}</span>
                     <span data-ng-if="!pack.after">now</span>
                 </td>
             </tr>
@@ -75,7 +75,6 @@
                 <th class="sparesys-view-object-content-cell">Answer</th>
                 <th class="sparesys-view-object-content-cell" style="padding-right:5px">Due</th>
                 <th class="sparesys-view-object-content-cell">Start</th>
-                <th class="sparesys-view-object-content-cell">Style</th>
             </tr>
             </thead>
             <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
@@ -99,7 +98,7 @@
                     {{card.answer}}
                 </td>
 
-                <td class="sparesys-view-object-content-cell" style="white-space: nowrap; padding-right:5px">
+                <td class="sparesys-view-object-content-cell" style="white-space: nowrap; padding-right:20px">
                     <span data-ng-if="card.due">
                         {{card.due | date:'mediumDate'}}
                     </span>
@@ -108,7 +107,7 @@
                     </span>
                 </td>
 
-                <td class="sparesys-view-object-content-cell" style="white-space: nowrap; padding-right:5px">
+                <td class="sparesys-view-object-content-cell" style="white-space: nowrap;">
                     <span data-ng-if="card.after">
                         {{card.after | date:'mediumDate'}}
                     </span>
@@ -117,16 +116,7 @@
                     </span>
                 </td>
 
-                <td class="sparesys-view-object-label-cell">
 
-
-                    <span data-ng-if="card.style[0]" style="color:green; cursor: pointer" data-ng-click="toggleRead(card)">Read</span>
-                    <span data-ng-if="!card.style[0]" style="color:red; cursor: pointer" data-ng-click="toggleRead(card)">Read</span>
-
-                    <span data-ng-if="card.style[1]" style="color:green; cursor: pointer" data-ng-click="toggleWrite(card)">Write</span>
-                    <span data-ng-if="!card.style[1]" style="color:red; cursor: pointer" data-ng-click="toggleWrite(card)">Write</span>
-
-                </td>
             </tr>
 
             </tbody>

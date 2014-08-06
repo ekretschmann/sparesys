@@ -3,6 +3,25 @@
 angular.module('packs').controller('EditPackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'Cards',
     function ($scope, $state, $timeout, $modalInstance, pack, Cards) {
         $scope.pack = pack;
+        var originalDue = pack.due;
+        var originalAfter = pack.after;
+        $scope.validation = 'unchanged';
+        $scope.sound = 'unchanged';
+        $scope.ask = 'unchanged';
+
+        // dont know why I have to do this. Seems the checkboxes don't like modal windows
+        $scope.changeValidation = function(value) {
+            $scope.validation = value;
+        };
+
+        $scope.changeSound = function(value) {
+            $scope.sound = value;
+        };
+
+        $scope.changeAsk = function(value) {
+            $scope.ask = value;
+        };
+
 
         $scope.setFocus = function () {
             $timeout(function () {
@@ -16,10 +35,12 @@ angular.module('packs').controller('EditPackController', ['$scope', '$state', '$
 
         $scope.ok = function () {
 
+
             var courseName = pack.courseName;
             $scope.pack.$update(function () {
                 pack.courseName = courseName;
             });
+
 
 
             var cardsToUpdate = pack.cards.length;
@@ -28,8 +49,30 @@ angular.module('packs').controller('EditPackController', ['$scope', '$state', '$
                 Cards.get({
                     cardId: card
                 }, function (card) {
-                    card.due = pack.due;
-                    card.after = pack.after;
+                    if (pack.due !== originalDue) {
+                        card.due = pack.due;
+                    }
+                    if (pack.after !== originalAfter) {
+                        card.after = pack.after;
+                    }
+                    if ($scope.validation === 'default') {
+                        card.validation = 'default';
+                    } else if ($scope.validation === 'checked') {
+                        card.validation = 'checked';
+                    } else if ($scope.validation === 'self') {
+                        card.validation = 'self';
+                    }
+                    if ($scope.sound === 'yes') {
+                        card.sound = true;
+                    } else if ($scope.sound === 'no') {
+                        card.sound = false;
+                    }
+
+                    if ($scope.ask === 'both') {
+                        card.bothways = true;
+                    } else if ($scope.ask === 'oneway') {
+                        card.bothways = false;
+                    }
                     card.$update(function() {
                         cardsUpdated++;
                         if (cardsUpdated === cardsToUpdate) {
@@ -37,7 +80,7 @@ angular.module('packs').controller('EditPackController', ['$scope', '$state', '$
                         }
                     });
                 });
-            });
+            }, this);
 
             $modalInstance.dismiss('cancel');
         };

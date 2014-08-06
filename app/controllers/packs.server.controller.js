@@ -63,6 +63,8 @@ exports.update = function(req, res) {
 	var pack = req.pack;
 
 	pack = _.extend(pack, req.body);
+    pack.updated = Date.now();
+
 
 	pack.save(function(err) {
 		if (err) {

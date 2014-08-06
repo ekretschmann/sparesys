@@ -18,15 +18,34 @@
                 Edit
             </a>
 
-            <a href="" data-ng-click="areYouSureToDeleteCourse(course)" data-ng-show="authentication.user._id == course.user._id"
+            <a href="" data-ng-click="areYouSureToDeleteCourse(course)"
+               data-ng-show="authentication.user._id == course.user._id"
                style="padding-right: 20px">
                 Delete
             </a>
 
-
-            <a class="btn btn-primary" data-ng-click="areYouSureToPublishCourse(course)">
-                <i class="glyphicon glyphicon-upload"></i>
+            <span data-ng-if="!course.published">
+            <a href="" data-ng-click="areYouSureToPublishCourse(course)"
+               data-ng-show="authentication.user._id == course.user._id"
+               style="padding-right: 20px">
+                Publish
             </a>
+            </span>
+
+            <span data-ng-if="course.published">
+            <a href="" data-ng-click="areYouSureToPublishCourse(course)"
+               data-ng-show="authentication.user._id == course.user._id"
+               style="padding-right: 20px">
+                Un-Publish
+            </a>
+            </span>
+
+
+            <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == course.user._id">
+                Add Packs
+
+            </a>
+
         </div>
 
         <div class="sparesys-title">
@@ -62,23 +81,12 @@
     </div>
 
 
-
-
-
     <div data-ng-hide="course.packs.length > 0">
         No Packs yet, why don't you <a href="" ng-click="addPackToCoursePopup()">add one</a>?
     </div>
     <div data-ng-show="course.packs.length > 0">
 
-        <div class="pull-right">
-            <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == course.user._id">
-                Add Packs
-                <i class="glyphicon glyphicon-plus-sign">
-                </i>
 
-            </a>
-        </div>
-        <div style="height: 10px"></div>
         <table id="searchTextResults" class="table-striped" style="width: 100%; margin-top: 20px">
             <thead>
             <tr>
@@ -116,9 +124,20 @@
 
     </div>
 
+    <div class="footer">
 
-    <small>
-        <em class="text-muted">Created on {{course.created | date:'mediumDate'}} by {{course.user.displayName}}</em>
+        <div>
+            <small>
+                <em class="text-muted">Created on {{course.created | date:'medium'}}</em>
+            </small>
+        </div>
+        <div data-ng-if="course.updated">
+            <small>
+                <em class="text-muted">Updated on {{course.updated | date:'medium'}}</em>
+            </small>
+        </div>
 
-    </small>
+    </div>
+
+
 </section>

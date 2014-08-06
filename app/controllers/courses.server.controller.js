@@ -65,10 +65,10 @@ exports.read = function (req, res) {
  */
 exports.update = function (req, res) {
 
-    console.log('update course');
     var course = req.course;
 
     course = _.extend(course, req.body);
+    course.updated = Date.now();
 
     course.save(function (err) {
         if (err) {

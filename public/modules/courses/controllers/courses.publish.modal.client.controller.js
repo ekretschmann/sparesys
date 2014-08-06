@@ -9,7 +9,7 @@ angular.module('courses').controller('PublishCourseModalController', ['$scope', 
 //                $state.go($state.$current, null, { reload: true });
 //            });
 
-            course.published = true;
+            course.published = !course.published;
             course.$update();
 
             $modalInstance.close();
@@ -19,7 +19,6 @@ angular.module('courses').controller('PublishCourseModalController', ['$scope', 
         $scope.cancel = function () {
 
 
-            course.published = false;
             $modalInstance.dismiss('cancel');
         };
 	}

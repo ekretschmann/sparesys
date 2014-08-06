@@ -30,6 +30,9 @@ var CourseSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    updated: {
+        type: Date
+    },
     user: {
         type: Schema.ObjectId,
         ref: 'User'

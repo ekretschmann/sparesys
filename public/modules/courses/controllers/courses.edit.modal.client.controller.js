@@ -16,7 +16,22 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
             {name:'Korean', code:'ko-KR'},
             {name:'Spanish', code:'es-ES'}
         ];
-        $scope.language = course.language;
+
+
+        var selectedIndex = 0;
+        if (course.language) {
+            var index = 0;
+            $scope.languages.forEach(function (lang) {
+
+                if (lang.name === course.language.name) {
+                    selectedIndex = index;
+                }
+                index++;
+            });
+        }
+        $scope.language = $scope.languages[selectedIndex];
+
+
 
         $scope.setFocus = function () {
             $timeout(function(){

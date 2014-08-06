@@ -1,10 +1,7 @@
-<section data-ng-controller="PracticeController" data-ng-init="init()">
+<section data-ng-controller="PracticeController" data-ng-init="init()" data-ng-keypress="key(event)">
 
 
-    <div class="pull-right">
-        <div>Predicted card retention: {{getPredictedCardRetention()}}%</div>
-        <!--<div>Predicted course retention: {{getPredictedCourseRetention()}}%</div>-->
-    </div>
+
 
     <div class="sparesys-header">
 
@@ -15,23 +12,25 @@
 
         <table>
             <tr>
-                <td>Cards</td>
+                <td >Cards</td>
                 <td style="padding-left: 5px">:</td>
                 <td style="padding-left: 5px">
                     {{cards.length}}
                 </td>
             </tr>
             <tr>
-                <td>In Play</td>
+                <td style="white-space: nowrap">In Play</td>
                 <td style="padding-left: 5px">:</td>
                 <td style="padding-left: 5px">
-                    {{getCardsInPlay()}}
+                    {{inPlay}}
                 </td>
             </tr>
             <tr>
-                <td>Memorized</td>
+                <td>Score</td>
                 <td style="padding-left: 5px">:</td>
-                <td style="padding-left: 5px">{{getPredictedCourseRetention()}}%</a></td>
+                <td style="padding-left: 5px">{{score}}%</td>
+                <td style="padding-left: 5px; width: 100%; text-align: right">Card Score:</td>
+                <td style="padding-left: 5px">{{getPredictedCardRetention()}}%</a></td>
             </tr>
 
         </table>
@@ -89,7 +88,8 @@
                 <div data-ng-if="state == 'question'" class="form-group">
                     <input type="text" required id="answer" name="answer"
                            class="answer form-control"
-                           data-ng-model="answer.text" data-ng-init="setFocus()">
+                           data-ng-model="answer.text" data-ng-init="setFocus()"
+                           data-ng-keypress="key($event)">
 
                     <!--<div style="padding-top: 10px">-->
                     <!--<button data-ng-click="submitAnswer()" class="btn btn-large btn-primary">submit</button>-->
@@ -137,35 +137,8 @@
 
         </div>
     </div>
-    <!--<div>max hrt: {{getMaxHrt()}}</div>-->
-    <!--<div>hrt: {{card.hrt/60000}}</div>-->
-    <!--<div>history: {{card.history}}</div>-->
-
-    <!--<table class="table-striped" style="width: 100%">-->
-    <!--<thead>-->
-    <!--<tr>-->
-    <!--<th class="sparesys-view-courses-description-column">Card</th>-->
-    <!--<th class="sparesys-view-courses-course-column">PR</th>-->
-    <!--<th class="sparesys-view-courses-course-column">HRT</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr data-ng-repeat="k in keys">-->
-
-    <!--<td class="sparesys-view-courses-name-cell">-->
-
-    <!--{{k}}-->
-    <!--</td>-->
-    <!--<td class="sparesys-view-courses-course-column">{{analysis[k].pr}}</td>-->
-    <!--<td class="sparesys-view-courses-course-column">{{analysis[k].hrt}}</td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
-    <!--</table>-->
-    <!--&lt;!&ndash;<button data-ng-click="clearHistory(c)">Clear Card History</button>&ndash;&gt;-->
-    <!--<button data-ng-click="clearCourseHistory()">Clear Course History</button>-->
 
 
-    </div>
 
     <div data-ng-if="cards.length === 0">
         There are no cards in this course.

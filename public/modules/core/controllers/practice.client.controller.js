@@ -18,6 +18,7 @@ angular.module('core').controller('PracticeController',
             $scope.lastRating = 0;
 
             $scope.inPlay = 0;
+            $scope.score = 0;
 
             $scope.setFocus = function () {
                 $timeout(function () {
@@ -25,11 +26,7 @@ angular.module('core').controller('PracticeController',
                 }, 100);
             };
 
-            $scope.getCardsInPlay = function() {
-                console.log('called');
-                console.log($scope.inPlay);
-                return $scope.inPlay;
-            };
+
 
             $scope.submitAnswer = function () {
 
@@ -100,7 +97,9 @@ angular.module('core').controller('PracticeController',
 
             $document.bind('keypress', function (event) {
 
-
+                if($state.$current.url.source !== '/practice/:courseId') {
+                    return;
+                }
 
                 if ($scope.state === 'question' && $scope.validation === 'checked' && event.keyCode === 13) {
                     $scope.submitAnswer();
@@ -114,7 +113,7 @@ angular.module('core').controller('PracticeController',
 
                 if ($scope.state === 'answer' && $scope.validation === 'checked' && event.keyCode === 13) {
                     $scope.nextCard();
-                    $scope.getValidation();
+
                     return;
                 }
 
@@ -202,8 +201,10 @@ angular.module('core').controller('PracticeController',
                     $scope.card = SchedulerService.nextCard();
                     $scope.getValidation();
                     if ($scope.card.history.length === 0) {
-                        $scope.cards.inPlay --;
+                        $scope.inPlay ++;
                     }
+                    $scope.setScore();
+
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
                     $scope.state = 'question';
@@ -217,8 +218,9 @@ angular.module('core').controller('PracticeController',
                 $scope.card = SchedulerService.nextCard();
                 $scope.getValidation();
                 if ($scope.card.history.length === 0) {
-                    $scope.cards.inPlay --;
+                    $scope.inPlay ++;
                 }
+                $scope.setScore();
                 $scope.analysis = SchedulerService.getAnalysis();
                 $scope.keys = Object.keys($scope.analysis);
                 $scope.state = 'question';
@@ -241,9 +243,9 @@ angular.module('core').controller('PracticeController',
                 return Math.round(SchedulerService.getPredictedRetention($scope.card, Date.now()) * 100);
             };
 
-            $scope.getPredictedCourseRetention = function () {
+            $scope.setScore = function () {
 
-                return Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100);
+                $scope.score = Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100);
             };
 
             // Find existing Course
@@ -259,14 +261,13 @@ angular.module('core').controller('PracticeController',
                         }
                     });
 
+
                     SchedulerService.init($scope.cards);
                     $scope.card = SchedulerService.nextCard();
-                    $scope.getValidation();
-                    if ($scope.card.history.length === 0) {
-                        $scope.cards.inPlay --;
-                    }
+
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
+                    $scope.setScore();
                 });
 
                 Courses.get({
@@ -290,7 +291,6 @@ angular.module('core').controller('PracticeController',
 
                     var msg = new SpeechSynthesisUtterance(answer);
 
-//                    console.log($scope.course.language);
                     msg.lang = $scope.course.language.code;
                     window.speechSynthesis.speak(msg);
                 }

@@ -45,6 +45,14 @@ var CardSchema = new Schema({
         type: Number,
         default: 0.0
     },
+    sound: {
+        type: Boolean,
+        default: false
+    },
+    bothways: {
+        type: Boolean,
+        default: false
+    },
     lastRep: {
         type: Number,
         default: 0.0
@@ -54,10 +62,9 @@ var CardSchema = new Schema({
         default: [],
         _id: false
     },
-    style: {
-        type: [Boolean],
-        // read - write - listen - multiple-choice
-        default: [true, true, false, false]
+    validation: {
+        type: String,
+        default: 'default'
     },
     due: {
         type: Date

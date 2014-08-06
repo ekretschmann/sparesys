@@ -11,15 +11,38 @@
         <div class="sparesys-title">
             {{course.name}}
         </div>
-        <div class="sparesys-subtitle">
-            Memorized: {{getPredictedCourseRetention()}}%
-        </div>
+
+
+        <table>
+            <tr>
+                <td>Cards</td>
+                <td style="padding-left: 5px">:</td>
+                <td style="padding-left: 5px">
+                    {{cards.length}}
+                </td>
+            </tr>
+            <tr>
+                <td>In Play</td>
+                <td style="padding-left: 5px">:</td>
+                <td style="padding-left: 5px">
+                    {{getCardsInPlay()}}
+                </td>
+            </tr>
+            <tr>
+                <td>Memorized</td>
+                <td style="padding-left: 5px">:</td>
+                <td style="padding-left: 5px">{{getPredictedCourseRetention()}}%</a></td>
+            </tr>
+
+        </table>
     </div>
 
 
     <div data-ng-if="cards.length > 0">
-        <div data-ng-if="style === 'read'">
-            <div class="jumbotron" style="height:320px">
+        <div data-ng-if="validation === 'self'">
+                <div class="flashcard">
+
+                   
 
                 <h2>{{card.question}}</h2>
 
@@ -29,7 +52,7 @@
                 <div style="height: 100px">
             <span>
                 <h3>
-                    <span style="color: #0078ae" data-ng-if="state == 'answer'" >
+                    <span data-ng-if="state == 'answer'" >
                         <span>{{card.answer}}</span>
                     </span>
                 </h3>
@@ -56,8 +79,8 @@
             </div>
         </div>
 
-        <div data-ng-if="style === 'write'">
-            <div class="jumbotron" style="height:320px">
+        <div data-ng-if="validation === 'checked'">
+            <div class="flashcard" style="height:320px">
 
                 <h2>{{card.question}}</h2>
 
@@ -76,7 +99,7 @@
 
                 <div data-ng-if="state == 'answer'">
                     <h3>
-                    <span style="color: #0078ae">
+                    <span>
                         your answer: {{answer.text}}
                     </span>
                     </h3>

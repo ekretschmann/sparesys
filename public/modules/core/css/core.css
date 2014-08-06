@@ -241,12 +241,12 @@ html, body {
 
 .navbar-inverse .navbar-nav > li > a{
     color: #d0d8dd;
+
 }
 
 .font-m{
     font-family:'Grinched';
     font-size: 14pt;
-
 }
 
 div {
@@ -284,3 +284,17 @@ body {
     background-color: aliceblue
 }
 
+.flashcard {
+    padding: 30px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-color: #26b3f7;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 5px 5px 5px #CCC;
+    height:320px;
+}
+
+.answer {
+    background-color: aliceblue;
+}

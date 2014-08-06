@@ -8,7 +8,7 @@ angular.module('core').controller('PracticeController',
             $scope.authentication = Authentication;
 
 
-            $scope.style = 'read';
+            $scope.validation = 'self';
             $scope.state = 'question';
             $scope.cards = [];
             $scope.card = undefined;
@@ -16,46 +16,62 @@ angular.module('core').controller('PracticeController',
             $scope.analysis = {};
             $scope.keys = [];
             $scope.lastRating = 0;
-            $scope.style = 'read';
+
+            $scope.inPlay = 0;
 
             $scope.setFocus = function () {
                 $timeout(function () {
                     angular.element('.answer').trigger('focus');
                 }, 100);
             };
-//
+
+            $scope.getCardsInPlay = function() {
+                console.log('called');
+                console.log($scope.inPlay);
+                return $scope.inPlay;
+            };
+
             $scope.submitAnswer = function () {
 
 
                 var expected = $scope.card.answer.toString();
-                var dist = $scope.levenshteinDistance(expected, $scope.answer.text) / expected.length;
 
-                if (dist === 0) {
+                if (expected === $scope.answer.text) {
                     $scope.rateCard(3);
                     $scope.lastRating = 3;
-                } else if (dist <= 0.2) {
-                    $scope.rateCard(2);
-                    $scope.lastRating = 2;
-                } else if (dist <= 0.4) {
-                    $scope.rateCard(1);
-                    $scope.lastRating = 1;
                 } else {
                     $scope.rateCard(0);
                     $scope.lastRating = 0;
                 }
+
+//                var dist = $scope.levenshteinDistance(expected, $scope.answer.text) / expected.length;
+//
+//                if (dist === 0) {
+//                    $scope.rateCard(3);
+//                    $scope.lastRating = 3;
+//                } else if (dist <= 0.2) {
+//                    $scope.rateCard(2);
+//                    $scope.lastRating = 2;
+//                } else if (dist <= 0.4) {
+//                    $scope.rateCard(1);
+//                    $scope.lastRating = 1;
+//                } else {
+//                    $scope.rateCard(0);
+//                    $scope.lastRating = 0;
+//                }
                 $scope.showAnswer();
             };
 
-            $scope.levenshteinDistance = function (s, t) {
-                if (s.length === 0) return t.length;
-                if (t.length === 0) return s.length;
-
-                return Math.min(
-                        $scope.levenshteinDistance(s.substr(1), t) + 1,
-                        $scope.levenshteinDistance(t.substr(1), s) + 1,
-                        $scope.levenshteinDistance(s.substr(1), t.substr(1)) + (s[0] !== t[0] ? 1 : 0)
-                );
-            };
+//            $scope.levenshteinDistance = function (s, t) {
+//                if (s.length === 0) return t.length;
+//                if (t.length === 0) return s.length;
+//
+//                return Math.min(
+//                        $scope.levenshteinDistance(s.substr(1), t) + 1,
+//                        $scope.levenshteinDistance(t.substr(1), s) + 1,
+//                        $scope.levenshteinDistance(s.substr(1), t.substr(1)) + (s[0] !== t[0] ? 1 : 0)
+//                );
+//            };
 
             $scope.getMaxHrt = function () {
 //                    return SchedulerService.getMaxHrt($scope.card, Date.now());
@@ -66,44 +82,39 @@ angular.module('core').controller('PracticeController',
                 return 8;
             };
 
-            $scope.getStyle = function () {
-//                console.log('getstyle');
-                if ($scope.card.style[0] && !$scope.card.style[1]) {
-                    $scope.style = 'read';
-                    return;
-                }
-
-                if ($scope.card.style[0] && $scope.card.style[1]) {
-//                    console.log('  '+$scope.card.hrt / 60000);
-//                    console.log('  '+SchedulerService.getMaxHrt($scope.card, Date.now()) / (60000*60*24*7));
+            $scope.getValidation = function () {
+                if ($scope.card.validation === 'self') {
+                    $scope.validation = 'self';
+                } else if ($scope.card.validation === 'default') {
                     if (SchedulerService.getMaxHrt($scope.card, Date.now()) > 1000 * 60 * 24 * 7) {
 
-                        $scope.style = 'write';
-                        return;
+
+                        $scope.validation =  'checked';
                     }
-                    $scope.style = 'read';
-                    return;
+                    $scope.validation =  'self';
                 }
 
-                $scope.style = 'write';
+                $scope.validation =  'checked';
             };
-//
-//
+
+
             $document.bind('keypress', function (event) {
 
 
-                if ($scope.state === 'question' && $scope.style === 'write' && event.keyCode === 13) {
+
+                if ($scope.state === 'question' && $scope.validation === 'checked' && event.keyCode === 13) {
                     $scope.submitAnswer();
                     return;
                 }
 
-                if ($scope.state === 'question' && $scope.style === 'read' && event.keyCode === 13) {
+                if ($scope.state === 'question' && $scope.validation === 'self' && event.keyCode === 13) {
                     $scope.showAnswer();
                     return;
                 }
 
-                if ($scope.state === 'answer' && $scope.style === 'write' && event.keyCode === 13) {
+                if ($scope.state === 'answer' && $scope.validation === 'checked' && event.keyCode === 13) {
                     $scope.nextCard();
+                    $scope.getValidation();
                     return;
                 }
 
@@ -189,7 +200,10 @@ angular.module('core').controller('PracticeController',
                     thecard.lastRep = $scope.card.lastRep;
                     thecard.$update();
                     $scope.card = SchedulerService.nextCard();
-                    $scope.getStyle();
+                    $scope.getValidation();
+                    if ($scope.card.history.length === 0) {
+                        $scope.cards.inPlay --;
+                    }
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
                     $scope.state = 'question';
@@ -201,7 +215,10 @@ angular.module('core').controller('PracticeController',
             $scope.nextCard = function () {
                 $scope.answer.text = '';
                 $scope.card = SchedulerService.nextCard();
-                $scope.getStyle();
+                $scope.getValidation();
+                if ($scope.card.history.length === 0) {
+                    $scope.cards.inPlay --;
+                }
                 $scope.analysis = SchedulerService.getAnalysis();
                 $scope.keys = Object.keys($scope.analysis);
                 $scope.state = 'question';
@@ -234,9 +251,20 @@ angular.module('core').controller('PracticeController',
                 var res = CoursesService.serverLoadCards();
                 res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
                     $scope.cards = cards;
+                    $scope.inPlay = cards.length;
+                    $scope.cards.forEach(function(c) {
+
+                        if (c.history.length === 0) {
+                            $scope.inPlay --;
+                        }
+                    });
+
                     SchedulerService.init($scope.cards);
                     $scope.card = SchedulerService.nextCard();
-                    $scope.getStyle();
+                    $scope.getValidation();
+                    if ($scope.card.history.length === 0) {
+                        $scope.cards.inPlay --;
+                    }
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
                 });
@@ -251,9 +279,10 @@ angular.module('core').controller('PracticeController',
 
             $scope.playSound = function (answer) {
 
-//                if ($scope.course.language === '') {
-//                    return;
-//                }
+
+                if (!$scope.course.language) {
+                    return;
+                }
 
                 /* jshint ignore:start */
                 if (window.SpeechSynthesisUtterance !== undefined) {
@@ -262,7 +291,7 @@ angular.module('core').controller('PracticeController',
                     var msg = new SpeechSynthesisUtterance(answer);
 
 //                    console.log($scope.course.language);
-                    msg.lang = $scope.course.language;
+                    msg.lang = $scope.course.language.code;
                     window.speechSynthesis.speak(msg);
                 }
                 /* jshint ignore:end */

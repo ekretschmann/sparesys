@@ -37,22 +37,22 @@
                     <!--<a href="/#!/courses">Find</a>-->
                     <!--</li>-->
                     <li>
-                        <a id="user-admin-link" href="/#!/users" class="font-m">Users</a>
+                        <a id="user-admin-link" href="/#!/users" class="font-m" style="color: darkblue">Users</a>
                     </li>
                     <li>
-                        <a href="/#!/schools/admin" class="font-m">Schools</a>
+                        <a href="/#!/schools/admin" class="font-m" style="color: darkblue">Schools</a>
                     </li>
                     <li>
-                        <a href="/#!/schoolclasses/admin" class="font-m">School Classes</a>
+                        <a href="/#!/schoolclasses/admin" class="font-m" style="color: darkblue">School Classes</a>
                     </li>
                     <li>
-                        <a id="courses-admin-link" href="/#!/courses/admin" class="font-m">Courses</a>
+                        <a id="courses-admin-link" href="/#!/courses/admin" class="font-m" style="color: darkblue">Courses</a>
                     </li>
                     <li>
-                        <a href="/#!/packs/admin" class="font-m">Packs</a>
+                        <a href="/#!/packs/admin" class="font-m" style="color: darkblue">Packs</a>
                     </li>
                     <li>
-                        <a href="/#!/cards/admin" class="font-m">Cards</a>
+                        <a href="/#!/cards/admin" class="font-m" style="color: darkblue">Cards</a>
                     </li>
                     <!--<li class="divider"></li>-->
                     <!--<li>-->
@@ -71,16 +71,16 @@
                     <!--<a href="/#!/courses">Find</a>-->
                     <!--</li>-->
                     <li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1">
-                        <a href="/#!/schools/register" class="font-m">Register School</a>
+                        <a href="/#!/schools/register" class="font-m" style="color: darkblue">Register School</a>
                     </li>
                     <li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1">
-                        <a href="/#!/schools/manage" class="font-m">Manage Schools</a>
+                        <a href="/#!/schools/manage" class="font-m" style="color: darkblue">Manage Schools</a>
                     </li>
 
                     <li class="divider" data-ng-show="authentication.user.roles.indexOf('teacher') > -1 && authentication.user.roles.indexOf('headmaster') > -1"></li>
 
                     <li data-ng-show="authentication.user.roles.indexOf('teacher') > -1">
-                        <a href="/#!/schools/classes/manage" class="font-m">Manage Classes</a>
+                        <a href="/#!/schools/classes/manage" class="font-m" style="color: darkblue">Manage Classes</a>
                     </li>
 
 
@@ -97,17 +97,17 @@
                 </a>
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="/#!/courses" class="font-m">Manage</a>
+                        <a href="/#!/courses" class="font-m" style="color: darkblue">Manage</a>
                     </li>
                     <li>
-                        <a href="/#!/courses/create" class="font-m">Create</a>
+                        <a href="/#!/courses/create" class="font-m" style="color: darkblue">Create</a>
                     </li>
                     <li>
-                        <a href="/#!/courses/search" class="font-m">Search</a>
+                        <a href="/#!/courses/search" class="font-m" style="color: darkblue">Search</a>
                     </li>
                     <li class="divider"></li>
                     <li>
-                        <a href="/#!/schools" class="font-m">Subscribe to School</a>
+                        <a href="/#!/schools" class="font-m" style="color: darkblue">Subscribe to School</a>
                     </li>
                     <!--<li class="divider"></li>-->
                     <!--<li>-->
@@ -125,19 +125,19 @@
 
                 <ul class="dropdown-menu">
                     <li>
-                        <a href="/#!/settings/profile" class="font-m">Edit Profile</a>
+                        <a href="/#!/settings/profile" class="font-m" style="color: darkblue">Edit Profile</a>
                     </li>
                     <li>
-                        <a href="/#!/settings/accounts" class="font-m">Manage Social Accounts</a>
+                        <a href="/#!/settings/accounts" class="font-m" style="color: darkblue">Manage Social Accounts</a>
                     </li>
                     <li data-ng-show="authentication.user.provider === 'local'">
-                        <a href="/#!/settings/password" class="font-m">Change Password</a>
+                        <a href="/#!/settings/password" class="font-m" style="color: darkblue">Change Password</a>
                     </li>
 
 
                     <li class="divider"></li>
                     <li>
-                        <a href="/auth/signout" class="font-m">Signout</a>
+                        <a href="/auth/signout" class="font-m" style="color: darkblue">Signout</a>
                     </li>
                 </ul>
             </li>

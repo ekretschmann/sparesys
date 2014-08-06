@@ -9,8 +9,15 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.nextAlternative = undefined;
 
 
+        $scope.enterAlternative = function (event) {
+//            console.log(event);
+            if (event.keyCode === 13) {
+                $scope.updateNextAlternative();
+            }
+        };
         // Create new Card
         $scope.create = function () {
+
             // Create new Card object
             var card = new Cards({
                 name: this.name
@@ -29,6 +36,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         // Remove existing Card
         $scope.remove = function (card) {
+
             if (card) {
                 card.$remove();
 
@@ -44,17 +52,20 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             }
         };
 
-        $scope.updateAnswer = function() {
+        $scope.updateAnswer = function () {
+
             if (!$scope.card.answer) {
                 if ($scope.card.alternatives[0]) {
                     $scope.card.answer = $scope.card.alternatives[0];
-                    $scope.card.alternatives.splice(0,1);
+                    $scope.card.alternatives.splice(0, 1);
                 }
             }
+            $scope.update();
         };
 
 
         $scope.updateAlternative = function (index, alt) {
+
             $scope.card.alternatives[index] = alt;
             var alts = [];
             $scope.card.alternatives.forEach(function (alt) {
@@ -63,9 +74,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 }
             });
             $scope.card.alternatives = alts;
+            $scope.update();
         };
 
         $scope.updateNextAlternative = function () {
+
+
             if ($scope.nextAlternative) {
                 $scope.card.alternatives.push($scope.nextAlternative);
                 $scope.nextAlternative = undefined;
@@ -75,27 +89,30 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 }, 100);
 
             }
+            $scope.update();
         };
-
 
 
         // Update existing Card
         $scope.update = function () {
 
-            console.log('updating');
 
-            var card = $scope.card;
-            card.updated = Date.now();
+            // this is a hack to wait for the date picker to update the model
+            // before updating
+            $timeout(function () {
+                var card = $scope.card;
+                card.updated = Date.now();
 
-            if ($scope.nextAlternative) {
-                card.alternatives.push($scope.nextAlternative);
-            }
+                if ($scope.nextAlternative) {
+                    card.alternatives.push($scope.nextAlternative);
+                }
 
-            card.$update(function (c) {
-                $location.path('packs/' + card.packs[0]+'/edit');
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
+                card.$update(function (c) {
+//                $location.path('packs/' + card.packs[0] + '/edit');
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+            }, 500);
         };
 
         // Find a list of Cards
@@ -107,11 +124,11 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.findOne = function () {
             $scope.card = Cards.get({
                 cardId: $stateParams.cardId
-            }, function() {
+            }, function () {
 
                 Packs.get({
                     packId: $scope.card.packs[0]
-                }, function(pack) {
+                }, function (pack) {
 
 
                     $scope.pack = pack;

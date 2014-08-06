@@ -34,6 +34,8 @@
     </div>
     <form class="form-horizontal" data-ng-submit="update()" novalidate>
         <fieldset>
+
+
             <table class="sparesys-view-object-table">
                 <tr class="controls">
                     <td class="sparesys-view-object-label-cell">Question</td>
@@ -41,6 +43,7 @@
                         <input type="text" data-ng-model="card.question"
                                id="question" class="form-control"
                                placeholder="Question"
+                               data-ng-blur="update()"
                                required>
                     </td>
 
@@ -70,6 +73,7 @@
                     <td class="sparesys-view-object-content-cell">
                         <input type="text" data-ng-model="nextAlternative"
                                id="alternative" class="form-control alternative"
+                               ng-keyup="enterAlternative($event)"
                                placeholder="Next Alternative Answer" data-ng-blur="updateNextAlternative()" >
                     </td>
                 </tr>
@@ -77,16 +81,16 @@
                 <tr class="controls">
                     <td class="sparesys-view-object-label-cell">Style</td>
                     <td class="sparesys-view-object-content-cell">
-                        <input type="radio" data-ng-model="card.style[0]"
-                               id="read" ><span style="padding-left: 5px">Self Certify (Read) {{card.style[0]}}</span>
+                        <input type="checkbox" data-ng-model="card.style[0]"
+                               id="read" data-ng-click="update()"><span style="padding-left: 5px">Self-Certify (Read)</span>
                     </td>
                 </tr>
 
                 <tr class="controls">
                     <td class="sparesys-view-object-label-cell"></td>
                     <td class="sparesys-view-object-content-cell">
-                        <input type="radio" data-ng-model="card.style[1]"
-                               id="write" ><span style="padding-left: 5px">Validated Input (Write)</span>
+                        <input type="checkbox" data-ng-model="card.style[1]"
+                               id="write" data-ng-click="update()"  ><span style="padding-left: 5px">Validated Input (Write)</span>
                     </td>
                 </tr>
 
@@ -96,10 +100,10 @@
                     <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Due date</td>
                     <td class="input-group">
 
-                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="card.due"
-                               is-open="opened" min-date="minDate" id="dueDatePicker"
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="$parent.card.due"
+                               is-open="opened" min-date="minDate"
                                datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
-                               ng-required="false" close-text="Close" data-ng-blur="closeDateDropdown()" />
+                               ng-required="false" close-text="Close" data-ng-blur="$parent.update()"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open($event)"><i
                         class="glyphicon glyphicon-calendar"></i></button>
@@ -112,22 +116,23 @@
                     <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Start</td>
                     <td class="input-group" style="padding-top: 3px">
 
-                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="card.after"
+                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="$parent.card.after"
                                is-open="opened" min-date="minDate"
                                datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
-                               ng-required="false" close-text="Close"/>
+                               ng-required="false" close-text="Close" data-ng-blur="$parent.update()"/>
               <span class="input-group-btn">
                 <button type="button" class="btn btn-default" ng-click="open($event)"><i
                         class="glyphicon glyphicon-calendar"></i></button>
               </span>
 
-                    </td>
-                </tr>
+                    <!--</td>-->
+                <!--</tr>-->
             </table>
-            <div class="pull-right" style="padding-top: 2px">
-                <input type="submit" value="Update" class="btn btn-default">
-            </div>
+
+
         </fieldset>
+
+
     </form>
     <div data-ng-show="error" class="text-danger" style="text-align: center">
         <strong>Error: {{error}}</strong>

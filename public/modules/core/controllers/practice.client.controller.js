@@ -34,7 +34,7 @@ angular.module('core').controller('PracticeController',
 
                 var expected = $scope.card.answer.toString();
 
-                if (expected === $scope.answer.text) {
+                if (expected.toLowerCase() === $scope.answer.text.toLowerCase()) {
                     $scope.rateCard(3);
                     $scope.lastRating = 3;
                 } else {
@@ -83,16 +83,19 @@ angular.module('core').controller('PracticeController',
             $scope.getValidation = function () {
                 if ($scope.card.validation === 'self') {
                     $scope.validation = 'self';
+
                 } else if ($scope.card.validation === 'default') {
-                    if (SchedulerService.getMaxHrt($scope.card, Date.now()) > 1000 * 60 * 24 * 7) {
+                    var hrt = SchedulerService.getMaxHrt($scope.card, Date.now());
+                    if ( hrt > 1000 * 60 * 24 * 7) {
 
 
                         $scope.validation =  'checked';
+                    } else {
+                        $scope.validation = 'self';
                     }
-                    $scope.validation =  'self';
+                } else {
+                    $scope.validation = 'checked';
                 }
-
-                $scope.validation =  'checked';
             };
 
 

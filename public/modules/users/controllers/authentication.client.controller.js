@@ -10,7 +10,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
         $scope.setFocus = function () {
             $timeout(function(){
-                angular.element('.addcardfocus').trigger('focus');
+                angular.element('.focus').trigger('focus');
             },100);
         };
 
@@ -20,7 +20,9 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
                 //If successful we assign the response to the global user model
 
                 $scope.authentication.user = response;
-
+                $modalInstance.close();
+                $location.path('/');
+                $state.go($state.$current, null, {reload: true});
                 //And redirect to the index page
 //                $location.path('/');
             }).error(function(response) {
@@ -33,6 +35,7 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
                 //If successful we assign the response to the global user model
                 $scope.authentication.user = response;
                 $modalInstance.close();
+                $location.path('/');
                 $state.go($state.$current, null, {reload: true});
 //                console.log($modalInstance);
                 //$modalInstance.close();

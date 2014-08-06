@@ -27,7 +27,7 @@ angular.module('users').config(['$stateProvider',
             }).
             state('signup', {
                 url: '/signup',
-                templateUrl: 'modules/users/views/signup.client.view.html'
+                templateUrl: '../views/partial/signup.client.view.html'
             }).
             state('signin', {
                 url: '/signin',

@@ -12,16 +12,17 @@
     <div class="sparesys-header">
         <div class="pull-right">
 
-            <a class="btn btn-primary" data-ng-click="editCoursePopup(course)"
-               data-ng-show="authentication.user._id == course.user._id">
-                <i class="glyphicon glyphicon-edit"></i>
+
+            <a href="" data-ng-click="editCoursePopup(course)" data-ng-show="authentication.user._id == course.user._id"
+               style="padding-right: 20px">
+                Edit
             </a>
 
-
-            <a class="btn btn-primary" data-ng-click="areYouSureToDeleteCourse(course)"
-               data-ng-show="authentication.user._id == course.user._id">
-                <i class="glyphicon glyphicon-trash"></i>
+            <a href="" data-ng-click="areYouSureToDeleteCourse(course)" data-ng-show="authentication.user._id == course.user._id"
+               style="padding-right: 20px">
+                Delete
             </a>
+
 
             <a class="btn btn-primary" data-ng-click="areYouSureToPublishCourse(course)">
                 <i class="glyphicon glyphicon-upload"></i>
@@ -31,12 +32,33 @@
         <div class="sparesys-title">
             {{course.name}}
         </div>
-        <div class="sparesys-subtitle">
-            {{course.description}}
-            <span data-ng-if="course.published">(published course)</span>
-            <span data-ng-if="!course.published">(private course)</span>
-            <div data-ng-if="course.language !== ''">Language: {{course.language}}</div>
-        </div>
+        <table>
+            <tr>
+                <td>Description</td>
+                <td style="padding-left: 5px">:</td>
+                <td style="padding-left: 5px">{{course.description}}</td>
+            </tr>
+            <tr>
+                <td>Published</td>
+                <td style="padding-left: 5px">:</td>
+                <td style="padding-left: 5px">
+                    <span data-ng-if="course.published">yes</span>
+                    <span data-ng-if="!course.published">no</span>
+                </td>
+            </tr>
+
+            <tr>
+                <td>Language</td>
+                <td style="padding-left: 5px">:</td>
+                <td style="padding-left: 5px">
+                    <span data-ng-if="course.language">{{course.language.name}}</span>
+                    <span data-ng-if="!course.language">n/a</span>
+
+                </td>
+            </tr>
+
+        </table>
+
     </div>
 
 

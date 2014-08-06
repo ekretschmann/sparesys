@@ -5,12 +5,18 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
         $scope.course = course;
 
         $scope.languages = [
-            {name:'none', code:''},
-            {name:'English', code:'en-GB'},
+            {name:'n/a', code:''},
+            {name:'Chinese', code:'zh-CN'},
+            {name:'English (GB)', code:'en-GB'},
+            {name:'English (US)', code:'en-US'},
+            {name:'French', code:'fr-FR'},
             {name:'German', code:'de-DE'},
-            {name:'Spanish', shade:'es-ES'}
+            {name:'Italian', code:'it-IT'},
+            {name:'Japanese', code:'ja-JP'},
+            {name:'Korean', code:'ko-KR'},
+            {name:'Spanish', code:'es-ES'}
         ];
-        $scope.language = $scope.languages[0];
+        $scope.language = course.language;
 
         $scope.setFocus = function () {
             $timeout(function(){
@@ -26,7 +32,9 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
 
             course.name = this.name;
             course.description = this.description;
-            course.language = this.language.code;
+            course.language = this.language;
+
+
             $scope.course.$update();
             $modalInstance.dismiss('cancel');
         };

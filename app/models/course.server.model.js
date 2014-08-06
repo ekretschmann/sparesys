@@ -39,8 +39,8 @@ var CourseSchema = new Schema({
         default: []
     },
     language: {
-        type: String,
-        default: ''
+        name: String,
+        code: String
     },
     master: {
         type: Schema.Types.ObjectId

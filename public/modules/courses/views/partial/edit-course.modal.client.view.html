@@ -3,8 +3,8 @@
 
         <div class="modal-body">
             <div class="sparesys-header">
-                <div class="sparesys-title">
-                    Edit course <span class="sparesys-emphasize">"{{course.name}}"</span>
+                <div class="sparesys-title" style="text-align: center">
+                    Edit Course: {{course.name}}
                 </div>
             </div>
 
@@ -32,13 +32,14 @@
                             </tr>
 
                             <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Read Questions Language</td>
+                                <td class="sparesys-view-object-label-cell">Language</td>
                                 <td class="sparesys-view-object-content-cell">
                                     <select ng-model="language" ng-options="lan.name for lan in languages"></select>
                             </tr>
                         </table>
                     </div>
 
+                    <div style="text-align: center">
                     <button class="btn btn-primary sparesys-button"
                             type="submit"
                             ng-click="ok()"
@@ -47,7 +48,7 @@
                     </button>
 
                     <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
-
+                    </div>
 
                 </fieldset>
             </form>

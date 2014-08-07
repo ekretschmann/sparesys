@@ -12,7 +12,18 @@ angular.module('schools').controller('SubscribeToSchoolModalController', ['$scop
             if (school.students.indexOf($scope.authentication.user._id) === -1) {
                 school.students.push($scope.authentication.user._id);
                 school.$update();
-                console.log(school.students);
+            } else {
+
+                for (var i in school.students) {
+                    if (school.students[i] === $scope.authentication.user._id.toString()) {
+                        school.students.splice(i, 1);
+                    }
+                }
+
+                school.$update();
+                // TODO: REMOVE FROM CLASSES. SCHOOL SHOULD KNOW WHICH CLASSES IT HAS
+
+
             }
 
 //            school.$remove(school, function () {

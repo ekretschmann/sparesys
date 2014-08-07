@@ -7,34 +7,36 @@
             Search: <input ng-model="searchText">
         </div>
         <div class="sparesys-title">
-            Schools
+            School Subscriptions
         </div>
-        <div class="sparesys-subtitle">
 
-        </div>
     </div>
 
 
     <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-hide="schools.length === 0">
         <thead>
         <tr>
+            <th></th>
             <th class="sparesys-view-courses-description-column">School</th>
             <th class="sparesys-view-courses-course-column">City</th>
             <th class="sparesys-view-courses-course-column">Country</th>
             <th class="sparesys-view-courses-course-column">Headmaster</th>
-            <th>Created</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="school in schools | filter:searchText">
 
-            <td class="sparesys-view-courses-name-cell">
+            <td  style="padding-right: 5px"><a href="" data-ng-if="school.students.indexOf(authentication.user._id) != -1">
+                <i data-ng-click="areYouSureToDeletePack(card)"
+                   class="glyphicon glyphicon-remove-sign">
+                </i>
+            </a></td>
+            <td class="sparesys-view-courses-name-cell"">
                 <a href="" data-ng-click="areYouSureToSubscribePopoup(school)">{{school.name}}</a></td>
             <td class="sparesys-view-courses-course-column">{{school.city}}</td>
             <td class="sparesys-view-courses-course-column">{{school.country}}</td>
 
             <td class="sparesys-view-courses-name-cell">{{school.user.displayName}}</td>
-            <td class="sparesys-view-courses-date-cell">{{school.created | date:'shortDate'}}</td>
         </tr>
         </tbody>
     </table>

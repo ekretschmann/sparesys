@@ -81,7 +81,11 @@ var UserSchema = new Schema({
 	created: {
 		type: Date,
 		default: Date.now
-	}
+	},
+    classes: {
+        type: [Schema.Types.ObjectId],
+        default: []
+    }
 });
 
 /**

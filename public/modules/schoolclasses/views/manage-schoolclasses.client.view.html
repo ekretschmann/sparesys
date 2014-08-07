@@ -8,21 +8,15 @@
     <div class="sparesys-header">
 
         <div class="sparesys-title">
-            My Classes
-        </div>
-        <div class="sparesys-subtitle">
-
+            Manage Classes
         </div>
     </div>
 
-    <div class="pull-right">
-        <a href="" ng-click="addClassPopup()" >
-            Create another Class
-            <i class="glyphicon glyphicon-plus-sign">
-            </i>
-
-        </a>
+    <div data-ng-hide="course.packs.length > 0">
+        You have no access to existing classes. You can <a href="" ng-click="addClassPopup()">create a class</a> for your school!
     </div>
+
+
 
     <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-hide="schoolclasses.length === 0">
         <thead>
@@ -69,7 +63,4 @@
     </table>
 
 
-    <div class="alert alert-warning text-center" data-ng-hide="!schoolclasses.$resolved || schoolclasses.length">
-        No Classes yet, why don't you <a href="" ng-click="addClassPopup()">create one</a>?
-    </div>
 </section>

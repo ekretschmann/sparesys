@@ -1,0 +1,64 @@
+<script type="text/ng-template" id="editSchool.html">
+    <div>
+
+        <div class="modal-body">
+            <div class="sparesys-header">
+                <div class="sparesys-title" style="text-align: center">
+                    Edit School: {{school.name}}
+                </div>
+            </div>
+
+            <form class="form-horizontal"  novalidate>
+                <fieldset>
+                    <div class="sparesys-header">
+                        <table class="sparesys-view-object-table">
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Name</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="name"
+                                           id="coursename" class="form-control focus"
+                                           placeholder="{{school.name}}"
+                                           data-ng-init="setFocus()"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">City</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="city"
+                                           id="city" class="form-control"
+                                           placeholder="{{school.city}}"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Country</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="country"
+                                           id="country" class="form-control"
+                                           placeholder="{{school.country}}"
+                                           required></td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div style="text-align: center">
+                    <button class="btn btn-primary sparesys-button"
+                            type="submit"
+                            ng-click="ok()"
+                            >
+                        Change
+                    </button>
+
+                    <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+
+
+    </div>
+</script>

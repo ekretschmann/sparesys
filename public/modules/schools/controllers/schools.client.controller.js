@@ -142,5 +142,18 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
                 schoolId: $stateParams.schoolId
             });
         };
+
+        $scope.editSchoolPopup = function (size) {
+            $modal.open({
+                templateUrl: 'editSchool.html',
+                controller: 'EditSchoolController',
+                size: size,
+                resolve: {
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+        };
     }
 ]);

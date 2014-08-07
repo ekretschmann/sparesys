@@ -12,7 +12,8 @@
                 Edit
             </a>
 
-            <a href="" data-ng-click="areYouSureToDeleteSchool(school)" data-ng-show="authentication.user._id == school.user._id">
+            <a href="" data-ng-click="areYouSureToDeleteSchool(school)"
+               data-ng-show="authentication.user._id == school.user._id">
                 Delete
             </a>
 
@@ -47,12 +48,36 @@
     </div>
 
 
-    <div class="sparesys-header" data-ng-show="school.students.length === 0" >
-        This school has no students.  Please ask your students
-        to subscribe to {{school.name}}.
+    <div class="sparesys-header">
+        <div data-ng-if="school.students.length === 0">
+            This school has no students. Please ask your students
+            to subscribe to {{school.name}}.
+        </div>
+
+        <div data-ng-if="school.students.length > 0">
+            <table class="table-striped" style="width: 100%;" >
+
+                <thead>
+                <tr>
+                    <th class="sparesys-view-courses-course-column">Registered Students</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="student in school.students"
+                    data-ng-controller="UsersController"
+                    data-ng-init="findStudent(student)">
+
+
+                    <td class="sparesys-view-object-content-cell">
+                        {{student.displayName}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div >
+    <div>
         <small>
             <em class="text-muted">
                 Created on

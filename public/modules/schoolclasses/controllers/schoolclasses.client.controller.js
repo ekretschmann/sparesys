@@ -163,6 +163,20 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             }
         };
 
+        $scope.editClassPopup = function(size) {
+            $modal.open({
+                templateUrl: 'editClass.html',
+                controller: 'EditClassController',
+                size: size,
+                resolve: {
+                    schoolclass: function () {
+                        return $scope.schoolclass;
+                    }
+                }
+            });
+
+        };
+
         $scope.addClassPopup = function (size) {
 
             $modal.open({

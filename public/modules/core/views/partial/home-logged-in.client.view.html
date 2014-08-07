@@ -2,9 +2,41 @@
 
     <div class="sparesys-header">
         <div class="sparesys-title" id="home-welcome">Welcome {{authentication.user.firstName}}</div>
+    </div>
 
+    <div data-ng-controller="SchoolsController" data-ng-init="findForCurrentUser()" data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
+
+        <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-if="schools.length > 0">
+            <thead>
+            <tr>
+                <th class="sparesys-view-courses-description-column" colspan="3" style="padding-bottom: 10px">You are managing the following Schools</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="school in schools | filter:searchText">
+                <td class="sparesys-view-courses-name-cell">
+                    <a href="#!/schools/{{school._id}}/edit">{{school.name}}</a></td>
+                <td class="sparesys-view-courses-course-column">{{school.city}}</td>
+                <td class="sparesys-view-courses-course-column" style="width: 100%">{{school.country}}</td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <div data-ng-hide="!schools.$resolved || schools.length">
+            You are not managing any schools, yet. Please use this <a href="/#!/schools/register">link</a>
+            or the menu to register your schools.
+        </div>
+
+    </div>
+
+    <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+        You Teach the following Classes:
+    </div>
+
+    <div data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') === -1">
         <div data-ng-if="courses.length>0">
-            Your Courses:
+            Your courses:
         </div>
 
         <!--<div class="sparesys-subtitle" data-ng-if="!courses || courses.length===0">-->
@@ -26,27 +58,24 @@
         </div>
 
 
-    </div>
+        <div data-ng-repeat="course in courses">
 
-
-    <div data-ng-repeat="course in courses">
-
-        <div data-ng-if="course.visible">
-            <div>{{course.name}}
+            <div data-ng-if="course.visible">
+                <div>{{course.name}}
                 <span class="pull-right">
                     <a data-ng-href="#!/practice/{{course._id}}">practice</a>
                 </span>
+                </div>
+
+                <div><span class="sparesys-view-object-right-padded-element">Number of cards:</span><span>56</span>
+                </div>
+                <div><span class="sparesys-view-object-right-padded-element">Due Date:</span><span>01/07/2014</span>
+                </div>
+                <div><span class="sparesys-view-object-right-padded-element">On Track:</span><span>87%</span></div>
             </div>
 
-            <div><span class="sparesys-view-object-right-padded-element">Number of cards:</span><span>56</span>
-            </div>
-            <div><span class="sparesys-view-object-right-padded-element">Due Date:</span><span>01/07/2014</span>
-            </div>
-            <div><span class="sparesys-view-object-right-padded-element">On Track:</span><span>87%</span></div>
         </div>
-
     </div>
-
 
 </section>
 

@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div data-ng-hide="course.packs.length > 0">
+    <div data-ng-hide="schoolclasses.length  > 0">
         You have no access to existing classes. You can <a href="" ng-click="addClassPopup()">create a class</a> for your school!
     </div>
 
@@ -43,6 +43,7 @@
                 <a href="#!/schoolclasses/{{schoolclass._id}}/edit" >{{schoolclass.name}}</a></td>
             <td class="sparesys-view-courses-course-column" style="vertical-align: top; white-space: nowrap">
 
+                <div data-ng-if="schoolclass.students.length === 0">none</div>
 
                 <div data-ng-repeat="student in schoolclass.students">
                     <div data-ng-controller="UsersController" data-ng-init="findStudent(student)">
@@ -51,6 +52,8 @@
                 </div>
             </td>
             <td class="sparesys-view-courses-date-cell" style="vertical-align: top; width: 100%">
+
+                <div data-ng-if="schoolclass.courses.length === 0">none</div>
 
                 <div data-ng-repeat="course in schoolclass.courses">
                     <div data-ng-controller="CoursesController" data-ng-init="findById(course)">

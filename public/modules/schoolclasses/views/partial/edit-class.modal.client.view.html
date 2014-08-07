@@ -1,0 +1,48 @@
+<script type="text/ng-template" id="editClass.html">
+
+    <div>
+
+        <div class="modal-body">
+            <div class="sparesys-header">
+                <div class="sparesys-title">
+                    Edit Class: {{scoolclass.name}}
+                </div>
+            </div>
+
+            <form class="form-horizontal" novalidate>
+                <fieldset>
+                    <div class="sparesys-header">
+                        <table class="sparesys-view-object-table">
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Name</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="name.text"
+                                           id="cardquestion" class="form-control focus"
+                                           placeholder="Name"
+                                           data-ng-init="setFocus()"
+                                           required></td>
+                            </tr>
+
+                        </table>
+                    </div>
+
+                    <div style="text-align: center">
+                        <button class="btn btn-primary sparesys-button"
+                                type="submit"
+                                ng-click="ok()"
+                                >
+                            OK
+                        </button>
+
+                            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Done</button>
+
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+
+
+    </div>
+</script>

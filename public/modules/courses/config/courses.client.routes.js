@@ -28,6 +28,9 @@ angular.module('courses').config(['$stateProvider',
             state('searchCourse', {
                 url: '/courses/search',
                 templateUrl: 'modules/courses/views/search-courses.client.view.html'
+            }).state('uploadCourses', {
+                url: '/courses/upload',
+                templateUrl: 'modules/courses/views/upload-course.client.view.html'
             });
     }
 ]);

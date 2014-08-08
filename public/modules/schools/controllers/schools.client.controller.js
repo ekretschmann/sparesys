@@ -5,6 +5,16 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
     function ($scope, $stateParams, $location, $modal, Authentication, Schools) {
         $scope.authentication = Authentication;
 
+
+        $scope.subscribeTeacher = function (user) {
+
+            if ($scope.school.teachers.indexOf(user._id) === -1) {
+
+                $scope.school.teachers.push(user._id);
+                $scope.school.$update();
+            }
+        };
+
         $scope.addTeacherToSchoolPopup = function (size) {
             $modal.open({
                 templateUrl: 'addTeacherToSchool.html',
@@ -19,14 +29,34 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
         };
 
 
+        $scope.areYouSureToUnsubscribeAsTeacherPopoup = function(school) {
+            $scope.school = school;
+            $scope.unsubscribeTeacher = true;
+            $modal.open({
+                templateUrl: 'areYouSureToSubscribeToSchool.html',
+                controller: 'SubscribeToSchoolModalController',
+                resolve: {
+                    unsubscribeTeacher: function() {
+                        return $scope.unsubscribeTeacher;
+                    },
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+        };
+
         $scope.areYouSureToSubscribePopoup = function (school) {
 
+            $scope.unsubscribeTeacher = false;
             $scope.school = school;
             $modal.open({
                 templateUrl: 'areYouSureToSubscribeToSchool.html',
                 controller: 'SubscribeToSchoolModalController',
                 resolve: {
-
+                    unsubscribeTeacher: function() {
+                        return $scope.unsubscribeTeacher;
+                    },
                     school: function () {
                         return $scope.school;
                     }

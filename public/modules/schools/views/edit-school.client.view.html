@@ -38,13 +38,48 @@
         </table>
     </div>
 
-    <div class="sparesys-header" data-ng-show="school.schoolclasses.length === 0">
+    <div class="sparesys-header" data-ng-show="school.schoolclasses.length === 0" style="padding-bottom: 10px">
         You have to <a href="" ng-click="addClassPopup()">create classes</a> for this school!
     </div>
 
-    <div class="sparesys-header" data-ng-show="school.teachers.length === 0">
-        This school has no teachers. Please ask your teachers
-        to subscribe to {{school.name}}.
+    <div class="sparesys-header" >
+        <div data-ng-show="school.teachers.length === 0">
+            This school has no teachers. Please ask your teachers
+            to subscribe to {{school.name}}.
+            <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1"
+                 style="padding-top: 10px; padding-bottom: 10px">
+                You can also <a href="" data-ng-click="subscribeTeacher(authentication.user)">subscribe as teacher</a>
+                to this school yourself.
+            </div>
+            <div data-ng-if="authentication.user.roles.indexOf('teacher') === -1"
+                 style="padding-top: 10px; padding-bottom: 10px">
+                You can also edit your profile to register as teacher and subscribe
+                to this school yourself.
+            </div>
+        </div>
+
+
+        <div data-ng-if="school.teachers.length > 0">
+            <table class="table-striped" style="width: 100%;">
+
+                <thead>
+                <tr>
+                    <th class="sparesys-view-courses-course-column">Registered Teachers</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="teacher in school.teachers"
+                    data-ng-controller="UsersController"
+                    data-ng-init="findTeacher(teacher)">
+
+
+                    <td class="sparesys-view-object-content-cell">
+                        {{teacher.displayName}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
 
@@ -55,7 +90,7 @@
         </div>
 
         <div data-ng-if="school.students.length > 0">
-            <table class="table-striped" style="width: 100%;" >
+            <table class="table-striped" style="width: 100%;">
 
                 <thead>
                 <tr>

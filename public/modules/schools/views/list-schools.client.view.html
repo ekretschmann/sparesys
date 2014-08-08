@@ -26,12 +26,19 @@
         <tbody>
         <tr data-ng-repeat="school in schools | filter:searchText">
 
-            <td  style="padding-right: 5px"><a href="" data-ng-if="school.students.indexOf(authentication.user._id) != -1">
-                <i data-ng-click="areYouSureToDeletePack(card)"
-                   class="glyphicon glyphicon-remove-sign">
-                </i>
-            </a></td>
-            <td class="sparesys-view-courses-name-cell"">
+            <td style="padding-right: 5px; white-space: nowrap">
+                <a href="" data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
+                    <i data-ng-click="areYouSureToUnsubscribeAsTeacherPopoup(school)"
+                       class="glyphicon glyphicon-user">
+                    </i>
+                </a>
+                <a href="" data-ng-if="school.students.indexOf(authentication.user._id) != -1">
+                    <i data-ng-click="areYouSureToSubscribePopoup(school)"
+                       class="glyphicon glyphicon-pencil">
+                    </i>
+                </a>
+                </td>
+            <td class="sparesys-view-courses-name-cell">
                 <a href="" data-ng-click="areYouSureToSubscribePopoup(school)">{{school.name}}</a></td>
             <td class="sparesys-view-courses-course-column">{{school.city}}</td>
             <td class="sparesys-view-courses-course-column">{{school.country}}</td>

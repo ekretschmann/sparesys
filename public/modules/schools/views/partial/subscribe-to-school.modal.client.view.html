@@ -1,19 +1,36 @@
 <script type="text/ng-template" id="areYouSureToSubscribeToSchool.html">
     <div class="modal-body">
 
+        <div data-ng-if="unsubscribeTeacher">
+            <div class="sparesys-title" style="text-align: center">
+                Un-Subscribe as Teacher from School: {{school.name}}
+            </div>
+        </div>
+
+        <div data-ng-if="!unsubscribeTeacher">
+
             <div class="sparesys-title" style="text-align: center"
                  data-ng-if="school.students.indexOf(authentication.user._id) == -1">
                 Subscribe to School: {{school.name}}
+
+                <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1" style="padding-top: 5px">
+                    <input type="checkbox" data-ng-model="options.asTeacher"
+                           data-ng-click="update()"><span style="padding-left: 5px; padding-right: 20px">As Teacher</span>
+                    <input type="checkbox" data-ng-model="options.asStudent"
+                           data-ng-click="update()"><span style="padding-left: 5px">As Student</span>
+
+                </div>
             </div>
             <div class="sparesys-title" style="text-align: center"
                  data-ng-if="school.students.indexOf(authentication.user._id) != -1">
                 Un-Subscribe from School: {{school.name}}
             </div>
 
-        <div style="text-align: center; padding-bottom: 10px"
-             data-ng-if="school.students.indexOf(authentication.user._id) != -1">
-            This action will remove you from all the classes you are in
-            <div class="font-l" style="color: #AA0000">Are You Really Sure?</div>
+            <div style="text-align: center; padding-bottom: 10px"
+                 data-ng-if="school.students.indexOf(authentication.user._id) != -1">
+                This action will remove you from all the classes you are in
+                <div class="font-l" style="color: #AA0000">Are You Really Sure?</div>
+            </div>
         </div>
 
         <div style="text-align: center; border-top: 1px solid #e5e5e5; padding-top: 10px">

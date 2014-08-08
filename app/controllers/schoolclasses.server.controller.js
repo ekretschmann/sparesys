@@ -100,7 +100,18 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
     Schoolclass.find().sort('-created').populate('user', 'displayName').exec(function (err, schoolclasses) {
 
-        if (req.query.courses) {
+        if (req.query.userId) {
+
+            Schoolclass.find({'user': req.query.userId}).exec(function (err, courses) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(courses);
+                }
+            });
+        } else if (req.query.courses) {
 
             Schoolclass.find({'courses': req.query.courses}).exec(function (err, courses) {
                 if (err) {

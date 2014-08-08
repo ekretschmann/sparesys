@@ -47,9 +47,21 @@
         </table>
 
         <div data-ng-hide="!schoolclasses.$resolved || schoolclasses.length">
-            You are not teaching any classes, yet.
-            <div style="padding-top:10px">Please subscribe to your school by clicking this
-            <a href="/#!/schools">link</a> or use the menu.</div>
+
+            <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authorization.user._id)">
+                <div data-ng-if="schools.length === 0 ">
+
+
+                    <div style="padding-top:10px">Please subscribe to your school by clicking this
+                        <a href="/#!/schools">link</a> or use the menu.</div>
+                </div>
+
+                <div data-ng-if="schools.length > 0 ">
+                    You are not teaching any classes, yet. Ask your headmaster to assign you to
+                    your classes.
+                </div>
+            </div>
+
         </div>
 
 

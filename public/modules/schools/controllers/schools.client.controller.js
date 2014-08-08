@@ -61,7 +61,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
             });
         };
 
-        $scope.areYouSureToUnsubscribeAsStudentPopoup = function(school) {
+        $scope.areYouSureToUnsubscribeAsStudentPopoup = function (school) {
             $scope.school = school;
             $scope.unsubscribeTeacher = false;
             $scope.unsubscribeStudent = true;
@@ -69,10 +69,10 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
                 templateUrl: 'areYouSureToSubscribeToSchool.html',
                 controller: 'SubscribeToSchoolModalController',
                 resolve: {
-                    unsubscribeStudent: function() {
+                    unsubscribeStudent: function () {
                         return $scope.unsubscribeStudent;
                     },
-                    unsubscribeTeacher: function() {
+                    unsubscribeTeacher: function () {
                         return $scope.unsubscribeTeacher;
                     },
                     school: function () {
@@ -83,7 +83,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
         };
 
 
-        $scope.areYouSureToUnsubscribeAsTeacherPopoup = function(school) {
+        $scope.areYouSureToUnsubscribeAsTeacherPopoup = function (school) {
             $scope.school = school;
             $scope.unsubscribeTeacher = true;
             $scope.unsubscribeStudent = false;
@@ -91,10 +91,10 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
                 templateUrl: 'areYouSureToSubscribeToSchool.html',
                 controller: 'SubscribeToSchoolModalController',
                 resolve: {
-                    unsubscribeStudent: function() {
+                    unsubscribeStudent: function () {
                         return $scope.unsubscribeStudent;
                     },
-                    unsubscribeTeacher: function() {
+                    unsubscribeTeacher: function () {
                         return $scope.unsubscribeTeacher;
                     },
                     school: function () {
@@ -113,10 +113,10 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
                 templateUrl: 'areYouSureToSubscribeToSchool.html',
                 controller: 'SubscribeToSchoolModalController',
                 resolve: {
-                    unsubscribeStudent: function() {
+                    unsubscribeStudent: function () {
                         return $scope.unsubscribeStudent;
                     },
-                    unsubscribeTeacher: function() {
+                    unsubscribeTeacher: function () {
                         return $scope.unsubscribeTeacher;
                     },
                     school: function () {
@@ -143,6 +143,11 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
 
         };
 
+        $scope.findForTeacher = function (teacher) {
+            $scope.schools = Schools.query({
+                teachers: teacher
+            });
+        };
 
         // Find list for current user
         $scope.findForCurrentUser = function () {

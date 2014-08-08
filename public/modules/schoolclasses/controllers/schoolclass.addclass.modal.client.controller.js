@@ -1,9 +1,9 @@
 'use strict';
 
-angular.module('schoolclasses').controller('AddClassController', ['$scope', '$state', '$timeout', '$modalInstance', 'Schoolclasses', 'classlist',
-	function($scope, $state, $timeout, $modalInstance, Schoolclasses, classlist) {
+angular.module('schoolclasses').controller('AddClassController', ['$scope', '$state', '$timeout', '$modalInstance', 'Schoolclasses', 'school',
+	function($scope, $state, $timeout, $modalInstance, Schoolclasses, school) {
 
-        $scope.schoolclasses = classlist;
+        $scope.school = school;
 
 
 
@@ -21,13 +21,19 @@ angular.module('schoolclasses').controller('AddClassController', ['$scope', '$st
 
 //            Create new Pack object
             var schoolClass = new Schoolclasses({
-                name: this.name
+                name: this.name,
+                school: $scope.school._id
+
+            });
+
+            schoolClass.$save(function(sc) {
+                $scope.school.schoolclasses.push(schoolClass._id);
+                $scope.school.$save();
+
             });
 
 
-            $scope.schoolclasses.push(schoolClass);
             // Redirect after save
-            schoolClass.$save();
             this.name = '';
             angular.element('.focus').trigger('focus');
         };

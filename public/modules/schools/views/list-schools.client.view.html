@@ -4,7 +4,8 @@
 
     <div class="sparesys-header">
         <div class="pull-right">
-            Search: <input ng-model="searchText">
+            <input ng-model="searchText" class="form-control"
+                           placeholder="Search">
         </div>
         <div class="sparesys-title">
             School Subscriptions
@@ -33,7 +34,7 @@
                     </i>
                 </a>
                 <a href="" data-ng-if="school.students.indexOf(authentication.user._id) != -1">
-                    <i data-ng-click="areYouSureToSubscribePopoup(school)"
+                    <i data-ng-click="areYouSureToUnsubscribeAsStudentPopoup(school)"
                        class="glyphicon glyphicon-pencil">
                     </i>
                 </a>
@@ -49,7 +50,13 @@
     </table>
 
 
-    <div class="alert alert-warning text-center" data-ng-hide="!schools.$resolved || schools.length">
-        No Schools yet, why don't you <a href="/#!/schools/register">create one</a>?
+    <div data-ng-hide="!schools.$resolved || schools.length">
+        There are no Schools yet.
+
+        <div data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
+            In your role as headmaster, you can register a school following this
+            <a href="/#!/schools/register">link</a> or use the menu.
+
+        </div>
     </div>
 </section>

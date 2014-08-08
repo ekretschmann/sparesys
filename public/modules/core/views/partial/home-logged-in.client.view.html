@@ -4,7 +4,7 @@
         <div class="sparesys-title" id="home-welcome">Welcome {{authentication.user.firstName}}</div>
     </div>
 
-    <div data-ng-controller="SchoolsController" data-ng-init="findForCurrentUser()" data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
+    <div class="sparesys-header" data-ng-controller="SchoolsController" data-ng-init="findForCurrentUser()" data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
 
         <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-if="schools.length > 0">
             <thead>
@@ -30,11 +30,30 @@
 
     </div>
 
-    <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
-        You Teach the following Classes:
+    <div class="sparesys-header" data-ng-controller="SchoolclassesController" data-ng-init="findForCurrentUser()" data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+        <table class="table-striped" style="width: 100%" data-ng-if="schoolclasses.length > 0">
+            <thead>
+            <tr>
+                <th class="sparesys-view-courses-description-column"style="padding-bottom: 10px">You are teaching the following Classes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="schoolclass in schoolclasses">
+                <td class="sparesys-view-courses-name-cell">
+                    <a href="#!/schoolclasses/{{schoolclass._id}}/edit">{{schoolclass.name}}</a></td>
+
+            </tr>
+            </tbody>
+        </table>
+
+        <div data-ng-hide="!schoolclasses.$resolved || schoolclasses.length">
+            You are not teaching any classes, yet. Please .....
+        </div>
+
+
     </div>
 
-    <div data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') === -1">
+    <div>
         <div data-ng-if="courses.length>0">
             Your courses:
         </div>

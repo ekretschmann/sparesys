@@ -3,7 +3,7 @@
 
         <div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>
         <div ng-include="'/modules/schools/views/partial/edit-school.modal.client.view.html'"></div>
-        <!--<div ng-include="'/modules/schools/views/partial/add-teacher.modal.client.view.html'"></div>-->
+        <div ng-include="'/modules/schoolclasses/views/partial/add-class.modal.client.view.html'"></div>
 
         <div class="pull-right">
 
@@ -12,9 +12,14 @@
                 Edit
             </a>
 
-            <a href="" data-ng-click="areYouSureToDeleteSchool(school)"
+            <a href="" data-ng-click="areYouSureToDeleteSchool(school)" style="padding-right: 20px"
                data-ng-show="authentication.user._id == school.user._id">
                 Delete
+            </a>
+
+            <a href="" data-ng-click="addClassPopup()"
+               data-ng-show="authentication.user._id == school.user._id">
+                Add Classes
             </a>
 
         </div>
@@ -38,11 +43,44 @@
         </table>
     </div>
 
-    <div class="sparesys-header" data-ng-show="school.schoolclasses.length === 0" style="padding-bottom: 10px">
-        You have to <a href="" ng-click="addClassPopup()">create classes</a> for this school!
+    <div class="sparesys-header">
+        <div data-ng-show="school.schoolclasses.length === 0">
+            You have to <a href="" ng-click="addClassPopup()">create classes</a> for this school!
+        </div>
+
+        <div data-ng-show="school.schoolclasses.length > 0">
+            <table class="table-striped" style="width: 100%;">
+
+                <thead>
+                <tr>
+                    <th class="sparesys-view-courses-course-column">Classes</th>
+                    <th class="sparesys-view-courses-course-column">Teachers</th>
+                    <th class="sparesys-view-courses-course-column">Students</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="schoolclass in school.schoolclasses"
+                    data-ng-controller="SchoolclassesController"
+                    data-ng-init="findById(schoolclass)">
+
+
+                    <td >
+                        <a data-ng-href="#!/schoolclasses/{{schoolclass._id}}/edit">{{schoolclass.name}}</a>
+                    </td>
+
+                    <td >
+                        {{schoolclass.teachers.length}}
+                    </td>
+                    <td class="sparesys-view-object-content-cell" style="width: 100%">
+                        {{schoolclass.students.length}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 
-    <div class="sparesys-header" >
+    <div class="sparesys-header">
         <div data-ng-show="school.teachers.length === 0">
             This school has no teachers. Please ask your teachers
             to subscribe to {{school.name}}.

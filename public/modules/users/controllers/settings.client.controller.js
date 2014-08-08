@@ -76,7 +76,8 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$s
                 $scope.success = true;
                 Authentication.user = response;
 //                $state.go($state.$current, null, { reload: true });
-                $location.path("");
+                console.log('going');
+                $location.path('/');
             }, function (response) {
                 $scope.error = response.data.message;
             });

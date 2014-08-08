@@ -15,6 +15,39 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
             }
         };
 
+
+        $scope.addClassPopup = function (size) {
+
+            $modal.open({
+                templateUrl: 'addClass.html',
+                controller: 'AddClassController',
+                size: size,
+                resolve: {
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+
+        };
+
+
+        $scope.areYouSureToDeleteClass = function (schoolclass) {
+
+            $scope.schoolclass = schoolclass;
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteClass.html',
+                controller: 'DeleteClassModalController',
+                resolve: {
+
+                    schoolclass: function () {
+                        return $scope.schoolclass;
+                    }
+                }
+            });
+
+        };
+
         $scope.addTeacherToSchoolPopup = function (size) {
             $modal.open({
                 templateUrl: 'addTeacherToSchool.html',
@@ -28,14 +61,39 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
             });
         };
 
-
-        $scope.areYouSureToUnsubscribeAsTeacherPopoup = function(school) {
+        $scope.areYouSureToUnsubscribeAsStudentPopoup = function(school) {
             $scope.school = school;
-            $scope.unsubscribeTeacher = true;
+            $scope.unsubscribeTeacher = false;
+            $scope.unsubscribeStudent = true;
             $modal.open({
                 templateUrl: 'areYouSureToSubscribeToSchool.html',
                 controller: 'SubscribeToSchoolModalController',
                 resolve: {
+                    unsubscribeStudent: function() {
+                        return $scope.unsubscribeStudent;
+                    },
+                    unsubscribeTeacher: function() {
+                        return $scope.unsubscribeTeacher;
+                    },
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+        };
+
+
+        $scope.areYouSureToUnsubscribeAsTeacherPopoup = function(school) {
+            $scope.school = school;
+            $scope.unsubscribeTeacher = true;
+            $scope.unsubscribeStudent = false;
+            $modal.open({
+                templateUrl: 'areYouSureToSubscribeToSchool.html',
+                controller: 'SubscribeToSchoolModalController',
+                resolve: {
+                    unsubscribeStudent: function() {
+                        return $scope.unsubscribeStudent;
+                    },
                     unsubscribeTeacher: function() {
                         return $scope.unsubscribeTeacher;
                     },
@@ -49,11 +107,15 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
         $scope.areYouSureToSubscribePopoup = function (school) {
 
             $scope.unsubscribeTeacher = false;
+            $scope.unsubscribeStudent = false;
             $scope.school = school;
             $modal.open({
                 templateUrl: 'areYouSureToSubscribeToSchool.html',
                 controller: 'SubscribeToSchoolModalController',
                 resolve: {
+                    unsubscribeStudent: function() {
+                        return $scope.unsubscribeStudent;
+                    },
                     unsubscribeTeacher: function() {
                         return $scope.unsubscribeTeacher;
                     },
@@ -88,9 +150,9 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
                 $scope.schools = Schools.query({
                     userId: $scope.authentication.user._id
                 }, function (schools) {
-                    if (schools.length === 1) {
-                        $location.path('schools/' + schools[0]._id + '/edit');
-                    }
+//                    if (schools.length === 1) {
+//                        $location.path('schools/' + schools[0]._id + '/edit');
+//                    }
                 });
             }
         };
@@ -147,7 +209,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
         $scope.findForUser = function () {
 
             $scope.school = Schools.query({
-                teachers: Authentication.user._id
+                user: Authentication.user._id
             }, function (schools) {
                 $scope.school = schools[0];
             });

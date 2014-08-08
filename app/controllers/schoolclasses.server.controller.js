@@ -140,8 +140,11 @@ exports.schoolclassByID = function (req, res, next, id) {
  * Schoolclass authorization middleware
  */
 exports.hasAuthorization = function (req, res, next) {
-    if (req.schoolclass.user.id !== req.user.id) {
+    if (req.user.roles.indexOf('admin') > -1) {
+        next();
+    } else if (req.schoolclass.user && (req.schoolclass.user.id !== req.user.id)) {
         return res.send(403, 'User is not authorized');
+    } else {
+        next();
     }
-    next();
 };

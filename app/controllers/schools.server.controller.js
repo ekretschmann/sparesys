@@ -83,8 +83,10 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
 	var school = req.school ;
 
+    console.log('here');
 	school.remove(function(err) {
 		if (err) {
+            console.log(err);
 			return res.send(400, {
 				message: getErrorMessage(err)
 			});
@@ -99,7 +101,6 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
 
-    console.log(req);
 
     if (req.query.teachers) {
         School.find({'teachers': req.query.teachers}).exec(function (err, schools) {
@@ -152,8 +153,12 @@ exports.schoolByID = function(req, res, next, id) { School.findById(id).populate
  * School authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.school.user.id !== req.user.id) {
-		return res.send(403, 'User is not authorized');
-	}
-	next();
+    if (req.user.roles.indexOf('admin') > -1) {
+        next();
+    } else if (req.school.user && (req.school.user.id !== req.user.id)) {
+        return res.send(403, 'User is not authorized');
+    } else {
+        next();
+    }
 };
+

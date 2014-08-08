@@ -179,7 +179,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         // Find list for current user
         $scope.findForCurrentUser = function () {
-            console.log($scope.authentication.user);
             if ($scope.authentication.user) {
                 $scope.schoolclasses = Schoolclasses.query({
                     userId: $scope.authentication.user._id
@@ -221,7 +220,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             $scope.schoolclass.$update(function (res) {
 
             }, function (err) {
-                console.log(err);
+//                console.log(err);
             });
         };
 
@@ -235,7 +234,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             $scope.schoolclass.$update(function (res) {
 
             }, function (err) {
-                console.log(err);
+//                console.log(err);
             });
         };
 

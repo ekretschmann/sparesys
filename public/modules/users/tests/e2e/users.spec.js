@@ -37,7 +37,6 @@ describe('User tests:', function () {
 
             var usersEntry = dropdownToggle.element(By.xpath('//option[text() = \'Users\']'));
 
-            console.log(usersEntry);
 
 
         });

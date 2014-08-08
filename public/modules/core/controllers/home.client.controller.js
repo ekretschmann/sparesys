@@ -19,7 +19,6 @@ angular.module('core').controller('HomeController', ['$scope', '$modal', 'Authen
 
 
         $scope.signinPopup = function () {
-            console.log('signin');
         };
 
         $scope.signinPopup = function (size) {
@@ -33,7 +32,6 @@ angular.module('core').controller('HomeController', ['$scope', '$modal', 'Authen
         };
 
         $scope.signupPopup = function (size) {
-            console.log('sign up');
             $modal.open({
                 templateUrl: 'signup.html',
                 controller: 'AuthenticationController',

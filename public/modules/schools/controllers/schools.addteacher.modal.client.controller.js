@@ -31,8 +31,8 @@ angular.module('schools').controller('AddTeacherToSchoolController', ['$scope', 
 //                And redirect to the index page
             }).error(function(response) {
                 $scope.error = response.message;
-                console.log('ERROR');
-                console.log(response);
+//                console.log('ERROR');
+//                console.log(response);
 
             });
 

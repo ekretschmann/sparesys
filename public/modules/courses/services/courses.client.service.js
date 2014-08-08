@@ -94,7 +94,6 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                         if (courses.length === 0) {
 
 //                           not sure this can happen?
-                            console.log('remove dangling pack ' + pack.name);
                             self.removeCards(pack.cards).then(function(){
                                 pack.$remove();
                                 callback();

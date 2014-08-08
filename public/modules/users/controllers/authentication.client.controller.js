@@ -37,7 +37,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
                 $modalInstance.close();
                 $location.path('/');
                 $state.go($state.$current, null, {reload: true});
-//                console.log($modalInstance);
                 //$modalInstance.close();
                 //And redirect to the index page
 

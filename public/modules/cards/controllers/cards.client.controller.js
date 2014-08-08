@@ -10,7 +10,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
         $scope.enterAlternative = function (event) {
-//            console.log(event);
             if (event.keyCode === 13) {
                 $scope.updateNextAlternative();
             }

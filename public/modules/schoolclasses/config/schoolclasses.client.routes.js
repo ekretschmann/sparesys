@@ -28,6 +28,10 @@ angular.module('schoolclasses').config(['$stateProvider',
             state('editSchoolclass', {
                 url: '/schoolclasses/:schoolclassId/edit',
                 templateUrl: 'modules/schoolclasses/views/edit-schoolclass.client.view.html'
+            }).
+            state('teachSchoolclass', {
+                url: '/schoolclasses/:schoolclassId/teach',
+                templateUrl: 'modules/schoolclasses/views/teach-schoolclass.client.view.html'
             });
     }
 ]);

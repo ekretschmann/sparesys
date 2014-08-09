@@ -18,6 +18,7 @@
         <thead>
         <tr>
 
+            <th></th>
             <th class="sparesys-view-courses-description-column">School</th>
             <th class="sparesys-view-courses-course-column">City</th>
             <th class="sparesys-view-courses-course-column">Country</th>
@@ -27,7 +28,13 @@
         <tbody>
         <tr data-ng-repeat="school in schools | filter:searchText">
 
-
+            <td style="padding-right: 5px; white-space: nowrap">
+                <a href="" data-ng-if="school.students.indexOf(authentication.user._id) != -1">
+                    <i data-ng-click="subscribeStudentPopup(school)"
+                       class="glyphicon glyphicon-pencil">
+                    </i>
+                </a>
+            </td>
             <td class="sparesys-view-courses-name-cell">
                 <a href="" data-ng-click="subscribeStudentPopup(school)">{{school.name}}</a></td>
             <td class="sparesys-view-courses-course-column">{{school.city}}</td>

@@ -11,6 +11,13 @@ angular.module('schools').controller('SubscribeTeacherModalController', ['$scope
                 if (school.teachers.indexOf($scope.authentication.user._id) === -1) {
                     school.teachers.push($scope.authentication.user._id);
                     school.$update();
+                } else {
+                    for (var i in school.teachers) {
+                        if (school.teachers[i] === $scope.authentication.user._id) {
+                            school.teachers.splice(i, 1);
+                        }
+                    }
+                    school.$update();
                 }
 
 //            school.$remove(school, function () {

@@ -62,12 +62,25 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
         };
 
 
+        $scope.subscribeTeacherPopup = function (school) {
+
+            $scope.school = school;
+            $modal.open({
+                templateUrl: 'subscribeTeacher.html',
+                controller: 'SubscribeTeacherModalController',
+                resolve: {
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+
+        };
 
 
 
         $scope.subscribeStudentPopup = function (school) {
 
-            console.log('here');
             $scope.school = school;
             $modal.open({
                 templateUrl: 'subscribeStudent.html',

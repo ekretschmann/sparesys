@@ -4,12 +4,16 @@
         <div class="sparesys-title" id="home-welcome">Welcome {{authentication.user.firstName}}</div>
     </div>
 
-    <div class="sparesys-header" data-ng-controller="SchoolsController" data-ng-init="findForCurrentUser()" data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
+    <div class="sparesys-header" data-ng-controller="SchoolsController" data-ng-init="findForCurrentUser()"
+         data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
+        <div style="font-weight: bold; ">Schools</div>
 
         <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-if="schools.length > 0">
             <thead>
             <tr>
-                <th class="sparesys-view-courses-description-column" colspan="3" style="padding-bottom: 10px">You are managing the following Schools</th>
+                <th class="sparesys-view-courses-description-column" colspan="3" style="padding-bottom: 10px">You are
+                    managing the following Schools
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -23,18 +27,21 @@
             </tbody>
         </table>
 
-        <div data-ng-hide="!schools.$resolved || schools.length">
+        <div data-ng-hide="!schools.$resolved || schools.length" style="padding-top: 5px">
             You are not managing any schools, yet. Please use this <a href="/#!/schools/register">link</a>
             or the menu to register your schools.
         </div>
 
     </div>
 
-    <div class="sparesys-header" data-ng-controller="SchoolclassesController" data-ng-init="findForCurrentUser()" data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+    <div class="sparesys-header" data-ng-controller="SchoolclassesController" data-ng-init="findForCurrentUser()"
+         data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
         <table class="table-striped" style="width: 100%" data-ng-if="schoolclasses.length > 0">
             <thead>
             <tr>
-                <th class="sparesys-view-courses-description-column"style="padding-bottom: 10px">You are teaching the following Classes</th>
+                <th class="sparesys-view-courses-description-column" style="padding-bottom: 10px">You are teaching the
+                    following Classes
+                </th>
             </tr>
             </thead>
             <tbody>
@@ -56,7 +63,8 @@
 
 
                     <div style="padding-top:5px">Please subscribe to your school by clicking this
-                        <a href="/#!/schools">link</a> or use the teaching menu.</div>
+                        <a href="/#!/schools">link</a> or use the teaching menu.
+                    </div>
                 </div>
 
                 <div data-ng-if="schools.length > 0 ">
@@ -70,7 +78,7 @@
 
     </div>
 
-    <div>
+    <div class="sparesys-header">
         <div style="font-weight: bold">Learning</div>
 
         <!--<div class="sparesys-subtitle" data-ng-if="!courses || courses.length===0">-->
@@ -80,44 +88,61 @@
         <div data-ng-if="!courses || courses.length===0">
 
             <div style="padding-top:5px">
-            You have not subscribed to any courses, yet.
+                You have not subscribed to any courses, yet.
             </div>
 
             <div style="padding-top: 10px">
-            You can start with creating your own private Rememberators course using this
+                You can start with creating your own private Rememberators course using this
 
-            <a href="#!/courses/create">link</a> or the Courses menu.
+                <a href="#!/courses/create">link</a> or the Courses menu.
             </div>
 
             <div style="padding-top: 10px">
-            You can also <a href="#!/courses/search">search for a published course</a> and download your local copy.
-                </div>
+                You can also <a href="#!/courses/search">search for a published course</a> and download your local copy.
+            </div>
 
             <div style="padding-top: 10px">
                 If you are a student and your school has registered with Rememberators, you can
-                <a href="#!/schools">Search for your school</a> and subscribe to it. Teachers
+                <a href="#!/schools">search for your school</a> and subscribe to it. Teachers
                 will then assign you courses.
             </div>
+
+        </div>
+    </div>
+
+
+    <div class="sparesys-header"
+         data-ng-if="(!courses || courses.length===0) && (authentication.user.roles.indexOf('teacher') === -1 || authentication.user.roles.indexOf('headmaster') === -1)">
+        <div style="font-weight: bold">Roles</div>
+        <div style="padding-top: 10px" data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
+            If you are planning to teach others, use the
+            <a href="#!/settings/profile">settings</a> in your {{user.displayName}} menu to register as a teacher.
         </div>
 
+        <div style="padding-top: 10px" data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
+            If you are planning to run a school of teachers and students, use the
+            <a href="#!/settings/profile">settings</a> in your {{user.displayName}} menu to register as a
+            headmaster.
+        </div>
+    </div>
 
-        <div data-ng-repeat="course in courses">
 
-            <div data-ng-if="course.visible">
-                <div>{{course.name}}
+    <div data-ng-repeat="course in courses">
+
+        <div data-ng-if="course.visible">
+            <div>{{course.name}}
                 <span class="pull-right">
                     <a data-ng-href="#!/practice/{{course._id}}">practice</a>
                 </span>
-                </div>
-
-                <div><span class="sparesys-view-object-right-padded-element">Number of cards:</span><span>56</span>
-                </div>
-                <div><span class="sparesys-view-object-right-padded-element">Due Date:</span><span>01/07/2014</span>
-                </div>
-                <div><span class="sparesys-view-object-right-padded-element">On Track:</span><span>87%</span></div>
             </div>
 
+            <div><span class="sparesys-view-object-right-padded-element">Number of cards:</span><span>56</span>
+            </div>
+            <div><span class="sparesys-view-object-right-padded-element">Due Date:</span><span>01/07/2014</span>
+            </div>
+            <div><span class="sparesys-view-object-right-padded-element">On Track:</span><span>87%</span></div>
         </div>
+
     </div>
 
 </section>

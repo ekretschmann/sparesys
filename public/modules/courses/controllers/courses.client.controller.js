@@ -18,11 +18,7 @@ angular.module('courses').controller('CoursesController',
 
             $scope.copy = function () {
 
-                var res = CoursesService.copyCourse($scope.course._id);
-                res.get({courseId: $stateParams.courseId}).$promise.then(function () {
 
-
-                });
                 $modal.open({
                     templateUrl: 'copiedCourse.html',
                     controller: 'CopiedCourseModalController',

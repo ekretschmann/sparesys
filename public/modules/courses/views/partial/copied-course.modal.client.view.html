@@ -1,14 +1,14 @@
 <script type="text/ng-template" id="copiedCourse.html">
     <div class="modal-body">
 
-        <div class="sparesys-header">
+        <div class="sparesys-header" style="text-align: center">
             <div class="sparesys-title">
-                You have downloaded <span class="sparesys-emphasize">"{{course.name}}"</span>
-            </div>
-            <div class="sparesys-subtitle">
-                A copy of this course is now available in your course collection.
+                Download Course: {{course.name}}
             </div>
         </div>
+        <div style="text-align: center">
             <button class="btn btn-primary sparesys-button" ng-click="ok()">Ok</button>
+            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+        </div>
     </div>
 </script>

@@ -5,9 +5,13 @@ angular.module('schools').config(['$stateProvider',
     function ($stateProvider) {
         // Schools state routing
         $stateProvider.
-            state('listSchools', {
-                url: '/schools',
-                templateUrl: 'modules/schools/views/list-schools.client.view.html'
+            state('subscribeTeacher', {
+                url: '/schools/subscribe/teacher',
+                templateUrl: 'modules/schools/views/subscribe-teacher.client.view.html'
+            }).
+            state('subscribeStudent', {
+                url: '/schools/subscribe/student',
+                templateUrl: 'modules/schools/views/subscribe-student.client.view.html'
             }).state('manageSchools', {
                 url: '/schools/manage',
                 templateUrl: 'modules/schools/views/manage-schools.client.view.html'

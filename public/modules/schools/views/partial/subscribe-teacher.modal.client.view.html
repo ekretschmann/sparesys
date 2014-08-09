@@ -1,0 +1,32 @@
+<script type="text/ng-template" id="subscribeTeacher.html">
+    <div class="modal-body">
+
+
+        <div data-ng-if="school.teachers.indexOf(authentication.user._id) !== -1">
+            <div class="sparesys-title" style="text-align: center"
+                 data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
+                Un-Subscribe as Teacher from School: {{school.name}}
+            </div>
+
+            <div style="text-align: center; padding-bottom: 10px"
+                 data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
+                This action will remove you from all the classes you are in
+                <div class="font-l" style="color: #AA0000">Are You Really Sure?</div>
+            </div>
+        </div>
+
+
+        <div data-ng-if="school.teachers.indexOf(authentication.user._id) === -1">
+            <div class="sparesys-title" style="text-align: center">
+                Subscribe as Teacher to School: {{school.name}}
+            </div>
+        </div>
+
+
+        <div style="text-align: center; border-top: 1px solid #e5e5e5; padding-top: 10px">
+            <button class="btn btn-primary sparesys-button" ng-click="ok()">OK</button>
+            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+        </div>
+
+    </div>
+</script>

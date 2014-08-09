@@ -65,13 +65,29 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
 
 
 
-        $scope.areYouSureToSubscribePopoup = function (school) {
+        $scope.subscribeStudentPopup = function (school) {
+
+            console.log('here');
+            $scope.school = school;
+            $modal.open({
+                templateUrl: 'subscribeStudent.html',
+                controller: 'SubscribeStudentModalController',
+                resolve: {
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+
+        };
+
+        $scope.subscribeTeacherPopoup = function (school) {
 
 
             $scope.school = school;
             $modal.open({
-                templateUrl: 'areYouSureToSubscribeToSchool.html',
-                controller: 'SubscribeToSchoolModalController',
+                templateUrl: 'subscribeTeacher.html',
+                controller: 'SubscribeTeacherModalController',
                 resolve: {
                     school: function () {
                         return $scope.school;

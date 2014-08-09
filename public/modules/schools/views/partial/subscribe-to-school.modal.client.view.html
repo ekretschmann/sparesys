@@ -1,13 +1,8 @@
 <script type="text/ng-template" id="areYouSureToSubscribeToSchool.html">
     <div class="modal-body">
 
-        <div data-ng-if="unsubscribeTeacher">
-            <div class="sparesys-title" style="text-align: center">
-                Un-Subscribe as Teacher from School: {{school.name}}
-            </div>
-        </div>
 
-        <div data-ng-if="unsubscribeStudent">
+        <div data-ng-if="school.students.indexOf(authentication.user._id) !== -1">
             <div class="sparesys-title" style="text-align: center"
                  data-ng-if="school.students.indexOf(authentication.user._id) != -1">
                 Un-Subscribe as Student from School: {{school.name}}
@@ -21,67 +16,9 @@
         </div>
 
 
-        <div data-ng-if="!unsubscribeTeacher && !unsubscribeStudent">
-
-            <div data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
-
-                <div data-ng-if="school.students.indexOf(authentication.user._id) !== -1">
-                    <div class="sparesys-title" style="text-align: center">
-                        You have a subscription to {{school.name}} already. Use the pencil
-                        icon to unsubscribe.
-                    </div>
-                </div>
-
-
-                <div data-ng-if="school.students.indexOf(authentication.user._id) === -1">
-                    <div class="sparesys-title" style="text-align: center">
-                        Subscribe as Student to School: {{school.name}}
-                    </div>
-                </div>
-
-            </div>
-
-
-            <div data-ng-if="authentication.user.roles.indexOf('teacher') !== -1">
-                <div style="text-align: center"
-                     data-ng-if="school.students.indexOf(authentication.user._id) !== -1 && school.teachers.indexOf(authentication.user._id) !== -1">
-                    <div class="sparesys-title">
-                        You are registered as Teacher and Student to {{school.name}}.
-                    </div>
-                    <div style="padding-top: 10px; padding-bottom: 10px">
-                        Click the
-                        <i class="glyphicon glyphicon-user"></i> or <i class="glyphicon glyphicon-pencil"></i> icons
-                        to unsubscribe.
-                    </div>
-                </div>
-
-                <div data-ng-if="school.students.indexOf(authentication.user._id) === -1 && school.teachers.indexOf(authentication.user._id) === -1">
-                    <div class="sparesys-title" style="text-align: center">
-                        Subscribe to School: {{school.name}}
-
-                    </div>
-                    <div style="text-align: center">
-                        <input type="checkbox" data-ng-model="options.asTeacher"
-                               data-ng-click="update()"><span
-                            style="padding-left: 5px; padding-right: 20px">As Teacher</span>
-                        <input type="checkbox" data-ng-model="options.asStudent"
-                               data-ng-click="update()"><span
-                            style="padding-left: 5px">As Student</span>
-                    </div>
-                </div>
-
-                <div data-ng-if="school.students.indexOf(authentication.user._id) !== -1 && school.teachers.indexOf(authentication.user._id) === -1">
-                    <div class="sparesys-title" style="text-align: center" data-ng-init="options.asStudent = true">
-                        Subscribe as Teacher to School: {{school.name}}
-                    </div>
-                </div>
-
-                <div data-ng-if="school.students.indexOf(authentication.user._id) === -1 && school.teachers.indexOf(authentication.user._id) !== -1">
-                    <div class="sparesys-title" style="text-align: center" data-ng-init="options.asStudent = true">
-                        Subscribe as Student to School: {{school.name}}
-                    </div>
-                </div>
-
+        <div data-ng-if="school.students.indexOf(authentication.user._id) === -1">
+            <div class="sparesys-title" style="text-align: center">
+                Subscribe as Student to School: {{school.name}}
             </div>
         </div>
 

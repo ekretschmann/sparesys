@@ -61,64 +61,18 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
             });
         };
 
-        $scope.areYouSureToUnsubscribeAsStudentPopoup = function (school) {
-            $scope.school = school;
-            $scope.unsubscribeTeacher = false;
-            $scope.unsubscribeStudent = true;
-            $modal.open({
-                templateUrl: 'areYouSureToSubscribeToSchool.html',
-                controller: 'SubscribeToSchoolModalController',
-                resolve: {
-                    unsubscribeStudent: function () {
-                        return $scope.unsubscribeStudent;
-                    },
-                    unsubscribeTeacher: function () {
-                        return $scope.unsubscribeTeacher;
-                    },
-                    school: function () {
-                        return $scope.school;
-                    }
-                }
-            });
-        };
 
 
-        $scope.areYouSureToUnsubscribeAsTeacherPopoup = function (school) {
-            $scope.school = school;
-            $scope.unsubscribeTeacher = true;
-            $scope.unsubscribeStudent = false;
-            $modal.open({
-                templateUrl: 'areYouSureToSubscribeToSchool.html',
-                controller: 'SubscribeToSchoolModalController',
-                resolve: {
-                    unsubscribeStudent: function () {
-                        return $scope.unsubscribeStudent;
-                    },
-                    unsubscribeTeacher: function () {
-                        return $scope.unsubscribeTeacher;
-                    },
-                    school: function () {
-                        return $scope.school;
-                    }
-                }
-            });
-        };
+
 
         $scope.areYouSureToSubscribePopoup = function (school) {
 
-            $scope.unsubscribeTeacher = false;
-            $scope.unsubscribeStudent = false;
+
             $scope.school = school;
             $modal.open({
                 templateUrl: 'areYouSureToSubscribeToSchool.html',
                 controller: 'SubscribeToSchoolModalController',
                 resolve: {
-                    unsubscribeStudent: function () {
-                        return $scope.unsubscribeStudent;
-                    },
-                    unsubscribeTeacher: function () {
-                        return $scope.unsubscribeTeacher;
-                    },
                     school: function () {
                         return $scope.school;
                     }

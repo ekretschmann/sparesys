@@ -83,7 +83,6 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
 	var school = req.school ;
 
-    console.log('here');
 	school.remove(function(err) {
 		if (err) {
             console.log(err);
@@ -101,7 +100,6 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
 
-console.log(req.query.teachers);
 
     if (req.query.teachers) {
         School.find({'teachers': req.query.teachers}).exec(function (err, schools) {

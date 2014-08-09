@@ -85,6 +85,8 @@ exports.update = function (req, res) {
  * Delete an Course
  */
 exports.delete = function (req, res) {
+
+
     var course = req.course;
 
     course.remove(function (err) {
@@ -155,16 +157,11 @@ exports.list = function (req, res) {
  */
 exports.courseByID = function (req, res, next, id) {
 
-    console.log(id);
-
-    Course.find({'user': req.query.userId}).exec(function (err, courses) {
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.jsonp(courses);
-        }
+    Course.findById(id).populate('user', 'displayName').exec(function (err, course) {
+        if (err) return next(err);
+        if (!course) return next(new Error('Failed to load Course ' + id));
+        req.course = course;
+        next();
     });
 
 
@@ -248,6 +245,7 @@ var copyCards = function (pack, originalCards, req) {
 
 var copyPacks = function (course, originalPacks, req) {
 
+//    console.log('  copying packs');
     var deferred = q.defer();
     var packagesLoaded = 0;
     var packMap = {};
@@ -257,14 +255,15 @@ var copyPacks = function (course, originalPacks, req) {
     }
     originalPacks.forEach(function (packId) {
 
+//        console.log('  copy pack: '+packId);
         var loadPack = Pack.find({'_id': packId}).exec(function (err) {
             if (err) {
-                console.log(err);
+                console.log('Error: '+err);
             }
         });
 
         loadPack.then(function (packs) {
-
+//            console.log('  loaded pack: '+packs[0].name);
 
             var packCopy = new Pack();
             packCopy.user = req.user;
@@ -272,7 +271,7 @@ var copyPacks = function (course, originalPacks, req) {
             packCopy.course = course._id;
 
             packCopy.save(function () {
-
+//                console.log('  saved copy: '+packCopy.name);
                 packMap[packs[0]._id]  = packCopy._id;
                 packagesLoaded ++;
 
@@ -288,6 +287,7 @@ var copyPacks = function (course, originalPacks, req) {
 
 
                         course.save(function(result){
+//                            console.log('  pack deferred resolve '+packCopy.name);
                             deferred.resolve(true);
                         });
 

@@ -10,7 +10,7 @@ angular.module('courses').controller('CopiedCourseModalController', ['$scope', '
 //            });
 
             var res = CoursesService.copyCourse($scope.course._id);
-            res.get({courseId: course.courseId}).$promise.then(function () {
+            res.get({courseId: $scope.course._id}).$promise.then(function () {
             });
 
             $location.path('/');

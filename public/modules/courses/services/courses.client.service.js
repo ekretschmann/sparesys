@@ -37,50 +37,83 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                 });
 
             },
-            removeCards: function(cards) {
-
+            removeCards: function(theCards) {
 
                 var deferred = $q.defer();
-                if (cards.length === 0) {
+                if (theCards.length === 0) {
                     deferred.resolve(true);
                 }
                 var cardsRemoved = 0;
-                cards.forEach(function (cardId) {
-
+                theCards.forEach(function (cardId) {
 
                     Cards.query({
                         _id: cardId
                     }, function (cards) {
                         if (cards.length === 1) {
-                            cards[0].$remove();
-                            cardsRemoved++;
-                            if (cardsRemoved === cards.length) {
-                                deferred.resolve(true);
-                            }
+//                            console.log('    removing card '+cards[0].question);
+                            cards[0].$remove(function() {
+//                                console.log('    removed card '+cards[0].question);
+                                cardsRemoved++;
+                                if (cardsRemoved === theCards.length) {
+//                                    console.log('    all cards done');
+                                    deferred.resolve(true);
+                                }
+                            });
+
+
+                        }
+                    });
+                });
+                return deferred.promise;
+            },
+            removePacks: function(thePacks) {
+//                console.log('  packs length:'+thePacks.lenth);
+                var self = this;
+                var deferred = $q.defer();
+                if (thePacks.length === 0) {
+//                    console.log('  deferring packs');
+                    deferred.resolve(true);
+                }
+                var packsRemoved = 0;
+                thePacks.forEach(function (packsId) {
+
+                    Packs.query({
+                        _id: packsId
+                    }, function (packs) {
+                        if (packs.length === 1) {
+//                            console.log('  removing pack '+packs[0].name);
+                            self.removeCards(packs[0].cards).then(function(){
+
+
+                                packs[0].$remove(function(){
+                                    packsRemoved++;
+//                                    console.log('  removed pack '+packs[0].name);
+                                    if (packsRemoved === thePacks.length) {
+//                                        console.log('  removed all packs');
+                                        deferred.resolve(true);
+                                    }
+                                });
+
+                            });
+
+
                         }
                     });
                 });
                 return deferred.promise;
             },
             remove: function (course, callback) {
-
+//                console.log('removing course');
+                var self = this;
                 if (course) {
-                    course.packs.forEach(function (packId) {
 
-                        var self = this;
-                        Packs.query({
-                            _id: packId
-                        }, function (packs) {
+                    self.removePacks(course.packs).then(function() {
+                        course.$remove(callback);
 
-                            if (packs.length === 1) {
-                                self.removeCards(packs[0].cards).then(function(){
-                                    packs[0].$remove();
-                                });
-                            }
+                    });
 
-                        });
-                    }, this);
-                   course.$remove(callback);
+
+
                 }
                 return true;
             },

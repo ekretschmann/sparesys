@@ -31,7 +31,7 @@
             <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown"
                 data-ng-show="authentication.user.roles.indexOf('admin') > -1">
                 <a href="#" class="dropdown-toggle font-m" id="admin-dropdown-toggle" data-toggle="dropdown">
-                    Administration <b class="caret"></b>
+                    Admin <b class="caret"></b>
                 </a>
                 <ul class="dropdown-menu">
                     <!--<li>-->
@@ -143,10 +143,10 @@
                     <li>
                         <a href="/#!/settings/profile" class="font-m" style="color: darkblue">Edit Profile</a>
                     </li>
-                    <li>
-                        <a href="/#!/settings/accounts" class="font-m" style="color: darkblue">Manage Social
-                            Accounts</a>
-                    </li>
+                    <!--<li>-->
+                        <!--<a href="/#!/settings/accounts" class="font-m" style="color: darkblue">Manage Social-->
+                            <!--Accounts</a>-->
+                    <!--</li>-->
                     <li data-ng-show="authentication.user.provider === 'local'">
                         <a href="/#!/settings/password" class="font-m" style="color: darkblue">Change Password</a>
                     </li>

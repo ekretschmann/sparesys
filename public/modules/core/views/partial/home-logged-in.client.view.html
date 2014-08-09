@@ -141,7 +141,9 @@
 
     <div class="sparesys-header"
          data-ng-if="(!courses || courses.length===0) && (authentication.user.roles.indexOf('teacher') === -1 || authentication.user.roles.indexOf('headmaster') === -1)">
-        <div style="font-weight: bold">Roles</div>
+        <div style="font-weight: bold" data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') === -1">Headmasters and Teachers</div>
+        <div style="font-weight: bold" data-ng-if="authentication.user.roles.indexOf('teacher') !== -1 && authentication.user.roles.indexOf('headmaster') === -1">Headmasters</div>
+        <div style="font-weight: bold" data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') !== -1">Teachers</div>
         <div style="padding-top: 10px" data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
             If you are planning to teach others, use the
             <a href="#!/settings/profile">settings</a> in your {{user.displayName}} menu to register as a teacher.

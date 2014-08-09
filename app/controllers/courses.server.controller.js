@@ -155,12 +155,19 @@ exports.list = function (req, res) {
  */
 exports.courseByID = function (req, res, next, id) {
 
-    Course.findById(id).populate('user', 'displayName').exec(function (err, course) {
-        if (err) return next(err);
-        if (!course) return next(new Error('Failed to load Course ' + id));
-        req.course = course;
-        next();
+    console.log(id);
+
+    Course.find({'user': req.query.userId}).exec(function (err, courses) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(courses);
+        }
     });
+
+
 };
 
 exports.courseByUser = function (req, res, next, id) {

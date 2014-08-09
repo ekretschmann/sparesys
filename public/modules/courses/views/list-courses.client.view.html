@@ -3,9 +3,7 @@
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
     <div class="sparesys-header">
-        <div class="pull-right">
-            Search: <input ng-model="searchText">
-        </div>
+
 
         <div class="sparesys-title">
             My Courses
@@ -13,12 +11,12 @@
 
     </div>
 
-    <table id="searchTextResults" class="table-striped" style="width: 100%">
+    <table data-ng-if="courses.length >0" class="table-striped" style="width: 100%">
         <thead>
         <tr>
             <th class="sparesys-view-courses-course-column"></th>
-            <th class= "sparesys-view-courses-course-column">Course</th>
-            <th class= "sparesys-view-courses-description-column">Description</th>
+            <th class="sparesys-view-courses-course-column">Course</th>
+            <th class="sparesys-view-courses-description-column">Description</th>
             <th>Created</th>
         </tr>
         </thead>
@@ -37,8 +35,8 @@
             </td>
             <td>
 
-            <span data-ng-if="!course.master">{{course.description}}</span>
-            <span data-ng-if="course.master" style="color: #999999" >{{course.description}} (from school)</span>
+                <span data-ng-if="!course.master">{{course.description}}</span>
+                <span data-ng-if="course.master" style="color: #999999">{{course.description}} (from school)</span>
 
             </td>
             <td class="sparesys-view-courses-date-cell">
@@ -49,7 +47,16 @@
         </tbody>
     </table>
 
-       <div class="alert alert-warning text-center" data-ng-hide="!courses.$resolved || courses.length">
-    	No Courses yet, why don't you <a href="/#!/courses/create">create one</a>?
+    <div data-ng-hide="!courses.$resolved || courses.length">
+        <div>
+            You have not subscribed to any courses, yet. You can start with creating your own private Rememberators
+            course using this
+
+            <a href="#!/courses/create">link</a> or the Courses menu.
+        </div>
+
+        <div style="padding-top: 10px">
+            You can also <a href="#!/courses/search">search for a published course</a> and download your local copy.
+        </div>
     </div>
 </section>

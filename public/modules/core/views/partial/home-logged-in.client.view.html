@@ -108,6 +108,34 @@
             </div>
 
         </div>
+
+        <div data-ng-if="courses.length > 0">
+
+            <table class="table-striped" style="width: 100%; margin-top: 10px">
+                <thead>
+                <tr>
+                    <th class="sparesys-view-courses-course-column" colspan="2">My Courses</th>
+                </tr>
+                </thead>
+                <tbody >
+                <tr data-ng-repeat="course in courses">
+                    <td class="sparesys-view-courses-name-cell">
+                        {{course.name}}
+                    </td>
+
+                    <td class="sparesys-view-object-content-cell">
+                        <a data-ng-href="#!/practice/{{course._id}}">practice</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+
+
+
+
+
+        </div>
     </div>
 
 
@@ -127,23 +155,7 @@
     </div>
 
 
-    <div data-ng-repeat="course in courses">
 
-        <div data-ng-if="course.visible">
-            <div>{{course.name}}
-                <span class="pull-right">
-                    <a data-ng-href="#!/practice/{{course._id}}">practice</a>
-                </span>
-            </div>
-
-            <div><span class="sparesys-view-object-right-padded-element">Number of cards:</span><span>56</span>
-            </div>
-            <div><span class="sparesys-view-object-right-padded-element">Due Date:</span><span>01/07/2014</span>
-            </div>
-            <div><span class="sparesys-view-object-right-padded-element">On Track:</span><span>87%</span></div>
-        </div>
-
-    </div>
 
 </section>
 

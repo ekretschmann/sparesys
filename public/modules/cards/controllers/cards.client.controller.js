@@ -9,6 +9,17 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.nextAlternative = undefined;
 
 
+        $scope.clearCards = function() {
+            $scope.cards.forEach(function(card) {
+                if (card.packName === 'undefined') {
+                    card.$remove(function() {
+                        $state.go($state.$current, null, { reload: true });
+                    });
+
+                }
+            });
+        };
+
         $scope.enterAlternative = function (event) {
             if (event.keyCode === 13) {
                 $scope.updateNextAlternative();

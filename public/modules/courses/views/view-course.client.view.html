@@ -5,10 +5,14 @@
     <div class="sparesys-header">
 
         <div class="pull-right">
-            <a class="btn btn-primary" data-ng-click="copy(course)">
-                <i class="glyphicon glyphicon-download"></i>
+
+
+            <a href="" data-ng-click="copy(course)" data-ng-show="authentication.user._id == course.user._id"
+               style="padding-right: 20px">
+                Download
             </a>
         </div>
+
 
         <div class="sparesys-title">
             {{course.name}}

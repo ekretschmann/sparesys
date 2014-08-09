@@ -101,6 +101,7 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
 
+console.log(req.query.teachers);
 
     if (req.query.teachers) {
         School.find({'teachers': req.query.teachers}).exec(function (err, schools) {

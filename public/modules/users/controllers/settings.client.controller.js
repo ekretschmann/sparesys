@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$state','$location', 'Users', 'Authentication',
+angular.module('users').controller('SettingsController', ['$scope', '$http', '$state', '$location', 'Users', 'Authentication',
     function ($scope, $http, $state, $location, Users, Authentication) {
         $scope.user = Authentication.user;
         $scope.headmaster = $scope.user.roles.indexOf('headmaster')>0;
@@ -76,7 +76,11 @@ angular.module('users').controller('SettingsController', ['$scope', '$http', '$s
                 $scope.success = true;
                 Authentication.user = response;
 //                $state.go($state.$current, null, { reload: true });
+//                console.log($route);
+
                 $location.path('/');
+
+//                console.log($scope.$route);
             }, function (response) {
                 $scope.error = response.data.message;
             });

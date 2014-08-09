@@ -48,12 +48,15 @@
 
         <div data-ng-hide="!schoolclasses.$resolved || schoolclasses.length">
 
-            <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authorization.user._id)">
+            <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
+
+                <div style="font-weight: bold">Teaching</div>
+
                 <div data-ng-if="schools.length === 0 ">
 
 
-                    <div style="padding-top:10px">Please subscribe to your school by clicking this
-                        <a href="/#!/schools">link</a> or use the menu.</div>
+                    <div style="padding-top:5px">Please subscribe to your school by clicking this
+                        <a href="/#!/schools">link</a> or use the teaching menu.</div>
                 </div>
 
                 <div data-ng-if="schools.length > 0 ">
@@ -68,9 +71,7 @@
     </div>
 
     <div>
-        <div data-ng-if="courses.length>0">
-            Your courses:
-        </div>
+        <div style="font-weight: bold">Learning</div>
 
         <!--<div class="sparesys-subtitle" data-ng-if="!courses || courses.length===0">-->
         <!--You have not subscribed to any courses-->
@@ -78,16 +79,25 @@
 
         <div data-ng-if="!courses || courses.length===0">
 
-            You have not subscribed to any courses, yet. You can start with creating your own
-            private sparesys course from the menu. Each course consists of packs of cards. If
-            you want to create your own, create the course first, then add some packs and then
-            add cards to the packs. Use the menu above to get started:
-            <div style="margin-top: 10px; margin-bottom: 10px">Courses -> Create</div>
-            You can also search for a published course and get your local copy. Since it is
-            your personal copy, you will be able to modify cards or add new content to the
-            course. Use the menu above to find a course that you may be interested in:
-            <div style="margin-top: 10px; margin-bottom: 10px">Courses -> Search</div>
-            <div style="height: 500px"></div>
+            <div style="padding-top:5px">
+            You have not subscribed to any courses, yet.
+            </div>
+
+            <div style="padding-top: 10px">
+            You can start with creating your own private Rememberators course using this
+
+            <a href="#!/courses/create">link</a> or the Courses menu.
+            </div>
+
+            <div style="padding-top: 10px">
+            You can also <a href="#!/courses/search">search for a published course</a> and download your local copy.
+                </div>
+
+            <div style="padding-top: 10px">
+                If you are a student and your school has registered with Rememberators, you can
+                <a href="#!/schools">Search for your school</a> and subscribe to it. Teachers
+                will then assign you courses.
+            </div>
         </div>
 
 

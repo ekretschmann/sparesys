@@ -212,9 +212,9 @@ html, body {
 
 @font-face {
     font-family: 'Grinched';
-    src: url('grinchedt.eot?#iefix') format('embedded-opentype'),
+    src: url('grinched.eot?#iefix') format('embedded-opentype'),
     /*url('grinched.woff') format('woff'),*/
-    url('grinched.ttf')  format('truetype'),
+    url('Grinched.ttf')  format('truetype'),
     url('grinched.svg#svgFontName') format('svg');
 }
 

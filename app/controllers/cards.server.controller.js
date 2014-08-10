@@ -151,7 +151,8 @@ exports.cardByID = function(req, res, next, id) {
 exports.hasAuthorization = function(req, res, next) {
     if (req.user.roles.indexOf('admin') > -1) {
         next();
-    } else if (req.pack.user && (req.pack.user.id !== req.user.id)) {
+    } else if (req.card.user && (req.card.user.id !== req.user.id)) {
+        console.log(req.card.user);
         return res.send(403, 'User is not authorized');
     } else {
         next();

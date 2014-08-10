@@ -215,24 +215,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
 
-        $scope.removeTeacherFromClass = function (teacher) {
-            for (var i in $scope.schoolclass.teachers) {
-                if ($scope.schoolclass.teachers[i] === teacher) {
-                    $scope.schoolclass.teachers.splice(i, 1);
-                }
-            }
-
-            $scope.schoolclass.$update(function (res) {
-                for (var i in teacher.classes) {
-                    if (teacher.classes[i] === $scope.schoolclass._id) {
-                        teacher.classes[i].splice(i, 1);
-                    }
-                }
-                teacher.$update();
-            }, function (err) {
-//                console.log(err);
-            });
-        };
 
         $scope.removeFromClass = function (student) {
             for (var i in $scope.schoolclass.students) {
@@ -250,22 +232,37 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 
         $scope.addTeacherToClass = function (teacher) {
-//            console.log('adding teacher ' + teacher.displayNam);
             if ($scope.schoolclass.teachers.indexOf(teacher._id) === -1) {
                 $scope.schoolclass.teachers.push(teacher._id);
             }
 
             $scope.schoolclass.$update(function () {
-//
-//            console.log(teacher);
-//            console.log(teacher.schoolclasses.length);
                if (teacher.schoolclasses.indexOf($scope.schoolclass) === -1) {
                     teacher.schoolclasses.push($scope.schoolclass._id);
                     teacher.$update();
                 }
-//                console.log(teacher.schoolclasses);
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
+            });
+        };
+
+        $scope.removeTeacherFromClass = function (teacher) {
+            for (var i in $scope.schoolclass.teachers) {
+                if ($scope.schoolclass.teachers[i] === teacher._id) {
+                    $scope.schoolclass.teachers.splice(i, 1);
+                }
+            }
+
+
+            $scope.schoolclass.$update(function (res) {
+                for (var i in teacher.schoolclasses) {
+                    if (teacher.schoolclasses[i] === $scope.schoolclass._id) {
+                        teacher.schoolclasses.splice(i, 1);
+                    }
+                }
+                teacher.$update();
+            }, function (err) {
+//                console.log(err);
             });
         };
 

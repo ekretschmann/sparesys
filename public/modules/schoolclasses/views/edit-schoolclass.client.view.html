@@ -83,7 +83,9 @@
                         </td>
                     </tr>
 
-                    <tr data-ng-repeat="teacher in schoolclass.teachers">
+                    <tr data-ng-repeat="teacher in schoolclass.teachers"
+                        data-ng-controller="UsersController"
+                        data-ng-init="findTeacher(teacher)">
 
                         <td class="sparesys-view-courses-name-cell">
                             <a href="#!/schoolclasses/{{schoolclass._id}}/edit">
@@ -93,8 +95,7 @@
                             </a>
                         </td>
 
-                        <td data-ng-controller="UsersController"
-                            data-ng-init="findTeacher(teacher)" class="sparesys-view-object-content-cell">
+                        <td class="sparesys-view-object-content-cell">
                             {{teacher.displayName}}
                         </td>
                     </tr>

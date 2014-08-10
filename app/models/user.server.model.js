@@ -82,7 +82,11 @@ var UserSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-    classes: {
+    schoolclasses: {
+        type: [Schema.Types.ObjectId],
+        default: []
+    },
+    schools: {
         type: [Schema.Types.ObjectId],
         default: []
     }

@@ -6,9 +6,9 @@
 
     <div class="sparesys-header" data-ng-controller="SchoolsController" data-ng-init="findForCurrentUser()"
          data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
-        <div style="font-weight: bold; ">Schools</div>
 
-        <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-if="schools.length > 0">
+
+        <table class="table-striped" style="width: 100%" data-ng-if="schools.length > 0">
             <thead>
             <tr>
                 <th class="sparesys-view-courses-description-column" colspan="3" style="padding-bottom: 10px">You are
@@ -27,51 +27,65 @@
             </tbody>
         </table>
 
-        <div data-ng-hide="!schools.$resolved || schools.length" style="padding-top: 5px">
+        <div data-ng-hide="!schools.$resolved || schools.length">
+            <div style="font-weight: bold; ">Schools</div>
+
+            <div style="padding-top: 5px">
             You are not managing any schools, yet. Please use this <a href="/#!/schools/register">link</a>
             or the menu to register your schools.
+            </div>
         </div>
 
     </div>
 
-    <div class="sparesys-header" data-ng-controller="SchoolclassesController" data-ng-init="findForCurrentUser()"
-         data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
-        <table class="table-striped" style="width: 100%" data-ng-if="schoolclasses.length > 0">
-            <thead>
-            <tr>
-                <th class="sparesys-view-courses-description-column" style="padding-bottom: 10px">You are teaching the
-                    following Classes
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-ng-repeat="schoolclass in schoolclasses">
-                <td class="sparesys-view-courses-name-cell">
-                    <a href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a></td>
+    <div class="sparesys-header" data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
 
-            </tr>
-            </tbody>
-        </table>
-
-        <div data-ng-hide="!schoolclasses.$resolved || schoolclasses.length">
 
             <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
 
-                <div style="font-weight: bold">Teaching</div>
 
                 <div data-ng-if="schools.length === 0 ">
 
-
-                    <div style="padding-top:5px">You are a teacher without an associated school. Please subscribe to your school by clicking this
+                    <div style="font-weight: bold">Teaching</div>
+                    <div style="padding-top:5px">You are a teacher without an associated school. Please subscribe to
+                        your school by clicking this
                         <a href="/#!/schools/subscribe/teacher">link</a> or use the teaching menu.
                     </div>
                 </div>
 
-                <div data-ng-if="schools.length > 0 ">
-                    You are not teaching any classes, yet. Ask your headmaster to assign you to
-                    your classes.
+                <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length === 0 ">
+                    <div style="font-weight: bold">Teaching</div>
+                    <div style="padding-top:5px"> You are not teaching any classes, yet. Ask your headmaster to assign you to
+                    your classes.</div>
+
                 </div>
-            </div>
+
+                <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length > 0">
+                    <div data-ng-controller="SchoolclassesController" data-ng-init="findForTeacher(authentication.user._id)">
+                        <table class="table-striped" style="width: 100%" data-ng-if="schoolclasses.length > 0">
+                            <thead>
+                            <tr>
+                                <th class="sparesys-view-courses-description-column" style="padding-bottom: 10px">You are
+                                    teaching the
+                                    following Classes
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-repeat="schoolclass in schoolclasses">
+                                <td class="sparesys-view-courses-name-cell">
+                                    <a href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a></td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+
+
+
+
 
         </div>
 
@@ -103,7 +117,7 @@
 
             <div style="padding-top: 10px">
                 If you are a student and your school has registered with Rememberators, you can
-                <a href="#!/schools">search for your school</a> and subscribe to it. Teachers
+                <a href="#!/schools/subscribe/student">search for your school</a> and subscribe to it. Teachers
                 will then assign you courses.
             </div>
 
@@ -117,7 +131,7 @@
                     <th class="sparesys-view-courses-course-column" colspan="2">My Courses</th>
                 </tr>
                 </thead>
-                <tbody >
+                <tbody>
                 <tr data-ng-repeat="course in courses">
                     <td class="sparesys-view-courses-name-cell">
                         {{course.name}}
@@ -131,19 +145,24 @@
             </table>
 
 
-
-
-
-
         </div>
     </div>
 
 
     <div class="sparesys-header"
          data-ng-if="(!courses || courses.length===0) && (authentication.user.roles.indexOf('teacher') === -1 || authentication.user.roles.indexOf('headmaster') === -1)">
-        <div style="font-weight: bold" data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') === -1">Headmasters and Teachers</div>
-        <div style="font-weight: bold" data-ng-if="authentication.user.roles.indexOf('teacher') !== -1 && authentication.user.roles.indexOf('headmaster') === -1">Headmasters</div>
-        <div style="font-weight: bold" data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') !== -1">Teachers</div>
+        <div style="font-weight: bold"
+             data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') === -1">
+            Headmasters and Teachers
+        </div>
+        <div style="font-weight: bold"
+             data-ng-if="authentication.user.roles.indexOf('teacher') !== -1 && authentication.user.roles.indexOf('headmaster') === -1">
+            Headmasters
+        </div>
+        <div style="font-weight: bold"
+             data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') !== -1">
+            Teachers
+        </div>
         <div style="padding-top: 10px" data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
             If you are planning to teach others, use the
             <a href="#!/settings/profile">settings</a> in your {{user.displayName}} menu to register as a teacher.
@@ -155,8 +174,6 @@
             headmaster.
         </div>
     </div>
-
-
 
 
 </section>

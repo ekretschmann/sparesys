@@ -1,7 +1,7 @@
 'use strict';
 
 // Schoolclasses controller
-angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools','Courses', 'CoursesService',
+angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService',
     function ($scope, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService) {
 
         $scope.authentication = Authentication;
@@ -156,7 +156,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             $scope.schoolclass = Schoolclasses.get({
                 schoolclassId: $stateParams.schoolclassId
-            }, function() {
+            }, function () {
                 $scope.school = Schools.get({
                     schoolId: $scope.schoolclass.school
                 });
@@ -170,6 +170,17 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             });
         };
 
+        $scope.findForUser = function () {
+
+            Schoolclasses.query({
+                teachers: Authentication.user._id
+
+            }, function (schoolclasses) {
+                $scope.schoolclasses = schoolclasses;
+                console.log(schoolclasses);
+            });
+        };
+
         $scope.findForCourse = function (courseId) {
 
             $scope.schoolclass = Schoolclasses.get({
@@ -178,20 +189,18 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
         // Find list for current user
-        $scope.findForCurrentUser = function () {
-            if ($scope.authentication.user) {
+        $scope.findForTeacher = function (teacherId) {
                 $scope.schoolclasses = Schoolclasses.query({
-                    userId: $scope.authentication.user._id
+                    teacher: teacherId
                 }, function (schoolclasses) {
 //                    console.log(schoolclasses);
 //                    if (schoolclasses.length === 1) {
 //                        $location.path('schools/'+schools[0]._id+'/edit');
 //                    }
                 });
-            }
         };
 
-        $scope.editClassPopup = function(size) {
+        $scope.editClassPopup = function (size) {
             $modal.open({
                 templateUrl: 'editClass.html',
                 controller: 'EditClassController',
@@ -206,10 +215,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
 
-
-
-
-
         $scope.removeTeacherFromClass = function (teacher) {
             for (var i in $scope.schoolclass.teachers) {
                 if ($scope.schoolclass.teachers[i] === teacher) {
@@ -218,7 +223,12 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             }
 
             $scope.schoolclass.$update(function (res) {
-
+                for (var i in teacher.classes) {
+                    if (teacher.classes[i] === $scope.schoolclass._id) {
+                        teacher.classes[i].splice(i, 1);
+                    }
+                }
+                teacher.$update();
             }, function (err) {
 //                console.log(err);
             });
@@ -239,13 +249,21 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
 
-        $scope.addTeacherToClass = function(teacher) {
+        $scope.addTeacherToClass = function (teacher) {
+//            console.log('adding teacher ' + teacher.displayNam);
             if ($scope.schoolclass.teachers.indexOf(teacher._id) === -1) {
                 $scope.schoolclass.teachers.push(teacher._id);
             }
 
             $scope.schoolclass.$update(function () {
-                //$location.path('schoolclasses/' + schoolclass._id);
+//
+//            console.log(teacher);
+//            console.log(teacher.schoolclasses.length);
+               if (teacher.schoolclasses.indexOf($scope.schoolclass) === -1) {
+                    teacher.schoolclasses.push($scope.schoolclass._id);
+                    teacher.$update();
+                }
+//                console.log(teacher.schoolclasses);
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });

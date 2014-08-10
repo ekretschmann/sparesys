@@ -144,7 +144,6 @@ exports.update = function (req, res) {
     // For security measurement we remove the roles from the req.body object
 //	delete req.body.roles;
 
-
     function updateUser(theUser) {
         theUser = _.extend(theUser, req.body);
         theUser.updated = Date.now();
@@ -168,7 +167,8 @@ exports.update = function (req, res) {
 
     if (user) {
         if(req.body._id.toString() !== user._id.toString()) {
-            User.findById(req.body._id, 'username roles email lastName firstName', function (err, otherUser) {
+            User.findById(req.body._id, 'username roles email lastName firstName schoolclasses schools', function (err, otherUser) {
+
                 if (!err && otherUser) {
 
                     updateUser(otherUser);
@@ -451,7 +451,6 @@ exports.list = function (req, res) {
  * Show another user
  */
 exports.read = function (req, res) {
-//console.log(req)
 
     var usr = {
         updated: req.profile.updated,
@@ -464,7 +463,9 @@ exports.read = function (req, res) {
         roles: req.profile.roles,
         email: req.profile.email,
         lastName: req.profile.lastName,
-        firstName: req.profile.firstName
+        firstName: req.profile.firstName,
+        schoolclasses: req.profile.schoolclasses,
+        schools: req.profile.schoools
     };
 
     res.jsonp(usr);

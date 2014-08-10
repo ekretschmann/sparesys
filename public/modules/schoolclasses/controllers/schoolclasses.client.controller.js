@@ -1,8 +1,8 @@
 'use strict';
 
 // Schoolclasses controller
-angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService',
-    function ($scope, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService) {
+angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$state', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService',
+    function ($scope, $state, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService) {
 
         $scope.authentication = Authentication;
 
@@ -177,7 +177,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             }, function (schoolclasses) {
                 $scope.schoolclasses = schoolclasses;
-                console.log(schoolclasses);
             });
         };
 
@@ -237,9 +236,11 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             }
 
             $scope.schoolclass.$update(function () {
-               if (teacher.schoolclasses.indexOf($scope.schoolclass) === -1) {
+               if (teacher.schoolclasses.indexOf($scope.schoolclass._id) === -1) {
                     teacher.schoolclasses.push($scope.schoolclass._id);
-                    teacher.$update();
+                    teacher.$update(function() {
+                        $state.go($state.$current, null, {reload: true});
+                    });
                 }
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
@@ -260,7 +261,9 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                         teacher.schoolclasses.splice(i, 1);
                     }
                 }
-                teacher.$update();
+                teacher.$update(function(t) {
+                    console.log(t.schoolclasses);
+                });
             }, function (err) {
 //                console.log(err);
             });

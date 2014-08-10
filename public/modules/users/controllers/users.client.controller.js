@@ -58,6 +58,7 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
         };
 
         $scope.findTeacher = function (userId) {
+
             $scope.teacher = Users.get({
                 userId: userId
             });

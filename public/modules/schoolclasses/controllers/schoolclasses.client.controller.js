@@ -22,7 +22,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 Courses.query({
                     userId: studentId
                 }).$promise.then(function (studentCourses) {
-                        console.log(studentCourses);
+
                         studentCourses.forEach(function (studentCourse) {
                             if (studentCourse.master.toString() === course.toString()) {
                                 studentCourse.visible = false;
@@ -77,17 +77,22 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                             });
                             if (!setVisible) {
 //                                create the course
-                                var res = CoursesService.copyCourse(course._id);
+                                console.log('crating new course');
+                                var res = CoursesService.copyCourseFor(studentId);
                                 var promise = res.get({courseId: course._id}).$promise;
 
                                 promise.then(function (returnedCourse) {
 
+                                    console.log('received '+returnedCourse);
                                     Courses.get({
                                         courseId: returnedCourse._id
                                     }).$promise.then(function (copiedCourse) {
-                                            copiedCourse.user = studentId;
+                                            console.log('changing user id');
+//                                            copiedCourse.user = studentId;
                                             copiedCourse.master = course._id;
-                                            copiedCourse.$save(function () {
+                                            copiedCourse.$update(function () {
+                                                console.log('updated');
+                                                console.log(copiedCourse);
                                             });
                                         });
 

@@ -198,6 +198,7 @@ exports.hasAuthorization = function (req, res, next) {
 var copyCards = function (pack, originalCards, req) {
 
 
+
     var deferred = q.defer();
     var cardsLoaded = 0;
     var cardMap = {};
@@ -287,7 +288,6 @@ var copyPacks = function (course, originalPacks, req) {
 
 
                         course.save(function(result){
-//                            console.log('  pack deferred resolve '+packCopy.name);
                             deferred.resolve(true);
                         });
 
@@ -304,6 +304,9 @@ var copyPacks = function (course, originalPacks, req) {
 
 exports.copyCourse = function (req, res, next, id) {
 
+    if (req.query.userId) {
+        req.user = req.query.userId;
+    }
     var cardMap = {};
 
     var loadCourse = Course.find({'_id': id}).exec(function (err) {

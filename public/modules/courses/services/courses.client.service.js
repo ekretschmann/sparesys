@@ -167,6 +167,13 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                     }
                 });
             },
+            copyCourseFor: function (userId) {
+                return $resource('courses/copy/:courseId', {userId: userId}, {
+                    get: {
+                        method: 'GET'
+                    }
+                });
+            },
             findSchoolclasses: function () {
                 return $resource('/courses/copy/:userId', {userId:'@id'});
             }

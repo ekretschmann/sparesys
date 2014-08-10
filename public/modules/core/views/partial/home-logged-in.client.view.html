@@ -61,7 +61,7 @@
                 </div>
 
                 <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length > 0">
-                    {{authentication.user.schoolclasses}}
+
                     <div data-ng-controller="SchoolclassesController" data-ng-init="findForTeacher(authentication.user._id)">
                         <table class="table-striped" style="width: 100%" data-ng-if="schoolclasses.length > 0">
                             <thead>

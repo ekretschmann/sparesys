@@ -215,7 +215,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 
 
-        $scope.removeFromClass = function (student) {
+        $scope.removeStudentFromClass = function (student) {
             for (var i in $scope.schoolclass.students) {
                 if ($scope.schoolclass.students[i] === student) {
                     $scope.schoolclass.students.splice(i, 1);
@@ -229,6 +229,19 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             });
         };
 
+        $scope.addStudentToClass = function (student) {
+
+            if ($scope.schoolclass.students.indexOf(student._id) === -1) {
+                $scope.schoolclass.students.push(student._id);
+            }
+
+            $scope.schoolclass.$update(function () {
+                //$location.path('schoolclasses/' + schoolclass._id);
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
+//            $scope.schoolclass.$update();
+        };
 
         $scope.addTeacherToClass = function (teacher) {
             if ($scope.schoolclass.teachers.indexOf(teacher._id) === -1) {
@@ -269,19 +282,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             });
         };
 
-        $scope.addToClass = function (student) {
 
-            if ($scope.schoolclass.students.indexOf(student._id) === -1) {
-                $scope.schoolclass.students.push(student._id);
-            }
-
-            $scope.schoolclass.$update(function () {
-                //$location.path('schoolclasses/' + schoolclass._id);
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
-//            $scope.schoolclass.$update();
-        };
 
 
     }

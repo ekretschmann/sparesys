@@ -95,7 +95,7 @@
                     Teaching <b class="caret"></b>
                 </a>
 
-                <ul  class="dropdown-menu" data-ng-controller="SchoolclassesController" data-ng-init="findForCurrentUser()">
+                <ul  class="dropdown-menu" data-ng-controller="SchoolclassesController" data-ng-init="findForTeacher(authentication.user._id)">
 
                     <li>
                         <a href="/#!/schools/subscribe/teacher" class="font-m" style="color: darkblue">Subscribe to School</a>

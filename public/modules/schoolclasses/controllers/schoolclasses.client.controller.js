@@ -22,6 +22,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 Courses.query({
                     userId: studentId
                 }).$promise.then(function (studentCourses) {
+                        console.log(studentCourses);
                         studentCourses.forEach(function (studentCourse) {
                             if (studentCourse.master.toString() === course.toString()) {
                                 studentCourse.visible = false;

@@ -87,8 +87,17 @@ angular.module('courses').controller('CoursesController',
             // Find list for current user
             $scope.findForCurrentUser = function () {
                 if ($scope.authentication.user) {
-                    $scope.courses = Courses.query({
+                    Courses.query({
                         userId: $scope.authentication.user._id
+                    }, function(courses) {
+                        $scope.courses = [];
+                        courses.forEach(function(course) {
+                            if (course.visible) {
+                                $scope.courses.push(course);
+                            }
+
+                        }, this);
+
                     });
                 }
             };

@@ -19,14 +19,11 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             $scope.schoolclass.students.forEach(function (studentId) {
 
-                console.log('here');
                 Courses.query({
                     userId: studentId
                 }).$promise.then(function (studentCourses) {
-                        console.log('there');
                         studentCourses.forEach(function (studentCourse) {
                             if (studentCourse.master && studentCourse.master.toString() === course.toString()) {
-                                console.log('everywhere');
 
                                 studentCourse.visible = false;
                                 studentCourse.$update();
@@ -80,23 +77,17 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                             });
                             if (!setVisible) {
 //                                create the course
-                                console.log('crating new course');
                                 var res = CoursesService.copyCourseFor(studentId);
                                 var promise = res.get({courseId: course._id}).$promise;
 
-                                promise.then(function (courseId) {
+                                promise.then(function (course) {
 
-                                    console.log('received '+returnedCourse);
                                     Courses.get({
-                                        courseId: returnedCourse._id
+                                        courseId: course._id
                                     }).$promise.then(function (copiedCourse) {
-                                            console.log('changing user id');
-//                                            copiedCourse.user = studentId;
+                                            copiedCourse.user = studentId;
                                             copiedCourse.master = course._id;
-                                            copiedCourse.$update(function () {
-                                                console.log('updated');
-                                                console.log(copiedCourse);
-                                            });
+                                            copiedCourse.$update();
                                         });
 
                                 });
@@ -163,12 +154,34 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         // Find existing Schoolclass
         $scope.findOne = function () {
 
-            $scope.schoolclass = Schoolclasses.get({
+            Schoolclasses.get({
                 schoolclassId: $stateParams.schoolclassId
-            }, function () {
+            }, function (schoolclass) {
+                $scope.schoolclass = schoolclass;
                 $scope.school = Schools.get({
                     schoolId: $scope.schoolclass.school
                 });
+                // remove missing courses
+                // this shouldn't happen, but while I am developing
+                // I like it to be self-fixing.
+                schoolclass.courses.forEach(function(courseId) {
+                    Courses.query({
+                        _id: courseId
+                    }).$promise.then(function(courses) {
+                        if (courses.length === 0) {
+                            console.log('Course doesnt exist. Removing from schoolclass');
+                            for (var i in schoolclass.courses) {
+                                if (schoolclass.courses[i] === courseId) {
+                                    schoolclass.courses.splice(i, 1);
+                                }
+                            }
+                            schoolclass.$update();
+                        }
+
+                    });
+                });
+
+
             });
         };
 
@@ -198,14 +211,14 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         // Find list for current user
         $scope.findForTeacher = function (teacherId) {
-                $scope.schoolclasses = Schoolclasses.query({
-                    teacher: teacherId
-                }, function (schoolclasses) {
+            $scope.schoolclasses = Schoolclasses.query({
+                teacher: teacherId
+            }, function (schoolclasses) {
 //                    console.log(schoolclasses);
 //                    if (schoolclasses.length === 1) {
 //                        $location.path('schools/'+schools[0]._id+'/edit');
 //                    }
-                });
+            });
         };
 
         $scope.editClassPopup = function (size) {
@@ -221,7 +234,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             });
 
         };
-
 
 
         $scope.removeStudentFromClass = function (student) {
@@ -258,9 +270,9 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             }
 
             $scope.schoolclass.$update(function () {
-               if (teacher.schoolclasses.indexOf($scope.schoolclass._id) === -1) {
+                if (teacher.schoolclasses.indexOf($scope.schoolclass._id) === -1) {
                     teacher.schoolclasses.push($scope.schoolclass._id);
-                    teacher.$update(function() {
+                    teacher.$update(function () {
                         $state.go($state.$current, null, {reload: true});
                     });
                 }
@@ -283,15 +295,13 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                         teacher.schoolclasses.splice(i, 1);
                     }
                 }
-                teacher.$update(function(t) {
+                teacher.$update(function (t) {
                     console.log(t.schoolclasses);
                 });
             }, function (err) {
 //                console.log(err);
             });
         };
-
-
 
 
     }

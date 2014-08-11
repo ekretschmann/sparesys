@@ -326,14 +326,17 @@ exports.copyCourse = function (req, res, next, id) {
 
         packPromise.then(function (packs) {
             copy.packs = packs;
-            copy.save();
+            copy.save(function() {
+                res.jsonp(copy);
+            });
         });
 
 
 //        copyPacks(original.packs, userId).then(function (result) {
 //            res.jsonp(true);
 //        });
-        res.jsonp(true);
+
+
     });
 
 };

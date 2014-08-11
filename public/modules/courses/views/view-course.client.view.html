@@ -17,7 +17,12 @@
         <div class="sparesys-title">
             {{course.name}}
         </div>
+        <div>
             {{course.description}}
+        </div>
+        <div data-ng-if="authentication.user.roles.indexOf('admin') > 0">
+            {{course._id}}
+        </div>
     </div>
 
 

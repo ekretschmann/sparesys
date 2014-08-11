@@ -13,7 +13,7 @@ angular.module('courses').controller('CopiedCourseModalController', ['$scope', '
             res.get({courseId: $scope.course._id}).$promise.then(function () {
             });
 
-            $location.path('/');
+//            $location.path('/');
             $modalInstance.close();
 
         };

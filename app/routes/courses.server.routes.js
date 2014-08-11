@@ -9,13 +9,16 @@ module.exports = function(app) {
 		.get(courses.list)
 		.post(users.requiresLogin, courses.create);
 
+    app.route('/courses/upload')
+        .post(users.requiresLogin, courses.upload);
+
 //
     app.route('/courses/cards/:cId')
         .get(courses.getCardsForCourse);
 
 
     app.route('/courses/copy/:cId2')
-        .get(courses.copyCourse);
+        .post(courses.copyCourse);
 
 
     app.route('/courses/:courseId')

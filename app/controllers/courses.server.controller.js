@@ -11,7 +11,7 @@ var mongoose = require('mongoose'),
     q = require('q');
 
 /**
-/**
+ /**
  * Get the error message from error object
  */
 var getErrorMessage = function (err) {
@@ -89,15 +89,29 @@ exports.delete = function (req, res) {
 
     var course = req.course;
 
-    course.remove(function (err) {
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.jsonp(course);
+    course.packs.forEach(function (pack) {
+        Pack.find({'_id': pack}).exec(function (err, packs) {
+            if (packs && packs[0]) {
+
+                packs[0].cards.forEach(function (card) {
+                    Card.find({'_id': card}).exec(function (err, cards) {
+                        if (cards && cards[0]) {
+                            cards[0].remove();
+                        }
+                    });
+                });
+                packs[0].remove();
+            }
+        });
+    });
+
+    Course.find({'_id': course._id}).exec(function (err, courses) {
+
+        if (courses && courses[0]) {
+            courses[0].remove();
         }
     });
+
 };
 
 /**
@@ -200,21 +214,25 @@ var copyCards = function (cardIds, userId, newPackId) {
     var idMap = {};
     var cardsToCopy = cardIds.length;
     var cardsCopied = 0;
-    cardIds.forEach(function(cardId) {
-        console.log('    copying card: '+cardId);
-        var findCard = Pack.find({'_id': cardId}).exec(function (err) {
+    var deferred = q.defer();
+    if (cardIds.length === 0) {
+        deferred.resolve([]);
+        return deferred.promise;
+    }
+
+    cardIds.forEach(function (cardId) {
+        var findCard = Card.find({'_id': cardId}).exec(function (err) {
             if (err) {
-                console.log('Error: '+err);
+                console.log('Error: ' + err);
             }
         });
 
-        findCard.then(function(findCardResult) {
+        findCard.then(function (findCardResult) {
             var original = findCardResult[0];
-            console.log('    loaded: '+ original.question);
             var copy = new Card();
             copy.user = userId;
             copy.question = original.question;
-            copy.anser = original.answer;
+            copy.answer = original.answer;
             copy.packs = [newPackId];
             copy.save();
 
@@ -223,63 +241,71 @@ var copyCards = function (cardIds, userId, newPackId) {
             cardsCopied++;
             if (cardsCopied === cardsToCopy) {
                 var result = [];
-                cardIds.forEach(function(cardId) {
+                cardIds.forEach(function (cardId) {
                     result.push(idMap[cardId]);
                 });
-                return result;
+                deferred.resolve(result);
             }
         });
     });
+    return deferred.promise;
 };
 
 var copyPacks = function (packIds, userId, newCourseId) {
     var idMap = {};
     var packsToCopy = packIds.length;
     var packsCopied = 0;
-    packIds.forEach(function(packId) {
-        console.log('  copying pack: '+packId);
+    var deferred = q.defer();
+    if (packIds.length === 0) {
+        deferred.resolve([]);
+        return deferred.promise;
+    }
+
+    packIds.forEach(function (packId) {
         var findPack = Pack.find({'_id': packId}).exec(function (err) {
             if (err) {
-                console.log('Error: '+err);
+                console.log('Error: ' + err);
             }
         });
 
-        findPack.then(function(findPackResult) {
+        findPack.then(function (findPackResult) {
             var original = findPackResult[0];
-            console.log('  loaded: '+ original.name);
             var copy = new Pack();
             copy.user = userId;
             copy.name = original.name;
             copy.course = newCourseId;
             idMap[original._id] = copy._id;
-            copy.cards = copyCards(original.cards, userId, copy._id);
-            copy.save();
+            var cardPromise = copyCards(original.cards, userId, copy._id);
+            cardPromise.then(function (cards) {
+                copy.cards = cards;
+                copy.save(function () {
+                });
+            });
+
 
             packsCopied++;
             if (packsCopied === packsToCopy) {
                 var result = [];
-                packIds.forEach(function(packId) {
+                packIds.forEach(function (packId) {
+
                     result.push(idMap[packId]);
                 });
-                return result;
+                deferred.resolve(result);
             }
         });
     });
+    return deferred.promise;
 };
 
 exports.copyCourse = function (req, res, next, id) {
 
     var userId;
-    if (req.query.userId) {
-        userId = req.query.userId;
-        console.log('student');
+    if (req.body.userId) {
+        userId = req.body.userId;
     } else {
         userId = req.user;
-        console.log('this user');
     }
 
-    console.log('copy for user '+userId);
-    console.log(id);
     var findCourse = Course.find({'_id': id}).exec(function (err) {
         if (err) {
             return res.send(400, {
@@ -288,16 +314,21 @@ exports.copyCourse = function (req, res, next, id) {
         }
     });
 
-    findCourse.then(function(findCourseResult) {
+    findCourse.then(function (findCourseResult) {
         var original = findCourseResult[0];
-        console.log('loaded: '+ original.name);
         var copy = new Course();
         copy.user = userId;
         copy.name = original.name;
         copy.description = original.description;
         copy.language = original.language;
-        copy.packs = copyPacks(original.packs, userId, copy._id);
-        copy.save();
+        var packPromise = copyPacks(original.packs, userId, copy._id);
+
+        packPromise.then(function (packs) {
+            copy.packs = packs;
+            copy.save();
+        });
+
+
 //        copyPacks(original.packs, userId).then(function (result) {
 //            res.jsonp(true);
 //        });
@@ -306,11 +337,99 @@ exports.copyCourse = function (req, res, next, id) {
 
 };
 
+var uploadCards = function (cards, userId, newPackId) {
+    var idMap = {};
+    var cardsToCopy = cards.length;
+    var cardsCopied = 0;
+    var deferred = q.defer();
+    if (cards.length === 0) {
+        deferred.resolve([]);
+        return deferred.promise;
+    }
+
+    cards.forEach(function (card) {
+        var copy = new Card();
+        copy.user = userId;
+        copy.question = card.question;
+        copy.answer = card.answer;
+        copy.packs = [newPackId];
+        copy.save();
+
+        idMap[card.id] = copy._id;
+
+        cardsCopied++;
+        if (cardsCopied === cardsToCopy) {
+            var result = [];
+            cards.forEach(function (card) {
+                result.push(idMap[card.id]);
+            });
+            deferred.resolve(result);
+        }
+
+    });
+    return deferred.promise;
+};
+
+var uploadPacks = function (packs, userId, newCourseId) {
+    var idMap = {};
+    var packsToCopy = packs.length;
+    var packsCopied = 0;
+    var deferred = q.defer();
+    if (packs.length === 0) {
+        deferred.resolve([]);
+        return deferred.promise;
+    }
+
+    packs.forEach(function (pack) {
+        var copy = new Pack();
+        copy.user = userId;
+        copy.name = pack.name;
+        copy.course = newCourseId;
+        idMap[pack.id] = copy._id;
+        var cardPromise = uploadCards(pack.cards, userId, copy._id);
+        cardPromise.then(function (cards) {
+            copy.cards = cards;
+            copy.save();
+        });
+
+
+        packsCopied++;
+        if (packsCopied === packsToCopy) {
+            var result = [];
+            packs.forEach(function (pack) {
+
+                result.push(idMap[pack.id]);
+            });
+            deferred.resolve(result);
+        }
+    });
+
+    return deferred.promise;
+};
+
+exports.upload = function (req, res, next) {
+    var course = req.body.course;
+    var userId = req.user;
+
+    var copy = new Course();
+    copy.user = userId;
+    copy.name = course.name;
+    copy.description = course.description;
+    var packPromise = uploadPacks(course.packs, userId, copy._id);
+
+    packPromise.then(function (packs) {
+        copy.packs = packs;
+        copy.save();
+    });
+};
+
 
 exports.getCardsForCourse = function (req, res, next, id) {
 
     var result = [];
     var expectedCards = 0;
+    var packOrder = {};
+
     var loadCourse = Course.find({'_id': id}).exec(function (err) {
         if (err) {
             return res.send(400, {
@@ -320,6 +439,9 @@ exports.getCardsForCourse = function (req, res, next, id) {
     });
 
     loadCourse.then(function (courses) {
+
+
+
         courses[0].packs.forEach(function (packId) {
             var loadPack = Pack.find({'_id': packId}).exec(function (err) {
                 if (err) {
@@ -329,6 +451,7 @@ exports.getCardsForCourse = function (req, res, next, id) {
                 }
             });
             loadPack.then(function (packs) {
+                packOrder[packs[0]._id] = packs[0].cards;
                 expectedCards += packs[0].cards.length;
                 packs[0].cards.forEach(function (cardId) {
                     var loadCard = Card.find({'_id': cardId}).exec(function (err) {
@@ -341,7 +464,19 @@ exports.getCardsForCourse = function (req, res, next, id) {
                     loadCard.then(function (card) {
                         result = result.concat(card);
                         if (result.length === expectedCards) {
-                            res.jsonp(result);
+                            var ordered = [];
+                            courses[0].packs.forEach(function(packId) {
+
+                                packOrder[packId].forEach(function(cardId) {
+                                    result.forEach(function(item) {
+
+                                        if (item._id.toString() === cardId.toString() && item.packs[0].toString() === packId.toString()) {
+                                            ordered.push(item);
+                                        }
+                                    });
+                                });
+                            });
+                            res.jsonp(ordered);
                         }
                     });
 
@@ -350,7 +485,6 @@ exports.getCardsForCourse = function (req, res, next, id) {
         });
 
     });
-
 
 };
 

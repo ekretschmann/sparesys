@@ -19,12 +19,15 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             $scope.schoolclass.students.forEach(function (studentId) {
 
+                console.log('here');
                 Courses.query({
                     userId: studentId
                 }).$promise.then(function (studentCourses) {
-
+                        console.log('there');
                         studentCourses.forEach(function (studentCourse) {
-                            if (studentCourse.master.toString() === course.toString()) {
+                            if (studentCourse.master && studentCourse.master.toString() === course.toString()) {
+                                console.log('everywhere');
+
                                 studentCourse.visible = false;
                                 studentCourse.$update();
                             }
@@ -69,7 +72,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
                                 // if the course existed, then just set it visible
 
-                                if (studentCourse.master.toString() === course._id) {
+                                if (studentCourse.master && studentCourse.master.toString() === course._id) {
                                     studentCourse.visible = true;
                                     studentCourse.$update();
                                     setVisible = true;
@@ -81,7 +84,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                                 var res = CoursesService.copyCourseFor(studentId);
                                 var promise = res.get({courseId: course._id}).$promise;
 
-                                promise.then(function (returnedCourse) {
+                                promise.then(function (courseId) {
 
                                     console.log('received '+returnedCourse);
                                     Courses.get({

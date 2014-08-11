@@ -3,73 +3,103 @@
 
 // Courses controller
 angular.module('courses').controller('UploadController',
-    ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards',
-        function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards) {
+    ['$scope', '$q','$stateParams', '$state', '$location', '$modal', 'Authentication', 'CoursesService',
+        function ($scope, $q, $stateParams, $state, $location, $modal, Authentication, CoursesService) {
             $scope.authentication = Authentication;
-
-
             $scope.text = '';
-
-            $scope.upload = function() {
-//                console.log($scope.coursename);
-//                console.log($scope.text);
-////
-//                var lines = $scope.text.split('\n');
-//
-//
-//                var course = new Courses({
-//                    name: $scope.courseName,
-//                    description: $scope.description
-//                });
-//
-//                // Redirect after save
-//                course.$save(function (c) {
-//
-//                    for (var i = 0; i < lines.length; i+=40) {
-//
-//                        var pack = new Packs({
-//                            name: 'Pack '+i/40,
-//                            course: c._id
-//                        });
-//
-//                        pack.$save(function (p) {
-//
-//
-//                        });
-//                        console.log('  create pack: Pack '+i/40);
-//
-//                        for (var j = 0; j < 40; j+=2) {
-//                            if (i+j+1 < lines.length) {
-//                                var answer = lines[i + j];
-//                                var question = lines[i + j + 1];
-//                                console.log('    card: '+question+': '+answer);
-//                            }
-//                        }
-//                    }
-//
-//                    //$location.path('courses/' + response._id + '/edit');
-//                }, function (errorResponse) {
-//                    $scope.error = errorResponse.data.message;
-//                });
-
-//                console.log('crate course');
-//
+            $scope.state = '';
 
 
-//                var course = new Courses({
-//                    name: $scope.coursename,
-//                    description: $scope.description
-//                });
-//
-//                // Redirect after save
-//                course.$save(function (response) {
-//                    $location.path('courses/' + response._id + '/edit');
-//                }, function (errorResponse) {
-//                    $scope.error = errorResponse.data.message;
-//                });
+            $scope.uploadWordList = function () {
+                var course = {};
+                course.packs = [];
+                var pack = {};
+                var card = {};
+                var state = 'question';
+                var question = '';
+                var answer = '';
+                var id = 0;
+
+                var lines = $scope.text.split('\n');
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
+                    if (line.indexOf('CN:') === 0) {
+                        course.name = line.substring(3);
+                    } else if (line.indexOf('CD:') === 0) {
+                        course.description = line.substring(3);
+                    } else if (line.indexOf('P:') === 0) {
+                        pack = {};
+                        pack.id = id++;
+                        pack.name = line.substring(2);
+                        pack.cards = [];
+                        card = {};
+                        card.id = id++;
+                        course.packs.push(pack);
+                    } else {
+                        if (state === 'question') {
+                            card.answer = line;
+                            state = 'answer';
+                        } else {
+                            card.question = line;
+                            pack.cards.push(card);
+                            card = {};
+                            card.id = id++;
+                            state = 'question';
+                        }
+                    }
+                }
+
+                var res = CoursesService.uploadCourse();
+                res.post({course: course});
+
+            };
+
+            $scope.uploadTimestables = function () {
+                var course = {};
+                course.packs = [];
+                var pack = {};
+                var card = {};
+                var state = 'question';
+                var question = '';
+                var answer = '';
+                var id = 0;
+
+                var lines = $scope.text.split('\n');
+                for (var i = 0; i < lines.length; i++) {
+                    var line = lines[i];
+                    if (line.indexOf('CN:') === 0) {
+                        course.name = line.substring(3);
+                    } else if (line.indexOf('CD:') === 0) {
+                        course.description = line.substring(3);
+                    } else if (line.indexOf('P:') === 0) {
+                        pack = {};
+                        pack.id = id++;
+                        pack.name = line.substring(2);
+                        pack.cards = [];
+                        card = {};
+                        card.id = id++;
+                        course.packs.push(pack);
+                    } else {
+                        if (state === 'question') {
+                            card.question = line;
+                            state = 'answer';
+                        } else {
+                            card.answer = line;
+                            pack.cards.push(card);
+                            card = {};
+                            card.id = id++;
+                            state = 'question';
+                        }
+                    }
+                }
+
+                var res = CoursesService.uploadCourse();
+                res.post({course: course});
 
             };
 
 
+
         }
-    ]);
+    ])
+;

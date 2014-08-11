@@ -107,10 +107,10 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                 var self = this;
                 if (course) {
 
-                    self.removePacks(course.packs).then(function() {
+//                    self.removePacks(course.packs).then(function() {
                         course.$remove(callback);
 
-                    });
+//                    });
 
 
 
@@ -160,17 +160,24 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                     }
                 });
             },
+            uploadCourse: function () {
+                return $resource('courses/upload', [], {
+                    post: {
+                        method: 'POST'
+                    }
+                });
+            },
             copyCourse: function () {
                 return $resource('courses/copy/:courseId', [], {
-                    get: {
-                        method: 'GET'
+                    post: {
+                        method: 'POST'
                     }
                 });
             },
             copyCourseFor: function (userId) {
                 return $resource('courses/copy/:courseId', {userId: userId}, {
-                    get: {
-                        method: 'GET'
+                    post: {
+                        method: 'POST'
                     }
                 });
             },

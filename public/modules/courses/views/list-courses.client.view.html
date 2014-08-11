@@ -47,7 +47,7 @@
         </tbody>
     </table>
 
-    <div data-ng-hide="!courses.$resolved || courses.length">
+    <div data-ng-show="courses.length === 0">
         <div>
             You have not subscribed to any courses, yet. You can start with creating your own private Rememberators
             course using this

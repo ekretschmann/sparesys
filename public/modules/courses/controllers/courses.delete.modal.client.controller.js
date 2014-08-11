@@ -20,10 +20,7 @@ angular.module('courses').controller('DeleteCourseModalController', ['$scope', '
                 });
             });
 
-            console.log('here');
             CoursesService.remove(course, function () {
-
-                console.log($state.$current.url.source);
                 if($state.$current.url.source === '/courses') {
                     $state.go($state.$current, null, {reload: true});
                 } else if($state.$current.url.source === '/courses/admin') {

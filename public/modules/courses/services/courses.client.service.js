@@ -13,107 +13,15 @@ angular.module('courses').factory('Courses', ['$resource', function ($resource) 
 }]);
 
 
-angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses', 'Packs', 'Cards',
-    function ($q, $resource, Courses, Packs, Cards) {
+angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses', 
+    function ($q, $resource, Courses) {
         return {
-            removeCard: function(card, callback) {
-                var id = card.packs[0];
-                Packs.query({
-                    _id: id
-                }, function(packs) {
-
-                    packs.forEach(function(pack) {
-                        for (var i in pack.cards) {
-                            if (pack.cards[i] === card._id) {
-                                pack.cards.splice(i, 1);
-                            }
-                        }
-                        pack.$update(function() {
-                            card.$remove(function() {
-                                callback();
-                            });
-                        });
-                    });
-                });
-
-            },
-            removeCards: function(theCards) {
-
-                var deferred = $q.defer();
-                if (theCards.length === 0) {
-                    deferred.resolve(true);
-                }
-                var cardsRemoved = 0;
-                theCards.forEach(function (cardId) {
-
-                    Cards.query({
-                        _id: cardId
-                    }, function (cards) {
-                        if (cards.length === 1) {
-//                            console.log('    removing card '+cards[0].question);
-                            cards[0].$remove(function() {
-//                                console.log('    removed card '+cards[0].question);
-                                cardsRemoved++;
-                                if (cardsRemoved === theCards.length) {
-//                                    console.log('    all cards done');
-                                    deferred.resolve(true);
-                                }
-                            });
-
-
-                        }
-                    });
-                });
-                return deferred.promise;
-            },
-            removePacks: function(thePacks) {
-//                console.log('  packs length:'+thePacks.lenth);
-                var self = this;
-                var deferred = $q.defer();
-                if (thePacks.length === 0) {
-//                    console.log('  deferring packs');
-                    deferred.resolve(true);
-                }
-                var packsRemoved = 0;
-                thePacks.forEach(function (packsId) {
-
-                    Packs.query({
-                        _id: packsId
-                    }, function (packs) {
-                        if (packs.length === 1) {
-//                            console.log('  removing pack '+packs[0].name);
-                            self.removeCards(packs[0].cards).then(function(){
-
-
-                                packs[0].$remove(function(){
-                                    packsRemoved++;
-//                                    console.log('  removed pack '+packs[0].name);
-                                    if (packsRemoved === thePacks.length) {
-//                                        console.log('  removed all packs');
-                                        deferred.resolve(true);
-                                    }
-                                });
-
-                            });
-
-
-                        }
-                    });
-                });
-                return deferred.promise;
-            },
             remove: function (course, callback) {
-//                console.log('removing course');
-                var self = this;
+
                 if (course) {
-
-//                    self.removePacks(course.packs).then(function() {
-                        course.$remove(callback);
-
-//                    });
-
-
-
+                        course.$remove(function() {
+                            callback();
+                        });
                 }
                 return true;
             },

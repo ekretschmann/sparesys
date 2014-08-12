@@ -6,6 +6,37 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.authentication = Authentication;
 
+        $scope.addCourseToClass = function (course) {
+
+            if ($scope.schoolclass.courses.indexOf(course._id) === -1) {
+                $scope.schoolclass.courses.push(course._id);
+                $scope.schoolclass.$update();
+
+                $scope.schoolclass.students.forEach(function (studentId) {
+
+                    Courses.query({
+                        userId: studentId
+                    }).$promise.then(function (studentCourses) {
+                            var setVisible = false;
+                            studentCourses.forEach(function (studentCourse) {
+
+                                // if the course existed, then just set it visible
+                                if (studentCourse.master && studentCourse.master.toString() === course._id) {
+                                    studentCourse.visible = true;
+                                    studentCourse.$update();
+                                    setVisible = true;
+                                }
+                            });
+                            if (!setVisible) {
+                                var res = CoursesService.copyCourseFor(studentId);
+                                res.get({courseId: course._id});
+
+                            }
+                        });
+
+                });
+            }
+        };
 
         $scope.removeCourseFromClass = function (course) {
             for (var i in $scope.schoolclass.courses) {
@@ -13,7 +44,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                     $scope.schoolclass.courses.splice(i, 1);
                 }
             }
-
 
             $scope.schoolclass.$update();
 
@@ -24,7 +54,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 }).$promise.then(function (studentCourses) {
                         studentCourses.forEach(function (studentCourse) {
                             if (studentCourse.master && studentCourse.master.toString() === course.toString()) {
-
                                 studentCourse.visible = false;
                                 studentCourse.$update();
                             }
@@ -48,55 +77,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 }
             });
 
-        };
-
-
-        $scope.addCourseToClass = function (course) {
-
-
-            if ($scope.schoolclass.courses.indexOf(course._id) === -1) {
-                $scope.schoolclass.courses.push(course._id);
-                $scope.schoolclass.$update();
-
-                $scope.schoolclass.students.forEach(function (studentId) {
-
-
-                    Courses.query({
-                        userId: studentId
-                    }).$promise.then(function (studentCourses) {
-                            var setVisible = false;
-                            studentCourses.forEach(function (studentCourse) {
-
-                                // if the course existed, then just set it visible
-
-                                if (studentCourse.master && studentCourse.master.toString() === course._id) {
-                                    studentCourse.visible = true;
-                                    studentCourse.$update();
-                                    setVisible = true;
-                                }
-                            });
-                            if (!setVisible) {
-//                                create the course
-                                var res = CoursesService.copyCourseFor(studentId);
-                                var promise = res.get({courseId: course._id}).$promise;
-
-                                promise.then(function (course) {
-
-                                    Courses.get({
-                                        courseId: course._id
-                                    }).$promise.then(function (copiedCourse) {
-                                            copiedCourse.user = studentId;
-                                            copiedCourse.master = course._id;
-                                            copiedCourse.$update();
-                                        });
-
-                                });
-                            }
-                        });
-
-
-                });
-            }
         };
 
 
@@ -164,21 +144,21 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 // remove missing courses
                 // this shouldn't happen, but while I am developing
                 // I like it to be self-fixing.
-                schoolclass.courses.forEach(function(courseId) {
+                schoolclass.courses.forEach(function (courseId) {
                     Courses.query({
                         _id: courseId
-                    }).$promise.then(function(courses) {
-                        if (courses.length === 0) {
-                            console.log('Course doesnt exist. Removing from schoolclass');
-                            for (var i in schoolclass.courses) {
-                                if (schoolclass.courses[i] === courseId) {
-                                    schoolclass.courses.splice(i, 1);
+                    }).$promise.then(function (courses) {
+                            if (courses.length === 0) {
+                                console.log('Course doesnt exist. Removing from schoolclass');
+                                for (var i in schoolclass.courses) {
+                                    if (schoolclass.courses[i] === courseId) {
+                                        schoolclass.courses.splice(i, 1);
+                                    }
                                 }
+                                schoolclass.$update();
                             }
-                            schoolclass.$update();
-                        }
 
-                    });
+                        });
                 });
 
 

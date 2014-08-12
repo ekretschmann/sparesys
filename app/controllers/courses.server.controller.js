@@ -301,8 +301,9 @@ var copyPacks = function (packIds, userId, newCourseId) {
 exports.copyCourse = function (req, res, next, id) {
 
     var userId;
-    if (req.body.userId) {
-        userId = req.body.userId;
+
+    if (req.query.userId) {
+        userId = req.query.userId;
     } else {
         userId = req.user;
     }
@@ -322,6 +323,8 @@ exports.copyCourse = function (req, res, next, id) {
         copy.name = original.name;
         copy.description = original.description;
         copy.language = original.language;
+        copy.master = original._id;
+
         var packPromise = copyPacks(original.packs, userId, copy._id);
 
         packPromise.then(function (packs) {
@@ -331,10 +334,6 @@ exports.copyCourse = function (req, res, next, id) {
             });
         });
 
-
-//        copyPacks(original.packs, userId).then(function (result) {
-//            res.jsonp(true);
-//        });
 
 
     });

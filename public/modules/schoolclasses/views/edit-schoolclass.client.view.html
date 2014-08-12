@@ -167,10 +167,8 @@
                     <tr data-ng-repeat="student in schoolclass.students">
 
                         <td class="sparesys-view-courses-name-cell">
-                            <a href="#!/schoolclasses/{{schoolclass._id}}/edit">
-                                <i data-ng-click="removeStudentClass(student)"
+                            <a data-ng-click="removeStudentFromClass(student)"
                                    class="glyphicon glyphicon-minus-sign">
-                                </i>
                             </a>
                         </td>
 

@@ -223,11 +223,21 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 }
             }
 
-            $scope.schoolclass.$update(function (res) {
+            console.log($scope.schoolclass.courses);
+            Courses.query({
+                userId: student
+            }, function(courses) {
+                courses.forEach(function(course) {
+                    console.log(course);
+                }, this);
 
-            }, function (err) {
-//                console.log(err);
             });
+
+//            $scope.schoolclass.$update(function (res) {
+//
+//            }, function (err) {
+////                console.log(err);
+//            });
         };
 
         $scope.addStudentToClass = function (student) {

@@ -6,6 +6,28 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.authentication = Authentication;
 
+        $scope.addCourseForStudent = function (studentId, courseId) {
+            Courses.query({
+                userId: studentId
+            }).$promise.then(function (studentCourses) {
+                    var setVisible = false;
+                    studentCourses.forEach(function (studentCourse) {
+
+                        // if the course existed, then just set it visible
+                        if (studentCourse.supervised && studentCourse.master.toString() === courseId) {
+                            studentCourse.visible = true;
+                            studentCourse.$update();
+                            setVisible = true;
+                        }
+                    });
+                    if (!setVisible) {
+                        var res = CoursesService.copyCourseFor(studentId);
+                        res.get({courseId: courseId});
+
+                    }
+                });
+        };
+
         $scope.addCourseToClass = function (course) {
 
             if ($scope.schoolclass.courses.indexOf(course._id) === -1) {
@@ -14,25 +36,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
                 $scope.schoolclass.students.forEach(function (studentId) {
 
-                    Courses.query({
-                        userId: studentId
-                    }).$promise.then(function (studentCourses) {
-                            var setVisible = false;
-                            studentCourses.forEach(function (studentCourse) {
-
-                                // if the course existed, then just set it visible
-                                if (studentCourse.supervised && studentCourse.master.toString() === course._id) {
-                                    studentCourse.visible = true;
-                                    studentCourse.$update();
-                                    setVisible = true;
-                                }
-                            });
-                            if (!setVisible) {
-                                var res = CoursesService.copyCourseFor(studentId);
-                                res.get({courseId: course._id});
-
-                            }
-                        });
+                    $scope.addCourseForStudent(studentId, course._id);
 
                 });
             }
@@ -247,6 +251,12 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             }
 
             $scope.schoolclass.$update(function () {
+
+                $scope.schoolclass.courses.forEach(function(courseId) {
+                    $scope.addCourseForStudent(student._id, courseId);
+                });
+
+
                 //$location.path('schoolclasses/' + schoolclass._id);
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;

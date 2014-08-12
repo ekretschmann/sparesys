@@ -23,25 +23,25 @@
         <tbody>
         <tr data-ng-repeat="course in courses | filter:searchText">
             <td class="sparesys-view-courses-name-cell">
-                <a href="" data-ng-if="!course.master">
+                <a href="" data-ng-if="!course.supervised">
                     <i data-ng-click="areYouSureToDeleteCourse(course)"
                        class="glyphicon glyphicon-remove-sign">
                     </i>
                 </a>
             </td>
             <td class="sparesys-view-courses-name-cell">
-                <a data-ng-if="!course.master" data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
+                <a data-ng-if="!course.supervised" data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
                 <span style="color: #999999" data-ng-if="course.master">{{course.name}}</span>
             </td>
             <td>
 
-                <span data-ng-if="!course.master">{{course.description}}</span>
-                <span data-ng-if="course.master" style="color: #999999">{{course.description}} (from school)</span>
+                <span data-ng-if="!course.supervised">{{course.description}}</span>
+                <span data-ng-if="course.supervised" style="color: #999999">{{course.description}} (from school)</span>
 
             </td>
             <td class="sparesys-view-courses-date-cell">
-                <span data-ng-if="!course.master">{{course.created | date:'shortDate'}}</span>
-                <span data-ng-if="course.master" style="color: #999999">{{course.created | date:'shortDate'}}</span>
+                <span data-ng-if="!course.supervised">{{course.created | date:'shortDate'}}</span>
+                <span data-ng-if="course.supervised" style="color: #999999">{{course.created | date:'shortDate'}}</span>
             </td>
         </tr>
         </tbody>

@@ -51,6 +51,10 @@ var CourseSchema = new Schema({
     visible: {
         type: Boolean,
         default: true
+    },
+    supervised: {
+        type: Boolean,
+        default: false
     }
 });
 

@@ -21,7 +21,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                             studentCourses.forEach(function (studentCourse) {
 
                                 // if the course existed, then just set it visible
-                                if (studentCourse.master && studentCourse.master.toString() === course._id) {
+                                if (studentCourse.supervised && studentCourse.master.toString() === course._id) {
                                     studentCourse.visible = true;
                                     studentCourse.$update();
                                     setVisible = true;
@@ -53,7 +53,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                     userId: studentId
                 }).$promise.then(function (studentCourses) {
                         studentCourses.forEach(function (studentCourse) {
-                            if (studentCourse.master && studentCourse.master.toString() === course.toString()) {
+                            if (studentCourse.supervised && studentCourse.master.toString() === course.toString()) {
                                 studentCourse.visible = false;
                                 studentCourse.$update();
                             }

@@ -301,9 +301,11 @@ var copyPacks = function (packIds, userId, newCourseId) {
 exports.copyCourse = function (req, res, next, id) {
 
     var userId;
+    var isSupervised = false;
 
     if (req.query.userId) {
         userId = req.query.userId;
+        isSupervised = true;
     } else {
         userId = req.user;
     }
@@ -324,6 +326,7 @@ exports.copyCourse = function (req, res, next, id) {
         copy.description = original.description;
         copy.language = original.language;
         copy.master = original._id;
+        copy.supervised = isSupervised;
 
         var packPromise = copyPacks(original.packs, userId, copy._id);
 

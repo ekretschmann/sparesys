@@ -1,8 +1,6 @@
 <section data-ng-controller="PracticeController" data-ng-init="init()" data-ng-keypress="key(event)">
 
 
-
-
     <div class="sparesys-header">
 
         <div class="sparesys-title">
@@ -12,7 +10,7 @@
 
         <table>
             <tr>
-                <td >Cards</td>
+                <td>Cards</td>
                 <td style="padding-left: 5px">:</td>
                 <td style="padding-left: 5px">
                     {{cards.length}}
@@ -40,19 +38,18 @@
 
     <div data-ng-if="cards.length > 0">
         <div data-ng-if="validation === 'self'">
-                <div class="flashcard">
+            <div class="flashcard">
 
-                   
 
                 <h2>{{card.question}}</h2>
 
-                <span  data-ng-init="playSound(card.question)" data-ng-if="state == 'question'" ></span>
+                <span data-ng-init="playSound(card.question)" data-ng-if="state == 'question'"></span>
 
 
                 <div style="height: 100px">
             <span>
                 <h3>
-                    <span data-ng-if="state == 'answer'" >
+                    <span data-ng-if="state == 'answer'">
                         <span>{{card.answer}}</span>
                     </span>
                 </h3>
@@ -84,7 +81,7 @@
 
                 <h2>{{card.question}}</h2>
 
-                <span  data-ng-init="playSound(card.question)" data-ng-if="state == 'question'" ></span>
+                <span data-ng-init="playSound(card.question)" data-ng-if="state == 'question'"></span>
 
                 <div data-ng-if="state == 'question'" class="form-group">
                     <input type="text" required id="answer" name="answer"
@@ -144,29 +141,28 @@
     <!--<div>hrt: {{card.hrt/60000}}</div>-->
     <!--<div>history: {{card.history}}</div>-->
 
-    <!--<table class="table-striped" style="width: 100%">-->
-    <!--<thead>-->
-    <!--<tr>-->
-    <!--<th class="sparesys-view-courses-description-column">Card</th>-->
-    <!--<th class="sparesys-view-courses-course-column">PR</th>-->
-    <!--<th class="sparesys-view-courses-course-column">HRT</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr data-ng-repeat="k in keys">-->
+    <table class="table-striped" style="width: 100%">
+        <thead>
+        <tr>
+            <th class="sparesys-view-courses-description-column">Card</th>
+            <th class="sparesys-view-courses-course-column">PR</th>
+            <th class="sparesys-view-courses-course-column">HRT</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="k in keys">
 
-    <!--<td class="sparesys-view-courses-name-cell">-->
+            <td class="sparesys-view-courses-name-cell">
 
-    <!--{{k}}-->
-    <!--</td>-->
-    <!--<td class="sparesys-view-courses-course-column">{{analysis[k].pr}}</td>-->
-    <!--<td class="sparesys-view-courses-course-column">{{analysis[k].hrt}}</td>-->
-    <!--</tr>-->
-    <!--</tbody>-->
-    <!--</table>-->
+                {{k}}
+            </td>
+            <td class="sparesys-view-courses-course-column">{{analysis[k].pr}}</td>
+            <td class="sparesys-view-courses-course-column" style="white-space: nowrap">{{analysis[k].hrt}}</td>
+        </tr>
+        </tbody>
+    </table>
     <!--<button data-ng-click="clearHistory(c)">Clear Card History</button>-->
-    <!--<button data-ng-click="clearCourseHistory()">Clear Course History</button>-->
-
+    <button data-ng-click="clearCourseHistory()">Clear Course History</button>
 
 
     <div data-ng-if="cards.length === 0">

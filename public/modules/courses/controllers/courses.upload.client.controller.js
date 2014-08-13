@@ -21,6 +21,7 @@ angular.module('courses').controller('UploadController',
                 var question = '';
                 var answer = '';
                 var id = 0;
+                var line;
                 $scope.error = undefined;
 
                     course.name = $scope.options.name;
@@ -42,7 +43,7 @@ angular.module('courses').controller('UploadController',
 
                 for (var i = 0; i < lines.length; i++) {
 
-                    var line = lines[i];
+                    line = lines[i];
                     if (line.length > 140) {
                         $scope.error = 'Maximum length of lines is 140. Line is: '+line;
                         return;

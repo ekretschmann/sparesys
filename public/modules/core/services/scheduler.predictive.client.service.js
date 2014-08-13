@@ -57,7 +57,15 @@ angular.module('core').service('PredictiveSchedulerService', [
                 this.cards.forEach(function(card) {
 
                     var pr = this.getPredictedRetention(card, time);
-                    this.analysis[card.question] = {pr: Math.round(pr*100000)/1000, hrt: Math.round(card.hrt / 60000)};
+                    if (card.hrt > 1000*60*60*24) {
+                        this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000*60*60*24))+ ' days'};
+                    } else if (card.hrt > 1000*60*60) {
+                        this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000*60*60))+ ' hours'};
+                    } else if (card.hrt > 1000*60) {
+                        this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000*60))+ ' mins'};
+                    } else {
+                            this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000))+ ' secs'};
+                    }
 //                    console.log(card.question+" - "+pr);
                     if (Math.abs(pr-0.4) < bestValue) {
                         bestCard = card;
@@ -90,20 +98,28 @@ angular.module('core').service('PredictiveSchedulerService', [
 
                 if (card.history.length === 0) {
                     if (assessment === 0) {
+                        // 10 s
                         card.hrt = 10000;
                     } else if (assessment === 1) {
-                        card.hrt = 60000;
+                        // 10 min
+                        card.hrt = 1000*60*10 * (Math.random()/10.0+1.0);
                     } else if (assessment === 2) {
-                        card.hrt = 60*24*60000;
+                        // 1 day
+                        card.hrt = 1000*60*60*24 * (Math.random()/10.0+1.0);
                     } else if (assessment === 3) {
-                        card.hrt = 60*24*5*60000;
+                        // 5 days
+                        console.log(Math.random()/10.0+1.0);
+                        card.hrt = 1000*60*60*24*5 * (Math.random()/10.0+1.0);
+                        console.log(card.hrt);
                     }
                 } else {
                     if (assessment === 0) {
-                        card.hrt = 10000;
+                        // 10 s
+                        card.hrt = 10000 * (Math.random()/10.0+1.0);
                     } else if (assessment === 1) {
-                        card.hrt = 60000;
-                    } else if (assessment === 3) {
+                        // 10 min
+                        card.hrt = 1000*60*10 * (Math.random()/10.0+1.0);
+                    } else {
                         if (card.hrt < 10000) {card.hrt = 10000;}
 
                         var pr = this.getPredictedRetention(card, time);
@@ -113,7 +129,13 @@ angular.module('core').service('PredictiveSchedulerService', [
                         } else {
                             weight = 2 - (5/3-1/0.6*pr);
                         }
-                        card.hrt *= 1 + weight*10;
+                        if (assessment === 2) {
+                            card.hrt *= 1 + weight*2;
+                        } else if (assessment === 3) {
+                            card.hrt *= 1 + weight*10;
+                        }
+
+
                     }
                 }
                 card.history.push({when: time, assessment: assessment});

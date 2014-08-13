@@ -86,9 +86,7 @@ angular.module('core').controller('PracticeController',
 
                 } else if ($scope.card.validation === 'default') {
                     var hrt = SchedulerService.getMaxHrt($scope.card, Date.now());
-                    if ( hrt > 1000 * 60 * 24 * 7) {
-
-
+                    if ( hrt > 1000 * 60 * 60 * 24 * 7) {
                         $scope.validation =  'checked';
                     } else {
                         $scope.validation = 'self';

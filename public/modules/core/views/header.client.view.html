@@ -117,6 +117,9 @@
                     <li>
                         <a href="/#!/courses/create" class="font-m" style="color: darkblue">Create</a>
                     </li>
+                    <li data-ng-if="authentication.user.roles.indexOf('upload-course') > -1">
+                        <a href="/#!/courses/upload" class="font-m" style="color: darkblue">Upload</a>
+                    </li>
                     <li>
                         <a href="/#!/courses" class="font-m" style="color: darkblue">Manage</a>
                     </li>

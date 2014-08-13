@@ -83,7 +83,7 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
         };
 
         // Role management
-        $scope.roles = ['admin', 'user', 'feature1'];
+        $scope.roles = ['admin', 'user', 'upload-course'];
 
         // toggle selection for a given user role
         $scope.toggleSelection = function toggleSelection(toggledRole) {

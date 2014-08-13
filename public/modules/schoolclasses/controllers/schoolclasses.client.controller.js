@@ -232,16 +232,16 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 userId: student
             }, function(courses) {
                 courses.forEach(function(course) {
-                    console.log(course);
+                    if ($scope.schoolclass.courses.indexOf(course.master) > -1) {
+                        course.visble = true;
+                        course.supervised = false;
+                        course.$update();
+                    }
                 }, this);
 
             });
 
-//            $scope.schoolclass.$update(function (res) {
-//
-//            }, function (err) {
-////                console.log(err);
-//            });
+            $scope.schoolclass.$update();
         };
 
         $scope.addStudentToClass = function (student) {

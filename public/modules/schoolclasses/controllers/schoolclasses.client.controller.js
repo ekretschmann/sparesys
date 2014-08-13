@@ -14,7 +14,8 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                     studentCourses.forEach(function (studentCourse) {
 
                         // if the course existed, then just set it visible
-                        if (studentCourse.supervised && studentCourse.master.toString() === courseId) {
+                        if ( studentCourse.master === courseId) {
+                            studentCourse.supervised = true;
                             studentCourse.visible = true;
                             studentCourse.$update();
                             setVisible = true;
@@ -227,7 +228,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 }
             }
 
-            console.log($scope.schoolclass.courses);
             Courses.query({
                 userId: student
             }, function(courses) {
@@ -295,9 +295,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                         teacher.schoolclasses.splice(i, 1);
                     }
                 }
-                teacher.$update(function (t) {
-                    console.log(t.schoolclasses);
-                });
+                teacher.$update();
             }, function (err) {
 //                console.log(err);
             });

@@ -55,8 +55,8 @@ angular.module('courses').controller('UploadController',
                     }
                 }
 
-                for (var i = 0; i < lines.length; i++) {
-                    var line = lines[i];
+                for (var j = 0; j < lines.length; j++) {
+                    line = lines[j];
 
                     if (line.indexOf('++') === 0) {
                         if (state === 'question') {
@@ -82,7 +82,6 @@ angular.module('courses').controller('UploadController',
                         } else {
                             card = {};
                             card.question = line;
-                            console.log(card.question);
                             card.id = id++;
                             state = 'question';
                         }

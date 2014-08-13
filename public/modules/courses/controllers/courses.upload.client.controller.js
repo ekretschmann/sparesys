@@ -17,12 +17,13 @@ angular.module('courses').controller('UploadController',
                 course.packs = [];
                 var pack;
                 var card = {};
-                var state = 'question';
+                var state = 'answer';
                 var question = '';
                 var answer = '';
                 var id = 0;
+                $scope.error = undefined;
 
-                course.name = $scope.options.name;
+                    course.name = $scope.options.name;
                 course.description = $scope.options.description;
 
                 if (!course.name || course.name === '') {
@@ -30,7 +31,7 @@ angular.module('courses').controller('UploadController',
                     return;
                 }
 
-                if (!course.desciption || course.description === '') {
+                if (!course.description || course.description === '') {
                     $scope.error = 'Please fill in course description';
                     return;
                 }
@@ -38,11 +39,30 @@ angular.module('courses').controller('UploadController',
                 course.packs = [];
 
                 var lines = $scope.text.split('\n');
+
+                for (var i = 0; i < lines.length; i++) {
+
+                    var line = lines[i];
+                    if (line.length > 140) {
+                        $scope.error = 'Maximum length of lines is 140. Line is: '+line;
+                        return;
+                    }
+
+
+                    if (i > 10000) {
+                        $scope.error = 'Maximum upload length is 5000 cards';
+                        return;
+                    }
+                }
+
                 for (var i = 0; i < lines.length; i++) {
                     var line = lines[i];
 
                     if (line.indexOf('++') === 0) {
-
+                        if (state === 'question') {
+                            $scope.error = 'There is no answer for question '+ card.question;
+                            return;
+                        }
                         pack = {};
                         pack.id = id++;
                         pack.name = line.substring(2);
@@ -57,17 +77,19 @@ angular.module('courses').controller('UploadController',
                                 return;
                             }
                             card.answer = line;
+                            pack.cards.push(card);
                             state = 'answer';
                         } else {
-                            card.question = line;
-                            pack.cards.push(card);
                             card = {};
+                            card.question = line;
+                            console.log(card.question);
                             card.id = id++;
                             state = 'question';
                         }
                     }
                 }
 
+//                console.log(course);
                 var res = CoursesService.uploadCourse();
                 res.post({course: course});
 

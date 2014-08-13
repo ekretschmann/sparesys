@@ -210,27 +210,27 @@ html, body {
     /*font-style: normal;*/
 /*}*/
 
-@font-face {
-    font-family: 'Grinched';
-    src: url('grinched.eot?#iefix') format('embedded-opentype'),
+/*@font-face {*/
+    /*font-family: 'Grinched';*/
+    /*src: url('grinched.eot?#iefix') format('embedded-opentype'),*/
     /*url('grinched.woff') format('woff'),*/
-    url('Grinched.ttf')  format('truetype'),
-    url('grinched.svg#svgFontName') format('svg');
-}
+    /*url('Grinched.ttf')  format('truetype'),*/
+    /*url('grinched.svg#svgFontName') format('svg');*/
+/*}*/
 
 .font-xxl{
-    font-family:'Grinched';
+    /*font-family:'Grinched';*/
     font-size: 64pt;
 
 }
 
 .font-xl{
-    font-family:'Grinched';
+    /*font-family:'Grinched';*/
     font-size: 36pt;
 }
 
 .font-l{
-    font-family:'Grinched';
+    /*font-family:'Grinched';*/
     font-size: 20pt;
 
 }
@@ -245,7 +245,7 @@ html, body {
 }
 
 .font-m{
-    font-family:'Grinched';
+    /*font-family:'Grinched';*/
     font-size: 14pt;
 }
 

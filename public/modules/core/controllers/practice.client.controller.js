@@ -288,7 +288,7 @@ angular.module('core').controller('PracticeController',
             $scope.playSound = function (answer) {
 
 
-                if (!$scope.course.language) {
+                if (!$scope.course || !$scope.course.language) {
                     return;
                 }
 

@@ -94,13 +94,13 @@
     </div>
 
     <div class="sparesys-header">
-        <div style="font-weight: bold">Learning</div>
 
         <!--<div class="sparesys-subtitle" data-ng-if="!courses || courses.length===0">-->
         <!--You have not subscribed to any courses-->
         <!--</div>-->
 
         <div data-ng-if="!courses || courses.length===0">
+            <div style="font-weight: bold" >Learning</div>
 
             <div style="padding-top:5px">
                 You have not subscribed to any courses, yet.
@@ -129,7 +129,7 @@
             <table class="table-striped" style="width: 100%; margin-top: 10px">
                 <thead>
                 <tr>
-                    <th class="sparesys-view-courses-course-column" colspan="2">My Courses</th>
+                    <th class="sparesys-view-courses-course-column" colspan="3">My Courses</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -138,8 +138,12 @@
                         {{course.name}}
                     </td>
 
-                    <td class="sparesys-view-object-content-cell">
+                    <td >
                         <a data-ng-href="#!/practice/{{course._id}}">practice</a>
+                    </td>
+
+                    <td class="sparesys-view-object-content-cell" style="width: 100%; padding-left: 10px">
+                        <a data-ng-href="#!/statistics/{{course._id}}">statistics</a>
                     </td>
                 </tr>
                 </tbody>

@@ -248,7 +248,7 @@ angular.module('core').controller('PracticeController',
 
             $scope.setScore = function () {
 
-                $scope.score = Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100);
+                $scope.score = Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100)*$scope.inPlay;
             };
 
             // Find existing Course
@@ -267,6 +267,9 @@ angular.module('core').controller('PracticeController',
 
                     SchedulerService.init($scope.cards);
                     $scope.card = SchedulerService.nextCard();
+                    if ($scope.card.history.length === 0) {
+                        $scope.inPlay ++;
+                    }
 
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);

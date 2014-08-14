@@ -7,7 +7,7 @@ angular.module('courses').controller('CoursesController',
         function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, CoursesService) {
             $scope.authentication = Authentication;
 
-
+//            google.load('visualization', '1', {packages:['corechart']});
 
             $scope.createDummyCourse = function() {
 

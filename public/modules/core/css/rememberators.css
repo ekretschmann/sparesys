@@ -23,12 +23,24 @@
     vertical-align: top;
 }
 
+.content-last-section {
+    margin-bottom: 10px;
+    padding-bottom: 5px;
+    vertical-align: top;
+}
+
+
 .content-header .title {
     font-size: x-large;
     font-weight: bold;
 }
 
 .content-footer {
+    position: absolute;
+    bottom: 0;
+    border-top: #eaeaea solid 1px;
+    padding-top: 10px;
+    width: 200px;
     font-family:'Grinched';
     font-size: 12pt;
 }

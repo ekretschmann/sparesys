@@ -152,12 +152,9 @@ exports.update = function (req, res) {
 //	delete req.body.roles;
 
     function updateUser(theUser) {
-        console.log('updating');
-        console.log(theUser);
         theUser = _.extend(theUser, req.body);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
-        console.log(theUser);
         theUser.save(function (err) {
             if (err) {
                 return res.send(400, {

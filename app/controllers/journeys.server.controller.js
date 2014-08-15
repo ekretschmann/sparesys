@@ -95,15 +95,31 @@ exports.delete = function(req, res) {
 /**
  * List of Journeys
  */
-exports.list = function(req, res) { Journey.find().sort('-created').populate('user', 'displayName').exec(function(err, journeys) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(journeys);
-		}
-	});
+exports.list = function(req, res) {
+
+
+    if (req.query.userId) {
+
+        Journey.find({'user': req.query.userId}).exec(function (err, journeys) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(journeys);
+            }
+        });
+    } else {
+        Journey.find().sort('-created').populate('user', 'displayName').exec(function (err, journeys) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(journeys);
+            }
+        });
+    }
 };
 
 /**

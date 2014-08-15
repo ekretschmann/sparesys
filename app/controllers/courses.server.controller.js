@@ -49,10 +49,8 @@ exports.create = function (req, res) {
                 message: getErrorMessage(err)
             });
         } else {
-            console.log(req.user._id);
-            Journey.findById(req.user._id).exec(function (err, journey) {
-                console.log(err);
-                console.log(journey);
+            Journey.find({'user': req.user._id}).exec(function (err, journeys) {
+                var journey = journeys[0];
 
                 journey.createdCourse = true;
                 journey.save();

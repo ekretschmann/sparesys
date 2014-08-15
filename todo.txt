@@ -1,0 +1,17 @@
+add course to class makes courses available
+remove course hides them
+re-add makes them visible
+
+remove student from class: Courses become normal courses
+re-add student to class: Courses become controlled
+
+re-implement practice
+add due date
+add not before
+
+add stats
+
+REFACTOR
+RE-DESIGN
+
+GO Live

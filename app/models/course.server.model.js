@@ -17,13 +17,13 @@ var CourseSchema = new Schema({
     name: {
         type: String,
         default: '',
-        required: 'Please fill Course name',
+        required: 'Can not create a course without a name',
         trim: true
     },
     description: {
         type: String,
         default: '',
-        required: 'Please fill Course description',
+        required: 'Can not create a course without a description',
         trim: true
     },
     created: {

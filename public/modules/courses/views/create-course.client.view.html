@@ -1,43 +1,83 @@
 <section data-ng-controller="CoursesController">
 
 
-    <div class="sparesys-header">
-
-
-        <div class="sparesys-title">
+    <div class="content-header">
+        <div class="title">
             Create Course
         </div>
     </div>
 
-    <form class="form-horizontal" data-ng-submit="create()" novalidate>
-        <fieldset>
-            <table class="sparesys-view-object-table">
-                <tr class="controls">
-                    <td class="sparesys-view-object-label-cell">Name</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <input type="text" data-ng-model="name"
-                               id="name" class="form-control"
+    <div data-ng-show="error" class="text-error">
+        <div>
+            <strong>OOps, there was and error:</strong>
+        </div>
+        <div>
+            <strong>{{error}}</strong>
+        </div>
+    </div>
+
+      <div class="content-section"
+         data-ng-controller="JourneysController"
+         data-ng-init="findForCurrentUser()"
+         data-ng-if="!journey.createdCourse">
+
+          <img style="float: left;" class="right-padded" src="/modules/core/img/brand/superhero-girl-medium.gif"
+             width="48px">
+        Wow. You are creating your first course! You have to give your course a name
+        and a short description of what your course is going to be about. Once that
+        is done you will be able to add packs to your course and cards to the packs.
+    </div>
+
+    <div class="content-section"
+         data-ng-controller="JourneysController"
+         data-ng-init="findForCurrentUser()"
+         data-ng-if="journey.createdCourse">
+
+        <img style="float: right;" class="right-padded" src="/modules/core/img/brand/superhero-boy-medium.gif"
+             width="48px">
+        You have created a course before. Click me, if you want help.
+    </div>
+
+
+    <div class="content-section">
+        <form data-ng-submit="create()" validate>
+            <table>
+                <tr>
+                    <td class="right-padded">Name</td>
+                    <td>
+                        <input type="text"
+                               data-ng-model="name"
+                               class="form-control"
                                placeholder="Name"
-                               required></td>
+                               required>
+                    </td>
                 </tr>
 
-                <tr class="controls">
-
-                    <td class="sparesys-view-object-label-cell">Description</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <input type="text" data-ng-model="description"
-                               id="description" class="form-control"
-                               placeholder="Description" required></td>
+                <tr>
+                    <td class="right-padded">Description</td>
+                    <td class="expands top-padded">
+                        <input type="text"
+                               data-ng-model="description"
+                               class="form-control"
+                               placeholder="Description"
+                               required>
+                    </td>
                 </tr>
             </table>
-            <div class="pull-right">
+
+
+            <div class="top-padded" style="width: 100%; text-align: right">
                 <input type="submit" value="Create" class="btn btn-default">
             </div>
-            <div data-ng-show="error" class="text-danger">
-                <strong>{{error}}</strong>
-            </div>
-        </fieldset>
-    </form>
 
+
+        </form>
+    </div>
+
+
+    <div class="content-footer">
+
+        rememberators.com
+    </div>
 
 </section>

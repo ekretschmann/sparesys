@@ -17,7 +17,17 @@ module.exports = function(config) {
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
 		//reporters: ['progress'],
-		reporters: ['progress'],
+		reporters: ['progress', 'coverage'],
+//		reporters: ['coverage'],
+
+        preprocessors: {
+            // source files, that you wanna generate coverage for
+            // do not include tests or libraries
+            // (these files will be instrumented by Istanbul)
+            'public/modules/courses/controllers/courses.client.controller.js': ['coverage']
+        },
+
+        coverageReporter: { type : 'html', dir : 'coverage/' },
 
 		// Web server port
 		port: 9876,
@@ -41,6 +51,7 @@ module.exports = function(config) {
 		// - PhantomJS
 		// - IE (only Windows)
 		browsers: ['PhantomJS'],
+//		browsers: ['Chrome'],
 
 
 		// If browser does not capture in given timeout [ms], kill it

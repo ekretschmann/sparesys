@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     passport = require('passport'),
     User = mongoose.model('User'),
+    Journey = mongoose.model('Journey'),
     _ = require('lodash');
 
 /**
@@ -59,6 +60,12 @@ exports.signup = function (req, res) {
                 message: getErrorMessage(err)
             });
         } else {
+
+            // creating a user journey for this user
+            var journey = new Journey();
+            journey.user = user._id;
+            journey.save();
+
             // Remove sensitive data before login
             user.password = undefined;
             user.salt = undefined;
@@ -75,8 +82,8 @@ exports.signup = function (req, res) {
 };
 
 /**
- * Signup
- */
+* Signup
+*/
 exports.addTeacher = function (req, res) {
 //    delete req.body.roles;
 

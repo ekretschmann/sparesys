@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
     Course = mongoose.model('Course'),
     Pack = mongoose.model('Pack'),
     Card = mongoose.model('Card'),
+    Journey = mongoose.model('Journey'),
     _ = require('lodash'),
     q = require('q');
 
@@ -48,6 +49,15 @@ exports.create = function (req, res) {
                 message: getErrorMessage(err)
             });
         } else {
+            console.log(req.user._id);
+            Journey.findById(req.user._id).exec(function (err, journey) {
+                console.log(err);
+                console.log(journey);
+
+                journey.createdCourse = true;
+                journey.save();
+            });
+
             res.jsonp(course);
         }
     });

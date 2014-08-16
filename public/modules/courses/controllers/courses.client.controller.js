@@ -68,7 +68,6 @@ angular.module('courses').controller('CoursesController',
 
             // Create new Course
             $scope.create = function () {
-                console.log('here');
                 var course = new Courses({
                     name: this.name,
                     description: this.description

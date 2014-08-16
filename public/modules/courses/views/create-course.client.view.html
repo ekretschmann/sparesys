@@ -17,25 +17,12 @@
     <div data-ng-controller="JourneysController"
          data-ng-init="findForCurrentUser()">
 
-        <div data-ng-if="!journey.createdCourse">
-            <img class="right-padded"
-                 src="/modules/core/img/brand/superhero-girl-medium.gif"
-                 width="48px">
-
+        <div class="content-section" data-ng-if="!journey.createdCourse">
+            <img class="right-padded float-left"
+                 src="/modules/core/img/brand/superhero-girl-64.gif">
             Wow. You are creating your first course! You have to give your course a name
             and a short description of what your course is going to be about. Once that
             is done you will be able to add packs to your course and cards to the packs.
-        </div>
-
-        <div class="content-section"
-             data-ng-controller="JourneysController"
-             data-ng-init="findForCurrentUser()"
-             data-ng-if="journey.createdCourse">
-            <img class="right-padded" src="/modules/core/img/brand/superhero-boy-medium.gif"
-                 width="48px">
-            Can you remember how to create a course? Click me, if you want help.
-
-
         </div>
     </div>
 
@@ -64,10 +51,10 @@
                                required>
                     </td>
                 </tr>
+
             </table>
 
-
-            <div class="top-padded" style="width: 100%; text-align: right">
+            <div class="top-padded right-aligned">
                 <input type="submit" value="Create" class="btn btn-default">
             </div>
 
@@ -75,8 +62,4 @@
         </form>
     </div>
 
-
-    <div class="content-footer" >
-            rememberators.com
-    </div>
 </div>

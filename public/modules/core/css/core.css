@@ -228,22 +228,6 @@ html, body {
     font-style: normal;
 }
 
-.font-xxl{
-    font-family:'Grinched';
-    font-size: 64pt;
-
-}
-
-.font-xl{
-    font-family:'Grinched';
-    font-size: 36pt;
-}
-
-.font-l{
-    font-family:'Grinched';
-    font-size: 20pt;
-
-}
 
 .navbar-inverse .navbar-brand{
     color: #d0d8dd;
@@ -294,16 +278,7 @@ body {
     background-color: aliceblue
 }
 
-.flashcard {
-    padding: 30px;
-    margin-bottom: 30px;
-    color: inherit;
-    background-color: #26b3f7;
-    border-radius: 12px;
-    text-align: center;
-    box-shadow: 5px 5px 5px #CCC;
-    min-height:320px;
-}
+
 
 .answer {
     background-color: aliceblue;

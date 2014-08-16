@@ -4,8 +4,10 @@ angular.module('core').controller('HomeController', ['$scope', '$modal', 'Authen
     function ($scope, $modal, Authentication) {
         $scope.authentication = Authentication;
 
+        $scope.interval = 500;
+
         // Set of Photos
-        $scope.photos = [
+        $scope.slides = [
             {src: '/modules/core/img/brand/superhero-girl-medium.gif', text: 'test'},
             {src: '/modules/core/img/brand/superhero-boy-medium.gif', text: 'Image 02'},
             {src: '/modules/core/img/brand/philosopher-medium.gif', text: 'Image 03'},
@@ -15,7 +17,8 @@ angular.module('core').controller('HomeController', ['$scope', '$modal', 'Authen
         ];
 
         // initial image index
-        $scope.index = Math.floor((Math.random() * 6) + 1);
+//        $scope.index = Math.floor((Math.random() * 6) + 1);
+        $scope.index = 2;
 
 
         $scope.signinPopup = function () {

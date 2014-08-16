@@ -1,68 +1,64 @@
-
 <div ng-include="'/modules/users/views/partial/signin.client.view.html'"></div>
 <div ng-include="'/modules/users/views/partial/signup.client.view.html'"></div>
 
-    <div class="flashcard" >
+<div class="flashcard">
 
 
-        <div class="font-xxl">Rememberators!</div>
+    <div class="font-xxl">Rememberators!</div>
 
-
-        <div data-ng-if="index == 1">
-            <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
-                <img src="/modules/core/img/brand/superhero-girl-medium.gif" alt="Rememberators"><br>
-            </p>
-
-            <div class="font-xl">You won't forget this. Ever.</div>
-        </div>
-
-        <div data-ng-if="index == 2">
-        <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
-        <img src="/modules/core/img/brand/superhero-boy-medium.gif" alt="Rememberators"><br>
-        </p>
-
-        <div class="font-xl">I dare you to become a Rememberator.</div>
-        </div>
-
-        <div  data-ng-if="index == 3">
-        <p class="lead" style="padding-left:40px; padding-top: 10px; padding-bottom: 10px">
-        <img src="/modules/core/img/brand/guru-medium.gif" alt="Rememberators"><br>
-        </p>
-
-        <div class="font-xl">Unleash your brainpower!</div>
-        </div>
-
-        <div data-ng-if="index == 4">
-        <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
-        <img src="/modules/core/img/brand/philosopher-medium.gif" alt="Rememberators"><br>
-        </p>
-
-        <div class="font-xl">I remember, therefore I am.</div>
-        </div>
-
-
-        <div  data-ng-if="index == 5">
-        <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
-        <img src="/modules/core/img/brand/teacher-woman-medium.gif" alt="Rememberators"><br>
-        </p>
-
-        <div class="font-xl">No one can take your memories away from you.</div>
-        </div>
-
-        <div data-ng-if="index == 6">
-        <p class="lead" style="padding-top: 10px; padding-bottom: 10px">
-        <img src="/modules/core/img/brand/teacher-man-medium.gif" alt="Rememberators"><br>
-        </p>
-
-        <div class="font-xl">That will teach you!</div>
-        </div>
-
-
-    </div>
+            <carousel interval="interval">
+                <slide ng-repeat="slide in slides" active="slide.active">
+                    <img ng-src="{{slide.src}}" style="margin:auto;">
+                    <!--<div class="carousel-caption">-->
+                        <!--<p>{{slide.text}}</p>-->
+                    <!--</div>-->
+                </slide>
+            </carousel>
 
 
 
-<p style="width: 100%; text-align: center"><a class="btn btn-lg btn-success font-l" data-ng-click="signupPopup()">I'll give it a
+    <!--<div data-ng-if="index == 1" class="image-container">-->
+        <!--<div class="hero-girl"></div>-->
+        <!--<div class="font-xl">You won't forget this. Ever.</div>-->
+    <!--</div>-->
+
+    <!--<div data-ng-if="index == 2" class="image-container">-->
+        <!--<div class="hero-boy"></div>-->
+
+        <!--<div class="font-xl">I dare you to become a Rememberator.</div>-->
+    <!--</div>-->
+
+    <!--<div data-ng-if="index == 3" class="image-container">-->
+        <!--<div class="guru"></div>-->
+
+        <!--<div class="font-xl">Unleash your brainpower!</div>-->
+    <!--</div>-->
+
+    <!--<div data-ng-if="index == 4" class="image-container">-->
+        <!--<div class="philosopher"></div>-->
+
+        <!--<div class="font-xl">I remember, therefore I am.</div>-->
+    <!--</div>-->
+
+
+    <!--<div data-ng-if="index == 5" class="image-container">-->
+        <!--<div class="teacher-woman"></div>-->
+
+        <!--<div class="font-xl">Forget about Forgetting!</div>-->
+    <!--</div>-->
+
+    <!--<div data-ng-if="index == 6" class="image-container">-->
+        <!--<div class="teacher-man"></div>-->
+
+        <!--<div class="font-xl">That will teach you!</div>-->
+    <!--</div>-->
+
+
+</div>
+
+
+<p style="width: 100%; text-align: center"><a class="btn btn-lg btn-success font-l" data-ng-click="signupPopup()">I'll
+    give it a
     shot</span></a></p>
 
 <div class="sparesys-header" style="padding-top: 20px; border-top: 1px ">

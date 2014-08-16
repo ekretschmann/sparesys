@@ -9,58 +9,59 @@
     <div ng-include="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>
 
 
-    <div class="sparesys-header">
+    <div class="content-header">
         <div class="pull-right">
 
-
-            <a href="" data-ng-click="editCoursePopup(course)" data-ng-show="authentication.user._id == course.user._id"
-               style="padding-right: 20px">
+            <a class="menu-link"
+               href=""
+               data-ng-click="editCoursePopup(course)">
                 Edit
             </a>
 
-            <a href="" data-ng-click="areYouSureToDeleteCourse(course)"
-               data-ng-show="authentication.user._id == course.user._id"
-               style="padding-right: 20px">
+            <a class="menu-link"
+               href=""
+               data-ng-click="areYouSureToDeleteCourse(course)"
+               data-ng-show="authentication.user._id == course.user._id">
                 Delete
             </a>
 
-            <span data-ng-if="!course.master && !course.published">
-            <a href="" data-ng-click="areYouSureToPublishCourse(course)"
-               data-ng-show="authentication.user._id == course.user._id"
-               style="padding-right: 20px">
+            <span data-ng-if="!course.master && !course.published && course.packs.length > 0">
+            <a class="menu-link"
+               href=""
+               data-ng-click="areYouSureToPublishCourse(course)"
+               data-ng-show="authentication.user._id == course.user._id">
                 Publish
             </a>
             </span>
 
             <span data-ng-if="course.published">
-            <a href="" data-ng-click="areYouSureToPublishCourse(course)"
-               data-ng-show="authentication.user._id == course.user._id"
-               style="padding-right: 20px">
+            <a class="menu-link"
+               href=""
+               data-ng-click="areYouSureToPublishCourse(course)"
+               data-ng-show="authentication.user._id == course.user._id">
                 Un-Publish
             </a>
             </span>
 
 
-            <a href="" ng-click="addPackToCoursePopup()" data-ng-show="authentication.user._id == course.user._id">
+            <a style="color: #00008b" class="menu-link" href="" ng-click="addPackToCoursePopup()">
                 Add Packs
-
             </a>
-
         </div>
 
-        <div class="sparesys-title">
+        <div class="title">
             {{course.name}}
         </div>
         <table>
             <tr>
                 <td>Description</td>
-                <td style="padding-left: 5px">:</td>
-                <td style="padding-left: 5px">{{course.description}}</td>
+                <td class="left-padded">:</td>
+                <td class="left-padded">{{course.description}}</td>
             </tr>
             <tr>
                 <td>Published</td>
-                <td style="padding-left: 5px">:</td>
-                <td style="padding-left: 5px">
+                <td class="left-padded">:</td>
+                <td class="left-padded">
                     <span data-ng-if="course.published">yes</span>
                     <span data-ng-if="!course.published">no</span>
                 </td>
@@ -68,11 +69,27 @@
 
             <tr>
                 <td>Language</td>
-                <td style="padding-left: 5px">:</td>
-                <td style="padding-left: 5px">
+                <td class="left-padded">:</td>
+                <td class="left-padded">
                     <span data-ng-if="course.language">{{course.language.name}}</span>
-                    <span data-ng-if="!course.language">n/a</span>
+                    <span data-ng-if="!course.language">-</span>
 
+                </td>
+            </tr>
+
+            <tr>
+                <td>Card Front</td>
+                <td class="left-padded">:</td>
+                <td class="left-padded">
+                    {{course.front}}
+                </td>
+            </tr>
+
+            <tr>
+                <td>Card Back</td>
+                <td class="left-padded">:</td>
+                <td class="left-padded">
+                    {{course.back}}
                 </td>
             </tr>
 
@@ -81,50 +98,85 @@
     </div>
 
 
-    <div data-ng-hide="course.packs.length > 0">
-        You have to <a href="" ng-click="addPackToCoursePopup()">create packs</a> for this course!
+    <div data-ng-if="course.packs.length === 0">
+
+
+        <div data-ng-controller="JourneysController"
+             data-ng-init="findForCurrentUser()">
+
+            <div data-ng-if="journey && !journey.createdPack">
+
+                <div class="content-section ">
+                    <img class="right-padded float-left size-64"
+                         src="/modules/core/img/brand/teacher-woman-medium.gif">
+                    Ok. Now, a course has a number of packs to order cards. If you are creating
+                    a language course, you can for example put all the colors into one pack,
+                    the days of the week into another and so on. To do this, click on the
+                    <a href="" ng-click="addPackToCoursePopup()">Add Packs</a> link above.
+                </div>
+
+                <div class="content-section">
+                    <img class="left-padded float-right size-64"
+                         src="/modules/core/img/brand/guru-medium.gif">
+
+                    If you are a guru like me, you can tell the Rememberators more about your course.
+                    If you set a language, they will try to read the questions to you in that language.
+                    This can be very useful if you are creating a foreign language course. You can also decide what
+                    is on the front and back of your card, like "French" and "English". To do this,
+                    click on the <a href="" ng-click="editCoursePopup(course)">Edit</a> link above.
+                </div>
+            </div>
+
+            <div class="content-section" data-ng-if="!journey || journey.createdPack">
+                You have to <a href="" ng-click="addPackToCoursePopup()">create packs</a> for this course!
+            </div>
+        </div>
+
     </div>
+
+
     <div data-ng-show="course.packs.length > 0">
 
+        <div class="content-section ">
 
-        <table id="searchTextResults" class="table-striped" style="width: 100%; margin-top: 20px">
-            <thead>
-            <tr>
-                <th class="sparesys-view-courses-course-column">
-                </th>
-                <th class="sparesys-view-courses-course-column">Pack</th>
-                <th class="sparesys-view-object-label-cell">Number of Cards</th>
-                <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
-                <!--<th>Created</th>-->
-            </tr>
-            </thead>
-            <tbody ui-sortable="sortableOptions" data-ng-model="course.packs">
-            <tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"
-                data-ng-init="findById(packId)"
-                style="cursor: move">
-                <td class="sparesys-view-courses-name-cell">
-                    <a href="">
-                        <i data-ng-click="areYouSureToDeletePack(pack)"
-                           class="glyphicon glyphicon-remove-sign">
-                        </i>
-                    </a>
+            <table class="table-striped" style="width: 100%; margin-top: 20px; margin-bottom: 20px">
+                <thead>
+                <tr>
+                    <th class="sparesys-view-courses-course-column">
+                    </th>
+                    <th class="sparesys-view-courses-course-column">Pack</th>
+                    <th class="sparesys-view-object-label-cell">Number of Cards</th>
+                    <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
+                    <!--<th>Created</th>-->
+                </tr>
+                </thead>
+                <tbody ui-sortable="sortableOptions" data-ng-model="course.packs">
+                <tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"
+                    data-ng-init="findById(packId)"
+                    style="cursor: move">
+                    <td class="sparesys-view-courses-name-cell">
+                        <a href="">
+                            <i data-ng-click="areYouSureToDeletePack(pack)"
+                               class="glyphicon glyphicon-remove-sign">
+                            </i>
+                        </a>
 
-                </td>
+                    </td>
 
-                <td class="sparesys-view-object-content-cell">
-                    <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
-                </td>
-                <td class="sparesys-view-object-content-cell" style="text-align: right">
-                    {{pack.cards.length}}
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
+                    <td class="sparesys-view-object-content-cell">
+                        <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
+                    </td>
+                    <td class="sparesys-view-object-content-cell" style="text-align: right">
+                        {{pack.cards.length}}
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
 
     </div>
 
-    <div class="footer">
+    <div class="content-last-section">
 
         <div>
             <small>

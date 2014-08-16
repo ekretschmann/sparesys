@@ -26,6 +26,16 @@ var CourseSchema = new Schema({
         required: 'Can not create a course without a description',
         trim: true
     },
+    front: {
+        type: String,
+        default: 'Question',
+        trim: true
+    },
+    back: {
+        type: String,
+        default: 'Answer',
+        trim: true
+    },
     created: {
         type: Date,
         default: Date.now

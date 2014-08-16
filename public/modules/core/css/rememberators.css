@@ -35,6 +35,13 @@
     font-weight: bold;
 }
 
+.menu-link {
+    padding-left: 20px;
+    color: #00008b;
+    font-family:'Grinched';
+    font-size: 14pt;
+}
+
 
 /*From bootstrap*/
 .form-control {
@@ -81,6 +88,10 @@
     padding-right: 10px;
 }
 
+.left-padded {
+    padding-left: 10px;
+}
+
 .top-padded {
     padding-top: 3px;
 }
@@ -101,7 +112,14 @@
     float: left;
 }
 
+.float-right {
+    float: right;
+}
+
 .right-aligned {
     width: 100%;
     text-align: right
+}
+.size-64 {
+    height: 64px
 }

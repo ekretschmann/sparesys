@@ -17,9 +17,9 @@
     <div data-ng-controller="JourneysController"
          data-ng-init="findForCurrentUser()">
 
-        <div class="content-section" data-ng-if="!journey.createdCourse">
-            <img class="right-padded float-left"
-                 src="/modules/core/img/brand/superhero-girl-64.gif">
+        <div class="content-section" data-ng-if="journey && !journey.createdCourse">
+            <img class="right-padded float-left size-64"
+                 src="/modules/core/img/brand/superhero-girl-medium.gif">
             Wow. You are creating your first course! You have to give your course a name
             and a short description of what your course is going to be about. Once that
             is done you will be able to add packs to your course and cards to the packs.

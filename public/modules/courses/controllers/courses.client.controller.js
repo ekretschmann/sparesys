@@ -8,6 +8,9 @@ angular.module('courses').controller('CoursesController',
 
             $scope.authentication = Authentication;
 
+            if (!$scope.authentication.user) {
+                $location.path('/');
+            }
 
 //
 //            // Load the Visualization API and the piechart package.

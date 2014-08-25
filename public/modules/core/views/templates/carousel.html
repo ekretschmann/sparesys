@@ -1,0 +1,26 @@
+<div>
+
+
+    <div class="sld"  ng-repeat="slide in slides" ng-hide="!slide.visible">
+
+        <img ng-src="{{slide.image}}" height="300px"/>
+
+        <div class="font-xl" style="padding-top: 10px">{{slide.text}}</div>
+    </div>
+    <!--TEST-->
+
+
+    <!--<a data-ng-href="#!/packs/{{card._id}}/edit">-->
+        <!--<i class="glyphicon glyphicon-edit"></i>-->
+    <!--</a>-->
+
+    <a data-ng-click="prev()">
+       <i class="glyphicon glyphicon-arrow-left"></i>
+    </a>
+
+    <a data-ng-click="next()">
+       <i class="glyphicon glyphicon-arrow-right"></i>
+    </a>
+
+
+</div>

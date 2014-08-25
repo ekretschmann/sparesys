@@ -1,3 +1,7 @@
+
+
+
+
 <div ng-include="'/modules/users/views/partial/signin.client.view.html'"></div>
 <div ng-include="'/modules/users/views/partial/signup.client.view.html'"></div>
 
@@ -6,52 +10,7 @@
 
     <div class="font-xxl">Rememberators!</div>
 
-            <carousel interval="interval">
-                <slide ng-repeat="slide in slides" active="slide.active">
-                    <img ng-src="{{slide.src}}" style="margin:auto;">
-                    <!--<div class="carousel-caption">-->
-                        <!--<p>{{slide.text}}</p>-->
-                    <!--</div>-->
-                </slide>
-            </carousel>
-
-
-
-    <!--<div data-ng-if="index == 1" class="image-container">-->
-        <!--<div class="hero-girl"></div>-->
-        <!--<div class="font-xl">You won't forget this. Ever.</div>-->
-    <!--</div>-->
-
-    <!--<div data-ng-if="index == 2" class="image-container">-->
-        <!--<div class="hero-boy"></div>-->
-
-        <!--<div class="font-xl">I dare you to become a Rememberator.</div>-->
-    <!--</div>-->
-
-    <!--<div data-ng-if="index == 3" class="image-container">-->
-        <!--<div class="guru"></div>-->
-
-        <!--<div class="font-xl">Unleash your brainpower!</div>-->
-    <!--</div>-->
-
-    <!--<div data-ng-if="index == 4" class="image-container">-->
-        <!--<div class="philosopher"></div>-->
-
-        <!--<div class="font-xl">I remember, therefore I am.</div>-->
-    <!--</div>-->
-
-
-    <!--<div data-ng-if="index == 5" class="image-container">-->
-        <!--<div class="teacher-woman"></div>-->
-
-        <!--<div class="font-xl">Forget about Forgetting!</div>-->
-    <!--</div>-->
-
-    <!--<div data-ng-if="index == 6" class="image-container">-->
-        <!--<div class="teacher-man"></div>-->
-
-        <!--<div class="font-xl">That will teach you!</div>-->
-    <!--</div>-->
+    <imagecarousel slides="slides" />
 
 
 </div>
@@ -59,7 +18,7 @@
 
 <p style="width: 100%; text-align: center"><a class="btn btn-lg btn-success font-l" data-ng-click="signupPopup()">I'll
     give it a
-    shot</span></a></p>
+    shot</a></p>
 
 <div class="sparesys-header" style="padding-top: 20px; border-top: 1px ">
     <div class="sparesys-title">Is this site for kids?</div>
@@ -70,15 +29,33 @@
     </div>
 </div>
 
+<div class="sparesys-header">
+<div class="sparesys-title">Rememberators get you prepared for your important test</div>
+<div>
+    You have to know your stack at a certain date? Tell the Rememberators, and they will optimize
+    your learning so that you succeed.
+</div>
+</div>
 
-<div class="sparesys-header" style="padding-top: 20px;">
-    <div class="sparesys-title">Is it for free?</div>
+<div class="sparesys-header">
+
+    <div class="sparesys-title">Rememberators let you set priorities</div>
+
     <div>
-        Yes, it is. And we guarantee no charges for all functionality.
+        Some things are more important to remember than others. You can tell the Rememberators
+        what is essential for you to know and they will make sure that you won't forget those.
     </div>
 </div>
 
-<div class="sparesys-header" style="padding-top: 20px">
+
+<div class="sparesys-header">
+    <div class="sparesys-title">Is it for free?</div>
+    <div>
+        Yes, it is and it will be for using it for the future.
+    </div>
+</div>
+
+<div class="sparesys-header">
     <div class="sparesys-title">Rememberators optimize your learning</div>
 
     <div>
@@ -111,20 +88,12 @@
     </div>
 </div>
 
-
 <div class="sparesys-header">
-
-    <div class="sparesys-title">Rememberators let you set priorities</div>
-
-    <div>
-        Some things are more important to remember than others. You can tell the Rememberators
-        what is essential for you to know and they will make sure that you won't forget those.
-    </div>
-</div>
-
-
-<div class="sparesys-title">You schedule your learning</div>
+<div class="sparesys-title">How mature is this application?</div>
 <div>
-    You have to know your stack at a certain date? Tell the Rememberators, and they will optimize
-    your learning so that you succeed.
+    Rememberators are still is in their alpha stage. We have a number of users now and will include
+    their feedback in future versions of the application. The application is open for early adopters, but
+    at this stage we are after organic growth and are not advertising the application for a
+    wide audience. But stay tuned, a beta release is planned for early 2015.
+</div>
 </div>

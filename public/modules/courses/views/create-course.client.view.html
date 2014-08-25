@@ -1,5 +1,13 @@
 <div data-ng-controller="CoursesController">
     <div class="content-header">
+        <div class="pull-right">
+
+            <a class="menu-link"
+               href=""
+               data-ng-click="help()">
+                Help
+            </a>
+        </div>
         <div class="title">
             Create Course
         </div>
@@ -17,7 +25,7 @@
     <div data-ng-controller="JourneysController"
          data-ng-init="findForCurrentUser()">
 
-        <div class="content-section" data-ng-if="journey && !journey.createdCourse">
+        <div class="content-section" data-ng-if="showhelp || (journey && !journey.createdCourse)">
             <img class="right-padded float-left size-64"
                  src="/modules/core/img/brand/superhero-girl-medium.gif">
             Wow. You are creating your first course! You have to give your course a name

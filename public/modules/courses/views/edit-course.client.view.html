@@ -47,6 +47,14 @@
             <a style="color: #00008b" class="menu-link" href="" ng-click="addPackToCoursePopup()">
                 Add Packs
             </a>
+
+            x{{journey.createdPack}}x
+            <a class="menu-link"
+               href=""
+               data-ng-click="help()"
+               data-ng-if="journey && journey.createdPack">
+                Help
+            </a>
         </div>
 
         <div class="title">
@@ -104,7 +112,7 @@
         <div data-ng-controller="JourneysController"
              data-ng-init="findForCurrentUser()">
 
-            <div data-ng-if="journey && !journey.createdPack">
+            <div data-ng-if="showhelp || (journey && !journey.createdPack)">
 
                 <div class="content-section ">
                     <img class="right-padded float-left size-64"

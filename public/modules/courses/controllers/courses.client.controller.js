@@ -7,10 +7,17 @@ angular.module('courses').controller('CoursesController',
         function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService) {
 
             $scope.authentication = Authentication;
+            $scope.showhelp = false;
+
+
 
             if (!$scope.authentication.user) {
                 $location.path('/');
             }
+
+            $scope.help = function() {
+                $scope.showhelp = ! $scope.showhelp;
+            };
 
 //
 //            // Load the Visualization API and the piechart package.

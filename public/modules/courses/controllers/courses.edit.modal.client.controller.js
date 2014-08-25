@@ -4,6 +4,7 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
 	function($scope, $state, $timeout, $modalInstance, course) {
         $scope.course = course;
 
+
         $scope.languages = [
             {name:'-', code:''},
             {name:'Chinese', code:'zh-CN'},

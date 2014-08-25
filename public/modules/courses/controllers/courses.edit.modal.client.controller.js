@@ -5,7 +5,7 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
         $scope.course = course;
 
         $scope.languages = [
-            {name:'n/a', code:''},
+            {name:'-', code:''},
             {name:'Chinese', code:'zh-CN'},
             {name:'English (GB)', code:'en-GB'},
             {name:'English (US)', code:'en-US'},
@@ -48,6 +48,8 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
             course.name = this.name;
             course.description = this.description;
             course.language = this.language;
+            course.front = this.front;
+            course.back = this.back;
 
 
             $scope.course.$update();

@@ -16,7 +16,7 @@
                                 <td class="sparesys-view-object-label-cell">Name</td>
                                 <td class="sparesys-view-object-content-cell">
                                     <input type="text" data-ng-model="name"
-                                           id="coursename" class="form-control editCoursefocus"
+                                           class="form-control editCoursefocus"
                                            placeholder="{{course.name}}"
                                            data-ng-init="setFocus()"
                                            required></td>
@@ -26,8 +26,26 @@
                                 <td class="sparesys-view-object-label-cell">Description</td>
                                 <td class="sparesys-view-object-content-cell">
                                     <input type="text" data-ng-model="description"
-                                           id="coursedescription" class="form-control"
+                                            class="form-control"
                                            placeholder="{{course.description}}"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Front of Card</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="front"
+                                            class="form-control"
+                                           placeholder="{{course.front}}"
+                                           required></td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Back of Card</td>
+                                <td class="sparesys-view-object-content-cell">
+                                    <input type="text" data-ng-model="back"
+                                           class="form-control"
+                                           placeholder="{{course.back}}"
                                            required></td>
                             </tr>
 

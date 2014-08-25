@@ -109,7 +109,7 @@
                 <div class="content-section ">
                     <img class="right-padded float-left size-64"
                          src="/modules/core/img/brand/teacher-woman-medium.gif">
-                    Ok. Now, a course has a number of packs to order cards. If you are creating
+                    Ok. Now, a course has a number of packs. If you are creating
                     a language course, you can for example put all the colors into one pack,
                     the days of the week into another and so on. To do this, click on the
                     <a href="" ng-click="addPackToCoursePopup()">Add Packs</a> link above.
@@ -178,14 +178,14 @@
 
     <div class="content-last-section">
 
-        <div>
+        <div style="float: right">
             <small>
-                <em class="text-muted">Created on {{course.created | date:'medium'}}</em>
+                <em class="text-muted">Course created on {{course.created | date:'medium'}}</em>
             </small>
         </div>
         <div data-ng-if="course.updated">
             <small>
-                <em class="text-muted">Updated on {{course.updated | date:'medium'}}</em>
+                <em class="text-muted">Course last update on {{course.updated | date:'medium'}}</em>
             </small>
         </div>
 

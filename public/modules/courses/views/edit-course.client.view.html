@@ -32,34 +32,32 @@
 
         <div class="content-section ">
 
-            <table class="table-striped" style="width: 100%; margin-top: 20px; margin-bottom: 20px">
+            <table class="table-striped">
                 <thead>
                 <tr>
-                    <th class="sparesys-view-courses-course-column">
-                    </th>
-                    <th class="sparesys-view-courses-course-column">Pack</th>
-                    <th class="sparesys-view-object-label-cell">Number of Cards</th>
-                    <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
-                    <!--<th>Created</th>-->
+                    <th></th>
+                    <th>Pack</th>
+                    <th class="nobreak-label right-aligned">Number of Cards</th>
                 </tr>
                 </thead>
-                <tbody ui-sortable="sortableOptions" data-ng-model="course.packs">
-                <tr data-ng-repeat="packId in course.packs" data-ng-controller="PacksController"
+                <tbody ui-sortable="sortableOptions"
+                       data-ng-model="course.packs">
+                <tr data-ng-controller="PacksController"
+                    data-ng-repeat="packId in course.packs"
                     data-ng-init="findById(packId)"
                     style="cursor: move">
-                    <td class="sparesys-view-courses-name-cell">
+                    <td class="right-padded">
                         <a href="">
                             <i data-ng-click="areYouSureToDeletePack(pack)"
                                class="glyphicon glyphicon-remove-sign">
                             </i>
                         </a>
-
                     </td>
 
-                    <td class="sparesys-view-object-content-cell">
+                    <td>
                         <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
                     </td>
-                    <td class="sparesys-view-object-content-cell" style="text-align: right">
+                    <td class="expands right-aligned">
                         {{pack.cards.length}}
                     </td>
                 </tr>
@@ -70,10 +68,19 @@
         <div data-ng-if="!userHasCreatedCardBefore()">
 
             <div class="content-section ">
-                <img class="right-padded  size-64"
-                     src="/modules/core/img/brand/teacher-man-medium.gif">
-                So, a pack has a number of cards. Click on one of your packs
-                and you will be able to do this.
+                <table>
+                    <tr>
+                        <td>
+                            <img class="right-padded size-64"
+                                 src="/modules/core/img/brand/teacher-man-medium.gif">
+                        </td>
+                        <td class="top-aligned">
+                            So, a pack has a number of cards and you have to add them for
+                            each of your packs. Click on one of your packs
+                            to be able to do this.
+                        </td>
+                    </tr>
+                </table>
             </div>
         </div>
 

@@ -105,6 +105,25 @@
     width: 100%;
 }
 
+.table-striped {
+    width: 1000%;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.nobreak-label {
+    white-space: nowrap;
+}
+
+.right-aligned {
+    text-align: right;
+}
+
+.top-aligned {
+    vertical-align: top;
+}
+
+
 .text-error {
     color: #AA0000;
 }

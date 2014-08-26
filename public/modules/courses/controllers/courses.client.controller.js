@@ -43,6 +43,10 @@ angular.module('courses').controller('CoursesController',
 
             };
 
+            $scope.userHasCreatedCourseBefore = function() {
+                return JourneyService.userHasCreatedCourseBefore();
+            };
+
             // Create new Course
             $scope.create = function () {
                 var course = new Courses({

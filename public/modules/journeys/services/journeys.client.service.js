@@ -52,7 +52,11 @@ angular.module('journeys').service('JourneyService', ['$q', '$resource', 'Journe
                     journey.createdPack = true;
                     journey.$update();
                 }
+            },
+            userHasCreatedCourseBefore: function() {
+                return journey.createdCourse;
             }
+
         };
     }
 ]);

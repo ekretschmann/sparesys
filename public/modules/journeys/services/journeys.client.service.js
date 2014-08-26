@@ -20,6 +20,15 @@ angular.module('journeys').service('JourneyService', ['$q', '$resource', 'Journe
         Journeys.query({
             userId: Authentication.user._id
         }, function (journeys) {
+
+            // should not happen, but you never know - a journey could be deleted
+            if (journeys.length === 0) {
+                var newJourney = new Journeys ();
+
+                newJourney.$save(function(response) {
+                    journey = response;
+                });
+            }
             if (journeys.length === 1) {
                 journey = journeys[0];
             }

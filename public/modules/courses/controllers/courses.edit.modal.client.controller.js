@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('courses').controller('EditCourseController', ['$scope', '$state', '$timeout', '$modalInstance', 'course',
-	function($scope, $state, $timeout, $modalInstance, course) {
+angular.module('courses').controller('EditCourseController', ['$scope', '$state', '$timeout', '$modalInstance', 'course', 'JourneyService',
+	function($scope, $state, $timeout, $modalInstance, course, JourneyService) {
         $scope.course = course;
 
 
@@ -53,7 +53,11 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
             course.back = this.back;
 
 
-            $scope.course.$update();
+            $scope.course.$update(function() {
+                JourneyService.courseEdited();
+                $state.go($state.$current, null, { reload: true });
+            });
+
             $modalInstance.dismiss('cancel');
         };
 	}

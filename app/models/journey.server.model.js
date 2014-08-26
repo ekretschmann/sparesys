@@ -25,6 +25,10 @@ var JourneySchema = new Schema({
     createdPack: {
         type: Boolean,
         default: false
+    },
+    editedCourse: {
+        type: Boolean,
+        default: false
     }
 });
 

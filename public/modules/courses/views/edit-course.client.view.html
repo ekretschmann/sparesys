@@ -1,5 +1,7 @@
-<section data-ng-controller="CoursesController" data-ng-init="findOne()">
-
+<section data-ng-controller="CoursesController"
+         data-ng-init="findOne()">
+<section data-ng-controller="JourneysController"
+         data-ng-init="findForCurrentUser()">
 
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/edit-course.modal.client.view.html'"></div>
@@ -8,6 +10,7 @@
     <div ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>
 
+    {{journey}}
 
     <div class="content-header">
         <div class="pull-right">
@@ -44,16 +47,16 @@
             </span>
 
 
-            <a style="color: #00008b" class="menu-link" href="" ng-click="addPackToCoursePopup()">
+            <a class="menu-link"
+               href=""
+               ng-click="addPackToCoursePopup()">
                 Add Packs
             </a>
 
             <a class="menu-link"
                href=""
                data-ng-click="help()"
-               data-ng-if="journey && journey.createdPack">
-                Help
-            </a>
+               data-ng-if="journey && (journey.createdPack || journey.editedPack)">Help</a>
         </div>
 
         <div class="title">
@@ -105,42 +108,13 @@
     </div>
 
 
+
+
     <div data-ng-if="course.packs.length === 0">
-
-
-        <div data-ng-controller="JourneysController"
-             data-ng-init="findForCurrentUser()">
-
-            <div data-ng-if="showhelp || (journey && !journey.createdPack)">
-
-                <div class="content-section ">
-                    <img class="right-padded float-left size-64"
-                         src="/modules/core/img/brand/teacher-woman-medium.gif">
-                    Ok. Now, a course has a number of packs. If you are creating
-                    a language course, you can for example put all the colors into one pack,
-                    the days of the week into another and so on. To do this, click on the
-                    <a href="" ng-click="addPackToCoursePopup()">Add Packs</a> link above.
-                </div>
-
-                <div class="content-section">
-                    <img class="left-padded float-right size-64"
-                         src="/modules/core/img/brand/guru-medium.gif">
-
-                    If you are a guru like me, you can tell the Rememberators more about your course.
-                    If you set a language, they will try to read the questions to you in that language.
-                    This can be very useful if you are creating a foreign language course. You can also decide what
-                    is on the front and back of your card, like "French" and "English". To do this,
-                    click on the <a href="" ng-click="editCoursePopup(course)">Edit</a> link above.
-                </div>
-            </div>
-
-            <div class="content-section" data-ng-if="!journey || journey.createdPack">
-                You have to <a href="" ng-click="addPackToCoursePopup()">create packs</a> for this course!
-            </div>
+        <div class="content-section" data-ng-if="!journey || journey.createdPack">
+            You have to <a href="" ng-click="addPackToCoursePopup()">create packs</a> for this course!
         </div>
-
     </div>
-
 
     <div data-ng-show="course.packs.length > 0">
 
@@ -183,6 +157,33 @@
 
     </div>
 
+    <div data-ng-if="showhelp || (journey && !journey.createdPack)">
+
+        <div class="content-section ">
+            <img class="right-padded float-left size-64"
+                 src="/modules/core/img/brand/teacher-woman-medium.gif">
+            Ok. Now, a course has a number of packs. If you are creating
+            a language course, you can for example put all the colors into one pack,
+            the days of the week into another and so on. To do this, click on the
+            <a href="" ng-click="addPackToCoursePopup()">Add Packs</a> link above.
+        </div>
+    </div>
+
+
+    <div data-ng-if="showhelp || (journey && !journey.editedCourse)">
+        <div class="content-section">
+            <img class="left-padded float-right size-64"
+                 src="/modules/core/img/brand/guru-medium.gif">
+
+            If you are a guru like me, you can tell the Rememberators more about your course.
+            If you set a language, they will try to read the questions to you in that language.
+            This can be very useful if you are creating a foreign language course. You can also decide what
+            is on the front and back of your card, like "French" and "English". To do this,
+            click on the <a href="" ng-click="editCoursePopup(course)">Edit</a> link above.
+        </div>
+    </div>
+
+
     <div class="content-last-section">
 
         <div style="float: right">
@@ -199,4 +200,5 @@
     </div>
 
 
+</section>
 </section>

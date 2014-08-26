@@ -49,12 +49,6 @@ exports.create = function (req, res) {
                 message: getErrorMessage(err)
             });
         } else {
-            Journey.find({'user': req.user._id}).exec(function (err, journeys) {
-                var journey = journeys[0];
-
-                journey.createdCourse = true;
-                journey.save();
-            });
 
             res.jsonp(course);
         }
@@ -84,6 +78,8 @@ exports.update = function (req, res) {
                 message: getErrorMessage(err)
             });
         } else {
+
+
             res.jsonp(course);
         }
     });

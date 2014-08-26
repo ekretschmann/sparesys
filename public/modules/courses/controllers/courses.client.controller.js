@@ -20,6 +20,18 @@ angular.module('courses').controller('CoursesController',
             };
 
 
+            $scope.userHasCreatedPackBefore = function() {
+                return JourneyService.userHasCreatedPackBefore();
+            };
+
+            $scope.userHasEditedCourseBefore = function() {
+                return JourneyService.userHasEditedCourseBefore();
+            };
+
+            $scope.userHasCreatedCardBefore = function() {
+               return JourneyService.userHasCreatedCardBefore();
+            };
+
             $scope.createDummyCourse = function() {
 
                 CoursesService.createDummmyCourse(function() {

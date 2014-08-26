@@ -171,7 +171,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
         $scope.swap = function(card) {
-            console.log(card);
             var temp = card.question;
             card.question = card.answer;
             card.answer = temp;

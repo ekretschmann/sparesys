@@ -1,0 +1,42 @@
+<table>
+    <tr>
+        <td>Description</td>
+        <td class="left-padded">:</td>
+        <td class="left-padded">{{course.description}}</td>
+    </tr>
+    <tr>
+        <td>Published</td>
+        <td class="left-padded">:</td>
+        <td class="left-padded">
+            <span data-ng-if="course.published">yes</span>
+            <span data-ng-if="!course.published">no</span>
+        </td>
+    </tr>
+
+    <tr>
+        <td>Language</td>
+        <td class="left-padded">:</td>
+        <td class="left-padded">
+            <span data-ng-if="course.language">{{course.language.name}}</span>
+            <span data-ng-if="!course.language">-</span>
+
+        </td>
+    </tr>
+
+    <tr>
+        <td>Card Front</td>
+        <td class="left-padded">:</td>
+        <td class="left-padded">
+            {{course.front}}
+        </td>
+    </tr>
+
+    <tr>
+        <td>Card Back</td>
+        <td class="left-padded">:</td>
+        <td class="left-padded">
+            {{course.back}}
+        </td>
+    </tr>
+
+</table>

@@ -17,22 +17,24 @@ angular.module('journeys').service('JourneyService', ['$q', '$resource', 'Journe
 
         var journey;
 
-        Journeys.query({
-            userId: Authentication.user._id
-        }, function (journeys) {
+        if (Authentication.user) {
+            Journeys.query({
+                userId: Authentication.user._id
+            }, function (journeys) {
 
-            // should not happen, but you never know - a journey could be deleted
-            if (journeys.length === 0) {
-                var newJourney = new Journeys ();
+                // should not happen, but you never know - a journey could be deleted
+                if (journeys.length === 0) {
+                    var newJourney = new Journeys();
 
-                newJourney.$save(function(response) {
-                    journey = response;
-                });
-            }
-            if (journeys.length === 1) {
-                journey = journeys[0];
-            }
-        });
+                    newJourney.$save(function (response) {
+                        journey = response;
+                    });
+                }
+                if (journeys.length === 1) {
+                    journey = journeys[0];
+                }
+            });
+        }
 
         return {
             courseEdited: function() {
@@ -54,7 +56,28 @@ angular.module('journeys').service('JourneyService', ['$q', '$resource', 'Journe
                 }
             },
             userHasCreatedCourseBefore: function() {
-                return journey.createdCourse;
+                if (journey) {
+                    return journey.createdCourse;
+                }
+                return false;
+            },
+            userHasCreatedPackBefore: function() {
+                if (journey) {
+                    return journey.createdPack;
+                }
+                return false;
+            },
+            userHasEditedCourseBefore: function() {
+                if (journey) {
+                    return journey.editedCourse;
+                }
+                return false;
+            },
+            userHasCreatedCardBefore: function() {
+                if (journey) {
+                    return journey.createdCard;
+                }
+                return false;
             }
 
         };

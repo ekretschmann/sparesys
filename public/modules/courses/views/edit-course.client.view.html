@@ -1,117 +1,29 @@
 <section data-ng-controller="CoursesController"
          data-ng-init="findOne()">
-<section data-ng-controller="JourneysController"
-         data-ng-init="findForCurrentUser()">
 
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/edit-course.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/publish-course.modal.client.view.html'"></div>
-
     <div ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>
 
-    {{journey}}
-
     <div class="content-header">
-        <div class="pull-right">
-
-            <a class="menu-link"
-               href=""
-               data-ng-click="editCoursePopup(course)">
-                Edit
-            </a>
-
-            <a class="menu-link"
-               href=""
-               data-ng-click="areYouSureToDeleteCourse(course)"
-               data-ng-show="authentication.user._id == course.user._id">
-                Delete
-            </a>
-
-            <span data-ng-if="!course.master && !course.published && course.packs.length > 0">
-            <a class="menu-link"
-               href=""
-               data-ng-click="areYouSureToPublishCourse(course)"
-               data-ng-show="authentication.user._id == course.user._id">
-                Publish
-            </a>
-            </span>
-
-            <span data-ng-if="course.published">
-            <a class="menu-link"
-               href=""
-               data-ng-click="areYouSureToPublishCourse(course)"
-               data-ng-show="authentication.user._id == course.user._id">
-                Un-Publish
-            </a>
-            </span>
-
-
-            <a class="menu-link"
-               href=""
-               ng-click="addPackToCoursePopup()">
-                Add Packs
-            </a>
-
-            <a class="menu-link"
-               href=""
-               data-ng-click="help()"
-               data-ng-if="journey && (journey.createdPack || journey.editedPack)">Help</a>
+        <div class="submenu">
+            <span ng-include="'/modules/courses/views/partial/edit-course-menu.client.view.html'"></span>
         </div>
 
         <div class="title">
             {{course.name}}
         </div>
-        <table>
-            <tr>
-                <td>Description</td>
-                <td class="left-padded">:</td>
-                <td class="left-padded">{{course.description}}</td>
-            </tr>
-            <tr>
-                <td>Published</td>
-                <td class="left-padded">:</td>
-                <td class="left-padded">
-                    <span data-ng-if="course.published">yes</span>
-                    <span data-ng-if="!course.published">no</span>
-                </td>
-            </tr>
 
-            <tr>
-                <td>Language</td>
-                <td class="left-padded">:</td>
-                <td class="left-padded">
-                    <span data-ng-if="course.language">{{course.language.name}}</span>
-                    <span data-ng-if="!course.language">-</span>
-
-                </td>
-            </tr>
-
-            <tr>
-                <td>Card Front</td>
-                <td class="left-padded">:</td>
-                <td class="left-padded">
-                    {{course.front}}
-                </td>
-            </tr>
-
-            <tr>
-                <td>Card Back</td>
-                <td class="left-padded">:</td>
-                <td class="left-padded">
-                    {{course.back}}
-                </td>
-            </tr>
-
-        </table>
-
+        <div class="headerinfo">
+            <span ng-include="'/modules/courses/views/partial/edit-course-headerinfo.client.view.html'"></span>
+        </div>
     </div>
 
 
-
-
     <div data-ng-if="course.packs.length === 0">
-        <div class="content-section" data-ng-if="!journey || journey.createdPack">
+        <div class="content-section" data-ng-if="userHasCreatedPackBefore()">
             You have to <a href="" ng-click="addPackToCoursePopup()">create packs</a> for this course!
         </div>
     </div>
@@ -155,9 +67,19 @@
             </table>
         </div>
 
+        <div data-ng-if="!userHasCreatedCardBefore()">
+
+            <div class="content-section ">
+                <img class="right-padded  size-64"
+                     src="/modules/core/img/brand/teacher-man-medium.gif">
+                So, a pack has a number of cards. Click on one of your packs
+                and you will be able to do this.
+            </div>
+        </div>
+
     </div>
 
-    <div data-ng-if="showhelp || (journey && !journey.createdPack)">
+    <div data-ng-if="!userHasCreatedPackBefore()">
 
         <div class="content-section ">
             <img class="right-padded float-left size-64"
@@ -170,7 +92,7 @@
     </div>
 
 
-    <div data-ng-if="showhelp || (journey && !journey.editedCourse)">
+    <div data-ng-if="!userHasEditedCourseBefore()">
         <div class="content-section">
             <img class="left-padded float-right size-64"
                  src="/modules/core/img/brand/guru-medium.gif">
@@ -200,5 +122,4 @@
     </div>
 
 
-</section>
 </section>

@@ -26,6 +26,10 @@ var JourneySchema = new Schema({
         type: Boolean,
         default: false
     },
+    createdCard: {
+        type: Boolean,
+        default: false
+    },
     editedCourse: {
         type: Boolean,
         default: false

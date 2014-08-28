@@ -4,8 +4,10 @@
 
             <a class="menu-link"
                href=""
-               data-ng-click="help()">
-                Help
+               data-ng-click="help()"
+                >
+               <span data-ng-if="!showhelp">Help</span>
+               <span data-ng-if="showhelp">Hide Help</span>
             </a>
         </div>
         <div class="title">

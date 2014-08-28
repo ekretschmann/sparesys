@@ -65,7 +65,7 @@
             </table>
         </div>
 
-        <div data-ng-if="!userHasCreatedCardBefore()">
+        <div data-ng-if="showhelp || !userHasCreatedCardBefore()">
 
             <div class="content-section ">
                 <table>
@@ -86,29 +86,47 @@
 
     </div>
 
-    <div data-ng-if="!userHasCreatedPackBefore()">
+    <div data-ng-if="showhelp || !userHasCreatedPackBefore()">
+
 
         <div class="content-section ">
-            <img class="right-padded float-left size-64"
-                 src="/modules/core/img/brand/teacher-woman-medium.gif">
-            Ok. Now, a course has a number of packs. If you are creating
-            a language course, you can for example put all the colors into one pack,
-            the days of the week into another and so on. To do this, click on the
-            <a href="" ng-click="addPackToCoursePopup()">Add Packs</a> link above.
+            <table>
+                <tr>
+                    <td class="top-aligned">
+                        Ok. Now, a course has a number of packs. If you are creating
+                        a language course, you can for example put all the colors into one pack,
+                        the days of the week into another and so on. To do this, click on the
+                        <a href="" ng-click="addPackToCoursePopup()">Add Packs</a> link above.
+                    </td>
+                    <td>
+                        <img class="right-padded size-64"
+                             src="/modules/core/img/brand/teacher-woman-medium.gif">
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 
 
-    <div data-ng-if="!userHasEditedCourseBefore()">
+    <div data-ng-if="showhelp || !userHasEditedCourseBefore()">
         <div class="content-section">
-            <img class="left-padded float-right size-64"
-                 src="/modules/core/img/brand/guru-medium.gif">
 
-            If you are a guru like me, you can tell the Rememberators more about your course.
-            If you set a language, they will try to read the questions to you in that language.
-            This can be very useful if you are creating a foreign language course. You can also decide what
-            is on the front and back of your card, like "French" and "English". To do this,
-            click on the <a href="" ng-click="editCoursePopup(course)">Edit</a> link above.
+            <table>
+                <tr>
+                    <td>
+                        <img class="right-padded size-64"
+                             src="/modules/core/img/brand/guru-medium.gif">
+                    </td>
+                    <td class="top-aligned">
+                        If you are a guru like me, you can tell the Rememberators more about your course.
+                        If you set a language, they will try to read the questions to you in that language.
+                        This can be very useful if you are creating a foreign language course. You can also decide what
+                        is on the front and back of your card, like "French" and "English". To do this,
+                        click on the <a href="" ng-click="editCoursePopup(course)">Edit</a> link above.
+                    </td>
+                </tr>
+            </table>
+
         </div>
     </div>
 

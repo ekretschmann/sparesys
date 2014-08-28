@@ -113,18 +113,33 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
         };
 
-        $scope.addCardToPackPopup = function (size) {
+        $scope.addCardToPackPopup = function () {
 
-            $modal.open({
-                templateUrl: 'addCardToPack.html',
-                controller: 'AddCardToPackController',
-                size: size,
-                resolve: {
-                    pack: function () {
-                        return $scope.pack;
-                    }
+
+            Courses.query({
+                _id: $scope.pack.course
+            }, function (courses) {
+                if (courses.length === 1) {
+                    $scope.course = courses[0];
+
+                    $modal.open({
+                        templateUrl: 'addCardToPack.html',
+                        controller: 'AddCardToPackController',
+                        resolve: {
+                            pack: function () {
+                                return $scope.pack;
+                            },
+                            course: function () {
+                                return $scope.course;
+                            }
+                        }
+                    });
+
+
                 }
             });
+
+
 
         };
 

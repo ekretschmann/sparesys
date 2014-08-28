@@ -55,6 +55,12 @@ angular.module('journeys').service('JourneyService', ['$q', '$resource', 'Journe
                     journey.$update();
                 }
             },
+            cardCreated: function() {
+                if (!journey.createdCard) {
+                    journey.createdCard = true;
+                    journey.$update();
+                }
+            },
             userHasCreatedCourseBefore: function() {
                 if (journey) {
                     return journey.createdCourse;

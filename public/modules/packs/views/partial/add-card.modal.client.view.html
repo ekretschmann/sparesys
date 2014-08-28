@@ -1,5 +1,6 @@
 <script type="text/ng-template" id="addCardToPack.html">
 
+
     <div>
 
         <div class="modal-body">
@@ -14,7 +15,7 @@
                     <div class="sparesys-header">
                         <table class="sparesys-view-object-table">
                             <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Question</td>
+                                <td class="sparesys-view-object-label-cell">{{course.front}}</td>
                                 <td class="sparesys-view-object-content-cell">
                                     <input type="text" data-ng-model="question"
                                            id="cardquestion" class="form-control addcardfocus"
@@ -24,7 +25,7 @@
                             </tr>
 
                             <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Answer</td>
+                                <td class="sparesys-view-object-label-cell">{{course.back}}</td>
                                 <td class="sparesys-view-object-content-cell">
                                     <input type="text" data-ng-model="answer"
                                            id="cardanswer" class="form-control"

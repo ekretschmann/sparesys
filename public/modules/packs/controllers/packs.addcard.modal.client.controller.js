@@ -1,8 +1,9 @@
 'use strict';
 
-angular.module('packs').controller('AddCardToPackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'Cards',
-	function($scope, $state, $timeout, $modalInstance, pack, Cards) {
+angular.module('packs').controller('AddCardToPackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'course', 'Cards', 'JourneyService',
+	function($scope, $state, $timeout, $modalInstance, pack, course, Cards, JourneyService) {
         $scope.pack = pack;
+        $scope.course = course;
 
         $scope.setFocus = function () {
             $timeout(function(){
@@ -31,6 +32,7 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
                 var cardid = response._id;
                 var p = $scope.pack;
                 p.cards.push(cardid);
+                JourneyService.cardCreated();
                 p.$update(function () {
                     $state.go($state.$current, null, { reload: true });
                 }, function (errorResponse) {

@@ -5,9 +5,14 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
         $scope.pack = pack;
         var originalDue = pack.due;
         var originalAfter = pack.after;
-        $scope.validation = 'unchanged';
-        $scope.sound = 'unchanged';
-        $scope.ask = 'unchanged';
+        $scope.validation = 'leave unchanged';
+        $scope.sound = 'leave unchanged';
+        $scope.direction = 'leave unchanged';
+
+        $scope.validations = ['always computer-checked', 'always self-checked', 'self-checked for new cards'];
+        $scope.readQuestions = ['yes', 'no'];
+        $scope.directions = ['one way', 'both ways'];
+
 
         // dont know why I have to do this. Seems the checkboxes don't like modal windows
         $scope.changeValidation = function(value) {

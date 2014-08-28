@@ -13,11 +13,13 @@
                     <div class="content-section">
                         <table>
                             <tr>
-                                <td>Validation</td>
+                                <td class="right-padded">Checks</td>
                                 <td>
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default">{{ validation }}</button>
-                                        <button type="button" class="btn btn-default dropdown-toggle">
+                                    <div class="btn-group bottom-spacer" >
+                                        <button type="button"
+                                                class="btn btn-default">{{ validation }}</button>
+                                        <button type="button"
+                                                class="btn btn-default dropdown-toggle">
                                             <span class="caret"></span>
                                             <span class="sr-only">Split button!</span>
                                         </button>
@@ -29,9 +31,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Read Questions</td>
+                                <td class="right-padded">Read Questions</td>
                                 <td>
-                                    <div class="btn-group">
+                                    <div class="btn-group  bottom-spacer">
                                         <button type="button" class="btn btn-default">{{ sound }}</button>
                                         <button type="button" class="btn btn-default dropdown-toggle">
                                             <span class="caret"></span>
@@ -47,9 +49,9 @@
                             </tr>
 
                             <tr>
-                                <td>Direction</td>
+                                <td class="right-padded">Direction</td>
                                 <td>
-                                    <div class="btn-group">
+                                    <div class="btn-group  bottom-spacer">
                                         <button type="button" class="btn btn-default">{{ direction }}</button>
                                         <button type="button" class="btn btn-default dropdown-toggle">
                                             <span class="caret"></span>
@@ -64,12 +66,12 @@
                             </tr>
 
 
-                            <tr class="controls"
-                                data-ng-controller="DateDropdownController">
-                                <td>Due date</td>
+                            <tr data-ng-controller="DateDropdownController">
+                                <td class="right-padded">Due Date</td>
                                 <td>
-                                    <div class="input-group">
-                                        <input type="text" class="form-control"
+                                    <div class="input-group  bottom-spacer">
+                                        <input type="text"
+                                               class="form-control"
                                                datepicker-popup="{{format}}"
                                                ng-model="pack.due"
                                                is-open="opened"
@@ -90,19 +92,25 @@
                                 </td>
                             </tr>
 
-                            <tr class="controls" data-ng-controller="DateDropdownController">
-                                <td class="sparesys-view-object-label-cell">Start</td>
-                                <td style="padding-top: 3px" colspan="3">
-                                    <div class="input-group">
-                                        <input type="text" class="form-control" datepicker-popup="{{format}}"
+                            <tr data-ng-controller="DateDropdownController">
+                                <td class="right-padded">Start Date</td>
+                                <td>
+                                    <div class="input-group bottom-spacer">
+                                        <input type="text"
+                                               class="form-control"
+                                               datepicker-popup="{{format}}"
                                                ng-model="pack.after"
-                                               is-open="opened" min-date="minDate" max-date="'2015-06-22'"
-                                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
-                                               ng-required="false" close-text="Close"/>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i
-                        class="glyphicon glyphicon-calendar"></i></button>
-              </span>
+                                               is-open="opened"
+                                               min-date="minDate"
+                                               datepicker-options="dateOptions"
+                                               date-disabled="disabled(date, mode)"
+                                               ng-required="false"
+                                               close-text="Close"/>
+
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default" ng-click="open($event)">
+                                                <i class="glyphicon glyphicon-calendar"></i></button>
+                                        </div>
                                     </div>
                                 </td>
                             </tr>
@@ -112,12 +120,10 @@
                     <div style="text-align: center">
                         <button class="btn btn-primary sparesys-button"
                                 type="submit"
-                                ng-click="ok()"
-                                >
-                            Change
-                        </button>
+                                ng-click="ok()">Change</button>
 
-                        <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-primary sparesys-button"
+                                ng-click="cancel()">Cancel</button>
                     </div>
 
                 </fieldset>

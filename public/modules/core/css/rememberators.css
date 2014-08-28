@@ -104,7 +104,12 @@
 .expands {
     width: 100%;
 }
+
 .form-control {
+    margin-bottom: 3px;
+}
+
+.bottom-spacer {
     margin-bottom: 3px;
 }
 

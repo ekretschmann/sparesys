@@ -9,22 +9,22 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
         $scope.sound = 'leave unchanged';
         $scope.direction = 'leave unchanged';
 
-        $scope.validations = ['always computer-checked', 'always self-checked', 'self-checked for new cards'];
-        $scope.readQuestions = ['yes', 'no'];
-        $scope.directions = ['one way', 'both ways'];
+        $scope.validations = ['leave unchanged', 'always computer-checked', 'always self-checked', 'self-checked for new cards'];
+        $scope.readQuestions = ['leave unchanged', 'yes', 'no'];
+        $scope.directions = ['leave unchanged', 'one way', 'both ways'];
 
 
         // dont know why I have to do this. Seems the checkboxes don't like modal windows
-        $scope.changeValidation = function(value) {
+        $scope.setValidation = function(value) {
             $scope.validation = value;
         };
 
-        $scope.changeSound = function(value) {
+        $scope.setSound = function(value) {
             $scope.sound = value;
         };
 
-        $scope.changeAsk = function(value) {
-            $scope.ask = value;
+        $scope.setDirection = function(value) {
+            $scope.direction = value;
         };
 
 
@@ -60,11 +60,11 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
                     if (pack.after !== originalAfter) {
                         card.after = pack.after;
                     }
-                    if ($scope.validation === 'default') {
+                    if ($scope.validation === 'self-checked for new cards') {
                         card.validation = 'default';
-                    } else if ($scope.validation === 'checked') {
+                    } else if ($scope.validation === 'always computer-checked') {
                         card.validation = 'checked';
-                    } else if ($scope.validation === 'self') {
+                    } else if ($scope.validation === 'always self-checked') {
                         card.validation = 'self';
                     }
                     if ($scope.sound === 'yes') {
@@ -73,9 +73,9 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
                         card.sound = false;
                     }
 
-                    if ($scope.ask === 'both') {
+                    if ($scope.direction === 'both ways') {
                         card.bothways = true;
-                    } else if ($scope.ask === 'oneway') {
+                    } else if ($scope.direction === 'one way') {
                         card.bothways = false;
                     }
                     card.$update(function() {

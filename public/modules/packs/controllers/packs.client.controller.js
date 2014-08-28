@@ -1,13 +1,25 @@
 'use strict';
 
 // Packs controller
-angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs',
-    function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs) {
+angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'JourneyService',
+    function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, JourneyService) {
         $scope.authentication = Authentication;
 
+        $scope.showhelp = false;
 
 
+        if (!$scope.authentication.user) {
+            $location.path('/');
+        }
 
+        $scope.help = function() {
+            $scope.showhelp = ! $scope.showhelp;
+        };
+
+
+        $scope.userHasCreatedCardBefore = function() {
+            return JourneyService.userHasCreatedCardBefore();
+        };
 
         // Remove existing Pack
         $scope.remove = function (pack) {
@@ -147,6 +159,19 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             $modal.open({
                 templateUrl: 'editPack.html',
                 controller: 'EditPackController',
+                size: size,
+                resolve: {
+                    pack: function () {
+                        return $scope.pack;
+                    }
+                }
+            });
+        };
+
+        $scope.managePackPopup = function (size) {
+            $modal.open({
+                templateUrl: 'managePack.html',
+                controller: 'ManagePackController',
                 size: size,
                 resolve: {
                     pack: function () {

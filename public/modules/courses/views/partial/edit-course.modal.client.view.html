@@ -2,70 +2,91 @@
     <div>
 
         <div class="modal-body">
-            <div class="sparesys-header">
-                <div class="sparesys-title" style="text-align: center">
-                    Edit Course: {{course.name}}
+            <div class="content-header">
+                <div class="title center-aligned">
+                    Edit Course: {{initialCourseName}}
                 </div>
             </div>
 
-            <form class="form-horizontal"  novalidate>
+            <form class="form-horizontal" novalidate>
                 <fieldset>
-                    <div class="sparesys-header">
-                        <table class="sparesys-view-object-table">
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Name</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="name"
-                                           class="form-control editCoursefocus"
-                                           placeholder="{{course.name}}"
+                    <div class="content-header">
+                        <table class="expands">
+                            <tr>
+                                <td class="right-padded">Name</td>
+                                <td class="expands">
+                                    <input type="text"
+                                           data-ng-model="course.name"
+                                           class="focus form-control"
                                            data-ng-init="setFocus()"
-                                           required></td>
+                                           required>
+                                </td>
                             </tr>
 
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Description</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="description"
-                                            class="form-control"
+                            <tr>
+                                <td class="right-padded">Description</td>
+                                <td>
+                                    <input type="text"
+                                           data-ng-model="course.description"
+                                           class="form-control"
                                            placeholder="{{course.description}}"
-                                           required></td>
+                                           required>
+                                </td>
                             </tr>
 
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Front of Card</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="front"
-                                            class="form-control"
+                            <tr>
+                                <td class="nobreak-label right-padded">Front of Card</td>
+                                <td>
+                                    <input type="text"
+                                           data-ng-model="course.front"
+                                           class="form-control"
                                            placeholder="{{course.front}}"
-                                           required></td>
+                                           required>
+                                </td>
                             </tr>
 
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Back of Card</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="back"
+                            <tr>
+                                <td class="nobreak-label right-padded">Back of Card</td>
+                                <td>
+                                    <input type="text"
+                                           data-ng-model="course.back"
                                            class="form-control"
                                            placeholder="{{course.back}}"
-                                           required></td>
+                                           required>
+                                </td>
                             </tr>
 
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Language</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <select ng-model="language" ng-options="lan.name for lan in languages"></select>
+                            <tr>
+                                <td class="right-padded">Language</td>
+                                <td>
+
+
+                                    <div class="btn-group" dropdown width="300px">
+                                        <button type="button" class="btn btn-default" >{{ language.name }}</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" >
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Split button!</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li data-ng-repeat="lang in languages" ><a data-ng-click="setLanguage(lang)">{{lang.name}}</a></li>
+                                        </ul>
+                                    </div>
+
+
+                                </td>
                             </tr>
                         </table>
                     </div>
 
-                    <div style="text-align: center">
-                    <button class="btn btn-primary sparesys-button"
-                            type="submit"
-                            ng-click="ok()"
-                            >
-                        Change
-                    </button>
+                    <div class="center-aligned">
+                        <button class="btn btn-primary"
+                                type="submit"
+                                ng-click="ok()">Change
+                        </button>
 
-                    <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-primary"
+                                ng-click="cancel()">Cancel
+                        </button>
                     </div>
 
                 </fieldset>

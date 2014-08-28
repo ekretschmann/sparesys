@@ -104,6 +104,9 @@
 .expands {
     width: 100%;
 }
+.form-control {
+    margin-bottom: 3px;
+}
 
 .table-striped {
     width: 1000%;
@@ -121,6 +124,10 @@
 
 .top-aligned {
     vertical-align: top;
+}
+
+.center-aligned {
+    text-align: center
 }
 
 

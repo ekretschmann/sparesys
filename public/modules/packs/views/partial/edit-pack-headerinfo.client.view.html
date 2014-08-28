@@ -1,0 +1,23 @@
+<table>
+    <tr>
+        <td>Course</td>
+        <td class="left-padded">:</td>
+        <td class="left-padded"><a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.courseName}}</a></td>
+    </tr>
+    <tr>
+        <td>Due</td>
+        <td class="left-padded">:</td>
+        <td class="left-padded">
+            <span data-ng-if="pack.due">{{pack.due | date:'mediumDate'}}</span>
+            <span data-ng-if="!pack.due">never</span>
+        </td>
+    </tr>
+    <tr>
+        <td>Start</td>
+        <td class="left-padded">:</td>
+        <td class="left-padded">
+            <span data-ng-if="pack.after">{{pack.after | date:'mediumDate'}}</span>
+            <span data-ng-if="!pack.after">now</span>
+        </td>
+    </tr>
+</table>

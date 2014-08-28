@@ -1,0 +1,129 @@
+<script type="text/ng-template" id="managePack.html">
+    <div>
+
+        <div class="modal-body">
+            <div class="sparesys-header">
+                <div class="sparesys-title" style="text-align: center">
+                    Edit Pack: {{pack.name}}
+                </div>
+            </div>
+
+            <form class="form-horizontal" novalidate>
+                <fieldset>
+                    <div class="sparesys-header">
+                        <table class="sparesys-view-object-table">
+                            <tr class="controls">
+                                <td class="sparesys-view-object-label-cell">Name</td>
+                                <td class="sparesys-view-object-content-cell" colspan="3">
+                                    <input type="text" data-ng-model="pack.name"
+                                           id="packname" class="form-control editPackFocus"
+                                           data-ng-init="setFocus()"
+                                           required></td>
+
+
+                            </tr>
+
+
+                            <tr class="controls">
+                                <td >Options</td>
+                                <td style="white-space: nowrap">
+                                    <input type="radio" ng-model="validation" value="default" data-ng-click="changeValidation('default')">
+                                    <span style="padding-left: 5px">Default Validation</span>
+                                </td>
+
+                                <td style="white-space: nowrap; padding-left: 20px">
+                                    <input type="radio" ng-model="sound" value="yes" data-ng-click="changeSound('yes')">
+                                    <span style="padding-left: 5px">Use Sound</span>
+                                </td>
+                                <td style="white-space: nowrap; padding-left: 20px">
+                                    <input type="radio" ng-model="ask" value="both" data-ng-click="changeAsk('both')">
+                                    <span style="padding-left: 5px">Ask Both Ways</span>
+                                </td>
+
+
+
+
+                            </tr>
+
+                            <tr class="controls">
+                                <td ></td>
+                                <td style="white-space: nowrap">
+                                    <input type="radio" ng-model="validation" value="checked" data-ng-click="changeValidation('checked')" >
+                                    <span style="padding-left: 5px">Input Checked</span>
+                                </td>
+                                <td style="white-space: nowrap; padding-left: 20px">
+                                    <input type="radio" ng-model="sound" value="no"  data-ng-click="changeSound('no')">
+                                    <span style="padding-left: 5px">No Sound</span></td>
+                                <td style="white-space: nowrap; padding-left: 20px">
+                                    <input type="radio" ng-model="ask" value="oneway"  data-ng-click="changeAsk('oneWay')">
+                                    <span style="padding-left: 5px">Ask One Way</span>
+                                </td>
+                            </tr>
+
+                            <tr class="controls">
+                                <td ></td>
+                                <td style="white-space: nowrap" >
+                                    <input type="radio" ng-model="validation" value="self"  data-ng-click="changeValidation('self')">
+                                    <span style="padding-left: 5px">Self Certify</span>
+                                </td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+
+
+
+                            <tr class="controls" data-ng-controller="DateDropdownController">
+                                <td class="sparesys-view-object-label-cell">Due date</td>
+                                <td style="vertical-align: middle" colspan="3">
+                                    <div class="input-group">
+                                    <input type="text" class="form-control" datepicker-popup="{{format}}"
+                                           ng-model="pack.due"
+                                           is-open="opened" min-date="minDate" max-date="'2015-06-22'"
+                                           datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                           ng-required="false" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+                                    </div>
+                                </td>
+                            </tr>
+
+                            <tr class="controls" data-ng-controller="DateDropdownController">
+                                <td class="sparesys-view-object-label-cell">Start</td>
+                                <td style="padding-top: 3px" colspan="3">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" datepicker-popup="{{format}}"
+                                           ng-model="pack.after"
+                                           is-open="opened" min-date="minDate" max-date="'2015-06-22'"
+                                           datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
+                                           ng-required="false" close-text="Close"/>
+              <span class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+              </span>
+</div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+
+                    <div style="text-align: center">
+                        <button class="btn btn-primary sparesys-button"
+                                type="submit"
+                                ng-click="ok()"
+                                >
+                            Change
+                        </button>
+
+                        <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+
+
+    </div>
+</script>

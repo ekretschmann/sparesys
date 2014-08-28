@@ -1,0 +1,30 @@
+<div class="pull-right">
+
+
+    <a class="menu-link"
+       href=""
+       data-ng-click="editPackPopup(pack)">Edit</a>
+
+    <a class="menu-link"
+       href=""
+       data-ng-click="managePackPopup()"
+       data-ng-show="authentication.user._id == pack.user._id">Manage</a>
+
+    <a class="menu-link"
+       href=""
+       data-ng-click="areYouSureToDeletePack(pack)"
+       data-ng-show="authentication.user._id == pack.user._id">Delete</a>
+
+    <a class="menu-link"
+       href=""
+       data-ng-click="addCardToPackPopup()"
+       data-ng-show="authentication.user._id == pack.user._id">Add Cards</a>
+
+
+    <a class="menu-link"
+       href=""
+       data-ng-click="help()">
+        <span data-ng-if="!showhelp">Help</span>
+        <span data-ng-if="showhelp">Hide Help</span>
+    </a>
+</div>

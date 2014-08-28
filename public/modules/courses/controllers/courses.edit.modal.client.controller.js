@@ -1,8 +1,10 @@
 'use strict';
 
-angular.module('courses').controller('EditCourseController', ['$scope', '$state', '$timeout', '$modalInstance', 'course', 'JourneyService',
-	function($scope, $state, $timeout, $modalInstance, course, JourneyService) {
-        $scope.course = course;
+angular.module('courses').controller('EditCourseController', ['$scope', '$state', '$timeout', '$modalInstance', 'course', 'JourneyService', 'Courses',
+	function($scope, $state, $timeout, $modalInstance, course, JourneyService, Courses) {
+
+        $scope.course = new Courses(course);
+        $scope.initialCourseName = course.name;
 
 
         $scope.languages = [
@@ -33,10 +35,14 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
         $scope.language = $scope.languages[selectedIndex];
 
 
+        $scope.setLanguage = function(lang) {
+            $scope.language = lang;
+            $scope.course.language = lang;
+        };
 
         $scope.setFocus = function () {
             $timeout(function(){
-                angular.element('.editCoursefocus').trigger('focus');
+                angular.element('.focus').trigger('focus');
             },100);
         };
 
@@ -45,12 +51,6 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
         };
 
         $scope.ok = function () {
-
-            course.name = this.name;
-            course.description = this.description;
-            course.language = this.language;
-            course.front = this.front;
-            course.back = this.back;
 
 
             $scope.course.$update(function() {

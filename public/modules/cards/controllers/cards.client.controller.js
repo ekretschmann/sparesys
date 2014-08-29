@@ -3,10 +3,88 @@
 // Cards controller
 angular.module('cards').controller('CardsController', ['$scope', '$modal', '$timeout', '$stateParams', '$state', '$location', 'Authentication', 'Packs', 'Cards',
     function ($scope, $modal, $timeout, $stateParams, $state, $location, Authentication, Packs, Cards) {
+
+
+
+        // Set of Photos
+        $scope.slides = [
+            {image: '/modules/core/img/brand/superhero-girl-medium.gif'},
+            {image: '/modules/core/img/brand/superhero-boy-medium.gif'},
+            {image: '/modules/core/img/brand/philosopher-medium.gif'},
+            {image: '/modules/core/img/brand/guru-medium.gif'},
+            {image: '/modules/core/img/brand/teacher-man-medium.gif'},
+            {image: '/modules/core/img/brand/teacher-woman-medium.gif'}
+        ];
+
+
         $scope.authentication = Authentication;
-
-
         $scope.nextAlternative = undefined;
+
+        $scope.validation = 'leave unchanged';
+        $scope.sound = 'leave unchanged';
+        $scope.direction = 'leave unchanged';
+
+        $scope.validations = ['always computer-checked', 'always self-checked', 'self-checked for new cards'];
+        $scope.readQuestions = ['yes', 'no'];
+        $scope.directions = ['one way', 'both ways'];
+
+
+        // dont know why I have to do this. Seems the checkboxes don't like modal windows
+        $scope.setValidation = function(value) {
+            $scope.validation = value;
+        };
+
+        $scope.setSound = function(value) {
+            $scope.sound = value;
+        };
+
+        $scope.setDirection = function(value) {
+            $scope.direction = value;
+        };
+
+        // Find existing Card
+        $scope.findOne = function () {
+            $scope.card = Cards.get({
+                cardId: $stateParams.cardId
+            }, function () {
+
+                if ($scope.card.validation === 'self') {
+                    $scope.validation = 'always self-checked';
+                } else if ($scope.card.validation === 'checked') {
+                    $scope.validation = 'always computer-checked';
+                } else {
+                    $scope.validation = 'self-checked for new cards';
+                }
+
+                if ($scope.card.bothways) {
+                    $scope.direction = 'both ways';
+                } else {
+                    $scope.direction = 'one way';
+                }
+
+                if ($scope.card.sound) {
+                    $scope.sound = 'yes';
+                } else {
+                    $scope.sound = 'no';
+                }
+
+
+                Packs.get({
+                    packId: $scope.card.packs[0]
+                }, function (pack) {
+
+
+                    $scope.pack = pack;
+
+                });
+            });
+        };
+
+        $scope.setFocus = function () {
+            $timeout(function () {
+                angular.element('.editPackFocus').trigger('focus');
+            }, 100);
+        };
 
 
         $scope.clearCards = function() {
@@ -130,22 +208,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             $scope.cards = Cards.query();
         };
 
-        // Find existing Card
-        $scope.findOne = function () {
-            $scope.card = Cards.get({
-                cardId: $stateParams.cardId
-            }, function () {
 
-                Packs.get({
-                    packId: $scope.card.packs[0]
-                }, function (pack) {
-
-
-                    $scope.pack = pack;
-
-                });
-            });
-        };
 
         // Find existing Pack
         $scope.findById = function (cardId) {

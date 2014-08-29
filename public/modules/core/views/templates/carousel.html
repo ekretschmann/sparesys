@@ -5,7 +5,7 @@
 
         <img ng-src="{{slide.image}}" height="300px"/>
 
-        <div class="font-xl" style="padding-top: 10px">{{slide.text}}</div>
+        <div class="font-xl" style="padding-top: 10px" data-ng-if="slide.text">{{slide.text}}</div>
     </div>
     <!--TEST-->
 

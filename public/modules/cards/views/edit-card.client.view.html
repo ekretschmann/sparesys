@@ -1,198 +1,232 @@
 <section data-ng-controller="CardsController" data-ng-init="findOne()">
 
-    <div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
+<div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
 
-    <div class="sparesys-header">
-        <div class="pull-right" style="padding-top: 5px">
+<div class="content-header">
+    <div class="pull-right">
 
+        <div class="submenu">
 
-            <a href="" data-ng-click="areYouSureToDeleteCard(card)"
-               data-ng-show="authentication.user._id == card.user._id">
-                Delete
-            </a>
+            <div ng-include="'/modules/cards/views/partial/edit-card-menu.client.view.html'"></div>
 
-
-            <!--<a class="btn btn-primary" data-ng-click="editPackPopup(pack)"-->
-            <!--data-ng-show="authentication.user._id == pack.user._id">-->
-            <!--<i class="glyphicon glyphicon-edit"></i>-->
-            <!--</a>-->
-
-            <!--<a class="btn btn-primary" data-ng-click="areYouSureToDeletePack(pack)"-->
-            <!--data-ng-show="authentication.user._id == pack.user._id">-->
-            <!--<i class="glyphicon glyphicon-trash"></i>-->
-            <!--</a>-->
-
-        </div>
-
-        <div class="sparesys-title">
-            Card: {{card.question}} &#8594; {{card.answer}}
-        </div>
-        <div>
-
-            Pack: <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
         </div>
     </div>
-    <form class="form-horizontal" data-ng-submit="update()" novalidate>
-        <fieldset>
+
+    <div class="title">
+        {{card.question}}
+    </div>
+    <div class="headerinfo">
+        <table>
+            <tr>
+                <td>{{card.answer}}</td>
+                <td class="left-padded"></td>
+                <td class="left-padded">
+                </td>
+            </tr>
+            <tr>
+                <td>Pack</td>
+                <td class="left-padded">:</td>
+                <td class="left-padded"><a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
+                </td>
+            </tr>
+        </table>
 
 
-            <table class="sparesys-view-object-table">
-                <tr class="controls">
-                    <td class="sparesys-view-object-label-cell">Question</td>
-                    <td class="sparesys-view-object-content-cell" colspan="4">
-                        <input type="text" data-ng-model="card.question"
-                               id="question" class="form-control"
-                               placeholder="Question"
-                               data-ng-blur="update()"
-                               required>
-                    </td>
-
-                <tr class="controls">
-                    <td class="sparesys-view-object-label-cell">Answers</td>
-                    <td class="sparesys-view-object-content-cell" colspan="4">
-                        <input type="text" data-ng-model="card.answer"
-                               id="answer" class="form-control"
-                               placeholder="Answer"
-                               data-ng-blur="updateAnswer()"
-                               required>
-                    </td>
-                </tr>
-
-                <tr class="controls" data-ng-repeat="alt in card.alternatives track by $index">
-                    <td class="sparesys-view-object-label-cell"></td>
-                    <td class="sparesys-view-object-content-cell" colspan="4">
-                        <input type="text" data-ng-model="alt"
-                               id="alternatives" class="form-control"
-                               data-ng-blur="updateAlternative($index, alt)"
-                               placeholder="Alternative Answer">
-                    </td>
-                </tr>
-
-                <tr class="controls">
-                    <td class="sparesys-view-object-label-cell"></td>
-                    <td class="sparesys-view-object-content-cell" colspan="4">
-                        <input type="text" data-ng-model="nextAlternative"
-                               id="alternative" class="form-control alternative"
-                               ng-keyup="enterAlternative($event)"
-                               placeholder="Next Alternative Answer" data-ng-blur="updateNextAlternative()">
-                    </td>
-                </tr>
-
-                <tr class="controls">
-                    <td >Options</td>
-                    <td style="white-space: nowrap">
-                        <input type="radio" data-ng-model="card.validation" value="default"
-                               data-ng-click="update()"><span style="padding-left: 5px">Default Validation</span>
-                    </td>
-
-                    <td style="white-space: nowrap; padding-left: 20px">
-                        <input type="checkbox" data-ng-model="card.sound"
-                               data-ng-click="update()"><span style="padding-left: 5px">Use Sound</span>
-                    </td>
-                    <td style="white-space: nowrap; padding-left: 20px; width: 100%">
-                        <input type="checkbox" data-ng-model="card.bothways"
-                               data-ng-click="update()"><span style="padding-left: 5px">Ask Both Ways</span>
-                    </td>
+    </div>
+</div>
+<form class="form-horizontal" data-ng-submit="update()" novalidate>
+    <fieldset>
 
 
+        <table>
+            <tr>
+                <td class="right-padded">Front</td>
+                <td class="expands">
+                    <input type="text"
+                           data-ng-model="card.question"
+                           id="question"
+                           class="form-control focus"
+                           placeholder="Question"
+                           data-ng-blur="update()"
+                           required>
+                </td>
+
+            <tr>
+                <td class="right-padded">Back</td>
+                <td class="expands">
+                    <input type="text"
+                           data-ng-model="card.answer"
+                           id="answer"
+                           class="form-control"
+                           placeholder="Answer"
+                           data-ng-blur="updateAnswer()"
+                           required>
+                </td>
+            </tr>
 
 
-                </tr>
+            <tr data-ng-repeat="alt in card.alternatives track by $index">
+                <td class="right-padded"></td>
+                <td class="expands">
+                    <input type="text"
+                           data-ng-model="alt"
+                           id="alternatives"
+                           class="form-control"
+                           data-ng-blur="updateAlternative($index, alt)"
+                           placeholder="Alternative Answer">
+                </td>
+            </tr>
 
-                <tr class="controls">
-                    <td ></td>
-                    <td style="white-space: nowrap">
-                        <input type="radio" data-ng-model="card.validation" value="checked"
-                               data-ng-click="update()"><span style="padding-left: 5px">Input Checked</span>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            <tr class="controls">
+                <td class="right-padded"></td>
+                <td class="expands">
+                    <input type="text"
+                           data-ng-model="nextAlternative"
+                           id="alternative"
+                           class="form-control alternative"
+                           ng-keyup="enterAlternative($event)"
+                           placeholder="Next Alternative Answer"
+                           data-ng-blur="updateNextAlternative()">
+                </td>
+            </tr>
 
-                <tr class="controls">
-                    <td ></td>
-                    <td style="white-space: nowrap" >
-                        <input type="radio" data-ng-model="card.validation" value="self"
-                               data-ng-click="update()"><span style="padding-left: 5px">Self Certify</span>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
+            <tr>
+                <td class="right-padded">Checks</td>
+                <td>
+                    <div class="btn-group bottom-spacer">
+                        <button type="button"
+                                class="btn btn-default">{{ validation }}
+                        </button>
+                        <button type="button"
+                                class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-ng-repeat="val in validations"><a
+                                    data-ng-click="setValidation(val)">{{val}}</a></li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
 
+            <tr>
+                <td class="right-padded nobreak-label">Read Questions</td>
+                <td>
+                    <div class="btn-group  bottom-spacer">
+                        <button type="button" class="btn btn-default">{{ sound }}</button>
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-ng-repeat="r in readQuestions"><a
+                                    data-ng-click="setSound(r)">{{r}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
 
-                <tr class="controls" data-ng-controller="DateDropdownController">
-                    <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Due date</td>
-                    <td  colspan="3">
+            <tr>
+                <td class="right-padded">Direction</td>
+                <td>
+                    <div class="btn-group  bottom-spacer">
+                        <button type="button" class="btn btn-default">{{ direction }}</button>
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-ng-repeat="d in directions"><a data-ng-click="setDirection(d)">{{d}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </td>
+            </tr>
 
-                        <div class="input-group" style="padding-top: 3px">
-                        <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="$parent.card.due"
+            <tr data-ng-controller="DateDropdownController">
+                <td>Due date</td>
+                <td>
+
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               datepicker-popup="{{format}}"
+                               ng-model="$parent.card.due"
+                               is-open="opened"
+                               min-date="minDate"
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="false"
+                               close-text="Close"
+                               data-ng-blur="$parent.update()"/>
+
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+
+            <tr data-ng-controller="DateDropdownController">
+                <td>Start date</td>
+                <td>
+
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               datepicker-popup="{{format}}"
+                               ng-model="$parent.card.after"
                                is-open="opened" min-date="minDate"
-                               datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
-                               ng-required="false" close-text="Close" data-ng-blur="$parent.update()"/>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i
-                        class="glyphicon glyphicon-calendar"></i></button>
-              </span></div>
+                               datepicker-options="dateOptions"
+                               date-disabled="disabled(date, mode)"
+                               ng-required="false"
+                               close-text="Close"
+                               data-ng-blur="$parent.update()"/>
 
-                    </td>
-                </tr>
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
+                        </div>
+                    </div>
 
-                <tr class="controls" data-ng-controller="DateDropdownController">
-                    <td class="sparesys-view-object-label-cell" style="vertical-align: middle">Start date</td>
-                    <td  colspan="3">
+                </td>
+            </tr>
 
-                        <div class="input-group" style="padding-top: 3px">
-                            <input type="text" class="form-control" datepicker-popup="{{format}}" ng-model="$parent.card.after"
-                                   is-open="opened" min-date="minDate"
-                                   datepicker-options="dateOptions" date-disabled="disabled(date, mode)"
-                                   ng-required="false" close-text="Close" data-ng-blur="$parent.update()"/>
-              <span class="input-group-btn">
-                <button type="button" class="btn btn-default" ng-click="open($event)"><i
-                        class="glyphicon glyphicon-calendar"></i></button>
-              </span></div>
+            <tr data-ng-controller="DateDropdownController">
+                <td>Images</td>
+                <td>
 
-                    </td>
-                </tr>
+                    <imagecarousel slides="slides" />
+                </td>
+            </tr>
 
-                <!--<tr class="controls" data-ng-controller="DateDropdownController">-->
-                    <!--<td class="sparesys-view-object-label-cell" style="vertical-align: middle">Start</td>-->
-                    <!--<td class="input-group" style="padding-top: 3px" colspan="4">-->
-
-                        <!--<input type="text" class="form-control" datepicker-popup="{{format}}"-->
-                               <!--ng-model="$parent.card.after"-->
-                               <!--is-open="opened" min-date="minDate"-->
-                               <!--datepicker-options="dateOptions" date-disabled="disabled(date, mode)"-->
-                               <!--ng-required="false" close-text="Close" data-ng-blur="$parent.update()"/>-->
-              <!--<span class="input-group-btn">-->
-                <!--<button type="button" class="btn btn-default" ng-click="open($event)"><i-->
-                        <!--class="glyphicon glyphicon-calendar"></i></button>-->
-              <!--</span>-->
-
-                    <!--</td>-->
-                <!--</tr>-->
-            </table>
+        </table>
 
 
-        </fieldset>
+    </fieldset>
 
 
-    </form>
-    <div data-ng-show="error" class="text-danger" style="text-align: center">
-        <strong>Error: {{error}}</strong>
+</form>
+<div data-ng-show="error" class="text-danger" style="text-align: center">
+    <strong>Error: {{error}}</strong>
+</div>
+
+<div class="footer">
+
+    <div>
+        <small>
+            <em class="text-muted">Created on {{card.created | date:'medium'}}</em>
+        </small>
+    </div>
+    <div data-ng-if="card.updated">
+        <small>
+            <em class="text-muted">Updated on {{card.updated | date:'medium'}}</em>
+        </small>
     </div>
 
-    <div class="footer">
-
-        <div>
-            <small>
-                <em class="text-muted">Created on {{card.created | date:'medium'}}</em>
-            </small>
-        </div>
-        <div data-ng-if="card.updated">
-            <small>
-                <em class="text-muted">Updated on {{card.updated | date:'medium'}}</em>
-            </small>
-        </div>
-
-    </div>
+</div>
 </section>

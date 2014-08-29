@@ -1,0 +1,21 @@
+<div class="pull-right">
+
+
+    <a class="menu-link"
+       href=""
+       data-ng-click="areYouSureToDeleteCard(card)"
+       data-ng-show="authentication.user._id == card.user._id">Delete</a>
+
+
+    <a class="menu-link"
+       href=""
+       data-ng-click="addImages(card)"
+       data-ng-show="authentication.user._id == card.user._id">Add Images</a>
+
+    <a class="menu-link"
+       href=""
+       data-ng-click="help()">
+        <span data-ng-if="!showhelp">Help</span>
+        <span data-ng-if="showhelp">Hide Help</span>
+    </a>
+</div>

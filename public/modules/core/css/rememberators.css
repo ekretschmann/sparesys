@@ -109,6 +109,10 @@
     margin-bottom: 3px;
 }
 
+.btn {
+    min-width: 100px;
+}
+
 .bottom-spacer {
     margin-bottom: 3px;
 }

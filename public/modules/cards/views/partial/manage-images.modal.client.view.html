@@ -8,7 +8,6 @@
                     <td class="title nobreak-label">
 
                         Images for {{card.question}}
-                         {{search.text}}
                     </td>
                     <td class="expands right-aligned">Search: <input ng-model="search.text"></td>
                 </tr>
@@ -20,9 +19,9 @@
         <div class="content-section">
 
             <table width="100%">
-                <tr data-ng-repeat="row in images">
-                    <td style="width: 33%; padding: 3px 3px 3px 3px" data-ng-repeat="img in row">
-                        <img ng-src="{{img}}"/>
+                <tr data-ng-repeat="row in images track by $index">
+                    <td style="width: 33%; padding: 3px 3px 3px 3px" data-ng-repeat="img in row track by $index">
+                        <img ng-src="{{img}}" style="max-width: 128px"/>
                     </td>
                 </tr>
             </table>

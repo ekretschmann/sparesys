@@ -1,27 +1,33 @@
 <script type="text/ng-template" id="areYouSureToPublishCourse.html">
     <div class="modal-body">
 
-        <div class="sparesys-header">
-            <div class="sparesys-title" style="text-align: center" data-ng-if="!course.published">
+        <div class="content-header">
+            <div class="title center-aligned"
+                 data-ng-if="!course.published">
                 Publish Course: {{course.name}}
             </div>
 
-            <div class="sparesys-title" style="text-align: center" data-ng-if="course.published">
+            <div class="title center-aligned"
+                 data-ng-if="course.published">
                 Un-Publish Course: {{course.name}}
             </div>
-
         </div>
-        <div style="padding-bottom: 10px; border-bottom: 1px solid #eaeaea; text-align: center" data-ng-if="!course.published">
+
+        <div class="modal-message content-section"
+             data-ng-if="!course.published">
             This action will make the course available for all other users.
         </div>
 
-        <div style="padding-bottom: 10px; border-bottom: 1px solid #eaeaea; text-align: center" data-ng-if="course.published">
+        <div class="modal-message content-section"
+             data-ng-if="course.published">
             This action will make the course invisible for all other users.
         </div>
 
-        <div style="text-align: center; padding-top: 10px">
-            <button class="btn btn-primary sparesys-button" ng-click="ok()">Yes</button>
-            <button class="btn btn-primary sparesys-button" ng-click="cancel()">No</button>
+        <div class="center-aligned">
+            <button class="btn btn-primary"
+                    ng-click="ok()">Yes</button>
+            <button class="btn btn-primary"
+                    ng-click="cancel()">No</button>
         </div>
     </div>
 </script>

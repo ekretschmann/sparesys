@@ -109,8 +109,14 @@
     margin-bottom: 3px;
 }
 
-.btn {
+.btn-primary {
     min-width: 100px;
+}
+
+.modal-message {
+    padding-bottom: 10px;
+    border-bottom: 1px solid #eaeaea;
+    text-align: center
 }
 
 .bottom-spacer {
@@ -139,7 +145,6 @@
     text-align: center
 }
 
-
 .text-error {
     color: #AA0000;
 }
@@ -161,8 +166,8 @@
     height: 64px
 }
 
-.font-l{
-    font-family:'Grinched';
+.font-l {
+    font-family: 'Grinched';
     font-size: 24pt;
 }
 
@@ -178,206 +183,238 @@
 
 @media screen and (min-width: 310px) {
 
-    .font-xxl{
-        font-family:'Grinched';
+    .font-xxl {
+        font-family: 'Grinched';
         font-size: 24pt;
     }
 
-    .font-xl{
-        font-family:'Grinched';
+    .font-xl {
+        font-family: 'Grinched';
         font-size: 18pt;
     }
 
-    .hero-boy:after { content:url("../img/brand/superhero-boy-small.gif"); }
-    .hero-girl:after { content:url("../img/brand/superhero-girl-small.gif"); }
-    .teacher-man:after { content:url("../img/brand/teacher-man-small.gif"); }
-    .teacher-woman:after { content:url("../img/brand/teacher-woman-small.gif"); }
-    .guru:after { content:url("../img/brand/guru-small.gif"); }
-    .philosopher:after { content:url("../img/brand/philosopher-small.gif"); }
+    .hero-boy:after {
+        content: url("../img/brand/superhero-boy-small.gif");
+    }
+
+    .hero-girl:after {
+        content: url("../img/brand/superhero-girl-small.gif");
+    }
+
+    .teacher-man:after {
+        content: url("../img/brand/teacher-man-small.gif");
+    }
+
+    .teacher-woman:after {
+        content: url("../img/brand/teacher-woman-small.gif");
+    }
+
+    .guru:after {
+        content: url("../img/brand/guru-small.gif");
+    }
+
+    .philosopher:after {
+        content: url("../img/brand/philosopher-small.gif");
+    }
 }
 
 @media screen and (min-width: 620px) {
 
-    .font-xxl{
-        font-family:'Grinched';
+    .font-xxl {
+        font-family: 'Grinched';
         font-size: 36pt;
     }
 
-    .font-xl{
-        font-family:'Grinched';
+    .font-xl {
+        font-family: 'Grinched';
         font-size: 24pt;
     }
 
-    .hero-boy:after { content:url("../img/brand/superhero-boy-medium.gif"); }
-    .hero-girl:after { content:url("../img/brand/superhero-girl-medium.gif"); }
-    .teacher-man:after { content:url("../img/brand/teacher-man-medium.gif"); }
-    .teacher-woman:after { content:url("../img/brand/teacher-woman-medium.gif"); }
-    .guru:after { content:url("../img/brand/guru-medium.gif"); }
-    .philosopher:after { content:url("../img/brand/philosopher-medium.gif"); }
+    .hero-boy:after {
+        content: url("../img/brand/superhero-boy-medium.gif");
+    }
+
+    .hero-girl:after {
+        content: url("../img/brand/superhero-girl-medium.gif");
+    }
+
+    .teacher-man:after {
+        content: url("../img/brand/teacher-man-medium.gif");
+    }
+
+    .teacher-woman:after {
+        content: url("../img/brand/teacher-woman-medium.gif");
+    }
+
+    .guru:after {
+        content: url("../img/brand/guru-medium.gif");
+    }
+
+    .philosopher:after {
+        content: url("../img/brand/philosopher-medium.gif");
+    }
 }
 
-.nav, .pagination, .carousel, .panel-title a { cursor: pointer; }
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
 
 @media screen and (min-width: 800px) {
 
-    .font-xxl{
-        font-family:'Grinched';
+    .font-xxl {
+        font-family: 'Grinched';
         font-size: 64pt;
     }
 
-    .font-xl{
-        font-family:'Grinched';
+    .font-xl {
+        font-family: 'Grinched';
         font-size: 36pt;
     }
 
     .hero-boy:after {
-        content:url("../img/brand/superhero-boy-medium.gif");
+        content: url("../img/brand/superhero-boy-medium.gif");
     }
 }
 
-
-
 /*.hero-girl {*/
-    /*background-image: url("../img/brand/superhero-girl-medium.gif");*/
-    /*display: block;*/
-    /*text-align: center;*/
+/*background-image: url("../img/brand/superhero-girl-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
 /*}*/
 
 /*@media screen and (min-width: 620px) {*/
 
-    /*.font-xxl{*/
-        /*font-family:'Grinched';*/
-        /*font-size: 36pt;*/
-    /*}*/
+/*.font-xxl{*/
+/*font-family:'Grinched';*/
+/*font-size: 36pt;*/
+/*}*/
 
-    /*.font-xl{*/
-        /*font-family:'Grinched';*/
-        /*font-size: 24pt;*/
-    /*}*/
+/*.font-xl{*/
+/*font-family:'Grinched';*/
+/*font-size: 24pt;*/
+/*}*/
 
-    /*.hero-boy:after {*/
-        /*background-size: 150px 200px;*/
-        /*width: 150px;*/
-        /*height: 200px;*/
-        /*content:"";*/
-    /*}*/
+/*.hero-boy:after {*/
+/*background-size: 150px 200px;*/
+/*width: 150px;*/
+/*height: 200px;*/
+/*content:"";*/
+/*}*/
 
-    /*.hero-girl:after {*/
-        /*background-size: 150px 200px;*/
-        /*width: 150px;*/
-        /*height: 200px;*/
-        /*content:"";*/
-    /*}*/
+/*.hero-girl:after {*/
+/*background-size: 150px 200px;*/
+/*width: 150px;*/
+/*height: 200px;*/
+/*content:"";*/
+/*}*/
 
-    /*.teacher-man:after {*/
-        /*background-image: url("../img/brand/teacher-man-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 150px 200px;*/
-        /*width: 150px;*/
-        /*height: 200px;*/
-        /*content:"";*/
-    /*}*/
+/*.teacher-man:after {*/
+/*background-image: url("../img/brand/teacher-man-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 150px 200px;*/
+/*width: 150px;*/
+/*height: 200px;*/
+/*content:"";*/
+/*}*/
 
-    /*.teacher-woman:after {*/
-        /*background-image: url("../img/brand/teacher-woman-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 150px 200px;*/
-        /*width: 150px;*/
-        /*height: 200px;*/
-        /*content:"";*/
-    /*}*/
+/*.teacher-woman:after {*/
+/*background-image: url("../img/brand/teacher-woman-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 150px 200px;*/
+/*width: 150px;*/
+/*height: 200px;*/
+/*content:"";*/
+/*}*/
 
-    /*.guru:after {*/
-        /*background-image: url("../img/brand/guru-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 150px 200px;*/
-        /*width: 150px;*/
-        /*height: 200px;*/
-        /*content:"";*/
-    /*}*/
+/*.guru:after {*/
+/*background-image: url("../img/brand/guru-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 150px 200px;*/
+/*width: 150px;*/
+/*height: 200px;*/
+/*content:"";*/
+/*}*/
 
-    /*.philosopher:after {*/
-        /*background-image: url("../img/brand/philosopher-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 150px 200px;*/
-        /*width: 150px;*/
-        /*height: 200px;*/
-        /*content:"";*/
-    /*}*/
+/*.philosopher:after {*/
+/*background-image: url("../img/brand/philosopher-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 150px 200px;*/
+/*width: 150px;*/
+/*height: 200px;*/
+/*content:"";*/
+/*}*/
 /*}*/
 
 /*@media screen and (min-width: 800px) {*/
 
-    /*.font-xxl{*/
-        /*font-family:'Grinched';*/
-        /*font-size: 64pt;*/
-    /*}*/
-
-    /*.font-xl{*/
-        /*font-family:'Grinched';*/
-        /*font-size: 36pt;*/
-    /*}*/
-
-    /*.hero-boy:after {*/
-        /*background-image: url("../img/brand/superhero-boy-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 100px 200px;*/
-        /*width: 100px;*/
-        /*content:"";*/
-    /*}*/
-
-    /*.hero-girl:after {*/
-        /*background-image: url("../img/brand/superhero-girl-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 100px 200px;*/
-        /*width: 100px;*/
-        /*content:"";*/
-    /*}*/
-
-    /*.teacher-man:after {*/
-        /*background-image: url("../img/brand/teacher-man-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 100px 200px;*/
-        /*width: 100px;*/
-        /*content:"";*/
-    /*}*/
-
-    /*.teacher-woman:after {*/
-        /*background-image: url("../img/brand/teacher-woman-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 100px 200px;*/
-        /*width: 100px;*/
-        /*content:"";*/
-    /*}*/
-
-    /*.guru:after {*/
-        /*background-image: url("../img/brand/guru-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 100px 200px;*/
-        /*width: 100px;*/
-        /*content:"";*/
-    /*}*/
-
-    /*.philosopher:after {*/
-        /*background-image: url("../img/brand/philosopher-medium.gif");*/
-        /*display: block;*/
-        /*text-align: center;*/
-        /*background-size: 100px 200px;*/
-        /*width: 100px;*/
-        /*content:"";*/
-    /*}*/
+/*.font-xxl{*/
+/*font-family:'Grinched';*/
+/*font-size: 64pt;*/
 /*}*/
 
+/*.font-xl{*/
+/*font-family:'Grinched';*/
+/*font-size: 36pt;*/
+/*}*/
 
+/*.hero-boy:after {*/
+/*background-image: url("../img/brand/superhero-boy-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 100px 200px;*/
+/*width: 100px;*/
+/*content:"";*/
+/*}*/
+
+/*.hero-girl:after {*/
+/*background-image: url("../img/brand/superhero-girl-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 100px 200px;*/
+/*width: 100px;*/
+/*content:"";*/
+/*}*/
+
+/*.teacher-man:after {*/
+/*background-image: url("../img/brand/teacher-man-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 100px 200px;*/
+/*width: 100px;*/
+/*content:"";*/
+/*}*/
+
+/*.teacher-woman:after {*/
+/*background-image: url("../img/brand/teacher-woman-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 100px 200px;*/
+/*width: 100px;*/
+/*content:"";*/
+/*}*/
+
+/*.guru:after {*/
+/*background-image: url("../img/brand/guru-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 100px 200px;*/
+/*width: 100px;*/
+/*content:"";*/
+/*}*/
+
+/*.philosopher:after {*/
+/*background-image: url("../img/brand/philosopher-medium.gif");*/
+/*display: block;*/
+/*text-align: center;*/
+/*background-size: 100px 200px;*/
+/*width: 100px;*/
+/*content:"";*/
+/*}*/
+/*}*/
 
 .flashcard {
     padding: 30px;

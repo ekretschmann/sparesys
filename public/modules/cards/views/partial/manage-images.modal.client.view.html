@@ -1,0 +1,42 @@
+<script type="text/ng-template" id="manageImages.html">
+    <div class="modal-body">
+
+        <div class="content-header">
+
+            <table>
+                <tr>
+                    <td class="title nobreak-label">
+
+                        Images for {{card.question}}
+                         {{search.text}}
+                    </td>
+                    <td class="expands right-aligned">Search: <input ng-model="search.text"></td>
+                </tr>
+            </table>
+
+
+        </div>
+
+        <div class="content-section">
+
+            <table width="100%">
+                <tr data-ng-repeat="row in images">
+                    <td style="width: 33%; padding: 3px 3px 3px 3px" data-ng-repeat="img in row">
+                        <img ng-src="{{img}}"/>
+                    </td>
+                </tr>
+            </table>
+            <!--<div data-ng-repeat="img in images">-->
+                <!--<img ng-src="{{img}}"/>-->
+
+            <!--</div>-->
+
+        </div>
+
+        <div style="text-align: center">
+            <button class="btn btn-primary sparesys-button" ng-click="search()">Search</button>
+            <button class="btn btn-primary sparesys-button" ng-click="ok()">OK</button>
+            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</script>

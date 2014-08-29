@@ -243,6 +243,20 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             });
         };
 
+        $scope.manageImages = function (card) {
+            $scope.card = card;
+
+            $modal.open({
+                templateUrl: 'manageImages.html',
+                controller: 'ManageImagesController',
+                resolve: {
+                    card: function () {
+                        return $scope.card;
+                    }
+                }
+            });
+        };
+
         $scope.areYouSureToDeleteCard = function (card) {
 
             $scope.card = card;

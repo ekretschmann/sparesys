@@ -6,8 +6,8 @@ angular.module('core').directive('imagecarousel',
             restrict: 'AE',
             replace: true,
             scope: {
-                slides: '='
-
+                slides: '=',
+                size: '='
 
             },
             link: function(scope, elem, attrs) {

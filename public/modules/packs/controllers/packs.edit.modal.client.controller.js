@@ -22,6 +22,7 @@ angular.module('packs').controller('EditPackController', ['$scope', '$state', '$
             var courseName = pack.courseName;
             $scope.pack.$update(function () {
                 pack.courseName = courseName;
+
                 $state.go($state.$current, null, { reload: true });
             });
 

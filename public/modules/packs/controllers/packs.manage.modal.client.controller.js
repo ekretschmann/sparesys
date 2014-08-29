@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('packs').controller('ManagePackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'Cards',
-    function ($scope, $state, $timeout, $modalInstance, pack, Cards) {
+angular.module('packs').controller('ManagePackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'Cards', 'JourneyService',
+    function ($scope, $state, $timeout, $modalInstance, pack, Cards, JourneyService) {
         $scope.pack = pack;
         var originalDue = pack.due;
         var originalAfter = pack.after;
@@ -42,14 +42,12 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
 
 
             var courseName = pack.courseName;
-            $scope.pack.$update(function () {
-                pack.courseName = courseName;
-            });
-
 
 
             var cardsToUpdate = pack.cards.length;
             var cardsUpdated = 0;
+            console.log('setting');
+            JourneyService.packEdited();
             pack.cards.forEach(function (card) {
                 Cards.get({
                     cardId: card

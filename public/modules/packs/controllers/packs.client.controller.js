@@ -17,6 +17,10 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         };
 
 
+        $scope.userHasEditedPackBefore = function() {
+            return JourneyService.userHasEditedPackBefore();
+        };
+
         $scope.userHasCreatedCardBefore = function() {
             return JourneyService.userHasCreatedCardBefore();
         };

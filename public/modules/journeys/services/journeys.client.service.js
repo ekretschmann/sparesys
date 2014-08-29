@@ -37,6 +37,12 @@ angular.module('journeys').service('JourneyService', ['$q', '$resource', 'Journe
         }
 
         return {
+            packEdited: function() {
+                if (!journey.editedPack) {
+                    journey.editedPack = true;
+                    journey.$update();
+                }
+            },
             courseEdited: function() {
                 if (!journey.editedCourse) {
                     journey.editedCourse = true;
@@ -76,6 +82,12 @@ angular.module('journeys').service('JourneyService', ['$q', '$resource', 'Journe
             userHasEditedCourseBefore: function() {
                 if (journey) {
                     return journey.editedCourse;
+                }
+                return false;
+            },
+            userHasEditedPackBefore: function() {
+                if (journey) {
+                    return journey.editedPack;
                 }
                 return false;
             },

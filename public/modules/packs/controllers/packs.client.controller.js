@@ -146,13 +146,8 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                             }
                         }
                     });
-
-
                 }
             });
-
-
-
         };
 
         $scope.editPackPopup = function (size) {

@@ -4,29 +4,32 @@
     <div>
 
         <div class="modal-body">
-            <div class="sparesys-header">
-                <div class="sparesys-title" style="text-align: center">
+            <div class="content-header">
+                <div class="title center-aligned">
                     Add cards to Pack: {{pack.name}}
                 </div>
             </div>
 
             <form class="form-horizontal" novalidate>
                 <fieldset>
-                    <div class="sparesys-header">
-                        <table class="sparesys-view-object-table">
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">{{course.front}}</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="question"
-                                           id="cardquestion" class="form-control addcardfocus"
+                    <div class="content-header">
+                        <table>
+                            <tr>
+                                <td class="right-padded">{{course.front}}</td>
+                                <td class="expands">
+                                    <input type="text"
+                                           data-ng-model="question"
+                                           id="cardquestion"
+                                           class="form-control focus"
                                            placeholder="Question"
                                            data-ng-init="setFocus()"
-                                           required></td>
+                                           required>
+                                </td>
                             </tr>
 
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">{{course.back}}</td>
-                                <td class="sparesys-view-object-content-cell">
+                            <tr>
+                                <td class="right-padded">{{course.back}}</td>
+                                <td class="expands">
                                     <input type="text" data-ng-model="answer"
                                            id="cardanswer" class="form-control"
                                            placeholder="Answer"
@@ -37,15 +40,13 @@
                     </div>
 
                     <div>
-                        <button class="btn btn-primary sparesys-button"
+                        <button class="btn btn-primary"
                                 type="submit"
-                                ng-click="addCardToPack()"
-                                >
-                            Add
-                        </button>
+                                ng-click="addCardToPack()">Add</button>
 
                         <div class="pull-right">
-                            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Done</button>
+                            <button class="btn btn-primary"
+                                    ng-click="cancel()">Done</button>
                         </div>
 
                     </div>

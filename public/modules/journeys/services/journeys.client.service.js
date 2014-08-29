@@ -38,31 +38,31 @@ angular.module('journeys').service('JourneyService', ['$q', '$resource', 'Journe
 
         return {
             packEdited: function() {
-                if (!journey.editedPack) {
+                if (journey && !journey.editedPack) {
                     journey.editedPack = true;
                     journey.$update();
                 }
             },
             courseEdited: function() {
-                if (!journey.editedCourse) {
+                if (journey && !journey.editedCourse) {
                     journey.editedCourse = true;
                     journey.$update();
                 }
             },
             courseCreated: function() {
-                if (!journey.createdCourse) {
+                if (journey && !journey.createdCourse) {
                     journey.createdCourse = true;
                     journey.$update();
                 }
             },
             packCreated: function() {
-                if (!journey.createdPack) {
+                if (journey && !journey.createdPack) {
                     journey.createdPack = true;
                     journey.$update();
                 }
             },
             cardCreated: function() {
-                if (!journey.createdCard) {
+                if (journey && !journey.createdCard) {
                     journey.createdCard = true;
                     journey.$update();
                 }

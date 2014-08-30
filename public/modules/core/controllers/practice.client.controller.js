@@ -211,6 +211,7 @@ angular.module('core').controller('PracticeController',
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
                     $scope.state = 'question';
+                    $scope.updateSlides();
                     $state.go($state.current);
                 });
 
@@ -229,15 +230,23 @@ angular.module('core').controller('PracticeController',
                 $scope.keys = Object.keys($scope.analysis);
                 $scope.state = 'question';
 
+                $scope.updateSlides();
+                $state.go($state.current);
+
+            };
+
+            $scope.updateSlides = function(){
                 $scope.slides = [];
+
+
 
                 $scope.card.images.forEach(function(img){
                     var slide = {};
-                    slide.images = img;
+                    slide.image = img;
                     $scope.slides.push(slide);
                 }, this);
-                $state.go($state.current);
 
+                console.log($scope.slides);
             };
 
             $scope.getPredictedRetention = function (card) {

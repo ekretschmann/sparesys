@@ -44,7 +44,6 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             console.log(image);
             for (var i in $scope.card.images) {
                 if ($scope.card.images[i] === image) {
-                    console.log('splicing');
                     $scope.card.images.splice(i, 1);
                 }
             }
@@ -60,14 +59,14 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             console.log($scope.selected.images);
         };
 
-        $scope.search = function () {
+        $scope.search_offline = function () {
 
             $scope.images = [['/modules/core/img/brand/philosopher-medium.gif','/modules/core/img/brand/teacher-man-medium.gif','/modules/core/img/brand/philosopher-medium.gif'],
                 ['/modules/core/img/brand/teacher-woman-medium.gif','/modules/core/img/brand/superhero-boy-medium.gif','/modules/core/img/brand/teacher-woman-medium.gif'],
                 ['/modules/core/img/brand/guru-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif']];
         };
 
-        $scope.search_offline = function () {
+        $scope.search = function () {
 
             console.log('https://connect.gettyimages.com:443/v3/search/images/creative?phrase='+$scope.search.text);
 

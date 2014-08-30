@@ -41,7 +41,19 @@
             <div class="flashcard">
 
 
-                <h2>{{card.question}}</h2>
+                <h2 data-ng-if="slides.length === 0">{{card.question}}</h2>
+                <div data-ng-if="slides.length > 0">
+                    <table>
+                        <tr>
+                            <td width="50%"></td>
+                            <td><imagecarousel slides="slides" size="256"/></td>
+                            <td width="50%"></td>
+                        </tr>
+                    </table>
+
+
+
+                </div>
 
                 <span data-ng-init="playSound(card.question)" data-ng-if="state == 'question'"></span>
 

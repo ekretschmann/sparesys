@@ -8,6 +8,7 @@ angular.module('core').controller('PracticeController',
             $scope.authentication = Authentication;
 
 
+            $scope.slides = [];
             $scope.validation = 'self';
             $scope.state = 'question';
             $scope.cards = [];
@@ -228,6 +229,13 @@ angular.module('core').controller('PracticeController',
                 $scope.keys = Object.keys($scope.analysis);
                 $scope.state = 'question';
 
+                $scope.slides = [];
+
+                $scope.card.images.forEach(function(img){
+                    var slide = {};
+                    slide.images = img;
+                    $scope.slides.push(slide);
+                }, this);
                 $state.go($state.current);
 
             };
@@ -270,6 +278,15 @@ angular.module('core').controller('PracticeController',
                     if ($scope.card.history.length === 0) {
                         $scope.inPlay ++;
                     }
+
+                    $scope.slides = [];
+
+                    $scope.card.images.forEach(function(img){
+                        var slide = {};
+                        slide.image = img;
+                        $scope.slides.push(slide);
+                    }, this);
+
 
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);

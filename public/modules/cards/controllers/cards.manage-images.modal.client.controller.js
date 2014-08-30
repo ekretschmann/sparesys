@@ -8,29 +8,57 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
 
         $scope.images = [];
         $scope.search = {};
-        $scope.search.text = $scope.card.question;;
+        $scope.search.text = $scope.card.question;
 
 
+        // init selected image array
+        if (!card.images) {
+            card.images = [];
+        }
 
-//        $http({ method: 'GET',
-//            url: 'https://connect.gettyimages.com:443/v3/search/images?phrase=453539050',
-//            headers: {'Api-Key': 'kxp5cbugd37388ra47sww5fr'}}).
-//            success(function (data, status, headers, config) {
-//                console.log(data);
-//                data.images.forEach(function(image) {
-//                    console.log(image.id)
-//                });
-//            }).
-//            error(function (data, status, headers, config) {
-//                console.log(data);
-//                console.log();
-//                console.log(status);
-//                console.log();
-//                console.log(headers);
-//                console.log();
-//                console.log(config);
-//            });
+        $scope.selected = {};
+        $scope.selected.images = [];
+        card.images.forEach(function(img) {
+            $scope.selected.images.push(img);
+        });
+        for (var i = card.images.length; i < 4; i++) {
+            $scope.selected.images.push('/modules/core/img/brand/placeholder_icon.png');
+        }
 
+
+        $scope.addImage = function(image) {
+            $scope.card.images.push(image);
+            $scope.selected.images = [];
+            $scope.card.images.forEach(function(img) {
+                $scope.selected.images.push(img);
+            });
+            console.log($scope.selected.images);
+            for (var i = $scope.card.images.length; i < 4; i++) {
+                $scope.selected.images.push('/modules/core/img/brand/placeholder_icon.png');
+            }
+            console.log($scope.selected.images);
+        };
+
+        $scope.removeImage = function(image) {
+
+            console.log(image);
+            for (var i in $scope.card.images) {
+                if ($scope.card.images[i] === image) {
+                    console.log('splicing');
+                    $scope.card.images.splice(i, 1);
+                }
+            }
+
+            $scope.selected.images = [];
+            $scope.card.images.forEach(function(img) {
+                $scope.selected.images.push(img);
+            });
+            console.log($scope.selected.images);
+            for (i = $scope.card.images.length; i < 4; i++) {
+                $scope.selected.images.push('/modules/core/img/brand/placeholder_icon.png');
+            }
+            console.log($scope.selected.images);
+        };
 
         $scope.search = function () {
 
@@ -39,7 +67,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
                 ['/modules/core/img/brand/guru-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif']];
         };
 
-        $scope.search_real = function () {
+        $scope.search_offline = function () {
 
             console.log('https://connect.gettyimages.com:443/v3/search/images/creative?phrase='+$scope.search.text);
 
@@ -82,6 +110,9 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
         $scope.ok = function () {
 
 
+            $scope.card.$update(function() {
+                $state.go($state.$current, null, { reload: true });
+            });
 
             $modalInstance.close();
         };

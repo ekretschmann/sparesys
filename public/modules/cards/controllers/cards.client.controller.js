@@ -7,15 +7,21 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
         // Set of Photos
-        $scope.slides = [
-            {image: '/modules/core/img/brand/superhero-girl-medium.gif'},
-            {image: '/modules/core/img/brand/superhero-boy-medium.gif'},
-            {image: '/modules/core/img/brand/philosopher-medium.gif'},
-            {image: '/modules/core/img/brand/guru-medium.gif'},
-            {image: '/modules/core/img/brand/teacher-man-medium.gif'},
-            {image: '/modules/core/img/brand/teacher-woman-medium.gif'}
-        ];
+        $scope.slides = [];
 
+
+
+        $scope.initSlides = function() {
+
+            if ($scope.card) {
+                $scope.card.images.forEach(function(img) {
+                    var slide = {};
+                    slide.image = img;
+                    $scope.slides.push(slide);
+                }, this);
+            }
+        };
+        $scope.initSlides();
 
         $scope.authentication = Authentication;
         $scope.nextAlternative = undefined;
@@ -77,6 +83,8 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                     $scope.pack = pack;
 
                 });
+
+                $scope.initSlides();
             });
         };
 

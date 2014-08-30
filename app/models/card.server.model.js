@@ -4,18 +4,18 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+    Schema = mongoose.Schema;
 
 /**
  * Card Schema
  */
 var CardSchema = new Schema({
-	question: {
-		type: String,
-		default: '',
-		required: 'Please fill out Card Question',
-		trim: true
-	},
+    question: {
+        type: String,
+        default: '',
+        required: 'Please fill out Card Question',
+        trim: true
+    },
     answer: {
         type: String,
         default: '',
@@ -26,17 +26,17 @@ var CardSchema = new Schema({
         type: [String],
         default: []
     },
-	created: {
-		type: Date,
-		default: Date.now
-	},
+    created: {
+        type: Date,
+        default: Date.now
+    },
     updated: {
         type: Date
     },
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	},
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    },
     packs: {
         type: [Schema.Types.ObjectId],
         default: []
@@ -58,9 +58,15 @@ var CardSchema = new Schema({
         default: 0.0
     },
     history: {
-        type: [{when: Number, assessment: Number}],
+        type: [
+            {when: Number, assessment: Number}
+        ],
         default: [],
         _id: false
+    },
+    images: {
+        type: [String],
+        default: []
     },
     validation: {
         type: String,

@@ -16,17 +16,90 @@
 
         </div>
 
-        <div class="content-section">
+
+        <div class="content-section center-aligned">
 
             <table width="100%">
-                <tr data-ng-repeat="row in images track by $index">
-                    <td style="width: 33%; padding: 3px 3px 3px 3px" data-ng-repeat="img in row track by $index">
-                        <img ng-src="{{img}}" style="max-width: 128px"/>
+                <tr>
+
+                    <td style="width: 25%" data-ng-if="selected.images[0] === '/modules/core/img/brand/placeholder_icon.png'">
+                        <img ng-src="{{selected.images[0]}}" style="max-width: 128px; max-height: 128px"/>
+                    </td>
+                    <td data-ng-if="selected.images[0] !== '/modules/core/img/brand/placeholder_icon.png'">
+                        <a class="gallerypic" href="" data-ng-click="removeImage(selected.images[0])">
+                            <img ng-src="{{selected.images[0]}}" style="max-width: 128px; max-height: 128px"/>
+                                <span class="zoom-icon">
+        <i class="glyphicon glyphicon-minus-sign" style="color: red"></i>
+                                </span>
+                        </a>
+                    </td>
+
+                    <td style="width: 25%" data-ng-if="selected.images[1] === '/modules/core/img/brand/placeholder_icon.png'">
+                        <img ng-src="{{selected.images[1]}}" style="max-width: 128px; max-height: 128px"/>
+                    </td>
+
+                    <td style="width: 25%" data-ng-if="selected.images[1] !== '/modules/core/img/brand/placeholder_icon.png'">
+                        <a class="gallerypic" href="" data-ng-click="removeImage(selected.images[1])">
+                            <img ng-src="{{selected.images[1]}}" style="max-width: 128px; max-height: 128px"/>
+                                <span class="zoom-icon">
+        <i class="glyphicon glyphicon-minus-sign" style="color: red"></i>
+                                </span>
+                        </a>
+                    </td>
+
+                    <td style="width: 25%" data-ng-if="selected.images[2] === '/modules/core/img/brand/placeholder_icon.png'">
+                        <img ng-src="{{selected.images[2]}}" style="max-width: 128px; max-height: 128px"/>
+                    </td>
+
+                    <td style="width: 25%" data-ng-if="selected.images[2] !== '/modules/core/img/brand/placeholder_icon.png'">
+                        <a class="gallerypic" href="" data-ng-click="removeImage(selected.images[2])">
+                            <img ng-src="{{selected.images[2]}}" style="max-width: 128px; max-height: 128px"/>
+                                <span class="zoom-icon">
+        <i class="glyphicon glyphicon-minus-sign" style="color: red"></i>
+                                </span>
+                        </a>
+                    </td>
+
+                    <td style="width: 25%" data-ng-if="selected.images[3] === '/modules/core/img/brand/placeholder_icon.png'">
+                        <img ng-src="{{selected.images[3]}}" style="max-width: 128px; max-height: 128px"/>
+                    </td>
+
+                    <td style="width: 25%" data-ng-if="selected.images[3] !== '/modules/core/img/brand/placeholder_icon.png'">
+                        <a class="gallerypic" href="" data-ng-click="removeImage(selected.images[3])">
+                            <img ng-src="{{selected.images[3]}}" style="max-width: 128px; max-height: 128px"/>
+                                <span class="zoom-icon">
+        <i class="glyphicon glyphicon-minus-sign" style="color: red"></i>
+                                </span>
+                        </a>
                     </td>
                 </tr>
             </table>
+
+        </div>
+
+        <div class="content-section">
+
+
+            <div data-ng-if="images.length === 0">
+                No Search Result
+            </div>
+
+            <div data-ng-if="images.length > 0">
+                <table width="100%">
+                    <tr data-ng-repeat="row in images track by $index">
+                        <td style="width: 33%; padding: 3px 3px 3px 3px" data-ng-repeat="img in row track by $index">
+                            <a class="gallerypic" href="" data-ng-click="addImage(img)">
+                                <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px"/>
+                                <span class="zoom-icon">
+        <i class="glyphicon glyphicon-plus-sign"></i>
+                                </span>
+                            </a>
+                        </td>
+                    </tr>
+                </table>
+            </div>
             <!--<div data-ng-repeat="img in images">-->
-                <!--<img ng-src="{{img}}"/>-->
+            <!--<img ng-src="{{img}}"/>-->
 
             <!--</div>-->
 

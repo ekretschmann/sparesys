@@ -3,7 +3,7 @@
 
     <div class="sld" ng-repeat="slide in slides" ng-hide="!slide.visible" style="max-width: {{size}}px; text-align: center; padding-top: 10px">
 
-        <img ng-src="{{slide.image}}" height="{{size}}px"/>
+        <img ng-src="{{slide.image}}" height="{{size}}px" data-ng-if="slide.image"/>
 
         <div class="font-xl" style="padding-top: 10px" data-ng-if="slide.text">{{slide.text}}</div>
 

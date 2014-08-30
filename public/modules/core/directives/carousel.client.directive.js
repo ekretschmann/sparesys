@@ -11,6 +11,9 @@ angular.module('core').directive('imagecarousel',
 
             },
             link: function(scope, elem, attrs) {
+
+
+
                 scope.currentIndex = 0; // Initially the index is at the first image
 
                 scope.next = function() {

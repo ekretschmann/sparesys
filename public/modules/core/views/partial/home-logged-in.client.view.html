@@ -184,8 +184,8 @@
             </div>
             <div data-ng-hide="!schools.$resolved || schools.length">
 
-                <div>
-                    You are set up as a school administrator but are not managing any schools. Please use this <a
+                <div class="warning">
+                    You are set up as a school administrator but you are not managing any schools. Please use this <a
                         href="/#!/schools/register">link</a>
                     or the Schools Menu to register your schools.
                 </div>
@@ -216,7 +216,7 @@
 
             <div data-ng-if="schools.length === 0 ">
 
-                <div class="content-subsection">You are a teacher without an associated school. Please find your
+                <div class="content-subsection warning">You are a teacher without an associated school. Please find your
                     school in the Teaching menu or by clicking this
                     <a href="/#!/schools/subscribe/teacher">link</a>.
                 </div>

@@ -151,6 +151,12 @@
     text-align: right;
 }
 
+.warning {
+    font-weight: bold;
+    color: #CC3333;
+    /*background-color: red;*/
+}
+
 .top-aligned {
     vertical-align: top;
 }

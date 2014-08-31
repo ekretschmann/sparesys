@@ -22,15 +22,29 @@
     vertical-align: top;
 }
 
+
+.content-subsection {
+    margin-bottom: 8px;
+    padding-bottom: 4px;
+    vertical-align: top;
+}
+
+
 .content-last-section {
     margin-bottom: 10px;
     padding-bottom: 5px;
     vertical-align: top;
 }
 
-.title {
+.content-header .title {
     font-size: x-large;
     font-weight: bold;
+}
+
+.content-section .title {
+    font-size: large;
+    font-weight: bold;
+    padding-bottom: 5px;
 }
 
 .menu-link {

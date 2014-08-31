@@ -1,185 +1,268 @@
-<section data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
+<section data-ng-controller="CoursesController"
+         data-ng-init="findForCurrentUser()">
 
-    <div class="sparesys-header">
-        <div class="sparesys-title" id="home-welcome">Welcome {{authentication.user.firstName}}</div>
+<div class="content-header">
+    <div class="title">Welcome {{authentication.user.firstName}}</div>
+</div>
+
+
+<div class="content-section">
+
+    <div class="title">Learning</div>
+
+    <div data-ng-if="!courses || courses.length===0">
+
+
+        <div class="content-subsection">
+            <table>
+                <tr>
+                    <td class="top-aligned">
+                        <div>
+                            New to Rememberators? I see, that you haven't got any courses, yet.
+                            Whatever you learn on Rememberators is put into courses. Courses help you to
+                            keep the subjects you learn separated so that you can concentrate on one thing
+                            at a time. So how to you get your courses?
+
+                        </div>
+                    </td>
+                    <td>
+                        <img class="size-64"
+                             src="/modules/core/img/brand/teacher-woman-medium.gif">
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+        <div class="content-subsection">
+            <table>
+                <tr>
+                    <td class="top-aligned">
+                        <img class="right-padded size-64"
+                             src="/modules/core/img/brand/superhero-girl-medium.gif">
+                    </td>
+                    <td class="top-aligned">
+                        <div>
+                            Superheros sometimes <a href="#!/courses/create">create their own courses</a>. This is great
+                            when you have
+                            something special that you find interesting. Why not have your very own
+                            course on horse breeds or facts about your favorite football stars? Once you
+                            have created a course you can decide to publish it and share it with others here
+                            on Rememberators - or you can keep it for yourself forever. Use the Courses
+                            Menu to get going!
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+        <div class="content-subsection">
+            <table>
+                <tr>
+                    <td class="top-aligned">
+                        <div class="top-aligned">
+                            Well, well, well. If everybody starts sharing, there will
+                            be plenty of courses to choose from. You can use the Courses Menu to
+                            have a look at what is there already
+                            and <a href="#!/courses/search">search for courses</a> of things you are interested in. Once
+                            you subscribe
+                            to a course it turns into your own course - so you are free to change it in
+                            any way that you like. You can turn it into exactly what you want it be!
+                        </div>
+                    </td>
+                    <td>
+                        <img class="size-64"
+                             src="/modules/core/img/brand/philosopher-medium.gif">
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+        <div class="content-subsection">
+            <table>
+                <tr>
+                    <td class="top-aligned">
+                        <img class="right-padded size-64"
+                             src="/modules/core/img/brand/teacher-man-medium.gif">
+                    </td>
+                    <td class="top-aligned">
+                        <div>
+                            Rememberators are also great for your teachers. They let them put courses together for
+                            you and help you learn your facts. This way, they can spot what you are working on
+                            and give you all the support that you need to succeed. If your school works with the
+                            Rememberators, you can use the courses menu to <a
+                                href="#!/schools/subscribe/student">find</a>
+                            your school and enrol. Your teachers will then be able to assign your coursework.
+                        </div>
+                    </td>
+
+                </tr>
+            </table>
+        </div>
+
+
     </div>
 
-    <div class="sparesys-header" data-ng-controller="SchoolsController" data-ng-init="findForCurrentUser()"
-         data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
+    <div data-ng-if="courses.length > 0">
 
-
-        <table class="table-striped" style="width: 100%" data-ng-if="schools.length > 0">
+        <table class="table-striped" style="width: 100%; margin-top: 10px">
             <thead>
             <tr>
-                <th class="sparesys-view-courses-description-column" colspan="3" style="padding-bottom: 10px">You are
-                    managing the following Schools
-                </th>
+                <th class="sparesys-view-courses-course-column" colspan="3">My Courses</th>
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="school in schools | filter:searchText">
+            <tr data-ng-repeat="course in courses">
                 <td class="sparesys-view-courses-name-cell">
-                    <a href="#!/schools/{{school._id}}/edit">{{school.name}}</a></td>
-                <td class="sparesys-view-courses-course-column">{{school.city}}</td>
-                <td class="sparesys-view-courses-course-column" style="width: 100%">{{school.country}}</td>
+                    {{course.name}}
+                </td>
 
+                <td>
+                    <a data-ng-href="#!/practice/{{course._id}}">practice</a>
+                </td>
+
+                <td class="sparesys-view-object-content-cell" style="width: 100%; padding-left: 10px">
+                    <a data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
+                </td>
             </tr>
             </tbody>
         </table>
 
-        <div data-ng-hide="!schools.$resolved || schools.length">
-            <div style="font-weight: bold; ">Schools</div>
 
-            <div style="padding-top: 5px">
-            You are not managing any schools, yet. Please use this <a href="/#!/schools/register">link</a>
-            or the menu to register your schools.
-            </div>
+    </div>
+</div>
+
+
+<div class="content-section">
+    <div class="title">
+        Teaching
+    </div>
+
+
+    <!--<div data-ng-if="(!courses || courses.length===0) && (authentication.user.roles.indexOf('teacher') === -1 || authentication.user.roles.indexOf('headmaster') === -1)">-->
+    <!--<div class="content-subsection">-->
+
+
+    <!---->
+    <!--<span data-ng-if="authentication.user.roles.indexOf('teacher') === -1">-->
+    <!--You are not set up as a teacher. If your headmaster has enrolled with Rememberators, use the-->
+    <!--<a href="#!/settings/profile">settings</a> in your {{user.displayName}} menu to register as a teacher.-->
+    <!--</span>-->
+
+    <!--</div>-->
+
+
+    <!--</div>-->
+
+    <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
+
+        <div class="content-subsection">
+            If you are planning to user Rememberators for your school, go to your
+            <a href="#!/settings/profile">settings</a> in the {{user.displayName}} menu and register as a
+            headmaster to manage teachers and classes.
         </div>
+
 
     </div>
 
-    <div class="sparesys-header" data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+    <div data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
 
+        <div class="content-subsection"
+             data-ng-controller="SchoolsController"
+             data-ng-init="findForCurrentUser()"
+             data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
 
-            <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
-
-
-                <div data-ng-if="schools.length === 0 ">
-
-                    <div style="font-weight: bold">Teaching</div>
-                    <div style="padding-top:5px">You are a teacher without an associated school. Please subscribe to
-                        your school by clicking this
-                        <a href="/#!/schools/subscribe/teacher">link</a> or use the teaching menu.
-                    </div>
+            <div data-ng-if="schools.length > 0">
+                <div>
+                    You are managing the following Schools:
                 </div>
 
-                <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length === 0 ">
-                    <div style="font-weight: bold">Teaching</div>
-                    <div style="padding-top:5px"> You are not teaching any classes, yet. Ask your headmaster to assign you to
-                    your classes.</div>
+                <table class="table-striped">
+                    <tr data-ng-repeat="school in schools | filter:searchText">
+                        <td>
+                            <a href="#!/schools/{{school._id}}/edit">{{school.name}}</a></td>
+                        <td>{{school.city}}</td>
+                        <td>{{school.country}}</td>
 
+                    </tr>
+                </table>
+            </div>
+            <div data-ng-hide="!schools.$resolved || schools.length">
+
+                <div>
+                    You are set up as a headmaster but are not managing any schools. Please use this <a
+                        href="/#!/schools/register">link</a>
+                    or the menu to register your schools.
+                </div>
+            </div>
+
+        </div>
+
+
+    </div>
+
+
+    <div data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
+
+        <div class="content-subsection">
+            If you are a teacher and your school is set up with Rememberators, use the
+            <a href="#!/settings/profile">settings</a> in the {{user.displayName}} menu
+            to register for the role of a teacher. You will get a Teaching menu with all the details
+            to manage your students.
+        </div>
+
+
+    </div>
+
+    <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+
+        <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
+
+
+            <div data-ng-if="schools.length === 0 ">
+
+                <div class="content-subsection">You are a teacher without an associated school. Please find your
+                    school in the Teaching menu or by clicking this
+                    <a href="/#!/schools/subscribe/teacher">link</a>.
+                </div>
+            </div>
+
+            <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length === 0 ">
+                <div class="content-subsection"> You are not teaching any classes, yet. Ask your headmaster to assign
+                    you
+                    to your classes.
+                </div>
+            </div>
+
+            <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length > 0">
+
+                <div>
+                    You are
+                    teaching the
+                    following Classes:
                 </div>
 
-                <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length > 0">
 
-                    <div data-ng-controller="SchoolclassesController" data-ng-init="findForTeacher(authentication.user._id)">
-                        <table class="table-striped" style="width: 100%" data-ng-if="schoolclasses.length > 0">
-                            <thead>
-                            <tr>
-                                <th class="sparesys-view-courses-description-column" style="padding-bottom: 10px">You are
-                                    teaching the
-                                    following Classes
-                                </th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr data-ng-repeat="schoolclass in schoolclasses">
-                                <td class="sparesys-view-courses-name-cell">
-                                    <a href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a></td>
-
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div data-ng-controller="SchoolclassesController"
+                     data-ng-init="findForTeacher(authentication.user._id)">
+                    <table class="table-striped">
+                        <tbody>
+                        <tr data-ng-repeat="schoolclass in schoolclasses">
+                            <td>
+                                <a href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
                 </div>
-
-
-
-
+            </div>
 
 
         </div>
-
 
     </div>
 
-    <div class="sparesys-header">
-
-        <!--<div class="sparesys-subtitle" data-ng-if="!courses || courses.length===0">-->
-        <!--You have not subscribed to any courses-->
-        <!--</div>-->
-
-        <div data-ng-if="!courses || courses.length===0">
-            <div style="font-weight: bold" >Learning</div>
-
-            <div style="padding-top:5px">
-                You have not subscribed to any courses, yet.
-            </div>
-
-            <div style="padding-top: 10px">
-                You can start with creating your own private Rememberators course using this
-
-                <a href="#!/courses/create">link</a> or the Courses menu.
-            </div>
-
-            <div style="padding-top: 10px">
-                You can also <a href="#!/courses/search">search for a published course</a> and download your local copy.
-            </div>
-
-            <div style="padding-top: 10px">
-                If you are a student and your school has registered with Rememberators, you can
-                <a href="#!/schools/subscribe/student">search for your school</a> and subscribe to it. Teachers
-                will then assign you courses.
-            </div>
-
-        </div>
-
-        <div data-ng-if="courses.length > 0">
-
-            <table class="table-striped" style="width: 100%; margin-top: 10px">
-                <thead>
-                <tr>
-                    <th class="sparesys-view-courses-course-column" colspan="3">My Courses</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="course in courses">
-                    <td class="sparesys-view-courses-name-cell">
-                        {{course.name}}
-                    </td>
-
-                    <td >
-                        <a data-ng-href="#!/practice/{{course._id}}">practice</a>
-                    </td>
-
-                    <td class="sparesys-view-object-content-cell" style="width: 100%; padding-left: 10px">
-                        <a data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-
-        </div>
-    </div>
-
-
-    <div class="sparesys-header"
-         data-ng-if="(!courses || courses.length===0) && (authentication.user.roles.indexOf('teacher') === -1 || authentication.user.roles.indexOf('headmaster') === -1)">
-        <div style="font-weight: bold"
-             data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') === -1">
-            Headmasters and Teachers
-        </div>
-        <div style="font-weight: bold"
-             data-ng-if="authentication.user.roles.indexOf('teacher') !== -1 && authentication.user.roles.indexOf('headmaster') === -1">
-            Headmasters
-        </div>
-        <div style="font-weight: bold"
-             data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') !== -1">
-            Teachers
-        </div>
-        <div style="padding-top: 10px" data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
-            If you are planning to teach others, use the
-            <a href="#!/settings/profile">settings</a> in your {{user.displayName}} menu to register as a teacher.
-        </div>
-
-        <div style="padding-top: 10px" data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
-            If you are planning to run a school of teachers and students, use the
-            <a href="#!/settings/profile">settings</a> in your {{user.displayName}} menu to register as a
-            headmaster.
-        </div>
-    </div>
-
+</div>
 
 </section>
 

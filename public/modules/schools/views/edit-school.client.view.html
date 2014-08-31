@@ -53,8 +53,12 @@
 
 
 <div data-ng-if="school.students.length === 0">
-    <div class="content-section">
-        <table>
+  <div class="content-section">
+      <div class="title">
+          Students
+      </div>
+
+      <table>
             <tr>
                 <td class="top-aligned">
                     <div>
@@ -79,8 +83,8 @@
 
     <div class="content-section">
 
-        <div>
-            Registered Students
+        <div class="title">
+            Students
         </div>
         <table class="table-striped" style="width: 100%;">
 
@@ -94,7 +98,6 @@
                     {{student.displayName}}
                 </td>
             </tr>
-            </tbody>
         </table>
     </div>
 </div>
@@ -102,6 +105,11 @@
 <div data-ng-if="school.teachers.length === 0">
 
     <div class="content-section">
+
+        <div class="title">
+            Teachers
+        </div>
+
         <table>
             <tr>
                 <td class="right-padded top-aligned">
@@ -127,8 +135,8 @@
 
 <div data-ng-if="school.teachers.length > 0">
     <div class="content-section">
-        <div>
-            Registered Teachers
+        <div class="title">
+            Teachers
         </div>
         <table class="table-striped">
 
@@ -148,6 +156,11 @@
 
 <div data-ng-show="school.schoolclasses.length === 0">
     <div class="content-section">
+
+        <div class="title">
+            Classes
+        </div>
+
         <table>
             <tr>
                 <td class="top-aligned">
@@ -171,11 +184,16 @@
 <div data-ng-show="school.schoolclasses.length > 0">
 
     <div class="content-section">
+
+        <div class="title">
+            Classes
+        </div>
+
         <table class="table-striped" style="width: 100%;">
 
             <thead>
             <tr>
-                <th class="sparesys-view-courses-course-column">Classes</th>
+                <th class="sparesys-view-courses-course-column">Class Name</th>
                 <th class="sparesys-view-courses-course-column">Teachers</th>
                 <th class="sparesys-view-courses-course-column">Students</th>
             </tr>
@@ -185,15 +203,14 @@
                 data-ng-controller="SchoolclassesController"
                 data-ng-init="findById(schoolclass)">
 
-
-                <td>
+                <td class="expands">
                     <a data-ng-href="#!/schoolclasses/{{schoolclass._id}}/edit">{{schoolclass.name}}</a>
                 </td>
 
-                <td>
+                <td class="right-padded">
                     {{schoolclass.teachers.length}}
                 </td>
-                <td class="sparesys-view-object-content-cell" style="width: 100%">
+                <td>
                     {{schoolclass.students.length}}
                 </td>
             </tr>

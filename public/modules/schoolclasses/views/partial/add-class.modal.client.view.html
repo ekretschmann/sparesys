@@ -3,21 +3,26 @@
     <div>
 
         <div class="modal-body">
-            <div class="sparesys-header">
-                <div class="sparesys-title">
-                    Create Class for School: {{school.name}}
+            <div class="content-header">
+                <div class="title center-aligned">
+                    Create Classes for School
+                </div>
+                <div class="title  center-aligned">
+                    {{school.name}}
                 </div>
             </div>
 
             <form class="form-horizontal" novalidate>
                 <fieldset>
-                    <div class="sparesys-header">
-                        <table class="sparesys-view-object-table">
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Name</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="name"
-                                           id="cardquestion" class="form-control focus"
+                    <div class="content-header">
+                        <table>
+                            <tr>
+                                <td class="right-padded">Class</td>
+                                <td class="expands">
+                                    <input type="text"
+                                           data-ng-model="name"
+                                           id="cardquestion"
+                                           class="form-control focus"
                                            placeholder="Name"
                                            data-ng-init="setFocus()"
                                            required></td>
@@ -29,10 +34,7 @@
                     <div>
                         <button class="btn btn-primary sparesys-button"
                                 type="submit"
-                                ng-click="addClass()"
-                                >
-                            Add
-                        </button>
+                                ng-click="addClass()">Add</button>
 
                         <div class="pull-right">
                             <button class="btn btn-primary sparesys-button" ng-click="cancel()">Done</button>

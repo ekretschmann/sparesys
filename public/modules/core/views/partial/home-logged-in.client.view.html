@@ -16,7 +16,7 @@
         <div class="content-subsection">
             <table>
                 <tr>
-                    <td class="top-aligned">
+                    <td class="top-aligned right-padded">
                         <div>
                             New to Rememberators? I see, that you haven't got any courses, yet.
                             Whatever you learn on Rememberators is put into courses. Courses help you to
@@ -36,8 +36,8 @@
         <div class="content-subsection">
             <table>
                 <tr>
-                    <td class="top-aligned">
-                        <img class="right-padded size-64"
+                    <td class="top-aligned right-padded">
+                        <img class="size-64"
                              src="/modules/core/img/brand/superhero-girl-medium.gif">
                     </td>
                     <td class="top-aligned">
@@ -59,8 +59,8 @@
         <div class="content-subsection">
             <table>
                 <tr>
-                    <td class="top-aligned">
-                        <div class="top-aligned">
+                    <td class="top-aligned right-padded">
+                        <div>
                             Well, well, well. If everybody starts sharing, there will
                             be plenty of courses to choose from. You can use the Courses Menu to
                             have a look at what is there already
@@ -82,8 +82,8 @@
         <div class="content-subsection">
             <table>
                 <tr>
-                    <td class="top-aligned">
-                        <img class="right-padded size-64"
+                    <td class="top-aligned right-padded">
+                        <img class="size-64"
                              src="/modules/core/img/brand/teacher-man-medium.gif">
                     </td>
                     <td class="top-aligned">
@@ -161,17 +161,25 @@
 
             <div data-ng-if="schools.length > 0">
                 <div>
-                    You are managing the following Schools:
+                    You are the administrator of the following School<span data-ng-if="schools.length>1">s</span>:
                 </div>
 
                 <table class="table-striped">
+                    <thead>
+                    <th>School</th>
+                    <th>City</th>
+                    <th>Country</th>
+                    </thead>
+                    <tbody>
                     <tr data-ng-repeat="school in schools | filter:searchText">
-                        <td>
+
+                        <td class="expands right-padded">
                             <a href="#!/schools/{{school._id}}/edit">{{school.name}}</a></td>
-                        <td>{{school.city}}</td>
-                        <td>{{school.country}}</td>
+                        <td class="right-padded nobreak-label">{{school.city}}</td>
+                        <td class="nobreak-label">{{school.country}}</td>
 
                     </tr>
+                    </tbody>
                 </table>
             </div>
             <div data-ng-hide="!schools.$resolved || schools.length">

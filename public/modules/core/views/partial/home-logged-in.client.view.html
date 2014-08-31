@@ -140,27 +140,13 @@
     </div>
 
 
-    <!--<div data-ng-if="(!courses || courses.length===0) && (authentication.user.roles.indexOf('teacher') === -1 || authentication.user.roles.indexOf('headmaster') === -1)">-->
-    <!--<div class="content-subsection">-->
-
-
-    <!---->
-    <!--<span data-ng-if="authentication.user.roles.indexOf('teacher') === -1">-->
-    <!--You are not set up as a teacher. If your headmaster has enrolled with Rememberators, use the-->
-    <!--<a href="#!/settings/profile">settings</a> in your {{user.displayName}} menu to register as a teacher.-->
-    <!--</span>-->
-
-    <!--</div>-->
-
-
-    <!--</div>-->
 
     <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
 
         <div class="content-subsection">
             If you are planning to user Rememberators for your school, go to your
             <a href="#!/settings/profile">settings</a> in the {{user.displayName}} menu and register as a
-            headmaster to manage teachers and classes.
+            school administrator to manage teachers and classes.
         </div>
 
 
@@ -191,9 +177,9 @@
             <div data-ng-hide="!schools.$resolved || schools.length">
 
                 <div>
-                    You are set up as a headmaster but are not managing any schools. Please use this <a
+                    You are set up as a school administrator but are not managing any schools. Please use this <a
                         href="/#!/schools/register">link</a>
-                    or the menu to register your schools.
+                    or the Schools Menu to register your schools.
                 </div>
             </div>
 
@@ -229,7 +215,8 @@
             </div>
 
             <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length === 0 ">
-                <div class="content-subsection"> You are not teaching any classes, yet. Ask your headmaster to assign
+                <div class="content-subsection"> You are not teaching any classes, yet. Ask your school
+                    administrator to assign
                     you
                     to your classes.
                 </div>

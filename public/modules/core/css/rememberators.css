@@ -49,9 +49,10 @@
 
 .menu-link {
     padding-left: 20px;
-    color: #00008b;
+    color: #1858B2;
     font-family: 'Grinched';
     font-size: 14pt;
+    text-decoration: none;
 }
 
 /*From bootstrap*/
@@ -440,7 +441,8 @@
     padding: 30px;
     margin-bottom: 30px;
     color: inherit;
-    background-color: #26b3f7;
+    /*background-color: #26b3f7;*/
+    background-color: #BFDAFF;
     border-radius: 12px;
     text-align: center;
     box-shadow: 5px 5px 5px #CCC;
@@ -472,4 +474,9 @@ a.gallerypic span.zoom-icon{
 
 a.gallerypic:hover span.zoom-icon{
     visibility:visible;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+    background-color: #FFDEA0;
 }

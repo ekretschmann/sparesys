@@ -8,6 +8,20 @@ angular.module('core').service('PredictiveSchedulerService', [
                 this.cards = cards;
                 this.analysis = {};
             },
+            getCourseStart: function() {
+                if(!this.cards) {
+                    return Date.now();
+                }
+                var min = Date.now();
+                this.cards.forEach(function(card) {
+                    if (card.history && card.history.length >0) {
+                        if (card.history[0].when < min) {
+                            min = card.history[0].when;
+                        }
+                    }
+                }, this);
+                return new Date(min);
+            },
 
             getPredictedCourseRetention: function(time) {
                 if (!this.cards) {

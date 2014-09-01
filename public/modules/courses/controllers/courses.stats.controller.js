@@ -3,12 +3,8 @@
 
 // Courses controller
 angular.module('courses').controller('StatsController',
-    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService',
-        function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService) {
-
-
-            console.log('here');
-            console.log(google);
+    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService', 'PredictiveSchedulerService',
+        function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService, SchedulerService) {
 
 
             $scope.authentication = Authentication;
@@ -20,8 +16,46 @@ angular.module('courses').controller('StatsController',
             };
 
 
-            $scope.drawChart = function () {
-                console.log('trying');
+            $scope.drawCharts = function () {
+                $scope.drawCalendarChart();
+//                $scope.drawScoreChart();
+            };
+
+            $scope.drawScoreChart = function () {
+
+                var res = CoursesService.serverLoadCards();
+                res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
+                    $scope.cards = cards;
+
+                    SchedulerService.init(cards);
+
+                    console.log('starts');
+                    console.log(SchedulerService.getCourseStart());
+                    console.log('score');
+                    console.log(SchedulerService.getPredictedCourseRetention(Date.now()) * 100);
+
+
+
+
+                    var data = google.visualization.arrayToDataTable([
+                        ['Year', 'Sales', 'Expenses'],
+                        ['2004', 1000, 400],
+                        ['2005', 1170, 460],
+                        ['2006', 660, 1120],
+                        ['2007', 1030, 540]
+                    ]);
+
+                    var options = {
+                        title: 'Company Performance'
+                    };
+
+                    var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+
+                    chart.draw(data, options);
+                });
+            };
+
+            $scope.drawCalendarChart = function () {
 
                 var res = CoursesService.serverLoadCards();
                 res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
@@ -38,9 +72,6 @@ angular.module('courses').controller('StatsController',
                         for (var j = 0; j < c.history.length; j++) {
                             var h = c.history[j];
                             var d = new Date(h.when);
-//                            console.log(d.getFullYear());
-//                            console.log(d.getMonth());
-//                            console.log(d.getDate());
                             var day = new Date(d.getFullYear(), d.getMonth(), d.getDate());
                             if (data[day]) {
                                 data[day]++;
@@ -56,7 +87,6 @@ angular.module('courses').controller('StatsController',
                         dates.push([new Date(Date.parse(keys[i])), data[keys[i]]]);
                     }
 
-                    console.log(dates);
                     dataTable.addRows(dates);
                     var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
 
@@ -71,6 +101,6 @@ angular.module('courses').controller('StatsController',
 
             };
 
-            google.setOnLoadCallback($scope.drawChart);
+            google.setOnLoadCallback($scope.drawCharts);
         }
     ]);

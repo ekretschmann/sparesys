@@ -7,7 +7,7 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
 
         $scope.setFocus = function () {
             $timeout(function(){
-                angular.element('.addcardfocus').trigger('focus');
+                angular.element('.focus').trigger('focus');
             },100);
         };
 
@@ -44,7 +44,7 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
             });
             this.question = '';
             this.answer = '';
-            angular.element('.addcardfocus').trigger('focus');
+            angular.element('.focus').trigger('focus');
         };
 	}
 ]);

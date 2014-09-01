@@ -215,7 +215,7 @@ exports.hasAuthorization = function (req, res, next) {
 };
 
 
-var copyCards = function (cardIds, userId, newPackId) {
+var copyCards = function (cardIds, userId, newPackId, isSupervised) {
     var idMap = {};
     var cardsToCopy = cardIds.length;
     var cardsCopied = 0;
@@ -238,8 +238,23 @@ var copyCards = function (cardIds, userId, newPackId) {
             copy.user = userId;
             copy.question = original.question;
             copy.answer = original.answer;
+            copy.due = original.due;
+            copy.after = original.after;
+            copy.validation = original.validation;
+            copy.images = original.images;
+            copy.bothways = original.bothways;
+            copy.alternatives = original.alternatives;
+            copy.sound = original.sound;
             copy.packs = [newPackId];
             copy.save();
+
+            if (isSupervised) {
+                if (!original.slaves) {
+                    original.slaves = [];
+                }
+                original.slaves.push(copy._id);
+                original.save();
+            }
 
             idMap[original._id] = copy._id;
 
@@ -256,7 +271,7 @@ var copyCards = function (cardIds, userId, newPackId) {
     return deferred.promise;
 };
 
-var copyPacks = function (packIds, userId, newCourseId) {
+var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
     var idMap = {};
     var packsToCopy = packIds.length;
     var packsCopied = 0;
@@ -280,7 +295,7 @@ var copyPacks = function (packIds, userId, newCourseId) {
             copy.name = original.name;
             copy.course = newCourseId;
             idMap[original._id] = copy._id;
-            var cardPromise = copyCards(original.cards, userId, copy._id);
+            var cardPromise = copyCards(original.cards, userId, copy._id, isSupervised);
             cardPromise.then(function (cards) {
                 copy.cards = cards;
                 copy.save(function () {
@@ -332,7 +347,7 @@ exports.copyCourse = function (req, res, next, id) {
         copy.master = original._id;
         copy.supervised = isSupervised;
 
-        var packPromise = copyPacks(original.packs, userId, copy._id);
+        var packPromise = copyPacks(original.packs, userId, copy._id, isSupervised);
 
         packPromise.then(function (packs) {
             copy.packs = packs;

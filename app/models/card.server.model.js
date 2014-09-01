@@ -77,6 +77,10 @@ var CardSchema = new Schema({
     },
     after: {
         type: Date
+    },
+    slaves: {
+        type: [Schema.Types.ObjectId],
+        default: []
     }
 });
 

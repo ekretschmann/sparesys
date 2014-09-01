@@ -1,0 +1,83 @@
+<section data-ng-controller="PacksController"
+         data-ng-init="findOne()">
+
+
+
+
+    <div class="content-header">
+
+
+
+        <div class="title">{{pack.name}}</div>
+
+
+        <table>
+            <tr>
+                <td>Course</td>
+                <td class="left-padded">:</td>
+                <td class="left-padded"><a data-ng-href="#!/courses/{{pack.course}}/view">{{pack.courseName}}</a></td>
+            </tr>
+                   </table>
+
+
+    </div>
+
+
+    <div data-ng-hide="pack.cards.length > 0">
+        <div class="content-section">
+            There are no cards in this pack!
+        </div>
+    </div>
+
+    <div data-ng-show="pack.cards.length > 0">
+
+        <div class="content-section ">
+            <div class="title">
+                Cards in this pack
+            </div>
+            <table class="table-striped">
+                <thead>
+                <tr>
+                    <th class="right-padded" style="width:50%">Front</th>
+                    <th class="right-padded" style="width:50%">Back</th>
+                </tr>
+                </thead>
+                <tbody data-ng-model="pack.cards">
+                <tr data-ng-repeat="cardId in pack.cards"
+                    data-ng-controller="CardsController"
+                    data-ng-init="findById(cardId)">
+
+
+                    <td class="right-padded">
+                        {{card.question}}
+                    </td>
+
+                    <td class="expands right-padded">
+                        {{card.answer}}
+                    </td>
+
+
+                </tr>
+
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+
+
+
+    <div class="content-last-section">
+        <div>
+            <small>
+                <em class="text-muted">Created on {{pack.created | date:'medium'}}</em>
+            </small>
+        </div>
+        <div data-ng-if="pack.updated">
+            <small>
+                <em class="text-muted">Updated on {{pack.updated | date:'medium'}}</em>
+            </small>
+        </div>
+
+    </div>
+</section>

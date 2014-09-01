@@ -10,7 +10,7 @@ angular.module('courses').controller('UploadController',
             $scope.state = '';
             $scope.options = {};
 
-            $scope.instructions = '++Pack Name 1\nQuestion 1\nAnswewer 1\nQuestion 2\nAnswewer 2\n[more questions and answers]\n++Pack Name 2\netc.';
+            $scope.text = '++Pack Name 1\nQuestion 1\nAnswer 1\nQuestion 2\nAnswer 2\n[more questions and answers]\n++Pack Name 2\netc.';
 
             $scope.uploadQA = function () {
                 var course = {};

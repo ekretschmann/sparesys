@@ -1,6 +1,4 @@
-CN:Advanced English Words
-CD:To use in essays
-P:Pack 1
+++Pack Pack 1
 consider
 deem to be
 minute	
@@ -99,7 +97,7 @@ entertain
 provide entertainment for
 contract	
 a binding agreement between two or more persons that is enforceable by law
-P:Pack 2
+++Pack Pack 2
 earnest
 characterized by a firm and humorless belief in the validity of your opinions
 yield	
@@ -198,7 +196,7 @@ inclined
 at an angle to the horizontal or vertical position
 attribute	
 an abstraction belonging to or characteristic of an entity
-P:Pack 3
+++Pack Pack 3
 exert
 make a great effort at a mental or physical task
 oppress	
@@ -297,7 +295,7 @@ suspended
 (of undissolved particles in a fluid) supported or kept from sinking or falling by buoyancy and without apparent attachment
 conspicuous	
 obvious to the eye or mind
-P:Pack 4
+++Pack Pack 4
 retort
 a quick reply to a question or remark (especially a witty or critical one)
 jet	
@@ -396,7 +394,7 @@ illustrious
 widely known and esteemed
 device	
 an instrumentality invented for a particular purpose
-P:Pack 5
+++Pack Pack 5
 pomp
 cheap or pretentious or vain display
 entreat	
@@ -495,7 +493,7 @@ foster
 promote the growth of
 admonish	
 take to task
-P:Pack 6
+++Pack Pack 6
 repeal
 cancel officially
 retiring	
@@ -594,7 +592,7 @@ perpetrate
 perform an act, usually with a negative connotation
 decorum	
 propriety in manners and conduct
-P:Pack 7
+++Pack Pack 7
 luxuriant
 produced or growing in extreme abundance
 cant	
@@ -693,7 +691,7 @@ deduce
 reason by deduction; establish by deduction
 halting	
 fragmentary or halting from emotional strain
-P:Pack 8
+++Pack Pack 8
 ignominy
 a state of dishonor
 ideology	
@@ -792,7 +790,7 @@ estrange
 arouse hostility or indifference in where there had formerly been love, affection, or friendliness
 spat	
 a quarrel about petty points
-P:Pack 9
+++Pack Pack 9
 warble
 sing or play with trills, alternating with the half note above or below
 mien	
@@ -891,7 +889,7 @@ auspices
 kindly endorsement and guidance
 sonorous	
 full and loud and deep
-P:Pack 10
+++Pack Pack 10
 exploitation
 an act that exploits or victimizes someone (treats them unfairly)
 bane	
@@ -990,7 +988,7 @@ brawn
 possessing muscular strength
 burnish	
 polish and make shiny
-P:Pack 11
+++Pack Pack 11
 palpitate
 beat rapidly
 promiscuous	
@@ -1089,7 +1087,7 @@ adulterate
 corrupt, debase, or make impure by adding a foreign or inferior substance; often by replacing valuable ingredients with inferior ones
 beleaguer	
 annoy persistently
-P:Pack 12
+++Pack Pack 12
 remission
 an abatement in intensity or degree (as in the manifestations of a disease)
 exorbitant	
@@ -1188,7 +1186,7 @@ granary
 a storehouse for threshed grain or animal feed
 whet	
 make keen or more acute
-P:Pack 13
+++Pack Pack 13
 imposture
 pretending to be another person
 diadem	
@@ -1287,7 +1285,7 @@ dyspeptic
 irritable as if suffering from indigestion
 prude	
 a person excessively concerned about propriety and decorum
-P:Pack 14
+++Pack Pack 14
 luminary
 a celebrity who is an inspiration to others
 amenable	
@@ -1386,7 +1384,7 @@ aphorism
 a short pithy instructive saying
 redoubtable	
 worthy of respect or honor
-P:Pack 15
+++Pack Pack 15
 corpulent
 excessively fat
 benighted	
@@ -1485,7 +1483,7 @@ emblazon
 decorate with heraldic arms
 augury	
 an event that is experienced as indicating important things to come
-P:Pack 16
+++Pack Pack 16
 abut
 lie adjacent to another or share a boundary
 banal	
@@ -1584,7 +1582,7 @@ aquiline
 curved down like an eagle's beak
 bilious	
 irritable as if suffering from indigestion
-P:Pack 17
+++Pack Pack 17
 vilify	
 spread negative information about
 nuance	
@@ -1683,7 +1681,7 @@ miserly
 (used of persons or behavior) characterized by or indicative of lack of generosity
 vapid	
 lacking significance or liveliness or spirit or zest
-P:Pack 18
+++Pack Pack 18
 mercurial	
 liable to sudden unpredictable change
 perspicuous	
@@ -1782,7 +1780,7 @@ aspersion
 a disparaging remark
 abysmal	
 resembling an abyss in depth; so deep as to be unmeasurable
-P:Pack 19
+++Pack Pack 19
 poignancy
 a quality that arouses emotions (especially pity or sorrow)
 stilted	
@@ -1881,7 +1879,7 @@ retentive
 good at remembering
 unconscionable	
 greatly exceeding bounds of reason or moderation
-P:Pack 20
+++Pack Pack 20
 badinage	
 frivolous banter
 insensate	

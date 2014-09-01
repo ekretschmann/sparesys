@@ -2,21 +2,8 @@
     <div class="modal-body">
         <div class="content-header">
 
-            <div data-ng-if="school.teachers.indexOf(authentication.user._id) !== -1">
-                <div class="title center-aligned"
-                     data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
-                    Un-Subscribe as Teacher from School: {{school.name}}
-                </div>
 
-                <div class="title center-aligned"
-                     data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
-                    This action will remove you from all the classes you are in
-                    <div class="font-l" style="color: #AA0000">Are You Really Sure?</div>
-                </div>
-            </div>
-
-
-            <div data-ng-if="school.teachers.indexOf(authentication.user._id) === -1">
+            <div>
                 <div class="title center-aligned">
                     Subscribe as Teacher to School
                 </div>

@@ -87,7 +87,10 @@
         </div>
         <table class="table-striped" style="width: 100%;">
 
-
+            <tr>
+                <th>Name</th>
+                <th class="nobreak-label">Class</th>
+            </tr>
             <tr data-ng-repeat="student in school.students"
                 data-ng-controller="UsersController"
                 data-ng-init="findStudent(student)">
@@ -96,6 +99,8 @@
                 <td class="sparesys-view-object-content-cell">
                     {{student.displayName}}
                 </td>
+
+
             </tr>
         </table>
     </div>

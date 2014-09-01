@@ -1,0 +1,36 @@
+<script type="text/ng-template" id="unsubscribeStudent.html">
+    <div class="modal-body">
+        <div class="content-header">
+
+            <div>
+                <div class="title center-aligned">
+                    Un-Subscribe as Student from School
+                </div>
+                <div class="title center-aligned"
+                     data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
+                    {{school.name}}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="content-header">
+
+
+            <div class="title center-aligned">
+                This action will remove you from all the classes you are in
+
+            </div>
+
+            <div class="title center-aligned warning font-l">Are You Really Sure?</div>
+        </div>
+
+
+
+    <div class="title center-aligned">
+        <button class="btn btn-primary sparesys-button" ng-click="ok()">OK</button>
+        <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+    </div>
+
+    </div>
+</script>

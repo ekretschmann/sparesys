@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
     Card = mongoose.model('Card'),
+    Pack = mongoose.model('Pack'),
     _ = require('lodash');
 
 /**
@@ -117,6 +118,49 @@ exports.update = function (req, res) {
 exports.delete = function (req, res) {
     var card = req.card;
 
+    function deleteCardFromItsPack(card) {
+        card.packs.forEach(function (pid) {
+            var findPack = Pack.find({'_id': pid}).exec(function (err) {
+                if (err) {
+                    console.log('Error: ' + err);
+                }
+            });
+
+            findPack.then(function (findPackResult) {
+                for (var i = 0; i < findPackResult[0].cards.length; i++) {
+                    if (findPackResult[0].cards[i].toString() === card._id.toString()) {
+                        findPackResult[0].cards.splice(i, 1);
+                    }
+
+
+                }
+//                console.log('pack is now: ' + findPackResult[0].cards);
+                findPackResult[0].save();
+            });
+        });
+    }
+
+    card.slaves.forEach(function (cid) {
+
+        var findCard = Card.find({'_id': cid}).exec(function (err) {
+            if (err) {
+                console.log('Error: ' + err);
+            }
+        });
+
+        findCard.then(function (findCardResult) {
+
+            deleteCardFromItsPack(findCardResult[0]);
+
+//            console.log('removing slave: ' + findCardResult[0]._id);
+            findCardResult.remove();
+        });
+    });
+
+
+    deleteCardFromItsPack(card);
+
+//    console.log('removing original: ' + card._id);
     card.remove(function (err) {
         if (err) {
             return res.send(400, {

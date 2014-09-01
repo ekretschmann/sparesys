@@ -25,6 +25,15 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                 }
                 return true;
             },
+            removeCard: function (card, callback) {
+
+                if (card) {
+                    card.$remove(function() {
+                        callback();
+                    });
+                }
+                return true;
+            },
             removePack: function (pack, callback) {
 
                 var self = this;

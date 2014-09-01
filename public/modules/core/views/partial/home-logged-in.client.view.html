@@ -141,7 +141,7 @@
 
 
 
-    <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
+    <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1 && authentication.user.schoolclasses.length === 0">
 
         <div class="content-subsection">
             If you are planning to user Rememberators for your school, go to your
@@ -214,7 +214,7 @@
         <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
 
 
-            <div data-ng-if="schools.length === 0 ">
+            <div data-ng-if="schools.length === 0">
 
                 <div class="content-subsection warning">You are a teacher without an associated school. Please find your
                     school in the Teaching menu or by clicking this
@@ -233,22 +233,38 @@
             <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length > 0">
 
                 <div>
-                    You are
-                    teaching the
-                    following Classes:
+                    You are teaching the following Classes
                 </div>
 
 
                 <div data-ng-controller="SchoolclassesController"
                      data-ng-init="findForTeacher(authentication.user._id)">
-                    <table class="table-striped">
+                    <table class="table-striped" style="margin-top: 15px">
+                        <thead>
+                        <tr>
+                            <th class="right-padded">Class</th>
+                            <th class="expands">Courses</th>
+                        </tr>
+                        </thead>
                         <tbody>
                         <tr data-ng-repeat="schoolclass in schoolclasses">
+                            <td class="right-padded nobreak-label">
+                                <a href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a>
+
+                            </td>
+
                             <td>
-                                <a href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a></td>
+                                <div data-ng-if="schoolclass.courses.length === 0">
+
+                                    None. Click to manage courses for this class.
+                                </div>
+
+
+                            </td>
                         </tr>
                         </tbody>
                     </table>
+
                 </div>
             </div>
 

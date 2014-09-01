@@ -51,14 +51,13 @@
 </div>
 
 
-
 <div data-ng-if="school.students.length === 0">
-  <div class="content-section">
-      <div class="title">
-          Students
-      </div>
+    <div class="content-section">
+        <div class="title">
+            Students
+        </div>
 
-      <table>
+        <table>
             <tr>
                 <td class="top-aligned">
                     <div>
@@ -140,13 +139,24 @@
         </div>
         <table class="table-striped">
 
+            <tr>
+                <th>Name</th>
+                <th class="nobreak-label">Teaches Classes</th>
+            </tr>
             <tr data-ng-repeat="teacher in school.teachers"
                 data-ng-controller="UsersController"
                 data-ng-init="findTeacher(teacher)">
 
 
-                <td class="sparesys-view-object-content-cell">
+                <td class="expands">
                     {{teacher.displayName}}
+                </td>
+                <td>
+                    <div data-ng-repeat="schoolclass in teacher.schoolclasses"
+                         data-ng-controller="SchoolclassesController"
+                         data-ng-init="findById(schoolclass)">
+                        {{schoolclass.name}}<br/>
+                    </div>
                 </td>
             </tr>
         </table>
@@ -189,13 +199,13 @@
             Classes
         </div>
 
-        <table class="table-striped" style="width: 100%;">
+        <table class="table-striped">
 
             <thead>
             <tr>
-                <th class="sparesys-view-courses-course-column">Class Name</th>
-                <th class="sparesys-view-courses-course-column">Teachers</th>
-                <th class="sparesys-view-courses-course-column">Students</th>
+                <th class="right-padded">Class Name</th>
+                <th class="right-padded">Teachers</th>
+                <th>Students</th>
             </tr>
             </thead>
             <tbody>

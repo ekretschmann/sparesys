@@ -77,6 +77,21 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
 
         };
 
+        $scope.unsubscribeTeacherPopup = function (school) {
+
+            $scope.school = school;
+            $modal.open({
+                templateUrl: 'unsubscribeTeacher.html',
+                controller: 'UnsubscribeTeacherModalController',
+                resolve: {
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+
+        };
+
 
 
         $scope.subscribeStudentPopup = function (school) {

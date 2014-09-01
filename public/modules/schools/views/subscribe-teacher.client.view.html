@@ -1,6 +1,7 @@
 <section data-ng-controller="SchoolsController" data-ng-init="find()">
 
     <div ng-include="'/modules/schools/views/partial/subscribe-teacher.modal.client.view.html'"></div>
+    <div ng-include="'/modules/schools/views/partial/unsubscribe-teacher.modal.client.view.html'"></div>
 
     <div class="content-header">
         <div class="pull-right">
@@ -21,7 +22,6 @@
             <table id="searchTextResults" class="table-striped">
                 <thead>
                 <tr>
-                    <th></th>
                     <th class="sparesys-view-courses-description-column">School</th>
                     <th class="sparesys-view-courses-course-column">City</th>
                     <th class="sparesys-view-courses-course-column">Country</th>
@@ -31,15 +31,18 @@
                 <tbody>
                 <tr data-ng-repeat="school in schools | filter:searchText">
 
-                    <td>
-                        <a href="" data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
-                            <i data-ng-click="subscribeTeacherPopup(school)"
-                               class="glyphicon glyphicon-pencil">
-                            </i>
-                        </a>
-                    </td>
                     <td class="right-padded nobreak-label">
-                        <a href="" data-ng-click="subscribeTeacherPopup(school)">{{school.name}}</a>
+                        <div data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
+                            <a href="" data-ng-click="unsubscribeTeacherPopup(school)">{{school.name}}
+                                <i
+                                   class="glyphicon glyphicon-pencil">
+                                </i>
+                            </a>
+                        </div>
+
+                        <div data-ng-if="school.teachers.indexOf(authentication.user._id) === -1">
+                            <a href="" data-ng-click="subscribeTeacherPopup(school)">{{school.name}}</a>
+                        </div>
                     </td>
                     <td class="right-padded nobreak-label">{{school.city}}</td>
                     <td class="right-padded nobreak-label">{{school.country}}</td>

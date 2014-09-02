@@ -321,6 +321,14 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
                 });
             });
 
+            if (isSupervised) {
+                if (!original.slaves) {
+                    original.slaves = [];
+                }
+                original.slaves.push(copy.Id);
+                original.save();
+            }
+
 
             packsCopied++;
             if (packsCopied === packsToCopy) {

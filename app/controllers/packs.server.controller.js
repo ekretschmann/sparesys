@@ -66,6 +66,22 @@ exports.update = function(req, res) {
     pack.updated = Date.now();
 
 
+    if (pack.slaves) {
+        pack.slaves.forEach(function(slaveId) {
+            Pack.find({'_id': slaveId}).exec(function (err, packs) {
+                if (err) {
+                   console.log(err);
+                } else {
+                    if (packs.length === 1) {
+                        packs[0].name = pack.name;
+                        packs[0].save();
+                    }
+                }
+            });
+        }, this);
+    }
+
+
 	pack.save(function(err) {
 		if (err) {
 			return res.send(400, {

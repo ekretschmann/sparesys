@@ -252,7 +252,7 @@ div {
 
 body {
     /*background-color: aliceblue;*/
-    background-color: #FFF5E1;
+    background-color: #FFF9DE;
     font-family: 'PT Sans', sans-serif;
     font-size: 11pt;
     color: #333333;
@@ -262,29 +262,62 @@ body {
 /*.navbar-inverse .navbar-brand {*/
     /*color: white*/
 /*}*/
+/*color done*/
 .navbar-header, .nav, .collapse, .navbar-collapse, .navbar-inverse {
-    background-color: #1858B2;
-    background-image: linear-gradient(to bottom, #1858B2 0%, #1858B2 100%);
+    background-color: #030698;
+    background-image: linear-gradient(to bottom, #030698 0%, #4E51E5 100%);
     border-color: #1858B2;
 
 }
 
+
+.dropdown-toggle {
+    background-color: #030698;
+    background-image: linear-gradient(to bottom, #030698 0%, #4E51E5 100%);
+    border-color: #1858B2;
+}
+
+.dropdown-toggle:hover {
+    background-color: #FF0000;
+
+}
+
 .dropdown-menu {
-    background-color: aliceblue;
+    background-color: #4E51E5;
 }
 
 .dropdown-menu > li > a {
-    color: #333333;
+    color: #ECECFF;
 }
+
+.dropdown-menu > li > a:hover {
+    /*background-color: #030698;*/
+    /*background-color: #ff0000;*/
+    color: #4E51E5;
+}
+
 
 .dropdown-menu > li {
-    background-color: aliceblue
+    background-color: #4E51E5;
 }
 
+a:link {
+    color: #4E51E5;
+    text-decoration: none;
+}
+
+a:visited {
+    color: #4E51E5;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #030698;
+}
 
 
 .answer {
-    background-color: #BFDAFF;
+    background-color: #030698;
 }
 
 

@@ -57,15 +57,10 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             $scope.schoolclass.students.forEach(function (studentId) {
 
-                console.log(studentId);
                 Courses.query({
                     userId: studentId
                 }).$promise.then(function (studentCourses) {
-                        console.log(studentCourses);
                         studentCourses.forEach(function (studentCourse) {
-                            console.log(studentCourse.supervised);
-                            console.log(studentCourse.master.toString());
-                            console.log(course._id);
                             if (studentCourse.supervised && studentCourse.master.toString() === course._id) {
                                 studentCourse.visible = false;
                                 studentCourse.$update();

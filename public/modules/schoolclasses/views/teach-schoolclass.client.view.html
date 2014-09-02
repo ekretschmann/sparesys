@@ -78,8 +78,10 @@
                     <tr data-ng-repeat="course in courses">
 
                         <td data-ng-controller="SchoolclassesController">
-                            <a href="">
-                                <i data-ng-click="addCourseToClass(course)"
+                            <a href=""
+                               data-ng-if="schoolclass.courses.indexOf(course._id) === -1"
+                               data-ng-click="addCourseToClass(course)">
+                                <i
                                    class="glyphicon glyphicon-plus-sign">
                                 </i>
                             </a>
@@ -106,20 +108,17 @@
                     <tr data-ng-repeat="course in schoolclass.courses">
 
 
-                        <td class="sparesys-view-courses-name-cell">
-                            <a href="">
-                                <i  data-ng-click="removeCourseFromClass(course)"
-                                        class="glyphicon glyphicon-minus-sign"></i>
+                        <td data-ng-controller="CoursesController" data-ng-init="findById(course)" >
+                            <a href=""
+                               data-ng-click="removeCourseFromClass(course)">
+                                <i class="glyphicon glyphicon-minus-sign"></i>
                             </a>
-
+                            {{course.name}}
                         </td>
 
                         <!--<td data-ng-controller="CoursesController"-->
                         <!--data-ng-init="findOne(course._id)" class="sparesys-view-object-content-cell">-->
 
-                        <td style="text-align: left; width: 100%" data-ng-controller="CoursesController" data-ng-init="findById(course)" >
-                            {{course.name}}
-                        </td>
                     </tr>
                     </tbody>
                 </table>

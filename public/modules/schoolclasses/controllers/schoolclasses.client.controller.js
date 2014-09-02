@@ -44,21 +44,29 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
         $scope.removeCourseFromClass = function (course) {
+
+
             for (var i in $scope.schoolclass.courses) {
-                if ($scope.schoolclass.courses[i] === course) {
+                if ($scope.schoolclass.courses[i] === course._id) {
                     $scope.schoolclass.courses.splice(i, 1);
                 }
             }
+
 
             $scope.schoolclass.$update();
 
             $scope.schoolclass.students.forEach(function (studentId) {
 
+                console.log(studentId);
                 Courses.query({
                     userId: studentId
                 }).$promise.then(function (studentCourses) {
+                        console.log(studentCourses);
                         studentCourses.forEach(function (studentCourse) {
-                            if (studentCourse.supervised && studentCourse.master.toString() === course.toString()) {
+                            console.log(studentCourse.supervised);
+                            console.log(studentCourse.master.toString());
+                            console.log(course._id);
+                            if (studentCourse.supervised && studentCourse.master.toString() === course._id) {
                                 studentCourse.visible = false;
                                 studentCourse.$update();
                             }

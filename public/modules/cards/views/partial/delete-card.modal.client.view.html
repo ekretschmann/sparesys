@@ -1,9 +1,12 @@
 <script type="text/ng-template" id="areYouSureToDeleteCard.html">
     <div class="modal-body" >
 
-        <div class="sparesys-header">
-            <div class="sparesys-title" style="text-align: center">
-                Delete Card: {{card.question}} &#8594; {{card.answer}}
+        <div class="content-header">
+            <div class="title center-aligned">
+                Delete Card: {{card.question}}
+            </div>
+            <div class="title center-aligned">
+               {{card.answer}}
             </div>
         </div>
         <!--<div class="sparesys-header">-->
@@ -13,8 +16,8 @@
             <!--</div>-->
         <!--</div>-->
         <div style="text-align: center">
-        <button class="btn btn-primary sparesys-button" ng-click="ok()">OK</button>
-        <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+        <button class="btn btn-rememberators" ng-click="ok()">OK</button>
+        <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
         </div>
     </div>
 </script>

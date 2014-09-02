@@ -75,15 +75,16 @@
 
             <div style="text-align: center">
                 <div data-ng-show="state == 'answer'">
-                    <button data-ng-click="processCard(0)">0</button>
-                    <button data-ng-click="processCard(1)">1</button>
-                    <button data-ng-click="processCard(2)">2</button>
-                    <button data-ng-click="processCard(3)">3</button>
+                    <button class="btn btn-rememberators btn-small" data-ng-click="processCard(0)">0</button>
+                    <button class="btn btn-rememberators btn-small" data-ng-click="processCard(1)">1</button>
+                    <button class="btn btn-rememberators btn-small" data-ng-click="processCard(2)">2</button>
+                    <button class="btn btn-rememberators btn-small" data-ng-click="processCard(3)">3</button>
                     <div style="color: #999999">rate yourself</div>
+                    <div style="color: #999999">0=never heard, 1=not quite remembered, 2=remembered with difficulty, 3=easy!</div>
                 </div>
 
                 <div data-ng-show="state == 'question'">
-                    <button data-ng-click="showAnswer()">Enter</button>
+                    <button class="btn btn-rememberators" data-ng-click="showAnswer()">Enter</button>
                 </div>
             </div>
         </div>

@@ -27,9 +27,24 @@
             <tr>
                 <td>Pack</td>
                 <td class="left-padded">:</td>
-                <td class="left-padded"><a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
+                <td class="left-padded"><a href="" data-ng-click="navigateToPack(pack)">{{pack.name}}</a>
                 </td>
             </tr>
+
+            <tr data-ng-if="nextCard">
+                <td>Next Card in Pack</td>
+                <td class="left-padded">:</td>
+                <td class="left-padded"><a data-ng-href="#!/cards/{{nextCard._id}}/edit">{{nextCard.question}}</a>
+                </td>
+            </tr>
+
+            <tr data-ng-if="prevCard">
+                <td>Previous Card in Pack</td>
+                <td class="left-padded">:</td>
+                <td class="left-padded"><a data-ng-href="#!/cards/{{prevCard._id}}/edit">{{prevCard.question}}</a>
+                </td>
+            </tr>
+
         </table>
 
 

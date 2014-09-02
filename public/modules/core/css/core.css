@@ -177,10 +177,9 @@ body {
     /*padding: 15px;*/
     /*border-bottom: 1px solid #e5e5e5;*/
 /*}*/
-/*.modal-body {*/
-    /*position: relative;*/
-    /*padding: 10px;*/
-/*}*/
+
+
+
 
 * {
     margin: 0;
@@ -271,35 +270,25 @@ body {
 }
 
 
-.dropdown-toggle {
-    background-color: #030698;
-    background-image: linear-gradient(to bottom, #030698 0%, #4E51E5 100%);
-    border-color: #1858B2;
-}
 
-.dropdown-toggle:hover {
-    background-color: #FF0000;
+/*.dropdown-menu {*/
+    /*background-color: #4E51E5;*/
+/*}*/
 
-}
+/*.dropdown-menu > li > a {*/
+    /*color: #ECECFF;*/
+/*}*/
 
-.dropdown-menu {
-    background-color: #4E51E5;
-}
-
-.dropdown-menu > li > a {
-    color: #ECECFF;
-}
-
-.dropdown-menu > li > a:hover {
+/*.dropdown-menu > li > a:hover {*/
     /*background-color: #030698;*/
     /*background-color: #ff0000;*/
-    color: #4E51E5;
-}
+    /*color: #4E51E5;*/
+/*}*/
 
 
-.dropdown-menu > li {
-    background-color: #4E51E5;
-}
+/*.dropdown-menu > li {*/
+    /*background-color: #4E51E5;*/
+/*}*/
 
 a:link {
     color: #4E51E5;
@@ -320,4 +309,32 @@ a:hover {
     background-color: #030698;
 }
 
+.btn-rememberators {
+    background-color: #4E51E5;
+    background-image: linear-gradient(to bottom, #4E51E5 0%, #030698 100%);
+    border-color: #4E51E5;
+    color: #ECECFF;
+    min-width: 100px;
+}
+.btn-rememberators:hover,
+.btn-rememberators:focus,
+.btn-rememberators:active,
+.btn-rememberators.active {
+    background-image: none;
+    background-color: #4E51E5;
+    color: #ECECFF;
+}
 
+input[type="text"], input[type="password"] {
+    background-color: #F5F5F5;
+
+}
+.btn-small {
+    min-width: 40px;
+}
+
+.modal-content {
+
+    background-color: #FFF9DE;
+    border-radius: 6px;
+}

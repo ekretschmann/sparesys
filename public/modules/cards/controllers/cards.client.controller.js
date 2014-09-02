@@ -9,12 +9,16 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         // Set of Photos
         $scope.slides = [];
 
+        $scope.navigateToPack = function (pack) {
+            $timeout(function () {
+                $location.path('packs/' + pack._id + '/edit');
+            }, 500);
+        };
 
-
-        $scope.initSlides = function() {
+        $scope.initSlides = function () {
 
             if ($scope.card) {
-                $scope.card.images.forEach(function(img) {
+                $scope.card.images.forEach(function (img) {
                     var slide = {};
                     slide.image = img;
                     $scope.slides.push(slide);
@@ -36,15 +40,15 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
         // dont know why I have to do this. Seems the checkboxes don't like modal windows
-        $scope.setValidation = function(value) {
+        $scope.setValidation = function (value) {
             $scope.validation = value;
         };
 
-        $scope.setSound = function(value) {
+        $scope.setSound = function (value) {
             $scope.sound = value;
         };
 
-        $scope.setDirection = function(value) {
+        $scope.setDirection = function (value) {
             $scope.direction = value;
         };
 
@@ -81,6 +85,39 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
                     $scope.pack = pack;
+                    var prev;
+                    var next;
+                    for (var i =0; i< $scope.pack.cards.length; i++) {
+                        if ($scope.pack.cards[i] === $scope.card._id) {
+                            if (i>0) {
+                                prev = $scope.pack.cards[i-1];
+                            }
+                            if (i<$scope.pack.cards.length-1) {
+                                next = $scope.pack.cards[i+1];
+                            }
+                        }
+//                        prev = $scope.pack.cards[i];
+//                        console.log($scope.pack.cards[i]);
+                    }
+
+                    if (next) {
+                        Cards.get({
+                            cardId: next
+                        }, function (nextc) {
+                            $scope.nextCard = nextc;
+                        });
+                    }
+
+                    if (prev) {
+                        Cards.get({
+                            cardId: prev
+                        }, function (prevc) {
+                            $scope.prevCard = prevc;
+                        });
+                    }
+
+
+
 
                 });
 
@@ -95,10 +132,10 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         };
 
 
-        $scope.clearCards = function() {
-            $scope.cards.forEach(function(card) {
+        $scope.clearCards = function () {
+            $scope.cards.forEach(function (card) {
                 if (card.packName === 'undefined') {
-                    card.$remove(function() {
+                    card.$remove(function () {
                         $state.go($state.$current, null, { reload: true });
                     });
 
@@ -217,7 +254,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         };
 
 
-
         // Find existing Pack
         $scope.findById = function (cardId) {
             $scope.card = Cards.get({
@@ -241,12 +277,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         };
 
 
-        $scope.swap = function(card) {
+        $scope.swap = function (card) {
             var temp = card.question;
             card.question = card.answer;
             card.answer = temp;
             card.alternatives = [];
-            card.$update(function() {
+            card.$update(function () {
                 $state.go($state.$current, null, { reload: true });
             });
         };

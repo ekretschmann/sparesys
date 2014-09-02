@@ -93,6 +93,8 @@ exports.delete = function (req, res) {
 
     var course = req.course;
 
+
+
     course.packs.forEach(function (pack) {
         Pack.find({'_id': pack}).exec(function (err, packs) {
             if (packs && packs[0]) {
@@ -112,6 +114,23 @@ exports.delete = function (req, res) {
     Course.find({'_id': course._id}).exec(function (err, courses) {
 
         if (courses && courses[0]) {
+
+            courses[0].slaves.forEach(function(cid) {
+                Course.find({'_id': cid}).exec(function (err, c) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        if (c && c.length === 1) {
+                            c[0].master = undefined;
+                            c[0].supervised = false;
+                            c[0].visible = true;
+                            c[0].save();
+                        }
+                    }
+                });
+            });
+
+//            console.log(courses[0].slaves);
             courses[0].remove();
         }
     });
@@ -346,6 +365,11 @@ exports.copyCourse = function (req, res, next, id) {
         copy.language = original.language;
         copy.master = original._id;
         copy.supervised = isSupervised;
+        if (!original.slaves) {
+            original.slaves = [];
+        }
+        original.slaves.push(copy._id);
+        original.save();
 
         var packPromise = copyPacks(original.packs, userId, copy._id, isSupervised);
 

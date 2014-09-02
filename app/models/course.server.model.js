@@ -58,6 +58,10 @@ var CourseSchema = new Schema({
     master: {
         type: Schema.Types.ObjectId
     },
+    slaves: {
+        type: [Schema.Types.ObjectId],
+        default: []
+    },
     visible: {
         type: Boolean,
         default: true

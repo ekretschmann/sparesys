@@ -30,7 +30,10 @@
                 </a>
             </td>
             <td class="sparesys-view-courses-name-cell">
-                <a data-ng-if="!course.supervised" data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
+                <!--data-ng-if="!course.supervised"-->
+                <a
+
+                   data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
                 <span style="color: #999999" data-ng-if="course.supervised">{{course.name}}</span>
             </td>
             <td>

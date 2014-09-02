@@ -37,6 +37,7 @@ angular.module('courses').controller('StatsController',
 
 
 
+                    /* jshint ignore:start */
                     var data = google.visualization.arrayToDataTable([
                         ['Year', 'Sales', 'Expenses'],
                         ['2004', 1000, 400],
@@ -52,6 +53,8 @@ angular.module('courses').controller('StatsController',
                     var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
 
                     chart.draw(data, options);
+                    /* jshint ignore:end */
+
                 });
             };
 
@@ -61,6 +64,7 @@ angular.module('courses').controller('StatsController',
                 res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
                     $scope.cards = cards;
 
+                    /* jshint ignore:start */
                     var dataTable = new google.visualization.DataTable();
                     dataTable.addColumn({ type: 'date', id: 'Date' });
                     dataTable.addColumn({ type: 'number', id: 'Won/Loss' });
@@ -88,6 +92,7 @@ angular.module('courses').controller('StatsController',
                     }
 
                     dataTable.addRows(dates);
+
                     var chart = new google.visualization.Calendar(document.getElementById('calendar_basic'));
 
                     var options = {
@@ -96,11 +101,16 @@ angular.module('courses').controller('StatsController',
                     };
 
                     chart.draw(dataTable, options);
+                    /* jshint ignore:end */
                 });
 
 
             };
 
-            google.setOnLoadCallback($scope.drawCharts);
+            /* jshint ignore:start */
+            if (google) {
+                google.setOnLoadCallback($scope.drawCharts);
+            }
+            /* jshint ignore:end */
         }
     ]);

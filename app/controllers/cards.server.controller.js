@@ -37,9 +37,13 @@ var getErrorMessage = function (err) {
  */
 exports.create = function (req, res) {
     var card = new Card(req.body);
+
     card.user = req.user;
 
-
+    if (req.query.userId) {
+        console.log('for other user');
+        card.user = req.query.userId;
+    }
 
     card.save(function (err) {
         if (err) {
@@ -118,6 +122,7 @@ exports.update = function (req, res) {
  * Delete an Card
  */
 exports.delete = function (req, res) {
+
     var card = req.card;
 
     function deleteCardFromItsPack(card) {

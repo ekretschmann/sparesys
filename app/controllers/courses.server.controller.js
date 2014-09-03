@@ -252,7 +252,6 @@ var copyCards = function (cardIds, userId, newPackId, isSupervised) {
         });
 
         findCard.then(function (findCardResult) {
-            console.log('found card');
             var original = findCardResult[0];
             var copy = new Card();
             copy.user = userId;
@@ -279,8 +278,9 @@ var copyCards = function (cardIds, userId, newPackId, isSupervised) {
             idMap[original._id] = copy._id;
 
             cardsCopied++;
-            console.log('here');
+
             if (cardsCopied === cardsToCopy) {
+
                 var result = [];
                 cardIds.forEach(function (cardId) {
                     result.push(idMap[cardId]);
@@ -310,7 +310,6 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
         });
 
         findPack.then(function (findPackResult) {
-            console.log('found pack');
             var original = findPackResult[0];
             var copy = new Pack();
             copy.user = userId;
@@ -318,20 +317,19 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
             copy.course = newCourseId;
             idMap[original._id] = copy._id;
             var cardPromise = copyCards(original.cards, userId, copy._id, isSupervised);
+
             cardPromise.then(function (cards) {
                 copy.cards = cards;
                 copy.save(function () {
                 });
             });
-
             if (isSupervised) {
                 if (!original.slaves) {
                     original.slaves = [];
                 }
-                original.slaves.push(copy.Id);
+                original.slaves.push(copy._id);
                 original.save();
             }
-
 
             packsCopied++;
 
@@ -350,7 +348,6 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
 
 exports.copyCourse = function (req, res, next, id) {
 
-    console.log('copying course');
     var userId;
     var isSupervised = false;
 
@@ -384,13 +381,10 @@ exports.copyCourse = function (req, res, next, id) {
         original.slaves.push(copy._id);
         original.save();
 
-        console.log('trying to copy packs');
         var packPromise = copyPacks(original.packs, userId, copy._id, isSupervised);
-        console.log('and returned');
 
         packPromise.then(function (packs) {
             copy.packs = packs;
-            console.log('saving copy');
             copy.save(function() {
                 res.jsonp(copy);
             });

@@ -65,9 +65,7 @@ angular.module('courses').controller('CoursesController',
 
             $scope.createDummyCourse = function() {
 
-                console.log(CoursesService);
                 TestDataService.createDummmyCourse(function() {
-//                    console.log('done');
                     $state.go($state.$current, null, { reload: true });
                 });
             };

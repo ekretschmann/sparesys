@@ -10,7 +10,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             Courses.query({
                 userId: studentId
             }).$promise.then(function (studentCourses) {
-                    console.log('student courses are:');
                     studentCourses.forEach(function (studentCourse) {
                         console.log(studentCourse.name);
                     });
@@ -27,7 +26,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                         }
                     });
                     if (!setVisible) {
-                        console.log('copying course for student');
                         var res = CoursesService.copyCourseFor(studentId);
                         res.get({courseId: courseId});
 
@@ -37,14 +35,12 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.addCourseToClass = function (course) {
 
-            console.log('adding '+course._id);
             if ($scope.schoolclass.courses.indexOf(course._id) === -1) {
                 $scope.schoolclass.courses.push(course._id);
                 $scope.schoolclass.$update();
 
                 $scope.schoolclass.students.forEach(function (studentId) {
 
-                    console.log('adding '+course._id);
                     $scope.addCourseForStudent(studentId, course._id);
 
                 });

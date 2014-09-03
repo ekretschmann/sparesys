@@ -22,21 +22,21 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="course in courses | filter:searchText">
-            <td>
+            <td class="right-padded">
                 <a href="" data-ng-if="!course.supervised">
                     <i data-ng-click="areYouSureToDeleteCourse(course)"
                        class="glyphicon glyphicon-remove-sign">
                     </i>
                 </a>
             </td>
-            <td>
+            <td class="right-padded nobreak-label">
 
                 <a data-ng-if="!course.supervised || authentication.user.roles.indexOf('debug-viewer') !== -1"
                    data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
                 <span class="text-muted"
                       data-ng-if="course.supervised && authentication.user.roles.indexOf('debug-viewer') === -1">{{course.name}}</span>
             </td>
-            <td>
+            <td class="right-padded expands">
 
                 <span data-ng-if="!course.supervised">{{course.description}}</span>
                 <span data-ng-if="course.supervised"

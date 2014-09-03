@@ -31,12 +31,14 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.addCourseToClass = function (course) {
 
+            console.log('adding '+course._id);
             if ($scope.schoolclass.courses.indexOf(course._id) === -1) {
                 $scope.schoolclass.courses.push(course._id);
                 $scope.schoolclass.$update();
 
                 $scope.schoolclass.students.forEach(function (studentId) {
 
+                    console.log('adding '+course._id);
                     $scope.addCourseForStudent(studentId, course._id);
 
                 });

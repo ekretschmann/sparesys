@@ -3,55 +3,38 @@
     <div ng-include="'/modules/schoolclasses/views/partial/edit-class.modal.client.view.html'"></div>
     <div ng-include="'/modules/schoolclasses/views/partial/delete-class.modal.client.view.html'"></div>
 
-    <div class="sparesys-header">
+    <div class="content-header">
 
-        <!--<div class="pull-right" style="padding-top: 5px">-->
-
-
-        <!--<a href="" data-ng-click="editClassPopup(schoolclass)" data-ng-show="authentication.user._id == schoolclass.user._id"-->
-        <!--style="padding-right: 20px">-->
-        <!--Edit-->
-        <!--</a>-->
-
-        <!--<a href="" data-ng-click="areYouSureToDeleteClass(schoolclass)"-->
-        <!--data-ng-show="authentication.user._id == schoolclass.user._id">-->
-        <!--Delete-->
-        <!--</a>-->
-
-        <!--</div>-->
-        <div class="sparesys-title">
+        <div class="title">
             Teach Class: {{schoolclass.name}}
         </div>
 
         <table>
             <tr>
-                <td>School</td>
-                <td style="padding-left: 5px">:</td>
-                <td style="padding-left: 5px">{{school.name}}</td>
+                <td class="right-padded">School</td>
+                <td class="right-padded">:</td>
+                <td>{{school.name}}</td>
             </tr>
             <tr>
-                <td>Teachers</td>
-                <td style="padding-left: 5px">:</td>
-                <td style="padding-left: 5px">
-
+                <td class="right-padded">Teachers</td>
+                <td class="right-padded">:</td>
+                <td>
 
                     <span data-ng-repeat="teacher in schoolclass.teachers">
-                        <span data-ng-controller="UsersController" data-ng-init="findTeacher(teacher)">
-                        {{teacher.displayName}}
+                        <span data-ng-controller="UsersController" data-ng-init="findById(teacher)">
+                        {{displayName}}
                             </span>
                     </span>
                 </td>
             </tr>
             <tr>
-                <td>Students</td>
-                <td style="padding-left: 5px">:</td>
-                <td style="padding-left: 5px">
-
-
-                    <span data-ng-repeat="student in schoolclass.students">
-                        <span data-ng-controller="UsersController" data-ng-init="findStudent(student)">
-                        {{student.displayName}}
-                            </span>
+                <td class="right-padded">Students</td>
+                <td  class="right-padded">:</td>
+                <td>
+                     <span data-ng-repeat="student in schoolclass.students">
+                        <span data-ng-controller="UsersController" data-ng-init="findById(student)">
+                        {{displayName}}
+                        </span>
                     </span>
                 </td>
             </tr>
@@ -60,15 +43,15 @@
     </div>
 
 
-    <table style="width: 100%">
+    <table class="expands">
         <tr>
-            <td style="width: 50%; vertical-align: top">
-                <table class="table-striped" style="width: 100%"
+            <td style="top-aligned half-screen">
+                <table class="table-striped expands"
                        data-ng-controller="CoursesController"
                        data-ng-init="findForCurrentUser()">
                     <thead>
                     <tr>
-                        <th class="sparesys-view-courses-course-column" colspan="2">Courses</th>
+                        <th>Courses</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -93,12 +76,12 @@
                 </table>
 
             </td>
-            <td style="vertical-align: top; width: 50%">
+            <td class="top-aligned half-screen">
 
-                <table class="table-striped" style="width: 100%">
+                <table class="table-striped expands">
                     <thead>
                     <tr>
-                        <th style="width: 100%" colspan="2">In class {{schoolclass.name}}</th>
+                        <th>In class {{schoolclass.name}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -115,9 +98,6 @@
                             </a>
                             {{course.name}}
                         </td>
-
-                        <!--<td data-ng-controller="CoursesController"-->
-                        <!--data-ng-init="findOne(course._id)" class="sparesys-view-object-content-cell">-->
 
                     </tr>
                     </tbody>

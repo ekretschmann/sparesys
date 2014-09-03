@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesController',
-    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'JourneyService',
-        function ($scope, $stateParams, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService, JourneyService) {
+    ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService', 'JourneyService',
+        function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService, JourneyService) {
 
             $scope.authentication = Authentication;
             $scope.showhelp = false;
@@ -65,8 +65,10 @@ angular.module('courses').controller('CoursesController',
 
             $scope.createDummyCourse = function() {
 
-                CoursesService.createDummmyCourse(function() {
-                    //$state.go($state.$current, null, { reload: true });
+                console.log(CoursesService);
+                TestDataService.createDummmyCourse(function() {
+//                    console.log('done');
+                    $state.go($state.$current, null, { reload: true });
                 });
             };
 

@@ -252,6 +252,7 @@ var copyCards = function (cardIds, userId, newPackId, isSupervised) {
         });
 
         findCard.then(function (findCardResult) {
+            console.log('found card');
             var original = findCardResult[0];
             var copy = new Card();
             copy.user = userId;

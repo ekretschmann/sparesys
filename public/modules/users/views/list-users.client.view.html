@@ -1,39 +1,39 @@
 <section data-ng-controller="UsersController" data-ng-init="find()">
 
-    <div class="sparesys-header">
+    <div class="content-header">
         <div class="pull-right">
             Search: <input ng-model="searchText">
         </div>
 
-        <div class="sparesys-title">
+        <div class="title">
             Users
-        </div>
-        <div class="sparesys-subtitle">
-            List of all Users in the system
         </div>
     </div>
 
 
 
-    <table id="searchTextResults" class="table-striped" style="width: 100%">
+    <table id="searchTextResults" class="table-striped expands">
         <thead>
         <tr>
-            <th>User</th>
-            <th>First Name</th>
-            <th>Last Name</th>
-            <th>email</th>
-            <th>created</th>
-            <th>roles</th>
+            <th class="right-padded nobreak-label">User</th>
+            <th class="right-padded nobreak-label">Name</th>
+            <th class="right-padded nobreak-label">email</th>
+            <th class="right-padded nobreak-label">created</th>
+            <th class="expands">roles</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="user in users | filter:searchText">
-            <td><a data-ng-href="#!/users/{{user._id}}/edit">{{user.username}}</a></td>
-            <td>{{user.firstName}}</td>
-            <td>{{user.lastName}}</td>
-            <td>{{user.email}}</td>
-            <td>{{user.created | date:'medium'}}</td>
-            <td>{{user.roles}}</td>
+            <td class="right-padded nobreak-label top-aligned"><a data-ng-href="#!/users/{{user._id}}/edit">{{user.username}}</a></td>
+            <td class="right-padded nobreak-label top-aligned expands">{{user.displayName}}</td>
+            <td class="right-padded nobreak-label top-aligned">{{user.email}}</td>
+            <td class="right-padded nobreak-label top-aligned">{{user.created | date:'shortDate'}}</td>
+            <td class=" top-aligned">
+                <div class="right-padded nobreak-label" data-ng-repeat="role in user.roles">
+                        {{role}}
+                </div>
+
+            </td>
         </tr>
         </tbody>
     </table>

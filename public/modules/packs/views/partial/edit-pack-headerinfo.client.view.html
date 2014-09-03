@@ -20,4 +20,13 @@
             <span data-ng-if="!pack.after">now</span>
         </td>
     </tr>
+    <tr data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+        <td>ID</td>
+        <td class="left-padded">:</td>
+        <td class="left-padded">
+
+        </td>
+    </tr>
+
+
 </table>

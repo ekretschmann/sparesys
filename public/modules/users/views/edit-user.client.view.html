@@ -1,112 +1,114 @@
 <section data-ng-controller="UsersController" data-ng-init="findOne()">
 
-    <div class="sparesys-header">
+    <div class="content-header">
         <div class="pull-right">
-            <a class="btn btn-primary" data-ng-click="remove(otherUser);">
-                <i class="glyphicon glyphicon-trash"></i>
-            </a>
+            <a class="menu-link"
+               href=""
+               data-ng-click="remove(otherUser)">Delete</a>
+
+            <a class="menu-link"
+               href=""
+               data-ng-click="update()">Update</a>
+
         </div>
 
-        <div class="sparesys-title">
+        <div class="title">
             Edit User
-        </div>
-        <div class="sparesys-subtitle">
-            Maintain user attributes for User {{otherUser.username}}
         </div>
     </div>
 
-    <form class="form-horizontal" data-ng-submit="update()" novalidate>
-        <fieldset>
-            <div class="pull-right">
-                <input type="submit" value="Update" class="btn btn-default">
-            </div>
-            <table class="sparesys-view-object-table">
+    <table class="expands">
 
-            <tr class="controls">
-                    <td class="sparesys-view-object-label-cell">Id</td>
-                    <td class="sparesys-view-object-content-cell">
-                        {{otherUser.id}}}
-                    </td>
-                </tr>
+        <tr>
+            <td class="right-padded">Id</td>
+            <td>
+                {{otherUser._id}}
+            </td>
+        </tr>
 
 
-                <tr class="controls">
-                    <td class="sparesys-view-object-label-cell">Username</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <input type="text" data-ng-model="otherUser.username"
-                               id="username" class="form-control"
-                               placeholder="Username"
-                               required>
-                    </td>
-                </tr>
+        <tr>
+            <td class="right-padded">Username</td>
+            <td class="expands">
+                <input type="text"
+                       data-ng-model="otherUser.username"
+                       id="username"
+                       class="form-control"
+                       placeholder="Username"
+                       required>
+            </td>
+        </tr>
 
-                <tr class="controls">
-                    <td class="sparesys-view-object-label-cell">First Name</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <input type="text" data-ng-model="otherUser.firstName"
-                               id="firstName" class="form-control"
-                               placeholder="First Name"
-                               required>
-                    </td>
-                </tr>
+        <tr>
+            <td class="right-padded nobreak-label">First Name</td>
+            <td class="expands">
+                <input type="text"
+                       data-ng-model="otherUser.firstName"
+                       id="firstName"
+                       class="form-control"
+                       placeholder="First Name" required>
+            </td>
+        </tr>
 
-                <tr class="controls">
+        <tr>
 
-                    <td class="sparesys-view-object-label-cell">Last Name</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <input type="text" data-ng-model="otherUser.lastName"
-                               id="description" class="form-control"
-                               placeholder="Last Name" required>
-                    </td>
-                </tr>
+            <td class="right-padded nobreak-label">Last Name</td>
+            <td class="expands">
+                <input type="text"
+                       data-ng-model="otherUser.lastName"
+                       id="description"
+                       class="form-control"
+                       placeholder="Last Name" required>
+            </td>
+        </tr>
 
-                <tr class="controls">
+        <tr>
 
-                    <td class="sparesys-view-object-label-cell">Email</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <input type="text" data-ng-model="otherUser.email"
-                               id="email" class="form-control"
-                               placeholder="email" required>
-                    </td>
-                </tr>
+            <td class="right-padded">Email</td>
+            <td class="expands">
+                <input type="text"
+                       data-ng-model="otherUser.email"
+                       id="email"
+                       class="form-control"
+                       placeholder="email" required>
+            </td>
+        </tr>
 
-                <tr class="controls">
+        <tr>
 
-                    <td class="sparesys-view-object-label-cell">Roles</td>
-                    <td class="sparesys-view-object-content-cell">
-                        <div class="controls">
-                            <label class="sparesys-view-object-right-padded-element" ng-repeat="role in roles">
-                                <input
+            <td class="right-padded">Roles</td>
+            <td class="expands">
+                <div>
+                    <label class="sparesys-view-object-right-padded-element" ng-repeat="role in roles">
+                        <input
 
-                                        type="checkbox"
-                                        name="selectedRole[]"
-                                        value="{{role}}"
-                                        ng-checked="otherUser.roles.indexOf(role) > -1"
-                                        ng-click="toggleSelection(role)">
-                                {{role}}
+                                type="checkbox"
+                                name="selectedRole[]"
+                                value="{{role}}"
+                                ng-checked="otherUser.roles.indexOf(role) > -1"
+                                ng-click="toggleSelection(role)">
+                        {{role}}
 
-                            </label>
-                        </div>
-                    </td>
-                </tr>
+                    </label>
+                </div>
+            </td>
+        </tr>
 
-                <tr class="controls">
+        <tr>
 
-                    <td class="sparesys-view-object-label-cell">Created</td>
-                    <td class="sparesys-view-object-content-cell">
-                        {{otherUser.created | date: 'medium'}}
-                    </td>
-                </tr>
+            <td class="right-padded">Created</td>
+            <td class="expands">
+                {{otherUser.created | date: 'shortDate'}}
+            </td>
+        </tr>
 
-                <tr class="controls">
+        <tr class="controls">
 
-                    <td class="sparesys-view-object-label-cell">Updated</td>
-                    <td class="sparesys-view-object-content-cell">
-                        {{otherUser.updated | date: 'medium'}}
-                    </td>
-                </tr>
+            <td class="right-padded">Updated</td>
+            <td class="expands">
+                {{otherUser.updated | date: 'shortDate'}}
+            </td>
+        </tr>
 
-            </table>
-        </fieldset>
-    </form>
+    </table>
 </section>

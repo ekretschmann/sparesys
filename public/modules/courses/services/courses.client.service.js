@@ -13,22 +13,31 @@ angular.module('courses').factory('Courses', ['$resource', function ($resource) 
 }]);
 
 
-angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses', 
+angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses',
     function ($q, $resource, Courses) {
         return {
             remove: function (course, callback) {
 
                 if (course) {
-                        course.$remove(function() {
-                            callback();
-                        });
+                    course.$remove(function () {
+                        callback();
+                    });
                 }
                 return true;
             },
             removeCard: function (card, callback) {
 
                 if (card) {
-                    card.$remove(function() {
+                    card.$remove(function () {
+                        callback();
+                    });
+                }
+                return true;
+            },
+            removeCards: function (card, callback) {
+
+                if (card) {
+                    card.$remove(function () {
                         callback();
                     });
                 }
@@ -38,35 +47,12 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
 
                 var self = this;
                 if (pack) {
-                    Courses.query({
-                        _id: pack.course
-                    }, function (courses) {
-                        if (courses.length === 0) {
-
-//                           not sure this can happen?
-                            self.removeCards(pack.cards).then(function(){
-                                pack.$remove();
-                                callback();
-                            });
-                        }
-                        if (courses.length === 1) {
-                            var course = courses[0];
-                            for (var i in course.packs) {
-                                if (course.packs[i] === pack._id) {
-                                    course.packs.splice(i, 1);
-                                }
-                            }
-                            course.$update(function () {
-                                self.removeCards(pack.cards).then(function(){
-                                    pack.$remove();
-                                    callback();
-                                });
-                            });
-                        }
+                    pack.$remove(function () {
+                        callback();
                     });
-
-
                 }
+
+
                 return true;
             },
             serverLoadCards: function () {
@@ -99,7 +85,7 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                 });
             },
             findSchoolclasses: function () {
-                return $resource('/courses/copy/:userId', {userId:'@id'});
+                return $resource('/courses/copy/:userId', {userId: '@id'});
             }
         };
     }

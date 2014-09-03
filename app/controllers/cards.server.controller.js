@@ -39,6 +39,8 @@ exports.create = function (req, res) {
     var card = new Card(req.body);
     card.user = req.user;
 
+
+
     card.save(function (err) {
         if (err) {
             return res.send(400, {

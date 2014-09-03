@@ -32,7 +32,7 @@ angular.module('courses').controller('CoursesController',
                         packs.forEach(function(pack) {
                             if(validCourseIds.indexOf(pack.course) === -1) {
                                 console.log('deleting pack '+pack._id);
-                                CoursesService.removePack(pack);
+                                pack.$remove();
                             } else {
                                 validPackIds.push(pack._id);
                             }

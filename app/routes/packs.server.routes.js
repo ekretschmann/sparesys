@@ -11,8 +11,8 @@ module.exports = function(app) {
 	
 	app.route('/packs/:packId')
 		.get(packs.read)
-		.put(users.requiresLogin, packs.hasAuthorization, packs.update)
-	    .delete(users.requiresLogin, packs.hasAuthorization, packs.delete);
+		.put(users.requiresLogin, packs.update)
+	    .delete(users.requiresLogin,  packs.delete);
 
 	// Finish by binding the Pack middleware
 	app.param('packId', packs.packByID);

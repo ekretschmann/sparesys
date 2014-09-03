@@ -1,16 +1,15 @@
 'use strict';
 
-angular.module('packs').controller('AddCardToPackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'course', 'Cards', 'JourneyService',
-	function($scope, $state, $timeout, $modalInstance, pack, course, Cards, JourneyService) {
+angular.module('packs').controller('AddCardToPackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'course', 'Cards', 'Packs', 'JourneyService',
+    function ($scope, $state, $timeout, $modalInstance, pack, course, Cards, Packs, JourneyService) {
         $scope.pack = pack;
         $scope.course = course;
 
         $scope.setFocus = function () {
-            $timeout(function(){
+            $timeout(function () {
                 angular.element('.focus').trigger('focus');
-            },100);
+            }, 100);
         };
-
 
 
         $scope.cancel = function () {
@@ -19,32 +18,37 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
 
         $scope.addCardToPack = function () {
 
-//            Create new Pack object
-            var card = new Cards({
-                question: this.question,
-                answer: this.answer,
-                packs: [this.pack._id]
-            });
+            var packs = [];
+            packs.push(this.pack._id);
 
+            if (pack.slaves) {
+                pack.slaves.forEach(function (slaveId) {
+                    packs.push(slaveId);
+                }, this);
+            }
 
-            // Redirect after save
-            card.$save(function (response) {
-                var cardid = response._id;
-                var p = $scope.pack;
-                p.cards.push(cardid);
-                JourneyService.cardCreated();
-                p.$update(function () {
-                    $state.go($state.$current, null, { reload: true });
-                }, function (errorResponse) {
-                    $scope.error = errorResponse.data.message;
+            packs.forEach(function (pId) {
+                var card = new Cards({
+                    question: this.question,
+                    answer: this.answer,
+                    packs: [pId]
                 });
+                card.$save();
+                Packs.query({
+                    _id: pId
+                }, function (packs) {
 
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
+                    packs[0].cards.push(card._id);
+                    packs[0].$update(function() {
+                        $state.go($state.$current, null, { reload: true });
+                    });
+                });
+            }, this);
+
+            JourneyService.cardCreated();
             this.question = '';
             this.answer = '';
             angular.element('.focus').trigger('focus');
         };
-	}
+    }
 ]);

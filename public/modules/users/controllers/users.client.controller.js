@@ -57,10 +57,12 @@ angular.module('courses').controller('UsersController', ['$scope', '$stateParams
 
         };
 
-        $scope.findTeacher = function (userId) {
 
-            $scope.teacher = Users.get({
+        $scope.findById = function (userId) {
+            Users.get({
                 userId: userId
+            }, function(user) {
+                $scope.displayName = user.displayName;
             });
         };
 

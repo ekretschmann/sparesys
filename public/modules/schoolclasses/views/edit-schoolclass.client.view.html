@@ -32,9 +32,8 @@
 
     <table class="expands">
         <tr>
-            <td style="width: 50%; vertical-align: top">
-                <table class="table-striped expands"
-                       data-ng-controller="SchoolsController">
+            <td class="half-screen top-aligned">
+                <table class="table-striped expands">
                     <thead>
                     <tr>
                         <th>Teachers</th>
@@ -45,18 +44,22 @@
                         <td>none</td>
                     </tr>
 
-                    <tr data-ng-repeat="teacher in school.teachers"
-                        data-ng-controller="UsersController"
-                        data-ng-init="findTeacher(teacher)">
+
+                    <tr data-ng-repeat="teacher in school.teachers">
 
                         <td class="right-padded">
+
                             <a href=""
-                               data-ng-if="schoolclass.teachers.indexOf(teacher) === -1">
-                                <i data-ng-click="addTeacherToClass(teacher)"
-                                   class="glyphicon glyphicon-plus-sign">
+                               data-ng-if="schoolclass.teachers.indexOf(teacher) === -1"
+                               data-ng-click="addTeacherToClass(teacher)">
+                                <i
+                                        class="glyphicon glyphicon-plus-sign">
                                 </i>
                             </a>
-                            {{teacher.displayName}}
+                            <span data-ng-controller="UsersController"
+                                  data-ng-init="findById(teacher)">
+                                {{displayName}}
+                            </span>
                         </td>
 
                     </tr>
@@ -64,13 +67,13 @@
                 </table>
 
             </td>
-            <td style="vertical-align: top; width: 50%">
+            <td class="half-screen top-aligned">
 
                 <table class="table-striped expands">
                     <thead>
                     <tr>
-                        <th class="sparesys-view-courses-course-column" style="width: 100%">In class
-                            {{schoolclass.name}}
+                        <th class="expands">
+                            In class {{schoolclass.name}}
                         </th>
                     </tr>
                     </thead>
@@ -81,17 +84,18 @@
                         </td>
                     </tr>
 
-                    <tr data-ng-repeat="teacher in schoolclass.teachers"
-                        data-ng-controller="UsersController"
-                        data-ng-init="findTeacher(teacher)">
+                    <tr data-ng-repeat="teacher in schoolclass.teachers">
 
-                        <td class="sparesys-view-courses-name-cell">
-                            <a href="#!/schoolclasses/{{schoolclass._id}}/edit">
-                                <i data-ng-click="removeTeacherFromClass(teacher)"
-                                   class="glyphicon glyphicon-minus-sign">
+                        <td>
+                            <a href=""
+                               data-ng-click="removeTeacherFromClass(teacher)">
+                                <i class="glyphicon glyphicon-minus-sign">
                                 </i>
                             </a>
-                            {{teacher.displayName}}
+                            <span data-ng-controller="UsersController"
+                                  data-ng-init="findById(teacher)">
+                            {{displayName}}
+                            </span>
                         </td>
 
                     </tr>
@@ -102,11 +106,10 @@
             </td>
         </tr>
 
-        <tr >
-            <td style="vertical-align: top; padding-top: 15px">
+        <tr>
+            <td class="half-screen top-aligned top-spacer">
                 <table id="searchTextResults"
-                       class="table-striped expands"
-                       data-ng-controller="SchoolsController">
+                       class="table-striped expands">
                     <thead>
                     <tr>
                         <th>Students</th>
@@ -118,32 +121,31 @@
                     </tr>
 
 
-                    <tr data-ng-repeat="student in school.students"
-                        data-ng-controller="UsersController"
-                        data-ng-init="findStudent(student)">
+                    <tr data-ng-repeat="student in school.students">
 
 
                         <td>
-                            <a href="">
-                                <i data-ng-click="addStudentToClass(student)"
-                                   class="glyphicon glyphicon-plus-sign"
-                                   data-ng-if="schoolclass.students.indexOf(student._id) === -1">
+                            <a href=""
+                               data-ng-click="addStudentToClass(student)">
+                                <i class="glyphicon glyphicon-plus-sign"
+                                   data-ng-if="schoolclass.students.indexOf(student) === -1">
                                 </i>
                             </a>
-                            {{student.displayName}}
+                            <span data-ng-controller="UsersController"
+                                  data-ng-init="findById(student)">
+                            {{displayName}}
+                            </span>
                         </td>
                     </tr>
                     </tbody>
                 </table>
 
             </td>
-            <td style="vertical-align: top; padding-top: 15px">
-                <table class="table-striped" style="width: 100%">
+            <td class="half-screen top-aligned top-spacer">
+                <table class="table-striped expands">
                     <thead>
                     <tr>
-                        <th class="sparesys-view-courses-course-column" style="width: 100%">In class
-                            {{schoolclass.name}}
-                        </th>
+                        <th class="expands">In class {{schoolclass.name}}</th>
                     </tr>
                     </thead>
                     <tbody>
@@ -156,14 +158,15 @@
                     <tr data-ng-repeat="student in schoolclass.students">
 
                         <td>
-                            <a data-ng-click="removeStudentFromClass(student)"
-                               class="glyphicon glyphicon-minus-sign">
+                            <a href=""
+                               data-ng-click="removeStudentFromClass(student)">
+                                <i class="glyphicon glyphicon-minus-sign"></i>
                             </a>
 
-                        <span data-ng-controller="UsersController"
-                              data-ng-init="findStudent(student)">
-                            {{student.displayName}}
-                        </span>
+                            <span data-ng-controller="UsersController"
+                                  data-ng-init="findById(student)">
+                            {{displayName}}
+                            </span>
 
                         </td>
 

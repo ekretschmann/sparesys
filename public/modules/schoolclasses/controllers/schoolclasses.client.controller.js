@@ -1,8 +1,8 @@
 'use strict';
 
 // Schoolclasses controller
-angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$state', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService',
-    function ($scope, $state, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService) {
+angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$state', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService','Users',
+    function ($scope, $state, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService, Users) {
 
         $scope.authentication = Authentication;
 
@@ -146,9 +146,13 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 schoolclassId: $stateParams.schoolclassId
             }, function (schoolclass) {
                 $scope.schoolclass = schoolclass;
-                $scope.school = Schools.get({
+                Schools.get({
                     schoolId: $scope.schoolclass.school
+                }, function (school) {
+                    $scope.school = school;
                 });
+
+
                 // remove missing courses
                 // this shouldn't happen, but while I am developing
                 // I like it to be self-fixing.
@@ -224,15 +228,15 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
 
-        $scope.removeStudentFromClass = function (student) {
+        $scope.removeStudentFromClass = function (studentId) {
             for (var i in $scope.schoolclass.students) {
-                if ($scope.schoolclass.students[i] === student) {
+                if ($scope.schoolclass.students[i] === studentId) {
                     $scope.schoolclass.students.splice(i, 1);
                 }
             }
 
             Courses.query({
-                userId: student
+                userId: studentId
             }, function(courses) {
                 courses.forEach(function(course) {
                     if ($scope.schoolclass.courses.indexOf(course.master) > -1) {
@@ -247,60 +251,58 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             $scope.schoolclass.$update();
         };
 
-        $scope.addStudentToClass = function (student) {
+        $scope.addStudentToClass = function (studentId) {
 
-            if ($scope.schoolclass.students.indexOf(student._id) === -1) {
-                $scope.schoolclass.students.push(student._id);
+            if ($scope.schoolclass.students.indexOf(studentId) === -1) {
+                $scope.schoolclass.students.push(studentId);
             }
 
             $scope.schoolclass.$update(function () {
 
                 $scope.schoolclass.courses.forEach(function(courseId) {
-                    $scope.addCourseForStudent(student._id, courseId);
+                    $scope.addCourseForStudent(studentId, courseId);
                 });
 
-
-                //$location.path('schoolclasses/' + schoolclass._id);
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-//            $scope.schoolclass.$update();
         };
 
-        $scope.addTeacherToClass = function (teacher) {
-            if ($scope.schoolclass.teachers.indexOf(teacher._id) === -1) {
-                $scope.schoolclass.teachers.push(teacher._id);
+        $scope.addTeacherToClass = function (teacherId) {
+            if ($scope.schoolclass.teachers.indexOf(teacherId) === -1) {
+                $scope.schoolclass.teachers.push(teacherId);
             }
-
             $scope.schoolclass.$update(function () {
-                if (teacher.schoolclasses.indexOf($scope.schoolclass._id) === -1) {
-                    teacher.schoolclasses.push($scope.schoolclass._id);
-                    teacher.$update(function () {
-                        $state.go($state.$current, null, {reload: true});
-                    });
-                }
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
+                Users.get({
+                    userId: teacherId
+                }, function(teacher) {
+                    if (teacher.schoolclasses.indexOf($scope.schoolclass._id) === -1) {
+                        teacher.schoolclasses.push($scope.schoolclass._id);
+                    }
+                    teacher.$update();
+                });
             });
         };
 
-        $scope.removeTeacherFromClass = function (teacher) {
-            for (var i in $scope.schoolclass.teachers) {
-                if ($scope.schoolclass.teachers[i] === teacher._id) {
+
+        $scope.removeTeacherFromClass = function (teacherId) {
+            for (var i = 0; i < $scope.schoolclass.teachers.length; i++) {
+                if ($scope.schoolclass.teachers[i] === teacherId) {
                     $scope.schoolclass.teachers.splice(i, 1);
                 }
             }
-
-
-            $scope.schoolclass.$update(function (res) {
-                for (var i in teacher.schoolclasses) {
-                    if (teacher.schoolclasses[i] === $scope.schoolclass._id) {
-                        teacher.schoolclasses.splice(i, 1);
+            $scope.schoolclass.$update(function () {
+                // update teacher
+                Users.get({
+                    userId: teacherId
+                }, function(teacher) {
+                    for (var i =0; i < teacher.schoolclasses.length; i++) {
+                        if (teacher.schoolclasses[i] === $scope.schoolclass._id) {
+                            teacher.schoolclasses.splice(i, 1);
+                        }
                     }
-                }
-                teacher.$update();
-            }, function (err) {
-//                console.log(err);
+                    teacher.$update();
+                });
             });
         };
 

@@ -178,10 +178,23 @@
     float: right;
 }
 
+
+.half-screen {
+    width: 50%;
+}
 .right-aligned {
     width: 100%;
     text-align: right
 }
+
+.top-spacer {
+    padding-top: 15px;
+}
+
+.top-aligned {
+    vertical-align: top;
+}
+
 
 .size-64 {
     height: 64px

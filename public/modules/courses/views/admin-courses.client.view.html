@@ -2,33 +2,42 @@
 
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
-    <div class="sparesys-header">
+    <div class="content-header">
         <div class="pull-right">
-            <button data-ng-controller="TestDataController" data-ng-click="createDummyCourse()">Create Dummy Course</button>
+            <a class="menu-link"
+               href=""
+               data-ng-click="createDummyCourse()">Dummy Course</a>
+
+            <a class="menu-link"
+               href=""
+               data-ng-click="cleanDatabase()">Clean Database</a>
+
+
+            <!--<button class="btn btn-rememberators"-->
+                    <!--data-ng-controller="TestDataController"-->
+                    <!--data-ng-click="createDummyCourse()">Create Dummy Course</button>-->
         </div>
 
-        <div class="sparesys-title">
+        <div class="title">
             Courses Administration
         </div>
-        <div class="sparesys-subtitle">
 
-        </div>
     </div>
 
-    <table id="searchTextResults" class="table-striped" style="width: 100%">
+    <table id="searchTextResults" class="table-striped expands">
         <thead>
         <tr>
-            <th class="sparesys-view-courses-course-column"></th>
-            <th class="sparesys-view-courses-course-column">Course</th>
-            <th class="sparesys-view-courses-description-column">Description</th>
-            <th class="sparesys-view-courses-description-column">By</th>
-            <th class="sparesys-view-courses-description-column">Visible</th>
+            <th></th>
+            <th class="right-padded">Course</th>
+            <th class="right-padded">Description</th>
+            <th class="right-padded">By</th>
+            <th class="right-padded">Visible</th>
             <th>Created</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="course in courses | filter:searchText">
-            <td class="sparesys-view-courses-name-cell">
+            <td class="nobreak-label right-padded top-aligned">
                 <a href="">
                     <i data-ng-click="areYouSureToDeleteCourse(course)"
                        class="glyphicon glyphicon-remove-sign">
@@ -38,12 +47,12 @@
                         <i class="glyphicon glyphicon-edit"></i>
                     </a>
             </td>
-            <td class="sparesys-view-courses-name-cell">
+            <td class="nobreak-label right-padded top-aligned">
                 <a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></td>
-            <td>{{course.description}}</td>
-            <td class="sparesys-view-courses-name-cell">{{course.user.displayName}}</td>
-            <td class="sparesys-view-courses-name-cell">{{course.visible}}</td>
-            <td class="sparesys-view-courses-date-cell">{{course.created | date:'shortDate'}}</td>
+            <td class="expands right-padded">{{course.description}}</td>
+            <td class="nobreak-label right-padded top-aligned">{{course.user.displayName}}</td>
+            <td class="nobreak-label right-padded top-aligned">{{course.visible}}</td>
+            <td class="nobreak-label top-aligned">{{course.created | date:'shortDate'}}</td>
         </tr>
         </tbody>
     </table>

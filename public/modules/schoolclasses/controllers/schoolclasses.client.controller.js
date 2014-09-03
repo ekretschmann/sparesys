@@ -10,6 +10,11 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             Courses.query({
                 userId: studentId
             }).$promise.then(function (studentCourses) {
+                    console.log('student courses are:');
+                    studentCourses.forEach(function (studentCourse) {
+                        console.log(studentCourse.name);
+                    });
+
                     var setVisible = false;
                     studentCourses.forEach(function (studentCourse) {
 
@@ -22,6 +27,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                         }
                     });
                     if (!setVisible) {
+                        console.log('copying course for student');
                         var res = CoursesService.copyCourseFor(studentId);
                         res.get({courseId: courseId});
 

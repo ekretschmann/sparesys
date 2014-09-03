@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesController',
-    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService', 'JourneyService',
-        function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService, JourneyService) {
+    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'JourneyService',
+        function ($scope, $stateParams, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService, JourneyService) {
 
             $scope.authentication = Authentication;
             $scope.showhelp = false;
@@ -19,6 +19,37 @@ angular.module('courses').controller('CoursesController',
                 $scope.showhelp = ! $scope.showhelp;
             };
 
+
+            $scope.cleanDatabase = function() {
+                Courses.query(function(courses) {
+                    var validCourseIds = [];
+                    courses.forEach(function(course) {
+                        validCourseIds.push(course._id);
+                    });
+
+                    Packs.query(function(packs) {
+                        var validPackIds = [];
+                        packs.forEach(function(pack) {
+                            if(validCourseIds.indexOf(pack.course) === -1) {
+                                console.log('deleting pack '+pack._id);
+                                CoursesService.removePack(pack);
+                            } else {
+                                validPackIds.push(pack._id);
+                            }
+
+                        });
+
+                        Cards.query(function(cards) {
+                            cards.forEach(function(card) {
+                                if(validPackIds.indexOf(card.pack) === -1) {
+                                    console.log('deleting card '+card._id);
+                                    card.$remove();
+                                }
+                            });
+                        });
+                    });
+                });
+            };
 
             $scope.userHasCreatedPackBefore = function() {
                 return JourneyService.userHasCreatedPackBefore();
@@ -106,6 +137,7 @@ angular.module('courses').controller('CoursesController',
             // Find a list of Courses
             $scope.find = function () {
                 $scope.courses = Courses.query();
+
             };
 
             // Find list for current user

@@ -314,6 +314,7 @@ a:hover {
     background-image: linear-gradient(to bottom, #4E51E5 0%, #030698 100%);
     border-color: #4E51E5;
     color: #ECECFF;
+    font-weight: bold;
     min-width: 100px;
 }
 .btn-rememberators:hover,

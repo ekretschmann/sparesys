@@ -8,37 +8,33 @@
                 </div>
             </div>
 
-            <form class="form-horizontal" novalidate>
-                <fieldset>
-                    <div class="sparesys-header">
-                        <table class="sparesys-view-object-table">
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Name</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="name"
-                                           id="packname" class="form-control addpackfocus"
-                                           placeholder="Name"
-                                           data-ng-init="setFocus()"
-                                           required></td>
-                            </tr>
-                        </table>
-                    </div>
 
-                    <div>
-                        <button class="btn btn-primary sparesys-button"
-                                type="submit"
-                                ng-click="addPackToCourse()"
-                                >
-                            Add
-                        </button>
+            <div class="content-header">
+                <table>
+                    <tr>
+                        <td class="right-padded">Name</td>
+                        <td class="expands">
+                            <input type="text" data-ng-model="name"
+                                   id="packname"
+                                   class="form-control focus"
+                                   placeholder="Name"
+                                   data-ng-init="setFocus()"
+                                   required></td>
+                    </tr>
+                </table>
+            </div>
 
-                        <div class="pull-right">
-                            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Done</button>
-                        </div>
+            <div class="center-aligned">
+                <button class="btn btn-rememberators"
+                        type="submit"
+                        ng-click="addPackToCourse()"
+                        >
+                    Add
+                </button>
 
-                     </div>
-                </fieldset>
-            </form>
+                    <button class="btn btn-rememberators" ng-click="cancel()">Done</button>
+
+            </div>
 
         </div>
 

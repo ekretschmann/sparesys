@@ -1,0 +1,55 @@
+<div class="flashcard">
+
+    <h2>{{card.question}}</h2>
+
+    <span data-ng-init="playSound(card.question)" data-ng-if="state == 'question'"></span>
+
+    <div data-ng-if="state == 'question'" class="form-group">
+        <input type="text" required id="answer" name="answer"
+               class="answer form-control"
+               data-ng-model="answer.text" data-ng-init="setFocus()"
+               data-ng-keypress="key($event)">
+
+        <!--<div style="padding-top: 10px">-->
+        <!--<button data-ng-click="submitAnswer()" class="btn btn-large btn-primary">submit</button>-->
+        <!--</div>-->
+    </div>
+
+
+    <div data-ng-if="state == 'answer'">
+        <h3>
+                    <span>
+                        your answer: {{answer.text}}
+                    </span>
+        </h3>
+
+        <h3>
+                    <span data-ng-if="lastRating === 3" style="color: darkgreen">
+                        correct
+                    </span>
+
+                        <span data-ng-if="lastRating === 2" style="color: #aaaa38">
+                        correct answer: {{card.answer}}
+                    </span>
+
+                        <span data-ng-if="lastRating === 1" style="color: orange">
+                        correct answer: {{card.answer}}
+                    </span>
+
+                    <span data-ng-if="lastRating === 0" style="color: red">
+                        correct answer: {{card.answer}}
+                    </span>
+        </h3>
+
+
+    </div>
+</div>
+
+<div style="text-align: center" class="form-group">
+    <div data-ng-if="state == 'question'" style="padding-top: 10px">
+        <button data-ng-click="submitAnswer()">submit</button>
+    </div>
+    <button data-ng-if="state == 'answer'" data-ng-click="nextCard()">
+        next
+    </button>
+</div>

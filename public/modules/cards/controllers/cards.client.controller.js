@@ -39,8 +39,22 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.directions = ['one way', 'both ways'];
 
 
-        // dont know why I have to do this. Seems the checkboxes don't like modal windows
         $scope.setValidation = function (value) {
+
+
+            if (value.toString() === 'always computer-checked') {
+                $scope.card.validation = 'checked';
+            } else if (value.toString() === 'always self-checked') {
+                $scope.card.validation = 'self';
+            } else {
+                $scope.card.validation = 'default';
+            }
+
+            $scope.card.$update(function (c) {
+//                $location.path('packs/' + card.packs[0] + '/edit');
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
             $scope.validation = value;
         };
 

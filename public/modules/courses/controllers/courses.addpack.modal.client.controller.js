@@ -42,7 +42,6 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
 
 
                 $scope.course.slaves.forEach(function(slaveId) {
-                    console.log(slaveId);
                     Courses.query({
                         _id: slaveId
                     }, function (slaveCourses) {

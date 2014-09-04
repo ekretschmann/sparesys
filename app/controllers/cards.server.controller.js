@@ -83,6 +83,8 @@ exports.update = function (req, res) {
 
     card.slaves.forEach(function (cid) {
 
+
+
         var findCard = Card.find({'_id': cid}).exec(function (err) {
             if (err) {
                 console.log('Error: ' + err);

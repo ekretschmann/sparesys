@@ -1,12 +1,15 @@
 <script type="text/ng-template" id="areYouSureToDeletePack.html">
     <div class="modal-body">
 
-        <div class="sparesys-header">
-            <div class="sparesys-title" style="text-align: center">
-                Delete Pack: {{pack.name}}
+        <div class="content-header">
+            <div class="title center-aligned" style="text-align: center">
+                Delete Pack
+            </div>
+            <div class="title center-aligned">
+                {{pack.name}}
             </div>
         </div>
-        <div style="text-align: center">
+        <div class="center-aligned">
         <button class="btn btn-rememberators" ng-click="ok()">OK</button>
         <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
         </div>

@@ -138,11 +138,6 @@
     margin-bottom: 3px;
 }
 
-.table-striped {
-    width: 1000%;
-    /*margin-top: 20px;*/
-    /*margin-bottom: 20px;*/
-}
 
 .nobreak-label {
     white-space: nowrap;
@@ -348,6 +343,10 @@ a.gallerypic span.zoom-icon{
 
 a.gallerypic:hover span.zoom-icon{
     visibility:visible;
+}
+
+.table-striped {
+    width: 100%;
 }
 
 .table-striped>tbody>tr:nth-child(odd)>td,

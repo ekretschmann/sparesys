@@ -1,12 +1,34 @@
 <div class="flashcard">
 
-    <div   data-ng-if="card.history.length === 0"
-            style="padding-top: 5px; padding-right: 5px; color:#4DB22B;">
+    <div class="card-score">
+        Score: {{cardScore}}
+    </div>
+
+    <div data-ng-if="card.history.length > 0"
+         class="history text-muted">
+
+        <div style="font-size: x-small">
+            Repetitions: {{card.history.length}}
+        </div>
+        <div style="font-size: x-small">
+            Last Check: {{card.history[card.history.length-1].assessment }}
+        </div>
+        <div style="font-size: x-small">
+            First Repetition: {{card.history[0].when | date:'medium'}}
+        </div>
+        <div style="font-size: x-small">
+            Last Repetition: {{card.history[card.history.length-1].when | date:'medium'}}
+        </div>
+
+    </div>
+
+    <div data-ng-if="card.history.length === 0"
+         class="new-card">
         <table>
             <tr>
-                <td style="width: 100%"></td>
+                <td class="expands"></td>
                 <td class="top-aligned nobreak-label">
-                    <div>
+                    <div class="font-s">
                         New Card!
                     </div>
                 </td>
@@ -21,7 +43,7 @@
     </div>
 
 
-    <h2 data-ng-if="slides.length === 0" style="padding-top: 30px">{{card.question}}</h2>
+    <div data-ng-if="slides.length === 0" class="question">{{card.question}}</div>
 
     <div data-ng-if="slides.length > 0">
         <table>

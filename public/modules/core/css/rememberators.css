@@ -204,6 +204,11 @@
     font-size: 24pt;
 }
 
+.font-s {
+    font-family: 'Grinched';
+    font-size: 14pt;
+}
+
 .hero-boy:after, .hero-girl:after, .guru:after, .philosopher:after, .teacher-man:after, .teacher-woman:after {
     display: block;
     text-align: center;
@@ -311,6 +316,7 @@
 
 
 .flashcard {
+    position: relative;
     /*padding: 30px;*/
     margin-bottom: 30px;
     color: inherit;
@@ -364,4 +370,72 @@ a.gallerypic:hover span.zoom-icon{
     border-color: #4DB22B;
 
     /*background-color: #4DB22B;*/
+}
+
+@keyframes resize {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 100;
+    }
+}
+
+
+.question {
+    padding-top: 30px;
+    font-size: xx-large;
+
+    transition: all 1s ease-in-out;
+
+    animation-name: resize;
+    animation-duration: 1s;
+    animation-timing-function: ease-out;
+}
+
+.new-card {
+
+    padding-top: 5px;
+    padding-right: 5px;
+    color:#4DB22B;
+    position: absolute;
+    bottom: 5px;
+    right: 0;
+    transition: all 1s ease-in-out;
+
+    animation-name: resize;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+}
+
+.card-score {
+    position: absolute;
+    top: 5px;
+    right: 10px;
+    transition: all 1s ease-in-out;
+}
+
+.correct {
+    color:#4DB22B;
+    font-size: xx-large;
+    padding: 20px;
+}
+
+.correct-answer {
+}
+
+.history {
+
+    text-align: left;
+    padding-top: 5px;
+    padding-right: 5px;
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    transition: all 1s ease-in-out;
+
+
+    animation-name: resize;
+    animation-duration: 1s;
+    animation-timing-function: ease-in-out;
 }

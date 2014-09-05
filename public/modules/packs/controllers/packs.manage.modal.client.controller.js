@@ -46,7 +46,6 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
 
             var cardsToUpdate = pack.cards.length;
             var cardsUpdated = 0;
-            console.log('setting');
             JourneyService.packEdited();
             pack.cards.forEach(function (card) {
                 Cards.get({

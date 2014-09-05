@@ -25,6 +25,7 @@ angular.module('core').controller('PracticeController',
             $scope.inPlay = 0;
             $scope.score = 0;
             $scope.cardScore = 0;
+            $scope.practice = {};
 
             $scope.setFocus = function () {
                 $timeout(function () {
@@ -41,15 +42,22 @@ angular.module('core').controller('PracticeController',
 
 
                 var score = 0;
-                if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
-                    score = 3;
-                }
 
-                $scope.card.alternatives.forEach(function(alt) {
-                    if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                if ($scope.practice.direction ==='forward') {
+                    if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                         score = 3;
                     }
-                });
+
+                    $scope.card.alternatives.forEach(function (alt) {
+                        if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                            score = 3;
+                        }
+                    });
+                } else {
+                    if ($scope.card.question.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                        score = 3;
+                    }
+                }
 
 
                 if (score === 3) {
@@ -230,6 +238,19 @@ angular.module('core').controller('PracticeController',
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
                     $scope.state = 'question';
+
+
+                    if ($scope.card.bothways && Math.random() > 0.5) {
+                        $scope.practice.direction = 'reverse';
+                        $scope.practice.question = $scope.card.answer;
+                        $scope.practice.answer = $scope.card.question;
+                    } else {
+                        $scope.practice.direction = 'forward';
+                        $scope.practice.question = $scope.card.question;
+                        $scope.practice.answer = $scope.card.answer;
+                    }
+
+
                     $scope.updateSlides();
                     $state.go($state.current);
                 });
@@ -249,8 +270,24 @@ angular.module('core').controller('PracticeController',
                 $scope.keys = Object.keys($scope.analysis);
                 $scope.state = 'question';
 
+                console.log($scope.card.bothways);
+                if ($scope.card.bothways && Math.random() > 0.5) {
+                    console.log('swapping');
+                    $scope.practice.direction = 'reverse';
+                    $scope.practice.question = $scope.card.answer;
+                    $scope.practice.answer = $scope.card.question;
+                } else {
+                    $scope.practice.direction = 'forward';
+                    $scope.practice.question = $scope.card.question;
+                    $scope.practice.answer = $scope.card.answer;
+                }
+
+
+
                 $scope.updateSlides();
                 $state.go($state.current);
+
+
 
             };
 
@@ -265,7 +302,6 @@ angular.module('core').controller('PracticeController',
                     $scope.slides.push(slide);
                 }, this);
 
-                console.log($scope.slides);
             };
 
             $scope.getPredictedRetention = function (card) {
@@ -316,8 +352,11 @@ angular.module('core').controller('PracticeController',
                     }, this);
 
 
+                    $scope.getValidation();
                     $scope.analysis = SchedulerService.getAnalysis();
                     $scope.keys = Object.keys($scope.analysis);
+                    $scope.practice.question = $scope.card.question;
+                    $scope.practice.answer = $scope.card.answer;
                     $scope.setScore();
                     $scope.setCardScore();
                 });

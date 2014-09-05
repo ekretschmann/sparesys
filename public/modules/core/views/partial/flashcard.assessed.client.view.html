@@ -42,10 +42,10 @@
 
     </div>
 
-    <div data-ng-if="slides.length === 0" class="question">{{card.question}}</div>
+    <div data-ng-if="slides.length === 0" class="question">{{practice.question}}</div>
 
 
-    <span data-ng-init="playSound(card.question)" data-ng-if="state == 'question'"></span>
+    <span data-ng-init="playSound(practice.question)" data-ng-if="state == 'question'"></span>
 
     <div data-ng-if="state == 'question'" class="form-group" class="expands" style="padding: 20px;">
         <input type="text" required id="answer" name="answer"
@@ -78,10 +78,10 @@
         </div>
 
         <div class="correct-answer">
-            Correct Answer: {{card.answer}}
+            Correct Answer: {{practice.answer}}
         </div>
 
-        <div data-ng-if="card.alternatives && card.alternatives.length > 0">
+        <div data-ng-if="practice.direction === 'forward' && card.alternatives && card.alternatives.length > 0">
                     <span class="text-muted right-padded top-aligned">Also:</span>
                         <span class="text-muted right-padded" data-ng-repeat="alt in card.alternatives">
                     "{{alt}}"

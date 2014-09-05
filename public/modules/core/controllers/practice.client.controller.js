@@ -8,6 +8,10 @@ angular.module('core').controller('PracticeController',
             $scope.authentication = Authentication;
 
 
+            $scope.positiveFeedback = ['legen... wait for it... dary','Sweet', 'Epic', 'Great', 'Correct', 'You Rock', 'Wow', 'What an answer', 'Awesome'];
+            $scope.negativeFeedback = ['Sorry', 'Nope', 'Not Quite'];
+            $scope.correct = $scope.positiveFeedback[0];
+            $scope.incorrect = $scope.negativeFeedback[0];
             $scope.slides = [];
             $scope.validation = 'self';
             $scope.state = 'question';
@@ -35,12 +39,27 @@ angular.module('core').controller('PracticeController',
 
                 var expected = $scope.card.answer.toString();
 
-                if (expected.toLowerCase() === $scope.answer.text.toLowerCase()) {
+
+                var score = 0;
+                if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                    score = 3;
+                }
+
+                $scope.card.alternatives.forEach(function(alt) {
+                    if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                        score = 3;
+                    }
+                });
+
+
+                if (score === 3) {
                     $scope.rateCard(3);
                     $scope.lastRating = 3;
+                    $scope.correct = $scope.positiveFeedback[Math.floor((Math.random() * $scope.positiveFeedback.length))];
                 } else {
                     $scope.rateCard(0);
                     $scope.lastRating = 0;
+                    $scope.incorrect = $scope.negativeFeedback[Math.floor((Math.random() * $scope.negativeFeedback.length))];
                 }
 
 //                var dist = $scope.levenshteinDistance(expected, $scope.answer.text) / expected.length;

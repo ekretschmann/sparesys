@@ -4,27 +4,28 @@
         Score: {{cardScore}}
     </div>
 
-    <div data-ng-if="card.history.length > 0"
-         class="history text-muted">
+    <div data-ng-if="card.history.length > 0">
 
-        <div style="font-size: x-small">
-            Repetitions: {{card.history.length}}
-        </div>
-        <div style="font-size: x-small">
-            Last Check: {{card.history[card.history.length-1].assessment }}
-        </div>
-        <div style="font-size: x-small">
-            First Repetition: {{card.history[0].when | date:'medium'}}
-        </div>
-        <div style="font-size: x-small">
-            Last Repetition: {{card.history[card.history.length-1].when | date:'medium'}}
-        </div>
+        <div class="history text-muted">
 
+            <div style="font-size: x-small">
+                Repetitions: {{card.history.length}}
+            </div>
+            <div style="font-size: x-small">
+                Last Check: {{card.history[card.history.length-1].assessment }}
+            </div>
+            <div style="font-size: x-small">
+                First Repetition: {{card.history[0].when | date:'medium'}}
+            </div>
+            <div style="font-size: x-small">
+                Last Repetition: {{card.history[card.history.length-1].when | date:'medium'}}
+            </div>
+
+        </div>
     </div>
 
-    <div data-ng-if="card.history.length === 0"
-         class="new-card">
-        <table>
+    <div data-ng-if="card.history.length === 0">
+        <table class="new-card">
             <tr>
                 <td class="expands"></td>
                 <td class="top-aligned nobreak-label">
@@ -43,7 +44,12 @@
     </div>
 
 
-    <div data-ng-if="slides.length === 0" class="question">{{card.question}}</div>
+    <div data-ng-if="slides.length === 0">
+
+        <div class="question">{{card.question}}</div>
+
+    </div>
+
 
     <div data-ng-if="slides.length > 0">
         <table>
@@ -60,15 +66,21 @@
     <span data-ng-init="playSound(card.question)" data-ng-if="state == 'question'"></span>
 
 
-    <div>
-            <span>
-                <h3>
-                    <span data-ng-if="state == 'answer'">
-                        <span>{{card.answer}}</span>
-                    </span>
-                </h3>
+    <div data-ng-if="state == 'answer'">
 
-            </span>
+
+        <div class="correct-answer">
+            {{card.answer}}
+        </div>
+
+        <div data-ng-if="card.alternatives && card.alternatives.length > 0">
+            <span class="text-muted right-padded top-aligned">Also:</span>
+                        <span class="text-muted right-padded" data-ng-repeat="alt in card.alternatives">
+                    "{{alt}}"
+                </span>
+
+        </div>
+
     </div>
 </div>
 

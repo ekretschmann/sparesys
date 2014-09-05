@@ -22,9 +22,9 @@
 
     </div>
 
-    <div data-ng-if="card.history.length === 0"
-         class="new-card">
-        <table>
+    <div data-ng-if="card.history.length === 0">
+        <div>just some text</div>
+        <table  class="new-card">
             <tr>
                 <td class="expands"></td>
                 <td class="top-aligned nobreak-label">
@@ -63,27 +63,30 @@
 
         <div data-ng-if="lastRating === 3"
              class="correct">
-            Correct!
+            {{correct}}
         </div>
 
-                        <span data-ng-if="lastRating === 2" style="color: #aaaa38">
-                        correct answer: {{card.answer}}
-                    </span>
 
-                        <span data-ng-if="lastRating === 1" style="color: orange">
-                        correct answer: {{card.answer}}
-                    </span>
+        <div data-ng-if="lastRating === 0"
+             class="incorrect">
+            {{incorrect}}
+        </div>
 
-                    <span data-ng-if="lastRating === 0" style="color: red">
-                        correct answer: {{card.answer}}
-                    </span>
 
-                    <div class="your-answer">
-                        Your Answer: {{answer.text}}
-                    </div>
+        <div class="your-answer">
+            Your Answer: {{answer.text}}
+        </div>
 
         <div class="correct-answer">
-            Correct Answer: {{answer.text}}
+            Correct Answer: {{card.answer}}
+        </div>
+
+        <div data-ng-if="card.alternatives && card.alternatives.length > 0">
+                    <span class="text-muted right-padded top-aligned">Also:</span>
+                        <span class="text-muted right-padded" data-ng-repeat="alt in card.alternatives">
+                    "{{alt}}"
+                </span>
+
         </div>
 
     </div>

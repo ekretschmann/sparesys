@@ -4,6 +4,7 @@
         Score: {{cardScore}}
     </div>
 
+
     <div data-ng-if="card.history.length > 0"
          class="history text-muted">
 
@@ -23,7 +24,6 @@
     </div>
 
     <div data-ng-if="card.history.length === 0">
-        <div>just some text</div>
         <table  class="new-card">
             <tr>
                 <td class="expands"></td>
@@ -45,7 +45,15 @@
     <div data-ng-if="slides.length === 0" class="question">{{practice.question}}</div>
 
 
-    <span data-ng-init="playSound(practice.question)" data-ng-if="state == 'question'"></span>
+    <span data-ng-if="practice.direction === 'forward' && state == 'question'">
+
+        <span data-ng-init="playSound(practice.question)"></span>
+    </span>
+
+     <span data-ng-if="practice.direction === 'reverse' && state == 'answer'">
+        <span data-ng-init="playSound(practice.answer)"></span>
+    </span>
+
 
     <div data-ng-if="state == 'question'" class="form-group" class="expands" style="padding: 20px;">
         <input type="text" required id="answer" name="answer"

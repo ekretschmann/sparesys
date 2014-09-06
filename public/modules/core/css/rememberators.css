@@ -427,7 +427,7 @@ a.gallerypic:hover span.zoom-icon{
 
 .question {
     padding-top: 30px;
-    font-size: xx-large;
+    font-size: 250%;
 
     /*animation-name: appear;*/
     /*animation-duration: 5s;*/
@@ -445,6 +445,13 @@ a.gallerypic:hover span.zoom-icon{
     }
 }
 
+.sound-replay {
+    color:#4DB22B;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+    font-size: large;
+}
 
 .new-card {
 
@@ -471,7 +478,7 @@ a.gallerypic:hover span.zoom-icon{
 
 .correct-answer {
     color:#4DB22B;
-    font-size: x-large;
+    font-size: xx-large;
 }
 
 .history {

@@ -1,4 +1,4 @@
-<div class="flashcard">
+<div class="flashcard" xmlns="http://www.w3.org/1999/html">
 
     <div class="card-score">
         Score: {{cardScore}}
@@ -63,8 +63,20 @@
         </table>
     </div>
 
-    <span data-ng-init="playSound(practice.question)" data-ng-if="state == 'question'"></span>
+    <span data-ng-if="practice.direction === 'forward' && state == 'question'">
+            <a class="" href="" data-ng-click="playSound(practice.question)">
+                <i class="glyphicon glyphicon-volume-down sound-replay"></i>
+            </a>
 
+        <span data-ng-init="playSound(practice.question)"></span>
+    </span>
+
+     <span data-ng-if="practice.direction === 'reverse' && state == 'answer'">
+             <a href="" data-ng-click="playSound(practice.answer)">
+                 <i class="glyphicon glyphicon-volume-down sound-replay"></i>
+             </a>
+         <span data-ng-init="playSound(practice.answer)"></span>
+    </span>
 
     <div data-ng-if="state == 'answer'">
 

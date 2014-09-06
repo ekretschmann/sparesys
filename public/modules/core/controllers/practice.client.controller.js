@@ -8,7 +8,7 @@ angular.module('core').controller('PracticeController',
             $scope.authentication = Authentication;
 
 
-            $scope.positiveFeedback = ['legen... wait for it... dary','Sweet', 'Epic', 'Great', 'Correct', 'You Rock', 'Wow', 'What an answer', 'Awesome'];
+            $scope.positiveFeedback = ['legen... wait for it... dary', 'Sweet', 'Epic', 'Great', 'Correct', 'You Rock', 'Wow', 'What an answer', 'Awesome'];
             $scope.negativeFeedback = ['Sorry', 'Nope', 'Not Quite'];
             $scope.correct = $scope.positiveFeedback[0];
             $scope.incorrect = $scope.negativeFeedback[0];
@@ -34,7 +34,6 @@ angular.module('core').controller('PracticeController',
             };
 
 
-
             $scope.submitAnswer = function () {
 
 
@@ -43,7 +42,7 @@ angular.module('core').controller('PracticeController',
 
                 var score = 0;
 
-                if ($scope.practice.direction ==='forward') {
+                if ($scope.practice.direction === 'forward') {
                     if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                         score = 3;
                     }
@@ -114,8 +113,8 @@ angular.module('core').controller('PracticeController',
 
                 } else if ($scope.card.validation === 'default') {
                     var hrt = SchedulerService.getMaxHrt($scope.card, Date.now());
-                    if ( hrt > 1000 * 60 * 60 * 24 * 7) {
-                        $scope.validation =  'checked';
+                    if (hrt > 1000 * 60 * 60 * 24 * 7) {
+                        $scope.validation = 'checked';
                     } else {
                         $scope.validation = 'self';
                     }
@@ -127,7 +126,7 @@ angular.module('core').controller('PracticeController',
 
             $document.bind('keypress', function (event) {
 
-                if($state.$current.url.source !== '/practice/:courseId') {
+                if ($state.$current.url.source !== '/practice/:courseId') {
                     return;
                 }
 
@@ -231,7 +230,7 @@ angular.module('core').controller('PracticeController',
                     $scope.card = SchedulerService.nextCard();
                     $scope.getValidation();
                     if ($scope.card.history.length === 0) {
-                        $scope.inPlay ++;
+                        $scope.inPlay++;
                     }
                     $scope.setScore();
                     $scope.setCardScore();
@@ -240,15 +239,15 @@ angular.module('core').controller('PracticeController',
                     $scope.state = 'question';
 
 
-                    if ($scope.card.bothways && Math.random() > 0.5) {
-                        $scope.practice.direction = 'reverse';
-                        $scope.practice.question = $scope.card.answer;
-                        $scope.practice.answer = $scope.card.question;
-                    } else {
-                        $scope.practice.direction = 'forward';
-                        $scope.practice.question = $scope.card.question;
-                        $scope.practice.answer = $scope.card.answer;
-                    }
+                        if ($scope.card.bothways && Math.random() > 0.5 && $scope.card.history && $scope.card.history.length > 0) {
+                            $scope.practice.direction = 'reverse';
+                            $scope.practice.question = $scope.card.answer;
+                            $scope.practice.answer = $scope.card.question;
+                        } else {
+                            $scope.practice.direction = 'forward';
+                            $scope.practice.question = $scope.card.question;
+                            $scope.practice.answer = $scope.card.answer;
+                        }
 
 
                     $scope.updateSlides();
@@ -262,7 +261,7 @@ angular.module('core').controller('PracticeController',
                 $scope.card = SchedulerService.nextCard();
                 $scope.getValidation();
                 if ($scope.card.history.length === 0) {
-                    $scope.inPlay ++;
+                    $scope.inPlay++;
                 }
                 $scope.setScore();
                 $scope.setCardScore();
@@ -270,9 +269,8 @@ angular.module('core').controller('PracticeController',
                 $scope.keys = Object.keys($scope.analysis);
                 $scope.state = 'question';
 
-                console.log($scope.card.bothways);
-                if ($scope.card.bothways && Math.random() > 0.5) {
-                    console.log('swapping');
+
+                if ($scope.card.bothways && Math.random() > 0.5 && $scope.card.history && $scope.card.history.length > 0) {
                     $scope.practice.direction = 'reverse';
                     $scope.practice.question = $scope.card.answer;
                     $scope.practice.answer = $scope.card.question;
@@ -283,20 +281,17 @@ angular.module('core').controller('PracticeController',
                 }
 
 
-
                 $scope.updateSlides();
                 $state.go($state.current);
 
 
-
             };
 
-            $scope.updateSlides = function(){
+            $scope.updateSlides = function () {
                 $scope.slides = [];
 
 
-
-                $scope.card.images.forEach(function(img){
+                $scope.card.images.forEach(function (img) {
                     var slide = {};
                     slide.image = img;
                     $scope.slides.push(slide);
@@ -320,7 +315,7 @@ angular.module('core').controller('PracticeController',
 
             $scope.setScore = function () {
 
-                $scope.score = Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100)*$scope.inPlay;
+                $scope.score = Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100) * $scope.inPlay;
             };
 
             // Find existing Course
@@ -329,10 +324,10 @@ angular.module('core').controller('PracticeController',
                 res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
                     $scope.cards = cards;
                     $scope.inPlay = cards.length;
-                    $scope.cards.forEach(function(c) {
+                    $scope.cards.forEach(function (c) {
 
                         if (c.history.length === 0) {
-                            $scope.inPlay --;
+                            $scope.inPlay--;
                         }
                     });
 
@@ -340,12 +335,12 @@ angular.module('core').controller('PracticeController',
                     SchedulerService.init($scope.cards);
                     $scope.card = SchedulerService.nextCard();
                     if ($scope.card.history.length === 0) {
-                        $scope.inPlay ++;
+                        $scope.inPlay++;
                     }
 
                     $scope.slides = [];
 
-                    $scope.card.images.forEach(function(img){
+                    $scope.card.images.forEach(function (img) {
                         var slide = {};
                         slide.image = img;
                         $scope.slides.push(slide);

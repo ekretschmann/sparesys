@@ -31,6 +31,7 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
 
             // Redirect after save
             pack.$save(function (response) {
+                console.log('saved pack');
                 var packid = response._id;
                 $scope.course.packs.push(packid);
                 $scope.course.$update(function () {
@@ -40,13 +41,16 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
                     $scope.error = errorResponse.data.message;
                 });
 
+                console.log($scope.course.slaves);
 
                 $scope.course.slaves.forEach(function(slaveId) {
+                    console.log('got slave: '+slaveId);
                     Courses.query({
                         _id: slaveId
                     }, function (slaveCourses) {
 
                         if (slaveCourses.length === 1) {
+                            console.log('creating slave pack');
                             var slaveCourse = slaveCourses[0];
 
                             var slavePack = new Packs({
@@ -55,10 +59,12 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
                             });
 
                             slavePack.$save(function() {
+                                console.log('saving pack');
                                 slaveCourse.packs.push(slavePack._id);
                                 self.slaves.push(slavePack._id);
                                 self.slavesSaved ++;
                                 if (self.slavesSaved === self.slavesToSave) {
+                                    console.log('updating');
                                     pack.slaves = self.slaves;
                                     pack.$update();
                                     slaveCourse.$update();

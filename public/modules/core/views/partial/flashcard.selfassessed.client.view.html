@@ -48,6 +48,13 @@
 
         <div class="question">{{practice.question}}</div>
 
+        <div data-ng-if="card.alternativequestions && card.alternativequestions.length > 0">
+            <span class="text-muted right-padded top-aligned">Also:</span>
+                        <span class="text-muted right-padded" data-ng-repeat="alt in card.alternativequestions">
+                    "{{alt}}"
+                </span>
+
+        </div>
     </div>
 
 
@@ -65,7 +72,7 @@
 
     <span data-ng-if="practice.direction === 'forward' && state == 'question'">
             <a class="" href="" data-ng-click="playSound(practice.question)">
-                <i class="glyphicon glyphicon-volume-down sound-replay"></i>
+                <i class="glyphicon glyphicon-volume-up sound-replay"></i>
             </a>
 
         <span data-ng-init="playSound(practice.question)"></span>
@@ -73,9 +80,15 @@
 
      <span data-ng-if="practice.direction === 'reverse' && state == 'answer'">
              <a href="" data-ng-click="playSound(practice.answer)">
-                 <i class="glyphicon glyphicon-volume-down sound-replay"></i>
+                 <i class="glyphicon glyphicon-volume-up sound-replay"></i>
              </a>
          <span data-ng-init="playSound(practice.answer)"></span>
+    </span>
+
+    <span data-ng-if="practice.direction === 'forward' && state == 'answer'">
+             <a href="" data-ng-click="playSound(practice.answer)">
+                 <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+             </a>
     </span>
 
     <div data-ng-if="state == 'answer'">

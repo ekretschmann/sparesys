@@ -445,6 +445,9 @@ a.gallerypic:hover span.zoom-icon{
     }
 }
 
+.sound-replay:hover {
+    font-size: x-large;
+}
 .sound-replay {
     color:#4DB22B;
     position: absolute;

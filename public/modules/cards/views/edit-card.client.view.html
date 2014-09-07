@@ -66,6 +66,31 @@
                            data-ng-blur="update()"
                            required>
                 </td>
+            </tr>
+
+            <tr data-ng-repeat="alt in card.alternativequestions track by $index">
+                <td class="right-padded"></td>
+                <td class="expands">
+                    <input type="text"
+                           data-ng-model="alt"
+                           class="form-control"
+                           data-ng-blur="updateAlternativeLQuestion($index, alt)"
+                           placeholder="Alternative Question">
+                </td>
+            </tr>
+
+            <tr class="controls">
+                <td class="right-padded"></td>
+                <td class="expands">
+                    <input type="text"
+                           data-ng-model="nextAlternativeQuestion"
+                           id="alternativequestion"
+                           class="form-control alternative"
+                           ng-keyup="enterAlternativeQuestion($event)"
+                           placeholder="Next Alternative Question"
+                           data-ng-blur="updateNextAlternativeQuestion()">
+                </td>
+            </tr>
 
             <tr>
                 <td class="right-padded">Back</td>

@@ -16,6 +16,10 @@ var CardSchema = new Schema({
         required: 'Please fill out Card Question',
         trim: true
     },
+    alternativequestions: {
+        type: [String],
+        default: []
+    },
     answer: {
         type: String,
         default: '',

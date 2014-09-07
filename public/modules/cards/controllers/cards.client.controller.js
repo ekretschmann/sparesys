@@ -29,6 +29,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.authentication = Authentication;
         $scope.nextAlternative = undefined;
+        $scope.nextAlternativeQuestion = undefined;
 
         $scope.validation = 'leave unchanged';
         $scope.sound = 'leave unchanged';
@@ -162,6 +163,13 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 $scope.updateNextAlternative();
             }
         };
+
+        $scope.enterAlternativeQuestion = function (event) {
+            if (event.keyCode === 13) {
+                $scope.updateNextAlternativeQuestion();
+            }
+        };
+
         // Create new Card
         $scope.create = function () {
 
@@ -224,6 +232,19 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             $scope.update();
         };
 
+        $scope.updateAlternativeQuestion = function (index, alt) {
+
+            $scope.card.alternativequestions[index] = alt;
+            var alts = [];
+            $scope.card.alternativequestions.forEach(function (alt) {
+                if (alt !== undefined && alt !== '') {
+                    alts.push(alt);
+                }
+            });
+            $scope.card.alternativequestions = alts;
+            $scope.update();
+        };
+
         $scope.updateNextAlternative = function () {
 
 
@@ -233,6 +254,21 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
                 $timeout(function () {
                     angular.element('#alternative').trigger('focus');
+                }, 100);
+
+            }
+            $scope.update();
+        };
+
+        $scope.updateNextAlternativeQuestion = function () {
+
+
+            if ($scope.nextAlternativeQuestion) {
+                $scope.card.alternativequestions.push($scope.nextAlternativeQuestion);
+                $scope.nextAlternativeQuestion = undefined;
+
+                $timeout(function () {
+                    angular.element('#alternativequestion').trigger('focus');
                 }, 100);
 
             }

@@ -49,6 +49,17 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
                         _id: slaveId
                     }, function (slaveCourses) {
 
+                        if (slaveCourses.length === 0) {
+                            // course does not exist any more
+                            console.log('deleting course '+slaveId);
+                            self.slavesSaved ++;
+                            for (var i in $scope.course.slaves) {
+                                if ($scope.course.slaves[i] === slaveId) {
+                                    $scope.course.slaves.splice(i, 1);
+                                }
+                            }
+                        }
+
                         if (slaveCourses.length === 1) {
                             console.log('creating slave pack');
                             var slaveCourse = slaveCourses[0];
@@ -68,6 +79,7 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
                                     pack.slaves = self.slaves;
                                     pack.$update();
                                     slaveCourse.$update();
+                                    $scope.course.$update();
                                 }
                             });
 

@@ -48,9 +48,9 @@
 
         <div class="question">{{practice.question}}</div>
 
-        <div data-ng-if="card.alternativequestions && card.alternativequestions.length > 0">
+        <div data-ng-if="practice.alternativequestions && practice.alternativequestions.length > 0">
             <span class="text-muted right-padded top-aligned">Also:</span>
-                        <span class="text-muted right-padded" data-ng-repeat="alt in card.alternativequestions">
+                        <span class="text-muted right-padded" data-ng-repeat="alt in practice.alternativequestions">
                     "{{alt}}"
                 </span>
 
@@ -98,9 +98,9 @@
             {{practice.answer}}
         </div>
 
-        <div data-ng-if="practice.direction === 'forward' && card.alternatives && card.alternatives.length > 0">
+        <div data-ng-if="practice.direction === 'forward' && practice.alternatives && practice.alternatives.length > 0">
             <span class="text-muted right-padded top-aligned">Also:</span>
-                        <span class="text-muted right-padded" data-ng-repeat="alt in card.alternatives">
+                        <span class="text-muted right-padded" data-ng-repeat="alt in practice.alternatives">
                     "{{alt}}"
                 </span>
 

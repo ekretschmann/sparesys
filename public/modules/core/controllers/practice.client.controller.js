@@ -243,10 +243,14 @@ angular.module('core').controller('PracticeController',
                             $scope.practice.direction = 'reverse';
                             $scope.practice.question = $scope.card.answer;
                             $scope.practice.answer = $scope.card.question;
+                            $scope.practice.alternativequestions = $scope.card.alternatives;
+                            $scope.practice.alternatives = $scope.card.alternativequestions;
                         } else {
                             $scope.practice.direction = 'forward';
                             $scope.practice.question = $scope.card.question;
                             $scope.practice.answer = $scope.card.answer;
+                            $scope.practice.alternativequestions = $scope.card.alternativequestions;
+                            $scope.practice.alternatives = $scope.card.alternatives;
                         }
 
 
@@ -274,10 +278,14 @@ angular.module('core').controller('PracticeController',
                     $scope.practice.direction = 'reverse';
                     $scope.practice.question = $scope.card.answer;
                     $scope.practice.answer = $scope.card.question;
+                    $scope.practice.alternativequestions = $scope.card.alternatives;
+                    $scope.practice.alternatives = $scope.card.alternativequestions;
                 } else {
                     $scope.practice.direction = 'forward';
                     $scope.practice.question = $scope.card.question;
                     $scope.practice.answer = $scope.card.answer;
+                    $scope.practice.alternativequestions = $scope.card.alternativequestions;
+                    $scope.practice.alternatives = $scope.card.alternatives;
                 }
 
 

@@ -214,6 +214,11 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                     $scope.card.answer = $scope.card.alternatives[0];
                     $scope.card.alternatives.splice(0, 1);
                 }
+
+                if ($scope.card.alternativequestions[0]) {
+                    $scope.card.question = $scope.card.alternativequestions[0];
+                    $scope.card.alternativequestions.splice(0, 1);
+                }
             }
             $scope.update();
         };

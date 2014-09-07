@@ -103,6 +103,7 @@ exports.update = function (req, res) {
             c.images = card.images;
             c.bothways = card.bothways;
             c.alternatives = card.alternatives;
+            c.alternativequestions = card.alternativequestions;
             c.sound = card.sound;
             c.save();
 

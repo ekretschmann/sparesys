@@ -263,6 +263,7 @@ var copyCards = function (cardIds, userId, newPackId, isSupervised) {
             copy.images = original.images;
             copy.bothways = original.bothways;
             copy.alternatives = original.alternatives;
+            copy.alternativequestions = original.alternativequestions;
             copy.sound = original.sound;
             copy.packs = [newPackId];
             copy.save();

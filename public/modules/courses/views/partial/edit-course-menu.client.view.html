@@ -7,7 +7,7 @@
     <a class="menu-link"
        href=""
        data-ng-click="areYouSureToDeleteCourse(course)"
-       data-ng-show="authentication.user._id == course.user._id">Delete</a>
+       data-ng-show="authentication.user._id == course.user._id || authentication.user.roles.indexOf('admin') !== -1">Delete</a>
 
             <span data-ng-if="!course.master && !course.published && course.packs.length > 0">
             <a class="menu-link"

@@ -40,7 +40,6 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
                     $scope.error = errorResponse.data.message;
                 });
 
-                console.log($scope.course.slaves);
 
                 $scope.course.slaves.forEach(function(slaveId) {
                     Courses.query({

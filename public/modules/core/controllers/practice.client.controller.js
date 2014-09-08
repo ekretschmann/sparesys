@@ -31,7 +31,7 @@ angular.module('core').controller('PracticeController',
 
             $scope.typeSpecialChar = function (c) {
                 if (!$scope.answer.text) {
-                    $scope.answer.text = "";
+                    $scope.answer.text = '';
                 }
 
                 var selectionStart = angular.element('.answer')[0].selectionStart;
@@ -307,6 +307,13 @@ angular.module('core').controller('PracticeController',
                     $scope.practice.alternatives = $scope.card.alternatives;
                 }
 
+                if (window.SpeechSynthesisUtterance !== undefined) {
+                    $scope.practice.sound = $scope.card.sound;
+
+                } else {
+                    $scope.practice.sound = false;
+                }
+                $scope.practice.assessment = $scope.validation;
 
                 $scope.updateSlides();
                 $state.go($state.current);

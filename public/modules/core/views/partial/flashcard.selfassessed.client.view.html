@@ -70,6 +70,9 @@
         </table>
     </div>
 
+    <span data-ng-if="practice.assessment === 'self' && practice.sound">
+
+
     <span data-ng-if="practice.direction === 'forward' && state == 'question'">
             <a class="" href="" data-ng-click="playSound(practice.question)">
                 <i class="glyphicon glyphicon-volume-up sound-replay"></i>
@@ -89,6 +92,7 @@
              <a href="" data-ng-click="playSound(practice.answer)">
                  <i class="glyphicon glyphicon-volume-up sound-replay"></i>
              </a>
+    </span>
     </span>
 
     <div data-ng-if="state == 'answer'">

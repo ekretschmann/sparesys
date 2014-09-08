@@ -86,16 +86,12 @@
         </div>
         <table class="table-striped" style="width: 100%;">
 
-            <tr>
-                <th>Name</th>
-                <th class="nobreak-label">Class</th>
-            </tr>
             <tr data-ng-repeat="student in school.students"
                 data-ng-controller="UsersController"
                 data-ng-init="findStudent(student)">
 
 
-                <td class="sparesys-view-object-content-cell">
+                <td>
                     {{student.displayName}}
                 </td>
 
@@ -143,10 +139,6 @@
         </div>
         <table class="table-striped">
 
-            <tr>
-                <th>Name</th>
-                <th class="nobreak-label">Teaches Classes</th>
-            </tr>
             <tr data-ng-repeat="teacher in school.teachers"
                 data-ng-controller="UsersController"
                 data-ng-init="findTeacher(teacher)">
@@ -155,13 +147,7 @@
                 <td class="expands">
                     {{teacher.displayName}}
                 </td>
-                <td>
-                    <div data-ng-repeat="schoolclass in teacher.schoolclasses"
-                         data-ng-controller="SchoolclassesController"
-                         data-ng-init="findById(schoolclass)">
-                        {{schoolclass.name}}<br/>
-                    </div>
-                </td>
+
             </tr>
         </table>
     </div>
@@ -207,7 +193,7 @@
 
             <thead>
             <tr>
-                <th class="right-padded">Class Name</th>
+                <th class="right-padded"></th>
                 <th class="right-padded">Teachers</th>
                 <th>Students</th>
             </tr>

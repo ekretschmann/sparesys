@@ -61,10 +61,22 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.setSound = function (value) {
             $scope.sound = value;
+            if (value === 'yes') {
+                $scope.card.sound = true;
+            } else if (value === 'no') {
+                $scope.card.sound = false;
+            }
+            $scope.card.$update();
         };
 
         $scope.setDirection = function (value) {
             $scope.direction = value;
+            if (value === 'one way') {
+                $scope.card.bothways = false;
+            } else if (value === 'both ways') {
+                $scope.card.bothways = true;
+            }
+            $scope.card.$update();
         };
 
         // Find existing Card

@@ -14,7 +14,6 @@ angular.module('core').controller('HomeController', ['$scope', '$modal', 'Authen
             {image: '/modules/core/img/brand/guru-medium.gif', text: 'Unleash your brainpower!'},
             {image: '/modules/core/img/brand/teacher-man-medium.gif', text: 'Do something worth Remembering!'},
             {image: '/modules/core/img/brand/teacher-woman-medium.gif', text: 'Forget about Forgetting!'}
-//            {image: '/modules/core/img/brand/teacher-man-medium.gif', text: 'It all started with Ebbinghaus ...'}
         ];
 
 

@@ -484,6 +484,11 @@ a.gallerypic:hover span.zoom-icon{
     font-size: xx-large;
 }
 
+.incorrect-answer {
+    color:#E99267;;
+    font-size: xx-large;
+}
+
 .history {
 
     text-align: left;

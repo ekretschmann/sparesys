@@ -27,6 +27,20 @@ angular.module('core').controller('PracticeController',
             $scope.cardScore = 0;
             $scope.practice = {};
 
+            $scope.specialChars = [];
+
+            $scope.typeSpecialChar = function (c) {
+                if (!$scope.answer.text) {
+                    $scope.answer.text = "";
+                }
+
+                var selectionStart = angular.element('.answer')[0].selectionStart;
+                var selectionEnd = angular.element('.answer')[0].selectionEnd;
+
+                $scope.answer.text = $scope.answer.text.substr(0, selectionStart) + c + $scope.answer.text.substr(selectionEnd);
+                angular.element('.answer').trigger('focus');
+            };
+
             $scope.setFocus = function () {
                 $timeout(function () {
                     angular.element('.answer').trigger('focus');
@@ -41,6 +55,7 @@ angular.module('core').controller('PracticeController',
 
 
                 var score = 0;
+
 
                 if ($scope.practice.direction === 'forward') {
                     if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
@@ -125,6 +140,7 @@ angular.module('core').controller('PracticeController',
 
 
             $document.bind('keypress', function (event) {
+
 
                 if ($state.$current.url.source !== '/practice/:courseId') {
                     return;
@@ -227,35 +243,38 @@ angular.module('core').controller('PracticeController',
                     thecard.history = $scope.card.history;
                     thecard.lastRep = $scope.card.lastRep;
                     thecard.$update();
-                    $scope.card = SchedulerService.nextCard();
-                    $scope.getValidation();
-                    if ($scope.card.history.length === 0) {
-                        $scope.inPlay++;
-                    }
-                    $scope.setScore();
-                    $scope.setCardScore();
-                    $scope.analysis = SchedulerService.getAnalysis();
-                    $scope.keys = Object.keys($scope.analysis);
-                    $scope.state = 'question';
 
+                    $scope.nextCard();
 
-                        if ($scope.card.bothways && Math.random() > 0.5 && $scope.card.history && $scope.card.history.length > 0) {
-                            $scope.practice.direction = 'reverse';
-                            $scope.practice.question = $scope.card.answer;
-                            $scope.practice.answer = $scope.card.question;
-                            $scope.practice.alternativequestions = $scope.card.alternatives;
-                            $scope.practice.alternatives = $scope.card.alternativequestions;
-                        } else {
-                            $scope.practice.direction = 'forward';
-                            $scope.practice.question = $scope.card.question;
-                            $scope.practice.answer = $scope.card.answer;
-                            $scope.practice.alternativequestions = $scope.card.alternativequestions;
-                            $scope.practice.alternatives = $scope.card.alternatives;
-                        }
-
-
-                    $scope.updateSlides();
-                    $state.go($state.current);
+//                    $scope.card = SchedulerService.nextCard();
+//                    $scope.getValidation();
+//                    if ($scope.card.history.length === 0) {
+//                        $scope.inPlay++;
+//                    }
+//                    $scope.setScore();
+//                    $scope.setCardScore();
+//                    $scope.analysis = SchedulerService.getAnalysis();
+//                    $scope.keys = Object.keys($scope.analysis);
+//                    $scope.state = 'question';
+//
+//
+//                        if ($scope.card.bothways && Math.random() > 0.5 && $scope.card.history && $scope.card.history.length > 0) {
+//                            $scope.practice.direction = 'reverse';
+//                            $scope.practice.question = $scope.card.answer;
+//                            $scope.practice.answer = $scope.card.question;
+//                            $scope.practice.alternativequestions = $scope.card.alternatives;
+//                            $scope.practice.alternatives = $scope.card.alternativequestions;
+//                        } else {
+//                            $scope.practice.direction = 'forward';
+//                            $scope.practice.question = $scope.card.question;
+//                            $scope.practice.answer = $scope.card.answer;
+//                            $scope.practice.alternativequestions = $scope.card.alternativequestions;
+//                            $scope.practice.alternatives = $scope.card.alternatives;
+//                        }
+//
+//
+//                    $scope.updateSlides();
+//                    $state.go($state.current);
                 });
 
             };
@@ -326,6 +345,10 @@ angular.module('core').controller('PracticeController',
                 $scope.score = Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100) * $scope.inPlay;
             };
 
+            $scope.prepareNextCard = function () {
+
+            };
+
             // Find existing Course
             $scope.init = function () {
                 var res = CoursesService.serverLoadCards();
@@ -341,33 +364,22 @@ angular.module('core').controller('PracticeController',
 
 
                     SchedulerService.init($scope.cards);
-                    $scope.card = SchedulerService.nextCard();
-                    if ($scope.card.history.length === 0) {
-                        $scope.inPlay++;
-                    }
 
-                    $scope.slides = [];
-
-                    $scope.card.images.forEach(function (img) {
-                        var slide = {};
-                        slide.image = img;
-                        $scope.slides.push(slide);
-                    }, this);
-
-
-                    $scope.getValidation();
-                    $scope.analysis = SchedulerService.getAnalysis();
-                    $scope.keys = Object.keys($scope.analysis);
-                    $scope.practice.question = $scope.card.question;
-                    $scope.practice.answer = $scope.card.answer;
-                    $scope.setScore();
-                    $scope.setCardScore();
+                    $scope.nextCard();
                 });
 
                 Courses.get({
                     courseId: $stateParams.courseId
                 }, function (course) {
                     $scope.course = course;
+
+                    if ($scope.course.language && $scope.course.language.name === 'Spanish') {
+                        $scope.specialChars = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+                    } else if ($scope.course.language && $scope.course.language.name === 'French') {
+                        $scope.specialChars = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+                    } else if ($scope.course.language && $scope.course.language.name === 'German') {
+                        $scope.specialChars = ['ä', 'é', 'ö', 'ü', 'ß'];
+                    }
                 });
             };
 

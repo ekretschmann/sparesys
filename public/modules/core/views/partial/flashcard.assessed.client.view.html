@@ -61,6 +61,11 @@
                data-ng-model="answer.text" data-ng-init="setFocus()"
                data-ng-keypress="key($event)">
 
+
+        <span data-ng-repeat="c in specialChars">
+            <button class="btn btn-rememberators btn-small" data-ng-click="typeSpecialChar(c)">{{c}}</button>
+        </span>
+
         <!--<div style="padding-top: 10px">-->
         <!--<button data-ng-click="submitAnswer()" class="btn btn-large btn-primary">submit</button>-->
         <!--</div>-->
@@ -81,12 +86,16 @@
         </div>
 
 
-        <div class="your-answer">
-            Your Answer: {{answer.text}}
+        <div data-ng-if="lastRating === 3" >
+            Your answer was:
+            <div class="correct-answer">{{answer.text}}</div>
         </div>
 
-        <div class="correct-answer">
-            Correct Answer: {{practice.answer}}
+
+
+        <div data-ng-if="lastRating === 0" >
+            Your answer was: {{answer.text}}
+            <div class="incorrect-answer">The correct answer is: {{practice.answer}}</div>
         </div>
 
         <div data-ng-if="practice.direction === 'forward' && card.alternatives && card.alternatives.length > 0">

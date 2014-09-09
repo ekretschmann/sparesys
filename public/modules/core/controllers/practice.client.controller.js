@@ -29,6 +29,37 @@ angular.module('core').controller('PracticeController',
 
             $scope.specialChars = [];
 
+
+            $scope.thatCounts = function() {
+
+
+
+                if ($scope.practice.direction === 'forward') {
+                    $scope.card.validanswers.push($scope.answer.text);
+                } else if ($scope.practice.direction === 'reverse') {
+                    $scope.card.validreverseanswers.push($scope.answer.text);
+                }
+
+                $scope.card.history.splice($scope.card.history.length-1);
+                SchedulerService.record($scope.card, Date.now(), 3);
+
+
+                Cards.get({
+                    cardId: $scope.card._id
+                }, function (thecard) {
+                    thecard.hrt = $scope.card.hrt;
+                    thecard.history = $scope.card.history;
+                    thecard.validanswers = $scope.card.validanswers;
+                    thecard.validreverseanswers = $scope.card.validreverseanswers;
+                    thecard.$update(function() {
+                        $scope.nextCard();
+                    });
+                });
+
+
+            };
+
+
             $scope.typeSpecialChar = function (c) {
                 if (!$scope.answer.text) {
                     $scope.answer.text = '';
@@ -57,6 +88,7 @@ angular.module('core').controller('PracticeController',
                 var score = 0;
 
 
+
                 if ($scope.practice.direction === 'forward') {
                     if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                         score = 3;
@@ -67,10 +99,21 @@ angular.module('core').controller('PracticeController',
                             score = 3;
                         }
                     });
+
+                    $scope.card.validanswers.forEach(function (alt) {
+                        if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                            score = 3;
+                        }
+                    });
                 } else {
                     if ($scope.card.question.toLowerCase() === $scope.answer.text.toLowerCase()) {
                         score = 3;
                     }
+                    $scope.card.validreverseanswers.forEach(function (alt) {
+                        if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                            score = 3;
+                        }
+                    });
                 }
 
 
@@ -246,35 +289,6 @@ angular.module('core').controller('PracticeController',
 
                     $scope.nextCard();
 
-//                    $scope.card = SchedulerService.nextCard();
-//                    $scope.getValidation();
-//                    if ($scope.card.history.length === 0) {
-//                        $scope.inPlay++;
-//                    }
-//                    $scope.setScore();
-//                    $scope.setCardScore();
-//                    $scope.analysis = SchedulerService.getAnalysis();
-//                    $scope.keys = Object.keys($scope.analysis);
-//                    $scope.state = 'question';
-//
-//
-//                        if ($scope.card.bothways && Math.random() > 0.5 && $scope.card.history && $scope.card.history.length > 0) {
-//                            $scope.practice.direction = 'reverse';
-//                            $scope.practice.question = $scope.card.answer;
-//                            $scope.practice.answer = $scope.card.question;
-//                            $scope.practice.alternativequestions = $scope.card.alternatives;
-//                            $scope.practice.alternatives = $scope.card.alternativequestions;
-//                        } else {
-//                            $scope.practice.direction = 'forward';
-//                            $scope.practice.question = $scope.card.question;
-//                            $scope.practice.answer = $scope.card.answer;
-//                            $scope.practice.alternativequestions = $scope.card.alternativequestions;
-//                            $scope.practice.alternatives = $scope.card.alternatives;
-//                        }
-//
-//
-//                    $scope.updateSlides();
-//                    $state.go($state.current);
                 });
 
             };

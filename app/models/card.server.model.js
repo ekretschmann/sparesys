@@ -26,6 +26,14 @@ var CardSchema = new Schema({
         required: 'Please fill out Card Answer',
         trim: true
     },
+    validanswers: {
+        type: [String],
+        default: []
+    },
+    validreverseanswers: {
+        type: [String],
+        default: []
+    },
     alternatives: {
         type: [String],
         default: []

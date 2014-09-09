@@ -476,6 +476,7 @@ a.gallerypic:hover span.zoom-icon{
     top: 5px;
     right: 10px;
     transition: all 1s ease-in-out;
+    text-align: right;
 }
 
 

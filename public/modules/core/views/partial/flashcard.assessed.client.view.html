@@ -2,6 +2,12 @@
 
     <div class="card-score">
         Score: {{cardScore}}
+        <div data-ng-if="state == 'answer'">
+            <div data-ng-if="lastRating === 0">
+                <a href="" data-ng-click="thatCounts()">My Answer Counts!</a>
+
+            </div>
+        </div>
     </div>
 
 
@@ -57,7 +63,6 @@
     <!--</span>-->
 
     </span>
-
 
 
     <div data-ng-if="card.history.length === 0">
@@ -122,6 +127,7 @@
         <div data-ng-if="lastRating === 0">
             Your answer was: {{answer.text}}
             <div class="incorrect-answer">The correct answer is: {{practice.answer}}</div>
+
         </div>
 
         <div data-ng-if="practice.direction === 'forward' && card.alternatives && card.alternatives.length > 0">

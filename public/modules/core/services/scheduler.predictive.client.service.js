@@ -54,9 +54,7 @@ angular.module('core').service('PredictiveSchedulerService', [
                 var lastRep = card.lastRep;
                 var hrt = card.hrt;
 
-//                console.log(time);
-//                console.log(lastRep);
-//                console.log("  "+(time-lastRep));
+
 
                 return Math.exp((time - lastRep) / hrt * Math.log(0.5));
             },
@@ -80,13 +78,11 @@ angular.module('core').service('PredictiveSchedulerService', [
                     } else {
                             this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000))+ ' secs'};
                     }
-//                    console.log(card.question+" - "+pr);
                     if (Math.abs(pr-0.4) < bestValue) {
                         bestCard = card;
                         bestValue = Math.abs(pr-0.4);
                     }
                 }, this);
-//                console.log('best card: '+bestCard.question);
                 return bestCard;
             },
             getAnalysis: function() {
@@ -122,9 +118,7 @@ angular.module('core').service('PredictiveSchedulerService', [
                         card.hrt = 1000*60*60*24 * (Math.random()/10.0+1.0);
                     } else if (assessment === 3) {
                         // 5 days
-                        console.log(Math.random()/10.0+1.0);
                         card.hrt = 1000*60*60*24*5 * (Math.random()/10.0+1.0);
-                        console.log(card.hrt);
                     }
                 } else {
                     if (assessment === 0) {

@@ -96,6 +96,8 @@ exports.update = function (req, res) {
             //c = _.extend(c, req.body);
 
             c.question = card.question;
+            c.validanswers = card.validanswers;
+            c.validreverseanswers = card.validreverseanswers;
             c.answer = card.answer;
             c.due = card.due;
             c.after = card.after;

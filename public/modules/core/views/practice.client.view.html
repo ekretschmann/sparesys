@@ -44,7 +44,7 @@
         </div>
 
 
-        <!--<div data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+        <div data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
             <!--<div>max hrt: {{getMaxHrt()}}</div>-->
             <!--<div>hrt: {{card.hrt/60000}}</div>-->
             <!--<div>history: {{card.history}}</div>-->
@@ -73,7 +73,7 @@
             <button data-ng-click="clearHistory(c)">Clear Card History</button>
             <button data-ng-click="clearCourseHistory()">Clear Course History</button>
 
-        <!--</div>-->
+        </div>
     </div>
 
     <div data-ng-if="cards.length === 0">

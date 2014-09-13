@@ -19,10 +19,12 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
         $scope.addCardToPack = function () {
 
 
+
             var original = new Cards({
                 question: this.question,
                 answer: this.answer,
                 packs: [$scope.pack._id],
+                course: $scope.course._id,
                 slaves: []
             });
             var self = {};
@@ -57,6 +59,7 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
                                 slave.$update();
                                 self.slaves.push(card._id);
                                 self.slavesSaved ++;
+
                                 if(self.slavesSaved === self.slavesToSave) {
                                     original.slaves = self.slaves;
                                     original.$update();

@@ -96,6 +96,9 @@ var CardSchema = new Schema({
     },
     master: {
         type: [Schema.Types.ObjectId]
+    },
+    course: {
+        type: Schema.Types.ObjectId
     }
 });
 

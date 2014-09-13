@@ -55,6 +55,36 @@
 
 
         <table>
+
+        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+            <td class="right-padded">ID</td>
+            <td class="expands  bottom-spacer">
+                {{card._id}}
+            </td>
+        </tr>
+
+        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+            <td class="right-padded">Slaves</td>
+            <td class="expands  bottom-spacer">
+                {{card.slaves}}
+            </td>
+        </tr>
+
+        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+            <td class="right-padded">Master</td>
+            <td class="expands  bottom-spacer">
+                {{card.master}}
+            </td>
+        </tr>
+
+        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+            <td class="right-padded">Course</td>
+            <td class="expands  bottom-spacer">
+                {{card.course}}
+            </td>
+        </tr>
+
+
             <tr>
                 <td class="right-padded">Front</td>
                 <td class="expands">

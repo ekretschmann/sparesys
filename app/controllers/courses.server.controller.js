@@ -234,7 +234,7 @@ exports.hasAuthorization = function (req, res, next) {
 };
 
 
-var copyCards = function (cardIds, userId, newPackId, isSupervised) {
+var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised) {
     var idMap = {};
     var cardsToCopy = cardIds.length;
     var cardsCopied = 0;
@@ -267,14 +267,16 @@ var copyCards = function (cardIds, userId, newPackId, isSupervised) {
             copy.sound = original.sound;
             copy.packs = [newPackId];
             copy.master = original._id;
+            copy.course = newCourseId;
             copy.save();
 
             if (isSupervised) {
+
                 if (!original.slaves) {
                     original.slaves = [];
                 }
                 original.slaves.push(copy._id);
-
+                original.save();
             }
 
 
@@ -320,7 +322,7 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
             copy.course = newCourseId;
             copy.master = original._id;
             idMap[original._id] = copy._id;
-            var cardPromise = copyCards(original.cards, userId, copy._id, isSupervised);
+            var cardPromise = copyCards(original.cards, userId, newCourseId, copy._id, isSupervised);
 
             cardPromise.then(function (cards) {
                 copy.cards = cards;

@@ -30,6 +30,11 @@
                 <td class="right-padded">{{score}}</td>
             </tr>
 
+            <tr data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+                <td class="right-padded">ID</td>
+                <td class="right-padded">:</td>
+                <td class="right-padded">{{card._id}}</td>
+            </tr>
         </table>
     </div>
 

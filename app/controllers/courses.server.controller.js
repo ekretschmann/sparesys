@@ -267,6 +267,7 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.sound = original.sound;
             copy.packs = [newPackId];
             copy.master = original._id;
+            copy.supervisor = original.user;
             copy.course = newCourseId;
             copy.save();
 

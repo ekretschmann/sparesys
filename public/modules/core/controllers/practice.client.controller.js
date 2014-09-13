@@ -56,6 +56,11 @@ angular.module('core').controller('PracticeController',
                     });
                 });
 
+                if ($scope.card.master) {
+                    console.log($scope.card.supervisor);
+                    console.log($scope.card.master);
+                }
+
 
             };
 

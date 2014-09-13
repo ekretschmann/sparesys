@@ -29,7 +29,6 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
             });
 
 
-            // Redirect after save
             pack.$save(function (response) {
                 var packid = response._id;
                 $scope.course.packs.push(packid);
@@ -70,8 +69,14 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
                                 self.slavesSaved ++;
                                 if (self.slavesSaved === self.slavesToSave) {
                                     pack.slaves = self.slaves;
-                                    pack.$update();
-                                    slaveCourse.$update();
+                                    pack.$update(function(err) {
+//                                        console.log('updated pack '+pack);
+//                                        console.log(err);
+                                    });
+                                    slaveCourse.$update(function(err) {
+//                                        console.log('updated course '+slaveCourse);
+//                                        console.log(err);
+                                    });
                                     $scope.course.$update();
                                 }
                             });

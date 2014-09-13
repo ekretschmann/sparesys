@@ -10,9 +10,9 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             Courses.query({
                 userId: studentId
             }).$promise.then(function (studentCourses) {
-                    studentCourses.forEach(function (studentCourse) {
-                        console.log(studentCourse.name);
-                    });
+//                    studentCourses.forEach(function (studentCourse) {
+//                        console.log(studentCourse.name);
+//                    });
 
                     var setVisible = false;
                     studentCourses.forEach(function (studentCourse) {

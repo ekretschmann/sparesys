@@ -93,6 +93,9 @@ var CardSchema = new Schema({
     slaves: {
         type: [Schema.Types.ObjectId],
         default: []
+    },
+    master: {
+        type: [Schema.Types.ObjectId]
     }
 });
 

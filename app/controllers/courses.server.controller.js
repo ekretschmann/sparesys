@@ -266,6 +266,7 @@ var copyCards = function (cardIds, userId, newPackId, isSupervised) {
             copy.alternativequestions = original.alternativequestions;
             copy.sound = original.sound;
             copy.packs = [newPackId];
+            copy.master = original._id;
             copy.save();
 
             if (isSupervised) {
@@ -273,8 +274,9 @@ var copyCards = function (cardIds, userId, newPackId, isSupervised) {
                     original.slaves = [];
                 }
                 original.slaves.push(copy._id);
-                original.save();
+
             }
+
 
             idMap[original._id] = copy._id;
 
@@ -316,6 +318,7 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
             copy.user = userId;
             copy.name = original.name;
             copy.course = newCourseId;
+            copy.master = original._id;
             idMap[original._id] = copy._id;
             var cardPromise = copyCards(original.cards, userId, copy._id, isSupervised);
 

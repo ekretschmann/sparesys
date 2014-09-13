@@ -84,6 +84,19 @@
             </td>
         </tr>
 
+        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+            <td class="right-padded">Valid Answers</td>
+            <td class="expands  bottom-spacer">
+                {{card.validanswers}}
+            </td>
+        </tr>
+
+        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+            <td class="right-padded">Valid Reverse Answers</td>
+            <td class="expands  bottom-spacer">
+                {{card.validreverseanswers}}
+            </td>
+        </tr>
 
             <tr>
                 <td class="right-padded">Front</td>

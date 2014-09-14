@@ -34,33 +34,19 @@ angular.module('core').controller('PracticeController',
 
 
 
-//                if ($scope.practice.direction === 'forward') {
-//                    $scope.card.validanswers.push($scope.answer.text);
-//                } else if ($scope.practice.direction === 'reverse') {
-//                    $scope.card.validreverseanswers.push($scope.answer.text);
-//                }
-//
-//                $scope.card.history.splice($scope.card.history.length-1);
-//                SchedulerService.record($scope.card, Date.now(), 3);
-//
-//
-//                Cards.get({
-//                    cardId: $scope.card._id
-//                }, function (thecard) {
-//                    thecard.hrt = $scope.card.hrt;
-//                    thecard.history = $scope.card.history;
-//                    thecard.validanswers = $scope.card.validanswers;
-//                    thecard.validreverseanswers = $scope.card.validreverseanswers;
-//                    thecard.$update(function() {
-//                        $scope.nextCard();
-//                    });
-//                });
+                if ($scope.practice.direction === 'forward') {
+                    $scope.card.validanswers.push($scope.answer.text);
+                } else if ($scope.practice.direction === 'reverse') {
+                    $scope.card.validreverseanswers.push($scope.answer.text);
+                }
+
+                $scope.card.history.splice($scope.card.history.length-1);
+                SchedulerService.record($scope.card, Date.now(), 3);
+
+
+
 
                 if ($scope.card.master) {
-//                    console.log($scope.card.supervisor);
-//                    console.log($scope.card.master);
-
-
                     var msg = new Messages({
                         sender: $scope.authentication.user.displayName,
                         direction: $scope.practice.direction,
@@ -69,9 +55,33 @@ angular.module('core').controller('PracticeController',
                         to: [$scope.card.supervisor]
                     });
 
+                    Cards.get({
+                        cardId: $scope.card._id
+                    }, function (thecard) {
+                        thecard.hrt = $scope.card.hrt;
+                        thecard.history = $scope.card.history;
+                        thecard.$update(function() {
+                            $scope.nextCard();
+                        });
+                    });
+
                     msg.$save(function() {
                         $scope.nextCard();
                     });
+                } else  {
+
+                    Cards.get({
+                        cardId: $scope.card._id
+                    }, function (thecard) {
+                        thecard.hrt = $scope.card.hrt;
+                        thecard.history = $scope.card.history;
+                        thecard.validanswers = $scope.card.validanswers;
+                        thecard.validreverseanswers = $scope.card.validreverseanswers;
+                        thecard.$update(function() {
+                            $scope.nextCard();
+                        });
+                    });
+
                 }
 
 

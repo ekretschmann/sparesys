@@ -24,24 +24,44 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
                 for (var i in $scope.validationRequests) {
                     var req = $scope.validationRequests[i];
                     if(req.card === message.card && req.content === message.content) {
-                        console.log('removing');
-                        console.log(req);
                         $scope.validationRequests.splice(i, 1);
-                        message.$remove();
+                        req.$remove();
                     }
                 }
-
-
             });
-
         };
 
         $scope.decline = function(message) {
-            console.log('decline '+message);
+            Cards.get({
+                cardId: message.card
+            }, function(card) {
+                if (message.direction === 'forward') {
+                    card.invalidanswers.push(message.content);
+                } else {
+                    card.invalidreverseanswers.push(message.content);
+                }
+
+                card.$update();
+
+
+                for (var i in $scope.validationRequests) {
+                    var req = $scope.validationRequests[i];
+                    if(req.card === message.card && req.content === message.content) {
+                        $scope.validationRequests.splice(i, 1);
+                        req.$remove();
+                    }
+                }
+            });
         };
 
         $scope.ignore = function(message) {
-            console.log('ignore '+message);
+            for (var i in $scope.validationRequests) {
+                var req = $scope.validationRequests[i];
+                if(req.card === message.card && req.content === message.content) {
+                    $scope.validationRequests.splice(i, 1);
+                    req.$remove();
+                }
+            }
         };
 
         // Create new Message

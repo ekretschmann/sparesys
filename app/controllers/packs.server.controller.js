@@ -104,7 +104,6 @@ exports.delete = function (req, res) {
 
     pack.cards.forEach(function (cardId) {
         Card.find({'_id': cardId}).exec(function (err, cards) {
-            console.log(cards);
             if (cards && cards.length === 1) {
                 var card = cards[0];
                 if (card.slaves && card.slaves.length > 0) {

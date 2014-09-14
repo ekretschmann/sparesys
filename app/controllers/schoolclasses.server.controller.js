@@ -113,9 +113,7 @@ exports.list = function (req, res) {
             });
         } else if (req.query.userId) {
 
-            console.log(req.query.userId);
             Schoolclass.find({'user': req.query.userId}).exec(function (err, courses) {
-                console.log(courses);
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)

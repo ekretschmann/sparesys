@@ -100,7 +100,9 @@ exports.update = function (req, res) {
 
             c.question = card.question;
             c.validanswers = card.validanswers;
+            c.invalidanswers = card.invalidanswers;
             c.validreverseanswers = card.validreverseanswers;
+            c.invalidreverseanswers = card.invalidreverseanswers;
             c.answer = card.answer;
             c.due = card.due;
             c.after = card.after;
@@ -234,9 +236,6 @@ exports.cardByID = function (req, res, next, id) {
  */
 exports.hasAuthorization = function (req, res, next) {
 
-    console.log(req.card.user);
-    console.log(req.card.user._id);
-    console.log(req.user._id);
     if (req.user.roles.indexOf('admin') > -1) {
         next();
     } else if (req.card.user && (req.card.user._id !== req.user._id)) {

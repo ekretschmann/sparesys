@@ -30,7 +30,15 @@ var CardSchema = new Schema({
         type: [String],
         default: []
     },
+    invalidanswers: {
+        type: [String],
+        default: []
+    },
     validreverseanswers: {
+        type: [String],
+        default: []
+    },
+    invalidreverseanswers: {
         type: [String],
         default: []
     },

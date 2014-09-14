@@ -141,8 +141,6 @@ exports.messageByID = function(req, res, next, id) { Message.findById(id).popula
  */
 exports.hasAuthorization = function(req, res, next) {
 
-    console.log(req);
-    console.log(req.message);
     if (req.message.to.indexOf(req.user.id) === -1) {
 
         return res.send(403, 'User is not authorized');

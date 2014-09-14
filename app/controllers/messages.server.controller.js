@@ -140,8 +140,12 @@ exports.messageByID = function(req, res, next, id) { Message.findById(id).popula
  * Message authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.message.user.id !== req.user.id) {
-		return res.send(403, 'User is not authorized');
+
+    console.log(req);
+    console.log(req.message);
+    if (req.message.to.indexOf(req.user.id) === -1) {
+
+        return res.send(403, 'User is not authorized');
 	}
 	next();
 };

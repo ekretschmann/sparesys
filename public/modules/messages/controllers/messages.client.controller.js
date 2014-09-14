@@ -1,15 +1,38 @@
 'use strict';
 
 // Messages controller
-angular.module('messages').controller('MessagesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Messages',
-    function ($scope, $stateParams, $location, Authentication, Messages) {
+angular.module('messages').controller('MessagesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Messages', 'Cards',
+    function ($scope, $stateParams, $location, Authentication, Messages, Cards) {
         $scope.authentication = Authentication;
 
         $scope.validationRequests = [];
 
         $scope.accept = function(message) {
-            console.log('accept '+message.card);
 
+            Cards.get({
+                cardId: message.card
+            }, function(card) {
+                if (message.direction === 'forward') {
+                    card.validanswers.push(message.content);
+                } else {
+                    card.validreverseanswers.push(message.content);
+                }
+
+                card.$update();
+
+
+                for (var i in $scope.validationRequests) {
+                    var req = $scope.validationRequests[i];
+                    if(req.card === message.card && req.content === message.content) {
+                        console.log('removing');
+                        console.log(req);
+                        $scope.validationRequests.splice(i, 1);
+                        message.$remove();
+                    }
+                }
+
+
+            });
 
         };
 

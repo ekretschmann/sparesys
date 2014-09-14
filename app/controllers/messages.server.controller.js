@@ -92,11 +92,30 @@ exports.delete = function(req, res) {
 	});
 };
 
+
 /**
  * List of Messages
  */
-exports.list = function(req, res) { Message.find().sort('-created').populate('user', 'displayName').exec(function(err, messages) {
-		if (err) {
+exports.list = function(req, res) { Message.find().sort('-created').populate('user', 'displayName').exec(
+
+    function(err, messages) {
+
+        if (req.query.to) {
+
+            Message.find({'to': req.query.to}).exec(function (err, messages) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(messages);
+                }
+            });
+
+
+        } else
+
+        if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
 			});

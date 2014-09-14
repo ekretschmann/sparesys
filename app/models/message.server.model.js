@@ -4,26 +4,46 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	Schema = mongoose.Schema;
+    Schema = mongoose.Schema;
 
 /**
  * Message Schema
  */
 var MessageSchema = new Schema({
-	name: {
-		type: String,
-		default: '',
-		required: 'Please fill Message name',
-		trim: true
-	},
-	created: {
-		type: Date,
-		default: Date.now
-	},
-	user: {
-		type: Schema.ObjectId,
-		ref: 'User'
-	}
+
+    type: {
+        type: String,
+        default: 'validation-request'
+    },
+    direction: {
+        type: String,
+        default: 'forward'
+    },
+    title: {
+        type: String,
+        default: '',
+        trim: true
+    },
+    content: {
+        type: String,
+        default: '',
+        required: 'Please fill Message content',
+        trim: true
+    },
+    created: {
+        type: Date,
+        default: Date.now
+    },
+    user: {
+        type: Schema.ObjectId,
+        ref: 'User'
+    },
+    to: {
+        type: [Schema.ObjectId]
+    },
+    card: {
+        type: Schema.ObjectId
+    }
 });
 
 mongoose.model('Message', MessageSchema);

@@ -140,7 +140,6 @@
     </div>
 
 
-
     <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1 && authentication.user.schoolclasses.length === 0">
 
         <div class="content-subsection">
@@ -277,7 +276,58 @@
 
 </section>
 
+<section data-ng-controller="MessagesController"
+         data-ng-init="findForCurrentUser()">
 
+    <section data-ng-if="validationRequests.length > 0">
+
+        <table class="table-striped" style="margin-top: 15px">
+
+            <thead>
+            <tr>
+                <th class="right-padded nobreak-label">Suggested Variation</th>
+                <th class="right-padded nobreak-label">Card Front</th>
+                <th class="expands nobreak-label">Card Back</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="request in validationRequests" data-ng-init="findById(request.card)"
+                data-ng-controller="CardsController">
+                <td class="right-padded nobreak-label">
+                    {{request.content}}
+
+                </td>
+
+                <td class="right-padded nobreak-label">
+
+                    <span data-ng-if="request.direction === 'forward'" style="font-weight: bold">
+                    {{card.question}}
+                    </span>
+
+                    <span data-ng-if="request.direction === 'reverse'">
+                    {{card.question}}
+                    </span>
+
+                </td>
+                <td class="right-padded nobreak-label">
+                    <span data-ng-if="request.direction === 'forward'" >
+                    {{card.answer}}
+                    </span>
+
+                    <span data-ng-if="request.direction === 'reverse'" style="font-weight: bold">
+                    {{card.answer}}
+                    </span>
+
+
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <!--YOU HAVE MAIL {{validationRequests}}-->
+    </section>
+
+</section>
 
 
 

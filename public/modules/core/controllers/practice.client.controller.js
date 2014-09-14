@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('PracticeController',
-    ['$scope', '$q', '$stateParams', '$http', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'PredictiveSchedulerService', 'CoursesService',
-        function ($scope, $q, $stateParams, $http, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, SchedulerService, CoursesService) {
+    ['$scope', '$q', '$stateParams', '$http', '$state', '$location', '$modal', '$timeout', '$document', 'Authentication', 'Courses', 'Packs', 'Cards', 'Messages', 'PredictiveSchedulerService', 'CoursesService',
+        function ($scope, $q, $stateParams, $http, $state, $location, $modal, $timeout, $document, Authentication, Courses, Packs, Cards, Messages, SchedulerService, CoursesService) {
             $scope.authentication = Authentication;
 
 
@@ -34,31 +34,43 @@ angular.module('core').controller('PracticeController',
 
 
 
-                if ($scope.practice.direction === 'forward') {
-                    $scope.card.validanswers.push($scope.answer.text);
-                } else if ($scope.practice.direction === 'reverse') {
-                    $scope.card.validreverseanswers.push($scope.answer.text);
-                }
-
-                $scope.card.history.splice($scope.card.history.length-1);
-                SchedulerService.record($scope.card, Date.now(), 3);
-
-
-                Cards.get({
-                    cardId: $scope.card._id
-                }, function (thecard) {
-                    thecard.hrt = $scope.card.hrt;
-                    thecard.history = $scope.card.history;
-                    thecard.validanswers = $scope.card.validanswers;
-                    thecard.validreverseanswers = $scope.card.validreverseanswers;
-                    thecard.$update(function() {
-                        $scope.nextCard();
-                    });
-                });
+//                if ($scope.practice.direction === 'forward') {
+//                    $scope.card.validanswers.push($scope.answer.text);
+//                } else if ($scope.practice.direction === 'reverse') {
+//                    $scope.card.validreverseanswers.push($scope.answer.text);
+//                }
+//
+//                $scope.card.history.splice($scope.card.history.length-1);
+//                SchedulerService.record($scope.card, Date.now(), 3);
+//
+//
+//                Cards.get({
+//                    cardId: $scope.card._id
+//                }, function (thecard) {
+//                    thecard.hrt = $scope.card.hrt;
+//                    thecard.history = $scope.card.history;
+//                    thecard.validanswers = $scope.card.validanswers;
+//                    thecard.validreverseanswers = $scope.card.validreverseanswers;
+//                    thecard.$update(function() {
+//                        $scope.nextCard();
+//                    });
+//                });
 
                 if ($scope.card.master) {
-                    console.log($scope.card.supervisor);
-                    console.log($scope.card.master);
+//                    console.log($scope.card.supervisor);
+//                    console.log($scope.card.master);
+
+
+                    var msg = new Messages({
+                        direction: $scope.practice.direction,
+                        card: $scope.card._id,
+                        content: $scope.answer.text,
+                        to: [$scope.card.supervisor]
+                    });
+
+                    msg.$save(function() {
+                        $scope.nextCard();
+                    });
                 }
 
 

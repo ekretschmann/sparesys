@@ -38,12 +38,15 @@ var getErrorMessage = function (err) {
 exports.create = function (req, res) {
     var card = new Card(req.body);
 
-    card.user = req.user;
 
-    if (req.query.userId) {
-        console.log('for other user');
-        card.user = req.query.userId;
+
+
+    if (req.body.userId) {
+        card.user = req.body.userId;
+    } else {
+        card.user = req.user;
     }
+
 
     card.save(function (err) {
         if (err) {

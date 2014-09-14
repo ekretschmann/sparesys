@@ -49,6 +49,9 @@ var CardSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'User'
     },
+    supervisor: {
+        type: Schema.ObjectId,
+    },
     packs: {
         type: [Schema.Types.ObjectId],
         default: []

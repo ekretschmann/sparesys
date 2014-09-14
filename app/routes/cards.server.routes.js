@@ -11,7 +11,7 @@ module.exports = function(app) {
 	
 	app.route('/cards/:cardId')
 		.get(cards.read)
-		.put(users.requiresLogin, cards.hasAuthorization, cards.update)
+		.put(users.requiresLogin, cards.update)
 	    .delete(users.requiresLogin, cards.hasAuthorization, cards.delete);
 
 	// Finish by binding the Card middleware

@@ -49,7 +49,12 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
                     }, function (slavePacks) {
                         if (slavePacks.length === 1) {
                             var slave = slavePacks[0];
+//                            console.log(slave.user);
                             var card = new Cards({
+                                userId: slave.user,
+                                master: original._id,
+                                course: slave.course,
+                                supervisor: original.user,
                                 question: self.question,
                                 answer: self.answer,
                                 packs: [slaveId]

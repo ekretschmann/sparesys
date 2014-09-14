@@ -64,6 +64,13 @@
         </tr>
 
         <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+            <td class="right-padded">User</td>
+            <td class="expands  bottom-spacer">
+                {{card.user}}
+            </td>
+        </tr>
+
+        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
             <td class="right-padded">Slaves</td>
             <td class="expands  bottom-spacer">
                 {{card.slaves}}

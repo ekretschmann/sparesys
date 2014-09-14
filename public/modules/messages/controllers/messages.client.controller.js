@@ -6,6 +6,21 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
         $scope.authentication = Authentication;
 
         $scope.validationRequests = [];
+
+        $scope.accept = function(message) {
+            console.log('accept '+message.card);
+
+
+        };
+
+        $scope.decline = function(message) {
+            console.log('decline '+message);
+        };
+
+        $scope.ignore = function(message) {
+            console.log('ignore '+message);
+        };
+
         // Create new Message
         $scope.create = function () {
             // Create new Message object

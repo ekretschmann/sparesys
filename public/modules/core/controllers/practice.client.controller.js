@@ -62,6 +62,7 @@ angular.module('core').controller('PracticeController',
 
 
                     var msg = new Messages({
+                        sender: $scope.authentication.user.displayName,
                         direction: $scope.practice.direction,
                         card: $scope.card._id,
                         content: $scope.answer.text,

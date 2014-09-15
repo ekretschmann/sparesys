@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('packs').controller('ManageImagesController', ['$scope', '$http', '$state', '$location', '$modalInstance', 'card', 'CoursesService',
-    function ($scope, $http, $state, $location, $modalInstance, card, CoursesService) {
+angular.module('packs').controller('ManageImagesController', ['$scope', '$http', '$state', '$timeout', '$location', '$modalInstance', 'card', 'CoursesService',
+    function ($scope, $http, $state, $timeout, $location, $modalInstance, card, CoursesService) {
         $scope.card = card;
 
 
@@ -9,6 +9,13 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
         $scope.images = [];
         $scope.search = {};
         $scope.search.text = $scope.card.question;
+
+        $scope.setFocus = function () {
+            console.log('setting focus');
+            $timeout(function () {
+                angular.element('.focus').trigger('focus');
+            }, 100);
+        };
 
 
         // init selected image array
@@ -59,14 +66,14 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             console.log($scope.selected.images);
         };
 
-        $scope.search_offline = function () {
+        $scope.search = function () {
 
             $scope.images = [['/modules/core/img/brand/philosopher-medium.gif','/modules/core/img/brand/teacher-man-medium.gif','/modules/core/img/brand/philosopher-medium.gif'],
                 ['/modules/core/img/brand/teacher-woman-medium.gif','/modules/core/img/brand/superhero-boy-medium.gif','/modules/core/img/brand/teacher-woman-medium.gif'],
                 ['/modules/core/img/brand/guru-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif']];
         };
 
-        $scope.search = function () {
+        $scope.search_online = function () {
 
             console.log('https://connect.gettyimages.com:443/v3/search/images/creative?phrase='+$scope.search.text);
 

@@ -1,15 +1,15 @@
 <script type="text/ng-template" id="manageImages.html">
-    <div class="modal-body">
+    <div class="modal-body"   data-ng-init="setFocus()">
 
         <div class="content-header">
 
             <table>
                 <tr>
-                    <td class="title nobreak-label">
+                    <td class="expands title nobreak-label">
 
-                        Images for {{card.question}}
+                        {{card.question}}
                     </td>
-                    <td class="expands right-aligned">Search: <input ng-model="search.text"></td>
+                    <td class="right-aligned"><input type="search" style="min-width: 200px" class="form-control focus" ng-model="search.text"></td>
                 </tr>
             </table>
 
@@ -17,68 +17,28 @@
         </div>
 
 
-        <div class="content-section center-aligned">
+        <div class="content-section center-aligned" >
 
-            <table width="100%">
-                <tr>
+            <table width="560px">
+                <tr >
 
-                    <td style="width: 25%" data-ng-if="selected.images[0] === '/modules/core/img/brand/placeholder_icon.png'">
-                        <img ng-src="{{selected.images[0]}}" style="max-width: 128px; max-height: 128px"/>
-                    </td>
-                    <td data-ng-if="selected.images[0] !== '/modules/core/img/brand/placeholder_icon.png'">
-                        <a class="gallerypic" href="" data-ng-click="removeImage(selected.images[0])">
-                            <img ng-src="{{selected.images[0]}}" style="max-width: 128px; max-height: 128px"/>
-                                <span class="zoom-icon">
-        <i class="glyphicon glyphicon-minus-sign" style="color: red"></i>
-                                </span>
-                        </a>
-                    </td>
-
-                    <td style="width: 25%" data-ng-if="selected.images[1] === '/modules/core/img/brand/placeholder_icon.png'">
-                        <img ng-src="{{selected.images[1]}}" style="max-width: 128px; max-height: 128px"/>
-                    </td>
-
-                    <td style="width: 25%" data-ng-if="selected.images[1] !== '/modules/core/img/brand/placeholder_icon.png'">
-                        <a class="gallerypic" href="" data-ng-click="removeImage(selected.images[1])">
-                            <img ng-src="{{selected.images[1]}}" style="max-width: 128px; max-height: 128px"/>
-                                <span class="zoom-icon">
-        <i class="glyphicon glyphicon-minus-sign" style="color: red"></i>
-                                </span>
-                        </a>
-                    </td>
-
-                    <td style="width: 25%" data-ng-if="selected.images[2] === '/modules/core/img/brand/placeholder_icon.png'">
-                        <img ng-src="{{selected.images[2]}}" style="max-width: 128px; max-height: 128px"/>
-                    </td>
-
-                    <td style="width: 25%" data-ng-if="selected.images[2] !== '/modules/core/img/brand/placeholder_icon.png'">
-                        <a class="gallerypic" href="" data-ng-click="removeImage(selected.images[2])">
-                            <img ng-src="{{selected.images[2]}}" style="max-width: 128px; max-height: 128px"/>
-                                <span class="zoom-icon">
-        <i class="glyphicon glyphicon-minus-sign" style="color: red"></i>
-                                </span>
-                        </a>
-                    </td>
-
-                    <td style="width: 25%" data-ng-if="selected.images[3] === '/modules/core/img/brand/placeholder_icon.png'">
-                        <img ng-src="{{selected.images[3]}}" style="max-width: 128px; max-height: 128px"/>
-                    </td>
-
-                    <td style="width: 25%" data-ng-if="selected.images[3] !== '/modules/core/img/brand/placeholder_icon.png'">
-                        <a class="gallerypic" href="" data-ng-click="removeImage(selected.images[3])">
-                            <img ng-src="{{selected.images[3]}}" style="max-width: 128px; max-height: 128px"/>
-                                <span class="zoom-icon">
-        <i class="glyphicon glyphicon-minus-sign" style="color: red"></i>
-                                </span>
-                        </a>
+                    <td class="gallerypic" style="max-width:140px; padding: 3px 3px 24px 3px; border: 1px solid #666666" data-ng-repeat="i in [0,1,2,3]">
+                            <a  href="" data-ng-click="removeImage(selected.images[i])">
+                                <img ng-src="{{selected.images[i]}}" style="max-width: 128px; max-height: 128px;"/>
+                                <section data-ng-if="selected.images[i] !== '/modules/core/img/brand/placeholder_icon.png'">
+                                <div class="add-icon" style="color:#E99267;">
+                                    Remove
+                                </div>
+                                    </section>
+                            </a>
                     </td>
                 </tr>
+
             </table>
 
         </div>
 
         <div class="content-section">
-
 
             <div data-ng-if="images.length === 0">
                 No Search Result
@@ -87,13 +47,14 @@
             <div data-ng-if="images.length > 0">
                 <table width="100%">
                     <tr data-ng-repeat="row in images track by $index">
-                        <td style="width: 33%; padding: 3px 3px 3px 3px" data-ng-repeat="img in row track by $index">
-                            <a class="gallerypic" href="" data-ng-click="addImage(img)">
-                                <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px"/>
-                                <span class="zoom-icon">
-        <i class="glyphicon glyphicon-plus-sign"></i>
-                                </span>
+                        <td class="gallerypic" style="text-align:center; max-width: 33%; padding: 3px 3px 24px 3px; border: 1px solid #666666" data-ng-repeat="img in row track by $index">
+                            <a href="" data-ng-click="addImage(img)">
+                                <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
+                                <div class="add-icon">
+                                       Add
+                                </div>
                             </a>
+
                         </td>
                     </tr>
                 </table>
@@ -105,10 +66,12 @@
 
         </div>
 
+        <pager total-items="10" ng-model="images"></pager>
+
         <div style="text-align: center">
-            <button class="btn btn-primary sparesys-button" ng-click="search()">Search</button>
-            <button class="btn btn-primary sparesys-button" ng-click="ok()">OK</button>
-            <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+            <button class="btn btn-rememberators" ng-click="search()">Search</button>
+            <button class="btn btn-rememberators" ng-click="ok()">OK</button>
+            <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
         </div>
     </div>
 </script>

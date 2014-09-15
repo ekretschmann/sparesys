@@ -328,10 +328,13 @@
     min-height: 320px;
 }
 
-a.gallerypic{
+.gallerypic{
+    position:relative;
+}
+
+.gallerypic a{
     width:140px;
     text-decoration:none;
-    position:relative;
     display:block;
     /*border:1px solid #666;*/
     padding:3px;
@@ -339,19 +342,21 @@ a.gallerypic{
     /*float:left;*/
 }
 
-a.gallerypic span.zoom-icon{
+.gallerypic a div.add-icon{
     visibility:hidden;
     position:absolute;
-    right:0;
-    top:0;
-    color: green;
-    filter:alpha(opacity=50);
-    -moz-opacity:0.5;
-    -khtml-opacity: 0.5;
-    opacity: 0.5;
+    width: 100%;
+    bottom:0;
+    font-size: large;
+    color:#4DB22B;
+    /*filter:alpha(opacity=50);*/
+    /*-moz-opacity:0.5;*/
+    /*-khtml-opacity: 0.5;*/
+    /*opacity: 0.5;*/
 }
 
-a.gallerypic:hover span.zoom-icon{
+
+.gallerypic:hover a div.add-icon{
     visibility:visible;
 }
 

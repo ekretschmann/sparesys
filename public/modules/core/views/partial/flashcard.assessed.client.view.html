@@ -91,10 +91,16 @@
 
 
     <div data-ng-if="state == 'question'" class="form-group" class="expands" style="padding: 20px;">
-        <input type="text" required id="answer" name="answer"
-               class="answer form-control"
-               data-ng-model="answer.text" data-ng-init="setFocus()"
-               data-ng-keypress="key($event)">
+        <!--<input type="text" required id="answer" name="answer"-->
+               <!--class="answer form-control"-->
+               <!--data-ng-model="answer.text" data-ng-init="setFocus()"-->
+               <!--data-ng-keypress="key($event)">-->
+
+        <input type="text" required
+               class="answer form-control focus"
+               data-ng-model="answer.text"
+               data-ng-init="setFocus()"
+               data-ng-click="settext()">
 
 
         <span data-ng-repeat="c in specialChars">

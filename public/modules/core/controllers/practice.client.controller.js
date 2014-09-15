@@ -18,6 +18,7 @@ angular.module('core').controller('PracticeController',
             $scope.cards = [];
             $scope.card = undefined;
             $scope.answer = {};
+//            $scope.answer.final_transcript = '';
             $scope.analysis = {};
             $scope.keys = [];
             $scope.lastRating = 0;
@@ -28,6 +29,40 @@ angular.module('core').controller('PracticeController',
             $scope.practice = {};
 
             $scope.specialChars = [];
+
+
+
+            $scope.settext = function() {
+                console.log($scope);
+                $scope.answer.final_transcript = 'hello world';
+            };
+
+            $scope.onSpeechResult = function (event) {
+
+
+                console.log('result');
+                var interim_transcript = '';
+                if (typeof(event.results) == 'undefined') {
+                    console.log('ending');
+                    recognition.onend = null;
+                    recognition.stop();
+                    upgrade();
+                    return;
+                }
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
+                    if (event.results[i].isFinal) {
+                        $scope.answer.text += event.results[i][0].transcript;
+//                        $scope.answer.final_transcript += 'hello world';
+                        $state.go($state.$current);
+                        console.log($scope.answer.text);
+                        console.log($scope);
+                    } else {
+                        interim_transcript += event.results[i][0].transcript;
+                    }
+                }
+
+            };
+
 
 
             $scope.thatCounts = function() {
@@ -400,6 +435,41 @@ angular.module('core').controller('PracticeController',
 
             // Find existing Course
             $scope.init = function () {
+
+                if (!('webkitSpeechRecognition' in window)) {
+                    console.log('sorry');
+                } else {
+                    console.log('got it');
+                    var recognition = new webkitSpeechRecognition();
+                    recognition.continuous = true;
+                    recognition.interimResults = true;
+
+
+                    recognition.onstart = function () {
+                        console.log('start');
+                        $scope.answer.text = '';
+                    };
+                    recognition.onresult = $scope.onSpeechResult;
+                    recognition.onerror = function (event) {
+                        console.log('error');
+//                    console.log(event);
+                    };
+                    recognition.onend = function () {
+                        console.log('end');
+//                    recognition.start();
+                    };
+
+                    console.log('and starting');
+                    recognition.start();
+                }
+
+
+
+
+
+
+
+
                 var res = CoursesService.serverLoadCards();
                 res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
                     $scope.cards = cards;

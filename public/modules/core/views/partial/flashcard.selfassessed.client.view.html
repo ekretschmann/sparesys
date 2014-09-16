@@ -98,9 +98,16 @@
     <div data-ng-if="state == 'answer'">
 
 
-        <div class="correct-answer">
-            {{practice.answer}}
-        </div>
+        <section data-ng-if="practice.format === 'short'">
+            <div class="correct-answer">
+                {{practice.answer}}
+            </div>
+        </section>
+
+        <section data-ng-if="practice.format === 'long'">
+            <pre style="text-align: left; margin-left: 15px; margin-right: 15px">{{practice.answer}}</pre>
+
+        </section>
 
         <div data-ng-if="practice.direction === 'forward' && practice.alternatives && practice.alternatives.length > 0">
             <span class="text-muted right-padded top-aligned">Also:</span>

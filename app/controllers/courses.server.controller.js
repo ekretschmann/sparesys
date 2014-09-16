@@ -268,6 +268,7 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.packs = [newPackId];
             copy.master = original._id;
             copy.supervisor = original.user;
+            copy.format = original.format;
             copy.course = newCourseId;
             copy.save();
 

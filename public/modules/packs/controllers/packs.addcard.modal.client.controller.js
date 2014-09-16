@@ -4,6 +4,18 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
     function ($scope, $state, $timeout, $modalInstance, pack, course, Cards, Packs, JourneyService) {
         $scope.pack = pack;
         $scope.course = course;
+        $scope.options = {};
+        $scope.options.format = 'short';
+        $scope.options.answer = '';
+        $scope.options.question = '';
+
+        $scope.toggleFormat = function() {
+            if ( $scope.options.format === 'short') {
+                $scope.options.format = 'long';
+            } else if ($scope.options.format === 'long') {
+                $scope.options.format = 'short';
+            }
+        };
 
         $scope.setFocus = function () {
             $timeout(function () {
@@ -21,16 +33,18 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
 
 
             var original = new Cards({
-                question: this.question,
-                answer: this.answer,
+                question: $scope.options.question,
+                answer: $scope.options.answer,
                 packs: [$scope.pack._id],
                 course: $scope.course._id,
+                format:  $scope.options.format,
                 slaves: []
             });
-            var self = {};
-            self.question = this.question;
-            self.answer = this.answer;
 
+            var self = {};
+            self.question = $scope.options.question;
+            self.answer = $scope.options.answer;
+            self.format = $scope.options.format;
             original.$save(function () {
                 $scope.pack.cards.push(original._id);
                 $scope.pack.$update(function () {
@@ -41,6 +55,7 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
                 self.slaves = [];
                 self.slavesToSave = pack.slaves.length;
                 self.slavesSaved = 0;
+
                 // take care of slaves
                 pack.slaves.forEach(function (slaveId) {
 
@@ -57,6 +72,7 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
                                 supervisor: original.user,
                                 question: self.question,
                                 answer: self.answer,
+                                format: self.format,
                                 packs: [slaveId]
                             });
                             card.$save(function () {

@@ -6,6 +6,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
 
 
 
+
         $scope.images = [];
         $scope.search = {};
         $scope.search.text = $scope.card.question;
@@ -16,6 +17,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
                 angular.element('.focus').trigger('focus');
             }, 100);
         };
+
 
 
         // init selected image array
@@ -66,12 +68,53 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             console.log($scope.selected.images);
         };
 
+
+        $scope.page = 0;
+        $scope.totalResults = 0;
+
         $scope.search = function () {
 
+
+            $scope.totalResults = 50;
             $scope.images = [['/modules/core/img/brand/philosopher-medium.gif','/modules/core/img/brand/teacher-man-medium.gif','/modules/core/img/brand/philosopher-medium.gif'],
                 ['/modules/core/img/brand/teacher-woman-medium.gif','/modules/core/img/brand/superhero-boy-medium.gif','/modules/core/img/brand/teacher-woman-medium.gif'],
-                ['/modules/core/img/brand/guru-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif']];
+                ['/modules/core/img/brand/guru-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif']];
         };
+
+        $scope.testImages=[
+            '/modules/core/img/brand/philosopher-medium.gif',
+            '/modules/core/img/brand/teacher-man-medium.gif',
+            '/modules/core/img/brand/teacher-woman-medium.gif',
+            '/modules/core/img/brand/superhero-boy-medium.gif',
+            '/modules/core/img/brand/superhero-girl-medium.gif',
+            '/modules/core/img/brand/guru-medium.gif'
+        ];
+
+        $scope.nextPage = function() {
+            var data = {};
+            data.images = [];
+            var row = [];
+            var counter = 0;
+            var max = 9;
+            $scope.images = [];
+            for(var i=0; i<9; i++) {
+                var img = $scope.testImages[Math.floor((Math.random()*$scope.testImages.length))];
+                data.images.push(img);
+            }
+            data.images.forEach(function(image) {
+
+                if (counter < max) {
+
+                    if (counter % 3 === 0) {
+                        row = [];
+                        $scope.images.push(row);
+                    }
+                    row.push(image);
+                }
+                counter++;
+            });
+        };
+
 
         $scope.search_online = function () {
 

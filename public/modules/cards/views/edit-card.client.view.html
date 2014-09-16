@@ -310,17 +310,17 @@
                 </td>
             </tr>
 
-            <tr data-ng-controller="DateDropdownController">
+            <tr >
                 <td class="top-aligned">Images</td>
 
-                <td data-ng-if="slides.length  === 0">
+                <td data-ng-if="card.images  === 0">
 
                     no images
                 </td>
-                <td data-ng-if="slides.length > 0">
+                <td data-ng-repeat="img in card.images">
 
 
-                    <imagecarousel slides="slides" size="128"/>
+                    <img ng-src="{{img}}" style="max-width: 120px; max-height: 120px;"/>
                 </td>
 
             </tr>

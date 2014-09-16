@@ -110,6 +110,10 @@ var CardSchema = new Schema({
     },
     course: {
         type: Schema.Types.ObjectId
+    },
+    format: {
+        type: String,
+        default: 'short'
     }
 });
 

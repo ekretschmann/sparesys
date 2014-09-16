@@ -41,6 +41,7 @@ exports.create = function (req, res) {
 
 
 
+
     if (req.body.userId) {
         card.user = req.body.userId;
     } else {
@@ -75,6 +76,8 @@ exports.update = function (req, res) {
 
 
     card = _.extend(card, req.body);
+
+
 
     if (!req.body.answer) {
         card.answer = undefined;
@@ -112,6 +115,7 @@ exports.update = function (req, res) {
             c.alternatives = card.alternatives;
             c.alternativequestions = card.alternativequestions;
             c.sound = card.sound;
+            c.format = card.format;
             c.save();
 
         });

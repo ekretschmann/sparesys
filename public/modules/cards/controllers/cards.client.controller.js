@@ -6,8 +6,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
 
-        // Set of Photos
-        $scope.slides = [];
 
         $scope.navigateToPack = function (pack) {
             $timeout(function () {
@@ -15,17 +13,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             }, 500);
         };
 
-        $scope.initSlides = function () {
-
-            if ($scope.card) {
-                $scope.card.images.forEach(function (img) {
-                    var slide = {};
-                    slide.image = img;
-                    $scope.slides.push(slide);
-                }, this);
-            }
-        };
-        $scope.initSlides();
 
         $scope.authentication = Authentication;
         $scope.nextAlternative = undefined;
@@ -148,7 +135,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
                 });
 
-                $scope.initSlides();
             });
         };
 

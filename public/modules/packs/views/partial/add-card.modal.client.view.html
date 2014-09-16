@@ -18,7 +18,7 @@
                                 <td class="right-padded">{{course.front}}</td>
                                 <td class="expands">
                                     <input type="text"
-                                           data-ng-model="question"
+                                           data-ng-model="options.question"
                                            id="cardquestion"
                                            class="form-control focus"
                                            placeholder="Question"
@@ -28,13 +28,39 @@
                             </tr>
 
                             <tr>
-                                <td class="right-padded">{{course.back}}</td>
+                                <td class="right-padded top-aligned top-padded">{{course.back}}</td>
                                 <td class="expands">
-                                    <input type="text" data-ng-model="answer"
-                                           id="cardanswer" class="form-control"
-                                           placeholder="Answer"
-                                           data-ng-init="setFocus()"
-                                           required></td>
+
+                                    <section data-ng-if="options.format === 'short'">
+                                        <input type="text" data-ng-model="options.answer"
+                                               class="form-control"
+                                               placeholder="Answer"
+                                               data-ng-init="setFocus()"
+                                               required>
+                                    </section>
+
+                                    <section data-ng-if="options.format === 'long'">
+                                        <textarea type="text" data-ng-model="options.answer"
+                                                  class="form-control"
+                                                  placeholder="Answer"
+                                                  data-ng-init="setFocus()"
+                                                  rows="5"
+                                                  required></textarea>
+                                    </section>
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td></td>
+                                <td class="expands nobreak-label right-aligned">
+                                    <section data-ng-if="options.format === 'short'">
+                                    <a href="" data-ng-click="toggleFormat()">Long Answer</a>
+                                        </section>
+
+                                    <section data-ng-if="options.format === 'long'">
+                                        <a href="" data-ng-click="toggleFormat()">Short Answer</a>
+                                    </section>
+                                </td>
                             </tr>
                         </table>
                     </div>
@@ -42,10 +68,12 @@
                     <div class="center-aligned">
                         <button class="btn btn-rememberators"
                                 type="submit"
-                                ng-click="addCardToPack()">Add</button>
+                                ng-click="addCardToPack()">Add
+                        </button>
 
-                            <button class="btn btn-rememberators"
-                                    ng-click="cancel()">Done</button>
+                        <button class="btn btn-rememberators"
+                                ng-click="cancel()">Done
+                        </button>
 
                     </div>
 

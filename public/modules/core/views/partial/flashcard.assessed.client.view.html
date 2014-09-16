@@ -87,7 +87,20 @@
 
     </div>
 
-    <div data-ng-if="slides.length === 0" class="question">{{practice.question}}</div>
+
+    <div data-ng-if="slides.length === 0 || practice.direction === 'reverse'" class="question">{{practice.question}}</div>
+
+    <div data-ng-if="slides.length > 0 && practice.direction === 'forward'">
+        <table>
+            <tr>
+                <td width="50%"></td>
+                <td>
+                    <imagecarousel slides="slides" size="200"/>
+                </td>
+                <td width="50%"></td>
+            </tr>
+        </table>
+    </div>
 
 
     <div data-ng-if="state == 'question'" class="form-group" class="expands" style="padding: 20px;">
@@ -111,6 +124,7 @@
         <!--<button data-ng-click="submitAnswer()" class="btn btn-large btn-primary">submit</button>-->
         <!--</div>-->
     </div>
+
 
 
     <div data-ng-if="state == 'answer'">

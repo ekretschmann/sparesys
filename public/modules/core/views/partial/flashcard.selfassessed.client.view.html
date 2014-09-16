@@ -44,7 +44,7 @@
     </div>
 
 
-    <div data-ng-if="slides.length === 0">
+    <div data-ng-if="slides.length === 0 || practice.direction === 'reverse'">
 
         <div class="question">{{practice.question}}</div>
 
@@ -58,7 +58,7 @@
     </div>
 
 
-    <div data-ng-if="slides.length > 0">
+    <div data-ng-if="slides.length > 0 && practice.direction === 'forward'">
         <table>
             <tr>
                 <td width="50%"></td>

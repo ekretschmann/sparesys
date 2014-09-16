@@ -317,10 +317,15 @@
 
                     no images
                 </td>
-                <td data-ng-repeat="img in card.images">
+                <td >
 
-
-                    <img ng-src="{{img}}" style="max-width: 120px; max-height: 120px;"/>
+                    <table>
+                        <tr>
+                            <td class="right-padded" data-ng-repeat="img in card.images">
+                                <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
+                            </td>
+                        </tr>
+                    </table>
                 </td>
 
             </tr>

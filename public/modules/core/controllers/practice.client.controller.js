@@ -430,9 +430,7 @@ angular.module('core').controller('PracticeController',
                 $scope.score = Math.round(SchedulerService.getPredictedCourseRetention(Date.now()) * 100) * $scope.inPlay;
             };
 
-            $scope.prepareNextCard = function () {
 
-            };
 
             // Find existing Course
             $scope.init = function () {

@@ -32,6 +32,16 @@ angular.module('core').directive('imagecarousel',
                     }
                 };
 
+
+                scope.$watch('slides', function() {
+                    scope.currentIndex = 0;
+                    scope.slides.forEach(function(slide) {
+                        slide.visible = false; // make every image invisible
+                    });
+
+                    scope.slides[scope.currentIndex].visible = true; // make the current image visible
+                });
+
                 scope.$watch('currentIndex', function() {
                     scope.slides.forEach(function(slide) {
                         slide.visible = false; // make every image invisible

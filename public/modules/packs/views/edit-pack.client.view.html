@@ -51,7 +51,7 @@
                 <tr data-ng-repeat="cardId in pack.cards"
                     data-ng-controller="CardsController"
                     data-ng-init="findById(cardId)">
-                    <td class="right-padded">
+                    <td class="right-padded top-padded top-aligned">
                         <a href="">
                             <i data-ng-click="areYouSureToDeleteCard(card)"
                                class="glyphicon glyphicon-remove-sign">
@@ -60,7 +60,7 @@
 
                     </td>
 
-                    <td class="right-padded">
+                    <td class="right-padded top-padded top-aligned">
                         <a href="">
                             <i data-ng-click="swap(card)"
                                class="glyphicon glyphicon-random">
@@ -68,12 +68,17 @@
                         </a>
                     </td>
 
-                    <td class="right-padded standard-min-width">
+                    <td class="right-padded standard-min-width top-padded top-aligned">
                         <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
                     </td>
 
-                    <td class="expands right-padded">
+                    <td class="expands right-padded top-padded top-aligned" style="max-width: 300px">
+                        <section data-ng-if="card.format === 'short'">
                         {{card.answer}}
+                        </section>
+                        <section data-ng-if="card.format === 'long'">
+                            <pre style="font-size: x-small">{{card.answer}}</pre>
+                        </section>
                     </td>
 
                     <td class="right-padded nobreak-label">

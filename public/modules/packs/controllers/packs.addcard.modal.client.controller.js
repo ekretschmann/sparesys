@@ -127,8 +127,8 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
 
 
             JourneyService.cardCreated();
-            this.question = '';
-            this.answer = '';
+            $scope.options.question = '';
+            $scope.options.answer = '';
             angular.element('.focus').trigger('focus');
         };
     }

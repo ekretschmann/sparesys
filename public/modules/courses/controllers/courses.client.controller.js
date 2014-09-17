@@ -136,7 +136,7 @@ angular.module('courses').controller('CoursesController',
 
             // Find a list of Courses
             $scope.find = function () {
-                $scope.courses = Courses.query();
+                Courses.query();
 
             };
 
@@ -154,6 +154,15 @@ angular.module('courses').controller('CoursesController',
 
                         }, this);
 
+                        $scope.coursesStudent = [];
+                        $scope.coursesTeacher = [];
+                        $scope.courses.forEach(function(course) {
+                            if (course.slaves.length > 0) {
+                                $scope.coursesTeacher.push(course);
+                            } else {
+                                $scope.coursesStudent.push(course);
+                            }
+                        }, this);
                     });
                 }
             };

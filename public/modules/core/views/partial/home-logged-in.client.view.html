@@ -8,7 +8,31 @@
 
 <div class="content-section">
 
-    <div class="title">Learning</div>
+    <table>
+        <tr>
+            <td class="top-aligned right-padded top-padded" style="min-width: 72px">
+                <img class="size-64"
+                     src="/modules/core/img/brand/superhero-boy-medium.gif">
+            </td>
+            <td class="top-aligned">
+
+                <div class="title">
+                    Your courses
+                </div>
+
+                <div>
+                    You are working on {{courses.length}} courses. Just select the actions you
+                    want to take. The <b>practice</b> will go through the cards of the course
+                    with you. If you choose <b>statistics</b>, you will be able to see how diagrams
+                    and numbers about how you are progressing. You can also <b>edit</b> courses that
+                    you are managing yourself.
+
+                </div>
+            </td>
+
+
+        </tr>
+    </table>
 
     <div data-ng-if="!courses || courses.length===0">
 
@@ -109,12 +133,12 @@
         <table class="table-striped" style="width: 100%; margin-top: 10px">
             <thead>
             <tr>
-                <th>Courses</th>
+                <th>You are a student of</th>
                 <th>Actions</th>
             </tr>
             </thead>
             <tbody>
-            <tr data-ng-repeat="course in courses">
+            <tr data-ng-repeat="course in coursesStudent">
                 <td class="rightpadded expands">
                     {{course.name}}
                 </td>
@@ -122,7 +146,29 @@
                 <td class="nobreak-label">
                     <a class="right-padded" data-ng-href="#!/practice/{{course._id}}">practice</a>
                     <a class="right-padded" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
-                    <a data-ng-href="#!/courses/{{course._id}}/edit">manage</a>
+                    <a data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+        <table class="table-striped" style="width: 100%; margin-top: 10px">
+            <thead>
+            <tr>
+                <th>You are a teacher of</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="course in coursesTeacher">
+                <td class="rightpadded expands">
+                    {{course.name}}
+                </td>
+
+                <td class="nobreak-label">
+                    <a class="right-padded" data-ng-href="#!/practice/{{course._id}}">practice</a>
+                    <a class="right-padded" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
+                    <a data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
                 </td>
             </tr>
             </tbody>
@@ -229,7 +275,7 @@
 
                 <table>
                     <tr>
-                        <td class="top-aligned right-padded top-padded">
+                        <td class="top-aligned right-padded top-padded" style="min-width: 72px">
                             <img class="size-64"
                                  src="/modules/core/img/brand/teacher-woman-medium.gif">
                         </td>
@@ -240,8 +286,9 @@
                             </div>
 
                             <div>
-                                Your school administrater has set you up with the classes below. To
-                                assign courses to your classes, please choose the manage action.
+                                Your school administrater has set you up with the classes below. Choose
+                                the <b>courses</b> action to assing courses to a class. You can also
+                                look at the <b>statistics</b> of how your class is progressing.
                             </div>
                         </td>
 
@@ -256,15 +303,19 @@
                         <thead>
                         <tr>
                             <th class="right-padded">Class</th>
+                            <th class="right-padded">Actions</th>
                         </tr>
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="schoolclass in schoolclasses">
-                            <td class="right-padded nobreak-label">
-                                <a href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a>
-
+                            <td class="right-padded expands nobreak-label">
+                                {{schoolclass.name}}
                             </td>
 
+                            <td class="right-aligned nobreak-label">
+                                <a class="right-padded" href="#!/schoolclasses/{{schoolclass._id}}/teach">courses</a>
+                                <a href="#!/schoolclasses/{{schoolclass._id}}/teach">staistics</a>
+                            </td>
 
                         </tr>
                         </tbody>
@@ -292,7 +343,7 @@
 
             <table>
                 <tr>
-                    <td class="top-aligned right-padded top-padded">
+                    <td class="top-aligned right-padded top-padded"  style="min-width: 72px">
                         <img class="size-64"
                              src="/modules/core/img/brand/teacher-man-medium.gif">
                     </td>

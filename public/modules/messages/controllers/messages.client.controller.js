@@ -1,8 +1,8 @@
 'use strict';
 
 // Messages controller
-angular.module('messages').controller('MessagesController', ['$scope', '$stateParams', '$location', 'Authentication', 'Messages', 'Cards',
-    function ($scope, $stateParams, $location, Authentication, Messages, Cards) {
+angular.module('messages').controller('MessagesController', ['$scope', '$modal', '$stateParams', '$location', 'Authentication', 'Messages', 'Cards',
+    function ($scope, $modal, $stateParams, $location, Authentication, Messages, Cards) {
         $scope.authentication = Authentication;
 
         $scope.validationRequests = [];
@@ -138,6 +138,22 @@ angular.module('messages').controller('MessagesController', ['$scope', '$statePa
 
                 });
             }
+        };
+
+        $scope.areYouSureToDeleteMessage = function (message) {
+
+            $scope.message = message;
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteMessage.html',
+                controller: 'DeleteMessageModalController',
+                resolve: {
+
+                    message: function () {
+                        return $scope.message;
+                    }
+                }
+            });
+
         };
     }
 ]);

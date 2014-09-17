@@ -12,10 +12,9 @@
         <tr>
             <th></th>
             <th class="right-padded">Message</th>
-            <th class="right-padded">Type</th>
+            <th class="right-padded">Replaces</th>
             <th class="right-padded">From</th>
             <th class="right-padded">To</th>
-            <th class="right-padded">Card</th>
             <th>Created</th>
         </tr>
         </thead>
@@ -28,14 +27,31 @@
                     </i>
                 </a>
             </td>
-            <td class="nobreak-label right-padded top-aligned">
+            <td class="sharedexpand right-padded top-aligned">
                 {{message.content}}
             </td>
-            <td class="nobreak-label right-padded">{{message.type}}</td>
-            <td class="nobreak-label right-padded top-aligned">{{message.from}}</td>
-            <td class="nobreak-label right-padded top-aligned">{{message.to}}</td>
-            <td class="nobreak-label right-padded top-aligned">{{message.card}}</td>
-            <td class="nobreak-label top-aligned"><span data-ng-bind="message.created | date:'short'"></span></td>
+
+            <td class="sharedexpand right-padded top-aligned">
+test
+                <!--<section-->
+                        <!--data-ng-controller="CardsController"-->
+                        <!--data-ng-init="findById(message.card)">-->
+                <!--<section data-ng-if="message.direction === 'forward'">-->
+                    <!--{{card.question}}-->
+                <!--</section>-->
+
+                <!--<section data-ng-if="message.direction === 'reverse'">-->
+                    <!--{{card.answer}}-->
+                <!--</section>-->
+                <!--</section>-->
+            </td>
+            <!--<td class="nobreak-label right-padded">{{message.type}}</td>-->
+            <td class="nobreak-label right-padded top-aligned">{{message.user.displayName}}</td>
+            <td class="nobreak-label right-padded top-aligned"
+                data-ng-controller="UsersController"
+                data-ng-init="findById(message.to[0])">{{displayName}}</td>
+
+            <td class="nobreak-label top-aligned"><span data-ng-bind="message.created | date:'shortDate'"></span></td>
         </tr>
         </tbody>
     </table>

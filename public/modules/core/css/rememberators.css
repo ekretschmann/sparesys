@@ -120,6 +120,10 @@
     width: 100%;
 }
 
+.sharedexpand {
+    width: 50%;
+}
+
 .form-control {
     margin-bottom: 3px;
 }

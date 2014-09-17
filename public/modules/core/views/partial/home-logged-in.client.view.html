@@ -109,21 +109,20 @@
         <table class="table-striped" style="width: 100%; margin-top: 10px">
             <thead>
             <tr>
-                <th class="sparesys-view-courses-course-column" colspan="3">My Courses</th>
+                <th>Courses</th>
+                <th>Actions</th>
             </tr>
             </thead>
             <tbody>
             <tr data-ng-repeat="course in courses">
-                <td class="sparesys-view-courses-name-cell">
+                <td class="rightpadded expands">
                     {{course.name}}
                 </td>
 
-                <td>
-                    <a data-ng-href="#!/practice/{{course._id}}">practice</a>
-                </td>
-
-                <td class="sparesys-view-object-content-cell" style="width: 100%; padding-left: 10px">
-                    <a data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
+                <td class="nobreak-label">
+                    <a class="right-padded" data-ng-href="#!/practice/{{course._id}}">practice</a>
+                    <a class="right-padded" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
+                    <a data-ng-href="#!/courses/{{course._id}}/edit">manage</a>
                 </td>
             </tr>
             </tbody>
@@ -135,9 +134,6 @@
 
 
 <div class="content-section">
-    <div class="title">
-        Teaching
-    </div>
 
 
     <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1 && authentication.user.schoolclasses.length === 0">
@@ -231,9 +227,27 @@
 
             <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length > 0">
 
-                <div>
-                    You are teaching the following Classes
-                </div>
+                <table>
+                    <tr>
+                        <td class="top-aligned right-padded top-padded">
+                            <img class="size-64"
+                                 src="/modules/core/img/brand/teacher-woman-medium.gif">
+                        </td>
+                        <td class="top-aligned">
+
+                            <div class="title">
+                                Your classes
+                            </div>
+
+                            <div>
+                                Your school administrater has set you up with the classes below. To
+                                assign courses to your classes, please choose the manage action.
+                            </div>
+                        </td>
+
+
+                    </tr>
+                </table>
 
 
                 <div data-ng-controller="SchoolclassesController"
@@ -274,18 +288,20 @@
     <section data-ng-if="validationRequests.length > 0">
 
         <div class="content-section">
-            <div class="title">
-                Validation Requests
-            </div>
 
 
             <table>
                 <tr>
-                    <td class="top-aligned right-padded">
+                    <td class="top-aligned right-padded top-padded">
                         <img class="size-64"
                              src="/modules/core/img/brand/teacher-man-medium.gif">
                     </td>
                     <td class="top-aligned">
+
+                        <div class="title">
+                            Validation Requests
+                        </div>
+
                         <div>
                             Your students were busy practicing your courses. Some of them
                             suggest relaxing the validation of particular cards.

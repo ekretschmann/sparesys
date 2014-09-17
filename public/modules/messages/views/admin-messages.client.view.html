@@ -1,0 +1,42 @@
+<section data-ng-controller="MessagesController" data-ng-init="find()">
+    <div class="content-header">
+
+        <div class="title">
+            Messages Administration
+        </div>
+
+    </div>
+
+    <table id="searchTextResults" class="table-striped expands">
+        <thead>
+        <tr>
+            <th></th>
+            <th class="right-padded">Message</th>
+            <th class="right-padded">Type</th>
+            <th class="right-padded">From</th>
+            <th class="right-padded">To</th>
+            <th class="right-padded">Card</th>
+            <th>Created</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="message in messages | filter:searchText">
+            <td class="nobreak-label right-padded top-aligned">
+                <a href="">
+                    <i data-ng-click="areYouSureToDeleteMessage(course)"
+                       class="glyphicon glyphicon-remove-sign">
+                    </i>
+                </a>
+            </td>
+            <td class="nobreak-label right-padded top-aligned">
+                {{message.content}}
+            </td>
+            <td class="nobreak-label right-padded">{{message.type}}</td>
+            <td class="nobreak-label right-padded top-aligned">{{message.from}}</td>
+            <td class="nobreak-label right-padded top-aligned">{{message.to}}</td>
+            <td class="nobreak-label right-padded top-aligned">{{message.card}}</td>
+            <td class="nobreak-label top-aligned"><span data-ng-bind="message.created | date:'short'"></span></td>
+        </tr>
+        </tbody>
+    </table>
+</section>

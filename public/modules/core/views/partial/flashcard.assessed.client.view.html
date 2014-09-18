@@ -91,15 +91,9 @@
     <div data-ng-if="slides.length === 0 || practice.direction === 'reverse'" class="question">{{practice.question}}</div>
 
     <div data-ng-if="slides.length > 0 && practice.direction === 'forward'">
-        <table>
-            <tr>
-                <td width="50%"></td>
-                <td>
+        <div style="text-align: center">
                     <imagecarousel slides="slides" size="200"/>
-                </td>
-                <td width="50%"></td>
-            </tr>
-        </table>
+        </div>
     </div>
 
 

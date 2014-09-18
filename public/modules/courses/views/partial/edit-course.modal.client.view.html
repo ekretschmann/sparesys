@@ -4,7 +4,7 @@
         <div class="modal-body">
             <div class="content-header">
                 <div class="title center-aligned">
-                    Edit Course: {{initialCourseName}}
+                    Settings for Course: {{initialCourseName}}
                 </div>
             </div>
 
@@ -57,7 +57,7 @@
                             </tr>
 
                             <tr>
-                                <td class="right-padded">Language</td>
+                                <td class="right-padded nobreak-label">Language Front</td>
                                 <td>
 
 
@@ -69,6 +69,26 @@
                                         </button>
                                         <ul class="dropdown-menu" role="menu">
                                             <li data-ng-repeat="lang in languages" ><a data-ng-click="setLanguage(lang)">{{lang.name}}</a></li>
+                                        </ul>
+                                    </div>
+
+
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="right-padded nobreak-label">Language Back</td>
+                                <td class="top-padded">
+
+
+                                    <div class="btn-group">
+                                        <button type="button" class="btn btn-default" >{{ languageback.name }}</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle" >
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Split button!</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li data-ng-repeat="lang in languages" ><a data-ng-click="setLanguageBack(lang)">{{lang.name}}</a></li>
                                         </ul>
                                     </div>
 

@@ -1,11 +1,15 @@
 <div>
 
 
-    <div class="sld" ng-repeat="slide in slides" ng-hide="!slide.visible" style="max-width: {{size}}px; text-align: center; padding-top: 10px">
+    <div style="padding-top: 25px" ng-repeat="slide in slides"
+         ng-hide="!slide.visible">
 
-        <img ng-src="{{slide.image}}" height="{{size}}px" data-ng-if="slide.image"/>
+        <img ng-src="{{slide.image}}"
+             height="{{size}}px"
 
-        <div class="font-xl" style="padding-top: 10px" data-ng-if="slide.text">{{slide.text}}</div>
+             data-ng-if="slide.image"/>
+
+        <!--<div class="font-xl" style="padding-top: 10px" data-ng-if="slide.text">{{slide.text}}</div>-->
 
 
 

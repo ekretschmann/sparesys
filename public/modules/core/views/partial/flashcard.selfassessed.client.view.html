@@ -59,15 +59,9 @@
 
 
     <div data-ng-if="slides.length > 0 && practice.direction === 'forward'">
-        <table>
-            <tr>
-                <td width="50%"></td>
-                <td>
-                    <imagecarousel slides="slides" size="256"/>
-                </td>
-                <td width="50%"></td>
-            </tr>
-        </table>
+        <div style="min-width: 100%">
+            <imagecarousel slides="slides" size="200"/>
+        </div>
     </div>
 
     <span data-ng-if="practice.assessment === 'self' && practice.sound">

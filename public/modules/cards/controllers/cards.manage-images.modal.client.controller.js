@@ -72,7 +72,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
         $scope.page = 0;
         $scope.totalResults = 0;
 
-        $scope.search = function () {
+        $scope.search_offline = function () {
 
 
             $scope.totalResults = 50;
@@ -116,7 +116,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
         };
 
 
-        $scope.search_online = function () {
+        $scope.search = function () {
 
             console.log('https://connect.gettyimages.com:443/v3/search/images/creative?phrase='+$scope.search.text);
 

@@ -22,8 +22,9 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
 
 
         var selectedIndex = 0;
+        var index = 0;
         if (course.language) {
-            var index = 0;
+
             $scope.languages.forEach(function (lang) {
 
                 if (lang.name === course.language.name) {
@@ -34,10 +35,27 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
         }
         $scope.language = $scope.languages[selectedIndex];
 
+        if (course.languageback) {
+            index = 0;
+            $scope.languages.forEach(function (lang) {
+
+                if (lang.name === course.languageback.name) {
+                    selectedIndex = index;
+                }
+                index++;
+            });
+        }
+        $scope.languageback = $scope.languages[selectedIndex];
+
 
         $scope.setLanguage = function(lang) {
             $scope.language = lang;
             $scope.course.language = lang;
+        };
+
+        $scope.setLanguageBack = function(lang) {
+            $scope.languageback = lang;
+            $scope.course.languageback = lang;
         };
 
         $scope.setFocus = function () {

@@ -55,6 +55,11 @@ var CourseSchema = new Schema({
         name: String,
         code: String
     },
+
+    languageback: {
+        name: String,
+        code: String
+    },
     master: {
         type: Schema.Types.ObjectId
     },

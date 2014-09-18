@@ -465,20 +465,7 @@
     font-size: large;
 }
 
-.new-card {
 
-    padding-top: 5px;
-    padding-right: 5px;
-    color:#4DB22B;
-    position: absolute;
-    bottom: 5px;
-    right: 0;
-
-
-    animation-name: appear;
-    animation-duration: 1s;
-    animation-timing-function: linear;
-}
 
 .card-score {
     position: absolute;
@@ -497,6 +484,22 @@
 .incorrect-answer {
     color:#E99267;;
     font-size: xx-large;
+}
+
+
+.new-card {
+    text-align: left;
+    padding-top: 5px;
+    padding-right: 5px;
+    color:#4DB22B;
+    position: absolute;
+    top: 5px;
+    left: 10px;
+
+
+    animation-name: appear;
+    animation-duration: 1s;
+    animation-timing-function: linear;
 }
 
 .history {

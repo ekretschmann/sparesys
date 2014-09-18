@@ -24,11 +24,30 @@
             Last Check: {{card.history[card.history.length-1].assessment }}
         </div>
         <div style="font-size: x-small">
-            First Repetition: {{card.history[0].when | date:'medium'}}
+            First Repetition: {{card.history[0].when | date:'shortDate'}}
         </div>
         <div style="font-size: x-small">
-            Last Repetition: {{card.history[card.history.length-1].when | date:'medium'}}
+            Last Repetition: {{card.history[card.history.length-1].when | date:'shortDate'}}
         </div>
+
+    </div>
+
+    <div data-ng-if="card.history.length === 0">
+        <table class="new-card">
+            <tr>
+                <td class="top-aligned">
+                    <img class="size-64"
+                         src="/modules/core/img/brand/superhero-boy-medium.gif">
+                </td>
+                <td class="top-aligned nobreak-label">
+                    <div class="font-s">
+                        New Card!
+                    </div>
+                </td>
+
+
+            </tr>
+        </table>
 
     </div>
 
@@ -68,24 +87,7 @@
     </span>
 
 
-    <div data-ng-if="card.history.length === 0">
-        <table class="new-card">
-            <tr>
-                <td class="expands"></td>
-                <td class="top-aligned nobreak-label">
-                    <div class="font-s">
-                        New Card!
-                    </div>
-                </td>
-                <td class="top-aligned right-padded">
-                    <img class="size-64"
-                         src="/modules/core/img/brand/superhero-boy-medium.gif">
-                </td>
 
-            </tr>
-        </table>
-
-    </div>
 
 
     <div data-ng-if="slides.length === 0 || practice.direction === 'reverse'" class="question">{{practice.question}}</div>
@@ -98,16 +100,17 @@
 
 
     <div data-ng-if="state == 'question'" class="form-group" class="expands" style="padding: 20px;">
-        <input type="text" required id="answer" name="answer"
-               class="answer form-control"
-               data-ng-model="answer.text" data-ng-init="setFocus()"
-               data-ng-keypress="key($event)">
+        <!--<input type="text" required id="answer" name="answer"-->
+               <!--class="answer form-control"-->
+               <!--data-ng-model="answer.text" data-ng-init="setFocus()"-->
+               <!--data-ng-keypress="key($event)">-->
 
-        <!--<input type="text" required-->
-               <!--class="answer form-control focus"-->
-               <!--data-ng-model="answer.text"-->
-               <!--data-ng-init="setFocus()"-->
-               <!--data-ng-click="settext()">-->
+
+        <input type="text" required
+               class="answer form-control focus"
+               data-ng-model="answer.text"
+               data-ng-init="setFocus()"
+               data-ng-click="settext()">
 
 
         <span data-ng-repeat="c in specialChars">

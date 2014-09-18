@@ -242,6 +242,24 @@
                 </td>
             </tr>
 
+        <tr>
+            <td class="right-padded nobreak-label">Read Back</td>
+            <td>
+                <div class="btn-group  bottom-spacer">
+                    <button type="button" class="btn btn-default">{{ soundback }}</button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="r in readAnswers"><a
+                                data-ng-click="setSoundBack(r)">{{r}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+
             <tr>
                 <td class="right-padded">Direction</td>
                 <td>

@@ -7,10 +7,12 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
         var originalAfter = pack.after;
         $scope.validation = 'leave unchanged';
         $scope.sound = 'leave unchanged';
+        $scope.soundback = 'leave unchanged';
         $scope.direction = 'leave unchanged';
 
-        $scope.validations = ['leave unchanged', 'always computer-checked', 'always self-checked', 'self-checked for new cards'];
+        $scope.validations = ['leave unchanged', 'always computer-checked', 'always self-checked', 'self-checked for new cards', 'speech recognition'];
         $scope.readQuestions = ['leave unchanged', 'yes', 'no'];
+        $scope.readAnswers = ['leave unchanged', 'yes', 'no'];
         $scope.directions = ['leave unchanged', 'one way', 'both ways'];
 
 
@@ -21,6 +23,10 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
 
         $scope.setSound = function(value) {
             $scope.sound = value;
+        };
+
+        $scope.setSoundBack = function(value) {
+            $scope.soundback = value;
         };
 
         $scope.setDirection = function(value) {
@@ -63,11 +69,19 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
                         card.validation = 'checked';
                     } else if ($scope.validation === 'always self-checked') {
                         card.validation = 'self';
+                    } else if ($scope.validation === 'speech recognition') {
+                        card.validation = 'speech';
                     }
                     if ($scope.sound === 'yes') {
                         card.sound = true;
                     } else if ($scope.sound === 'no') {
                         card.sound = false;
+                    }
+
+                    if ($scope.soundback === 'yes') {
+                        card.soundback = true;
+                    } else if ($scope.soundback === 'no') {
+                        card.soundback = false;
                     }
 
                     if ($scope.direction === 'both ways') {
@@ -78,11 +92,15 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
                     card.$update(function() {
                         cardsUpdated++;
                         if (cardsUpdated === cardsToUpdate) {
-                            $state.go($state.$current, null, {reload:true});
+                            pack.$update(function() {
+                                $state.go($state.$current, null, {reload:true});
+                            });
+
                         }
                     });
                 });
             }, this);
+
 
             $modalInstance.dismiss('cancel');
         };

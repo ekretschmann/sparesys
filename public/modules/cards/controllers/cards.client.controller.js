@@ -20,10 +20,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.validation = 'leave unchanged';
         $scope.sound = 'leave unchanged';
+        $scope.soundback = 'leave unchanged';
         $scope.direction = 'leave unchanged';
 
-        $scope.validations = ['always computer-checked', 'always self-checked', 'self-checked for new cards'];
+        $scope.validations = ['always computer-checked', 'always self-checked', 'self-checked for new cards', 'speech recognition'];
         $scope.readQuestions = ['yes', 'no'];
+        $scope.readAnswers = ['yes', 'no'];
         $scope.directions = ['one way', 'both ways'];
 
 
@@ -34,6 +36,8 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 $scope.card.validation = 'checked';
             } else if (value.toString() === 'always self-checked') {
                 $scope.card.validation = 'self';
+            } else if (value.toString() === 'speech recognition') {
+                $scope.card.validation = 'speech';
             } else {
                 $scope.card.validation = 'default';
             }
@@ -52,6 +56,16 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 $scope.card.sound = true;
             } else if (value === 'no') {
                 $scope.card.sound = false;
+            }
+            $scope.card.$update();
+        };
+
+        $scope.setSoundBack = function (value) {
+            $scope.soundback = value;
+            if (value === 'yes') {
+                $scope.card.soundback = true;
+            } else if (value === 'no') {
+                $scope.card.soundback = false;
             }
             $scope.card.$update();
         };
@@ -76,6 +90,8 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                     $scope.validation = 'always self-checked';
                 } else if ($scope.card.validation === 'checked') {
                     $scope.validation = 'always computer-checked';
+                } else if ($scope.card.validation === 'speech') {
+                    $scope.validation = 'speech recongnition';
                 } else {
                     $scope.validation = 'self-checked for new cards';
                 }
@@ -90,6 +106,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                     $scope.sound = 'yes';
                 } else {
                     $scope.sound = 'no';
+                }
+
+                if ($scope.card.soundback) {
+                    $scope.soundback = 'yes';
+                } else {
+                    $scope.soundback = 'no';
                 }
 
 

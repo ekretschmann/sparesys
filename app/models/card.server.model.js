@@ -72,6 +72,10 @@ var CardSchema = new Schema({
         type: Boolean,
         default: false
     },
+    soundback: {
+        type: Boolean,
+        default: false
+    },
     bothways: {
         type: Boolean,
         default: false

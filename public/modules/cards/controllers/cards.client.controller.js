@@ -16,7 +16,8 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.authentication = Authentication;
         $scope.nextAlternative = undefined;
-        $scope.nextAlternativeQuestion = undefined;
+        $scope.nextAlternativeQuestion = {};
+        $scope.nextAlternativeQuestion.text = '';
 
         $scope.validation = 'leave unchanged';
         $scope.sound = 'leave unchanged';
@@ -300,12 +301,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.updateNextAlternativeQuestion = function () {
 
             console.log('here');
-            console.log($scope.nextAlternativeQuestion);
+            console.log($scope.nextAlternativeQuestion.text);
 
 
-            if ($scope.nextAlternativeQuestion) {
-                $scope.card.alternativequestions.push($scope.nextAlternativeQuestion);
-                $scope.nextAlternativeQuestion = undefined;
+            if ($scope.nextAlternativeQuestion.text !== '') {
+                $scope.card.alternativequestions.push($scope.nextAlternativeQuestion.text);
+                $scope.nextAlternativeQuestion.text = '';
 
                 $timeout(function () {
                     angular.element('#alternativequestion').trigger('focus');

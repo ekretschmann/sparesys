@@ -10,7 +10,7 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
         $scope.soundback = 'leave unchanged';
         $scope.direction = 'leave unchanged';
 
-        $scope.validations = ['leave unchanged', 'always computer-checked', 'always self-checked', 'self-checked for new cards', 'speech recognition'];
+        $scope.validations = ['leave unchanged', 'always computer-checked', 'always self-checked', 'self-checked for new cards'];
         $scope.readQuestions = ['leave unchanged', 'yes', 'no'];
         $scope.readAnswers = ['leave unchanged', 'yes', 'no'];
         $scope.directions = ['leave unchanged', 'one way', 'both ways'];
@@ -69,8 +69,6 @@ angular.module('packs').controller('ManagePackController', ['$scope', '$state', 
                         card.validation = 'checked';
                     } else if ($scope.validation === 'always self-checked') {
                         card.validation = 'self';
-                    } else if ($scope.validation === 'speech recognition') {
-                        card.validation = 'speech';
                     }
                     if ($scope.sound === 'yes') {
                         card.sound = true;

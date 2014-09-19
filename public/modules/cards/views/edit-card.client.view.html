@@ -19,10 +19,10 @@
     <div class="headerinfo">
         <table>
             <!--<tr>-->
-                <!--<td>{{card.answer}}</td>-->
-                <!--<td class="left-padded"></td>-->
-                <!--<td class="left-padded">-->
-                <!--</td>-->
+            <!--<td>{{card.answer}}</td>-->
+            <!--<td class="left-padded"></td>-->
+            <!--<td class="left-padded">-->
+            <!--</td>-->
             <!--</tr>-->
             <tr>
                 <td>Pack</td>
@@ -51,224 +51,164 @@
     </div>
 </div>
 <form class="form-horizontal" data-ng-submit="update()" novalidate>
-    <fieldset>
+<fieldset>
 
+
+<table>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded">ID</td>
+    <td class="expands  bottom-spacer">
+        {{card._id}}
+    </td>
+</tr>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded">User</td>
+    <td class="expands  bottom-spacer">
+        {{card.user}}
+    </td>
+</tr>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded">Slaves</td>
+    <td class="expands  bottom-spacer">
+        {{card.slaves}}
+    </td>
+</tr>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded">Master</td>
+    <td class="expands  bottom-spacer">
+        {{card.master}}
+    </td>
+</tr>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded">Course</td>
+    <td class="expands  bottom-spacer">
+        {{card.course}}
+    </td>
+</tr>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded nobreak-label">Supervisor</td>
+    <td class="expands  bottom-spacer">
+        {{card.supervisor}}
+    </td>
+</tr>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded">Valid Answers</td>
+    <td class="expands  bottom-spacer">
+        {{card.validanswers}}
+    </td>
+</tr>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded">Invalid Answers</td>
+    <td class="expands  bottom-spacer">
+        {{card.invalidanswers}}
+    </td>
+</tr>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded nobreak-label">Valid Reverse Answers</td>
+    <td class="expands  bottom-spacer">
+        {{card.validreverseanswers}}
+    </td>
+</tr>
+
+<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+    <td class="right-padded nobreak-label">Invalid Reverse Answers</td>
+    <td class="expands  bottom-spacer">
+        {{card.invalidreverseanswers}}
+    </td>
+</tr>
+
+
+<tr>
+    <td class="right-padded">Type</td>
+    <td>
+        <div class="btn-group bottom-spacer">
+            <button type="button"
+                    class="btn btn-default">{{ card.type }}
+            </button>
+            <button type="button"
+                    class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="t in cardtypes"><a
+                        data-ng-click="setCardType(t)">{{t}}</a></li>
+            </ul>
+        </div>
+    </td>
+</tr>
+
+<tr data-ng-if="card.type === 'image-text'">
+    <td class="top-aligned nobreak-label">Images Front</td>
+
+    <td data-ng-if="card.images  === 0">
+
+        no images
+    </td>
+    <td>
 
         <table>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded">ID</td>
-            <td class="expands  bottom-spacer">
-                {{card._id}}
-            </td>
-        </tr>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded">User</td>
-            <td class="expands  bottom-spacer">
-                {{card.user}}
-            </td>
-        </tr>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded">Slaves</td>
-            <td class="expands  bottom-spacer">
-                {{card.slaves}}
-            </td>
-        </tr>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded">Master</td>
-            <td class="expands  bottom-spacer">
-                {{card.master}}
-            </td>
-        </tr>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded">Course</td>
-            <td class="expands  bottom-spacer">
-                {{card.course}}
-            </td>
-        </tr>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded nobreak-label">Supervisor</td>
-            <td class="expands  bottom-spacer">
-                {{card.supervisor}}
-            </td>
-        </tr>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded">Valid Answers</td>
-            <td class="expands  bottom-spacer">
-                {{card.validanswers}}
-            </td>
-        </tr>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded">Invalid Answers</td>
-            <td class="expands  bottom-spacer">
-                {{card.invalidanswers}}
-            </td>
-        </tr>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded nobreak-label">Valid Reverse Answers</td>
-            <td class="expands  bottom-spacer">
-                {{card.validreverseanswers}}
-            </td>
-        </tr>
-
-        <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-            <td class="right-padded nobreak-label">Invalid Reverse Answers</td>
-            <td class="expands  bottom-spacer">
-                {{card.invalidreverseanswers}}
-            </td>
-        </tr>
-
-
-
-        <tr>
-            <td class="right-padded">Type</td>
-            <td>
-                <div class="btn-group bottom-spacer">
-                    <button type="button"
-                            class="btn btn-default">{{ card.type }}
-                    </button>
-                    <button type="button"
-                            class="btn btn-default dropdown-toggle">
-                        <span class="caret"></span>
-                        <span class="sr-only">Split button!</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="t in cardtypes"><a
-                                data-ng-click="setCardType(t)">{{t}}</a></li>
-                    </ul>
-                </div>
-            </td>
-        </tr>
-
-        <tr data-ng-if="card.type === 'image-text'">
-            <td class="top-aligned">Images</td>
-
-            <td data-ng-if="card.images  === 0">
-
-                no images
-            </td>
-            <td >
-
-                <table>
-                    <tr>
-                        <td class="right-padded" data-ng-repeat="img in card.images">
-                            <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
-                        </td>
-                    </tr>
-                </table>
-            </td>
-
-        </tr>
-
             <tr>
-                <td class="right-padded">Front</td>
-                <td class="expands">
-                    <input type="text"
+                <td class="right-padded" data-ng-repeat="img in card.images">
+                    <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
+                </td>
+            </tr>
+        </table>
+    </td>
+
+</tr>
+
+<tr >
+    <td class="right-padded nobreak-label">
+        <section data-ng-if="card.type ==='text-text'">
+        Front
+        </section>
+
+        <section data-ng-if="card.type ==='image-text'">
+            <section data-ng-if="sound === 'yes'">
+            Text to Read
+            </section>
+
+            <section data-ng-if="sound === 'no'" class="text-muted">
+                Text to Read
+            </section>
+        </section>
+
+    </td>
+    <td class="expands">
+        <table>
+            <tr>
+                <td class="right-padded">
+                    <section data-ng-if="sound === 'yes' || card.type === 'text-text'">
+                       <input type="text"
+
                            data-ng-model="card.question"
                            id="question"
-                           class="form-control focus"
+                           class=" form-control focus standard-input-width"
                            placeholder="Question"
                            data-ng-blur="update()"
                            required>
+                        </section>
+
+                    <section data-ng-if="sound === 'no' && card.type === 'image-text'" class="text-muted nobreak-label standard-input-width">
+                      no text being read
+                     </section>
                 </td>
-            </tr>
+                <td class="nobreak-label">
+                    Read:
 
-            <tr data-ng-if="card.bothways === true" data-ng-repeat="alt in card.alternativequestions track by $index" >
-                <td class="right-padded"></td>
-                <td class="expands">
-                    <input type="text"
-                           data-ng-model="alt"
-                           class="form-control"
-                           data-ng-blur="updateAlternativeQuestion($index, alt)"
-                           placeholder="Alternative">
-                </td>
-            </tr>
-
-            <tr class="controls" data-ng-if="card.bothways">
-                <td class="right-padded"></td>
-                <td class="expands">
-                    <input type="text"
-                           data-ng-model="nextAlternativeQuestion.text"
-                           id="alternativequestion"
-                           class="form-control alternative"
-                           ng-keyup="enterAlternativeQuestion($event)"
-                           placeholder="Next Alternative (when asked back to front)"
-                           data-ng-blur="updateNextAlternativeQuestion()">
-                </td>
-            </tr>
-
-            <tr>
-                <td class="right-padded">Back</td>
-                <td class="expands">
-                    <input type="text"
-                           data-ng-model="card.answer"
-                           id="answer"
-                           class="form-control"
-                           placeholder="Answer"
-                           data-ng-blur="updateAnswer()"
-                           required>
-                </td>
-            </tr>
-
-
-            <tr data-ng-repeat="alt in card.alternatives track by $index">
-                <td class="right-padded"></td>
-                <td class="expands">
-                    <input type="text"
-                           data-ng-model="alt"
-                           id="alternatives"
-                           class="form-control"
-                           data-ng-blur="updateAlternative($index, alt)"
-                           placeholder="Alternative Answer">
-                </td>
-            </tr>
-
-            <tr class="controls">
-                <td class="right-padded"></td>
-                <td class="expands">
-                    <input type="text"
-                           data-ng-model="nextAlternative"
-                           id="alternative"
-                           class="form-control alternative"
-                           ng-keyup="enterAlternative($event)"
-                           placeholder="Next Alternative"
-                           data-ng-blur="updateNextAlternative()">
-                </td>
-            </tr>
-
-            <tr>
-                <td class="right-padded">Checks</td>
-                <td>
-                    <div class="btn-group bottom-spacer">
-                        <button type="button"
-                                class="btn btn-default">{{ validation }}
-                        </button>
-                        <button type="button"
-                                class="btn btn-default dropdown-toggle">
-                            <span class="caret"></span>
-                            <span class="sr-only">Split button!</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li data-ng-repeat="val in validations"><a
-                                    data-ng-click="setValidation(val)">{{val}}</a></li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-
-            <tr>
-                <td class="right-padded nobreak-label">Read Front</td>
-                <td>
                     <div class="btn-group  bottom-spacer">
-                        <button type="button" class="btn btn-default">{{ sound }}</button>
+
+                        <button type="button" class="btn btn-default"  style="width: 60px">{{ sound }}</button>
                         <button type="button" class="btn btn-default dropdown-toggle">
                             <span class="caret"></span>
                             <span class="sr-only">Split button!</span>
@@ -281,112 +221,215 @@
                     </div>
                 </td>
             </tr>
+        </table>
+    </td>
 
-        <tr>
-            <td class="right-padded nobreak-label">Read Back</td>
-            <td>
-                <div class="btn-group  bottom-spacer">
-                    <button type="button" class="btn btn-default">{{ soundback }}</button>
-                    <button type="button" class="btn btn-default dropdown-toggle">
-                        <span class="caret"></span>
-                        <span class="sr-only">Split button!</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="r in readAnswers"><a
-                                data-ng-click="setSoundBack(r)">{{r}}</a>
-                        </li>
-                    </ul>
-                </div>
-            </td>
-        </tr>
+</tr>
 
+
+<tr data-ng-if="card.bothways === true" data-ng-repeat="alt in card.alternativequestions track by $index">
+    <td class="right-padded"></td>
+    <td class="expands">
+        <input type="text"
+               data-ng-model="alt"
+               class="form-control standard-input-width "
+               data-ng-blur="updateAlternativeQuestion($index, alt)"
+               placeholder="Alternative">
+    </td>
+</tr>
+
+<tr class="controls" data-ng-if="card.bothways">
+    <td class="right-padded"></td>
+    <td class="expands">
+        <input type="text"
+               data-ng-model="nextAlternativeQuestion.text"
+               id="alternativequestion"
+               class="standard-input-width form-control alternative"
+               ng-keyup="enterAlternativeQuestion($event)"
+               placeholder="Next Alternative (when asked back to front)"
+               data-ng-blur="updateNextAlternativeQuestion()">
+    </td>
+</tr>
+
+<tr>
+    <td class="right-padded">Back</td>
+
+    <td class="expands">
+        <table >
             <tr>
                 <td class="right-padded">
-                    <section data-ng-if="card.type === 'text-text'">
-                    Direction
-                    </section>
-                    <section data-ng-if="card.type === 'image-text'" class="text-muted">
-                        Direction
-                    </section>
+                    <input type="text"
+                           data-ng-model="card.answer"
+                           id="answer"
+                           class="standard-input-width form-control"
+                           placeholder="Answer"
+                           data-ng-blur="updateAnswer()"
+                           required>
                 </td>
-                <td>
-                    <section data-ng-if="card.type === 'text-text'">
+
+                <td class="nobreak-label">
+                    Read:
+
                     <div class="btn-group  bottom-spacer">
-                        <button type="button" class="btn btn-default">{{ direction }}</button>
+                        <button type="button" class="btn btn-default" style="width: 60px">{{ soundback }}</button>
                         <button type="button" class="btn btn-default dropdown-toggle">
                             <span class="caret"></span>
                             <span class="sr-only">Split button!</span>
                         </button>
                         <ul class="dropdown-menu" role="menu">
-                            <li data-ng-repeat="d in directions"><a data-ng-click="setDirection(d)">{{d}}</a>
+                            <li data-ng-repeat="r in readAnswers"><a
+                                    data-ng-click="setSoundBack(r)">{{r}}</a>
                             </li>
                         </ul>
                     </div>
-                    </section>
-
-                    <section data-ng-if="card.type === 'image-text'" class="text-muted">
-                        one-way
-                    </section>
                 </td>
             </tr>
-
-            <tr data-ng-controller="DateDropdownController">
-                <td>Due date</td>
-                <td>
-
-                    <div class="input-group bottom-spacer">
-                        <input type="text"
-                               class="form-control"
-                               datepicker-popup="{{format}}"
-                               ng-model="$parent.card.due"
-                               is-open="opened"
-                               min-date="minDate"
-                               datepicker-options="dateOptions"
-                               date-disabled="disabled(date, mode)"
-                               ng-required="false"
-                               close-text="Close"
-                               data-ng-blur="$parent.update()"/>
-
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)"><i
-                                    class="glyphicon glyphicon-calendar"></i></button>
-                        </div>
-                    </div>
-
-                </td>
-            </tr>
-
-            <tr data-ng-controller="DateDropdownController">
-                <td>Start date</td>
-                <td>
-
-                    <div class="input-group  bottom-spacer">
-                        <input type="text"
-                               class="form-control"
-                               datepicker-popup="{{format}}"
-                               ng-model="$parent.card.after"
-                               is-open="opened" min-date="minDate"
-                               datepicker-options="dateOptions"
-                               date-disabled="disabled(date, mode)"
-                               ng-required="false"
-                               close-text="Close"
-                               data-ng-blur="$parent.update()"/>
-
-                        <div class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)"><i
-                                    class="glyphicon glyphicon-calendar"></i></button>
-                        </div>
-                    </div>
-
-                </td>
-            </tr>
-
-
-
         </table>
 
 
-    </fieldset>
+</tr>
+
+
+<tr data-ng-repeat="alt in card.alternatives track by $index">
+    <td class="right-padded"></td>
+    <td class="expands">
+        <input type="text"
+               data-ng-model="alt"
+               id="alternatives"
+               class="standard-input-width form-control"
+               data-ng-blur="updateAlternative($index, alt)"
+               placeholder="Alternative Answer">
+    </td>
+</tr>
+
+<tr class="controls">
+    <td class="right-padded"></td>
+    <td class="expands">
+        <input type="text"
+               data-ng-model="nextAlternative"
+               id="alternative"
+               class="standard-input-width form-control alternative"
+               ng-keyup="enterAlternative($event)"
+               placeholder="Next Alternative"
+               data-ng-blur="updateNextAlternative()">
+    </td>
+</tr>
+
+<tr>
+    <td class="right-padded">Checks</td>
+    <td>
+        <div class="btn-group bottom-spacer">
+            <button type="button"
+                    class="btn btn-default">{{ validation }}
+            </button>
+            <button type="button"
+                    class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="val in validations"><a
+                        data-ng-click="setValidation(val)">{{val}}</a></li>
+            </ul>
+        </div>
+    </td>
+</tr>
+
+
+
+<tr>
+    <td class="right-padded">
+        <section data-ng-if="card.type === 'text-text'">
+            Direction
+        </section>
+        <section data-ng-if="card.type === 'image-text'" class="text-muted">
+            Direction
+        </section>
+    </td>
+    <td>
+        <section data-ng-if="card.type === 'text-text'">
+            <div class="btn-group  bottom-spacer">
+                <button type="button" class="btn btn-default">{{ direction }}</button>
+                <button type="button" class="btn btn-default dropdown-toggle">
+                    <span class="caret"></span>
+                    <span class="sr-only">Split button!</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li data-ng-repeat="d in directions"><a data-ng-click="setDirection(d)">{{d}}</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+
+        <section data-ng-if="card.type === 'image-text'" class="text-muted">
+            <div class="btn-group  bottom-spacer">
+                <button type="button" class="btn btn-default.disabled text-muted">{{ direction }}</button>
+                <button type="button" class="btn btn-default.disabled dropdown-toggle">
+                    <span class="caret"></span>
+                    <span class="sr-only">Split button!</span>
+                </button>
+
+            </div>
+        </section>
+    </td>
+</tr>
+
+<tr data-ng-controller="DateDropdownController">
+    <td>Due date</td>
+    <td>
+
+        <div class="input-group bottom-spacer">
+            <input type="text"
+                   class="form-control"
+                   datepicker-popup="{{format}}"
+                   ng-model="$parent.card.due"
+                   is-open="opened"
+                   min-date="minDate"
+                   datepicker-options="dateOptions"
+                   date-disabled="disabled(date, mode)"
+                   ng-required="false"
+                   close-text="Close"
+                   data-ng-blur="$parent.update()"/>
+
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+            </div>
+        </div>
+
+    </td>
+</tr>
+
+<tr data-ng-controller="DateDropdownController">
+    <td>Start date</td>
+    <td>
+
+        <div class="input-group  bottom-spacer">
+            <input type="text"
+                   class="form-control"
+                   datepicker-popup="{{format}}"
+                   ng-model="$parent.card.after"
+                   is-open="opened" min-date="minDate"
+                   datepicker-options="dateOptions"
+                   date-disabled="disabled(date, mode)"
+                   ng-required="false"
+                   close-text="Close"
+                   data-ng-blur="$parent.update()"/>
+
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                        class="glyphicon glyphicon-calendar"></i></button>
+            </div>
+        </div>
+
+    </td>
+</tr>
+
+
+</table>
+
+
+</fieldset>
 
 
 </form>

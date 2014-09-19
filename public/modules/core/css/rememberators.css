@@ -487,6 +487,10 @@
 }
 
 
+.standard-input-width {
+    width: 400px
+}
+
 .new-card {
     text-align: left;
     padding-top: 5px;

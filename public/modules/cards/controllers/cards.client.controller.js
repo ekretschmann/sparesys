@@ -28,6 +28,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.readAnswers = ['yes', 'no'];
         $scope.directions = ['one way', 'both ways'];
 
+        $scope.cardtypes = ['text-text', 'image-text'];
 
         $scope.setValidation = function (value) {
 
@@ -70,6 +71,13 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             $scope.card.$update();
         };
 
+        $scope.setCardType = function(t) {
+            $scope.card.type = t;
+            $scope.card.bothways = false;
+            $scope.direction = 'one way';
+            $scope.card.$update();
+        };
+
         $scope.setDirection = function (value) {
             $scope.direction = value;
             if (value === 'one way') {
@@ -85,6 +93,8 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             $scope.card = Cards.get({
                 cardId: $stateParams.cardId
             }, function () {
+
+
 
                 if ($scope.card.validation === 'self') {
                     $scope.validation = 'always self-checked';
@@ -259,6 +269,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.updateAlternativeQuestion = function (index, alt) {
 
+
             $scope.card.alternativequestions[index] = alt;
             var alts = [];
             $scope.card.alternativequestions.forEach(function (alt) {
@@ -267,11 +278,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 }
             });
             $scope.card.alternativequestions = alts;
+
+            console.log($scope.card.alternativequestions);
             $scope.update();
         };
 
         $scope.updateNextAlternative = function () {
-
 
             if ($scope.nextAlternative) {
                 $scope.card.alternatives.push($scope.nextAlternative);
@@ -286,6 +298,9 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         };
 
         $scope.updateNextAlternativeQuestion = function () {
+
+            console.log('here');
+            console.log($scope.nextAlternativeQuestion);
 
 
             if ($scope.nextAlternativeQuestion) {

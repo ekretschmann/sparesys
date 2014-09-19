@@ -128,6 +128,46 @@
 
 
 
+        <tr>
+            <td class="right-padded">Type</td>
+            <td>
+                <div class="btn-group bottom-spacer">
+                    <button type="button"
+                            class="btn btn-default">{{ card.type }}
+                    </button>
+                    <button type="button"
+                            class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="t in cardtypes"><a
+                                data-ng-click="setCardType(t)">{{t}}</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+
+        <tr data-ng-if="card.type === 'image-text'">
+            <td class="top-aligned">Images</td>
+
+            <td data-ng-if="card.images  === 0">
+
+                no images
+            </td>
+            <td >
+
+                <table>
+                    <tr>
+                        <td class="right-padded" data-ng-repeat="img in card.images">
+                            <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
+                        </td>
+                    </tr>
+                </table>
+            </td>
+
+        </tr>
+
             <tr>
                 <td class="right-padded">Front</td>
                 <td class="expands">
@@ -141,26 +181,26 @@
                 </td>
             </tr>
 
-            <tr data-ng-repeat="alt in card.alternativequestions track by $index">
+            <tr data-ng-if="card.bothways === true" data-ng-repeat="alt in card.alternativequestions track by $index" >
                 <td class="right-padded"></td>
                 <td class="expands">
                     <input type="text"
                            data-ng-model="alt"
                            class="form-control"
                            data-ng-blur="updateAlternativeQuestion($index, alt)"
-                           placeholder="Alternative Question">
+                           placeholder="Alternative">
                 </td>
             </tr>
 
-            <tr class="controls">
+            <tr class="controls" data-ng-if="card.bothways">
                 <td class="right-padded"></td>
                 <td class="expands">
                     <input type="text"
-                           data-ng-model="nextAlternativeQuestion"
+                           data-ng-model="nextAlternativeQuestion.text"
                            id="alternativequestion"
                            class="form-control alternative"
                            ng-keyup="enterAlternativeQuestion($event)"
-                           placeholder="Next Alternative Question"
+                           placeholder="Next Alternative (when asked back to front)"
                            data-ng-blur="updateNextAlternativeQuestion()">
                 </td>
             </tr>
@@ -199,7 +239,7 @@
                            id="alternative"
                            class="form-control alternative"
                            ng-keyup="enterAlternative($event)"
-                           placeholder="Next Alternative Answer"
+                           placeholder="Next Alternative"
                            data-ng-blur="updateNextAlternative()">
                 </td>
             </tr>
@@ -261,8 +301,16 @@
         </tr>
 
             <tr>
-                <td class="right-padded">Direction</td>
+                <td class="right-padded">
+                    <section data-ng-if="card.type === 'text-text'">
+                    Direction
+                    </section>
+                    <section data-ng-if="card.type === 'image-text'" class="text-muted">
+                        Direction
+                    </section>
+                </td>
                 <td>
+                    <section data-ng-if="card.type === 'text-text'">
                     <div class="btn-group  bottom-spacer">
                         <button type="button" class="btn btn-default">{{ direction }}</button>
                         <button type="button" class="btn btn-default dropdown-toggle">
@@ -274,6 +322,11 @@
                             </li>
                         </ul>
                     </div>
+                    </section>
+
+                    <section data-ng-if="card.type === 'image-text'" class="text-muted">
+                        one-way
+                    </section>
                 </td>
             </tr>
 
@@ -328,25 +381,7 @@
                 </td>
             </tr>
 
-            <tr >
-                <td class="top-aligned">Images</td>
 
-                <td data-ng-if="card.images  === 0">
-
-                    no images
-                </td>
-                <td >
-
-                    <table>
-                        <tr>
-                            <td class="right-padded" data-ng-repeat="img in card.images">
-                                <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
-                            </td>
-                        </tr>
-                    </table>
-                </td>
-
-            </tr>
 
         </table>
 

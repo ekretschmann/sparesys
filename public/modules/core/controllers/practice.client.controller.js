@@ -38,11 +38,11 @@ angular.module('core').controller('PracticeController',
             };
 
             $scope.onSpeechResult = function (event) {
-
+                /* jshint ignore:start */
 
                 console.log('result');
                 var interim_transcript = '';
-                if (typeof(event.results) == 'undefined') {
+                if (typeof(event.results) === 'undefined') {
                     console.log('ending');
                     recognition.onend = null;
                     recognition.stop();
@@ -51,6 +51,10 @@ angular.module('core').controller('PracticeController',
                 }
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
                     if (event.results[i].isFinal) {
+                        if ($scope.answer.text === undefined) {
+                            $scope.answer.text ='';
+                        }
+
                         $scope.answer.text += event.results[i][0].transcript.trim();
                         $state.go($state.$current);
                         console.log($scope.answer.text);
@@ -59,6 +63,7 @@ angular.module('core').controller('PracticeController',
                         interim_transcript += event.results[i][0].transcript.trim();
                     }
                 }
+                /* jshint ignore:end */
 
             };
 
@@ -478,7 +483,9 @@ angular.module('core').controller('PracticeController',
                     } else {
 
                         console.log('got it');
+                        /* jshint ignore:start */
                         var recognition = new webkitSpeechRecognition();
+
                         recognition.continuous = true;
                         recognition.interimResults = true;
 
@@ -507,6 +514,8 @@ angular.module('core').controller('PracticeController',
 
                         console.log('and starting');
                         recognition.start();
+                        /* jshint ignore:end */
+
                     }
 
                 });

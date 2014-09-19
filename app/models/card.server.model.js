@@ -10,10 +10,15 @@ var mongoose = require('mongoose'),
  * Card Schema
  */
 var CardSchema = new Schema({
+
+
+    type: {
+        type: String,
+        default: 'text-text'
+    },
     question: {
         type: String,
         default: '',
-        required: 'Please fill out Card Question',
         trim: true
     },
     alternativequestions: {

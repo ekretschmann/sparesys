@@ -136,9 +136,10 @@ angular.module('courses').controller('CoursesController',
 
             // Find a list of Courses
             $scope.find = function () {
-                Courses.query();
+                $scope.courses = Courses.query();
 
             };
+
 
             // Find list for current user
             $scope.findForCurrentUser = function () {

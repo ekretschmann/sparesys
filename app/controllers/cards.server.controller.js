@@ -116,6 +116,7 @@ exports.update = function (req, res) {
             c.alternativequestions = card.alternativequestions;
             c.sound = card.sound;
             c.format = card.format;
+            c.type = card.type;
             c.save();
 
         });

@@ -483,6 +483,17 @@
     font-size: large;
 }
 
+.sound-replay-back:hover {
+    font-size: x-large;
+}
+.sound-replay-back {
+    color:#4DB22B;
+    position: absolute;
+    top: 5px;
+    left: 30px;
+    font-size: large;
+}
+
 
 
 .card-score {
@@ -511,12 +522,8 @@
 
 .new-card {
     text-align: left;
-    padding-top: 5px;
-    padding-right: 5px;
+    padding-top: 10px;
     color:#4DB22B;
-    position: absolute;
-    top: 5px;
-    left: 10px;
 
 
     -webkit-animation-name: appear;

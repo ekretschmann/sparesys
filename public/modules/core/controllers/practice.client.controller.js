@@ -30,17 +30,53 @@ angular.module('core').controller('PracticeController',
 
             $scope.specialChars = [];
 
+            $scope.recognition = undefined;
 
-
-            $scope.settext = function() {
+            $scope.settext = function () {
                 console.log($scope);
                 $scope.answer.final_transcript = 'hello world';
+            };
+
+
+            $scope.initSpeech = function () {
+                console.log('got it');
+                       /* jshint ignore:start */
+                $scope.recognition = new webkitSpeechRecognition();
+
+                console.log( $scope.recognition);
+
+                $scope.recognition.continuous = true;
+                $scope.recognition.interimResults = true;
+
+                $scope.recognition.lang = $scope.course.languageback.code;
+
+
+                $scope.recognition.onresult = $scope.onSpeechResult;
+
+                $scope.recognition.onstart = function () {
+                    console.log('start');
+                    $scope.answer.text = '';
+                };
+
+                $scope.recognition.onerror = function (event) {
+
+                    console.log('error');
+                    console.log(event);
+                };
+                $scope.recognition.onend = function () {
+                    console.log('end');
+//                    recognition.start();
+                };
+
+                console.log('and starting');
+                $scope.recognition.start();
+                /* jshint ignore:end */
             };
 
             $scope.onSpeechResult = function (event) {
                 /* jshint ignore:start */
 
-                console.log('result');
+
                 var interim_transcript = '';
                 if (typeof(event.results) === 'undefined') {
                     console.log('ending');
@@ -50,9 +86,12 @@ angular.module('core').controller('PracticeController',
                     return;
                 }
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
+
+                    console.log($scope.recognition.lang);
+                    console.log(event.results[i]);
                     if (event.results[i].isFinal) {
                         if ($scope.answer.text === undefined) {
-                            $scope.answer.text ='';
+                            $scope.answer.text = '';
                         }
 
                         $scope.answer.text += event.results[i][0].transcript.trim();
@@ -68,9 +107,7 @@ angular.module('core').controller('PracticeController',
             };
 
 
-
-            $scope.thatCounts = function() {
-
+            $scope.thatCounts = function () {
 
 
                 if ($scope.practice.direction === 'forward') {
@@ -79,10 +116,8 @@ angular.module('core').controller('PracticeController',
                     $scope.card.validreverseanswers.push($scope.answer.text);
                 }
 
-                $scope.card.history.splice($scope.card.history.length-1);
+                $scope.card.history.splice($scope.card.history.length - 1);
                 SchedulerService.record($scope.card, Date.now(), 3);
-
-
 
 
                 if ($scope.card.master) {
@@ -99,15 +134,15 @@ angular.module('core').controller('PracticeController',
                     }, function (thecard) {
                         thecard.hrt = $scope.card.hrt;
                         thecard.history = $scope.card.history;
-                        thecard.$update(function() {
+                        thecard.$update(function () {
                             $scope.nextCard();
                         });
                     });
 
-                    msg.$save(function() {
+                    msg.$save(function () {
                         $scope.nextCard();
                     });
-                } else  {
+                } else {
 
                     Cards.get({
                         cardId: $scope.card._id
@@ -116,7 +151,7 @@ angular.module('core').controller('PracticeController',
                         thecard.history = $scope.card.history;
                         thecard.validanswers = $scope.card.validanswers;
                         thecard.validreverseanswers = $scope.card.validreverseanswers;
-                        thecard.$update(function() {
+                        thecard.$update(function () {
                             $scope.nextCard();
                         });
                     });
@@ -153,7 +188,6 @@ angular.module('core').controller('PracticeController',
 
 
                 var score = 0;
-
 
 
                 if ($scope.practice.direction === 'forward') {
@@ -381,6 +415,9 @@ angular.module('core').controller('PracticeController',
                     $scope.practice.format = $scope.card.format;
                     $scope.practice.alternativequestions = $scope.card.alternatives;
                     $scope.practice.alternatives = $scope.card.alternativequestions;
+
+
+
                 } else {
                     $scope.practice.direction = 'forward';
                     $scope.practice.question = $scope.card.question;
@@ -388,13 +425,16 @@ angular.module('core').controller('PracticeController',
                     $scope.practice.answer = $scope.card.answer;
                     $scope.practice.alternativequestions = $scope.card.alternativequestions;
                     $scope.practice.alternatives = $scope.card.alternatives;
+
                 }
 
                 if (window.SpeechSynthesisUtterance !== undefined) {
-                    $scope.practice.sound = $scope.card.sound;
+                    $scope.practice.soundFront = $scope.card.sound;
+                    $scope.practice.soundBack = $scope.card.soundback;
 
                 } else {
-                    $scope.practice.sound = false;
+                    $scope.practice.soundFront = false;
+                    $scope.practice.soundBack = false;
                 }
                 $scope.practice.assessment = $scope.validation;
 
@@ -436,16 +476,8 @@ angular.module('core').controller('PracticeController',
             };
 
 
-
             // Find existing Course
             $scope.init = function () {
-
-
-
-
-
-
-
 
 
                 var res = CoursesService.serverLoadCards();
@@ -478,44 +510,15 @@ angular.module('core').controller('PracticeController',
                         $scope.specialChars = ['ä', 'é', 'ö', 'ü', 'ß'];
                     }
 
+                    if (course.speechrecognition !== 'none' && 'webkitSpeechRecognition' in window) {
+                        $scope.initSpeech();
+                    }
 
 //                    if (!('webkitSpeechRecognition' in window)) {
 //                        console.log('sorry');
 //                    } else {
 //
-//                        console.log('got it');
-//                        /* jshint ignore:start */
-//                        var recognition = new webkitSpeechRecognition();
 //
-//                        recognition.continuous = true;
-//                        recognition.interimResults = true;
-//
-//                        console.log('x');
-//                        console.log($scope.course.languageback.code);
-//                        console.log('x');
-//                        recognition.lang =  $scope.course.languageback.code;
-//
-//
-//                        recognition.onresult = $scope.onSpeechResult;
-//
-//                        recognition.onstart = function () {
-//                            console.log('start');
-//                            $scope.answer.text = '';
-//                        };
-//
-//                        recognition.onerror = function (event) {
-//
-//                            console.log('error');
-//                            console.log(event);
-//                        };
-//                        recognition.onend = function () {
-//                            console.log('end');
-////                    recognition.start();
-//                        };
-//
-//                        console.log('and starting');
-//                        recognition.start();
-                        /* jshint ignore:end */
 
 //                    }
 
@@ -525,9 +528,6 @@ angular.module('core').controller('PracticeController',
 
             $scope.playSound = function (answer) {
 
-
-                console.log('here');
-                console.log(!$scope.course.language);
 
                 if (!$scope.course || !$scope.course.language) {
                     return;
@@ -540,6 +540,27 @@ angular.module('core').controller('PracticeController',
                     var msg = new SpeechSynthesisUtterance(answer);
 
                     msg.lang = $scope.course.language.code;
+                    window.speechSynthesis.speak(msg);
+                }
+                /* jshint ignore:end */
+
+            };
+
+
+            $scope.playSoundBack = function (answer) {
+
+
+                if (!$scope.course || !$scope.course.languageback) {
+                    return;
+                }
+
+                /* jshint ignore:start */
+                if (window.SpeechSynthesisUtterance !== undefined) {
+
+
+                    var msg = new SpeechSynthesisUtterance(answer);
+
+                    msg.lang = $scope.course.languageback.code;
                     window.speechSynthesis.speak(msg);
                 }
                 /* jshint ignore:end */

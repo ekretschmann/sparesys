@@ -80,26 +80,24 @@ angular.module('core').controller('PracticeController',
                 var interim_transcript = '';
                 if (typeof(event.results) === 'undefined') {
                     console.log('ending');
-                    recognition.onend = null;
-                    recognition.stop();
-                    upgrade();
+                    $scope.recognition.onend = null;
+                    $scope.recognition.stop();
+//                    upgrade();
                     return;
                 }
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
 
-                    console.log($scope.recognition.lang);
-                    console.log(event.results[i]);
-                    if (event.results[i].isFinal) {
-                        if ($scope.answer.text === undefined) {
-                            $scope.answer.text = '';
-                        }
+                    if ($scope.state==='question') {
+                        if (event.results[i].isFinal) {
+                            if ($scope.answer.text === undefined) {
+                                $scope.answer.text = '';
+                            }
 
-                        $scope.answer.text += event.results[i][0].transcript.trim();
-                        $state.go($state.$current);
-                        console.log($scope.answer.text);
-                        console.log($scope);
-                    } else {
-                        interim_transcript += event.results[i][0].transcript.trim();
+                            $scope.answer.text += event.results[i][0].transcript.trim();
+                            $state.go($state.$current);
+                        } else {
+                            interim_transcript += event.results[i][0].transcript.trim();
+                        }
                     }
                 }
                 /* jshint ignore:end */

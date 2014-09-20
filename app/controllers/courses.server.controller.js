@@ -269,6 +269,7 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.master = original._id;
             copy.supervisor = original.user;
             copy.format = original.format;
+            copy.type = original.type;
             copy.course = newCourseId;
             copy.save();
 
@@ -381,6 +382,8 @@ exports.copyCourse = function (req, res, next, id) {
         copy.name = original.name;
         copy.description = original.description;
         copy.language = original.language;
+        copy.languageback = original.languageback;
+        copy.speechrecognition = original.speechrecognition;
         copy.master = original._id;
         copy.supervised = isSupervised;
         if (!original.slaves) {

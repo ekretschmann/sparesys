@@ -48,30 +48,44 @@
 
         <div class="content-section">
 
-            <div class="title">Search Result</div>
+            <div class="title">
+                Search Result
+
+                <span data-ng-if="images.length >0">
+                <span data-ng-if="page > 1">
+                    <a href="">
+                        <i data-ng-click="prev()"
+                           class="glyphicon glyphicon-arrow-left">
+                        </i>
+                        </a>
+                </span>
+
+                <span data-ng-if="page <= 1">
+                    <i class="glyphicon glyphicon-arrow-left text-muted">
+                    </i>
+                </span>
+
+                <span data-ng-if="page < max_page">
+                    <a href="">
+                        <i data-ng-click="next()"
+                           class="glyphicon glyphicon-arrow-right">
+                        </i>
+                    </a>
+                </span>
+
+                <span data-ng-if="page >= max_page">
+                        <i
+                           class="glyphicon glyphicon-arrow-right text-muted">
+                        </i>
+                </span>
+
+                    </span>
+            </div>
             <div data-ng-if="images.length === 0">
                 No Search Result
             </div>
 
-            <div data-ng-if="totalResults > 9">
-                <table>
-                    <tr>
-                        <td>
-                            <a href="">
-                                <i data-ng-click="prev()"
-                                   class="glyphicon glyphicon-arrow-left">
-                                </i>
-                            </a>
-                        <td class="expands"></td>
-                        <td><a href="">
-                            <i data-ng-click="nextPage()"
-                               class="glyphicon glyphicon-arrow-right">
-                            </i>
-                        </a></td>
-                    </tr>
-                </table>
 
-            </div>
 
             <div data-ng-if="images.length > 0">
                 <table width="100%">
@@ -106,7 +120,7 @@
 
 
         <div style="text-align: center">
-            <button class="btn btn-rememberators" ng-click="search()">Search</button>
+            <button class="btn btn-rememberators" ng-click="newSearch()">Search</button>
             <button class="btn btn-rememberators" ng-click="ok()">OK</button>
             <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
         </div>

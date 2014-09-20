@@ -9,10 +9,10 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
 
         $scope.images = [];
         $scope.search = {};
-        $scope.search.text = $scope.card.question;
+
 
         $scope.setFocus = function () {
-            console.log('setting focus');
+            $scope.search.text = $scope.card.question;
             $timeout(function () {
                 angular.element('.focus').trigger('focus');
             }, 100);
@@ -115,15 +115,41 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             });
         };
 
+        $scope.page = 1;
+        $scope.max_page = 1;
+
+        $scope.next = function() {
+            if ($scope.page < $scope.max_page) {
+                $scope.page++;
+                $scope.search();
+            }
+        };
+
+        $scope.prev = function() {
+
+            if ($scope.page>1) {
+                $scope.page--;
+                $scope.search();
+            }
+        };
+
+        $scope.newSearch = function () {
+            $scope.page = 1;
+            $scope.search();
+        };
 
         $scope.search = function () {
 
-            console.log('https://connect.gettyimages.com:443/v3/search/images/creative?phrase='+$scope.search.text);
 
             $http({ method: 'GET',
-                url: 'https://connect.gettyimages.com:443/v3/search/images/creative?phrase='+$scope.search.text,
+                url: 'https://connect.gettyimages.com:443/v3/search/images/creative?phrase='+$scope.search.text+'&page_size=9&page='+$scope.page,
                 headers: {'Api-Key': 'kxp5cbugd37388ra47sww5fr'}}).
                 success(function (data, status, headers, config) {
+
+
+                    $scope.max_page = Math.floor(data.result_count / 9);
+
+
                     var max = 9;
                     var counter = 0;
                     $scope.images = [];
@@ -143,7 +169,6 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
 
                     });
 
-                    console.log($scope.images);
                 }).
                 error(function (data, status, headers, config) {
                     console.log(data);

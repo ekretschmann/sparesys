@@ -31,19 +31,34 @@
                 </td>
             </tr>
 
-            <tr data-ng-if="nextCard">
-                <td>Next Card in Pack</td>
+            <tr>
+                <td>Previous Card in Pack</td>
                 <td class="left-padded">:</td>
-                <td class="left-padded"><a data-ng-href="#!/cards/{{nextCard._id}}/edit">{{nextCard.question}}</a>
+                <td class="left-padded">
+                    <section data-ng-if="prevCard">
+                    <a data-ng-href="#!/cards/{{prevCard._id}}/edit">{{prevCard.question}}</a>
+                    </section>
+                    <section data-ng-if="!prevCard" class="text-muted">
+                        this is the first card
+                    </section>
                 </td>
             </tr>
 
-            <tr data-ng-if="prevCard">
-                <td>Previous Card in Pack</td>
+            <tr >
+                <td>Next Card in Pack</td>
                 <td class="left-padded">:</td>
-                <td class="left-padded"><a data-ng-href="#!/cards/{{prevCard._id}}/edit">{{prevCard.question}}</a>
+                <td class="left-padded">
+                    <section data-ng-if="nextCard">
+                    <a data-ng-href="#!/cards/{{nextCard._id}}/edit">{{nextCard.question}}</a>
+                    </section>
+
+                    <section data-ng-if="!nextCard" class="text-muted">
+                        this is the last card
+                    </section>
                 </td>
             </tr>
+
+
 
         </table>
 
@@ -156,7 +171,7 @@
     </td>
     <td>
 
-        <table>
+        <table  class="bottom-spacer">
             <tr>
                 <td class="right-padded" data-ng-repeat="img in card.images">
                     <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>

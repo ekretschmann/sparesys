@@ -7,6 +7,8 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
         $scope.initialCourseName = course.name;
 
 
+        $scope.speechRecognitionOptions = ['none', 'front to back questions', 'back to front questions', 'both ways'];
+
         $scope.languages = [
             {name:'-', code:''},
             {name:'Chinese', code:'zh-CN'},
@@ -19,6 +21,10 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
             {name:'Korean', code:'ko-KR'},
             {name:'Spanish', code:'es-ES'}
         ];
+
+        $scope.setSpeechrecognition = function(option) {
+            $scope.course.speechrecognition = option;
+        };
 
 
         var selectedIndex = 0;

@@ -74,6 +74,10 @@ var CourseSchema = new Schema({
     supervised: {
         type: Boolean,
         default: false
+    },
+    speechrecognition: {
+        type: String,
+        default: 'none'
     }
 });
 

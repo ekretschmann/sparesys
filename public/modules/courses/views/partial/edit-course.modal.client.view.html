@@ -81,7 +81,7 @@
                                 <td class="top-padded">
 
 
-                                    <div class="btn-group">
+                                    <div class="btn-group bottom-spacer">
                                         <button type="button" class="btn btn-default" >{{ languageback.name }}</button>
                                         <button type="button" class="btn btn-default dropdown-toggle" >
                                             <span class="caret"></span>
@@ -92,6 +92,29 @@
                                         </ul>
                                     </div>
 
+
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td class="right-padded nobreak-label">Speech Recognition</td>
+                                <td>
+
+                                    <div class="btn-group  bottom-spacer">
+
+                                        <button type="button" class="btn btn-default" >{{ course.speechrecognition }}</button>
+                                        <button type="button" class="btn btn-default dropdown-toggle">
+                                            <span class="caret"></span>
+                                            <span class="sr-only">Split button!</span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu">
+                                            <li data-ng-repeat="option in speechRecognitionOptions"><a
+                                                    data-ng-click="setSpeechrecognition(option)">{{option}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
 
                                 </td>
                             </tr>

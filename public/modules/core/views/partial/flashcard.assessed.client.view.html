@@ -92,6 +92,8 @@
 
     <div data-ng-if="slides.length === 0 || practice.direction === 'reverse'" class="question">{{practice.question}}</div>
 
+
+
     <div data-ng-if="slides.length > 0 && practice.direction === 'forward'">
         <div style="text-align: center">
                     <imagecarousel slides="slides" size="200"/>
@@ -139,24 +141,23 @@
 
 
         <div data-ng-if="lastRating === 3">
-            Your answer was:
-            <div class="correct-answer">{{answer.text}}</div>
+            Your answer was: <span class="correct-color">{{answer.text}}</span>
         </div>
 
 
         <div data-ng-if="lastRating === 0">
-            Your answer was: {{answer.text}}
-            <div class="incorrect-answer">The correct answer is: {{practice.answer}}</div>
+            Your answer was:  <span class="incorrect-color">{{answer.text}}</span>
+            <div style="padding-bottom: 15px">The correct answer is:  <span class="correct-color">{{practice.answer}}</span></div>
 
         </div>
 
-        <div data-ng-if="practice.direction === 'forward' && card.alternatives && card.alternatives.length > 0">
-            <span class="text-muted right-padded top-aligned">Also:</span>
-                        <span class="text-muted right-padded" data-ng-repeat="alt in card.alternatives">
-                    "{{alt}}"
-                </span>
+        <!--<div data-ng-if="practice.direction === 'forward' && card.alternatives && card.alternatives.length > 0">-->
+            <!--<span class="text-muted right-padded top-aligned">Also:</span>-->
+                        <!--<span class="text-muted right-padded" data-ng-repeat="alt in card.alternatives">-->
+                    <!--"{{alt}}"-->
+                <!--</span>-->
 
-        </div>
+        <!--</div>-->
 
     </div>
 </div>

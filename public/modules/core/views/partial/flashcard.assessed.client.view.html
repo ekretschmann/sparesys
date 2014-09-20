@@ -14,23 +14,23 @@
     </div>
 
 
-    <div data-ng-if="card.history.length > 0"
-         class="history text-muted">
+    <!--<div data-ng-if="card.history.length > 0"-->
+         <!--class="history text-muted">-->
 
-        <div style="font-size: x-small">
-            Repetitions: {{card.history.length}}
-        </div>
-        <div style="font-size: x-small">
-            Last Check: {{card.history[card.history.length-1].assessment }}
-        </div>
-        <div style="font-size: x-small">
-            First Repetition: {{card.history[0].when | date:'shortDate'}}
-        </div>
-        <div style="font-size: x-small">
-            Last Repetition: {{card.history[card.history.length-1].when | date:'shortDate'}}
-        </div>
+        <!--<div style="font-size: x-small">-->
+            <!--Repetitions: {{card.history.length}}-->
+        <!--</div>-->
+        <!--<div style="font-size: x-small">-->
+            <!--Last Check: {{card.history[card.history.length-1].assessment }}-->
+        <!--</div>-->
+        <!--<div style="font-size: x-small">-->
+            <!--First Repetition: {{card.history[0].when | date:'shortDate'}}-->
+        <!--</div>-->
+        <!--<div style="font-size: x-small">-->
+            <!--Last Repetition: {{card.history[card.history.length-1].when | date:'shortDate'}}-->
+        <!--</div>-->
 
-    </div>
+    <!--</div>-->
 
     <div data-ng-if="card.history.length === 0">
         <table class="new-card">

@@ -478,45 +478,46 @@ angular.module('core').controller('PracticeController',
                         $scope.specialChars = ['ä', 'é', 'ö', 'ü', 'ß'];
                     }
 
-                    if (!('webkitSpeechRecognition' in window)) {
-                        console.log('sorry');
-                    } else {
 
-                        console.log('got it');
-                        /* jshint ignore:start */
-                        var recognition = new webkitSpeechRecognition();
-
-                        recognition.continuous = true;
-                        recognition.interimResults = true;
-
-                        console.log('x');
-                        console.log($scope.course.languageback.code);
-                        console.log('x');
-                        recognition.lang =  $scope.course.languageback.code;
-
-
-                        recognition.onresult = $scope.onSpeechResult;
-
-                        recognition.onstart = function () {
-                            console.log('start');
-                            $scope.answer.text = '';
-                        };
-
-                        recognition.onerror = function (event) {
-
-                            console.log('error');
-                            console.log(event);
-                        };
-                        recognition.onend = function () {
-                            console.log('end');
-//                    recognition.start();
-                        };
-
-                        console.log('and starting');
-                        recognition.start();
+//                    if (!('webkitSpeechRecognition' in window)) {
+//                        console.log('sorry');
+//                    } else {
+//
+//                        console.log('got it');
+//                        /* jshint ignore:start */
+//                        var recognition = new webkitSpeechRecognition();
+//
+//                        recognition.continuous = true;
+//                        recognition.interimResults = true;
+//
+//                        console.log('x');
+//                        console.log($scope.course.languageback.code);
+//                        console.log('x');
+//                        recognition.lang =  $scope.course.languageback.code;
+//
+//
+//                        recognition.onresult = $scope.onSpeechResult;
+//
+//                        recognition.onstart = function () {
+//                            console.log('start');
+//                            $scope.answer.text = '';
+//                        };
+//
+//                        recognition.onerror = function (event) {
+//
+//                            console.log('error');
+//                            console.log(event);
+//                        };
+//                        recognition.onend = function () {
+//                            console.log('end');
+////                    recognition.start();
+//                        };
+//
+//                        console.log('and starting');
+//                        recognition.start();
                         /* jshint ignore:end */
 
-                    }
+//                    }
 
                 });
             };

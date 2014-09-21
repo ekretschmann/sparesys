@@ -64,30 +64,54 @@
         </div>
     </div>
 
-    <span data-ng-if="practice.assessment === 'self' && practice.sound">
+   <span data-ng-if="practice.direction === 'forward'">
+<section  data-ng-if="practice.soundFront && state==='question'">
+    <a class="" href="" data-ng-click="playSound(practice.question)">
+        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+    </a>
+    <span data-ng-init="playSound(practice.question)"></span>
+</section>
 
 
-    <span data-ng-if="practice.direction === 'forward' && state == 'question'">
-            <a class="" href="" data-ng-click="playSound(practice.question)">
-                <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-            </a>
+    <section  data-ng-if="practice.soundFront && state==='answer'">
+        <a class="" href="" data-ng-click="playSound(practice.question)">
+            <i class="glyphicon glyphicon-volume-up sound-replay-back"></i>
+        </a>
+    </section>
 
-        <span data-ng-init="playSound(practice.question)"></span>
-    </span>
+    <section  data-ng-if="practice.soundBack && state==='answer'">
+        <a class="" href="" data-ng-click="playSoundBack(practice.answer)">
+            <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+        </a>
+        <span data-ng-init="playSoundBack(practice.answer)"></span>
+    </section>
+</span>
 
-     <span data-ng-if="practice.direction === 'reverse' && state == 'answer'">
-             <a href="" data-ng-click="playSound(practice.answer)">
-                 <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-             </a>
-         <span data-ng-init="playSound(practice.answer)"></span>
-    </span>
 
-    <span data-ng-if="practice.direction === 'forward' && state == 'answer'">
-             <a href="" data-ng-click="playSound(practice.answer)">
-                 <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-             </a>
-    </span>
-    </span>
+    <span data-ng-if="practice.direction === 'reverse'">
+<section  data-ng-if="practice.soundFront && state==='question'">
+    <a class="" href="" data-ng-click="playSoundBack(practice.question)">
+        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+    </a>
+    <span data-ng-init="playSoundBack(practice.question)"></span>
+</section>
+
+
+    <section  data-ng-if="practice.soundFront && state==='answer'">
+        <a class="" href="" data-ng-click="playSoundBack(practice.question)">
+            <i class="glyphicon glyphicon-volume-up sound-replay-back"></i>
+        </a>
+    </section>
+
+    <section  data-ng-if="practice.soundBack && state==='answer'">
+        <a class="" href="" data-ng-click="playSound(practice.answer)">
+            <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+        </a>
+        <span data-ng-init="playSound(practice.answer)"></span>
+    </section>
+</span>
+
+
 
     <div data-ng-if="state == 'answer'">
 

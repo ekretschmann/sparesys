@@ -87,7 +87,7 @@ angular.module('core').controller('PracticeController',
                 }
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
 
-                    if ($scope.state==='question') {
+                    if ($scope.state==='question' && $scope.practice.direction === 'forward') {
                         if (event.results[i].isFinal) {
                             if ($scope.answer.text === undefined) {
                                 $scope.answer.text = '';
@@ -436,6 +436,7 @@ angular.module('core').controller('PracticeController',
                 }
                 $scope.practice.assessment = $scope.validation;
 
+                $scope.setSpecialCharacters();
                 $scope.updateSlides();
                 $state.go($state.current);
 
@@ -475,6 +476,32 @@ angular.module('core').controller('PracticeController',
 
 
             // Find existing Course
+            $scope.setSpecialCharacters = function () {
+
+                console.log('setting');
+                var lang = '';
+                if ($scope.practice.direction === 'reverse' && $scope.course.language) {
+                    lang = $scope.course.language.name;
+                }
+
+                if ($scope.practice.direction === 'forward' && $scope.course.languageback) {
+                    lang = $scope.course.languageback.name;
+                }
+                console.log(lang);
+
+                if (lang === 'Spanish') {
+                    $scope.specialChars = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+                } else if (lang === 'French') {
+                    $scope.specialChars = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+                } else if (lang === 'German') {
+                    $scope.specialChars = ['ä', 'é', 'ö', 'ü', 'ß'];
+                } else if (lang === 'English (GB)') {
+                    $scope.specialChars = [];
+                } else if (lang === '') {
+                    $scope.specialChars = [];
+                }
+            };
+
             $scope.init = function () {
 
 
@@ -499,15 +526,6 @@ angular.module('core').controller('PracticeController',
                     courseId: $stateParams.courseId
                 }, function (course) {
                     $scope.course = course;
-
-                    if ($scope.course.language && $scope.course.language.name === 'Spanish') {
-                        $scope.specialChars = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
-                    } else if ($scope.course.language && $scope.course.language.name === 'French') {
-                        $scope.specialChars = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
-                    } else if ($scope.course.language && $scope.course.language.name === 'German') {
-                        $scope.specialChars = ['ä', 'é', 'ö', 'ü', 'ß'];
-                    }
-
                     if (course.speechrecognition !== 'no' && 'webkitSpeechRecognition' in window) {
                         $scope.initSpeech();
                     }

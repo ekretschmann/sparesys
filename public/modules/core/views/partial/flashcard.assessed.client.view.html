@@ -152,6 +152,8 @@
                data-ng-init="setFocus()"
                data-ng-click="settext()">
 
+        <div data-ng-if="practice.direction === 'reverse' && recognition" class="text-muted">no speech recognition</div>
+
 
         <span data-ng-repeat="c in specialChars">
             <button class="btn btn-rememberators btn-small" data-ng-click="typeSpecialChar(c)">{{c}}</button>

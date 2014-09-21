@@ -79,10 +79,37 @@ exports.update = function (req, res) {
             });
         } else {
 
+            Course.find({'_id': course._id}).exec(function (err, courses) {
+
+                if (courses && courses[0]) {
+
+                    courses[0].slaves.forEach(function(cid) {
+                        Course.find({'_id': cid}).exec(function (err, c) {
+                            if (err) {
+                                console.log(err);
+                            } else {
+                                if (c && c.length === 1) {
+                                    c[0].name = course.name;
+                                    c[0].description = course.description;
+                                    c[0].language = course.language;
+                                    c[0].front = course.front;
+                                    c[0].back = course.back;
+                                    c[0].languageback = course.languageback;
+                                    c[0].speechrecognition = course.speechrecognition;
+                                    c[0].save();
+                                }
+                            }
+                        });
+                    }, this);
+
+                }
+            });
 
             res.jsonp(course);
         }
     });
+
+
 };
 
 /**
@@ -265,6 +292,7 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.alternatives = original.alternatives;
             copy.alternativequestions = original.alternativequestions;
             copy.sound = original.sound;
+            copy.soundback = original.soundback;
             copy.packs = [newPackId];
             copy.master = original._id;
             copy.supervisor = original.user;
@@ -382,6 +410,8 @@ exports.copyCourse = function (req, res, next, id) {
         copy.name = original.name;
         copy.description = original.description;
         copy.language = original.language;
+        copy.front = original.front;
+        copy.back = original.back;
         copy.languageback = original.languageback;
         copy.speechrecognition = original.speechrecognition;
         copy.master = original._id;

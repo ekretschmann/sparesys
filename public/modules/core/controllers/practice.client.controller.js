@@ -477,8 +477,6 @@ angular.module('core').controller('PracticeController',
 
             // Find existing Course
             $scope.setSpecialCharacters = function () {
-
-                console.log('setting');
                 var lang = '';
                 if ($scope.practice.direction === 'reverse' && $scope.course.language) {
                     lang = $scope.course.language.name;
@@ -487,7 +485,6 @@ angular.module('core').controller('PracticeController',
                 if ($scope.practice.direction === 'forward' && $scope.course.languageback) {
                     lang = $scope.course.languageback.name;
                 }
-                console.log(lang);
 
                 if (lang === 'Spanish') {
                     $scope.specialChars = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];

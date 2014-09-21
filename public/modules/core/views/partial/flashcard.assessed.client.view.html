@@ -1,15 +1,8 @@
 <div class="flashcard">
 
     <div class="card-score">
+    <div data-ng-if="card.history.length > 0">
         Score: {{cardScore}}
-        <div data-ng-if="state == 'answer'">
-            <div data-ng-if="lastRating === 0 && practice.direction === 'forward' && card.invalidanswers.indexOf(answer.text.trim()) ===-1">
-                <a href="" data-ng-click="thatCounts()">My Answer Counts!</a>
-             </div>
-
-            <div data-ng-if="lastRating === 0 && practice.direction === 'reverse' && card.invalidreverseanswers.indexOf(answer.text.trim()) ===-1">
-                <a href="" data-ng-click="thatCounts()">My Answer Counts!</a>
-            </div>
         </div>
         <div data-ng-if="card.history.length === 0">
             <table class="new-card">
@@ -29,6 +22,16 @@
             </table>
 
         </div>
+        <div data-ng-if="state == 'answer'">
+            <div data-ng-if="lastRating === 0 && practice.direction === 'forward' && card.invalidanswers.indexOf(answer.text.trim()) ===-1">
+                <a href="" data-ng-click="thatCounts()">My Answer Counts!</a>
+            </div>
+
+            <div data-ng-if="lastRating === 0 && practice.direction === 'reverse' && card.invalidreverseanswers.indexOf(answer.text.trim()) ===-1">
+                <a href="" data-ng-click="thatCounts()">My Answer Counts!</a>
+            </div>
+        </div>
+
     </div>
 
 

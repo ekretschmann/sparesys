@@ -1,7 +1,9 @@
 <div class="flashcard" xmlns="http://www.w3.org/1999/html">
 
     <div class="card-score">
+        <div data-ng-if="card.history.length > 0">
         Score: {{cardScore}}
+        </div>
         <div data-ng-if="card.history.length === 0">
             <table class="new-card">
                 <tr>
@@ -22,25 +24,7 @@
         </div>
     </div>
 
-    <div data-ng-if="card.history.length > 0">
 
-        <div class="history text-muted">
-
-            <div style="font-size: x-small">
-                Repetitions: {{card.history.length}}
-            </div>
-            <div style="font-size: x-small">
-                Last Check: {{card.history[card.history.length-1].assessment }}
-            </div>
-            <div style="font-size: x-small">
-                First Repetition: {{card.history[0].when | date:'medium'}}
-            </div>
-            <div style="font-size: x-small">
-                Last Repetition: {{card.history[card.history.length-1].when | date:'medium'}}
-            </div>
-
-        </div>
-    </div>
 
 
 

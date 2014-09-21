@@ -77,7 +77,7 @@ var CourseSchema = new Schema({
     },
     speechrecognition: {
         type: String,
-        default: 'none'
+        default: 'no'
     }
 });
 

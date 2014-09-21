@@ -7,7 +7,7 @@ angular.module('courses').controller('EditCourseController', ['$scope', '$state'
         $scope.initialCourseName = course.name;
 
 
-        $scope.speechRecognitionOptions = ['none', 'front to back questions', 'back to front questions', 'both ways'];
+        $scope.speechRecognitionOptions = ['no', 'yes'];
 
         $scope.languages = [
             {name:'-', code:''},

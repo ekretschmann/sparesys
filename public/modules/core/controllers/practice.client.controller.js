@@ -508,7 +508,7 @@ angular.module('core').controller('PracticeController',
                         $scope.specialChars = ['ä', 'é', 'ö', 'ü', 'ß'];
                     }
 
-                    if (course.speechrecognition !== 'none' && 'webkitSpeechRecognition' in window) {
+                    if (course.speechrecognition !== 'no' && 'webkitSpeechRecognition' in window) {
                         $scope.initSpeech();
                     }
 

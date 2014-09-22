@@ -68,19 +68,25 @@ angular.module('core').service('PredictiveSchedulerService', [
                 var bestCard;
                 this.cards.forEach(function(card) {
 
-                    var pr = this.getPredictedRetention(card, time);
-                    if (card.hrt > 1000*60*60*24) {
-                        this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000*60*60*24))+ ' days'};
-                    } else if (card.hrt > 1000*60*60) {
-                        this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000*60*60))+ ' hours'};
-                    } else if (card.hrt > 1000*60) {
-                        this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000*60))+ ' mins'};
-                    } else {
-                            this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000))+ ' secs'};
-                    }
-                    if (Math.abs(pr-0.4) < bestValue) {
-                        bestCard = card;
-                        bestValue = Math.abs(pr-0.4);
+                    if (!card.after || time >=new Date(card.after).getTime()) {
+
+
+                        var pr = this.getPredictedRetention(card, time);
+
+
+                        if (card.hrt > 1000 * 60 * 60 * 24) {
+                            this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000 * 60 * 60 * 24)) + ' days'};
+                        } else if (card.hrt > 1000 * 60 * 60) {
+                            this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000 * 60 * 60)) + ' hours'};
+                        } else if (card.hrt > 1000 * 60) {
+                            this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000 * 60)) + ' mins'};
+                        } else {
+                            this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000)) + ' secs'};
+                        }
+                        if (Math.abs(pr - 0.4) < bestValue) {
+                            bestCard = card;
+                            bestValue = Math.abs(pr - 0.4);
+                        }
                     }
                 }, this);
                 return bestCard;

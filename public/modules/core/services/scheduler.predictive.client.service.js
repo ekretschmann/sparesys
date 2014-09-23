@@ -83,7 +83,18 @@ angular.module('core').service('PredictiveSchedulerService', [
                         } else {
                             this.analysis[card.question] = {pr: Math.round(pr * 100000) / 1000, hrt: Math.round(card.hrt / (1000)) + ' secs'};
                         }
-                        if (Math.abs(pr - 0.4) < bestValue) {
+                        var score = Math.abs(pr - 0.4);
+
+                        if (card.due) {
+                            var dueInSecs = new Date(card.due).getTime() - time;
+                            var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
+                            var factor = 10 - dueInDays;
+
+                            if (factor > 0 && factor < 10) {
+                                score = score / ((factor+2)/4);
+                            }
+                        }
+                        if (score < bestValue) {
                             bestCard = card;
                             bestValue = Math.abs(pr - 0.4);
                         }

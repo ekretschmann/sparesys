@@ -23,6 +23,7 @@
                                            class="form-control focus front"
                                            placeholder="Question"
                                            data-ng-init="setFocus()"
+                                           tabindex=1
                                            required>
 
                                     <div style="text-align: center; padding-bottom: 10px">
@@ -42,6 +43,7 @@
                                                class="form-control back"
                                                placeholder="Answer"
                                                data-ng-init="setFocus()"
+                                               tabindex=2
                                                required>
                                     </section>
 
@@ -80,10 +82,12 @@
                     <div class="center-aligned">
                         <button class="btn btn-rememberators"
                                 type="submit"
+                                tabindex=3
                                 ng-click="addCardToPack()">Add
                         </button>
 
                         <button class="btn btn-rememberators"
+                                tabindex=4
                                 ng-click="cancel()">Done
                         </button>
 

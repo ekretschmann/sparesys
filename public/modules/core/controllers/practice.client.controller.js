@@ -438,6 +438,9 @@ angular.module('core').controller('PracticeController',
 
                 $scope.setSpecialCharacters();
                 $scope.updateSlides();
+                console.log('updated slides');
+                console.log($scope.slides );
+
                 $state.go($state.current);
 
 

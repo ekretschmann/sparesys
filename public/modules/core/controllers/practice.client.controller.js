@@ -33,17 +33,17 @@ angular.module('core').controller('PracticeController',
             $scope.recognition = undefined;
 
             $scope.settext = function () {
-                console.log($scope);
+//                console.log($scope);
                 $scope.answer.final_transcript = 'hello world';
             };
 
 
             $scope.initSpeech = function () {
-                console.log('got it');
+//                console.log('got it');
                        /* jshint ignore:start */
                 $scope.recognition = new webkitSpeechRecognition();
 
-                console.log( $scope.recognition);
+//                console.log( $scope.recognition);
 
                 $scope.recognition.continuous = true;
                 $scope.recognition.interimResults = true;
@@ -54,21 +54,21 @@ angular.module('core').controller('PracticeController',
                 $scope.recognition.onresult = $scope.onSpeechResult;
 
                 $scope.recognition.onstart = function () {
-                    console.log('start');
+//                    console.log('start');
                     $scope.answer.text = '';
                 };
 
                 $scope.recognition.onerror = function (event) {
 
-                    console.log('error');
+//                    console.log('error');
                     console.log(event);
                 };
                 $scope.recognition.onend = function () {
-                    console.log('end');
+//                    console.log('end');
 //                    recognition.start();
                 };
 
-                console.log('and starting');
+//                console.log('and starting');
                 $scope.recognition.start();
                 /* jshint ignore:end */
             };
@@ -79,7 +79,7 @@ angular.module('core').controller('PracticeController',
 
                 var interim_transcript = '';
                 if (typeof(event.results) === 'undefined') {
-                    console.log('ending');
+//                    console.log('ending');
                     $scope.recognition.onend = null;
                     $scope.recognition.stop();
 //                    upgrade();
@@ -438,8 +438,8 @@ angular.module('core').controller('PracticeController',
 
                 $scope.setSpecialCharacters();
                 $scope.updateSlides();
-                console.log('updated slides');
-                console.log($scope.slides );
+//                console.log('updated slides');
+//                console.log($scope.slides );
 
                 $state.go($state.current);
 

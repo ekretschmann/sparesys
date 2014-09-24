@@ -8,6 +8,64 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
         $scope.options.format = 'short';
         $scope.options.answer = '';
         $scope.options.question = '';
+        $scope.specialCharsFront = [];
+        $scope.specialCharsBack = [];
+
+        $scope.typeSpecialCharFront = function (c) {
+            if (!$scope.options.question) {
+                $scope.options.question = '';
+            }
+
+            var selectionStart = angular.element('.front')[0].selectionStart;
+            var selectionEnd = angular.element('.front')[0].selectionEnd;
+
+            $scope.options.question = $scope.options.question.substr(0, selectionStart) + c + $scope.options.question.substr(selectionEnd);
+            angular.element('.front').trigger('focus');
+        };
+
+        $scope.typeSpecialCharBack = function (c) {
+            if (!$scope.options.answer) {
+                $scope.options.answer = '';
+            }
+
+            var selectionStart = angular.element('.back')[0].selectionStart;
+            var selectionEnd = angular.element('.back')[0].selectionEnd;
+
+            $scope.options.answer = $scope.options.answer.substr(0, selectionStart) + c + $scope.options.answer.substr(selectionEnd);
+            angular.element('.back').trigger('focus');
+        };
+
+        $scope.setSpecialCharacters = function () {
+            var langFront = $scope.course.language.name;
+            var langBack = $scope.course.languageback.name;
+
+
+            if (langFront === 'Spanish') {
+                $scope.specialCharsFront = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+            } else if (langFront === 'French') {
+                $scope.specialCharsFront = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+            } else if (langFront === 'German') {
+                $scope.specialCharsFront = ['ä', 'é', 'ö', 'ü', 'ß'];
+            } else if (langFront === 'English (GB)') {
+                $scope.specialCharsFront = [];
+            } else if (langFront === '') {
+                $scope.specialCharsFront = [];
+            }
+
+            if (langBack === 'Spanish') {
+                $scope.specialCharsBack = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+            } else if (langBack === 'French') {
+                $scope.specialCharsBack = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+            } else if (langBack === 'German') {
+                $scope.specialCharsBack = ['ä', 'é', 'ö', 'ü', 'ß'];
+            } else if (langBack === 'English (GB)') {
+                $scope.specialCharsBack = [];
+            } else if (langBack === '') {
+                $scope.specialCharsBack = [];
+            }
+        };
+
+        $scope.setSpecialCharacters();
 
         $scope.toggleFormat = function() {
             if ( $scope.options.format === 'short') {

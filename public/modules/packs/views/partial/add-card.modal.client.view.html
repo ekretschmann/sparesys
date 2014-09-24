@@ -15,15 +15,21 @@
                     <div class="content-header">
                         <table>
                             <tr>
-                                <td class="right-padded">{{course.front}}</td>
+                                <td class="right-padded top-aligned">{{course.front}}</td>
                                 <td class="expands">
                                     <input type="text"
                                            data-ng-model="options.question"
                                            id="cardquestion"
-                                           class="form-control focus"
+                                           class="form-control focus front"
                                            placeholder="Question"
                                            data-ng-init="setFocus()"
                                            required>
+
+                                    <div style="text-align: center; padding-bottom: 10px">
+                                          <span data-ng-repeat="c in specialCharsFront" >
+                        <button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharFront(c)">{{c}}</button>
+                                              </span>
+                                    </div>
                                 </td>
                             </tr>
 
@@ -33,7 +39,7 @@
 
                                     <section data-ng-if="options.format === 'short'">
                                         <input type="text" data-ng-model="options.answer"
-                                               class="form-control"
+                                               class="form-control back"
                                                placeholder="Answer"
                                                data-ng-init="setFocus()"
                                                required>
@@ -47,6 +53,12 @@
                                                   rows="5"
                                                   required></textarea>
                                     </section>
+
+                                    <div style="text-align: center; padding-bottom: 10px">
+                                          <span data-ng-repeat="c in specialCharsBack" >
+                        <button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharBack(c)">{{c}}</button>
+                                              </span>
+                                    </div>
                                 </td>
                             </tr>
 
@@ -54,8 +66,8 @@
                                 <td></td>
                                 <td class="expands nobreak-label right-aligned">
                                     <section data-ng-if="options.format === 'short'">
-                                    <a href="" data-ng-click="toggleFormat()">Long Answer</a>
-                                        </section>
+                                        <a href="" data-ng-click="toggleFormat()">Long Answer</a>
+                                    </section>
 
                                     <section data-ng-if="options.format === 'long'">
                                         <a href="" data-ng-click="toggleFormat()">Short Answer</a>

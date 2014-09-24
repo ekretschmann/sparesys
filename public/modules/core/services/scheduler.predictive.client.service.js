@@ -94,9 +94,13 @@ angular.module('core').service('PredictiveSchedulerService', [
                                 score = score / ((factor+2)/4);
                             }
                         }
+
+                        console.log(card.question);
+                        console.log(score);
                         if (score < bestValue) {
                             bestCard = card;
-                            bestValue = Math.abs(pr - 0.4);
+                            bestValue = score;
+                            console.log('champion');
                         }
                     }
                 }, this);

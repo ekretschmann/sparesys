@@ -1,20 +1,29 @@
 <table>
+
     <tr>
-        <td class="top-aligned right-padded top-padded" style="min-width: 72px">
+
+        <td colspan="2">
+        <div class="infobox-title">
+            {{title}}
+        </div>
+        </td>
+    </tr>
+    <tr>
+
+        <td data-ng-if="!position || position !== 'right'" class="top-aligned right-padded top-padded" style="min-width: 72px">
             <img class="size-64"
-                 src="/modules/core/img/brand/teacher-woman-medium.gif">
+                 src="{{image}}">
         </td>
         <td class="top-aligned">
-
-            <div class="infobox-title">
-                {{title}}
-            </div>
 
             <div ng-transclude="">
                 content
             </div>
         </td>
-
+        <td data-ng-if="position && position === 'right'" class="top-aligned right-padded top-padded" style="min-width: 72px">
+            <img class="size-64"
+                 src="{{image}}">
+        </td>
 
     </tr>
 </table>

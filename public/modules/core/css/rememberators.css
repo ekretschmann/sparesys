@@ -36,6 +36,11 @@
     vertical-align: top;
 }
 
+.infobox-title {
+    font-size: x-large;
+    font-weight: bold;
+}
+
 .content-header .title {
     font-size: x-large;
     font-weight: bold;

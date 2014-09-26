@@ -1,63 +1,75 @@
 <script type="text/ng-template" id="signup.html">
 
     <div class="modal-body">
-        <div class="sparesys-header">
-            <div class="sparesys-title" style="text-align: center">
-                Sig Up for  Rememberators
+        <div class="content-header">
+            <div class="title center-aligned">
+                Sig Up for Rememberators
             </div>
         </div>
 
         <form class="signup form-horizontal" autocomplete="off">
 			<fieldset>
-                <div class="sparesys-header">
+                <div class="content-header">
 
-                    <table class="sparesys-view-object-table">
-                        <tr class="controls">
-                            <td class="sparesys-view-object-label-cell">First Name</td>
-                            <td class="sparesys-view-object-content-cell">
-                                <input type="text" data-ng-model="credentials.firstName"
-                                       id="firstName" class="form-control focus"
-                                       name="firstName"
+                    <table>
+                        <tr>
+                            <td class="nobreak-label right-padded">First Name</td>
+                            <td class="expands">
+                                <input type="text"
+                                       data-ng-model="credentials.firstName"
+                                       class="form-control focus"
                                        placeholder="First Name"
                                        data-ng-init="setFocus()"
                                        required></td>
                         </tr>
 
-                        <tr class="controls">
-                            <td class="sparesys-view-object-label-cell">Last Name</td>
-                            <td class="sparesys-view-object-content-cell">
-                                <input type="text" data-ng-model="credentials.lastName"
-                                       id="lastName" class="form-control"
-                                       name="lastName"
+                        <tr>
+                            <td class="nobreak-label right-padded">Last Name</td>
+                            <td class="expands">
+                                <input type="text"
+                                       data-ng-model="credentials.lastName"
+                                       class="form-control"
                                        placeholder="Last Name"
                                        required></td>
                         </tr>
 
-                        <tr class="controls">
-                            <td class="sparesys-view-object-label-cell">email</td>
-                            <td class="sparesys-view-object-content-cell">
-                                <input type="text" data-ng-model="credentials.email"
-                                       id="email" class="form-control"
-                                       name="email"
+                        <tr>
+                            <td class="right-padded">email</td>
+                            <td class="expands">
+                                <input type="text"
+                                       data-ng-model="credentials.email"
+                                       class="form-control"
                                        placeholder="email"
                                        required></td>
                         </tr>
 
-                        <tr class="controls">
-                            <td class="sparesys-view-object-label-cell">Username</td>
-                            <td class="sparesys-view-object-content-cell">
-                                <input type="text" data-ng-model="credentials.username"
-                                       id="username" class="form-control"
-                                       name="username"
+                        <tr>
+                            <td class="right-padded">Username</td>
+                            <td class="expands">
+                                <input type="text"
+                                       data-ng-model="credentials.username"
+                                       class="form-control"
                                        placeholder="username"
                                        required></td>
                         </tr>
 
                         <tr class="controls">
-                            <td class="sparesys-view-object-label-cell">Password</td>
-                            <td class="sparesys-view-object-content-cell">
-                                <input type="password" data-ng-model="credentials.password"
-                                       id="password" name="password" class="form-control"
+                            <td class="right-padded">Password</td>
+                            <td class="expands">
+                                <input type="password"
+                                       data-ng-model="credentials.password"
+                                       class="form-control"
+                                       placeholder="Password"
+                                       required></td>
+                        </tr>
+
+                        <tr class="controls">
+                            <td class="nobreak-label right-padded">Repeat Password</td>
+                            <td class="expands">
+                                <input type="password"
+                                       data-ng-model="credentials.password"
+                                       name="password"
+                                       class="form-control"
                                        placeholder="Password"
                                        required></td>
                         </tr>

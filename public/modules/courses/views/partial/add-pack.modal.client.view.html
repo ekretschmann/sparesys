@@ -1,45 +1,43 @@
 <script type="text/ng-template" id="addPackToCourse.html">
-    <div>
 
-        <div class="modal-body">
-            <div class="content-header center-aligned">
-                <div class="title">
-                    Add Packs to Course: {{course.name}}
-                </div>
+    <div class="modal-body">
+        <div class="content-header center-aligned">
+            <div class="title">
+                Add Packs to Course: {{course.name}}
             </div>
-
-            <form class="form-horizontal" novalidate>
-                <fieldset>
-                    <div class="content-header">
-                        <table>
-                            <tr>
-                                <td class="right-padded">Name</td>
-                                <td class="expands">
-                                    <input type="text" data-ng-model="name"
-                                           id="packname"
-                                           class="form-control focus"
-                                           placeholder="Name"
-                                           data-ng-init="setFocus()"
-                                           required></td>
-                            </tr>
-                        </table>
-                    </div>
-
-                    <div class="center-aligned">
-                        <button class="btn btn-rememberators"
-                                type="submit"
-                                ng-click="addPackToCourse()"
-                                >
-                            Add
-                        </button>
-
-                        <button class="btn btn-rememberators" ng-click="cancel()">Done</button>
-
-                    </div>
-                </fieldset>
-            </form>
         </div>
 
+        <form class="form-horizontal" novalidate>
+            <fieldset>
+                <div class="content-header">
+                    <table>
+                        <tr>
+                            <td class="right-padded">Name</td>
+                            <td class="expands">
+                                <input type="text" data-ng-model="name"
+                                       id="packname"
+                                       class="form-control focus"
+                                       placeholder="Name"
+                                       data-ng-init="setFocus()"
+                                       required></td>
+                        </tr>
+                    </table>
+                </div>
 
+                <div class="center-aligned">
+                    <button class="btn btn-rememberators"
+                            type="submit"
+                            ng-click="addPackToCourse()"
+                            >
+                        Add
+                    </button>
+
+                    <button class="btn btn-rememberators" ng-click="cancel()">Done</button>
+
+                </div>
+            </fieldset>
+        </form>
     </div>
+
+
 </script>

@@ -1,26 +1,30 @@
-<table>
+<table style="margin-top: 20px; width: 100%">
 
-    <tr>
+    <tr data-ng-if="title">
 
         <td colspan="2">
-        <div class="infobox-title">
+        <div data-ng-if="!position || position !== 'right'" class="infobox-title left-aligned">
             {{title}}
         </div>
+
+            <div data-ng-if="position && position === 'right'" class="infobox-title left-aligned" >
+                {{title}}
+            </div>
         </td>
     </tr>
     <tr>
 
-        <td data-ng-if="!position || position !== 'right'" class="top-aligned right-padded top-padded" style="min-width: 72px">
+        <td data-ng-if="!position || position !== 'right'" class="top-aligned right-padded top-padded" style="min-width: 84px">
             <img class="size-64"
                  src="{{image}}">
         </td>
         <td class="top-aligned">
 
-            <div ng-transclude="">
+            <div ng-transclude="" style="text-align: justify">
                 content
             </div>
         </td>
-        <td data-ng-if="position && position === 'right'" class="top-aligned right-padded top-padded" style="min-width: 72px">
+        <td data-ng-if="position && position === 'right'" class="top-aligned left-padded top-padded" style="min-width: 84px">
             <img class="size-64"
                  src="{{image}}">
         </td>

@@ -1,0 +1,235 @@
+@dark-stripes: #FEE67A;
+@background-color: #FFF9DE;
+@inverse-background-color: #030698;
+@light-inverse-background-color: #4E51E5;
+@inverse-font-color: #d0d8dd;
+@background-color-contrast: #ECECFF;
+@foreground-color: #333333;
+@standard-font: 'PT Sans', sans-serif;
+@standard-font-size: 11pt;
+
+@font-face {
+  font-family: 'Grinched';
+  src: url('grinched.eot');
+  src: url('grinched.eot?#iefix') format('embedded-opentype'),
+  url('grinched.svg#Grinched') format('svg'),
+  url('grinched.woff') format('woff'),
+  url('Grinched.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  background: @background-color;
+  font-family: @standard-font;
+  font-size: @standard-font-size;
+  color: @foreground-color;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 730px;
+  }
+}
+
+.content {
+  margin-top: 50px;
+}
+
+.header-font {
+  font-family: 'Grinched';
+}
+
+.font-xxl {
+  .header-font;
+  font-size: 64pt;
+}
+
+.font-xl {
+  .header-font;
+  font-size: 36pt;
+}
+.font-l {
+  .header-font;
+  font-size: 24pt;
+}
+
+.font-m {
+  .header-font;
+  font-size: 14pt;
+}
+
+
+
+.navbar-header, .nav, .collapse, .navbar-collapse, .navbar-inverse {
+  background-color: @inverse-background-color;
+  background-image: linear-gradient(to bottom, @inverse-background-color 0%, @light-inverse-background-color 100%);
+}
+
+.navbar-inverse .navbar-brand{
+  color: @inverse-font-color;
+}
+
+.navbar-inverse .navbar-nav > li > a{
+  color: @inverse-font-color;
+}
+
+
+.flashcard {
+  position: relative;
+  margin-bottom: 30px;
+  background-color: @background-color-contrast;
+  border-radius: 12px;
+  text-align: center;
+  box-shadow: 5px 5px 5px #CCC;
+  min-height: 320px;
+}
+
+.btn-success, .btn-success:hover {
+  background-color: #4DB22B;
+  background-image: linear-gradient(to bottom, #48982C 0%, #4DB22B 100%);
+  border-color: #4DB22B;
+}
+
+.center-aligned {
+  text-align: center
+}
+
+.left-aligned {
+  text-align: left
+}
+
+.right-aligned {
+  text-align: right
+}
+
+.top-aligned {
+  vertical-align: top;
+}
+
+.right-padded {
+  padding-right: 15px;
+}
+
+.left-padded {
+  padding-left: 15px;
+}
+
+.top-padded {
+  padding-top: 5px;
+}
+
+.infobox-title {
+  font-size: x-large;
+  font-weight: bold;
+}
+
+
+.small-image {
+  height: 84px
+}
+
+.content-section {
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: #eaeaea solid 1px;
+  vertical-align: top;
+}
+
+@media screen and (min-width: 310px) {
+
+  .font-xxl {
+    font-family: 'Grinched';
+    font-size: 24pt;
+  }
+
+  .font-xl {
+    font-family: 'Grinched';
+    font-size: 18pt;
+  }
+
+  .hero-boy:after {
+    content: url("../img/brand/superhero-boy-small.gif");
+  }
+
+  .hero-girl:after {
+    content: url("../img/brand/superhero-girl-small.gif");
+  }
+
+  .teacher-man:after {
+    content: url("../img/brand/teacher-man-small.gif");
+  }
+
+  .teacher-woman:after {
+    content: url("../img/brand/teacher-woman-small.gif");
+  }
+
+  .guru:after {
+    content: url("../img/brand/guru-small.gif");
+  }
+
+  .philosopher:after {
+    content: url("../img/brand/philosopher-small.gif");
+  }
+}
+
+@media screen and (min-width: 620px) {
+
+  .font-xxl {
+    font-family: 'Grinched';
+    font-size: 36pt;
+  }
+
+  .font-xl {
+    font-family: 'Grinched';
+    font-size: 24pt;
+  }
+
+  .hero-boy:after {
+    content: url("../img/brand/superhero-boy-medium.gif");
+  }
+
+  .hero-girl:after {
+    content: url("../img/brand/superhero-girl-medium.gif");
+  }
+
+  .teacher-man:after {
+    content: url("../img/brand/teacher-man-medium.gif");
+  }
+
+  .teacher-woman:after {
+    content: url("../img/brand/teacher-woman-medium.gif");
+  }
+
+  .guru:after {
+    content: url("../img/brand/guru-medium.gif");
+  }
+
+  .philosopher:after {
+    content: url("../img/brand/philosopher-medium.gif");
+  }
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+  cursor: pointer;
+}
+
+@media screen and (min-width: 800px) {
+
+  .font-xxl {
+    font-family: 'Grinched';
+    font-size: 64pt;
+  }
+
+  .font-xl {
+    font-family: 'Grinched';
+    font-size: 36pt;
+  }
+
+  .hero-boy:after {
+    content: url("../img/brand/superhero-boy-medium.gif");
+  }
+}

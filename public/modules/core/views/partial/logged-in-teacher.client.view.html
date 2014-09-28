@@ -1,0 +1,93 @@
+<div data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
+
+    <infobox logo="man" position="left">
+        If you are a teacher and your school is set up with Rememberators, use the
+        <a href="#!/settings/profile">settings</a> in the {{user.displayName}} menu
+        to register for the role of a teacher. You will get a Teaching menu with all the details
+        to manage your students.
+    </infobox>
+
+
+</div>
+
+
+
+<div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+
+    <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
+
+
+        <div data-ng-if="schools.length === 0">
+
+
+            <div class="content-subsection warning">You are a teacher without an associated school. Please find your
+                school in the Teaching menu or by clicking this
+                <a href="/#!/schools/subscribe/teacher">link</a>.
+            </div>
+        </div>
+
+        <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length === 0 ">
+            <div class="content-subsection"> You are not teaching any classes, yet. Ask your school
+                administrator to assign
+                you
+                to your classes.
+            </div>
+        </div>
+
+        <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length > 0">
+
+            <table>
+                <tr>
+                    <td class="top-aligned right-padded top-padded" style="min-width: 72px">
+                        <img class="size-64"
+                             src="/modules/core/img/brand/teacher-woman-medium.gif">
+                    </td>
+                    <td class="top-aligned">
+
+                        <div class="title">
+                            Your classes
+                        </div>
+
+                        <div>
+                            Your school administrater has set you up with the classes below. Choose
+                            the <b>courses</b> action to assing courses to a class. You can also
+                            look at the <b>statistics</b> of how your class is progressing.
+                        </div>
+                    </td>
+
+
+                </tr>
+            </table>
+
+
+            <div data-ng-controller="SchoolclassesController"
+                 data-ng-init="findForTeacher(authentication.user._id)">
+                <table class="table-striped" style="margin-top: 15px">
+                    <thead>
+                    <tr>
+                        <th class="right-padded">Class</th>
+                        <th class="right-padded">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="schoolclass in schoolclasses">
+                        <td class="right-padded expands nobreak-label">
+                            {{schoolclass.name}}
+                        </td>
+
+                        <td class="right-aligned nobreak-label">
+                            <a class="right-padded" href="#!/schoolclasses/{{schoolclass._id}}/teach">courses</a>
+                            <a href="#!/schoolclasses/{{schoolclass._id}}/teach">staistics</a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+
+
+    </div>
+
+</div>

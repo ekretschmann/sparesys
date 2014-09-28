@@ -11,6 +11,8 @@ angular.module('core').directive('infobox',
                 position: '@'
             },
             link: function(scope, elem, attrs) {
+
+
                 switch (scope.logo) {
                     case 'woman': scope.image = '/modules/core/img/brand/teacher-woman-medium.gif'; break;
                     case 'girl': scope.image = '/modules/core/img/brand/superhero-girl-medium.gif'; break;

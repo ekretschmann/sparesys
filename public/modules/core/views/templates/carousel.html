@@ -5,31 +5,12 @@
          ng-hide="!slide.visible">
 
         <img ng-src="{{slide.image}}"
-             height="{{size}}px"
-
+            class="large-image"
              data-ng-if="slide.image"/>
 
-        <div class="font-xl" style="padding-top: 10px" data-ng-if="slide.text">{{slide.text}}</div>
+        <div class="font-xl top-padded-m" data-ng-if="slide.text">{{slide.text}}</div>
 
 
-
-        <!--<div style="text-align: center">-->
-            <!--<a data-ng-click="prev()">-->
-                <!--<i class="glyphicon glyphicon-arrow-left"></i>-->
-            <!--</a>-->
-
-            <!--<a data-ng-click="next()">-->
-                <!--<i class="glyphicon glyphicon-arrow-right"></i>-->
-            <!--</a>-->
-        <!--</div>-->
     </div>
-    <!--TEST-->
-
-
-    <!--<a data-ng-href="#!/packs/{{card._id}}/edit">-->
-    <!--<i class="glyphicon glyphicon-edit"></i>-->
-    <!--</a>-->
-
-
 
 </div>

@@ -5,19 +5,6 @@
 @inverse-font-color: #d0d8dd;
 @background-color-contrast: #ECECFF;
 @foreground-color: #333333;
-@standard-font: 'PT Sans', sans-serif;
-@standard-font-size: 11pt;
-
-@font-face {
-  font-family: 'Grinched';
-  src: url('grinched.eot');
-  src: url('grinched.eot?#iefix') format('embedded-opentype'),
-  url('grinched.svg#Grinched') format('svg'),
-  url('grinched.woff') format('woff'),
-  url('Grinched.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
 
 body {
   background: @background-color;
@@ -27,7 +14,6 @@ body {
   padding-top: 20px;
   padding-bottom: 20px;
 }
-
 
 @media (min-width: 768px) {
   .container {
@@ -39,53 +25,33 @@ body {
   margin-top: 50px;
 }
 
-.header-font {
-  font-family: 'Grinched';
+.content-section {
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  border-bottom: #eaeaea solid 1px;
+  vertical-align: top;
 }
-
-.font-xxl {
-  .header-font;
-  font-size: 64pt;
-}
-
-.font-xl {
-  .header-font;
-  font-size: 36pt;
-}
-.font-l {
-  .header-font;
-  font-size: 24pt;
-}
-
-.font-m {
-  .header-font;
-  font-size: 14pt;
-}
-
-
 
 .navbar-header, .nav, .collapse, .navbar-collapse, .navbar-inverse {
   background-color: @inverse-background-color;
   background-image: linear-gradient(to bottom, @inverse-background-color 0%, @light-inverse-background-color 100%);
 }
 
-.navbar-inverse .navbar-brand{
+.navbar-inverse .navbar-brand {
   color: @inverse-font-color;
 }
 
-.navbar-inverse .navbar-nav > li > a{
+.navbar-inverse .navbar-nav > li > a {
   color: @inverse-font-color;
 }
-
 
 .flashcard {
+  .bottom-margin-xl;
   position: relative;
-  margin-bottom: 30px;
   background-color: @background-color-contrast;
   border-radius: 12px;
   text-align: center;
   box-shadow: 5px 5px 5px #CCC;
-  min-height: 320px;
 }
 
 .btn-success, .btn-success:hover {
@@ -94,6 +60,7 @@ body {
   border-color: #4DB22B;
 }
 
+//alignment
 .center-aligned {
   text-align: center
 }
@@ -110,16 +77,31 @@ body {
   vertical-align: top;
 }
 
-.right-padded {
-  padding-right: 15px;
+// paddings
+@default-padding-unit: 5px;
+.right-padded-m {
+  padding-right: @default-padding-unit * 3;
 }
 
-.left-padded {
-  padding-left: 15px;
+.left-padded-m {
+  padding-left: @default-padding-unit * 3;
 }
 
-.top-padded {
-  padding-top: 5px;
+.top-padded-s {
+  padding-top: @default-padding-unit;
+}
+
+.top-padded-m {
+  padding-top: @default-padding-unit * 3;
+}
+
+// margins
+.top-margin-l {
+  margin-top: 15px;
+}
+
+.bottom-margin-xl {
+  margin-bottom: 20px;
 }
 
 .infobox-title {
@@ -127,89 +109,23 @@ body {
   font-weight: bold;
 }
 
-
+// Image sizes
 .small-image {
   height: 84px
 }
 
-.content-section {
-  margin-bottom: 10px;
-  padding-bottom: 5px;
-  border-bottom: #eaeaea solid 1px;
-  vertical-align: top;
-}
+.large-image {
 
-@media screen and (min-width: 310px) {
-
-  .font-xxl {
-    font-family: 'Grinched';
-    font-size: 24pt;
-  }
-
-  .font-xl {
-    font-family: 'Grinched';
-    font-size: 18pt;
-  }
-
-  .hero-boy:after {
-    content: url("../img/brand/superhero-boy-small.gif");
-  }
-
-  .hero-girl:after {
-    content: url("../img/brand/superhero-girl-small.gif");
-  }
-
-  .teacher-man:after {
-    content: url("../img/brand/teacher-man-small.gif");
-  }
-
-  .teacher-woman:after {
-    content: url("../img/brand/teacher-woman-small.gif");
-  }
-
-  .guru:after {
-    content: url("../img/brand/guru-small.gif");
-  }
-
-  .philosopher:after {
-    content: url("../img/brand/philosopher-small.gif");
-  }
-}
-
-@media screen and (min-width: 620px) {
-
-  .font-xxl {
-    font-family: 'Grinched';
-    font-size: 36pt;
-  }
-
-  .font-xl {
-    font-family: 'Grinched';
-    font-size: 24pt;
-  }
-
-  .hero-boy:after {
-    content: url("../img/brand/superhero-boy-medium.gif");
-  }
-
-  .hero-girl:after {
-    content: url("../img/brand/superhero-girl-medium.gif");
-  }
-
-  .teacher-man:after {
-    content: url("../img/brand/teacher-man-medium.gif");
-  }
-
-  .teacher-woman:after {
-    content: url("../img/brand/teacher-woman-medium.gif");
-  }
-
-  .guru:after {
-    content: url("../img/brand/guru-medium.gif");
-  }
-
-  .philosopher:after {
-    content: url("../img/brand/philosopher-medium.gif");
+  @media screen {
+    @media (min-width: 310px) {
+      height: 150px;
+    }
+    @media (min-width: 620px) {
+      height: 200px;
+    }
+    @media (min-width: 800px) {
+      height: 250px;
+    }
   }
 }
 
@@ -217,19 +133,66 @@ body {
   cursor: pointer;
 }
 
-@media screen and (min-width: 800px) {
+//Fonts
+@standard-font: 'PT Sans', sans-serif;
 
-  .font-xxl {
-    font-family: 'Grinched';
-    font-size: 64pt;
-  }
+.header-font {
+  font-family: 'Grinched';
+}
 
-  .font-xl {
-    font-family: 'Grinched';
-    font-size: 36pt;
-  }
+@standard-font-size: 11pt;
 
-  .hero-boy:after {
-    content: url("../img/brand/superhero-boy-medium.gif");
+@font-face {
+  font-family: 'Grinched';
+  src: url('grinched.eot');
+  src: url('grinched.eot?#iefix') format('embedded-opentype'),
+  url('grinched.svg#Grinched') format('svg'),
+  url('grinched.woff') format('woff'),
+  url('Grinched.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+
+.font-xxl {
+
+  .header-font;
+
+  @media screen {
+    @media (min-width: 310px) {
+      font-size: 24pt;
+    }
+    @media (min-width: 620px) {
+      font-size: 36pt;
+    }
+    @media (min-width: 800px) {
+      font-size: 64pt;
+    }
   }
+}
+
+.font-xl {
+
+  .header-font;
+
+  @media screen {
+    @media (min-width: 310px) {
+      font-size: 18pt;
+    }
+    @media (min-width: 620px) {
+      font-size: 24pt;
+    }
+    @media (min-width: 800px) {
+      font-size: 36pt;
+    }
+  }
+}
+
+.font-l {
+  .header-font;
+  font-size: 24pt;
+}
+
+.font-m {
+  .header-font;
+  font-size: 16pt;
 }

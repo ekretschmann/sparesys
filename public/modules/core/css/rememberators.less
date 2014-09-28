@@ -6,6 +6,10 @@
 @background-color-contrast: #ECECFF;
 @foreground-color: #333333;
 
+.default-border {
+  border-bottom: #eaeaea solid 1px;
+}
+
 body {
   background: @background-color;
   font-family: @standard-font;
@@ -25,10 +29,22 @@ body {
   margin-top: 50px;
 }
 
+
+.content-header {
+  margin-bottom: 10px;
+  padding-bottom: 5px;
+  .default-border;
+  .title {
+    font-size: x-large;
+    font-weight: bold;
+  }
+}
+
+
 .content-section {
   margin-bottom: 10px;
   padding-bottom: 5px;
-  border-bottom: #eaeaea solid 1px;
+  .default-border;
   vertical-align: top;
 }
 
@@ -54,12 +70,6 @@ body {
   box-shadow: 5px 5px 5px #CCC;
 }
 
-.btn-success, .btn-success:hover {
-  background-color: #4DB22B;
-  background-image: linear-gradient(to bottom, #48982C 0%, #4DB22B 100%);
-  border-color: #4DB22B;
-}
-
 //alignment
 .center-aligned {
   text-align: center
@@ -75,6 +85,18 @@ body {
 
 .top-aligned {
   vertical-align: top;
+}
+
+.middle-aligned {
+  vertical-align: middle;
+}
+
+.nowrap {
+  white-space: nowrap;
+}
+
+.expands {
+  width: 100%;
 }
 
 // paddings
@@ -195,4 +217,38 @@ body {
 .font-m {
   .header-font;
   font-size: 16pt;
+}
+
+// modals
+.modal-content {
+
+  background-color: @background-color;
+  border-radius: 6px;
+  box-shadow: 5px 5px 5px #333;
+}
+
+// buttons
+
+.btn-success, .btn-success:hover {
+  background-color: #4DB22B;
+  background-image: linear-gradient(to bottom, #48982C 0%, #4DB22B 100%);
+  border-color: #4DB22B;
+}
+
+
+.btn-rememberators {
+  background-color: #4E51E5;
+  background-image: linear-gradient(to bottom, #4E51E5 0%, #030698 100%);
+  border-color: #4E51E5;
+  color: #ECECFF;
+  font-weight: bold;
+  min-width: 100px;
+}
+.btn-rememberators:hover,
+.btn-rememberators:focus,
+.btn-rememberators:active,
+.btn-rememberators.active {
+  background-image: none;
+  background-color: #4E51E5;
+  color: #ECECFF;
 }

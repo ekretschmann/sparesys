@@ -13,7 +13,7 @@
 
                     <table>
                         <tr>
-                            <td class="nobreak-label right-padded">First Name</td>
+                            <td class="nowrap right-padded-m">First Name</td>
                             <td class="expands">
                                 <input type="text"
                                        data-ng-model="credentials.firstName"
@@ -24,8 +24,8 @@
                         </tr>
 
                         <tr>
-                            <td class="nobreak-label right-padded">Last Name</td>
-                            <td class="expands">
+                            <td class="nowrap right-padded-m top-padded-s">Last Name</td>
+                            <td class="expands top-padded-s">
                                 <input type="text"
                                        data-ng-model="credentials.lastName"
                                        class="form-control"
@@ -34,8 +34,8 @@
                         </tr>
 
                         <tr>
-                            <td class="right-padded">email</td>
-                            <td class="expands">
+                            <td class="right-padded-m top-padded-s">email</td>
+                            <td class="expands top-padded-s">
                                 <input type="text"
                                        data-ng-model="credentials.email"
                                        class="form-control"
@@ -44,8 +44,8 @@
                         </tr>
 
                         <tr>
-                            <td class="right-padded">Username</td>
-                            <td class="expands">
+                            <td class="right-padded-m top-padded-s">Username</td>
+                            <td class="expands top-padded-s">
                                 <input type="text"
                                        data-ng-model="credentials.username"
                                        class="form-control"
@@ -54,8 +54,8 @@
                         </tr>
 
                         <tr class="controls">
-                            <td class="right-padded">Password</td>
-                            <td class="expands">
+                            <td class="right-padded-m top-padded-s">Password</td>
+                            <td class="expands top-padded-s">
                                 <input type="password"
                                        data-ng-model="credentials.password"
                                        class="form-control"
@@ -63,12 +63,11 @@
                                        required></td>
                         </tr>
 
-                        <tr class="controls">
-                            <td class="nobreak-label right-padded">Repeat Password</td>
-                            <td class="expands">
+                        <tr class="controls top-padded-s">
+                            <td class="nowrap right-padded-m top-padded-s">Repeat Password</td>
+                            <td class="expands top-padded-s">
                                 <input type="password"
-                                       data-ng-model="credentials.password"
-                                       name="password"
+                                       data-ng-model="credentials.password_repeat"
                                        class="form-control"
                                        placeholder="Password"
                                        required></td>
@@ -77,44 +76,16 @@
                 </div>
 
 
-                <!--<div class="form-group">-->
-					<!--<label for="firstName">First Name</label>-->
-					<!--<input type="text" required id="firstName" name="firstName" class="form-control" data-ng-model="credentials.firstName" placeholder="First Name">-->
-				<!--</div>-->
-				<!--<div class="form-group">-->
-					<!--<label for="lastName">Last Name</label>-->
-					<!--<input type="text" id="lastName" name="lastName" class="form-control" data-ng-model="credentials.lastName" placeholder="Last Name">-->
-				<!--</div>-->
-				<!--<div class="form-group">-->
-					<!--<label for="email">Email</label>-->
-					<!--<input type="text" id="email" name="email" class="form-control" data-ng-model="credentials.email" placeholder="Email">-->
-				<!--</div>-->
-				<!--<div class="form-group">-->
-					<!--<label for="username">Username</label>-->
-					<!--<input type="text" id="username" name="username" class="form-control" data-ng-model="credentials.username" placeholder="Username">-->
-				<!--</div>-->
-				<!--<div class="form-group">-->
-					<!--<label for="password">Password</label>-->
-					<!--<input type="password" id="password" name="password" class="form-control" data-ng-model="credentials.password" placeholder="Password">-->
-				<!--</div>-->
-
                 <div style="text-align: center">
                     <button class="btn btn-rememberators"
                             type="submit"
-                            ng-click="signup()"
-                            >
-                        Sign Up
-                    </button>
+                            ng-click="signup()">Sign Up</button>
 
 
                     <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
 
                 </div>
 
-				<!--<div class="text-center form-group">-->
-					<!--<button type="submit" class="btn btn-large btn-primary">Sign up</button>&nbsp; or&nbsp;-->
-					<!--<a href="/#!/signin" class="show-signup">Sign in</a>-->
-				<!--</div>-->
 				<div data-ng-show="error" class="text-center text-danger">
 					<strong>{{error}}</strong>
 				</div>

@@ -16,15 +16,19 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
 
 
         $scope.signup = function() {
+            $scope.error = undefined;
+            if ($scope.credentials.password && $scope.credentials.password_repeat) {
+                if ($scope.credentials.password !== $scope.credentials.password_repeat) {
+                    $scope.error = 'passwords do not match';
+                    return;
+                }
+            }
             $http.post('/auth/signup', $scope.credentials).success(function(response) {
                 //If successful we assign the response to the global user model
-
                 $scope.authentication.user = response;
                 $modalInstance.close();
                 $location.path('/');
                 $state.go($state.$current, null, {reload: true});
-                //And redirect to the index page
-//                $location.path('/');
             }).error(function(response) {
                 $scope.error = response.message;
             });
@@ -37,13 +41,6 @@ angular.module('users').controller('AuthenticationController', ['$scope', '$http
                 $modalInstance.close();
                 $location.path('/');
                 $state.go($state.$current, null, {reload: true});
-                //$modalInstance.close();
-                //And redirect to the index page
-
-//                $timeout(function(){
-//                $location.path('/');
-//                },100);
-
             }).error(function(response) {
                 $scope.error = response.message;
             });

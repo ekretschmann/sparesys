@@ -1,9 +1,111 @@
--cat: display file content (uncompressed) 
--text: just like cat but works on compressed files 
--chgrp,-chmod,-chown: changes file permissions 
--put,-get,-copyFromLocal,-copyToLocal: copies files 
-from the local file system to the HDFS and viceIversa. Two versions. 
--ls, -ls -R: list files/directories 
--mv,-moveFromLocal,-moveToLocal: moves files 
--stat: staLsLcal info for any given file (block size, number of blocks, 
-file type, etc.) 
+<section data-ng-controller="CoursesController"
+         data-ng-init="findForCurrentUser()">
+
+    <div class="content-header">
+        <div class="title">Welcome {{authentication.user.firstName}}</div>
+    </div>
+
+
+    <div class="content-section">
+
+
+        <section data-ng-if="!courses || courses.length===0">
+
+
+            <infobox logo="woman" position="right">
+                New to Rememberators? I see, that you haven't got any courses, yet.
+                Whatever you learn on Rememberators is put into courses. Courses help you to
+                keep the subjects you learn separated so that you can concentrate on one thing
+                at a time. So here is how to you get your courses?
+            </infobox>
+
+            <infobox logo="girl" position="left">
+                Superheros sometimes <a href="#!/courses/create">create their own courses</a>. This is great
+                when you have
+                something special that you find interesting. Why not have your very own
+                course on horse breeds or facts about your favorite football stars? Once you
+                have created a course you can decide to publish it and share it with others here
+                on Rememberators - or you can keep it for yourself forever. Use the Courses
+                Menu to get going!
+            </infobox>
+
+            <infobox logo="philosopher" position="right">
+                Well, well, well. If everybody starts sharing, there will
+                be plenty of courses to choose from. You can use the Courses Menu to
+                have a look at what is there already
+                and <a href="#!/courses/search">search for courses</a> of things you are interested in. Once
+                you subscribe
+                to a course it turns into your own course - so you are free to change it in
+                any way that you like. You can turn it into exactly what you want it be!
+            </infobox>
+
+            <infobox logo="man" position="left">
+                Rememberators are also great for your teachers. They let them put courses together for
+                you and help you learn your facts. This way, they can spot what you are working on
+                and give you all the support that you need to succeed. If your school works with the
+                Rememberators, you can use the courses menu to <a
+                    href="#!/schools/subscribe/student">find</a>
+                your school and enrol. Your teachers will then be able to assign your coursework.
+            </infobox>
+
+        </section>
+
+
+        <section data-ng-if="courses.length > 0">
+
+
+            <infobox logo="boy" title="Your courses" position="left">
+                You are working on {{courses.length}} courses. Just select the actions you
+                want to take. The <b>practice</b> will go through the cards of the course
+                with you. If you choose <b>statistics</b>, you will be able to see how diagrams
+                and numbers about how you are progressing. You can also <b>edit</b> courses that
+                you are managing yourself.
+            </infobox>
+
+            <table class="table-striped" style="width: 100%; margin-top: 10px">
+                <thead>
+                <tr>
+                    <th>You are a student of</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="course in coursesStudent">
+                    <td class="rightpadded expands">
+                        {{course.name}}
+                    </td>
+
+                    <td class="nobreak-label">
+                        <a class="right-padded" data-ng-href="#!/practice/{{course._id}}">practice</a>
+                        <a class="right-padded" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
+                        <a data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <table data-ng-if="coursesTeacher.length>0" class="table-striped" style="width: 100%; margin-top: 10px">
+                <thead>
+                <tr>
+                    <th>You are a teacher of</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="course in coursesTeacher">
+                    <td class="rightpadded expands">
+                        {{course.name}}
+                    </td>
+
+                    <td class="nobreak-label">
+                        <a class="right-padded" data-ng-href="#!/practice/{{course._id}}">practice</a>
+                        <a class="right-padded" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
+                        <a data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </section>
+    </div>
+</section>

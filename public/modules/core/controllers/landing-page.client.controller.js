@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('core').controller('HomeController', ['$scope', '$modal', 'Authentication',
+angular.module('core').controller('LandingPageController', ['$scope', '$modal', 'Authentication',
     function ($scope, $modal, Authentication) {
         $scope.authentication = Authentication;
 

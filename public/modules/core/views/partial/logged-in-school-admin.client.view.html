@@ -1,7 +1,10 @@
+<div ng-include="'/modules/users/views/partial/settings.modal.client.view.html'"></div>
+
+
 <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1 && authentication.user.schoolclasses.length === 0">
         <infobox logo="woman" position="right">
             If you are planning to user Rememberators for your school, go to your
-            <a href="#!/settings/profile">settings</a> in the {{user.displayName}} menu and register as a
+            <a href="" data-ng-click="settingsPopup()">settings</a> in the {{user.displayName}} menu and register as a
             school administrator to manage teachers and classes. Also, if you want to use the Rememberators
             to teach somone, you will first have to create a school.
         </infobox>

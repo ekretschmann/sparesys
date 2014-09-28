@@ -240,18 +240,17 @@ angular.module('core').controller('HomePageController',
 //                });
 //            };
 //
-//            $scope.editCoursePopup = function (size) {
-//                $modal.open({
-//                    templateUrl: 'editCourse.html',
-//                    controller: 'EditCourseController',
-//                    size: size,
-//                    resolve: {
-//                        course: function () {
-//                            return $scope.course;
-//                        }
-//                    }
-//                });
-//            };
+            $scope.settingsPopup = function () {
+                $modal.open({
+                    templateUrl: 'settings.html',
+                    controller: 'UsersController',
+                    resolve: {
+                        user: function () {
+                            return $scope.authentication.user;
+                        }
+                    }
+                });
+            };
 //
 //
 //            $scope.sortableOptions = {

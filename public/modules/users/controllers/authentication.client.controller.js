@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('users').controller('AuthenticationController', ['$scope', '$http', '$state', '$modalInstance', '$location', '$timeout', 'Authentication',
+angular.module('users').controller('LoginController', ['$scope', '$http', '$state', '$modalInstance', '$location', '$timeout', 'Authentication',
     function($scope, $http, $state, $modalInstance, $location, $timeout, Authentication) {
         $scope.authentication = Authentication;
 

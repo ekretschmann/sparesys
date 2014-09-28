@@ -30,7 +30,7 @@ angular.module('core').controller('LandingPageController', ['$scope', '$modal', 
 
             $modal.open({
                 templateUrl: 'signin.html',
-                controller: 'AuthenticationController',
+                controller: 'LoginController',
                 size: size
             });
 
@@ -39,7 +39,7 @@ angular.module('core').controller('LandingPageController', ['$scope', '$modal', 
         $scope.signupPopup = function (size) {
             $modal.open({
                 templateUrl: 'signup.html',
-                controller: 'AuthenticationController',
+                controller: 'LoginController',
                 size: size
             });
 

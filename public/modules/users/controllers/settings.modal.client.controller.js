@@ -1,9 +1,7 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$modalInstance', 'Users', 'user',
-    function ($scope, $modalInstance, Users, user) {
-
-
+angular.module('users').controller('SettingsController', ['$scope', '$state', '$modalInstance', 'Users', 'Authentication', 'user',
+    function ($scope, $state, $modalInstance, Users, Authentication, user) {
 
         $scope.roleSettings = {};
         $scope.roleSettings.teacher = user.roles.indexOf('teacher') > -1;
@@ -13,6 +11,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$modalInsta
             userId: user._id
         }, function (result) {
                 $scope.user = result;
+            Authentication.user = result;
         });
 
         $scope.cancel = function () {
@@ -50,8 +49,10 @@ angular.module('users').controller('SettingsController', ['$scope', '$modalInsta
                 }
             }
 
+
+
             $scope.user.$update(function() {
-                $modalInstance.dismiss('cancel');
+                $modalInstance.close();
             });
         };
 

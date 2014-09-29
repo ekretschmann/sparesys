@@ -243,7 +243,7 @@ angular.module('core').controller('HomePageController',
             $scope.settingsPopup = function () {
                 $modal.open({
                     templateUrl: 'settings.html',
-                    controller: 'UsersController',
+                    controller: 'SettingsController',
                     resolve: {
                         user: function () {
                             return $scope.authentication.user;

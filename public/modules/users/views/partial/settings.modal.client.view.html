@@ -60,9 +60,9 @@
 
                                 <input
                                         type="checkbox"
-                                        data-ng-model="teacher"
-                                        ng-checked="user.roles.indexOf('teacher') > -1"
-                                        > <span style="padding-left: 10px">(You plan to teach one or more students)</span>
+                                        data-ng-model="roleSettings.teacher"
+                                        > <span
+                                    style="padding-left: 10px">(You plan to teach one or more students)</span>
                             </td>
                         </tr>
 
@@ -74,9 +74,9 @@
                                 <input
                                         style="padding-right: 10px"
                                         type="checkbox"
-                                        data-ng-model="headmaster"
-                                        ng-checked="user.roles.indexOf('headmaster') > -1"
-                                        > <span style="padding-left: 10px">(You plan to organize teachers and students)</span>
+                                        data-ng-model="roleSettings.headmaster"
+                                        > <span
+                                    style="padding-left: 10px">(You plan to organize teachers and students)</span>
                             </td>
                         </tr>
 
@@ -87,17 +87,16 @@
                 <div class="center-aligned">
                     <button class="btn btn-rememberators"
                             type="submit"
-                            ng-click="signin()">Sign In</button>
-
+                            ng-click="ok()">OK</button>
 
                     <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
 
                 </div>
 
+
                 <div data-ng-show="error" class="text-center text-danger">
                     <strong>{{error}}</strong>
                 </div>
-
             </fieldset>
         </form>
 
@@ -105,22 +104,22 @@
 
     <!--<section data-ng-controller="UsersController" data-ng-init="findOne()">-->
 
-        <!--<div class="content-header">-->
-            <!--<div class="pull-right">-->
-                <!--<a class="menu-link"-->
-                   <!--href=""-->
-                   <!--data-ng-click="remove(otherUser)">Delete</a>-->
+    <!--<div class="content-header">-->
+    <!--<div class="pull-right">-->
+    <!--<a class="menu-link"-->
+    <!--href=""-->
+    <!--data-ng-click="remove(otherUser)">Delete</a>-->
 
-                <!--<a class="menu-link"-->
-                   <!--href=""-->
-                   <!--data-ng-click="update()">Update</a>-->
+    <!--<a class="menu-link"-->
+    <!--href=""-->
+    <!--data-ng-click="update()">Update</a>-->
 
-            <!--</div>-->
+    <!--</div>-->
 
-            <!--<div class="title">-->
-                <!--Edit User-->
-            <!--</div>-->
-        <!--</div>-->
+    <!--<div class="title">-->
+    <!--Edit User-->
+    <!--</div>-->
+    <!--</div>-->
 
 
     <!--</section>-->

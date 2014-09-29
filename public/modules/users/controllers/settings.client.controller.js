@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$http', '$state', '$location', 'Users', 'Authentication',
+angular.module('users').controller('OldSettingsController', ['$scope', '$http', '$state', '$location', 'Users', 'Authentication',
     function ($scope, $http, $state, $location, Users, Authentication) {
         $scope.user = Authentication.user;
         $scope.headmaster = $scope.user.roles.indexOf('headmaster')>0;

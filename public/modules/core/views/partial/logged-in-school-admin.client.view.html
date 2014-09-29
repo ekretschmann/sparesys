@@ -17,7 +17,7 @@
 
 <div data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
 
-    <div class="content-subsection"
+    <div class="content-section"
          data-ng-controller="SchoolsController"
          data-ng-init="findForCurrentUser()"
          data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
@@ -48,9 +48,8 @@
         <div data-ng-hide="!schools.$resolved || schools.length">
 
             <div class="warning">
-                You are set up as a school administrator but you are not managing any schools. Please use this
-                <a
-                        href="/#!/schools/register">link</a>
+                You are a school administrator but you are not managing any schools. Please use this
+                <a href="/#!/schools/register">link</a>
                 or the Schools Menu to register your schools.
             </div>
         </div>

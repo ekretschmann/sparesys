@@ -6,54 +6,43 @@
         </div>
     </div>
 
+    <div data-ng-if="authentication.user.roles.indexOf('help') > -1" class="content-section">
+
+
+        <infobox logo="woman" position="right">
+            School registration is simple. Please fill in the form below and the school
+            will be available for teachers and students to sign up to. After that, it will be your
+            task to to set up and manage the classes for your school.
+        </infobox>
+
+
+    </div>
+
     <div class="content-section">
-
-
-            <table>
-                <tr>
-
-                    <td class="top-aligned">
-                        <div>
-                            School registration is simple. Please fill in the form below and the school
-                            will be available for teachers and students to sign up to. It will be your
-                            job to to set up and manage the classes for your school.
-                        </div>
-                    </td>
-                    <td class="top-aligned">
-                        <img class="size-64"
-                             src="/modules/core/img/brand/teacher-woman-medium.gif">
-                    </td>
-                </tr>
-            </table>
-
-
-        </div>
-
-    <div class="content-lastsection">
 
         <form class="form-horizontal" data-ng-submit="create()" novalidate>
             <fieldset>
-                <table class="sparesys-view-object-table">
-                    <tr class="controls">
-                        <td class="sparesys-view-object-label-cell">School Name</td>
-                        <td class="sparesys-view-object-content-cell">
+                <table>
+                    <tr>
+                        <td class="nowrap right-padded-m">School Name</td>
+                        <td class="expands">
                             <input type="text" data-ng-model="name"
                                    id="name" class="form-control"
                                    placeholder="School Name"
                                    required></td>
                     </tr>
 
-                    <tr class="controls">
-                        <td class="sparesys-view-object-label-cell">City</td>
-                        <td class="sparesys-view-object-content-cell">
+                    <tr>
+                        <td class="right-padded-m">City</td>
+                        <td>
                             <input type="text" data-ng-model="city"
                                    id="city" class="form-control"
                                    placeholder="City" required></td>
                     </tr>
 
-                    <tr class="controls">
-                        <td class="sparesys-view-object-label-cell">Country</td>
-                        <td class="sparesys-view-object-content-cell">
+                    <tr>
+                        <td class="right-padded-m">Country</td>
+                        <td>
                             <input type="text" data-ng-model="country"
                                    id="country" class="form-control"
                                    placeholder="Country" required></td>
@@ -62,14 +51,18 @@
 
                 </table>
                 <div class="pull-right">
-                    <input type="submit" value="Create" class="btn btn-default">
+                    <input type="submit" value="Create" class="btn btn-rememberators">
                 </div>
                 <div data-ng-show="error" class="text-danger">
                     <strong>{{error}}</strong>
                 </div>
             </fieldset>
         </form>
-
-        <div>
-
+    </div>
 </section>
+
+<div>
+    <p>rememberators.com</p>
+
+
+</div>

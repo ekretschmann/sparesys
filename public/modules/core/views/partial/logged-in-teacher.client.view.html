@@ -4,7 +4,7 @@
         <div class="content-section">
             <infobox logo="man" position="left">
                 If you are a teacher and your school is set up with Rememberators, use the
-                <a href="#!/settings/profile">settings</a> in the {{user.displayName}} menu
+                <a href="" data-ng-click="settingsPopup()">settings</a> in the {{user.displayName}} menu
                 to register for the role of a teacher. You will get a Teaching menu with all the details
                 to manage your students.
             </infobox>
@@ -23,7 +23,7 @@
         <div data-ng-if="schools.length === 0">
 
 
-            <div class="content-subsection warning">You are a teacher without an associated school. Please find your
+            <div class="content-section warning">You are a teacher without an associated school. Please find your
                 school in the Teaching menu or by clicking this
                 <a href="/#!/schools/subscribe/teacher">link</a>.
             </div>

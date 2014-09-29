@@ -149,8 +149,8 @@
 
 
                 <ul class="dropdown-menu">
-                    <li>
-                        <a href="/#!/settings/profile" class="font-m">Edit Profile</a>
+                    <li data-ng-controller="HomePageController">
+                        <a href="" data-ng-click="settingsPopup()" class="font-m">Edit Profile</a>
                     </li>
 
                     <li data-ng-if="authentication.user.roles.indexOf('help') > -1">

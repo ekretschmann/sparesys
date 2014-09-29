@@ -47,10 +47,10 @@
                         <a href="/#!/schoolclasses/admin" class="font-m">School Classes</a>
                     </li>
                     <li>
-                        <a id="courses-admin-link" href="/#!/courses/admin" class="font-m">Courses</a>
+                        <a href="/#!/courses/admin" class="font-m">Courses</a>
                     </li>
                     <li>
-                        <a id="courses-admin-link" href="/#!/messages/admin" class="font-m">Messages</a>
+                        <a href="/#!/messages/admin" class="font-m">Messages</a>
                     </li>
                     <!--<li>-->
                         <!--<a href="/#!/packs/admin" class="font-m">Packs</a>-->
@@ -152,11 +152,16 @@
                     <li>
                         <a href="/#!/settings/profile" class="font-m">Edit Profile</a>
                     </li>
-                    <!--<li>-->
-                        <!--<a href="/#!/settings/accounts" class="font-m">Manage Social-->
-                            <!--Accounts</a>-->
-                    <!--</li>-->
-                    <li data-ng-show="authentication.user.provider === 'local'">
+
+                    <li data-ng-if="authentication.user.roles.indexOf('help') > -1">
+                        <a href="" data-ng-click="toggleHelp()" class="font-m">Turn Off Help</a>
+                    </li>
+
+                    <li data-ng-if="authentication.user.roles.indexOf('help') === -1">
+                        <a href="" data-ng-click="toggleHelp()" class="font-m">Turn On Help</a>
+                    </li>
+
+                   <li data-ng-show="authentication.user.provider === 'local'">
                         <a href="/#!/settings/password" class="font-m">Change Password</a>
                     </li>
 

@@ -74,8 +74,8 @@
                     <!--<li>-->
                     <!--<a href="/#!/courses">Find</a>-->
                     <!--</li>-->
-                    <li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1">
-                        <a href="/#!/schools/register" class="font-m">Register School</a>
+                    <li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1" data-ng-controller="SchoolsController">
+                        <a href="" data-ng-click="registerSchoolPopup()" class="font-m">Register School</a>
                     </li>
                     <!--<li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1">-->
                         <!--<a href="/#!/schools/manage" class="font-m">Manage Schools</a>-->

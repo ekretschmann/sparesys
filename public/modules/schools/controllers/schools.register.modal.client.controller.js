@@ -5,11 +5,10 @@ angular.module('schools').controller('RegisterSchoolController', ['$scope', '$st
 
         $scope.school = {};
 
-        $scope.setFocus = function () {
+
             $timeout(function () {
                 angular.element('.focus').trigger('focus');
             }, 100);
-        };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
@@ -26,6 +25,7 @@ angular.module('schools').controller('RegisterSchoolController', ['$scope', '$st
             // Redirect after save
             newSchool.$save(function (response) {
 
+                $state.go($state.$current, null, { reload: true });
                 $modalInstance.dismiss('cancel');
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;

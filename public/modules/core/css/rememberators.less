@@ -107,8 +107,15 @@ body {
 
 // paddings
 @default-padding-unit: 5px;
+.right-padded-s {
+  padding-right: @default-padding-unit;
+}
 .right-padded-m {
   padding-right: @default-padding-unit * 3;
+}
+
+.left-padded-s {
+  padding-left: @default-padding-unit;
 }
 
 .left-padded-m {
@@ -121,6 +128,10 @@ body {
 
 .top-padded-m {
   padding-top: @default-padding-unit * 3;
+}
+
+.top-padded-l {
+  padding-top: @default-padding-unit * 10;
 }
 
 // margins
@@ -257,4 +268,13 @@ body {
   background-image: none;
   background-color: #4E51E5;
   color: #ECECFF;
+}
+
+.table-striped {
+  width: 100%;
+}
+
+.table-striped>tbody>tr:nth-child(odd)>td,
+.table-striped>tbody>tr:nth-child(odd)>th {
+  background-color: #FEE67A;
 }

@@ -19,19 +19,19 @@
 
         <div class="content-section">
 
-            <table id="searchTextResults" class="table-striped">
+            <table id="searchTextResults" class="table-striped bottom-margin-xl">
                 <thead>
                 <tr>
-                    <th class="expands right-padded">School</th>
-                    <th class="right-padded">City</th>
-                    <th class="right-padded">Country</th>
-                    <th >Administrator</th>
+                    <th class="expands right-padded-m left-padded-s">School</th>
+                    <th class="right-padded-m">City</th>
+                    <th class="right-padded-m">Country</th>
+                    <th class="right-padded-s">Administrator</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="school in schools | filter:searchText">
 
-                    <td class="right-padded nobreak-label">
+                    <td class="left-padded-s right-padded-m nowrap">
                         <div data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
                             <a href="" data-ng-click="unsubscribeTeacherPopup(school)">{{school.name}}
                                 <i
@@ -44,10 +44,10 @@
                             <a href="" data-ng-click="subscribeTeacherPopup(school)">{{school.name}}</a>
                         </div>
                     </td>
-                    <td class="right-padded nobreak-label">{{school.city}}</td>
-                    <td class="right-padded nobreak-label">{{school.country}}</td>
+                    <td class="right-padded-m nowrap">{{school.city}}</td>
+                    <td class="right-padded-m nowrap">{{school.country}}</td>
 
-                    <td class="nobreak-label">{{school.user.displayName}}</td>
+                    <td class="right-padded-s nowrap">{{school.user.displayName}}</td>
                 </tr>
                 </tbody>
             </table>
@@ -58,3 +58,8 @@
         There are no Schools yet.
     </div>
 </section>
+
+
+<div>
+    <p>rememberators.com</p>
+</div>

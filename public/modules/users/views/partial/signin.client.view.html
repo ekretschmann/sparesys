@@ -7,7 +7,8 @@
             </div>
         </div>
 
-        <form class="signin form-horizontal" autocomplete="off">
+        <form class="signin form-horizontal"
+              data-ng-submit="signin()">
             <fieldset>
                 <div class="content-header">
 
@@ -37,8 +38,7 @@
 
                 <div class="center-aligned">
                     <button class="btn btn-rememberators"
-                            type="submit"
-                            ng-click="signin()">Sign In</button>
+                            type="submit">Sign In</button>
 
 
                     <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>

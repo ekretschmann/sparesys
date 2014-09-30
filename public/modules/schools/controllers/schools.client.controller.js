@@ -6,6 +6,14 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
         $scope.authentication = Authentication;
 
 
+        $scope.registerSchoolPopup = function() {
+            $modal.open({
+                templateUrl: 'registerSchool.html',
+                controller: 'RegisterSchoolController'
+            });
+        };
+
+
         $scope.subscribeTeacher = function (user) {
 
             if ($scope.school.teachers.indexOf(user._id) === -1) {
@@ -175,25 +183,25 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$statePara
             }
         };
 
-        // Create new School
-        $scope.create = function () {
-            // Create new School object
-            var school = new Schools({
-                name: this.name,
-                city: this.city,
-                country: this.country
-            });
-
-            // Redirect after save
-            school.$save(function (response) {
-                $location.path('schools/' + response._id + '/edit');
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
-
-            // Clear form fields
-            this.name = '';
-        };
+//        // Create new School
+//        $scope.create = function () {
+//            // Create new School object
+//            var school = new Schools({
+//                name: this.name,
+//                city: this.city,
+//                country: this.country
+//            });
+//
+//            // Redirect after save
+//            school.$save(function (response) {
+//                $location.path('schools/' + response._id + '/edit');
+//            }, function (errorResponse) {
+//                $scope.error = errorResponse.data.message;
+//            });
+//
+//            // Clear form fields
+//            this.name = '';
+//        };
 
         // Remove existing School
         $scope.remove = function (school) {

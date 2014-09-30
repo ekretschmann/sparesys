@@ -1,6 +1,8 @@
 <section data-ng-controller="HomePageController"
          data-ng-init="findCourses()">
 
+    <div ng-include="'/modules/users/views/partial/settings.modal.client.view.html'"></div>
+
     <div class="content-header">
         <div class="title">Welcome {{authentication.user.firstName}}</div>
     </div>

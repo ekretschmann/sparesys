@@ -22,7 +22,7 @@ angular.module('schools').config(['$stateProvider',
             }).
             state('registerSchool', {
                 url: '/schools/register',
-                templateUrl: 'modules/schools/views/register-school.client.view.html'
+                templateUrl: '../views/partial/register-school.client.view.html'
             }).
             state('viewSchool', {
                 url: '/schools/:schoolId',

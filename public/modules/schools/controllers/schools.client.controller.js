@@ -1,10 +1,14 @@
 'use strict';
 
 // Schools controller
-angular.module('schools').controller('SchoolsController', ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Schools',
-    function ($scope, $stateParams, $location, $modal, Authentication, Schools) {
+angular.module('schools').controller('SchoolsController', ['$scope', '$timeout','$stateParams', '$location', '$modal', 'Authentication', 'Schools',
+    function ($scope, $timeout, $stateParams, $location, $modal, Authentication, Schools) {
         $scope.authentication = Authentication;
 
+
+        $timeout(function () {
+            angular.element('.focus').trigger('focus');
+        }, 100);
 
         $scope.registerSchoolPopup = function() {
             $modal.open({

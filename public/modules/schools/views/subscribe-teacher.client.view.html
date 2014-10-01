@@ -4,20 +4,33 @@
     <div ng-include="'/modules/schools/views/partial/unsubscribe-teacher.modal.client.view.html'"></div>
 
     <div class="content-header">
-        <div class="pull-right">
-            <input ng-model="searchText"
-                   class="form-control"
-                   placeholder="Search">
-        </div>
         <div class="title">
-            Subscribe as Teacher to School
+            Select our School
         </div>
 
     </div>
 
     <div data-ng-if="schools.length > 0">
 
+        <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+            <div class="content-section">
+                <infobox logo="man" position="left">
+                    Select your school(s) from the list below. You can use the search box to
+                    narrow down the options. After you have subscribed, your school administrator
+                    will be able to assign you to your class. You will find a pencil icon next
+                    to all the schools you have subscribed to. Clicking
+                </infobox>
+            </div>
+        </section>
+
         <div class="content-section">
+
+            <div class="pull-right bottom-margin-xl">
+                <input ng-model="searchText"
+                       class="form-control search focus"
+                       placeholder="Search for your School">
+            </div>
+
 
             <table id="searchTextResults" class="table-striped bottom-margin-xl">
                 <thead>
@@ -35,7 +48,7 @@
                         <div data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
                             <a href="" data-ng-click="unsubscribeTeacherPopup(school)">{{school.name}}
                                 <i
-                                   class="glyphicon glyphicon-pencil">
+                                        class="glyphicon glyphicon-pencil">
                                 </i>
                             </a>
                         </div>

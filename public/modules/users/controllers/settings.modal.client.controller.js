@@ -1,31 +1,45 @@
 'use strict';
 
-angular.module('users').controller('SettingsController', ['$scope', '$state', '$modalInstance', 'Users', 'Authentication', 'user',
-    function ($scope, $state, $modalInstance, Users, Authentication, user) {
+angular.module('users').controller('SettingsController', ['$scope', '$timeout', '$http', '$state', '$modalInstance', 'Users', 'Authentication', 'user',
+    function ($scope, $timeout, $http, $state, $modalInstance, Users, Authentication, user) {
 
         $scope.roleSettings = {};
+        $scope.userDetails = {};
+        $scope.userDetails.username = user.username;
+        $scope.userDetails.firstName = user.firstName;
+        $scope.userDetails.lastName = user.lastName;
+        $scope.userDetails.email = user.email;
         $scope.roleSettings.teacher = user.roles.indexOf('teacher') > -1;
         $scope.roleSettings.headmaster = user.roles.indexOf('headmaster') > -1;
+        $scope.passwordDetails = {};
+        $scope.cancelled = false;
+
+        $timeout(function () {
+            angular.element('.focus').trigger('focus');
+        }, 100);
 
         Users.get({
             userId: user._id
         }, function (result) {
-                $scope.user = result;
+            $scope.user = result;
             Authentication.user = result;
         });
 
         $scope.cancel = function () {
-            $modalInstance.dismiss('cancel');
+            $scope.cancelled = true;
+            $modalInstance.close();
         };
 
         // Update a user profile
-        $scope.ok = function () {
-
+        $scope.changeDetails = function () {
+            if ($scope.cancelled) {
+                return;
+            }
             var teacher = $scope.roleSettings.teacher;
             var headmaster = $scope.roleSettings.headmaster;
 
             if (teacher === true) {
-                if ($scope.user.roles.indexOf('teacher')<0) {
+                if ($scope.user.roles.indexOf('teacher') < 0) {
                     $scope.user.roles.push('teacher');
                 }
             } else {
@@ -38,7 +52,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$state', '$
             }
 
             if (headmaster === true) {
-                if ($scope.user.roles.indexOf('headmaster')<0) {
+                if ($scope.user.roles.indexOf('headmaster') < 0) {
                     $scope.user.roles.push('headmaster');
                 }
             } else {
@@ -49,13 +63,29 @@ angular.module('users').controller('SettingsController', ['$scope', '$state', '$
                 }
             }
 
+            $scope.user.firstName =  $scope.userDetails.firstName;
+            $scope.user.lastName =  $scope.userDetails.lastName;
+            $scope.user.email =  $scope.userDetails.email;
+            $scope.user.username =  $scope.userDetails.username;
 
 
-            $scope.user.$update(function() {
+            $scope.user.$update(function () {
                 $modalInstance.close();
             });
         };
 
+        // Change user password
+        $scope.changePassword = function () {
+            console.log('bbb');
+            $scope.success = $scope.error = null;
+
+            $http.post('/users/password', $scope.passwordDetails).success(function (response) {
+
+                $modalInstance.close();
+            }).error(function (response) {
+                $scope.error = response.message;
+            });
+        };
 
     }
 ]);

@@ -195,6 +195,7 @@ exports.update = function (req, res) {
  * Change Password
  */
 exports.changePassword = function (req, res, next) {
+
     // Init Variables
     var passwordDetails = req.body;
     var message = null;

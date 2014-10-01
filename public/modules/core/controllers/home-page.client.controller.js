@@ -251,6 +251,19 @@ angular.module('core').controller('HomePageController',
                     }
                 });
             };
+
+            $scope.passwordPopup = function () {
+                $modal.open({
+                    templateUrl: 'password.html',
+                    controller: 'SettingsController',
+                    resolve: {
+                        user: function () {
+                            return $scope.authentication.user;
+                        }
+                    }
+                });
+            };
+
 //
 //
 //            $scope.sortableOptions = {

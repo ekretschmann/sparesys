@@ -161,8 +161,8 @@
                         <a href="" data-ng-click="toggleHelp()" class="font-m">Turn On Help</a>
                     </li>
 
-                   <li data-ng-show="authentication.user.provider === 'local'">
-                        <a href="/#!/settings/password" class="font-m">Change Password</a>
+                   <li data-ng-controller="HomePageController" data-ng-show="authentication.user.provider === 'local'">
+                        <a href="" data-ng-click="passwordPopup()" class="font-m">Change Password</a>
                     </li>
 
 

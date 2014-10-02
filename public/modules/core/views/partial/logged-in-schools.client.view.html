@@ -3,7 +3,9 @@
 
         <div class="content-section">
             <infobox logo="man" position="left" title="Your Schools">
-                You have subscribed to <span data-ng-repeat="school in schools">{{school.name}}, </span>
+                You have subscribed to
+                <span data-ng-repeat="school in schools track by $index"><span data-ng-if="$index > 0 && $index < schools.length">,</span><span data-ng-if="$index === schools.length-1"> and</span>
+                    <span  {{school.name}}</span>.
             </infobox>
         </div>
     </div>

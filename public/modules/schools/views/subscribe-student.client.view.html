@@ -3,34 +3,47 @@
     <div ng-include="'/modules/schools/views/partial/subscribe-student.modal.client.view.html'"></div>
     <div ng-include="'/modules/schools/views/partial/unsubscribe-student.modal.client.view.html'"></div>
 
-    <div class="content-header">
+    <div class="popup-header">
         <div class="pull-right">
             <input ng-model="searchText"
-                   class="form-control"
+                   class="form-control search focus"
                    placeholder="Search">
         </div>
         <div class="title">
-            Subscribe as Student to School
+            Student School Subscriptions
         </div>
 
     </div>
 
     <div data-ng-if="schools.length > 0">
 
+
+        <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+            <div class="content-section">
+                <infobox logo="boy" position="left">
+                    Select your school(s) from the list below. You can use the search box to
+                    narrow down the options. After you have subscribed, your school administrator
+                    will be able to assign you to your class. You will find a pencil icon next
+                    to all the schools you have subscribed to. If you want to unsubscribe from
+                    a school, click on the school name again.
+                </infobox>
+            </div>
+        </section>
+
         <table id="searchTextResults" class="table-striped">
             <thead>
             <tr>
 
-                <th class="expands right-padded">School</th>
-                <th class="right-padded">City</th>
-                <th class="right-padded">Country</th>
+                <th class="expands right-padded-m">School</th>
+                <th class="right-padded-m">City</th>
+                <th class="right-padded-m">Country</th>
                 <th>Administrator</th>
             </tr>
             </thead>
             <tbody>
             <tr data-ng-repeat="school in schools | filter:searchText">
 
-                <td class="right-padded nobreak-label">
+                <td class="right-padded-m nowrap left-padded-s">
                     <div data-ng-if="school.students.indexOf(authentication.user._id) != -1">
                         <a href="" data-ng-click="unsubscribeStudentPopup(school)">{{school.name}}
                             <i
@@ -44,10 +57,10 @@
                     </div>
                 </td>
 
-                <td class="right-padded nobreak-label">{{school.city}}</td>
-                <td class="right-padded nobreak-label">{{school.country}}</td>
+                <td class="right-padded-m nowrap">{{school.city}}</td>
+                <td class="right-padded-m nowrap">{{school.country}}</td>
 
-                <td class="nobreak-label">{{school.user.displayName}}</td>
+                <td class="nowrap right-padded-s">{{school.user.displayName}}</td>
             </tr>
             </tbody>
         </table>

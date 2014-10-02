@@ -2,40 +2,45 @@
     <div>
 
         <div class="modal-body">
-            <div class="sparesys-header">
-                <div class="sparesys-title" style="text-align: center">
+            <div class="popup-header">
+                <div class="title center-aligned">
                     Edit School: {{school.name}}
                 </div>
             </div>
 
-            <form class="form-horizontal"  novalidate>
+            <form class="form-horizontal"  data-ng-submit="ok()">
                 <fieldset>
-                    <div class="sparesys-header">
-                        <table class="sparesys-view-object-table">
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Name</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="model.name"
-                                           id="coursename" class="form-control focus"
+                    <div class="content-header">
+                        <table>
+                            <tr>
+                                <td class="right-padded-m">Name</td>
+                                <td class="expands">
+                                    <input type="text"
+                                           data-ng-model="model.name"
+                                           class="form-control focus"
                                            placeholder="{{school.name}}"
-                                           data-ng-init="setFocus()"
-                                           required></td>
+                                           required>
+                                </td>
                             </tr>
 
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">City</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="model.city"
-                                           id="city" class="form-control"
+                            <tr>
+                                <td class="right-padded-m top-padded-s">City</td>
+                                <td class="expands top-padded-s">
+                                    <input type="text"
+                                           data-ng-model="model.city"
+                                           class="form-control"
                                            placeholder="{{school.city}}"
-                                           required></td>
+                                           required>
+                                </td>
                             </tr>
 
-                            <tr class="controls">
-                                <td class="sparesys-view-object-label-cell">Country</td>
-                                <td class="sparesys-view-object-content-cell">
-                                    <input type="text" data-ng-model="model.country"
-                                           id="country" class="form-control"
+                            <tr>
+                                <td class="right-padded-m top-padded-s">Country</td>
+                                <td class="expands top-padded-s">
+                                    <input type="text"
+                                           data-ng-model="model.country"
+                                           id="country"
+                                           class="form-control"
                                            placeholder="{{school.country}}"
                                            required></td>
                             </tr>
@@ -43,16 +48,14 @@
                         </table>
                     </div>
 
-                    <div style="text-align: center">
-                    <button class="btn btn-primary sparesys-button"
-                            type="submit"
-                            ng-click="ok()"
-                            >
-                        Change
-                    </button>
+                    <div class="center-aligned">
+                        <button class="btn btn-rememberators"
+                                type="submit">OK</button>
 
-                    <button class="btn btn-primary sparesys-button" ng-click="cancel()">Cancel</button>
+                        <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
+
                     </div>
+
 
                 </fieldset>
             </form>

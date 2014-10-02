@@ -1,0 +1,12 @@
+<section data-ng-controller="SchoolsController" data-ng-init="findForStudent()">
+    <div data-ng-if="schools.length > 0">
+
+        <div class="content-section">
+            <infobox logo="man" position="left" title="Your Schools">
+                You have subscribed to <span data-ng-repeat="school in schools">{{school.name}}, </span>
+            </infobox>
+        </div>
+    </div>
+</section>
+
+

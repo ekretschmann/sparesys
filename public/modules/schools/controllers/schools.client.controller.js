@@ -174,6 +174,13 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
             });
         };
 
+
+        $scope.findForStudent = function (student) {
+            $scope.schools = Schools.query({
+                students: student
+            });
+        };
+
         // Find list for current user
         $scope.findForCurrentUser = function () {
             if ($scope.authentication.user) {

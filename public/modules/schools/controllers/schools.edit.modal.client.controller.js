@@ -5,12 +5,13 @@ angular.module('schools').controller('EditSchoolController', ['$scope', '$state'
         $scope.school = school;
 
         $scope.model = {};
+        $scope.model.name = school.name;
+        $scope.model.city = school.city;
+        $scope.model.country = school.country;
 
-        $scope.setFocus = function () {
-            $timeout(function () {
-                angular.element('.focus').trigger('focus');
-            }, 100);
-        };
+        $timeout(function () {
+            angular.element('.focus').trigger('focus');
+        }, 100);
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

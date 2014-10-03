@@ -177,7 +177,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
 
         $scope.findForStudent = function (student) {
             $scope.schools = Schools.query({
-                students: student
+                student: $scope.authentication.user._id
             });
         };
 

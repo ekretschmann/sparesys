@@ -101,7 +101,20 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
 
 
-    if (req.query.teachers) {
+    if (req.query.student) {
+        console.log(req.query.student);
+        School.find({'students': req.query.student}).populate('schoolclasses').exec(function (err, schools) {
+            console.log(err);
+            console.log(schools);
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(schools);
+            }
+        });
+    } else if (req.query.teachers) {
         School.find({'teachers': req.query.teachers}).exec(function (err, schools) {
 //            console.log(err);
 //            console.log(schools);
@@ -115,6 +128,7 @@ exports.list = function(req, res) {
         });
     } else if (req.query.userId) {
 
+
         School.find({'user': req.query.userId}).exec(function (err, courses) {
             if (err) {
                 return res.send(400, {
@@ -125,6 +139,7 @@ exports.list = function(req, res) {
             }
         });
     } else {
+        console.log('bbbbbbbbbbbbbbbbbbb');
         School.find().sort('-created').populate('user', 'displayName').exec(function (err, schools) {
             if (err) {
                 return res.send(400, {

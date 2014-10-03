@@ -15,23 +15,19 @@
     <table id="searchTextResults" class="table-striped expands">
         <thead>
         <tr>
-            <th class="right-padded nobreak-label">User</th>
-            <th class="right-padded nobreak-label">Name</th>
-            <th class="right-padded nobreak-label">email</th>
-            <th class="right-padded nobreak-label">created</th>
-            <th class="expands">roles</th>
+            <th class="right-padded-m nowrap">User</th>
+            <th class="right-padded-m nowrap">Name</th>
+            <th class="expands">Roles</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="user in users | filter:searchText">
-            <td class="right-padded nobreak-label top-aligned"><a data-ng-href="#!/users/{{user._id}}/edit">{{user.username}}</a></td>
-            <td class="right-padded nobreak-label top-aligned expands">{{user.displayName}}</td>
-            <td class="right-padded nobreak-label top-aligned">{{user.email}}</td>
-            <td class="right-padded nobreak-label top-aligned">{{user.created | date:'shortDate'}}</td>
-            <td class=" top-aligned">
-                <div class="right-padded nobreak-label" data-ng-repeat="role in user.roles">
+            <td class="left-padded-s right-padded-m nowrap top-aligned"><a data-ng-href="#!/users/{{user._id}}/edit">{{user.username}}</a></td>
+            <td class="right-padded-m nowrap top-aligned">{{user.displayName}}</td>
+            <td class="top-aligned">
+                <span class="right-padded-s nowrap" data-ng-repeat="role in user.roles">
                         {{role}}
-                </div>
+                </span>
 
             </td>
         </tr>

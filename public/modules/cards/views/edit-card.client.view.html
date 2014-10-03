@@ -107,7 +107,7 @@
 </tr>
 
 <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-    <td class="right-padded nobreak-label">Supervisor</td>
+    <td class="right-padded nowrap">Supervisor</td>
     <td class="expands  bottom-spacer">
         {{card.supervisor}}
     </td>
@@ -128,14 +128,14 @@
 </tr>
 
 <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-    <td class="right-padded nobreak-label">Valid Reverse Answers</td>
+    <td class="right-padded nowrap">Valid Reverse Answers</td>
     <td class="expands  bottom-spacer">
         {{card.validreverseanswers}}
     </td>
 </tr>
 
 <tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
-    <td class="right-padded nobreak-label">Invalid Reverse Answers</td>
+    <td class="right-padded nowrap">Invalid Reverse Answers</td>
     <td class="expands  bottom-spacer">
         {{card.invalidreverseanswers}}
     </td>
@@ -163,7 +163,7 @@
 </tr>
 
 <tr data-ng-if="card.type === 'image-text'">
-    <td class="top-aligned nobreak-label">Images Front</td>
+    <td class="top-aligned nowrap">Images Front</td>
 
     <td data-ng-if="card.images  === 0">
 
@@ -183,7 +183,7 @@
 </tr>
 
 <tr >
-    <td class="right-padded nobreak-label">
+    <td class="right-padded nowrap">
         <section data-ng-if="card.type ==='text-text'">
         Front
         </section>
@@ -214,11 +214,11 @@
                            required>
                         </section>
 
-                    <section data-ng-if="sound === 'no' && card.type === 'image-text'" class="text-muted nobreak-label standard-input-width">
+                    <section data-ng-if="sound === 'no' && card.type === 'image-text'" class="text-muted nowrap standard-input-width">
                       no text being read
                      </section>
                 </td>
-                <td class="nobreak-label">
+                <td class="nowrap">
                     Read:
 
                     <div class="btn-group  bottom-spacer">
@@ -282,7 +282,7 @@
                            required>
                 </td>
 
-                <td class="nobreak-label">
+                <td class="nowrap">
                     Read:
 
                     <div class="btn-group  bottom-spacer">

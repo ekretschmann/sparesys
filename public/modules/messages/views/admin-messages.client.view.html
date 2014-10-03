@@ -23,7 +23,7 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="message in messages | filter:searchText">
-            <td class="nobreak-label right-padded top-aligned">
+            <td class="nowrap right-padded top-aligned">
                 <a href="">
                     <i data-ng-click="areYouSureToDeleteMessage(message)"
                        class="glyphicon glyphicon-remove-sign">
@@ -46,14 +46,14 @@
                     </section>
                 </section>
             </td>
-            <!--<td class="nobreak-label right-padded">{{message.type}}</td>-->
-            <td class="nobreak-label right-padded top-aligned">{{message.user.displayName}}</td>
-            <td class="nobreak-label right-padded top-aligned"
+            <!--<td class="nowrap right-padded">{{message.type}}</td>-->
+            <td class="nowrap right-padded top-aligned">{{message.user.displayName}}</td>
+            <td class="nowrap right-padded top-aligned"
                 data-ng-controller="UsersController"
                 data-ng-init="findById(message.to[0])">{{displayName}}
             </td>
 
-            <td class="nobreak-label top-aligned"><span data-ng-bind="message.created | date:'shortDate'"></span></td>
+            <td class="nowrap top-aligned"><span data-ng-bind="message.created | date:'shortDate'"></span></td>
         </tr>
         </tbody>
     </table>

@@ -37,7 +37,7 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="course in courses | filter:searchText">
-            <td class="nobreak-label right-padded top-aligned">
+            <td class="nowrap right-padded top-aligned">
                 <a href="">
                     <i data-ng-click="areYouSureToDeleteCourse(course)"
                        class="glyphicon glyphicon-remove-sign">
@@ -47,12 +47,12 @@
                         <i class="glyphicon glyphicon-edit"></i>
                     </a>
             </td>
-            <td class="nobreak-label right-padded top-aligned">
+            <td class="nowrap right-padded top-aligned">
                 <a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></td>
             <td class="expands right-padded">{{course.description}}</td>
-            <td class="nobreak-label right-padded top-aligned">{{course.user.displayName}}</td>
-            <td class="nobreak-label right-padded top-aligned">{{course.visible}}</td>
-            <td class="nobreak-label top-aligned">{{course.created | date:'shortDate'}}</td>
+            <td class="nowrap right-padded top-aligned">{{course.user.displayName}}</td>
+            <td class="nowrap right-padded top-aligned">{{course.visible}}</td>
+            <td class="nowrap top-aligned">{{course.created | date:'shortDate'}}</td>
         </tr>
         </tbody>
     </table>

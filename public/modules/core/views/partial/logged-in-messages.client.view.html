@@ -40,18 +40,18 @@
                 <thead>
                 <tr>
 
-                    <th class="right-padded nobreak-label">Student</th>
-                    <th class="expands right-padded nobreak-label">Question</th>
-                    <th class="expands right-padded nobreak-label">Expected Answer</th>
-                    <th class="expands right-padded nobreak-label">Suggested Variation</th>
-                    <th class="nobreak-label">Action</th>
+                    <th class="right-padded nowrap">Student</th>
+                    <th class="expands right-padded nowrap">Question</th>
+                    <th class="expands right-padded nowrap">Expected Answer</th>
+                    <th class="expands right-padded nowrap">Suggested Variation</th>
+                    <th class="nowrap">Action</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="request in validationRequests" data-ng-init="findById(request.card)"
                     data-ng-controller="CardsController">
 
-                    <td class="right-padded nobreak-label">
+                    <td class="right-padded nowrap">
 
                         {{request.sender}}
 
@@ -84,7 +84,7 @@
 
                     </td>
 
-                    <td class="expands nobreak-label">
+                    <td class="expands nowrap">
                         <a href="" class="right-padded" data-ng-click="accept(request)">accept</a>
                         <a href="" class="right-padded" data-ng-click="decline(request)">decline</a>
                         <a href="" data-ng-click="ignore(request)">ignore</a>

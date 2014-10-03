@@ -1,9 +1,13 @@
 'use strict';
 
 // Courses controller
-angular.module('courses').controller('UsersController', ['$scope', '$stateParams', '$location', 'Authentication', 'Users',
-    function ($scope, $stateParams, $location, Authentication, Users) {
+angular.module('courses').controller('UsersController', ['$scope', '$timeout', '$stateParams', '$location', 'Authentication', 'Users',
+    function ($scope, $timeout, $stateParams, $location, Authentication, Users) {
         $scope.authentication = Authentication;
+
+        $timeout(function () {
+            angular.element('.focus').trigger('focus');
+        }, 100);
 
 //        // Create new Course
 //        $scope.create = function() {

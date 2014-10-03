@@ -1,69 +1,56 @@
-<table>
-    <tr>
-        <td class="top-aligned right-padded top-padded" style="min-width: 72px">
-            <img class="size-64"
-                 src="/modules/core/img/brand/superhero-boy-medium.gif">
-        </td>
-        <td class="top-aligned" >
 
-            <div class="title">
-                Your courses
-            </div>
+<div class="infobox-title">Courses</div>
+<section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+    <infobox logo="boy" position="left" title="Learning">
 
-            <div>
-                You are working on {{courses.length}} courses. Just select the actions you
-                want to take. The <b>practice</b> will go through the cards of the course
-                with you. If you choose <b>statistics</b>, you will be able to see how diagrams
-                and numbers about how you are progressing. You can also <b>edit</b> courses that
-                you are managing yourself.
+        You are working on {{coursesStudent.length}} course<span data-ng-if="coursesStudent.length > 1">s</span>.
+        Just select the actions you
+        want to take. In <b>practice</b>, you will go through the cards of the course.
+        If you choose <b>statistics</b>, you will be able to see diagrams
+        and numbers about how you are progressing. You can also <b>edit</b> courses that
+        you manage yourself.
+    </infobox>
+</section>
 
-            </div>
-        </td>
-
-
-    </tr>
-</table>
-
-
-<table class="table-striped" style="width: 100%; margin-top: 10px">
+<table class="table-striped top-margin-l" data-ng-if="coursesStudent.length > 0">
     <thead>
     <tr>
-        <th>You are a student of</th>
-        <th>Actions</th>
+        <th class="left-padded-s">You are a student of</th>
+        <th class="right-aligned">Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr data-ng-repeat="course in coursesStudent">
-        <td class="rightpadded expands">
+        <td class="left-padded-s right-padded-m expands">
             {{course.name}}
         </td>
 
-        <td class="nobreak-label">
-            <a class="right-padded" data-ng-href="#!/practice/{{course._id}}">practice</a>
-            <a class="right-padded" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
-            <a data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
+        <td class="nowrap">
+            <a class="right-padded-m" data-ng-href="#!/practice/{{course._id}}">practice</a>
+            <a class="right-padded-m" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
+            <a class="right-padded-s" data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
         </td>
     </tr>
     </tbody>
 </table>
 
-<table data-ng-if="coursesTeacher.length>0" class="table-striped" style="width: 100%; margin-top: 10px">
+<table data-ng-if="coursesTeacher.length>0" class="table-striped top-margin-l">
     <thead>
     <tr>
-        <th>You are a teacher of</th>
-        <th>Actions</th>
+        <th class="left-padded-s">You are a teacher of</th>
+        <th class="right-padded-s right-aligned">Actions</th>
     </tr>
     </thead>
     <tbody>
     <tr data-ng-repeat="course in coursesTeacher">
-        <td class="rightpadded expands">
+        <td class="left-padded-s right-padded-m expands">
             {{course.name}}
         </td>
 
-        <td class="nobreak-label">
-            <a class="right-padded" data-ng-href="#!/practice/{{course._id}}">practice</a>
-            <a class="right-padded" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
-            <a data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
+        <td class="nowrap">
+            <!--<a class="right-padded-m" data-ng-href="#!/practice/{{course._id}}">practice</a>-->
+            <a class="right-padded-m" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
+            <a class="right-padded-s" data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
         </td>
     </tr>
     </tbody>

@@ -82,13 +82,18 @@ var UserSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
-    schoolclasses: {
+    studentInClasses: {
         type: [Schema.Types.ObjectId],
         default: []
     },
-    schools: {
+    teachesClasses: {
         type: [Schema.Types.ObjectId],
         default: []
+    },
+    administersSchools: {
+        type: [Schema.Types.ObjectId],
+        default: [],
+        ref: 'School'
     }
 });
 

@@ -5,6 +5,8 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
     function ($scope, $timeout, $stateParams, $location, Authentication, Users) {
         $scope.authentication = Authentication;
 
+
+
         $timeout(function () {
             angular.element('.focus').trigger('focus');
         }, 100);
@@ -57,6 +59,8 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
         $scope.findOne = function () {
             $scope.otherUser = Users.get({
                 userId: $stateParams.userId
+            }, function(u) {
+                console.log(u);
             });
 
         };
@@ -66,6 +70,7 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
             Users.get({
                 userId: userId
             }, function(user) {
+                console.
                 $scope.displayName = user.displayName;
             });
         };
@@ -95,7 +100,7 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
         };
 
         // Role management
-        $scope.roles = ['admin', 'user', 'upload-course', 'debug-viewer'];
+        $scope.roles = ['admin', 'user', 'upload-course', 'debug-viewer', 'teacher', 'headmaster'];
 
         // toggle selection for a given user role
         $scope.toggleSelection = function toggleSelection(toggledRole) {

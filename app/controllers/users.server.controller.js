@@ -121,6 +121,7 @@ exports.addTeacher = function (req, res) {
  * Signin after passport authentication
  */
 exports.signin = function (req, res, next) {
+
     passport.authenticate('local', function (err, user, info) {
         if (err || !user) {
             res.send(400, info);
@@ -174,11 +175,18 @@ exports.update = function (req, res) {
 
     if (user) {
         if(req.body._id.toString() !== user._id.toString()) {
-            User.findById(req.body._id, 'username roles email lastName firstName schoolclasses schools', function (err, otherUser) {
+            User.findById(req.body._id, '-salt -password -__v -provider', function (err, otherUser) {
+
 
                 if (!err && otherUser) {
+                    if (user.roles.indexOf('admin') === -1) {
+                        return res.send(400, {
+                            message: 'not authorized'
+                        });
+                    } else {
 
-                    updateUser(otherUser);
+                        updateUser(otherUser);
+                    }
                 }
             });
         } else {
@@ -286,6 +294,8 @@ exports.oauthCallback = function (strategy) {
  * User middleware
  */
 exports.userByID = function (req, res, next, id) {
+
+
     User.findOne({
         _id: id
     }).exec(function (err, user) {
@@ -444,7 +454,9 @@ exports.removeOAuthProvider = function (req, res, next) {
  * List of Users
  */
 exports.list = function (req, res) {
+
     User.find().sort('-created').populate('_id').exec(function (err, users) {
+        console.log(users);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -460,23 +472,29 @@ exports.list = function (req, res) {
  */
 exports.read = function (req, res) {
 
-    var usr = {
-        updated: req.profile.updated,
-        _id: req.profile.id,
-        displayName: req.profile.displayName,
-        provider: req.profile.provider,
-        __v: req.profile.__v,
-        username: req.profile.username,
-        created: req.profile.created,
-        roles: req.profile.roles,
-        email: req.profile.email,
-        lastName: req.profile.lastName,
-        firstName: req.profile.firstName,
-        schoolclasses: req.profile.schoolclasses,
-        schools: req.profile.schoools
-    };
+    console.log('xxxxxxxxxxx');
+    var query = User.findOne({_id: req.profile.id}, '-salt -password -__v -provider').populate('administersSchools', 'name').exec(function (err, user) {
+        console.log(user);
+        res.jsonp(user);
+    });
 
-    res.jsonp(usr);
+//    var usr = {
+//        updated: req.profile.updated,
+//        _id: req.profile.id,
+//        displayName: req.profile.displayName,
+//        provider: req.profile.provider,
+//        __v: req.profile.__v,
+//        username: req.profile.username,
+//        created: req.profile.created,
+//        roles: req.profile.roles,
+//        email: req.profile.email,
+//        lastName: req.profile.lastName,
+//        firstName: req.profile.firstName,
+//        studentInClasses: req.profile.studentInClasses,
+//        teachesClasses: req.profile.teachesClasses,
+//        administersSchools: req.profile.administersSchools
+//    };
+
 };
 
 /**

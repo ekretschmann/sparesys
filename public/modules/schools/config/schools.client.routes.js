@@ -31,6 +31,21 @@ angular.module('schools').config(['$stateProvider',
             state('editSchool', {
                 url: '/schools/:schoolId/edit',
                 templateUrl: 'modules/schools/views/edit-school.client.view.html'
+            }).
+            state('adminSchool', {
+                url: '/schools/:schoolId/admin',
+                templateUrl: 'modules/schools/views/admin-school.client.view.html',
+                data: { auth: 'admin'}
             });
     }
 ]);
+
+
+angular.module('schools').run(function ($rootScope, Authentication) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+        if ( toState.data && toState.data.auth && toState.data.auth === 'admin' && Authentication.user && Authentication.user.roles.indexOf('admin') === -1 ) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});

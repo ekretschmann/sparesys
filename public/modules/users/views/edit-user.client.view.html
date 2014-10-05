@@ -20,7 +20,7 @@
     <table class="expands">
 
         <tr>
-            <td class="right-padded">Id</td>
+            <td class="right-padded-m">Id</td>
             <td>
                 {{otherUser._id}}
             </td>
@@ -28,8 +28,8 @@
 
 
         <tr>
-            <td class="right-padded">Username</td>
-            <td class="expands">
+            <td class="right-padded-m top-padded-s">Username</td>
+            <td class="expands top-padded-s">
                 <input type="text"
                        data-ng-model="otherUser.username"
                        id="username"
@@ -40,8 +40,8 @@
         </tr>
 
         <tr>
-            <td class="right-padded nowrap">First Name</td>
-            <td class="expands">
+            <td class="right-padded-m nowrap top-padded-s">First Name</td>
+            <td class="expands top-padded-s">
                 <input type="text"
                        data-ng-model="otherUser.firstName"
                        id="firstName"
@@ -52,8 +52,8 @@
 
         <tr>
 
-            <td class="right-padded nowrap">Last Name</td>
-            <td class="expands">
+            <td class="right-padded-m nowrap top-padded-s">Last Name</td>
+            <td class="expands top-padded-s">
                 <input type="text"
                        data-ng-model="otherUser.lastName"
                        id="description"
@@ -64,8 +64,8 @@
 
         <tr>
 
-            <td class="right-padded">Email</td>
-            <td class="expands">
+            <td class="right-padded-m top-padded-s">Email</td>
+            <td class="expands top-padded-s">
                 <input type="text"
                        data-ng-model="otherUser.email"
                        id="email"
@@ -76,10 +76,33 @@
 
         <tr>
 
-            <td class="right-padded">Roles</td>
-            <td class="expands">
+            <td class="right-padded-m top-padded-s nowrap">Administers Schools</td>
+            <td class="expands top-padded-s">
+                <input type="text"
+                       data-ng-model="otherUser.administersSchools"
+                       class="form-control"
+                       placeholder="schools" >
+            </td>
+        </tr>
+
+        <tr>
+
+            <td class="right-padded-m top-padded-s">Classes</td>
+            <td class="expands top-padded-s">
+                <input type="text"
+                       data-ng-model="otherUser.schoolclasses"
+                       class="form-control"
+                       placeholder="classes" >
+            </td>
+        </tr>
+
+
+        <tr>
+
+            <td class="right-padded-m top-padded-s">Roles</td>
+            <td class="expands top-padded-s">
                 <div>
-                    <label class="sparesys-view-object-right-padded-element" ng-repeat="role in roles">
+                    <label class="right-padded-m" ng-repeat="role in roles">
                         <input
 
                                 type="checkbox"
@@ -96,17 +119,17 @@
 
         <tr>
 
-            <td class="right-padded">Created</td>
-            <td class="expands">
-                {{otherUser.created | date: 'shortDate'}}
+            <td class="right-padded-m top-padded-s">Created</td>
+            <td class="expands top-padded-s">
+                {{otherUser.created | date: 'short'}}
             </td>
         </tr>
 
         <tr class="controls">
 
-            <td class="right-padded">Updated</td>
-            <td class="expands">
-                {{otherUser.updated | date: 'shortDate'}}
+            <td class="right-padded-m top-padded-s nowrap">Last Update</td>
+            <td class="expands top-padded-s">
+                {{otherUser.updated | date: 'short'}}
             </td>
         </tr>
 

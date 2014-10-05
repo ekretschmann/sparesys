@@ -6,9 +6,9 @@ angular.module('schools').controller('RegisterSchoolController', ['$scope', '$st
         $scope.school = {};
 
 
-            $timeout(function () {
-                angular.element('.focus').trigger('focus');
-            }, 100);
+        $timeout(function () {
+            angular.element('.focus').trigger('focus');
+        }, 100);
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');

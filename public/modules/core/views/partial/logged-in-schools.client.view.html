@@ -1,22 +1,4 @@
-<section data-ng-controller="SchoolsController" data-ng-init="findForStudent()">
-    <div data-ng-if="schools.length > 0">
+My Schools
 
-        <div class="content-section">
-                <table>
-                    <tr data-ng-repeat="school in schools">
-                        <td>
-                            {{school.name}}
-                        </td>
-                        <td>
-                            {{school.schoolclasses}}
-                            
-                        </td>
-                    </tr>
-                </table>
-                <!--<span data-ng-repeat="school in schools track by $index"><span data-ng-if="$index > 0 && $index < schools.length">,</span><span data-ng-if="$index === schools.length-1"> and</span>-->
-                    <!--<span {{school.name}}</span>.-->
-        </div>
-    </div>
-</section>
 
 

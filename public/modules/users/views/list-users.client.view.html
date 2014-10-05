@@ -15,7 +15,7 @@
     <table id="searchTextResults" class="table-striped expands">
         <thead>
         <tr>
-            <th class="right-padded-m nowrap">User</th>
+            <th class="left-padded-s right-padded-m nowrap">User</th>
             <th class="right-padded-m nowrap">Name</th>
             <th class="expands">Roles</th>
         </tr>
@@ -24,7 +24,7 @@
         <tr data-ng-repeat="user in users | filter:searchText">
             <td class="left-padded-s right-padded-m nowrap top-aligned"><a data-ng-href="#!/users/{{user._id}}/edit">{{user.username}}</a></td>
             <td class="right-padded-m nowrap top-aligned">{{user.displayName}}</td>
-            <td class="top-aligned">
+            <td class="top-aligned right-padded-s">
                 <span class="right-padded-s nowrap" data-ng-repeat="role in user.roles">
                         {{role}}
                 </span>

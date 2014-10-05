@@ -11,7 +11,8 @@ angular.module('users').config(['$stateProvider',
             }).
             state('editUser', {
                 url: '/users/:userId/edit',
-                templateUrl: 'modules/users/views/edit-user.client.view.html'
+                templateUrl: 'modules/users/views/edit-user.client.view.html',
+                data: { auth: 'admin'}
             }).
             state('profile', {
                 url: '/settings/profile',
@@ -35,3 +36,12 @@ angular.module('users').config(['$stateProvider',
             });
     }
 ]);
+
+angular.module('users').run(function ($rootScope, Authentication) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+        if ( toState.data && toState.data.auth && toState.data.auth === 'admin' && Authentication.user && Authentication.user.roles.indexOf('admin') === -1 ) {
+            event.preventDefault();
+            return false;
+        }
+    });
+});

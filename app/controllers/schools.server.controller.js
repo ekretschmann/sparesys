@@ -38,12 +38,15 @@ exports.create = function(req, res) {
 	var school = new School(req.body);
 	school.user = req.user;
 
+
 	school.save(function(err) {
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)
 			});
 		} else {
+            req.user.administersSchools.push(school._id);
+            req.user.save();
 			res.jsonp(school);
 		}
 	});
@@ -66,6 +69,7 @@ exports.update = function(req, res) {
 
 	school = _.extend(school , req.body);
 
+    console.log(school.user);
 	school.save(function(err) {
 		if (err) {
 			return res.send(400, {
@@ -102,10 +106,7 @@ exports.list = function(req, res) {
 
 
     if (req.query.student) {
-        console.log(req.query.student);
         School.find({'students': req.query.student}).populate('schoolclasses').exec(function (err, schools) {
-            console.log(err);
-            console.log(schools);
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)
@@ -139,7 +140,6 @@ exports.list = function(req, res) {
             }
         });
     } else {
-        console.log('bbbbbbbbbbbbbbbbbbb');
         School.find().sort('-created').populate('user', 'displayName').exec(function (err, schools) {
             if (err) {
                 return res.send(400, {
@@ -152,6 +152,7 @@ exports.list = function(req, res) {
     }
 };
 
+/**
 /**
  * School middleware
  */

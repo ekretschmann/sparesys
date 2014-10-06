@@ -5,10 +5,6 @@
                href=""
                data-ng-click="remove(otherUser)">Delete</a>
 
-            <a class="menu-link"
-               href=""
-               data-ng-click="update()">Update</a>
-
         </div>
 
         <div class="title">
@@ -16,85 +12,97 @@
         </div>
     </div>
 
-    <table class="expands">
+    <form class="form-horizontal" data-ng-submit="update()" novalidate>
+        <fieldset>
 
-        <tr>
-            <td class="right-padded-m">Id</td>
-            <td>
-                {{school._id}}
-            </td>
-        </tr>
+            <table class="expands">
 
-
-        <tr>
-            <td class="right-padded-m top-padded-s">Name</td>
-            <td class="expands top-padded-s">
-                <input type="text"
-                       data-ng-model="school.name"
-                       class="form-control"
-                       placeholder="Name"
-                       required>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="right-padded-m nowrap top-padded-s">City</td>
-            <td class="expands top-padded-s">
-                <input type="text"
-                       data-ng-model="school.city"
-                       class="form-control"
-                       placeholder="City" required>
-            </td>
-        </tr>
-
-        <tr>
-
-            <td class="right-padded-m nowrap top-padded-s">Country</td>
-            <td class="expands top-padded-s">
-                <input type="text"
-                       data-ng-model="school.country"
-                       class="form-control"
-                       placeholder="Country" required>
-            </td>
-        </tr>
-
-        <tr>
-
-            <td class="right-padded-m nowrap top-padded-s">Administrator</td>
-            <td class="expands top-padded-s">
-                <table>
-                    <tr>
-                        <td class="right-padded-m"><input type="text"
-                                   style="width:16em"
-                                   data-ng-model="school.user._id"
-                                   class="form-control"
-                                   placeholder="Administrator" required></td>
-                        <td>{{school.user.displayName}}</td>
-                    </tr>
-                </table>
+                <tr>
+                    <td class="right-padded-m">Id</td>
+                    <td>
+                        {{school._id}}
+                    </td>
+                </tr>
 
 
-            </td>
-        </tr>
+                <tr>
+                    <td class="right-padded-m top-padded-s">Name</td>
+                    <td class="expands top-padded-s">
+                        <input type="text"
+                               data-ng-model="school.name"
+                               class="form-control"
+                               placeholder="Name"
+                               required>
+                    </td>
+                </tr>
 
-        <tr>
+                <tr>
+                    <td class="right-padded-m nowrap top-padded-s">City</td>
+                    <td class="expands top-padded-s">
+                        <input type="text"
+                               data-ng-model="school.city"
+                               class="form-control"
+                               placeholder="City" required>
+                    </td>
+                </tr>
 
-            <td class="right-padded-m nowrap top-padded-s">Classes</td>
-            <td class="expands top-padded-s">
-                <table>
-                    <tr data-ng-repeat="schoolclass in schoolclasses">
-                        <td class="right-padded-m"><input type="text"
-                                                          style="width:16em"
-                                                          data-ng-model="schoolclass"
-                                                          class="form-control"
-                                                          placeholder="Administrator" required></td>
-                        <td>{{schoolclass}}</td>
-                    </tr>
-                </table>
+                <tr>
+
+                    <td class="right-padded-m nowrap top-padded-s">Country</td>
+                    <td class="expands top-padded-s">
+                        <input type="text"
+                               data-ng-model="school.country"
+                               class="form-control"
+                               placeholder="Country" required>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td class="right-padded-m nowrap top-padded-s">Administrator</td>
+                    <td class="expands top-padded-s">
+                        <table>
+                            <tr>
+                                <td class="right-padded-m"><input type="text"
+                                                                  style="width:16em"
+                                                                  data-ng-model="school.user._id"
+                                                                  class="form-control"
+                                                                  placeholder="Administrator" required></td>
+                                <td>{{school.user.displayName}}</td>
+                            </tr>
+                        </table>
 
 
-            </td>
-        </tr>
+                    </td>
+                </tr>
 
-    </table>
+                <tr>
+
+                    <td class="right-padded-m nowrap top-padded-s">Classes</td>
+                    <td class="expands top-padded-s">
+                        <table>
+                            <tr data-ng-repeat="schoolclass in schoolclasses">
+                                <td class="right-padded-m"><input type="text"
+                                                                  style="width:16em"
+                                                                  data-ng-model="schoolclass"
+                                                                  class="form-control"
+                                                                  placeholder="Administrator" required></td>
+                                <td>{{schoolclass}}</td>
+                            </tr>
+                        </table>
+
+
+                    </td>
+                </tr>
+
+            </table>
+
+
+            <div class="center-aligned">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-rememberators">
+                </div>
+            </div>
+        </fieldset>
+    </form>
 </section>

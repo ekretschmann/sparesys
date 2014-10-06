@@ -472,9 +472,8 @@ exports.list = function (req, res) {
  */
 exports.read = function (req, res) {
 
-    console.log('xxxxxxxxxxx');
-    var query = User.findOne({_id: req.profile.id}, '-salt -password -__v -provider').populate('administersSchools', 'name').exec(function (err, user) {
-        console.log(user);
+    // .populate('administersSchools', 'name')
+    User.findOne({_id: req.profile.id}, '-salt -password -__v -provider').exec(function (err, user) {
         res.jsonp(user);
     });
 

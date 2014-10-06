@@ -226,7 +226,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
                 }
             } else {
                 $scope.school.$remove(function () {
-                    $location.path('schools');
+                    $location.path('schools/admin');
                 });
             }
         };
@@ -236,7 +236,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
             var school = $scope.school;
 
             school.$update(function () {
-                $location.path('schools/' + school._id);
+                $location.path('schools/admin');
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });

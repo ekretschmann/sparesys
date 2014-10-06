@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	School = mongoose.model('School'),
+	User = mongoose.model('User'),
 	_ = require('lodash');
 
 /**
@@ -65,11 +66,36 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 	var school = req.school ;
 
-
+    var originalUserId = school.user._id;
 
 	school = _.extend(school , req.body);
 
-    console.log(school.user);
+
+    if (school.user._id.toString() !== originalUserId.toString()) {
+        console.log('here');
+
+        User.findOne({_id: school.user._id}).exec(function (err, newUser) {
+
+            if (newUser.administersSchools.indexOf(school._id) === -1) {
+                newUser.administersSchools.push(school._id);
+            }
+            newUser.save(function(u) {
+                console.log(u);
+            });
+        });
+
+        User.findOne({_id: originalUserId}).exec(function (err, originalUser) {
+            console.log(originalUser);
+            for (var j in originalUser.administersSchools) {
+                if (originalUser.administersSchools[j] === school._id) {
+                    originalUser.administersSchools[j].splice(j, 1);
+                }
+            }
+            originalUser.save(function(u) {
+                console.log(u);
+            });
+        });
+    }
 	school.save(function(err) {
 		if (err) {
 			return res.send(400, {
@@ -87,13 +113,27 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
 	var school = req.school ;
 
+    var userId = school.user._id;
 	school.remove(function(err) {
-		if (err) {
+
+
+        if (err) {
             console.log(err);
 			return res.send(400, {
 				message: getErrorMessage(err)
 			});
 		} else {
+
+            User.findOne({_id: userId}).exec(function (err, originalUser) {
+                for (var j in originalUser.administersSchools) {
+                    if (originalUser.administersSchools[j] === school._id) {
+                        originalUser.administersSchools[j].splice(j, 1);
+                    }
+                }
+                originalUser.save();
+            });
+
+
 			res.jsonp(school);
 		}
 	});

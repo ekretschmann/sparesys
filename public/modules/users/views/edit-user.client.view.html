@@ -6,9 +6,6 @@
                href=""
                data-ng-click="remove(otherUser)">Delete</a>
 
-            <a class="menu-link"
-               href=""
-               data-ng-click="update()">Update</a>
 
         </div>
 
@@ -17,121 +14,132 @@
         </div>
     </div>
 
-    <table class="expands">
 
-        <tr>
-            <td class="right-padded-m">Id</td>
-            <td>
-                {{otherUser._id}}
-            </td>
-        </tr>
+    <form class="form-horizontal" data-ng-submit="update()" novalidate>
+        <fieldset>
 
+            <table class="expands">
 
-        <tr>
-            <td class="right-padded-m top-padded-s">Username</td>
-            <td class="expands top-padded-s">
-                <input type="text"
-                       data-ng-model="otherUser.username"
-                       id="username"
-                       class="form-control"
-                       placeholder="Username"
-                       required>
-            </td>
-        </tr>
-
-        <tr>
-            <td class="right-padded-m nowrap top-padded-s">First Name</td>
-            <td class="expands top-padded-s">
-                <input type="text"
-                       data-ng-model="otherUser.firstName"
-                       id="firstName"
-                       class="form-control"
-                       placeholder="First Name" required>
-            </td>
-        </tr>
-
-        <tr>
-
-            <td class="right-padded-m nowrap top-padded-s">Last Name</td>
-            <td class="expands top-padded-s">
-                <input type="text"
-                       data-ng-model="otherUser.lastName"
-                       id="description"
-                       class="form-control"
-                       placeholder="Last Name" required>
-            </td>
-        </tr>
-
-        <tr>
-
-            <td class="right-padded-m top-padded-s">Email</td>
-            <td class="expands top-padded-s">
-                <input type="text"
-                       data-ng-model="otherUser.email"
-                       id="email"
-                       class="form-control"
-                       placeholder="email" required>
-            </td>
-        </tr>
-
-        <tr>
-
-            <td class="right-padded-m top-padded-s nowrap">Administers Schools</td>
-            <td class="expands top-padded-s">
-                <input type="text"
-                       data-ng-model="otherUser.administersSchools"
-                       class="form-control"
-                       placeholder="schools" >
-            </td>
-        </tr>
-
-        <tr>
-
-            <td class="right-padded-m top-padded-s">Classes</td>
-            <td class="expands top-padded-s">
-                <input type="text"
-                       data-ng-model="otherUser.schoolclasses"
-                       class="form-control"
-                       placeholder="classes" >
-            </td>
-        </tr>
+                <tr>
+                    <td class="right-padded-m">Id</td>
+                    <td>
+                        {{otherUser._id}}
+                    </td>
+                </tr>
 
 
-        <tr>
+                <tr>
+                    <td class="right-padded-m top-padded-s">Username</td>
+                    <td class="expands top-padded-s">
+                        <input type="text"
+                               data-ng-model="otherUser.username"
+                               id="username"
+                               class="form-control"
+                               placeholder="Username"
+                               required>
+                    </td>
+                </tr>
 
-            <td class="right-padded-m top-padded-s">Roles</td>
-            <td class="expands top-padded-s">
-                <div>
-                    <label class="right-padded-m" ng-repeat="role in roles">
-                        <input
+                <tr>
+                    <td class="right-padded-m nowrap top-padded-s">First Name</td>
+                    <td class="expands top-padded-s">
+                        <input type="text"
+                               data-ng-model="otherUser.firstName"
+                               id="firstName"
+                               class="form-control"
+                               placeholder="First Name" required>
+                    </td>
+                </tr>
 
-                                type="checkbox"
-                                name="selectedRole[]"
-                                value="{{role}}"
-                                ng-checked="otherUser.roles.indexOf(role) > -1"
-                                ng-click="toggleSelection(role)">
-                        {{role}}
+                <tr>
 
-                    </label>
+                    <td class="right-padded-m nowrap top-padded-s">Last Name</td>
+                    <td class="expands top-padded-s">
+                        <input type="text"
+                               data-ng-model="otherUser.lastName"
+                               id="description"
+                               class="form-control"
+                               placeholder="Last Name" required>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td class="right-padded-m top-padded-s">Email</td>
+                    <td class="expands top-padded-s">
+                        <input type="text"
+                               data-ng-model="otherUser.email"
+                               id="email"
+                               class="form-control"
+                               placeholder="email" required>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td class="right-padded-m top-padded-s nowrap">Administers Schools</td>
+                    <td class="expands top-padded-s">
+                        <input type="text"
+                               data-ng-model="otherUser.administersSchools"
+                               class="form-control"
+                               placeholder="schools">
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td class="right-padded-m top-padded-s">Classes</td>
+                    <td class="expands top-padded-s">
+                        <input type="text"
+                               data-ng-model="otherUser.schoolclasses"
+                               class="form-control"
+                               placeholder="classes">
+                    </td>
+                </tr>
+
+
+                <tr>
+
+                    <td class="right-padded-m top-padded-s">Roles</td>
+                    <td class="expands top-padded-s">
+                        <div>
+                            <label class="right-padded-m" ng-repeat="role in roles">
+                                <input
+
+                                        type="checkbox"
+                                        name="selectedRole[]"
+                                        value="{{role}}"
+                                        ng-checked="otherUser.roles.indexOf(role) > -1"
+                                        ng-click="toggleSelection(role)">
+                                {{role}}
+
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td class="right-padded-m top-padded-s">Created</td>
+                    <td class="expands top-padded-s">
+                        {{otherUser.created | date: 'short'}}
+                    </td>
+                </tr>
+
+                <tr class="controls">
+
+                    <td class="right-padded-m top-padded-s nowrap">Last Update</td>
+                    <td class="expands top-padded-s">
+                        {{otherUser.updated | date: 'short'}}
+                    </td>
+                </tr>
+
+            </table>
+            <div class="center-aligned">
+                <div class="form-group">
+                    <input type="submit" class="btn btn-rememberators">
                 </div>
-            </td>
-        </tr>
-
-        <tr>
-
-            <td class="right-padded-m top-padded-s">Created</td>
-            <td class="expands top-padded-s">
-                {{otherUser.created | date: 'short'}}
-            </td>
-        </tr>
-
-        <tr class="controls">
-
-            <td class="right-padded-m top-padded-s nowrap">Last Update</td>
-            <td class="expands top-padded-s">
-                {{otherUser.updated | date: 'short'}}
-            </td>
-        </tr>
-
-    </table>
+            </div>
+        </fieldset>
+    </form>
 </section>

@@ -18,7 +18,7 @@ angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '
             });
 
             school.$remove(function () {
-                $location.path('schools/manage');
+                $location.path('schools/admin');
             });
 
 

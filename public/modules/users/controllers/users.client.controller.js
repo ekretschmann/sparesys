@@ -59,8 +59,6 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
         $scope.findOne = function () {
             $scope.otherUser = Users.get({
                 userId: $stateParams.userId
-            }, function(u) {
-                console.log(u);
             });
 
         };
@@ -70,7 +68,6 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
             Users.get({
                 userId: userId
             }, function(user) {
-                console.
                 $scope.displayName = user.displayName;
             });
         };
@@ -94,6 +91,9 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
         $scope.update = function () {
 
 
+            if(!$scope.otherUser.administersSchools) {
+                $scope.otherUser.administersSchools = [];
+            }
             $scope.otherUser.$update(function () {
                 $location.path('users');
             });

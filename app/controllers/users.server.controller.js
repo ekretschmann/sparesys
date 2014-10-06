@@ -153,6 +153,7 @@ exports.update = function (req, res) {
 //	delete req.body.roles;
 
     function updateUser(theUser) {
+        console.log(req.body);
         theUser = _.extend(theUser, req.body);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;

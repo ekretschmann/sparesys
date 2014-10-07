@@ -9,7 +9,6 @@ angular.module('schools').controller('SubscribeTeacherModalController', ['$scope
         $scope.ok = function () {
             school.teachers.push($scope.authentication.user._id);
             school.$update();
-            school.$update();
             $modalInstance.close();
         };
 

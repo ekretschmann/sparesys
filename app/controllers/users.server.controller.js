@@ -126,9 +126,6 @@ exports.signin = function (req, res, next) {
 
     passport.authenticate('local', function (err, user, info) {
 
-        console.log(err);
-        console.log(user);
-        console.log(info);
         if (err || !user) {
             res.send(400, info);
         } else {
@@ -468,7 +465,6 @@ exports.list = function (req, res) {
 
     User.find({},'-salt -password -__v -provider').sort('-created').populate('_id').exec(function (err, users) {
 
-        console.log(users);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

@@ -93,6 +93,7 @@ exports.update = function(req, res) {
             originalUser.save();
         });
     }
+
 	school.save(function(err) {
 		if (err) {
 			return res.send(400, {
@@ -124,21 +125,15 @@ exports.delete = function(req, res) {
 			});
 		} else {
 
-            console.log('removing school from user');
             if (userId) {
 
-                console.log('got userID');
                 User.findOne({_id: userId}, 'administersSchools').exec(function (err, originalUser) {
 
-                    console.log('got original User');
-                    console.log(originalUser);
                     for (var j in originalUser.administersSchools) {
                         if (originalUser.administersSchools[j].toString() === school._id.toString()) {
                             originalUser.administersSchools.splice(j, 1);
                         }
                     }
-                    console.log('after');
-                    console.log(originalUser);
                     originalUser.save();
                 });
             }

@@ -137,7 +137,7 @@
         </section>
 
         <section data-ng-if="authentication.user.roles.indexOf('help') === -1">
-            No students
+            No students have subscribed to this school.
         </section>
     </div>
 </div>
@@ -184,8 +184,8 @@
         </section>
 
         <section data-ng-if="authentication.user.roles.indexOf('help') === -1">
-
-            </section>
+            No teachers have subscribed to this school.
+         </section>
 
     </div>
 
@@ -203,7 +203,7 @@
                 data-ng-init="findTeacher(teacher)">
 
 
-                <td class="expands">
+                <td class="expands left-padded-s">
                     {{teacher.displayName}}
                 </td>
 

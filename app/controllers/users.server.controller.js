@@ -122,7 +122,13 @@ exports.addTeacher = function (req, res) {
  */
 exports.signin = function (req, res, next) {
 
+
+
     passport.authenticate('local', function (err, user, info) {
+
+        console.log(err);
+        console.log(user);
+        console.log(info);
         if (err || !user) {
             res.send(400, info);
         } else {
@@ -267,6 +273,7 @@ exports.signout = function (req, res) {
  * Send User
  */
 exports.me = function (req, res) {
+
     res.jsonp(req.user || null);
 };
 
@@ -295,10 +302,12 @@ exports.oauthCallback = function (strategy) {
  */
 exports.userByID = function (req, res, next, id) {
 
-
     User.findOne({
         _id: id
     }).exec(function (err, user) {
+
+
+
         if (err) return next(err);
         if (!user) return next(new Error('Failed to load User ' + id));
         req.profile = user;
@@ -310,6 +319,8 @@ exports.userByID = function (req, res, next, id) {
  * Require login routing middleware
  */
 exports.requiresLogin = function (req, res, next) {
+
+
     if (!req.isAuthenticated()) {
         return res.send(401, {
             message: 'User is not logged in'
@@ -455,7 +466,9 @@ exports.removeOAuthProvider = function (req, res, next) {
  */
 exports.list = function (req, res) {
 
-    User.find().sort('-created').populate('_id').exec(function (err, users) {
+    User.find({},'-salt -password -__v -provider').sort('-created').populate('_id').exec(function (err, users) {
+
+        console.log(users);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -473,25 +486,10 @@ exports.read = function (req, res) {
 
     // .populate('administersSchools', 'name')
     User.findOne({_id: req.profile.id}, '-salt -password -__v -provider').exec(function (err, user) {
+
         res.jsonp(user);
     });
 
-//    var usr = {
-//        updated: req.profile.updated,
-//        _id: req.profile.id,
-//        displayName: req.profile.displayName,
-//        provider: req.profile.provider,
-//        __v: req.profile.__v,
-//        username: req.profile.username,
-//        created: req.profile.created,
-//        roles: req.profile.roles,
-//        email: req.profile.email,
-//        lastName: req.profile.lastName,
-//        firstName: req.profile.firstName,
-//        studentInClasses: req.profile.studentInClasses,
-//        teachesClasses: req.profile.teachesClasses,
-//        administersSchools: req.profile.administersSchools
-//    };
 
 };
 

@@ -16,8 +16,6 @@ module.exports = function(app) {
         .put(users.update)
         .delete(users.delete);
 
-//    .delete(users.requiresLogin, courses.hasAuthorization, courses.delete);
-//        .put(users.requiresLogin, users.hasAuthorization, users.update);
 
 	app.route('/users/me').get(users.me);
 	app.route('/users').put(users.update)

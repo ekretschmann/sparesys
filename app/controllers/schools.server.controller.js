@@ -65,35 +65,32 @@ exports.read = function(req, res) {
  */
 exports.update = function(req, res) {
 	var school = req.school ;
+    var originalUserId;
 
-    var originalUserId = school.user._id;
+    if (school.user) {
+        originalUserId = school.user._id;
+    }
 
 	school = _.extend(school , req.body);
 
 
-    if (school.user._id.toString() !== originalUserId.toString()) {
-        console.log('here');
+    if (originalUserId && school.user._id.toString() !== originalUserId.toString()) {
 
-        User.findOne({_id: school.user._id}).exec(function (err, newUser) {
+        User.findOne({_id: school.user._id}, 'administersSchools').exec(function (err, newUser) {
 
             if (newUser.administersSchools.indexOf(school._id) === -1) {
                 newUser.administersSchools.push(school._id);
             }
-            newUser.save(function(u) {
-                console.log(u);
-            });
+            newUser.save();
         });
 
-        User.findOne({_id: originalUserId}).exec(function (err, originalUser) {
-            console.log(originalUser);
+        User.findOne({_id: originalUserId}, 'administersSchools').exec(function (err, originalUser) {
             for (var j in originalUser.administersSchools) {
-                if (originalUser.administersSchools[j] === school._id) {
-                    originalUser.administersSchools[j].splice(j, 1);
+                if (originalUser.administersSchools[j].toString() === school._id.toString()) {
+                    originalUser.administersSchools.splice(j, 1);
                 }
             }
-            originalUser.save(function(u) {
-                console.log(u);
-            });
+            originalUser.save();
         });
     }
 	school.save(function(err) {
@@ -113,7 +110,10 @@ exports.update = function(req, res) {
 exports.delete = function(req, res) {
 	var school = req.school ;
 
-    var userId = school.user._id;
+    if (school.user) {
+        var userId = school.user._id;
+    }
+
 	school.remove(function(err) {
 
 
@@ -124,14 +124,24 @@ exports.delete = function(req, res) {
 			});
 		} else {
 
-            User.findOne({_id: userId}).exec(function (err, originalUser) {
-                for (var j in originalUser.administersSchools) {
-                    if (originalUser.administersSchools[j] === school._id) {
-                        originalUser.administersSchools[j].splice(j, 1);
+            console.log('removing school from user');
+            if (userId) {
+
+                console.log('got userID');
+                User.findOne({_id: userId}, 'administersSchools').exec(function (err, originalUser) {
+
+                    console.log('got original User');
+                    console.log(originalUser);
+                    for (var j in originalUser.administersSchools) {
+                        if (originalUser.administersSchools[j].toString() === school._id.toString()) {
+                            originalUser.administersSchools.splice(j, 1);
+                        }
                     }
-                }
-                originalUser.save();
-            });
+                    console.log('after');
+                    console.log(originalUser);
+                    originalUser.save();
+                });
+            }
 
 
 			res.jsonp(school);

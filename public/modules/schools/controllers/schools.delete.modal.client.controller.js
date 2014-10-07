@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '$location', '$modalInstance', 'school', 'Schools', 'Schoolclasses', 'Authentication',
-	function($scope, $location, $modalInstance, school, Schools, Schoolclasses, Authentication) {
+angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '$state','$location', '$modalInstance', 'school', 'Schools', 'Schoolclasses', 'Authentication',
+	function($scope, $state, $location, $modalInstance, school, Schools, Schoolclasses, Authentication) {
         $scope.school = school;
         $scope.authentication = Authentication;
 
@@ -18,6 +18,7 @@ angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '
             });
 
             school.$remove(function () {
+                $state.go($state.$current, null, { reload: true });
                 $location.path('schools/admin');
             });
 

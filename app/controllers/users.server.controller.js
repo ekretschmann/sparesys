@@ -153,7 +153,6 @@ exports.update = function (req, res) {
 //	delete req.body.roles;
 
     function updateUser(theUser) {
-        console.log(req.body);
         theUser = _.extend(theUser, req.body);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
@@ -457,7 +456,6 @@ exports.removeOAuthProvider = function (req, res, next) {
 exports.list = function (req, res) {
 
     User.find().sort('-created').populate('_id').exec(function (err, users) {
-        console.log(users);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

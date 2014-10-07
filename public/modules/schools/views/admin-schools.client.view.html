@@ -9,7 +9,11 @@
         </div>
     </div>
 
-    <table id="searchTextResults" class="table-striped">
+    <div data-ng-if="schools.length === 0">
+        No Schools Registered.
+    </div>
+
+    <table id="searchTextResults" class="table-striped" data-ng-if="schools.length > 0">
         <thead>
         <tr>
             <th class="left-paddes-s right-padded-s"></th>

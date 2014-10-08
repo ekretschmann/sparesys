@@ -1,4 +1,90 @@
+<div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
 
+    <div class="content-header">
+        <div class="infobox-title">Teaching</div>
+
+        <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
+
+
+            <div data-ng-if="schools.length === 0">
+
+
+                <div class="content-section warning">You are a teacher without an associated school. Please find your
+                    school in the Teaching menu or by clicking this
+                    <a href="/#!/schools/subscribe/teacher">link</a>.
+                </div>
+            </div>
+
+            <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length === 0 ">
+                <div class="content-subsection"> You are not teaching any classes, yet. Ask your school
+                    administrator to assign
+                    you
+                    to your classes.
+                </div>
+            </div>
+
+
+        </div>
+
+
+        <div data-ng-controller="SchoolclassesController"
+             data-ng-init="findForTeacher(authentication.user._id)">
+
+
+            <div data-ng-if="schoolclasses.length === 0">
+                <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+                    <infobox logo="woman">
+                        <div class="warning">
+                            You are not set up as teacher for any classes. Please ask your school
+                            administrator to arrange this, so that you can start teaching your students.
+                        </div>
+                    </infobox>
+                </section>
+
+                <section data-ng-if="authentication.user.roles.indexOf('help') === -1">
+                    <div class="warning">
+                        You are not set up as teacher for any classes. Please ask your school
+                        administrator to arrange this, so that you can start teaching your students.
+                    </div>
+                </section>
+            </div>
+
+            <div data-ng-if="schoolclasses.length > 0">
+                <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+                    <infobox logo="man">
+                        Your school administrater has set you up with the classes below. Choose
+                        the <b>courses</b> action to assing courses to a class. You can also
+                        look at the <b>statistics</b> of how your class is progressing.
+                    </infobox>
+                </section>
+
+                <table class="table-striped" style="margin-top: 15px">
+                    <thead>
+                    <tr>
+                        <th class="right-padded-m left-padded-s">Class</th>
+                        <th class="right-padded-m">Actions</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-repeat="schoolclass in schoolclasses">
+                        <td class="right-padded-m left-padded-s expands nowrap">
+                            {{schoolclass.name}}
+                        </td>
+
+                        <td class="right-aligned right-padded-s nowrap">
+                            <a class="right-padded-m" href="#!/schoolclasses/{{schoolclass._id}}/teach">courses</a>
+                            <a href="#!/schoolclasses/{{schoolclass._id}}/teach">staistics</a>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+    </div>
+</div>
 
 
 

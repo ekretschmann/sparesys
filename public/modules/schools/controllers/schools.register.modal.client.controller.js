@@ -25,8 +25,8 @@ angular.module('schools').controller('RegisterSchoolController', ['$scope', '$st
             // Redirect after save
             newSchool.$save(function (response) {
 
-                Authentication.user.administersSchools.push(newSchool._id);
-                $state.go('home', null, { reload: true });
+                Authentication.user.administersSchools.push(response._id);
+//                $state.go('home', null, { reload: true });
                 $modalInstance.dismiss('cancel');
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;

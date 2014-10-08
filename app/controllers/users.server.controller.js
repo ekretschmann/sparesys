@@ -148,6 +148,8 @@ exports.signin = function (req, res, next) {
  * Update user details
  */
 exports.update = function (req, res) {
+
+
     // Init Variables
     var user = req.user;
     var message = null;
@@ -160,6 +162,7 @@ exports.update = function (req, res) {
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
         theUser.save(function (err) {
+
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)
@@ -179,7 +182,6 @@ exports.update = function (req, res) {
     if (user) {
         if(req.body._id.toString() !== user._id.toString()) {
             User.findById(req.body._id, '-salt -password -__v -provider', function (err, otherUser) {
-
 
                 if (!err && otherUser) {
                     if (user.roles.indexOf('admin') === -1) {

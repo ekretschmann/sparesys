@@ -276,16 +276,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             if ($scope.schoolclass.teachers.indexOf(teacherId) === -1) {
                 $scope.schoolclass.teachers.push(teacherId);
             }
-            $scope.schoolclass.$update(function () {
-                Users.get({
-                    userId: teacherId
-                }, function(teacher) {
-                    if (teacher.schoolclasses.indexOf($scope.schoolclass._id) === -1) {
-                        teacher.schoolclasses.push($scope.schoolclass._id);
-                    }
-                    teacher.$update();
-                });
-            });
+            $scope.schoolclass.$update();
         };
 
 
@@ -295,19 +286,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                     $scope.schoolclass.teachers.splice(i, 1);
                 }
             }
-            $scope.schoolclass.$update(function () {
-                // update teacher
-                Users.get({
-                    userId: teacherId
-                }, function(teacher) {
-                    for (var i =0; i < teacher.schoolclasses.length; i++) {
-                        if (teacher.schoolclasses[i] === $scope.schoolclass._id) {
-                            teacher.schoolclasses.splice(i, 1);
-                        }
-                    }
-                    teacher.$update();
-                });
-            });
+            $scope.schoolclass.$update();
         };
 
 

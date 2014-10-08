@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
     Schoolclass = mongoose.model('Schoolclass'),
+    User = mongoose.model('User'),
     _ = require('lodash');
 
 /**
@@ -62,9 +63,16 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
 
 
+
     var schoolclass = req.schoolclass;
+    var originalTeachers = schoolclass.teachers;
+    var originalStudents = schoolclass.students;
 
     schoolclass = _.extend(schoolclass, req.body);
+
+
+
+
 
     schoolclass.save(function (err) {
         if (err) {
@@ -72,6 +80,32 @@ exports.update = function (req, res) {
                 message: getErrorMessage(err)
             });
         } else {
+            var currentTeachers = schoolclass.teachers;
+            var currentStudents = schoolclass.students;
+            originalTeachers.forEach(function(originalTeacherId) {
+                if (currentTeachers.indexOf(originalTeacherId) === -1) {
+                    User.findOne({_id: originalTeacherId}, 'teachesClasses').exec(function (err, originalTeacher) {
+
+                        for (var j in originalTeacher.teachesClasses) {
+                            if (originalTeacher.teachesClasses[j].toString() === schoolclass._id.toString()) {
+                                originalTeacher.teachesClasses.splice(j, 1);
+                            }
+                        }
+                        originalTeacher.save();
+                    });
+                }
+            });
+
+            currentTeachers.forEach(function(currentTeacherId) {
+                User.findOne({_id: currentTeacherId}, 'teachesClasses').exec(function (err, currentTeacher) {
+
+                    if (currentTeacher.teachesClasses.indexOf(schoolclass._id) === -1) {
+                        currentTeacher.teachesClasses.push(schoolclass._id);
+                    }
+                    currentTeacher.save();
+                });
+            });
+
             res.jsonp(schoolclass);
         }
     });

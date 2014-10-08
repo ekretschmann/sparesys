@@ -17,6 +17,7 @@
 
 <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
 
+    {{ authentication.user}}
     <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
 
 
@@ -37,7 +38,7 @@
             </div>
         </div>
 
-        <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length > 0">
+        <div data-ng-if="schools.length > 0 && authentication.user.teachesClasses.length > 0">
 
             <table>
                 <tr>

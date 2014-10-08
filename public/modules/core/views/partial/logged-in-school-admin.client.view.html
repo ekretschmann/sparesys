@@ -23,7 +23,7 @@
         <div data-ng-if="authentication.user.administersSchools.length === 0">
 
 
-            <div class="warning">
+            <div class="warning" data-ng-controller="SchoolsController">
                 You are a school administrator but you are not managing any schools. Please use
                 <a href="" data-ng-click="registerSchoolPopup()">this link</a>
                 or the Schools Menu to register your schools.
@@ -48,7 +48,7 @@
                     data-ng-if="authentication.user.administersSchools.length>1">s</span>:
             </div>
 
-            <table class="table-striped top-margin-l">
+            <table class="table-striped top-margin-l" data-ng-if="authentication.user.administersSchools.length > 0">
                 <thead>
                 <tr>
                     <th class="right-padded-m left-padded-s">School</th>

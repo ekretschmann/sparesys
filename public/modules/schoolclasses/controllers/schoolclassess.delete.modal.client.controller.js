@@ -4,12 +4,16 @@ angular.module('schoolclasses').controller('DeleteClassModalController', ['$scop
 	function($scope, $location, $state, $modalInstance, schoolclass) {
         $scope.schoolclass = schoolclass;
 
+
         $scope.ok = function () {
-            schoolclass.$remove(schoolclass, function () {
+
+            var schoolId = schoolclass.school._id;
+            schoolclass.$remove(function () {
 
 
-//                $location.path('/schools/classes/manage');
-                $state.go($state.$current, null, {reload:true});
+//                $state.go($state.$current, null, {reload:true});
+                $location.path('schools/'+schoolId+'/edit');
+
             });
 
             $modalInstance.close();

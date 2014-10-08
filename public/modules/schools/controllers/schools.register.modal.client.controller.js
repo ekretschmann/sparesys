@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('schools').controller('RegisterSchoolController', ['$scope', '$state', '$timeout', '$modalInstance', 'Schools',
-    function ($scope, $state, $timeout, $modalInstance, Schools) {
+angular.module('schools').controller('RegisterSchoolController', ['$scope', '$state', '$timeout', '$modalInstance', 'Schools', 'Authentication',
+    function ($scope, $state, $timeout, $modalInstance, Schools, Authentication) {
 
         $scope.school = {};
 
@@ -25,7 +25,8 @@ angular.module('schools').controller('RegisterSchoolController', ['$scope', '$st
             // Redirect after save
             newSchool.$save(function (response) {
 
-                $state.go($state.$current, null, { reload: true });
+                Authentication.user.administersSchools.push(newSchool._id);
+                $state.go('home', null, { reload: true });
                 $modalInstance.dismiss('cancel');
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;

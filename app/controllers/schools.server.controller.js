@@ -47,8 +47,10 @@ exports.create = function(req, res) {
 			});
 		} else {
             req.user.administersSchools.push(school._id);
-            req.user.save();
-			res.jsonp(school);
+            req.user.save(function() {
+                res.jsonp('ok');
+            });
+
 		}
 	});
 };

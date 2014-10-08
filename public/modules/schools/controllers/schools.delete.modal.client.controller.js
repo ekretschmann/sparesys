@@ -1,34 +1,37 @@
 'use strict';
 
-angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '$state','$location', '$modalInstance', 'school', 'Schools', 'Schoolclasses', 'Authentication',
-	function($scope, $state, $location, $modalInstance, school, Schools, Schoolclasses, Authentication) {
+angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '$state', '$location', '$modalInstance', 'school', 'Schools', 'Schoolclasses', 'Authentication',
+    function ($scope, $state, $location, $modalInstance, school, Schools, Schoolclasses, Authentication) {
         $scope.school = school;
         $scope.authentication = Authentication;
 
         $scope.ok = function () {
 
-            // TODO: FURTHER CLEANUP WITH TEACHERS AND STUDENTS
-            school.schoolclasses.forEach(function(schoolclassId){
-                Schoolclasses.get({
-                    schoolclassId: schoolclassId
-                }, function(schoolclass) {
-
-                    schoolclass.$remove();
-                });
-            });
+            var id = school._id;
 
             school.$remove(function () {
-                $state.go($state.$current, null, { reload: true });
-                $location.path('schools/admin');
+
+
+                for (var i in $scope.authentication.user.administersSchools) {
+                    if ($scope.authentication.user.administersSchools[i] === school._id) {
+                        $scope.authentication.user.administersSchools.splice(i, 1);
+                    }
+                }
+
+                if ($state.current.url === '/schools/:schoolId/edit') {
+                    $location.path('/');
+                    $state.go('home', null, { reload: true });
+                    $modalInstance.close();
+                }
+                //
+//                $location.path('schools/admin');
             });
 
-
-            $modalInstance.close();
 
         };
 
         $scope.cancel = function () {
             $modalInstance.dismiss('cancel');
         };
-	}
+    }
 ]);

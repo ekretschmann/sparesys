@@ -70,16 +70,18 @@ angular.module('courses').controller('CoursesController',
                 });
             };
 
-            $scope.copy = function () {
-
+            $scope.copy = function (course, target) {
 
                 $modal.open({
                     templateUrl: 'copiedCourse.html',
                     controller: 'CopiedCourseModalController',
                     resolve: {
 
+                        target: function() {
+                            return target;
+                        },
                         course: function () {
-                            return $scope.course;
+                            return course;
                         }
                     }
                 });

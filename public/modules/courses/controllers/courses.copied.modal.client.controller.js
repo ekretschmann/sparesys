@@ -1,8 +1,11 @@
 'use strict';
 
-angular.module('courses').controller('CopiedCourseModalController', ['$scope', '$state', '$location', '$modalInstance', 'course', 'CoursesService',
-	function($scope, $state, $location, $modalInstance, course, CoursesService) {
+angular.module('courses').controller('CopiedCourseModalController', ['$scope', '$state', '$location', '$modalInstance', 'CoursesService', 'course',  'target',
+	function($scope, $state, $location, $modalInstance, CoursesService, course,  target) {
         $scope.course = course;
+        $scope.target = target;
+
+
 
         $scope.ok = function () {
 //            CoursesService.remove(course, function () {

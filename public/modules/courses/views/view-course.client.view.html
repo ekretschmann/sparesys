@@ -9,13 +9,20 @@
 
             <a class="menu-link"
                href=""
-               data-ng-click="copy(course)">
-                Subscribe to Course
+               data-ng-click="copy(course, 'teacher')">
+                Teach This
+            </a>
+
+
+            <a class="menu-link"
+               href=""
+               data-ng-click="copy(course, 'student')">
+                Learn This
             </a>
 
             <a class="menu-link"
                href="/#!/courses/search"
-               >
+                    >
                 Back to Search
             </a>
         </div>
@@ -32,11 +39,19 @@
     <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
         <div class="content-section">
             <infobox logo="girl" position="left">
-                If you like the content of this course and you have decided to subscribe to it,
-                please click on <a href="" data-ng-click="copy(course)">this link</a> or the
-                <b>Subscribe to Course</b> button above.
-
+                If you like the content of this course and you have decided to choose it,
+                please click on <a href="" data-ng-click="copy(course, 'student')">this link</a> or the
+                <b>Learn This</b> button above.
             </infobox>
+
+            <section data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+                <infobox logo="man" position="right">
+                    If you would like to teach the content of this course use
+                    <a href="" data-ng-click="copy(course, 'teacher')">this link</a> or the
+                    <b>Teach This</b> button above. You will also be able to learn the content
+                    of this course.
+                </infobox>
+            </section>
         </div>
     </section>
 

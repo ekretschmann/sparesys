@@ -1,36 +1,46 @@
 <section data-ng-controller="CoursesController" data-ng-init="findPublished()">
 
 
-    <div class="sparesys-header">
+    <div class="content-header">
         <div class="pull-right">
-            Search: <input ng-model="searchText">
+            Search: <input class="search" ng-model="searchText">
         </div>
 
-        <div class="sparesys-title">
+        <div class="title">
             Published Courses
         </div>
 
     </div>
 
-    <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-hide="courses.length === 0">
+    <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="content-section">
+            <infobox logo="boy" position="left">
+                Use the search box above to browse to the course you want to subscribe
+                to. Click on the course name and you will get to a page where you are able to browse the content
+                of the course. From there, you will be able to subscribe to the course.
+            </infobox>
+        </div>
+    </section>
+
+    <table id="searchTextResults" class="table-striped" data-ng-hide="courses.length === 0">
         <thead>
         <tr>
-            <th class= "sparesys-view-courses-course-column">Course</th>
-            <th class= "sparesys-view-courses-description-column">Description</th>
+            <th class="left-padded-s right-padded-m">Course</th>
+            <th class="">Description</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="course in courses | filter:searchText">
-            <td class="sparesys-view-courses-name-cell">
+            <td class="left-padded-s right-padded-m">
                 <a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>
             </td>
-            <td>{{course.description}}</td>
+            <td class="right-padded-s">{{course.description}}</td>
         </tr>
         </tbody>
     </table>
 
-       <div data-ng-hide="!courses.$resolved || courses.length">
-    	There are no published courses. You can publish a course that you have created yourself.
+    <div data-ng-hide="!courses.$resolved || courses.length">
+        There are no published courses. You can publish a course that you have created yourself.
 
     </div>
 </section>

@@ -10,19 +10,35 @@
             <a class="menu-link"
                href=""
                data-ng-click="copy(course)">
-                Subscribe
+                Subscribe to Course
+            </a>
+
+            <a class="menu-link"
+               href="/#!/courses/search"
+               >
+                Back to Search
             </a>
         </div>
 
 
-        <div class="sparesys-title">
+        <div class="title">
             {{course.name}}
         </div>
-        <div>
+        <div class="info">
             {{course.description}}
         </div>
     </div>
 
+    <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="content-section">
+            <infobox logo="girl" position="left">
+                If you like the content of this course and you have decided to subscribe to it,
+                please click on <a href="" data-ng-click="copy(course)">this link</a> or the
+                <b>Subscribe to Course</b> button above.
+
+            </infobox>
+        </div>
+    </section>
 
     <div data-ng-if="course.packs.length === 0">
         <div class="content-section">
@@ -36,8 +52,8 @@
             <table id="searchTextResults" class="table-striped expands">
                 <thead>
                 <tr>
-                    <th class="right-padded expands">Pack</th>
-                    <th>Cards</th>
+                    <th class="right-padded left-padded-s expands">Pack</th>
+                    <th class="right-padded-s">Cards</th>
                     <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
                     <!--<th>Created</th>-->
                 </tr>
@@ -47,10 +63,10 @@
                     data-ng-controller="PacksController"
                     data-ng-init="findById(packId)">
 
-                    <td class="expands right-padded">
-                        <a data-ng-href="#!/packs/{{pack._id}}/view">{{pack.name}}</a>
+                    <td class="expands  left-padded-s right-padded">
+                        {{pack.name}}
                     </td>
-                    <td>
+                    <td class="right-padded-s right-aligned">
                         {{pack.cards.length}}
                     </td>
                 </tr>

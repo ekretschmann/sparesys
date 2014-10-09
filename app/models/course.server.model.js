@@ -78,6 +78,10 @@ var CourseSchema = new Schema({
     speechrecognition: {
         type: String,
         default: 'no'
+    },
+    teaching: {
+        type: Boolean,
+        default: false
     }
 });
 

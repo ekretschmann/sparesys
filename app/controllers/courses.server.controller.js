@@ -385,6 +385,7 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
 
 exports.copyCourse = function (req, res, next, id) {
 
+
     var userId;
     var isSupervised = false;
 
@@ -416,6 +417,9 @@ exports.copyCourse = function (req, res, next, id) {
         copy.speechrecognition = original.speechrecognition;
         copy.master = original._id;
         copy.supervised = isSupervised;
+        if (req.query.target === 'teaching') {
+            copy.teaching = true;
+        }
         if (!original.slaves) {
             original.slaves = [];
         }

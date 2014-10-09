@@ -9,14 +9,14 @@
             <div data-ng-if="schools.length === 0">
 
 
-                <div class="content-section warning">You are a teacher without an associated school. Please find your
+                <div class="warning">You are a teacher without an associated school. Please find your
                     school in the Teaching menu or by clicking this
                     <a href="/#!/schools/subscribe/teacher">link</a>.
                 </div>
             </div>
 
             <div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length === 0 ">
-                <div class="content-subsection"> You are not teaching any classes, yet. Ask your school
+                <div> You are not teaching any classes, yet. Ask your school
                     administrator to assign
                     you
                     to your classes.
@@ -31,7 +31,7 @@
              data-ng-init="findForTeacher(authentication.user._id)">
 
 
-            <div data-ng-if="schoolclasses.length === 0">
+            <div data-ng-if="schoolclasses.length === 0 && schools.length > 0">
                 <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
                     <infobox logo="woman">
                         <div class="warning">

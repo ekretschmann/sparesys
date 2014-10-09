@@ -157,8 +157,11 @@ angular.module('core').controller('HomePageController',
 
                         $scope.coursesStudent = [];
                         $scope.coursesTeacher = [];
+
+                        console.log($scope.courses[0]);
+                        console.log($scope.courses[1]);
                         $scope.courses.forEach(function(course) {
-                            if (course.slaves.length > 0) {
+                            if (course.teaching) {
                                 $scope.coursesTeacher.push(course);
                             } else {
                                 $scope.coursesStudent.push(course);

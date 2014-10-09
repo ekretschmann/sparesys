@@ -70,8 +70,8 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                     }
                 });
             },
-            copyCourse: function () {
-                return $resource('courses/copy/:courseId', [], {
+            copyCourse: function (target) {
+                return $resource('courses/copy/:courseId', {target: target}, {
                     post: {
                         method: 'POST'
                     }

@@ -7,12 +7,15 @@ angular.module('courses').controller('CopiedCourseModalController', ['$scope', '
 
 
 
-        $scope.ok = function () {
+        $scope.ok = function (target) {
 //            CoursesService.remove(course, function () {
 //                $state.go($state.$current, null, { reload: true });
 //            });
 
-            var res = CoursesService.copyCourse($scope.course._id);
+
+            console.log(target);
+
+            var res = CoursesService.copyCourse(target);
             res.get({courseId: $scope.course._id}).$promise.then(function () {
                 $location.path('/');
                 $modalInstance.close();

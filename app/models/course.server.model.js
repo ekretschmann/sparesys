@@ -82,6 +82,14 @@ var CourseSchema = new Schema({
     teaching: {
         type: Boolean,
         default: false
+    },
+    readfront: {
+        type: Boolean,
+        default: false
+    },
+    readback: {
+        type: Boolean,
+        default: false
     }
 });
 

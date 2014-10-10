@@ -10,6 +10,24 @@ angular.module('courses').controller('CoursesController',
             $scope.showhelp = false;
 
 
+            $scope.languages = [
+                {name:'---', code:''},
+                {name:'Chinese', code:'zh-CN'},
+                {name:'English (GB)', code:'en-GB'},
+                {name:'English (US)', code:'en-US'},
+                {name:'French', code:'fr-FR'},
+                {name:'German', code:'de-DE'},
+                {name:'Italian', code:'it-IT'},
+                {name:'Japanese', code:'ja-JP'},
+                {name:'Korean', code:'ko-KR'},
+                {name:'Spanish', code:'es-ES'}
+            ];
+
+            var selectedIndexFront = 0;
+            var selectedIndexBack = 0;
+            $scope.languageFront = $scope.languages[selectedIndexFront];
+            $scope.languageBack = $scope.languages[selectedIndexBack];
+
 
             if (!$scope.authentication.user) {
                 $location.path('/');
@@ -96,12 +114,20 @@ angular.module('courses').controller('CoursesController',
             $scope.create = function () {
                 var course = new Courses({
                     name: this.name,
-                    description: this.description
+                    description: this.description,
+                    back: this.back,
+                    front: this.front,
+                    readfront: this.readFront,
+                    readback: this.readBack,
+                    language: this.languageFront,
+                    languageback: this.languageback,
+                    speechrecognition: this.speechRecognition,
+                    teaching: this.teaching
                 });
 
+                console.log(course);
                 // Redirect after save
                 course.$save(function (response) {
-                    JourneyService.courseCreated();
                     $location.path('courses/' + response._id + '/edit');
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
@@ -188,7 +214,7 @@ angular.module('courses').controller('CoursesController',
                     }, function(courses) {
 
                         courses.forEach(function (c) {
-                            if (c.master.toString() === course._id) {
+                            if (c.master && c.master.toString() === course._id) {
                                 $scope.duplicateCourse = true;
                             }
                         });

@@ -160,7 +160,6 @@ angular.module('courses').controller('CoursesController',
                         $scope.coursesStudent = [];
                         $scope.coursesTeacher = [];
 
-                        console.log($scope.courses);
                         $scope.courses.forEach(function(course) {
                             if (course.teaching) {
                                 $scope.coursesTeacher.push(course);
@@ -182,6 +181,13 @@ angular.module('courses').controller('CoursesController',
             $scope.findOne = function () {
                 $scope.course = Courses.get({
                     courseId: $stateParams.courseId
+                }, function(course) {
+                    Courses.query({
+                        userId: $scope.authentication.user._id
+                    }, function(courses) {
+
+                        console.log(courses);
+                    });
                 });
             };
 

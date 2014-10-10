@@ -11,13 +11,13 @@
 
         <table>
             <tr>
-                <td class="right-padded">School</td>
-                <td class="right-padded">:</td>
+                <td class="right-padded-m">School</td>
+                <td class="right-padded-m">:</td>
                 <td>{{school.name}}</td>
             </tr>
             <tr>
-                <td class="right-padded">Teachers</td>
-                <td class="right-padded">:</td>
+                <td class="right-padded-m">Teachers</td>
+                <td class="right-padded-m">:</td>
                 <td>
 
                     <span data-ng-repeat="teacher in schoolclass.teachers">
@@ -28,8 +28,8 @@
                 </td>
             </tr>
             <tr>
-                <td class="right-padded">Students</td>
-                <td  class="right-padded">:</td>
+                <td class="right-padded-m">Students</td>
+                <td  class="right-padded-m">:</td>
                 <td>
                      <span data-ng-repeat="student in schoolclass.students">
                         <span data-ng-controller="UsersController" data-ng-init="findById(student)">
@@ -42,30 +42,39 @@
 
     </div>
 
+    <div class="content-header">
+    <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <infobox logo="man">
+           Use the  <i class="glyphicon glyphicon-plus-sign small"></i> and <i class="glyphicon glyphicon-minus-sign small"></i>
+            icons to assign and remove courses to all students in this class. The courses you can select from
+            are those you have selected as ones that you would like to teach.
+        </infobox>
+    </section>
+
 
     <table class="expands">
         <tr>
-            <td style="top-aligned half-screen">
+            <td class="top-aligned half-screen  top-padded-m bottom-padded-m">
                 <table class="table-striped expands"
                        data-ng-controller="CoursesController"
                        data-ng-init="findForCurrentUser()">
                     <thead>
                     <tr>
-                        <th>Courses</th>
+                        <th class="left-padded-s">Courses</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr data-ng-if="courses.length === 0">
-                        <td>none</td>
+                        <td class="left-padded-s">none</td>
                     </tr>
                     <tr data-ng-repeat="course in courses">
 
-                        <td data-ng-controller="SchoolclassesController">
+                        <td   class="left-padded-s" data-ng-controller="SchoolclassesController">
                             <a href=""
                                data-ng-if="schoolclass.courses.indexOf(course._id) === -1"
                                data-ng-click="addCourseToClass(course)">
                                 <i
-                                   class="glyphicon glyphicon-plus-sign">
+                                   class="glyphicon glyphicon-plus-sign small">
                                 </i>
                             </a>
                             {{course.name}}
@@ -76,22 +85,23 @@
                 </table>
 
             </td>
-            <td class="top-aligned half-screen">
+            <td class="top-aligned half-screen top-padded-m">
 
                 <table class="table-striped expands">
                     <thead>
                     <tr>
-                        <th>In class {{schoolclass.name}}</th>
+                        <th class="left-padded-s right-padded-s">In class {{schoolclass.name}}</th>
                     </tr>
                     </thead>
                     <tbody>
                     <tr data-ng-if="schoolclass.courses.length === 0">
-                        <td>none</td>
+                        <td class="left-padded-s right-padded-s">none</td>
                     </tr>
                     <tr data-ng-repeat="course in schoolclass.courses">
 
 
-                        <td data-ng-controller="CoursesController" data-ng-init="findById(course)" >
+                        <td class="left-padded-s right-padded-s"
+                            data-ng-controller="CoursesController" data-ng-init="findById(course)" >
                             <a href=""
                                data-ng-click="removeCourseFromClass(course)">
                                 <i class="glyphicon glyphicon-minus-sign"></i>
@@ -110,5 +120,7 @@
 
     </table>
 
+</div>
 
+    <div>rememberators.com</div>
 </section>

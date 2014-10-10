@@ -1,49 +1,31 @@
 <div data-ng-controller="CoursesController">
     <div class="content-header">
-        <div class="pull-right">
 
-            <a class="menu-link"
-               href=""
-               data-ng-click="help()"
-                >
-               <span data-ng-if="!showhelp">Help</span>
-               <span data-ng-if="showhelp">Hide Help</span>
-            </a>
-        </div>
         <div class="title">
             Create Course
         </div>
     </div>
 
-    <div data-ng-show="error" class="text-error">
-        <div>
-            <strong>OOps, there was and error:</strong>
-        </div>
-        <div>
-            <strong>{{error}}</strong>
-        </div>
-    </div>
 
 
-    <div class="content-section" data-ng-if="showhelp || !userHasCreatedCourseBefore()">
-        <img class="right-padded float-left size-64"
-             src="/modules/core/img/brand/superhero-girl-medium.gif">
-        Wow. You are creating
-        <span data-ng-if="!userHasCreatedCourseBefore()">your first</span>
-        <span data-ng-if="userHasCreatedCourseBefore()">a</span>
 
+    <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+
+        <infobox logo="girl">
+        Wow! You are creating a
         course! You have to give your course a name
         and a short description of what your course is going to be about. Once that
         is done you will be able to add packs to your course and cards to the packs.
-    </div>
+        </infobox>
+    </section>
 
 
-    <div class="content-last-section">
+    <div class="content-section">
         <form data-ng-submit="create()" validate>
-            <table>
+            <table class="top-margin-l">
                 <tr>
-                    <td class="right-padded">Name</td>
-                    <td>
+                    <td class="right-padded-m nowrap top-padded-s">Course Name</td>
+                    <td class="top-padded-s">
                         <input type="text"
                                data-ng-model="name"
                                class="form-control"
@@ -53,8 +35,8 @@
                 </tr>
 
                 <tr>
-                    <td class="right-padded">Description</td>
-                    <td class="expands top-padded">
+                    <td class="right-padded top-padded-s">Description</td>
+                    <td class="expands top-padded-s">
                         <input type="text"
                                data-ng-model="description"
                                class="form-control"
@@ -65,7 +47,7 @@
 
             </table>
 
-            <div class="top-padded right-aligned">
+            <div class="top-padded-s right-aligned">
                 <input type="submit" value="Create" class="btn btn-default">
             </div>
 

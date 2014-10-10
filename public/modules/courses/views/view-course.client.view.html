@@ -7,19 +7,21 @@
         <div class="pull-right">
 
 
-            <a class="menu-link"
-               href=""
-               data-ng-click="copy(course, 'teacher')">
-                Teach This
-            </a>
+            <span data-ng-if="duplicateCourse === false">
+                <a class="menu-link"
+                   href=""
+                   data-ng-click="copy(course, 'teacher')">
+                    Teach This
+                </a>
 
 
-            <a class="menu-link"
-               href=""
-               data-ng-click="copy(course, 'student')">
-                Learn This
-            </a>
+                <a class="menu-link"
+                   href=""
+                   data-ng-click="copy(course, 'student')">
+                    Learn This
+                </a>
 
+            </span>
             <a class="menu-link"
                href="/#!/courses/search"
                     >
@@ -36,66 +38,82 @@
         </div>
     </div>
 
-    <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="content-section">
-            <infobox logo="girl" position="left">
-                If you like the content of this course and you have decided to choose it,
-                please click on <a href="" data-ng-click="copy(course, 'student')">this link</a> or the
-                <b>Learn This</b> button above.
+    <section data-ng-if="duplicateCourse === false">
+
+        <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+            <div class="content-section">
+                <infobox logo="girl" position="left">
+                    If you like the content of this course and you have decided to choose it,
+                    please click on <a href="" data-ng-click="copy(course, 'student')">this link</a> or the
+                    <b>Learn This</b> button above.
+                </infobox>
+
+                <section data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+                    <infobox logo="man" position="right">
+                        If you would like to teach the content of this course use
+                        <a href="" data-ng-click="copy(course, 'teacher')">this link</a> or the
+                        <b>Teach This</b> button above. You will also be able to learn the content
+                        of this course.
+                    </infobox>
+                </section>
+            </div>
+        </section>
+
+        <div data-ng-if="course.packs.length === 0">
+            <div class="content-section">
+                This is an empty course.
+            </div>
+        </div>
+
+        <div data-ng-if="course.packs.length > 0">
+            <div class="content-section">
+
+                <table id="searchTextResults" class="table-striped expands">
+                    <thead>
+                    <tr>
+                        <th class="right-padded left-padded-s expands">Pack</th>
+                        <th class="right-padded-s">Cards</th>
+                        <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
+                        <!--<th>Created</th>-->
+                    </tr>
+                    </thead>
+                    <tbody data-ng-model="course.packs">
+                    <tr data-ng-repeat="packId in course.packs"
+                        data-ng-controller="PacksController"
+                        data-ng-init="findById(packId)">
+
+                        <td class="expands  left-padded-s right-padded">
+                            {{pack.name}}
+                        </td>
+                        <td class="right-padded-s right-aligned">
+                            {{pack.cards.length}}
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </div>
+        </div>
+
+
+            <span>rememberators.com</span>
+
+        <small class="pull-right">
+            <em class="text-muted">Course created on {{course.created | date:'mediumDate'}} by
+                {{course.user.displayName}}</em>
+
+        </small>
+    </section>
+    <section data-ng-if="duplicateCourse === true">
+        <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+            <infobox logo="philosopher">
+                You already have a copy of this course. If you want from scratch,
+                please delete this course and then sign up for it again.
             </infobox>
 
-            <section data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
-                <infobox logo="man" position="right">
-                    If you would like to teach the content of this course use
-                    <a href="" data-ng-click="copy(course, 'teacher')">this link</a> or the
-                    <b>Teach This</b> button above. You will also be able to learn the content
-                    of this course.
-                </infobox>
-            </section>
-        </div>
+        </section>
     </section>
-
-    <div data-ng-if="course.packs.length === 0">
-        <div class="content-section">
-            This is an empty course.
-        </div>
-    </div>
-
-    <div data-ng-if="course.packs.length > 0">
-        <div class="content-section">
-
-            <table id="searchTextResults" class="table-striped expands">
-                <thead>
-                <tr>
-                    <th class="right-padded left-padded-s expands">Pack</th>
-                    <th class="right-padded-s">Cards</th>
-                    <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
-                    <!--<th>Created</th>-->
-                </tr>
-                </thead>
-                <tbody data-ng-model="course.packs">
-                <tr data-ng-repeat="packId in course.packs"
-                    data-ng-controller="PacksController"
-                    data-ng-init="findById(packId)">
-
-                    <td class="expands  left-padded-s right-padded">
-                        {{pack.name}}
-                    </td>
-                    <td class="right-padded-s right-aligned">
-                        {{pack.cards.length}}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-
-
-        </div>
-    </div>
-
-
-    <small>
-        <em class="text-muted">Course created on {{course.created | date:'mediumDate'}} by
-            {{course.user.displayName}}</em>
-
-    </small>
 </section>
+
+

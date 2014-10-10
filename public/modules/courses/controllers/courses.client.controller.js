@@ -179,6 +179,7 @@ angular.module('courses').controller('CoursesController',
 
             // Find existing Course
             $scope.findOne = function () {
+                $scope.duplicateCourse = false;
                 $scope.course = Courses.get({
                     courseId: $stateParams.courseId
                 }, function(course) {
@@ -186,7 +187,12 @@ angular.module('courses').controller('CoursesController',
                         userId: $scope.authentication.user._id
                     }, function(courses) {
 
-                        console.log(courses);
+                        courses.forEach(function (c) {
+                            if (c.master.toString() === course._id) {
+                                $scope.duplicateCourse = true;
+                            }
+                        });
+
                     });
                 });
             };

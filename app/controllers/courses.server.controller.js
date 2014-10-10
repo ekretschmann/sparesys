@@ -417,7 +417,9 @@ exports.copyCourse = function (req, res, next, id) {
         copy.speechrecognition = original.speechrecognition;
         copy.master = original._id;
         copy.supervised = isSupervised;
-        if (req.query.target === 'teaching') {
+        console.log(req.query.target);
+        if (req.query && req.query.target.toString() === 'teach') {
+            console.log('teaching');
             copy.teaching = true;
         }
         if (!original.slaves) {

@@ -1,5 +1,7 @@
+<div class="infobox-title">Learning</div>
+
 <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
-    <infobox logo="boy" position="right" title="Courses">
+    <infobox logo="boy" position="right" >
         New to Rememberators? I see, that you haven't got any courses, yet.
         Whatever you learn on Rememberators is put into courses. Courses help you to
         keep the subjects you learn separated so that you can concentrate on one thing
@@ -39,6 +41,6 @@
 </section>
 
 <section data-ng-if="authentication.user.roles.indexOf('help') === -1">
-    <div class="infobox-title">Courses</div>
+
     You have not subscribed to any courses.
 </section>

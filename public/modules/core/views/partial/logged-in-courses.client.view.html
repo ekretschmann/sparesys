@@ -1,7 +1,8 @@
-<div data-ng-if="!courses || courses.length===0">
+
+<div data-ng-if="!coursesStudent || coursesStudent.length===0">
     <div ng-include="'/modules/core/views/partial/logged-in-no-courses.client.view.html'"></div>
 </div>
 
-<div data-ng-if="courses.length > 0">
+<div data-ng-if="coursesStudent.length > 0">
     <div ng-include="'/modules/core/views/partial/logged-in-has-courses.client.view.html'"></div>
 </div>

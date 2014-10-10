@@ -24,8 +24,6 @@
             </div>
 
 
-        </div>
-
 
         <div data-ng-controller="SchoolclassesController"
              data-ng-init="findForTeacher(authentication.user._id)">
@@ -83,7 +81,36 @@
 
             </div>
         </div>
+
+
+
+        <table data-ng-if="coursesTeacher.length>0" class="table-striped top-margin-l">
+            <thead>
+            <tr>
+                <th class="left-padded-s">You are a teacher of</th>
+                <th class="right-padded-s right-aligned">Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="course in coursesTeacher">
+                <td class="left-padded-s right-padded-m expands">
+                    {{course.name}}
+                </td>
+
+                <td class="nowrap">
+                    <a class="right-padded-m" data-ng-href="#!/practice/{{course._id}}">practice</a>
+                    <a class="right-padded-m" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
+                    <a class="right-padded-s" data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
     </div>
+
+
+    </div>
+
 </div>
 
 

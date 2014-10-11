@@ -3,22 +3,25 @@
     <div class="modal-body">
         <div class="content-header center-aligned">
             <div class="title">
-                Add Packs to Course: {{course.name}}
+                Add Packs to
+            </div>
+
+            <div class="title">
+                {{course.name}}
             </div>
         </div>
 
-        <form class="form-horizontal" novalidate>
+        <form class="form-horizontal" >
             <fieldset>
                 <div class="content-header">
                     <table>
                         <tr>
-                            <td class="right-padded">Name</td>
+                            <td class="right-padded-m nowrap">Pack Name</td>
                             <td class="expands">
                                 <input type="text" data-ng-model="name"
                                        id="packname"
                                        class="form-control focus"
                                        placeholder="Name"
-                                       data-ng-init="setFocus()"
                                        required></td>
                         </tr>
                     </table>
@@ -32,7 +35,6 @@
                         Add
                     </button>
 
-                    <button class="btn btn-rememberators" ng-click="cancel()">Done</button>
 
                 </div>
             </fieldset>

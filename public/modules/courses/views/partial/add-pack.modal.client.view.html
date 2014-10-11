@@ -13,21 +13,19 @@
 
         <form class="form-horizontal" >
             <fieldset>
-                <div class="content-header">
                     <table>
                         <tr>
                             <td class="right-padded-m nowrap">Pack Name</td>
                             <td class="expands">
-                                <input type="text" data-ng-model="name"
-                                       id="packname"
+                                <input type="text"
+                                       data-ng-model="data.name"
                                        class="form-control focus"
                                        placeholder="Name"
                                        required></td>
                         </tr>
                     </table>
-                </div>
 
-                <div class="center-aligned">
+                <div class="center-aligned top-padded-m">
                     <button class="btn btn-rememberators"
                             type="submit"
                             ng-click="addPackToCourse()"

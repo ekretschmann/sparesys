@@ -48,7 +48,7 @@
                 <tr>
                     <th></th>
                     <th>Pack</th>
-                    <th class="nowrap right-aligned">Number of Cards</th>
+                    <th class="nowrap right-aligned right-padded-s">Number of Cards</th>
                 </tr>
                 </thead>
                 <tbody ui-sortable="sortableOptions"
@@ -60,7 +60,7 @@
                     <td class="right-padded">
                         <a href="">
                             <i data-ng-click="areYouSureToDeletePack(pack)"
-                               class="glyphicon glyphicon-remove-sign">
+                               class="small right-padded-s left-padded-s glyphicon glyphicon-remove-sign">
                             </i>
                         </a>
                     </td>
@@ -68,7 +68,7 @@
                     <td class="nowrap">
                         <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
                     </td>
-                    <td class="expands right-aligned">
+                    <td class="expands right-aligned right-padded-s">
                         {{pack.cards.length}}
                     </td>
                 </tr>

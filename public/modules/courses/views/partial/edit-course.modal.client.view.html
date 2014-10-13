@@ -4,8 +4,13 @@
         <div class="modal-body">
             <div class="content-header">
                 <div class="title center-aligned">
-                    Settings for Course: {{initialCourseName}}
+                    Settings for Course
                 </div>
+
+                <div class="title center-aligned font-m">
+                    <span class="warning">{{initialCourseName}}</span>
+                </div>
+
             </div>
 
             <form class="form-horizontal" novalidate>
@@ -13,7 +18,7 @@
                     <div class="content-header">
                         <table class="expands">
                             <tr>
-                                <td class="right-padded">Name</td>
+                                <td class="right-padded-m">Name</td>
                                 <td class="expands">
                                     <input type="text"
                                            data-ng-model="course.name"
@@ -24,8 +29,8 @@
                             </tr>
 
                             <tr>
-                                <td class="right-padded">Description</td>
-                                <td>
+                                <td class="right-padded-m top-padded-s">Description</td>
+                                <td class="top-padded-s">
                                     <input type="text"
                                            data-ng-model="course.description"
                                            class="form-control"
@@ -35,8 +40,8 @@
                             </tr>
 
                             <tr>
-                                <td class="nowrap right-padded">Front of Card</td>
-                                <td>
+                                <td class="nowrap right-padded-m top-padded-s">Front of Card</td>
+                                <td class="top-padded-s">
                                     <input type="text"
                                            data-ng-model="course.front"
                                            class="form-control"
@@ -46,8 +51,8 @@
                             </tr>
 
                             <tr>
-                                <td class="nowrap right-padded">Back of Card</td>
-                                <td>
+                                <td class="nowrap right-padded-m top-padded-s">Back of Card</td>
+                                <td class="top-padded-s">
                                     <input type="text"
                                            data-ng-model="course.back"
                                            class="form-control"
@@ -56,65 +61,74 @@
                                 </td>
                             </tr>
 
+                            <!--<tr>-->
+                                <!--<td class="right-padded-m nowrap">Language on Front</td>-->
+                                <!--<td>-->
+
+
+                                    <!--<div class="btn-group">-->
+                                        <!--<button type="button" class="btn btn-default" >{{ language.name }}</button>-->
+                                        <!--<button type="button" class="btn btn-default dropdown-toggle" >-->
+                                            <!--<span class="caret"></span>-->
+                                            <!--<span class="sr-only">Split button!</span>-->
+                                        <!--</button>-->
+                                        <!--<ul class="dropdown-menu" role="menu">-->
+                                            <!--<li data-ng-repeat="lang in languages" ><a data-ng-click="setLanguage(lang)">{{lang.name}}</a></li>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+
+
+                                <!--</td>-->
+                            <!--</tr>-->
+
+                            <!--<tr>-->
+                                <!--<td class="right-padded-m nowrap">Language Back</td>-->
+                                <!--<td class="top-padded">-->
+
+
+                                    <!--<div class="btn-group bottom-spacer">-->
+                                        <!--<button type="button" class="btn btn-default" >{{ languageback.name }}</button>-->
+                                        <!--<button type="button" class="btn btn-default dropdown-toggle" >-->
+                                            <!--<span class="caret"></span>-->
+                                            <!--<span class="sr-only">Split button!</span>-->
+                                        <!--</button>-->
+                                        <!--<ul class="dropdown-menu" role="menu">-->
+                                            <!--<li data-ng-repeat="lang in languages" ><a data-ng-click="setLanguageBack(lang)">{{lang.name}}</a></li>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+
+
+                                <!--</td>-->
+                            <!--</tr>-->
+
+
+
+                            <!--<tr>-->
+                                <!--<td class="right-padded-m nowrap">Speech Recognition</td>-->
+                                <!--<td>-->
+
+                                    <!--<div class="btn-group  bottom-spacer">-->
+
+                                        <!--<button type="button" class="btn btn-default" >{{ course.speechrecognition }}</button>-->
+                                        <!--<button type="button" class="btn btn-default dropdown-toggle">-->
+                                            <!--<span class="caret"></span>-->
+                                            <!--<span class="sr-only">Split button!</span>-->
+                                        <!--</button>-->
+                                        <!--<ul class="dropdown-menu" role="menu">-->
+                                            <!--<li data-ng-repeat="option in speechRecognitionOptions"><a-->
+                                                    <!--data-ng-click="setSpeechrecognition(option)">{{option}}</a>-->
+                                            <!--</li>-->
+                                        <!--</ul>-->
+                                    <!--</div>-->
+
+                                <!--</td>-->
+                            <!--</tr>-->
+
                             <tr>
-                                <td class="right-padded nowrap">Language on Front</td>
-                                <td>
+                                <td class="right-padded-m-m nowrap top-padded-m top-padded-s">
+                                    <input  type="checkbox"
+                                            data-ng-model="teaching"><span class="left-padded-s">Teach This Course</span></td>
 
-
-                                    <div class="btn-group">
-                                        <button type="button" class="btn btn-default" >{{ language.name }}</button>
-                                        <button type="button" class="btn btn-default dropdown-toggle" >
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Split button!</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li data-ng-repeat="lang in languages" ><a data-ng-click="setLanguage(lang)">{{lang.name}}</a></li>
-                                        </ul>
-                                    </div>
-
-
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="right-padded nowrap">Language Back</td>
-                                <td class="top-padded">
-
-
-                                    <div class="btn-group bottom-spacer">
-                                        <button type="button" class="btn btn-default" >{{ languageback.name }}</button>
-                                        <button type="button" class="btn btn-default dropdown-toggle" >
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Split button!</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li data-ng-repeat="lang in languages" ><a data-ng-click="setLanguageBack(lang)">{{lang.name}}</a></li>
-                                        </ul>
-                                    </div>
-
-
-                                </td>
-                            </tr>
-
-
-
-                            <tr>
-                                <td class="right-padded nowrap">Speech Recognition</td>
-                                <td>
-
-                                    <div class="btn-group  bottom-spacer">
-
-                                        <button type="button" class="btn btn-default" >{{ course.speechrecognition }}</button>
-                                        <button type="button" class="btn btn-default dropdown-toggle">
-                                            <span class="caret"></span>
-                                            <span class="sr-only">Split button!</span>
-                                        </button>
-                                        <ul class="dropdown-menu" role="menu">
-                                            <li data-ng-repeat="option in speechRecognitionOptions"><a
-                                                    data-ng-click="setSpeechrecognition(option)">{{option}}</a>
-                                            </li>
-                                        </ul>
-                                    </div>
 
                                 </td>
                             </tr>

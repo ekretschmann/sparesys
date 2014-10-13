@@ -19,9 +19,8 @@
         <infobox logo="boy" position="right">
             It is also useful to describe what the front and back of your cards are. It
             not always easy to remember which way around a card is written, especially
-            when you allow for prompting your cards both ways. You can also define the
-            default settings for your cards. These will be used when you create a new
-            card.
+            when you allow for prompting your cards both ways. If you plan to teach this
+            course to others, please tick the Teach This Course checkbox.
         </infobox>
     </section>
 
@@ -65,95 +64,95 @@
                     <td class="right-padded-m top-padded-s nowrap">Back of Card</td>
                     <td class="expands top-padded-s" colspan="3">
                         <input type="text"
-                               data-ng-model="front"
+                               data-ng-model="back"
                                class="form-control"
                                placeholder="What is on the Back of the Cards (e.g. Spanish)">
                     </td>
                 </tr>
 
-                <tr>
-                    <th class="right-padded-m nowrap top-padded-m bottom-padded-m" colspan="3">Default Settings for
-                        Cards
-                    </th>
-                </tr>
+                <!--<tr>-->
+                    <!--<th class="right-padded-m nowrap top-padded-m bottom-padded-m" colspan="3">Default Settings for-->
+                        <!--Cards-->
+                    <!--</th>-->
+                <!--</tr>-->
 
-                <tr>
-                    <td class="right-padded-m nowrap top-padded-s">Language on Front</td>
-                    <td class="expands">
-
-
-                        <div class="btn-group top-padded-s">
-                            <button type="button" class="btn btn-default btn-std-width">{{ languageFront.name }}</button>
-                            <button type="button" class="btn btn-default dropdown-toggle">
-                                <span class="caret"></span>
-                                <span class="sr-only">Split button!</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li data-ng-repeat="lang in languages"><a data-ng-click="setLanguageFront(lang)">{{lang.name}}</a>
-                                </li>
-                            </ul>
-                        </div>
+                <!--<tr>-->
+                    <!--<td class="right-padded-m nowrap top-padded-s">Language on Front</td>-->
+                    <!--<td class="expands">-->
 
 
-                    </td>
-
-                </tr>
-
-                <tr>
-                    <td class="right-padded-m nowrap top-padded-s">Language on Back</td>
-                    <td class="expands">
-
-
-                        <div class="btn-group top-padded-s">
-                            <button type="button" class="btn btn-default btn-std-width">{{ languageBack.name }}</button>
-                            <button type="button" class="btn btn-default dropdown-toggle">
-                                <span class="caret"></span>
-                                <span class="sr-only">Split button!</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li data-ng-repeat="lang in languages"><a data-ng-click="setLanguageBack(lang)">{{lang.name}}</a>
-                                </li>
-                            </ul>
-                        </div>
+                        <!--<div class="btn-group top-padded-s">-->
+                            <!--<button type="button" class="btn btn-default btn-std-width">{{ languageFront.name }}</button>-->
+                            <!--<button type="button" class="btn btn-default dropdown-toggle">-->
+                                <!--<span class="caret"></span>-->
+                                <!--<span class="sr-only">Split button!</span>-->
+                            <!--</button>-->
+                            <!--<ul class="dropdown-menu" role="menu">-->
+                                <!--<li data-ng-repeat="lang in languages"><a data-ng-click="setLanguageFront(lang)">{{lang.name}}</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
 
 
-                    </td>
+                    <!--</td>-->
 
-                </tr>
+                <!--</tr>-->
+
+                <!--<tr>-->
+                    <!--<td class="right-padded-m nowrap top-padded-s">Language on Back</td>-->
+                    <!--<td class="expands">-->
+
+
+                        <!--<div class="btn-group top-padded-s">-->
+                            <!--<button type="button" class="btn btn-default btn-std-width">{{ languageBack.name }}</button>-->
+                            <!--<button type="button" class="btn btn-default dropdown-toggle">-->
+                                <!--<span class="caret"></span>-->
+                                <!--<span class="sr-only">Split button!</span>-->
+                            <!--</button>-->
+                            <!--<ul class="dropdown-menu" role="menu">-->
+                                <!--<li data-ng-repeat="lang in languages"><a data-ng-click="setLanguageBack(lang)">{{lang.name}}</a>-->
+                                <!--</li>-->
+                            <!--</ul>-->
+                        <!--</div>-->
+
+
+                    <!--</td>-->
+
+                <!--</tr>-->
+
+                <!--<tr>-->
+                    <!--<td class="right-padded-m nowrap top-padded-m">-->
+                        <!--<input  type="checkbox"-->
+                               <!--data-ng-model="bothWays"><span class="left-padded-m">Practice Cards Both Ways</span></td>-->
+
+                <!--</tr>-->
+
+                <!--<tr>-->
+                    <!--<td class="right-padded-m nowrap top-padded-m">-->
+                        <!--<input  type="checkbox"-->
+                                <!--data-ng-model="speechRecognition"><span class="left-padded-m">Enable Speech Recognition</span></td>-->
+
+                <!--</tr>-->
+
+                <!--<tr>-->
+                    <!--<td class="right-padded-m nowrap top-padded-m">-->
+                        <!--<input  type="checkbox"-->
+                                <!--data-ng-model="readFront"><span class="left-padded-m">Read Out Questions</span></td>-->
+
+                <!--</tr>-->
+
+                <!--<tr>-->
+                    <!--<td class="right-padded-m nowrap top-padded-m">-->
+                        <!--<input  type="checkbox"-->
+                                <!--data-ng-model="readBack"><span class="left-padded-m">Read Out Expected Solution</span></td>-->
+
+                <!--</tr>-->
+
 
                 <tr>
                     <td class="right-padded-m nowrap top-padded-m">
                         <input  type="checkbox"
-                               data-ng-model="bothWays"><span class="left-padded-m">Practice Cards Both Ways</span></td>
-
-                </tr>
-
-                <tr>
-                    <td class="right-padded-m nowrap top-padded-m">
-                        <input  type="checkbox"
-                                data-ng-model="speechRecognition"><span class="left-padded-m">Enable Speech Recognition</span></td>
-
-                </tr>
-
-                <tr>
-                    <td class="right-padded-m nowrap top-padded-m">
-                        <input  type="checkbox"
-                                data-ng-model="readFront"><span class="left-padded-m">Read Out Questions</span></td>
-
-                </tr>
-
-                <tr>
-                    <td class="right-padded-m nowrap top-padded-m">
-                        <input  type="checkbox"
-                                data-ng-model="readBack"><span class="left-padded-m">Read Out Expected Solution</span></td>
-
-                </tr>
-
-
-                <tr>
-                    <td class="right-padded-m nowrap top-padded-m">
-                        <input  type="checkbox"
-                                data-ng-model="teaching"><span class="left-padded-m">Teach This Course</span></td>
+                                data-ng-model="teaching"><span class="left-padded-s">Teach This Course</span></td>
 
 
                     </td>

@@ -21,23 +21,35 @@
         </div>
     </div>
 
-    <div class="content-section">
+
     <div data-ng-if="course.packs.length === 0">
-        <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="content-section">
+            <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
 
-            <infobox logo="girl">
-                Ok. Now, a course has a number of packs. If you are creating
-                a language course, you can for example put all the colors into one pack,
-                the days of the week into another and so on. To do this, click on the
-                <a href="" ng-click="addPackToCoursePopup()">Add Packs</a> link above.
-            </infobox>
-        </section>
+                <infobox logo="girl">
+                    Ok. Now, a course has a number of packs. If you are creating
+                    a language course, you can for example put all the colors into one pack,
+                    the days of the week into another and so on. To do this, click on the
+                    <a href="" ng-click="addPackToCoursePopup()">Add Packs</a> link above.
+                </infobox>
+            </section>
 
-        <section data-ng-if="authentication.user.roles.indexOf('help') === -1">
+            <section data-ng-if="authentication.user.roles.indexOf('help') === -1">
                 You have to <a href="" ng-click="addPackToCoursePopup()">add packs</a> to this course!
-        </section>
+            </section>
+        </div>
     </div>
-</div>
+
+    <div data-ng-if="course.packs.length > 0">
+        <div class="content-section" data-ng-if="authentication.user.roles.indexOf('help') > -1">
+
+            <infobox logo="boy">
+                Time to put some cards into your packs. Click on the pack names to go to the next
+                page where you can add cards.
+            </infobox>
+        </div>
+
+    </div>
 
     <div data-ng-show="course.packs.length > 0">
 

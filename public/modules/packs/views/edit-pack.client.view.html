@@ -2,236 +2,229 @@
          data-ng-init="findOne()">
 
 
-    <div ng-include="'/modules/packs/views/partial/add-card.modal.client.view.html'"></div>
-    <div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
-    <div ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
-    <div ng-include="'/modules/packs/views/partial/edit-pack.modal.client.view.html'"></div>
-    <div ng-include="'/modules/packs/views/partial/manage-pack.modal.client.view.html'"></div>
-    <div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
+<div ng-include="'/modules/packs/views/partial/add-card.modal.client.view.html'"></div>
+<div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
+<div ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
+<div ng-include="'/modules/packs/views/partial/edit-pack.modal.client.view.html'"></div>
+<div ng-include="'/modules/packs/views/partial/manage-pack.modal.client.view.html'"></div>
+<div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
 
 
-    <div class="content-header">
+<div class="content-header">
 
-        <div class="submenu">
-            <span ng-include="'/modules/packs/views/partial/edit-pack-menu.client.view.html'"></span>
-        </div>
-
-
-        <div class="title">{{pack.name}}</div>
-
-
-        <div class="headerinfo">
-            <span ng-include="'/modules/packs/views/partial/edit-pack-headerinfo.client.view.html'"></span>
-        </div>
-
-
+    <div class="submenu">
+        <span ng-include="'/modules/packs/views/partial/edit-pack-menu.client.view.html'"></span>
     </div>
 
 
-    <div data-ng-hide="pack.cards.length > 0">
-        <div class="content-section" data-ng-if="userHasCreatedCardBefore()">
-            You have to <a href="" ng-click="addCardToPackPopup()">create cards</a> for this pack!
-        </div>
+    <div class="title">{{pack.name}}</div>
+
+
+    <div class="headerinfo">
+        <span ng-include="'/modules/packs/views/partial/edit-pack-headerinfo.client.view.html'"></span>
     </div>
 
-    <div data-ng-show="pack.cards.length > 0">
 
-        <div class="content-section ">
-            <table id="searchTextResults" class="table-striped">
-                <thead>
-                <tr>
-                    <th colspan="2"></th>
-                    <th class="right-padded">Question</th>
-                    <th class="right-padded">Answer</th>
-                    <th class="right-padded">Due</th>
-                    <th>Start</th>
-                </tr>
-                </thead>
-                <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
-                <tr data-ng-repeat="cardId in pack.cards"
-                    data-ng-controller="CardsController"
-                    data-ng-init="findById(cardId)">
-                    <td class="right-padded top-padded top-aligned">
-                        <a href="">
-                            <i data-ng-click="areYouSureToDeleteCard(card)"
-                               class="glyphicon glyphicon-remove-sign">
-                            </i>
-                        </a>
+</div>
 
-                    </td>
+<div data-ng-if="pack.cards.length === 0">
 
-                    <td class="right-padded top-padded top-aligned">
-                        <a href="">
-                            <i data-ng-click="swap(card)"
-                               class="glyphicon glyphicon-random">
-                            </i>
-                        </a>
-                    </td>
+    <div class="content-section">
+        <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
 
-                    <td class="right-padded standard-min-width top-padded top-aligned">
-                        <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
-                    </td>
+            <infobox logo="guru">Well done! A pack has cards in it. It is a good idea to keep similar
+                cards in one pack. To add some cards to this pack, click on the
+                <a href="" ng-click="addCardToPackPopup()">Add Cards</a> link above.
+            </infobox>
+        </section>
 
-                    <td class="expands right-padded top-padded top-aligned" style="max-width: 300px">
-                        <section data-ng-if="card.format === 'short'">
+        <section data-ng-if="authentication.user.roles.indexOf('help') === -1">
+
+            Please <a href="" ng-click="addCardToPackPopup()">create cards</a> for this pack!
+        </section>
+    </div>
+</div>
+
+<div data-ng-show="pack.cards.length > 0">
+
+    <div class="content-section ">
+        <table id="searchTextResults" class="table-striped">
+            <thead>
+            <tr>
+                <th colspan="2"></th>
+                <th class="right-padded">Question</th>
+                <th class="right-padded">Answer</th>
+                <th class="right-padded">Due</th>
+                <th>Start</th>
+            </tr>
+            </thead>
+            <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
+            <tr data-ng-repeat="cardId in pack.cards"
+                data-ng-controller="CardsController"
+                data-ng-init="findById(cardId)">
+                <td class="right-padded top-padded top-aligned">
+                    <a href="">
+                        <i data-ng-click="areYouSureToDeleteCard(card)"
+                           class="glyphicon glyphicon-remove-sign">
+                        </i>
+                    </a>
+
+                </td>
+
+                <td class="right-padded top-padded top-aligned">
+                    <a href="">
+                        <i data-ng-click="swap(card)"
+                           class="glyphicon glyphicon-random">
+                        </i>
+                    </a>
+                </td>
+
+                <td class="right-padded standard-min-width top-padded top-aligned">
+                    <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+                </td>
+
+                <td class="expands right-padded top-padded top-aligned" style="max-width: 300px">
+                    <section data-ng-if="card.format === 'short'">
                         {{card.answer}}
-                        </section>
-                        <section data-ng-if="card.format === 'long'">
-                            <pre style="font-size: x-small">{{card.answer}}</pre>
-                        </section>
-                    </td>
+                    </section>
+                    <section data-ng-if="card.format === 'long'">
+                        <pre style="font-size: x-small">{{card.answer}}</pre>
+                    </section>
+                </td>
 
-                    <td class="right-padded nowrap">
+                <td class="right-padded nowrap">
                     <span data-ng-if="card.due">
                         {{card.due | date:'mediumDate'}}
                     </span>
                     <span data-ng-if="!card.due">
                         -
                     </span>
-                    </td>
+                </td>
 
-                    <td class="right-padded nowrap">
+                <td class="right-padded nowrap">
                     <span data-ng-if="card.after">
                         {{card.after | date:'mediumDate'}}
                     </span>
                     <span data-ng-if="!card.after">
                         now
                     </span>
-                    </td>
+                </td>
 
 
-                </tr>
+            </tr>
 
-                </tbody>
-            </table>
-
-        </div>
-    </div>
-
-
-    <div data-ng-if="showhelp || !userHasCreatedCardBefore()">
-
-
-        <div class="content-section ">
-            <table>
-                <tr>
-                    <td class="top-aligned">
-                        Well done! A pack has cards in it. It is a good idea to keep similar
-                        cards in one pack. To add some cards to this pack, click on the
-                        <a href="" ng-click="addCardToPackPopup()">Add Cards</a> link above.
-                    </td>
-                    <td>
-                        <img class="right-padded size-64"
-                             src="/modules/core/img/brand/teacher-woman-medium.gif">
-                    </td>
-                </tr>
-            </table>
-        </div>
-    </div>
-
-
-    <div data-ng-if="showhelp || !userHasEditedPackBefore()">
-        <div class="content-section">
-
-            <table>
-                <tr>
-                    <td>
-                        <img class="right-padded size-64"
-                             src="/modules/core/img/brand/guru-medium.gif">
-                    </td>
-                    <td class="top-aligned">
-                        <div>
-                            Packs are very important to the Rememberators and you can do many things with them.
-                            If you choose the <a href="" ng-click="managePackPopup()">Manage</a> menu point,
-                            you can for example tell the Remeberators when you will write a test about this pack.
-                            They will then make sure to practice the cards with you in the days before your
-                            test.
-                        </div>
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-
-        <div class="content-section">
-
-            <table>
-                <tr>
-
-                    <td class="top-aligned">
-                        <div>
-                            But there is plenty more. If you don't want to start practicing this pack immediately,
-                            you can set a date from which on cards will be in play. You can also tell the Rememberators
-                            to read the front of your cards when you are practicing.
-                        </div>
-                    </td>
-                    <td>
-                        <img class="right-padded size-64"
-                             src="/modules/core/img/brand/philosopher-medium.gif">
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-
-        <div class="content-section">
-
-            <table>
-                <tr>
-                    <td>
-                        <img class="right-padded size-64"
-                             src="/modules/core/img/brand/superhero-boy-medium.gif">
-                    </td>
-                    <td class="top-aligned">
-                        <div>
-                            You can ask the Rememberators to practice cards both ways, which is great for
-                            language courses. If you want to practice general knowledge,
-                            it will be better if you just let them show you the front of the card and you
-                            will have to guess what the answer on the back could be.
-                        </div>
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-
-        <div class="content-section">
-
-            <table>
-                <tr>
-
-                    <td class="top-aligned">
-                        <div>
-                            Normally, the Rememberators will let you tell them if you knew an answer or not
-                            for all new items. Once you have repeated them a few times, they will also ask you
-                            to type the answer in. It may be better sometimes if you have to type
-                            the answers every time, for example when you are practicing times-tables. If your course
-                            is about explaining something long and complicated
-                            like what the football offside rule says, it will be better not to
-                            type in the answer at all.
-                        </div>
-                    </td>
-                    <td class="top-aligned">
-                        <img class="right-padded size-64"
-                             src="/modules/core/img/brand/superhero-girl-medium.gif">
-                    </td>
-                </tr>
-            </table>
-
-        </div>
-    </div>
-
-    <div class="content-last-section">
-        <div>
-            <small>
-                <em class="text-muted">Created on {{pack.created | date:'medium'}}</em>
-            </small>
-        </div>
-        <div data-ng-if="pack.updated">
-            <small>
-                <em class="text-muted">Updated on {{pack.updated | date:'medium'}}</em>
-            </small>
-        </div>
+            </tbody>
+        </table>
 
     </div>
+</div>
+
+
+<!--<div data-ng-if="showhelp || !userHasCreatedCardBefore()">-->
+
+
+<!--<div data-ng-if="showhelp || !userHasEditedPackBefore()">-->
+<!--<div class="content-section">-->
+
+<!--<table>-->
+<!--<tr>-->
+<!--<td>-->
+<!--<img class="right-padded size-64"-->
+<!--src="/modules/core/img/brand/guru-medium.gif">-->
+<!--</td>-->
+<!--<td class="top-aligned">-->
+<!--<div>-->
+<!--Packs are very important to the Rememberators and you can do many things with them.-->
+<!--If you choose the <a href="" ng-click="managePackPopup()">Manage</a> menu point,-->
+<!--you can for example tell the Remeberators when you will write a test about this pack.-->
+<!--They will then make sure to practice the cards with you in the days before your-->
+<!--test.-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</table>-->
+
+<!--</div>-->
+
+<!--<div class="content-section">-->
+
+<!--<table>-->
+<!--<tr>-->
+
+<!--<td class="top-aligned">-->
+<!--<div>-->
+<!--But there is plenty more. If you don't want to start practicing this pack immediately,-->
+<!--you can set a date from which on cards will be in play. You can also tell the Rememberators-->
+<!--to read the front of your cards when you are practicing.-->
+<!--</div>-->
+<!--</td>-->
+<!--<td>-->
+<!--<img class="right-padded size-64"-->
+<!--src="/modules/core/img/brand/philosopher-medium.gif">-->
+<!--</td>-->
+<!--</tr>-->
+<!--</table>-->
+
+<!--</div>-->
+
+<!--<div class="content-section">-->
+
+<!--<table>-->
+<!--<tr>-->
+<!--<td>-->
+<!--<img class="right-padded size-64"-->
+<!--src="/modules/core/img/brand/superhero-boy-medium.gif">-->
+<!--</td>-->
+<!--<td class="top-aligned">-->
+<!--<div>-->
+<!--You can ask the Rememberators to practice cards both ways, which is great for-->
+<!--language courses. If you want to practice general knowledge,-->
+<!--it will be better if you just let them show you the front of the card and you-->
+<!--will have to guess what the answer on the back could be.-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</table>-->
+
+<!--</div>-->
+
+<!--<div class="content-section">-->
+
+<!--<table>-->
+<!--<tr>-->
+
+<!--<td class="top-aligned">-->
+<!--<div>-->
+<!--Normally, the Rememberators will let you tell them if you knew an answer or not-->
+<!--for all new items. Once you have repeated them a few times, they will also ask you-->
+<!--to type the answer in. It may be better sometimes if you have to type-->
+<!--the answers every time, for example when you are practicing times-tables. If your course-->
+<!--is about explaining something long and complicated-->
+<!--like what the football offside rule says, it will be better not to-->
+<!--type in the answer at all.-->
+<!--</div>-->
+<!--</td>-->
+<!--<td class="top-aligned">-->
+<!--<img class="right-padded size-64"-->
+<!--src="/modules/core/img/brand/superhero-girl-medium.gif">-->
+<!--</td>-->
+<!--</tr>-->
+<!--</table>-->
+
+<!--</div>-->
+<!--</div>-->
+
+<div class="content-last-section">
+    <div>
+        <small>
+            <em class="text-muted">Created on {{pack.created | date:'medium'}}</em>
+        </small>
+    </div>
+    <div data-ng-if="pack.updated">
+        <small>
+            <em class="text-muted">Updated on {{pack.updated | date:'medium'}}</em>
+        </small>
+    </div>
+
+</div>
 </section>

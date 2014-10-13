@@ -36,33 +36,33 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
         };
 
         $scope.setSpecialCharacters = function () {
-            var langFront = $scope.course.language.name;
-            var langBack = $scope.course.languageback.name;
+//            var langFront = $scope.course.language.name;
+//            var langBack = $scope.course.languageback.name;
 
 
-            if (langFront === 'Spanish') {
-                $scope.specialCharsFront = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
-            } else if (langFront === 'French') {
-                $scope.specialCharsFront = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
-            } else if (langFront === 'German') {
-                $scope.specialCharsFront = ['ä', 'é', 'ö', 'ü', 'ß'];
-            } else if (langFront === 'English (GB)') {
-                $scope.specialCharsFront = [];
-            } else if (langFront === '') {
-                $scope.specialCharsFront = [];
-            }
-
-            if (langBack === 'Spanish') {
-                $scope.specialCharsBack = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
-            } else if (langBack === 'French') {
-                $scope.specialCharsBack = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
-            } else if (langBack === 'German') {
-                $scope.specialCharsBack = ['ä', 'é', 'ö', 'ü', 'ß'];
-            } else if (langBack === 'English (GB)') {
-                $scope.specialCharsBack = [];
-            } else if (langBack === '') {
-                $scope.specialCharsBack = [];
-            }
+//            if (langFront === 'Spanish') {
+//                $scope.specialCharsFront = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+//            } else if (langFront === 'French') {
+//                $scope.specialCharsFront = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+//            } else if (langFront === 'German') {
+//                $scope.specialCharsFront = ['ä', 'é', 'ö', 'ü', 'ß'];
+//            } else if (langFront === 'English (GB)') {
+//                $scope.specialCharsFront = [];
+//            } else if (langFront === '') {
+//                $scope.specialCharsFront = [];
+//            }
+//
+//            if (langBack === 'Spanish') {
+//                $scope.specialCharsBack = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+//            } else if (langBack === 'French') {
+//                $scope.specialCharsBack = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+//            } else if (langBack === 'German') {
+//                $scope.specialCharsBack = ['ä', 'é', 'ö', 'ü', 'ß'];
+//            } else if (langBack === 'English (GB)') {
+//                $scope.specialCharsBack = [];
+//            } else if (langBack === '') {
+//                $scope.specialCharsBack = [];
+//            }
         };
 
         $scope.setSpecialCharacters();

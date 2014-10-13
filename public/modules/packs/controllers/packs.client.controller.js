@@ -132,9 +132,11 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.addCardToPackPopup = function () {
 
 
+
             Courses.query({
                 _id: $scope.pack.course
             }, function (courses) {
+                console.log(courses);
                 if (courses.length === 1) {
                     $scope.course = courses[0];
 

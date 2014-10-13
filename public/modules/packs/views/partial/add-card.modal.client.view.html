@@ -15,7 +15,7 @@
                     <div class="content-header">
                         <table>
                             <tr>
-                                <td class="right-padded top-aligned">{{course.front}}</td>
+                                <td class="right-padded-m">{{course.front}}</td>
                                 <td class="expands">
                                     <input type="text"
                                            data-ng-model="options.question"
@@ -26,41 +26,41 @@
                                            tabindex=1
                                            required>
 
-                                    <div style="text-align: center; padding-bottom: 10px">
-                                          <span data-ng-repeat="c in specialCharsFront" >
-                        <button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharFront(c)">{{c}}</button>
-                                              </span>
-                                    </div>
+                                    <!--<div style="text-align: center; padding-bottom: 10px">-->
+                                          <!--<span data-ng-repeat="c in specialCharsFront" >-->
+                        <!--<button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharFront(c)">{{c}}</button>-->
+                                              <!--</span>-->
+                                    <!--</div>-->
                                 </td>
                             </tr>
 
                             <tr>
-                                <td class="right-padded top-aligned top-padded">{{course.back}}</td>
-                                <td class="expands">
+                                <td class="right-padded-m top-aligned top-padded-sm">{{course.back}}</td>
+                                <td class="expands top-padded-s">
 
-                                    <section data-ng-if="options.format === 'short'">
+                                    <span data-ng-if="options.format === 'short'" >
                                         <input type="text" data-ng-model="options.answer"
                                                class="form-control back"
                                                placeholder="Answer"
                                                data-ng-init="setFocus()"
                                                tabindex=2
                                                required>
-                                    </section>
+                                    </span>
 
-                                    <section data-ng-if="options.format === 'long'">
+                                    <span data-ng-if="options.format === 'long'">
                                         <textarea type="text" data-ng-model="options.answer"
                                                   class="form-control"
                                                   placeholder="Answer"
                                                   data-ng-init="setFocus()"
                                                   rows="5"
                                                   required></textarea>
-                                    </section>
+                                    </span>
 
-                                    <div style="text-align: center; padding-bottom: 10px">
-                                          <span data-ng-repeat="c in specialCharsBack" >
-                        <button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharBack(c)">{{c}}</button>
-                                              </span>
-                                    </div>
+                                    <!--<div style="text-align: center; padding-bottom: 10px">-->
+                                          <!--<span data-ng-repeat="c in specialCharsBack" >-->
+                        <!--<button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharBack(c)">{{c}}</button>-->
+                                              <!--</span>-->
+                                    <!--</div>-->
                                 </td>
                             </tr>
 
@@ -86,10 +86,6 @@
                                 ng-click="addCardToPack()">Add
                         </button>
 
-                        <button class="btn btn-rememberators"
-                                tabindex=4
-                                ng-click="cancel()">Done
-                        </button>
 
                     </div>
 

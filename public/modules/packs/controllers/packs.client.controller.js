@@ -6,6 +6,13 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.authentication = Authentication;
 
         $scope.showhelp = false;
+        $scope.toggles = {};
+        $scope.toggles.due = false;
+        $scope.toggles.start = false;
+        $scope.toggles.check = false;
+        $scope.toggles.dir = false;
+        $scope.toggles.images = false;
+
 
 
         if (!$scope.authentication.user) {
@@ -63,7 +70,13 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             $scope.pack = Packs.get({
                 packId: $stateParams.packId
             }, function(pack) {
-                $scope.getCourseName(pack);
+                Courses.query({
+                    _id: pack.course
+                }, function (courses) {
+                    if (courses.length === 1) {
+                        $scope.course = courses[0];
+                    }
+                });
             });
         };
 

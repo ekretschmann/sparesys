@@ -6,12 +6,12 @@
 <div class="content-header">
     <div class="pull-right">
 
-    <div class="submenu">
+        <div class="submenu">
 
-        <div ng-include="'/modules/cards/views/partial/edit-card-menu.client.view.html'"></div>
+            <div ng-include="'/modules/cards/views/partial/edit-card-menu.client.view.html'"></div>
 
+        </div>
     </div>
-</div>
 
     <div class="title">
         {{card.question}}
@@ -25,39 +25,24 @@
             <!--</td>-->
             <!--</tr>-->
             <tr>
-                <td>Pack</td>
-                <td class="left-padded">:</td>
-                <td class="left-padded"><a href="" data-ng-click="navigateToPack(pack)">{{pack.name}}</a>
+                <td>Pack: <a href="" data-ng-click="navigateToPack(pack)">{{pack.name}}</a>
                 </td>
             </tr>
+
 
             <tr>
-                <td>Previous Card in Pack</td>
-                <td class="left-padded">:</td>
                 <td class="left-padded">
-                    <section data-ng-if="prevCard">
-                    <a data-ng-href="#!/cards/{{prevCard._id}}/edit">{{prevCard.question}}</a>
-                    </section>
-                    <section data-ng-if="!prevCard" class="text-muted">
-                        this is the first card
-                    </section>
+
+                    <span data-ng-if="prevCard">
+                        <a class="right-padded-m" data-ng-href="#!/cards/{{prevCard._id}}/edit">prev</a>
+                    </span>
+
+                    <span data-ng-if="nextCard">
+                    <a data-ng-href="#!/cards/{{nextCard._id}}/edit">next</a>
+                    </span>
+
                 </td>
             </tr>
-
-            <tr >
-                <td>Next Card in Pack</td>
-                <td class="left-padded">:</td>
-                <td class="left-padded">
-                    <section data-ng-if="nextCard">
-                    <a data-ng-href="#!/cards/{{nextCard._id}}/edit">{{nextCard.question}}</a>
-                    </section>
-
-                    <section data-ng-if="!nextCard" class="text-muted">
-                        this is the last card
-                    </section>
-                </td>
-            </tr>
-
 
 
         </table>
@@ -143,9 +128,9 @@
 
 
 <tr>
-    <td class="right-padded">Type</td>
+    <td class="right-padded-m">Mode</td>
     <td>
-        <div class="btn-group bottom-spacer">
+        <div class="btn-group">
             <button type="button"
                     class="btn btn-default">{{ card.type }}
             </button>
@@ -162,81 +147,80 @@
     </td>
 </tr>
 
-<tr data-ng-if="card.type === 'image-text'">
-    <td class="top-aligned nowrap">Images Front</td>
+<!--<tr data-ng-if="card.type === 'image-text'">-->
+<!--<td class="top-aligned nowrap">Images Front</td>-->
 
-    <td data-ng-if="card.images  === 0">
+<!--<td data-ng-if="card.images  === 0">-->
 
-        no images
-    </td>
-    <td>
+<!--no images-->
+<!--</td>-->
 
-        <table  class="bottom-spacer">
-            <tr>
-                <td class="right-padded" data-ng-repeat="img in card.images">
-                    <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
-                </td>
-            </tr>
-        </table>
-    </td>
+<!--<td>-->
 
-</tr>
+<!--<table>-->
+<!--<tr>-->
+<!--<td class="right-padded-m" data-ng-repeat="img in card.images">-->
+<!--<img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</td>-->
 
-<tr >
-    <td class="right-padded nowrap">
+<!--</tr>-->
+
+<tr>
+    <td class="right-padded-m nowrap top-padded-s">
         <section data-ng-if="card.type ==='text-text'">
-        Front
+            Front Text
         </section>
 
-        <section data-ng-if="card.type ==='image-text'">
-            <section data-ng-if="sound === 'yes'">
-            Text to Read
-            </section>
+        <!--<section data-ng-if="card.type ==='image-text'">-->
+        <!--<section data-ng-if="sound === 'yes'">-->
+        <!--Read out loud-->
+        <!--</section>-->
 
-            <section data-ng-if="sound === 'no'" class="text-muted">
-                Text to Read
-            </section>
-        </section>
+        <!--<section data-ng-if="sound === 'no'" class="text-muted">-->
+        <!--Read out loud-->
+        <!--</section>-->
+        <!--</section>-->
 
     </td>
-    <td class="expands">
-        <table>
-            <tr>
-                <td class="right-padded">
-                    <section data-ng-if="sound === 'yes' || card.type === 'text-text'">
-                       <input type="text"
+    <td class="expands right-padded-m top-padded-s">
+        <section data-ng-if="sound === 'yes' || card.type === 'text-text'">
+            <input type="text"
 
-                           data-ng-model="card.question"
-                           id="question"
-                           class=" form-control focus standard-input-width"
-                           placeholder="Question"
-                           data-ng-blur="update()"
-                           required>
-                        </section>
+                   data-ng-model="card.question"
+                   id="question"
+                   class=" form-control focus standard-input-width"
+                   placeholder="Question"
+                   data-ng-blur="update()"
+                   required>
+        </section>
 
-                    <section data-ng-if="sound === 'no' && card.type === 'image-text'" class="text-muted nowrap standard-input-width">
-                      no text being read
-                     </section>
-                </td>
-                <td class="nowrap">
-                    Read:
+        <section data-ng-if="sound === 'no' && card.type === 'image-text'"
+                 class="text-muted nowrap standard-input-width">
+            no text being read
+        </section>
+    </td>
+    <td class="nowrap">
 
-                    <div class="btn-group  bottom-spacer">
+                    <span class="right-padded-s">
+                    Read out Loud
+                        </span>
 
-                        <button type="button" class="btn btn-default"  style="width: 60px">{{ sound }}</button>
-                        <button type="button" class="btn btn-default dropdown-toggle">
-                            <span class="caret"></span>
-                            <span class="sr-only">Split button!</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li data-ng-repeat="r in readQuestions"><a
-                                    data-ng-click="setSound(r)">{{r}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-        </table>
+        <div class="btn-group right-padded-m">
+
+            <button type="button" class="btn btn-default" style="width: 60px">{{ sound }}</button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="r in readQuestions"><a
+                        data-ng-click="setSound(r)">{{r}}</a>
+                </li>
+            </ul>
+        </div>
     </td>
 
 </tr>
@@ -254,8 +238,8 @@
 </tr>
 
 <tr class="controls" data-ng-if="card.bothways">
-    <td class="right-padded"></td>
-    <td class="expands">
+    <td class="right-padded-m top-padded-s"></td>
+    <td class="expands right-padded-m top-padded-s">
         <input type="text"
                data-ng-model="nextAlternativeQuestion.text"
                id="alternativequestion"
@@ -270,7 +254,7 @@
     <td class="right-padded">Back</td>
 
     <td class="expands">
-        <table >
+        <table>
             <tr>
                 <td class="right-padded">
                     <input type="text"
@@ -331,7 +315,6 @@
 </tr>
 
 
-
 <tr>
     <td class="right-padded">Checks</td>
     <td>
@@ -351,10 +334,6 @@
         </div>
     </td>
 </tr>
-
-
-
-
 
 
 <tr>

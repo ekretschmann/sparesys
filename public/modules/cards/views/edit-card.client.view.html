@@ -148,9 +148,9 @@
 </tr>
 
 <tr>
-    <td class="top-aligned nowrap">Images Front</td>
+    <td class="top-aligned nowrap right-padded-m top-padded-m">Front Images</td>
 
-    <td data-ng-if="card.images  === 0">
+    <td class="right-padded-m top-padded-m" data-ng-if="card.images.length  === 0">
 
         no images
     </td>
@@ -169,7 +169,7 @@
 </tr>
 
 <tr>
-    <td class="right-padded-m nowrap top-padded-s">
+    <td class="right-padded-m nowrap top-padded-m">
         <section data-ng-if="card.type ==='text-text'">
             Front Text
         </section>
@@ -185,7 +185,7 @@
         <!--</section>-->
 
     </td>
-    <td class="expands right-padded-m top-padded-s">
+    <td class="expands right-padded-m top-padded-m">
         <section data-ng-if="sound === 'yes' || card.type === 'text-text'">
             <input type="text"
 
@@ -204,7 +204,7 @@
     </td>
 
 
-    <td class="nowrap right-padded-s">
+    <td class="nowrap right-padded-s top-padded-m">
         <input data-ng-model="card.sound" type="checkbox"/> Read out loud
     </td>
 
@@ -248,10 +248,6 @@
                required>
     </td>
 
-    <td class="nowrap">
-        <input data-ng-model="card.soundBack" type="checkbox"/> Read out Loud
-    </td>
-
 
 </tr>
 
@@ -279,6 +275,33 @@
                placeholder="Possible Alternative Answer (when asked front to back)"
                data-ng-blur="updateNextAlternative()">
     </td>
+</tr>
+
+
+<tr>
+    <td></td>
+    <td class="nowrap top-padded-s">
+
+
+        Language
+        <div class="btn-group right-padded-m">
+            <button type="button" class="btn btn-default">{{ language.name }}</button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="lang in languages"><a data-ng-click="setLanguage(lang)">{{lang.name}}</a></li>
+            </ul>
+        </div>
+
+
+        <input class="right-padded-m" data-ng-model="card.speachRecgognitionBack" type="checkbox"/> Speech Recognition
+
+        <input data-ng-model="card.soundBack" type="checkbox"/> Read out loud
+
+    </td>
+
 </tr>
 
 

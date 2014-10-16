@@ -31,6 +31,35 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.cardtypes = ['text-text', 'image-text'];
 
+
+
+        $scope.languages = [
+            {name:'-', code:''},
+            {name:'Chinese', code:'zh-CN'},
+            {name:'English (GB)', code:'en-GB'},
+            {name:'English (US)', code:'en-US'},
+            {name:'French', code:'fr-FR'},
+            {name:'German', code:'de-DE'},
+            {name:'Italian', code:'it-IT'},
+            {name:'Japanese', code:'ja-JP'},
+            {name:'Korean', code:'ko-KR'},
+            {name:'Spanish', code:'es-ES'}
+        ];
+
+        var selectedIndex = 0;
+//        var index = 0;
+//        if (course.language) {
+//
+//            $scope.languages.forEach(function (lang) {
+//
+//                if (lang.name === course.language.name) {
+//                    selectedIndex = index;
+//                }
+//                index++;
+//            });
+//        }
+        $scope.language = $scope.languages[selectedIndex];
+
         $scope.setValidation = function (value) {
 
 

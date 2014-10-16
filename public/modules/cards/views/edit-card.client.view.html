@@ -129,7 +129,7 @@
 
 <tr>
     <td class="right-padded-m">Mode</td>
-    <td>
+    <td colspan="3">
         <div class="btn-group">
             <button type="button"
                     class="btn btn-default">{{ card.type }}
@@ -147,26 +147,26 @@
     </td>
 </tr>
 
-<!--<tr data-ng-if="card.type === 'image-text'">-->
-<!--<td class="top-aligned nowrap">Images Front</td>-->
+<tr>
+    <td class="top-aligned nowrap">Images Front</td>
 
-<!--<td data-ng-if="card.images  === 0">-->
+    <td data-ng-if="card.images  === 0">
 
-<!--no images-->
-<!--</td>-->
+        no images
+    </td>
 
-<!--<td>-->
+    <td>
 
-<!--<table>-->
-<!--<tr>-->
-<!--<td class="right-padded-m" data-ng-repeat="img in card.images">-->
-<!--<img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>-->
-<!--</td>-->
-<!--</tr>-->
-<!--</table>-->
-<!--</td>-->
+        <table>
+            <tr>
+                <td class="right-padded-m" data-ng-repeat="img in card.images">
+                    <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
+                </td>
+            </tr>
+        </table>
+    </td>
 
-<!--</tr>-->
+</tr>
 
 <tr>
     <td class="right-padded-m nowrap top-padded-s">
@@ -197,30 +197,15 @@
                    required>
         </section>
 
-        <section data-ng-if="sound === 'no' && card.type === 'image-text'"
-                 class="text-muted nowrap standard-input-width">
-            no text being read
-        </section>
+        <!--<section data-ng-if="sound === 'no' && card.type === 'image-text'"-->
+        <!--class="text-muted nowrap standard-input-width">-->
+        <!--no text being read-->
+        <!--</section>-->
     </td>
-    <td class="nowrap">
 
-                    <span class="right-padded-s">
-                    Read out Loud
-                        </span>
 
-        <div class="btn-group right-padded-m">
-
-            <button type="button" class="btn btn-default" style="width: 60px">{{ sound }}</button>
-            <button type="button" class="btn btn-default dropdown-toggle">
-                <span class="caret"></span>
-                <span class="sr-only">Split button!</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li data-ng-repeat="r in readQuestions"><a
-                        data-ng-click="setSound(r)">{{r}}</a>
-                </li>
-            </ul>
-        </div>
+    <td class="nowrap right-padded-s">
+        <input data-ng-model="card.sound" type="checkbox"/> Read out loud
     </td>
 
 </tr>
@@ -245,52 +230,34 @@
                id="alternativequestion"
                class="standard-input-width form-control alternative"
                ng-keyup="enterAlternativeQuestion($event)"
-               placeholder="Next Alternative (when asked back to front)"
+               placeholder="Possible Alternative Answer (when asked back to front)"
                data-ng-blur="updateNextAlternativeQuestion()">
     </td>
 </tr>
 
 <tr>
-    <td class="right-padded">Back</td>
+    <td class="right-padded-m top-padded-s">Back Text</td>
 
-    <td class="expands">
-        <table>
-            <tr>
-                <td class="right-padded">
-                    <input type="text"
-                           data-ng-model="card.answer"
-                           id="answer"
-                           class="standard-input-width form-control"
-                           placeholder="Answer"
-                           data-ng-blur="updateAnswer()"
-                           required>
-                </td>
+    <td class="expands  top-padded-s right-padded-m">
+        <input type="text"
+               data-ng-model="card.answer"
+               id="answer"
+               class="standard-input-width form-control"
+               placeholder="Answer"
+               data-ng-blur="updateAnswer()"
+               required>
+    </td>
 
-                <td class="nowrap">
-                    Read:
-
-                    <div class="btn-group  bottom-spacer">
-                        <button type="button" class="btn btn-default" style="width: 60px">{{ soundback }}</button>
-                        <button type="button" class="btn btn-default dropdown-toggle">
-                            <span class="caret"></span>
-                            <span class="sr-only">Split button!</span>
-                        </button>
-                        <ul class="dropdown-menu" role="menu">
-                            <li data-ng-repeat="r in readAnswers"><a
-                                    data-ng-click="setSoundBack(r)">{{r}}</a>
-                            </li>
-                        </ul>
-                    </div>
-                </td>
-            </tr>
-        </table>
+    <td class="nowrap">
+        <input data-ng-model="card.soundBack" type="checkbox"/> Read out Loud
+    </td>
 
 
 </tr>
 
 
 <tr data-ng-repeat="alt in card.alternatives track by $index">
-    <td class="right-padded"></td>
+    <td class="right-padded-m"></td>
     <td class="expands">
         <input type="text"
                data-ng-model="alt"
@@ -302,22 +269,22 @@
 </tr>
 
 <tr class="controls">
-    <td class="right-padded"></td>
-    <td class="expands">
+    <td class="right-padded-m top-padded-s"></td>
+    <td class="expands top-padded-s right-padded-m">
         <input type="text"
                data-ng-model="nextAlternative"
                id="alternative"
                class="standard-input-width form-control alternative"
                ng-keyup="enterAlternative($event)"
-               placeholder="Next Alternative"
+               placeholder="Possible Alternative Answer (when asked front to back)"
                data-ng-blur="updateNextAlternative()">
     </td>
 </tr>
 
 
 <tr>
-    <td class="right-padded">Checks</td>
-    <td>
+    <td class="right-padded-m top-padded-s">Checks</td>
+    <td class="top-padded-s">
         <div class="btn-group bottom-spacer">
             <button type="button"
                     class="btn btn-default">{{ validation }}
@@ -337,15 +304,15 @@
 
 
 <tr>
-    <td class="right-padded">
+    <td class="right-padded-m top-padded-s">
         <section data-ng-if="card.type === 'text-text'">
             Direction
         </section>
-        <section data-ng-if="card.type === 'image-text'" class="text-muted">
-            Direction
-        </section>
+        <!--<section data-ng-if="card.type === 'image-text'" class="text-muted">-->
+        <!--Direction-->
+        <!--</section>-->
     </td>
-    <td>
+    <td class="top-padded-s">
         <section data-ng-if="card.type === 'text-text'">
             <div class="btn-group  bottom-spacer">
                 <button type="button" class="btn btn-default">{{ direction }}</button>
@@ -374,8 +341,8 @@
 </tr>
 
 <tr data-ng-controller="DateDropdownController">
-    <td>Due date</td>
-    <td>
+    <td class="top-padded-s">Due date</td>
+    <td class="top-padded-s">
 
         <div class="input-group bottom-spacer">
             <input type="text"
@@ -385,7 +352,6 @@
                    is-open="opened"
                    min-date="minDate"
                    datepicker-options="dateOptions"
-                   date-disabled="disabled(date, mode)"
                    ng-required="false"
                    close-text="Close"
                    data-ng-blur="$parent.update()"/>
@@ -400,8 +366,8 @@
 </tr>
 
 <tr data-ng-controller="DateDropdownController">
-    <td>Start date</td>
-    <td>
+    <td class="right-padded-m top-padded-s">Start date</td>
+    <td class="top-padded-s">
 
         <div class="input-group  bottom-spacer">
             <input type="text"

@@ -29,7 +29,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.readAnswers = ['yes', 'no'];
         $scope.directions = ['one way', 'both ways'];
 
-        $scope.cardtypes = ['text-text', 'image-text'];
+        $scope.modes = ['forward', 'reverse', 'image', 'multiple choice'];
 
 
 

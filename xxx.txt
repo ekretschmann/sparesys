@@ -1,216 +1,410 @@
-{ _mongooseOptions: {},
-  mongooseCollection:
-   { collection:
-      { db: [Object],
-        collectionName: 'users',
-        internalHint: null,
-        opts: {},
-        slaveOk: false,
-        serializeFunctions: false,
-        raw: false,
-        pkFactory: [Object],
-        serverCapabilities: undefined },
-     opts: { bufferCommands: true, capped: false },
-     name: 'users',
-     conn:
-      { base: [Object],
-        collections: [Object],
-        models: [Object],
-        replica: false,
-        hosts: null,
-        host: 'localhost',
-        port: 27017,
-        user: undefined,
-        pass: undefined,
-        name: 'sparesys-dev',
-        options: [Object],
-        otherDbs: [],
-        _readyState: 1,
-        _closeCalled: false,
-        _hasOpened: true,
-        _listening: true,
-        _events: {},
-        db: [Object] },
-     queue: [],
-     buffer: false },
-  model:
-   { [Function: model]
-     base:
-      { connections: [Object],
-        plugins: [],
-        models: [Object],
-        modelSchemas: [Object],
-        options: [Object] },
-     modelName: 'User',
-     model: [Function: model],
-     db:
-      { base: [Object],
-        collections: [Object],
-        models: [Object],
-        replica: false,
-        hosts: null,
-        host: 'localhost',
-        port: 27017,
-        user: undefined,
-        pass: undefined,
-        name: 'sparesys-dev',
-        options: [Object],
-        otherDbs: [],
-        _readyState: 1,
-        _closeCalled: false,
-        _hasOpened: true,
-        _listening: true,
-        _events: {},
-        db: [Object] },
-     discriminators: undefined,
-     findUniqueUsername: [Function],
-     schema:
-      { paths: [Object],
-        subpaths: {},
-        virtuals: [Object],
-        nested: {},
-        inherits: {},
-        callQueue: [Object],
-        _indexes: [],
-        methods: [Object],
-        statics: [Object],
-        tree: [Object],
-        _requiredpaths: [Object],
-        discriminatorMapping: undefined,
-        _indexedpaths: [Object],
-        options: [Object],
-        _events: {} },
-     options: undefined,
-     collection:
-      { collection: [Object],
-        opts: [Object],
-        name: 'users',
-        conn: [Object],
-        queue: [],
-        buffer: false },
-     _events: {} },
-  op: 'findOne',
-  options: {},
-  _conditions: { _id: 5430eeff0bedd7140cbeaca0 },
-  _fields: { salt: 0, password: 0, __v: 0, provider: 0 },
-  _update: undefined,
-  _path: undefined,
-  _distinct: undefined,
-  _collection:
-   { collection:
-      { collection: [Object],
-        opts: [Object],
-        name: 'users',
-        conn: [Object],
-        queue: [],
-        buffer: false } },
-  _castError: null }
-xxxxxxxxxxxx
-{ _mongooseOptions: { populate: { administersSchools: [Object] } },
-  mongooseCollection:
-   { collection:
-      { db: [Object],
-        collectionName: 'users',
-        internalHint: null,
-        opts: {},
-        slaveOk: false,
-        serializeFunctions: false,
-        raw: false,
-        pkFactory: [Object],
-        serverCapabilities: undefined },
-     opts: { bufferCommands: true, capped: false },
-     name: 'users',
-     conn:
-      { base: [Object],
-        collections: [Object],
-        models: [Object],
-        replica: false,
-        hosts: null,
-        host: 'localhost',
-        port: 27017,
-        user: undefined,
-        pass: undefined,
-        name: 'sparesys-dev',
-        options: [Object],
-        otherDbs: [],
-        _readyState: 1,
-        _closeCalled: false,
-        _hasOpened: true,
-        _listening: true,
-        _events: {},
-        db: [Object] },
-     queue: [],
-     buffer: false },
-  model:
-   { [Function: model]
-     base:
-      { connections: [Object],
-        plugins: [],
-        models: [Object],
-        modelSchemas: [Object],
-        options: [Object] },
-     modelName: 'User',
-     model: [Function: model],
-     db:
-      { base: [Object],
-        collections: [Object],
-        models: [Object],
-        replica: false,
-        hosts: null,
-        host: 'localhost',
-        port: 27017,
-        user: undefined,
-        pass: undefined,
-        name: 'sparesys-dev',
-        options: [Object],
-        otherDbs: [],
-        _readyState: 1,
-        _closeCalled: false,
-        _hasOpened: true,
-        _listening: true,
-        _events: {},
-        db: [Object] },
-     discriminators: undefined,
-     findUniqueUsername: [Function],
-     schema:
-      { paths: [Object],
-        subpaths: {},
-        virtuals: [Object],
-        nested: {},
-        inherits: {},
-        callQueue: [Object],
-        _indexes: [],
-        methods: [Object],
-        statics: [Object],
-        tree: [Object],
-        _requiredpaths: [Object],
-        discriminatorMapping: undefined,
-        _indexedpaths: [Object],
-        options: [Object],
-        _events: {} },
-     options: undefined,
-     collection:
-      { collection: [Object],
-        opts: [Object],
-        name: 'users',
-        conn: [Object],
-        queue: [],
-        buffer: false },
-     _events: {} },
-  op: 'findOne',
-  options: {},
-  _conditions: { _id: 5430eeff0bedd7140cbeaca0 },
-  _fields: { salt: 0, password: 0, __v: 0, provider: 0 },
-  _update: undefined,
-  _path: undefined,
-  _distinct: undefined,
-  _collection:
-   { collection:
-      { collection: [Object],
-        opts: [Object],
-        name: 'users',
-        conn: [Object],
-        queue: [],
-        buffer: false } },
-  _castError: null }
-xxxxxxxxxxxx
+
+<!--<form class="form-horizontal" data-ng-submit="update()" novalidate>-->
+<!--<fieldset>-->
+
+
+<!--<table>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded">ID</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card._id}}-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded">User</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card.user}}-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded">Slaves</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card.slaves}}-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded">Master</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card.master}}-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded">Course</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card.course}}-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded nowrap">Supervisor</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card.supervisor}}-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded">Valid Answers</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card.validanswers}}-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded">Invalid Answers</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card.invalidanswers}}-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded nowrap">Valid Reverse Answers</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card.validreverseanswers}}-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="bottom-spacer" data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">-->
+<!--<td class="right-padded nowrap">Invalid Reverse Answers</td>-->
+<!--<td class="expands  bottom-spacer">-->
+<!--{{card.invalidreverseanswers}}-->
+<!--</td>-->
+<!--</tr>-->
+
+
+<!--<tr>-->
+<!--<td class="right-padded-m">Mode</td>-->
+<!--<td colspan="3">-->
+<!--<div class="btn-group">-->
+<!--<button type="button"-->
+<!--class="btn btn-default">{{ card.type }}-->
+<!--</button>-->
+<!--<button type="button"-->
+<!--class="btn btn-default dropdown-toggle">-->
+<!--<span class="caret"></span>-->
+<!--<span class="sr-only">Split button!</span>-->
+<!--</button>-->
+<!--<ul class="dropdown-menu" role="menu">-->
+<!--<li data-ng-repeat="t in cardtypes"><a-->
+<!--data-ng-click="setCardType(t)">{{t}}</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr>-->
+<!--<td class="top-aligned nowrap right-padded-m top-padded-m">Front Images</td>-->
+
+<!--<td class="right-padded-m top-padded-m" data-ng-if="card.images.length  === 0">-->
+
+<!--no images-->
+<!--</td>-->
+
+<!--<td>-->
+
+<!--<table>-->
+<!--<tr>-->
+<!--<td class="right-padded-m" data-ng-repeat="img in card.images">-->
+<!--<img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>-->
+<!--</td>-->
+<!--</tr>-->
+<!--</table>-->
+<!--</td>-->
+
+<!--</tr>-->
+
+<!--<tr>-->
+<!--<td class="right-padded-m nowrap top-padded-m">-->
+<!--<section data-ng-if="card.type ==='text-text'">-->
+<!--Front Text-->
+<!--</section>-->
+
+<!--<!--<section data-ng-if="card.type ==='image-text'">-->-->
+<!--<!--<section data-ng-if="sound === 'yes'">-->-->
+<!--<!--Read out loud-->-->
+<!--<!--</section>-->-->
+
+<!--<!--<section data-ng-if="sound === 'no'" class="text-muted">-->-->
+<!--<!--Read out loud-->-->
+<!--<!--</section>-->-->
+<!--<!--</section>-->-->
+
+<!--</td>-->
+<!--<td class="expands right-padded-m top-padded-m">-->
+<!--<section data-ng-if="sound === 'yes' || card.type === 'text-text'">-->
+<!--<input type="text"-->
+
+<!--data-ng-model="card.question"-->
+<!--id="question"-->
+<!--class=" form-control focus standard-input-width"-->
+<!--placeholder="Question"-->
+<!--data-ng-blur="update()"-->
+<!--required>-->
+<!--</section>-->
+
+<!--<!--<section data-ng-if="sound === 'no' && card.type === 'image-text'"-->-->
+<!--<!--class="text-muted nowrap standard-input-width">-->-->
+<!--<!--no text being read-->-->
+<!--<!--</section>-->-->
+<!--</td>-->
+
+
+<!--<!--<td class="nowrap right-padded-s top-padded-m">-->-->
+<!--<!--<input data-ng-model="card.sound" type="checkbox"/> Read out loud-->-->
+<!--<!--</td>-->-->
+
+<!--</tr>-->
+
+
+<!--<tr data-ng-if="card.bothways === true" data-ng-repeat="alt in card.alternativequestions track by $index">-->
+<!--<td class="right-padded"></td>-->
+<!--<td class="expands">-->
+<!--<input type="text"-->
+<!--data-ng-model="alt"-->
+<!--class="form-control standard-input-width "-->
+<!--data-ng-blur="updateAlternativeQuestion($index, alt)"-->
+<!--placeholder="Alternative">-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="controls" data-ng-if="card.bothways">-->
+<!--<td class="right-padded-m top-padded-s"></td>-->
+<!--<td class="expands right-padded-m top-padded-s">-->
+<!--<input type="text"-->
+<!--data-ng-model="nextAlternativeQuestion.text"-->
+<!--id="alternativequestion"-->
+<!--class="standard-input-width form-control alternative"-->
+<!--ng-keyup="enterAlternativeQuestion($event)"-->
+<!--placeholder="Possible Alternative Answer (when asked back to front)"-->
+<!--data-ng-blur="updateNextAlternativeQuestion()">-->
+<!--</td>-->
+<!--</tr>-->
+
+
+<!--<tr data-ng-if="card.bothways">-->
+<!--<td class="top-padded-l"></td>-->
+<!--<td class="nowrap top-padded-s middle-aligned" >-->
+
+
+<!--<span class="right-padded-m top-padded-m">-->
+<!--<input data-ng-model="card.soundFront" type="checkbox"/> Read out loud-->
+<!--</span>-->
+
+<!--<span class="right-padded-m">-->
+<!--<input data-ng-model="card.speechRecgognitionFront" type="checkbox"/> Speech Recognition-->
+<!--</span>-->
+
+<!--<span data-ng-if="card.soundFront || card.speechRecgognitionFront" class="right-padded-s">Language</span>-->
+
+<!--<div data-ng-if="card.soundFront || card.speechRecgognitionFront" class="btn-group right-padded-l expands">-->
+
+<!--<button type="button" class="btn btn-default">{{ language.name }}</button>-->
+<!--<button type="button" class="btn btn-default dropdown-toggle">-->
+<!--<span class="caret"></span>-->
+<!--<span class="sr-only">Split button!</span>-->
+<!--</button>-->
+<!--<ul class="dropdown-menu" role="menu">-->
+<!--<li data-ng-repeat="lang in languages"><a data-ng-click="setLanguage(lang)">{{lang.name}}</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+
+<!--</td>-->
+
+<!--</tr>-->
+
+
+<!--<tr>-->
+<!--<td class="right-padded-m top-padded-s">Back Text</td>-->
+
+<!--<td class="expands  top-padded-s right-padded-m">-->
+<!--<input type="text"-->
+<!--data-ng-model="card.answer"-->
+<!--id="answer"-->
+<!--class="standard-input-width form-control"-->
+<!--placeholder="Answer"-->
+<!--data-ng-blur="updateAnswer()"-->
+<!--required>-->
+<!--</td>-->
+
+
+<!--</tr>-->
+
+
+<!--<tr data-ng-repeat="alt in card.alternatives track by $index">-->
+<!--<td class="right-padded-m"></td>-->
+<!--<td class="expands">-->
+<!--<input type="text"-->
+<!--data-ng-model="alt"-->
+<!--id="alternatives"-->
+<!--class="standard-input-width form-control"-->
+<!--data-ng-blur="updateAlternative($index, alt)"-->
+<!--placeholder="Alternative Answer">-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr class="controls">-->
+<!--<td class="right-padded-m top-padded-s"></td>-->
+<!--<td class="expands top-padded-s right-padded-m">-->
+<!--<input type="text"-->
+<!--data-ng-model="nextAlternative"-->
+<!--id="alternative"-->
+<!--class="standard-input-width form-control alternative"-->
+<!--ng-keyup="enterAlternative($event)"-->
+<!--placeholder="Possible Alternative Answer (when asked front to back)"-->
+<!--data-ng-blur="updateNextAlternative()">-->
+<!--</td>-->
+<!--</tr>-->
+
+
+<!--<tr>-->
+<!--<td class="top-padded-l"></td>-->
+<!--<td class="nowrap top-padded-s middle-aligned" >-->
+
+
+<!--<span class="right-padded-m">-->
+<!--<input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Speech Recognition-->
+<!--</span>-->
+
+<!--<span class="right-padded-m top-padded-m">-->
+<!--<input data-ng-model="card.soundBack" type="checkbox"/> Read out loud-->
+<!--</span>-->
+
+<!--<span data-ng-if="card.soundBack || card.speechRecgognitionBack" class="right-padded-s">Language</span>-->
+
+<!--<div data-ng-if="card.soundBack || card.speechRecgognitionBack" class="btn-group right-padded-l expands">-->
+
+<!--<button type="button" class="btn btn-default">{{ language.name }}</button>-->
+<!--<button type="button" class="btn btn-default dropdown-toggle">-->
+<!--<span class="caret"></span>-->
+<!--<span class="sr-only">Split button!</span>-->
+<!--</button>-->
+<!--<ul class="dropdown-menu" role="menu">-->
+<!--<li data-ng-repeat="lang in languages"><a data-ng-click="setLanguage(lang)">{{lang.name}}</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+
+<!--</td>-->
+
+<!--</tr>-->
+
+
+<!--<tr>-->
+<!--<td class="right-padded-m top-padded-s">Checks</td>-->
+<!--<td class="top-padded-s">-->
+<!--<div class="btn-group bottom-spacer">-->
+<!--<button type="button"-->
+<!--class="btn btn-default">{{ validation }}-->
+<!--</button>-->
+<!--<button type="button"-->
+<!--class="btn btn-default dropdown-toggle">-->
+<!--<span class="caret"></span>-->
+<!--<span class="sr-only">Split button!</span>-->
+<!--</button>-->
+<!--<ul class="dropdown-menu" role="menu">-->
+<!--<li data-ng-repeat="val in validations"><a-->
+<!--data-ng-click="setValidation(val)">{{val}}</a></li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</td>-->
+<!--</tr>-->
+
+
+<!--<tr>-->
+<!--<td class="right-padded-m top-padded-s">-->
+<!--<section data-ng-if="card.type === 'text-text'">-->
+<!--Direction-->
+<!--</section>-->
+<!--<!--<section data-ng-if="card.type === 'image-text'" class="text-muted">-->-->
+<!--<!--Direction-->-->
+<!--<!--</section>-->-->
+<!--</td>-->
+<!--<td class="top-padded-s">-->
+<!--<section data-ng-if="card.type === 'text-text'">-->
+<!--<div class="btn-group  bottom-spacer">-->
+<!--<button type="button" class="btn btn-default">{{ direction }}</button>-->
+<!--<button type="button" class="btn btn-default dropdown-toggle">-->
+<!--<span class="caret"></span>-->
+<!--<span class="sr-only">Split button!</span>-->
+<!--</button>-->
+<!--<ul class="dropdown-menu" role="menu">-->
+<!--<li data-ng-repeat="d in directions"><a data-ng-click="setDirection(d)">{{d}}</a>-->
+<!--</li>-->
+<!--</ul>-->
+<!--</div>-->
+<!--</section>-->
+
+<!--<section data-ng-if="card.type === 'image-text'" class="text-muted">-->
+<!--<div class="btn-group  bottom-spacer">-->
+<!--<button type="button" class="btn btn-default.disabled text-muted">{{ direction }}</button>-->
+<!--<button type="button" class="btn btn-default.disabled dropdown-toggle">-->
+<!--<span class="caret"></span>-->
+<!--<span class="sr-only">Split button!</span>-->
+<!--</button>-->
+
+<!--</div>-->
+<!--</section>-->
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr data-ng-controller="DateDropdownController">-->
+<!--<td class="top-padded-s">Due date</td>-->
+<!--<td class="top-padded-s">-->
+
+<!--<div class="input-group bottom-spacer">-->
+<!--<input type="text"-->
+<!--class="form-control"-->
+<!--datepicker-popup="{{format}}"-->
+<!--ng-model="$parent.card.due"-->
+<!--is-open="opened"-->
+<!--min-date="minDate"-->
+<!--datepicker-options="dateOptions"-->
+<!--ng-required="false"-->
+<!--close-text="Close"-->
+<!--data-ng-blur="$parent.update()"/>-->
+
+<!--<div class="input-group-btn">-->
+<!--<button type="button" class="btn btn-default" ng-click="open($event)"><i-->
+<!--class="glyphicon glyphicon-calendar"></i></button>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</td>-->
+<!--</tr>-->
+
+<!--<tr data-ng-controller="DateDropdownController">-->
+<!--<td class="right-padded-m top-padded-s">Start date</td>-->
+<!--<td class="top-padded-s">-->
+
+<!--<div class="input-group  bottom-spacer">-->
+<!--<input type="text"-->
+<!--class="form-control"-->
+<!--datepicker-popup="{{format}}"-->
+<!--ng-model="$parent.card.after"-->
+<!--is-open="opened" min-date="minDate"-->
+<!--datepicker-options="dateOptions"-->
+<!--date-disabled="disabled(date, mode)"-->
+<!--ng-required="false"-->
+<!--close-text="Close"-->
+<!--data-ng-blur="$parent.update()"/>-->
+
+<!--<div class="input-group-btn">-->
+<!--<button type="button" class="btn btn-default" ng-click="open($event)"><i-->
+<!--class="glyphicon glyphicon-calendar"></i></button>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--</td>-->
+<!--</tr>-->
+
+
+<!--</table>-->
+
+
+<!--</fieldset>-->
+
+
+<!--</form>-->

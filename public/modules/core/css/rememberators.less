@@ -6,8 +6,12 @@
 @background-color-contrast: #ECECFF;
 @foreground-color: #333333;
 
-.default-border {
+.default-border-bottom {
   border-bottom: #eaeaea solid 1px;
+}
+
+.default-border {
+  border: #eaeaea solid 1px;
 }
 
 .warning {
@@ -39,7 +43,7 @@ body {
 .header {
   margin-bottom: 10px;
   padding-bottom: 5px;
-  .default-border;
+  .default-border-bottom;
 }
 .popup-header {
   .header;
@@ -64,7 +68,7 @@ body {
 .content-section {
   margin-bottom: 10px;
   padding-bottom: 15px;
-  .default-border;
+  .default-border-bottom;
   vertical-align: top;
 }
 
@@ -337,4 +341,11 @@ body {
 
 .half-screen {
   width: 50%;
+}
+
+.rememberators-tabs {
+  .nav {
+    background-image: none;
+    background-color: @background-color;
+  }
 }

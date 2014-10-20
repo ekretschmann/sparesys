@@ -3,6 +3,8 @@
 
     <tr>
         <td class="top-padded-s right-padded-m">{{course.front}}</td>
+
+
         <td class="nowrap top-padded-s middle-aligned">
 
             {{card.question}}
@@ -10,6 +12,28 @@
         </td>
 
     </tr>
+
+    <tr>
+        <td class="right-padded-m top-padded-m middle-aligned">
+            Language
+        </td>
+        <td class="btn-group right-padded-l  top-padded-sm">
+
+
+            <button type="button" class="btn btn-default">{{ language.name }}</button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="lang in languages"><a
+                        data-ng-click="setLanguage(lang)">{{lang.name}}</a>
+                </li>
+            </ul>
+
+        </td>
+    </tr>
+
 
     <tr>
         <td class="top-padded-sm right-padded-m">{{course.back}}</td>
@@ -21,25 +45,46 @@
 
     </tr>
 
+    <tr>
+        <td class="right-padded-m top-padded-m middle-aligned">
+            Language
+        </td>
+        <td class="btn-group right-padded-l  top-padded-sm">
+
+
+            <button type="button" class="btn btn-default">{{ language.name }}</button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="lang in languages"><a
+                        data-ng-click="setLanguage(lang)">{{lang.name}}</a>
+                </li>
+            </ul>
+
+        </td>
+    </tr>
+
 
     <!--<tr>-->
-        <!--<td class="right-padded-m top-padded-sm">Lan</td>-->
-        <!--<td class="top-padded-sm">-->
-            <!--<div class="btn-group">-->
-                <!--<button type="button"-->
-                        <!--class="btn btn-default">{{ validation }}-->
-                <!--</button>-->
-                <!--<button type="button"-->
-                        <!--class="btn btn-default dropdown-toggle">-->
-                    <!--<span class="caret"></span>-->
-                    <!--<span class="sr-only">Split button!</span>-->
-                <!--</button>-->
-                <!--<ul class="dropdown-menu" role="menu">-->
-                    <!--<li data-ng-repeat="val in validations"><a-->
-                            <!--data-ng-click="setValidation(val)">{{val}}</a></li>-->
-                <!--</ul>-->
-            <!--</div>-->
-        <!--</td>-->
+    <!--<td class="right-padded-m top-padded-sm">Lan</td>-->
+    <!--<td class="top-padded-sm">-->
+    <!--<div class="btn-group">-->
+    <!--<button type="button"-->
+    <!--class="btn btn-default">{{ validation }}-->
+    <!--</button>-->
+    <!--<button type="button"-->
+    <!--class="btn btn-default dropdown-toggle">-->
+    <!--<span class="caret"></span>-->
+    <!--<span class="sr-only">Split button!</span>-->
+    <!--</button>-->
+    <!--<ul class="dropdown-menu" role="menu">-->
+    <!--<li data-ng-repeat="val in validations"><a-->
+    <!--data-ng-click="setValidation(val)">{{val}}</a></li>-->
+    <!--</ul>-->
+    <!--</div>-->
+    <!--</td>-->
     <!--</tr>-->
 
     <tr>

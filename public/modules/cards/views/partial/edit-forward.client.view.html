@@ -1,0 +1,174 @@
+<table class="box-margin-s">
+    <tr>
+        <td class="right-padded-m nowrap top-padded-m">
+            <section>
+                Front Text
+            </section>
+
+            <!--<section data-ng-if="card.type ==='image-text'">-->
+            <!--<section data-ng-if="sound === 'yes'">-->
+            <!--Read out loud-->
+            <!--</section>-->
+
+            <!--<section data-ng-if="sound === 'no'" class="text-muted">-->
+            <!--Read out loud-->
+            <!--</section>-->
+            <!--</section>-->
+
+        </td>
+        <td class="expands right-padded-m top-padded-m">
+            <section>
+                <input type="text"
+
+                       data-ng-model="card.question"
+                       id="question"
+                       class=" form-control focus standard-input-width"
+                       placeholder="Question"
+                       data-ng-blur="update()"
+                       required>
+            </section>
+
+            <!--<section data-ng-if="sound === 'no' && card.type === 'image-text'"-->
+            <!--class="text-muted nowrap standard-input-width">-->
+            <!--no text being read-->
+            <!--</section>-->
+        </td>
+
+
+    </tr>
+
+    <!--<tr-->
+    <!--data-ng-repeat="alt in card.alternativequestions track by $index">-->
+    <!--<td class="right-padded"></td>-->
+    <!--<td class="expands">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="alt"-->
+    <!--class="form-control standard-input-width "-->
+    <!--data-ng-blur="updateAlternativeQuestion($index, alt)"-->
+    <!--placeholder="Alternative">-->
+    <!--</td>-->
+    <!--</tr>-->
+
+
+    <!--<tr class="controls" data-ng-if="card.bothways">-->
+    <!--<td class="right-padded-m top-padded-s"></td>-->
+    <!--<td class="expands right-padded-m top-padded-s">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="nextAlternativeQuestion.text"-->
+    <!--id="alternativequestion"-->
+    <!--class="standard-input-width form-control alternative"-->
+    <!--ng-keyup="enterAlternativeQuestion($event)"-->
+    <!--placeholder="Possible Alternative Answer (when asked back to front)"-->
+    <!--data-ng-blur="updateNextAlternativeQuestion()">-->
+    <!--</td>-->
+    <!--</tr>-->
+
+
+    <tr>
+        <td class="top-padded-l"></td>
+        <td class="nowrap top-padded-s middle-aligned">
+
+
+                        <span class="right-padded-m top-padded-m">
+                        <input data-ng-model="card.soundFront" type="checkbox"/> Read out loud
+                        </span>
+
+            <!--<span class="right-padded-m">-->
+            <!--<input data-ng-model="card.speechRecgognitionFront" type="checkbox"/> Speech Recognition-->
+            <!--</span>-->
+
+            <span class="right-padded-s">Language</span>
+
+            <div class="btn-group right-padded-l expands">
+
+
+                <button type="button" class="btn btn-default">{{ language.name }}</button>
+                <button type="button" class="btn btn-default dropdown-toggle">
+                    <span class="caret"></span>
+                    <span class="sr-only">Split button!</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li data-ng-repeat="lang in languages"><a
+                            data-ng-click="setLanguage(lang)">{{lang.name}}</a>
+                    </li>
+                </ul>
+            </div>
+
+        </td>
+
+    </tr>
+
+    <tr>
+        <td class="right-padded-m top-padded-s">Back Text</td>
+
+        <td class="expands  top-padded-s right-padded-m">
+            <input type="text"
+                   data-ng-model="card.answer"
+                   id="answer"
+                   class="standard-input-width form-control"
+                   placeholder="Answer"
+                   data-ng-blur="updateAnswer()"
+                   required>
+        </td>
+
+    </tr>
+
+    <tr data-ng-repeat="alt in card.alternatives track by $index">
+        <td class="right-padded-m"></td>
+        <td class="expands">
+            <input type="text"
+                   data-ng-model="alt"
+                   id="alternatives"
+                   class="standard-input-width form-control"
+                   data-ng-blur="updateAlternative($index, alt)"
+                   placeholder="Alternative Answer">
+        </td>
+    </tr>
+
+    <tr class="controls">
+        <td class="right-padded-m top-padded-s"></td>
+        <td class="expands top-padded-s right-padded-m">
+            <input type="text"
+                   data-ng-model="nextAlternative"
+                   id="alternative"
+                   class="standard-input-width form-control alternative"
+                   ng-keyup="enterAlternative($event)"
+                   placeholder="Alternative Answer"
+                   data-ng-blur="updateNextAlternative()">
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="top-padded-l"></td>
+        <td class="nowrap top-padded-s middle-aligned">
+
+
+            <span class="right-padded-m">
+            <input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Recognize Speech
+            </span>
+
+            <span class="right-padded-m top-padded-m">
+            <input data-ng-model="card.soundBack" type="checkbox"/> Read out loud
+            </span>
+
+            <span class="right-padded-s">Language</span>
+
+            <div class="btn-group right-padded-l expands">
+
+                <button type="button" class="btn btn-default">{{ language.name }}</button>
+                <button type="button" class="btn btn-default dropdown-toggle">
+                    <span class="caret"></span>
+                    <span class="sr-only">Split button!</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li data-ng-repeat="lang in languages"><a data-ng-click="setLanguage(lang)">{{lang.name}}</a></li>
+                </ul>
+            </div>
+
+        </td>
+
+    </tr>
+
+
+</table>

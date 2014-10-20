@@ -1,8 +1,8 @@
 'use strict';
 
 // Cards controller
-angular.module('cards').controller('CardsController', ['$scope', '$modal', '$timeout', '$stateParams', '$state', '$location', 'Authentication', 'Packs', 'Cards',
-    function ($scope, $modal, $timeout, $stateParams, $state, $location, Authentication, Packs, Cards) {
+angular.module('cards').controller('CardsController', ['$scope', '$modal', '$timeout', '$stateParams', '$state', '$location', 'Authentication', 'Courses', 'Packs', 'Cards',
+    function ($scope, $modal, $timeout, $stateParams, $state, $location, Authentication, Courses, Packs, Cards) {
 
 
 
@@ -150,6 +150,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                     $scope.soundback = 'no';
                 }
 
+
+                Courses.get({
+                    courseId: $scope.card.course
+                }, function(course) {
+                    $scope.course = course;
+                });
 
                 Packs.get({
                     packId: $scope.card.packs[0]

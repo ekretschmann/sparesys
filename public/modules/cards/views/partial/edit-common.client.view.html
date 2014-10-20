@@ -1,0 +1,117 @@
+<table class="box-margin-s">
+
+
+    <tr>
+        <td class="top-padded-s right-padded-m">{{course.front}}</td>
+        <td class="nowrap top-padded-s middle-aligned">
+
+            {{card.question}}
+
+        </td>
+
+    </tr>
+
+    <tr>
+        <td class="top-padded-sm right-padded-m">{{course.back}}</td>
+        <td class="nowrap top-padded-sm middle-aligned">
+
+            {{card.answer}}
+
+        </td>
+
+    </tr>
+
+
+    <!--<tr>-->
+        <!--<td class="right-padded-m top-padded-sm">Lan</td>-->
+        <!--<td class="top-padded-sm">-->
+            <!--<div class="btn-group">-->
+                <!--<button type="button"-->
+                        <!--class="btn btn-default">{{ validation }}-->
+                <!--</button>-->
+                <!--<button type="button"-->
+                        <!--class="btn btn-default dropdown-toggle">-->
+                    <!--<span class="caret"></span>-->
+                    <!--<span class="sr-only">Split button!</span>-->
+                <!--</button>-->
+                <!--<ul class="dropdown-menu" role="menu">-->
+                    <!--<li data-ng-repeat="val in validations"><a-->
+                            <!--data-ng-click="setValidation(val)">{{val}}</a></li>-->
+                <!--</ul>-->
+            <!--</div>-->
+        <!--</td>-->
+    <!--</tr>-->
+
+    <tr>
+        <td class="right-padded-m top-padded-sm">Checks</td>
+        <td class="top-padded-sm">
+            <div class="btn-group">
+                <button type="button"
+                        class="btn btn-default">{{ validation }}
+                </button>
+                <button type="button"
+                        class="btn btn-default dropdown-toggle">
+                    <span class="caret"></span>
+                    <span class="sr-only">Split button!</span>
+                </button>
+                <ul class="dropdown-menu" role="menu">
+                    <li data-ng-repeat="val in validations"><a
+                            data-ng-click="setValidation(val)">{{val}}</a></li>
+                </ul>
+            </div>
+        </td>
+    </tr>
+
+    <tr data-ng-controller="DateDropdownController">
+        <td class="top-padded-s">Due date</td>
+        <td class="top-padded-s">
+
+            <div class="input-group">
+                <input type="text"
+                       class="form-control"
+                       datepicker-popup="{{format}}"
+                       ng-model="$parent.card.due"
+                       is-open="opened"
+                       min-date="minDate"
+                       datepicker-options="dateOptions"
+                       ng-required="false"
+                       close-text="Close"
+                       data-ng-blur="$parent.update()"/>
+
+
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                </div>
+            </div>
+
+        </td>
+    </tr>
+
+    <tr data-ng-controller="DateDropdownController">
+        <td class="top-padded-s">Due date</td>
+        <td class="top-padded-s">
+
+            <div class="input-group  bottom-spacer">
+                <input type="text"
+                       class="form-control"
+                       datepicker-popup="{{format}}"
+                       ng-model="$parent.card.after"
+                       is-open="opened" min-date="minDate"
+                       datepicker-options="dateOptions"
+                       date-disabled="disabled(date, mode)"
+                       ng-required="false"
+                       close-text="Close"
+                       data-ng-blur="$parent.update()"/>
+
+                <div class="input-group-btn">
+                    <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                            class="glyphicon glyphicon-calendar"></i></button>
+                </div>
+            </div>
+
+        </td>
+    </tr>
+
+
+</table>

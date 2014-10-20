@@ -166,83 +166,13 @@
 
 
 
-<!--<tr data-ng-repeat="alt in card.alternatives track by $index">-->
-<!--<td class="right-padded-m"></td>-->
-<!--<td class="expands">-->
-<!--<input type="text"-->
-<!--data-ng-model="alt"-->
-<!--id="alternatives"-->
-<!--class="standard-input-width form-control"-->
-<!--data-ng-blur="updateAlternative($index, alt)"-->
-<!--placeholder="Alternative Answer">-->
-<!--</td>-->
-<!--</tr>-->
-
-<!--<tr class="controls">-->
-<!--<td class="right-padded-m top-padded-s"></td>-->
-<!--<td class="expands top-padded-s right-padded-m">-->
-<!--<input type="text"-->
-<!--data-ng-model="nextAlternative"-->
-<!--id="alternative"-->
-<!--class="standard-input-width form-control alternative"-->
-<!--ng-keyup="enterAlternative($event)"-->
-<!--placeholder="Possible Alternative Answer (when asked front to back)"-->
-<!--data-ng-blur="updateNextAlternative()">-->
-<!--</td>-->
-<!--</tr>-->
 
 
-<!--<tr>-->
-<!--<td class="top-padded-l"></td>-->
-<!--<td class="nowrap top-padded-s middle-aligned" >-->
 
 
-<!--<span class="right-padded-m">-->
-<!--<input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Speech Recognition-->
-<!--</span>-->
-
-<!--<span class="right-padded-m top-padded-m">-->
-<!--<input data-ng-model="card.soundBack" type="checkbox"/> Read out loud-->
-<!--</span>-->
-
-<!--<span data-ng-if="card.soundBack || card.speechRecgognitionBack" class="right-padded-s">Language</span>-->
-
-<!--<div data-ng-if="card.soundBack || card.speechRecgognitionBack" class="btn-group right-padded-l expands">-->
-
-<!--<button type="button" class="btn btn-default">{{ language.name }}</button>-->
-<!--<button type="button" class="btn btn-default dropdown-toggle">-->
-<!--<span class="caret"></span>-->
-<!--<span class="sr-only">Split button!</span>-->
-<!--</button>-->
-<!--<ul class="dropdown-menu" role="menu">-->
-<!--<li data-ng-repeat="lang in languages"><a data-ng-click="setLanguage(lang)">{{lang.name}}</a></li>-->
-<!--</ul>-->
-<!--</div>-->
-
-<!--</td>-->
-
-<!--</tr>-->
 
 
-<!--<tr>-->
-<!--<td class="right-padded-m top-padded-s">Checks</td>-->
-<!--<td class="top-padded-s">-->
-<!--<div class="btn-group bottom-spacer">-->
-<!--<button type="button"-->
-<!--class="btn btn-default">{{ validation }}-->
-<!--</button>-->
-<!--<button type="button"-->
-<!--class="btn btn-default dropdown-toggle">-->
-<!--<span class="caret"></span>-->
-<!--<span class="sr-only">Split button!</span>-->
-<!--</button>-->
-<!--<ul class="dropdown-menu" role="menu">-->
-<!--<li data-ng-repeat="val in validations"><a-->
-<!--data-ng-click="setValidation(val)">{{val}}</a></li>-->
-<!--</ul>-->
-<!--</div>-->
-<!--</td>-->
-<!--</tr>-->
+
 
 
 <!--<tr>-->
@@ -282,55 +212,7 @@
 <!--</td>-->
 <!--</tr>-->
 
-<!--<tr data-ng-controller="DateDropdownController">-->
-<!--<td class="top-padded-s">Due date</td>-->
-<!--<td class="top-padded-s">-->
 
-<!--<div class="input-group bottom-spacer">-->
-<!--<input type="text"-->
-<!--class="form-control"-->
-<!--datepicker-popup="{{format}}"-->
-<!--ng-model="$parent.card.due"-->
-<!--is-open="opened"-->
-<!--min-date="minDate"-->
-<!--datepicker-options="dateOptions"-->
-<!--ng-required="false"-->
-<!--close-text="Close"-->
-<!--data-ng-blur="$parent.update()"/>-->
-
-<!--<div class="input-group-btn">-->
-<!--<button type="button" class="btn btn-default" ng-click="open($event)"><i-->
-<!--class="glyphicon glyphicon-calendar"></i></button>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--</td>-->
-<!--</tr>-->
-
-<!--<tr data-ng-controller="DateDropdownController">-->
-<!--<td class="right-padded-m top-padded-s">Start date</td>-->
-<!--<td class="top-padded-s">-->
-
-<!--<div class="input-group  bottom-spacer">-->
-<!--<input type="text"-->
-<!--class="form-control"-->
-<!--datepicker-popup="{{format}}"-->
-<!--ng-model="$parent.card.after"-->
-<!--is-open="opened" min-date="minDate"-->
-<!--datepicker-options="dateOptions"-->
-<!--date-disabled="disabled(date, mode)"-->
-<!--ng-required="false"-->
-<!--close-text="Close"-->
-<!--data-ng-blur="$parent.update()"/>-->
-
-<!--<div class="input-group-btn">-->
-<!--<button type="button" class="btn btn-default" ng-click="open($event)"><i-->
-<!--class="glyphicon glyphicon-calendar"></i></button>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--</td>-->
-<!--</tr>-->
 
 
 <!--</table>-->

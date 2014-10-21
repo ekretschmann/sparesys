@@ -1,0 +1,142 @@
+<table class="box-margin-s">
+
+
+    <tr>
+        <td class="top-aligned nowrap right-padded-m top-padded-m">Images</td>
+
+        <td class="right-padded-m top-padded-m" data-ng-if="card.images.length  === 0">
+
+            no images
+
+
+        </td>
+
+        <td>
+
+            <table>
+                <tr>
+                    <td class="right-padded-m" data-ng-repeat="img in card.images">
+                        <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
+                    </td>
+                </tr>
+            </table>
+        </td>
+
+    </tr>
+
+    <tr>
+        <td class="top-padded-sm"></td>
+        <td  class="top-padded-sm"> <a href=""
+                data-ng-click="manageImages(card)"
+                data-ng-show="authentication.user._id == card.user._id">
+            (Manage Images)
+        </a>
+        </td>
+    </tr>
+
+    <tr>
+        <td class="right-padded-m nowrap top-padded-m">
+            <section>
+                Front Text
+            </section>
+
+            <!--<section data-ng-if="card.type ==='image-text'">-->
+            <!--<section data-ng-if="sound === 'yes'">-->
+            <!--Read out loud-->
+            <!--</section>-->
+
+            <!--<section data-ng-if="sound === 'no'" class="text-muted">-->
+            <!--Read out loud-->
+            <!--</section>-->
+            <!--</section>-->
+
+        </td>
+        <td class="expands right-padded-m top-padded-m">
+            {{card.question}}
+            <!--<section data-ng-if="sound === 'no' && card.type === 'image-text'"-->
+            <!--class="text-muted nowrap standard-input-width">-->
+            <!--no text being read-->
+            <!--</section>-->
+        </td>
+
+
+    </tr>
+
+    <!--<tr-->
+    <!--data-ng-repeat="alt in card.alternativequestions track by $index">-->
+    <!--<td class="right-padded"></td>-->
+    <!--<td class="expands">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="alt"-->
+    <!--class="form-control standard-input-width "-->
+    <!--data-ng-blur="updateAlternativeQuestion($index, alt)"-->
+    <!--placeholder="Alternative">-->
+    <!--</td>-->
+    <!--</tr>-->
+
+
+    <!--<tr class="controls" data-ng-if="card.bothways">-->
+    <!--<td class="right-padded-m top-padded-s"></td>-->
+    <!--<td class="expands right-padded-m top-padded-s">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="nextAlternativeQuestion.text"-->
+    <!--id="alternativequestion"-->
+    <!--class="standard-input-width form-control alternative"-->
+    <!--ng-keyup="enterAlternativeQuestion($event)"-->
+    <!--placeholder="Possible Alternative Answer (when asked back to front)"-->
+    <!--data-ng-blur="updateNextAlternativeQuestion()">-->
+    <!--</td>-->
+    <!--</tr>-->
+
+
+
+    <tr>
+        <td class="top-padded-l"></td>
+        <td class="nowrap top-padded-s middle-aligned">
+
+
+            <span class="right-padded-m top-padded-m">
+            <input data-ng-model="card.soundBack" type="checkbox"/> Show Text
+            </span>
+
+                        <span class="right-padded-m top-padded-m">
+                        <input data-ng-model="card.soundFront" type="checkbox"/> Read out loud
+                        </span>
+
+
+
+
+        </td>
+
+    </tr>
+
+    <tr>
+        <td class="right-padded-m top-padded-s top-aligned">Back Text</td>
+
+        <td class="expands  top-padded-s right-padded-m">
+            {{card.answer}}
+        </td>
+
+    </tr>
+
+
+    <tr>
+        <td class="top-padded-l"></td>
+        <td class="nowrap top-padded-s middle-aligned">
+
+
+            <span class="right-padded-m">
+            <input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Recognize Speech
+            </span>
+
+            <span class="right-padded-m top-padded-m">
+            <input data-ng-model="card.soundBack" type="checkbox"/> Read out loud
+            </span>
+
+
+        </td>
+
+    </tr>
+
+
+</table>

@@ -19,22 +19,13 @@
         <div class="headerinfo">
             <table>
                 <tr>
-                    <td><a href="" data-ng-click="navigateToPack(pack)">{{pack.name}}</a>
+                    <td><a href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
                     </td>
                 </tr>
 
 
                 <tr>
-                    <td class="left-padded">
-
-                    <span data-ng-if="prevCard">
-                        <a class="right-padded-m" data-ng-href="#!/cards/{{prevCard._id}}/edit">prev</a>
-                    </span>
-
-                    <span data-ng-if="nextCard">
-                    <a data-ng-href="#!/cards/{{nextCard._id}}/edit">next</a>
-                    </span>
-
+                    <td><a href="" data-ng-click="navigateToPack(pack)">{{pack.name}}</a>
                     </td>
                 </tr>
 
@@ -45,13 +36,38 @@
         </div>
     </div>
 
+    <div class="pull-right">
+        <table>
+            <tr>
+                <td class="left-padded">
 
+                    <span data-ng-if="prevCard">
+                        <a class="right-padded-m" data-ng-href="#!/cards/{{prevCard._id}}/edit">previous card</a>
+                    </span>
+
+                    <span data-ng-if="nextCard">
+                    <a data-ng-href="#!/cards/{{nextCard._id}}/edit">next card</a>
+                    </span>
+
+                </td>
+            </tr>
+
+        </table>
+    </div>
+
+    <table>
     <tr>
-        <td class="right-padded-m">Card supports:</td>
-        <td>
-            <span data-ng-repeat="mode in modes" class="right-padded-m"><input type="checkbox"/> {{mode}} </span>
-        </td>
+        <td class="right-padded-m">Card supports</td>
+
     </tr>
+        <tr>
+            <td class="top-padded-sm">
+                <span data-ng-repeat="mode in modes" class="right-padded-m"><input type="checkbox"/> {{mode}} </span>
+            </td>
+        </tr>
+
+
+    </table>
 
 
     <div class="rememberators-tabs top-margin-l bottom-padded-m">
@@ -80,12 +96,23 @@
             </tab>
             <tab heading="Reverse">
                 <div class="default-border">
-                <div ng-include="'/modules/cards/views/partial/edit-reverse.client.view.html'"></div>
+                    <div ng-include="'/modules/cards/views/partial/edit-reverse.client.view.html'"></div>
                 </div>
 
             </tab>
-            <tab heading="Images">Static content</tab>
-            <tab heading="Multiple Choice">Static content</tab>
+            <tab heading="Images">
+                <div class="default-border">
+                    <div ng-include="'/modules/cards/views/partial/edit-images.client.view.html'"></div>
+                </div>
+
+
+            </tab>
+            <tab heading="Multiple Choice">
+                <div class="default-border">
+                    Multiple Choice is coming soon
+                </div>
+
+            </tab>
 
         </tabset>
     </div>

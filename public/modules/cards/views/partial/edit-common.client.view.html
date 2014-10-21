@@ -2,66 +2,83 @@
 
 
     <tr>
-        <td class="top-padded-s right-padded-m">{{course.front}}</td>
+        <td class="top-padded-s right-padded-m"><b>{{course.front}}</b></td>
 
 
-        <td class="nowrap top-padded-s middle-aligned">
+        <td class="top-padded-s middle-aligned">
 
-            {{card.question}}
-
-        </td>
-
-    </tr>
-
-    <tr>
-        <td class="right-padded-m top-padded-m middle-aligned">
-            Language
-        </td>
-        <td class="btn-group right-padded-l  top-padded-sm">
-
-
-            <button type="button" class="btn btn-default">{{ language.name }}</button>
-            <button type="button" class="btn btn-default dropdown-toggle">
-                <span class="caret"></span>
-                <span class="sr-only">Split button!</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li data-ng-repeat="lang in languages"><a
-                        data-ng-click="setLanguage(lang)">{{lang.name}}</a>
-                </li>
-            </ul>
-
-        </td>
-    </tr>
-
-
-    <tr>
-        <td class="top-padded-sm right-padded-m">{{course.back}}</td>
-        <td class="nowrap top-padded-sm middle-aligned">
-
-            {{card.answer}}
+            <b>{{card.question}}</b>
 
         </td>
 
     </tr>
 
     <tr>
-        <td class="right-padded-m top-padded-m middle-aligned">
-            Language
+        <td></td>
+        <td>
+        <table>
+            <tr>
+                <td class="right-padded-m top-padded-sm">
+                    Language
+
+                </td>
+                <td class="btn-group right-padded-l  top-padded-sm">
+
+
+                    <button type="button" class="btn btn-default">{{ language.name }}</button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="lang in languages"><a
+                                data-ng-click="setLanguage(lang)">{{lang.name}}</a>
+                        </li>
+                    </ul>
+
+                </td>
+            </tr>
+        </table>
         </td>
-        <td class="btn-group right-padded-l  top-padded-sm">
+    </tr>
 
 
-            <button type="button" class="btn btn-default">{{ language.name }}</button>
-            <button type="button" class="btn btn-default dropdown-toggle">
-                <span class="caret"></span>
-                <span class="sr-only">Split button!</span>
-            </button>
-            <ul class="dropdown-menu" role="menu">
-                <li data-ng-repeat="lang in languages"><a
-                        data-ng-click="setLanguage(lang)">{{lang.name}}</a>
-                </li>
-            </ul>
+    <tr>
+        <td class="top-padded-sm right-padded-m top-aligned"><b>{{course.back}}</b></td>
+        <td class="top-padded-sm middle-aligned">
+
+            <b>{{card.answer}}</b>
+
+        </td>
+
+    </tr>
+
+    <tr>
+        <td></td>
+        <td class="btn-group top-padded-sm">
+
+            <table>
+                <tr>
+                    <td class="right-padded-m">
+                        Language
+
+                    </td>
+                    <td class="btn-group">
+                        <button type="button" class="btn btn-default">{{ language.name }}</button>
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-ng-repeat="lang in languages"><a
+                                    data-ng-click="setLanguage(lang)">{{lang.name}}</a>
+                            </li>
+                        </ul>
+
+                    </td>
+                </tr>
+            </table>
+
 
         </td>
     </tr>

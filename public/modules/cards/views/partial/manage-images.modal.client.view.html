@@ -13,7 +13,8 @@
                             </td>
 
                             <td class="right-aligned"><input type="search" style="min-width: 200px"
-                                                             class="form-control focus" ng-model="search.text"></td>
+                                                             class="form-control focus search" ng-model="search.text">
+                            </td>
                         </tr>
                     </table>
                 </fieldset>
@@ -24,21 +25,37 @@
 
         <div class="content-section">
 
-            <div class="title">Selected Images</div>
-            <table style="max-width: 560px">
+            <!--<div class="title">Selected Images</div>-->
+
+            <!--style="max-width: 560px"-->
+            <table>
                 <tr>
 
-                    <td class="gallerypic"
-                        style="text-align:center;max-width:139px;padding: 3px 5px 24px 0px; border: 1px solid #666666"
+                    <!--style="text-align:center;max-width:139px;padding: 3px 5px 24px 0px; border: 1px solid #666666"-->
+
+
+                    <td class="gallerypic center-aligned"
+                        style="width:30%; min-width:25%; min-height: 120px"
                         data-ng-repeat="i in [0,1,2,3]">
+
                         <a href="" data-ng-click="removeImage(selected.images[i])">
                             <img ng-src="{{selected.images[i]}}" style="max-width: 120px; max-height: 120px;"/>
-                            <section data-ng-if="selected.images[i] !== '/modules/core/img/brand/placeholder_icon.png'">
-                                <div class="add-icon" style="color:#E99267;">
-                                    Remove
-                                </div>
+                            <section
+                                    data-ng-if="selected.images[i] !== '/modules/core/img/brand/placeholder_icon.png'">
+
                             </section>
                         </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="center-aligned"
+                        data-ng-repeat="i in [0,1,2,3]">
+
+                        <div data-ng-if="selected.images[i] !== '/modules/core/img/brand/placeholder_icon.png'">
+                            <a class="remove-icon" href="" data-ng-click="removeImage(selected.images[i])">
+                                Remove
+                            </a>
+                        </div>
                     </td>
                 </tr>
 
@@ -46,83 +63,71 @@
 
         </div>
 
-        <div class="content-section">
 
-            <div class="title">
-                Search Result
+        <!--<div class="title">-->
 
+
+        <!--</span>-->
+        <!--</div>-->
+        <!--<div data-ng-if="images.length === 0">-->
+        <!--No Search Result-->
+        <!--</div>-->
+
+
+        <div data-ng-if="images.length > 0" style="position: relative">
+            <div style="position: absolute; top:50%; font-size: x-large; left:3px">
                 <span data-ng-if="images.length >0">
                 <span data-ng-if="page > 1">
-                    <a href="">
-                        <i data-ng-click="prev()"
-                           class="glyphicon glyphicon-arrow-left">
-                        </i>
-                        </a>
+                <a href="">
+                    <i data-ng-click="prev()"
+                       class="glyphicon glyphicon-chevron-left">
+                    </i>
+                </a>
                 </span>
 
                 <span data-ng-if="page <= 1">
-                    <i class="glyphicon glyphicon-arrow-left text-muted">
-                    </i>
+                <i class="glyphicon glyphicon-chevron-left text-muted">
+                </i>
                 </span>
+                </span>
+            </div>
 
+            <div style="position: absolute; top:50%; right: 3px; font-size: x-large">
                 <span data-ng-if="page < max_page">
-                    <a href="">
-                        <i data-ng-click="next()"
-                           class="glyphicon glyphicon-arrow-right">
-                        </i>
-                    </a>
+                <a href="">
+                    <i data-ng-click="next()"
+                       class="glyphicon glyphicon-chevron-right">
+                    </i>
+                </a>
                 </span>
 
                 <span data-ng-if="page >= max_page">
-                        <i
-                           class="glyphicon glyphicon-arrow-right text-muted">
-                        </i>
+                <i
+                        class="glyphicon glyphicon-chevron-right text-muted">
+                </i>
                 </span>
-
-                    </span>
             </div>
-            <div data-ng-if="images.length === 0">
-                No Search Result
-            </div>
+            <table width="90%" style="margin-left: 5%; margin-right:5%">
+                <tr data-ng-repeat="row in images track by $index">
+                    <td class="gallerypic searchimage"
+                        style="position: relative"
+                        data-ng-repeat="img in row track by $index">
+                        <a href="" data-ng-click="addImage(img)">
 
 
+                            <div style="height: 128px">
+                                <span style="height: 100%; vertical-align: middle;display: inline-block;"></span>
+                                    <img ng-src="{{img}}" class="image-128" style="vertical-align: middle;"/>
+                            </div>
 
-            <div data-ng-if="images.length > 0">
-                <table width="100%">
-                    <tr data-ng-repeat="row in images track by $index">
-                        <td class="gallerypic"
-                            style="text-align:center; max-width: 33%; padding: 3px 3px 24px 3px; border: 1px solid #666666"
-                            data-ng-repeat="img in row track by $index">
-                            <a href="" data-ng-click="addImage(img)">
-                                <img ng-src="{{img}}" style="max-width: 128px; max-height: 128px;"/>
+                            <div class="add-icon" style="position: absolute; bottom:2px; left: 44%">
+                                Add
+                            </div>
+                        </a>
 
-                                <div class="add-icon">
-                                    Add
-                                </div>
-                            </a>
-
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <!--<div data-ng-repeat="img in images">-->
-            <!--<img ng-src="{{img}}"/>-->
-
-            <!--</div>-->
-
-
-
-
-        </div>
-
-        <!--<pagination total-items="totalItems" ng-model="currentPage" ng-change="pageChanged()"></pagination>-->
-        <!--<pager total-items="totalItems" items-per-page="9" ng-model="currentPage"></pager>-->
-
-
-        <div style="text-align: center">
-            <button class="btn btn-rememberators" ng-click="newSearch()">Search</button>
-            <button class="btn btn-rememberators" ng-click="ok()">OK</button>
-            <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
+                    </td>
+                </tr>
+            </table>
         </div>
     </div>
 </script>

@@ -12,9 +12,9 @@ var mongoose = require('mongoose'),
 var CardSchema = new Schema({
 
 
-    type: {
-        type: String,
-        default: 'text-text'
+    types: {
+        type: [String],
+        default: ['forward']
     },
     question: {
         type: String,

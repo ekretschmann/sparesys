@@ -1,3 +1,14 @@
+
+<div class="pull-right right-padded-sm" >
+
+
+    <a href="">
+        <i data-ng-click="areYouSureToDeleteCard(card)"
+           class="glyphicon glyphicon-remove-sign">
+        </i>
+    </a>
+</div>
+
 <table class="box-margin-s">
 
 
@@ -16,29 +27,29 @@
     <tr>
         <td></td>
         <td>
-        <table>
-            <tr>
-                <td class="right-padded-m top-padded-sm">
-                    Language
+            <table>
+                <tr>
+                    <td class="right-padded-m top-padded-sm">
+                        Language
 
-                </td>
-                <td class="btn-group right-padded-l  top-padded-sm">
+                    </td>
+                    <td class="btn-group right-padded-l  top-padded-sm">
 
 
-                    <button type="button" class="btn btn-default">{{ language.name }}</button>
-                    <button type="button" class="btn btn-default dropdown-toggle">
-                        <span class="caret"></span>
-                        <span class="sr-only">Split button!</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="lang in languages"><a
-                                data-ng-click="setLanguage(lang)">{{lang.name}}</a>
-                        </li>
-                    </ul>
+                        <button type="button" class="btn btn-default">{{ language.name }}</button>
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-ng-repeat="lang in languages"><a
+                                    data-ng-click="setLanguage(lang)">{{lang.name}}</a>
+                            </li>
+                        </ul>
 
-                </td>
-            </tr>
-        </table>
+                    </td>
+                </tr>
+            </table>
         </td>
     </tr>
 
@@ -104,6 +115,35 @@
     <!--</td>-->
     <!--</tr>-->
 
+
+    <tr>
+        <td class="right-padded-m top-padded-sm">Operation Modes</td>
+        <td class="top-padded-sm">
+
+                <span class="right-padded-m" data-ng-repeat="mode in modes">
+
+
+                    <span data-ng-if="card.types.indexOf(mode) === -1">
+                        <input type="checkbox" data-ng-click="toggleType(mode)"/>
+                    </span>
+                <span data-ng-if="card.types.indexOf(mode) > -1">
+                    <span data-ng-if="card.types.length === 1 && mode === card.types[0]">
+                          <input type="checkbox" checked disabled/>
+                    </span>
+
+                    <span data-ng-if="card.types.length > 1 || mode !== card.types[0]">
+                         <input type="checkbox" checked data-ng-click="toggleType(mode)"/>
+                    </span>
+
+
+                </span>
+                    {{mode}}
+
+                </span>
+
+        </td>
+    </tr>
+
     <tr>
         <td class="right-padded-m top-padded-sm">Checks</td>
         <td class="top-padded-sm">
@@ -151,7 +191,7 @@
     </tr>
 
     <tr data-ng-controller="DateDropdownController">
-        <td class="top-padded-s">Due date</td>
+        <td class="top-padded-s right-padded-m">Start date</td>
         <td class="top-padded-s">
 
             <div class="input-group  bottom-spacer">
@@ -177,3 +217,4 @@
 
 
 </table>
+

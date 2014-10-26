@@ -50,7 +50,6 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
 
         $scope.removeImage = function(image) {
 
-            console.log(image);
             for (var i in $scope.card.images) {
                 if ($scope.card.images[i] === image) {
                     $scope.card.images.splice(i, 1);

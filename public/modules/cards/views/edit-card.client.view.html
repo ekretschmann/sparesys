@@ -36,104 +36,77 @@
         </div>
     </div>
 
-    <div class="pull-right">
-        <table>
-            <tr>
-                <td class="left-padded">
-
-                    <span data-ng-if="prevCard">
-                        <a class="right-padded-m" data-ng-href="#!/cards/{{prevCard._id}}/edit">previous card</a>
-                    </span>
-
-                    <span data-ng-if="nextCard">
-                    <a data-ng-href="#!/cards/{{nextCard._id}}/edit">next card</a>
-                    </span>
-
-                </td>
-            </tr>
-
-        </table>
-    </div>
-
-    <table>
-    <tr>
-        <td class="right-padded-m">Card supports</td>
-
-    </tr>
-        <tr>
-            <td class="top-padded-sm">
-                <span data-ng-repeat="mode in modes" class="right-padded-m"><input type="checkbox"/> {{mode}} </span>
-            </td>
-        </tr>
+    <div class="content-header">
 
 
-    </table>
+
+        <div class="rememberators-tabs top-margin-l bottom-padded-m">
+            <tabset>
+                <tab heading="Card">
 
 
-    <div class="rememberators-tabs top-margin-l bottom-padded-m">
-        <tabset>
-            <tab heading="Card">
+                    <div class="default-border">
+
+                        <div ng-include="'/modules/cards/views/partial/edit-common.client.view.html'"></div>
 
 
-                <div class="default-border">
-
-                    <div ng-include="'/modules/cards/views/partial/edit-common.client.view.html'"></div>
-
-
-                </div>
-            </tab>
+                    </div>
+                </tab>
 
 
-            <tab heading="Forward">
+                <tab heading="Forward" data-ng-if="card.types.indexOf('forward') > -1">
 
 
-                <div class="default-border">
+                    <div class="default-border">
 
-                    <div ng-include="'/modules/cards/views/partial/edit-forward.client.view.html'"></div>
-
-
-                </div>
-            </tab>
-            <tab heading="Reverse">
-                <div class="default-border">
-                    <div ng-include="'/modules/cards/views/partial/edit-reverse.client.view.html'"></div>
-                </div>
-
-            </tab>
-            <tab heading="Images">
-                <div class="default-border">
-                    <div ng-include="'/modules/cards/views/partial/edit-images.client.view.html'"></div>
-                </div>
+                        <div ng-include="'/modules/cards/views/partial/edit-forward.client.view.html'"></div>
 
 
-            </tab>
-            <tab heading="Multiple Choice">
-                <div class="default-border">
-                    Multiple Choice is coming soon
-                </div>
+                    </div>
+                </tab>
+                <tab heading="Reverse" data-ng-if="card.types.indexOf('reverse') > -1">
+                    <div class="default-border">
+                        <div ng-include="'/modules/cards/views/partial/edit-reverse.client.view.html'"></div>
+                    </div>
 
-            </tab>
+                </tab>
+                <tab heading="Images" data-ng-if="card.types.indexOf('images') > -1">
+                    <div class="default-border">
+                        <div ng-include="'/modules/cards/views/partial/edit-images.client.view.html'"></div>
+                    </div>
 
-        </tabset>
-    </div>
 
+                </tab>
+                <tab heading="Multiple Choice" data-ng-if="card.types.indexOf('multiple choice') > -1">
+                    <div class="default-border">
+                        Multiple Choice is coming soon
+                    </div>
 
-    <div data-ng-show="error" class="text-danger" style="text-align: center">
-        <strong>Error: {{error}}</strong>
-    </div>
+                </tab>
 
-    <div class="footer">
+            </tabset>
 
-        <div>
-            <small>
-                <em class="text-muted">Created on {{card.created | date:'medium'}}</em>
-            </small>
-        </div>
-        <div data-ng-if="card.updated">
-            <small>
-                <em class="text-muted">Updated on {{card.updated | date:'medium'}}</em>
-            </small>
+            <div class="pull-right">
+
+                <small>
+                    <em class="text-muted">Created on {{card.created | date:'medium'}}</em>
+                </small>
+    <span data-ng-if="card.updated">
+        <small>
+            <em class="text-muted">Updated on {{card.updated | date:'medium'}}</em>
+        </small>
+    </span>
+
+            </div>
         </div>
 
+
+
+        <div data-ng-show="error" class="text-danger" style="text-align: center">
+            <strong>Error: {{error}}</strong>
+        </div>
+
+
     </div>
+    <div>rememberators.com</div>
 </section>

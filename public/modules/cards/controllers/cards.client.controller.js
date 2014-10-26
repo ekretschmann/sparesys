@@ -6,6 +6,25 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
 
+        $scope.toggleType = function(type) {
+
+            if ($scope.card.types.length === 1 && type === $scope.card.types[0]) {
+                return;
+            }
+
+            if ($scope.card.types.indexOf(type) === -1) {
+                $scope.card.types.push(type);
+            } else {
+                for (var i in $scope.card.types) {
+                    if ($scope.card.types[i] === type) {
+                        $scope.card.types.splice(i, 1);
+                    }
+                }
+            }
+
+            $scope.card.$update();
+        };
+
 
         $scope.navigateToPack = function (pack) {
             $timeout(function () {
@@ -29,7 +48,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.readAnswers = ['yes', 'no'];
         $scope.directions = ['one way', 'both ways'];
 
-        $scope.modes = ['forward', 'reverse', 'image', 'multiple choice'];
+        $scope.modes = ['forward', 'reverse', 'images', 'multiple choice'];
 
 
 

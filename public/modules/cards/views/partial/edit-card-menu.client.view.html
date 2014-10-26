@@ -2,9 +2,11 @@
 
 
     <a class="menu-link"
-       href=""
-       data-ng-click="areYouSureToDeleteCard(card)"
-       data-ng-show="authentication.user._id == card.user._id">Delete</a>
+       data-ng-href="#!/cards/{{prevCard._id}}/edit">Previous</a>
+
+
+    <a class="menu-link"
+       data-ng-href="#!/cards/{{nextCard._id}}/edit">Next</a>
 
 
 

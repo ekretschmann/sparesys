@@ -48,103 +48,37 @@
 <div data-ng-show="pack.cards.length > 0">
 
     <div class="content-section ">
-        <div class="pull-right bottom-padded-m">
-            <span class="right-padded-m"><input type="checkbox" data-ng-model="toggles.images"/><span
-                    class="left-padded-s">Images</span></span>
-            <span class="right-padded-m"><input type="checkbox" data-ng-model="toggles.dir"/><span
-                    class="left-padded-s">Direction</span></span>
-            <span class="right-padded-m"><input type="checkbox" data-ng-model="toggles.check"/><span
-                    class="left-padded-s">Checks</span></span>
-            <span class="right-padded-m"><input type="checkbox" data-ng-model="toggles.start"/><span
-                    class="left-padded-s">Start</span></span>
-            <span class="right-padded-s"><input type="checkbox" data-ng-model="toggles.due"/><span
-                    class="left-padded-s">Due</span></span>
-        </div>
-
-        <table id="searchTextResults" class="table-striped">
-            <thead>
-            <tr>
-                <th class="right-padded-m left-padded-s">{{course.front}}</th>
-                <th class="right-padded-m">{{course.back}}</th>
-                <th class="right-padded-m" data-ng-if="toggles.images">Images</th>
-                <th class="right-padded-m" data-ng-if="toggles.dir">Direction</th>
-                <th class="right-padded-m" data-ng-if="toggles.check">Checks</th>
-                <th class="right-padded-m" data-ng-if="toggles.due">Due</th>
-                <th class="right-padded-s" data-ng-if="toggles.start">Start</th>
-            </tr>
-            </thead>
-            <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
-
-            <tr>
 
 
-            <tr data-ng-repeat="cardId in pack.cards"
-                data-ng-controller="CardsController"
-                data-ng-init="findById(cardId)">
+        <div class="rememberators-tabs top-margin-l bottom-padded-m">
+        <tabset>
+            <tab heading="Cards">
 
 
+                <div class="default-border">
+
+                    <div ng-include="'/modules/packs/views/partial/edit-common.client.view.html'"></div>
 
 
-            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+                </div>
+            </tab>
+        </tabset>
 
+            </div>
 
-                <a href="">
-                    <i data-ng-click="areYouSureToDeleteCard(card)"
-                       class="small left-padded-s glyphicon glyphicon-remove-sign">
-                    </i>
-                </a>
+        <!--<div class="pull-right bottom-padded-m">-->
+            <!--<span class="right-padded-m"><input type="checkbox" data-ng-model="toggles.images"/><span-->
+                    <!--class="left-padded-s">Images</span></span>-->
+            <!--<span class="right-padded-m"><input type="checkbox" data-ng-model="toggles.dir"/><span-->
+                    <!--class="left-padded-s">Direction</span></span>-->
+            <!--<span class="right-padded-m"><input type="checkbox" data-ng-model="toggles.check"/><span-->
+                    <!--class="left-padded-s">Checks</span></span>-->
+            <!--<span class="right-padded-m"><input type="checkbox" data-ng-model="toggles.start"/><span-->
+                    <!--class="left-padded-s">Start</span></span>-->
+            <!--<span class="right-padded-s"><input type="checkbox" data-ng-model="toggles.due"/><span-->
+                    <!--class="left-padded-s">Due</span></span>-->
+        <!--</div>-->
 
-                <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
-            </td>
-
-            <td class="right-padded-m top-padded top-aligned expands">
-                <section data-ng-if="card.format === 'short'">
-                    {{card.answer}}
-                </section>
-                <section data-ng-if="card.format === 'long'">
-                    <div style="color: #808080">{{card.answer}}</div>
-                </section>
-            </td>
-
-
-            <td class="right-padded-m nowrap right-aligned top-aligned" data-ng-if="toggles.images">
-                {{card.images.length}}
-            </td>
-
-
-            <td class="right-padded-m nowrap right-aligned top-aligned" data-ng-if="toggles.dir">
-                <span data-ng-if="card.bothways">both ways</span>
-                <span data-ng-if="!card.bothways">one way</span>
-            </td>
-
-            <td class="right-padded-m nowrap right-aligned top-aligned" data-ng-if="toggles.check">
-                {{card.validation}}
-            </td>
-
-
-            <td class="right-padded-s nowrap right-aligned top-aligned" data-ng-if="toggles.start">
-                    <span data-ng-if="card.after">
-                        {{card.after | date:'shortDate'}}
-                    </span>
-                    <span data-ng-if="!card.after">
-                        now
-                    </span>
-            </td>
-
-
-            <td class="right-padded-s nowrap right-aligned top-aligned" data-ng-if="toggles.due">
-                    <span data-ng-if="card.due">
-                        {{card.due | date:'shortDate'}}
-                    </span>
-                    <span data-ng-if="!card.due">
-                        -
-                    </span>
-            </td>
-
-            </tr>
-
-            </tbody>
-        </table>
 
     </div>
 </div>

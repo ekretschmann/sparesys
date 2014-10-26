@@ -1,0 +1,289 @@
+<div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl">
+    <div class="pull-right right-padded-sm">
+
+
+        <a href="">
+            <i data-ng-click="areYouSureToDeletePack(card)"
+               class="glyphicon glyphicon-remove-sign">
+            </i>
+        </a>
+    </div>
+
+    <table class="box-margin-s">
+
+
+        <tr>
+            <td class="top-padded-s right-padded-m"><b>{{course.front}}</b></td>
+
+
+            <td>
+                <table>
+                    <tr>
+                        <td class="right-padded-m top-padded-sm">
+                            Language
+
+                        </td>
+                        <td class="btn-group right-padded-l  top-padded-sm">
+
+
+                            <button type="button" class="btn btn-default">{{ language.name }}</button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="lang in languages"><a
+                                        data-ng-click="setLanguage(lang)">{{lang.name}}</a>
+                                </li>
+                            </ul>
+
+                        </td>
+                    </tr>
+                </table>
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="top-padded-sm right-padded-m top-aligned"><b>{{course.back}}</b></td>
+
+            <td class="btn-group top-padded-sm">
+
+                <table>
+                    <tr>
+                        <td class="right-padded-m">
+                            Language
+
+                        </td>
+                        <td class="btn-group">
+                            <button type="button" class="btn btn-default">{{ language.name }}</button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="lang in languages"><a
+                                        data-ng-click="setLanguage(lang)">{{lang.name}}</a>
+                                </li>
+                            </ul>
+
+                        </td>
+                    </tr>
+                </table>
+
+
+            </td>
+        </tr>
+
+
+        <!--<tr>-->
+        <!--<td class="right-padded-m top-padded-sm">Lan</td>-->
+        <!--<td class="top-padded-sm">-->
+        <!--<div class="btn-group">-->
+        <!--<button type="button"-->
+        <!--class="btn btn-default">{{ validation }}-->
+        <!--</button>-->
+        <!--<button type="button"-->
+        <!--class="btn btn-default dropdown-toggle">-->
+        <!--<span class="caret"></span>-->
+        <!--<span class="sr-only">Split button!</span>-->
+        <!--</button>-->
+        <!--<ul class="dropdown-menu" role="menu">-->
+        <!--<li data-ng-repeat="val in validations"><a-->
+        <!--data-ng-click="setValidation(val)">{{val}}</a></li>-->
+        <!--</ul>-->
+        <!--</div>-->
+        <!--</td>-->
+        <!--</tr>-->
+
+
+        <tr>
+            <td class="right-padded-m top-padded-sm">Operation Modes</td>
+            <td class="top-padded-sm">
+
+                <span class="right-padded-m" data-ng-repeat="mode in modes">
+
+
+                    <span data-ng-if="pack.modes.indexOf(mode) === -1">
+                        <input type="checkbox" data-ng-click="toggleMode(mode)"/>
+                    </span>
+                <span data-ng-if="pack.modes.indexOf(mode) > -1">
+                    <span data-ng-if="pack.modes.length === 1 && mode === pack.modes[0]">
+                          <input type="checkbox" checked disabled/>
+                    </span>
+
+                    <span data-ng-if="pack.modes.length > 1 || mode !== pack.modes[0]">
+                         <input type="checkbox" checked data-ng-click="toggleMode(mode)"/>
+                    </span>
+
+
+                </span>
+                    {{mode}}
+
+                </span>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td class="right-padded-m top-padded-sm">Checks</td>
+            <td class="top-padded-sm">
+                <div class="btn-group">
+                    <button type="button"
+                            class="btn btn-default">{{ check }}
+                    </button>
+                    <button type="button"
+                            class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="check in checks"><a
+                                data-ng-click="setCheck(check)">{{check}}</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+
+        <tr data-ng-controller="DateDropdownController">
+            <td class="top-padded-s">Due date</td>
+            <td class="top-padded-s">
+
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           datepicker-popup="{{format}}"
+                           ng-model="$parent.card.due"
+                           is-open="opened"
+                           min-date="minDate"
+                           datepicker-options="dateOptions"
+                           ng-required="false"
+                           close-text="Close"
+                           data-ng-blur="$parent.update()"/>
+
+
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                class="glyphicon glyphicon-calendar"></i></button>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+
+        <tr data-ng-controller="DateDropdownController">
+            <td class="top-padded-s right-padded-m">Start date</td>
+            <td class="top-padded-s">
+
+                <div class="input-group  bottom-spacer">
+                    <input type="text"
+                           class="form-control"
+                           datepicker-popup="{{format}}"
+                           ng-model="$parent.card.after"
+                           is-open="opened" min-date="minDate"
+                           datepicker-options="dateOptions"
+                           date-disabled="disabled(date, mode)"
+                           ng-required="false"
+                           close-text="Close"
+                           data-ng-blur="$parent.update()"/>
+
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                                class="glyphicon glyphicon-calendar"></i></button>
+                    </div>
+                </div>
+
+            </td>
+        </tr>
+
+
+    </table>
+</div>
+
+<table class="table-striped top-padded-l">
+    <thead>
+    <tr>
+        <th class="right-padded-m left-padded-s">{{course.front}}</th>
+        <th class="right-padded-m">{{course.back}}</th>
+        <!--<th class="right-padded-m" data-ng-if="toggles.images">Images</th>-->
+        <th class="right-padded-m">Modes</th>
+        <th class="right-padded-m">Checks</th>
+        <th class="right-padded-m">Due</th>
+        <th class="right-padded-s">Start</th>
+    </tr>
+    </thead>
+    <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
+
+    <tr>
+
+
+    <tr data-ng-repeat="cardId in pack.cards"
+        data-ng-controller="CardsController"
+        data-ng-init="findById(cardId)">
+
+
+        <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+
+
+            <a href="">
+                <i data-ng-click="areYouSureToDeleteCard(card)"
+                   class="small left-padded-s glyphicon glyphicon-remove-sign">
+                </i>
+            </a>
+
+            <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+        </td>
+
+        <td class="right-padded-m top-padded top-aligned expands">
+            <section data-ng-if="card.format === 'short'">
+                {{card.answer}}
+            </section>
+            <section data-ng-if="card.format === 'long'">
+                <div style="color: #808080">{{card.answer}}</div>
+            </section>
+        </td>
+
+
+        <!--<td class="right-padded-m nowrap right-aligned top-aligned" data-ng-if="toggles.images">-->
+        <!--{{card.images.length}}-->
+        <!--</td>-->
+
+
+        <td class="right-padded-m nowrap top-aligned">
+
+            <div data-ng-repeat="mode in card.modes">
+                {{mode}}
+            </div>
+
+        </td>
+
+        <td class="right-padded-m nowrap right-aligned top-aligned">
+            {{card.check}}
+        </td>
+
+
+        <td class="right-padded-s nowrap right-aligned top-aligned">
+                    <span data-ng-if="card.after">
+                        {{card.after | date:'shortDate'}}
+                    </span>
+                    <span data-ng-if="!card.after">
+                        now
+                    </span>
+        </td>
+
+
+        <td class="right-padded-s nowrap right-aligned top-aligned">
+                    <span data-ng-if="card.due">
+                        {{card.due | date:'shortDate'}}
+                    </span>
+                    <span data-ng-if="!card.due">
+                        -
+                    </span>
+        </td>
+
+    </tr>
+
+    </tbody>
+</table>
+
+

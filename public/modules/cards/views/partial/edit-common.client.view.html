@@ -123,16 +123,16 @@
                 <span class="right-padded-m" data-ng-repeat="mode in modes">
 
 
-                    <span data-ng-if="card.types.indexOf(mode) === -1">
-                        <input type="checkbox" data-ng-click="toggleType(mode)"/>
+                    <span data-ng-if="card.modes.indexOf(mode) === -1">
+                        <input type="checkbox" data-ng-click="toggleMode(mode)"/>
                     </span>
-                <span data-ng-if="card.types.indexOf(mode) > -1">
-                    <span data-ng-if="card.types.length === 1 && mode === card.types[0]">
+                <span data-ng-if="card.modes.indexOf(mode) > -1">
+                    <span data-ng-if="card.modes.length === 1 && mode === card.modes[0]">
                           <input type="checkbox" checked disabled/>
                     </span>
 
-                    <span data-ng-if="card.types.length > 1 || mode !== card.types[0]">
-                         <input type="checkbox" checked data-ng-click="toggleType(mode)"/>
+                    <span data-ng-if="card.modes.length > 1 || mode !== card.modes[0]">
+                         <input type="checkbox" checked data-ng-click="toggleMode(mode)"/>
                     </span>
 
 
@@ -149,7 +149,7 @@
         <td class="top-padded-sm">
             <div class="btn-group">
                 <button type="button"
-                        class="btn btn-default">{{ validation }}
+                        class="btn btn-default">{{ check }}
                 </button>
                 <button type="button"
                         class="btn btn-default dropdown-toggle">
@@ -157,8 +157,8 @@
                     <span class="sr-only">Split button!</span>
                 </button>
                 <ul class="dropdown-menu" role="menu">
-                    <li data-ng-repeat="val in validations"><a
-                            data-ng-click="setValidation(val)">{{val}}</a></li>
+                    <li data-ng-repeat="check in checks"><a
+                            data-ng-click="setCheck(check)">{{check}}</a></li>
                 </ul>
             </div>
         </td>

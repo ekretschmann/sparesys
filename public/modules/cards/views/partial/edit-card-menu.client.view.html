@@ -2,11 +2,23 @@
 
 
     <a class="menu-link"
+       data-ng-if="prevCard"
        data-ng-href="#!/cards/{{prevCard._id}}/edit">Previous</a>
 
 
+    <span
+       data-ng-if="!prevCard"
+       class="text-muted font-m">Previous</span>
+
+
     <a class="menu-link"
+       data-ng-if="nextCard"
        data-ng-href="#!/cards/{{nextCard._id}}/edit">Next</a>
+
+
+    <span
+       data-ng-if="!nextCard"
+       class="text-muted font-m">Next</span>
 
 
 

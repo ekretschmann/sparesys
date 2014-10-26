@@ -12,7 +12,7 @@ var mongoose = require('mongoose'),
 var CardSchema = new Schema({
 
 
-    types: {
+    modes: {
         type: [String],
         default: ['forward']
     },
@@ -100,7 +100,7 @@ var CardSchema = new Schema({
         type: [String],
         default: []
     },
-    validation: {
+    check: {
         type: String,
         default: 'default'
     },

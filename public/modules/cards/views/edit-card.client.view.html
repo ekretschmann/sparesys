@@ -54,7 +54,7 @@
                 </tab>
 
 
-                <tab heading="Forward" data-ng-if="card.types.indexOf('forward') > -1">
+                <tab heading="Forward" data-ng-if="card.modes.indexOf('forward') > -1">
 
 
                     <div class="default-border">
@@ -64,20 +64,20 @@
 
                     </div>
                 </tab>
-                <tab heading="Reverse" data-ng-if="card.types.indexOf('reverse') > -1">
+                <tab heading="Reverse" data-ng-if="card.modes.indexOf('reverse') > -1">
                     <div class="default-border">
                         <div ng-include="'/modules/cards/views/partial/edit-reverse.client.view.html'"></div>
                     </div>
 
                 </tab>
-                <tab heading="Images" data-ng-if="card.types.indexOf('images') > -1">
+                <tab heading="Images" data-ng-if="card.modes.indexOf('images') > -1">
                     <div class="default-border">
                         <div ng-include="'/modules/cards/views/partial/edit-images.client.view.html'"></div>
                     </div>
 
 
                 </tab>
-                <tab heading="Multiple Choice" data-ng-if="card.types.indexOf('multiple choice') > -1">
+                <tab heading="Multiple Choice" data-ng-if="card.modes.indexOf('multiple choice') > -1">
                     <div class="default-border">
                         Multiple Choice is coming soon
                     </div>

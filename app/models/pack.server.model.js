@@ -10,6 +10,15 @@ var mongoose = require('mongoose'),
  * Pack Schema
  */
 var PackSchema = new Schema({
+
+    modes: {
+        type: [String],
+        default: ['forward']
+    },
+    checks: {
+        type: String,
+        default: 'default'
+    },
     name: {
         type: String,
         default: '',

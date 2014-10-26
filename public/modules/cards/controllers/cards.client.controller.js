@@ -6,18 +6,21 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
 
-        $scope.toggleType = function(type) {
+        $scope.toggleMode = function(mode) {
 
-            if ($scope.card.types.length === 1 && type === $scope.card.types[0]) {
+            console.log(mode);
+            console.log($scope.card.modes);
+
+            if ($scope.card.modes.length === 1 && mode === $scope.card.modes[0]) {
                 return;
             }
 
-            if ($scope.card.types.indexOf(type) === -1) {
-                $scope.card.types.push(type);
+            if ($scope.card.modes.indexOf(mode) === -1) {
+                $scope.card.modes.push(mode);
             } else {
-                for (var i in $scope.card.types) {
-                    if ($scope.card.types[i] === type) {
-                        $scope.card.types.splice(i, 1);
+                for (var i in $scope.card.modes) {
+                    if ($scope.card.modes[i] === mode) {
+                        $scope.card.modes.splice(i, 1);
                     }
                 }
             }
@@ -38,12 +41,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.nextAlternativeQuestion = {};
         $scope.nextAlternativeQuestion.text = '';
 
-        $scope.validation = 'leave unchanged';
-        $scope.sound = 'leave unchanged';
-        $scope.soundback = 'leave unchanged';
-        $scope.direction = 'leave unchanged';
+        $scope.check = 'self-checked for new cards';
+//        $scope.sound = 'leave unchanged';
+//        $scope.soundback = 'leave unchanged';
+//        $scope.direction = 'leave unchanged';
 
-        $scope.validations = ['always computer-checked', 'always self-checked', 'self-checked for new cards'];
+        $scope.checks = ['always computer-checked', 'always self-checked', 'self-checked for new cards'];
         $scope.readQuestions = ['yes', 'no'];
         $scope.readAnswers = ['yes', 'no'];
         $scope.directions = ['one way', 'both ways'];
@@ -66,28 +69,17 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         ];
 
         var selectedIndex = 0;
-//        var index = 0;
-//        if (course.language) {
-//
-//            $scope.languages.forEach(function (lang) {
-//
-//                if (lang.name === course.language.name) {
-//                    selectedIndex = index;
-//                }
-//                index++;
-//            });
-//        }
         $scope.language = $scope.languages[selectedIndex];
 
-        $scope.setValidation = function (value) {
+        $scope.setCheck = function (value) {
 
 
             if (value.toString() === 'always computer-checked') {
-                $scope.card.validation = 'checked';
+                $scope.card.check = 'checked';
             } else if (value.toString() === 'always self-checked') {
-                $scope.card.validation = 'self';
+                $scope.card.check = 'self';
             } else {
-                $scope.card.validation = 'default';
+                $scope.card.check = 'default';
             }
 
             $scope.card.$update(function (c) {
@@ -95,7 +87,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });
-            $scope.validation = value;
+            $scope.check = value;
         };
 
         $scope.setSound = function (value) {
@@ -143,12 +135,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
 
-                if ($scope.card.validation === 'self') {
-                    $scope.validation = 'always self-checked';
-                } else if ($scope.card.validation === 'checked') {
-                    $scope.validation = 'always computer-checked';
+                if ($scope.card.check === 'self') {
+                    $scope.check = 'always self-checked';
+                } else if ($scope.card.check === 'checked') {
+                    $scope.check = 'always computer-checked';
                 }  else {
-                    $scope.validation = 'self-checked for new cards';
+                    $scope.check = 'self-checked for new cards';
                 }
 
                 if ($scope.card.bothways) {

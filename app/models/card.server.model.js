@@ -82,11 +82,19 @@ var CardSchema = new Schema({
         type: Number,
         default: 0.0
     },
-    sound: {
+    readFront: {
         type: Boolean,
         default: false
     },
-    soundback: {
+    readBack: {
+        type: Boolean,
+        default: false
+    },
+    speechRecognitionFront: {
+        type: Boolean,
+        default: false
+    },
+    speechRecognitionBack: {
         type: Boolean,
         default: false
     },

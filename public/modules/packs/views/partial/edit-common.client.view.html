@@ -1,28 +1,16 @@
 <div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl">
-    <div class="pull-right right-padded-sm">
 
-
-        <a href="">
-            <i data-ng-click="areYouSureToDeletePack(card)"
-               class="glyphicon glyphicon-remove-sign">
-            </i>
-        </a>
-    </div>
 
     <table class="box-margin-s">
 
 
         <tr>
-            <td class="top-padded-s right-padded-m"><b>{{course.front}}</b></td>
+            <td class="top-padded-s right-padded-m middle-aligned">Language Front</td>
 
 
             <td>
                 <table>
                     <tr>
-                        <td class="right-padded-m top-padded-sm">
-                            Language
-
-                        </td>
                         <td class="btn-group right-padded-l  top-padded-sm">
 
 
@@ -45,16 +33,12 @@
 
 
         <tr>
-            <td class="top-padded-sm right-padded-m top-aligned"><b>{{course.back}}</b></td>
+            <td class="top-padded-sm right-padded-m  middle-aligned">Language Back</td>
 
             <td class="btn-group top-padded-sm">
 
                 <table>
                     <tr>
-                        <td class="right-padded-m">
-                            Language
-
-                        </td>
                         <td class="btn-group">
                             <button type="button" class="btn btn-default">{{ language.name }}</button>
                             <button type="button" class="btn btn-default dropdown-toggle">
@@ -197,19 +181,25 @@
         </tr>
 
 
+
     </table>
+
+    <div class="top-padded-s center-aligned bottom-padded-m">
+        <button class="btn btn-rememberators" ng-click="updateCards()">Update Cards</button>
+
+    </div>
 </div>
 
 <table class="table-striped top-padded-l">
     <thead>
     <tr>
-        <th class="right-padded-m left-padded-s">{{course.front}}</th>
-        <th class="right-padded-m">{{course.back}}</th>
-        <!--<th class="right-padded-m" data-ng-if="toggles.images">Images</th>-->
-        <th class="right-padded-m">Modes</th>
-        <th class="right-padded-m">Checks</th>
-        <th class="right-padded-m">Due</th>
-        <th class="right-padded-s">Start</th>
+        <th class="right-padded-m left-padded-s top-aligned">Card</th>
+        <th class="right-padded-m top-aligned">Language Front</th>
+        <th class="right-padded-m top-aligned">Language Back</th>
+        <th class="right-padded-m top-aligned">Modes</th>
+        <th class="right-padded-m top-aligned">Checks</th>
+        <th class="right-padded-m top-aligned">Due</th>
+        <th class="right-padded-s top-aligned">Start</th>
     </tr>
     </thead>
     <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
@@ -222,7 +212,7 @@
         data-ng-init="findById(cardId)">
 
 
-        <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+        <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width expands">
 
 
             <a href="">
@@ -234,20 +224,27 @@
             <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
         </td>
 
-        <td class="right-padded-m top-padded top-aligned expands">
-            <section data-ng-if="card.format === 'short'">
-                {{card.answer}}
-            </section>
-            <section data-ng-if="card.format === 'long'">
-                <div style="color: #808080">{{card.answer}}</div>
-            </section>
-        </td>
-
-
-        <!--<td class="right-padded-m nowrap right-aligned top-aligned" data-ng-if="toggles.images">-->
-        <!--{{card.images.length}}-->
+        <!--<td class="right-padded-m top-padded top-aligned expands">-->
+        <!--<section data-ng-if="card.format === 'short'">-->
+        <!--{{card.answer}}-->
+        <!--</section>-->
+        <!--<section data-ng-if="card.format === 'long'">-->
+        <!--<div style="color: #808080">{{card.answer}}</div>-->
+        <!--</section>-->
         <!--</td>-->
 
+
+        <td class="right-padded-m nowrap left-aligned top-aligned">
+            <div data-ng-if="card.languageFront">{{card.languageFront.name}}</div>
+            <div data-ng-if="!card.languageFront">none</div>
+
+        </td>
+
+        <td class="right-padded-m nowrap left-aligned top-aligned">
+            <div data-ng-if="card.languageBack">{{card.languageBack.name}}</div>
+            <div data-ng-if="!card.languageBack">none</div>
+
+        </td>
 
         <td class="right-padded-m nowrap top-aligned">
 

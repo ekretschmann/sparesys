@@ -51,7 +51,7 @@ var CourseSchema = new Schema({
         type: [Schema.Types.ObjectId],
         default: []
     },
-    language: {
+    languageFront: {
         name: String,
         code: String
     },

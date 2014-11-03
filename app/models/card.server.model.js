@@ -12,6 +12,15 @@ var mongoose = require('mongoose'),
 var CardSchema = new Schema({
 
 
+    languageFront: {
+        name: String,
+        code: String
+    },
+
+    languageback: {
+        name: String,
+        code: String
+    },
     modes: {
         type: [String],
         default: ['forward']

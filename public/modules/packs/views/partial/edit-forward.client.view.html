@@ -1,0 +1,211 @@
+<table class="box-margin-s">
+    <tr>
+        <td class="right-padded-m nowrap top-padded-m">
+            <section>
+                Front Text
+            </section>
+
+            <!--<section data-ng-if="card.type ==='image-text'">-->
+            <!--<section data-ng-if="sound === 'yes'">-->
+            <!--Read out loud-->
+            <!--</section>-->
+
+            <!--<section data-ng-if="sound === 'no'" class="text-muted">-->
+            <!--Read out loud-->
+            <!--</section>-->
+            <!--</section>-->
+
+        </td>
+        <td class="expands right-padded-m top-padded-m">
+            <section>
+                <input type="text"
+
+                       data-ng-model="card.question"
+                       id="question"
+                       class=" form-control focus standard-input-width"
+                       placeholder="Question"
+                       data-ng-blur="update()"
+                       required>
+            </section>
+
+            <!--<section data-ng-if="sound === 'no' && card.type === 'image-text'"-->
+            <!--class="text-muted nowrap standard-input-width">-->
+            <!--no text being read-->
+            <!--</section>-->
+        </td>
+
+
+    </tr>
+
+    <!--<tr-->
+    <!--data-ng-repeat="alt in card.alternativequestions track by $index">-->
+    <!--<td class="right-padded"></td>-->
+    <!--<td class="expands">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="alt"-->
+    <!--class="form-control standard-input-width "-->
+    <!--data-ng-blur="updateAlternativeQuestion($index, alt)"-->
+    <!--placeholder="Alternative">-->
+    <!--</td>-->
+    <!--</tr>-->
+
+
+    <!--<tr class="controls" data-ng-if="card.bothways">-->
+    <!--<td class="right-padded-m top-padded-s"></td>-->
+    <!--<td class="expands right-padded-m top-padded-s">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="nextAlternativeQuestion.text"-->
+    <!--id="alternativequestion"-->
+    <!--class="standard-input-width form-control alternative"-->
+    <!--ng-keyup="enterAlternativeQuestion($event)"-->
+    <!--placeholder="Possible Alternative Answer (when asked back to front)"-->
+    <!--data-ng-blur="updateNextAlternativeQuestion()">-->
+    <!--</td>-->
+    <!--</tr>-->
+
+
+    <tr>
+        <td class="top-padded-l"></td>
+        <td class="nowrap top-padded-s middle-aligned">
+
+
+                        <span class="right-padded-m top-padded-m">
+                        <input data-ng-model="card.soundFront" type="checkbox"/> Read out loud
+                        </span>
+
+            <!--<span class="right-padded-m">-->
+            <!--<input data-ng-model="card.speechRecgognitionFront" type="checkbox"/> Speech Recognition-->
+            <!--</span>-->
+
+
+        </td>
+
+    </tr>
+
+    <tr>
+        <td class="right-padded-m top-padded-s">Back Text</td>
+
+        <td class="expands  top-padded-s right-padded-m">
+            <input type="text"
+                   data-ng-model="card.answer"
+                   id="answer"
+                   class="standard-input-width form-control"
+                   placeholder="Answer"
+                   data-ng-blur="updateAnswer()"
+                   required>
+        </td>
+
+    </tr>
+
+    <tr data-ng-repeat="alt in card.alternatives track by $index">
+        <td class="right-padded-m"></td>
+        <td class="expands">
+            <input type="text"
+                   data-ng-model="alt"
+                   id="alternatives"
+                   class="standard-input-width form-control"
+                   data-ng-blur="updateAlternative($index, alt)"
+                   placeholder="Alternative Answer">
+        </td>
+    </tr>
+
+    <tr class="controls">
+        <td class="right-padded-m top-padded-s"></td>
+        <td class="expands top-padded-s right-padded-m">
+            <input type="text"
+                   data-ng-model="nextAlternative"
+                   id="alternative"
+                   class="standard-input-width form-control alternative"
+                   ng-keyup="enterAlternative($event)"
+                   placeholder="Alternative Answer"
+                   data-ng-blur="updateNextAlternative()">
+        </td>
+    </tr>
+
+
+    <tr>
+        <td class="top-padded-l"></td>
+        <td class="nowrap top-padded-s middle-aligned">
+
+
+            <span class="right-padded-m">
+            <input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Recognize Speech
+            </span>
+
+            <span class="right-padded-m top-padded-m">
+            <input data-ng-model="card.soundBack" type="checkbox"/> Read out loud
+            </span>
+
+
+        </td>
+
+    </tr>
+
+
+</table>
+
+
+<table class="table-striped top-padded-l">
+    <thead>
+    <tr>
+        <th class="right-padded-m left-padded-s top-aligned">{{course.front}}</th>
+        <th class="right-padded-m top-aligned">{{course.back}}</th>
+        <th class="right-padded-m top-aligned">Read Front</th>
+        <th class="right-padded-m top-aligned">Read Back</th>
+        <th class="right-padded-s top-aligned">Speech Recognition</th>
+    </tr>
+    </thead>
+    <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
+
+    <tr>
+
+
+    <tr data-ng-repeat="cardId in pack.cards"
+        data-ng-controller="CardsController"
+        data-ng-init="findById(cardId)">
+
+
+        <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+
+
+            <a href="">
+                <i data-ng-click="areYouSureToDeleteCard(card)"
+                   class="small left-padded-s glyphicon glyphicon-remove-sign">
+                </i>
+            </a>
+
+            <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+        </td>
+
+        <td class="right-padded-m top-padded top-aligned">
+            <section data-ng-if="card.format === 'short'">
+                {{card.answer}}
+            </section>
+            <section data-ng-if="card.format === 'long'">
+                <div style="color: #808080">{{card.answer}}</div>
+            </section>
+        </td>
+
+
+        <td class="right-padded-m nowrap left-aligned top-aligned">
+yes
+        </td>
+
+        <td class="right-padded-m nowrap left-aligned top-aligned">
+   no
+        </td>
+
+
+
+        <td class="right-padded-m nowrap right-aligned top-aligned">
+
+no
+        </td>
+
+
+
+
+    </tr>
+
+    </tbody>
+</table>

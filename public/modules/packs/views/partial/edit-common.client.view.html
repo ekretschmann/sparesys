@@ -81,33 +81,33 @@
         <!--</tr>-->
 
 
-        <tr>
-            <td class="right-padded-m top-padded-sm">Operation Modes</td>
-            <td class="top-padded-sm">
+        <!--<tr>-->
+            <!--<td class="right-padded-m top-padded-sm">Operation Modes</td>-->
+            <!--<td class="top-padded-sm">-->
 
-                <span class="right-padded-m" data-ng-repeat="mode in modes">
-
-
-                    <span data-ng-if="pack.modes.indexOf(mode) === -1">
-                        <input type="checkbox" data-ng-click="toggleMode(mode)"/>
-                    </span>
-                <span data-ng-if="pack.modes.indexOf(mode) > -1">
-                    <span data-ng-if="pack.modes.length === 1 && mode === pack.modes[0]">
-                          <input type="checkbox" checked disabled/>
-                    </span>
-
-                    <span data-ng-if="pack.modes.length > 1 || mode !== pack.modes[0]">
-                         <input type="checkbox" checked data-ng-click="toggleMode(mode)"/>
-                    </span>
+                <!--<span class="right-padded-m" data-ng-repeat="mode in modes">-->
 
 
-                </span>
-                    {{mode}}
+                    <!--<span data-ng-if="pack.modes.indexOf(mode) === -1">-->
+                        <!--<input type="checkbox" data-ng-click="toggleMode(mode)"/>-->
+                    <!--</span>-->
+                <!--<span data-ng-if="pack.modes.indexOf(mode) > -1">-->
+                    <!--<span data-ng-if="pack.modes.length === 1 && mode === pack.modes[0]">-->
+                          <!--<input type="checkbox" checked disabled/>-->
+                    <!--</span>-->
 
-                </span>
+                    <!--<span data-ng-if="pack.modes.length > 1 || mode !== pack.modes[0]">-->
+                         <!--<input type="checkbox" checked data-ng-click="toggleMode(mode)"/>-->
+                    <!--</span>-->
 
-            </td>
-        </tr>
+
+                <!--</span>-->
+                    <!--{{mode}}-->
+
+                <!--</span>-->
+
+            <!--</td>-->
+        <!--</tr>-->
 
         <tr>
             <td class="right-padded-m top-padded-sm">Checks</td>
@@ -196,7 +196,7 @@
         <th class="right-padded-m left-padded-s top-aligned">Card</th>
         <th class="right-padded-m top-aligned">Language Front</th>
         <th class="right-padded-m top-aligned">Language Back</th>
-        <th class="right-padded-m top-aligned">Modes</th>
+        <!--<th class="right-padded-m top-aligned">Modes</th>-->
         <th class="right-padded-m top-aligned">Checks</th>
         <th class="right-padded-m top-aligned">Due</th>
         <th class="right-padded-s top-aligned">Start</th>
@@ -246,13 +246,15 @@
 
         </td>
 
-        <td class="right-padded-m nowrap top-aligned">
 
-            <div data-ng-repeat="mode in card.modes">
-                {{mode}}
-            </div>
 
-        </td>
+        <!--<td class="right-padded-m nowrap top-aligned">-->
+
+            <!--<div data-ng-repeat="mode in card.modes">-->
+                <!--{{mode}}-->
+            <!--</div>-->
+
+        <!--</td>-->
 
         <td class="right-padded-m nowrap right-aligned top-aligned">
             {{card.check}}

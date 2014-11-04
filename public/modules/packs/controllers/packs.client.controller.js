@@ -49,7 +49,7 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
 
         $scope.checkForward = function(card) {
-            if (card.modes.indexOf('forward') === -1) {
+            if (card.modes && card.modes.indexOf('forward') === -1) {
                 return "text-muted";
             }
         };

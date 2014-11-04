@@ -38,6 +38,7 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
 
 
+
         if (!$scope.authentication.user) {
             $location.path('/');
         }
@@ -46,6 +47,12 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             $scope.showhelp = ! $scope.showhelp;
         };
 
+
+        $scope.checkForward = function(card) {
+            if (card.modes.indexOf('forward') === -1) {
+                return "text-muted";
+            }
+        };
 
         $scope.userHasEditedPackBefore = function() {
             return JourneyService.userHasEditedPackBefore();

@@ -1,33 +1,103 @@
 <div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl">
 
-    <table class="box-margin-s expands">
+    <table class="box-margin-s">
+
+
         <tr>
-            <td class="right-padded-m top-aligned nowrap">
-                <b>Card Front</b>
+            <td class="right-padded-m top-aligned nowrap top-padded-s expands" colspan="4">
+                <b>Change Settings for all Cards in this Pack</b>
             </td>
-            <td class="nowrap right-padded-xl top-aligned">
+
+        </tr>
+
+        <tr>
+            <td class="right-padded-m top-aligned nowrap top-padded-m">
+                Questions
+            </td>
 
 
+            <td class="nowrap right-padded-xl top-aligned top-padded-m">
                 <input data-ng-model="card.soundFront" type="checkbox"/> Read out loud
+            </td>
 
+            <td class="nowrap right-padded-xl top-aligned top-padded-m">
+                <input data-ng-model="card.soundFront" type="checkbox"/> Don't Read out loud
             </td>
 
 
-            <td class="right-padded-m top-aligned nowrap"><b>Card Back</b></td>
+            <td class="nowrap right-padded-xl top-aligned top-padded-m">
+                <input data-ng-model="card.soundFront" type="checkbox"/> Leave Unchanged
+            </td>
 
-            <td class="expands right-padded-m">
+        </tr>
+        <tr>
 
-                <div class="right-padded-m">
-                    <input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Recognize Speech
-                </div>
+            <td class="right-padded-m top-aligned nowrap top-padded-m">Expected Answers</td>
 
-                <div class="right-padded-m">
-                    <input data-ng-model="card.soundBack" type="checkbox"/> Read out loud
-                </div>
+            <td class="expands right-padded-m top-padded-m">
 
+                <input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Recognize Speech
+            </td>
+
+            <td class="expands right-padded-m top-padded-m">
+
+                <input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Don't Recognize Speech
+            </td>
+
+            <td class="expands right-padded-m top-padded-m">
+
+                <input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Leave Unchanged
+            </td>
+
+        </tr>
+
+        <tr>
+
+            <td class="right-padded-m top-aligned nowrap top-padded-m"></td>
+
+            <td class="expands right-padded-m top-padded-m">
+
+                <input data-ng-model="card.soundBack" type="checkbox"/> Read out loud
+            </td>
+
+            <td class="expands right-padded-m top-padded-m">
+
+                <input data-ng-model="card.soundBack" type="checkbox"/> Don't Read out loud
+            </td>
+
+            <td class="expands right-padded-m top-padded-m">
+
+                <input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Leave Unchanged
+            </td>
+        </tr>
+
+
+        <tr>
+            <td class="right-padded-m top-aligned nowrap top-padded-m">Mode</td>
+            <td class="right-padded-m top-aligned nowrap top-padded-m">
+
+
+                <input data-ng-model="card.soundFront" type="checkbox"/>
+
+                Enable Forward Mode
+            </td>
+            <td class="right-padded-m top-aligned nowrap top-padded-m">
+
+
+            <input data-ng-model="card.soundFront" type="checkbox"/>
+
+                Disable Forward Mode
 
             </td>
 
+            <td class="right-padded-m top-aligned nowrap top-padded-m">
+
+
+                <input data-ng-model="card.soundFront" type="checkbox"/>
+
+                Leave Unchanged
+
+            </td>
         </tr>
 
     </table>
@@ -64,36 +134,33 @@
 
 
             <a href="">
-                <i data-ng-click="areYouSureToDeleteCard(card)"
+                <i ng-class="checkForward(card)" data-ng-click="areYouSureToDeleteCard(card)"
                    class="small left-padded-s glyphicon glyphicon-remove-sign">
                 </i>
             </a>
 
-            <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+            <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
         </td>
 
-        <td class="right-padded-m top-padded top-aligned" data-ng-if="card.modes.indexOf('forward') !== -1">
-                {{card.answer}}
-        </td>
-
-        <td class="right-padded-m top-padded top-aligned text-muted" data-ng-if="card.modes.indexOf('forward') === -1">
-                {{card.answer}}
+        <td class="right-padded-m top-padded top-aligned" ng-class="checkForward(card)">
+            {{card.answer}}
         </td>
 
 
-        <td class="right-padded-m nowrap center-aligned top-aligned">
+        <td class="right-padded-m nowrap center-aligned top-aligned" ng-class="checkForward(card)">
+
             <span data-ng-if="card.readFront">yes</span>
             <span data-ng-if="!card.readFront">no</span>
         </td>
 
-        <td class="right-padded-m nowrap center-aligned top-aligned">
+        <td class="right-padded-m nowrap center-aligned top-aligned" ng-class="checkForward(card)">
 
             <span data-ng-if="card.speechRecognitionBack">yes</span>
             <span data-ng-if="!card.speechRecognitionBack">no</span>
 
         </td>
 
-        <td class="right-padded-s nowrap center-aligned top-aligned">
+        <td class="right-padded-s nowrap center-aligned top-aligned" ng-class="checkForward(card)">
             <span data-ng-if="card.readBack">yes</span>
             <span data-ng-if="!card.readBack">no</span>
 

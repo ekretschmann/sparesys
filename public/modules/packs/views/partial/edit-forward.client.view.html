@@ -66,11 +66,11 @@
     <table class="table-striped top-padded-l">
         <thead>
         <tr>
-            <th class="right-padded-m left-padded-s top-aligned">Card Front</th>
-            <th class="right-padded-m top-aligned">Card Back</th>
-            <th class="right-padded-m top-aligned">Read Front</th>
+            <th class="right-padded-m left-padded-s top-aligned">Question</th>
+            <th class="right-padded-m top-aligned">Expected Answer</th>
+            <th class="right-padded-m top-aligned">Read Question</th>
             <th class="right-padded-m top-aligned">Speech Recognition</th>
-            <th class="right-padded-s top-aligned">Read Back</th>
+            <th class="right-padded-s top-aligned">Read Expected Answer</th>
 
         </tr>
         </thead>
@@ -79,9 +79,7 @@
         <tr>
 
 
-        <tr data-ng-repeat="cardId in pack.cards"
-            data-ng-controller="CardsController"
-            data-ng-init="findById(cardId)">
+        <tr data-ng-repeat="card in cards">
 
 
             <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
@@ -101,23 +99,35 @@
             </td>
 
 
-            <td class="right-padded-m nowrap center-aligned top-aligned" ng-class="checkForward(card)">
+            <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isForward(card)">
 
                 <span data-ng-if="card.readFront">yes</span>
                 <span data-ng-if="!card.readFront">no</span>
             </td>
 
-            <td class="right-padded-m nowrap center-aligned top-aligned" ng-class="checkForward(card)">
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isForward(card)">
+                 n/a
+            </td>
+
+            <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isForward(card)">
 
                 <span data-ng-if="card.speechRecognitionBack">yes</span>
                 <span data-ng-if="!card.speechRecognitionBack">no</span>
 
             </td>
 
-            <td class="right-padded-s nowrap center-aligned top-aligned" ng-class="checkForward(card)">
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isForward(card)">
+                n/a
+            </td>
+
+            <td class="right-padded-s nowrap center-aligned top-aligned" data-ng-if="isForward(card)">
                 <span data-ng-if="card.readBack">yes</span>
                 <span data-ng-if="!card.readBack">no</span>
 
+            </td>
+
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isForward(card)">
+                n/a
             </td>
 
         </tr>

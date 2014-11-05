@@ -1,8 +1,8 @@
 'use strict';
 
 // Packs controller
-angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'JourneyService',
-    function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, JourneyService) {
+angular.module('packs').controller('PacksController', ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards',
+    function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards) {
         $scope.authentication = Authentication;
 
         $scope.showhelp = false;
@@ -12,6 +12,7 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.toggles.check = false;
         $scope.toggles.dir = false;
         $scope.toggles.images = false;
+        $scope.cards = [];
 
 
         $scope.check = 'self-checked for new cards';
@@ -48,19 +49,7 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         };
 
 
-        $scope.checkForward = function(card) {
-            if (card.modes && card.modes.indexOf('forward') === -1) {
-                return "text-muted";
-            }
-        };
 
-        $scope.userHasEditedPackBefore = function() {
-            return JourneyService.userHasEditedPackBefore();
-        };
-
-        $scope.userHasCreatedCardBefore = function() {
-            return JourneyService.userHasCreatedCardBefore();
-        };
 
         // Remove existing Pack
         $scope.remove = function (pack) {
@@ -107,6 +96,14 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                         $scope.course = courses[0];
                     }
                 });
+
+                $scope.pack.cards.forEach(function (cardId) {
+                    Cards.get({
+                        cardId: cardId
+                    }, function (card) {
+                        $scope.cards.push(card);
+                    });
+                }, this);
             });
         };
 

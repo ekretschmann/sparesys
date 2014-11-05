@@ -40,11 +40,10 @@ var PackSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'Course'
     },
-    cards: {
-        type: [Schema.Types.ObjectId],
-        default: [],
+    cards: [{
+        type: Schema.ObjectId,
         ref: 'Card'
-    },
+    }],
     due: {
         type: Date
     },

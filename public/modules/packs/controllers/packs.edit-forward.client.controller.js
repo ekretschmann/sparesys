@@ -24,7 +24,10 @@ angular.module('packs').controller('EditPackForwardController', ['$scope', 'Card
         $scope.updateCards = function () {
 
 
-            $scope.cards.forEach(function (card) {
+            $scope.pack.cards.forEach(function (c) {
+
+
+                var card = new Cards(c);
 
                 if ($scope.options.readFront === 'on') {
                     card.readFront = true;
@@ -49,13 +52,13 @@ angular.module('packs').controller('EditPackForwardController', ['$scope', 'Card
                 }
 
                 if ($scope.options.mode === 'on') {
-                    if(card.modes.indexOf('forward') ===-1) {
-                       card.modes.push('forward');
+                    if (card.modes.indexOf('forward') === -1) {
+                        card.modes.push('forward');
                     }
                 }
 
                 if ($scope.options.mode === 'off') {
-                    if(card.modes.indexOf('forward') !==-1) {
+                    if (card.modes.indexOf('forward') !== -1) {
                         card.modes.splice(card.modes.indexOf('forward'), 1);
                     }
                 }
@@ -63,6 +66,7 @@ angular.module('packs').controller('EditPackForwardController', ['$scope', 'Card
                 card.$update();
 
             });
+
 
         };
     }

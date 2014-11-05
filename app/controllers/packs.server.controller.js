@@ -183,7 +183,8 @@ exports.list = function (req, res) {
  * Pack middleware
  */
 exports.packByID = function (req, res, next, id) {
-    Pack.findById(id).populate('user', 'displayName').populate('course').exec(function (err, pack) {
+    //Pack.findById(id).populate('user', 'displayName').populate('course').exec(function (err, pack) {
+    Pack.findById(id).populate('user', 'displayName').populate('course').populate('cards').exec(function (err, pack) {
         if (err) return next(err);
         if (!pack) return next(new Error('Failed to load Pack ' + id));
         req.pack = pack;

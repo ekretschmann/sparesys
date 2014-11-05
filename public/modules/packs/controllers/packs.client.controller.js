@@ -89,21 +89,23 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             $scope.pack = Packs.get({
                 packId: $stateParams.packId
             }, function(pack) {
-                Courses.query({
-                    _id: pack.course
-                }, function (courses) {
-                    if (courses.length === 1) {
-                        $scope.course = courses[0];
-                    }
-                });
-
-                $scope.pack.cards.forEach(function (cardId) {
-                    Cards.get({
-                        cardId: cardId
-                    }, function (card) {
-                        $scope.cards.push(card);
-                    });
-                }, this);
+                console.log('xxx');
+                console.log(pack);
+//                Courses.query({
+//                    _id: pack.course
+//                }, function (courses) {
+//                    if (courses.length === 1) {
+//                        $scope.course = courses[0];
+//                    }
+//                });
+//
+//                $scope.pack.cards.forEach(function (cardId) {
+//                    Cards.get({
+//                        cardId: cardId
+//                    }, function (card) {
+//                        $scope.cards.push(card);
+//                    });
+//                }, this);
             });
         };
 

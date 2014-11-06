@@ -15,29 +15,6 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.cards = [];
 
 
-        $scope.check = 'self-checked for new cards';
-
-        $scope.languages = [
-            {name:'-', code:''},
-            {name:'Chinese', code:'zh-CN'},
-            {name:'English (GB)', code:'en-GB'},
-            {name:'English (US)', code:'en-US'},
-            {name:'French', code:'fr-FR'},
-            {name:'German', code:'de-DE'},
-            {name:'Italian', code:'it-IT'},
-            {name:'Japanese', code:'ja-JP'},
-            {name:'Korean', code:'ko-KR'},
-            {name:'Spanish', code:'es-ES'}
-        ];
-
-        $scope.modes = ['forward', 'reverse', 'images', 'multiple choice'];
-
-        $scope.checks = ['always computer-checked', 'always self-checked', 'self-checked for new cards'];
-
-        var selectedIndex = 0;
-        $scope.language = $scope.languages[selectedIndex];
-
-
 
 
         if (!$scope.authentication.user) {

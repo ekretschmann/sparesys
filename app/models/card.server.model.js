@@ -119,7 +119,7 @@ var CardSchema = new Schema({
     },
     check: {
         type: String,
-        default: 'default'
+        default: 'mixed'
     },
     due: {
         type: Date

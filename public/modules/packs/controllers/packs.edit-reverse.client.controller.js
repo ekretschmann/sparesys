@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('packs').controller('EditPackForwardController', ['$scope', 'Cards',
+angular.module('packs').controller('EditPackReverseController', ['$scope', 'Cards',
     function ($scope, Cards) {
 
         $scope.options = {};
@@ -11,56 +11,59 @@ angular.module('packs').controller('EditPackForwardController', ['$scope', 'Card
         $scope.options.speech = 'leave';
 
 
-        $scope.checkForward = function (card) {
-            if (card.modes && card.modes.indexOf('forward') === -1) {
+        $scope.checkReverse = function (card) {
+            if (card.modes && card.modes.indexOf('reverse') === -1) {
                 return 'text-muted';
             }
         };
 
-        $scope.isForward = function (card) {
-            return card.modes && card.modes.indexOf('forward') !== -1;
+        $scope.isReverse = function (card) {
+            return card.modes && card.modes.indexOf('reverse') !== -1;
         };
 
         $scope.updateCards = function () {
 
+            console.log('here');
 
             $scope.pack.cards.forEach(function (card) {
 
 
 
                 if ($scope.options.readFront === 'on') {
-                    card.readFrontForward = true;
+                    card.readFrontReverse = true;
                 }
                 if ($scope.options.readFront === 'off') {
-                    card.readFrontForward = false;
+                    card.readFrontReverse = false;
                 }
 
                 if ($scope.options.readBack === 'on') {
-                    card.readBackForward = true;
+                    card.readBackReverse = true;
                 }
                 if ($scope.options.readBack === 'off') {
-                    card.readBackForward = false;
+                    card.readBackReverse = false;
                 }
 
                 if ($scope.options.speech === 'on') {
-                    card.speechRecognitionForward = true;
+                    card.speechRecognitionReverse = true;
                 }
 
                 if ($scope.options.speech === 'off') {
-                    card.speechRecognitionForward = false;
+                    card.speechRecognitionReverse = false;
                 }
 
                 if ($scope.options.mode === 'on') {
-                    if (card.modes.indexOf('forward') === -1) {
-                        card.modes.push('forward');
+                    if (card.modes.indexOf('reverse') === -1) {
+                        card.modes.push('reverse');
                     }
                 }
 
                 if ($scope.options.mode === 'off') {
-                    if (card.modes.indexOf('forward') !== -1) {
-                        card.modes.splice(card.modes.indexOf('forward'), 1);
+                    if (card.modes.indexOf('reverse') !== -1) {
+                        card.modes.splice(card.modes.indexOf('reverse'), 1);
                     }
                 }
+
+                console.log(card.modes);
 
                 new Cards(card).$update();
 

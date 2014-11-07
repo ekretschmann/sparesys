@@ -72,7 +72,7 @@ var CardSchema = new Schema({
         ref: 'User'
     },
     supervisor: {
-        type: Schema.ObjectId,
+        type: Schema.ObjectId
     },
     packs: {
         type: [Schema.Types.ObjectId],
@@ -82,23 +82,27 @@ var CardSchema = new Schema({
         type: Number,
         default: 0.0
     },
-    readFront: {
+    readFrontForward: {
         type: Boolean,
         default: false
     },
-    readBack: {
+    readBackForward: {
         type: Boolean,
         default: false
     },
-    speechRecognitionFront: {
+    readFrontReverse: {
         type: Boolean,
         default: false
     },
-    speechRecognitionBack: {
+    readBackReverse: {
         type: Boolean,
         default: false
     },
-    bothways: {
+    speechRecognitionForward: {
+        type: Boolean,
+        default: false
+    },
+    speechRecognitionReverse: {
         type: Boolean,
         default: false
     },

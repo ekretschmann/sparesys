@@ -1,4 +1,4 @@
-<div data-ng-controller="EditPackForwardController">
+<div data-ng-controller="EditPackReverseController">
     <div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl">
 
         <table class="box-margin-s">
@@ -44,7 +44,7 @@
                     <div><input data-ng-model="options.speech" type="radio" value="leave"/> Leave Unchanged</div>
                 </td>
 
-                <td class="right-padded-m top-aligned nowrap top-padded-m">Forward Mode</td>
+                <td class="right-padded-m top-aligned nowrap top-padded-m">Reverse Mode</td>
                 <td class="nowrap right-padded-xl top-aligned top-padded-m">
 
                     <div><input data-ng-model="options.mode" type="radio" value="on"/> Switch On for all cards</div>
@@ -86,47 +86,47 @@
 
 
                 <a href="">
-                    <i ng-class="checkForward(card)" data-ng-click="areYouSureToDeleteCard(card)"
+                    <i ng-class="checkReverse(card)" data-ng-click="areYouSureToDeleteCard(card)"
                        class="small left-padded-s glyphicon glyphicon-remove-sign">
                     </i>
                 </a>
 
-                <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+                <a ng-class="checkreverse(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.answer}}</a>
             </td>
 
-            <td class="right-padded-m top-padded top-aligned" ng-class="checkForward(card)">
-                {{card.answer}}
+            <td class="right-padded-m top-padded top-aligned" ng-class="checkReverse(card)">
+                {{card.question}}
             </td>
 
 
-            <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isForward(card)">
+            <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isReverse(card)">
 
-                <span data-ng-if="card.readFrontForward">yes</span>
-                <span data-ng-if="!card.readFrontForward">no</span>
+                <span data-ng-if="card.readFrontReverse">yes</span>
+                <span data-ng-if="!card.readFrontReverse">no</span>
             </td>
 
-            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isForward(card)">
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isReverse(card)">
                  n/a
             </td>
 
-            <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isForward(card)">
+            <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isReverse(card)">
 
-                <span data-ng-if="card.speechRecognitionForward">yes</span>
-                <span data-ng-if="!card.speechRecognitionForward">no</span>
+                <span data-ng-if="card.speechRecognitionReverse">yes</span>
+                <span data-ng-if="!card.speechRecognitionReverse">no</span>
 
             </td>
 
-            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isForward(card)">
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isReverse(card)">
                 n/a
             </td>
 
-            <td class="right-padded-s nowrap center-aligned top-aligned" data-ng-if="isForward(card)">
-                <span data-ng-if="card.readBackForward">yes</span>
-                <span data-ng-if="!card.readBackForward">no</span>
+            <td class="right-padded-s nowrap center-aligned top-aligned" data-ng-if="isReverse(card)">
+                <span data-ng-if="card.readBackReverse">yes</span>
+                <span data-ng-if="!card.readBackReverse">no</span>
 
             </td>
 
-            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isForward(card)">
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isReverse(card)">
                 n/a
             </td>
 

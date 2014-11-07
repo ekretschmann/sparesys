@@ -23,10 +23,20 @@ angular.module('packs').controller('EditPackReverseController', ['$scope', 'Card
 
         $scope.updateCards = function () {
 
-            console.log('here');
-
             $scope.pack.cards.forEach(function (card) {
 
+
+                if ($scope.options.mode === 'on') {
+                    if (card.modes.indexOf('reverse') === -1) {
+                        card.modes.push('reverse');
+                    }
+                }
+
+                if ($scope.options.mode === 'off') {
+                    if (card.modes.indexOf('reverse') !== -1) {
+                        card.modes.splice(card.modes.indexOf('reverse'), 1);
+                    }
+                }
 
 
                 if ($scope.options.readFront === 'on') {
@@ -51,24 +61,13 @@ angular.module('packs').controller('EditPackReverseController', ['$scope', 'Card
                     card.speechRecognitionReverse = false;
                 }
 
-                if ($scope.options.mode === 'on') {
-                    if (card.modes.indexOf('reverse') === -1) {
-                        card.modes.push('reverse');
-                    }
-                }
 
-                if ($scope.options.mode === 'off') {
-                    if (card.modes.indexOf('reverse') !== -1) {
-                        card.modes.splice(card.modes.indexOf('reverse'), 1);
-                    }
-                }
 
-                console.log(card.modes);
 
-                new Cards(card).$update();
+                var nc =  new Cards(card);
+                nc.$update();
 
             });
-
 
         };
     }

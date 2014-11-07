@@ -7,6 +7,7 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
         $scope.showhelp = false;
         $scope.toggles = {};
+        $scope.toggles = {};
         $scope.toggles.due = false;
         $scope.toggles.start = false;
         $scope.toggles.check = false;

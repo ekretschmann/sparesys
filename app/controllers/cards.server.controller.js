@@ -75,6 +75,7 @@ exports.update = function (req, res) {
     var card = req.card;
 
 
+    card.__v = undefined;
     card = _.extend(card, req.body);
 
 

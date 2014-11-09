@@ -9,7 +9,7 @@
                 <td class="top-padded-s right-padded-m middle-aligned">Language Front</td>
 
 
-                <td>
+                <td colspan="3">
                     <table>
                         <tr>
                             <td class="btn-group right-padded-l  top-padded-sm">
@@ -36,7 +36,7 @@
             <tr>
                 <td class="top-padded-sm right-padded-m  middle-aligned">Language Back</td>
 
-                <td class="btn-group top-padded-sm">
+                <td colspan="3" class="btn-group top-padded-sm">
 
                     <table>
                         <tr>
@@ -63,7 +63,7 @@
 
             <tr>
                 <td class="right-padded-m top-padded-sm">Checks</td>
-                <td class="top-padded-sm">
+                <td colspan="3" class="top-padded-sm">
                     <div class="btn-group">
                         <button type="button"
                                 class="btn btn-default">{{ options.check }}
@@ -83,23 +83,52 @@
 
             <tr data-ng-controller="DateDropdownController">
                 <td class="top-padded-s">Due date</td>
-                <td class="top-padded-s">
+                <td class="top-padded-s right-padded-m">
 
+                    <input data-ng-model="options.changeDueDate" type="radio" value="off"/> Leave Unchanged
+                </td>
+                <td class="top-padded-s right-padded-s">
+                    <input data-ng-model="options.changeDueDate" ng-click="openDueDateCalendar($event)" type="radio"
+                           value="on"/> Change To
+
+                </td>
+                <td class="top-padded-s" data-ng-if="options.changeDueDate === 'on'">
                     <div class="input-group">
                         <input type="text"
                                class="form-control"
                                datepicker-popup="{{format}}"
-                               ng-model="$parent.card.due"
-                               is-open="opened"
+                               ng-model="options.dueDate"
+                               is-open="options.openDueDateCalendar"
+                               min-date="minDate"
+                               datepicker-options="dateOptions"
+                               ng-required="false"
+                               close-text="Close"/>
+
+
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openDueDateCalendar($event)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
+                        </div>
+                    </div>
+
+                </td>
+
+                <td class="top-padded-s" data-ng-if="options.changeDueDate === 'off'">
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               datepicker-popup="{{format}}"
+                               ng-model="options.dueDate"
+                               is-open="{{false}}"
                                min-date="minDate"
                                datepicker-options="dateOptions"
                                ng-required="false"
                                close-text="Close"
-                               data-ng-blur="$parent.updateCards()"/>
+                               date-disabled="'true'" disabled/>
 
 
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                            <button type="button" class="btn btn-disabled"><i
                                     class="glyphicon glyphicon-calendar"></i></button>
                         </div>
                     </div>
@@ -109,21 +138,52 @@
 
             <tr data-ng-controller="DateDropdownController">
                 <td class="top-padded-s right-padded-m">Start date</td>
-                <td class="top-padded-s">
+                <td class="top-padded-s right-padded-m">
 
-                    <div class="input-group  bottom-spacer">
+                    <input data-ng-model="options.changeStartDate" type="radio" value="off"/> Leave Unchanged
+                </td>
+                <td class="top-padded-s right-padded-s">
+                    <input data-ng-model="options.changeStartDate" ng-click="openStartDateCalendar($event)" type="radio"
+                           value="on"/> Change To
+
+                </td>
+                <td class="top-padded-s" data-ng-if="options.changeStartDate === 'on'">
+                    <div class="input-group">
                         <input type="text"
                                class="form-control"
                                datepicker-popup="{{format}}"
-                               ng-model="$parent.card.after"
-                               is-open="opened" min-date="minDate"
+                               ng-model="options.startDate"
+                               is-open="options.openStartDateCalendar"
+                               min-date="minDate"
+                               datepicker-options="dateOptions"
+                               ng-required="false"
+                               close-text="Close"/>
+
+
+                        <div class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="openStartDateCalendar($event)"><i
+                                    class="glyphicon glyphicon-calendar"></i></button>
+                        </div>
+                    </div>
+
+                </td>
+
+                <td class="top-padded-s" data-ng-if="options.changeStartDate === 'off'">
+                    <div class="input-group">
+                        <input type="text"
+                               class="form-control"
+                               datepicker-popup="{{format}}"
+                               ng-model="options.openStartDateCalendar"
+                               is-open="{{false}}"
+                               min-date="minDate"
                                datepicker-options="dateOptions"
                                ng-required="false"
                                close-text="Close"
-                               data-ng-blur="$parent.updateCards()"/>
+                               date-disabled="'true'" disabled/>
+
 
                         <div class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="open($event)"><i
+                            <button type="button" class="btn btn-disabled" ><i
                                     class="glyphicon glyphicon-calendar"></i></button>
                         </div>
                     </div>
@@ -209,20 +269,22 @@
 
 
             <td class="right-padded-s nowrap right-aligned top-aligned">
-                    <span data-ng-if="card.after">
-                        {{card.after | date:'shortDate'}}
+
+                <span data-ng-if="card.startDate">
+                        {{card.startDate | date:'shortDate'}}
                     </span>
-                    <span data-ng-if="!card.after">
+                    <span data-ng-if="!card.startDate">
                         now
                     </span>
             </td>
 
 
             <td class="right-padded-s nowrap right-aligned top-aligned">
-                    <span data-ng-if="card.due">
-                        {{card.due | date:'shortDate'}}
+
+                    <span data-ng-if="card.dueDate">
+                        {{card.dueDate | date:'shortDate'}}
                     </span>
-                    <span data-ng-if="!card.due">
+                    <span data-ng-if="!card.dueDate">
                         -
                     </span>
             </td>

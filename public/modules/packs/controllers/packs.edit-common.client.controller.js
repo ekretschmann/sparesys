@@ -6,6 +6,21 @@ angular.module('packs').controller('EditPackCommonController', ['$scope', 'Cards
         $scope.options = {};
 
 
+        $scope.openDueDateCalendar = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.options.openDueDateCalendar = true;
+        };
+
+        $scope.openStartDateCalendar = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.options.openStartDateCalendar = true;
+        };
+
+
         $scope.languages = [
             {name: 'Leave Unchanged', code: ''},
             {name: 'Chinese', code: 'zh-CN'},
@@ -19,12 +34,28 @@ angular.module('packs').controller('EditPackCommonController', ['$scope', 'Cards
             {name: 'Spanish', code: 'es-ES'}
         ];
 
-        $scope.options.languageFront = $scope.languages[0];
-        $scope.options.languageBack = $scope.languages[0];
-
-
         $scope.options.checks = ['Leave Unchanged', 'Computer Checks', 'Self Check', 'Mixed Checks'];
-        $scope.options.check = 'Leave Unchanged';
+
+
+
+        var reset = function() {
+            $scope.options.openDueDateCalendar = false;
+            $scope.options.openStartDateCalendar = false;
+
+            $scope.options.languageFront = $scope.languages[0];
+            $scope.options.languageBack = $scope.languages[0];
+
+            $scope.options.changeStartDate = 'off';
+            $scope.options.changeDueDate = 'off';
+
+            $scope.options.check = 'Leave Unchanged';
+
+
+            $scope.options.startDate = undefined;
+            $scope.options.dueDate = undefined;
+        };
+
+        reset();
 
 
         $scope.updateCards = function () {
@@ -52,11 +83,21 @@ angular.module('packs').controller('EditPackCommonController', ['$scope', 'Cards
                 }
 
 
+                if($scope.options.startDate) {
+                    card.startDate = $scope.options.startDate;
+                }
+
+                if($scope.options.dueDate) {
+                    card.dueDate = $scope.options.dueDate;
+                }
+
+
                 new Cards(card).$update();
+
 
             });
 
-
+            reset();
         };
     }
 ]);

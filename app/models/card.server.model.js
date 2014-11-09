@@ -125,10 +125,10 @@ var CardSchema = new Schema({
         type: String,
         default: 'mixed'
     },
-    due: {
+    dueDate: {
         type: Date
     },
-    after: {
+    startDate: {
         type: Date
     },
     slaves: {

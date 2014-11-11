@@ -17,7 +17,7 @@ var CardSchema = new Schema({
         code: String
     },
 
-    languageback: {
+    languageBack: {
         name: String,
         code: String
     },

@@ -83,6 +83,8 @@ angular.module('packs').controller('EditPackCommonController', ['$scope', 'Cards
                 }
 
 
+
+
                 if($scope.options.startDate) {
                     card.startDate = $scope.options.startDate;
                 }

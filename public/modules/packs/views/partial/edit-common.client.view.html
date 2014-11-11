@@ -96,7 +96,9 @@
                 <td class="top-padded-s">Due date</td>
                 <td class="top-padded-s right-padded-m">
 
-                    <input data-ng-model="options.changeDueDate" type="radio" value="off"/> Leave Unchanged
+                    <input data-ng-model="options.changeDueDate" type="radio" value="off"/> <span class="right-padded-m"> Leave Unchanged</span>
+
+                    <input data-ng-model="options.changeDueDate" type="radio" value="reset"/> Reset
                 </td>
                 <td class="top-padded-s right-padded-s">
                     <input data-ng-model="options.changeDueDate" ng-click="openDueDateCalendar($event)" type="radio"
@@ -124,7 +126,7 @@
 
                 </td>
 
-                <td class="top-padded-s" data-ng-if="options.changeDueDate === 'off'">
+                <td class="top-padded-s" data-ng-if="options.changeDueDate !== 'on'">
                     <div class="input-group">
                         <input type="text"
                                class="form-control"
@@ -151,7 +153,9 @@
                 <td class="top-padded-s right-padded-m">Start date</td>
                 <td class="top-padded-s right-padded-m">
 
-                    <input data-ng-model="options.changeStartDate" type="radio" value="off"/> Leave Unchanged
+                    <input data-ng-model="options.changeStartDate" type="radio" value="off"/> <span class="right-padded-m"> Leave Unchanged</span>
+
+                    <input data-ng-model="options.changeStartDate" type="radio" value="reset"/> Reset
                 </td>
                 <td class="top-padded-s right-padded-s">
                     <input data-ng-model="options.changeStartDate" ng-click="openStartDateCalendar($event)" type="radio"
@@ -179,7 +183,7 @@
 
                 </td>
 
-                <td class="top-padded-s" data-ng-if="options.changeStartDate === 'off'">
+                <td class="top-padded-s" data-ng-if="options.changeStartDate !== 'on'">
                     <div class="input-group">
                         <input type="text"
                                class="form-control"

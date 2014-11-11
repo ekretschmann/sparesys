@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('packs').controller('EditPackForwardController', ['$scope', 'Cards',
+angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards',
     function ($scope, Cards) {
 
         $scope.options = {};
@@ -11,15 +11,15 @@ angular.module('packs').controller('EditPackForwardController', ['$scope', 'Card
         $scope.options.speech = 'leave';
 
 
-        $scope.checkForward = function (card) {
+        $scope.getModeStyle = function (card) {
 
-            if (card.modes && card.modes.indexOf('forward') === -1) {
+            if (card.modes && card.modes.indexOf('images') === -1) {
                 return 'text-muted';
             }
         };
 
-        $scope.isForward = function (card) {
-            return card.modes && card.modes.indexOf('forward') !== -1;
+        $scope.isImagesMode = function (card) {
+            return card.modes && card.modes.indexOf('images') !== -1;
         };
 
         $scope.updateCards = function () {
@@ -52,14 +52,14 @@ angular.module('packs').controller('EditPackForwardController', ['$scope', 'Card
                 }
 
                 if ($scope.options.mode === 'on') {
-                    if (card.modes.indexOf('forward') === -1) {
-                        card.modes.push('forward');
+                    if (card.modes.indexOf('images') === -1) {
+                        card.modes.push('images');
                     }
                 }
 
                 if ($scope.options.mode === 'off') {
-                    if (card.modes.indexOf('forward') !== -1) {
-                        card.modes.splice(card.modes.indexOf('forward'), 1);
+                    if (card.modes.indexOf('images') !== -1) {
+                        card.modes.splice(card.modes.indexOf('images'), 1);
                     }
                 }
 

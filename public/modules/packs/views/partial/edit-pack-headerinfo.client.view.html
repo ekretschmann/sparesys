@@ -2,23 +2,7 @@
     <tr>
         <td>Course</td>
         <td class="left-padded-s">:</td>
-        <td class="left-padded-s"><a data-ng-href="#!/courses/{{pack.course}}/edit">{{course.name}}</a></td>
-    </tr>
-    <tr>
-        <td>Due</td>
-        <td class="left-padded-s">:</td>
-        <td class="left-padded-s">
-            <span data-ng-if="pack.due">{{pack.due | date:'mediumDate'}}</span>
-            <span data-ng-if="!pack.due">never</span>
-        </td>
-    </tr>
-    <tr>
-        <td>Start</td>
-        <td class="left-padded-s">:</td>
-        <td class="left-padded-s">
-            <span data-ng-if="pack.after">{{pack.after | date:'mediumDate'}}</span>
-            <span data-ng-if="!pack.after">now</span>
-        </td>
+        <td class="left-padded-s"><a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.course.name}}</a></td>
     </tr>
     <tr data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
         <td>ID</td>

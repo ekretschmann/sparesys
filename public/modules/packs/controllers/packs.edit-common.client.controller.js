@@ -93,6 +93,13 @@ angular.module('packs').controller('EditPackCommonController', ['$scope', 'Cards
                     card.dueDate = $scope.options.dueDate;
                 }
 
+                if ($scope.options.changeStartDate === 'reset') {
+                    card.startDate = undefined;
+                }
+
+                if ($scope.options.changeDueDate === 'reset') {
+                    card.dueDate = undefined;
+                }
 
                 new Cards(card).$update();
 

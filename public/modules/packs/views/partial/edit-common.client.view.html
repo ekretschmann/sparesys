@@ -98,7 +98,7 @@
 
                     <input data-ng-model="options.changeDueDate" type="radio" value="off"/> <span class="right-padded-m"> Leave Unchanged</span>
 
-                    <input data-ng-model="options.changeDueDate" type="radio" value="reset"/> Reset
+                    <input data-ng-model="options.changeDueDate" type="radio" value="reset"/> None
                 </td>
                 <td class="top-padded-s right-padded-s">
                     <input data-ng-model="options.changeDueDate" ng-click="openDueDateCalendar($event)" type="radio"
@@ -155,7 +155,7 @@
 
                     <input data-ng-model="options.changeStartDate" type="radio" value="off"/> <span class="right-padded-m"> Leave Unchanged</span>
 
-                    <input data-ng-model="options.changeStartDate" type="radio" value="reset"/> Reset
+                    <input data-ng-model="options.changeStartDate" type="radio" value="reset"/> None
                 </td>
                 <td class="top-padded-s right-padded-s">
                     <input data-ng-model="options.changeStartDate" ng-click="openStartDateCalendar($event)" type="radio"
@@ -223,8 +223,8 @@
             <th class="right-padded-m top-aligned">Language Back</th>
             <!--<th class="right-padded-m top-aligned">Modes</th>-->
             <th class="right-padded-m top-aligned">Checks</th>
-            <th class="right-padded-m top-aligned">Due</th>
-            <th class="right-padded-s top-aligned">Start</th>
+            <th class="right-padded-m top-aligned">Start</th>
+            <th class="right-padded-s top-aligned">Due</th>
         </tr>
         </thead>
         <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
@@ -289,7 +289,7 @@
                         {{card.startDate | date:'shortDate'}}
                     </span>
                     <span data-ng-if="!card.startDate">
-                        now
+                        none
                     </span>
             </td>
 
@@ -300,7 +300,7 @@
                         {{card.dueDate | date:'shortDate'}}
                     </span>
                     <span data-ng-if="!card.dueDate">
-                        -
+                        none
                     </span>
             </td>
 

@@ -116,33 +116,33 @@
     <!--</tr>-->
 
 
-    <tr>
-        <td class="right-padded-m top-padded-sm">Operation Modes</td>
-        <td class="top-padded-sm">
+    <!--<tr>-->
+        <!--<td class="right-padded-m top-padded-sm">Operation Modes</td>-->
+        <!--<td class="top-padded-sm">-->
 
-                <span class="right-padded-m" data-ng-repeat="mode in modes">
-
-
-                    <span data-ng-if="card.modes.indexOf(mode) === -1">
-                        <input type="checkbox" data-ng-click="toggleMode(mode)"/>
-                    </span>
-                <span data-ng-if="card.modes.indexOf(mode) > -1">
-                    <span data-ng-if="card.modes.length === 1 && mode === card.modes[0]">
-                          <input type="checkbox" checked disabled/>
-                    </span>
-
-                    <span data-ng-if="card.modes.length > 1 || mode !== card.modes[0]">
-                         <input type="checkbox" checked data-ng-click="toggleMode(mode)"/>
-                    </span>
+                <!--<span class="right-padded-m" data-ng-repeat="mode in modes">-->
 
 
-                </span>
-                    {{mode}}
+                    <!--<span data-ng-if="card.modes.indexOf(mode) === -1">-->
+                        <!--<input type="checkbox" data-ng-click="toggleMode(mode)"/>-->
+                    <!--</span>-->
+                <!--<span data-ng-if="card.modes.indexOf(mode) > -1">-->
+                    <!--<span data-ng-if="card.modes.length === 1 && mode === card.modes[0]">-->
+                          <!--<input type="checkbox" checked disabled/>-->
+                    <!--</span>-->
 
-                </span>
+                    <!--<span data-ng-if="card.modes.length > 1 || mode !== card.modes[0]">-->
+                         <!--<input type="checkbox" checked data-ng-click="toggleMode(mode)"/>-->
+                    <!--</span>-->
 
-        </td>
-    </tr>
+
+                <!--</span>-->
+                    <!--{{mode}}-->
+
+                <!--</span>-->
+
+        <!--</td>-->
+    <!--</tr>-->
 
     <tr>
         <td class="right-padded-m top-padded-sm">Checks</td>
@@ -172,7 +172,7 @@
                 <input type="text"
                        class="form-control"
                        datepicker-popup="{{format}}"
-                       ng-model="$parent.card.due"
+                       ng-model="$parent.card.dueDate"
                        is-open="opened"
                        min-date="minDate"
                        datepicker-options="dateOptions"
@@ -198,7 +198,7 @@
                 <input type="text"
                        class="form-control"
                        datepicker-popup="{{format}}"
-                       ng-model="$parent.card.after"
+                       ng-model="$parent.card.startDate"
                        is-open="opened" min-date="minDate"
                        datepicker-options="dateOptions"
                        date-disabled="disabled(date, mode)"

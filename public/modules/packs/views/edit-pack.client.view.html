@@ -106,15 +106,15 @@
 
 
     <div class="content-last-section">
-        <div>
+        <div class="pull-right">
             <small>
                 <em class="text-muted">Created on {{pack.created | date:'medium'}}</em>
             </small>
-        </div>
-        <div data-ng-if="pack.updated">
-            <small>
-                <em class="text-muted">Updated on {{pack.updated | date:'medium'}}</em>
-            </small>
+            <div data-ng-if="pack.updated">
+                <small>
+                    <em class="text-muted">Updated on {{pack.updated | date:'medium'}}</em>
+                </small>
+            </div>
         </div>
 
     </div>

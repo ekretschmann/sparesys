@@ -39,8 +39,7 @@
     <div class="content-header">
 
 
-
-        <div class="rememberators-tabs top-margin-l bottom-padded-m">
+        <div class="rememberators-tabs top-margin-l">
             <tabset>
                 <tab heading="Card">
 
@@ -54,7 +53,7 @@
                 </tab>
 
 
-                <tab heading="Forward" data-ng-if="card.modes.indexOf('forward') > -1">
+                <tab heading="Forward" >
 
 
                     <div class="default-border">
@@ -64,47 +63,44 @@
 
                     </div>
                 </tab>
-                <tab heading="Reverse" data-ng-if="card.modes.indexOf('reverse') > -1">
+                <tab heading="Reverse" >
                     <div class="default-border">
                         <div ng-include="'/modules/cards/views/partial/edit-reverse.client.view.html'"></div>
                     </div>
 
                 </tab>
-                <tab heading="Images" data-ng-if="card.modes.indexOf('images') > -1">
+                <tab heading="Images" >
                     <div class="default-border">
                         <div ng-include="'/modules/cards/views/partial/edit-images.client.view.html'"></div>
                     </div>
 
 
                 </tab>
-                <tab heading="Multiple Choice" data-ng-if="card.modes.indexOf('multiple choice') > -1">
+                <tab heading="Multiple Choice" >
                     <div class="default-border">
+                        <div class="top-padded-m left-padded-m" style="min-height:200px">
                         Multiple Choice is coming soon
+                        </div>
                     </div>
 
                 </tab>
 
             </tabset>
 
-            <div class="pull-right">
+            <div class="right-aligned">
 
                 <small>
                     <em class="text-muted">Created on {{card.created | date:'medium'}}</em>
                 </small>
-    <span data-ng-if="card.updated">
-        <small>
-            <em class="text-muted">Updated on {{card.updated | date:'medium'}}</em>
-        </small>
-    </span>
+                <div data-ng-if="card.updated">
+                    <small>
+                        <em class="text-muted">Updated on {{card.updated | date:'medium'}}</em>
+                    </small>
+                </div>
 
             </div>
         </div>
 
-
-
-        <div data-ng-show="error" class="text-danger" style="text-align: center">
-            <strong>Error: {{error}}</strong>
-        </div>
 
 
     </div>

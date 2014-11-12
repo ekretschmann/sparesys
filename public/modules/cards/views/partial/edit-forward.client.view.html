@@ -1,4 +1,22 @@
 <table class="box-margin-s">
+
+
+    <tr>
+        <td class="right-padded-m nowrap top-padded-m" colspan="2">
+            <span data-ng-if="card.modes.indexOf(mode) === -1">
+            <input type="checkbox" data-ng-click="toggleMode(mode)"/>
+            </span>
+
+            <span data-ng-if="card.modes.indexOf(mode) > -1">
+            <input type="checkbox" checked data-ng-click="toggleMode(mode)"/>
+            </span>
+
+            <span class="left-padded-s">Forward Mode Enabled</span>
+        </td>
+
+    </tr>
+
+
     <tr>
         <td class="right-padded-m nowrap top-padded-m">
             <section>

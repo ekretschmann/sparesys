@@ -16,25 +16,29 @@
         <td class="top-padded-s right-padded-m"><b>{{course.front}}</b></td>
 
 
-        <td class="top-padded-s middle-aligned">
+        <td class="top-padded-s right-padded-m middle-aligned">
 
-            <b>{{card.question}}</b>
+            <input type="text"
+                   data-ng-model="card.question"
+                   id="answer"
+                   class="standard-input-width form-control"
+                   placeholder="Answer"
+                   data-ng-blur="updateAnswer()"
+                   required>
 
         </td>
 
-    </tr>
-
-    <tr>
-        <td></td>
-        <td>
+        <td class="btn-group">
             <table>
                 <tr>
                     <td class="right-padded-m top-padded-sm">
                         Language
 
                     </td>
-                    <td class="btn-group right-padded-l  top-padded-sm">
+                    <td class="right-padded-m top-padded-sm">
 
+
+                        <div class="btn-group">
 
                         <button type="button" class="btn btn-default">{{ card.languageFront.name }}</button>
                         <button type="button" class="btn btn-default dropdown-toggle">
@@ -46,7 +50,7 @@
                                     data-ng-click="setLanguage(lang)">{{lang.name}}</a>
                             </li>
                         </ul>
-
+                        </div>
                     </td>
                 </tr>
             </table>
@@ -55,17 +59,17 @@
 
 
     <tr>
-        <td class="top-padded-sm right-padded-m top-aligned"><b>{{course.back}}</b></td>
-        <td class="top-padded-sm middle-aligned">
+        <td class="top-padded-sm right-padded-m middle-aligned"><b>{{course.back}}</b></td>
+        <td class="top-padded-sm right-padded-m middle-aligned">
 
-            <b>{{card.answer}}</b>
-
+            <input type="text"
+                   data-ng-model="card.answer"
+                   class="standard-input-width form-control"
+                   placeholder="Answer"
+                   data-ng-blur="updateAnswer()"
+                   required>
         </td>
 
-    </tr>
-
-    <tr>
-        <td></td>
         <td class="btn-group top-padded-sm">
 
             <table>
@@ -89,7 +93,6 @@
                     </td>
                 </tr>
             </table>
-
 
         </td>
     </tr>
@@ -117,8 +120,8 @@
 
 
     <tr>
-        <td class="right-padded-m top-padded-sm">Card Supports Modes</td>
-        <td class="top-padded-sm">
+        <td class="right-padded-m top-padded-m bottom-padded-sm nowrap">Card Supports Modes</td>
+        <td class="top-padded-m bottom-padded-sm" colspan="2">
 
                 <span class="right-padded-m" data-ng-repeat="mode in modes">
 

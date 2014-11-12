@@ -45,7 +45,6 @@
         </div>
     </div>
 
-    <div data-ng-show="pack.cards.length > 0">
 
         <div class="content-section ">
 
@@ -53,6 +52,18 @@
             <div class="rememberators-tabs top-margin-l bottom-padded-m">
                 <tabset>
                     <tab heading="Cards">
+
+
+                        <div class="default-border">
+
+
+                            <div ng-include="'/modules/packs/views/partial/edit-cards.client.view.html'"></div>
+
+                        </div>
+                    </tab>
+
+
+                    <tab heading="Settings">
 
 
                         <div class="default-border">
@@ -102,7 +113,6 @@
             </div>
 
         </div>
-    </div>
 
 
     <div class="content-last-section">

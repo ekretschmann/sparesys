@@ -1,5 +1,23 @@
 <div>
 
+
+    <div class="pull-right right-padded-s top-padded-s bottom-padded-m" >
+
+
+        <a href="">
+            <i data-ng-click="addCardToPackPopup()"
+
+               class="glyphicon glyphicon-plus-sign">
+            </i>
+        </a>
+
+        <a href="">
+            <i data-ng-click="areYouSureToDeleteCard(card)"
+               class="glyphicon glyphicon-remove-sign">
+            </i>
+        </a>
+    </div>
+
     <div data-ng-if="pack.cards.length > 0">
         <table class="table-striped top-padded-l">
             <thead>
@@ -80,3 +98,5 @@
 
     </div>
 </div>
+
+

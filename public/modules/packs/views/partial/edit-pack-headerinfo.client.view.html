@@ -2,7 +2,7 @@
     <tr>
         <td>Course</td>
         <td class="left-padded-s">:</td>
-        <td class="left-padded-s"><a data-ng-href="#!/courses/{{pack.course}}/edit">{{pack.course.name}}</a></td>
+        <td class="left-padded-s"><a data-ng-href="#!/courses/{{pack.course._id}}/edit">{{pack.course.name}}</a></td>
     </tr>
     <tr data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
         <td>ID</td>

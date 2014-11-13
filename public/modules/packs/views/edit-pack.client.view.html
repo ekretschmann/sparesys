@@ -34,7 +34,29 @@
 
                 <infobox logo="guru">Well done! A pack has cards in it. It is a good idea to keep similar
                     cards in one pack. To add some cards to this pack, click on the
-                    <a href="" ng-click="addCardToPackPopup()">Add Cards</a> link above.
+                    <a href=""><i class="glyphicon glyphicon-plus-sign">
+                    </i> icon</a> in the pack view.
+                </infobox>
+            </section>
+
+            <section data-ng-if="authentication.user.roles.indexOf('help') === -1">
+
+                Please <a href="" ng-click="addCardToPackPopup()">create cards</a> for this pack!
+            </section>
+        </div>
+    </div>
+
+    <div data-ng-if="pack.cards.length > 0">
+
+        <div class="content-section">
+            <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+
+                <infobox logo="guru">You can now use the tabs below to tell the rememberators
+                    how you want to run your course. By default, they will present the
+                    front of the card and expect the back of the card as an answer. But
+                    you can also run them the other way round and use images, sound and
+                    speech recognition for your course. You can also set due dates and
+                    languages for your sound here.
                 </infobox>
             </section>
 
@@ -112,20 +134,24 @@
 
             </div>
 
+                <div class="right-aligned">
+                    <small>
+                        <em class="text-muted">Created on {{pack.created | date:'medium'}}</em>
+                    </small>
+                    <div data-ng-if="pack.updated">
+                        <small>
+                            <em class="text-muted">Updated on {{pack.updated | date:'medium'}}</em>
+                        </small>
+                    </div>
+                </div>
+
+
         </div>
 
 
-    <div class="content-last-section">
-        <div class="pull-right">
-            <small>
-                <em class="text-muted">Created on {{pack.created | date:'medium'}}</em>
-            </small>
-            <div data-ng-if="pack.updated">
-                <small>
-                    <em class="text-muted">Updated on {{pack.updated | date:'medium'}}</em>
-                </small>
-            </div>
-        </div>
 
+    <div>
+        rememberators.com
     </div>
 </section>
+

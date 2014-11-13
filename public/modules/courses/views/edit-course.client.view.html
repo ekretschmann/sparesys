@@ -51,41 +51,44 @@
 
     </div>
 
+
+
+
+
     <div data-ng-show="course.packs.length > 0">
 
         <div class="content-section ">
 
-            <table class="table-striped">
-                <thead>
-                <tr>
-                    <th></th>
-                    <th>Pack</th>
-                    <th class="nowrap right-aligned right-padded-s">Number of Cards</th>
-                </tr>
-                </thead>
-                <tbody ui-sortable="sortableOptions"
-                       data-ng-model="course.packs">
-                <tr data-ng-controller="PacksController"
-                    data-ng-repeat="packId in course.packs"
-                    data-ng-init="findById(packId)"
-                    style="cursor: move">
-                    <td class="right-padded">
-                        <a href="">
-                            <i data-ng-click="areYouSureToDeletePack(pack)"
-                               class="small right-padded-s left-padded-s glyphicon glyphicon-remove-sign">
-                            </i>
-                        </a>
-                    </td>
 
-                    <td class="nowrap">
-                        <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
-                    </td>
-                    <td class="expands right-aligned right-padded-s">
-                        {{pack.cards.length}}
-                    </td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="rememberators-tabs top-margin-l bottom-padded-m">
+                <tabset>
+                    <tab heading="{{course.name}}">
+
+
+                        <div class="default-border">
+
+
+                            <div ng-include="'/modules/courses/views/partial/view-course.client.view.html'"></div>
+
+                        </div>
+                    </tab>
+
+                    <tab heading="Settings">
+
+
+                        <div class="default-border">
+
+
+                            <div ng-include="'/modules/courses/views/partial/course-settings.client.view.html'"></div>
+
+                        </div>
+                    </tab>
+
+</tabset>
+
+
+
+
         </div>
 
         <!--<div data-ng-if="showhelp || !userHasCreatedCardBefore()">-->

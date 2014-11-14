@@ -1,0 +1,144 @@
+<div data-ng-controller="EditPackReverseController">
+    <div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl">
+
+        <table class="box-margin-s">
+
+
+            <tr>
+                <td class="right-padded-m top-aligned nowrap top-padded-s expands" colspan="4">
+                    <b>Change Settings for all Cards in this Pack</b>
+                </td>
+
+            </tr>
+
+            <tr>
+
+                <td class="right-padded-m top-aligned nowrap top-padded-m">Reverse Mode</td>
+                <td class="nowrap right-padded-xl top-aligned top-padded-m">
+
+                    <div><input data-ng-model="options.mode" type="radio" value="on"/> Switch On for all cards</div>
+                    <div><input data-ng-model="options.mode" type="radio" value="off"/> Switch Off for all cards</div>
+                    <div><input data-ng-model="options.mode" type="radio" value="leave"/> Leave Unchanged</div>
+                </td>
+            </tr>
+
+
+            <tr>
+                <td class="right-padded-m top-aligned nowrap top-padded-m">
+                    Read Questions
+                </td>
+
+
+                <td class="nowrap right-padded-xl top-aligned top-padded-m">
+
+                    <div><input data-ng-model="options.readFront" type="radio" value="on" /> Read out loud</div>
+                    <div><input data-ng-model="options.readFront" type="radio" value="off"/> Don't Read out loud</div>
+                    <div><input data-ng-model="options.readFront" type="radio" value="leave"/> Leave Unchanged</div>
+                </td>
+
+
+            </tr>
+            <tr>
+
+                <td class="right-padded-m top-aligned nowrap top-padded-m">Read Expected Answers</td>
+
+
+                <td class="nowrap right-padded-xl top-aligned top-padded-m">
+
+                    <div><input data-ng-model="options.readBack" type="radio" value="on"/> Read out loud</div>
+                    <div><input data-ng-model="options.readBack" type="radio" value="off"/> Don't Read out loud</div>
+                    <div><input data-ng-model="options.readBack" type="radio" value="leave"/> Leave Unchanged</div>
+                </td>
+
+                <td class="right-padded-m top-aligned nowrap top-padded-m">Speech Recognition</td>
+                <td class="nowrap right-padded-xl top-aligned top-padded-m">
+
+                    <div><input data-ng-model="options.speech" type="radio" value="on"/> Switch On for all cards</div>
+                    <div><input data-ng-model="options.speech" type="radio" value="off"/> Switch Off for all cards</div>
+                    <div><input data-ng-model="options.speech" type="radio" value="leave"/> Leave Unchanged</div>
+                </td>
+
+            </tr>
+
+
+        </table>
+
+        <div class="top-padded-s center-aligned bottom-padded-m">
+            <button class="btn btn-rememberators" ng-click="updateCards()">Update Cards</button>
+
+        </div>
+    </div>
+
+
+    <table class="table-striped top-padded-l">
+        <thead>
+        <tr>
+            <th class="right-padded-m left-padded-s top-aligned">Question</th>
+            <th class="right-padded-m top-aligned">Expected Answer</th>
+            <th class="right-padded-m top-aligned">Read Question</th>
+            <th class="right-padded-m top-aligned">Speech Recognition</th>
+            <th class="right-padded-s top-aligned">Read Expected Answer</th>
+
+        </tr>
+        </thead>
+        <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
+
+        <tr>
+
+
+        <tr data-ng-repeat="card in pack.cards">
+
+
+            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+
+
+                <a href="">
+                    <i ng-class="checkReverse(card)" data-ng-click="areYouSureToDeleteCard(card)"
+                       class="small left-padded-s glyphicon glyphicon-remove-sign">
+                    </i>
+                </a>
+
+                <a ng-class="checkReverse(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.answer}}</a>
+            </td>
+
+            <td class="right-padded-m top-padded top-aligned" ng-class="checkReverse(card)">
+                {{card.question}}
+            </td>
+
+
+            <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isReverse(card)">
+
+                <span data-ng-if="card.readFrontReverse">yes</span>
+                <span data-ng-if="!card.readFrontReverse">no</span>
+            </td>
+
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isReverse(card)">
+                 n/a
+            </td>
+
+            <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isReverse(card)">
+
+                <span data-ng-if="card.speechRecognitionReverse">yes</span>
+                <span data-ng-if="!card.speechRecognitionReverse">no</span>
+
+            </td>
+
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isReverse(card)">
+                n/a
+            </td>
+
+            <td class="right-padded-s nowrap center-aligned top-aligned" data-ng-if="isReverse(card)">
+                <span data-ng-if="card.readBackReverse">yes</span>
+                <span data-ng-if="!card.readBackReverse">no</span>
+
+            </td>
+
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isReverse(card)">
+                n/a
+            </td>
+
+        </tr>
+
+        </tbody>
+    </table>
+</div>

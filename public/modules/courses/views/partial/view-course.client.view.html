@@ -1,31 +1,52 @@
-<table class="table-striped">
-<thead>
-<tr>
-<th></th>
-<th>Pack</th>
-<th class="nowrap right-aligned right-padded-s">Number of Cards</th>
-</tr>
-</thead>
-<tbody ui-sortable="sortableOptions"
-data-ng-model="course.packs">
-<tr data-ng-controller="PacksController"
-data-ng-repeat="packId in course.packs"
-data-ng-init="findById(packId)"
-style="cursor: move">
-<td class="right-padded">
-<a href="">
-<i data-ng-click="areYouSureToDeletePack(pack)"
-class="small right-padded-s left-padded-s glyphicon glyphicon-remove-sign">
-</i>
-</a>
-</td>
+<div class="right-padded-s top-padded-s bottom-padded-m">
 
-<td class="nowrap">
-<a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
-</td>
-<td class="expands right-aligned right-padded-s">
-{{pack.cards.length}}
-</td>
-</tr>
-</tbody>
-</table>
+
+    <div class="pull-right right-padded-s top-padded-s bottom-padded-m" >
+
+
+        <a href="">
+            <i data-ng-click="addCardToPackPopup()"
+
+               class="glyphicon glyphicon-plus-sign">
+            </i>
+        </a>
+
+        <a href="">
+            <i data-ng-click="areYouSureToDeleteCard(card)"
+               class="glyphicon glyphicon-remove-sign">
+            </i>
+        </a>
+    </div>
+
+    <table class="table-striped">
+        <thead>
+        <tr>
+            <th></th>
+            <th>Pack</th>
+            <th class="nowrap right-aligned right-padded-s">Number of Cards</th>
+        </tr>
+        </thead>
+        <tbody ui-sortable="sortableOptions"
+               data-ng-model="course.packs">
+        <tr data-ng-controller="PacksController"
+            data-ng-repeat="packId in course.packs"
+            data-ng-init="findById(packId)"
+            style="cursor: move">
+            <td class="right-padded">
+                <a href="">
+                    <i data-ng-click="areYouSureToDeletePack(pack)"
+                       class="small right-padded-s left-padded-s glyphicon glyphicon-remove-sign">
+                    </i>
+                </a>
+            </td>
+
+            <td class="nowrap">
+                <a data-ng-href="#!/packs/{{pack._id}}/edit">{{pack.name}}</a>
+            </td>
+            <td class="expands right-aligned right-padded-s">
+                {{pack.cards.length}}
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

@@ -1,9 +1,22 @@
-<div class="left-padded-s right-padded-s top-padded-s bottom-padded-m">
+<div class="left-padded-s right-padded-s top-padded-s bottom-padded-m" data-ng-controller="CoursesSettingsController">
     <table class="box-margin-s">
 
-    <tr>
+        <tr>
+            <td class="right-padded-m nowrap top-padded-s bottom-padded-m top-padded-s" colspan="3">
+                <input  type="checkbox"
+                        data-ng-model="teaching"><span class="left-padded-s right-padded-m">Teach This Course</span>
+
+
+            <input  type="checkbox"
+                    data-ng-model="teaching"><span class="left-padded-s">Publish This Course</span>
+
+            </td>
+        </tr>
+
+
+        <tr>
         <td class="right-padded-m">Name</td>
-        <td class="expands">
+        <td class="expands" colspan="3">
             <input type="text"
                    data-ng-model="course.name"
                    class="focus form-control"
@@ -14,7 +27,7 @@
 
     <tr>
         <td class="right-padded-m top-padded-s">Description</td>
-        <td class="top-padded-s">
+        <td class="top-padded-s" colspan="3">
             <input type="text"
                    data-ng-model="course.description"
                    class="form-control"
@@ -25,7 +38,7 @@
 
     <tr>
         <td class="nowrap right-padded-m top-padded-s">Front of Card</td>
-        <td class="top-padded-s">
+        <td class="top-padded-s" colspan="3">
             <input type="text"
                    data-ng-model="course.front"
                    class="form-control"
@@ -36,7 +49,7 @@
 
     <tr>
         <td class="nowrap right-padded-m top-padded-s">Back of Card</td>
-        <td class="top-padded-s">
+        <td class="top-padded-s" colspan="3">
             <input type="text"
                    data-ng-model="course.back"
                    class="form-control"
@@ -51,7 +64,7 @@
 
 
         <tr>
-            <td class="top-padded-s right-padded-m middle-aligned">Language Front</td>
+            <td class="top-padded-s right-padded-m middle-aligned nowrap">Language Front</td>
 
 
             <td colspan="3">
@@ -79,7 +92,7 @@
 
 
         <tr>
-            <td class="top-padded-sm right-padded-m  middle-aligned">Language Back</td>
+            <td class="top-padded-sm right-padded-m  middle-aligned nowrap">Language Back</td>
 
             <td colspan="3" class="btn-group top-padded-sm">
 
@@ -240,14 +253,6 @@
             </td>
         </tr>
 
-        <tr>
-            <td class="right-padded-m-m nowrap top-padded-m top-padded-s">
-                <input  type="checkbox"
-                        data-ng-model="teaching"><span class="left-padded-s">Teach This Course</span></td>
-
-
-            </td>
-        </tr>
 
 
     </table>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('packs').controller('EditPackCommonController', ['$scope', 'Cards',
+angular.module('packs').controller('PackSettingsController', ['$scope', 'Cards',
     function ($scope, Cards) {
 
         $scope.options = {};

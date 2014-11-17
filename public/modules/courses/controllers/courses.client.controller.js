@@ -69,17 +69,6 @@ angular.module('courses').controller('CoursesController',
                 });
             };
 
-            $scope.userHasCreatedPackBefore = function() {
-                return JourneyService.userHasCreatedPackBefore();
-            };
-
-            $scope.userHasEditedCourseBefore = function() {
-                return JourneyService.userHasEditedCourseBefore();
-            };
-
-            $scope.userHasCreatedCardBefore = function() {
-               return JourneyService.userHasCreatedCardBefore();
-            };
 
             $scope.createDummyCourse = function() {
 
@@ -106,9 +95,6 @@ angular.module('courses').controller('CoursesController',
 
             };
 
-            $scope.userHasCreatedCourseBefore = function() {
-                return JourneyService.userHasCreatedCourseBefore();
-            };
 
             // Create new Course
             $scope.create = function () {
@@ -125,7 +111,6 @@ angular.module('courses').controller('CoursesController',
                     teaching: this.teaching
                 });
 
-                console.log(course);
                 // Redirect after save
                 course.$save(function (response) {
                     $location.path('courses/' + response._id + '/edit');
@@ -206,21 +191,24 @@ angular.module('courses').controller('CoursesController',
             // Find existing Course
             $scope.findOne = function () {
                 $scope.duplicateCourse = false;
+
+
+
+
+
                 $scope.course = Courses.get({
                     courseId: $stateParams.courseId
-                }, function(course) {
-                    Courses.query({
-                        userId: $scope.authentication.user._id
-                    }, function(courses) {
+                }, function() {
 
-                        courses.forEach(function (c) {
-                            if (c.master && c.master.toString() === course._id) {
-                                $scope.duplicateCourse = true;
-                            }
-                        });
 
+                    var res = CoursesService.serverLoadCards();
+                    res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
+
+                        $scope.course.cards = cards;
                     });
                 });
+
+
             };
 
             // Find existing Course

@@ -1,4 +1,4 @@
-<div data-ng-controller="EditPackForwardController">
+<div data-ng-controller="EditCourseForwardController">
     <div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl">
 
         <table class="box-margin-s">
@@ -6,7 +6,7 @@
 
             <tr>
                 <td class="right-padded-m top-aligned nowrap top-padded-s expands" colspan="4">
-                    <b>Change Settings for all Cards in this Pack</b>
+                    <b>Change Settings for all Cards in {{course.name}}</b>
                 </td>
 
             </tr>
@@ -88,7 +88,7 @@
         <tr>
 
 
-        <tr data-ng-repeat="card in pack.cards">
+        <tr data-ng-repeat="card in course.cards">
 
 
             <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">

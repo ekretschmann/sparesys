@@ -9,6 +9,7 @@ angular.module('courses').controller('CoursesController',
             $scope.authentication = Authentication;
             $scope.showhelp = false;
 
+            $scope.MAX_SHOW_CARDS = 12;
 
             $scope.languages = [
                 {name:'---', code:''},
@@ -205,6 +206,12 @@ angular.module('courses').controller('CoursesController',
                     res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
 
                         $scope.course.cards = cards;
+                        $scope.course.showCards = [];
+                        var showSize = Math.min(cards.length, $scope.MAX_SHOW_CARDS);
+                        for(var i = 0; i<showSize; i++) {
+                            $scope.course.showCards.push(cards[i]);
+                        }
+
                     });
                 });
 

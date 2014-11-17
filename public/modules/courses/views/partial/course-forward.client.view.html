@@ -71,8 +71,12 @@
         </div>
     </div>
 
+    <div class="top-padded-l" data-ng-if="course.showCards.length === 0">
 
-    <table class="table-striped top-padded-l">
+        There are no cards in course {{course.name}}
+    </div>
+
+    <table class="table-striped top-padded-l" data-ng-if="course.showCards.length > 0">
         <thead>
         <tr>
             <th class="right-padded-m left-padded-s top-aligned">Question</th>
@@ -88,7 +92,7 @@
         <tr>
 
 
-        <tr data-ng-repeat="card in course.cards">
+        <tr data-ng-repeat="card in course.showCards">
 
 
             <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
@@ -141,6 +145,12 @@
 
         </tr>
 
+
+        <tr data-ng-if="course.showCards.length < course.cards.length">
+            <td class="top-padded left-padded-m" colspan="5">
+                and {{course.cards.length - course.showCards.length}} further cards
+             </td>
+        </tr>
         </tbody>
     </table>
 </div>

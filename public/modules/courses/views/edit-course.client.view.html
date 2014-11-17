@@ -30,7 +30,14 @@
                     Ok. Now, a course has a number of packs. If you are creating
                     a language course, you can for example put all the colors into one pack,
                     the days of the week into another and so on. To do this, click on the
-                    <a href="" ng-click="addPackToCoursePopup()">Add Packs</a> link above.
+                    <a href="">
+                        <i data-ng-click="addPackToCoursePopup()"
+
+                           class="glyphicon glyphicon-plus-sign">
+                        </i>
+                    </a>
+
+                     icon below.
                 </infobox>
             </section>
 
@@ -61,7 +68,7 @@
                     <tab heading="{{course.name}}">
 
 
-                        <div class="default-border">
+                        <div class="default-border standard-min-height">
 
 
                             <div ng-include="'/modules/courses/views/partial/view-course.client.view.html'"></div>
@@ -72,7 +79,7 @@
                     <tab heading="Settings">
 
 
-                        <div class="default-border">
+                        <div class="default-border standard-min-height">
 
 
                             <div ng-include="'/modules/courses/views/partial/course-settings.client.view.html'"></div>
@@ -84,7 +91,7 @@
                     <tab heading="Forward">
 
 
-                        <div class="default-border">
+                        <div class="default-border standard-min-height">
 
 
                             <div ng-include="'/modules/courses/views/partial/course-forward.client.view.html'"></div>
@@ -95,7 +102,7 @@
                     <tab heading="Reverse">
 
 
-                        <div class="default-border">
+                        <div class="default-border standard-min-height">
 
 
                             <div ng-include="'/modules/courses/views/partial/course-reverse.client.view.html'"></div>
@@ -107,7 +114,7 @@
                     <tab heading="Images">
 
 
-                        <div class="default-border">
+                        <div class="default-border standard-min-height">
 
 
                             <div ng-include="'/modules/courses/views/partial/course-images.client.view.html'"></div>

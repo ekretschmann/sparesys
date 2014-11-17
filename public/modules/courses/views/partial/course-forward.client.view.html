@@ -1,7 +1,35 @@
 <div data-ng-controller="EditCourseForwardController">
-    <div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl">
 
-        <table class="box-margin-s">
+
+
+    <div class="pull-right right-padded-s top-padded-s bottom-padded-m" >
+
+
+        <a href="">
+            <i data-ng-click="addPackToCoursePopup()"
+
+               class="glyphicon glyphicon-plus-sign">
+            </i>
+        </a>
+
+        <a href="">
+            <i data-ng-click="areYouSureToDeleteCard(card)"
+               class="glyphicon glyphicon-remove-sign">
+            </i>
+        </a>
+    </div>
+
+
+    <div class="top-padded-m left-padded-m" data-ng-if="!course.showCards || course.showCards.length === 0">
+
+        There are no cards in course {{course.name}}
+    </div>
+
+
+    <div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl" data-ng-if="course.showCards.length > 0">
+
+        <table class="box-margin-s" data-ng-if="">
+
 
 
             <tr>

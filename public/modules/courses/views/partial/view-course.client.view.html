@@ -1,11 +1,10 @@
-<div class="right-padded-s top-padded-s bottom-padded-m">
 
 
     <div class="pull-right right-padded-s top-padded-s bottom-padded-m" >
 
 
         <a href="">
-            <i data-ng-click="addCardToPackPopup()"
+            <i data-ng-click="addPackToCoursePopup()"
 
                class="glyphicon glyphicon-plus-sign">
             </i>
@@ -18,11 +17,17 @@
         </a>
     </div>
 
-    <table class="table-striped">
+
+    <div class="top-padded-m left-padded-m" data-ng-if="!course.packs || course.packs.length === 0">
+
+        There are no packs in course {{course.name}}
+    </div>
+
+    <table class="table-striped" data-ng-if="course.showCards.length > 0">
         <thead>
         <tr>
             <th></th>
-            <th>Pack</th>
+            <th class="left-padded-s">Pack</th>
             <th class="nowrap right-aligned right-padded-s">Number of Cards</th>
         </tr>
         </thead>
@@ -49,4 +54,3 @@
         </tr>
         </tbody>
     </table>
-</div>

@@ -53,6 +53,11 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', 'Ca
 
             $scope.options.startDate = undefined;
             $scope.options.dueDate = undefined;
+
+            $scope.options.name = $scope.course.name;
+            $scope.options.description = $scope.course.description;
+            $scope.options.front = $scope.course.front;
+            $scope.options.back = $scope.course.back;
         };
 
         reset();
@@ -60,8 +65,16 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', 'Ca
 
         $scope.updateCards = function () {
 
+            $scope.course.name = $scope.options.name;
+            $scope.course.description = $scope.options.description ;
+            $scope.course.front = $scope.options.front;
+            $scope.course.back = $scope.options.back;
+
+            $scope.course.$update();
 
             $scope.pack.cards.forEach(function (card) {
+
+
 
 
                 if ($scope.options.check === 'Computer Checks') {

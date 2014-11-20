@@ -2,23 +2,24 @@
     <table class="box-margin-s">
 
         <tr>
-            <td class="right-padded-m nowrap top-padded-s bottom-padded-m top-padded-s" colspan="3">
+            <td></td>
+            <td class="right-padded-m nowrap top-padded-s bottom-padded-m top-padded-s" colspan="5">
                 <input  type="checkbox"
-                        data-ng-model="teaching"><span class="left-padded-s right-padded-m">Teach This Course</span>
+                        data-ng-model="options.teaching"><span class="left-padded-s right-padded-m">Teach This Course</span>
 
 
             <input  type="checkbox"
-                    data-ng-model="teaching"><span class="left-padded-s">Publish This Course</span>
+
+                    data-ng-model="options.teaching"><span class="left-padded-s">Publish This Course</span>
 
             </td>
         </tr>
 
-
         <tr>
         <td class="right-padded-m">Name</td>
-        <td class="expands" colspan="3">
+        <td class="expands" colspan="5">
             <input type="text"
-                   data-ng-model="course.name"
+                   data-ng-model="options.name"
                    class="focus form-control"
                    data-ng-init="setFocus()"
                    required>
@@ -27,9 +28,9 @@
 
     <tr>
         <td class="right-padded-m top-padded-s">Description</td>
-        <td class="top-padded-s" colspan="3">
+        <td class="top-padded-s" colspan="5">
             <input type="text"
-                   data-ng-model="course.description"
+                   data-ng-model="options.description"
                    class="form-control"
                    placeholder="{{course.description}}"
                    required>
@@ -38,9 +39,9 @@
 
     <tr>
         <td class="nowrap right-padded-m top-padded-s">Front of Card</td>
-        <td class="top-padded-s" colspan="3">
+        <td class="top-padded-s" colspan="5">
             <input type="text"
-                   data-ng-model="course.front"
+                   data-ng-model="options.front"
                    class="form-control"
                    placeholder="{{course.front}}"
                    required>
@@ -49,9 +50,9 @@
 
     <tr>
         <td class="nowrap right-padded-m top-padded-s">Back of Card</td>
-        <td class="top-padded-s" colspan="3">
+        <td class="top-padded-s" colspan="5">
             <input type="text"
-                   data-ng-model="course.back"
+                   data-ng-model="options.back"
                    class="form-control"
                    placeholder="{{course.back}}"
                    required>
@@ -67,7 +68,7 @@
             <td class="top-padded-s right-padded-m middle-aligned nowrap">Language Front</td>
 
 
-            <td colspan="3">
+            <td>
                 <table>
                     <tr>
                         <td class="btn-group right-padded-l  top-padded-sm">
@@ -88,13 +89,9 @@
                     </tr>
                 </table>
             </td>
-        </tr>
-
-
-        <tr>
             <td class="top-padded-sm right-padded-m  middle-aligned nowrap">Language Back</td>
 
-            <td colspan="3" class="btn-group top-padded-sm">
+            <td class="btn-group top-padded-sm">
 
                 <table>
                     <tr>
@@ -121,7 +118,7 @@
 
         <tr>
             <td class="right-padded-m top-padded-sm">Checks</td>
-            <td colspan="3" class="top-padded-sm">
+            <td colspan="5" class="top-padded-sm">
                 <div class="btn-group">
                     <button type="button"
                             class="btn btn-default">{{ options.check }}
@@ -261,4 +258,93 @@
         <button class="btn btn-rememberators" ng-click="updateCards()">Update Cards</button>
 
     </div>
+
+
+    <div class="top-padded-l" data-ng-if="course.showCards.length === 0">
+
+        There are no cards in course {{course.name}}
+    </div>
+
+    <table class="table-striped top-padded-l" data-ng-if="course.showCards.length > 0">
+        <thead>
+        <tr>
+            <th class="right-padded-m left-padded-s top-aligned">Question</th>
+            <th class="right-padded-m top-aligned">Language Front</th>
+            <th class="right-padded-m top-aligned">Language Back</th>
+            <th class="right-padded-m top-aligned">Checks</th>
+            <th class="right-padded-m top-aligned">Start Date</th>
+            <th class="right-padded-s top-aligned">Due Date</th>
+
+        </tr>
+        </thead>
+        <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
+
+        <tr>
+
+
+        <tr data-ng-repeat="card in course.showCards">
+
+
+            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+
+
+                <a href="">
+                    <i ng-class="checkForward(card)" data-ng-click="areYouSureToDeleteCard(card)"
+                       class="small left-padded-s glyphicon glyphicon-remove-sign">
+                    </i>
+                </a>
+
+                <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+            </td>
+
+            <td class="right-padded-m top-padded top-aligned" >
+                <div data-ng-if="card.languageFront">{{card.languageFront.name}}</div>
+                <div data-ng-if="!card.languageFront">none</div>
+            </td>
+
+
+            <td class="right-padded-m nowrap center-aligned top-aligned" >
+
+                <div data-ng-if="card.languageBack">{{card.languageBack.name}}</div>
+                <div data-ng-if="!card.languageBack">none</div>
+
+            </td>
+
+
+            <td class="right-padded-m nowrap right-aligned top-aligned">
+                {{card.check}}
+            </td>
+
+
+            <td class="right-padded-s nowrap right-aligned top-aligned">
+
+                <span data-ng-if="card.startDate">
+                        {{card.startDate | date:'shortDate'}}
+                    </span>
+                    <span data-ng-if="!card.startDate">
+                        none
+                    </span>
+            </td>
+
+
+            <td class="right-padded-s nowrap right-aligned top-aligned">
+
+                    <span data-ng-if="card.dueDate">
+                        {{card.dueDate | date:'shortDate'}}
+                    </span>
+                    <span data-ng-if="!card.dueDate">
+                        none
+                    </span>
+            </td>
+
+        </tr>
+
+
+        <tr data-ng-if="course.showCards.length < course.cards.length">
+            <td class="top-padded left-padded-m" colspan="5">
+                and {{course.cards.length - course.showCards.length}} further cards
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>

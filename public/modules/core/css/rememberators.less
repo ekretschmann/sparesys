@@ -159,6 +159,10 @@ body {
   padding-left: @default-padding-unit * 3;
 }
 
+.left-padded-sm {
+  padding-left: @default-padding-unit * 2;
+}
+
 .top-padded-s {
   padding-top: @default-padding-unit;
 }
@@ -415,4 +419,21 @@ a {
 //  animation-duration: 0.1s;
   -webkit-animation-iteration-count: 10;
 //  animation-timing-function: linear;
+}
+
+.nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
+  background-color:  @inverse-font-color;
+  border: none;
+}
+
+.nav-tabs {
+  border-bottom: none;
+}
+
+.tab-header {
+  border: none;
+  .left-padded-sm;
+  .top-padded-s;
+  background-color: @inverse-font-color;
+  font-weight: bold;
 }

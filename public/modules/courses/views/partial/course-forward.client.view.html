@@ -28,22 +28,17 @@
 
     <div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl" data-ng-if="course.showCards.length > 0">
 
-        <table class="box-margin-s" data-ng-if="">
+        <div class="tab-header">
+            Change Settings for all Cards in {{course.name}}
+        </div>
 
-
-
-            <tr>
-                <td class="right-padded-m top-aligned nowrap top-padded-s expands" colspan="4">
-                    <b>Change Settings for all Cards in {{course.name}}</b>
-                </td>
-
-            </tr>
+        <table class="box-margin-s" >
 
 
             <tr>
 
-                <td class="right-padded-m top-aligned nowrap top-padded-m">Forward Mode</td>
-                <td class="nowrap right-padded-xl top-aligned top-padded-m">
+                <td class="right-padded-m top-aligned nowrap ">Forward Mode</td>
+                <td class="nowrap right-padded-xl top-aligned ">
 
                     <div><input data-ng-model="options.mode" type="radio" value="on"/> Switch On for all cards</div>
                     <div><input data-ng-model="options.mode" type="radio" value="off"/> Switch Off for all cards</div>

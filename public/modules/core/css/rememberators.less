@@ -5,6 +5,8 @@
 @inverse-font-color: #d0d8dd;
 @background-color-contrast: #ECECFF;
 @foreground-color: #333333;
+@warning-color: #E95610;
+
 
 .default-border-bottom {
   border-bottom: #eaeaea solid 1px;
@@ -21,7 +23,7 @@
 
 .warning {
   font-weight: bold;
-  color: #E95610;
+  color: @warning-color;
 }
 
 
@@ -385,4 +387,32 @@ body {
 
 .remove-icon {
   color:#E99267;
+}
+
+a {
+  color: @light-inverse-background-color;
+}
+
+@-webkit-keyframes clickme {
+  0% {
+    color: @light-inverse-background-color;
+    text-shadow: none;
+  }
+  50% {
+    color: @warning-color;
+    text-shadow: 0 3px 6px @dark-stripes;
+  }
+  100% {
+    color: @light-inverse-background-color;
+    text-shadow: none;
+  }
+}
+
+.flashing {
+
+  -webkit-animation: clickme 10s linear;
+//  animation-name: wiggle;
+//  animation-duration: 0.1s;
+  -webkit-animation-iteration-count: 10;
+//  animation-timing-function: linear;
 }

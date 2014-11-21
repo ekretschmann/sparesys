@@ -65,18 +65,31 @@
 
             <div class="rememberators-tabs top-margin-l bottom-padded-m">
                 <tabset>
-                    <tab heading="{{course.name}}">
+
+                    <tab heading="Course">
 
 
                         <div class="default-border standard-min-height">
 
 
-                            <div ng-include="'/modules/courses/views/partial/view-course.client.view.html'"></div>
+                            <div ng-include="'/modules/courses/views/partial/course-config.client.view.html'"></div>
 
                         </div>
                     </tab>
 
-                    <tab heading="Settings">
+                    <tab heading="Packs">
+
+
+                        <div class="default-border standard-min-height">
+
+
+                            <div ng-include="'/modules/courses/views/partial/course-view-packs.client.view.html'"></div>
+
+                        </div>
+                    </tab>
+
+
+                    <tab heading="Cards">
 
 
                         <div class="default-border standard-min-height">

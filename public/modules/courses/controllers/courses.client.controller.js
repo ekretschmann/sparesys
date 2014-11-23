@@ -8,6 +8,17 @@ angular.module('courses').controller('CoursesController',
 
             $scope.authentication = Authentication;
             $scope.showhelp = false;
+            $scope.tabs = [
+                { title:'Course', active: false },
+                { title:'Packs', active: true },
+                { title:'Cards', active: false },
+                { title:'Forward', active: false },
+                { title:'Reverse', active: false },
+                { title:'Images', active: false  }
+            ];
+
+
+
 
             $scope.MAX_SHOW_CARDS = 12;
 
@@ -37,6 +48,7 @@ angular.module('courses').controller('CoursesController',
             $scope.help = function() {
                 $scope.showhelp = ! $scope.showhelp;
             };
+
 
 
             $scope.cleanDatabase = function() {

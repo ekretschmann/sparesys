@@ -3,22 +3,45 @@
 @inverse-background-color: #030698;
 @light-inverse-background-color: #4E51E5;
 @inverse-font-color: #d0d8dd;
+@inverse-font-color-darker: darken(#d0d8dd,5%);
+@inverse-font-color-lighter: lighten(#d0d8dd,5%);
 @background-color-contrast: #ECECFF;
+@background-color-contrast-darker: darken(#ECECFF, 2%);
 @foreground-color: #333333;
 @warning-color: #E95610;
 
 
 .default-border-bottom {
-  border-bottom: #eaeaea solid 1px;
+  border-bottom: #dadada double 3px;
 }
 
 .standard-min-height {
   min-height:200px;
 }
 
+
+
 .default-border {
   border: #eaeaea solid 1px;
   background-color: @background-color-contrast;
+
+
+
+  background: @background-color-contrast url('/modules/core/img/brand/bg.png') left top repeat; /* ie fallback */
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-gradient(linear, 0 0, 0 bottom, from(@background-color-contrast), to(@background-color-contrast-darker));
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-linear-gradient(@background-color-contrast, @background-color-contrast-darker);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -moz-linear-gradient(@background-color-contrast, @background-color-contrast-darker);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -ms-linear-gradient(@background-color-contrast, @background-color-contrast-darker);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -o-linear-gradient(@background-color-contrast, @background-color-contrast-darker);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  linear-gradient(@background-color-contrast, @background-color-contrast-darker);
+
+
 }
 
 .warning {
@@ -29,6 +52,7 @@
 
 body {
   background: @background-color;
+  background-image: url('/modules/core/img/brand/bg.png');
   font-family: @standard-font;
   font-size: @standard-font-size;
   color: @foreground-color;
@@ -41,6 +65,8 @@ body {
     max-width: 730px;
   }
 }
+
+
 
 .content {
   margin-top: 50px;
@@ -80,8 +106,23 @@ body {
 }
 
 .navbar-header, .nav, .collapse, .navbar-collapse, .navbar-inverse {
-  background-color: @inverse-background-color;
-  background-image: linear-gradient(to bottom, @inverse-background-color 0%, @light-inverse-background-color 100%);
+//  background-color: @inverse-background-color;
+  background: @inverse-background-color url('/modules/core/img/brand/bg.png') left top repeat; /* ie fallback */
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-gradient(linear, 0 0, 0 bottom, from(@inverse-background-color), to(@light-inverse-background-color));
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-linear-gradient(@inverse-background-color, @light-inverse-background-color);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -moz-linear-gradient(@inverse-background-color, @light-inverse-background-color);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -ms-linear-gradient(@inverse-background-color, @light-inverse-background-color);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -o-linear-gradient(@inverse-background-color, @light-inverse-background-color);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  linear-gradient(@inverse-background-color, @light-inverse-background-color);
+
+
+//  background-image: url('/modules/core/img/brand/bg.png'), linear-gradient(to bottom, @inverse-background-color 0%, @light-inverse-background-color 100%);
 }
 
 .navbar-inverse .navbar-brand {
@@ -237,6 +278,9 @@ body {
   cursor: pointer;
 }
 
+.navbar-brand {
+  padding-top: 0.6em;
+}
 //Fonts
 @standard-font: 'Exo+2', sans-serif;
 
@@ -355,7 +399,24 @@ body {
 
 .table-striped>tbody>tr:nth-child(odd)>td,
 .table-striped>tbody>tr:nth-child(odd)>th {
-  background-color: @inverse-font-color;
+
+
+  background: @inverse-font-color url('/modules/core/img/brand/bg-noise.png') left top repeat; /* ie fallback */
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-gradient(linear, 0 0, 0 bottom, from(@inverse-font-color), to(@inverse-font-color-lighter));
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-linear-gradient(@inverse-font-color, @inverse-font-color-lighter);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -moz-linear-gradient(@inverse-font-color, @inverse-font-color-lighter);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -ms-linear-gradient(@inverse-font-color, @inverse-font-color-lighter);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -o-linear-gradient(@inverse-font-color, @inverse-font-color-lighter);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  linear-gradient(@inverse-font-color, @inverse-font-color-lighter);
+
+
+
 }
 
 .search {
@@ -370,8 +431,9 @@ body {
 
 .rememberators-tabs {
   .nav {
-    background-image: none;
     background-color: @background-color;
+
+    background-image: url('/modules/core/img/brand/bg.png');
   }
 }
 
@@ -422,7 +484,8 @@ a {
 }
 
 .nav-tabs > li.active > a, .nav-tabs > li.active > a:hover, .nav-tabs > li.active > a:focus {
-  background-color:  @inverse-font-color;
+
+  background: @inverse-font-color-darker url('/modules/core/img/brand/bg-noise.png') left top repeat;
   border: none;
 }
 
@@ -431,10 +494,27 @@ a {
 }
 
 .tab-header {
+  min-height: 3em;
   border: none;
   .left-padded-sm;
   .top-padded-s;
   background-color: @inverse-font-color;
   font-weight: bolder;
+
+
+  background: @inverse-font-color url('/modules/core/img/brand/bg-noise.png') left top repeat; /* ie fallback */
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-gradient(linear, 0 0, 0 bottom, from(@inverse-font-color), to(@background-color-contrast));
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-linear-gradient(@inverse-font-color, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -moz-linear-gradient(@inverse-font-color, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -ms-linear-gradient(@inverse-font-color, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -o-linear-gradient(@inverse-font-color, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  linear-gradient(@inverse-font-color, @background-color-contrast);
+
 
 }

@@ -14,8 +14,6 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
             $timeout(function() {
                 $scope.course.name = $scope.options.name;
                 $scope.course.description = $scope.options.description;
-                //$scope.course.published = $scope.options.published;
-                //$scope.course.teaching = $scope.options.teaching;
                 $scope.course.front = $scope.options.front;
                 $scope.course.back = $scope.options.back;
 

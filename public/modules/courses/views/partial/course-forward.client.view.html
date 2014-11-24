@@ -1,8 +1,11 @@
 <div data-ng-controller="EditCourseForwardController">
 
 
+    <div class="tab-header">
+        Change Forward Mode Settings for all Cards in {{course.name}}
+    </div>
 
-    <div class="top-padded-m left-padded-m" data-ng-if="!course.showCards || course.showCards.length === 0">
+    <div class="left-padded-m" data-ng-if="!course.showCards || course.showCards.length === 0">
 
         There are no cards in course {{course.name}}
     </div>
@@ -10,9 +13,7 @@
 
     <div style="border-bottom: 1px solid #CCCCCC" class="bottom-margin-xl" data-ng-if="course.showCards.length > 0">
 
-        <div class="tab-header">
-            Change Forward Mode Settings for all Cards in {{course.name}}
-        </div>
+
 
         <table class="box-margin-s" >
 

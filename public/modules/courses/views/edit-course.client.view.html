@@ -71,6 +71,24 @@
                     This course has no cards, yet. You will have to create packs and put in
                     some cards. Come back after that to set due date, start date and
                 </infobox>
+
+                <infobox logo="guru" data-ng-if="tabs[3].active" >
+                    This course has no cards, yet. You will have to create packs and put in
+                    some cards. Come back after that to configure how cards are handled when
+                    they are played front to back. You will be able to ...
+                </infobox>
+
+                <infobox logo="boy" data-ng-if="tabs[4].active" position="right">
+                    This course has no cards, yet. You will have to create packs and put in
+                    some cards. Come back after that to configure how cards are handled when
+                    they are played back to front. You will be able to ...
+                </infobox>
+
+                <infobox logo="woman" data-ng-if="tabs[5].active">
+                    This course has no cards, yet. You will have to create packs and put in
+                    some cards. Come back after that to configure how cards are handled when
+                    they have images on the front. You will be able to ...
+                </infobox>
             </section>
 
             <section data-ng-if="authentication.user.roles.indexOf('help') === -1">

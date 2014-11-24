@@ -4,21 +4,30 @@
         <div class="content-header">
             <div class="title center-aligned"
                  data-ng-if="!course.published">
-                Publish Course: {{course.name}}
+                Publish Course
             </div>
+
+
 
             <div class="title center-aligned"
                  data-ng-if="course.published">
-                Un-Publish Course: {{course.name}}
+                Un-Publish Course
+            </div>
+
+            <div class="title">
+                <div class="title center-aligned font-m">
+                    <span class="warning">{{course.name}}</span>
+                </div>
+
             </div>
         </div>
 
-        <div class="modal-message content-section"
+        <div class="modal-message content-section center-aligned"
              data-ng-if="!course.published">
             This action will make the course available for all other users.
         </div>
 
-        <div class="modal-message content-section"
+        <div class="modal-message content-section center-aligned"
              data-ng-if="course.published">
             This action will make the course invisible for all other users.
         </div>

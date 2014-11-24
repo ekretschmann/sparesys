@@ -6,7 +6,7 @@
         Change Settings for all Cards in {{course.name}}
     </div>
 
-    <div class="top-padded-m left-padded-m"  data-ng-if="!course.showCards || course.showCards.length === 0">
+    <div class="left-padded-m"  data-ng-if="!course.showCards || course.showCards.length === 0">
 
         There are no cards in course {{course.name}}
     </div>
@@ -210,7 +210,7 @@
 
     </table>
 
-    <div class="top-padded-s center-aligned bottom-padded-m" data-ng-if="course.showCards.length > 0">
+    <div class="center-aligned bottom-padded-m" data-ng-if="course.showCards.length > 0">
         <button class="btn btn-rememberators" ng-click="updateCards()">Update Cards</button>
 
     </div>

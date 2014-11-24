@@ -17,29 +17,33 @@
         Settings for Course {{course.name}}
     </div>
 
-    <table class="box-margin-s">
+    <table class="box-margin-s" >
 
         <tr>
             <td></td>
-            <td class="right-padded-m nowrap top-padded-s bottom-padded-m top-padded-s" colspan="5">
+            <td class="nowrap bottom-padded-m">
                 <input  type="checkbox"
-                        data-ng-model="options.teaching"><span class="left-padded-s right-padded-m">Teach This Course</span>
+                        data-ng-model="options.teaching"
+                        data-ng-click="saveSettings()">
+                <span class="left-padded-s right-padded-m">Teach This Course</span>
 
 
             <input  type="checkbox"
-
-                    data-ng-model="options.teaching"><span class="left-padded-s">Publish This Course</span>
+                    data-ng-click="saveSettings()"
+                    data-ng-model="course.published" data-ng-click="areYouSureToPublishCourse(course)">
+                <span class="left-padded-s">Publish This Course</span>
 
             </td>
         </tr>
 
         <tr>
         <td class="right-padded-m">Name</td>
-        <td class="expands" colspan="5">
+        <td class="expands" >
             <input type="text"
                    data-ng-model="options.name"
+                   placeholder="{{course.name}}"
                    class="focus form-control"
-                   data-ng-init="setFocus()"
+                   data-ng-blur="saveSettings()"
                    required>
         </td>
     </tr>
@@ -51,6 +55,7 @@
                    data-ng-model="options.description"
                    class="form-control"
                    placeholder="{{course.description}}"
+                   data-ng-blur="saveSettings()"
                    required>
         </td>
     </tr>
@@ -62,6 +67,7 @@
                    data-ng-model="options.front"
                    class="form-control"
                    placeholder="{{course.front}}"
+                   data-ng-blur="saveSettings()"
                    required>
         </td>
     </tr>
@@ -73,6 +79,7 @@
                    data-ng-model="options.back"
                    class="form-control"
                    placeholder="{{course.back}}"
+                   data-ng-blur="saveSettings()"
                    required>
         </td>
     </tr>

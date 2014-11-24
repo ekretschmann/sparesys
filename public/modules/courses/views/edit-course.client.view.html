@@ -22,11 +22,20 @@
     </div>
 
 
-    <div data-ng-if="course.packs.length === 0">
+
+    <!--<div class="todo-item" data-ng-if="animation.show" >-->
+        <!--<label>bla</label>-->
+        <!--</div>-->
+
+    <!--<button class="btn btn-block btn-danger" ng-click="doit()">Animate</button>-->
+
+
+        <div data-ng-if="course.packs.length === 0">
         <div class="content-section">
             <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
 
-                <infobox logo="man" data-ng-if="tabs[0].active" position="right">
+
+                <infobox logo="man" data-ng-if="tabs[0].active" position="right"  >
 
                     Use this tab to change the course settings. You can select to
                     teach this course or make it available for other rememberator users
@@ -42,6 +51,7 @@
 
                     icon below.
                 </infobox>
+
 
                 <infobox logo="girl" data-ng-if="tabs[1].active">
                     Ok. Now, a course has a number of packs. If you are creating

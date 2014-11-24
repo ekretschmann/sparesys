@@ -230,6 +230,13 @@ angular.module('courses').controller('CoursesController',
 
             };
 
+            //$scope.animation = {};
+            //$scope.animation.show = true;
+            //$scope.doit = function() {
+            //    $scope.animation.show = !$scope.animation.show;
+            //
+            //};
+
             // Find existing Course
             $scope.findById = function (id) {
 

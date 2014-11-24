@@ -1,9 +1,18 @@
 'use strict';
 
-angular.module('courses').controller('CoursesSettingsController', ['$scope', 'Cards',
-    function ($scope, Cards) {
+angular.module('courses').controller('CoursesSettingsController', ['$scope', '$timeout', 'Cards',
+    function ($scope, $timeout, Cards) {
+
+
+        $timeout(function () {
+            angular.element('.focus').trigger('focus');
+        }, 100);
 
         $scope.options = {};
+
+        $scope.saveSettings = function() {
+            console.log('saving');
+        };
 
 
         $scope.openDueDateCalendar = function($event) {

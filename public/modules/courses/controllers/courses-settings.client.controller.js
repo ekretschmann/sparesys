@@ -4,14 +4,23 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
     function ($scope, $timeout, Cards) {
 
 
-        $timeout(function () {
-            angular.element('.focus').trigger('focus');
-        }, 100);
+
 
         $scope.options = {};
 
+
         $scope.saveSettings = function() {
-            console.log('saving');
+
+            $timeout(function() {
+                $scope.course.name = $scope.options.name;
+                $scope.course.description = $scope.options.description;
+                //$scope.course.published = $scope.options.published;
+                //$scope.course.teaching = $scope.options.teaching;
+                $scope.course.front = $scope.options.front;
+                $scope.course.back = $scope.options.back;
+
+                $scope.course.$update();
+            }, 100);
         };
 
 
@@ -65,6 +74,7 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
 
             $scope.options.name = $scope.course.name;
             $scope.options.description = $scope.course.description;
+            $scope.options.teaching = $scope.course.teaching;
             $scope.options.front = $scope.course.front;
             $scope.options.back = $scope.course.back;
         };

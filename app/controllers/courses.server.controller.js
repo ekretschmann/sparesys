@@ -96,6 +96,7 @@ exports.update = function (req, res) {
                                     c[0].back = course.back;
                                     c[0].languageback = course.languageback;
                                     c[0].speechrecognition = course.speechrecognition;
+                                    c[0].teaching = course.teaching;
                                     c[0].save();
                                 }
                             }
@@ -104,6 +105,7 @@ exports.update = function (req, res) {
 
                 }
             });
+
 
             res.jsonp(course);
         }

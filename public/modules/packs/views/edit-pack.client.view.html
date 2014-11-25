@@ -73,19 +73,10 @@
 
             <div class="rememberators-tabs top-margin-l bottom-padded-m">
                 <tabset>
-                    <tab heading="{{pack.name}}">
 
 
-                        <div class="default-border">
 
-
-                            <div ng-include="'/modules/packs/views/partial/view-cards.client.view.html'"></div>
-
-                        </div>
-                    </tab>
-
-
-                    <tab heading="Settings" data-ng-if="pack.cards.length > 0">
+                    <tab heading="Pack" >
 
 
                         <div class="default-border">
@@ -97,7 +88,20 @@
                     </tab>
 
 
-                    <tab heading="Forward" data-ng-if="pack.cards.length > 0">
+                    <tab heading="Cards">
+
+
+                        <div class="default-border">
+
+
+                            <div ng-include="'/modules/packs/views/partial/view-cards.client.view.html'"></div>
+
+                        </div>
+                    </tab>
+
+
+
+                    <tab heading="Forward" >
 
 
                         <div class="default-border">
@@ -107,7 +111,7 @@
 
                         </div>
                     </tab>
-                    <tab heading="Reverse" data-ng-if="pack.cards.length > 0">
+                    <tab heading="Reverse" >
 
 
                         <div class="default-border">
@@ -119,7 +123,7 @@
                     </tab>
 
 
-                    <tab heading="Images" data-ng-if="pack.cards.length > 0">
+                    <tab heading="Images" >
 
 
                         <div class="default-border">

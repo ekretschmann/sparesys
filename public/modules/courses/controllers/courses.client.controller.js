@@ -313,8 +313,12 @@ angular.module('courses').controller('CoursesController',
             $scope.sortableOptions = {
 
                 stop: function (e, ui) {
-                    var course = $scope.course;
-                    course.$update();
+
+                    var showCards = $scope.course.showCards;
+                    $scope.course.$update(function(course) {
+                        $scope.course.showCards = showCards;
+                    });
+
                 }
             };
         }

@@ -34,6 +34,7 @@
 
         <div class="content-section">
 
+
         <div data-ng-if="!course.showCards || course.showCards.length === 0">
 
             <infobox logo="man" data-ng-if="tabs[0].active" position="right"  >
@@ -107,23 +108,26 @@
                     icon below.
                 </infobox>
 
+                <infobox logo="girl" data-ng-if="tabs[1].active"   >
+
+                    From here you can browse to the cards in your packs by clicking on the pack
+                    names to edit cards or add new ones. You can also add new packs by clicking
+                    on the
+                    <a href="">
+                        <i data-ng-click="addPackToCoursePopup()"
+
+                           class="glyphicon glyphicon-plus-sign">
+                        </i>
+                    </a> icon. Rememberators will introduce new cards as they find them in the packs.
+                    You can rearrange the pack order by dragging and dropping the most important packs to the
+                    top.
+                </infobox>
+
 
             </div>
 
         </div>
     </section>
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

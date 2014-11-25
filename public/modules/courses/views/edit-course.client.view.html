@@ -30,9 +30,71 @@
     <!--<button class="btn btn-block btn-danger" ng-click="doit()">Animate</button>-->
 
 
-        <div data-ng-if="course.packs.length === 0">
+    <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+
         <div class="content-section">
-            <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+
+        <div data-ng-if="!course.showCards || course.showCards.length === 0">
+
+            <infobox logo="man" data-ng-if="tabs[0].active" position="right"  >
+
+                Use this tab to change the course settings. You can select to
+                teach this course or make it available for other rememberator users
+                to copy by publishing it. If you want to delete this course,
+                click on the <a href="">
+                    <i data-ng-click="addPackToCoursePopup()"
+                       class="glyphicon glyphicon-remove-sign">
+                    </i></a>
+                icon below.
+            </infobox>
+
+
+
+            <infobox logo="girl" data-ng-if="tabs[1].active && course.packs.length === 0">
+                Ok. Now, a course has a number of packs. If you are creating
+                a language course, you can for example put all the colors into one pack,
+                the days of the week into another and so on. To do this, click on the
+                <a href="">
+                    <i data-ng-click="addPackToCoursePopup()"
+
+                       class="glyphicon glyphicon-plus-sign">
+                    </i>
+                </a>
+
+                icon below.
+            </infobox>
+
+            <infobox logo="boy"  data-ng-if="tabs[1].active && course.packs.length > 0">
+                Time to put some cards into your packs. Click on the pack names to go to the next
+                page where you can add cards.
+            </infobox>
+
+            <infobox logo="philosopher" data-ng-if="tabs[2].active" position="right">
+                This course has no cards, yet. You will have to create packs and put in
+                some cards. Come back after that to set due date, start date and
+            </infobox>
+
+            <infobox logo="guru" data-ng-if="tabs[3].active" >
+                This course has no cards, yet. You will have to create packs and put in
+                some cards. Come back after that to configure how cards are handled when
+                they are played front to back. You will be able to ...
+            </infobox>
+
+            <infobox logo="boy" data-ng-if="tabs[4].active" position="right">
+                This course has no cards, yet. You will have to create packs and put in
+                some cards. Come back after that to configure how cards are handled when
+                they are played back to front. You will be able to ...
+            </infobox>
+
+            <infobox logo="woman" data-ng-if="tabs[5].active">
+                This course has no cards, yet. You will have to create packs and put in
+                some cards. Come back after that to configure how cards are handled when
+                they have images on the front. You will be able to ...
+            </infobox>
+        </div>
+
+
+            <div data-ng-if="course.showCards && course.showCards.length > 0">
 
 
                 <infobox logo="man" data-ng-if="tabs[0].active" position="right"  >
@@ -40,73 +102,28 @@
                     Use this tab to change the course settings. You can select to
                     teach this course or make it available for other rememberator users
                     to copy by publishing it. If you want to delete this course,
-                    click on the
-
-                    <a href="">
-                        <i data-ng-click="addPackToCoursePopup()"
-
-                           class="glyphicon glyphicon-remove-sign">
-                        </i>
-                    </a>
-
+                    click on the <a href=""><i data-ng-click="addPackToCoursePopup()"
+                           class="glyphicon glyphicon-remove-sign"></i></a>
                     icon below.
                 </infobox>
 
 
-                <infobox logo="girl" data-ng-if="tabs[1].active">
-                    Ok. Now, a course has a number of packs. If you are creating
-                    a language course, you can for example put all the colors into one pack,
-                    the days of the week into another and so on. To do this, click on the
-                    <a href="">
-                        <i data-ng-click="addPackToCoursePopup()"
+            </div>
 
-                           class="glyphicon glyphicon-plus-sign">
-                        </i>
-                    </a>
-
-                     icon below.
-                </infobox>
-
-                <infobox logo="philosopher" data-ng-if="tabs[2].active" position="right">
-                    This course has no cards, yet. You will have to create packs and put in
-                    some cards. Come back after that to set due date, start date and
-                </infobox>
-
-                <infobox logo="guru" data-ng-if="tabs[3].active" >
-                    This course has no cards, yet. You will have to create packs and put in
-                    some cards. Come back after that to configure how cards are handled when
-                    they are played front to back. You will be able to ...
-                </infobox>
-
-                <infobox logo="boy" data-ng-if="tabs[4].active" position="right">
-                    This course has no cards, yet. You will have to create packs and put in
-                    some cards. Come back after that to configure how cards are handled when
-                    they are played back to front. You will be able to ...
-                </infobox>
-
-                <infobox logo="woman" data-ng-if="tabs[5].active">
-                    This course has no cards, yet. You will have to create packs and put in
-                    some cards. Come back after that to configure how cards are handled when
-                    they have images on the front. You will be able to ...
-                </infobox>
-            </section>
-
-            <section data-ng-if="authentication.user.roles.indexOf('help') === -1">
-                You have to <a href="" ng-click="addPackToCoursePopup()">add packs</a> to this course!
-            </section>
         </div>
-    </div>
+    </section>
 
-    <div data-ng-if="course.packs.length > 0">
-        <div class="content-section" data-ng-if="authentication.user.roles.indexOf('help') > -1">
 
-            <infobox logo="boy">
-                Time to put some cards into your packs. Click on the pack names to go to the next
-                page where you can add cards.
-            </infobox>
-        </div>
 
-    </div>
+
+
+
+
+
+
+
+
+
 
 
 

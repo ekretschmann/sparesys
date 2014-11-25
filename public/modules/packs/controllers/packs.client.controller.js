@@ -107,7 +107,7 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             $scope.pack = pack;
 
             Courses.query({
-                _id: pack.course
+                _id: pack.course._id
             }, function (courses) {
                 if (courses.length === 1) {
                     $scope.course = courses[0];

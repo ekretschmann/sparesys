@@ -38,7 +38,7 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
 
 
         $scope.languages = [
-            {name: 'Leave Unchanged', code: ''},
+            {name: 'Don\'t Change', code: ''},
             {name: 'Chinese', code: 'zh-CN'},
             {name: 'English (GB)', code: 'en-GB'},
             {name: 'English (US)', code: 'en-US'},
@@ -50,7 +50,7 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
             {name: 'Spanish', code: 'es-ES'}
         ];
 
-        $scope.options.checks = ['Leave Unchanged', 'Computer Checks', 'Self Check', 'Mixed Checks'];
+        $scope.options.checks = ['Don\'t Change', 'Computer Checks', 'Self Check', 'Mixed Checks'];
 
 
 
@@ -64,7 +64,7 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
             $scope.options.changeStartDate = 'off';
             $scope.options.changeDueDate = 'off';
 
-            $scope.options.check = 'Leave Unchanged';
+            $scope.options.check = 'Don\'t Change';
 
 
             $scope.options.startDate = undefined;

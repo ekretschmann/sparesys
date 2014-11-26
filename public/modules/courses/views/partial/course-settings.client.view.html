@@ -1,12 +1,11 @@
-<div  data-ng-controller="CoursesSettingsController">
-
+<div data-ng-controller="CoursesSettingsController">
 
 
     <div class="tab-header">
         Change Settings for all Cards in {{course.name}}
     </div>
 
-    <div class="left-padded-m"  data-ng-if="!course.showCards || course.showCards.length === 0">
+    <div class="left-padded-m" data-ng-if="!course.showCards || course.showCards.length === 0">
 
         There are no cards in course {{course.name}}
     </div>
@@ -15,58 +14,46 @@
     <table class="box-margin-s" data-ng-if="course.showCards.length > 0">
 
 
-
-
-
-
-
         <tr>
-            <td class="top-padded-s right-padded-m middle-aligned nowrap">Language Front</td>
-
-
-            <td>
-                <table>
-                    <tr>
-                        <td class="btn-group right-padded-l  top-padded-sm">
-
-
-                            <button type="button" class="btn btn-default">{{ options.languageFront.name }}</button>
-                            <button type="button" class="btn btn-default dropdown-toggle">
-                                <span class="caret"></span>
-                                <span class="sr-only">Split button!</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li data-ng-repeat="lang in languages"><a
-                                        data-ng-click="options.languageFront=lang">{{lang.name}}</a>
-                                </li>
-                            </ul>
-
-                        </td>
-                    </tr>
-                </table>
+            <td class="top-padded-s right-padded-m middle-aligned">
+                Language Front
             </td>
-            <td class="top-padded-sm right-padded-m  middle-aligned nowrap">Language Back</td>
+            <td class="top-padded-s right-padded-m middle-aligned">
 
-            <td class="btn-group top-padded-sm">
 
-                <table>
-                    <tr>
-                        <td class="btn-group">
-                            <button type="button" class="btn btn-default">{{ options.languageBack.name }}</button>
-                            <button type="button" class="btn btn-default dropdown-toggle">
-                                <span class="caret"></span>
-                                <span class="sr-only">Split button!</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li data-ng-repeat="lang in languages"><a
-                                        data-ng-click="options.languageBack = lang">{{lang.name}}</a>
-                                </li>
-                            </ul>
+                <div class="btn-group right-padded-l nowrap">
 
-                        </td>
-                    </tr>
-                </table>
 
+                    <button type="button" class="btn btn-default">{{ options.languageFront.name }}</button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="lang in languages"><a
+                                data-ng-click="options.languageFront=lang">{{lang.name}}</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <span class="right-padded-s">
+                 Language Back
+                    </span>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default">{{ options.languageBack.name }}</button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="lang in languages"><a
+                                data-ng-click="options.languageBack = lang">{{lang.name}}</a>
+                        </li>
+                    </ul>
+
+                </div>
 
             </td>
         </tr>
@@ -74,7 +61,7 @@
 
         <tr>
             <td class="right-padded-m top-padded-sm">Checks</td>
-            <td colspan="5" class="top-padded-sm">
+            <td class="top-padded-sm ">
                 <div class="btn-group">
                     <button type="button"
                             class="btn btn-default">{{ options.check }}
@@ -92,120 +79,128 @@
             </td>
         </tr>
 
+
         <tr data-ng-controller="DateDropdownController">
             <td class="top-padded-s">Due date</td>
-            <td class="top-padded-s right-padded-m">
-
-                <input data-ng-model="options.changeDueDate" type="radio" value="off"/> <span class="right-padded-m"> Leave Unchanged</span>
-
-                <input data-ng-model="options.changeDueDate" type="radio" value="reset"/> None
-            </td>
-            <td class="top-padded-s right-padded-s">
-                <input data-ng-model="options.changeDueDate" ng-click="openDueDateCalendar($event)" type="radio"
-                       value="on"/> Change To
-
-            </td>
-            <td class="top-padded-s" data-ng-if="options.changeDueDate === 'on'">
-                <div class="input-group">
-                    <input type="text"
-                           class="form-control"
-                           datepicker-popup="{{format}}"
-                           ng-model="options.dueDate"
-                           is-open="options.openDueDateCalendar"
-                           min-date="minDate"
-                           datepicker-options="dateOptions"
-                           ng-required="false"
-                           close-text="Close"/>
 
 
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="openDueDateCalendar($event)"><i
-                                class="glyphicon glyphicon-calendar"></i></button>
-                    </div>
-                </div>
+            <td class="top-padded-s right-padded-m nowrap">
 
-            </td>
+                <table>
 
-            <td class="top-padded-s" data-ng-if="options.changeDueDate !== 'on'">
-                <div class="input-group">
-                    <input type="text"
-                           class="form-control"
-                           datepicker-popup="{{format}}"
-                           ng-model="options.dueDate"
-                           is-open="{{false}}"
-                           min-date="minDate"
-                           datepicker-options="dateOptions"
-                           ng-required="false"
-                           close-text="Close"
-                           date-disabled="'true'" disabled/>
+                    <tr>
+                        <td class="right-padded-m">
+                            <input data-ng-model="options.changeDueDate" type="radio" value="off"/> Don't Change
+                        </td>
 
+                        <td class="right-padded-m">
+                            <input data-ng-model="options.changeDueDate" type="radio" value="reset"/>  None
+                        </td>
 
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-disabled"><i
-                                class="glyphicon glyphicon-calendar"></i></button>
-                    </div>
-                </div>
+                        <td class="right-padded-m">
 
-            </td>
-        </tr>
+                        <input data-ng-model="options.changeDueDate" ng-click="openDueDateCalendar($event)" type="radio"
+                               value="on"/> Change To
+                        </td>
 
-        <tr data-ng-controller="DateDropdownController">
-            <td class="top-padded-s right-padded-m">Start date</td>
-            <td class="top-padded-s right-padded-m">
-
-                <input data-ng-model="options.changeStartDate" type="radio" value="off"/> <span class="right-padded-m"> Leave Unchanged</span>
-
-                <input data-ng-model="options.changeStartDate" type="radio" value="reset"/> None
-            </td>
-            <td class="top-padded-s right-padded-s">
-                <input data-ng-model="options.changeStartDate" ng-click="openStartDateCalendar($event)" type="radio"
-                       value="on"/> Change To
-
-            </td>
-            <td class="top-padded-s" data-ng-if="options.changeStartDate === 'on'">
-                <div class="input-group">
-                    <input type="text"
-                           class="form-control"
-                           datepicker-popup="{{format}}"
-                           ng-model="options.startDate"
-                           is-open="options.openStartDateCalendar"
-                           min-date="minDate"
-                           datepicker-options="dateOptions"
-                           ng-required="false"
-                           close-text="Close"/>
+                        <td class="input-group" data-ng-if="options.changeDueDate === 'on'">
+                            <input type="text"
+                                   class="form-control"
+                                   datepicker-popup="{{format}}"
+                                   ng-model="options.dueDate"
+                                   is-open="options.openDueDateCalendar"
+                                   min-date="minDate"
+                                   datepicker-options="dateOptions"
+                                   ng-required="false"
+                                   close-text="Close"/>
 
 
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default" ng-click="openStartDateCalendar($event)"><i
-                                class="glyphicon glyphicon-calendar"></i></button>
-                    </div>
-                </div>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="openDueDateCalendar($event)"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+                            </div>
+                        </td>
 
-            </td>
-
-            <td class="top-padded-s" data-ng-if="options.changeStartDate !== 'on'">
-                <div class="input-group">
-                    <input type="text"
-                           class="form-control"
-                           datepicker-popup="{{format}}"
-                           ng-model="options.openStartDateCalendar"
-                           is-open="{{false}}"
-                           min-date="minDate"
-                           datepicker-options="dateOptions"
-                           ng-required="false"
-                           close-text="Close"
-                           date-disabled="'true'" disabled/>
+                        <td class="input-group" data-ng-if="options.changeDueDate !== 'on'">
+                            <input type="text"
+                                   class="form-control"
+                                   datepicker-popup="{{format}}"
+                                   ng-model="options.dueDate"
+                                   is-open="{{false}}"
+                                   min-date="minDate"
+                                   datepicker-options="dateOptions"
+                                   ng-required="false"
+                                   close-text="Close"
+                                   date-disabled="'true'" disabled/>
 
 
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-disabled" ><i
-                                class="glyphicon glyphicon-calendar"></i></button>
-                    </div>
-                </div>
+                            <div class="input-group-btn">
+                                <button type="button" class="btn btn-disabled"><i
+                                        class="glyphicon glyphicon-calendar"></i></button>
+                            </div>
+                        </td>
+
+                    </tr>
+                </table>
 
             </td>
         </tr>
 
+        <!--<tr data-ng-controller="DateDropdownController">-->
+        <!--<td class="top-padded-s right-padded-m">Start date</td>-->
+        <!--<td class="top-padded-s right-padded-m nowrap">-->
+
+        <!--<input data-ng-model="options.changeStartDate" type="radio" value="off"/> <span class="right-padded-m"> Don't Change</span>-->
+
+        <!--<input data-ng-model="options.changeStartDate" type="radio" value="reset"/> <span class="right-padded-m">None</span>-->
+
+        <!--<input data-ng-model="options.changeStartDate" ng-click="openStartDateCalendar($event)" type="radio"-->
+        <!--value="on"/> Change To-->
+
+        <!--</td>-->
+        <!--<td class="top-padded-s" data-ng-if="options.changeStartDate === 'on'">-->
+        <!--<div class="input-group">-->
+        <!--<input type="text"-->
+        <!--class="form-control"-->
+        <!--datepicker-popup="{{format}}"-->
+        <!--ng-model="options.startDate"-->
+        <!--is-open="options.openStartDateCalendar"-->
+        <!--min-date="minDate"-->
+        <!--datepicker-options="dateOptions"-->
+        <!--ng-required="false"-->
+        <!--close-text="Close"/>-->
+
+
+        <!--<div class="input-group-btn">-->
+        <!--<button type="button" class="btn btn-default" ng-click="openStartDateCalendar($event)"><i-->
+        <!--class="glyphicon glyphicon-calendar"></i></button>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</td>-->
+
+        <!--<td class="top-padded-s" data-ng-if="options.changeStartDate !== 'on'">-->
+        <!--<div class="input-group">-->
+        <!--<input type="text"-->
+        <!--class="form-control"-->
+        <!--datepicker-popup="{{format}}"-->
+        <!--ng-model="options.openStartDateCalendar"-->
+        <!--is-open="{{false}}"-->
+        <!--min-date="minDate"-->
+        <!--datepicker-options="dateOptions"-->
+        <!--ng-required="false"-->
+        <!--close-text="Close"-->
+        <!--date-disabled="'true'" disabled/>-->
+
+
+        <!--<div class="input-group-btn">-->
+        <!--<button type="button" class="btn btn-disabled" ><i-->
+        <!--class="glyphicon glyphicon-calendar"></i></button>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--</td>-->
+        <!--</tr>-->
 
 
     </table>
@@ -214,8 +209,6 @@
         <button class="btn btn-rememberators" ng-click="updateCards()">Update Cards</button>
 
     </div>
-
-
 
 
     <table class="table-striped top-padded-l" data-ng-if="course.showCards.length > 0">
@@ -250,13 +243,13 @@
                 <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
             </td>
 
-            <td class="right-padded-m top-padded top-aligned" >
+            <td class="right-padded-m top-padded top-aligned">
                 <div data-ng-if="card.languageFront">{{card.languageFront.name}}</div>
                 <div data-ng-if="!card.languageFront">none</div>
             </td>
 
 
-            <td class="right-padded-m nowrap center-aligned top-aligned" >
+            <td class="right-padded-m nowrap center-aligned top-aligned">
 
                 <div data-ng-if="card.languageBack">{{card.languageBack.name}}</div>
                 <div data-ng-if="!card.languageBack">none</div>

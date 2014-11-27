@@ -25,6 +25,8 @@ angular.module('packs').controller('EditCourseForwardController', ['$scope', 'Ca
         $scope.updateCards = function () {
 
 
+            var cardsToUpdate = $scope.course.cards.length;
+            var cardsUpdated = 0;
             $scope.course.cards.forEach(function (card) {
 
 
@@ -63,9 +65,20 @@ angular.module('packs').controller('EditCourseForwardController', ['$scope', 'Ca
                     }
                 }
 
-                new Cards(card).$update();
+                new Cards(card).$update(function() {
+
+                    cardsUpdated++;
+
+                    if (cardsUpdated === cardsToUpdate) {
+                        $scope.options.readFront = 'leave';
+                        $scope.options.readBack = 'leave';
+                        $scope.options.mode = 'leave';
+                        $scope.options.speech = 'leave';
+                    }
+                });
 
             });
+
 
 
         };

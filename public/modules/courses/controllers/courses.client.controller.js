@@ -11,8 +11,8 @@ angular.module('courses').controller('CoursesController',
             $scope.tabs = [
                 { title:'Course', active: false },
                 { title:'Packs', active: false },
-                { title:'Cards', active: true },
-                { title:'Forward', active: false },
+                { title:'Cards', active: false },
+                { title:'Forward', active: true },
                 { title:'Reverse', active: false },
                 { title:'Images', active: false  }
             ];

@@ -39,6 +39,7 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
 
         $scope.languages = [
             {name: 'Don\'t Change', code: ''},
+            {name: 'None', code: ''},
             {name: 'Chinese', code: 'zh-CN'},
             {name: 'English (GB)', code: 'en-GB'},
             {name: 'English (US)', code: 'en-US'},
@@ -80,6 +81,7 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
         reset();
 
 
+
         $scope.updateCards = function () {
 
             $scope.course.name = $scope.options.name;
@@ -87,11 +89,10 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
             $scope.course.front = $scope.options.front;
             $scope.course.back = $scope.options.back;
 
-            $scope.course.$update();
+            var cards = $scope.course.cards;
+            var showCards = $scope.course.showCards;
 
-            $scope.pack.cards.forEach(function (card) {
-
-
+            $scope.course.cards.forEach(function (card) {
 
 
                 if ($scope.options.check === 'Computer Checks') {
@@ -104,12 +105,20 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
                     card.check = 'mixed';
                 }
 
-                if ($scope.options.languageFront.name !== 'Leave Unchanged') {
+                if ($scope.options.languageFront.name !== 'Don\'t Change') {
                     card.languageFront = $scope.options.languageFront;
                 }
 
-                if ($scope.options.languageBack.name !== 'Leave Unchanged') {
+                if ($scope.options.languageFront.name === 'None') {
+                    card.languageFront = undefined;
+                }
+
+                if ($scope.options.languageBack.name !== 'Don\'t Change') {
                     card.languageBack = $scope.options.languageBack;
+                }
+
+                if ($scope.options.languageBack.name === 'None') {
+                    card.languageBack = undefined;
                 }
 
 
@@ -133,10 +142,15 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
 
                 new Cards(card).$update();
 
-
             });
 
-            reset();
+            $scope.course.$update(function() {
+                $scope.course.cards = cards;
+                $scope.course.showCards = showCards;
+                reset();
+            });
+
+
         };
     }
 ]);

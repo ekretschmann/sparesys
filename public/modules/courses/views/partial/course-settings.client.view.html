@@ -225,7 +225,7 @@
     <table class="table-striped top-padded-l card-border-top"  data-ng-if="course.showCards.length > 0">
         <thead >
         <tr >
-            <th class="right-padded-m left-padded-s top-aligned top-padded-sm">Question</th>
+            <th class="right-padded-m left-padded-s top-aligned top-padded-sm" colspan="2">Question</th>
             <th class="right-padded-m top-aligned top-padded-sm">Language Front</th>
             <th class="right-padded-m top-aligned top-padded-sm">Language Back</th>
             <th class="right-padded-m top-aligned top-padded-sm">Checks</th>
@@ -242,7 +242,7 @@
         <tr data-ng-repeat="card in course.showCards">
 
 
-            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+            <td class="right-padded-sm top-padded top-aligned">
 
 
                 <a href="">
@@ -250,8 +250,10 @@
                        class="small left-padded-s glyphicon glyphicon-remove-sign">
                     </i>
                 </a>
+</td>
+            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
 
-                <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+            <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
             </td>
 
             <td class="right-padded-m top-padded top-aligned">

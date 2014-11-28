@@ -13,8 +13,8 @@ angular.module('courses').controller('CoursesController',
                 { title:'Packs', active: false },
                 { title:'Cards', active: false },
                 { title:'Forward', active: false },
-                { title:'Reverse', active: true },
-                { title:'Images', active: false  }
+                { title:'Reverse', active: false },
+                { title:'Images', active: true  }
             ];
 
 

@@ -12,8 +12,8 @@ angular.module('courses').controller('CoursesController',
                 { title:'Course', active: false },
                 { title:'Packs', active: false },
                 { title:'Cards', active: false },
-                { title:'Forward', active: true },
-                { title:'Reverse', active: false },
+                { title:'Forward', active: false },
+                { title:'Reverse', active: true },
                 { title:'Images', active: false  }
             ];
 

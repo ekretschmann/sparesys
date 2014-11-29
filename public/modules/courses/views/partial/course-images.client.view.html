@@ -75,6 +75,29 @@
 
             </tr>
 
+
+
+            <tr>
+                <td class="nowrap right-padded-m top-padded-m">
+
+                    Speech Recognition
+                </td>
+
+
+                <td class="nowrap right-padded-m top-padded-m">
+
+                    <input data-ng-model="options.speech" type="radio" value="on"/> Yes
+                </td>
+                <td class="nowrap right-padded-m top-padded-m">
+                    <input data-ng-model="options.speech" type="radio" value="off"/> No
+                </td>
+                <td class="nowrap right-padded-m top-padded-m">
+                    <input data-ng-model="options.speech" type="radio" value="leave"/> Don't Change
+                </td>
+
+
+            </tr>
+
             <tr>
                 <td class="nowrap right-padded-m top-padded-m">
 
@@ -84,126 +107,119 @@
 
                 <td class="nowrap right-padded-m top-padded-m">
 
-                    <input data-ng-model="options.writeFront" type="radio" value="on"/> Both
+                    <input data-ng-model="options.textAndImages" type="radio" value="on"/> Both
                 </td>
                 <td class="nowrap right-padded-m top-padded-m">
-                    <input data-ng-model="options.writeFront" type="radio" value="off"/> Images Only
+                    <input data-ng-model="options.textAndImages" type="radio" value="off"/> Images Only
                 </td>
                 <td class="nowrap right-padded-m top-padded-m">
-                    <input data-ng-model="options.writeFront" type="radio" value="leave"/> Don't Change
+                    <input data-ng-model="options.textAndImages" type="radio" value="leave"/> Don't Change
                 </td>
 
 
             </tr>
         </table>
-    </div>
 
-    <div data-ng-if="course.showCards.length > 0">
-
-        <table class="box-margin-s">
-
-
-            <tr>
-                <td class="right-padded-m top-aligned nowrap top-padded-m">Expected Answers</td>
-
-
-                <td class="nowrap right-padded-xl top-aligned top-padded-m">
-
-                    <div><input data-ng-model="options.readBack" type="radio" value="on"/> Read out loud</div>
-                    <div><input data-ng-model="options.readBack" type="radio" value="off"/> Don't Read out loud</div>
-                    <div><input data-ng-model="options.readBack" type="radio" value="leave"/> Leave Unchanged</div>
-                </td>
-                <td class="right-padded-m top-aligned nowrap top-padded-m">Speech Recognition</td>
-                <td class="nowrap right-padded-xl top-aligned top-padded-m">
-
-                    <div><input data-ng-model="options.speech" type="radio" value="on"/> Switch On for all cards</div>
-                    <div><input data-ng-model="options.speech" type="radio" value="off"/> Switch Off for all cards</div>
-                    <div><input data-ng-model="options.speech" type="radio" value="leave"/> Leave Unchanged</div>
-                </td>
-            </tr>
-
-
-        </table>
 
         <div class="top-padded-s center-aligned bottom-padded-m">
             <button class="btn btn-rememberators" ng-click="updateCards()">Update Cards</button>
 
         </div>
-
-
-        <table class="table-striped top-padded-l">
-            <thead>
-            <tr>
-                <th class="right-padded-m left-padded-s top-aligned">Question</th>
-                <th class="right-padded-m top-aligned">Expected Answer</th>
-                <th class="right-padded-m top-aligned">Read Question</th>
-                <th class="right-padded-m top-aligned">Speech Recognition</th>
-                <th class="right-padded-s top-aligned">Read Expected Answer</th>
-
-            </tr>
-            </thead>
-            <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
-
-            <tr>
-
-
-            <tr data-ng-repeat="card in pack.cards">
-
-
-                <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
-
-
-                    <a href="">
-                        <i ng-class="getModeStyle(card)" data-ng-click="areYouSureToDeleteCard(card)"
-                           class="small left-padded-s glyphicon glyphicon-remove-sign">
-                        </i>
-                    </a>
-
-                    <a ng-class="getModeStyle(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
-                </td>
-
-                <td class="right-padded-m top-padded top-aligned" ng-class="getModeStyle(card)">
-                    {{card.answer}}
-                </td>
-
-
-                <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isImagesMode(card)">
-
-                    <span data-ng-if="card.readFrontForward">yes</span>
-                    <span data-ng-if="!card.readFrontForward">no</span>
-                </td>
-
-                <td class="text-muted right-padded-m nowrap center-aligned top-aligned"
-                    data-ng-if="!isImagesMode(card)">
-                    n/a
-                </td>
-
-                <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isImagesMode(card)">
-
-                    <span data-ng-if="card.speechRecognitionForward">yes</span>
-                    <span data-ng-if="!card.speechRecognitionForward">no</span>
-
-                </td>
-
-                <td class="text-muted right-padded-m nowrap center-aligned top-aligned"
-                    data-ng-if="!isImagesMode(card)">
-                    n/a
-                </td>
-
-                <td class="right-padded-s nowrap center-aligned top-aligned" data-ng-if="isImagesMode(card)">
-                    <span data-ng-if="card.readBackForward">yes</span>
-                    <span data-ng-if="!card.readBackForward">no</span>
-
-                </td>
-
-                <td class="text-muted right-padded-m nowrap center-aligned top-aligned"
-                    data-ng-if="!isImagesMode(card)">
-                    n/a
-                </td>
-
-            </tr>
-
-            </tbody>
-        </table>
     </div>
+
+    <div class="top-padded-l" data-ng-if="course.showCards.length === 0">
+
+        There are no cards in course {{course.name}}
+    </div>
+
+    <table class="table-striped top-padded-l card-border-top" data-ng-if="course.showCards.length > 0">
+        <thead>
+        <tr>
+
+            <th class="right-padded-m left-padded-s top-padded-sm" colspan="2">Question</th>
+            <th class="right-padded-m center-aligned top-padded-sm nowrap">Read Question</th>
+            <th class="right-padded-m center-aligned top-padded-sm nowrap">Read Answer</th>
+            <th class="right-padded-m center-aligned top-padded-sm nowrap">Speech Recognition</th>
+            <th class="top-aligned top-padded-sm nowrap">Show Text</th>
+
+
+        </tr>
+        </thead>
+        <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
+
+        <tr>
+
+
+        <tr data-ng-repeat="card in course.showCards">
+
+
+            <td class="top-padded right-padded-sm top-aligned">
+
+
+                <a href="">
+                    <i ng-class="checkForward(card)" data-ng-click="areYouSureToDeleteCard(card)"
+                       class="small left-padded-s glyphicon glyphicon-remove-sign">
+                    </i>
+                </a>
+            </td>
+            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+
+                <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+            </td>
+
+
+
+            <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isImageMode(card)">
+
+                <span data-ng-if="card.readFrontForward">yes</span>
+                <span data-ng-if="!card.readFrontForward">no</span>
+            </td>
+
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isImageMode(card)">
+                n/a
+            </td>
+
+
+            <td class="right-padded-s nowrap center-aligned top-aligned" data-ng-if="isImageMode(card)">
+                <span data-ng-if="card.readBackForward">yes</span>
+                <span data-ng-if="!card.readBackForward">no</span>
+
+            </td>
+
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isImageMode(card)">
+                n/a
+            </td>
+
+            <td class=" nowrap center-aligned top-aligned" data-ng-if="isImageMode(card)">
+                <span data-ng-if="card.speechRecognitionForward">yes</span>
+                <span data-ng-if="!card.speechRecognitionForward">no</span>
+
+            </td>
+
+            <td class="text-muted nowrap center-aligned top-aligned" data-ng-if="!isImageMode(card)">
+                n/a
+            </td>
+
+            <td class="text-muted nowrap center-aligned top-aligned" data-ng-if="isImageMode(card)">
+                <span data-ng-if="card.textwithimages">yes</span>
+                <span data-ng-if="!card.textwithimages">no</span>
+
+            </td>
+
+            <td class="text-muted nowrap center-aligned top-aligned" data-ng-if="!isImageMode(card)">
+                n/a
+            </td>
+
+        </tr>
+
+
+        <tr data-ng-if="course.showCards.length < course.cards.length">
+            <td class="top-padded left-padded-m" colspan="5">
+                and {{course.cards.length - course.showCards.length}} further cards
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+
 </div>

@@ -9,6 +9,7 @@ angular.module('packs').controller('EditCourseImagesController', ['$scope', 'Car
         $scope.options.readBack = 'leave';
         $scope.options.mode = 'leave';
         $scope.options.speech = 'leave';
+        $scope.options.textAndImages = 'leave';
 
 
         $scope.getModeStyle = function (card) {
@@ -49,6 +50,15 @@ angular.module('packs').controller('EditCourseImagesController', ['$scope', 'Car
 
                 if ($scope.options.speech === 'off') {
                     card.speechRecognitionForward = false;
+                }
+
+
+                if ($scope.options.textAndImages === 'on') {
+                    card.textwithimages = true;
+                }
+
+                if ($scope.options.textAndImages === 'off') {
+                    card.textwithimages = false;
                 }
 
                 if ($scope.options.mode === 'on') {

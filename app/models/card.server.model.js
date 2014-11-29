@@ -121,6 +121,10 @@ var CardSchema = new Schema({
         type: [String],
         default: []
     },
+    textwithimages: {
+        type: Boolean,
+        default: false
+    },
     check: {
         type: String,
         default: 'mixed'

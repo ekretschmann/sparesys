@@ -26,7 +26,9 @@ angular.module('packs').controller('EditCourseImagesController', ['$scope', 'Car
         $scope.updateCards = function () {
 
 
-            $scope.pack.cards.forEach(function (card) {
+            var cardsToUpdate = $scope.course.cards.length;
+            var cardsUpdated = 0;
+            $scope.course.cards.forEach(function (card) {
 
 
 
@@ -61,6 +63,7 @@ angular.module('packs').controller('EditCourseImagesController', ['$scope', 'Car
                     card.textwithimages = false;
                 }
 
+
                 if ($scope.options.mode === 'on') {
                     if (card.modes.indexOf('images') === -1) {
                         card.modes.push('images');
@@ -73,7 +76,18 @@ angular.module('packs').controller('EditCourseImagesController', ['$scope', 'Car
                     }
                 }
 
-                new Cards(card).$update();
+                new Cards(card).$update(function() {
+
+                    cardsUpdated++;
+
+                    if (cardsUpdated === cardsToUpdate) {
+                        $scope.options.readFront = 'leave';
+                        $scope.options.readBack = 'leave';
+                        $scope.options.mode = 'leave';
+                        $scope.options.speech = 'leave';
+                        $scope.options.textAndImages = 'leave';
+                    }
+                });
 
             });
 

@@ -18,6 +18,10 @@ angular.module('courses').controller('CoursesController',
             ];
 
 
+            $scope.toggle = true;
+            $scope.toggleIt = function() {
+                $scope.toggle = !$scope.toggle;
+            };
 
 
             $scope.MAX_SHOW_CARDS = 12;

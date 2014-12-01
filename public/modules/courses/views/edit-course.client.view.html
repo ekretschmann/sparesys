@@ -22,6 +22,16 @@
     </div>
 
 
+    <!--<div class="box" data-ng-hide="toggle" ng-animate=" 'box' ">-->
+        <!--This is the box-->
+    <!--</div>-->
+
+    <!--<div class="box" data-ng-show="toggle" ng-animate=" 'box' ">-->
+        <!--This is the other box-->
+    <!--</div>-->
+
+    <!--<a href="" data-ng-click="toggleIt()">Toggle</a>-->
+
 
     <!--<div class="todo-item" data-ng-if="animation.show" >-->
         <!--<label>bla</label>-->
@@ -35,9 +45,9 @@
         <div class="content-section">
 
 
-        <div data-ng-if="!course.showCards || course.showCards.length === 0">
+        <div data-ng-show="!course.showCards || course.showCards.length === 0">
 
-            <infobox logo="man" data-ng-if="tabs[0].active" position="right"  >
+            <infobox logo="man" data-ng-show="tabs[0].active" position="right"  >
 
                 Use this tab to change the course settings. You can select to
                 teach this course or make it available for other rememberator users
@@ -51,7 +61,7 @@
 
 
 
-            <infobox logo="girl" data-ng-if="tabs[1].active && course.packs.length === 0">
+            <infobox logo="girl" data-ng-show="tabs[1].active && course.packs.length === 0">
                 Ok. Now, a course has a number of packs. If you are creating
                 a language course, you can for example put all the colors into one pack,
                 the days of the week into another and so on. To do this, click on the
@@ -65,29 +75,29 @@
                 icon below.
             </infobox>
 
-            <infobox logo="boy"  data-ng-if="tabs[1].active && course.packs.length > 0">
+            <infobox logo="boy"  data-ng-show="tabs[1].active && course.packs.length > 0">
                 Time to put some cards into your packs. Click on the pack names to go to the next
                 page where you can add cards.
             </infobox>
 
-            <infobox logo="philosopher" data-ng-if="tabs[2].active" position="right">
+            <infobox logo="philosopher" data-ng-show="tabs[2].active" position="right">
                 This course has no cards, yet. You will have to create packs and put in
                 some cards. Come back after that to set due date, start date and
             </infobox>
 
-            <infobox logo="guru" data-ng-if="tabs[3].active" >
+            <infobox logo="guru" data-ng-show="tabs[3].active" >
                 This course has no cards, yet. You will have to create packs and put in
                 some cards. Come back after that to configure how cards are handled when
                 they are played front to back. You will be able to ...
             </infobox>
 
-            <infobox logo="boy" data-ng-if="tabs[4].active" position="right">
+            <infobox logo="boy" data-ng-show="tabs[4].active" position="right">
                 This course has no cards, yet. You will have to create packs and put in
                 some cards. Come back after that to configure how cards are handled when
                 they are played back to front. You will be able to ...
             </infobox>
 
-            <infobox logo="woman" data-ng-if="tabs[5].active">
+            <infobox logo="woman" data-ng-show="tabs[5].active">
                 This course has no cards, yet. You will have to create packs and put in
                 some cards. Come back after that to configure how cards are handled when
                 they have images on the front. You will be able to ...
@@ -98,52 +108,80 @@
             <div data-ng-if="course.showCards && course.showCards.length > 0">
 
 
-                <infobox logo="man" data-ng-if="tabs[0].active" position="right"  >
+                <infobox logo="man" data-ng-show="tabs[0].active" position="right"  >
 
                     Use this tab to change the course settings. You can select to
                     teach this course or make it available for other rememberator users
-                    to copy by publishing it. If you want to delete this course,
+                    by publishing it. You can also change the name and description
+                    of the course or what is supposed to be on the front and the back
+                    of the cards.
+                    If you want to delete this course,
                     click on the <a href=""><i data-ng-click="addPackToCoursePopup()"
                            class="glyphicon glyphicon-remove-sign"></i></a>
-                    icon below.
+                    icon.
                 </infobox>
 
-                <infobox logo="girl" data-ng-if="tabs[1].active"   >
+                <infobox logo="girl" data-ng-show="tabs[1].active"   >
 
-                    From here you can browse to the cards in your packs by clicking on the pack
-                    names to edit cards or add new ones. You can also add new packs by clicking
+                    From here you can browse to the packs in your course by clicking on the pack
+                    names. You can also add new packs by clicking
                     on the
                     <a href="">
                         <i data-ng-click="addPackToCoursePopup()"
 
                            class="glyphicon glyphicon-plus-sign">
                         </i>
-                    </a> icon. Rememberators will introduce new cards as they find them in the packs.
+                    </a> icon. Rememberators will introduce new cards in the order they find them in the packs.
                     You can rearrange the pack order by dragging and dropping the most important packs to the
                     top.
                 </infobox>
 
-                <infobox logo="woman" data-ng-if="tabs[2].active"   >
+                <infobox logo="woman" data-ng-show="tabs[2].active"  position="right" >
 
-                    You can change the settings of all your cards on this tab.
+                    You can change the settings of all your cards on this tab. If you want to use text
+                    to speech to read out the questions or answers, you can configure the languages
+                    here. You can choose between three ways of checking the cards and also configure
+                    a start date from when on the card will be practiced and a due date at which you want
+                    to be sure you remember what is on the card.
+                    <!--: Computer Checks will always ask-->
+                    <!--your students to type in the answers and then check them automatically. Sometimes,-->
+                    <!--you may want to allow the students to self check and tell the rememberators whether-->
+                    <!--they kenw the answer or not themselves. There is also a mix, where new items are-->
+                    <!--self checked for a while and the computer starts checking once they are reasonable-->
+                    <!--well memorised. -->
                 </infobox>
 
 
-                <infobox logo="philosopher" data-ng-if="tabs[3].active" position="right"  >
+                <infobox logo="philosopher" data-ng-show="tabs[3].active"   >
 
-                    Forward Mode Settings can be changed here.
+                    Forward Mode Settings can be changed here. The front of the card will be shown to the student
+                    and the back of the card has the expected answer. You can switch forward and reverse mode on
+                    at the same time and rememberators will practice the card both ways.
+                    In case you want to use the forward mode, you can use text to speech to read out
+                    questions or answers. When you select speech recognition, you will be able to use your
+                    microphone to speak the answer. Don't forget to configure what language your cards are in on the
+                    Cards tab!
                 </infobox>
 
 
 
-                <infobox logo="guru" data-ng-if="tabs[4].active" position="left"  >
+                <infobox logo="guru" data-ng-show="tabs[4].active" position="left"  >
 
-                    Reverse Mode Settings can be changed here.
+                    Reverse Mode Settings can be changed here. The back of the card will be shown to the student
+                    and the front of the card has the expected answer. You can switch forward and reverse mode on
+                    at the same time and rememberators will practice the card both ways.
+                    In case you want to use the Reverse mode, you can use text to speech to read out
+                    questions or answers. When you select speech recognition, you will be able to use your
+                    microphone to speak the answer. Don't forget to configure what language your cards are in on the
+                    Cards tab!
                 </infobox>
 
-                <infobox logo="boy" data-ng-if="tabs[5].active" position="right"  >
+                <infobox logo="boy" data-ng-show="tabs[5].active" position="right"  >
 
-                    Image Mode Settings can be changed here.
+                    Image Mode Settings can be changed here. You can add images to the front of your cards
+                    and show those to your students. You can also use text to speech to read the questions
+                    and expected answers and speech recognition to use your microphone in the image mode.
+                    You can also select to show the text in addition to the images.
                 </infobox>
 
 

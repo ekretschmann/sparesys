@@ -528,27 +528,32 @@ a {
 
 
 }
-.todo-item {
-  -webkit-transition: color 0.6s, background-color 0.3s;
-  -moz-transition: color 0.6s, background-color 0.3s;
-  -ms-transition: color 0.6s, background-color 0.3s;
-  transition: color 0.6s, background-color 0.3s;
 
-  label {
-    display: block;
-  }
-
-  &.ng-enter {
-    -webkit-animation: fadeInLeft 1s;
-    -moz-animation: fadeInLeft 1s;
-    -ms-animation: fadeInLeft 1s;
-    animation: fadeInLeft 1s;
-  }
-
-  &.ng-leave {
-    -webkit-animation: bounceOut 1s;
-    -moz-animation: bounceOut 1s;
-    -ms-animation: bounceOut 1s;
-    animation: bounceOut 1s;
-  }
+.box {
+  -webkit-animation: myfirst 5s; /* Chrome, Safari, Opera */
+  animation: myfirst 5s;
 }
+
+/* Chrome, Safari, Opera */
+@-webkit-keyframes myfirst {
+  0%   {background: red;}
+  25%  {background: yellow;}
+  50%  {background: blue;}
+  100% {background: green;}
+}
+
+
+//
+//.box-show-setup, .box-hide-setup {
+//  -webkit-transition:all linear 0.3s;
+//  -moz-transition:all linear 0.3s;
+//  -ms-transition:all linear 0.3s;
+//  -o-transition:all linear 0.3s;
+//  transition:all linear 0.3s;
+//}
+//
+//.box-show-setup { opacity:0; height: 0; }
+//.box-show-setup.box-show-start { opacity:1; height: 100px; }
+//
+//.box-hide-setup { opacity:1; height: 0; }
+//.box-hide-setup.box-hide-start { opacity:0; height: 100px; }

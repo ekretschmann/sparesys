@@ -16,6 +16,16 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.cards = [];
 
 
+        $scope.tabs = [
+            { title:'Pack', active: false },
+            { title:'Content', active: true },
+            { title:'Cards', active: false },
+            { title:'Forward', active: false },
+            { title:'Reverse', active: false },
+            { title:'Images', active: false  }
+        ];
+
+
 
 
         if (!$scope.authentication.user) {

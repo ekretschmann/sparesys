@@ -1,0 +1,80 @@
+<div>
+
+
+    <div class="pull-right right-padded-s top-padded-s" >
+
+
+        <a href="">
+            <i data-ng-click="addCardToPackPopup()"
+
+               class="glyphicon glyphicon-plus-sign">
+            </i>
+        </a>
+
+    </div>
+
+    <div class="tab-header">
+        Cards in Pack {{pack.name}}
+    </div>
+
+    <div data-ng-if="pack.cards.length > 0">
+        <table class="table-striped ">
+            <thead>
+            <tr>
+                <th></th>
+                <th class="right-padded-m top-aligned">{{pack.course.front}}</th>
+                <th class="right-padded-m top-aligned">{{pack.course.back}}</th>
+            </tr>
+            </thead>
+            <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
+
+            <tr>
+
+
+            <tr data-ng-repeat="card in pack.cards">
+
+
+                <td class="right-padded-s top-aligned">
+
+
+                    <a href="">
+                        <i data-ng-click="areYouSureToDeleteCard(card)"
+                           class="small left-padded-s glyphicon glyphicon-remove-sign">
+                        </i>
+                    </a>
+
+
+                </td>
+
+                <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+
+                    <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+
+                </td>
+
+                <td class="right-padded-m top-padded top-aligned text-min-width expands">
+
+
+                    {{card.answer}}
+                </td>
+
+
+            </tr>
+
+            </tbody>
+        </table>
+
+    </div>
+
+    <div data-ng-if="pack.cards.length === 0">
+
+        <div class="default-border">
+            <div class="top-padded-m left-padded-m" style="min-height:200px">
+                There are no cards in pack {{pack.name}}
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

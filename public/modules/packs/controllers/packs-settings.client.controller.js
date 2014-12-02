@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('packs').controller('PackSettingsController', ['$scope', 'Cards',
+angular.module('packs').controller('PacksSettingsController', ['$scope', 'Cards',
     function ($scope, Cards) {
 
         $scope.options = {};

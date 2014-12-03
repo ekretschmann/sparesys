@@ -9,6 +9,7 @@ angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards
         $scope.options.readBack = 'leave';
         $scope.options.mode = 'leave';
         $scope.options.speech = 'leave';
+        $scope.options.textAndImages = 'leave';
 
 
         $scope.getModeStyle = function (card) {
@@ -24,6 +25,8 @@ angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards
 
         $scope.updateCards = function () {
 
+            var cardsToUpdate = $scope.course.cards.length;
+            var cardsUpdated = 0;
 
             $scope.pack.cards.forEach(function (card) {
 
@@ -63,7 +66,26 @@ angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards
                     }
                 }
 
-                new Cards(card).$update();
+                if ($scope.options.textAndImages === 'on') {
+                    card.textwithimages = true;
+                }
+
+                if ($scope.options.textAndImages === 'off') {
+                    card.textwithimages = false;
+                }
+
+                new Cards(card).$update(function() {
+
+                    cardsUpdated++;
+
+                    if (cardsUpdated === cardsToUpdate) {
+                        $scope.options.readFront = 'leave';
+                        $scope.options.readBack = 'leave';
+                        $scope.options.mode = 'leave';
+                        $scope.options.speech = 'leave';
+                        $scope.options.textAndImages = 'leave';
+                    }
+                });
 
             });
 

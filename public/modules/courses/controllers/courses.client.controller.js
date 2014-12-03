@@ -274,7 +274,13 @@ angular.module('courses').controller('CoursesController',
 
                 $modal.open({
                     templateUrl: 'showMoreInfo.html',
-                    controller: 'ShowMoreInfoController'
+                    controller: 'ShowMoreInfoController',
+                    resolve: {
+
+                        file: function () {
+                            return file;
+                        }
+                    }
                 });
 
             };

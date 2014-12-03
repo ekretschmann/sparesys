@@ -1,6 +1,7 @@
 <section data-ng-controller="CoursesController"
          data-ng-init="findOne()">
 
+    <div ng-include="'/modules/core/views/partial/show-more-info.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/edit-course.modal.client.view.html'"></div>
     <div ng-include="'/modules/courses/views/partial/publish-course.modal.client.view.html'"></div>
@@ -50,7 +51,7 @@
             <infobox logo="man" data-ng-show="tabs[0].active" position="right"  >
 
                 Use this tab to change the course settings. You can select to
-                teach this course or make it available for other rememberator users
+                <a href="" data-ng-click="showMoreInfo('teaching.html')">teach this course</a> or make it available for other rememberators users
                 to copy by publishing it. If you want to delete this course,
                 click on the <a href="">
                     <i data-ng-click="addPackToCoursePopup()"
@@ -111,7 +112,7 @@
                 <infobox logo="man" data-ng-show="tabs[0].active" position="right"  >
 
                     Use this tab to change the course settings. You can select to
-                    teach this course or make it available for other rememberator users
+                    <a href="" data-ng-click="showMoreInfo('teaching.html')">teach this course</a> or make it available for other rememberator users
                     by publishing it. You can also change the name and description
                     of the course or what is supposed to be on the front and the back
                     of the cards.

@@ -270,6 +270,15 @@ angular.module('courses').controller('CoursesController',
 
             };
 
+            $scope.showMoreInfo = function (file) {
+
+                $modal.open({
+                    templateUrl: 'showMoreInfo.html',
+                    controller: 'ShowMoreInfoController'
+                });
+
+            };
+
             $scope.areYouSureToPublishCourse = function (course) {
 
                 $scope.course = course;

@@ -113,9 +113,10 @@
 
                     Use this tab to change the course settings. You can select to
                     <a href="" data-ng-click="showMoreInfo('teaching.html')">teach this course</a> or make it available for other rememberator users
-                    by publishing it. You can also change the name and description
-                    of the course or what is supposed to be on the front and the back
-                    of the cards.
+                    by <a href="" data-ng-click="showMoreInfo('publishing.html')">publishing</a> it. You can also change the name and description
+                    of the course or what is supposed to be on the
+                    <a href="" data-ng-click="showMoreInfo('cards.html')">front and the back
+                    of the cards</a>.
                     If you want to delete this course,
                     click on the <a href=""><i data-ng-click="addPackToCoursePopup()"
                            class="glyphicon glyphicon-remove-sign"></i></a>
@@ -141,9 +142,9 @@
 
                     You can change the settings of all your cards on this tab. If you want to use text
                     to speech to read out the questions or answers, you can configure the languages
-                    here. You can choose between three ways of checking the cards and also configure
-                    a start date from when on the card will be practiced and a due date at which you want
-                    to be sure you remember what is on the card.
+                    here. You can choose between <a href="" data-ng-click="showMoreInfo('checking.html')">three ways of checking</a> and also configure
+                    a <a href="" data-ng-click="showMoreInfo('start-date.html')">start date</a> and a
+                    <a href="" data-ng-click="showMoreInfo('due-date.html')">due date</a> of a card card.
                     <!--: Computer Checks will always ask-->
                     <!--your students to type in the answers and then check them automatically. Sometimes,-->
                     <!--you may want to allow the students to self check and tell the rememberators whether-->
@@ -155,9 +156,7 @@
 
                 <infobox logo="philosopher" data-ng-show="tabs[3].active"   >
 
-                    Forward Mode Settings can be changed here. The front of the card will be shown to the student
-                    and the back of the card has the expected answer. You can switch forward and reverse mode on
-                    at the same time and rememberators will practice the card both ways.
+                    <a href="" data-ng-click="showMoreInfo('forward-mode.html')">Forward Mode</a> Settings can be changed here.
                     In case you want to use the forward mode, you can use text to speech to read out
                     questions or answers. When you select speech recognition, you will be able to use your
                     microphone to speak the answer. Don't forget to configure what language your cards are in on the
@@ -168,9 +167,8 @@
 
                 <infobox logo="guru" data-ng-show="tabs[4].active" position="left"  >
 
-                    Reverse Mode Settings can be changed here. The back of the card will be shown to the student
-                    and the front of the card has the expected answer. You can switch forward and reverse mode on
-                    at the same time and rememberators will practice the card both ways.
+                    <a href="" data-ng-click="showMoreInfo('reverse-mode.html')">Reverse Mode</a>
+                    Settings can be changed here.
                     In case you want to use the Reverse mode, you can use text to speech to read out
                     questions or answers. When you select speech recognition, you will be able to use your
                     microphone to speak the answer. Don't forget to configure what language your cards are in on the

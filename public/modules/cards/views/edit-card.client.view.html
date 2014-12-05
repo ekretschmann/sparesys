@@ -36,73 +36,92 @@
         </div>
     </div>
 
-    <div class="content-header">
+
+    <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+
+        <div class="content-section">
 
 
-        <div class="rememberators-tabs top-margin-l">
-            <tabset>
-                <tab heading="Card">
+            <infobox logo="man" data-ng-show="tabs[0].active" position="right">
+
+                Use this tab to change the course settings. You can select to
+                teach this course or make it available for other rememberator users
+                to copy by publishing it. If you want to delete this course,
+                click on the <a href="">
+                <i data-ng-click="addPackToCoursePopup()"
+                   class="glyphicon glyphicon-remove-sign">
+                </i></a>
+                icon below.
+            </infobox>
+        </div>
+    </section>
 
 
-                    <div class="default-border">
-
-                        <div ng-include="'/modules/cards/views/partial/edit-common.client.view.html'"></div>
-
-
-                    </div>
-                </tab>
+    <div class="rememberators-tabs top-margin-l">
+        <tabset>
 
 
-                <tab heading="Forward" >
+            <tab heading="{{tabs[0].title}}" active="tabs[0].active">
 
 
-                    <div class="default-border">
+                <div class="default-border">
 
-                        <div ng-include="'/modules/cards/views/partial/edit-forward.client.view.html'"></div>
-
-
-                    </div>
-                </tab>
-                <tab heading="Reverse" >
-                    <div class="default-border">
-                        <div ng-include="'/modules/cards/views/partial/edit-reverse.client.view.html'"></div>
-                    </div>
-
-                </tab>
-                <tab heading="Images" >
-                    <div class="default-border">
-                        <div ng-include="'/modules/cards/views/partial/edit-images.client.view.html'"></div>
-                    </div>
+                    <div ng-include="'/modules/cards/views/partial/card-settings.client.view.html'"></div>
 
 
-                </tab>
-                <tab heading="Multiple Choice" >
-                    <div class="default-border">
-                        <div class="top-padded-m left-padded-m" style="min-height:200px">
-                        Multiple Choice is coming soon
-                        </div>
-                    </div>
+                </div>
+            </tab>
 
-                </tab>
 
-            </tabset>
 
-            <div class="right-aligned">
+            <tab heading="Forward">
 
-                <small>
-                    <em class="text-muted">Created on {{card.created | date:'medium'}}</em>
-                </small>
-                <div data-ng-if="card.updated">
-                    <small>
-                        <em class="text-muted">Updated on {{card.updated | date:'medium'}}</em>
-                    </small>
+
+                <div class="default-border">
+
+                    <div ng-include="'/modules/cards/views/partial/edit-forward.client.view.html'"></div>
+
+
+                </div>
+            </tab>
+            <tab heading="Reverse">
+                <div class="default-border">
+                    <div ng-include="'/modules/cards/views/partial/edit-reverse.client.view.html'"></div>
                 </div>
 
+            </tab>
+            <tab heading="Images">
+                <div class="default-border">
+                    <div ng-include="'/modules/cards/views/partial/edit-images.client.view.html'"></div>
+                </div>
+
+
+            </tab>
+            <tab heading="Multiple Choice">
+                <div class="default-border">
+                    <div class="top-padded-m left-padded-m" style="min-height:200px">
+                        Multiple Choice is coming soon
+                    </div>
+                </div>
+
+            </tab>
+
+        </tabset>
+
+        <div class="right-aligned">
+
+            <small>
+                <em class="text-muted">Created on {{card.created | date:'medium'}}</em>
+            </small>
+            <div data-ng-if="card.updated">
+                <small>
+                    <em class="text-muted">Updated on {{card.updated | date:'medium'}}</em>
+                </small>
             </div>
+
         </div>
-
-
-
     </div>
+
+
     <div>rememberators.com</div>
 </section>

@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('packs').controller('PacksSettingsController', ['$scope', 'Cards',
+angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards',
     function ($scope, Cards) {
 
         $scope.options = {};
@@ -61,50 +61,47 @@ angular.module('packs').controller('PacksSettingsController', ['$scope', 'Cards'
         $scope.updateCards = function () {
 
 
-            $scope.pack.cards.forEach(function (card) {
 
 
                 if ($scope.options.check === 'Computer Checks') {
-                    card.check = 'computer';
+                    $scope.card.check = 'computer';
                 }
                 if ($scope.options.check === 'Self Check') {
-                    card.check = 'self';
+                    $scope.card.check = 'self';
                 }
                 if ($scope.options.check === 'Mixed Checks') {
-                    card.check = 'mixed';
+                    $scope.card.check = 'mixed';
                 }
 
                 if ($scope.options.languageFront.name !== 'Don\'t Change') {
-                    card.languageFront = $scope.options.languageFront;
+                    $scope.card.languageFront = $scope.options.languageFront;
                 }
 
                 if ($scope.options.languageBack.name !== 'Don\'t Change') {
-                    card.languageBack = $scope.options.languageBack;
+                    $scope.card.languageBack = $scope.options.languageBack;
                 }
 
 
 
 
                 if($scope.options.startDate) {
-                    card.startDate = $scope.options.startDate;
+                    $scope.card.startDate = $scope.options.startDate;
                 }
 
                 if($scope.options.dueDate) {
-                    card.dueDate = $scope.options.dueDate;
+                    $scope.card.dueDate = $scope.options.dueDate;
                 }
 
                 if ($scope.options.changeStartDate === 'reset') {
-                    card.startDate = undefined;
+                    $scope.card.startDate = undefined;
                 }
 
                 if ($scope.options.changeDueDate === 'reset') {
-                    card.dueDate = undefined;
+                    $scope.card.dueDate = undefined;
                 }
 
-                new Cards(card).$update();
+                new Cards($scope.card).$update();
 
-
-            });
 
             reset();
         };

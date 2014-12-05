@@ -6,6 +6,16 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
 
+        $scope.tabs = [
+            { title:'Card', active: false },
+            { title:'Content', active: true },
+            { title:'Cards', active: false },
+            { title:'Forward', active: false },
+            { title:'Reverse', active: false },
+            { title:'Images', active: false  }
+        ];
+
+
         $scope.toggleMode = function(mode) {
 
             console.log(mode);

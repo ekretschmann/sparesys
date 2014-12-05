@@ -53,6 +53,15 @@
                 </i></a>
                 icon below.
             </infobox>
+
+            <infobox logo="boy" data-ng-show="tabs[1].active" position="left">
+
+                <a href="" data-ng-click="showMoreInfo('forward-mode.html')">Forward Mode</a> Settings can be changed here.
+                In case you want to use the forward mode, you can use text to speech to read out
+                questions or answers. When you select speech recognition, you will be able to use your
+                microphone to speak the answer. Don't forget to configure what language your cards are in on the
+                Cards tab!
+            </infobox>
         </div>
     </section>
 
@@ -61,7 +70,7 @@
         <tabset>
 
 
-            <tab heading="{{tabs[0].title}}" active="tabs[0].active">
+            <tab heading="{{tabs[0].title}}" active="tabs[0].active" >
 
 
                 <div class="default-border">
@@ -74,30 +83,30 @@
 
 
 
-            <tab heading="Forward">
+            <tab heading="{{tabs[1].title}}" active="tabs[1].active">
 
 
                 <div class="default-border">
 
-                    <div ng-include="'/modules/cards/views/partial/edit-forward.client.view.html'"></div>
+                    <div ng-include="'/modules/cards/views/partial/card-forward.client.view.html'"></div>
 
 
                 </div>
             </tab>
-            <tab heading="Reverse">
+            <tab heading="{{tabs[2].title}}" active="tabs[2].active">
                 <div class="default-border">
                     <div ng-include="'/modules/cards/views/partial/edit-reverse.client.view.html'"></div>
                 </div>
 
             </tab>
-            <tab heading="Images">
+            <tab heading="{{tabs[3].title}}" active="tabs[3].active">
                 <div class="default-border">
                     <div ng-include="'/modules/cards/views/partial/edit-images.client.view.html'"></div>
                 </div>
 
 
             </tab>
-            <tab heading="Multiple Choice">
+            <tab heading="{{tabs[4].title}}" active="tabs[4].active">
                 <div class="default-border">
                     <div class="top-padded-m left-padded-m" style="min-height:200px">
                         Multiple Choice is coming soon

@@ -211,7 +211,7 @@
     </table>
 
     <div class="center-aligned bottom-padded-m top-padded-sm">
-        <button class="btn btn-rememberators" ng-click="updateCards()">Update Cards</button>
+        <button class="btn btn-rememberators" ng-click="updateCards()">Update Card</button>
 
     </div>
 
@@ -219,7 +219,7 @@
     <table class="table-striped top-padded-l card-border-top" >
         <thead >
         <tr >
-            <th class="right-padded-m left-padded-s top-aligned top-padded-sm" colspan="2">Question</th>
+            <th class="right-padded-m left-padded-s top-aligned top-padded-sm">Question</th>
             <th class="right-padded-m top-aligned top-padded-sm">Language Front</th>
             <th class="right-padded-m top-aligned top-padded-sm">Language Back</th>
             <th class="right-padded-m top-aligned top-padded-sm">Checks</th>
@@ -230,24 +230,13 @@
         </thead>
         <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
 
-        <tr>
-
 
         <tr >
 
 
-            <td class="right-padded-sm top-padded top-aligned">
+            <td class="left-padded-s right-padded-m standard-min-width top-padded top-aligned text-min-width">
 
-
-                <a href="">
-                    <i ng-class="checkForward(card)" data-ng-click="areYouSureToDeleteCard(card)"
-                       class="small left-padded-s glyphicon glyphicon-remove-sign">
-                    </i>
-                </a>
-            </td>
-            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
-
-                <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+                {{card.question}}
             </td>
 
             <td class="right-padded-m top-padded top-aligned">

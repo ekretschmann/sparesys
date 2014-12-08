@@ -8,7 +8,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.tabs = [
             { title:'Card', active: false },
-            { title:'Forward', active: false },
+            { title:'Forward', active: true },
             { title:'Reverse', active: false },
             { title:'Images', active: false  },
             { title:'Multiple', active: false  }
@@ -20,21 +20,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             console.log(mode);
             console.log($scope.card.modes);
 
-            if ($scope.card.modes.length === 1 && mode === $scope.card.modes[0]) {
-                return;
-            }
 
-            if ($scope.card.modes.indexOf(mode) === -1) {
-                $scope.card.modes.push(mode);
-            } else {
-                for (var i in $scope.card.modes) {
-                    if ($scope.card.modes[i] === mode) {
-                        $scope.card.modes.splice(i, 1);
-                    }
-                }
-            }
-
-            $scope.card.$update();
         };
 
 

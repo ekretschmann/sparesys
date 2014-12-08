@@ -1,163 +1,173 @@
-<table class="box-margin-s">
+<div data-ng-controller="EditCardForwardController">
 
 
-    <tr>
-        <td class="right-padded-m nowrap top-padded-m" colspan="2">
-            <span data-ng-if="card.modes.indexOf(mode) === -1">
-            <input type="checkbox" data-ng-click="toggleMode(mode)"/>
-            </span>
+    <div class="tab-header">
+        Change Forward Mode Settings for {{card.question}}
+    </div>
 
-            <span data-ng-if="card.modes.indexOf(mode) > -1">
-            <input type="checkbox" checked data-ng-click="toggleMode(mode)"/>
-            </span>
-
-            <span class="left-padded-s">Forward Mode Enabled</span>
-        </td>
-
-    </tr>
+    <table class="box-margin-s">
 
 
-    <tr>
-        <td class="right-padded-m nowrap top-padded-m">
-            <section>
-                Front Text
-            </section>
+        <tr>
+            <td></td>
+            <td class="right-padded-m nowrap" colspan="2">
 
-            <!--<section data-ng-if="card.type ==='image-text'">-->
-            <!--<section data-ng-if="sound === 'yes'">-->
-            <!--Read out loud-->
-            <!--</section>-->
-
-            <!--<section data-ng-if="sound === 'no'" class="text-muted">-->
-            <!--Read out loud-->
-            <!--</section>-->
-            <!--</section>-->
-
-        </td>
-        <td class="expands right-padded-m top-padded-m">
-            <section>
-                <input type="text"
-
-                       data-ng-model="card.question"
-                       id="question"
-                       class=" form-control focus standard-input-width"
-                       placeholder="Question"
-                       data-ng-blur="update()"
-                       required>
-            </section>
-
-            <!--<section data-ng-if="sound === 'no' && card.type === 'image-text'"-->
-            <!--class="text-muted nowrap standard-input-width">-->
-            <!--no text being read-->
-            <!--</section>-->
-        </td>
+                <input type="checkbox" data-ng-model="options.forward" data-ng-click="toggleMode()"/>
 
 
-    </tr>
+                <span data-ng-if="isForward()">Forward Mode Enabled</span>
+                <span data-ng-if="!isForward()" class="text-muted">Forward Mode Enabled</span>
+            </td>
 
-    <!--<tr-->
-    <!--data-ng-repeat="alt in card.alternativequestions track by $index">-->
-    <!--<td class="right-padded"></td>-->
-    <!--<td class="expands">-->
-    <!--<input type="text"-->
-    <!--data-ng-model="alt"-->
-    <!--class="form-control standard-input-width "-->
-    <!--data-ng-blur="updateAlternativeQuestion($index, alt)"-->
-    <!--placeholder="Alternative">-->
-    <!--</td>-->
-    <!--</tr>-->
+        </tr>
 
 
-    <!--<tr class="controls" data-ng-if="card.bothways">-->
-    <!--<td class="right-padded-m top-padded-s"></td>-->
-    <!--<td class="expands right-padded-m top-padded-s">-->
-    <!--<input type="text"-->
-    <!--data-ng-model="nextAlternativeQuestion.text"-->
-    <!--id="alternativequestion"-->
-    <!--class="standard-input-width form-control alternative"-->
-    <!--ng-keyup="enterAlternativeQuestion($event)"-->
-    <!--placeholder="Possible Alternative Answer (when asked back to front)"-->
-    <!--data-ng-blur="updateNextAlternativeQuestion()">-->
-    <!--</td>-->
-    <!--</tr>-->
+        <tr>
+            <td class="right-padded-m nowrap top-padded-m">
+                <span data-ng-if="isForward()">Front Text</span>
+                <span data-ng-if="!isForward()" class="text-muted">Front Text</span>
+            </td>
+            <td class="expands right-padded-m top-padded-m">
+                <section data-ng-if="isForward()">
+                    <input type="text"
+
+                           data-ng-model="card.question"
+                           class=" form-control focus standard-input-width"
+                           placeholder="Question"
+                           data-ng-blur="updateCard()"
+                           required>
+                </section>
+
+                <section data-ng-if="!isForward()">
+                    <input type="text"
+
+                           data-ng-model="card.question"
+                           class=" form-control focus standard-input-width"
+                           placeholder="Question"
+                           disabled
+                            >
+                </section>
+
+            </td>
 
 
-    <tr>
-        <td class="top-padded-l"></td>
-        <td class="nowrap top-padded-s middle-aligned">
+        </tr>
 
 
-                        <span class="right-padded-m top-padded-m">
-                        <input data-ng-model="card.soundFront" type="checkbox"/> Read out loud
-                        </span>
-
-            <!--<span class="right-padded-m">-->
-            <!--<input data-ng-model="card.speechRecgognitionFront" type="checkbox"/> Speech Recognition-->
-            <!--</span>-->
+        <tr>
+            <td class="top-padded-l"></td>
+            <td class="nowrap top-padded-s middle-aligned">
 
 
-        </td>
+                <div class="right-padded-m top-padded-m" data-ng-if="isForward()">
+                    <input data-ng-model="card.soundFront" type="checkbox"/> Read out loud
+                </div>
 
-    </tr>
+                <div class="right-padded-m top-padded-m text-muted" data-ng-if="!isForward()">
+                    <input data-ng-model="card.soundFront" disabled type="checkbox"/> Read out loud
+                </div>
 
-    <tr>
-        <td class="right-padded-m top-padded-s">Back Text</td>
+            </td>
 
-        <td class="expands  top-padded-s right-padded-m">
-            <input type="text"
-                   data-ng-model="card.answer"
-                   id="answer"
-                   class="standard-input-width form-control"
-                   placeholder="Answer"
-                   data-ng-blur="updateAnswer()"
-                   required>
-        </td>
+        </tr>
 
-    </tr>
+        <tr>
+            <td class="right-padded-m top-padded-s">
+                <div data-ng-if="isForward()">Back Text</div>
+                <div class="text-muted" data-ng-if="!isForward()">Back Text</div>
 
-    <tr data-ng-repeat="alt in card.alternatives track by $index">
-        <td class="right-padded-m"></td>
-        <td class="expands">
-            <input type="text"
-                   data-ng-model="alt"
-                   id="alternatives"
-                   class="standard-input-width form-control"
-                   data-ng-blur="updateAlternative($index, alt)"
-                   placeholder="Alternative Answer">
-        </td>
-    </tr>
+            </td>
 
-    <tr class="controls">
-        <td class="right-padded-m top-padded-s"></td>
-        <td class="expands top-padded-s right-padded-m">
-            <input type="text"
-                   data-ng-model="nextAlternative"
-                   id="alternative"
-                   class="standard-input-width form-control alternative"
-                   ng-keyup="enterAlternative($event)"
-                   placeholder="Alternative Answer"
-                   data-ng-blur="updateNextAlternative()">
-        </td>
-    </tr>
+            <td class="expands  top-padded-s right-padded-m">
+                <section data-ng-if="isForward()">
+                    <input type="text"
+                           data-ng-model="card.answer"
+                           class="standard-input-width form-control"
+                           placeholder="Answer"
+                           data-ng-blur="updateAnswer()"
+                           required>
+                </section>
+
+                <section data-ng-if="!isForward()">
+                    <input type="text"
+                           data-ng-model="card.answer"
+                           class="standard-input-width form-control"
+                           placeholder="Answer"
+                           disabled>
+                </section>
+            </td>
+
+        </tr>
+
+        <tr data-ng-repeat="alt in card.alternatives track by $index">
+            <td class="right-padded-m"></td>
+            <td class="expands">
+                <section data-ng-if="isForward()">
+                    <input type="text"
+                       data-ng-model="alt"
+                       id="alternatives"
+                       class="standard-input-width form-control"
+                       data-ng-blur="updateAlternative($index, alt)"
+                       placeholder="Alternative Answer">
+                </section>
+                <section data-ng-if="!isForward()">
+                    <input type="text"
+                           data-ng-model="alt"
+                           class="standard-input-width form-control"
+                           placeholder="Alternative Answer"
+                            disabled>
+                </section>
+            </td>
+        </tr>
+
+        <tr class="controls">
+            <td class="right-padded-m top-padded-s"></td>
+            <td class="expands top-padded-s right-padded-m">
+                <section data-ng-if="isForward()">
+                    <input type="text"
+                       data-ng-model="nextAlternative"
+                       id="alternative"
+                       class="standard-input-width form-control alternative"
+                       ng-keyup="enterAlternative($event)"
+                       placeholder="Alternative Answer"
+                       data-ng-blur="updateNextAlternative()">
+                </section>
+                <section data-ng-if="!isForward()">
+                    <input type="text"
+                           data-ng-model="nextAlternative"
+                           class="standard-input-width form-control alternative"
+                           ng-keyup="enterAlternative($event)"
+                           placeholder="Alternative Answer"
+                           disabled>
+                </section>
+            </td>
+        </tr>
 
 
-    <tr>
-        <td class="top-padded-l"></td>
-        <td class="nowrap top-padded-s middle-aligned">
+        <tr>
+            <td class="top-padded-l"></td>
+            <td class="nowrap top-padded-s middle-aligned">
 
 
-            <span class="right-padded-m">
+            <span class="right-padded-m" data-ng-if="isForward()">
             <input data-ng-model="card.speechRecgognitionBack" type="checkbox"/> Recognize Speech
             </span>
+
+                <span class="right-padded-m" data-ng-if="!isForward()">
+            <input data-ng-model="card.speechRecgognitionBack"  type="checkbox"/> Recognize Speech
+            </span>
+
 
             <span class="right-padded-m top-padded-m">
             <input data-ng-model="card.soundBack" type="checkbox"/> Read out loud
             </span>
 
 
-        </td>
+            </td>
 
-    </tr>
+        </tr>
 
 
-</table>
+    </table>
+
+</div>

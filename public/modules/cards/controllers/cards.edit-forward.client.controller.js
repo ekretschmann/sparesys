@@ -5,6 +5,8 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', 'Card
 
 
 
+        $scope.muted = '';
+
         $scope.options = {};
 
         $scope.isForward = function () {
@@ -13,8 +15,19 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', 'Card
 
         $scope.options.forward = $scope.isForward();
 
+        $scope.updateMuted = function() {
+            if ($scope.isForward()) {
+                $scope.muted = '';
+            } else {
+                $scope.muted = 'text-muted';
+            }
+        };
+
+        $scope.updateMuted();
 
         $scope.toggleMode = function () {
+
+
 
             var mode = 'forward';
             if ($scope.card.modes.indexOf(mode) === -1) {
@@ -28,6 +41,7 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', 'Card
             }
 
             $scope.card.$update();
+            $scope.updateMuted();
         };
 
         $scope.updateCard = function () {

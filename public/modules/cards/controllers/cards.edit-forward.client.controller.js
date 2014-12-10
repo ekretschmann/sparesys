@@ -1,32 +1,13 @@
 'use strict';
 
-angular.module('cards').controller('EditCardForwardController', ['$scope', 'Cards',
-    function ($scope, Cards) {
-
+angular.module('cards').controller('EditCardForwardController', ['$scope', '$timeout','Cards',
+    function ($scope, $timeout, Cards) {
 
 
         $scope.muted = '';
 
-        $scope.options = {};
-
-        $scope.isForward = function () {
-            return $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
-        };
-
-        $scope.options.forward = $scope.isForward();
-
-        $scope.updateMuted = function() {
-            if ($scope.isForward()) {
-                $scope.muted = '';
-            } else {
-                $scope.muted = 'text-muted';
-            }
-        };
-
-        $scope.updateMuted();
 
         $scope.toggleMode = function () {
-
 
 
             var mode = 'forward';
@@ -40,16 +21,42 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', 'Card
                 }
             }
 
-            $scope.card.$update();
-            $scope.updateMuted();
+            $scope.updateCard();
+            if ($scope.card.hasForwardMode) {
+                $scope.muted = '';
+            } else {
+                $scope.muted = 'text-muted';
+            }
         };
 
         $scope.updateCard = function () {
 
+            if ($scope.nextAlternative) {
+                $scope.card.alternativesFront.push($scope.nextAlternative);
+                $scope.nextAlternative = undefined;
+
+                $timeout(function () {
+                    angular.element('#alternative').trigger('focus');
+                }, 100);
+            }
 
             new Cards($scope.card).$update();
 
 
+        };
+
+
+        $scope.updateAlternative = function (index, alt) {
+
+            $scope.card.alternativesFront[index] = alt;
+            var alts = [];
+            $scope.card.alternativesFront.forEach(function (alt) {
+                if (alt !== undefined && alt !== '') {
+                    alts.push(alt);
+                }
+            });
+            $scope.card.alternativesFront = alts;
+            $scope.updateCard();
         };
     }
 ]);

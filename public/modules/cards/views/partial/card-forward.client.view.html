@@ -1,4 +1,4 @@
-<div data-ng-controller="EditCardForwardController">
+<div data-ng-controller="EditCardForwardController" data-ng-init="updateView()">
 
 
     <div class="tab-header">
@@ -12,10 +12,12 @@
             <td></td>
             <td class="right-padded-m nowrap" colspan="2">
 
-                <input type="checkbox" data-ng-model="options.forward" data-ng-click="toggleMode()"/>
+
+                <input type="checkbox" data-ng-model="card.hasForwardMode" data-ng-click="toggleMode()"/>
 
 
                 <span>Use Forward Mode</span>
+
 
             </td>
 
@@ -26,13 +28,13 @@
             <td class="right-padded-m nowrap top-padded-m">
                 <span ng-class="muted">Front Text</span>
             </td>
-            <td class="expands right-padded-m top-padded-m">
+            <td class="expands right-padded-s top-padded-m">
                 <input type="text"
                        data-ng-model="card.question"
                        class=" form-control focus standard-input-width"
                        placeholder="Question"
                        data-ng-blur="updateCard()"
-                       ng-disabled="!isForward()"
+                       ng-disabled="!card.hasForwardMode"
                        required>
 
 
@@ -43,42 +45,43 @@
 
 
         <tr>
-            <td class="top-padded-l"></td>
-            <td class="nowrap top-padded-s middle-aligned">
-                <input ng-disabled="!isForward()" data-ng-model="card.soundFront" type="checkbox"/>
+            <td class="top-padded-s bottom-padded-m"></td>
+            <td class="nowrap top-padded-s middle-aligned bottom-padded-m">
+                <input ng-disabled="!card.hasForwardMode" data-ng-model="card.readFrontForward" type="checkbox"/>
                 <span ng-class="muted">Read out loud</span>
             </td>
 
         </tr>
 
         <tr>
-            <td class="right-padded-m top-padded-s">
-                <div data-ng-class="muted">Back Text</div>
+            <td class="right-padded-m top-padded-s nowrap">
+                <div data-ng-class="muted">Expected Answer</div>
 
             </td>
 
-            <td class="expands  top-padded-s right-padded-m">
+            <td class="expands  top-padded-s right-padded-s">
                     <input type="text"
                            data-ng-model="card.answer"
                            class="standard-input-width form-control"
                            placeholder="Answer"
-                           data-ng-blur="updateAnswer()"
-                           ng-disabled="!isForward()"
+                           data-ng-blur="updateCard()"
+                           ng-disabled="!card.hasForwardMode"
                            required>
             </td>
 
         </tr>
 
-        <tr data-ng-repeat="alt in card.alternatives track by $index">
-            <td class="right-padded-m"></td>
-            <td class="expands">
+
+        <tr data-ng-repeat="alt in card.alternativesFront track by $index">
+            <td class="right-padded-m nowrap">Also Accepted</td>
+            <td class="expands top-padded-s right-padded-s">
 
                     <input type="text"
                            data-ng-model="alt"
                            id="alternatives"
                            class="standard-input-width form-control"
                            data-ng-blur="updateAlternative($index, alt)"
-                           ng-disabled="!isForward()"
+                           ng-disabled="!card.hasForwardMode"
                            placeholder="Alternative Answer">
 
             </td>
@@ -86,34 +89,36 @@
 
         <tr class="controls">
             <td class="right-padded-m top-padded-s"></td>
-            <td class="expands top-padded-s right-padded-m">
+            <td class="expands top-padded-s right-padded-s">
                     <input type="text"
                            data-ng-model="nextAlternative"
                            id="alternative"
                            class="standard-input-width form-control alternative"
-                           ng-keyup="enterAlternative($event)"
                            placeholder="Alternative Answer"
-                           ng-disabled="!isForward()"
-                           data-ng-blur="updateNextAlternative()">
+                           ng-disabled="!card.hasForwardMode"
+                           data-ng-blur="updateCard()">
             </td>
         </tr>
 
 
+
         <tr>
-            <td class="top-padded-l"></td>
-            <td class="nowrap top-padded-s middle-aligned">
+            <td class="top-padded-s"></td>
+            <td class="nowrap top-padded-s bottom-padded-m middle-aligned">
 
 
-            <input data-ng-model="card.speechRecgognitionBack"
-                   type="checkbox"
-                   ng-disabled="!isForward()"/>
+                <input data-ng-model="card.speechRecognitionForward"
+                       type="checkbox"
+                       ng-disabled="!card.hasForwardMode"
+                       data-ng-click="update()"/>
 
                 <span ng-class="muted">Recognize Speech</span>
 
 
-            <span class="left-padded-m top-padded-m">
-            <input data-ng-model="card.soundBack" type="checkbox"
-                   ng-disabled="!isForward()"/>
+            <span class="left-padded-m">
+            <input data-ng-model="card.readBackForward" type="checkbox"
+                   ng-disabled="!card.hasForwardMode"
+                   data-ng-click="update()"/>
 
                 <span ng-class="muted">Read out loud</span>
             </span>

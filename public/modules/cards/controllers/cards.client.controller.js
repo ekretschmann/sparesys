@@ -128,33 +128,34 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 cardId: $stateParams.cardId
             }, function () {
 
+                $scope.card.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
 
 
-                if ($scope.card.check === 'self') {
-                    $scope.check = 'always self-checked';
-                } else if ($scope.card.check === 'checked') {
-                    $scope.check = 'always computer-checked';
-                }  else {
-                    $scope.check = 'self-checked for new cards';
-                }
-
-                if ($scope.card.bothways) {
-                    $scope.direction = 'both ways';
-                } else {
-                    $scope.direction = 'one way';
-                }
-
-                if ($scope.card.sound) {
-                    $scope.sound = 'yes';
-                } else {
-                    $scope.sound = 'no';
-                }
-
-                if ($scope.card.soundback) {
-                    $scope.soundback = 'yes';
-                } else {
-                    $scope.soundback = 'no';
-                }
+                //if ($scope.card.check === 'self') {
+                //    $scope.check = 'always self-checked';
+                //} else if ($scope.card.check === 'checked') {
+                //    $scope.check = 'always computer-checked';
+                //}  else {
+                //    $scope.check = 'self-checked for new cards';
+                //}
+                //
+                //if ($scope.card.bothways) {
+                //    $scope.direction = 'both ways';
+                //} else {
+                //    $scope.direction = 'one way';
+                //}
+                //
+                //if ($scope.card.sound) {
+                //    $scope.sound = 'yes';
+                //} else {
+                //    $scope.sound = 'no';
+                //}
+                //
+                //if ($scope.card.soundback) {
+                //    $scope.soundback = 'yes';
+                //} else {
+                //    $scope.soundback = 'no';
+                //}
 
 
                 Courses.get({
@@ -292,18 +293,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         };
 
 
-        $scope.updateAlternative = function (index, alt) {
 
-            $scope.card.alternatives[index] = alt;
-            var alts = [];
-            $scope.card.alternatives.forEach(function (alt) {
-                if (alt !== undefined && alt !== '') {
-                    alts.push(alt);
-                }
-            });
-            $scope.card.alternatives = alts;
-            $scope.update();
-        };
 
         $scope.updateAlternativeQuestion = function (index, alt) {
 
@@ -323,6 +313,9 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.updateNextAlternative = function () {
 
+
+
+
             if ($scope.nextAlternative) {
                 $scope.card.alternatives.push($scope.nextAlternative);
                 $scope.nextAlternative = undefined;
@@ -337,7 +330,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.updateNextAlternativeQuestion = function () {
 
-            console.log('here');
             console.log($scope.nextAlternativeQuestion.text);
 
 
@@ -369,7 +361,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 }
 
                 card.$update(function (c) {
-//                $location.path('packs/' + card.packs[0] + '/edit');
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
                 });

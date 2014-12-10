@@ -56,7 +56,7 @@ var CardSchema = new Schema({
         type: [String],
         default: []
     },
-    alternatives: {
+    alternativesFront: {
         type: [String],
         default: []
     },

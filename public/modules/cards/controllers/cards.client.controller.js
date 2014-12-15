@@ -122,14 +122,28 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             $scope.card.$update();
         };
 
+
+        $scope.muted = '';
+
+        $scope.updateView = function () {
+
+            $scope.card.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
+
+            if ($scope.card.hasForwardMode) {
+                $scope.muted = '';
+            } else {
+                $scope.muted = 'text-muted';
+            }
+
+        };
+
         // Find existing Card
         $scope.findOne = function () {
             $scope.card = Cards.get({
                 cardId: $stateParams.cardId
             }, function () {
 
-                $scope.card.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
-
+                $scope.updateView();
 
                 //if ($scope.card.check === 'self') {
                 //    $scope.check = 'always self-checked';

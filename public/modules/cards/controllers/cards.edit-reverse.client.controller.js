@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('cards').controller('EditCardForwardController', ['$scope', '$timeout','Cards',
+angular.module('cards').controller('EditCardReverseController', ['$scope', '$timeout','Cards',
     function ($scope, $timeout, Cards) {
 
 
         $scope.toggleMode = function () {
 
 
-            var mode = 'forward';
+            var mode = 'reverse';
             if ($scope.card.modes.indexOf(mode) === -1) {
                 $scope.card.modes.push(mode);
             } else {
@@ -23,22 +23,22 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
 
         };
 
-        $scope.toggleReadFrontForward = function() {
+        $scope.toggleReadFrontReverse = function() {
 
-            $scope.card.readFrontForward = !$scope.card.readFrontForward;
+            $scope.card.readFrontReverse = !$scope.card.readFrontReverse;
             $scope.updateCard();
         };
 
-        $scope.toggleSpeechRecognitionForward = function() {
+        $scope.toggleSpeechRecognitionReverse = function() {
 
-            $scope.card.speechRecognitionForward = !$scope.card.speechRecognitionForward;
+            $scope.card.speechRecognitionReverse = !$scope.card.speechRecognitionReverse;
             $scope.updateCard();
         };
 
 
-        $scope.toggleReadBackForward = function() {
+        $scope.toggleReadBackReverse = function() {
 
-            $scope.card.readBackForward = !$scope.card.readBackForward;
+            $scope.card.readBackReverse = !$scope.card.readBackReverse;
             $scope.updateCard();
         };
 

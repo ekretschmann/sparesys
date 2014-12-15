@@ -8,10 +8,10 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.tabs = [
             { title:'Card', active: false },
-            { title:'Forward', active: true },
+            { title:'Forward', active: false },
             { title:'Reverse', active: false },
-            { title:'Images', active: false  },
-            { title:'Multiple', active: false  }
+            { title:'Images', active: true  },
+            { title:'Multiple Choice', active: false  }
         ];
 
 
@@ -125,11 +125,13 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.forwardMuted = '';
         $scope.reverseMuted = '';
+        $scope.imagesMuted = '';
 
         $scope.updateView = function () {
 
             $scope.card.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
             $scope.card.hasReverseMode = $scope.card.modes && $scope.card.modes.indexOf('reverse') !== -1;
+            $scope.card.hasImagesMode = $scope.card.modes && $scope.card.modes.indexOf('images') !== -1;
 
             if ($scope.card.hasForwardMode) {
                 $scope.forwardMuted = '';
@@ -141,6 +143,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 $scope.reverseMuted = '';
             } else {
                 $scope.reverseMuted = 'text-muted';
+            }
+
+            if ($scope.card.hasImagesMode) {
+                $scope.imagesMuted = '';
+            } else {
+                $scope.imagesMuted = 'text-muted';
             }
 
         };
@@ -402,19 +410,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             });
         };
 
-        $scope.manageImages = function (card) {
-            $scope.card = card;
 
-            $modal.open({
-                templateUrl: 'manageImages.html',
-                controller: 'ManageImagesController',
-                resolve: {
-                    card: function () {
-                        return $scope.card;
-                    }
-                }
-            });
-        };
 
         $scope.areYouSureToDeleteCard = function (card) {
 

@@ -71,6 +71,11 @@
                 microphone to speak the answer. Don't forget to configure what language your cards are in on the
                 Cards tab!
             </infobox>
+
+            <infobox logo="guru" data-ng-show="tabs[3].active" position="left">
+
+                This is what you can do with images.
+            </infobox>
         </div>
     </section>
 
@@ -110,7 +115,7 @@
             </tab>
             <tab heading="{{tabs[3].title}}" active="tabs[3].active">
                 <div class="default-border">
-                    <div ng-include="'/modules/cards/views/partial/edit-images.client.view.html'"></div>
+                    <div ng-include="'/modules/cards/views/partial/card-images.client.view.html'"></div>
                 </div>
 
 

@@ -30,33 +30,21 @@ var CardSchema = new Schema({
         default: '',
         trim: true
     },
-    alternativequestions: {
-        type: [String],
-        default: []
-    },
     answer: {
         type: String,
         default: '',
         required: 'Please fill out Card Answer',
         trim: true
     },
-    validanswers: {
-        type: [String],
-        default: []
-    },
     invalidanswers: {
         type: [String],
         default: []
     },
-    validreverseanswers: {
-        type: [String],
-        default: []
-    },
-    invalidreverseanswers: {
-        type: [String],
-        default: []
-    },
     alternativesFront: {
+        type: [String],
+        default: []
+    },
+    alternativesBack: {
         type: [String],
         default: []
     },

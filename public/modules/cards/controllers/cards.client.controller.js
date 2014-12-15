@@ -123,16 +123,24 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         };
 
 
-        $scope.muted = '';
+        $scope.forwardMuted = '';
+        $scope.reverseMuted = '';
 
         $scope.updateView = function () {
 
             $scope.card.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
+            $scope.card.hasReverseMode = $scope.card.modes && $scope.card.modes.indexOf('reverse') !== -1;
 
             if ($scope.card.hasForwardMode) {
-                $scope.muted = '';
+                $scope.forwardMuted = '';
             } else {
-                $scope.muted = 'text-muted';
+                $scope.forwardMuted = 'text-muted';
+            }
+
+            if ($scope.card.hasReverseMode) {
+                $scope.reverseMuted = '';
+            } else {
+                $scope.reverseMuted = 'text-muted';
             }
 
         };
@@ -144,32 +152,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             }, function () {
 
                 $scope.updateView();
-
-                //if ($scope.card.check === 'self') {
-                //    $scope.check = 'always self-checked';
-                //} else if ($scope.card.check === 'checked') {
-                //    $scope.check = 'always computer-checked';
-                //}  else {
-                //    $scope.check = 'self-checked for new cards';
-                //}
-                //
-                //if ($scope.card.bothways) {
-                //    $scope.direction = 'both ways';
-                //} else {
-                //    $scope.direction = 'one way';
-                //}
-                //
-                //if ($scope.card.sound) {
-                //    $scope.sound = 'yes';
-                //} else {
-                //    $scope.sound = 'no';
-                //}
-                //
-                //if ($scope.card.soundback) {
-                //    $scope.soundback = 'yes';
-                //} else {
-                //    $scope.soundback = 'no';
-                //}
 
 
                 Courses.get({

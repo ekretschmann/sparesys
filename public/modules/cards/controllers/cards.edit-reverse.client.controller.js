@@ -45,7 +45,7 @@ angular.module('cards').controller('EditCardReverseController', ['$scope', '$tim
         $scope.updateCard = function () {
 
             if ($scope.nextAlternative) {
-                $scope.card.alternativesFront.push($scope.nextAlternative);
+                $scope.card.alternativesBack.push($scope.nextAlternative);
                 $scope.nextAlternative = undefined;
 
                 $timeout(function () {
@@ -60,14 +60,14 @@ angular.module('cards').controller('EditCardReverseController', ['$scope', '$tim
 
         $scope.updateAlternative = function (index, alt) {
 
-            $scope.card.alternativesFront[index] = alt;
+            $scope.card.alternativesBack[index] = alt;
             var alts = [];
-            $scope.card.alternativesFront.forEach(function (alt) {
+            $scope.card.alternativesBack.forEach(function (alt) {
                 if (alt !== undefined && alt !== '') {
                     alts.push(alt);
                 }
             });
-            $scope.card.alternativesFront = alts;
+            $scope.card.alternativesBack = alts;
             $scope.updateCard();
         };
     }

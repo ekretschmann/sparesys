@@ -49,7 +49,7 @@ angular.module('cards').controller('EditCardReverseController', ['$scope', '$tim
                 $scope.nextAlternative = undefined;
 
                 $timeout(function () {
-                    angular.element('#alternative').trigger('focus');
+                    angular.element('#alternativeReverse').trigger('focus');
                 }, 100);
             }
             new Cards($scope.card).$update();

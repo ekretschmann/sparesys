@@ -75,7 +75,7 @@
         </tr>
 
 
-        <tr data-ng-repeat="alt in card.alternativesFront track by $index">
+        <tr data-ng-repeat="alt in card.alternativesBack track by $index">
             <td class="right-padded-m nowrap">
                 <div data-ng-class="reverseMuted">Also Accepted</div>
             </td>
@@ -97,7 +97,7 @@
             <td class="expands top-padded-s right-padded-s">
                     <input type="text"
                            data-ng-model="nextAlternative"
-                           id="alternative"
+                           id="alternativeReverse"
                            class="standard-input-width form-control alternative"
                            placeholder="Alternative Answer"
                            ng-disabled="!card.hasReverseMode"

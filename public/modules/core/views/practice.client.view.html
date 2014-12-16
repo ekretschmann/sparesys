@@ -1,5 +1,44 @@
-<section data-ng-controller="PracticeController">
+<section data-ng-controller="PracticeController" data-ng-init="initPractice()">
 
 
-    Practice
+    <div class="content-header">
+        <div class="title">
+            {{course.name}}
+        </div>
+        <div class="headerinfo">
+            <table class="info">
+                <tr>
+                    <td>Description</td>
+                    <td class="left-padded-s">:</td>
+                    <td class="left-padded-s">{{course.description}}</td>
+                </tr>
+
+
+                <tr>
+                    <td>Cards</td>
+                    <td class="left-padded-s">:</td>
+                    <td class="left-padded-s">
+                        {{cards.length}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>In Play</td>
+                    <td class="left-padded-s">:</td>
+                    <td class="left-padded-s">
+                        {{inPlay}}
+                    </td>
+                </tr>
+
+                <tr>
+                    <td>Score</td>
+                    <td class="left-padded-s">:</td>
+                    <td class="left-padded-s">
+                        {{score}}
+                    </td>
+                </tr>
+
+            </table>
+        </div>
+    </div>
 </section>

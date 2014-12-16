@@ -1,0 +1,95 @@
+<section data-ng-controller="PracticeOldController" data-ng-init="init()" data-ng-keypress="key(event)">
+
+
+    <div class="sparesys-header">
+
+        <div class="pull-right">
+
+
+            <a class="menu-link"
+               href="#!/cards/{{card._id}}/edit">Edit Card</a>
+            </div>
+
+
+        <div class="sparesys-title">
+            {{course.name}}
+        </div>
+
+
+        <table>
+            <tr>
+                <td class="right-padded">Cards</td>
+                <td class="right-padded">:</td>
+                <td>
+                    {{cards.length}}
+                </td>
+            </tr>
+
+            <tr>
+                <td class="right-padded nowrap">In Play</td>
+                <td class="right-padded">:</td>
+                <td class="right-padded">
+                    {{inPlay}}
+                </td>
+            </tr>
+            <tr>
+                <td class="right-padded">Score</td>
+                <td class="right-padded">:</td>
+                <td class="right-padded">{{score}}</td>
+            </tr>
+
+            <tr data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+                <td class="right-padded">ID</td>
+                <td class="right-padded">:</td>
+                <td class="right-padded">{{card._id}}</td>
+            </tr>
+        </table>
+    </div>
+
+
+    <div data-ng-if="cards.length > 0">
+        <div data-ng-if="validation === 'self'">
+            <div ng-include="'/modules/core/views/partial/flashcard.selfassessed.client.view.html'"></div>
+        </div>
+
+        <div data-ng-if="validation === 'checked'">
+            <div ng-include="'/modules/core/views/partial/flashcard.assessed.client.view.html'"></div>
+        </div>
+
+
+        <div data-ng-if="authentication.user.roles.indexOf('debug-viewer') !== -1">
+            <!--<div>max hrt: {{getMaxHrt()}}</div>-->
+            <!--<div>hrt: {{card.hrt/60000}}</div>-->
+            <!--<div>history: {{card.history}}</div>-->
+
+
+            <table class="table-striped" style="width: 100%">
+                <thead>
+                <tr>
+                    <th class="sparesys-view-courses-description-column">Card</th>
+                    <th class="sparesys-view-courses-course-column">PR</th>
+                    <th class="sparesys-view-courses-course-column">HRT</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr data-ng-repeat="k in keys">
+
+                    <td class="sparesys-view-courses-name-cell">
+
+                        {{k}}
+                    </td>
+                    <td class="sparesys-view-courses-course-column">{{analysis[k].pr}}</td>
+                    <td class="sparesys-view-courses-course-column" style="white-space: nowrap">{{analysis[k].hrt}}</td>
+                </tr>
+                </tbody>
+            </table>
+            <button data-ng-click="clearHistory(c)">Clear Card History</button>
+            <button data-ng-click="clearCourseHistory()">Clear Course History</button>
+
+        </div>
+    </div>
+
+    <div data-ng-if="cards.length === 0">
+        There are no cards in this course.
+    </div>
+</section>

@@ -11,6 +11,22 @@ var mongoose = require('mongoose'),
  */
 var CardSchema = new Schema({
 
+    imagesShowText: {
+        type: Boolean,
+        default: false
+    },
+    imagesReadFront: {
+        type: Boolean,
+        default: false
+    },
+    imagesRecognizeSpeech: {
+        type: Boolean,
+        default: false
+    },
+    imagesReadBack: {
+        type: Boolean,
+        default: false
+    },
 
     languageFront: {
         name: String,

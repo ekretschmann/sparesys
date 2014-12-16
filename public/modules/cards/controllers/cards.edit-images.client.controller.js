@@ -42,52 +42,39 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
 
         };
 
-        $scope.toggleReadFrontForward = function() {
+        $scope.toggleImagesShowText = function() {
 
-            $scope.card.readFrontForward = !$scope.card.readFrontForward;
+            $scope.card.imagesShowText = !$scope.card.imagesShowText;
             $scope.updateCard();
         };
 
-        $scope.toggleSpeechRecognitionForward = function() {
+        $scope.toggleImagesReadFront = function() {
 
-            $scope.card.speechRecognitionForward = !$scope.card.speechRecognitionForward;
+            $scope.card.imagesReadFront = !$scope.card.imagesReadFront;
+            $scope.updateCard();
+        };
+
+        $scope.toggleImagesReadBack = function() {
+
+            $scope.card.imagesReadBack = !$scope.card.imagesReadBack;
+            $scope.updateCard();
+        };
+
+        $scope.toggleImagesRecognizeSpeech = function() {
+
+            $scope.card.imagesRecognizeSpeech = !$scope.card.imagesRecognizeSpeech;
             $scope.updateCard();
         };
 
 
-        $scope.toggleReadBackForward = function() {
-
-            $scope.card.readBackForward = !$scope.card.readBackForward;
-            $scope.updateCard();
-        };
 
         $scope.updateCard = function () {
 
-            if ($scope.nextAlternative) {
-                $scope.card.alternativesFront.push($scope.nextAlternative);
-                $scope.nextAlternative = undefined;
-
-                $timeout(function () {
-                    angular.element('#alternative').trigger('focus');
-                }, 100);
-            }
             new Cards($scope.card).$update();
 
-
         };
 
 
-        $scope.updateAlternative = function (index, alt) {
 
-            $scope.card.alternativesFront[index] = alt;
-            var alts = [];
-            $scope.card.alternativesFront.forEach(function (alt) {
-                if (alt !== undefined && alt !== '') {
-                    alts.push(alt);
-                }
-            });
-            $scope.card.alternativesFront = alts;
-            $scope.updateCard();
-        };
     }
 ]);

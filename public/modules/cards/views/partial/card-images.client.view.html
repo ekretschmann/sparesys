@@ -81,12 +81,16 @@
 
 
             <span class="right-padded-m top-padded-s">
-                <input data-ng-model="card.soundBack" type="checkbox" ng-disabled="!card.hasImagesMode"/>
+                <input data-ng-model="card.imagesShowText"
+                       type="checkbox"
+                       ng-disabled="!card.hasImagesMode"
+                       data-ng-click="toggleImagesShowText()"/>
                 <span ng-class="imagesMuted">Show Text</span>
             </span>
 
                         <span class="right-padded-m top-padded-s">
-                        <input data-ng-model="card.soundFront" type="checkbox" ng-disabled="!card.hasImagesMode"/>
+                        <input data-ng-model="card.imagesReadFront" type="checkbox" ng-disabled="!card.hasImagesMode"
+                                data-ng-click="toggleImagesReadFront()"/>
                             <span ng-class="imagesMuted">Read out loud</span>
                         </span>
 
@@ -115,12 +119,14 @@
 
 
             <span class="right-padded-m">
-            <input data-ng-model="card.speechRecgognitionBack"  ng-disabled="!card.hasImagesMode" type="checkbox"/>
+            <input data-ng-model="card.imagesRecognizeSpeech"  ng-disabled="!card.hasImagesMode" type="checkbox"
+                    data-ng-click="toggleImagesRecognizeSpeech()"/>
                 <span ng-class="imagesMuted">Recognize Speech</span>
             </span>
 
             <span class="right-padded-m top-padded-m">
-            <input data-ng-model="card.soundBack"  ng-disabled="!card.hasImagesMode" type="checkbox"/>
+            <input data-ng-model="card.imagesReadBack"  ng-disabled="!card.hasImagesMode" type="checkbox"
+                    data-ng-click="toggleImagesReadBack()"/>
                 <span ng-class="imagesMuted">Read out loud</span>
             </span>
 

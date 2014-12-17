@@ -18,7 +18,8 @@
                     <td>Cards</td>
                     <td class="left-padded-s">:</td>
                     <td class="left-padded-s">
-                        {{cards.length}}
+                        <span data-ng-if="cards">{{cards.length}}</span>
+                        <span data-ng-if="!cards">0</span>
                     </td>
                 </tr>
 
@@ -26,7 +27,8 @@
                     <td>In Play</td>
                     <td class="left-padded-s">:</td>
                     <td class="left-padded-s">
-                        {{inPlay}}
+                        <span data-ng-if="cards">{{inPlay}}</span>
+                        <span data-ng-if="!cards">0</span>
                     </td>
                 </tr>
 
@@ -34,11 +36,35 @@
                     <td>Score</td>
                     <td class="left-padded-s">:</td>
                     <td class="left-padded-s">
-                        {{score}}
+                        <span data-ng-if="cards">{{score}}</span>
+                        <span data-ng-if="!cards">0</span>
+
                     </td>
                 </tr>
 
             </table>
         </div>
     </div>
+
+    <div data-ng-if="cards && cards.length > 0">
+
+
+        x{{card.modes}}x
+
+
+    </div>
+
+
+    <div data-ng-if="!cards || cards.length === 0">
+        <infobox logo="man" position="right"  >
+
+            There are no cards in this course. You will have to create some in order to practice. You
+            can do this by going to your home page (click on Rememberators on the top of this screen)
+            and select the edit action for this course or simply <a data-ng-href="#!/courses/{{course._id}}/edit">follow this link</a>.
+
+
+        </infobox>
+    </div>
+
+
 </section>

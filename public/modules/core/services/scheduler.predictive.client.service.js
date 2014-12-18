@@ -167,6 +167,7 @@ angular.module('core').service('PredictiveSchedulerService', [
 
                     }
                 }
+
                 card.history.push({when: time, assessment: assessment});
 
                 card.lastRep = time;

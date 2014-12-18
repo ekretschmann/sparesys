@@ -149,6 +149,31 @@ body {
   border-radius: 12px;
   text-align: center;
   box-shadow: 5px 5px 5px #CCC;
+  min-height: 360px;
+
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-gradient(linear, 0 0, 0 bottom, from(@background-color-contrast), to(@background-color-contrast));
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -moz-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -ms-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -o-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  linear-gradient(@background-color-contrast, @background-color-contrast);
+
+  .question {
+    font-size: xx-large;
+    padding-top: 3em;
+  }
+}
+
+.new-card {
+  float: right;
+  .top-margin-s;
+  .right-padded-s;
 }
 
 //alignment
@@ -267,6 +292,10 @@ body {
 // Image sizes
 .small-image {
   height: 84px
+}
+
+.tiny-image {
+  height: 64px
 }
 
 .large-image {

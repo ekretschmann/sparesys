@@ -2,12 +2,55 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$scope', '$stateParams', 'Courses', 'CoursesService',
-    function ($scope, $stateParams, Courses, CoursesService) {
+angular.module('core').controller('PracticeController', ['$scope', '$state', '$stateParams', 'Courses', 'CoursesService',
+    function ($scope, $state, $stateParams, Courses, CoursesService) {
 
         $scope.time = Date.now();
         $scope.card = {};
 
+
+
+        $scope.recordRate = function(card, time, assessment) {
+
+
+            // setting init values for first iteration
+            if (! card.history) {
+                card.history = [];
+            }
+
+            if (card.history.length === 0) {
+                if (assessment === 0) {
+                    // 10 s
+                    card.hrt = 10000;
+                } else if (assessment === 1) {
+                    // 10 min
+                    card.hrt = 1000*60*10 * (Math.random()/10.0+1.0);
+                } else if (assessment === 2) {
+                    // 1 day
+                    card.hrt = 1000*60*60*24 * (Math.random()/10.0+1.0);
+                } else if (assessment === 3) {
+                    // 5 days
+                    card.hrt = 1000*60*60*24*5 * (Math.random()/10.0+1.0);
+                }
+            } else {
+                if (assessment === 0) {
+                    // 10 s
+                    card.hrt = 10000 * (Math.random()/10.0+1.0);
+                } else if (assessment === 1) {
+                    // 10 min
+                    card.hrt = card.hrt / 10;
+                } else if (assessment === 2) {
+                    // don't change hrt
+                } else if (assesment === 3) {
+
+                }
+            }
+
+            card.history.push({when: time, assessment: assessment});
+
+
+
+        };
 
         $scope.getPredictedRetention = function (card, time) {
 
@@ -42,6 +85,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$stateParams
         };
 
         $scope.nextCard = function () {
+            console.log('next card');
             $scope.time = Date.now();
 
             var bestValue = 1.0;
@@ -51,21 +95,22 @@ angular.module('core').controller('PracticeController', ['$scope', '$stateParams
                 if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
 
 
-
-
                     var pr = this.getPredictedRetention(card, $scope.time);
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
                     card.score = Math.abs(pr - 0.4) * $scope.adjustScoreToDueDate(card, $scope.time);
 
-                    console.log(card.score);
 
-                    if (card.score < bestValue) {
+                    if (card.score < bestValue && card.modes.length > 0) {
                         bestCard = card;
                         bestValue = card.score;
                     }
                 }
             }, this);
+
+            bestCard.modes=['forward'];
             $scope.card = bestCard;
+            $scope.mode = bestCard.modes[Math.floor(Math.random()*bestCard.modes.length)];
+            $state.go($state.current);
         };
 
 
@@ -94,6 +139,8 @@ angular.module('core').controller('PracticeController', ['$scope', '$stateParams
 
             });
         };
+
+
 
 
     }]);

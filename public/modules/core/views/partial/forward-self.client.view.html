@@ -1,0 +1,59 @@
+<div data-ng-controller="ForwardSelfController">
+    <div class="flashcard">
+
+        <div class="card-score">
+            <div data-ng-if="card.history.length > 0">
+                Score: {{cardScore}}
+            </div>
+            <div data-ng-if="card.history.length === 0">
+                <table class="new-card">
+                    <tr>
+
+                        <td class="top-aligned nowrap">
+                            <div class="font-m">
+                                New Card!
+                            </div>
+                        </td>
+                        <td class="top-aligned">
+                            <img class="tiny-image"
+                                 src="/modules/core/img/brand/superhero-boy-medium.gif">
+                        </td>
+
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+
+        <div class="question">{{card.question}}</div>
+
+
+        <div data-ng-if="state === 'answer'">
+
+
+            <div class="correct-answer">
+                {{card.answer}}
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="center-aligned top-padded">
+        <div data-ng-show="state === 'answer'">
+            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(0)">0</button>
+            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(1)">1</button>
+            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(2)">2</button>
+            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(3)">3</button>
+            <div class="text-muted top-padded">rate yourself</div>
+            <div class="text-muted">0=never heard, 1=not quite remembered, 2=remembered with difficulty,
+                3=easy!
+            </div>
+        </div>
+
+        <div data-ng-show="state === 'question'">
+            <button class="btn btn-rememberators" data-ng-click="showAnswer()">Enter</button>
+        </div>
+    </div>
+</div>

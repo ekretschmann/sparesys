@@ -72,7 +72,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
         };
 
         $scope.nextCard = function () {
-            console.log('next card');
+
             $scope.time = Date.now();
 
             var bestValue = 1.0;
@@ -86,10 +86,6 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
                     card.score = Math.abs(pr - 0.4) * $scope.adjustScoreToDueDate(card, $scope.time);
 
-
-                    console.log(card.question);
-                    console.log(card.score);
-                    console.log(card.hrt);
                     if (card.score < bestValue && card.modes.length > 0) {
                         bestCard = card;
                         bestValue = card.score;

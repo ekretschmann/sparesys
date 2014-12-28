@@ -2,54 +2,44 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$scope', '$state', '$stateParams', 'Courses', 'CoursesService',
-    function ($scope, $state, $stateParams, Courses, CoursesService) {
+angular.module('core').controller('PracticeController', ['$scope', '$state', '$stateParams', 'Courses', 'Cards', 'CoursesService',
+    function ($scope, $state, $stateParams, Courses, Cards, CoursesService) {
 
         $scope.time = Date.now();
         $scope.card = {};
 
+        $scope.randomize = function(val) {
+            return val * (Math.random() / 10.0 + 1.0);
+        };
 
 
-        $scope.recordRate = function(card, time, assessment) {
+        $scope.recordRate = function (card, time, assessment) {
 
 
             // setting init values for first iteration
-            if (! card.history) {
+            if (!card.history) {
                 card.history = [];
             }
 
-            if (card.history.length === 0) {
-                if (assessment === 0) {
-                    // 10 s
-                    card.hrt = 10000;
-                } else if (assessment === 1) {
-                    // 10 min
-                    card.hrt = 1000*60*10 * (Math.random()/10.0+1.0);
-                } else if (assessment === 2) {
-                    // 1 day
-                    card.hrt = 1000*60*60*24 * (Math.random()/10.0+1.0);
-                } else if (assessment === 3) {
-                    // 5 days
-                    card.hrt = 1000*60*60*24*5 * (Math.random()/10.0+1.0);
-                }
-            } else {
-                if (assessment === 0) {
-                    // 10 s
-                    card.hrt = 10000 * (Math.random()/10.0+1.0);
-                } else if (assessment === 1) {
-                    // 10 min
-                    card.hrt = card.hrt / 10;
-                } else if (assessment === 2) {
-                    // don't change hrt
-                } else if (assesment === 3) {
-
-                }
+            if (assessment === 0) {
+                // 30 s
+                card.hrt = $scope.randomize(30*1000);
+            } else if (assessment === 1) {
+                // 5 min
+                card.hrt = $scope.randomize(1000 * 60 * 5);
+            } else if (assessment === 2) {
+                // 1 day
+                card.hrt = $scope.randomize(1000 * 60 * 60 * 24);
+            } else if (assessment === 3) {
+                // 5 days
+                card.hrt = $scope.randomize(1000 * 60 * 60 * 24 * 5);
             }
 
             card.history.push({when: time, assessment: assessment});
 
 
-
+            new Cards(card).$update();
+            $scope.nextCard();
         };
 
         $scope.getPredictedRetention = function (card, time) {
@@ -60,17 +50,14 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             if (!card.hrt) {
                 return 0.0;
             }
-            if (!card.lastRep) {
-                card.lastRep = 0;
-            }
-            var lastRep = card.lastRep;
+            var lastRep = card.history[card.history.length-1].when;
             var hrt = card.hrt;
 
 
             return Math.exp((time - lastRep) / hrt * Math.log(0.5));
         };
 
-        $scope.adjustScoreToDueDate = function(card, time) {
+        $scope.adjustScoreToDueDate = function (card, time) {
             var weight = 1;
             if (card.due) {
                 var dueInSecs = new Date(card.due).getTime() - time;
@@ -100,6 +87,9 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                     card.score = Math.abs(pr - 0.4) * $scope.adjustScoreToDueDate(card, $scope.time);
 
 
+                    console.log(card.question);
+                    console.log(card.score);
+                    console.log(card.hrt);
                     if (card.score < bestValue && card.modes.length > 0) {
                         bestCard = card;
                         bestValue = card.score;
@@ -107,9 +97,9 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                 }
             }, this);
 
-            bestCard.modes=['forward'];
+            bestCard.modes = ['forward'];
             $scope.card = bestCard;
-            $scope.mode = bestCard.modes[Math.floor(Math.random()*bestCard.modes.length)];
+            $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
             $state.go($state.current);
         };
 
@@ -136,11 +126,8 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                 $scope.course = course;
 
 
-
             });
         };
-
-
 
 
     }]);

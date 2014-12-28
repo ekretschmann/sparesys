@@ -49,8 +49,7 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
         $scope.processCard = function (rating) {
 
-            console.log($scope.$parent.card);
-            console.log($scope.$parent.card.history);
+            $scope.$parent.recordRate($scope.card, Date.now(), rating);
             $scope.state = 'question';
                 $scope.$parent.nextCard();
 

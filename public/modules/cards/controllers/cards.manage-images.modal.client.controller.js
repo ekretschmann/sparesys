@@ -41,11 +41,11 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             $scope.card.images.forEach(function(img) {
                 $scope.selected.images.push(img);
             });
-            console.log($scope.selected.images);
             for (var i = $scope.card.images.length; i < 4; i++) {
                 $scope.selected.images.push('/modules/core/img/brand/placeholder_icon.png');
             }
-            console.log($scope.selected.images);
+
+            $scope.card.$update();
         };
 
         $scope.removeImage = function(image) {
@@ -60,11 +60,13 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             $scope.card.images.forEach(function(img) {
                 $scope.selected.images.push(img);
             });
-            console.log($scope.selected.images);
             for (i = $scope.card.images.length; i < 4; i++) {
                 $scope.selected.images.push('/modules/core/img/brand/placeholder_icon.png');
             }
-            console.log($scope.selected.images);
+
+
+            $scope.card.$update();
+
         };
 
 
@@ -182,6 +184,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
         };
 
         $scope.ok = function () {
+
 
 
             $scope.card.$update(function() {

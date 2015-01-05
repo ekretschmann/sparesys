@@ -18,6 +18,18 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
         };
 
 
+        $scope.updateSlides = function () {
+            $scope.slides = [];
+
+
+            $scope.card.images.forEach(function (img) {
+                var slide = {};
+                slide.image = img;
+                $scope.slides.push(slide);
+            }, this);
+
+        };
+
         $scope.recordRate = function (card, time, assessment) {
 
 
@@ -103,6 +115,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             bestCard.modes = ['images'];
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
+            $scope.updateSlides();
             $state.go($state.current);
         };
 

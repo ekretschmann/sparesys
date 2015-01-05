@@ -6,11 +6,11 @@
             {{course.name}}
         </div>
         <div class="headerinfo">
-            <table class="info">
+            <table class="info expands">
                 <tr>
                     <td>Description</td>
                     <td class="left-padded-s">:</td>
-                    <td class="left-padded-s">{{course.description}}</td>
+                    <td class="left-padded-s nowrap">{{course.description}}</td>
                 </tr>
 
 
@@ -21,6 +21,17 @@
                         <span data-ng-if="cards">{{cards.length}}</span>
                         <span data-ng-if="!cards">0</span>
                     </td>
+
+                    <td class="expands"></td>
+
+                    <td>Score</td>
+                    <td class="left-padded-s">:</td>
+                    <td class="left-padded-s">
+                        <span data-ng-if="cards">{{ round(card.score) }}</span>
+                        <span data-ng-if="!cards">0</span>
+
+                    </td>
+
                 </tr>
 
                 <tr>
@@ -30,14 +41,14 @@
                         <span data-ng-if="cards">{{inPlay}}</span>
                         <span data-ng-if="!cards">0</span>
                     </td>
-                </tr>
 
-                <tr>
-                    <td>Score</td>
+                    <td class="expands"></td>
+
+
+                    <td>Mode</td>
                     <td class="left-padded-s">:</td>
                     <td class="left-padded-s">
-                        <span data-ng-if="cards">{{score}}</span>
-                        <span data-ng-if="!cards">0</span>
+                        <span data-ng-if="cards">{{mode}}</span>
 
                     </td>
                 </tr>
@@ -56,7 +67,7 @@
         </div>
 
         <div data-ng-if="mode === 'reverse'">
-            reverse mode
+            <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
         </div>
 
         <div data-ng-if="mode === 'images'">

@@ -13,6 +13,11 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
         };
 
 
+        $scope.round = function(num) {
+            return Math.round(10000 * num) / 10000;
+        };
+
+
         $scope.recordRate = function (card, time, assessment) {
 
 
@@ -41,6 +46,8 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             new Cards(card).$update();
             $scope.nextCard();
         };
+
+
 
         $scope.getPredictedRetention = function (card, time) {
 
@@ -93,7 +100,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                 }
             }, this);
 
-            bestCard.modes = ['forward'];
+            bestCard.modes = ['reverse'];
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
             $state.go($state.current);

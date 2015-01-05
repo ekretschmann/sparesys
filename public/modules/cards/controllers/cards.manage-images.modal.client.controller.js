@@ -71,13 +71,14 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
         $scope.page = 0;
         $scope.totalResults = 0;
 
-        $scope.search_offline = function () {
+        $scope.search = function () {
 
+            console.log('here');
 
             $scope.totalResults = 50;
-            $scope.images = [['/modules/core/img/brand/philosopher-medium.gif','/modules/core/img/brand/teacher-man-medium.gif','/modules/core/img/brand/philosopher-medium.gif'],
-                ['/modules/core/img/brand/teacher-woman-medium.gif','/modules/core/img/brand/superhero-boy-medium.gif','/modules/core/img/brand/teacher-woman-medium.gif'],
-                ['/modules/core/img/brand/guru-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif']];
+            $scope.images = [['/modules/core/img/brand/philosopher-medium.gif','/modules/core/img/brand/teacher-man-medium.gif','/modules/core/img/one.jpeg'],
+                ['/modules/core/img/brand/teacher-woman-medium.gif','/modules/core/img/brand/superhero-boy-medium.gif','/modules/core/img/two.png'],
+                ['/modules/core/img/brand/guru-medium.gif','/modules/core/img/brand/superhero-girl-medium.gif','/modules/core/img/three.gif' ]];
         };
 
         $scope.testImages=[
@@ -137,7 +138,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             $scope.search();
         };
 
-        $scope.search = function () {
+        $scope.search_online = function () {
 
 
             $http({ method: 'GET',

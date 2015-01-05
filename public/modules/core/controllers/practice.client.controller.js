@@ -100,7 +100,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                 }
             }, this);
 
-            bestCard.modes = ['reverse'];
+            bestCard.modes = ['images'];
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
             $state.go($state.current);

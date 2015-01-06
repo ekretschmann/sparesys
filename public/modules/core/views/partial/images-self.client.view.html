@@ -23,26 +23,29 @@
         </div>
 
 
-        <div data-ng-if="state === 'answer'" class="left-aligned left-padded-m top-padded-s">
+        <div class="edit-card">
             <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
         </div>
 
 
-        <div style="min-width: 100%">
+        <div class="center-aligned top-padded-l">
                 <imagecarousel slides="slides" size="200"/>
-        </div>
 
-        <div data-ng-if="state === 'answer'">
-
+            <div data-ng-if="state === 'answer'">
 
 
-            <div class="correct-answer">
-                {{card.answer}}
+
+                <div class="correct-answer top-padded-m">
+                    {{card.answer}}
+                </div>
+
+
             </div>
 
 
         </div>
-    </div>
+
+           </div>
 
     <div class="center-aligned top-padded">
         <div data-ng-show="state === 'answer'">

@@ -1,24 +1,24 @@
 <div class="pull-right">
 
 
-    <a class="menu-link"
+    <a class="menu-link right-padded-m"
        data-ng-if="prevCard"
-       data-ng-href="#!/cards/{{prevCard._id}}/edit">Previous</a>
+       data-ng-href="#!/cards/{{prevCard._id}}/tab/{{activeTab}}/edit">Previous Card</a>
 
 
     <span
        data-ng-if="!prevCard"
-       class="text-muted font-m">Previous</span>
+       class="text-muted font-m right-padded-m">Previous Card</span>
 
 
     <a class="menu-link"
        data-ng-if="nextCard"
-       data-ng-href="#!/cards/{{nextCard._id}}/edit">Next</a>
+       data-ng-href="#!/cards/{{nextCard._id}}/tab/{{activeTab}}/edit">Next Card</a>
 
 
     <span
        data-ng-if="!nextCard"
-       class="text-muted font-m">Next</span>
+       class="text-muted font-m">Next Card</span>
 
 
 

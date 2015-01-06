@@ -12,6 +12,10 @@ angular.module('cards').config(['$stateProvider',
             state('editCard', {
                 url: '/cards/:cardId/edit',
                 templateUrl: 'modules/cards/views/edit-card.client.view.html'
+            }).
+            state('editCardOnTab', {
+                url: '/cards/:cardId/tab/:tab/edit',
+                templateUrl: 'modules/cards/views/edit-card.client.view.html'
             });
     }
 ]);

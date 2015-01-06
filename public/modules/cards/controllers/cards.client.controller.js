@@ -6,12 +6,14 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
 
+        $scope.activeTab = 'Card';
+
         $scope.tabs = [
-            { title:'Card', active: false },
+            { title:'Card', active: true },
             { title:'Forward', active: false },
             { title:'Reverse', active: false },
-            { title:'Images', active: true  },
-            { title:'Multiple Choice', active: false  }
+            { title:'Images', active: false  },
+            { title:'MultipleChoice', active: false  }
         ];
 
 
@@ -19,7 +21,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
             console.log(mode);
             console.log($scope.card.modes);
-
 
         };
 
@@ -37,9 +38,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.nextAlternativeQuestion.text = '';
 
         $scope.check = 'self-checked for new cards';
-//        $scope.sound = 'leave unchanged';
-//        $scope.soundback = 'leave unchanged';
-//        $scope.direction = 'leave unchanged';
+
 
         $scope.checks = ['always computer-checked', 'always self-checked', 'self-checked for new cards'];
         $scope.readQuestions = ['yes', 'no'];
@@ -153,8 +152,30 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         };
 
+
+
+        $scope.switchTab = function(activeTab) {
+            $scope.activeTab = activeTab;
+        };
+
         // Find existing Card
         $scope.findOne = function () {
+
+            if($stateParams.tab) {
+
+                $scope.activeTab = $stateParams.tab;
+
+                    $scope.tabs.forEach(function(tab) {
+                    if (tab.title === $stateParams.tab) {
+                        tab.active = true;
+                    } else {
+                        tab.active = false;
+                    }
+                });
+
+            }
+
+
             $scope.card = Cards.get({
                 cardId: $stateParams.cardId
             }, function () {
@@ -177,17 +198,16 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                     var prev;
                     var next;
                     for (var i =0; i< $scope.pack.cards.length; i++) {
-                        if ($scope.pack.cards[i] === $scope.card._id) {
+                        if ($scope.pack.cards[i]._id === $scope.card._id) {
                             if (i>0) {
-                                prev = $scope.pack.cards[i-1];
+                                prev = $scope.pack.cards[i-1]._id;
                             }
                             if (i<$scope.pack.cards.length-1) {
-                                next = $scope.pack.cards[i+1];
+                                next = $scope.pack.cards[i+1]._id;
                             }
                         }
-//                        prev = $scope.pack.cards[i];
-//                        console.log($scope.pack.cards[i]);
                     }
+
 
                     if (next) {
                         Cards.get({

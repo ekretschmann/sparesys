@@ -26,6 +26,10 @@
         <div class="question">{{card.question}}</div>
 
 
+        <div class="edit-card">
+            <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+        </div>
+
         <div data-ng-if="state === 'answer'">
 
 

@@ -61,56 +61,5 @@
     </div>
 
 
-    <table class="table-striped top-margin-l top-padded-l card-border-top" data-ng-if="cards.length > 0">
-        <thead>
-        <tr>
-
-            <th class="right-padded-m  top-padded-sm" >Question</th>
-            <th class="right-padded-m center-aligned top-padded-sm nowrap">Half Retention</th>
-            <th class="right-padded-m center-aligned top-padded-sm nowrap">Score</th>
-            <th class="right-padded-m center-aligned top-padded-sm nowrap">History</th>
-
-
-        </tr>
-        </thead>
-        <tbody>
-
-        <tr>
-
-
-        <tr data-ng-repeat="card in cards">
-
-
-            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
-
-                <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
-            </td>
-
-
-
-            <td class="right-padded-m nowrap center-aligned top-aligned" >
-
-                {{toHours(card.hrt)}}
-
-            </td>
-
-            <td class="right-padded-m nowrap center-aligned top-aligned" >
-
-
-                {{ round(card.score)}}
-            </td>
-
-            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" >
-
-                <div data-ng-repeat="h in card.history">
-                    {{toDate(h.when) | date:'d/M h:mm:ss'}}
-                </div>
-            </td>
-
-
-        </tr>
-
-        </tbody>
-    </table>
 
 </div>

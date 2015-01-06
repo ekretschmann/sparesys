@@ -145,5 +145,35 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             });
         };
 
+        $scope.toDate = function(h) {
+            return new Date(h);
+        };
+
+
+        $scope.clearCourseHistory = function () {
+            $scope.cards.forEach(function (card) {
+                $scope.clearHistory(card);
+                $state.go($state.$current, null, { reload: true });
+            });
+        };
+
+        $scope.clearHistory = function (card) {
+            card.history = [];
+            card.lastRep = undefined;
+            card.hrt = 0.0;
+
+            new Cards(card).$update();
+
+            //Cards.get({
+            //    cardId: card._id
+            //}, function (thecard) {
+            //    thecard.hrt = card.hrt;
+            //    thecard.history = card.history;
+            //    thecard.lastRep = card.lastRep;
+            //    thecard.$update();
+            //
+            //});
+        };
+
 
     }]);

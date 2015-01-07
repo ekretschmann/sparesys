@@ -7,6 +7,8 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
         $scope.time = Date.now();
         $scope.card = {};
+        $scope.assess = 'self';
+        $scope.mode = 'forward';
 
         $scope.randomize = function(val) {
             return val * (Math.random() / 10.0 + 1.0);
@@ -92,6 +94,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
         $scope.nextCard = function () {
 
+            console.log('xxxxx');
             $scope.time = Date.now();
 
             var bestValue = 1.0;
@@ -112,9 +115,13 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                 }
             }, this);
 
-            bestCard.modes = ['images'];
+            bestCard.modes = ['forward'];
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
+            $scope.assess = 'self';
+            if ($scope.card.hrt && $scope.card.hrt > 0) {
+                $scope.assess = 'auto';
+            }
             $scope.updateSlides();
             $state.go($state.current);
         };
@@ -148,6 +155,17 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
         $scope.toDate = function(h) {
             return new Date(h);
         };
+
+
+        $scope.toHours = function(num) {
+            return Math.round(100 * num / 3600000) / 100;
+        };
+
+
+        $scope.round = function(num) {
+            return Math.round(10000 * num) / 10000;
+        };
+
 
 
         $scope.clearCourseHistory = function () {

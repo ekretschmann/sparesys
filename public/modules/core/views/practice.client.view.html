@@ -60,10 +60,14 @@
     <div data-ng-if="cards && cards.length > 0">
 
 
-
-
         <div data-ng-if="mode === 'forward'">
-            <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
+
+            <div data-ng-if="assess === 'self'">
+                <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
+            </div>
+            <div data-ng-if="assess === 'auto'">
+                <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
+            </div>
         </div>
 
         <div data-ng-if="mode === 'reverse'">
@@ -77,24 +81,24 @@
 
 
     <div data-ng-if="!cards || cards.length === 0">
-        <infobox logo="man" position="right"  >
+        <infobox logo="man" position="right">
 
             There are no cards in this course. You will have to create some in order to practice. You
             can do this by going to your home page (click on Rememberators on the top of this screen)
-            and select the edit action for this course or simply <a data-ng-href="#!/courses/{{course._id}}/edit">follow this link</a>.
+            and select the edit action for this course or simply <a data-ng-href="#!/courses/{{course._id}}/edit">follow
+            this link</a>.
 
 
         </infobox>
     </div>
 
 
-
     <table class="table-striped top-margin-l top-padded-l card-border-top" data-ng-if="cards.length > 0">
         <thead>
         <tr>
 
-            <th class="right-padded-m  top-padded-sm" >Question</th>
-            <th class="right-padded-m center-aligned top-padded-sm nowrap">Predicted Retention</th>
+            <th class="right-padded-m  top-padded-sm">Question</th>
+            <th class="right-padded-m center-aligned top-padded-sm nowrap">Predicted Retention [hrs]</th>
             <th class="right-padded-m center-aligned top-padded-sm nowrap">Score</th>
             <th class="right-padded-m center-aligned top-padded-sm nowrap">History</th>
 
@@ -115,11 +119,11 @@
             </td>
 
 
+            <td class="right-padded-m nowrap center-aligned top-aligned">
 
-            <td class="right-padded-m nowrap center-aligned top-aligned" >
 
                 <div data-ng-if="card.hrt">
-                {{toHours(card.hrt)}}
+                    {{toHours(card.hrt)}}
                 </div>
 
                 <div data-ng-if="!card.hrt">
@@ -127,13 +131,13 @@
                 </div>
             </td>
 
-            <td class="right-padded-m nowrap center-aligned top-aligned" >
+            <td class="right-padded-m nowrap center-aligned top-aligned">
 
 
                 {{ round(card.score)}}
             </td>
 
-            <td class="text-muted right-padded-m nowrap center-aligned top-aligned" >
+            <td class="text-muted right-padded-m nowrap center-aligned top-aligned">
 
                 <div data-ng-repeat="h in card.history">
                     {{toDate(h.when) | date:'d/M h:mm:ss'}}
@@ -147,8 +151,8 @@
     </table>
 
     <div class="center-aligned top-padded-m">
-    <button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card History</button>
-    <button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History</button>
+        <button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card History</button>
+        <button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History</button>
 
     </div>
 </section>

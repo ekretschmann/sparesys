@@ -2,17 +2,45 @@
 
 
 // Courses controller
-angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '$document',
-    function ($scope, $state, $document) {
+angular.module('core').controller('ForwardAutoController', ['$scope', '$state', '$document', '$timeout',
+    function ($scope, $state, $document, $timeout) {
 
         $scope.state = 'question';
+        $scope.answer = {};
+        $scope.answer.text = '';
 
-
+        $timeout(function () {
+            angular.element('.focus').trigger('focus');
+        }, 100);
 
         $scope.showAnswer = function () {
             $scope.state = 'answer';
             $state.go($state.current);
+
+
+            if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                $scope.processCard(3);
+            }
+
+
+            $scope.card.alternativesBack.forEach(function (alt) {
+                if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                    $scope.processCard(3);
+                }
+            });
         };
+
+
+        $scope.processCard = function (rating) {
+
+            $scope.$parent.recordRate($scope.card, Date.now(), rating);
+            $scope.state = 'question';
+                $scope.$parent.nextCard();
+
+
+        };
+
+
 
         $document.bind('keypress', function (event) {
 
@@ -48,15 +76,5 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
             }
 
         });
-
-        $scope.processCard = function (rating) {
-
-            $scope.$parent.recordRate($scope.card, Date.now(), rating);
-            $scope.state = 'question';
-                $scope.$parent.nextCard();
-
-
-        };
-
 
     }]);

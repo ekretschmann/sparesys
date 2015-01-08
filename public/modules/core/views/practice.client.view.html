@@ -71,7 +71,13 @@
         </div>
 
         <div data-ng-if="mode === 'reverse'">
-            <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
+            <div data-ng-if="assess === 'self'">
+                <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
+            </div>
+
+            <div data-ng-if="assess === 'auto'">
+                <div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>
+            </div>
         </div>
 
         <div data-ng-if="mode === 'images'">

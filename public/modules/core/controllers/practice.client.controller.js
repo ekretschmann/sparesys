@@ -8,7 +8,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
         $scope.time = Date.now();
         $scope.card = {};
         $scope.assess = 'self';
-        $scope.mode = 'forward';
+        $scope.mode = 'reverse';
 
         $scope.randomize = function(val) {
             return val * (Math.random() / 10.0 + 1.0);
@@ -114,7 +114,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                 }
             }, this);
 
-            bestCard.modes = ['forward'];
+            bestCard.modes = ['reverse'];
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
             $scope.assess = 'self';

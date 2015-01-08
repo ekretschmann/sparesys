@@ -2,7 +2,7 @@
 
 
 // Courses controller
-angular.module('core').controller('ForwardAutoController', ['$scope', '$state', '$document', '$timeout',
+angular.module('core').controller('ReverseAutoController', ['$scope', '$state', '$document', '$timeout',
     function ($scope, $state, $document, $timeout) {
 
         $scope.state = 'question';
@@ -27,7 +27,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             }
 
 
-            $scope.card.alternativesFront.forEach(function (alt) {
+            $scope.card.alternativesBack.forEach(function (alt) {
                 if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
                     $scope.processCard(3);
                     $scope.answer.assessment = 'correct';

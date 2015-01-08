@@ -11,6 +11,40 @@
 @warning-color: #E95610;
 
 
+.flashcard-input-box {
+  padding-left: 10em;
+  padding-right: 10em;
+}
+
+.flashcard-input {
+  .center-aligned;
+  .large-font;
+
+
+  outline-offset: 1px;
+  outline: none;
+  border: none;
+  border-bottom: 2px solid darken(#d0d8dd, 25%);
+  border-bottom: 2px solid lighten(#4E51E5, 25%);
+
+
+
+
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-gradient(linear, 0 0, 0 bottom, from(@background-color-contrast), to(@background-color-contrast));
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -moz-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -ms-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -o-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  linear-gradient(@background-color-contrast, @background-color-contrast);
+
+}
+
 .card-border-top {
   border-top: @background-color solid 2px;
 }
@@ -222,6 +256,9 @@ body {
 .right-padded-l {
   padding-right: @default-padding-unit * 5;
 }
+.left-padded-l {
+  padding-left: @default-padding-unit * 5;
+}
 .right-padded-xl {
   padding-right: @default-padding-unit * 10;
 }
@@ -395,6 +432,11 @@ body {
 
 .font-m {
   .header-font;
+  font-size: 16pt;
+}
+
+
+.large-font {
   font-size: 16pt;
 }
 

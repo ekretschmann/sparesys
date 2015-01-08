@@ -58,7 +58,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
 
             new Cards(card).$update();
-            $scope.nextCard();
+
         };
 
 
@@ -94,7 +94,6 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
         $scope.nextCard = function () {
 
-            console.log('xxxxx');
             $scope.time = Date.now();
 
             var bestValue = 1.0;

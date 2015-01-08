@@ -8,24 +8,29 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.state = 'question';
         $scope.answer = {};
         $scope.answer.text = '';
+        $scope.answer.assessment = undefined;
 
         $timeout(function () {
             angular.element('.focus').trigger('focus');
         }, 100);
 
         $scope.showAnswer = function () {
+
             $scope.state = 'answer';
             $state.go($state.current);
 
 
+            $scope.answer.assessment = 'wrong';
             if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                 $scope.processCard(3);
+                $scope.answer.assessment = 'correct';
             }
 
 
-            $scope.card.alternativesBack.forEach(function (alt) {
+            $scope.card.alternativesFront.forEach(function (alt) {
                 if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
                     $scope.processCard(3);
+                    $scope.answer.assessment = 'correct';
                 }
             });
         };
@@ -34,12 +39,13 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.processCard = function (rating) {
 
             $scope.$parent.recordRate($scope.card, Date.now(), rating);
-            $scope.state = 'question';
-                $scope.$parent.nextCard();
-
 
         };
 
+
+        $document.unbind('keypress', function (event) {
+
+        });
 
 
         $document.bind('keypress', function (event) {
@@ -53,6 +59,12 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
             if ($scope.state === 'question' && event.keyCode === 13) {
                 $scope.showAnswer();
+                return;
+            }
+
+
+            if ($scope.state === 'answer' && event.keyCode === 13) {
+                $scope.nextCard();
                 return;
             }
 
@@ -76,5 +88,17 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             }
 
         });
+
+        $scope.nextCard = function () {
+
+            $scope.$parent.nextCard();
+            $scope.state = 'question';
+
+            $scope.answer.text = '';
+
+            $timeout(function () {
+                angular.element('.focus').trigger('focus');
+            }, 100);
+        };
 
     }]);

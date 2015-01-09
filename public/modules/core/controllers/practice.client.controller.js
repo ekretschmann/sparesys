@@ -2,17 +2,13 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$scope', '$state', '$stateParams', 'Courses', 'Cards', 'CoursesService',
-    function ($scope, $state, $stateParams, Courses, Cards, CoursesService) {
+angular.module('core').controller('PracticeController', ['$scope', '$state', '$stateParams', 'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
+    function ($scope, $state, $stateParams, Courses, Cards, CoursesService, RetentionCalculatorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
         $scope.assess = 'self';
         $scope.mode = 'reverse';
-
-        $scope.randomize = function(val) {
-            return val * (Math.random() / 10.0 + 1.0);
-        };
 
 
         $scope.round = function(num) {
@@ -34,25 +30,8 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
         $scope.recordRate = function (card, time, assessment) {
 
+            card.hrt = RetentionCalculatorService.calculateFor(card, time, assessment);
 
-            // setting init values for first iteration
-            if (!card.history) {
-                card.history = [];
-            }
-
-            if (assessment === 0) {
-                // 30 s
-                card.hrt = $scope.randomize(30*1000);
-            } else if (assessment === 1) {
-                // 5 min
-                card.hrt = $scope.randomize(1000 * 60 * 5);
-            } else if (assessment === 2) {
-                // 1 day
-                card.hrt = $scope.randomize(1000 * 60 * 60 * 24);
-            } else if (assessment === 3) {
-                // 5 days
-                card.hrt = $scope.randomize(1000 * 60 * 60 * 24 * 5);
-            }
 
             card.history.push({when: time, assessment: assessment});
 

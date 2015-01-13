@@ -25,7 +25,11 @@ angular.module('core').service('RetentionCalculatorService', [
                     return this.randomize(1000 * 60 * 60 * 24);
                 } else if (assessment === 3) {
                     // 5 days
-                    return this.randomize(1000 * 60 * 60 * 24 * 5);
+                    //return this.randomize(1000 * 60 * 60 * 24 * 5);
+
+
+                    // 10 s for debugging
+                    return this.randomize(1000 * 10);
                 }
             },
             calculateWeight: function(pr) {
@@ -50,8 +54,8 @@ angular.module('core').service('RetentionCalculatorService', [
                 }
 
 
-                //console.log('');
-                //console.log(card.question);
+                console.log('');
+                console.log(card.question);
                 //console.log('  time now:'+time);
 
                 var endTime = time;
@@ -64,7 +68,7 @@ angular.module('core').service('RetentionCalculatorService', [
 
                     //console.log('');
                     //console.log('  timestamp: '+entry.when);
-                    //var timeDiff = endTime - entry.when;
+                    var timeDiff = endTime - entry.when;
                     //console.log('  timeDiff:'+timeDiff);
                     //console.log('  TS: '+entry.when);
                     var pr = this.getPredictedRetention(entry.when, entry.hrt, endTime);
@@ -72,13 +76,13 @@ angular.module('core').service('RetentionCalculatorService', [
 
                     //
                     //
-                    //var weight = this.calculateWeight(pr);
-                    //if (entry.assessment === 3) {
-                    //    totalWeight += totalWeight + weight / (counter);
-                    //}
-                    //console.log('  PR:'+pr);
-                    //console.log('  weight:'+weight);
-                    //console.log('  total:'+totalWeight);
+                    var weight = this.calculateWeight(pr);
+                    if (entry.assessment === 3) {
+                        totalWeight += weight / (counter);
+                    }
+                    console.log('  PR:'+pr);
+                    console.log('  weight:'+weight);
+                    console.log('  total:'+totalWeight);
 
                     endTime = entry.when;
 

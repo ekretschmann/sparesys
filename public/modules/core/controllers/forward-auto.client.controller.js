@@ -38,13 +38,17 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.processCard = function (rating) {
 
+
             $scope.$parent.recordRate($scope.card, Date.now(), rating);
 
         };
 
 
-
         $document.bind('keypress', function (event) {
+
+            if($scope.$parent.mode !== 'forward' || $scope.$parent.assess !== 'auto') {
+                return;
+            }
 
 
 

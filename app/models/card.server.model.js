@@ -116,7 +116,7 @@ var CardSchema = new Schema({
     },
     history: {
         type: [
-            {when: Number, assessment: Number}
+            {when: Number, assessment: Number, hrt: Number}
         ],
         default: [],
         _id: false

@@ -15,6 +15,7 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
         $scope.processCard = function (rating) {
 
+            console.log('process card self');
             $scope.$parent.recordRate($scope.card, Date.now(), rating);
             $scope.state = 'question';
                 $scope.$parent.nextCard();
@@ -26,6 +27,10 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
         $document.bind('keypress', function (event) {
 
+
+            if($scope.$parent.mode !== 'forward' || $scope.$parent.assess !== 'self') {
+                return;
+            }
 
 
             if ($state.$current.url.source !== '/practice/:courseId') {

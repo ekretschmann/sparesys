@@ -33,7 +33,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             card.hrt = RetentionCalculatorService.calculateFor(card, time, assessment);
 
 
-            card.history.push({when: time, assessment: assessment});
+            card.history.push({when: time, assessment: assessment, hrt:card.hrt});
 
 
             new Cards(card).$update();
@@ -87,13 +87,14 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                     card.score = Math.abs(pr - 0.4) * $scope.adjustScoreToDueDate(card, $scope.time);
 
                     if (card.score < bestValue && card.modes.length > 0) {
+                    //if (card.question === 'eins') {
                         bestCard = card;
                         bestValue = card.score;
                     }
                 }
             }, this);
 
-            bestCard.modes = ['reverse'];
+            bestCard.modes = ['forward'];
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
             $scope.assess = 'self';

@@ -2,8 +2,24 @@
 
 
     <div class="tab-header">
-        Change Settings for Cards {{card.question}}
+
+        <table>
+            <tr>
+                <td class="nowrap">Change Settings for Cards {{card.question}}</td>
+                <td class="expands"></td>
+                <td class="right-padded-s top-aligned">
+                    <a href="">
+                        <i ng-class="checkForward(card)" data-ng-click="areYouSureToDeleteCard(card)"
+                           class="small left-padded-s glyphicon glyphicon-remove-sign">
+                        </i>
+                    </a></td>
+            </tr>
+
+        </table>
     </div>
+
+
+
 
     <table class="box-margin-s" >
 

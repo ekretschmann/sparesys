@@ -25,6 +25,7 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
 
 
+
         $document.bind('keypress', function (event) {
 
 

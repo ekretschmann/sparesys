@@ -1,5 +1,7 @@
 <section data-ng-controller="CardsController" data-ng-init="findOne()">
 
+
+    <div ng-include="'/modules/core/views/partial/show-more-info.modal.client.view.html'"></div>
     <div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
     <div ng-include="'/modules/cards/views/partial/manage-images.modal.client.view.html'"></div>
 
@@ -68,16 +70,16 @@
 
             <infobox logo="boy" data-ng-show="tabs[1].active" position="left">
 
-                <a href="" data-ng-click="$parent.showMoreInfo('forward-mode.html')">Forward Mode</a> Settings can be changed here.
-                If you want to use the forward mode, you can use text to speech to read out
-                questions or answers. When you select speech recognition, you will be able to use your
-                microphone to speak the answer. Don't forget to configure what language your cards are in on the
+                <a href="" data-ng-click="$parent.showMoreInfo('forward-mode.html')">Forward Mode</a> settings can be changed here.
+                If you want to use the forward mode, you can use text to speech to read
+                questions or answers to the student. When you select speech recognition, you will be able to use your
+                microphone to say your answer. Don't forget to configure the language your cards are in on the
                 Cards tab!
             </infobox>
 
             <infobox logo="girl" data-ng-show="tabs[2].active" position="right">
 
-                <a href="" data-ng-click="showMoreInfo('reverse-mode.html')">Reverse Mode</a> Settings can be changed here.
+                <a href="" data-ng-click="showMoreInfo('reverse-mode.html')">Reverse Mode</a> settings can be changed here.
                 If you want to use the forward mode, you can use text to speech to read out
                 questions or answers. When you select speech recognition, you will be able to use your
                 microphone to speak the answer. Don't forget to configure what language your cards are in on the
@@ -85,8 +87,11 @@
             </infobox>
 
             <infobox logo="guru" data-ng-show="tabs[3].active" position="left">
+                <a href="" data-ng-click="showMoreInfo('image-mode.html')">Image Mode</a> settings can be changed here.
 
-                This is what you can do with images.
+                The <a href="">Manage Images</a> link will let you search for images that you can use instead
+                of text on the card front. You can also show the text and read it out loud. You can make
+                use of the speech recognition feature as input and read the answers back to the student.
             </infobox>
         </div>
     </section>

@@ -125,6 +125,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         $scope.forwardMuted = '';
         $scope.reverseMuted = '';
         $scope.imagesMuted = '';
+        $scope.imageMuted = '';
 
         $scope.updateView = function () {
 
@@ -148,6 +149,12 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 $scope.imagesMuted = '';
             } else {
                 $scope.imagesMuted = 'text-muted';
+            }
+
+            if ($scope.card.hasImagesMode) {
+                $scope.imageMuted = '';
+            } else {
+                $scope.imageMuted = 'image-muted';
             }
 
         };
@@ -448,5 +455,21 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
         };
+
+        $scope.showMoreInfo = function (file) {
+
+            $modal.open({
+                templateUrl: 'showMoreInfo.html',
+                controller: 'ShowMoreInfoController',
+                resolve: {
+
+                    file: function () {
+                        return file;
+                    }
+                }
+            });
+
+        };
+
     }
 ]);

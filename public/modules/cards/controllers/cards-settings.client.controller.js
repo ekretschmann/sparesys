@@ -34,7 +34,7 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
             {name: 'Spanish', code: 'es-ES'}
         ];
 
-        $scope.options.checks = ['Don\'t Change', 'Computer Checks', 'Self Check', 'Mixed Checks'];
+        $scope.options.checks = ['By Computer', 'Self Check', 'Mixed'];
 
 
 
@@ -42,13 +42,19 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
             $scope.options.openDueDateCalendar = false;
             $scope.options.openStartDateCalendar = false;
 
-            $scope.options.languageFront = $scope.languages[0];
-            $scope.options.languageBack = $scope.languages[0];
+            $scope.options.languageFront = $scope.card.languageFront;
+            $scope.options.languageBack = $scope.card.languageBack;
 
             $scope.options.changeStartDate = 'off';
             $scope.options.changeDueDate = 'off';
 
-            $scope.options.check = 'Don\'t Change';
+            if ($scope.card.check === 'computer') {
+                $scope.options.check = 'By Computer';
+            } else if ($scope.card.check === 'self') {
+                $scope.options.check = 'Self Checks';
+            } else {
+                $scope.options.check = 'Mixed';
+            }
 
 
             $scope.options.startDate = undefined;
@@ -57,21 +63,36 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
 
         reset();
 
+        $scope.setLanguageFront = function(lang) {
+            $scope.card.languageFront = lang;
+            new Cards($scope.card).$update();
+            reset();
+        };
+
+        $scope.setLanguageBack = function(lang) {
+            $scope.card.languageBack = lang;
+            new Cards($scope.card).$update();
+            reset();
+        };
+
+
+        $scope.setCheck = function(check) {
+            if (check === 'By Computer') {
+                $scope.card.check = 'computer';
+            }
+            if (check === 'Self Check') {
+                $scope.card.check = 'self';
+            }
+            if (check === 'Mixed') {
+                $scope.card.check = 'mixed';
+            }
+
+            new Cards($scope.card).$update();
+            reset();
+        };
 
         $scope.updateCards = function () {
 
-
-
-
-                if ($scope.options.check === 'Computer Checks') {
-                    $scope.card.check = 'computer';
-                }
-                if ($scope.options.check === 'Self Check') {
-                    $scope.card.check = 'self';
-                }
-                if ($scope.options.check === 'Mixed Checks') {
-                    $scope.card.check = 'mixed';
-                }
 
                 if ($scope.options.languageFront.name !== 'Don\'t Change') {
                     $scope.card.languageFront = $scope.options.languageFront;

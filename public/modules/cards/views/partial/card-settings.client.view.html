@@ -31,25 +31,44 @@
 
     <table class="box-margin-s" >
 
-
         <tr>
             <td class="top-padded-s right-padded-m middle-aligned">
+                Front Text
+            </td>
+
+            <td class="top-padded-s right-padded-m middle-aligned">
+                {{card.question}}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="top-padded-m right-padded-m middle-aligned">
+                Back Text
+            </td>
+
+            <td class="top-padded-m right-padded-m middle-aligned">
+                {{card.answer}}
+            </td>
+        </tr>
+
+        <tr>
+            <td class="top-padded-m right-padded-m middle-aligned">
                 Language Front
             </td>
-            <td class="top-padded-s right-padded-m middle-aligned">
+            <td class="top-padded-m right-padded-m middle-aligned">
 
 
                 <div class="btn-group right-padded-l nowrap">
 
 
-                    <button type="button" class="btn btn-default standard-dropdown-width">{{ options.languageFront.name }}</button>
+                    <button type="button" class="btn btn-default standard-dropdown-width">{{ card.languageFront.name }}</button>
                     <button type="button" class="btn btn-default dropdown-toggle">
                         <span class="caret"></span>
                         <span class="sr-only">Split button!</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="lang in languages"><a
-                                data-ng-click="options.languageFront=lang">{{lang.name}}</a>
+                                data-ng-click="setLanguageFront(lang)">{{lang.name}}</a>
                         </li>
                     </ul>
 
@@ -60,14 +79,14 @@
                     </span>
 
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default standard-dropdown-width">{{ options.languageBack.name }}</button>
+                    <button type="button" class="btn btn-default standard-dropdown-width">{{ card.languageBack.name }}</button>
                     <button type="button" class="btn btn-default dropdown-toggle">
                         <span class="caret"></span>
                         <span class="sr-only">Split button!</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="lang in languages"><a
-                                data-ng-click="options.languageBack = lang">{{lang.name}}</a>
+                                data-ng-click="setLanguageBack(lang)">{{lang.name}}</a>
                         </li>
                     </ul>
 
@@ -91,7 +110,7 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="check in options.checks"><a
-                                data-ng-click="options.check = check">{{check}}</a></li>
+                                data-ng-click="setCheck(check)">{{check}}</a></li>
                     </ul>
                 </div>
             </td>
@@ -107,30 +126,18 @@
                 <table>
 
                     <tr>
-                        <td class="right-padded-m">
-                            <input data-ng-model="options.changeStartDate" type="radio" value="off"/> Don't Change
-                        </td>
 
-                        <td class="right-padded-m">
-                            <input data-ng-model="options.changeStartDate" type="radio" value="reset"/>  None
-                        </td>
-
-                        <td class="right-padded-m">
-
-                            <input data-ng-model="options.changeStartDate" ng-click="openStartDateCalendar($event)" type="radio"
-                                   value="on"/> Change To
-                        </td>
-
-                        <td class="input-group" data-ng-if="options.changeStartDate === 'on'">
+                        <td class="input-group">
                             <input type="text"
                                    class="form-control"
                                    datepicker-popup="{{format}}"
-                                   ng-model="options.startDate"
+                                   ng-model="card.startDate"
                                    is-open="options.openStartDateCalendar"
                                    min-date="minDate"
                                    datepicker-options="dateOptions"
                                    ng-required="false"
-                                   close-text="Close"/>
+                                   close-text="Close"
+                                   data-ng-blur="update()"/>
 
 
                             <div class="input-group-btn">
@@ -139,24 +146,7 @@
                             </div>
                         </td>
 
-                        <td class="input-group" data-ng-if="options.changeStartDate !== 'on'">
-                            <input type="text"
-                                   class="form-control"
-                                   datepicker-popup="{{format}}"
-                                   ng-model="options.startDate"
-                                   is-open="{{false}}"
-                                   min-date="minDate"
-                                   datepicker-options="dateOptions"
-                                   ng-required="false"
-                                   close-text="Close"
-                                   date-disabled="'true'" disabled/>
 
-
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-disabled"><i
-                                        class="glyphicon glyphicon-calendar"></i></button>
-                            </div>
-                        </td>
 
                     </tr>
                 </table>
@@ -174,30 +164,18 @@
                 <table>
 
                     <tr>
-                        <td class="right-padded-m">
-                            <input data-ng-model="options.changeDueDate" type="radio" value="off"/> Don't Change
-                        </td>
 
-                        <td class="right-padded-m">
-                            <input data-ng-model="options.changeDueDate" type="radio" value="reset"/>  None
-                        </td>
-
-                        <td class="right-padded-m">
-
-                            <input data-ng-model="options.changeDueDate" ng-click="openDueDateCalendar($event)" type="radio"
-                                   value="on"/> Change To
-                        </td>
-
-                        <td class="input-group" data-ng-if="options.changeDueDate === 'on'">
+                        <td class="input-group">
                             <input type="text"
                                    class="form-control"
                                    datepicker-popup="{{format}}"
-                                   ng-model="options.dueDate"
+                                   ng-model="card.dueDate"
                                    is-open="options.openDueDateCalendar"
                                    min-date="minDate"
                                    datepicker-options="dateOptions"
                                    ng-required="false"
-                                   close-text="Close"/>
+                                   close-text="Close"
+                                   data-ng-blur="update()"/>
 
 
                             <div class="input-group-btn">
@@ -206,24 +184,6 @@
                             </div>
                         </td>
 
-                        <td class="input-group" data-ng-if="options.changeDueDate !== 'on'">
-                            <input type="text"
-                                   class="form-control"
-                                   datepicker-popup="{{format}}"
-                                   ng-model="options.dueDate"
-                                   is-open="{{false}}"
-                                   min-date="minDate"
-                                   datepicker-options="dateOptions"
-                                   ng-required="false"
-                                   close-text="Close"
-                                   date-disabled="'true'" disabled/>
-
-
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-disabled"><i
-                                        class="glyphicon glyphicon-calendar"></i></button>
-                            </div>
-                        </td>
 
                     </tr>
                 </table>
@@ -234,83 +194,7 @@
 
     </table>
 
-    <div class="center-aligned bottom-padded-m top-padded-sm">
-        <button class="btn btn-rememberators" ng-click="updateCards()">Update Card</button>
-
-    </div>
 
 
-    <table class="table-striped top-padded-l card-border-top" >
-        <thead >
-        <tr >
-            <th class="right-padded-m left-padded-s top-aligned top-padded-sm">Question</th>
-            <th class="right-padded-m top-aligned top-padded-sm">Language Front</th>
-            <th class="right-padded-m top-aligned top-padded-sm">Language Back</th>
-            <th class="right-padded-m top-aligned top-padded-sm">Checks</th>
-            <th class="right-padded-m top-aligned top-padded-sm">Start Date</th>
-            <th class="right-padded-s top-aligned top-padded-sm">Due Date</th>
 
-        </tr>
-        </thead>
-        <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
-
-
-        <tr >
-
-
-            <td class="left-padded-s right-padded-m standard-min-width top-padded top-aligned text-min-width">
-
-                {{card.question}}
-            </td>
-
-            <td class="right-padded-m top-padded top-aligned">
-                <div data-ng-if="card.languageFront">{{card.languageFront.name}}</div>
-                <div data-ng-if="!card.languageFront">none</div>
-            </td>
-
-
-            <td class="right-padded-m nowrap center-aligned top-aligned">
-
-                <div data-ng-if="card.languageBack">{{card.languageBack.name}}</div>
-                <div data-ng-if="!card.languageBack">none</div>
-
-            </td>
-
-
-            <td class="right-padded-m nowrap right-aligned top-aligned">
-                {{card.check}}
-            </td>
-
-
-            <td class="right-padded-s nowrap right-aligned top-aligned">
-
-                <span data-ng-if="card.startDate">
-                        {{card.startDate | date:'shortDate'}}
-                    </span>
-                    <span data-ng-if="!card.startDate">
-                        none
-                    </span>
-            </td>
-
-
-            <td class="right-padded-s nowrap right-aligned top-aligned">
-
-                    <span data-ng-if="card.dueDate">
-                        {{card.dueDate | date:'shortDate'}}
-                    </span>
-                    <span data-ng-if="!card.dueDate">
-                        none
-                    </span>
-            </td>
-
-        </tr>
-
-
-        <tr data-ng-if="pack.cards.length < course.cards.length">
-            <td class="top-padded left-padded-m" colspan="5">
-                and {{course.cards.length - pack.cards.length}} further cards
-            </td>
-        </tr>
-        </tbody>
-    </table>
 </div>

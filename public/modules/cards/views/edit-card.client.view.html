@@ -44,19 +44,31 @@
 
             <infobox logo="man" data-ng-show="tabs[0].active" position="right">
 
-                Use this tab to change the course settings. You can select to
-                teach this course or make it available for other rememberator users
-                to copy by publishing it. If you want to delete this course,
-                click on the <a href="">
-                <i data-ng-click="addPackToCoursePopup()"
-                   class="glyphicon glyphicon-remove-sign">
-                </i></a>
-                icon below.
+                Use this tab to change card settings.
+                The language settings are used for the reading out loud and speech recognition features.
+                You can also select the checking method, the due and start date
+                for the card.
+
+                With the <a href="">
+                <i class="small glyphicon glyphicon-remove-sign">
+                </i></a> in the corner, you can delete this card.
+
+                <a href="">
+                    <i class="small glyphicon glyphicon-backward">
+                    </i></a>
+
+                and
+
+                <a href="">
+                    <i class="small glyphicon glyphicon-forward">
+                    </i></a>
+
+                will navigate to the previous and next card of the pack.
             </infobox>
 
             <infobox logo="boy" data-ng-show="tabs[1].active" position="left">
 
-                <a href="" data-ng-click="showMoreInfo('forward-mode.html')">Forward Mode</a> Settings can be changed here.
+                <a href="" data-ng-click="$parent.showMoreInfo('forward-mode.html')">Forward Mode</a> Settings can be changed here.
                 If you want to use the forward mode, you can use text to speech to read out
                 questions or answers. When you select speech recognition, you will be able to use your
                 microphone to speak the answer. Don't forget to configure what language your cards are in on the

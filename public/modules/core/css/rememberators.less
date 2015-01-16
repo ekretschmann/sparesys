@@ -198,10 +198,23 @@ body {
   background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
   linear-gradient(@background-color-contrast, @background-color-contrast);
 
-  .question {
-    font-size: xx-large;
-    padding-top: 3em;
+  .question-box {
+    padding-top: 6em;
+
+    .question {
+      font-size: xx-large;
+
+    }
   }
+
+  .correct-answer-box {
+    .correct-answer {
+      color: #4DB22B;
+      font-size: x-large;
+    }
+  }
+
+
 }
 
 .new-card {
@@ -621,10 +634,6 @@ a {
   100% {background: green;}
 }
 
-.correct-answer {
-  color:#4DB22B;
-  font-size: x-large;
-}
 
 .incorrect-answer {
   color:#E99267;;

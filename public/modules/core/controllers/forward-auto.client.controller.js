@@ -23,9 +23,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         });
 
         $scope.$watch('state', function() {
-            console.log('state changed');
             if ($scope.state === 'answer' && $scope.card.readBackForward) {
-                console.log('here');
                 $scope.playSound($scope.card.languageBack, $scope.card.answer);
             }
         });

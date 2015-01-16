@@ -11,6 +11,8 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
         $scope.mode = 'reverse';
 
 
+
+
         $scope.round = function(num) {
             return Math.round(10000 * num) / 10000;
         };

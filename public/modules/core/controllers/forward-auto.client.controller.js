@@ -5,14 +5,50 @@
 angular.module('core').controller('ForwardAutoController', ['$scope', '$state', '$document', '$timeout',
     function ($scope, $state, $document, $timeout) {
 
-        $scope.state = 'question';
         $scope.answer = {};
         $scope.answer.text = '';
         $scope.answer.assessment = undefined;
+        $scope.state = 'question';
 
         $timeout(function () {
             angular.element('.focus').trigger('focus');
         }, 100);
+
+
+
+        $scope.$watch('card', function() {
+            if ($scope.card.readFrontForward) {
+                $scope.playSound($scope.card.languageFront, $scope.card.question);
+            }
+        });
+
+        $scope.$watch('state', function() {
+            console.log('state changed');
+            if ($scope.state === 'answer' && $scope.card.readBackForward) {
+                console.log('here');
+                $scope.playSound($scope.card.languageBack, $scope.card.answer);
+            }
+        });
+
+        $scope.playSound = function (lang, text) {
+
+            /* jshint ignore:start */
+            if (window.SpeechSynthesisUtterance !== undefined) {
+
+
+                var msg = new SpeechSynthesisUtterance(text);
+
+                msg.lang = lang.code;
+                window.speechSynthesis.speak(msg);
+            }
+            /* jshint ignore:end */
+
+        };
+
+
+
+
+
 
         $scope.showAnswer = function () {
 
@@ -42,6 +78,9 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $scope.$parent.recordRate($scope.card, Date.now(), rating);
 
         };
+
+
+
 
 
         $document.bind('keypress', function (event) {

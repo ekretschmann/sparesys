@@ -534,8 +534,6 @@ exports.upload = function (req, res, next) {
 
 exports.getCardsForCourse = function (req, res, next, id) {
 
-
-    console.log('xxxxx');
     var result = [];
     var expectedCards = 0;
     var packOrder = {};

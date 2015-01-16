@@ -534,6 +534,8 @@ exports.upload = function (req, res, next) {
 
 exports.getCardsForCourse = function (req, res, next, id) {
 
+
+    console.log('xxxxx');
     var result = [];
     var expectedCards = 0;
     var packOrder = {};
@@ -562,31 +564,34 @@ exports.getCardsForCourse = function (req, res, next, id) {
                 packOrder[packs[0]._id] = packs[0].cards;
                 expectedCards += packs[0].cards.length;
                 packs[0].cards.forEach(function (cardId) {
+
                     var loadCard = Card.find({'_id': cardId}).exec(function (err) {
-                        if (err) {
-                            return res.send(400, {
-                                message: getErrorMessage(err)
-                            });
-                        }
-                    });
-                    loadCard.then(function (card) {
-                        result = result.concat(card);
-                        if (result.length === expectedCards) {
-                            var ordered = [];
-                            courses[0].packs.forEach(function(packId) {
+                            if (err) {
+                                return res.send(400, {
+                                    message: getErrorMessage(err)
+                                });
+                            }
+                        });
+                        loadCard.then(function (card) {
 
-                                packOrder[packId].forEach(function(cardId) {
-                                    result.forEach(function(item) {
 
-                                        if (item._id.toString() === cardId.toString() && item.packs[0].toString() === packId.toString()) {
-                                            ordered.push(item);
-                                        }
+                            result = result.concat(card);
+                            if (result.length === expectedCards) {
+                                var ordered = [];
+                                courses[0].packs.forEach(function (packId) {
+
+                                    packOrder[packId].forEach(function (cardId) {
+                                        result.forEach(function (item) {
+
+                                            if (item._id.toString() === cardId.toString() && item.packs[0].toString() === packId.toString()) {
+                                                ordered.push(item);
+                                            }
+                                        });
                                     });
                                 });
-                            });
-                            res.jsonp(ordered);
-                        }
-                    });
+                                res.jsonp(ordered);
+                            }
+                        });
 
                 });
             });

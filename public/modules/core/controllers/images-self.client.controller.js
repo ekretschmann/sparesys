@@ -8,6 +8,17 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
         $scope.state = 'question';
 
 
+        $scope.$watch('card', function() {
+            if ($scope.card.imagesReadFront) {
+                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
+            }
+        });
+
+        $scope.$watch('state', function() {
+            if ($scope.state === 'answer' && $scope.card.imagesReadBack) {
+                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
+            }
+        });
 
         $scope.showAnswer = function () {
             $scope.state = 'answer';

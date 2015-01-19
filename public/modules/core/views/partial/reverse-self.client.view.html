@@ -23,13 +23,23 @@
         </div>
 
 
+
+        <div class="question-box" style="position: relative">
+            <span class="question">
+            {{card.answer}}
+                </span>
+
+            <span data-ng-if="card.readFrontReverse" class="left-padded-s top-padded-s" style="position: absolute;" >
+
+                    <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
+                </span>
+        </div>
+
         <div class="edit-card">
             <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
         </div>
-
-
-        <div class="question">{{card.answer}}</div>
-
 
         <div data-ng-if="state === 'answer'">
 

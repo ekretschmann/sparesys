@@ -13,6 +13,28 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
 
 
+
+
+        $scope.playSound = function (lang, text) {
+
+            console.log('playing sound: '+text+ ' ('+lang.code+')');
+
+            /* jshint ignore:start */
+            //if (window.SpeechSynthesisUtterance !== undefined) {
+            //
+            //
+            //    var msg = new SpeechSynthesisUtterance(text);
+            //
+            //
+            //    msg.lang = lang.code;
+            //    window.speechSynthesis.speak(msg);
+            //}
+            /* jshint ignore:end */
+
+        };
+
+
+
         $scope.round = function(num) {
             return Math.round(10000 * num) / 10000;
         };
@@ -96,7 +118,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                 }
             }, this);
 
-            bestCard.modes = ['forward'];
+            bestCard.modes = ['reverse'];
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
             $scope.assess = 'self';

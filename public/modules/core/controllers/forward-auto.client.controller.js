@@ -10,42 +10,22 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.answer.assessment = undefined;
         $scope.state = 'question';
 
+
         $timeout(function () {
             angular.element('.focus').trigger('focus');
         }, 100);
 
-
-
         $scope.$watch('card', function() {
             if ($scope.card.readFrontForward) {
-                $scope.playSound($scope.card.languageFront, $scope.card.question);
+                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
             }
         });
 
         $scope.$watch('state', function() {
             if ($scope.state === 'answer' && $scope.card.readBackForward) {
-                $scope.playSound($scope.card.languageBack, $scope.card.answer);
+                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
             }
         });
-
-        $scope.playSound = function (lang, text) {
-
-            /* jshint ignore:start */
-            if (window.SpeechSynthesisUtterance !== undefined) {
-
-
-                var msg = new SpeechSynthesisUtterance(text);
-
-                msg.lang = lang.code;
-                window.speechSynthesis.speak(msg);
-            }
-            /* jshint ignore:end */
-
-        };
-
-
-
-
 
 
         $scope.showAnswer = function () {
@@ -73,17 +53,16 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.processCard = function (rating) {
 
 
-            $scope.$parent.recordRate($scope.card, Date.now(), rating);
+            $scope.recordRate($scope.card, Date.now(), rating);
 
         };
 
 
 
 
-
         $document.bind('keypress', function (event) {
 
-            if($scope.$parent.mode !== 'forward' || $scope.$parent.assess !== 'auto') {
+            if($scope.mode !== 'forward' || $scope.assess !== 'auto') {
                 return;
             }
 

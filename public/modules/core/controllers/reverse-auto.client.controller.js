@@ -10,25 +10,43 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
         $scope.answer.text = '';
         $scope.answer.assessment = undefined;
 
+        $scope.$watch('card', function() {
+            console.log($scope.card.readFrontReverse);
+            if ($scope.card.readFrontReverse) {
+                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
+            }
+        });
+
+        $scope.$watch('state', function() {
+            if ($scope.state === 'answer' && $scope.card.readBackReverse) {
+                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
+            }
+        });
+
+
         $timeout(function () {
             angular.element('.focus').trigger('focus');
         }, 100);
 
         $scope.showAnswer = function () {
 
+            if($scope.mode !== 'reverse' || $scope.assess !== 'auto') {
+                return;
+            }
+
             $scope.state = 'answer';
             $state.go($state.current);
 
 
             $scope.answer.assessment = 'wrong';
-            if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
+            if ($scope.card.question.toLowerCase() === $scope.answer.text.toLowerCase()) {
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
             }
 
 
             $scope.card.alternativesBack.forEach(function (alt) {
-                if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                if (alt.toLowerCase() === $scope.question.text.toLowerCase()) {
                     $scope.processCard(3);
                     $scope.answer.assessment = 'correct';
                 }

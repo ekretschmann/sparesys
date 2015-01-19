@@ -7,6 +7,19 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
         $scope.state = 'question';
 
+
+        $scope.$watch('card', function() {
+            if ($scope.card.readFrontForward) {
+                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
+            }
+        });
+
+        $scope.$watch('state', function() {
+            if ($scope.state === 'answer' && $scope.card.readBackForward) {
+                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
+            }
+        });
+
         $scope.showAnswer = function () {
             $scope.state = 'answer';
             $state.go($state.current);
@@ -14,15 +27,10 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
 
         $scope.processCard = function (rating) {
-
-            console.log('process card self');
             $scope.$parent.recordRate($scope.card, Date.now(), rating);
             $scope.state = 'question';
-                $scope.$parent.nextCard();
-
-
+            $scope.$parent.nextCard();
         };
-
 
 
 

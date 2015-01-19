@@ -1,4 +1,4 @@
-<div data-ng-controller="ForwardAutoController">
+<div data-ng-controller="ReverseAutoController">
     <div class="flashcard">
 
         <div class="card-score">
@@ -23,7 +23,17 @@
         </div>
 
 
-        <div class="question">{{card.question}}</div>
+        <div class="question-box" style="position: relative">
+            <span class="question">
+            {{card.answer}}
+                </span>
+            <span data-ng-if="card.readFrontReverse" class="left-padded-s top-padded-s" style="position: absolute;" >
+
+                    <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
+                </span>
+        </div>
 
         <div class="flashcard-input-box top-padded-m" data-ng-if="state === 'question'">
 
@@ -46,9 +56,7 @@
                 <div>Your answer: {{answer.text}}</div>
             </div>
 
-
         </div>
-
 
 
         <div class="edit-card">
@@ -56,15 +64,12 @@
         </div>
 
 
-
         <div data-ng-if="state === 'answer'">
 
 
             <div class="correct-answer">
-                Expected answer: {{card.answer}}
+                Expected answer: {{card.question}}
             </div>
-
-
 
 
         </div>

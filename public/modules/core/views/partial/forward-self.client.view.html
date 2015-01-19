@@ -23,19 +23,30 @@
         </div>
 
 
-        <div class="question">{{card.question}}</div>
+        <div class="question-box" style="position: relative">
+            <span class="question">
+            {{card.question}}
+                </span>
+            <span data-ng-if="card.readFrontForward" class="left-padded-s top-padded-s" style="position: absolute;" >
 
+                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
+                </span>
+        </div>
 
         <div class="edit-card">
             <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
         </div>
 
-        <div data-ng-if="state === 'answer'">
 
 
+        <div class="left-padded-m right-padded-m top-padded-m" data-ng-if="state === 'answer'">
 
-            <div class="correct-answer">
-                {{card.answer}}
+
+            <div  class="correct-answer">
+
+                <div>{{card.answer}}</div>
             </div>
 
 

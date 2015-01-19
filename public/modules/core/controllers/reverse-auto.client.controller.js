@@ -11,7 +11,6 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
         $scope.answer.assessment = undefined;
 
         $scope.$watch('card', function() {
-            console.log($scope.card.readFrontReverse);
             if ($scope.card.readFrontReverse) {
                 $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
             }

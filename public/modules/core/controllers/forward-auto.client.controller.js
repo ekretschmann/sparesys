@@ -33,11 +33,13 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $scope.state = 'answer';
             $state.go($state.current);
 
+            var ratedCorrect = false;
 
             $scope.answer.assessment = 'wrong';
             if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
+                ratedCorrect = true;
             }
 
 
@@ -45,8 +47,13 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
                 if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
                     $scope.processCard(3);
                     $scope.answer.assessment = 'correct';
+                    ratedCorrect = true;
                 }
             });
+
+            if (!ratedCorrect) {
+                $scope.processCard(0);
+            }
         };
 
 
@@ -84,24 +91,6 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
                 return;
             }
 
-            if ($scope.state === 'question') {
-                return;
-            }
-
-            if ($scope.state === 'answer') {
-                if (event.charCode === 49) {
-                    $scope.processCard(1);
-                }
-                if (event.charCode === 50) {
-                    $scope.processCard(2);
-                }
-                if (event.charCode === 51) {
-                    $scope.processCard(3);
-                }
-                if (event.charCode === 48) {
-                    $scope.processCard(0);
-                }
-            }
 
         });
 

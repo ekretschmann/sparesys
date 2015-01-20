@@ -29,27 +29,30 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
 
         $scope.showAnswer = function () {
 
-            if($scope.mode !== 'reverse' || $scope.assess !== 'auto') {
-                return;
-            }
-
             $scope.state = 'answer';
             $state.go($state.current);
 
+            var ratedCorrect = false;
 
             $scope.answer.assessment = 'wrong';
-            if ($scope.card.question.toLowerCase() === $scope.answer.text.toLowerCase()) {
+            if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
+                ratedCorrect = true;
             }
 
 
-            $scope.card.alternativesBack.forEach(function (alt) {
-                if (alt.toLowerCase() === $scope.question.text.toLowerCase()) {
+            $scope.card.alternativesFront.forEach(function (alt) {
+                if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
                     $scope.processCard(3);
                     $scope.answer.assessment = 'correct';
+                    ratedCorrect = true;
                 }
             });
+
+            if (!ratedCorrect) {
+                $scope.processCard(0);
+            }
         };
 
 

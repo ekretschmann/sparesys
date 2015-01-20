@@ -41,7 +41,30 @@
             </div>
 
 
-            <div class="left-padded-m right-padded-m top-padded-m" data-ng-if="state === 'answer'">
+
+            <div data-ng-if="state === 'answer'">
+
+
+                <div class="correct-answer-box top-padded-s">
+                <span class="question-was">
+                Question: {{card.question}}
+
+                    </span>
+                 <span data-ng-if="card.readFrontForward" class="left-padded-s top-padded-s" style="position: absolute;" >
+
+                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
+                </span>
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="left-padded-m right-padded-m " data-ng-if="state === 'answer'">
 
 
                 <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
@@ -84,21 +107,14 @@
     </div>
 
     <div class="center-aligned top-padded">
-        <div data-ng-show="state === 'answer'">
-            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(0)">0</button>
-            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(1)">1</button>
-            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(2)">2</button>
-            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(3)">3</button>
-            <div class="text-muted top-padded">rate yourself</div>
-            <div class="text-muted">0=never heard, 1=not quite remembered, 2=remembered with difficulty,
-                3=easy!
-            </div>
-        </div>
-
         <div data-ng-show="state === 'question'">
             <button class="btn btn-rememberators" data-ng-click="showAnswer()">Enter</button>
         </div>
-    </div>
 
+
+        <div data-ng-show="state === 'answer'">
+            <button class="btn btn-rememberators" data-ng-click="nextCard()">Next Question</button>
+        </div>
+    </div>
 
 </div>

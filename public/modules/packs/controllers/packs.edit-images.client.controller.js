@@ -25,7 +25,7 @@ angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards
 
         $scope.updateCards = function () {
 
-            var cardsToUpdate = $scope.course.cards.length;
+            var cardsToUpdate = $scope.pack.cards.length;
             var cardsUpdated = 0;
 
             $scope.pack.cards.forEach(function (card) {
@@ -73,6 +73,7 @@ angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards
                 if ($scope.options.textAndImages === 'off') {
                     card.textwithimages = false;
                 }
+
 
                 new Cards(card).$update(function() {
 

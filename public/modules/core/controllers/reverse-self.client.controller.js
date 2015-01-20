@@ -26,8 +26,7 @@ angular.module('core').controller('ReverseSelfController', ['$scope', '$state', 
 
         $document.bind('keypress', function (event) {
 
-
-            if($scope.mode !== 'reverse' || $scope.assess !== 'auto') {
+            if($scope.mode !== 'reverse' || $scope.assess !== 'self') {
                 return;
             }
 

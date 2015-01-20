@@ -1,0 +1,104 @@
+<div data-ng-controller="ImagesAutoController">
+    <div class="flashcard">
+
+
+        <div class="card-score">
+            <div data-ng-if="card.history.length === 0">
+                <table class="new-card">
+                    <tr>
+
+                        <td class="top-aligned nowrap">
+                            <div class="font-m">
+                                New Card!
+                            </div>
+                        </td>
+                        <td class="top-aligned">
+                            <img class="tiny-image"
+                                 src="/modules/core/img/brand/superhero-boy-medium.gif">
+                        </td>
+
+                    </tr>
+                </table>
+
+            </div>
+        </div>
+
+
+        <div class="edit-card">
+            <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+        </div>
+
+
+        <div class="center-aligned top-padded-m">
+            <imagecarousel slides="slides" size="200"/>
+
+
+            <div class="flashcard-input-box top-padded-m" data-ng-if="state === 'question'">
+
+                <input type="text" required
+                       class="focus expands flashcard-input"
+                       data-ng-model="answer.text">
+            </div>
+
+
+            <div class="left-padded-m right-padded-m top-padded-m" data-ng-if="state === 'answer'">
+
+
+                <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
+
+                    <div>Your answer: {{answer.text}}</div>
+                </div>
+
+                <div data-ng-if="answer.assessment === 'wrong'" class="incorrect-answer">
+
+                    <div>Your answer: {{answer.text}}</div>
+                </div>
+
+
+            </div>
+
+
+            <div data-ng-if="state === 'answer'">
+
+
+                <div class="correct-answer-box">
+                <span class="correct-answer">
+                Expected answer: {{card.answer}}
+
+                    </span>
+                 <span data-ng-if="card.readBackForward" class="left-padded-s top-padded-s" style="position: absolute;" >
+
+                    <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
+                </span>
+                </div>
+
+
+
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <div class="center-aligned top-padded">
+        <div data-ng-show="state === 'answer'">
+            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(0)">0</button>
+            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(1)">1</button>
+            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(2)">2</button>
+            <button class="btn btn-rememberators btn-small" data-ng-click="processCard(3)">3</button>
+            <div class="text-muted top-padded">rate yourself</div>
+            <div class="text-muted">0=never heard, 1=not quite remembered, 2=remembered with difficulty,
+                3=easy!
+            </div>
+        </div>
+
+        <div data-ng-show="state === 'question'">
+            <button class="btn btn-rememberators" data-ng-click="showAnswer()">Enter</button>
+        </div>
+    </div>
+
+
+</div>

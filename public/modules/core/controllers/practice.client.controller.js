@@ -54,6 +54,8 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
         $scope.recordRate = function (card, time, assessment) {
 
+
+            console.log('recording: '+card.question+ ' ('+assessment+')' );
             card.hrt = RetentionCalculatorService.calculateFor(card, time, assessment);
 
 
@@ -122,9 +124,9 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
             $scope.assess = 'self';
-            //if ($scope.card.hrt && $scope.card.hrt > 0) {
-            //    $scope.assess = 'auto';
-            //}
+            if ($scope.card.hrt && $scope.card.hrt > 0) {
+                $scope.assess = 'auto';
+            }
             $scope.updateSlides();
             $state.go($state.current);
         };

@@ -81,7 +81,16 @@
         </div>
 
         <div data-ng-if="mode === 'images'">
-            <div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>
+            <div data-ng-if="assess === 'self'">
+                <div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>
+            </div>
+
+            <div data-ng-if="assess === 'auto'">
+                <div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>
+            </div>
+
+
+
         </div>
     </div>
 

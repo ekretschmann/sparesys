@@ -28,6 +28,10 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
         $document.bind('keypress', function (event) {
 
 
+            if($scope.mode !== 'images' || $scope.assess !== 'self') {
+                return;
+            }
+
 
             if ($state.$current.url.source !== '/practice/:courseId') {
                 return;

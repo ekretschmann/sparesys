@@ -2,50 +2,46 @@
 
 
 // Courses controller
-angular.module('core').controller('ReverseAutoController', ['$scope', '$state', '$document', '$timeout',
+angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '$document', '$timeout',
     function ($scope, $state, $document, $timeout) {
 
-        $scope.state = 'question';
         $scope.answer = {};
         $scope.answer.text = '';
         $scope.answer.assessment = undefined;
-
-        $scope.$watch('card', function() {
-            if ($scope.card.readFrontReverse) {
-                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
-            }
-        });
-
-        $scope.$watch('state', function() {
-            if ($scope.state === 'answer' && $scope.card.readBackReverse) {
-                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
-            }
-        });
+        $scope.state = 'question';
 
 
         $timeout(function () {
             angular.element('.focus').trigger('focus');
         }, 100);
 
-        $scope.showAnswer = function () {
-
-            if($scope.mode !== 'reverse' || $scope.assess !== 'auto') {
-                return;
+        $scope.$watch('card', function() {
+            if ($scope.card.imagesReadFront) {
+                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
             }
+        });
+
+        $scope.$watch('state', function() {
+            if ($scope.state === 'answer' && $scope.card.imagesReadBack) {
+                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
+            }
+        });
+
+        $scope.showAnswer = function () {
 
             $scope.state = 'answer';
             $state.go($state.current);
 
 
             $scope.answer.assessment = 'wrong';
-            if ($scope.card.question.toLowerCase() === $scope.answer.text.toLowerCase()) {
+            if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
             }
 
 
-            $scope.card.alternativesBack.forEach(function (alt) {
-                if (alt.toLowerCase() === $scope.question.text.toLowerCase()) {
+            $scope.card.alternativesFront.forEach(function (alt) {
+                if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
                     $scope.processCard(3);
                     $scope.answer.assessment = 'correct';
                 }
@@ -55,19 +51,21 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
 
         $scope.processCard = function (rating) {
 
+
             $scope.$parent.recordRate($scope.card, Date.now(), rating);
 
         };
 
 
 
+
         $document.bind('keypress', function (event) {
 
-
-
-            if($scope.mode !== 'reverse' || $scope.assess !== 'auto') {
+            if($scope.mode !== 'images' || $scope.assess !== 'auto') {
                 return;
             }
+
+
 
             if ($state.$current.url.source !== '/practice/:courseId') {
                 return;
@@ -89,18 +87,24 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
                 return;
             }
 
+
+
             if ($scope.state === 'answer') {
                 if (event.charCode === 49) {
                     $scope.processCard(1);
+                    $scope.nextCard();
                 }
                 if (event.charCode === 50) {
                     $scope.processCard(2);
+                    $scope.nextCard();
                 }
                 if (event.charCode === 51) {
                     $scope.processCard(3);
+                    $scope.nextCard();
                 }
                 if (event.charCode === 48) {
                     $scope.processCard(0);
+                    $scope.nextCard();
                 }
             }
 
@@ -117,5 +121,6 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
                 angular.element('.focus').trigger('focus');
             }, 100);
         };
+
 
     }]);

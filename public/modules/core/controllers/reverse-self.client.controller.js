@@ -27,6 +27,10 @@ angular.module('core').controller('ReverseSelfController', ['$scope', '$state', 
         $document.bind('keypress', function (event) {
 
 
+            if($scope.mode !== 'reverse' || $scope.assess !== 'auto') {
+                return;
+            }
+
 
             if ($state.$current.url.source !== '/practice/:courseId') {
                 return;

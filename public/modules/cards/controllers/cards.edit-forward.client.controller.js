@@ -45,7 +45,7 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
         $scope.updateCard = function () {
 
             if ($scope.nextAlternative) {
-                $scope.card.alternativesFront.push($scope.nextAlternative);
+                $scope.card.acceptedAnswersForward.push($scope.nextAlternative);
                 $scope.nextAlternative = undefined;
 
                 $timeout(function () {

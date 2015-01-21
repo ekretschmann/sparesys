@@ -48,18 +48,6 @@ var CardSchema = new Schema({
         required: 'Please fill out Card Answer',
         trim: true
     },
-    invalidanswers: {
-        type: [String],
-        default: []
-    },
-    alternativesFront: {
-        type: [String],
-        default: []
-    },
-    alternativesBack: {
-        type: [String],
-        default: []
-    },
     created: {
         type: Date,
         default: Date.now
@@ -121,10 +109,6 @@ var CardSchema = new Schema({
         type: [String],
         default: []
     },
-    textwithimages: {
-        type: Boolean,
-        default: false
-    },
     check: {
         type: String,
         default: 'mixed'
@@ -140,7 +124,7 @@ var CardSchema = new Schema({
         default: []
     },
     master: {
-        type: [Schema.Types.ObjectId]
+        type: Schema.Types.ObjectId
     },
     course: {
         type: Schema.Types.ObjectId
@@ -148,7 +132,24 @@ var CardSchema = new Schema({
     format: {
         type: String,
         default: 'short'
+    },
+    acceptedAnswersForward: {
+        type: [String],
+        default: []
+    },
+    invalidAnswersForward: {
+        type: [String],
+        default: []
+    },
+    acceptedAnswersReverse: {
+        type: [String],
+        default: []
+    },
+    invalidAnswersReverse: {
+        type: [String],
+        default: []
     }
+
 });
 
 mongoose.model('Card', CardSchema);

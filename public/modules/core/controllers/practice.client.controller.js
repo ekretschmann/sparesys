@@ -187,15 +187,24 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
             new Cards(card).$update();
 
-            //Cards.get({
-            //    cardId: card._id
-            //}, function (thecard) {
-            //    thecard.hrt = card.hrt;
-            //    thecard.history = card.history;
-            //    thecard.lastRep = card.lastRep;
-            //    thecard.$update();
-            //
-            //});
+
+        };
+
+        $scope.myAnswerCounts = function(answer) {
+            console.log('that counts');
+            console.log($scope.card);
+            console.log($scope.mode);
+
+            if (!$scope.card.supervisor) {
+                if ($scope.mode === 'reverse') {
+                    $scope.card.acceptedAnswersReverse.push(answer);
+                } else {
+                    $scope.card.acceptedAnswersForward.push(answer);
+                }
+
+                new Cards($scope.card).$update();
+
+            }
         };
 
 

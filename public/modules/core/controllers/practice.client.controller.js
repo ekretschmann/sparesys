@@ -120,13 +120,13 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                 }
             }, this);
 
-            //bestCard.modes = ['images'];
+            bestCard.modes = ['images'];
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
             $scope.assess = 'self';
-            if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
-                $scope.assess = 'auto';
-            }
+            //if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
+            //    $scope.assess = 'auto';
+            //}
             $scope.updateSlides();
             $state.go($state.current);
         };

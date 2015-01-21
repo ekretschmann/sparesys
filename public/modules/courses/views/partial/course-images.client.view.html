@@ -98,26 +98,7 @@
 
             </tr>
 
-            <tr>
-                <td class="nowrap right-padded-m top-padded-m">
 
-                    Text and Images
-                </td>
-
-
-                <td class="nowrap right-padded-m top-padded-m">
-
-                    <input data-ng-model="options.textAndImages" type="radio" value="on"/> Both
-                </td>
-                <td class="nowrap right-padded-m top-padded-m">
-                    <input data-ng-model="options.textAndImages" type="radio" value="off"/> Images Only
-                </td>
-                <td class="nowrap right-padded-m top-padded-m">
-                    <input data-ng-model="options.textAndImages" type="radio" value="leave"/> Don't Change
-                </td>
-
-
-            </tr>
         </table>
 
 
@@ -200,11 +181,6 @@
                 n/a
             </td>
 
-            <td class=" nowrap center-aligned top-aligned" data-ng-if="isImagesMode(card)">
-                <span data-ng-if="card.textwithimages">yes</span>
-                <span data-ng-if="!card.textwithimages">no</span>
-
-            </td>
 
             <td class="text-muted nowrap center-aligned top-aligned" data-ng-if="!isImagesMode(card)">
                 n/a

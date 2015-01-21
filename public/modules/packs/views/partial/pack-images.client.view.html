@@ -97,26 +97,7 @@
 
             </tr>
 
-            <tr>
-                <td class="nowrap right-padded-m top-padded-m">
 
-                    Text and Images
-                </td>
-
-
-                <td class="nowrap right-padded-m top-padded-m">
-
-                    <input data-ng-model="options.textAndImages" type="radio" value="on"/> Both
-                </td>
-                <td class="nowrap right-padded-m top-padded-m">
-                    <input data-ng-model="options.textAndImages" type="radio" value="off"/> Images Only
-                </td>
-                <td class="nowrap right-padded-m top-padded-m">
-                    <input data-ng-model="options.textAndImages" type="radio" value="leave"/> Don't Change
-                </td>
-
-
-            </tr>
         </table>
 
 
@@ -139,7 +120,6 @@
             <th class="right-padded-m center-aligned top-padded-sm nowrap">Read Question</th>
             <th class="right-padded-m center-aligned top-padded-sm nowrap">Read Answer</th>
             <th class="right-padded-m center-aligned top-padded-sm nowrap">Speech Recognition</th>
-            <th class="top-aligned top-padded-sm nowrap">Show Text</th>
 
 
         </tr>
@@ -199,11 +179,6 @@
                 n/a
             </td>
 
-            <td class=" nowrap center-aligned top-aligned" data-ng-if="isImagesMode(card)">
-                <span data-ng-if="card.textwithimages">yes</span>
-                <span data-ng-if="!card.textwithimages">no</span>
-
-            </td>
 
             <td class="text-muted nowrap center-aligned top-aligned" data-ng-if="!isImagesMode(card)">
                 n/a

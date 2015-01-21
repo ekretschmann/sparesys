@@ -28,11 +28,25 @@
         </div>
 
 
-        <div class="center-aligned top-padded-l">
-                <imagecarousel slides="slides" size="200"/>
+        <div class="question-box">
+
+
+            <imagecarousel slides="slides" size="200"/>
+
+                <div data-ng-if="card.imagesReadFront" class="left-padded-s top-padded-s ">
+
+                    <a  href="" data-ng-click="playSound(card.languageFront, card.question)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
+
+                    <a  href="" tooltip="{{card.question}}">
+                        <i class="glyphicon glyphicon-question-sign"></i>
+                    </a>
+
+                </div>
+
 
             <div data-ng-if="state === 'answer'">
-
 
 
                 <div class="correct-answer top-padded-m">
@@ -42,10 +56,9 @@
 
             </div>
 
-
         </div>
+    </div>
 
-           </div>
 
     <div class="center-aligned top-padded">
         <div data-ng-show="state === 'answer'">
@@ -63,7 +76,6 @@
             <button class="btn btn-rememberators" data-ng-click="showAnswer()">Enter</button>
         </div>
     </div>
-
 
 
 </div>

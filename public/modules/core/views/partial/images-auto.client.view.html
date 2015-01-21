@@ -24,8 +24,14 @@
         </div>
 
 
-        <div class="edit-card">
+        <div class="edit-card left-aligned">
+
+            <div>
             <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+                </div>
+            <div data-ng-if="state === 'answer'" data-ng-if="answer.assessment === 'wrong'">
+                <a data-ng-href="#!/cards/{{card._id}}/edit">My answer counts</a>
+            </div>
         </div>
 
 

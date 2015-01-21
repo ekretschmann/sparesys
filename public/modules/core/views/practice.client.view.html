@@ -57,7 +57,7 @@
         </div>
     </div>
 
-    <div data-ng-if="cards && cards.length > 0">
+    <div data-ng-if="cards && cards.length > 0" class="position:relative">
 
 
         <div data-ng-if="mode === 'forward'">
@@ -81,7 +81,10 @@
         </div>
 
         <div data-ng-if="mode === 'images'">
+
+
             <div data-ng-if="assess === 'self'">
+
                 <div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>
             </div>
 

@@ -13,12 +13,15 @@ angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards
 
         $scope.getModeStyle = function (card) {
 
-            if (card.modes && card.modes.indexOf('images') === -1) {
+            if (card && card.modes && card.modes.indexOf('images') === -1) {
                 return 'text-muted';
             }
         };
 
         $scope.isImagesMode = function (card) {
+            if (!card) {
+                return -1;
+            }
             return card.modes && card.modes.indexOf('images') !== -1;
         };
 

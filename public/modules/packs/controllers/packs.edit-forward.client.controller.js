@@ -13,12 +13,15 @@ angular.module('packs').controller('EditPackForwardController', ['$scope', 'Card
 
         $scope.checkForward = function (card) {
 
-            if (card.modes && card.modes.indexOf('forward') === -1) {
+            if (card && card.modes && card.modes.indexOf('forward') === -1) {
                 return 'text-muted';
             }
         };
 
         $scope.isForward = function (card) {
+            if (!card) {
+                return -1;
+            }
             return card.modes && card.modes.indexOf('forward') !== -1;
         };
 

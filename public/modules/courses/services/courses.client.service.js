@@ -13,8 +13,8 @@ angular.module('courses').factory('Courses', ['$resource', function ($resource) 
 }]);
 
 
-angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses',
-    function ($q, $resource, Courses) {
+angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses', 'Cards',
+    function ($q, $resource, Courses, Cards) {
         return {
             remove: function (course, callback) {
 
@@ -28,8 +28,9 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
             removeCard: function (card, callback) {
 
 
+
                 if (card) {
-                    card.$remove(function () {
+                    new Cards(card).$remove(function () {
                         callback();
                     });
                 }

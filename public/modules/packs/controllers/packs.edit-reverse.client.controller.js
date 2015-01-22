@@ -12,12 +12,15 @@ angular.module('packs').controller('EditPackReverseController', ['$scope', 'Card
 
 
         $scope.checkReverse = function (card) {
-            if (card.modes && card.modes.indexOf('reverse') === -1) {
+            if (card && card.modes && card.modes.indexOf('reverse') === -1) {
                 return 'text-muted';
             }
         };
 
         $scope.isReverse = function (card) {
+            if (!card) {
+                return -1;
+            }
             return card.modes && card.modes.indexOf('reverse') !== -1;
         };
 

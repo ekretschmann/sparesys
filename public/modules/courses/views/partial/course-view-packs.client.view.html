@@ -21,9 +21,14 @@
 
 
 
-    <div class="left-padded-m" data-ng-if="!course.packs || course.packs.length === 0">
+    <div class="left-padded-s" data-ng-if="!course.packs || course.packs.length === 0">
 
-        There are no packs in course {{course.name}}
+        There are no packs in course {{course.name}}. Click the
+        <a href="">
+            <i class="small glyphicon glyphicon-plus-sign">
+            </i>
+        </a>
+        icon in the top right corner to add packs.
     </div>
 
     <table class="table-striped" data-ng-if="course.packs.length > 0">

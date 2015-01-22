@@ -58,12 +58,10 @@
 
 
 
-                <infobox logo="girl" data-ng-show="tabs[1].active && course.packs.length === 0">
-                    Ok. Now, a course has a number of packs. If you are creating
-                    a language course, you can for example put all the colors into one pack,
-                    the days of the week into another and so on. To do this, click on the
+                <infobox logo="girl" data-ng-show="tabs[1].active && pack.cards.length === 0">
+                    A pack has a number of cards. To do this, click on the
                     <a href="">
-                        <i data-ng-click="addPackToCoursePopup()"
+                        <i data-ng-click="addCardToPackPopup()"
 
                            class="glyphicon glyphicon-plus-sign">
                         </i>

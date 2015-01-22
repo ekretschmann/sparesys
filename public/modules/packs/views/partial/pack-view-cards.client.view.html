@@ -1,4 +1,4 @@
-<div>
+<div data-ng-controller="PacksSettingsController">
 
 
     <div class="pull-right right-padded-s top-padded-s" >
@@ -69,8 +69,13 @@
     <div data-ng-if="pack.cards.length === 0">
 
         <div class="default-border">
-            <div class="top-padded-m left-padded-m" style="min-height:200px">
-                There are no cards in pack {{pack.name}}
+            <div class=" left-padded-s" style="min-height:200px">
+                There are no cards in pack {{pack.name}}. Click the
+                <a href="">
+                    <i class="small glyphicon glyphicon-plus-sign">
+                    </i>
+                </a>
+                icon in the top right corner to add cards.
             </div>
         </div>
 

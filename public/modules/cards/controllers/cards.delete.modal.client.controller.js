@@ -6,6 +6,7 @@ angular.module('packs').controller('DeleteCardController', ['$scope', '$state', 
 
         $scope.ok = function () {
             var packId = $scope.card.packs[0];
+
             CoursesService.removeCard(card, function () {
                 if ($state.$current.url.source === '/packs/:packId/edit') {
                     $state.go($state.$current, null, {reload:true});

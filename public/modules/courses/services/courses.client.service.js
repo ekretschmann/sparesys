@@ -27,6 +27,7 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
             },
             removeCard: function (card, callback) {
 
+
                 if (card) {
                     card.$remove(function () {
                         callback();

@@ -24,35 +24,37 @@
 
     </div>
 
-    <table id="searchTextResults" class="table-striped expands">
+    <div data-ng-if="!coursed || courses.length === 0">
+        There are no courses in the database.
+    </div>
+
+    <table id="searchTextResults" class="table-striped expands" data-ng-if="courses && courses.length>0">
         <thead>
         <tr>
             <th></th>
-            <th class="right-padded">Course</th>
-            <th class="right-padded">Description</th>
-            <th class="right-padded">By</th>
-            <th class="right-padded">Visible</th>
+            <th class="right-padded-m">Course</th>
+            <th class="right-padded-m">Description</th>
+            <th class="right-padded-m">By</th>
+            <th class="right-padded-m">Visible</th>
             <th>Created</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="course in courses | filter:searchText">
-            <td class="nowrap right-padded top-aligned">
+            <td class="nowrap right-padded-s middle-aligned left-padded-s">
                 <a href="">
                     <i data-ng-click="areYouSureToDeleteCourse(course)"
                        class="glyphicon glyphicon-remove-sign">
                     </i>
                 </a>
-                    <a data-ng-href="#!/courses/{{course._id}}/edit">
-                        <i class="glyphicon glyphicon-edit"></i>
-                    </a>
+
             </td>
-            <td class="nowrap right-padded top-aligned">
+            <td class="nowrap right-padded-m top-aligned">
                 <a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></td>
-            <td class="expands right-padded">{{course.description}}</td>
-            <td class="nowrap right-padded top-aligned">{{course.user.displayName}}</td>
-            <td class="nowrap right-padded top-aligned">{{course.visible}}</td>
-            <td class="nowrap top-aligned">{{course.created | date:'shortDate'}}</td>
+            <td class="expands right-padded-m">{{course.description}}</td>
+            <td class="nowrap right-padded-m top-aligned">{{course.user.displayName}}</td>
+            <td class="nowrap right-padded-m top-aligned">{{course.visible}}</td>
+            <td class="nowrap top-aligned right-padded-s">{{course.created | date:'shortDate'}}</td>
         </tr>
         </tbody>
     </table>

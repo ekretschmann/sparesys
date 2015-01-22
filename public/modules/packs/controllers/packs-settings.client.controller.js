@@ -1,9 +1,26 @@
 'use strict';
 
-angular.module('packs').controller('PacksSettingsController', ['$scope', 'Cards',
-    function ($scope, Cards) {
+angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal','Cards',
+    function ($scope, $modal, Cards) {
 
         $scope.options = {};
+
+        $scope.areYouSureToDeleteCard = function (card) {
+
+            $scope.card = card;
+
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteCard.html',
+                controller: 'DeleteCardController',
+                resolve: {
+                    card: function () {
+                        return $scope.card;
+                    }
+                }
+            });
+
+
+        };
 
 
         $scope.openDueDateCalendar = function($event) {

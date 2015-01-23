@@ -201,24 +201,27 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                 var courseName = pack.courseName;
 
 
+                console.log(e);
+                console.log(ui);
+                console.log($scope.pack);
 
 
                 // there seems to be a sortable options bug when the last element
                 // is sorted upwards. It introduces a null card.
-                for (var i in pack.cards) {
-                    if (!pack.cards[i]) {
-                        pack.cards.splice(i, 1);
-                    }
-                }
+                //for (var i in pack.cards) {
+                //    if (!pack.cards[i]) {
+                //        pack.cards.splice(i, 1);
+                //    }
+                //}
 
-                console.log(' ');
-                pack.cards.forEach(function(c) {
-                    console.log(c.question);
-                });
+                //console.log(' ');
+                //pack.cards.forEach(function(c) {
+                //    console.log(c.question);
+                //});
 
-                pack.$update(function() {
-                    $scope.pack.courseName = courseName;
-                });
+                //pack.$update(function() {
+                //    $scope.pack.courseName = courseName;
+                //});
 
             }
         };

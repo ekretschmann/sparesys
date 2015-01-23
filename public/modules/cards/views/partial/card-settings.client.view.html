@@ -32,27 +32,27 @@
     <table class="box-margin-s" >
 
         <tr>
-            <td class="top-padded-s right-padded-m middle-aligned">
+            <td class="top-padded-s right-padded-s middle-aligned">
                 Front Text
             </td>
 
-            <td class="top-padded-s right-padded-m middle-aligned">
+            <td class="top-padded-s right-padded-s middle-aligned">
                 {{card.question}}
             </td>
         </tr>
 
         <tr>
-            <td class="top-padded-m right-padded-m middle-aligned">
+            <td class="top-padded-m right-padded-s middle-aligned">
                 Back Text
             </td>
 
-            <td class="top-padded-m right-padded-m middle-aligned">
+            <td class="top-padded-m right-padded-s middle-aligned">
                 {{card.answer}}
             </td>
         </tr>
 
         <tr>
-            <td class="top-padded-m right-padded-m middle-aligned">
+            <td class="top-padded-m right-padded-s middle-aligned">
                 Language Front
             </td>
             <td class="top-padded-m right-padded-m middle-aligned">
@@ -61,7 +61,7 @@
                 <div class="btn-group right-padded-l nowrap">
 
 
-                    <button type="button" class="btn btn-default standard-dropdown-width">{{ card.languageFront.name }}</button>
+                    <button type="button" class="btn btn-default standard-dropdown-width">{{ options.languageFront.name }}</button>
                     <button type="button" class="btn btn-default dropdown-toggle">
                         <span class="caret"></span>
                         <span class="sr-only">Split button!</span>
@@ -74,12 +74,12 @@
 
                 </div>
 
-                <span class="right-padded-s">
+                <span class="right-padded-m left-padded-m">
                  Language Back
                     </span>
 
                 <div class="btn-group">
-                    <button type="button" class="btn btn-default standard-dropdown-width">{{ card.languageBack.name }}</button>
+                    <button type="button" class="btn btn-default standard-dropdown-width">{{ options.languageBack.name }}</button>
                     <button type="button" class="btn btn-default dropdown-toggle">
                         <span class="caret"></span>
                         <span class="sr-only">Split button!</span>
@@ -97,7 +97,7 @@
 
 
         <tr>
-            <td class="right-padded-m top-padded-sm">Checks</td>
+            <td class="right-padded-s top-padded-sm">Checks</td>
             <td class="top-padded-sm ">
                 <div class="btn-group">
                     <button type="button"
@@ -118,10 +118,10 @@
 
 
         <tr data-ng-controller="DateDropdownController">
-            <td class="top-padded-s">Start date</td>
+            <td class="top-padded-s right-padded-s">Start date</td>
 
 
-            <td class="top-padded-s right-padded-m nowrap">
+            <td class="top-padded-s right-padded-s nowrap">
 
                 <table>
 
@@ -156,10 +156,10 @@
 
 
         <tr data-ng-controller="DateDropdownController">
-            <td class="top-padded-s">Due date</td>
+            <td class="top-padded-s right-padded-s">Due date</td>
 
 
-            <td class="top-padded-s right-padded-m nowrap">
+            <td class="top-padded-s right-padded-s nowrap">
 
                 <table>
 

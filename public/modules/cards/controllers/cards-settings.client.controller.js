@@ -22,7 +22,7 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
 
 
         $scope.languages = [
-            {name: 'Don\'t Change', code: ''},
+            {name: 'None', code: ''},
             {name: 'Chinese', code: 'zh-CN'},
             {name: 'English (GB)', code: 'en-GB'},
             {name: 'English (US)', code: 'en-US'},
@@ -33,6 +33,7 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
             {name: 'Korean', code: 'ko-KR'},
             {name: 'Spanish', code: 'es-ES'}
         ];
+
 
         $scope.options.checks = ['By Computer', 'Self Check', 'Mixed'];
 
@@ -59,6 +60,20 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
 
             $scope.options.startDate = undefined;
             $scope.options.dueDate = undefined;
+
+            if ($scope.card.languageFront) {
+                $scope.options.languageFront = $scope.card.languageFront;
+            } else {
+                $scope.options.languageFront = $scope.languages[0];
+            }
+
+
+            if ($scope.card.languageBack) {
+                $scope.options.languageBack = $scope.card.languageBack;
+            } else {
+                $scope.options.languageBack = $scope.languages[0];
+            }
+
         };
 
         reset();
@@ -94,11 +109,11 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
         $scope.updateCards = function () {
 
 
-                if ($scope.options.languageFront.name !== 'Don\'t Change') {
+                if ($scope.options.languageFront.name !== 'None') {
                     $scope.card.languageFront = $scope.options.languageFront;
                 }
 
-                if ($scope.options.languageBack.name !== 'Don\'t Change') {
+                if ($scope.options.languageBack.name !== 'None') {
                     $scope.card.languageBack = $scope.options.languageBack;
                 }
 

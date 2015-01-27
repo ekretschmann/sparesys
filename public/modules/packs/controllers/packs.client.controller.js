@@ -201,9 +201,9 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                 var courseName = pack.courseName;
 
 
-                console.log(e);
-                console.log(ui);
-                console.log($scope.pack);
+                //console.log(e);
+                console.log(ui.item[0].innerText);
+                //console.log($scope.pack);
 
 
                 // there seems to be a sortable options bug when the last element

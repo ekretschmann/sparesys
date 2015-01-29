@@ -126,7 +126,6 @@
         </thead>
         <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
 
-        <tr>
 
 
         <tr data-ng-repeat="card in pack.cards">
@@ -141,7 +140,7 @@
                     </i>
                 </a>
             </td>
-            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+            <td class="right-padded-m expands top-padded top-aligned text-min-width">
 
                 <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
             </td>

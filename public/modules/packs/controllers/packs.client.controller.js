@@ -17,6 +17,12 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.prevPack = undefined;
         $scope.nextPack = undefined;
 
+        $scope.activeTab = 'Content';
+
+
+        $scope.switchTab = function(activeTab) {
+            $scope.activeTab = activeTab;
+        };
 
         $scope.tabs = [
             { title:'Pack', active: false },
@@ -76,6 +82,21 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
         // Find existing Pack
         $scope.findOne = function () {
+
+            if($stateParams.tab) {
+
+                $scope.activeTab = $stateParams.tab;
+
+                $scope.tabs.forEach(function(tab) {
+                    if (tab.title === $stateParams.tab) {
+                        tab.active = true;
+                    } else {
+                        tab.active = false;
+                    }
+                });
+
+            }
+
             $scope.pack = Packs.get({
                 packId: $stateParams.packId
             }, function() {

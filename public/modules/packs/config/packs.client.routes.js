@@ -16,6 +16,10 @@ angular.module('packs').config(['$stateProvider',
             state('viewPack', {
                 url: '/packs/:packId/view',
                 templateUrl: 'modules/packs/views/view-pack.client.view.html'
+            }).
+            state('editPackOnTab', {
+                url: '/packs/:packId/tab/:tab/edit',
+                templateUrl: 'modules/packs/views/edit-pack.client.view.html'
             });
 
 //		state('listPacks', {

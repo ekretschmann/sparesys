@@ -331,8 +331,12 @@ angular.module('courses').controller('CoursesController',
 
             $scope.sortableOptions = {
 
+                start: function(e, ui) {
+                    console.log(ui.item.index());
+                },
                 stop: function (e, ui) {
 
+                    console.log(ui.item.index());
                     var showCards = $scope.course.showCards;
                     $scope.course.$update(function(course) {
                         $scope.course.showCards = showCards;

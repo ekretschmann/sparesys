@@ -194,15 +194,17 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         };
 
 
+        $scope.data = ['eins', 'zwei', 'drei', 'vier'];
+
         $scope.sortableOptions = {
 
             stop: function (e, ui) {
-                var pack = $scope.pack;
-                var courseName = pack.courseName;
+                //var pack = $scope.pack;
+                var courseName = $scope.pack.courseName;
 
 
                 //console.log(e);
-                console.log(ui.item[0].innerText);
+                //console.log(ui.item[0].innerText);
                 //console.log($scope.pack);
 
 
@@ -219,9 +221,10 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                 //    console.log(c.question);
                 //});
 
-                //pack.$update(function() {
-                //    $scope.pack.courseName = courseName;
-                //});
+                $scope.pack.$update(function(e) {
+                    console.log(e);
+                    $scope.pack.courseName = courseName;
+                });
 
             }
         };

@@ -22,50 +22,36 @@
     <!--{{pack.cards[1].question}}<br/>-->
     <!--{{pack.cards[2].question}}<br/>-->
     <div data-ng-if="pack.cards.length > 0">
-        <table class="table-striped ">
+
+        <table class="table-striped">
             <thead>
             <tr>
-                <th></th>
-                <th class="right-padded-m top-aligned">{{pack.course.front}}</th>
-                <th class="right-padded-m top-aligned">{{pack.course.back}}</th>
+            <th></th>
+            <th class="right-padded-m top-aligned">{{pack.course.front}}</th>
+            <th class="right-padded-m top-aligned">{{pack.course.back}}</th>
             </tr>
             </thead>
-            <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
-
-            <tr>
-
-
-            <tr data-ng-repeat="card in pack.cards">
-
+        <tbody ui-sortable="sortableOptions" data-ng-model="pack.cards">
+            <tr data-ng-repeat="card in pack.cards" class="item">
                 <td class="right-padded-s top-aligned">
-
-
                     <a href="">
-                        <i data-ng-click="areYouSureToDeleteCard(card)"
-                           class="small left-padded-s glyphicon glyphicon-remove-sign">
-                        </i>
+                    <i data-ng-click="areYouSureToDeleteCard(card)"
+                    class="small left-padded-s glyphicon glyphicon-remove-sign">
+                    </i>
                     </a>
 
-
                 </td>
-
-                <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
-
-                    <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
-
-                </td>
-
-                <td class="right-padded-m top-padded top-aligned text-min-width expands">
-
-
-                    {{card.answer}}
-                </td>
-
+                <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">{{card.question}}</td>
+                <td class="right-padded-m top-padded top-aligned text-min-width expands">{{card.answer}}</td>
 
             </tr>
+        </tbody>
 
-            </tbody>
         </table>
+
+
+
+
 
     </div>
 

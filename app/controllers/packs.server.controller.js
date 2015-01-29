@@ -68,6 +68,10 @@ exports.update = function (req, res) {
     pack.updated = Date.now();
 
 
+    pack.cards.forEach(function(c) {
+        console.log(c.question);
+    });
+
     if (pack.slaves) {
         pack.slaves.forEach(function (slaveId) {
             Pack.find({'_id': slaveId}).exec(function (err, packs) {

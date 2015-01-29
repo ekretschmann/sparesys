@@ -1,0 +1,20 @@
+
+<a data-ng-if="prevPack"
+   data-ng-href="#!/packs/{{prevPack._id}}/tab/{{activeTab}}/edit">
+    <i class="small left-padded-s glyphicon glyphicon-backward"></i>
+</a>
+
+<span data-ng-if="!prevPack"
+      class="text-muted">
+    <i class="small left-padded-s glyphicon glyphicon-backward"></i>
+</span>
+
+<a data-ng-if="nextCard"
+   data-ng-href="#!/packs/{{nextPack._id}}/tab/{{activeTab}}/edit">
+    <i class="small left-padded-s glyphicon glyphicon-forward"></i>
+</a>
+
+<span data-ng-if="!nextPack" class="text-muted">
+    <i class="small left-padded-s glyphicon glyphicon-forward"></i>
+</span>
+

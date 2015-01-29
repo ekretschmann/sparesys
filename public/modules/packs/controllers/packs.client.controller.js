@@ -14,6 +14,8 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.toggles.dir = false;
         $scope.toggles.images = false;
         $scope.cards = [];
+        $scope.prevPack = undefined;
+        $scope.nextPack = undefined;
 
 
         $scope.tabs = [
@@ -76,6 +78,20 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.findOne = function () {
             $scope.pack = Packs.get({
                 packId: $stateParams.packId
+            }, function() {
+                var prev, next;
+
+                for (var i=0; i<$scope.pack.course.packs.length; i++) {
+                    var packId = $scope.pack.course.packs[i];
+                    if (packId === $scope.pack._id) {
+                        $scope.prevPack = prev;
+                        if ($scope.pack.course.packs.length > i) {
+                            $scope.nextPack = $scope.pack.course.packs[i+1];
+                        }
+                    } else {
+                        prev = packId;
+                    }
+                }
             });
         };
 

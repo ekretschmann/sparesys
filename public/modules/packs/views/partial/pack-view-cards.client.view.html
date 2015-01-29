@@ -4,7 +4,11 @@
     <div class="pull-right right-padded-s top-padded-s" >
 
 
+            <pack-pager></pack-pager>
+
         <a href="">
+
+
             <i data-ng-click="addCardToPackPopup()"
 
                class="glyphicon glyphicon-plus-sign">
@@ -18,9 +22,6 @@
     </div>
 
 
-    <!--{{pack.cards[0].question}}<br/>-->
-    <!--{{pack.cards[1].question}}<br/>-->
-    <!--{{pack.cards[2].question}}<br/>-->
     <div data-ng-if="pack.cards.length > 0">
 
         <table class="table-striped">
@@ -41,7 +42,9 @@
                     </a>
 
                 </td>
-                <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">{{card.question}}</td>
+                <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+                    <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+                </td>
                 <td class="right-padded-m top-padded top-aligned text-min-width expands">{{card.answer}}</td>
 
             </tr>

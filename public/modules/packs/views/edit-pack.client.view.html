@@ -195,7 +195,7 @@
 
 
 
-                    <tab heading="{{tabs[0].title}}" active="tabs[0].active">
+                    <tab heading="{{tabs[0].title}}" active="tabs[0].active" ng-click="switchTab('Pack')">
 
 
                         <div class="default-border">
@@ -207,7 +207,7 @@
                     </tab>
 
 
-                    <tab heading="{{tabs[1].title}}" active="tabs[1].active">
+                    <tab heading="{{tabs[1].title}}" active="tabs[1].active" ng-click="switchTab('Content')">
 
 
                         <div class="default-border">
@@ -220,7 +220,7 @@
 
 
 
-                    <tab heading="{{tabs[2].title}}" active="tabs[2].active" >
+                    <tab heading="{{tabs[2].title}}" active="tabs[2].active" ng-click="switchTab('Cards')">
 
 
                         <div class="default-border">
@@ -229,7 +229,7 @@
 
                         </div>
                     </tab>
-                    <tab heading="{{tabs[3].title}}" active="tabs[3].active" >
+                    <tab heading="{{tabs[3].title}}" active="tabs[3].active" ng-click="switchTab('Forward')">
 
 
                         <div class="default-border">
@@ -242,7 +242,7 @@
                     </tab>
 
 
-                    <tab heading="{{tabs[4].title}}" active="tabs[4].active" >
+                    <tab heading="{{tabs[4].title}}" active="tabs[4].active" ng-click="switchTab('Reverse')">
 
 
                         <div class="default-border">
@@ -254,13 +254,13 @@
                     </tab>
 
 
-                    <tab heading="{{tabs[5].title}}" active="tabs[5].active" >
+                    <tab heading="{{tabs[5].title}}" active="tabs[5].active" ng-click="switchTab('Images')">
 
 
                         <div class="default-border">
 
                             <div ng-include="'/modules/packs/views/partial/pack-images.client.view.html'"></div>
-
+\
 
                         </div>
                     </tab>

@@ -36,7 +36,27 @@
 
 
         <div class="center-aligned top-padded-m">
+
+    <div data-ng-if="slides && slides.length > 0">
             <imagecarousel slides="slides" size="200"/>
+    </div>
+
+
+            <div data-ng-if="!slides || slides.length === 0" class="left-padded-l right-padded-l">
+
+                <div class="question-box" style="position: relative">
+                    <div class="question">
+                        {{card.question}}
+                    </div>
+                </div>
+
+                <infobox logo="woman" >
+                    This card has the image mode switched on but has no images attached. Please
+                    edit this card and configure which images to show.
+                </infobox>
+
+
+            </div>
 
 
             <div class="flashcard-input-box top-padded-m" data-ng-if="state === 'question'">

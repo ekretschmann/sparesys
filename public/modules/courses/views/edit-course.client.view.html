@@ -23,22 +23,6 @@
     </div>
 
 
-    <!--<div class="box" data-ng-hide="toggle" ng-animate=" 'box' ">-->
-        <!--This is the box-->
-    <!--</div>-->
-
-    <!--<div class="box" data-ng-show="toggle" ng-animate=" 'box' ">-->
-        <!--This is the other box-->
-    <!--</div>-->
-
-    <!--<a href="" data-ng-click="toggleIt()">Toggle</a>-->
-
-
-    <!--<div class="todo-item" data-ng-if="animation.show" >-->
-        <!--<label>bla</label>-->
-        <!--</div>-->
-
-    <!--<button class="btn btn-block btn-danger" ng-click="doit()">Animate</button>-->
 
 
     <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
@@ -51,29 +35,29 @@
             <infobox logo="man" data-ng-show="tabs[0].active" position="right"  >
 
                 Use this tab to change the course settings. You can select to
-                <a href="" data-ng-click="showMoreInfo('teaching.html')">teach this course</a> or make it available for other rememberators users
-                to copy by publishing it. If you want to delete this course,
+                <a href="" data-ng-click="showMoreInfo('teaching.html')">teach this course</a> or make it available for other rememberators users.
+                If you want to delete this course,
                 click on the <a href="">
                     <i data-ng-click="addPackToCoursePopup()"
-                       class="glyphicon glyphicon-remove-sign">
+                       class="small glyphicon glyphicon-remove-sign">
                     </i></a>
-                icon below.
+                icon in the corner of the tab.
             </infobox>
 
 
 
             <infobox logo="girl" data-ng-show="tabs[1].active && course.packs.length === 0">
                 Ok. Now, a course has a number of packs. If you are creating
-                a language course, you can for example put all the colors into one pack,
+                a language course, you could put all the colors into one pack,
                 the days of the week into another and so on. To do this, click on the
                 <a href="">
                     <i data-ng-click="addPackToCoursePopup()"
 
-                       class="glyphicon glyphicon-plus-sign">
+                       class="small glyphicon glyphicon-plus-sign">
                     </i>
                 </a>
 
-                icon below.
+                icon in the corner of the tab.
             </infobox>
 
             <infobox logo="boy"  data-ng-show="tabs[1].active && course.packs.length > 0">
@@ -83,25 +67,22 @@
 
             <infobox logo="philosopher" data-ng-show="tabs[2].active" position="right">
                 This course has no cards, yet. You will have to create packs and put in
-                some cards. Come back after that to set due date, start date and
+                some cards before you can change these settings.
             </infobox>
 
             <infobox logo="guru" data-ng-show="tabs[3].active" >
                 This course has no cards, yet. You will have to create packs and put in
-                some cards. Come back after that to configure how cards are handled when
-                they are played front to back. You will be able to ...
+                some cards before you can change these settings.
             </infobox>
 
             <infobox logo="boy" data-ng-show="tabs[4].active" position="right">
                 This course has no cards, yet. You will have to create packs and put in
-                some cards. Come back after that to configure how cards are handled when
-                they are played back to front. You will be able to ...
+                some cards before you can change these settings.
             </infobox>
 
             <infobox logo="woman" data-ng-show="tabs[5].active">
                 This course has no cards, yet. You will have to create packs and put in
-                some cards. Come back after that to configure how cards are handled when
-                they have images on the front. You will be able to ...
+                some cards before you can change these settings.
             </infobox>
         </div>
 

@@ -20,7 +20,13 @@
             <a href="">
                 <i class="small glyphicon glyphicon-remove-sign">
                 </i></a>
-            next to each course to delete the courses you no longer need.
+            next to each course to delete the courses you no longer need. If you can't
+            find the course you are looking for in this list, you can
+            either <a href="/#!/courses/create">
+            create a new course
+            </a> or <a href="#!/courses/search">
+            search for an existing course.
+            </a>
         </infobox>
     </section>
 
@@ -116,15 +122,15 @@
             </tbody>
         </table>
 
-        <div class="top-padded-m right-aligned">
+        <div class="top-padded-m right-aligned" data-ng-if="authentication.user.roles.indexOf('help') === -1">
             Not found the course you need?
             <div>
-                <a href="" data-ng-if="!course.supervised">
+                <a href="/#!/courses/create" data-ng-if="!course.supervised">
                     Create a new course
                 </a>
             </div>
             <div>
-                <a href="" data-ng-if="!course.supervised">
+                <a href="#!/courses/search" data-ng-if="!course.supervised">
                     Search for a course
                 </a>
             </div>

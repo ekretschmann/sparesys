@@ -62,7 +62,13 @@
 
             <infobox logo="boy"  data-ng-show="tabs[1].active && course.packs.length > 0">
                 Time to put some cards into your packs. Click on the pack names to go to the next
-                page where you can add cards.
+                page where you can add cards and change the settings of the pack. If you
+                have made a mistake and want to delete a pack, click on the
+                <a href="">
+                    <i data-ng-click="addPackToCoursePopup()"
+                       class="small glyphicon glyphicon-remove-sign">
+                    </i></a>
+                icon next to the pack name.
             </infobox>
 
             <infobox logo="philosopher" data-ng-show="tabs[2].active" position="right">

@@ -37,11 +37,13 @@
 
                 <infobox logo="man" data-ng-show="tabs[0].active" position="right"  >
 
-                    For packs, there is only one
-                    setting to change, which is the name of the pack.  With the <a href="">
+                    For packs, you can only change one
+                    setting, which is the name of the pack. If you have made a mistake and wnat to
+                    delete this pack, use the <a href="">
                     <i class="small glyphicon glyphicon-remove-sign">
-                    </i></a> in the corner, you can delete this pack.
+                    </i></a> icon.
 
+                    The
                     <a href="">
                         <i class="small glyphicon glyphicon-backward">
                         </i></a>
@@ -52,52 +54,71 @@
                         <i class="small glyphicon glyphicon-forward">
                         </i></a>
 
-                    will navigate to the previous and next pack of the course.
+                    icons allow you to navigate to the previous and next pack in the course.
 
                 </infobox>
-
 
 
                 <infobox logo="girl" data-ng-show="tabs[1].active && pack.cards.length === 0">
-                    A pack has a number of cards. To do this, click on the
+                    A pack has a number of cards. Use the
                     <a href="">
                         <i data-ng-click="addCardToPackPopup()"
 
-                           class="glyphicon glyphicon-plus-sign">
+                           class="small glyphicon glyphicon-plus-sign">
                         </i>
                     </a>
 
-                    icon below.
+                    icon to start adding cards to your packs.
                 </infobox>
 
-                <infobox logo="boy"  data-ng-show="tabs[1].active && course.packs.length > 0">
-                    Time to put some cards into your packs. Click on the pack names to go to the next
-                    page where you can add cards.
+
+                <infobox logo="philosopher" data-ng-show="tabs[2].active"" position="right">
+                    This pack has no cards. You will have to add some cards using the Content tab
+                    before you can change settings.
                 </infobox>
 
-                <infobox logo="philosopher" data-ng-show="tabs[2].active" position="right">
-                    This course has no cards, yet. You will have to create packs and put in
-                    some cards. Come back after that to set due date, start date and
-                </infobox>
 
-                <infobox logo="guru" data-ng-show="tabs[3].active" >
-                    This course has no cards, yet. You will have to create packs and put in
-                    some cards. Come back after that to configure how cards are handled when
-                    they are played front to back. You will be able to ...
+                <infobox logo="boy" data-ng-show="tabs[3].active"" position="left">
+                This pack has no cards. You will have to add some cards using the Content tab
+                before you can change settings.
                 </infobox>
-
-                <infobox logo="boy" data-ng-show="tabs[4].active" position="right">
-                    This course has no cards, yet. You will have to create packs and put in
-                    some cards. Come back after that to configure how cards are handled when
-                    they are played back to front. You will be able to ...
+                <infobox logo="guru" data-ng-show="tabs[4].active"" position="right">
+                This pack has no cards. You will have to add some cards using the Content tab
+                before you can change settings.
                 </infobox>
-
-                <infobox logo="woman" data-ng-show="tabs[5].active">
-                    This course has no cards, yet. You will have to create packs and put in
-                    some cards. Come back after that to configure how cards are handled when
-                    they have images on the front. You will be able to ...
+                <infobox logo="girl" data-ng-show="tabs[5].active"" position="left">
+                This pack has no cards. You will have to add some cards using the Content tab
+                before you can change settings.
                 </infobox>
             </div>
+
+
+
+
+                <!--<infobox logo="boy"  data-ng-show="tabs[1].active && course.packs.length > 0">-->
+                    <!--Time to put some cards into your packs. Click on the pack names to go to the next-->
+                    <!--page where you can add cards.-->
+                <!--</infobox>-->
+
+
+
+                <!--<infobox logo="guru" data-ng-show="tabs[3].active" >-->
+                    <!--This course has no cards, yet. You will have to create packs and put in-->
+                    <!--some cards. Come back after that to configure how cards are handled when-->
+                    <!--they are played front to back. You will be able to ...-->
+                <!--</infobox>-->
+
+                <!--<infobox logo="boy" data-ng-show="tabs[4].active" position="right">-->
+                    <!--This course has no cards, yet. You will have to create packs and put in-->
+                    <!--some cards. Come back after that to configure how cards are handled when-->
+                    <!--they are played back to front. You will be able to ...-->
+                <!--</infobox>-->
+
+                <!--<infobox logo="woman" data-ng-show="tabs[5].active">-->
+                    <!--This course has no cards, yet. You will have to create packs and put in-->
+                    <!--some cards. Come back after that to configure how cards are handled when-->
+                    <!--they have images on the front. You will be able to ...-->
+                <!--</infobox>-->
 
 
             <div data-ng-if="pack.cards && pack.cards.length > 0">
@@ -260,7 +281,7 @@
                         <div class="default-border">
 
                             <div ng-include="'/modules/packs/views/partial/pack-images.client.view.html'"></div>
-\
+
 
                         </div>
                     </tab>

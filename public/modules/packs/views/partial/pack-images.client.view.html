@@ -11,11 +11,10 @@
         Change Image Mode Settings for all Cards in {{pack.name}}
     </div>
 
-    <div class="left-padded-m" data-ng-if="!pack.cards || pack.cards.length === 0">
+    <div class="left-padded-s" data-ng-if="!pack.cards || pack.cards.length === 0">
 
-        There are no cards in course {{course.name}}
+        There are no cards in pack {{pack.name}}.
     </div>
-
 
     <div data-ng-if="pack.cards.length > 0">
 
@@ -115,10 +114,6 @@
         </div>
     </div>
 
-    <div class="top-padded-l" data-ng-if="pack.cards.length === 0">
-
-        There are no cards in course {{course.name}}
-    </div>
 
     <table class="table-striped top-padded-l card-border-top" data-ng-if="pack.cards.length > 0">
         <thead>
@@ -201,5 +196,6 @@
         </tr>
         </tbody>
     </table>
+
 
 </div>

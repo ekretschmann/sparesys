@@ -62,7 +62,7 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
 
         $scope.toggleImagesRecognizeSpeech = function() {
 
-            $scope.card.imagesRecognizeSpeech = !$scope.card.imagesRecognizeSpeech;
+            $scope.card.speechRecognitionImages = !$scope.card.speechRecognitionImages;
             $scope.updateCard();
         };
 

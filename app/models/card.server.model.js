@@ -15,7 +15,7 @@ var CardSchema = new Schema({
         type: Boolean,
         default: false
     },
-    imagesRecognizeSpeech: {
+    speechRecognitionImages: {
         type: Boolean,
         default: false
     },

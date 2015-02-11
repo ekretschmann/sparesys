@@ -175,25 +175,25 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
             var bestValue = 1.0;
             var bestCard;
+
             this.cards.forEach(function (card) {
 
-                console.log(card.question);
-                console.log(card.startDate);
                 if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
 
                     var pr = this.getPredictedRetention(card, $scope.time);
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
                     card.score = Math.abs(pr - 0.4) * $scope.adjustScoreToDueDate(card, $scope.time);
 
+                    console.log(card.question);
+                    console.log(card.score);
                     if (card.score < bestValue && card.modes.length > 0) {
-                    //if (card.question === 'eins') {
                         bestCard = card;
                         bestValue = card.score;
+                        console.log('  '+bestCard);
                     }
                 }
             }, this);
 
-            //bestCard.modes = ['images'];
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
             $scope.assess = 'self';

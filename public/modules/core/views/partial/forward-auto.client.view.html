@@ -27,7 +27,7 @@
             <span class="question">
             {{card.question}}
                 </span>
-            <span data-ng-if="card.readFrontForward" class="left-padded-s top-padded-s" style="position: absolute;" >
+            <span data-ng-if="card.readFrontForward" class="left-padded-s top-padded-s" style="position: absolute;">
 
                     <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
@@ -40,7 +40,7 @@
 
             <input type="text" required
                    class="focus expands flashcard-input"
-               data-ng-model="answer.text">
+                   data-ng-model="answer.text">
         </div>
 
 
@@ -61,11 +61,15 @@
         </div>
 
 
+        <div class="edit-card left-aligned">
+            <div>
+                <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+            </div>
 
-        <div class="edit-card">
-            <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+            <div data-ng-if="state === 'answer'" data-ng-if="answer.assessment === 'wrong'">
+                <a data-ng-click="$parent.myAnswerCounts(answer.text)">My answer counts</a>
+            </div>
         </div>
-
 
 
         <div data-ng-if="state === 'answer'">
@@ -76,7 +80,7 @@
                 Expected answer: {{card.answer}}
 
                     </span>
-                 <span data-ng-if="card.readBackForward" class="left-padded-s top-padded-s" style="position: absolute;" >
+                 <span data-ng-if="card.readBackForward" class="left-padded-s top-padded-s" style="position: absolute;">
 
                     <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
@@ -85,11 +89,8 @@
             </div>
 
 
-
-
         </div>
     </div>
-
 
 
     <div class="center-aligned top-padded">
@@ -98,9 +99,9 @@
         </div>
 
 
-    <div data-ng-show="state === 'answer'">
-        <button class="btn btn-rememberators" data-ng-click="nextCard()">Next Question</button>
-    </div>
+        <div data-ng-show="state === 'answer'">
+            <button class="btn btn-rememberators" data-ng-click="nextCard()">Next Question</button>
+        </div>
     </div>
 
 </div>

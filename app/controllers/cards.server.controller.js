@@ -75,10 +75,19 @@ exports.update = function (req, res) {
     var card = req.card;
 
 
+    console.log(req.body.starDate);
+
     card.__v = undefined;
     card = _.extend(card, req.body);
 
+    if (!req.body.startDate) {
+        card.startDate = undefined;
+    }
 
+
+    if (!req.body.dueDate) {
+        card.dueDate = undefined;
+    }
 
 
     if (!req.body.answer) {

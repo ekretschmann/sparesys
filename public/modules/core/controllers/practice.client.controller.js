@@ -177,8 +177,9 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             var bestCard;
             this.cards.forEach(function (card) {
 
+                console.log(card.question);
+                console.log(card.startDate);
                 if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
-
 
                     var pr = this.getPredictedRetention(card, $scope.time);
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
@@ -199,6 +200,9 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
                 $scope.assess = 'auto';
             }
+
+            $scope.assess = 'auto';
+
             $scope.updateSlides();
             if ($scope.mode === 'forward' && $scope.card.speechRecognitionForward) {
                 $scope.initSpeech();
@@ -257,8 +261,9 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
         $scope.clearCourseHistory = function () {
             $scope.cards.forEach(function (card) {
                 $scope.clearHistory(card);
-                $state.go($state.$current, null, { reload: true });
+
             });
+            $state.go($state.$current, null, { reload: true });
         };
 
         $scope.clearHistory = function (card) {
@@ -266,7 +271,10 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             card.lastRep = undefined;
             card.hrt = 0.0;
 
-            new Cards(card).$update();
+
+            new Cards(card).$update(function(c) {
+                console.log(c);
+            });
 
 
         };

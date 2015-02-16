@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$scope', '$state', '$stateParams', 'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
-    function ($scope, $state, $stateParams, Courses, Cards, CoursesService, RetentionCalculatorService) {
+angular.module('core').controller('PracticeController', ['$scope', '$state', '$modal','$stateParams', 'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
+    function ($scope, $state, $modal, $stateParams, Courses, Cards, CoursesService, RetentionCalculatorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -273,25 +273,29 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
         };
 
-        $scope.myAnswerCounts = function(answer) {
-            console.log('that counts');
-            console.log($scope.card);
-            console.log($scope.mode);
-            console.log(answer);
+        $scope.myAnswerCounts = function (answer, mode) {
 
-            //if (!$scope.card.supervisor) {
-                if ($scope.mode === 'reverse') {
-                    $scope.card.acceptedAnswersReverse.push(answer);
-                } else {
-                    $scope.card.acceptedAnswersForward.push(answer);
+            $scope.answer = answer;
+            $scope.mode = mode;
+
+            $modal.open({
+                templateUrl: 'myAnswerCounts.html',
+                controller: 'MyAnswerCountsModalController',
+                resolve: {
+                    answer: function () {
+                        return $scope.answer;
+                    },
+                    mode: function () {
+                        return $scope.mode;
+                    },
+                    card: function () {
+                        return $scope.card;
+                    }
                 }
-
-                new Cards($scope.card).$update();
-
-            console.log($scope.card);
-
-            //}
+            });
         };
+
+
 
 
     }]);

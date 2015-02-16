@@ -59,8 +59,16 @@
         </div>
 
 
-        <div class="edit-card">
-            <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+
+
+        <div class="edit-card left-aligned">
+            <div>
+                <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+            </div>
+
+            <div data-ng-if="state === 'answer' && answer.assessment === 'wrong'">
+                <a data-ng-click="$parent.myAnswerCounts(answer.text, 'reverse')" href="">My answer counts</a>
+            </div>
         </div>
 
 

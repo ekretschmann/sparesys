@@ -56,7 +56,6 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             /* jshint ignore:start */
 
 
-            console.log('result');
             var interim_transcript = '';
             if (typeof(event.results) === 'undefined') {
 //                    console.log('ending');
@@ -184,12 +183,9 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
                     card.score = Math.abs(pr - 0.4) * $scope.adjustScoreToDueDate(card, $scope.time);
 
-                    console.log(card.question);
-                    console.log(card.score);
                     if (card.score < bestValue && card.modes.length > 0) {
                         bestCard = card;
                         bestValue = card.score;
-                        console.log('  '+bestCard);
                     }
                 }
             }, this);
@@ -272,9 +268,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             card.hrt = 0.0;
 
 
-            new Cards(card).$update(function(c) {
-                console.log(c);
-            });
+            new Cards(card).$update();
 
 
         };
@@ -283,8 +277,9 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
             console.log('that counts');
             console.log($scope.card);
             console.log($scope.mode);
+            console.log(answer);
 
-            if (!$scope.card.supervisor) {
+            //if (!$scope.card.supervisor) {
                 if ($scope.mode === 'reverse') {
                     $scope.card.acceptedAnswersReverse.push(answer);
                 } else {
@@ -293,7 +288,9 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$s
 
                 new Cards($scope.card).$update();
 
-            }
+            console.log($scope.card);
+
+            //}
         };
 
 

@@ -89,7 +89,7 @@
         </tr>
 
 
-        <tr data-ng-repeat="alt in card.alternativesFront track by $index">
+        <tr data-ng-repeat="alt in card.acceptedAnswersForward track by $index">
             <td class="right-padded-m nowrap">
                 <div data-ng-class="forward-muted">Also Accepted</div>
             </td>
@@ -101,7 +101,7 @@
                            class="standard-input-width form-control"
                            data-ng-blur="updateAlternative($index, alt)"
                            ng-disabled="!card.hasForwardMode"
-                           placeholder="Alternative Answer">
+                           placeholder="Also Acceptied">
 
             </td>
         </tr>
@@ -113,7 +113,7 @@
                            data-ng-model="nextAlternative"
                            id="alternative"
                            class="standard-input-width form-control alternative"
-                           placeholder="Accepted Answer"
+                           placeholder="Also Accepted"
                            ng-disabled="!card.hasForwardMode"
                            data-ng-blur="updateCard()">
             </td>

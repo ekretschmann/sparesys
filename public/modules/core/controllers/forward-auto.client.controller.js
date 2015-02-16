@@ -43,7 +43,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             }
 
 
-            $scope.card.alternativesFront.forEach(function (alt) {
+            $scope.card.acceptedAnswersForward.forEach(function (alt) {
                 if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
                     $scope.processCard(3);
                     $scope.answer.assessment = 'correct';

@@ -60,14 +60,14 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
 
         $scope.updateAlternative = function (index, alt) {
 
-            $scope.card.alternativesFront[index] = alt;
+            $scope.card.acceptedAnswersForward[index] = alt;
             var alts = [];
-            $scope.card.alternativesFront.forEach(function (alt) {
+            $scope.card.acceptedAnswersForward.forEach(function (alt) {
                 if (alt !== undefined && alt !== '') {
                     alts.push(alt);
                 }
             });
-            $scope.card.alternativesFront = alts;
+            $scope.card.acceptedAnswersForward = alts;
             $scope.updateCard();
         };
     }

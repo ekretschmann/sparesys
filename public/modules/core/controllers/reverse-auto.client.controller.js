@@ -35,14 +35,14 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
             var ratedCorrect = false;
 
             $scope.answer.assessment = 'wrong';
-            if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
+            if ($scope.card.question.toLowerCase() === $scope.answer.text.toLowerCase()) {
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
                 ratedCorrect = true;
             }
 
 
-            $scope.card.alternativesFront.forEach(function (alt) {
+            $scope.card.acceptedAnswersReverse.forEach(function (alt) {
                 if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
                     $scope.processCard(3);
                     $scope.answer.assessment = 'correct';

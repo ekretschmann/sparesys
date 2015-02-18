@@ -27,6 +27,21 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
             }
         };
 
+        $scope.areYouSureToDeleteClass = function (schoolclass) {
+
+            $scope.schoolclass = schoolclass;
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteClass.html',
+                controller: 'DeleteClassModalController',
+                resolve: {
+
+                    schoolclass: function () {
+                        return $scope.schoolclass;
+                    }
+                }
+            });
+
+        };
 
         $scope.addClassPopup = function (size) {
 

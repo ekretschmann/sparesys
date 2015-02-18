@@ -3,6 +3,9 @@
 <div ng-include="'/modules/schools/views/partial/register-school.modal.client.view.html'"></div>
     <div ng-include="'/modules/schools/views/partial/edit-school.modal.client.view.html'"></div>
     <div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>
+    <div ng-include="'/modules/schoolclasses/views/partial/add-class.modal.client.view.html'"></div>
+    <div ng-include="'/modules/schoolclasses/views/partial/delete-class.modal.client.view.html'"></div>
+
 
 
     <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
@@ -85,12 +88,22 @@
                     <td class="nowrap right-padded-s top-aligned top-padded-s">
                         <div data-ng-if="school.schoolclasses.length > 0">
                         <div data-ng-repeat="schoolclass in school.schoolclasses">
-                            <a href="#!/schoolclasses/{{schoolclss._id}}/edit">{{schoolclass.name}}</a>
+                            <a href="">
+                                <i data-ng-click="areYouSureToDeleteClass(schoolclass)"
+                                   class="small glyphicon glyphicon-remove-sign">
+                                </i>
+                            </a>
+
+
+                            <a href="#!/schoolclasses/{{schoolclass._id}}/edit">{{schoolclass.name}}</a>
                         </div>
                         </div>
 
                         <div data-ng-if="school.schoolclasses.length === 0" class="warning">
-                            no classes configured.
+                            School has no classes.
+                        </div>
+                        <div>
+                            <a href="" data-ng-click="addClassPopup()">add classes</a>
                         </div>
                     </td>
 

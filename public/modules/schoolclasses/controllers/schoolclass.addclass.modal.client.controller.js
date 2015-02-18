@@ -28,7 +28,11 @@ angular.module('schoolclasses').controller('AddClassController', ['$scope', '$st
 
             schoolClass.$save(function(sc) {
                 $scope.school.schoolclasses.push(schoolClass._id);
-                $scope.school.$save();
+                $scope.school.$save(function(){
+                    $state.go($state.current);
+                });
+
+
 
             });
 

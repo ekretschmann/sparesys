@@ -1,9 +1,10 @@
 
 <div class="content-section">
 <div ng-include="'/modules/schools/views/partial/register-school.modal.client.view.html'"></div>
+    <div ng-include="'/modules/schools/views/partial/edit-school.modal.client.view.html'"></div>
 
 
-<div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
+    <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
     <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
         <div class="title">School Administration</div>
         <infobox logo="woman" position="right">
@@ -68,7 +69,7 @@
                     data-ng-init="findById(schoolId)">
 
                     <td class="expands right-padded-m  top-aligned left-padded-s top-padded-s">
-                        <a href="#!/schools/{{school._id}}/edit">{{school.name}}</a></td>
+                        <a href="" data-ng-click="editSchoolPopup(school)">{{school.name}}</a></td>
                     <td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>
                     <td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>
                     <td class="nowrap right-padded-s top-aligned top-padded-s">

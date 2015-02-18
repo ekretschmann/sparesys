@@ -151,6 +151,8 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
 
+    console.log('xxxxx');
+    console.log(req.query);
 
     if (req.query.student) {
         School.find({'students': req.query.student}).populate('schoolclasses').exec(function (err, schools) {
@@ -163,7 +165,7 @@ exports.list = function(req, res) {
             }
         });
     } else if (req.query.teachers) {
-        School.find({'teachers': req.query.teachers}).exec(function (err, schools) {
+        School.find({'teachers': req.query.teachers}).populate('schoolclasses').exec(function (err, schools) {
 //            console.log(err);
 //            console.log(schools);
             if (err) {
@@ -177,7 +179,7 @@ exports.list = function(req, res) {
     } else if (req.query.userId) {
 
 
-        School.find({'user': req.query.userId}).exec(function (err, courses) {
+        School.find({'user': req.query.userId}).populate('schoolclasses').exec(function (err, courses) {
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)
@@ -187,7 +189,7 @@ exports.list = function(req, res) {
             }
         });
     } else {
-        School.find().sort('-created').populate('user', 'displayName').exec(function (err, schools) {
+        School.find().sort('-created').populate('schoolclasses').exec(function (err, schools) {
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)
@@ -203,7 +205,11 @@ exports.list = function(req, res) {
 /**
  * School middleware
  */
-exports.schoolByID = function(req, res, next, id) { School.findById(id).populate('user', 'displayName').exec(function(err, school) {
+exports.schoolByID = function(req, res, next, id) {
+
+    School.findById(id).populate('user', 'displayName').populate('schoolclasses').exec(function(err, school) {
+
+
 		if (err) return next(err);
 		if (! school) return next(new Error('Failed to load School ' + id));
 		req.school = school ;

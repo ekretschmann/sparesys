@@ -44,10 +44,11 @@ var SchoolSchema = new Schema({
         type: [Schema.Types.ObjectId],
         default: []
     },
-    schoolclasses: {
-        type: [Schema.Types.ObjectId],
-        default: []
-    }
+    schoolclasses:
+        [{
+            type: Schema.ObjectId,
+            ref: 'Schoolclass'
+        }]
 });
 
 mongoose.model('School', SchoolSchema);

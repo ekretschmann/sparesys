@@ -58,7 +58,8 @@
                 <tr>
                     <th class="right-padded-m left-padded-s">School</th>
                     <th class="right-padded-m">City</th>
-                    <th class="right-padded-s">Country</th>
+                    <th class="right-padded-m">Country</th>
+                    <th class="right-padded-s">Classes</th>
                 </tr>
                 </thead>
                 <tbody>
@@ -66,10 +67,23 @@
                     data-ng-controller="SchoolsController"
                     data-ng-init="findById(schoolId)">
 
-                    <td class="expands right-padded-m  left-padded-s">
+                    <td class="expands right-padded-m  top-aligned left-padded-s top-padded-s">
                         <a href="#!/schools/{{school._id}}/edit">{{school.name}}</a></td>
-                    <td class="right-padded-m nowrap">{{school.city}}</td>
-                    <td class="nowrap right-padded-s">{{school.country}}</td>
+                    <td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>
+                    <td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>
+                    <td class="nowrap right-padded-s top-aligned top-padded-s">
+                        <div data-ng-if="school.schoolclasses.length > 0">
+                        <div data-ng-repeat="schoolclass in school.schoolclasses">
+                            <a href="#!/schoolclasses/{{schoolclss._id}}/edit">{{schoolclass.name}}</a>
+                        </div>
+                        </div>
+
+                        <div data-ng-if="school.schoolclasses.length === 0" class="warning">
+                            no classes configured.
+                        </div>
+                    </td>
+
+
 
                 </tr>
                 </tbody>

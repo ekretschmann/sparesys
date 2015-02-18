@@ -2,6 +2,7 @@
 <div class="content-section">
 <div ng-include="'/modules/schools/views/partial/register-school.modal.client.view.html'"></div>
     <div ng-include="'/modules/schools/views/partial/edit-school.modal.client.view.html'"></div>
+    <div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>
 
 
     <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
@@ -57,7 +58,8 @@
             <table class="table-striped top-margin-l" data-ng-if="authentication.user.administersSchools.length > 0">
                 <thead>
                 <tr>
-                    <th class="right-padded-m left-padded-s">School</th>
+                    <th class="right-padded-s left-padded-s"></th>
+                    <th class="right-padded-m">School</th>
                     <th class="right-padded-m">City</th>
                     <th class="right-padded-m">Country</th>
                     <th class="right-padded-s">Classes</th>
@@ -68,7 +70,15 @@
                     data-ng-controller="SchoolsController"
                     data-ng-init="findById(schoolId)">
 
-                    <td class="expands right-padded-m  top-aligned left-padded-s top-padded-s">
+                    <td class="right-padded-s top-aligned top-padded-s">
+                        <a href="">
+                            <i data-ng-click="areYouSureToDeleteSchool(school)"
+                               class="small left-padded-s glyphicon glyphicon-remove-sign">
+                            </i>
+                        </a>
+</td>
+
+                    <td class="expands right-padded-m  top-aligned top-padded-s">
                         <a href="" data-ng-click="editSchoolPopup(school)">{{school.name}}</a></td>
                     <td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>
                     <td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>

@@ -1,0 +1,152 @@
+<script type="text/ng-template" id="setupClass.html">
+
+
+    <table class="expands">
+        <tr>
+            <td class="half-screen top-aligned top-padded-m">
+                <table class="table-striped expands">
+                    <thead>
+                    <tr>
+                        <th class="left-padded-s">Teachers</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-if="school.teachers.length === 0">
+                        <td>none</td>
+                    </tr>
+
+
+                    <tr data-ng-repeat="teacher in school.teachers">
+
+                        <td class="right-padded left-padded-s">
+
+                            <a href=""
+                               data-ng-if="schoolclass.teachers.indexOf(teacher) === -1"
+                               data-ng-click="addTeacherToClass(teacher)">
+                                <i
+                                        class="glyphicon glyphicon-plus-sign">
+                                </i>
+                            </a>
+                            <span data-ng-controller="UsersController"
+                                  data-ng-init="findById(teacher)">
+                                {{displayName}}
+                            </span>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </td>
+            <td class="half-screen top-aligned top-padded-m">
+
+                <table class="table-striped expands top-padded-l">
+                    <thead>
+                    <tr>
+                        <th class="expands">
+                            In class {{schoolclass.name}}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-if="schoolclass.teachers.length === 0">
+                        <td>
+                            none
+                        </td>
+                    </tr>
+
+                    <tr data-ng-repeat="teacher in schoolclass.teachers">
+
+                        <td>
+                            <a href=""
+                               data-ng-click="removeTeacherFromClass(teacher)">
+                                <i class="glyphicon glyphicon-minus-sign">
+                                </i>
+                            </a>
+                            <span data-ng-controller="UsersController"
+                                  data-ng-init="findById(teacher)">
+                            {{displayName}}
+                            </span>
+                        </td>
+
+                    </tr>
+                    </tbody>
+                </table>
+
+
+            </td>
+        </tr>
+
+        <tr>
+            <td class="half-screen top-aligned top-spacer top-padded-m">
+                <table id="searchTextResults"
+                       class="table-striped expands ">
+                    <thead>
+                    <tr>
+                        <th class="left-padded-s">Students</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-if="school.students.length === 0">
+                        <td>none</td>
+                    </tr>
+
+
+                    <tr data-ng-repeat="student in school.students">
+
+
+                        <td class="left-padded-s">
+                            <a href=""
+                               data-ng-click="addStudentToClass(student)">
+                                <i class="glyphicon glyphicon-plus-sign"
+                                   data-ng-if="schoolclass.students.indexOf(student) === -1">
+                                </i>
+                            </a>
+                            <span data-ng-controller="UsersController"
+                                  data-ng-init="findById(student)">
+                            {{displayName}}
+                            </span>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+
+            </td>
+            <td class="half-screen top-aligned top-spacer  top-padded-m">
+                <table class="table-striped expands">
+                    <thead>
+                    <tr>
+                        <th class="expands">In class {{schoolclass.name}}</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr data-ng-if="schoolclass.students.length === 0">
+                        <td>
+                            none
+                        </td>
+                    </tr>
+
+                    <tr data-ng-repeat="student in schoolclass.students">
+
+                        <td>
+                            <a href=""
+                               data-ng-click="removeStudentFromClass(student)">
+                                <i class="glyphicon glyphicon-minus-sign"></i>
+                            </a>
+
+                            <span data-ng-controller="UsersController"
+                                  data-ng-init="findById(student)">
+                            {{displayName}}
+                            </span>
+
+                        </td>
+
+
+                    </tr>
+                    </tbody>
+                </table>
+
+            </td>
+        </tr>
+    </table>
+</script>

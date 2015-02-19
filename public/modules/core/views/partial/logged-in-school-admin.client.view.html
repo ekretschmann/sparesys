@@ -5,6 +5,7 @@
     <div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>
     <div ng-include="'/modules/schoolclasses/views/partial/add-class.modal.client.view.html'"></div>
     <div ng-include="'/modules/schoolclasses/views/partial/delete-class.modal.client.view.html'"></div>
+    <div ng-include="'/modules/schoolclasses/views/partial/setup-class.modal.client.view.html'"></div>
 
 
 
@@ -95,7 +96,11 @@
                             </a>
 
 
-                            <a href="#!/schoolclasses/{{schoolclass._id}}/edit">{{schoolclass.name}}</a>
+                            <a data-ng-click="setupClassPopup(schoolclass)">{{schoolclass.name}}</a>
+
+                            <span class="warning" data-ng-if="schoolclass.students.length === 0 || schoolclass.teachers.length === 0">
+                                (not set up)
+                            </span>
                         </div>
                         </div>
 

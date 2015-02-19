@@ -29,6 +29,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
 
 
 
+
         $scope.addClassPopup = function (size) {
 
             $modal.open({
@@ -38,6 +39,21 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
                 resolve: {
                     school: function () {
                         return $scope.school;
+                    }
+                }
+            });
+
+        };
+
+        $scope.setupClassPopup = function (schoolclass) {
+
+            $scope.schoolclass = schoolclass;
+            $modal.open({
+                templateUrl: 'setupClass.html',
+                controller: 'SetupClassController',
+                resolve: {
+                    schoolclass: function () {
+                        return $scope.schoolclass;
                     }
                 }
             });

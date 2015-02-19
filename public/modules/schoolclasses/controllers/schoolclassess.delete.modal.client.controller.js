@@ -1,25 +1,29 @@
 'use strict';
 
-angular.module('schoolclasses').controller('DeleteClassModalController', ['$scope', '$location', '$state', '$modalInstance', 'schoolclass', 'Schoolclasses',
-	function($scope, $location, $state, $modalInstance, schoolclass, Schoolclasses) {
+angular.module('schoolclasses').controller('DeleteClassModalController', ['$scope', '$location', '$state', '$modalInstance',
+    'schoolclass', 'school', 'Schoolclasses', 'Schools',
+	function($scope, $location, $state, $modalInstance, schoolclass, school, Schoolclasses, Schools) {
         $scope.schoolclass = schoolclass;
+        $scope.school = school;
 
 
         $scope.ok = function () {
 
-            var schoolId = schoolclass.school._id;
 
 
-            console.log($scope.schoolclass);
+            for (var i in $scope.school.schoolclasses) {
+                if ($scope.school.schoolclasses[i] === $scope.schoolclass) {
+                    $scope.school.schoolclasses.splice(i, 1);
+                }
+            }
 
-            new Schoolclasses($scope.schoolclass).$remove(function () {
-//
-//
-                $state.go($state.$current, null, {reload:true});
-//                $location.path('schools/'+schoolId+'/edit');
-//
+            new Schools($scope.school).$update(function() {
+                new Schoolclasses($scope.schoolclass).$remove(function () {
+                    $state.go($state.$current, null, {reload: true});
+                });
             });
-//
+
+
             $modalInstance.close();
 
         };

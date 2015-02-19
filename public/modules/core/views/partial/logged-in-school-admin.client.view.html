@@ -100,10 +100,13 @@
                         </div>
 
                         <div data-ng-if="school.schoolclasses.length === 0" class="warning">
-                            School has no classes.
+                            School has no classes
                         </div>
-                        <div>
+                        <div data-ng-if="school.schoolclasses.length === 0">
                             <a href="" data-ng-click="addClassPopup()">add classes</a>
+                        </div>
+                        <div data-ng-if="school.schoolclasses.length > 0">
+                            <a href="" data-ng-click="addClassPopup()">add more classes</a>
                         </div>
                     </td>
 

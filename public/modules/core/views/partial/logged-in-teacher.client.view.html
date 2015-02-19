@@ -1,12 +1,19 @@
 <section data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
 
     <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="title">Teaching</div>
+
         <div class="content-section">
-            <infobox logo="man" position="left" title="Teaching">
+            <infobox logo="man" position="left" >
                 If you are a teacher and your school is set up with Rememberators, use the
                 <a href="" data-ng-click="settingsPopup()">settings</a> in the {{user.displayName}} menu
                 to register for the role of a teacher. You will get a Teaching menu with all the details
                 to manage your students.
+            </infobox>
+            <infobox logo="philosopher" position="right" >
+                Rememberators organise teaching in schools and classes. If you just want to coach your own
+                children, it is easy to register your own school and classes. Become a school admin and
+                follow the instructions to set yourself up as teacher for your children.
             </infobox>
         </div>
     </section>

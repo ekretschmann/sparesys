@@ -7,12 +7,13 @@ angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '
 
         $scope.ok = function () {
 
-            console.log(school);
-            var id = school._id;
             school.schoolclasses.forEach(function(schoolclass) {
-                console.log(schoolclass);
+                new Schoolclasses(schoolclass).$remove();
             });
-            //school.$remove();
+
+            new Schools(school).$remove(function() {
+                $state.go($state.current, null, { reload: true});
+            });
 
             $modalInstance.close();
 

@@ -21,7 +21,7 @@ var getErrorMessage = function (err) {
                 message = 'Card already exists';
                 break;
             default:
-                message = 'Something went wrong';
+                message = 'Something went wrong '+err;
         }
     } else {
         for (var errName in err.errors) {
@@ -75,7 +75,7 @@ exports.update = function (req, res) {
     var card = req.card;
 
 
-    console.log(req.body.starDate);
+    console.log('updating card');
 
     card.__v = undefined;
     card = _.extend(card, req.body);
@@ -97,6 +97,11 @@ exports.update = function (req, res) {
     if (!req.body.question) {
         card.question = undefined;
     }
+
+    console.log('after update');
+    console.log(card);
+
+
 
     card.slaves.forEach(function (cid) {
 
@@ -134,7 +139,10 @@ exports.update = function (req, res) {
         });
     });
 
+    console.log('saving');
+
     card.save(function (err) {
+        console.log(err);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

@@ -77,7 +77,7 @@ exports.update = function (req, res) {
 
     console.log('updating card');
 
-    card.__v = undefined;
+    //card.__v = undefined;
     card = _.extend(card, req.body);
 
     if (!req.body.startDate) {

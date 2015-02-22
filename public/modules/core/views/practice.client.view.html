@@ -110,6 +110,8 @@
         </infobox>
     </div>
 
+    <section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">
+
 
     <table class="table-striped top-margin-l top-padded-l card-border-top" data-ng-if="cards.length > 0">
         <thead>
@@ -174,4 +176,5 @@
         <button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History</button>
 
     </div>
+        </section>
 </section>

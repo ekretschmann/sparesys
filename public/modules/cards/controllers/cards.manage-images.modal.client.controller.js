@@ -45,7 +45,10 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
                 $scope.selected.images.push('/modules/core/img/brand/placeholder_icon.png');
             }
 
-            $scope.card.$update();
+            var modeToggle = $scope.card.hasImagesMode;
+            $scope.card.$update(function() {
+                $scope.card.hasImagesMode = modeToggle;
+            });
         };
 
         $scope.removeImage = function(image) {
@@ -65,8 +68,11 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             }
 
 
-            $scope.card.$update();
 
+            var modeToggle = $scope.card.hasImagesMode;
+            $scope.card.$update(function() {
+                $scope.card.hasImagesMode = modeToggle;
+            });
         };
 
 
@@ -187,7 +193,9 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
 
 
 
+            var modeToggle = $scope.card.hasImagesMode;
             $scope.card.$update(function() {
+                $scope.card.hasImagesMode = modeToggle;
                 $state.go($state.$current, null, { reload: true });
             });
 

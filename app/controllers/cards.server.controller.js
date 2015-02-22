@@ -75,7 +75,7 @@ exports.update = function (req, res) {
     var card = req.card;
 
 
-    console.log('updating card');
+    //console.log('updating card');
 
     //card.__v = undefined;
     card = _.extend(card, req.body);
@@ -98,8 +98,8 @@ exports.update = function (req, res) {
         card.question = undefined;
     }
 
-    console.log('after update');
-    console.log(card);
+    //console.log('after update');
+    //console.log(card);
 
 
 
@@ -139,10 +139,10 @@ exports.update = function (req, res) {
         });
     });
 
-    console.log('saving');
+    //console.log('saving');
 
     card.save(function (err) {
-        console.log(err);
+        //console.log(err);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

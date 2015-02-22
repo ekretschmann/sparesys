@@ -193,14 +193,14 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$m
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
 
-            $scope.mode = 'reverse';
+            //$scope.mode = 'reverse';
 
             $scope.assess = 'self';
             if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
                 $scope.assess = 'auto';
             }
 
-            $scope.assess = 'auto';
+            //$scope.assess = 'auto';
 
             $scope.updateSlides();
             if ($scope.mode === 'forward' && $scope.card.speechRecognitionForward) {

@@ -29,7 +29,7 @@
             {{card.answer}}
                 </span>
 
-            <span data-ng-if="card.readFrontReverse" class="left-padded-s top-padded-s" style="position: absolute;" >
+            <span data-ng-if="card.readFrontReverse && card.languageBack" class="left-padded-s top-padded-s" style="position: absolute;" >
 
                     <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>

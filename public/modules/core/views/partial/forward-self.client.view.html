@@ -27,7 +27,7 @@
             <span class="question">
             {{card.question}}
                 </span>
-            <span data-ng-if="card.readFrontForward" class="left-padded-s top-padded-s" style="position: absolute;" >
+            <span data-ng-if="card.readFrontForward && card.languageFront" class="left-padded-s top-padded-s" style="position: absolute;" >
 
                     <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>

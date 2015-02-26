@@ -56,9 +56,11 @@
 
             </div>
 
-
-            <div data-ng-if="card.imagesReadFront" class="left-padded-s top-padded-s ">
-
+xxx
+            {{card.imagesReadFront}}
+            {{card.languageFront}}
+            <div data-ng-if="card.imagesReadFront && card.languageFront" class="left-padded-s top-padded-s ">
+aaa
                     <a  href="" data-ng-click="playSound(card.languageFront, card.question)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
                     </a>

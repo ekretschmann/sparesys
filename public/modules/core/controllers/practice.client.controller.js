@@ -89,6 +89,10 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$m
         $scope.playSound = function (lang, text) {
 
 
+            if (!lang || !lang.code) {
+                return;
+            }
+
             /* jshint ignore:start */
             if (window.SpeechSynthesisUtterance !== undefined) {
 

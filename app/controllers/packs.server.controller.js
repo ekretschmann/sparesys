@@ -64,6 +64,7 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
     var pack = req.pack;
 
+
     pack = _.extend(pack, req.body);
     pack.updated = Date.now();
 

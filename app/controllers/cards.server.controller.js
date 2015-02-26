@@ -36,7 +36,9 @@ var getErrorMessage = function (err) {
  * Create a Card
  */
 exports.create = function (req, res) {
+
     var card = new Card(req.body);
+    console.log('creating card: '+card.question);
 
 
 
@@ -75,7 +77,8 @@ exports.update = function (req, res) {
     var card = req.card;
 
 
-    console.log('updating card');
+    console.log('updating card: '+card.question);
+    console.log('updating card: '+card.__v);
 
     //card.__v = undefined;
     card = _.extend(card, req.body);
@@ -97,10 +100,6 @@ exports.update = function (req, res) {
     if (!req.body.question) {
         card.question = undefined;
     }
-
-    console.log('after update');
-    console.log(card);
-
 
 
     card.slaves.forEach(function (cid) {

@@ -129,16 +129,20 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$m
 
         };
 
-        $scope.recordRate = function (card, time, assessment) {
+        $scope.recordRate = function (time, assessment) {
 
 
-            card.hrt = RetentionCalculatorService.calculateFor(card, time, assessment);
+            $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
 
 
-            card.history.push({when: time, assessment: assessment, hrt:card.hrt});
+            $scope.card.history.push({when: time, assessment: assessment, hrt:$scope.card.hrt});
 
 
-            new Cards(card).$update();
+            new Cards($scope.card).$update(function(c) {
+                $scope.card = c;
+
+                console.log('new version: '+ c.__v);
+            });
 
         };
 

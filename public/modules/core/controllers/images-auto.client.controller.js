@@ -59,7 +59,7 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
         $scope.processCard = function (rating) {
 
 
-            $scope.$parent.recordRate($scope.card, Date.now(), rating);
+            $scope.$parent.recordRate(Date.now(), rating);
 
         };
 

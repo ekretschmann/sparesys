@@ -124,7 +124,7 @@
             <th class="right-padded-m center-aligned top-padded-sm nowrap">Read Question</th>
             <th class="right-padded-m center-aligned top-padded-sm nowrap">Read Answer</th>
             <th class="right-padded-m center-aligned top-padded-sm nowrap">Speech Recognition</th>
-            <th class="top-aligned top-padded-sm nowrap">Show Text</th>
+            <!--<th class="top-aligned top-padded-sm nowrap">Show Text</th>-->
 
 
         </tr>
@@ -155,8 +155,8 @@
 
             <td class="right-padded-m nowrap center-aligned top-aligned" data-ng-if="isImagesMode(card)">
 
-                <span data-ng-if="card.readFrontForward">yes</span>
-                <span data-ng-if="!card.readFrontForward">no</span>
+                <span data-ng-if="card.imagesReadFront">yes</span>
+                <span data-ng-if="!card.imagesReadFront">no</span>
             </td>
 
             <td class="text-muted right-padded-m nowrap center-aligned top-aligned" data-ng-if="!isImagesMode(card)">
@@ -165,8 +165,8 @@
 
 
             <td class="right-padded-s nowrap center-aligned top-aligned" data-ng-if="isImagesMode(card)">
-                <span data-ng-if="card.readBackForward">yes</span>
-                <span data-ng-if="!card.readBackForward">no</span>
+                <span data-ng-if="card.imagesReadBack">yes</span>
+                <span data-ng-if="!card.imagesReadBack">no</span>
 
             </td>
 
@@ -175,19 +175,11 @@
             </td>
 
             <td class=" nowrap center-aligned top-aligned" data-ng-if="isImagesMode(card)">
-                <span data-ng-if="card.speechRecognitionForward">yes</span>
-                <span data-ng-if="!card.speechRecognitionForward">no</span>
+                <span data-ng-if="card.speechRecognitionImages">yes</span>
+                <span data-ng-if="!card.speechRecognitionImages">no</span>
 
             </td>
 
-            <td class="text-muted nowrap center-aligned top-aligned" data-ng-if="!isImagesMode(card)">
-                n/a
-            </td>
-
-
-            <td class="text-muted nowrap center-aligned top-aligned" data-ng-if="!isImagesMode(card)">
-                n/a
-            </td>
 
         </tr>
 

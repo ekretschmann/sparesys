@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$scope', '$state', '$modal','$stateParams', 'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
-    function ($scope, $state, $modal, $stateParams, Courses, Cards, CoursesService, RetentionCalculatorService) {
+angular.module('core').controller('PracticeController', ['$scope', '$state', '$modal','$stateParams', 'Authentication','Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
+    function ($scope, $state, $modal, $stateParams, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -12,6 +12,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$m
 
         $scope.answer = {};
 
+        $scope.authentication = Authentication;
 
 
         $scope.initSpeech = function () {
@@ -84,6 +85,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$m
         };
 
 
+        $scope.soundSupport = false;
 
 
         $scope.playSound = function (lang, text) {
@@ -96,14 +98,13 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$m
             /* jshint ignore:start */
             if (window.SpeechSynthesisUtterance !== undefined) {
 
+
                 console.log('playing sound: '+text+ ' ('+lang.code+')');
 
-
                 var msg = new SpeechSynthesisUtterance(text);
-
-
                 msg.lang = lang.code;
                 window.speechSynthesis.speak(msg);
+
             }
             /* jshint ignore:end */
 

@@ -1,17 +1,15 @@
 'use strict';
 
-angular.module('courses').controller('CoursesSettingsController', ['$scope', '$timeout', 'Cards',
-    function ($scope, $timeout, Cards) {
-
-
+angular.module('courses').controller('CoursesSettingsController', ['$window', '$scope', '$timeout', 'Cards',
+    function ($window, $scope, $timeout, Cards) {
 
 
         $scope.options = {};
 
 
-        $scope.saveSettings = function() {
+        $scope.saveSettings = function () {
 
-            $timeout(function() {
+            $timeout(function () {
                 $scope.course.name = $scope.options.name;
                 $scope.course.description = $scope.options.description;
                 $scope.course.front = $scope.options.front;
@@ -22,14 +20,14 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
         };
 
 
-        $scope.openDueDateCalendar = function($event) {
+        $scope.openDueDateCalendar = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
             $scope.options.openDueDateCalendar = true;
         };
 
-        $scope.openStartDateCalendar = function($event) {
+        $scope.openStartDateCalendar = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
@@ -54,8 +52,7 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
         $scope.options.checks = ['Don\'t Change', 'Computer Checks', 'Self Check', 'Mixed Checks'];
 
 
-
-        var reset = function() {
+        var reset = function () {
             $scope.options.openDueDateCalendar = false;
             $scope.options.openStartDateCalendar = false;
 
@@ -81,15 +78,12 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
         reset();
 
 
-
         $scope.updateFeedback = false;
         $scope.updateCards = function () {
 
 
-
-
             $scope.course.name = $scope.options.name;
-            $scope.course.description = $scope.options.description ;
+            $scope.course.description = $scope.options.description;
             $scope.course.front = $scope.options.front;
             $scope.course.back = $scope.options.back;
 
@@ -126,13 +120,11 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
                 }
 
 
-
-
-                if($scope.options.startDate) {
+                if ($scope.options.startDate) {
                     card.startDate = $scope.options.startDate;
                 }
 
-                if($scope.options.dueDate) {
+                if ($scope.options.dueDate) {
                     card.dueDate = $scope.options.dueDate;
                 }
 
@@ -144,16 +136,25 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
                     card.dueDate = undefined;
                 }
 
-                new Cards(card).$update(function() {
-                    $scope.updateFeedback = true;
-                    $timeout(function () {
-                        $scope.updateFeedback = false;
-                    }, 2000);
-                });
+                new Cards(card).$update();
 
             });
 
-            $scope.course.$update(function() {
+            $scope.course.$update(function () {
+
+                console.log('ga landing');
+                console.log('/courses/:id/edit');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/courses/:id/edit');
+                    $window.ga('send', 'event', 'updating all cards for course');
+                }
+
+                $scope.updateFeedback = true;
+                $timeout(function () {
+                    $scope.updateFeedback = false;
+                }, 2000);
+
                 $scope.course.cards = cards;
                 $scope.course.showCards = showCards;
                 reset();

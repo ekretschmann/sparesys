@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$scope', '$state', '$modal','$stateParams', 'Authentication','Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
-    function ($scope, $state, $modal, $stateParams, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
+angular.module('core').controller('PracticeController', ['$rootScope', '$scope', '$state', '$modal','$stateParams', 'Authentication','Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
+    function ($rootScope, $scope, $state, $modal, $stateParams, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -140,8 +140,6 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$m
 
             new Cards($scope.card).$update(function(c) {
                 $scope.card = c;
-
-                console.log('new version: '+ c.__v);
             });
 
         };
@@ -227,9 +225,12 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$m
 
         $scope.initPractice = function () {
 
+            console.log('init practice');
             var res = CoursesService.serverLoadCards();
+            console.log($stateParams.courseId);
             res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
                 $scope.cards = cards;
+                console.log('setting cards');
                 $scope.inPlay = cards.length;
                 $scope.cards.forEach(function (c) {
 
@@ -238,6 +239,7 @@ angular.module('core').controller('PracticeController', ['$scope', '$state', '$m
                     }
                 });
                 $scope.nextCard();
+
 
             });
 

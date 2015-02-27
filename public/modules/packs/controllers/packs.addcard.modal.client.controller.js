@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('packs').controller('AddCardToPackController', ['$scope', '$state', '$timeout', '$modalInstance', 'pack', 'course', 'Cards', 'Packs', 'JourneyService',
-    function ($scope, $state, $timeout, $modalInstance, pack, course, Cards, Packs, JourneyService) {
+angular.module('packs').controller('AddCardToPackController', ['$window', '$scope', '$state', '$timeout', '$modalInstance', 'pack', 'course', 'Cards', 'Packs', 'JourneyService',
+    function ($window, $scope, $state, $timeout, $modalInstance, pack, course, Cards, Packs, JourneyService) {
         $scope.pack = pack;
         $scope.course = course;
         $scope.options = {};
@@ -104,6 +104,15 @@ angular.module('packs').controller('AddCardToPackController', ['$scope', '$state
             self.answer = $scope.options.answer;
             self.format = $scope.options.format;
             original.$save(function () {
+
+                console.log('ga create card');
+                console.log('/packs/addcardtopack');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/packs/addcardtopack');
+                    $window.ga('send', 'event', 'create pack');
+                }
+
                 $scope.pack.cards.push(original._id);
                 $scope.pack.$update(function () {
                     $state.go($state.$current, null, { reload: true });

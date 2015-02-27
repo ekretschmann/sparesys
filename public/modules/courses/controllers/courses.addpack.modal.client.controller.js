@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('courses').controller('AddPackToCourseController', ['$scope', '$state', '$timeout', '$modalInstance', 'course', 'Packs', 'Courses', 'JourneyService',
-    function ($scope, $state, $timeout, $modalInstance, course, Packs, Courses, JourneyService) {
+angular.module('courses').controller('AddPackToCourseController', ['$window', '$scope', '$state', '$timeout', '$modalInstance', 'course', 'Packs', 'Courses', 'JourneyService',
+    function ($window, $scope, $state, $timeout, $modalInstance, course, Packs, Courses, JourneyService) {
         $scope.course = course;
         $scope.data = {};
         $scope.data.name = '';
@@ -30,6 +30,16 @@ angular.module('courses').controller('AddPackToCourseController', ['$scope', '$s
 
 
             pack.$save(function (response) {
+
+
+                console.log('ga create pack');
+                console.log('/courses/addpacktocourse');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/courses/addpacktocourse');
+                    $window.ga('send', 'event', 'create pack');
+                }
+
                 var packid = response._id;
                 $scope.course.packs.push(packid);
                 $scope.course.$update(function () {

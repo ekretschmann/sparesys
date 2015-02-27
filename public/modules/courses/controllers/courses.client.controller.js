@@ -3,23 +3,23 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesController',
-    ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService', 'JourneyService',
-        function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService, JourneyService) {
+    ['$window', '$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService', 'JourneyService',
+        function ($window, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService, JourneyService) {
 
             $scope.authentication = Authentication;
             $scope.showhelp = false;
             $scope.tabs = [
-                { title:'Course', active: false },
-                { title:'Packs', active: true },
-                { title:'Cards', active: false },
-                { title:'Forward', active: false },
-                { title:'Reverse', active: false },
-                { title:'Images', active: false  }
+                {title: 'Course', active: false},
+                {title: 'Packs', active: true},
+                {title: 'Cards', active: false},
+                {title: 'Forward', active: false},
+                {title: 'Reverse', active: false},
+                {title: 'Images', active: false}
             ];
 
 
             $scope.toggle = true;
-            $scope.toggleIt = function() {
+            $scope.toggleIt = function () {
                 $scope.toggle = !$scope.toggle;
             };
 
@@ -27,16 +27,16 @@ angular.module('courses').controller('CoursesController',
             $scope.MAX_SHOW_CARDS = 12;
 
             $scope.languages = [
-                {name:'---', code:''},
-                {name:'Chinese', code:'zh-CN'},
-                {name:'English (GB)', code:'en-GB'},
-                {name:'English (US)', code:'en-US'},
-                {name:'French', code:'fr-FR'},
-                {name:'German', code:'de-DE'},
-                {name:'Italian', code:'it-IT'},
-                {name:'Japanese', code:'ja-JP'},
-                {name:'Korean', code:'ko-KR'},
-                {name:'Spanish', code:'es-ES'}
+                {name: '---', code: ''},
+                {name: 'Chinese', code: 'zh-CN'},
+                {name: 'English (GB)', code: 'en-GB'},
+                {name: 'English (US)', code: 'en-US'},
+                {name: 'French', code: 'fr-FR'},
+                {name: 'German', code: 'de-DE'},
+                {name: 'Italian', code: 'it-IT'},
+                {name: 'Japanese', code: 'ja-JP'},
+                {name: 'Korean', code: 'ko-KR'},
+                {name: 'Spanish', code: 'es-ES'}
             ];
 
             var selectedIndexFront = 0;
@@ -49,24 +49,23 @@ angular.module('courses').controller('CoursesController',
                 $location.path('/');
             }
 
-            $scope.help = function() {
-                $scope.showhelp = ! $scope.showhelp;
+            $scope.help = function () {
+                $scope.showhelp = !$scope.showhelp;
             };
 
 
-
-            $scope.cleanDatabase = function() {
-                Courses.query(function(courses) {
+            $scope.cleanDatabase = function () {
+                Courses.query(function (courses) {
                     var validCourseIds = [];
-                    courses.forEach(function(course) {
+                    courses.forEach(function (course) {
                         validCourseIds.push(course._id);
                     });
 
-                    Packs.query(function(packs) {
+                    Packs.query(function (packs) {
                         var validPackIds = [];
-                        packs.forEach(function(pack) {
-                            if(validCourseIds.indexOf(pack.course) === -1) {
-                                console.log('deleting pack '+pack._id);
+                        packs.forEach(function (pack) {
+                            if (validCourseIds.indexOf(pack.course) === -1) {
+                                console.log('deleting pack ' + pack._id);
                                 pack.$remove();
                             } else {
                                 validPackIds.push(pack._id);
@@ -74,10 +73,10 @@ angular.module('courses').controller('CoursesController',
 
                         });
 
-                        Cards.query(function(cards) {
-                            cards.forEach(function(card) {
-                                if(validPackIds.indexOf(card.pack) === -1) {
-                                    console.log('deleting card '+card._id);
+                        Cards.query(function (cards) {
+                            cards.forEach(function (card) {
+                                if (validPackIds.indexOf(card.pack) === -1) {
+                                    console.log('deleting card ' + card._id);
                                     card.$remove();
                                 }
                             });
@@ -87,10 +86,10 @@ angular.module('courses').controller('CoursesController',
             };
 
 
-            $scope.createDummyCourse = function() {
+            $scope.createDummyCourse = function () {
 
-                TestDataService.createDummmyCourse(function() {
-                    $state.go($state.$current, null, { reload: true });
+                TestDataService.createDummmyCourse(function () {
+                    $state.go($state.$current, null, {reload: true});
                 });
             };
 
@@ -101,7 +100,7 @@ angular.module('courses').controller('CoursesController',
                     controller: 'CopiedCourseModalController',
                     resolve: {
 
-                        target: function() {
+                        target: function () {
                             return target;
                         },
                         course: function () {
@@ -130,6 +129,16 @@ angular.module('courses').controller('CoursesController',
 
                 // Redirect after save
                 course.$save(function (response) {
+
+                    console.log('ga create course');
+                    console.log($location.url());
+                    if ($window.ga) {
+                        console.log('sending to ga');
+                        $window.ga('send', 'pageview', {page: $location.url()});
+                        $window.ga('send', 'event', 'create course');
+                    }
+
+
                     $location.path('courses/' + response._id + '/edit');
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
@@ -176,9 +185,9 @@ angular.module('courses').controller('CoursesController',
                 if ($scope.authentication.user) {
                     Courses.query({
                         userId: $scope.authentication.user._id
-                    }, function(courses) {
+                    }, function (courses) {
                         $scope.courses = [];
-                        courses.forEach(function(course) {
+                        courses.forEach(function (course) {
                             if (course.visible) {
                                 $scope.courses.push(course);
                             }
@@ -188,7 +197,7 @@ angular.module('courses').controller('CoursesController',
                         $scope.coursesStudent = [];
                         $scope.coursesTeacher = [];
 
-                        $scope.courses.forEach(function(course) {
+                        $scope.courses.forEach(function (course) {
                             if (course.teaching) {
                                 $scope.coursesTeacher.push(course);
                             } else {
@@ -210,12 +219,9 @@ angular.module('courses').controller('CoursesController',
                 $scope.duplicateCourse = false;
 
 
-
-
-
                 $scope.course = Courses.get({
                     courseId: $stateParams.courseId
-                }, function() {
+                }, function () {
 
 
                     var res = CoursesService.serverLoadCards();
@@ -224,7 +230,7 @@ angular.module('courses').controller('CoursesController',
                         $scope.course.cards = cards;
                         $scope.course.showCards = [];
                         var showSize = Math.min(cards.length, $scope.MAX_SHOW_CARDS);
-                        for(var i = 0; i<showSize; i++) {
+                        for (var i = 0; i < showSize; i++) {
                             $scope.course.showCards.push(cards[i]);
                         }
 
@@ -331,14 +337,14 @@ angular.module('courses').controller('CoursesController',
 
             $scope.sortableOptions = {
 
-                start: function(e, ui) {
+                start: function (e, ui) {
                     console.log(ui.item.index());
                 },
                 stop: function (e, ui) {
 
                     console.log(ui.item.index());
                     var showCards = $scope.course.showCards;
-                    $scope.course.$update(function(course) {
+                    $scope.course.$update(function (course) {
                         $scope.course.showCards = showCards;
                     });
 

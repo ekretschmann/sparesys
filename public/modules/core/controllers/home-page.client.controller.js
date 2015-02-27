@@ -3,142 +3,22 @@
 
 // Courses controller
 angular.module('core').controller('HomePageController',
-    ['$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService', 'JourneyService',
-        function ($scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService, JourneyService) {
+    ['$window', '$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService', 'JourneyService',
+        function ($window, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService, JourneyService) {
 
             $scope.authentication = Authentication;
-//            $scope.showhelp = false;
-//
-//
-//
-//            if (!$scope.authentication.user) {
-//                $location.path('/');
-//            }
-//
-//            $scope.help = function() {
-//                $scope.showhelp = ! $scope.showhelp;
-//            };
-//
-//
-//            $scope.cleanDatabase = function() {
-//                Courses.query(function(courses) {
-//                    var validCourseIds = [];
-//                    courses.forEach(function(course) {
-//                        validCourseIds.push(course._id);
-//                    });
-//
-//                    Packs.query(function(packs) {
-//                        var validPackIds = [];
-//                        packs.forEach(function(pack) {
-//                            if(validCourseIds.indexOf(pack.course) === -1) {
-//                                console.log('deleting pack '+pack._id);
-//                                pack.$remove();
-//                            } else {
-//                                validPackIds.push(pack._id);
-//                            }
-//
-//                        });
-//
-//                        Cards.query(function(cards) {
-//                            cards.forEach(function(card) {
-//                                if(validPackIds.indexOf(card.pack) === -1) {
-//                                    console.log('deleting card '+card._id);
-//                                    card.$remove();
-//                                }
-//                            });
-//                        });
-//                    });
-//                });
-//            };
-//
-//            $scope.userHasCreatedPackBefore = function() {
-//                return JourneyService.userHasCreatedPackBefore();
-//            };
-//
-//            $scope.userHasEditedCourseBefore = function() {
-//                return JourneyService.userHasEditedCourseBefore();
-//            };
-//
-//            $scope.userHasCreatedCardBefore = function() {
-//               return JourneyService.userHasCreatedCardBefore();
-//            };
-//
-//            $scope.createDummyCourse = function() {
-//
-//                TestDataService.createDummmyCourse(function() {
-//                    $state.go($state.$current, null, { reload: true });
-//                });
-//            };
-//
-//            $scope.copy = function () {
-//
-//
-//                $modal.open({
-//                    templateUrl: 'copiedCourse.html',
-//                    controller: 'CopiedCourseModalController',
-//                    resolve: {
-//
-//                        course: function () {
-//                            return $scope.course;
-//                        }
-//                    }
-//                });
-//
-//            };
-//
-//            $scope.userHasCreatedCourseBefore = function() {
-//                return JourneyService.userHasCreatedCourseBefore();
-//            };
-//
-//            // Create new Course
-//            $scope.create = function () {
-//                var course = new Courses({
-//                    name: this.name,
-//                    description: this.description
-//                });
-//
-//                // Redirect after save
-//                course.$save(function (response) {
-//                    JourneyService.courseCreated();
-//                    $location.path('courses/' + response._id + '/edit');
-//                }, function (errorResponse) {
-//                    $scope.error = errorResponse.data.message;
-//                });
-//            };
-//
-//            // Remove existing Course
-//            $scope.remove = function (course) {
-//                if (course) {
-//                    course.$remove();
-//
-//                    for (var i in $scope.courses) {
-//                        if ($scope.courses[i] === course) {
-//                            $scope.courses.splice(i, 1);
-//                        }
-//                    }
-//                } else {
-//                    $scope.course.$remove(function () {
-//                        $location.path('courses');
-//                    });
-//                }
-//            };
-//
-//            // Update existing Course
-//            $scope.update = function () {
-//                var course = $scope.course;
-//
-//                course.$update(function () {
-//                    $location.path('courses');
-//                }, function (errorResponse) {
-//                    $scope.error = errorResponse.data.message;
-//                });
-//            };
-//
-//            // Find a list of Courses
-//            $scope.find = function () {
-//                $scope.courses = Courses.query();
-//
-//            };
+
+
+            $scope.ga = function() {
+
+                console.log('ga home');
+                console.log($location.url());
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', {page: $location.url()});
+                    $window.ga('send', 'event', 'user logged in');
+                }
+            };
 
 
             // Find list for current user

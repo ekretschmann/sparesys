@@ -1,7 +1,7 @@
 <section data-ng-controller="AuthenticationController">
 
-    <div data-ng-show="authentication.user" ng-include="'/modules/core/views/partial/home-logged-in.client.view.html'"></div>
-    <div data-ng-hide="authentication.user" ng-include="'/modules/core/views/partial/home-logged-out.client.view.html'"></div>
+    <div data-ng-if="authentication.user" ng-include="'/modules/core/views/partial/home-logged-in.client.view.html'"></div>
+    <div data-ng-if="!authentication.user" ng-include="'/modules/core/views/partial/home-logged-out.client.view.html'"></div>
 
     <div>
         <p>rememberators.com</p>

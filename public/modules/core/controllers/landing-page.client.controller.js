@@ -1,10 +1,22 @@
 'use strict';
 
-angular.module('core').controller('LandingPageController', ['$scope', '$modal', 'Authentication',
-    function ($scope, $modal, Authentication) {
+angular.module('core').controller('LandingPageController', ['$window', '$scope', '$modal', '$location','Authentication',
+    function ($window, $scope, $modal, $location, Authentication) {
         $scope.authentication = Authentication;
 
         $scope.interval = 500;
+
+
+        $scope.ga = function() {
+
+            console.log('ga landing');
+            console.log($location.url());
+            if ($window.ga) {
+                console.log('sending to ga');
+                $window.ga('send', 'pageview', {page: $location.url()});
+                $window.ga('send', 'event', 'landing page');
+            }
+        };
 
         // Set of Photos
         $scope.slides = [

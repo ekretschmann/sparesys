@@ -3,6 +3,7 @@
 
     <div class="tab-header">
         Change Settings for all Cards in {{course.name}}
+        <div data-ng-if="updateFeedback" class="pull-right warning right-padded-s update-animation">cards updated</div>
     </div>
 
     <div class="left-padded-s" data-ng-if="!course.showCards || course.showCards.length === 0">

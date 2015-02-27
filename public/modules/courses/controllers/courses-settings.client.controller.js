@@ -82,7 +82,11 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
 
 
 
+        $scope.updateFeedback = false;
         $scope.updateCards = function () {
+
+
+
 
             $scope.course.name = $scope.options.name;
             $scope.course.description = $scope.options.description ;
@@ -140,7 +144,12 @@ angular.module('courses').controller('CoursesSettingsController', ['$scope', '$t
                     card.dueDate = undefined;
                 }
 
-                new Cards(card).$update();
+                new Cards(card).$update(function() {
+                    $scope.updateFeedback = true;
+                    $timeout(function () {
+                        $scope.updateFeedback = false;
+                    }, 2000);
+                });
 
             });
 

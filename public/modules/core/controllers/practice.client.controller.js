@@ -225,12 +225,10 @@ angular.module('core').controller('PracticeController', ['$rootScope', '$scope',
 
         $scope.initPractice = function () {
 
-            console.log('init practice');
             var res = CoursesService.serverLoadCards();
-            console.log($stateParams.courseId);
-            res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
+            var promise = res.get({courseId: $stateParams.courseId});
+            promise.$promise.then(function (cards) {
                 $scope.cards = cards;
-                console.log('setting cards');
                 $scope.inPlay = cards.length;
                 $scope.cards.forEach(function (c) {
 
@@ -250,6 +248,7 @@ angular.module('core').controller('PracticeController', ['$rootScope', '$scope',
 
 
             });
+            $scope.course = {};
         };
 
         $scope.toDate = function(h) {

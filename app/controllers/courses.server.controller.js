@@ -419,9 +419,7 @@ exports.copyCourse = function (req, res, next, id) {
         copy.speechrecognition = original.speechrecognition;
         copy.master = original._id;
         copy.supervised = isSupervised;
-        console.log(req.query.target);
         if (req.query && req.query.target.toString() === 'teach') {
-            console.log('teaching');
             copy.teaching = true;
         }
         if (!original.slaves) {
@@ -534,11 +532,16 @@ exports.upload = function (req, res, next) {
 
 exports.getCardsForCourse = function (req, res, next, id) {
 
+
+
     var result = [];
+
+
     var expectedCards = 0;
     var packOrder = {};
 
     var loadCourse = Course.find({'_id': id}).exec(function (err) {
+
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -547,8 +550,6 @@ exports.getCardsForCourse = function (req, res, next, id) {
     });
 
     loadCourse.then(function (courses) {
-
-
 
         courses[0].packs.forEach(function (packId) {
             var loadPack = Pack.find({'_id': packId}).exec(function (err) {
@@ -571,7 +572,6 @@ exports.getCardsForCourse = function (req, res, next, id) {
                             }
                         });
                         loadCard.then(function (card) {
-
 
                             result = result.concat(card);
                             if (result.length === expectedCards) {

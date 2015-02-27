@@ -23,6 +23,9 @@ angular.module('core').controller('HomePageController',
 
             // Find list for current user
             $scope.findCourses = function () {
+
+
+
                 if ($scope.authentication.user) {
                     Courses.query({
                         userId: $scope.authentication.user._id

@@ -219,7 +219,8 @@ angular.module('core').controller('PracticeController', ['$rootScope', '$scope',
             if ($scope.mode === 'images' && $scope.card.speechRecognitionImages) {
                 $scope.initSpeech();
             }
-            $state.go($state.current);
+            //$state.go($state.current);
+            $scope.$apply();
         };
 
 

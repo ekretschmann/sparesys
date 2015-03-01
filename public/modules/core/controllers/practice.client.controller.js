@@ -8,7 +8,7 @@ angular.module('core').controller('PracticeController', ['$rootScope', '$scope',
         $scope.time = Date.now();
         $scope.card = {};
         $scope.assess = 'self';
-        $scope.mode = 'reverse';
+        $scope.mode = 'forward';
 
         $scope.answer = {};
 
@@ -200,12 +200,12 @@ angular.module('core').controller('PracticeController', ['$rootScope', '$scope',
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
 
-            //$scope.mode = 'reverse';
+            $scope.mode = 'forward';
 
             $scope.assess = 'self';
-            if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
-                $scope.assess = 'auto';
-            }
+            //if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
+            //    $scope.assess = 'auto';
+            //}
 
             //$scope.assess = 'auto';
 
@@ -220,7 +220,7 @@ angular.module('core').controller('PracticeController', ['$rootScope', '$scope',
                 $scope.initSpeech();
             }
             //$state.go($state.current);
-            $scope.$apply();
+            //$scope.$apply();
         };
 
 

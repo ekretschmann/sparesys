@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('LandingPageController', ['$window', '$scope', '$modal', '$location','Authentication',
-    function ($window, $scope, $modal, $location, Authentication) {
+angular.module('core').controller('LandingPageController', ['$window', '$scope', '$modal', 'Authentication',
+    function ($window, $scope, $modal, Authentication) {
         $scope.authentication = Authentication;
 
         $scope.interval = 500;
@@ -10,10 +10,10 @@ angular.module('core').controller('LandingPageController', ['$window', '$scope',
         $scope.ga = function() {
 
             console.log('ga landing');
-            console.log($location.url());
+            console.log('/');
             if ($window.ga) {
                 console.log('sending to ga');
-                $window.ga('send', 'pageview', {page: $location.url()});
+                $window.ga('send', 'pageview', '/');
                 $window.ga('send', 'event', 'landing page');
             }
         };

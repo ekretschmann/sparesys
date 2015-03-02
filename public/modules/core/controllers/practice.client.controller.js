@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', [ '$scope', '$state', '$modal','$stateParams', 'Authentication','Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
-    function ($scope, $state, $modal, $stateParams, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
+angular.module('core').controller('PracticeController', ['$window', '$location', '$scope', '$state', '$modal','$stateParams', 'Authentication','Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
+    function ($window, $location, $scope, $state, $modal, $stateParams, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -138,6 +138,7 @@ angular.module('core').controller('PracticeController', [ '$scope', '$state', '$
 
             $scope.card.history.push({when: time, assessment: assessment, hrt:$scope.card.hrt});
 
+            $scope.card.__v = undefined;
 
             new Cards($scope.card).$update();
 
@@ -221,10 +222,28 @@ angular.module('core').controller('PracticeController', [ '$scope', '$state', '$
             }
             //$state.go($state.current);
             //$scope.$apply();
+
+            console.log('ga next card');
+            console.log('/practice/card/:id');
+            if ($window.ga) {
+                console.log('sending to ga');
+                $window.ga('send', 'pageview', '/practice/card/:id');
+                $window.ga('send', 'event', 'next card');
+            }
         };
 
 
         $scope.initPractice = function () {
+
+
+                console.log('ga start practicing');
+                console.log('/practice/:id');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/practice/:id');
+                    $window.ga('send', 'event', 'start practicing');
+                }
+
 
             var res = CoursesService.serverLoadCards();
             var promise = res.get({courseId: $stateParams.courseId});
@@ -281,7 +300,7 @@ angular.module('core').controller('PracticeController', [ '$scope', '$state', '$
             card.lastRep = undefined;
             card.hrt = 0.0;
 
-
+            card.__v = undefined;
             new Cards(card).$update();
 
 

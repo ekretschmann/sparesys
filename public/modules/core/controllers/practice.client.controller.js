@@ -2,13 +2,14 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$rootScope', '$scope', '$state', '$modal','$stateParams', 'Authentication','Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
-    function ($rootScope, $scope, $state, $modal, $stateParams, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
+angular.module('core').controller('PracticeController', [ '$scope', '$state', '$modal','$stateParams', 'Authentication','Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
+    function ($scope, $state, $modal, $stateParams, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
         $scope.assess = 'self';
         $scope.mode = 'forward';
+        $scope.state = 'question';
 
         $scope.answer = {};
 
@@ -138,9 +139,7 @@ angular.module('core').controller('PracticeController', ['$rootScope', '$scope',
             $scope.card.history.push({when: time, assessment: assessment, hrt:$scope.card.hrt});
 
 
-            new Cards($scope.card).$update(function(c) {
-                $scope.card = c;
-            });
+            new Cards($scope.card).$update();
 
         };
 
@@ -200,12 +199,13 @@ angular.module('core').controller('PracticeController', ['$rootScope', '$scope',
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
 
-            $scope.mode = 'forward';
+            //$scope.mode = 'forward';
 
             $scope.assess = 'self';
-            //if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
-            //    $scope.assess = 'auto';
-            //}
+
+            if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
+                $scope.assess = 'auto';
+            }
 
             //$scope.assess = 'auto';
 
@@ -310,6 +310,31 @@ angular.module('core').controller('PracticeController', ['$rootScope', '$scope',
         };
 
 
+        //$scope.showAnswer = function () {
+        //    $scope.state = 'answer';
+        //};
+        //
+        //$scope.processCard = function (rating) {
+        //    $scope.recordRate(Date.now(), rating);
+        //    $scope.state = 'question';
+        //    $scope.nextCard();
+        //};
 
+
+        //hotkeys.bindTo($scope)
+        //    .add({
+        //        combo: 'ctrl+w',
+        //        description: 'blah blah',
+        //        callback: function() {
+        //            console.log('ctrl w');
+        //        }
+        //    })
+        //    .add ({
+        //    combo: 'ctrl+r',
+        //    description: 'blah blah',
+        //    callback: function() {
+        //        console.log('ctrl r');
+        //    }
+        //});
 
     }]);

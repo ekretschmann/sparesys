@@ -10,10 +10,10 @@ angular.module('core').controller('LandingPageController', ['$window', '$scope',
         $scope.ga = function() {
 
             console.log('ga landing');
-            console.log('/');
+            console.log('/landing');
             if ($window.ga) {
                 console.log('sending to ga');
-                $window.ga('send', 'pageview', '/');
+                $window.ga('send', 'pageview', '/landing');
                 $window.ga('send', 'event', 'landing page');
             }
         };

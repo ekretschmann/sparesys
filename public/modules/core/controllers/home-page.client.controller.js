@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('HomePageController',
-    ['$window', '$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService', 'JourneyService',
-        function ($window, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService, JourneyService) {
+    ['$window', '$scope', '$stateParams', '$state', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService', 'JourneyService',
+        function ($window, $scope, $stateParams, $state, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService, JourneyService) {
 
             $scope.authentication = Authentication;
 
@@ -12,10 +12,10 @@ angular.module('core').controller('HomePageController',
             $scope.ga = function() {
 
                 console.log('ga home');
-                console.log($location.url());
+                console.log('/home');
                 if ($window.ga) {
                     console.log('sending to ga');
-                    $window.ga('send', 'pageview', {page: $location.url()});
+                    $window.ga('send', 'pageview', '/home');
                     $window.ga('send', 'event', 'user logged in');
                 }
             };

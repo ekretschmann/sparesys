@@ -45,6 +45,17 @@ angular.module('courses').controller('CoursesController',
             $scope.languageBack = $scope.languages[selectedIndexBack];
 
 
+            $scope.ga = function() {
+
+                console.log('ga seraching');
+                console.log('/courses/search');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/courses/search');
+                    $window.ga('send', 'event', 'search course');
+                }
+            };
+
             if (!$scope.authentication.user) {
                 $location.path('/');
             }

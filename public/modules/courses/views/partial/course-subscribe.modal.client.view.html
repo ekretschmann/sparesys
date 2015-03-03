@@ -1,0 +1,42 @@
+<script type="text/ng-template" id="subscribeToCourse.html">
+
+    <div class="modal-body">
+        <div class="content-header center-aligned">
+            <div class="title">
+                Subscribe to Course
+            </div>
+
+            <div class="title">
+                <div class="title center-aligned font-m">
+                    <span class="warning">{{course.name}}</span>
+                </div>
+
+            </div>
+        </div>
+
+        <form class="form-horizontal" >
+            <fieldset>
+
+
+                <div class="center-aligned top-padded-m">
+                    <button class="btn btn-rememberators"
+                            type="submit"
+                            ng-click="subscribeAsTeacher()"
+                            data-ng-if="authentication.user.roles.indexOf('teacher') > -1"
+                            >
+                        As Teacher
+                    </button>
+
+                    <button class="btn btn-rememberators"
+                            type="submit"
+                            ng-click="subscribeAsStudent()"
+                            >
+                        As Student
+                    </button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+
+
+</script>

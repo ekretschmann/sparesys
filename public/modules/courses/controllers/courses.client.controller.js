@@ -308,6 +308,18 @@ angular.module('courses').controller('CoursesController',
             };
 
 
+            $scope.subscribePopup = function(course) {
+                $modal.open({
+                    templateUrl: 'subscribeToCourse.html',
+                    controller: 'SubscribeToCourseController',
+                    resolve: {
+                        course: function () {
+                            return course;
+                        }
+                    }
+                });
+            };
+
             $scope.addPackToCoursePopup = function (size) {
                 $modal.open({
                     templateUrl: 'addPackToCourse.html',

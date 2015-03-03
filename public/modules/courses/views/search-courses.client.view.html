@@ -1,6 +1,9 @@
 <section data-ng-controller="CoursesController" data-ng-init="findPublished()">
 
 
+    <div ng-include="'/modules/courses/views/partial/course-subscribe.modal.client.view.html'"></div>
+
+
     <div class="content-header">
         <div class="pull-right">
             Search: <input class="search" ng-model="searchText">
@@ -32,7 +35,8 @@
         <tbody>
         <tr data-ng-repeat="course in courses | filter:searchText">
             <td class="left-padded-s right-padded-m">
-                <a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>
+                <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
+                <a class="pointer" data-ng-click="subscribePopup(course)">{{course.name}}</a>
             </td>
             <td class="right-padded-s">{{course.description}}</td>
         </tr>

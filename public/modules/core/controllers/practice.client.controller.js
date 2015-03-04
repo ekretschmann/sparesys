@@ -200,7 +200,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
 
-            $scope.mode = 'images';
+            //$scope.mode = 'images';
 
             $scope.assess = 'self';
 

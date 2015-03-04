@@ -14,6 +14,42 @@
             </div>
         </div>
 
+        <div class="content-section">
+
+            <div data-ng-if="course.packs.length === 0">
+                    This is an empty course.
+            </div>
+
+            <div data-ng-if="course.packs.length > 0">
+
+                    <table id="searchTextResults" class="table-striped expands">
+                        <thead>
+                        <tr>
+                            <th class="right-padded left-padded-s expands">Pack</th>
+                            <th class="right-padded-s">Cards</th>
+                            <!--<th class= "sparesys-view-courses-description-column">Description</th>-->
+                            <!--<th>Created</th>-->
+                        </tr>
+                        </thead>
+                        <tbody data-ng-model="course.packs">
+                        <tr data-ng-repeat="packId in course.packs"
+                            data-ng-controller="PacksController"
+                            data-ng-init="findById(packId)">
+
+                            <td class="expands  left-padded-s right-padded">
+                                {{pack.name}}
+                            </td>
+                            <td class="right-padded-s right-aligned">
+                                {{pack.cards.length}}
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+
+
+            </div>
+        </div>
+
         <form class="form-horizontal" >
             <fieldset>
 

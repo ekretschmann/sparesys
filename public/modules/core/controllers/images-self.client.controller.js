@@ -8,6 +8,12 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
         $scope.state = 'question';
 
 
+        $scope.$watch('online', function(newStatus) {
+            $scope.online = newStatus;
+
+        });
+
+
         $scope.$watch('card', function() {
             if ($scope.card.imagesReadFront) {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
@@ -22,7 +28,6 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
 
         $scope.showAnswer = function () {
             $scope.state = 'answer';
-            $state.go($state.current);
         };
 
         $document.bind('keypress', function (event) {

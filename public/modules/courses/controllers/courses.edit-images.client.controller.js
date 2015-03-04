@@ -32,17 +32,17 @@ angular.module('packs').controller('EditCourseImagesController', ['$scope', 'Car
 
 
                 if ($scope.options.readFront === 'on') {
-                    card.readFrontForward = true;
+                    card.imagesReadFront = true;
                 }
                 if ($scope.options.readFront === 'off') {
-                    card.readFrontForward = false;
+                    card.imagesReadFront = false;
                 }
 
                 if ($scope.options.readBack === 'on') {
-                    card.readBackForward = true;
+                    card.imagesReadBack = true;
                 }
                 if ($scope.options.readBack === 'off') {
-                    card.readBackForward = false;
+                    card.imagesReadBack = false;
                 }
 
                 if ($scope.options.speech === 'on') {

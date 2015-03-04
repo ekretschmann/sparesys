@@ -25,18 +25,33 @@
 
         <div class="edit-card left-aligned">
             <div>
-            <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+                <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
             </div>
 
         </div>
-
 
 
         <div class="question-box">
 
 
             <div data-ng-if="slides && slides.length > 0">
-                <imagecarousel slides="slides" size="200"/>
+                <imagecarousel slides="slides" size="200" data-ng-if="online"/>
+                <div class="question-box" style="position: relative" data-ng-if="!online">
+            <span class="question">
+            [{{card.question}}]
+                </span>
+
+                </div>
+
+                <span data-ng-if="card.imagesReadFront && card.languageFront" class="left-padded-s top-padded-s"
+                      style="position: absolute;">
+
+                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
+                </span>
+
+
             </div>
 
 
@@ -48,7 +63,7 @@
                     </div>
                 </div>
 
-                <infobox logo="woman" >
+                <infobox logo="woman">
                     This card has the image mode switched on but has no images attached. Please
                     edit this card and configure which images to show.
                 </infobox>
@@ -57,15 +72,15 @@
             </div>
 
             <div data-ng-if="card.imagesReadFront && card.languageFront" class="left-padded-s top-padded-s ">
-                    <a  href="" data-ng-click="playSound(card.languageFront, card.question)">
-                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-                    </a>
+                <a href="" data-ng-click="playSound(card.languageFront, card.question)">
+                    <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                </a>
 
-                    <a  href="" tooltip="{{card.question}}">
-                        <i class="glyphicon glyphicon-question-sign"></i>
-                    </a>
+                <a href="" tooltip="{{card.question}}">
+                    <i class="glyphicon glyphicon-question-sign"></i>
+                </a>
 
-                </div>
+            </div>
 
 
             <div data-ng-if="state === 'answer'">
@@ -73,6 +88,12 @@
 
                 <div class="correct-answer top-padded-m">
                     {{card.answer}}
+                </div>
+                <div data-ng-if="card.imagesReadBack && card.languageBack" class="center-aligned">
+
+                    <a href="" data-ng-click="playSound(card.languageBack, card.answer)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
                 </div>
 
 

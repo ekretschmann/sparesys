@@ -45,15 +45,19 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
 
         };
 
-        $scope.setupClassPopup = function (schoolclass) {
+        $scope.setupClassPopup = function (schoolclass, school) {
 
             $scope.schoolclass = schoolclass;
+            $scope.school = school;
             $modal.open({
                 templateUrl: 'setupClass.html',
                 controller: 'SetupClassController',
                 resolve: {
                     schoolclass: function () {
                         return $scope.schoolclass;
+                    },
+                    school: function () {
+                        return $scope.school;
                     }
                 }
             });

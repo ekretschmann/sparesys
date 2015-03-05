@@ -154,13 +154,18 @@ exports.update = function (req, res) {
     var user = req.user;
     var message = null;
 
+
     // For security measurement we remove the roles from the req.body object
 //	delete req.body.roles;
+
 
     function updateUser(theUser) {
         theUser = _.extend(theUser, req.body);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
+        if (theUser.teachesClasses === '') {
+            theUser.teachesClasses = undefined;
+        }
         theUser.save(function (err) {
 
             if (err) {
@@ -184,6 +189,7 @@ exports.update = function (req, res) {
             User.findById(req.body._id, '-salt -password -__v -provider', function (err, otherUser) {
 
                 if (!err && otherUser) {
+                    console.log(otherUser);
                     if (user.roles.indexOf('admin') === -1) {
                         return res.send(400, {
                             message: 'not authorized'
@@ -192,6 +198,8 @@ exports.update = function (req, res) {
 
                         updateUser(otherUser);
                     }
+                } else {
+                    console.log(err);
                 }
             });
         } else {

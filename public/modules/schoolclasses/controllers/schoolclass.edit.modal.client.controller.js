@@ -1,9 +1,10 @@
 'use strict';
 
-angular.module('schoolclasses').controller('EditClassController', ['$scope', '$location', '$timeout','$state', '$modalInstance', 'schoolclass',
-    function($scope, $location, $timeout, $state, $modalInstance, schoolclass) {
+angular.module('schoolclasses').controller('EditClassController', ['$scope', '$location', '$timeout','$state', '$modalInstance', 'schoolclass', 'school',
+    function($scope, $location, $timeout, $state, $modalInstance, schoolclass, school) {
 
         $scope.schoolclass = schoolclass;
+        $scope.school = school;
         $scope.name = {};
 
 

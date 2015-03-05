@@ -94,6 +94,9 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
             if(!$scope.otherUser.administersSchools) {
                 $scope.otherUser.administersSchools = [];
             }
+            if(!$scope.otherUser.teachesClasses) {
+                $scope.otherUser.teachesClasses = [];
+            }
             $scope.otherUser.$update(function () {
                 $location.path('users');
             });

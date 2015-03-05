@@ -26,5 +26,7 @@ angular.module('schoolclasses').controller('EditClassController', ['$scope', '$l
             $scope.schoolclass.$update();
             $modalInstance.dismiss('cancel');
         };
+
+
 	}
 ]);

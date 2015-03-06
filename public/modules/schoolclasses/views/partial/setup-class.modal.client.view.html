@@ -1,4 +1,4 @@
-<script type="text/ng-template" id="setupClass.html">
+<script type="text/ng-template" id="setupClass.html" >
 
 
     <div class="modal-body">
@@ -28,17 +28,16 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr data-ng-if="school.teachers.length === 0">
+                            <tr data-ng-if="availableTeachers.length === 0">
                                 <td class="left-padded-s">none</td>
                             </tr>
 
 
-                            <tr data-ng-repeat="teacher in school.teachers">
+                            <tr data-ng-repeat="teacher in availableTeachers">
 
                                 <td class="right-padded top-padded-s left-padded-s">
 
 
-                                    <span data-ng-if="schoolclass.teachers.indexOf(teacher) === -1">
                                         <a href=""
 
                                            data-ng-click="addTeacherToClass(teacher)">
@@ -49,8 +48,6 @@
                                   data-ng-init="findById(teacher)">
                                 {{displayName}}
                             </span>
-                                    </span>
-                                    &nbsp;
                                 </td>
 
                             </tr>
@@ -107,16 +104,15 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr data-ng-if="school.students.length === 0">
+                            <tr data-ng-if="availableStudents.length === 0">
                                 <td class="left-padded-s top-padded-s">none</td>
                             </tr>
 
 
-                            <tr data-ng-repeat="student in school.students">
+                            <tr data-ng-repeat="student in availableStudents">
 
 
                                 <td class="left-padded-s top-padded-s">
-                                    <span data-ng-if="schoolclass.students.indexOf(student) === -1">
                                     <a href=""
                                        data-ng-click="addStudentToClass(student)">
                                         <i class="small glyphicon glyphicon-plus-sign">
@@ -126,8 +122,7 @@
                                   data-ng-init="findById(student)">
                             {{displayName}}
                             </span>
-                                        </span>
-                                    &nbsp;
+
                                 </td>
                             </tr>
                             </tbody>

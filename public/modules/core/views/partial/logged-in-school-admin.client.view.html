@@ -11,7 +11,6 @@
 
     <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
     <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="title">School Administration</div>
         <infobox logo="woman" position="right">
                 If you are planning to user Rememberators for your school, go to your
                 <a href="" data-ng-click="settingsPopup()">settings</a> in the {{user.displayName}} menu and register as
@@ -54,7 +53,6 @@
             </div>
 
             <div data-ng-if="authentication.user.roles.indexOf('help') === -1">
-                <div class="infobox-title">School Administration</div>
                 You are the administrator of the following School<span
                     data-ng-if="authentication.user.administersSchools.length>1">s</span>:
             </div>

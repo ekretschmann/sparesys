@@ -64,8 +64,8 @@
                     <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
                         <infobox logo="man">
                             Your school administrator has set you up with the classes below. Choose
-                            the <b>courses</b> action to assing courses to a class. You can also
-                            look at the <b>statistics</b> of how your class is progressing.
+                            the link to a class to assign course work or look how the students in
+                            the class are progressing.
                         </infobox>
                     </section>
 
@@ -80,17 +80,17 @@
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="schoolclass in schoolclasses">
-                            <td class="right-padded-m left-padded-s nowrap">
+                            <td class="right-padded-m left-padded-s nowrap top-padded-s">
                                 <a class="right-padded-m" href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a>
                             </td>
 
-                            <td class="right-padded-s expands nowrap" >
+                            <td class="right-padded-s expands nowrap  top-padded-s" >
                                 <span data-ng-repeat="student in schoolclass.students">
                                     <span>{{student.displayName}}</span><span data-ng-if="$index < schoolclass.students.length-1">, </span>
                                 </span>
                             </td>
 
-                            <td class="right-aligned right-padded-s nowrap">
+                            <td class="right-aligned right-padded-s nowrap  top-padded-s">
 
                                 <span data-ng-repeat="course in schoolclass.courses">
                                     <span>{{course.name}}</span><span data-ng-if="$index < schoolclass.courses.length-1">, </span>

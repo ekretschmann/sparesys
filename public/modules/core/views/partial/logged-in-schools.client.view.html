@@ -1,9 +1,23 @@
 <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
 
     <div class="content-header">
-        <div class="infobox-title">Teaching</div>
+        <div class="infobox-title">You Teach</div>
 
         <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
+
+
+
+            <div class="warning top-margin-l" style="text-align: justify" data-ng-if="coursesTeacher.length===0">
+                ... nothing so far! Please choose or create the courses you would like to teach. Use the
+                <a href="/#!/courses/search">search</a> or <a href="/#!/courses/create">create</a> functionality in the course
+                menu to compile the coursework for your students.
+            </div>
+
+            <div class="top-padded-m">
+            <span data-ng-repeat="course in coursesTeacher">
+                <span ><a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></span><span data-ng-if="$index < coursesTeacher.length-1">, </span>
+            </span>
+            </div>
 
 
             <div data-ng-if="schools.length === 0">
@@ -60,7 +74,7 @@
                         <tr>
                             <th class="right-padded-m left-padded-s">Class</th>
                             <th class="right-padded-m ">Students</th>
-                            <th class="right-padded-m left-padded-s">Courses</th>
+                            <th class="right-padded-s left-padded-s right-aligned">Courses</th>
                             <!--<th class="right-padded-m">Actions</th>-->
                         </tr>
                         </thead>
@@ -79,7 +93,7 @@
                             <td class="right-aligned right-padded-s nowrap">
 
                                 <span data-ng-repeat="course in schoolclass.courses">
-                                    {{course.name}}
+                                    <span>{{course.name}}</span><span data-ng-if="$index < schoolclass.courses.length-1">, </span>
                                 </span>
                                 <!--<a href="#!/schoolclasses/{{schoolclass._id}}/teach">staistics</a>-->
                             </td>
@@ -93,32 +107,7 @@
             </div>
 
 
-            <div class="warning top-margin-l" style="text-align: justify" data-ng-if="coursesTeacher.length===0">
-                You have not selected or created any courses you would like to teach. Please use the
-                <a href="/#!/courses/search">search</a> or <a href="/#!/courses/create">create</a> functionality in the course menu to collect the courses you would
-                like to assign to your students.
-            </div>
 
-            <table data-ng-if="coursesTeacher.length>0" class="table-striped top-margin-l">
-                <thead>
-                <tr>
-                    <th class="left-padded-s">You are a teacher of</th>
-                    <th class="right-padded-s right-aligned">Actions</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="course in coursesTeacher">
-                    <td class="left-padded-s right-padded-m expands">
-                        {{course.name}}
-                    </td>
-
-                    <td class="nowrap">
-                        <a class="right-padded-m" data-ng-href="#!/courses/{{course._id}}/stats">statistics</a>
-                        <a class="right-padded-s" data-ng-href="#!/courses/{{course._id}}/edit">edit</a>
-                    </td>
-                </tr>
-                </tbody>
-            </table>
 
         </div>
 

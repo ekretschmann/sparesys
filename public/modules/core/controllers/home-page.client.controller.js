@@ -21,6 +21,20 @@ angular.module('core').controller('HomePageController',
             };
 
 
+            $scope.getCoursename = function(course) {
+
+                console.log('xxxxx');
+                //for(var i=0; i<$scope.courses.length; i++) {
+                //    var c = $scope.courses[i];
+                //
+                //    console.log(c.name);
+                //    if (c._id === course) {
+                //        return c.name;
+                //    }
+                //}
+                return 'unknown';
+            };
+
             // Find list for current user
             $scope.findCourses = function () {
 

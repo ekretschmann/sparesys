@@ -59,18 +59,29 @@
                         <thead>
                         <tr>
                             <th class="right-padded-m left-padded-s">Class</th>
-                            <th class="right-padded-m">Actions</th>
+                            <th class="right-padded-m ">Students</th>
+                            <th class="right-padded-m left-padded-s">Courses</th>
+                            <!--<th class="right-padded-m">Actions</th>-->
                         </tr>
                         </thead>
                         <tbody>
                         <tr data-ng-repeat="schoolclass in schoolclasses">
-                            <td class="right-padded-m left-padded-s expands nowrap">
-                                {{schoolclass.name}}
+                            <td class="right-padded-m left-padded-s nowrap">
+                                <a class="right-padded-m" href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a>
+                            </td>
+
+                            <td class="right-padded-s expands nowrap" >
+                                <span data-ng-repeat="student in schoolclass.students">
+                                    <span data-ng-controller="UsersController" data-ng-init="findById(student)">{{displayName}}</span><span data-ng-if="$index < schoolclass.students.length-1">, </span>
+                                </span>
                             </td>
 
                             <td class="right-aligned right-padded-s nowrap">
-                                <a class="right-padded-m" href="#!/schoolclasses/{{schoolclass._id}}/teach">courses</a>
-                                <a href="#!/schoolclasses/{{schoolclass._id}}/teach">staistics</a>
+
+                                <span data-ng-repeat="course in schoolclass.courses">
+                                    {{getCoursename(course)}}
+                                </span>
+                                <!--<a href="#!/schoolclasses/{{schoolclass._id}}/teach">staistics</a>-->
                             </td>
 
                         </tr>

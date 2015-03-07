@@ -38,7 +38,6 @@ var getErrorMessage = function (err) {
 exports.create = function (req, res) {
 
     var card = new Card(req.body);
-    console.log('creating card: '+card.question);
 
 
 

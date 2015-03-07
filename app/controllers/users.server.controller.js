@@ -189,7 +189,6 @@ exports.update = function (req, res) {
             User.findById(req.body._id, '-salt -password -__v -provider', function (err, otherUser) {
 
                 if (!err && otherUser) {
-                    console.log(otherUser);
                     if (user.roles.indexOf('admin') === -1) {
                         return res.send(400, {
                             message: 'not authorized'

@@ -142,7 +142,6 @@ exports.list = function (req, res) {
                         message: getErrorMessage(err)
                     });
                 } else {
-                    console.log(schoolclasses);
                     res.jsonp(schoolclasses);
                 }
             });

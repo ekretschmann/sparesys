@@ -69,9 +69,6 @@ exports.update = function (req, res) {
     pack.updated = Date.now();
 
 
-    pack.cards.forEach(function(c) {
-        console.log(c.question);
-    });
 
     if (pack.slaves) {
         pack.slaves.forEach(function (slaveId) {

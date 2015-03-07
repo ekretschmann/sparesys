@@ -86,7 +86,8 @@
             </li>
 
 
-            <li ui-route="/courses" ng-class="{active: $uiRoute}" class="dropdown">
+            <li ui-route="/courses" ng-class="{active: $uiRoute}" class="dropdown"
+                data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
                 <a href="#" class="dropdown-toggle font-m" data-toggle="dropdown">
                     Courses <b class="caret"></b>
                 </a>
@@ -105,9 +106,12 @@
                         <a href="/#!/courses/search" class="font-m">Search</a>
                     </li>
                     <li class="divider"></li>
-                    <li>
-                        <a href="/#!/schools/subscribe/student" class="font-m">School Subscriptions</a>
+
+                    <li data-ng-repeat="course in courses">
+                        <a href="/#!/courses/{{course._id}}/edit" class="font-m">{{course.name}}</a>
                     </li>
+
+
                     <!--<li class="divider"></li>-->
                     <!--<li>-->
                     <!--<a href="/#!/courses-info">Info</a>-->
@@ -133,6 +137,9 @@
 
                     <li data-ng-if="authentication.user.roles.indexOf('help') === -1">
                         <a href="" data-ng-click="toggleHelp()" class="font-m">Turn On Help</a>
+                    </li>
+                    <li>
+                        <a href="/#!/schools/subscribe/student" class="font-m">Find School</a>
                     </li>
 
                    <li data-ng-controller="HomePageController" data-ng-show="authentication.user.provider === 'local'">

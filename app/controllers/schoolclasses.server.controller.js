@@ -133,14 +133,16 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
 
+
         if (req.query.teacher) {
 
-            Schoolclass.find({'teachers': req.query.teacher}).exec(function (err, schoolclasses) {
+            Schoolclass.find({'teachers': req.query.teacher}).populate('students', 'displayName').populate('courses').exec(function (err, schoolclasses) {
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)
                     });
                 } else {
+                    console.log(schoolclasses);
                     res.jsonp(schoolclasses);
                 }
             });

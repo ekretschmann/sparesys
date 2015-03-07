@@ -24,18 +24,23 @@ var SchoolclassSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
-    students: {
-        type: [Schema.Types.ObjectId],
-        default: []
-    },
+    students: [{
+        type: Schema.ObjectId,
+        ref: 'User'
+    }],
     teachers: {
         type: [Schema.Types.ObjectId],
         default: []
     },
-    courses: {
-        type: [Schema.Types.ObjectId],
-        default: []
-    },
+    //courses: {
+    //    type: [Schema.Types.ObjectId],
+    //    default: []
+    //},
+    courses:
+        [{
+        type: Schema.ObjectId,
+        ref: 'Course'
+    }],
     school: {
         type: Schema.ObjectId
     }

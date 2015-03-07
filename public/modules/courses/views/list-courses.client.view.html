@@ -92,28 +92,28 @@
             </thead>
             <tbody>
             <tr data-ng-repeat="course in courses | filter:searchText">
-                <td class="left-padded-s right-padded-s">
+                <td class="left-padded-s right-padded-s top-padded-s">
                     <a href="" data-ng-if="!course.supervised">
                         <i data-ng-click="areYouSureToDeleteCourse(course)"
-                           class="glyphicon glyphicon-remove-sign">
+                           class="small glyphicon glyphicon-remove-sign">
                         </i>
                     </a>
                 </td>
-                <td class="right-padded-m nowrap">
+                <td class="right-padded-m nowrap  top-padded-s">
 
                     <a data-ng-if="!course.supervised || authentication.user.roles.indexOf('debug-viewer') !== -1"
                        data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
                 <span class="text-muted"
                       data-ng-if="course.supervised && authentication.user.roles.indexOf('debug-viewer') === -1">{{course.name}}</span>
                 </td>
-                <td class="right-padded-m expands">
+                <td class="right-padded-m expands top-padded-s">
 
                     <span data-ng-if="!course.supervised">{{course.description}}</span>
                 <span data-ng-if="course.supervised"
                       class="text-muted">{{course.description}} (managed by teacher)</span>
 
                 </td>
-                <td class="right-aligned right-padded-s">
+                <td class="right-aligned right-padded-s top-padded-s">
                     <span data-ng-if="!course.supervised">{{course.created | date:'shortDate'}}</span>
                 <span data-ng-if="course.supervised"
                       class="text-muted">{{course.created | date:'shortDate'}}</span>

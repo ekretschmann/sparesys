@@ -105,7 +105,7 @@
                     <li>
                         <a href="/#!/courses/search" class="font-m">Search</a>
                     </li>
-                    <li class="divider"></li>
+                    <li class="divider" data-ng-if="courses.length > 0"></li>
 
                     <li data-ng-repeat="course in courses">
                         <a href="/#!/courses/{{course._id}}/edit" class="font-m">{{course.name}}</a>

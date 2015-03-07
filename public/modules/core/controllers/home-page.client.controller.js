@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('HomePageController',
-    ['$window', '$scope', '$stateParams', '$state', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService', 'JourneyService',
-        function ($window, $scope, $stateParams, $state, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService, JourneyService) {
+    ['$window', '$location','$scope', '$stateParams', '$state', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService', 'JourneyService',
+        function ($window, $location, $scope, $stateParams, $state, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService, JourneyService) {
 
             $scope.authentication = Authentication;
 
@@ -21,6 +21,10 @@ angular.module('core').controller('HomePageController',
             };
 
 
+
+            $scope.practice = function(course) {
+                $location.path('/practice/'+course._id);
+            };
 
             // Find list for current user
             $scope.findCourses = function () {

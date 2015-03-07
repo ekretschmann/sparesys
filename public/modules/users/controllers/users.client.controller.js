@@ -102,6 +102,8 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
             });
         };
 
+
+
         // Role management
         $scope.roles = ['admin', 'user', 'upload-course', 'debug-viewer', 'teacher', 'headmaster', 'help'];
 

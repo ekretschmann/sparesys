@@ -6,32 +6,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.authentication = Authentication;
 
-        $scope.addCourseForStudent = function (studentId, courseId) {
-            Courses.query({
-                userId: studentId
-            }).$promise.then(function (studentCourses) {
-//                    studentCourses.forEach(function (studentCourse) {
-//                        console.log(studentCourse.name);
-//                    });
 
-                    var setVisible = false;
-                    studentCourses.forEach(function (studentCourse) {
-
-                        // if the course existed, then just set it visible
-                        if ( studentCourse.master === courseId) {
-                            studentCourse.supervised = true;
-                            studentCourse.visible = true;
-                            studentCourse.$update();
-                            setVisible = true;
-                        }
-                    });
-                    if (!setVisible) {
-                        var res = CoursesService.copyCourseFor(studentId);
-                        res.get({courseId: courseId});
-
-                    }
-                });
-        };
 
         $scope.addCourseToClass = function (course) {
 

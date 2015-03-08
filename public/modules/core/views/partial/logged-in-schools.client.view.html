@@ -81,7 +81,8 @@
                         <tbody>
                         <tr data-ng-repeat="schoolclass in schoolclasses">
                             <td class="right-padded-m left-padded-s nowrap top-padded-s">
-                                <a class="right-padded-m" href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a>
+                                <!--<a class="right-padded-m" href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a>-->
+                                <a class="right-padded-m" href="" data-ng-click="assignCoursesPopup(schoolclass, school)">{{schoolclass.name}}</a>
                             </td>
 
                             <td class="right-padded-s expands nowrap  top-padded-s" >

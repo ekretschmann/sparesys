@@ -1,4 +1,4 @@
-<script type="text/ng-template" id="setupClass.html" >
+<script type="text/ng-template" id="setupClass.html">
 
 
     <div class="modal-body">
@@ -9,14 +9,30 @@
 
             <div class="title">
                 <div class="title center-aligned font-m">
-                    <span class="warning">{{course.name}}</span>
+                    <span class="warning">{{schoolclass.name}}</span>
                 </div>
 
             </div>
         </div>
 
 
-        <div class="content-section">
+        <div class="content-section" data-ng-if="authentication.user.roles.indexOf('help') > -1">
+
+            <infobox logo="woman">
+                Use the <a href="">
+                <i class=" small glyphicon glyphicon-plus-sign">
+                </i></a>
+                and
+
+                <a href="">
+                    <i class=" small glyphicon glyphicon-minus-sign">
+                    </i>
+                </a>
+                icons to move the teachers and students of {{schoolclass.name}}
+                to the right. All coursework for {{schoolclass.name}} defined by the
+                teachers of this class will automatically be
+                assigned to every student.
+            </infobox>
 
         </div>
 
@@ -43,12 +59,12 @@
                                 <td class="right-padded top-padded-s left-padded-s">
 
 
-                                        <a href=""
+                                    <a href=""
 
-                                           data-ng-click="addTeacherToClass(teacher)">
-                                            <i class=" small glyphicon glyphicon-plus-sign">
-                                            </i>
-                                        </a>
+                                       data-ng-click="addTeacherToClass(teacher)">
+                                        <i class=" small glyphicon glyphicon-plus-sign">
+                                        </i>
+                                    </a>
                             <span data-ng-controller="UsersController"
                                   data-ng-init="findById(teacher)">
                                 {{displayName}}

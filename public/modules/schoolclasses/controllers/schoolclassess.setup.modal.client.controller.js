@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$location', '$state', '$modalInstance',
-    'schoolclass', 'school','Schoolclasses', 'Courses',
-	function($scope, $location, $state, $modalInstance, schoolclass, school, Schoolclasses, Courses) {
+    'schoolclass', 'school','Schoolclasses', 'Courses', 'Authentication', 'CoursesService',
+	function($scope, $location, $state, $modalInstance, schoolclass, school, Schoolclasses, Courses, Authentication, CoursesService) {
         $scope.schoolclass = schoolclass;
         $scope.school = school;
+
+        console.log(Authentication);
+        $scope.authentication = Authentication;
 
 
 
@@ -112,7 +115,29 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
         };
 
 
+        $scope.addCourseForStudent = function (studentId, courseId) {
+            Courses.query({
+                userId: studentId
+            }).$promise.then(function (studentCourses) {
 
+                    var setVisible = false;
+                    studentCourses.forEach(function (studentCourse) {
+
+                        // if the course existed, then just set it visible
+                        if ( studentCourse.master === courseId) {
+                            studentCourse.supervised = true;
+                            studentCourse.visible = true;
+                            studentCourse.$update();
+                            setVisible = true;
+                        }
+                    });
+                    if (!setVisible) {
+                        var res = CoursesService.copyCourseFor(studentId);
+                        res.get({courseId: courseId});
+
+                    }
+                });
+        };
 
 
     }

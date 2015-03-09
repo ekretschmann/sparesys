@@ -1,5 +1,8 @@
 <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
 
+
+    <div ng-include="'/modules/schoolclasses/views/partial/assign-courses.modal.client.view.html'"></div>
+
     <div class="content-header">
         <div class="infobox-title">You Teach</div>
 
@@ -82,7 +85,7 @@
                         <tr data-ng-repeat="schoolclass in schoolclasses">
                             <td class="right-padded-m left-padded-s nowrap top-padded-s">
                                 <!--<a class="right-padded-m" href="#!/schoolclasses/{{schoolclass._id}}/teach">{{schoolclass.name}}</a>-->
-                                <a class="right-padded-m" href="" data-ng-click="assignCoursesPopup(schoolclass, school)">{{schoolclass.name}}</a>
+                                <a class="right-padded-m" href="" data-ng-click="assignCoursesPopup(schoolclass)">{{schoolclass.name}}</a>
                             </td>
 
                             <td class="right-padded-s expands nowrap  top-padded-s" >

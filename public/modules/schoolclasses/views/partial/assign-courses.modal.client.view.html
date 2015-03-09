@@ -1,0 +1,197 @@
+<script type="text/ng-template" id="assignCourses.html">
+
+
+    <div class="modal-body">
+        <div class="content-header center-aligned">
+            <div class="title">
+                Assign Courses
+            </div>
+
+            <div class="title">
+                <div class="title center-aligned font-m">
+                    <span class="warning">{{schoolclass.name}}</span>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div class="content-section" data-ng-if="authentication.user.roles.indexOf('help') > -1">
+
+            <infobox logo="woman">
+                Use the <a href="">
+                <i class=" small glyphicon glyphicon-plus-sign">
+                </i></a>
+                and
+
+                <a href="">
+                    <i class=" small glyphicon glyphicon-minus-sign">
+                    </i>
+                </a>
+                icons to move the teachers and students of {{schoolclass.name}}
+                to the right. All coursework for {{schoolclass.name}} defined by the
+                teachers of this class will automatically be
+                assigned to every student.
+            </infobox>
+
+        </div>
+
+        <div class="content-section">
+
+
+            <table class="expands">
+                <tr>
+                    <td class="half-screen top-aligned top-padded-m">
+                        <table class="table-striped expands">
+                            <thead>
+                            <tr>
+                                <th class="left-padded-s">Courses</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-if="availableCourses.length === 0">
+                                <td class="left-padded-s top-padded-s">none</td>
+                            </tr>
+
+
+                            <tr data-ng-repeat="course in availableCourses">
+
+                                <td class="right-padded top-padded-s left-padded-s">
+
+
+                                    <a href=""
+
+                                       data-ng-click="assignCourseToClass(course)">
+                                        <i class=" small glyphicon glyphicon-plus-sign">
+                                        </i>
+                                    </a>
+
+                                {{course.name}}
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+                    </td>
+                    <td class="half-screen top-aligned top-padded-m">
+
+                        <table class="table-striped expands top-padded-l">
+                            <thead>
+                            <tr>
+                                <th class="expands">
+                                    In class {{schoolclass.name}}
+                                </th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr data-ng-if="schoolclass.courses.length === 0">
+                                <td class="left-padded-s top-padded-s ">
+                                    none
+                                </td>
+                            </tr>
+
+                            <tr data-ng-repeat="course in schoolclass.courses">
+
+                                <td class="top-padded-s ">
+                                    <a href=""
+                                       data-ng-click="removeCourseFromClass(course)">
+                                        <i class="small glyphicon glyphicon-minus-sign">
+                                        </i>
+                                    </a>
+
+                            {{course.name}}
+
+                                </td>
+
+                            </tr>
+                            </tbody>
+                        </table>
+
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="half-screen top-aligned top-spacer top-padded-m">
+                        <!--<table id="searchTextResults"-->
+                               <!--class="table-striped expands ">-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th class="left-padded-s">Students</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr data-ng-if="availableStudents.length === 0">-->
+                                <!--<td class="left-padded-s top-padded-s">none</td>-->
+                            <!--</tr>-->
+
+
+                            <!--<tr data-ng-repeat="student in availableStudents">-->
+
+
+                                <!--<td class="left-padded-s top-padded-s">-->
+                                    <!--<a href=""-->
+                                       <!--data-ng-click="addStudentToClass(student)">-->
+                                        <!--<i class="small glyphicon glyphicon-plus-sign">-->
+                                        <!--</i>-->
+                                    <!--</a>-->
+                            <!--<span data-ng-controller="UsersController"-->
+                                  <!--data-ng-init="findById(student)">-->
+                            <!--{{displayName}}-->
+                            <!--</span>-->
+
+                                <!--</td>-->
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+
+                    <!--</td>-->
+                    <!--<td class="half-screen top-aligned top-spacer  top-padded-m">-->
+                        <!--<table class="table-striped expands">-->
+                            <!--<thead>-->
+                            <!--<tr>-->
+                                <!--<th class="expands">In class {{schoolclass.name}}</th>-->
+                            <!--</tr>-->
+                            <!--</thead>-->
+                            <!--<tbody>-->
+                            <!--<tr data-ng-if="schoolclass.students.length === 0">-->
+                                <!--<td class="left-padded-s top-padded-s">-->
+                                    <!--none-->
+                                <!--</td>-->
+                            <!--</tr>-->
+
+                            <!--<tr data-ng-repeat="student in schoolclass.students">-->
+
+                                <!--<td class="top-padded-s">-->
+                                    <!--<a href=""-->
+                                       <!--data-ng-click="removeStudentFromClass(student)">-->
+                                        <!--<i class="small glyphicon glyphicon-minus-sign"></i>-->
+                                    <!--</a>-->
+
+                            <!--<span data-ng-controller="UsersController"-->
+                                  <!--data-ng-init="findById(student)">-->
+                            <!--{{displayName}}-->
+                            <!--</span>-->
+
+                                <!--</td>-->
+
+
+                            <!--</tr>-->
+                            <!--</tbody>-->
+                        <!--</table>-->
+
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="center-aligned top-padded-m">
+            <button class="btn btn-rememberators"
+                    type="submit"
+                    ng-click="ok()"
+                    >
+                OK
+            </button>
+        </div>
+    </div>
+</script>

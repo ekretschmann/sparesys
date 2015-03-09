@@ -6,7 +6,6 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
         $scope.schoolclass = schoolclass;
         $scope.school = school;
 
-        console.log(Authentication);
         $scope.authentication = Authentication;
 
 

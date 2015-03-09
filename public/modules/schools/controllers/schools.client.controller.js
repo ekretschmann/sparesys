@@ -64,6 +64,26 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
 
         };
 
+        $scope.assignCoursesPopup = function (schoolclass) {
+
+
+            $scope.schoolclass = schoolclass;
+            //$scope.school = school;
+            $modal.open({
+                templateUrl: 'assignCourses.html',
+                controller: 'AssignCoursesController',
+                resolve: {
+                    schoolclass: function () {
+                        return $scope.schoolclass;
+                    },
+                    courses: function () {
+                        return $scope.courses;
+                    }
+                }
+            });
+
+        };
+
 
         $scope.areYouSureToDeleteClass = function (schoolclass) {
 

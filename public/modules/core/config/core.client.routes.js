@@ -24,6 +24,7 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 
 angular.module('core').run(function($window, $rootScope) {
     $rootScope.online = navigator.onLine;
+
     $window.addEventListener('offline', function () {
         $rootScope.$apply(function() {
             $rootScope.online = false;
@@ -34,4 +35,5 @@ angular.module('core').run(function($window, $rootScope) {
             $rootScope.online = true;
         });
     }, false);
+
 });

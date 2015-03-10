@@ -6,32 +6,21 @@ angular.module('schoolclasses').config(['$stateProvider',
 
         // Schoolclasses state routing
         $stateProvider.
-            state('listSchoolclasses', {
-                url: '/schoolclasses',
-                templateUrl: 'modules/schoolclasses/views/list-schoolclasses.client.view.html'
-            }).state('manageClasses', {
-                url: '/schools/classes/manage',
-                templateUrl: 'modules/schoolclasses/views/manage-schoolclasses.client.view.html'
-            }).
-            state('createSchoolclass', {
-                url: '/schoolclasses/create',
-                templateUrl: 'modules/schoolclasses/views/create-schoolclass.client.view.html'
-            }).
             state('adminSchoolclass', {
                 url: '/schoolclasses/admin',
-                templateUrl: 'modules/schoolclasses/views/admin-schoolclasses.client.view.html'
-            }).
-            state('viewSchoolclass', {
-                url: '/schoolclasses/:schoolclassId',
-                templateUrl: 'modules/schoolclasses/views/view-schoolclass.client.view.html'
-            }).
-            state('editSchoolclass', {
-                url: '/schoolclasses/:schoolclassId/edit',
-                templateUrl: 'modules/schoolclasses/views/edit-schoolclass.client.view.html'
-            }).
-            state('teachSchoolclass', {
-                url: '/schoolclasses/:schoolclassId/teach',
-                templateUrl: 'modules/schoolclasses/views/teach-schoolclass.client.view.html'
+                templateUrl: 'modules/schoolclasses/views/admin-schoolclasses.client.view.html',
+                data: { auth: ['admin']}
             });
     }
 ]);
+
+angular.module('schoolclasses').run(function ($rootScope, Authentication, $state) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+        if ( toState.data && toState.data.auth && toState.data.auth.indexOf('admin') > -1 && Authentication.user && Authentication.user.roles.indexOf('admin') === -1 ) {
+            event.preventDefault();
+            $state.current.url = '/';
+            $state.go($state.current);
+            return false;
+        }
+    });
+});

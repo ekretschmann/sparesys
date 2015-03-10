@@ -75,6 +75,8 @@ exports.update = function (req, res) {
 
 
     schoolclass.save(function (err) {
+        console.log('saved');
+        console.log(err);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

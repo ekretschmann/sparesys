@@ -52,11 +52,20 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
 
         $scope.assignCourseToClass = function (course) {
             console.log('assign '+course);
+            console.log($scope.schoolclass);
             if ($scope.schoolclass.courses.indexOf(course._id) === -1) {
-                $scope.schoolclass.courses.push(course._id);
+                $scope.schoolclass.courses.push(course);
             }
+            console.log($scope.schoolclass);
             $scope.schoolclass.__v = undefined;
-            new Schoolclasses($scope.schoolclass).$update(function(){
+            for(var i=0; i<$scope.schoolclass.courses.length; i++) {
+                var c = $scope.schoolclass.course[i];
+                $scope.schoolclass[i] = $scope.schoolclass[i]._id;
+            }
+           $scope.schoolclass.$update(function(c){
+                console.log('after update');
+                console.log($scope.schoolclass);
+               $scope.schoolclass = c;
                 $scope.initAssignCourses();
             });
         };

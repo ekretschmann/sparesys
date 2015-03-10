@@ -18,7 +18,8 @@ angular.module('schools').config(['$stateProvider',
             }).
             state('adminSchools', {
                 url: '/schools/admin',
-                templateUrl: 'modules/schools/views/admin-schools.client.view.html'
+                templateUrl: 'modules/schools/views/admin-schools.client.view.html',
+                data: { auth: ['admin']}
             }).
             state('registerSchool', {
                 url: '/schools/register',
@@ -27,10 +28,6 @@ angular.module('schools').config(['$stateProvider',
             state('viewSchool', {
                 url: '/schools/:schoolId',
                 templateUrl: 'modules/schools/views/view-school.client.view.html'
-            }).
-            state('editSchool', {
-                url: '/schools/:schoolId/edit',
-                templateUrl: 'modules/schools/views/edit-school.client.view.html'
             }).
             state('adminSchool', {
                 url: '/schools/:schoolId/admin',
@@ -41,10 +38,12 @@ angular.module('schools').config(['$stateProvider',
 ]);
 
 
-angular.module('schools').run(function ($rootScope, Authentication) {
+angular.module('users').run(function ($rootScope, Authentication, $state) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-        if ( toState.data && toState.data.auth && toState.data.auth === 'admin' && Authentication.user && Authentication.user.roles.indexOf('admin') === -1 ) {
+        if ( toState.data && toState.data.auth && toState.data.auth.indexOf('admin') > -1 && Authentication.user && Authentication.user.roles.indexOf('admin') === -1 ) {
             event.preventDefault();
+            $state.current.url = '/';
+            $state.go($state.current);
             return false;
         }
     });

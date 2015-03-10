@@ -7,12 +7,13 @@ angular.module('users').config(['$stateProvider',
         $stateProvider.
             state('listUsers', {
                 url: '/users',
-                templateUrl: 'modules/users/views/list-users.client.view.html'
+                templateUrl: 'modules/users/views/list-users.client.view.html',
+                data: { auth: ['admin']}
             }).
             state('editUser', {
                 url: '/users/:userId/edit',
                 templateUrl: 'modules/users/views/edit-user.client.view.html',
-                data: { auth: 'admin'}
+                data: { auth: ['admin']}
             }).
             state('profile', {
                 url: '/settings/profile',
@@ -37,10 +38,12 @@ angular.module('users').config(['$stateProvider',
     }
 ]);
 
-angular.module('users').run(function ($rootScope, Authentication) {
+angular.module('users').run(function ($rootScope, Authentication, $state) {
     $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
-        if ( toState.data && toState.data.auth && toState.data.auth === 'admin' && Authentication.user && Authentication.user.roles.indexOf('admin') === -1 ) {
+        if ( toState.data && toState.data.auth && toState.data.auth.indexOf('admin') > -1 && Authentication.user && Authentication.user.roles.indexOf('admin') === -1 ) {
             event.preventDefault();
+            $state.current.url = '/';
+            $state.go($state.current);
             return false;
         }
     });

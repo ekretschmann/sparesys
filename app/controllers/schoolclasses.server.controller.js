@@ -64,16 +64,6 @@ exports.update = function (req, res) {
 
 
 
-    var courseIds = [];
-    for (var i = 0; i < req.schoolclass.courses.length; i++) {
-        if (req.schoolclass.courses[i]._id) {
-            courseIds.push(courseIds[i]._id);
-        } else {
-            courseIds.push(req.schoolclass.courses[i]);
-        }
-    }
-
-    req.schoolclass.courses = courseIds;
     var schoolclass = req.schoolclass;
     var originalTeachers = schoolclass.teachers;
     var originalStudents = schoolclass.students;
@@ -85,8 +75,6 @@ exports.update = function (req, res) {
 
 
     schoolclass.save(function (err) {
-        console.log('saved');
-        console.log(err);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

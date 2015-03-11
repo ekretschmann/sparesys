@@ -50,10 +50,25 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
             $modalInstance.dismiss('cancel');
         };
 
-        function updateSchoolclass() {
+        $scope.updateSchoolclass = function() {
+
+            var originalCourses = $scope.schoolclass.courses;
+            $scope.schoolclass.__v = undefined;
+            var courses = $scope.schoolclass.courses;
+            $scope.schoolclass.courses = [];
 
 
-        }
+            for (var i = 0; i < courses.length; i++) {
+                $scope.schoolclass.courses.push(courses[i]._id);
+            }
+
+            console.log($scope.schoolclass.courses);
+            $scope.schoolclass.$update(function() {
+                $scope.schoolclass.courses = originalCourses;
+                $scope.initAssignCourses();
+            });
+
+        };
 
         $scope.assignCourseToClass = function (course) {
 
@@ -63,18 +78,18 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
             }
 
             $scope.schoolclass.__v = undefined;
-            $scope.schoolclass.$update();
+            $scope.updateSchoolclass();
         };
 
         $scope.removeCourseFromClass = function (course) {
             for (var i = 0; i < $scope.schoolclass.courses.length; i++) {
                 if ($scope.schoolclass.courses[i]._id === course._id) {
-                    $scope.schoolclass.courses.splice(i, i);
+                    $scope.schoolclass.courses.splice(i, 1);
                 }
             }
 
-            $scope.schoolclass.__v = undefined;
-            $scope.schoolclass.$update();
+
+            $scope.updateSchoolclass();
         };
 
         //

@@ -191,6 +191,17 @@ angular.module('courses').controller('CoursesController',
             };
 
 
+            $scope.manageCourses = function() {
+                console.log('ga view courses');
+                console.log('/courses');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/courses');
+                    $window.ga('send', 'event', 'user views their courses');
+                }
+                $scope.findForCurrentUser();
+            };
+
             // Find list for current user
             $scope.findForCurrentUser = function () {
                 if ($scope.authentication.user) {

@@ -1,4 +1,4 @@
-<section data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
+<section data-ng-controller="CoursesController" data-ng-init="manageCourses()">
 
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
@@ -87,6 +87,7 @@
 
                 </th>
                 <th>Description</th>
+                <th>Role</th>
                 <th class="right-padded-s">Created</th>
             </tr>
             </thead>
@@ -99,13 +100,14 @@
                         </i>
                     </a>
                 </td>
-                <td class="right-padded-m nowrap  top-padded-s">
+                <td class="right-padded-m nowrap top-padded-s">
 
                     <a data-ng-if="!course.supervised || authentication.user.roles.indexOf('debug-viewer') !== -1"
                        data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
                 <span class="text-muted"
                       data-ng-if="course.supervised && authentication.user.roles.indexOf('debug-viewer') === -1">{{course.name}}</span>
                 </td>
+
                 <td class="right-padded-m expands top-padded-s">
 
                     <span data-ng-if="!course.supervised">{{course.description}}</span>
@@ -113,6 +115,12 @@
                       class="text-muted">{{course.description}} (managed by teacher)</span>
 
                 </td>
+
+                <td class="right-padded-m top-padded-s">
+                    <div data-ng-if="course.teaching">Teacher</div>
+                    <div data-ng-if="!course.teaching">Student</div>
+                </td>
+
                 <td class="right-aligned right-padded-s top-padded-s">
                     <span data-ng-if="!course.supervised">{{course.created | date:'shortDate'}}</span>
                 <span data-ng-if="course.supervised"

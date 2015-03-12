@@ -108,7 +108,7 @@
                     <li class="divider" data-ng-if="courses.length > 0"></li>
 
                     <li data-ng-repeat="course in courses">
-                        <a href="/#!/courses/{{course._id}}/edit" class="font-m">{{course.name}}</a>
+                        <a href="/#!/courses/{{course._id}}/edit" class="font-m">{{course.name}} <span data-ng-if="course.teaching">(Teacher)</span> </a>
                     </li>
 
 

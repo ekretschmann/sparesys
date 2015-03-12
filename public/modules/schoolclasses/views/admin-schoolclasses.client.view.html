@@ -4,21 +4,19 @@
 
 
     <div class="content-header">
-        <div class="pull-right">
-            <a class="menu-link"
-               href=""
-               data-ng-click="remove(otherUser)">Delete</a>
-
-        </div>
 
         <div class="title">
             Administer Schoolclasses
         </div>
     </div>
 
+    <div data-ng-if="schoolclasses.length === 0">
+
+        No School Classes Registered.
+    </div>
 
 
-    <table id="searchTextResults" class="table-striped" style="width: 100%">
+    <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-if="schoolclasses.length > 0">
         <thead>
         <tr>
             <th class="sparesys-view-courses-course-column"></th>

@@ -24,18 +24,18 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="school in schools | filter:searchText">
-            <td class="right-padded-s left-padded-s">
+            <td class="right-padded-s left-padded-s top-padded-s">
                 <a href="">
                     <i data-ng-click="areYouSureToDeleteSchool(school)"
-                       class="glyphicon glyphicon-remove-sign">
+                       class="small glyphicon glyphicon-remove-sign">
                     </i>
                 </a>
             </td>
-            <td class="right-padded-m expands">
+            <td class="right-padded-m expands top-padded-s">
                 <a data-ng-href="#!/schools/{{school._id}}/admin">{{school.name}}</a>
             </td>
-            <td class="right-padded-m">{{school.city}}</td>
-            <td class="right-padded-s">{{school.country}}</td>
+            <td class="right-padded-m top-padded-s">{{school.city}}</td>
+            <td class="right-padded-s top-padded-s">{{school.country}}</td>
 
             <!--<td class="sparesys-view-courses-name-cell">{{school.user.displayName}}</td>-->
             <!--<td class="sparesys-view-courses-date-cell">{{school.created | date:'shortDate'}}</td>-->

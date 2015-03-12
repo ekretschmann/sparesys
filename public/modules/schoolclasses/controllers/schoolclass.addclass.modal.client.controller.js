@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('schoolclasses').controller('AddClassController', ['$scope', '$state', '$timeout', '$modalInstance', 'Schoolclasses', 'school',
-	function($scope, $state, $timeout, $modalInstance, Schoolclasses, school) {
+angular.module('schoolclasses').controller('AddClassController', ['$scope', '$state', '$window', '$timeout', '$modalInstance', 'Schoolclasses', 'school',
+	function($scope, $state, $window, $timeout, $modalInstance, Schoolclasses, school) {
 
         $scope.school = school;
 
@@ -27,6 +27,15 @@ angular.module('schoolclasses').controller('AddClassController', ['$scope', '$st
             });
 
             schoolClass.$save(function(sc) {
+
+                console.log('ga create schoolclass');
+                console.log('/schools/:id/addclass/:id');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/schools/:id/addclass/:id');
+                    $window.ga('send', 'event', 'user creates schoolclass');
+                }
+
                 $scope.school.schoolclasses.push(schoolClass);
                 $scope.school.$save(function(){
 

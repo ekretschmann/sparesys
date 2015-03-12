@@ -5,7 +5,7 @@
 
     <div class="content-header">
         <div class="title">
-            Select our Schools
+            Select Your Schools
         </div>
 
     </div>
@@ -44,13 +44,13 @@
                     <th class="expands right-padded-m left-padded-s">School</th>
                     <th class="right-padded-m">City</th>
                     <th class="right-padded-m">Country</th>
-                    <th class="right-padded-s">Administrator</th>
+                    <th class="right-padded-s right-aligned">Administrator</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr data-ng-repeat="school in schools | filter:searchText">
 
-                    <td class="left-padded-s right-padded-m nowrap">
+                    <td class="left-padded-s right-padded-m nowrap top-padded-s">
                         <div data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
                             <a href="" data-ng-click="unsubscribeTeacherPopup(school)">{{school.name}}
                                 <i
@@ -63,10 +63,10 @@
                             <a href="" data-ng-click="subscribeTeacherPopup(school)">{{school.name}}</a>
                         </div>
                     </td>
-                    <td class="right-padded-m nowrap">{{school.city}}</td>
-                    <td class="right-padded-m nowrap">{{school.country}}</td>
+                    <td class="right-padded-m nowrap top-padded-s">{{school.city}}</td>
+                    <td class="right-padded-m nowrap top-padded-s">{{school.country}}</td>
 
-                    <td class="right-padded-s nowrap">{{school.user.displayName}}</td>
+                    <td class="right-padded-s nowrap top-padded-s right-aligned">{{school.user.displayName}}</td>
                 </tr>
                 </tbody>
             </table>

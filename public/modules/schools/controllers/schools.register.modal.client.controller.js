@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('schools').controller('RegisterSchoolController', ['$scope', '$state', '$timeout', '$modalInstance', 'Schools', 'Authentication',
-    function ($scope, $state, $timeout, $modalInstance, Schools, Authentication) {
+angular.module('schools').controller('RegisterSchoolController', ['$scope', '$state', '$window', '$timeout', '$modalInstance', 'Schools', 'Authentication',
+    function ($scope, $state, $window, $timeout, $modalInstance, Schools, Authentication) {
 
         $scope.school = {};
 
@@ -24,6 +24,14 @@ angular.module('schools').controller('RegisterSchoolController', ['$scope', '$st
 
             // Redirect after save
             newSchool.$save(function (response) {
+
+                console.log('ga register school');
+                console.log('/schools/:id/register');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/schools/:id/register');
+                    $window.ga('send', 'event', 'user registers school');
+                }
 
                 Authentication.user.administersSchools.push(response._id);
 //                $state.go('home', null, { reload: true });

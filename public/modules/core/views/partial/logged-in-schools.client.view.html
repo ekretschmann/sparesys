@@ -10,13 +10,14 @@
 
 
 
-            <div class="warning top-margin-l" style="text-align: justify" data-ng-if="coursesTeacher.length===0">
+            <div class="warning top-margin-l bottom-padding-l" style="text-align: justify" data-ng-if="coursesTeacher.length===0">
                 ... nothing so far! Please choose or create the courses you would like to teach. Use the
                 <a href="/#!/courses/search">search</a> or <a href="/#!/courses/create">create</a> functionality in the course
                 menu to compile the coursework for your students.
             </div>
 
-            <div class="top-padded-m">
+            <div class="bottom-padded-m">
+                These courses:
             <span data-ng-repeat="course in coursesTeacher">
                 <span ><a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></span><span data-ng-if="$index < coursesTeacher.length-1">, </span>
             </span>

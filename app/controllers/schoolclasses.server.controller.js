@@ -106,6 +106,32 @@ exports.update = function (req, res) {
                 });
             });
 
+
+            originalStudents.forEach(function(originalStudentId) {
+                if (currentTeachers.indexOf(originalStudentId) === -1) {
+                    User.findOne({_id: originalStudentId}, 'studentInClasses').exec(function (err, originalStudent) {
+
+                        for (var j in originalStudent.teachesClasses) {
+                            if (originalStudent.studentInClasses[j].toString() === schoolclass._id.toString()) {
+                                originalStudent.studentInClasses.splice(j, 1);
+                            }
+                        }
+                        originalStudent.save();
+                    });
+                }
+            });
+
+            currentStudents.forEach(function(currentStudentId) {
+                User.findOne({_id: currentStudentId}, 'studentInClasses').exec(function (err, currentStudent) {
+
+                    if (currentStudent.studentInClasses.indexOf(schoolclass._id) === -1) {
+                        currentStudent.studentInClasses.push(schoolclass._id);
+                    }
+                    currentStudent.save();
+                });
+            });
+
+
             res.jsonp(schoolclass);
         }
     });

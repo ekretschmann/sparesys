@@ -98,6 +98,9 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
                 $scope.schoolclass.students.push(studentId);
             }
 
+
+
+
             $scope.schoolclass.__v = undefined;
             new Schoolclasses($scope.schoolclass).$update(function () {
 

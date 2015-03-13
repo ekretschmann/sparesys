@@ -111,7 +111,7 @@ exports.update = function (req, res) {
                 if (currentTeachers.indexOf(originalStudentId) === -1) {
                     User.findOne({_id: originalStudentId}, 'studentInClasses').exec(function (err, originalStudent) {
 
-                        for (var j in originalStudent.teachesClasses) {
+                        for (var j in originalStudent.studentInClasses) {
                             if (originalStudent.studentInClasses[j].toString() === schoolclass._id.toString()) {
                                 originalStudent.studentInClasses.splice(j, 1);
                             }

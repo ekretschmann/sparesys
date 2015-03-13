@@ -1,7 +1,7 @@
 'use strict';
 
 // Schools controller
-angular.module('schools').controller('SchoolsController', ['$scope', '$timeout','$stateParams', '$location', '$modal', 'Authentication', 'Schools',
+angular.module('schools').controller('SchoolsController', ['$scope', '$timeout', '$stateParams', '$location', '$modal', 'Authentication', 'Schools',
     function ($scope, $timeout, $stateParams, $location, $modal, Authentication, Schools) {
         $scope.authentication = Authentication;
 
@@ -10,7 +10,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
             angular.element('.focus').trigger('focus');
         }, 100);
 
-        $scope.registerSchoolPopup = function() {
+        $scope.registerSchoolPopup = function () {
             $modal.open({
                 templateUrl: 'registerSchool.html',
                 controller: 'RegisterSchoolController'
@@ -26,8 +26,6 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
                 $scope.school.$update();
             }
         };
-
-
 
 
         $scope.addClassPopup = function (size) {
@@ -148,7 +146,6 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
             });
 
         };
-
 
 
         $scope.subscribeStudentPopup = function (school) {
@@ -306,11 +303,29 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
             if (id) {
                 $scope.school = Schools.get({
                     schoolId: id
-                }, function(s) {
+                }, function (s) {
                     $scope.schoolclasses = s.schoolclasses;
-                    console.log($scope.schoolclasses);
                 });
             }
+        };
+
+        $scope.schoolclasses = [];
+
+        $scope.populateSchoolForUser = function (schoolId, user) {
+
+            $scope.school = Schools.get({
+                schoolId: schoolId
+            }, function (s) {
+                $scope.schoolclasses = s.schoolclasses;
+                $scope.schoolclasses = [];
+                for (var i = 0; i < $scope.school.schoolclasses.length; i++) {
+                    var schoolclass = $scope.school.schoolclasses[i];
+                    if (user.studentInClasses.indexOf(schoolclass._id) !== -1) {
+                        $scope.schoolclasses.push(schoolclass);
+                        console.log(schoolclass);
+                    }
+                }
+            });
         };
 
         // Find existing School
@@ -333,20 +348,6 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
             });
         };
 
-        $scope.studentIsInAclass = false;
-        $scope.isInAClass = function (student) {
 
-
-
-            console.log($scope.schoolclasses);
-            //$scope.studentIsInAclass = false;
-            //for (var i=0; i<$scope.school.schoolclasses.length; i++) {
-            //    if (student.studentInClasses.indexOf($scope.school.schoolclasses[i]) !== -1) {
-            //        $scope.studentIsInAclass = true;
-            //    }
-            //}
-            //console.log(student);
-
-        };
     }
 ]);

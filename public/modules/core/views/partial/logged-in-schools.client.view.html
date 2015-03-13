@@ -17,7 +17,7 @@
             <tbody>
             <tr data-ng-repeat="schoolId in authentication.user.studentInSchools"
                 data-ng-controller="SchoolsController"
-                data-ng-init="findById(schoolId)">
+                data-ng-init="populateSchoolForUser(schoolId, authentication.user)">
 
                 <td class="right-padded-s top-aligned top-padded-s">
                     <a href="">
@@ -32,14 +32,14 @@
                 </td>
                 <td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>
                 <td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>
-                <td class="right-padded-s top-aligned top-padded-s" data-ng-init="isInAClass(authentication.user)">
-                    <div data-ng-if="studentIsInAclass">
-                        <div data-ng-repeat="schoolclass in authentication.user.studentInClasses">
-                            {{schoolclass}}
+                <td class="right-padded-s top-aligned top-padded-s" >
+                    <div data-ng-if="schoolclasses.length>0">
+                        <div data-ng-repeat="sc in schoolclasses">
+                            {{sc.name}}
                         </div>
                     </div>
 
-                    <div data-ng-if="!studentIsInAclass" class="warning">
+                    <div data-ng-if="schoolclasses.length === 0" class="warning">
                         The School Administrator has not assigned you to your class
                     </div>
                 </td>

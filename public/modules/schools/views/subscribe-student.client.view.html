@@ -43,7 +43,7 @@
             <tbody>
             <tr data-ng-repeat="school in schools | filter:searchText">
 
-                <td class="right-padded-m nowrap left-padded-s">
+                <td class="right-padded-m nowrap left-padded-s top-padded-s">
                     <div data-ng-if="school.students.indexOf(authentication.user._id) != -1">
                         <a href="" data-ng-click="unsubscribeStudentPopup(school)">{{school.name}}
                             <i
@@ -57,10 +57,10 @@
                     </div>
                 </td>
 
-                <td class="right-padded-m nowrap">{{school.city}}</td>
-                <td class="right-padded-m nowrap">{{school.country}}</td>
+                <td class="right-padded-m nowrap top-padded-s">{{school.city}}</td>
+                <td class="right-padded-m nowrap top-padded-s">{{school.country}}</td>
 
-                <td class="nowrap right-padded-s">{{school.user.displayName}}</td>
+                <td class="nowrap right-padded-s top-padded-s">{{school.user.displayName}}</td>
             </tr>
             </tbody>
         </table>

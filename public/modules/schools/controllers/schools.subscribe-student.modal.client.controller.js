@@ -1,15 +1,15 @@
 'use strict';
 
-angular.module('schools').controller('SubscribeStudentModalController', ['$scope', '$location', '$window','$modalInstance', 'Authentication', 'school',
-    function ($scope, $location, $window, $modalInstance, Authentication, school) {
+angular.module('schools').controller('SubscribeStudentModalController', ['$scope', '$location', '$window','$modalInstance', 'Authentication', 'Users', 'school',
+    function ($scope, $location, $window, $modalInstance, Authentication, Users, school) {
 
         $scope.authentication = Authentication;
         $scope.school = school;
 
         $scope.ok = function () {
 
-            school.students.push($scope.authentication.user._id);
-            school.$update();
+            $scope.school.students.push($scope.authentication.user._id);
+            $scope.school.$update();
 
             console.log('ga student subscribes to school');
             console.log('/schools/subscribe/student/:id');
@@ -18,6 +18,12 @@ angular.module('schools').controller('SubscribeStudentModalController', ['$scope
                 $window.ga('send', 'pageview', '/schools/subscribe/student/:id');
                 $window.ga('send', 'event', 'user subscribes to a school as student');
             }
+
+            if ($scope.authentication.user.studentInSchools.indexOf($scope.school._id) === -1) {
+                $scope.authentication.user.studentInSchools.push($scope.school._id);
+                new Users($scope.authentication.user).$update();
+            }
+
 
             $modalInstance.close();
 

@@ -22,8 +22,10 @@ angular.module('schools').controller('RegisterSchoolController', ['$scope', '$st
                 country: $scope.school.country
             });
 
+
             // Redirect after save
             newSchool.$save(function (response) {
+
 
                 console.log('ga register school');
                 console.log('/schools/:id/register');

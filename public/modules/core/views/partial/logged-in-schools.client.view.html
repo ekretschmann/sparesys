@@ -1,3 +1,58 @@
+<div data-ng-if="authentication.user.studentInSchools.length > 0">
+
+    <div class="content-header">
+        <div class="infobox-title">Your Schools</div>
+
+
+        <table class="table-striped top-margin-l">
+            <thead>
+            <tr>
+                <th class="right-padded-s left-padded-s"></th>
+                <th class="right-padded-m">School</th>
+                <th class="right-padded-m">City</th>
+                <th class="right-padded-m">Country</th>
+                <th class="right-padded-s">Classes</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr data-ng-repeat="schoolId in authentication.user.studentInSchools"
+                data-ng-controller="SchoolsController"
+                data-ng-init="findById(schoolId)">
+
+                <td class="right-padded-s top-aligned top-padded-s">
+                    <a href="">
+                        <i data-ng-click="areYouSureToDeleteSchool(school)"
+                           class="small left-padded-s glyphicon glyphicon-remove-sign">
+                        </i>
+                    </a>
+                </td>
+
+                <td class="expands right-padded-m  top-aligned top-padded-s">
+                    {{school.name}}
+                </td>
+                <td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>
+                <td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>
+                <td class="right-padded-s top-aligned top-padded-s">
+                    <div data-ng-if="authentication.user.studentInClasses.length > 0">
+                        <div data-ng-repeat="schoolclass in authentication.user.studentInClasses">
+                            {{schoolclass}}
+                        </div>
+                    </div>
+
+                    <div data-ng-if="authentication.user.studentInClasses.length === 0" class="warning">
+                        The School Administrator has not assigned you to your class
+                    </div>
+                </td>
+
+
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>
+
 <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
 
 
@@ -9,17 +64,19 @@
         <div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">
 
 
-
-            <div class="warning top-margin-l bottom-padding-l" style="text-align: justify" data-ng-if="coursesTeacher.length===0">
+            <div class="warning top-margin-l bottom-padding-l" style="text-align: justify"
+                 data-ng-if="coursesTeacher.length===0">
                 ... nothing so far! Please choose or create the courses you would like to teach. Use the
-                <a href="/#!/courses/search">search</a> or <a href="/#!/courses/create">create</a> functionality in the course
+                <a href="/#!/courses/search">search</a> or <a href="/#!/courses/create">create</a> functionality in the
+                course
                 menu to compile the coursework for your students.
             </div>
 
             <div class="bottom-padded-m">
                 These courses:
             <span data-ng-repeat="course in coursesTeacher">
-                <span ><a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></span><span data-ng-if="$index < coursesTeacher.length-1">, </span>
+                <span><a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></span><span
+                    data-ng-if="$index < coursesTeacher.length-1">, </span>
             </span>
             </div>
 
@@ -89,16 +146,18 @@
                                 <a class="right-padded-m" href="" data-ng-click="assignCoursesPopup(schoolclass)">{{schoolclass.name}}</a>
                             </td>
 
-                            <td class="right-padded-s expands nowrap  top-padded-s" >
+                            <td class="right-padded-s expands nowrap  top-padded-s">
                                 <span data-ng-repeat="student in schoolclass.students">
-                                    <span>{{student.displayName}}</span><span data-ng-if="$index < schoolclass.students.length-1">, </span>
+                                    <span>{{student.displayName}}</span><span
+                                        data-ng-if="$index < schoolclass.students.length-1">, </span>
                                 </span>
                             </td>
 
                             <td class="right-aligned right-padded-s nowrap  top-padded-s">
 
                                 <span data-ng-repeat="course in schoolclass.courses">
-                                    <span>{{course.name}}</span><span data-ng-if="$index < schoolclass.courses.length-1">, </span>
+                                    <span>{{course.name}}</span><span
+                                        data-ng-if="$index < schoolclass.courses.length-1">, </span>
                                 </span>
                                 <!--<a href="#!/schoolclasses/{{schoolclass._id}}/teach">staistics</a>-->
                             </td>
@@ -110,8 +169,6 @@
 
                 </div>
             </div>
-
-
 
 
         </div>

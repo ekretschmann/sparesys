@@ -69,6 +69,7 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
                 userId: userId
             }, function(user) {
                 $scope.displayName = user.displayName;
+
             });
         };
 

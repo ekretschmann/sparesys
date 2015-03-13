@@ -306,6 +306,9 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
             if (id) {
                 $scope.school = Schools.get({
                     schoolId: id
+                }, function(s) {
+                    $scope.schoolclasses = s.schoolclasses;
+                    console.log($scope.schoolclasses);
                 });
             }
         };
@@ -328,6 +331,22 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
                     }
                 }
             });
+        };
+
+        $scope.studentIsInAclass = false;
+        $scope.isInAClass = function (student) {
+
+
+
+            console.log($scope.schoolclasses);
+            //$scope.studentIsInAclass = false;
+            //for (var i=0; i<$scope.school.schoolclasses.length; i++) {
+            //    if (student.studentInClasses.indexOf($scope.school.schoolclasses[i]) !== -1) {
+            //        $scope.studentIsInAclass = true;
+            //    }
+            //}
+            //console.log(student);
+
         };
     }
 ]);

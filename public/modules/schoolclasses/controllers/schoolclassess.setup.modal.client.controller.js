@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$location', '$state', '$modalInstance',
+angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$location', '$state', '$window','$modalInstance',
     'schoolclass', 'school','Schoolclasses', 'Courses', 'Authentication', 'CoursesService',
-	function($scope, $location, $state, $modalInstance, schoolclass, school, Schoolclasses, Courses, Authentication, CoursesService) {
+	function($scope, $location, $state, $window, $modalInstance, schoolclass, school, Schoolclasses, Courses, Authentication, CoursesService) {
         $scope.schoolclass = schoolclass;
         $scope.school = school;
 
@@ -50,6 +50,14 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
             }
             $scope.schoolclass.__v = undefined;
             new Schoolclasses($scope.schoolclass).$update(function(){
+
+                console.log('ga add teacher to class');
+                console.log('/schoolclassess/add/teacher/:id');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/schoolclassess/add/teacher/:id');
+                    $window.ga('send', 'event', 'school admin adds teacher to class');
+                }
                 $scope.initSchoolclassSetup();
             });
         };
@@ -62,6 +70,13 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
             }
             $scope.schoolclass.__v = undefined;
             new Schoolclasses($scope.schoolclass).$update(function(){
+                console.log('ga remove teacher from class');
+                console.log('/schoolclassess/remove/teacher/:id');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/schoolclassess/remove/teacher/:id');
+                    $window.ga('send', 'event', 'school admin removes teacher from class');
+                }
                 $scope.initSchoolclassSetup();
             });
         };
@@ -88,6 +103,13 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
 
             $scope.schoolclass.__v = undefined;
             new Schoolclasses($scope.schoolclass).$update(function(){
+                console.log('ga remove student from class');
+                console.log('/schoolclassess/remove/student/:id');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/schoolclassess/remove/student/:id');
+                    $window.ga('send', 'event', 'school admin removes student from class');
+                }
                 $scope.initSchoolclassSetup();
             });
         };
@@ -108,6 +130,14 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
                     $scope.addCourseForStudent(studentId, courseId);
                 });
 
+
+                console.log('ga add student to class');
+                console.log('/schoolclassess/add/student/:id');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/schoolclassess/add/student/:id');
+                    $window.ga('send', 'event', 'school admin adds student to class');
+                }
                 $scope.initSchoolclassSetup();
 
 

@@ -57,6 +57,8 @@ exports.read = function (req, res) {
     res.jsonp(req.schoolclass);
 };
 
+
+
 /**
  * Update a Schoolclass
  */
@@ -108,7 +110,7 @@ exports.update = function (req, res) {
 
 
             originalStudents.forEach(function(originalStudentId) {
-                if (currentTeachers.indexOf(originalStudentId) === -1) {
+                if (currentStudents.indexOf(originalStudentId) === -1) {
                     User.findOne({_id: originalStudentId}, 'studentInClasses').exec(function (err, originalStudent) {
 
                         for (var j in originalStudent.studentInClasses) {

@@ -62,9 +62,15 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
                 $scope.schoolclass.courses.push(courses[i]._id);
             }
 
-            console.log($scope.schoolclass.courses);
+            var students = $scope.schoolclass.students;
+            $scope.schoolclass.students = [];
+            for (i = 0; i < students.length; i++) {
+                $scope.schoolclass.students.push(students[i]._id);
+            }
+
             $scope.schoolclass.$update(function() {
                 $scope.schoolclass.courses = originalCourses;
+                $scope.schoolclass.students = students;
                 $scope.initAssignCourses();
             });
 
@@ -79,6 +85,13 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
 
             $scope.schoolclass.__v = undefined;
             $scope.updateSchoolclass();
+
+            for(var i=0; i<$scope.schoolclass.students.length; i++) {
+                var studentId = $scope.schoolclass.students[i];
+                var res = CoursesService.copyCourseFor(studentId);
+                res.get({courseId: course._id});
+            }
+
         };
 
         $scope.removeCourseFromClass = function (course) {

@@ -105,6 +105,7 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
             new Schoolclasses($scope.schoolclass).$update(function(){
                 console.log('ga remove student from class');
                 console.log('/schoolclassess/remove/student/:id');
+
                 if ($window.ga) {
                     console.log('sending to ga');
                     $window.ga('send', 'pageview', '/schoolclassess/remove/student/:id');

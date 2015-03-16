@@ -385,63 +385,7 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
     return deferred.promise;
 };
 
-exports.copyCourse = function (req, res, next, id) {
 
-
-    var userId;
-    var isSupervised = false;
-
-    if (req.query.userId) {
-        userId = req.query.userId;
-        isSupervised = true;
-    } else {
-        userId = req.user;
-    }
-
-    var findCourse = Course.find({'_id': id}).exec(function (err) {
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        }
-    });
-
-    findCourse.then(function (findCourseResult) {
-        var original = findCourseResult[0];
-        var copy = new Course();
-        copy.user = userId;
-        copy.name = original.name;
-        copy.description = original.description;
-        copy.language = original.language;
-        copy.front = original.front;
-        copy.back = original.back;
-        copy.languageback = original.languageback;
-        copy.speechrecognition = original.speechrecognition;
-        copy.master = original._id;
-        copy.supervised = isSupervised;
-        if (req.query && req.query.target.toString() === 'teach') {
-            copy.teaching = true;
-        }
-        if (!original.slaves) {
-            original.slaves = [];
-        }
-        original.slaves.push(copy._id);
-        original.save();
-
-        var packPromise = copyPacks(original.packs, userId, copy._id, isSupervised);
-
-        packPromise.then(function (packs) {
-            copy.packs = packs;
-            copy.save(function() {
-                res.jsonp(copy);
-            });
-        });
-
-
-
-    });
-
-};
 
 var uploadCards = function (cards, userId, newPackId) {
     var idMap = {};
@@ -601,4 +545,81 @@ exports.getCardsForCourse = function (req, res, next, id) {
 
 
 
+exports.copyCourse = function (req, res, next, id) {
 
+
+    var userId;
+    var isSupervised = false;
+
+    if (req.query.userId) {
+        userId = req.query.userId;
+        isSupervised = true;
+    } else {
+        userId = req.user;
+    }
+
+    var findCourse = Course.find({'_id': id}).exec(function (err) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        }
+    });
+
+
+    findCourse.then(function (findCourseResult) {
+        var original = findCourseResult[0];
+
+        var copy = new Course();
+
+
+        //_id: 54f811f261baba0000a3b480,
+        //    master: 54f17245dae49ace3fa7b2a0,
+        //    user: 545a17ea8085ab9403a39420,
+        //    __v: 0,
+        //    readback: false,
+        //    readfront: false,
+        //    teaching: true,
+        //    speechrecognition: 'no',
+        //    supervised: false,
+        //    visible: true,
+        //    slaves: [],
+
+        //packs: [ 54f811f261baba0000a3b481 ],
+        //    created: Thu Mar 05 2015 08:21:06 GMT+0000 (GMT),
+        //    published: false
+
+        copy.user = userId;
+        copy.name = original.name;
+        copy.description = original.description;
+        copy.languageFront = original.languageFront;
+        copy.languageBack = original.languageBack;
+        copy.front = original.front;
+        copy.back = original.back;
+
+        copy.master = original._id;
+        copy.supervised = isSupervised;
+        if (req.query && req.query.target && req.query.target.toString() === 'teach') {
+            copy.teaching = true;
+        }
+        if (!original.slaves) {
+            original.slaves = [];
+        }
+        original.slaves.push(copy._id);
+        original.update();
+
+        var packPromise = copyPacks(original.packs, userId, copy._id, isSupervised);
+
+
+        packPromise.then(function (packs) {
+            copy.packs = packs;
+            copy.save(function() {
+                res.jsonp(copy);
+            });
+        });
+
+
+
+    });
+
+};

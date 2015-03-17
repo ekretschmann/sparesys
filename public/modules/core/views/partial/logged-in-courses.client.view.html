@@ -56,8 +56,9 @@
                 {{course.name}}
             </button>
             <button data-ng-if="course.supervised" type="button" class="btn btn-course-supervised font-m" data-ng-click="practice(course)" tooltip="{{course.description}}">
-                {{course.name}}
-                {{course.supervisor}}
+                <div>{{course.name}}</div>
+                <div class="font-s">(supervised)</div>
+
             </button>
         </div>
 </div>

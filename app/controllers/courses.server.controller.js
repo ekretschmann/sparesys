@@ -284,22 +284,35 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             var original = findCardResult[0];
             var copy = new Card();
             copy.user = userId;
+
+
+
+            copy.imagesReadFront = original.imagesReadFront;
+            copy.speechRecognitionImages = original.speechRecognitionImages;
+            copy.imagesReadBack = original.imagesReadBack;
+            copy.languageFront = original.languageFront;
+            copy.languageBack = original.languageBack;
+            copy.modes = original.modes;
+            copy.readFrontForward = original.readFrontForward;
+            copy.readBackForward = original.readBackForward;
+            copy.readFrontReverse = original.readFrontReverse;
+            copy.readBackReverse = original.readBackReverse;
+            copy.speechRecognitionForward = original.speechRecognitionForward;
+            copy.speechRecognitionReverse = original.speechRecognitionReverse;
+            copy.acceptedAnswersForward = original.acceptedAnswersForward;
+            copy.invalidAnswersForward = original.invalidAnswersForward;
+            copy.acceptedAnswersReverse = original.acceptedAnswersReverse;
+            copy.invalidAnswersReverse = original.invalidAnswersReverse;
             copy.question = original.question;
             copy.answer = original.answer;
-            copy.due = original.due;
-            copy.after = original.after;
-            copy.validation = original.validation;
+            copy.dueDate = original.dueDate;
+            copy.startDate = original.startDate;
+            copy.check = original.check;
             copy.images = original.images;
-            copy.bothways = original.bothways;
-            copy.alternatives = original.alternatives;
-            copy.alternativequestions = original.alternativequestions;
-            copy.sound = original.sound;
-            copy.soundback = original.soundback;
             copy.packs = [newPackId];
             copy.master = original._id;
             copy.supervisor = original.user;
             copy.format = original.format;
-            copy.type = original.type;
             copy.course = newCourseId;
             copy.save();
 

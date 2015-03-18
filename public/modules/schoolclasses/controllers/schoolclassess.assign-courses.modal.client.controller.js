@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('schoolclasses').controller('AssignCoursesController', ['$scope', '$location', '$state', '$modalInstance',
+angular.module('schoolclasses').controller('AssignCoursesController', ['$scope', '$window', '$location', '$state', '$modalInstance',
     'schoolclass', 'courses', 'Schoolclasses', 'Courses', 'Authentication', 'CoursesService',
-    function ($scope, $location, $state, $modalInstance, schoolclass, courses, Schoolclasses, Courses, Authentication, CoursesService) {
+    function ($scope, $window, $location, $state, $modalInstance, schoolclass, courses, Schoolclasses, Courses, Authentication, CoursesService) {
         $scope.schoolclass = schoolclass;
         $scope.courses = courses;
 
@@ -78,6 +78,15 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
 
         $scope.assignCourseToClass = function (course) {
 
+            console.log('ga assign course to class');
+            console.log('/schoolclassess/:id/assigncourse/:id');
+
+            if ($window.ga) {
+                console.log('sending to ga');
+                $window.ga('send', 'pageview', '/schoolclassess/:id/assigncourse/:id');
+                $window.ga('send', 'event', 'teacher assigns course to class');
+            }
+
 
             if ($scope.schoolclass.courses.indexOf(course._id) === -1) {
                 $scope.schoolclass.courses.push(course);
@@ -95,31 +104,44 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
         };
 
         $scope.removeCourseFromClass = function (course) {
+
+            console.log('ga removes course to class');
+            console.log('/schoolclassess/:id/removecourse/:id');
+
+            if ($window.ga) {
+                console.log('sending to ga');
+                $window.ga('send', 'pageview', '/schoolclassess/:id/removecourse/:id');
+                $window.ga('send', 'event', 'teacher removes course from class');
+            }
+
+
             for (var i = 0; i < $scope.schoolclass.courses.length; i++) {
                 if ($scope.schoolclass.courses[i]._id === course._id) {
                     $scope.schoolclass.courses.splice(i, 1);
                 }
             }
 
-            //var hideCourse = function(id) {
-            //    Courses.get({
-            //        courseId: id
-            //    }, function(slaveCourse) {
-            //        console.log(slaveCourse);
-            //        slaveCourse.visible = false;
-            //        slaveCourse.$update();
-            //    });
-            //};
+            var hideCourse = function(id) {
+                Courses.get({
+                    courseId: id
+                }, function(slaveCourse) {
+                    console.log('got course:'+slaveCourse);
+                    slaveCourse.visible = false;
+                    slaveCourse.$update(function(){
+                        console.log('set course to invisible');
+                    });
+                });
+            };
 
             $scope.updateSchoolclass();
 
             console.log(course._id);
             console.log(course.slaves);
 
-            for(i=0; i<course.slaves; i++) {
-                var slaveId = $scope.slaves[i];
+            for(i=0; i<course.slaves.length; i++) {
+                var slaveId = course.slaves[i];
                 console.log('updating' +slaveId);
-                //hideCourse(slaveId);
+                hideCourse(slaveId);
             }
         };
 

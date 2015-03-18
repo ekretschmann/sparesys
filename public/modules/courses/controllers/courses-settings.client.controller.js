@@ -14,6 +14,7 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
                 $scope.course.description = $scope.options.description;
                 $scope.course.front = $scope.options.front;
                 $scope.course.back = $scope.options.back;
+                $scope.course.slaves = $scope.options.slaves;
 
                 $scope.course.$update();
             }, 100);
@@ -73,6 +74,7 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
             $scope.options.teaching = $scope.course.teaching;
             $scope.options.front = $scope.course.front;
             $scope.options.back = $scope.course.back;
+            $scope.options.slaves = $scope.course.slaves;
         };
 
         reset();

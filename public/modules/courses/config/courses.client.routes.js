@@ -11,7 +11,13 @@ angular.module('courses').config(['$stateProvider',
             }).
             state('adminCourses', {
                 url: '/courses/admin',
-                templateUrl: 'modules/courses/views/admin-courses.client.view.html'
+                templateUrl: 'modules/courses/views/admin-courses.client.view.html',
+                data: { auth: ['admin']}
+            }).
+            state('adminCourse', {
+                url: '/courses/:courseId/admin',
+                templateUrl: 'modules/courses/views/admin-course.client.view.html',
+                data: { auth: ['admin']}
             }).
             state('createCourse', {
                 url: '/courses/create',
@@ -38,3 +44,14 @@ angular.module('courses').config(['$stateProvider',
             });
     }
 ]);
+
+angular.module('courses').run(function ($rootScope, Authentication, $state) {
+    $rootScope.$on('$stateChangeStart', function(event, toState, toParams, fromState, fromParams){
+        if ( toState.data && toState.data.auth && toState.data.auth.indexOf('admin') > -1 && Authentication.user && Authentication.user.roles.indexOf('admin') === -1 ) {
+            event.preventDefault();
+            $state.current.url = '/';
+            $state.go($state.current);
+            return false;
+        }
+    });
+});

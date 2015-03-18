@@ -1,20 +1,12 @@
-<div  data-ng-controller="CoursesSettingsController">
-
-    <div class="pull-right right-padded-s top-padded-s bottom-padded-m" >
+<div  data-ng-controller="CoursesController" data-ng-init="findOne()">
 
 
 
-        <a href="">
-            <i data-ng-click="areYouSureToDeleteCourse(course)"
-               class="glyphicon glyphicon-remove-sign">
-            </i>
-        </a>
-    </div>
+    <div class="content-header">
 
-
-
-    <div class="tab-header">
-        Settings for Course {{course.name}}
+        <div class="title">
+        Admin for Course {{course.name}}
+        </div>
     </div>
 
     <table class="box-margin-s" >
@@ -84,7 +76,19 @@
         </td>
     </tr>
 
+        <tr>
+            <td class="nowrap right-padded-m top-padded-s">Slaves</td>
+            <td class="top-padded-s" colspan="5">
+                <input type="text"
+                       data-ng-model="options.slaves"
+                       class="form-control"
+                       placeholder="{{course.slaves}}"
+                       data-ng-blur="saveSettings()"
+                       required>
+            </td>
+        </tr>
 
+    
     </table>
 
 

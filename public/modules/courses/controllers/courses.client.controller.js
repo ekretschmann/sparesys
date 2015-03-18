@@ -177,6 +177,10 @@ angular.module('courses').controller('CoursesController',
             $scope.update = function () {
                 var course = $scope.course;
 
+                console.log(course.slaves);
+                if(!course.slaves) {
+                    course.slaves=[];
+                }
                 course.$update(function () {
                     $location.path('courses');
                 }, function (errorResponse) {

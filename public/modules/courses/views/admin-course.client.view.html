@@ -15,14 +15,12 @@
             <td></td>
             <td class="nowrap bottom-padded-m">
                 <input  type="checkbox"
-                        data-ng-model="course.teaching"
-                        data-ng-click="saveSettings()">
+                        data-ng-model="course.teaching">
                 <span class="left-padded-s right-padded-m">Teach This Course</span>
 
 
             <input  type="checkbox"
-                    data-ng-click="saveSettings()"
-                    data-ng-model="course.published" data-ng-click="areYouSureToPublishCourse(course)">
+                    data-ng-model="course.published">
                 <span class="left-padded-s">Publish This Course</span>
 
             </td>
@@ -32,10 +30,8 @@
         <td class="right-padded-m">Name</td>
         <td class="expands" >
             <input type="text"
-                   data-ng-model="options.name"
-                   placeholder="{{course.name}}"
+                   data-ng-model="course.name"
                    class="focus form-control"
-                   data-ng-blur="saveSettings()"
                    required>
         </td>
     </tr>
@@ -44,10 +40,8 @@
         <td class="right-padded-m top-padded-s">Description</td>
         <td class="top-padded-s" colspan="5">
             <input type="text"
-                   data-ng-model="options.description"
+                   data-ng-model="course.description"
                    class="form-control"
-                   placeholder="{{course.description}}"
-                   data-ng-blur="saveSettings()"
                    required>
         </td>
     </tr>
@@ -56,10 +50,8 @@
         <td class="nowrap right-padded-m top-padded-s">Front of Card</td>
         <td class="top-padded-s" colspan="5">
             <input type="text"
-                   data-ng-model="options.front"
+                   data-ng-model="course.front"
                    class="form-control"
-                   placeholder="{{course.front}}"
-                   data-ng-blur="saveSettings()"
                    required>
         </td>
     </tr>
@@ -68,10 +60,8 @@
         <td class="nowrap right-padded-m top-padded-s">Back of Card</td>
         <td class="top-padded-s" colspan="5">
             <input type="text"
-                   data-ng-model="options.back"
+                   data-ng-model="course.back"
                    class="form-control"
-                   placeholder="{{course.back}}"
-                   data-ng-blur="saveSettings()"
                    required>
         </td>
     </tr>
@@ -80,10 +70,8 @@
             <td class="nowrap right-padded-m top-padded-s">Slaves</td>
             <td class="top-padded-s" colspan="5">
                 <input type="text"
-                       data-ng-model="options.slaves"
+                       data-ng-model="course.slaves"
                        class="form-control"
-                       placeholder="{{course.slaves}}"
-                       data-ng-blur="saveSettings()"
                        required>
             </td>
         </tr>
@@ -91,5 +79,10 @@
     
     </table>
 
+    <div class="center-aligned">
+        <div class="form-group">
+            <button data-ng-click="update()" class="btn btn-rememberators">OK</button>
+        </div>
+    </div>
 
 </div>

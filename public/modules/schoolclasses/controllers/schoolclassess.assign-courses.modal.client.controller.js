@@ -96,9 +96,31 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
             $scope.updateSchoolclass();
 
             for(var i=0; i<$scope.schoolclass.students.length; i++) {
-                var studentId = $scope.schoolclass.students[i];
-                var res = CoursesService.copyCourseFor(studentId);
-                res.get({courseId: course._id});
+
+
+                Courses.query({
+                    userId: $scope.authentication.user._id
+                }, function(courses) {
+
+                    console.log('student has courses'+courses);
+                    var studentHasCourse = false;
+                    for (var i=0; i<courses.length; i++) {
+                        if (course.slaves.indexOf(courses[i]._id !== -1)) {
+                            courses[i].visible = true;
+                            courses[i].$update();
+                            studentHasCourse = true;
+                            console.log('setting visible');
+                        }
+                    }
+
+                    if (!studentHasCourse) {
+                        console.log('there is no course, copy');
+                        var studentId = $scope.schoolclass.students[i];
+                        var res = CoursesService.copyCourseFor(studentId);
+                        res.get({courseId: course._id});
+                    }
+                });
+
             }
 
         };

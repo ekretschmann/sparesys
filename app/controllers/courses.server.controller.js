@@ -316,6 +316,7 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.course = newCourseId;
             copy.save();
 
+
             if (isSupervised) {
 
                 if (!original.slaves) {
@@ -561,6 +562,7 @@ exports.getCardsForCourse = function (req, res, next, id) {
 exports.copyCourse = function (req, res, next, id) {
 
 
+
     var userId;
     var isSupervised = false;
 
@@ -571,7 +573,9 @@ exports.copyCourse = function (req, res, next, id) {
         userId = req.user;
     }
 
+
     var findCourse = Course.find({'_id': id}).exec(function (err) {
+
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -581,7 +585,11 @@ exports.copyCourse = function (req, res, next, id) {
 
 
     findCourse.then(function (findCourseResult) {
+
+
         var original = findCourseResult[0];
+
+
 
         var copy = new Course();
 
@@ -619,19 +627,28 @@ exports.copyCourse = function (req, res, next, id) {
             original.slaves = [];
         }
         original.slaves.push(copy._id);
-        original.update();
+
+
+
+        original.save(function(err) {
+            if(err) {
+                console.log(err);
+            }
+        });
 
         var packPromise = copyPacks(original.packs, userId, copy._id, isSupervised);
 
 
         packPromise.then(function (packs) {
             copy.packs = packs;
+
+
             copy.save(function() {
                 res.jsonp(copy);
             });
         });
 
-
+        //res.jsonp(copy);
 
     });
 

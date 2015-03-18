@@ -101,8 +101,26 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
                 }
             }
 
+            //var hideCourse = function(id) {
+            //    Courses.get({
+            //        courseId: id
+            //    }, function(slaveCourse) {
+            //        console.log(slaveCourse);
+            //        slaveCourse.visible = false;
+            //        slaveCourse.$update();
+            //    });
+            //};
 
             $scope.updateSchoolclass();
+
+            console.log(course._id);
+            console.log(course.slaves);
+
+            for(i=0; i<course.slaves; i++) {
+                var slaveId = $scope.slaves[i];
+                console.log('updating' +slaveId);
+                //hideCourse(slaveId);
+            }
         };
 
         //

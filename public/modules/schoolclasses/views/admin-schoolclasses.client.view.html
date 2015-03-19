@@ -28,30 +28,28 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="schoolclass in schoolclasses | filter:searchText">
-            <td class=""  >
+            <td class="top-padded-s left-padded-s right-padded-s" >
                 <a href="">
                     <i data-ng-click="areYouSureToDeleteClass(schoolclass)"
                        class="glyphicon glyphicon-remove-sign">
                     </i>
                 </a>
-                    <a data-ng-href="#!/schoolclass/{{schoolclass._id}}/edit">
-                        <i class="glyphicon glyphicon-edit"></i>
-                    </a>
+
             </td>
-            <td class="" >
+            <td class="top-padded-s nowrap right-padded-m" >
                 <a data-ng-href="#!/schoolclasses/{{schoolclass._id}}/edit">{{schoolclass.name}}</a></td>
-            <td data-ng-controller="SchoolsController" data-ng-init="findById(schoolclass.school)" style="vertical-align: top">
+            <td class="top-padded-s right-padded-m" data-ng-controller="SchoolsController" data-ng-init="findById(schoolclass.school)">
                 <span data-ng-if="school">{{school.name}}</span>
                 <span data-ng-if="!school">undefined</span>
             </td>
-            <td class="" >
+            <td class="top-padded-s right-padded-m" >
                 <div data-ng-repeat="student in schoolclass.students">
-                    <div data-ng-controller="UsersController" data-ng-init="findStudent(student)">
+                    <div class="nowrap" data-ng-controller="UsersController" data-ng-init="findStudent(student)">
                         {{student.displayName}}
                     </div>
                 </div>
             </td>
-            <td class="" >
+            <td class="top-padded-s right-padded-s" >
 
                 <div data-ng-repeat="course in schoolclass.courses">
                     <div data-ng-controller="CoursesController" data-ng-init="findById(course)">

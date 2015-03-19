@@ -121,6 +121,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         // Find existing Schoolclass
         $scope.findOne = function () {
 
+            console.log($stateParams.schoolclassId);
             Schoolclasses.get({
                 schoolclassId: $stateParams.schoolclassId
             }, function (schoolclass) {

@@ -6,9 +6,14 @@ angular.module('schoolclasses').config(['$stateProvider',
 
         // Schoolclasses state routing
         $stateProvider.
-            state('adminSchoolclass', {
+            state('adminSchoolclasses', {
                 url: '/schoolclasses/admin',
                 templateUrl: 'modules/schoolclasses/views/admin-schoolclasses.client.view.html',
+                data: { auth: ['admin']}
+            }).
+            state('adminSchoolclass', {
+                url: '/schoolclasses/:schoolclassId/admin',
+                templateUrl: 'modules/schoolclasses/views/admin-schoolclass.client.view.html',
                 data: { auth: ['admin']}
             });
     }

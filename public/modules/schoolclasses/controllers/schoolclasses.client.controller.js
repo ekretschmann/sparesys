@@ -66,6 +66,20 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         };
 
+        $scope.removeStudent = function (studentId) {
+
+            var index = $scope.schoolclass.students.indexOf(studentId);
+            $scope.schoolclass.students.splice(index, 1);
+            $scope.schoolclass.$update();
+        };
+
+        $scope.removeCourse = function (courseId) {
+
+            var index = $scope.schoolclass.courses.indexOf(courseId);
+            $scope.schoolclass.courses.splice(index, 1);
+            $scope.schoolclass.$update();
+        };
+
 
         // Create new Schoolclass
         $scope.create = function () {

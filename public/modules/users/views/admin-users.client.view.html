@@ -35,7 +35,7 @@
                        class="glyphicon glyphicon-remove-sign small">
                     </i>
                 </a>
-                <a data-ng-href="#!/users/{{user._id}}/edit">{{user.displayName}}</a>
+                <a data-ng-href="#!/users/{{user._id}}/admin">{{user.displayName}}</a>
             </td>
             <td>
                 {{user._id}}
@@ -45,41 +45,4 @@
         </tbody>
     </table>
 
-    <!---->
-    <!--&lt;!&ndash;<div data-ng-if="authentication.user.roles.indexOf('admin') !== -1">&ndash;&gt;-->
-    <!--<div class="content-header">-->
-        <!--<div class="pull-right">-->
-            <!--<input class="form-control search focus" ng-model="searchText" placeholder="Search">-->
-        <!--</div>-->
-
-        <!--<div class="title">-->
-            <!--Users-->
-        <!--</div>-->
-    <!--</div>-->
-
-
-
-    <!--<table id="searchTextResults" class="table-striped expands">-->
-        <!--<thead>-->
-        <!--<tr>-->
-            <!--<th class="left-padded-s right-padded-m nowrap">User</th>-->
-            <!--<th class="right-padded-m nowrap">Name</th>-->
-            <!--<th class="expands">Roles</th>-->
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--<tr data-ng-repeat="user in users | filter:searchText">-->
-            <!--<td class="left-padded-s right-padded-m nowrap top-aligned"><a data-ng-href="#!/users/{{user._id}}/edit">{{user.username}}</a></td>-->
-            <!--<td class="right-padded-m nowrap top-aligned">{{user.displayName}}</td>-->
-            <!--<td class="top-aligned right-padded-s">-->
-                <!--<span class="right-padded-s nowrap" data-ng-repeat="role in user.roles">-->
-                        <!--{{role}}-->
-                <!--</span>-->
-
-            <!--</td>-->
-        <!--</tr>-->
-        <!--</tbody>-->
-    <!--</table>-->
-
-    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-</section>
+    </section>

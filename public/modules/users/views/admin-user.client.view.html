@@ -1,13 +1,6 @@
 <section data-ng-controller="UsersController" data-ng-init="findOne()">
 
     <div class="content-header">
-        <div class="pull-right">
-            <a class="menu-link"
-               href=""
-               data-ng-click="remove(otherUser)">Delete</a>
-
-
-        </div>
 
         <div class="title">
             Edit User
@@ -75,25 +68,29 @@
                     </td>
                 </tr>
 
-                <tr>
+                <tr data-ng-repeat="school in otherUser.administersSchools">
 
-                    <td class="right-padded-m top-padded-s nowrap">Administers Schools</td>
-                    <td class="expands top-padded-s">
-                        <input type="text"
-                               data-ng-model="otherUser.administersSchools"
-                               class="form-control"
-                               placeholder="Schools">
+                    <td class="right-padded-m top-padded-s nowrap top-aligned" data-ng-if="$index === 0">Administers Schools</td>
+                    <td class="right-padded-m top-padded-s nowrap top-aligned" data-ng-if="$index !== 0"></td>
+                    <td class="expands top-padded-s top-aligned" data-ng-controller="SchoolsController" data-ng-init="findById(school)">
+                        <a>
+                            <i data-ng-click="removeSchoolAdmin(school, otherUser)"
+                               class="glyphicon glyphicon-remove-sign small">
+                            </i>
+                        </a> {{school.name}} ({{school._id}})
+
                     </td>
                 </tr>
 
-                <tr>
+                <tr data-ng-repeat="teachesClass in otherUser.teachesClasses">
 
                     <td class="right-padded-m top-padded-s nowrap">Teaches Classes</td>
-                    <td class="expands top-padded-s">
-                        <input type="text"
-                               data-ng-model="otherUser.teachesClasses"
-                               class="form-control"
-                               placeholder="Classes">
+                    <td class="expands top-padded-s" data-ng-controller="SchoolclassesController" data-ng-init="findById(teachesClass)">
+                        <a>
+                            <i data-ng-click="removeAsTeacher(schoolclass, otherUser)"
+                               class="glyphicon glyphicon-remove-sign small">
+                            </i>
+                        </a> {{schoolclass.name}} ({{schoolclass._id}})
                     </td>
                 </tr>
 

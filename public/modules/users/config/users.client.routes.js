@@ -10,9 +10,9 @@ angular.module('users').config(['$stateProvider',
                 templateUrl: 'modules/users/views/admin-users.client.view.html',
                 data: { auth: ['admin']}
             }).
-            state('editUser', {
-                url: '/users/:userId/edit',
-                templateUrl: 'modules/users/views/edit-user.client.view.html',
+            state('adminUser', {
+                url: '/users/:userId/admin',
+                templateUrl: 'modules/users/views/admin-user.client.view.html',
                 data: { auth: ['admin']}
             }).
             state('profile', {

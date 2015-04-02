@@ -171,6 +171,13 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             });
         };
 
+
+        $scope.removeAsTeacher = function(schoolclass, user) {
+            var index = user.teachesClasses.indexOf(schoolclass._id);
+            user.teachesClasses.splice(index, 1);
+            user.$update();
+        };
+
         $scope.findById = function (id) {
 
             $scope.schoolclass = Schoolclasses.get({

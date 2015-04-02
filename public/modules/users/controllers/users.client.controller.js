@@ -87,6 +87,11 @@ angular.module('courses').controller('UsersController', ['$scope', '$timeout', '
 
 
 
+        $scope.removeSchoolAdmin = function(school, user) {
+            var index = user.administersSchools.indexOf(school._id);
+            user.administersSchools.splice(index, 1);
+            user.$update();
+        };
 
         // Update existing User
         $scope.update = function () {

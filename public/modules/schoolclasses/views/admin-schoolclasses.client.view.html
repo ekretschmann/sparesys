@@ -19,24 +19,21 @@
     <table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-if="schoolclasses.length > 0">
         <thead>
         <tr>
-            <th class="sparesys-view-courses-course-column"></th>
-            <th class="sparesys-view-courses-course-column">Schoolclass</th>
-            <th class="sparesys-view-courses-description-column">School</th>
-            <th class="sparesys-view-courses-description-column" style="padding-left: 5px;">Students</th>
-            <th class="sparesys-view-courses-description-column">Courses</th>
+            <th >Schoolclass</th>
+            <th >School</th>
+            <th >Students</th>
+            <th >Courses</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="schoolclass in schoolclasses | filter:searchText">
-            <td class="top-padded-s left-padded-s right-padded-s top-aligned" >
+
+            <td class="top-padded-s nowrap right-padded-m top-aligned" >
                 <a href="">
                     <i data-ng-click="areYouSureToDeleteClass(schoolclass)"
-                       class="glyphicon glyphicon-remove-sign">
+                       class="glyphicon glyphicon-remove-sign small">
                     </i>
                 </a>
-
-            </td>
-            <td class="top-padded-s nowrap right-padded-m top-aligned" >
                 <a data-ng-href="#!/schoolclasses/{{schoolclass._id}}/admin">{{schoolclass.name}}</a></td>
             <td class="top-padded-s right-padded-m top-aligned" data-ng-controller="SchoolsController" data-ng-init="findById(schoolclass.school)">
                 <span data-ng-if="school">{{school.name}}</span>

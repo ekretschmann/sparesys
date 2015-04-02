@@ -7,7 +7,7 @@ angular.module('users').config(['$stateProvider',
         $stateProvider.
             state('listUsers', {
                 url: '/users',
-                templateUrl: 'modules/users/views/list-users.client.view.html',
+                templateUrl: 'modules/users/views/admin-users.client.view.html',
                 data: { auth: ['admin']}
             }).
             state('editUser', {

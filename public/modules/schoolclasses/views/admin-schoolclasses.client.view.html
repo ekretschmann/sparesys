@@ -22,6 +22,7 @@
             <th >Schoolclass</th>
             <th >School</th>
             <th >Students</th>
+            <th >Teachers</th>
             <th >Courses</th>
         </tr>
         </thead>
@@ -36,13 +37,20 @@
                 </a>
                 <a data-ng-href="#!/schoolclasses/{{schoolclass._id}}/admin">{{schoolclass.name}}</a></td>
             <td class="top-padded-s right-padded-m top-aligned" data-ng-controller="SchoolsController" data-ng-init="findById(schoolclass.school)">
-                <span data-ng-if="school">{{school.name}}</span>
-                <span data-ng-if="!school">undefined</span>
+                <span data-ng-if="school._id">{{school.name}}</span>
+                <span data-ng-if="!school._id">undefined</span>
             </td>
             <td class="top-padded-s right-padded-m top-aligned" >
                 <div data-ng-repeat="student in schoolclass.students">
                     <div class="nowrap" data-ng-controller="UsersController" data-ng-init="findStudent(student)">
                         {{student.displayName}}
+                    </div>
+                </div>
+            </td>
+            <td class="top-padded-s right-padded-m top-aligned" >
+                <div data-ng-repeat="teacher in schoolclass.teachers">
+                    <div class="nowrap" data-ng-controller="UsersController" data-ng-init="findStudent(teacher)">
+                        {{teacher.displayName}}
                     </div>
                 </div>
             </td>

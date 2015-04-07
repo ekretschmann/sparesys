@@ -95,14 +95,15 @@
                 </tr>
 
 
-                <tr>
+                <tr data-ng-repeat="takesClass in otherUser.studentInClasses">
 
-                    <td class="right-padded-m top-padded-s">Classes</td>
-                    <td class="expands top-padded-s">
-                        <input type="text"
-                               data-ng-model="otherUser.schoolclasses"
-                               class="form-control"
-                               placeholder="classes">
+                    <td class="right-padded-m top-padded-s nowrap">Takes Classes</td>
+                    <td class="expands top-padded-s" data-ng-controller="SchoolclassesController" data-ng-init="findById(takesClass)">
+                        <a>
+                            <i data-ng-click="removeAsStudent(schoolclass, otherUser)"
+                               class="glyphicon glyphicon-remove-sign small">
+                            </i>
+                        </a> {{schoolclass.name}} ({{schoolclass._id}})
                     </td>
                 </tr>
 

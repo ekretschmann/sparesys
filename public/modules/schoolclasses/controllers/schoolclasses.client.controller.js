@@ -52,6 +52,8 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.areYouSureToDeleteClass = function (schoolclass) {
 
+
+
             $scope.schoolclass = schoolclass;
             $modal.open({
                 templateUrl: 'areYouSureToDeleteClass.html',
@@ -175,6 +177,12 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         $scope.removeAsTeacher = function(schoolclass, user) {
             var index = user.teachesClasses.indexOf(schoolclass._id);
             user.teachesClasses.splice(index, 1);
+            user.$update();
+        };
+
+        $scope.removeAsStudent = function(schoolclass, user) {
+            var index = user.studentInClasses.indexOf(schoolclass._id);
+            user.studentInClasses.splice(index, 1);
             user.$update();
         };
 

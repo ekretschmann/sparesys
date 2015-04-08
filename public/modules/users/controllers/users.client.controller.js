@@ -1,7 +1,7 @@
 'use strict';
 
-// Courses controller
-angular.module('courses').controller('UsersController', ['$scope', '$timeout', '$stateParams', '$location', 'Authentication', 'Users',
+// Users controller
+angular.module('users').controller('UsersController', ['$scope', '$timeout', '$stateParams', '$location', 'Authentication', 'Users',
     function ($scope, $timeout, $stateParams, $location, Authentication, Users) {
         $scope.authentication = Authentication;
 

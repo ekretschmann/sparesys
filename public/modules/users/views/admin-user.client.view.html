@@ -22,8 +22,8 @@
 
 
                 <tr>
-                    <td class="right-padded-m top-padded-s">Username</td>
-                    <td class="expands top-padded-s">
+                    <td class="right-padded-m top-padded-m">Username</td>
+                    <td class="expands top-padded-m">
                         <input type="text"
                                data-ng-model="otherUser.username"
                                id="username"
@@ -34,8 +34,8 @@
                 </tr>
 
                 <tr>
-                    <td class="right-padded-m nowrap top-padded-s">First Name</td>
-                    <td class="expands top-padded-s">
+                    <td class="right-padded-m nowrap top-padded-m">First Name</td>
+                    <td class="expands top-padded-m">
                         <input type="text"
                                data-ng-model="otherUser.firstName"
                                id="firstName"
@@ -46,8 +46,8 @@
 
                 <tr>
 
-                    <td class="right-padded-m nowrap top-padded-s">Last Name</td>
-                    <td class="expands top-padded-s">
+                    <td class="right-padded-m nowrap top-padded-m">Last Name</td>
+                    <td class="expands top-padded-m">
                         <input type="text"
                                data-ng-model="otherUser.lastName"
                                id="description"
@@ -58,8 +58,8 @@
 
                 <tr>
 
-                    <td class="right-padded-m top-padded-s">Email</td>
-                    <td class="expands top-padded-s">
+                    <td class="right-padded-m top-padded-m">Email</td>
+                    <td class="expands top-padded-m">
                         <input type="text"
                                data-ng-model="otherUser.email"
                                id="email"
@@ -70,9 +70,9 @@
 
                 <tr data-ng-repeat="school in otherUser.administersSchools">
 
-                    <td class="right-padded-m top-padded-s nowrap top-aligned" data-ng-if="$index === 0">Administers Schools</td>
-                    <td class="right-padded-m top-padded-s nowrap top-aligned" data-ng-if="$index !== 0"></td>
-                    <td class="expands top-padded-s top-aligned" data-ng-controller="SchoolsController" data-ng-init="findById(school)">
+                    <td class="right-padded-m top-padded-m nowrap top-aligned" data-ng-if="$index === 0">Administers Schools</td>
+                    <td class="right-padded-m top-padded-m nowrap top-aligned" data-ng-if="$index !== 0"></td>
+                    <td class="expands top-padded-m top-aligned" data-ng-controller="SchoolsController" data-ng-init="findById(school)">
                         <a>
                             <i data-ng-click="removeSchoolAdmin(school, otherUser)"
                                class="glyphicon glyphicon-remove-sign small">
@@ -84,8 +84,8 @@
 
                 <tr data-ng-repeat="teachesClass in otherUser.teachesClasses">
 
-                    <td class="right-padded-m top-padded-s nowrap">Teaches Classes</td>
-                    <td class="expands top-padded-s" data-ng-controller="SchoolclassesController" data-ng-init="findById(teachesClass)">
+                    <td class="right-padded-m top-padded-m nowrap">Teaches Classes</td>
+                    <td class="expands top-padded-m" data-ng-controller="SchoolclassesController" data-ng-init="findById(teachesClass)">
                         <a>
                             <i data-ng-click="removeAsTeacher(schoolclass, otherUser)"
                                class="glyphicon glyphicon-remove-sign small">
@@ -97,8 +97,8 @@
 
                 <tr data-ng-repeat="takesClass in otherUser.studentInClasses">
 
-                    <td class="right-padded-m top-padded-s nowrap">Takes Classes</td>
-                    <td class="expands top-padded-s" data-ng-controller="SchoolclassesController" data-ng-init="findById(takesClass)">
+                    <td class="right-padded-m top-padded-m nowrap">Takes Classes</td>
+                    <td class="expands top-padded-m" data-ng-controller="SchoolclassesController" data-ng-init="findById(takesClass)">
                         <a>
                             <i data-ng-click="removeAsStudent(schoolclass, otherUser)"
                                class="glyphicon glyphicon-remove-sign small">
@@ -107,11 +107,23 @@
                     </td>
                 </tr>
 
+                <tr data-ng-controller="CoursesController" data-ng-init="findForUser(otherUser)">
+
+                    <!--<td class="right-padded-m top-padded-m nowrap">Takes Classes</td>-->
+                    <!--<td class="expands top-padded-m" data-ng-controller="SchoolclassesController" data-ng-init="findById(takesClass)">-->
+                        <!--<a>-->
+                            <!--<i data-ng-click="removeAsStudent(schoolclass, otherUser)"-->
+                               <!--class="glyphicon glyphicon-remove-sign small">-->
+                            <!--</i>-->
+                        <!--</a> {{schoolclass.name}} ({{schoolclass._id}})-->
+                    <!--</td>-->
+                </tr>
+
 
                 <tr>
 
-                    <td class="right-padded-m top-padded-s top-aligned">Roles</td>
-                    <td class="expands top-padded-s">
+                    <td class="right-padded-m top-padded-m top-aligned">Roles</td>
+                    <td class="expands top-padded-m">
                         <div>
                             <label class="right-padded-m" ng-repeat="role in roles">
                                 <input
@@ -130,16 +142,16 @@
 
                 <tr>
 
-                    <td class="right-padded-m top-padded-s">Created</td>
-                    <td class="expands top-padded-s">
+                    <td class="right-padded-m top-padded-m">Created</td>
+                    <td class="expands top-padded-m">
                         {{otherUser.created | date: 'short'}}
                     </td>
                 </tr>
 
                 <tr class="controls">
 
-                    <td class="right-padded-m top-padded-s nowrap">Last Update</td>
-                    <td class="expands top-padded-s">
+                    <td class="right-padded-m top-padded-m nowrap">Last Update</td>
+                    <td class="expands top-padded-m">
                         {{otherUser.updated | date: 'short'}}
                     </td>
                 </tr>

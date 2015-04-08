@@ -234,6 +234,10 @@ angular.module('courses').controller('CoursesController',
                 }
             };
 
+            $scope.findForUser = function (otherUser) {
+                console.log(otherUser);
+            };
+
             $scope.findPublished = function () {
                 $scope.courses = Courses.query({
                     published: true

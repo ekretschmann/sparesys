@@ -1,11 +1,6 @@
 <section data-ng-controller="SchoolsController" data-ng-init="findOne()">
     <div class="content-header">
-        <div class="pull-right">
-            <a class="menu-link"
-               href=""
-               data-ng-click="remove(otherUser)">Delete</a>
 
-        </div>
 
         <div class="title">
             Administer School
@@ -76,29 +71,74 @@
                     </td>
                 </tr>
 
-                <tr>
 
-                    <td class="right-padded-m nowrap top-padded-s">Classes</td>
+
+                <tr data-ng-repeat="schoolclass in school.schoolclasses">
+                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index ===0">Classes</td>
+                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index !==0"></td>
                     <td class="expands top-padded-s">
-                        <table>
-                            <tr data-ng-repeat="schoolclass in schoolclasses">
-                                <td class="right-padded-m"><input type="text"
-                                                                  style="width:16em"
-                                                                  data-ng-model="schoolclass"
-                                                                  class="form-control"
-                                                                  placeholder="Administrator" required></td>
-                                <td>{{schoolclass}}</td>
-                            </tr>
-                        </table>
+                        <a>
+                            <i data-ng-click="removeSchoolclass(schoolclass)"
+                               class="glyphicon glyphicon-remove-sign small">
+                            </i>
+                        </a>
 
-
+                        {{schoolclass.name}} ({{schoolclass._id}})
                     </td>
                 </tr>
+
+                <tr data-ng-repeat="student in school.students">
+                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index ===0">Students</td>
+                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index !==0"></td>
+                    <td class="expands top-padded-s" data-ng-controller="UsersController" data-ng-init="findById(student)">
+                        <a>
+                            <i data-ng-click="removeStudent(student)"
+                               class="glyphicon glyphicon-remove-sign small">
+                            </i>
+                        </a>
+
+                        {{displayName}} ({{student}})
+                    </td>
+                </tr>
+
+
+                <tr data-ng-repeat="teacher in school.teachers">
+                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index ===0">Teachers</td>
+                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index !==0"></td>
+                    <td class="expands top-padded-s" data-ng-controller="UsersController" data-ng-init="findById(teacher)">
+                        <a>
+                            <i data-ng-click="removeTeacher(teacher)"
+                               class="glyphicon glyphicon-remove-sign small">
+                            </i>
+                        </a>
+
+                        {{displayName}} ({{teacher}})
+                    </td>
+                </tr>
+
+                <!--<tr>-->
+
+                    <!--<td class="right-padded-m nowrap top-padded-s">Classes</td>-->
+                    <!--<td class="expands top-padded-s">-->
+                        <!--<table>-->
+                            <!--<tr data-ng-repeat="schoolclass in schoolclasses">-->
+                                <!--<td class="right-padded-m"><input type="text"-->
+                                                                  <!--style="width:16em"-->
+                                                                  <!--data-ng-model="schoolclass"-->
+                                                                  <!--class="form-control"-->
+                                                                  <!--placeholder="Administrator" required></td>-->
+                                <!--<td>{{schoolclass}}</td>-->
+                            <!--</tr>-->
+                        <!--</table>-->
+
+
+                    <!--</td>-->
+                <!--</tr>-->
 
             </table>
 
 
-            <div class="center-aligned">
+            <div class="center-aligned top-padded-m">
                 <div class="form-group">
                     <input type="submit" class="btn btn-rememberators">
                 </div>

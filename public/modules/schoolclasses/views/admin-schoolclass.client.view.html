@@ -68,7 +68,7 @@
                 <tr data-ng-repeat="teacher in schoolclass.teachers">
                     <td class="right-padded-m nowrap top-padded-m" data-ng-if="$index ===0">Teachers</td>
                     <td class="right-padded-m nowrap top-padded-m" data-ng-if="$index !==0"></td>
-                    <td class="expands top-padded-s" data-ng-controller="UsersController" data-ng-init="findById(teacher)">
+                    <td class="expands top-padded-m" data-ng-controller="UsersController" data-ng-init="findById(teacher)">
 
                         <a>
                             <i data-ng-click="removeStudent(teacher)"

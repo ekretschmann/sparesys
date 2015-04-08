@@ -50,6 +50,13 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         };
 
+        $scope.removeSchoolclass= function(schoolclass) {
+            schoolclass.$remove(function(){
+                $state.go($state.$current, null, {reload:true})
+            });
+
+        };
+
         $scope.areYouSureToDeleteClass = function (schoolclass) {
 
 

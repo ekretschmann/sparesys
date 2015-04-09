@@ -234,9 +234,31 @@ angular.module('courses').controller('CoursesController',
                 }
             };
 
-            $scope.findForUser = function (otherUser) {
-                console.log(otherUser);
+
+            $scope.otherUserCourses = [];
+
+            $scope.findCoursesForUser = function (otherUser) {
+
+                if (otherUser.$promise) {
+                    otherUser.$promise.then(function() {
+                        Courses.query({
+                            userId: otherUser._id
+                        }, function (courses) {
+                            $scope.otherUserCourses = courses;
+                        });
+                    });
+                } else {
+                    Courses.query({
+                        userId: otherUser._id
+                    }, function (courses) {
+                        $scope.otherUserCourses = courses;
+                    });
+                }
             };
+
+
+
+
 
             $scope.findPublished = function () {
                 $scope.courses = Courses.query({

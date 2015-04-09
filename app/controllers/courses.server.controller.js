@@ -172,7 +172,6 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
 
-
     if (req.query.userId) {
 
         Course.find({'user': req.query.userId}).exec(function (err, courses) {

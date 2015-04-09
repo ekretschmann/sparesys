@@ -11,7 +11,8 @@
     <form class="form-horizontal" data-ng-submit="update()" novalidate>
         <fieldset>
 
-            <table class="expands">
+
+            <table class="expands" data-ng-controller="CoursesController" data-ng-init="findCoursesForUser(otherUser)">
 
                 <tr>
                     <td class="right-padded-m">Id</td>
@@ -97,7 +98,8 @@
 
                 <tr data-ng-repeat="takesClass in otherUser.studentInClasses">
 
-                    <td class="right-padded-m top-padded-m nowrap">Takes Classes</td>
+                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Takes Classes</td>
+                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>
                     <td class="expands top-padded-m" data-ng-controller="SchoolclassesController" data-ng-init="findById(takesClass)">
                         <a>
                             <i data-ng-click="removeAsStudent(schoolclass, otherUser)"
@@ -107,16 +109,18 @@
                     </td>
                 </tr>
 
-                <tr data-ng-controller="CoursesController" data-ng-init="findForUser(otherUser)">
+                <tr  data-ng-repeat="course in otherUserCourses">
 
-                    <!--<td class="right-padded-m top-padded-m nowrap">Takes Classes</td>-->
-                    <!--<td class="expands top-padded-m" data-ng-controller="SchoolclassesController" data-ng-init="findById(takesClass)">-->
-                        <!--<a>-->
-                            <!--<i data-ng-click="removeAsStudent(schoolclass, otherUser)"-->
-                               <!--class="glyphicon glyphicon-remove-sign small">-->
-                            <!--</i>-->
-                        <!--</a> {{schoolclass.name}} ({{schoolclass._id}})-->
-                    <!--</td>-->
+                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Takes Courses</td>
+                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>
+                    <td class="expands top-padded-m">
+                        <a>
+                            <i
+                               class="glyphicon glyphicon-remove-sign small">
+                            </i>
+                        </a> {{course.name}} ({{course._id}}) {{course.supervised ? ' - supervised' : ''}}
+                    </td>
+
                 </tr>
 
 

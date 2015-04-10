@@ -13,22 +13,22 @@
 
         <tr>
             <td></td>
-            <td class="nowrap bottom-padded-m">
+            <td class="nowrap top-padded-m">
                 <input  type="checkbox"
                         data-ng-model="course.teaching">
-                <span class="left-padded-s right-padded-m">Teach This Course</span>
+                <span class="left-padded-s right-padded-m">Course is taught</span>
 
 
             <input  type="checkbox"
                     data-ng-model="course.published">
-                <span class="left-padded-s">Publish This Course</span>
+                <span class="left-padded-s">Course is published</span>
 
             </td>
         </tr>
 
         <tr>
-        <td class="right-padded-m">Name</td>
-        <td class="expands" >
+        <td class="right-padded-m top-padded-m">Name</td>
+        <td class="expands top-padded-m" >
             <input type="text"
                    data-ng-model="course.name"
                    class="focus form-control"
@@ -37,8 +37,8 @@
     </tr>
 
     <tr>
-        <td class="right-padded-m top-padded-s">Description</td>
-        <td class="top-padded-s" colspan="5">
+        <td class="right-padded-m top-padded-m">Description</td>
+        <td class="top-padded-m" colspan="5">
             <input type="text"
                    data-ng-model="course.description"
                    class="form-control"
@@ -47,8 +47,8 @@
     </tr>
 
     <tr>
-        <td class="nowrap right-padded-m top-padded-s">Front of Card</td>
-        <td class="top-padded-s" colspan="5">
+        <td class="nowrap right-padded-m top-padded-m">Front of Card</td>
+        <td class="top-padded-m" colspan="5">
             <input type="text"
                    data-ng-model="course.front"
                    class="form-control"
@@ -57,8 +57,8 @@
     </tr>
 
     <tr>
-        <td class="nowrap right-padded-m top-padded-s">Back of Card</td>
-        <td class="top-padded-s" colspan="5">
+        <td class="nowrap right-padded-m top-padded-m">Back of Card</td>
+        <td class="top-padded-m" colspan="5">
             <input type="text"
                    data-ng-model="course.back"
                    class="form-control"
@@ -66,15 +66,39 @@
         </td>
     </tr>
 
-        <tr>
-            <td class="nowrap right-padded-m top-padded-s">Slaves</td>
-            <td class="top-padded-s" colspan="5">
-                <input type="text"
-                       data-ng-model="course.slaves"
-                       class="form-control"
-                       required>
+
+        <tr data-ng-if="!course.slaves || course.slaves.length ===0">
+            <td class="top-padded-m">Slaves</td>
+            <td class="top-padded-m">none</td>
+        </tr>
+
+        <tr data-ng-repeat="slave in course.slaves">
+            <td class="right-padded-m nowrap top-padded-m" data-ng-if="$index ===0">Slaves</td>
+            <td class="right-padded-m nowrap top-padded-m" data-ng-if="$index !==0"></td>
+            <td class="expands top-padded-m" data-ng-init="findOtherCourse(slave)">
+
+                <a>
+                    <i data-ng-click="removeSlave(slave, course)"
+                       class="glyphicon glyphicon-remove-sign small">
+                    </i>
+                </a>
+
+
+                <span data-ng-if="otherCourse.user">({{otherCourse.user.displayName}})</span>
+                <span data-ng-if="!otherCourse.user">(unknown user)</span>
             </td>
         </tr>
+        <!---->
+        <!---->
+        <!--<tr>-->
+            <!--<td class="nowrap right-padded-m top-padded-m">Slaves</td>-->
+            <!--<td class="top-padded-m" colspan="5">-->
+                <!--<input type="text"-->
+                       <!--data-ng-model="course.slaves"-->
+                       <!--class="form-control"-->
+                       <!--required>-->
+            <!--</td>-->
+        <!--</tr>-->
 
     
     </table>

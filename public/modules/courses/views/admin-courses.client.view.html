@@ -41,7 +41,7 @@
         </thead>
         <tbody>
         <tr data-ng-repeat="course in courses | filter:searchText">
-            <td class="nowrap right-padded-s middle-aligned left-padded-s top-padded-s">
+            <td class="nowrap right-padded-s middle-aligned left-padded-s top-padded-s bottom-padded-s">
                 <a href="">
                     <i data-ng-click="areYouSureToDeleteCourse(course)"
                        class="glyphicon glyphicon-remove-sign">
@@ -49,12 +49,12 @@
                 </a>
 
             </td>
-            <td class="nowrap right-padded-m top-aligned top-padded-s">
+            <td class="nowrap right-padded-m top-aligned top-padded-s bottom-padded-s">
                 <a data-ng-href="#!/courses/{{course._id}}/admin">{{course.name}}</a></td>
-            <td class="expands right-padded-m top-padded-s">{{course.description}}</td>
-            <td class="nowrap right-padded-m top-aligned top-padded-s">{{course.user.displayName}}</td>
-            <td class="nowrap right-padded-m top-aligned top-padded-s">{{course.visible}}</td>
-            <td class="nowrap top-aligned right-padded-s top-padded-s">{{course.created | date:'shortDate'}}</td>
+            <td class="expands right-padded-m top-padded-s bottom-padded-s">{{course.description}}</td>
+            <td class="nowrap right-padded-m top-aligned top-padded-s bottom-padded-s">{{course.user.displayName}}</td>
+            <td class="nowrap right-padded-m top-aligned top-padded-s bottom-padded-s">{{course.visible}}</td>
+            <td class="nowrap top-aligned right-padded-s top-padded-s bottom-padded-s">{{course.created | date:'shortDate'}}</td>
         </tr>
         </tbody>
     </table>

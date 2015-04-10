@@ -97,6 +97,14 @@ angular.module('courses').controller('CoursesController',
             };
 
 
+            $scope.removeSlave = function(slave, course) {
+                console.log(slave);
+                console.log(course.slaves);
+                var index = course.slaves.indexOf(slave);
+                course.slaves.splice(index, 1);
+                course.$update();
+            };
+
             $scope.createDummyCourse = function () {
 
                 TestDataService.createDummmyCourse(function () {
@@ -303,6 +311,13 @@ angular.module('courses').controller('CoursesController',
             $scope.findById = function (id) {
 
                 $scope.course = Courses.get({
+                    courseId: id
+                });
+            };
+
+            $scope.findOtherCourse = function (id) {
+
+                $scope.otherCourse = Courses.get({
                     courseId: id
                 });
             };

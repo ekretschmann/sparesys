@@ -52,6 +52,8 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
 
         $scope.updateSchoolclass = function () {
 
+
+
             var originalCourses = $scope.schoolclass.courses;
             $scope.schoolclass.__v = undefined;
             var courses = $scope.schoolclass.courses;
@@ -96,38 +98,41 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
             $scope.updateSchoolclass();
 
 
-            //for (var i = 0; i < $scope.schoolclass.students.length; i++) {
+            for (var i = 0; i < $scope.schoolclass.students.length; i++) {
 
 
-                //Courses.query({
-                //    user: $scope.authentication.user._id
-                //}, function(courses){
-                //    console.log(courses);
-                //    console.log('student has courses');
-                //    var studentHasCourse = false;
-                //    for (var i=0; i<courses.length; i++) {
-                //        var c = courses[i];
-                //        console.log(c.name);
-                //        if (course.slaves.indexOf(c._id !== -1)) {
-                //            c.visible = true;
-                //            //c.$update();
-                //            studentHasCourse = true;
-                //            console.log('setting visible');
-                //        }
-                //    }
-                //
-                //
-                //    if (!studentHasCourse) {
-                //        console.log('there is no course, copy');
-                //        var studentId = $scope.schoolclass.students[i];
-                //        var res = CoursesService.copyCourseFor(studentId);
-                //        res.get({courseId: course._id});
-                //    }
-                //});
+                $scope.assignCourseToStudent($scope.schoolclass.students[i], course);
 
-            //}
+
+            }
 
         };
+
+        $scope.assignCourseToStudent = function(studentId, masterCourse) {
+            Courses.query({
+                userId: studentId
+            }, function(courses) {
+                console.log(courses);
+                var studentHasCourse = false;
+                for (var i=0; i<courses.length; i++) {
+                    var c = courses[i];
+                    console.log(c.name);
+                    if (course.slaves.indexOf(c._id !== -1)) {
+                        c.visible = true;
+                        c.$update();
+                        studentHasCourse = true;
+                        console.log('setting visible');
+                    }
+                }
+
+
+                if (!studentHasCourse) {
+                    var res = CoursesService.copyCourseFor(studentId);
+                    res.get({courseId: masterCourse._id});
+                }
+            });
+        };
+
 
         $scope.removeCourseFromClass = function (course) {
 
@@ -161,8 +166,6 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
 
             $scope.updateSchoolclass();
 
-            console.log(course._id);
-            console.log(course.slaves);
 
             for (i = 0; i < course.slaves.length; i++) {
                 var slaveId = course.slaves[i];

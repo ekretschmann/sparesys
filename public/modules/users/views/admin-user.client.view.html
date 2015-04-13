@@ -115,7 +115,7 @@
                     <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>
                     <td class="expands top-padded-m">
                         <a>
-                            <i
+                            <i data-ng-click="removeCourse(course)"
                                class="glyphicon glyphicon-remove-sign small">
                             </i>
                         </a> {{course.name}} {{course.visible ? 'visible' : '(not visible)'}} ({{course._id}}) {{course.supervised ? ' - supervised' : ''}}

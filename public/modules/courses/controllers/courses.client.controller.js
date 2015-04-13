@@ -164,6 +164,11 @@ angular.module('courses').controller('CoursesController',
                 });
             };
 
+
+            $scope.removeCourse = function (course) {
+                $scope.remove(course);
+            };
+
             // Remove existing Course
             $scope.remove = function (course) {
                 if (course) {
@@ -174,6 +179,7 @@ angular.module('courses').controller('CoursesController',
                             $scope.courses.splice(i, 1);
                         }
                     }
+                    $state.go($state.current, null, {reload:true});
                 } else {
                     $scope.course.$remove(function () {
                         $location.path('courses');

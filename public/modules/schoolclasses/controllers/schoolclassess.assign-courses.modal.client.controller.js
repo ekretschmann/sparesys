@@ -117,7 +117,7 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
                 for (var i=0; i<courses.length; i++) {
                     var c = courses[i];
                     console.log(c.name);
-                    if (course.slaves.indexOf(c._id !== -1)) {
+                    if (masterCourse.slaves.indexOf(c._id !== -1)) {
                         c.visible = true;
                         c.$update();
                         studentHasCourse = true;

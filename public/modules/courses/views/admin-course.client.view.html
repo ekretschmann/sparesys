@@ -84,6 +84,7 @@
                 </a>
 
 
+                <span data-ng-if="otherCourse.user">{{otherCourse._id}}</span>
                 <span data-ng-if="otherCourse.user">({{otherCourse.user.displayName}})</span>
                 <span data-ng-if="!otherCourse.user">(unknown user)</span>
             </td>

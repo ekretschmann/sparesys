@@ -96,6 +96,21 @@
                 </tr>
 
 
+                <tr data-ng-repeat="schoolId in otherUser.studentInSchools">
+
+                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Student in Schools</td>
+                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>
+                    <td class="expands top-padded-m" data-ng-controller="SchoolsController" data-ng-init="findById(schoolId)">
+                        <a>
+                            <i data-ng-click="removeStudentFromSchool(schoolId, otherUser)"
+                                    class="glyphicon glyphicon-remove-sign small">
+                            </i>
+                        </a>
+                        {{school.name ? school.name : 'unknown school'}} ({{schoolId}})
+
+                    </td>
+                </tr>
+
                 <tr data-ng-repeat="takesClass in otherUser.studentInClasses">
 
                     <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Takes Classes</td>

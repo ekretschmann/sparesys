@@ -156,6 +156,8 @@ exports.delete = function (req, res) {
     var card = req.card;
 
     function deleteCardFromItsPack(card) {
+
+
         card.packs.forEach(function (pid) {
             var findPack = Pack.find({'_id': pid}).exec(function (err) {
                 if (err) {
@@ -164,6 +166,9 @@ exports.delete = function (req, res) {
             });
 
             findPack.then(function (findPackResult) {
+
+
+
                 for (var i = 0; i < findPackResult[0].cards.length; i++) {
                     if (findPackResult[0].cards[i].toString() === card._id.toString()) {
                         findPackResult[0].cards.splice(i, 1);
@@ -177,6 +182,7 @@ exports.delete = function (req, res) {
         });
     }
 
+    console.log(card.slaves);
     card.slaves.forEach(function (cid) {
 
         var findCard = Card.find({'_id': cid}).exec(function (err) {
@@ -189,7 +195,7 @@ exports.delete = function (req, res) {
 
             deleteCardFromItsPack(findCardResult[0]);
 
-//            console.log('removing slave: ' + findCardResult[0]._id);
+            console.log('removing slave: ' + findCardResult[0]._id);
             findCardResult.remove();
         });
     });

@@ -22,6 +22,7 @@
     </div>
 
 
+
     <div data-ng-if="pack.cards.length > 0">
 
         <table class="table-striped">
@@ -36,7 +37,7 @@
             <tr data-ng-repeat="card in pack.cards" class="item">
                 <td class="right-padded-s top-aligned">
                     <a href="">
-                    <i data-ng-click="areYouSureToDeleteSchool(school)"
+                    <i data-ng-click="areYouSureToDeleteCard(card)"
                     class="small left-padded-s glyphicon glyphicon-remove-sign">
                     </i>
                     </a>

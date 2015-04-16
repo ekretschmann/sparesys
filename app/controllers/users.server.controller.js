@@ -6,7 +6,6 @@
 var mongoose = require('mongoose'),
     passport = require('passport'),
     User = mongoose.model('User'),
-    Journey = mongoose.model('Journey'),
     _ = require('lodash');
 
 /**
@@ -61,10 +60,6 @@ exports.signup = function (req, res) {
             });
         } else {
 
-            // creating a user journey for this user
-            var journey = new Journey();
-            journey.user = user._id;
-            journey.save();
 
             // Remove sensitive data before login
             user.password = undefined;
@@ -150,6 +145,7 @@ exports.signin = function (req, res, next) {
 exports.update = function (req, res) {
 
 
+    console.log('updating');
     // Init Variables
     var user = req.user;
     var message = null;
@@ -160,7 +156,11 @@ exports.update = function (req, res) {
 
 
     function updateUser(theUser) {
+
+
+        console.log(theUser.studentInSchools);
         theUser = _.extend(theUser, req.body);
+        console.log(theUser.studentInSchools);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
         if (theUser.teachesClasses === '') {

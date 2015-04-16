@@ -1,8 +1,8 @@
 'use strict';
 
 // Schools controller
-angular.module('schools').controller('SchoolsController', ['$scope', '$timeout', '$stateParams', '$location', '$modal', 'Authentication', 'Schools',
-    function ($scope, $timeout, $stateParams, $location, $modal, Authentication, Schools) {
+angular.module('schools').controller('SchoolsController', ['$scope', '$timeout', '$state','$stateParams', '$location', '$modal', 'Authentication', 'Schools',
+    function ($scope, $timeout, $state, $stateParams, $location, $modal, Authentication, Schools) {
         $scope.authentication = Authentication;
 
 
@@ -271,6 +271,16 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
                     $location.path('schools/admin');
                 });
             }
+        };
+
+        $scope.removeStudentFromSchool = function(schoolId, user) {
+            console.log(schoolId);
+            console.log(user);
+            var index = user.studentInSchools.indexOf(schoolId);
+            user.studentInSchools.splice(index, 1);
+            user.$update(function() {
+                $state.go($state.$current, null, {reload: true});
+            });
         };
 
         $scope.removeStudent = function (studentId) {

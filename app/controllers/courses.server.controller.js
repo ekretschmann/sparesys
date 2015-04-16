@@ -173,7 +173,6 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
 
 
-    console.log(req.query);
 
     if (req.query.userId) {
 

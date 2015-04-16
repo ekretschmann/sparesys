@@ -188,11 +188,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
 
-        $scope.removeStudentFromSchool = function(schoolId, user) {
-            var index = user.studentInSchools.indexOf(schoolId);
-            user.studentInSchools.splice(index, 1);
-            user.$update();
-        };
+
 
         $scope.removeAsStudent = function(schoolclass, user) {
             var index = user.studentInClasses.indexOf(schoolclass._id);

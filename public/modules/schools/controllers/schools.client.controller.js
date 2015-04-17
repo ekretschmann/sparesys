@@ -274,8 +274,6 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
         };
 
         $scope.removeStudentFromSchool = function(schoolId, user) {
-            console.log(schoolId);
-            console.log(user);
             var index = user.studentInSchools.indexOf(schoolId);
             user.studentInSchools.splice(index, 1);
             user.$update(function() {
@@ -339,7 +337,6 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
                     var schoolclass = $scope.school.schoolclasses[i];
                     if (user.studentInClasses.indexOf(schoolclass._id) !== -1) {
                         $scope.schoolclasses.push(schoolclass);
-                        console.log(schoolclass);
                     }
                 }
             });

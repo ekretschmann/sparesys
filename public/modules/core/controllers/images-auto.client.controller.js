@@ -98,7 +98,6 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
 
         $scope.nextCard = function () {
 
-            console.log('next card');
 
             $scope.$parent.nextCard();
             $scope.state = 'question';

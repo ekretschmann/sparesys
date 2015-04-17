@@ -10,7 +10,6 @@ angular.module('core').controller('MyAnswerCountsModalController', ['$scope', '$
         $scope.ok = function () {
 
 
-            console.log($scope.mode);
             if ($scope.mode === 'reverse') {
                 $scope.card.acceptedAnswersReverse.push(answer);
             } else {

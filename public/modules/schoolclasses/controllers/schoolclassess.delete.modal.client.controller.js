@@ -13,14 +13,7 @@ angular.module('schoolclasses').controller('DeleteClassModalController', ['$scop
 
             var school = $scope.schoolclass.school;
 
-            if (school) {
-                //for (var i in $scope.school.schoolclasses) {
-                //    if ($scope.school.schoolclasses[i] === $scope.schoolclass) {
-                //        $scope.school.schoolclasses.splice(i, 1);
-                //    }
-                //}
-                console.log('xxxx');
-            } else {
+            if (!school) {
                 $scope.schoolclass.$remove();
             }
             //

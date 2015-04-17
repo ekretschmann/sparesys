@@ -259,7 +259,6 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                 //});
 
                 $scope.pack.$update(function(e) {
-                    console.log(e);
                     $scope.pack.courseName = courseName;
                 });
 

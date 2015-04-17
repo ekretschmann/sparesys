@@ -98,8 +98,6 @@ angular.module('courses').controller('CoursesController',
 
 
             $scope.removeSlave = function(slave, course) {
-                console.log(slave);
-                console.log(course.slaves);
                 var index = course.slaves.indexOf(slave);
                 course.slaves.splice(index, 1);
                 course.$update();

@@ -81,7 +81,6 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
 
         $scope.search_offline = function () {
 
-            console.log('here');
 
             $scope.totalResults = 50;
             $scope.images = [['/modules/core/img/brand/philosopher-medium.gif','/modules/core/img/brand/teacher-man-medium.gif','/modules/core/img/one.jpeg'],

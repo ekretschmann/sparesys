@@ -19,7 +19,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
         $scope.toggleMode = function(mode) {
 
-            console.log(mode);
             console.log($scope.card.modes);
 
         };

@@ -1,5 +1,6 @@
 
 <div data-ng-if="!coursesStudent || coursesStudent.length===0">
+    {{coursesStudent|json}}
     <div class="infobox-title">Learning</div>
 
     <section data-ng-if="authentication.user.roles.indexOf('help') > -1">

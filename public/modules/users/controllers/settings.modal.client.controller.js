@@ -76,7 +76,6 @@ angular.module('users').controller('SettingsController', ['$scope', '$timeout', 
 
         // Change user password
         $scope.changePassword = function () {
-            console.log('bbb');
             $scope.success = $scope.error = null;
 
             $http.post('/users/password', $scope.passwordDetails).success(function (response) {

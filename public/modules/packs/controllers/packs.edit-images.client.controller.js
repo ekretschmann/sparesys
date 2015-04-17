@@ -71,7 +71,6 @@ angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards
 
                 new Cards(card).$update(function(c) {
 
-                    console.log(c);
 
                     cardsUpdated++;
 

@@ -100,7 +100,6 @@ angular.module('core').service('PredictiveSchedulerService', [
                         if (score < bestValue) {
                             bestCard = card;
                             bestValue = score;
-                            console.log('champion');
                         }
                     }
                 }, this);

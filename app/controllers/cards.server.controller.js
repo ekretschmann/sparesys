@@ -21,7 +21,7 @@ var getErrorMessage = function (err) {
                 message = 'Card already exists';
                 break;
             default:
-                message = 'Something went wrong '+err;
+                message = 'Something went wrong ' + err;
         }
     } else {
         for (var errName in err.errors) {
@@ -38,9 +38,6 @@ var getErrorMessage = function (err) {
 exports.create = function (req, res) {
 
     var card = new Card(req.body);
-
-
-
 
 
     if (req.body.userId) {
@@ -101,7 +98,6 @@ exports.update = function (req, res) {
     card.slaves.forEach(function (cid) {
 
 
-
         var findCard = Card.find({'_id': cid}).exec(function (err) {
             if (err) {
                 console.log('Error: ' + err);
@@ -110,25 +106,49 @@ exports.update = function (req, res) {
 
         findCard.then(function (findCardResult) {
             var c = findCardResult[0];
-            //c = _.extend(c, req.body);
 
+
+            c.imagesReadFront = card.imagesReadFront;
+            c.speechRecognitionImages = card.speechRecognitionImages;
+            c.imagesReadBack = card.imagesReadBack;
+            c.languageFront = card.languageFront;
+            c.languageBack = card.languageBack;
+            c.modes = card.modes;
             c.question = card.question;
-            c.validanswers = card.validanswers;
-            c.invalidanswers = card.invalidanswers;
-            c.validreverseanswers = card.validreverseanswers;
-            c.invalidreverseanswers = card.invalidreverseanswers;
             c.answer = card.answer;
-            c.due = card.due;
-            c.after = card.after;
-            c.validation = card.validation;
+            c.readFrontForward = card.readFrontForward;
+            c.readBackForward = card.readBackForward;
+            c.readFrontReverse = card.readFrontReverse;
+            c.readBackReverse = card.readBackReverse;
+            c.speechRecognitionForward = card.speechRecognitionForward;
+            c.speechRecognitionReverse = card.speechRecognitionReverse;
             c.images = card.images;
-            c.bothways = card.bothways;
-            c.alternatives = card.alternatives;
-            c.alternativequestions = card.alternativequestions;
-            c.sound = card.sound;
-            c.soundback = card.soundback;
+            c.check = card.check;
+            c.dueDate = card.dueDate;
+            c.startDate = card.startDate;
             c.format = card.format;
-            c.type = card.type;
+            c.acceptedAnswersForward = card.acceptedAnswersForward;
+            c.invalidAnswersForward = card.invalidAnswersForward;
+            c.acceptedAnswersReverse = card.acceptedAnswersReverse;
+            c.invalidAnswersReverse = card.invalidAnswersReverse;
+
+            //c.question = card.question;
+            //c.validanswers = card.validanswers;
+            //c.invalidanswers = card.invalidanswers;
+            //c.validreverseanswers = card.validreverseanswers;
+            //c.invalidreverseanswers = card.invalidreverseanswers;
+            //c.answer = card.answer;
+            //c.due = card.due;
+            //c.after = card.after;
+            //c.validation = card.validation;
+            //c.images = card.images;
+            //c.bothways = card.bothways;
+            //c.alternatives = card.alternatives;
+            //c.alternativequestions = card.alternativequestions;
+            //c.sound = card.sound;
+            //c.soundback = card.soundback;
+            //c.format = card.format;
+            //c.type = card.type;
             c.save();
 
         });
@@ -168,7 +188,6 @@ exports.delete = function (req, res) {
             findPack.then(function (findPackResult) {
 
 
-
                 for (var i = 0; i < findPackResult[0].cards.length; i++) {
                     if (findPackResult[0].cards[i].toString() === card._id.toString()) {
                         findPackResult[0].cards.splice(i, 1);
@@ -182,7 +201,6 @@ exports.delete = function (req, res) {
         });
     }
 
-    console.log(card.slaves);
     card.slaves.forEach(function (cid) {
 
         var findCard = Card.find({'_id': cid}).exec(function (err) {

@@ -157,10 +157,27 @@ exports.delete = function (req, res) {
                         }
                     }
                 });
+
+
             });
 
-//            console.log(courses[0].slaves);
+            // Remove course from master slave list
+            Course.find({'_id': courses[0].master}).exec(function (err, c) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    if (c && c.length === 1) {
+
+                        var index = c[0].slaves.indexOf(courses[0]._id);
+                        c[0].slaves.splice(index, 1);
+                        c[0].save();
+                    }
+                }
+            });
+
             courses[0].remove();
+
+
         }
     });
 
@@ -612,6 +629,7 @@ exports.copyCourse = function (req, res, next, id) {
             original.slaves = [];
         }
         original.slaves.push(copy._id);
+
 
 
 

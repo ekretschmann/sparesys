@@ -112,16 +112,13 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
             Courses.query({
                 userId: studentId
             }, function(courses) {
-                console.log(courses);
                 var studentHasCourse = false;
                 for (var i=0; i<courses.length; i++) {
                     var c = courses[i];
-                    console.log(c.name);
                     if (masterCourse.slaves.indexOf(c._id !== -1)) {
                         c.visible = true;
                         c.$update();
                         studentHasCourse = true;
-                        console.log('setting visible');
                     }
                 }
 
@@ -156,11 +153,8 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
                 Courses.get({
                     courseId: id
                 }, function (slaveCourse) {
-                    console.log('got course:' + slaveCourse);
                     slaveCourse.visible = false;
-                    slaveCourse.$update(function () {
-                        console.log('set course to invisible');
-                    });
+                    slaveCourse.$update();
                 });
             };
 
@@ -169,7 +163,6 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
 
             for (i = 0; i < course.slaves.length; i++) {
                 var slaveId = course.slaves[i];
-                console.log('updating' + slaveId);
                 hideCourse(slaveId);
             }
         };

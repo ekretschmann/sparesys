@@ -47,6 +47,7 @@ angular.module('core').controller('HomePageController',
                         $scope.coursesTeacher = [];
 
                         $scope.courses.forEach(function(course) {
+                            //console.log(course.teaching);
                             if (course.teaching) {
                                 $scope.coursesTeacher.push(course);
                             } else {

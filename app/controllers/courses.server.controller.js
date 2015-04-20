@@ -287,7 +287,6 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.user = userId;
 
 
-
             copy.imagesReadFront = original.imagesReadFront;
             copy.speechRecognitionImages = original.speechRecognitionImages;
             copy.imagesReadBack = original.imagesReadBack;
@@ -594,23 +593,6 @@ exports.copyCourse = function (req, res, next, id) {
 
         var copy = new Course();
 
-
-        //_id: 54f811f261baba0000a3b480,
-        //    master: 54f17245dae49ace3fa7b2a0,
-        //    user: 545a17ea8085ab9403a39420,
-        //    __v: 0,
-        //    readback: false,
-        //    readfront: false,
-        //    teaching: true,
-        //    speechrecognition: 'no',
-        //    supervised: false,
-        //    visible: true,
-        //    slaves: [],
-
-        //packs: [ 54f811f261baba0000a3b481 ],
-        //    created: Thu Mar 05 2015 08:21:06 GMT+0000 (GMT),
-        //    published: false
-
         copy.user = userId;
         copy.name = original.name;
         copy.description = original.description;
@@ -618,9 +600,11 @@ exports.copyCourse = function (req, res, next, id) {
         copy.languageBack = original.languageBack;
         copy.front = original.front;
         copy.back = original.back;
-
         copy.master = original._id;
         copy.supervised = isSupervised;
+
+
+        console.log(req.query);
         if (req.query && req.query.target && req.query.target.toString() === 'teach') {
             copy.teaching = true;
         }

@@ -186,9 +186,12 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                 if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
 
-                    var pr = this.getPredictedRetention(card, $scope.time);
+                    //var pr = this.getPredictedRetention(card, $scope.time);
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
-                    card.score = Math.abs(pr - 0.4) * $scope.adjustScoreToDueDate(card, $scope.time);
+
+
+                    card.score = Math.abs(card.predictedRetention - 0.4) * $scope.adjustScoreToDueDate(card, $scope.time);
+
 
                     if (card.score < bestValue && card.modes.length > 0) {
                         bestCard = card;

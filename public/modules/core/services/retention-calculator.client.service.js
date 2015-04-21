@@ -58,6 +58,7 @@ angular.module('core').service('RetentionCalculatorService', [
                 var counter = 1;
                 var totalWeight = 0;
 
+                console.log(card.history);
                 for (var i = card.history.length-1; i >=0; i--) {
                     var entry = card.history[i];
 
@@ -74,10 +75,32 @@ angular.module('core').service('RetentionCalculatorService', [
                     counter++;
                 }
 
+
+                var maximalMultiplicator = 10;
+
                 if (assessment === 3) {
-                    var maximalMultiplicator = 10;
-                    var newHrt = card.hrt*(1+maximalMultiplicator*totalWeight);
-                    return newHrt;
+
+
+                    // catapult step
+                    if(card.hrt > 1000000 && card.hrt <= 10000000) {
+                        maximalMultiplicator = 100;
+                    }
+
+                    return card.hrt*(1+maximalMultiplicator*totalWeight);
+                }
+
+                if (assessment === 2) {
+
+                    maximalMultiplicator = 2;
+
+                    return card.hrt*(1+maximalMultiplicator*totalWeight);
+
+                }
+
+                if (assessment === 1) {
+
+                    return card.hrt;
+
                 }
 
 

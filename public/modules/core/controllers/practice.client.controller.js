@@ -140,7 +140,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             $scope.card.__v = undefined;
 
-            new Cards($scope.card).$update();
+            console.log('saving');
+            new Cards($scope.card).$update(function() {
+                console.log('done');
+            });
 
         };
 

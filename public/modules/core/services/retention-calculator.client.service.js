@@ -83,7 +83,7 @@ angular.module('core').service('RetentionCalculatorService', [
 
                     // catapult step
                     if(card.hrt > 1000000 && card.hrt <= 10000000) {
-                        maximalMultiplicator = 100;
+                        maximalMultiplicator = 1200;
                     }
 
                     return card.hrt*(1+maximalMultiplicator*totalWeight);

@@ -58,16 +58,16 @@ angular.module('core').service('RetentionCalculatorService', [
                 var counter = 1;
                 var totalWeight = 0;
 
-                console.log(card.history);
                 for (var i = card.history.length-1; i >=0; i--) {
                     var entry = card.history[i];
+
 
                     var timeDiff = endTime - entry.when;
                     var pr = this.getPredictedRetention(entry.when, entry.hrt, endTime);
 
                     var weight = this.calculateWeight(pr);
                     if (entry.assessment === 3) {
-                        totalWeight += weight / (counter);
+                        totalWeight += weight / (counter * counter);
                     }
 
                     endTime = entry.when;

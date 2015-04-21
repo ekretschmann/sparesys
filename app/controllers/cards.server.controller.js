@@ -72,7 +72,6 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
     var card = req.card;
 
-
     //card.__v = undefined;
     card = _.extend(card, req.body);
 
@@ -157,8 +156,10 @@ exports.update = function (req, res) {
     //console.log('saving');
 
     card.save(function (err) {
-        console.log(err);
+
         if (err) {
+            console.log('error saving card '+card.question);
+            console.log(err);
             return res.send(400, {
                 message: getErrorMessage(err)
             });

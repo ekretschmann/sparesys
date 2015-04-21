@@ -72,6 +72,7 @@ angular.module('packs').controller('EditCourseImagesController', ['$scope', 'Car
                     }
                 }
 
+                card.__v = undefined;
                 new Cards(card).$update(function() {
 
                     cardsUpdated++;

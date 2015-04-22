@@ -80,8 +80,6 @@ exports.update = function (req, res) {
             newPack = pack;
         }
     }, this);
-
-    console.log(newPack);
     course.save(function (err) {
         if (err) {
             return res.send(400, {
@@ -109,17 +107,19 @@ exports.update = function (req, res) {
                                 if (err) {
                                     console.log(err);
                                 } else {
-                                    console.log('found');
-                                    console.log(p);
                                     var addedPack = new Pack();
                                     addedPack.user = c.user;
                                     addedPack.course = c._id;
                                     addedPack.name = p.name;
                                     addedPack.checks = p.checks;
                                     addedPack.modes = p.modes;
+                                    addedPack.master = p._id;
+
                                     c.packs.push(addedPack._id);
+                                    p.slaves.push(addedPack._id);
                                     addedPack.save();
                                     c.save();
+                                    p.save();
                                 }
                             });
                         }

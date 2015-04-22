@@ -97,13 +97,7 @@ exports.update = function (req, res) {
     });
 };
 
-/**
- * Delete a Pack
- */
-exports.delete = function (req, res) {
-    var pack = req.pack;
-
-
+var removePack = function(pack) {
     pack.cards.forEach(function (cardId) {
         Card.find({'_id': cardId}).exec(function (err, cards) {
             if (cards && cards.length === 1) {
@@ -120,7 +114,6 @@ exports.delete = function (req, res) {
             }
         });
     });
-
 
     Course.find({'_id': pack.course}).exec(function (err, courses) {
         if (courses && courses.length === 1) {
@@ -139,11 +132,7 @@ exports.delete = function (req, res) {
 
                     pack.remove(function (err) {
                         if (err) {
-                            return res.send(400, {
-                                message: getErrorMessage(err)
-                            });
-                        } else {
-                            res.jsonp(pack);
+                            console.log(err);
                         }
                     });
                 }
@@ -151,6 +140,24 @@ exports.delete = function (req, res) {
         }
     });
 
+};
+
+/**
+ * Delete a Pack
+ */
+exports.delete = function (req, res) {
+    var pack = req.pack;
+
+
+    pack.slaves.forEach(function (slaveId) {
+        Pack.findOne({'_id': slaveId}).exec(function (err, p) {
+            removePack(p);
+        });
+    });
+
+    removePack(pack);
+
+    res.jsonp('ok');
 };
 
 /**

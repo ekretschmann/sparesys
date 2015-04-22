@@ -69,9 +69,19 @@ exports.update = function (req, res) {
 
     var course = req.course;
 
+
+    var packsBefore = course.packs;
     course = _.extend(course, req.body);
     course.updated = Date.now();
+    var newPack;
 
+    course.packs.forEach(function (pack) {
+        if (packsBefore.indexOf(pack) === -1) {
+            newPack = pack;
+        }
+    }, this);
+
+    console.log(newPack);
     course.save(function (err) {
         if (err) {
             return res.send(400, {
@@ -79,33 +89,44 @@ exports.update = function (req, res) {
             });
         } else {
 
-            Course.find({'_id': course._id}).exec(function (err, courses) {
+            course.slaves.forEach(function (cid) {
+                Course.findOne({'_id': cid}).exec(function (err, c) {
 
-                if (courses && courses[0]) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        c.name = course.name;
+                        c.description = course.description;
+                        c.language = course.language;
+                        c.front = course.front;
+                        c.back = course.back;
+                        c.languageback = course.languageback;
+                        c.speechrecognition = course.speechrecognition;
+                        c.save();
 
-                    courses[0].slaves.forEach(function(cid) {
-                        Course.find({'_id': cid}).exec(function (err, c) {
-                            if (err) {
-                                console.log(err);
-                            } else {
-                                if (c && c.length === 1) {
-                                    c[0].name = course.name;
-                                    c[0].description = course.description;
-                                    c[0].language = course.language;
-                                    c[0].front = course.front;
-                                    c[0].back = course.back;
-                                    c[0].languageback = course.languageback;
-                                    c[0].speechrecognition = course.speechrecognition;
-                                    c[0].teaching = course.teaching;
-                                    c[0].save();
+                        if (newPack) {
+                            Pack.findOne({'_id': newPack}).exec(function (err, p) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    console.log('found');
+                                    console.log(p);
+                                    var addedPack = new Pack();
+                                    addedPack.user = c.user;
+                                    addedPack.course = c._id;
+                                    addedPack.name = p.name;
+                                    addedPack.checks = p.checks;
+                                    addedPack.modes = p.modes;
+                                    c.packs.push(addedPack._id);
+                                    addedPack.save();
+                                    c.save();
                                 }
-                            }
-                        });
-                    }, this);
+                            });
+                        }
 
-                }
-            });
-
+                    }
+                });
+            }, this);
 
             res.jsonp(course);
         }
@@ -121,7 +142,6 @@ exports.delete = function (req, res) {
 
 
     var course = req.course;
-
 
 
     course.packs.forEach(function (pack) {
@@ -144,7 +164,7 @@ exports.delete = function (req, res) {
 
         if (courses && courses[0]) {
 
-            courses[0].slaves.forEach(function(cid) {
+            courses[0].slaves.forEach(function (cid) {
                 Course.find({'_id': cid}).exec(function (err, c) {
                     if (err) {
                         console.log(err);
@@ -188,7 +208,6 @@ exports.delete = function (req, res) {
  * List of Courses
  */
 exports.list = function (req, res) {
-
 
 
     if (req.query.userId) {
@@ -417,7 +436,6 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
 };
 
 
-
 var uploadCards = function (cards, userId, newPackId) {
     var idMap = {};
     var cardsToCopy = cards.length;
@@ -508,7 +526,6 @@ exports.upload = function (req, res, next) {
 exports.getCardsForCourse = function (req, res, next, id) {
 
 
-
     var result = [];
 
 
@@ -540,31 +557,31 @@ exports.getCardsForCourse = function (req, res, next, id) {
                 packs[0].cards.forEach(function (cardId) {
 
                     var loadCard = Card.find({'_id': cardId}).exec(function (err) {
-                            if (err) {
-                                return res.send(400, {
-                                    message: getErrorMessage(err)
-                                });
-                            }
-                        });
-                        loadCard.then(function (card) {
+                        if (err) {
+                            return res.send(400, {
+                                message: getErrorMessage(err)
+                            });
+                        }
+                    });
+                    loadCard.then(function (card) {
 
-                            result = result.concat(card);
-                            if (result.length === expectedCards) {
-                                var ordered = [];
-                                courses[0].packs.forEach(function (packId) {
+                        result = result.concat(card);
+                        if (result.length === expectedCards) {
+                            var ordered = [];
+                            courses[0].packs.forEach(function (packId) {
 
-                                    packOrder[packId].forEach(function (cardId) {
-                                        result.forEach(function (item) {
+                                packOrder[packId].forEach(function (cardId) {
+                                    result.forEach(function (item) {
 
-                                            if (item._id.toString() === cardId.toString() && item.packs[0].toString() === packId.toString()) {
-                                                ordered.push(item);
-                                            }
-                                        });
+                                        if (item._id.toString() === cardId.toString() && item.packs[0].toString() === packId.toString()) {
+                                            ordered.push(item);
+                                        }
                                     });
                                 });
-                                res.jsonp(ordered);
-                            }
-                        });
+                            });
+                            res.jsonp(ordered);
+                        }
+                    });
 
                 });
             });
@@ -575,9 +592,7 @@ exports.getCardsForCourse = function (req, res, next, id) {
 };
 
 
-
 exports.copyCourse = function (req, res, next, id) {
-
 
 
     var userId;
@@ -607,7 +622,6 @@ exports.copyCourse = function (req, res, next, id) {
         var original = findCourseResult[0];
 
 
-
         var copy = new Course();
 
         copy.user = userId;
@@ -621,7 +635,6 @@ exports.copyCourse = function (req, res, next, id) {
         copy.supervised = isSupervised;
 
 
-        console.log(req.query);
         if (req.query && req.query.target && req.query.target.toString() === 'teach') {
             copy.teaching = true;
         }
@@ -631,10 +644,8 @@ exports.copyCourse = function (req, res, next, id) {
         original.slaves.push(copy._id);
 
 
-
-
-        original.save(function(err) {
-            if(err) {
+        original.save(function (err) {
+            if (err) {
                 console.log(err);
             }
         });
@@ -646,7 +657,7 @@ exports.copyCourse = function (req, res, next, id) {
             copy.packs = packs;
 
 
-            copy.save(function() {
+            copy.save(function () {
                 res.jsonp(copy);
             });
         });

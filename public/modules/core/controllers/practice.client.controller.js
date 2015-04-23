@@ -132,9 +132,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.recordRate = function (time, assessment) {
 
-
             $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
-
 
             $scope.card.history.push({when: time, assessment: assessment, hrt:$scope.card.hrt});
 

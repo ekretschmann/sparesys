@@ -37,6 +37,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
             $scope.answer.assessment = 'wrong';
             if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                console.log('right!');
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
                 ratedCorrect = true;
@@ -60,7 +61,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.processCard = function (rating) {
 
 
-            $scope.recordRate($scope.card, Date.now(), rating);
+            $scope.recordRate(Date.now(), rating);
 
         };
 

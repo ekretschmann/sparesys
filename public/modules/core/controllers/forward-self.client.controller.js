@@ -41,7 +41,6 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
                 return;
             }
 
-            console.log('xxxx '+event.charCode);
 
             if ($state.$current.url.source !== '/practice/:courseId') {
                 return;

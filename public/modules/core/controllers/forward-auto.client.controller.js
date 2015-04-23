@@ -75,7 +75,6 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
                 return;
             }
 
-            console.log('aaaaa '+event.charCode);
 
             if ($state.$current.url.source !== '/practice/:courseId') {
                 return;
@@ -84,6 +83,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             if ($scope.state === 'answer' && event.keyCode === 13) {
                 $scope.nextCard();
                 $scope.state = 'question';
+                return;
             }
 
             if ($scope.state === 'question' && event.keyCode === 13) {

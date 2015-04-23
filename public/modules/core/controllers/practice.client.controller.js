@@ -9,7 +9,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.card = {};
         $scope.assess = 'self';
         $scope.mode = 'forward';
-        $scope.state = 'question';
 
         $scope.answer = {};
 
@@ -67,19 +66,20 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 return;
             }
             for (var i = event.resultIndex; i < event.results.length; ++i) {
+                console.log(i);
 
-                if ($scope.state==='question' && $scope.practice.direction === 'forward') {
-                    if (event.results[i].isFinal) {
-                        if ($scope.answer.text === undefined) {
-                            $scope.answer.text = '';
-                        }
-
-                        $scope.answer.text += event.results[i][0].transcript.trim();
-                        $state.go($state.$current);
-                    } else {
-                        interim_transcript += event.results[i][0].transcript.trim();
-                    }
-                }
+                //if ($scope.state==='question' && $scope.practice.direction === 'forward') {
+                //    if (event.results[i].isFinal) {
+                //        if ($scope.answer.text === undefined) {
+                //            $scope.answer.text = '';
+                //        }
+                //
+                //        $scope.answer.text += event.results[i][0].transcript.trim();
+                //        $state.go($state.$current);
+                //    } else {
+                //        interim_transcript += event.results[i][0].transcript.trim();
+                //    }
+                //}
             }
             /* jshint ignore:end */
 

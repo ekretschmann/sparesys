@@ -140,10 +140,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             $scope.card.__v = undefined;
 
-            console.log('saving');
-            new Cards($scope.card).$update(function() {
-                console.log('done');
-            });
+            new Cards($scope.card).$update(function() {});
 
         };
 
@@ -206,15 +203,15 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
 
-            //$scope.mode = 'images';
-
+            if(!$scope.card.history || $scope.card.history.length ===0) {
+                $scope.inPlay ++;
+            }
             $scope.assess = 'self';
 
             if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
                 $scope.assess = 'auto';
             }
 
-            //$scope.assess = 'auto';
 
             $scope.updateSlides();
             if ($scope.mode === 'forward' && $scope.card.speechRecognitionForward) {
@@ -226,8 +223,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if ($scope.mode === 'images' && $scope.card.speechRecognitionImages) {
                 $scope.initSpeech();
             }
-            //$state.go($state.current);
-            //$scope.$apply();
 
             console.log('ga next card');
             console.log('/practice/card/:id');

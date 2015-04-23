@@ -208,6 +208,9 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             }
             $scope.assess = 'self';
 
+            if($scope.card.check === 'computer') {
+                $scope.assess = 'auto';
+            }
             if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
                 $scope.assess = 'auto';
             }

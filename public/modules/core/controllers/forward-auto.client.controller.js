@@ -30,14 +30,12 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.showAnswer = function () {
 
-            $scope.state = 'answer';
-            $state.go($state.current);
+            //$state.go($state.current);
 
             var ratedCorrect = false;
 
             $scope.answer.assessment = 'wrong';
             if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
-                console.log('right!');
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
                 ratedCorrect = true;
@@ -55,6 +53,9 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             if (!ratedCorrect) {
                 $scope.processCard(0);
             }
+
+            $scope.state = 'answer';
+
         };
 
 
@@ -74,23 +75,24 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
                 return;
             }
 
-
+            console.log('aaaaa '+event.charCode);
 
             if ($state.$current.url.source !== '/practice/:courseId') {
                 return;
             }
 
+            if ($scope.state === 'answer' && event.keyCode === 13) {
+                $scope.nextCard();
+                $scope.state = 'question';
+            }
 
             if ($scope.state === 'question' && event.keyCode === 13) {
                 $scope.showAnswer();
-                return;
+                $scope.state = 'answer';
             }
 
 
-            if ($scope.state === 'answer' && event.keyCode === 13) {
-                $scope.nextCard();
-                return;
-            }
+
 
 
         });
@@ -98,12 +100,14 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.nextCard = function () {
 
             $scope.$parent.nextCard();
-            $scope.state = 'question';
+
 
             $scope.answer.text = '';
 
+            $scope.state = 'question';
             $timeout(function () {
                 angular.element('.focus').trigger('focus');
+
             }, 100);
         };
 

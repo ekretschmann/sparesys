@@ -282,8 +282,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         };
 
 
-        $scope.round = function(num) {
-            return Math.round(10000 * num) / 10000;
+        $scope.toSeconds = function(num) {
+            return Math.round(num/1000);
         };
 
 

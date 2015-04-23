@@ -144,8 +144,8 @@
 
                 <div data-ng-if="card.hrt">
                     <!--{{toHours(card.hrt)}}-->
-                    {{card.hrt / (60*60*1000)}}
-                    {{card.hrt}}
+                    {{toHours(card.hrt)}} hrs
+                    ({{toSeconds(card.hrt)}} s)
                 </div>
 
                 <div data-ng-if="!card.hrt">

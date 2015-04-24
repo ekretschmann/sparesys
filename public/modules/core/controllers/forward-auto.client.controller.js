@@ -2,10 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('ForwardAutoController', ['$scope', '$state', '$document', '$timeout',
-    function ($scope, $state, $document, $timeout) {
-
-
+angular.module('core').controller('ForwardAutoController', ['$scope', '$state', '$document', '$timeout', 'KeyEventService',
+    function ($scope, $state, $document, $timeout, KeyEventService) {
 
 
         $scope.answer = {};
@@ -16,6 +14,11 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.init = function() {
             $scope.state = 'question';
+            if (!KeyEventService.isInitialized('forward-auto')) {
+                console.log('binding keys');
+                $scope.bindKeys();
+                KeyEventService.setInitialized('forward-auto');
+            }
         };
 
         $timeout(function () {
@@ -29,6 +32,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         });
 
         $scope.$watch('state', function() {
+
             if ($scope.state === 'answer' && $scope.card.readBackForward) {
                 $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
             }
@@ -37,11 +41,13 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.showAnswer = function () {
 
-            //$state.go($state.current);
+            $state.go($state.current);
 
             var ratedCorrect = false;
 
             $scope.answer.assessment = 'wrong';
+            console.log($scope.card.answer);
+            console.log($scope.answer.text);
             if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
@@ -58,10 +64,6 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             });
 
             if (!ratedCorrect) {
-
-                console.log('aaaaaa');
-                console.log($scope.card.answer);
-                console.log($scope.answer);
                 $scope.processCard(0);
             }
 
@@ -72,39 +74,45 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.processCard = function (rating) {
 
-
+            console.log('forward auto records rate '+rating);
             $scope.recordRate(Date.now(), rating);
 
         };
 
 
 
-
-        $document.bind('keypress', function (event) {
-
-            if($scope.mode !== 'forward' || $scope.assess !== 'auto') {
-                return;
-            }
+        $scope.bindKeys = function() {
+            $document.bind('keypress', function (event) {
 
 
-            if ($state.$current.url.source !== '/practice/:courseId') {
-                return;
-            }
+                if ($scope.mode !== 'forward' || $scope.assess !== 'auto') {
+                    return;
+                }
 
-            if ($scope.state === 'answer' && event.keyCode === 13) {
+                console.log('forward auto receives event');
 
-                $scope.nextCard();
-                $scope.state = 'question';
-                return;
-            }
 
-            if ($scope.state === 'question' && event.keyCode === 13) {
-                console.log('xxxxxx');
-                $scope.showAnswer();
-                $scope.state = 'answer';
-            }
+                if ($state.$current.url.source !== '/practice/:courseId') {
+                    return;
+                }
 
-        });
+                if ($scope.state === 'answer' && event.keyCode === 13) {
+
+                    $scope.nextCard();
+                    $scope.state = 'question';
+                    return;
+                }
+
+                if ($scope.state === 'question' && event.keyCode === 13) {
+                    console.log('showing answer');
+                    $scope.showAnswer();
+                    $scope.state = 'answer';
+                    console.log('state is now answer');
+
+                }
+            });
+
+        };
 
         $scope.nextCard = function () {
 

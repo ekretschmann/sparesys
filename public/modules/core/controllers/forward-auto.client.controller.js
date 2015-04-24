@@ -11,10 +11,10 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.answer = {};
         $scope.answer.text = '';
         $scope.answer.assessment = undefined;
+        $scope.keysbound = false;
 
 
         $scope.init = function() {
-            console.log('init');
             $scope.state = 'question';
         };
 
@@ -58,6 +58,10 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             });
 
             if (!ratedCorrect) {
+
+                console.log('aaaaaa');
+                console.log($scope.card.answer);
+                console.log($scope.answer);
                 $scope.processCard(0);
             }
 
@@ -88,19 +92,17 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             }
 
             if ($scope.state === 'answer' && event.keyCode === 13) {
+
                 $scope.nextCard();
                 $scope.state = 'question';
                 return;
             }
 
             if ($scope.state === 'question' && event.keyCode === 13) {
+                console.log('xxxxxx');
                 $scope.showAnswer();
                 $scope.state = 'answer';
             }
-
-
-
-
 
         });
 

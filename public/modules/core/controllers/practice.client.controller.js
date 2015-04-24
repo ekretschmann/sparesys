@@ -132,13 +132,16 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.recordRate = function (time, assessment) {
 
+            console.log($scope.card.question);
+            console.log(assessment);
+
             $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
 
             $scope.card.history.push({when: time, assessment: assessment, hrt:$scope.card.hrt});
 
-            $scope.card.__v = undefined;
+            //$scope.card.__v = undefined;
 
-            new Cards($scope.card).$update(function() {});
+            new Cards($scope.card).$update();
 
         };
 
@@ -225,10 +228,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 $scope.initSpeech();
             }
 
-            console.log('ga next card');
-            console.log('/practice/card/:id');
+            //console.log('ga next card');
+            //console.log('/practice/card/:id');
             if ($window.ga) {
-                console.log('sending to ga');
+                //console.log('sending to ga');
                 $window.ga('send', 'pageview', '/practice/card/:id');
                 $window.ga('send', 'event', 'next card');
             }
@@ -238,10 +241,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.initPractice = function () {
 
 
-                console.log('ga start practicing');
-                console.log('/practice/:id');
+                //console.log('ga start practicing');
+                //console.log('/practice/:id');
                 if ($window.ga) {
-                    console.log('sending to ga');
+                    //console.log('sending to ga');
                     $window.ga('send', 'pageview', '/practice/:id');
                     $window.ga('send', 'event', 'start practicing');
                 }

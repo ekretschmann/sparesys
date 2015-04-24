@@ -156,14 +156,31 @@ exports.update = function (req, res) {
 
     //console.log('saving');
 
+
     card.save(function (err) {
 
         if (err) {
             console.log('error saving card '+card.question);
             console.log(err);
-            return res.send(400, {
-                message: getErrorMessage(err)
+
+            console.log('new version is'+card.__v);
+
+
+            Card.find({'_id': card._id}).exec(function (err, c) {
+                card.__v = c.__v;
+                card.save(function(err) {
+                    if(err) {
+                        return res.send(400, {
+                            message: getErrorMessage(err)
+                        });
+                    } else {
+                        res.jsonp(card);
+                    }
+                });
             });
+
+
+
         } else {
             res.jsonp(card);
         }

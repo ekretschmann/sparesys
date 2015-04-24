@@ -5,11 +5,18 @@
 angular.module('core').controller('ForwardAutoController', ['$scope', '$state', '$document', '$timeout',
     function ($scope, $state, $document, $timeout) {
 
+
+
+
         $scope.answer = {};
         $scope.answer.text = '';
         $scope.answer.assessment = undefined;
-        $scope.state = 'question';
 
+
+        $scope.init = function() {
+            console.log('init');
+            $scope.state = 'question';
+        };
 
         $timeout(function () {
             angular.element('.focus').trigger('focus');

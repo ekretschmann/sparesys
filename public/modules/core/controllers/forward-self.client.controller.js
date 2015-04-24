@@ -5,7 +5,11 @@
 angular.module('core').controller('ForwardSelfController', ['$scope', '$state', '$document',
     function ($scope, $state, $document) {
 
-        $scope.state = 'question';
+        $scope.init = function() {
+            console.log('init');
+            $scope.state = 'question';
+        };
+
 
 
         $scope.$watch('card', function() {

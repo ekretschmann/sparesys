@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$window', '$location', '$scope', '$state', '$modal','$stateParams', 'Authentication','Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
-    function ($window, $location, $scope, $state, $modal, $stateParams, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
+angular.module('core').controller('PracticeController', ['$window', '$location', '$scope', '$state', '$modal','$stateParams', '$timeout','Authentication','Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
+    function ($window, $location, $scope, $state, $modal, $stateParams, $timeout, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -233,6 +233,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 $window.ga('send', 'pageview', '/practice/card/:id');
                 $window.ga('send', 'event', 'next card');
             }
+
+
         };
 
 

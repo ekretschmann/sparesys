@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('ForwardAutoController', ['$scope', '$state', '$document', '$timeout', 'KeyEventService',
-    function ($scope, $state, $document, $timeout, KeyEventService) {
+angular.module('core').controller('ForwardAutoController', ['$scope', '$state', '$document', '$timeout',
+    function ($scope, $state, $document, $timeout) {
 
 
         $scope.answer = {};
@@ -14,11 +14,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.init = function() {
             $scope.state = 'question';
-            if (!KeyEventService.isInitialized('forward-auto')) {
-                console.log('binding keys');
-                $scope.bindKeys();
-                KeyEventService.setInitialized('forward-auto');
-            }
+
         };
 
         $timeout(function () {
@@ -33,21 +29,28 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.$watch('state', function() {
 
+
+
             if ($scope.state === 'answer' && $scope.card.readBackForward) {
                 $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
+            }
+
+            if ($scope.state === 'question') {
+
+                $timeout(function () {
+                    angular.element('#focus-question').trigger('focus');
+                    //  console.log(angular.element('#focus-question'));
+                }, 100);
             }
         });
 
 
         $scope.showAnswer = function () {
 
-            $state.go($state.current);
 
             var ratedCorrect = false;
 
             $scope.answer.assessment = 'wrong';
-            console.log($scope.card.answer);
-            console.log($scope.answer.text);
             if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
@@ -74,22 +77,22 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.processCard = function (rating) {
 
-            console.log('forward auto records rate '+rating);
             $scope.recordRate(Date.now(), rating);
 
         };
 
 
 
-        $scope.bindKeys = function() {
+        //$scope.bindKeys = function() {
             $document.bind('keypress', function (event) {
+
+                $state.go($state.current);
 
 
                 if ($scope.mode !== 'forward' || $scope.assess !== 'auto') {
                     return;
                 }
 
-                console.log('forward auto receives event');
 
 
                 if ($state.$current.url.source !== '/practice/:courseId') {
@@ -104,15 +107,13 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
                 }
 
                 if ($scope.state === 'question' && event.keyCode === 13) {
-                    console.log('showing answer');
                     $scope.showAnswer();
                     $scope.state = 'answer';
-                    console.log('state is now answer');
 
                 }
             });
 
-        };
+        //};
 
         $scope.nextCard = function () {
 
@@ -122,10 +123,10 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $scope.answer.text = '';
 
             $scope.state = 'question';
-            $timeout(function () {
-                angular.element('.focus').trigger('focus');
 
-            }, 100);
+
+            $state.go($state.$current);
+
         };
 
     }]);

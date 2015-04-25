@@ -2,16 +2,12 @@
 
 
 // Courses controller
-angular.module('core').controller('ForwardSelfController', ['$scope', '$state', '$document', 'KeyEventService',
-    function ($scope, $state, $document, KeyEventService) {
+angular.module('core').controller('ForwardSelfController', ['$scope', '$state', '$document', '$timeout',
+    function ($scope, $state, $document, $timeout) {
 
         $scope.init = function() {
             $scope.state = 'question';
-            if (!KeyEventService.isInitialized('forward-self')) {
-                console.log('binding keys');
-                $scope.bindKeys();
-                KeyEventService.setInitialized('forward-self');
-            }
+
         };
 
 
@@ -26,6 +22,15 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
             if ($scope.state === 'answer' && $scope.card.readBackForward) {
                 $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
             }
+
+            if ($scope.state === 'question') {
+
+                $timeout(function () {
+                    angular.element('#focus-question').trigger('focus');
+                    //  console.log(angular.element('#focus-question'));
+                }, 100);
+            }
+
         });
 
         $scope.showAnswer = function () {
@@ -35,7 +40,6 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
 
         $scope.processCard = function (rating) {
-            console.log('forward self records rate '+rating);
             $scope.$parent.recordRate(Date.now(), rating);
             $scope.state = 'question';
             $scope.$parent.nextCard();
@@ -43,17 +47,17 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
 
 
-        $scope.bindKeys = function() {
+        //$scope.bindKeys = function() {
             $document.bind('keypress', function (event) {
 
 
+                $state.go($state.current);
 
 
                 if ($scope.$parent.mode !== 'forward' || $scope.$parent.assess !== 'self') {
                     return;
                 }
 
-                console.log('forward self receives event');
 
 
                 if ($state.$current.url.source !== '/practice/:courseId') {
@@ -67,6 +71,11 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
                 }
 
                 if ($scope.state === 'question') {
+                    //$timeout(function () {
+                    //    console.log(angular.element('#focus-question'));
+                    //    angular.element('#focus-question').trigger('focus');
+                    //    console.log('focus');
+                    //}, 300);
                     return;
                 }
 
@@ -86,6 +95,6 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
                 }
 
             });
-        };
+        //};
 
     }]);

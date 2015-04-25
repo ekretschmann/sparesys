@@ -59,12 +59,12 @@
 
     <div data-ng-if="cards && cards.length > 0" class="position:relative">
 
-           <div data-ng-if="mode === 'forward'">
+           <div data-ng-show="mode === 'forward'">
 
-            <div data-ng-if="assess === 'self'">
+            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
                 <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
             </div>
-            <div data-ng-if="assess === 'auto'">
+            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
                 <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
             </div>
         </div>

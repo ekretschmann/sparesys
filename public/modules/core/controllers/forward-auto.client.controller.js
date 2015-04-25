@@ -17,12 +17,11 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         };
 
-        $timeout(function () {
-            angular.element('.focus').trigger('focus');
-        }, 100);
+
 
         $scope.$watch('card', function() {
-            if ($scope.card.readFrontForward) {
+            console.log('card changed auto'+$scope.mode);
+            if ($scope.card.readFrontForward && $scope.mode === 'forward' && $scope.assess==='auto') {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
             }
         });

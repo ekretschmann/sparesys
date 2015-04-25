@@ -44,8 +44,13 @@
 
             <input type="text" required
                    id="focus-question"
-                   class="focus-question expands flashcard-input"
+                   class="focus-question expands flashcard-input answer"
                    data-ng-model="answer.text">
+
+
+            <div class="top-padded-s">
+                <span class="left-padded-s" data-ng-repeat="character in specialChars" data-ng-click="addChar(character)"><button class="btn btn-letter">{{character}}</button></span>
+            </div>
         </div>
 
 

@@ -10,17 +10,45 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.answer.text = '';
         $scope.answer.assessment = undefined;
         $scope.keysbound = false;
+        $scope.specialCharsFront = [];
+        $scope.specialCharsBack = [];
 
 
         $scope.init = function() {
             $scope.state = 'question';
-
+            $scope.setSpecialCharacters();
         };
 
+        $scope.setSpecialCharacters = function () {
+            var lang = $scope.card.languageFront.name;
 
+            if ($scope.state === 'question') {
+                lang = $scope.card.languageBack.name;
+            }
+
+            $scope.specialChars = [];
+            if (lang === 'Spanish') {
+                $scope.specialChars = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+            } else if (lang === 'French') {
+                $scope.specialChars = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+            } else if (lang === 'German') {
+                $scope.specialChars = ['ä', 'é', 'ö', 'ü', 'ß'];
+            }
+        };
+
+        $scope.addChar = function(c) {
+            if (!$scope.answer.text) {
+                $scope.answer.text = '';
+            }
+
+            var selectionStart = angular.element('.answer')[0].selectionStart;
+            var selectionEnd = angular.element('.answer')[0].selectionEnd;
+
+            $scope.answer.text = $scope.answer.text.substr(0, selectionStart) + c + $scope.answer.text.substr(selectionEnd);
+            angular.element('.answer').trigger('focus');
+        };
 
         $scope.$watch('card', function() {
-            console.log('card changed auto'+$scope.mode);
             if ($scope.card.readFrontForward && $scope.mode === 'forward' && $scope.assess==='auto') {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
             }
@@ -122,6 +150,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $scope.answer.text = '';
 
             $scope.state = 'question';
+            $scope.setSpecialCharacters();
 
 
             $state.go($state.$current);

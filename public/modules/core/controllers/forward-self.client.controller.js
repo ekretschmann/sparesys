@@ -70,14 +70,6 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
                     return;
                 }
 
-                if ($scope.state === 'question') {
-                    //$timeout(function () {
-                    //    console.log(angular.element('#focus-question'));
-                    //    angular.element('#focus-question').trigger('focus');
-                    //    console.log('focus');
-                    //}, 300);
-                    return;
-                }
 
                 if ($scope.state === 'answer') {
                     if (event.charCode === 49) {

@@ -105,6 +105,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.processCard = function (rating) {
 
             $scope.recordRate(Date.now(), rating);
+            $scope.state = 'question';
 
         };
 
@@ -133,7 +134,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
                     return;
                 }
 
-                if ($scope.state === 'question' && event.keyCode === 13) {
+                if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text) {
                     $scope.showAnswer();
                     $scope.state = 'answer';
 

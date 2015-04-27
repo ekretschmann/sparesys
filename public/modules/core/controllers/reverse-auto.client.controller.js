@@ -12,9 +12,6 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
             $scope.state = 'question';
 
 
-        $scope.inputchanged = function() {
-            console.log('now');
-        };
 
         $scope.setSpecialCharacters = function () {
             var lang = $scope.card.languageBack.name;
@@ -40,18 +37,10 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
         });
 
         $scope.$watch('state', function() {
-            console.log('state changed');
             if ($scope.state === 'answer' && $scope.card.readBackReverse) {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
             }
-            if ($scope.state === 'question') {
 
-                $timeout(function () {
-                    console.log('focus');
-                    angular.element('#focus-question-reverse').trigger('focus');
-                    //  console.log(angular.element('#focus-question'));
-                }, 100);
-            }
         });
 
 
@@ -66,13 +55,11 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
             var selectionEnd = angular.element('.answer')[0].selectionEnd;
 
             $scope.answer.text = $scope.answer.text.substr(0, selectionStart) + c + $scope.answer.text.substr(selectionEnd);
-            angular.element('.answer').trigger('focus');
+            //angular.element('.answer').trigger('focus');
         };
 
         $scope.showAnswer = function () {
 
-            $scope.state = 'answer';
-            $state.go($state.current);
 
             var ratedCorrect = false;
 
@@ -95,12 +82,16 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
             if (!ratedCorrect) {
                 $scope.processCard(0);
             }
+            $scope.state = 'answer';
+            $state.go($state.current);
+
         };
 
 
         $scope.processCard = function (rating) {
 
             $scope.$parent.recordRate(Date.now(), rating);
+            $scope.state = 'question';
 
         };
 
@@ -121,20 +112,21 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
             }
 
 
-            if ($scope.state === 'question' && event.keyCode === 13) {
+            if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text) {
                 $scope.showAnswer();
-                return;
-            }
-
-
-            if ($scope.state === 'answer' && event.keyCode === 13) {
-                $scope.nextCard();
                 return;
             }
 
             if ($scope.state === 'question') {
                 return;
             }
+
+            if ($scope.state === 'answer' && event.keyCode === 13) {
+                $scope.nextCard();
+                return;
+            }
+
+
 
             if ($scope.state === 'answer') {
                 if (event.charCode === 49) {
@@ -160,9 +152,9 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
 
             $scope.answer.text = '';
 
-            $timeout(function () {
-                angular.element('.focus').trigger('focus');
-            }, 100);
+            //$timeout(function () {
+            //    angular.element('.focus').trigger('focus');
+            //}, 100);
         };
 
     }]);

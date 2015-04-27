@@ -5,9 +5,7 @@
 angular.module('core').controller('ReverseSelfController', ['$scope', '$state', '$document', '$timeout',
     function ($scope, $state, $document, $timeout) {
 
-            $scope.state = 'question';
-
-
+        $scope.state = 'question';
 
 
         $scope.$watch('card', function() {
@@ -28,6 +26,7 @@ angular.module('core').controller('ReverseSelfController', ['$scope', '$state', 
         };
 
         $scope.processCard = function (rating) {
+
             $scope.$parent.recordRate(Date.now(), rating);
             $scope.state = 'question';
             $scope.$parent.nextCard();
@@ -52,9 +51,9 @@ angular.module('core').controller('ReverseSelfController', ['$scope', '$state', 
                 return;
             }
 
-            if ($scope.state === 'question') {
-                return;
-            }
+            //if ($scope.state === 'question') {
+            //    return;
+            //}
 
             if ($scope.state === 'answer') {
                 if (event.charCode === 49) {

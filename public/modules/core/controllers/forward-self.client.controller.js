@@ -23,13 +23,13 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
                 $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
             }
 
-            if ($scope.state === 'question') {
-
-                $timeout(function () {
-                    angular.element('#focus-question').trigger('focus');
-                    //  console.log(angular.element('#focus-question'));
-                }, 100);
-            }
+            //if ($scope.state === 'question') {
+            //
+            //    $timeout(function () {
+            //        angular.element('#focus-question').trigger('focus');
+            //        //  console.log(angular.element('#focus-question'));
+            //    }, 100);
+            //}
 
         });
 

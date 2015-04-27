@@ -226,6 +226,25 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 $scope.initSpeech();
             }
 
+
+
+            if ($scope.mode === 'forward') {
+
+                $timeout(function () {
+                    angular.element('#focus-question').trigger('focus');
+                    //  console.log(angular.element('#focus-question'));
+                }, 100);
+            }
+
+
+            if ($scope.mode === 'reverse') {
+
+                $timeout(function () {
+                    angular.element('#focus-question-reverse').trigger('focus');
+                    //  console.log(angular.element('#focus-question'));
+                }, 100);
+            }
+
             //console.log('ga next card');
             //console.log('/practice/card/:id');
             if ($window.ga) {

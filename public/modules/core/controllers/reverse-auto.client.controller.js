@@ -5,27 +5,69 @@
 angular.module('core').controller('ReverseAutoController', ['$scope', '$state', '$document', '$timeout',
     function ($scope, $state, $document, $timeout) {
 
-        $scope.state = 'question';
         $scope.answer = {};
         $scope.answer.text = '';
         $scope.answer.assessment = undefined;
 
+            $scope.state = 'question';
+
+
+        $scope.inputchanged = function() {
+            console.log('now');
+        };
+
+        $scope.setSpecialCharacters = function () {
+            var lang = $scope.card.languageBack.name;
+
+            if ($scope.state === 'question') {
+                lang = $scope.card.languageFront.name;
+            }
+
+            $scope.specialChars = [];
+            if (lang === 'Spanish') {
+                $scope.specialChars = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+            } else if (lang === 'French') {
+                $scope.specialChars = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+            } else if (lang === 'German') {
+                $scope.specialChars = ['ä', 'é', 'ö', 'ü', 'ß'];
+            }
+        };
+
         $scope.$watch('card', function() {
-            if ($scope.card.readFrontReverse) {
+            if ($scope.card.readFrontReverse && $scope.mode === 'reverse' && $scope.assess==='auto') {
                 $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
             }
         });
 
         $scope.$watch('state', function() {
+            console.log('state changed');
             if ($scope.state === 'answer' && $scope.card.readBackReverse) {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
+            }
+            if ($scope.state === 'question') {
+
+                $timeout(function () {
+                    console.log('focus');
+                    angular.element('#focus-question-reverse').trigger('focus');
+                    //  console.log(angular.element('#focus-question'));
+                }, 100);
             }
         });
 
 
-        $timeout(function () {
-            angular.element('.focus').trigger('focus');
-        }, 100);
+
+
+        $scope.addChar = function(c) {
+            if (!$scope.answer.text) {
+                $scope.answer.text = '';
+            }
+
+            var selectionStart = angular.element('.answer')[0].selectionStart;
+            var selectionEnd = angular.element('.answer')[0].selectionEnd;
+
+            $scope.answer.text = $scope.answer.text.substr(0, selectionStart) + c + $scope.answer.text.substr(selectionEnd);
+            angular.element('.answer').trigger('focus');
+        };
 
         $scope.showAnswer = function () {
 
@@ -65,6 +107,8 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
 
 
         $document.bind('keypress', function (event) {
+
+            $state.go($state.current);
 
 
 

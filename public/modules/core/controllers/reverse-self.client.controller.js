@@ -2,13 +2,16 @@
 
 
 // Courses controller
-angular.module('core').controller('ReverseSelfController', ['$scope', '$state', '$document',
-    function ($scope, $state, $document) {
+angular.module('core').controller('ReverseSelfController', ['$scope', '$state', '$document', '$timeout',
+    function ($scope, $state, $document, $timeout) {
 
-        $scope.state = 'question';
+            $scope.state = 'question';
+
+
+
 
         $scope.$watch('card', function() {
-            if ($scope.card.readFrontReverse) {
+            if ($scope.card.readFrontReverse && $scope.mode === 'reverse' && $scope.assess==='self') {
                 $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
             }
         });
@@ -24,7 +27,15 @@ angular.module('core').controller('ReverseSelfController', ['$scope', '$state', 
             $state.go($state.current);
         };
 
+        $scope.processCard = function (rating) {
+            $scope.$parent.recordRate(Date.now(), rating);
+            $scope.state = 'question';
+            $scope.$parent.nextCard();
+        };
+
         $document.bind('keypress', function (event) {
+
+            $state.go($state.current);
 
             if($scope.mode !== 'reverse' || $scope.assess !== 'self') {
                 return;
@@ -62,13 +73,6 @@ angular.module('core').controller('ReverseSelfController', ['$scope', '$state', 
 
         });
 
-        $scope.processCard = function (rating) {
 
-            $scope.$parent.recordRate(Date.now(), rating);
-            $scope.state = 'question';
-                $scope.$parent.nextCard();
-
-
-        };
 
     }]);

@@ -9,9 +9,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.answer = {};
         $scope.answer.text = '';
         $scope.answer.assessment = undefined;
-        $scope.keysbound = false;
-        $scope.specialCharsFront = [];
-        $scope.specialCharsBack = [];
+        $scope.specialChars = [];
 
 
         $scope.init = function() {
@@ -36,17 +34,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             }
         };
 
-        $scope.addChar = function(c) {
-            if (!$scope.answer.text) {
-                $scope.answer.text = '';
-            }
 
-            var selectionStart = angular.element('.answer')[0].selectionStart;
-            var selectionEnd = angular.element('.answer')[0].selectionEnd;
-
-            $scope.answer.text = $scope.answer.text.substr(0, selectionStart) + c + $scope.answer.text.substr(selectionEnd);
-            angular.element('.answer').trigger('focus');
-        };
 
         $scope.$watch('card', function() {
             if ($scope.card.readFrontForward && $scope.mode === 'forward' && $scope.assess==='auto') {
@@ -70,6 +58,18 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
                 }, 100);
             }
         });
+
+        $scope.addChar = function(c) {
+            if (!$scope.answer.text) {
+                $scope.answer.text = '';
+            }
+
+            var selectionStart = angular.element('.answer')[0].selectionStart;
+            var selectionEnd = angular.element('.answer')[0].selectionEnd;
+
+            $scope.answer.text = $scope.answer.text.substr(0, selectionStart) + c + $scope.answer.text.substr(selectionEnd);
+            angular.element('.answer').trigger('focus');
+        };
 
 
         $scope.showAnswer = function () {

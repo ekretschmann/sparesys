@@ -69,12 +69,12 @@
             </div>
         </div>
 
-        <div data-ng-if="mode === 'reverse'">
-            <div data-ng-if="assess === 'self'">
+        <div data-ng-show="mode === 'reverse'">
+            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
                 <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
             </div>
 
-            <div data-ng-if="assess === 'auto'">
+            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
                 <div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>
             </div>
         </div>

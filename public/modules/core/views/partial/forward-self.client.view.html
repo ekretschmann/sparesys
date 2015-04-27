@@ -55,7 +55,7 @@
     </div>
 
     <div class="center-aligned top-padded">
-        <div data-ng-show="state === 'answer'">
+        <div data-ng-show="state === 'answer'" data-ng-hide="state !== 'answer'">
             <button class="btn btn-rememberators btn-small" data-ng-click="processCard(0)">0</button>
             <button class="btn btn-rememberators btn-small" data-ng-click="processCard(1)">1</button>
             <button class="btn btn-rememberators btn-small" data-ng-click="processCard(2)">2</button>
@@ -66,7 +66,7 @@
             </div>
         </div>
 
-        <div data-ng-show="state === 'question'">
+        <div data-ng-show="state === 'question'" data-ng-show="state !== 'question'">
             <button class="btn btn-rememberators" data-ng-click="showAnswer()">Enter</button>
         </div>
     </div>

@@ -29,7 +29,7 @@
             <div  data-ng-if="!course.supervised">
             <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
                 </div>
-            <div data-ng-if="state === 'answer'" data-ng-if="answer.assessment === 'wrong'">
+            <div data-ng-if="state === 'answer' && answer.assessment === 'wrong'">
                 <a data-ng-click="$parent.myAnswerCounts(answer.text)">My answer counts</a>
             </div>
         </div>

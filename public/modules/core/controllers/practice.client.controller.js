@@ -100,7 +100,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if (window.SpeechSynthesisUtterance !== undefined) {
 
 
-                //console.log('playing sound: '+text+ ' ('+lang.code+')');
+                console.log('playing sound: '+text+ ' ('+lang.code+')');
 
                 var msg = new SpeechSynthesisUtterance(text);
                 msg.lang = lang.code;
@@ -231,7 +231,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if ($scope.mode === 'forward') {
 
                 $timeout(function () {
-                    console.log('focus fwd');
                     angular.element('#focus-question').trigger('focus');
                     //  console.log(angular.element('#focus-question'));
                 }, 100);
@@ -241,7 +240,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if ($scope.mode === 'reverse') {
 
                 $timeout(function () {
-                    console.log('focus rev');
                     angular.element('#focus-question-reverse').trigger('focus');
                     //  console.log(angular.element('#focus-question'));
                 }, 100);
@@ -251,7 +249,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
 
                 $timeout(function () {
-                    console.log('focus img');
                     angular.element('#focus-question-images').trigger('focus');
                     //  console.log(angular.element('#focus-question'));
                 }, 100);

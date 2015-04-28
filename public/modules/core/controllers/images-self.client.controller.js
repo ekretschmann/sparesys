@@ -48,8 +48,6 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
             }
 
 
-            console.log($scope.state);
-            console.log(event.keyCode);
             if ($scope.state === 'question' && event.keyCode === 13) {
                 $scope.showAnswer();
                 return;

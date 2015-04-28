@@ -27,17 +27,12 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
         $scope.showAnswer = function () {
 
 
-            console.log($scope.card.answer);
-            console.log($scope.answer.text);
-
-
             var ratedCorrect = false;
 
             $scope.answer.assessment = 'wrong';
 
 
             if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
-                console.log('aaa');
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';
                 ratedCorrect = true;
@@ -53,11 +48,9 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
             });
 
             if (!ratedCorrect) {
-                console.log('bbb');
                 $scope.processCard(0);
             }
 
-            console.log($scope.answer.assessment);
             $scope.state = 'answer';
             $state.go($state.current);
         };

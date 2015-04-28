@@ -7,15 +7,16 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
 
         $scope.state = 'question';
 
+        $scope.online = true;
 
-        $scope.$watch('online', function(newStatus) {
-            $scope.online = newStatus;
-
-        });
+        //$scope.$watch('online', function(newStatus) {
+        //    $scope.online = newStatus;
+        //
+        //});
 
 
         $scope.$watch('card', function() {
-            if ($scope.card.imagesReadFront) {
+            if ($scope.card.imagesReadFront && $scope.mode === 'images' && $scope.assess==='self') {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
             }
         });
@@ -28,10 +29,16 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
 
         $scope.showAnswer = function () {
             $scope.state = 'answer';
+            $state.go($state.current);
         };
 
         $document.bind('keypress', function (event) {
 
+
+            $state.go($state.current);
+
+            console.log($scope.mode);
+            console.log($scope.assess);
 
             if($scope.mode !== 'images' || $scope.assess !== 'self') {
                 return;
@@ -43,6 +50,8 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
             }
 
 
+            console.log($scope.state);
+            console.log(event.keyCode);
             if ($scope.state === 'question' && event.keyCode === 13) {
                 $scope.showAnswer();
                 return;

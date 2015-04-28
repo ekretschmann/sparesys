@@ -245,6 +245,14 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 }, 100);
             }
 
+            if ($scope.mode === 'reverse') {
+
+                $timeout(function () {
+                    angular.element('#focus-question-image').trigger('focus');
+                    //  console.log(angular.element('#focus-question'));
+                }, 100);
+            }
+
             //console.log('ga next card');
             //console.log('/practice/card/:id');
             if ($window.ga) {

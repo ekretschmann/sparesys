@@ -11,9 +11,6 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
         $scope.state = 'question';
 
 
-        $timeout(function () {
-            angular.element('.focus').trigger('focus');
-        }, 100);
 
         $scope.$watch('card', function() {
             if ($scope.card.imagesReadFront) {
@@ -29,8 +26,7 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
 
         $scope.showAnswer = function () {
 
-            $scope.state = 'answer';
-            $state.go($state.current);
+
 
             var ratedCorrect = false;
 
@@ -42,7 +38,7 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
             }
 
 
-            $scope.card.alternativesFront.forEach(function (alt) {
+            $scope.card.acceptedAnswersForward.forEach(function (alt) {
                 if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
                     $scope.processCard(3);
                     $scope.answer.assessment = 'correct';
@@ -53,6 +49,9 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
             if (!ratedCorrect) {
                 $scope.processCard(0);
             }
+
+            $scope.state = 'answer';
+            $state.go($state.current);
         };
 
 
@@ -60,6 +59,7 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
 
 
             $scope.$parent.recordRate(Date.now(), rating);
+            $scope.state = 'question';
 
         };
 
@@ -67,6 +67,8 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
 
 
         $document.bind('keypress', function (event) {
+
+            $state.go($state.current);
 
             if($scope.mode !== 'images' || $scope.assess !== 'auto') {
                 return;
@@ -104,9 +106,7 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
 
             $scope.answer.text = '';
 
-            $timeout(function () {
-                angular.element('.focus').trigger('focus');
-            }, 100);
+            $state.go($state.$current);
         };
 
 

@@ -37,8 +37,6 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
 
             $state.go($state.current);
 
-            console.log($scope.mode);
-            console.log($scope.assess);
 
             if($scope.mode !== 'images' || $scope.assess !== 'self') {
                 return;

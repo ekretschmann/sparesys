@@ -82,7 +82,7 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
             }
 
 
-            if ($scope.state === 'question' && event.keyCode === 13) {
+            if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text && $scope.answer.text !== '') {
                 $scope.showAnswer();
                 return;
             }

@@ -66,8 +66,9 @@ angular.module('core').service('RetentionCalculatorService', [
                     var pr = this.getPredictedRetention(entry.when, entry.hrt, endTime);
 
                     var weight = this.calculateWeight(pr);
+                    //console.log('  '+weight);
                     if (entry.assessment === 3) {
-                        totalWeight += weight / Math.pow(counter, 1.8);
+                        totalWeight += weight / counter;
                     }
 
                     endTime = entry.when;
@@ -76,16 +77,28 @@ angular.module('core').service('RetentionCalculatorService', [
                 }
 
 
-                var maximalMultiplicator = 10;
+                var maximalMultiplicator = 3;
 
                 if (assessment === 3) {
 
 
-                    // catapult step
-                    if(card.hrt > 1000000 && card.hrt <= 10000000) {
-                        maximalMultiplicator = 800;
+                    // loss than an hour
+                    if(card.hrt <= 1000*60*60) {
+                        maximalMultiplicator = 100;
                     }
 
+
+                    // less than a day
+                    if(card.hrt > 1000*60*60 && card.hrt <= 1000*60*60*24) {
+                        maximalMultiplicator = 50;
+                    }
+
+                    // less than a month
+                    if(card.hrt > 1000*60*60*24 && card.hrt <= 1000*60*60*24*30) {
+                        maximalMultiplicator = 6;
+                    }
+
+                    //console.log(totalWeight);
                     return card.hrt*(1+maximalMultiplicator*totalWeight);
                 }
 

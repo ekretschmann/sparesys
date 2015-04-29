@@ -100,7 +100,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if (window.SpeechSynthesisUtterance !== undefined) {
 
 
-                console.log('playing sound: '+text+ ' ('+lang.code+')');
+               // console.log('playing sound: '+text+ ' ('+lang.code+')');
 
                 var msg = new SpeechSynthesisUtterance(text);
                 msg.lang = lang.code;
@@ -193,8 +193,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
 
                     if (card.score < bestValue && card.modes.length > 0) {
-                        bestCard = card;
-                        bestValue = card.score;
+                        if (this.cards.length > 1 && card.question !== $scope.card.question) {
+                            bestCard = card;
+                            bestValue = card.score;
+                        }
                     }
                 }
             }, this);

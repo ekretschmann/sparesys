@@ -58,6 +58,7 @@ angular.module('core').service('RetentionCalculatorService', [
                 var counter = 1;
                 var totalWeight = 0;
 
+                //console.log(card.question);
                 for (var i = card.history.length-1; i >=0; i--) {
                     var entry = card.history[i];
 
@@ -67,8 +68,9 @@ angular.module('core').service('RetentionCalculatorService', [
 
                     var weight = this.calculateWeight(pr);
                     //console.log('  '+weight);
+                    //console.log('  '+weight);
                     if (entry.assessment === 3) {
-                        totalWeight += weight / counter;
+                        totalWeight += weight / (counter*counter);
                     }
 
                     endTime = entry.when;
@@ -81,21 +83,23 @@ angular.module('core').service('RetentionCalculatorService', [
 
                 if (assessment === 3) {
 
+                    //console.log('  ---------');
+                    //console.log('  '+totalWeight);
 
                     // loss than an hour
                     if(card.hrt <= 1000*60*60) {
-                        maximalMultiplicator = 100;
+                        maximalMultiplicator = 50;
                     }
 
 
                     // less than a day
                     if(card.hrt > 1000*60*60 && card.hrt <= 1000*60*60*24) {
-                        maximalMultiplicator = 50;
+                        maximalMultiplicator = 25;
                     }
 
                     // less than a month
                     if(card.hrt > 1000*60*60*24 && card.hrt <= 1000*60*60*24*30) {
-                        maximalMultiplicator = 6;
+                        maximalMultiplicator = 5;
                     }
 
                     //console.log(totalWeight);

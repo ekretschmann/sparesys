@@ -168,7 +168,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
                 var factor = 10 - dueInDays;
 
-                console.log(card.question);
+                //console.log(card.question);
                 if (factor > 0 && factor < 10) {
 
                     var dOptimal = 0.4 - pr;
@@ -199,10 +199,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             var bestValue = 1.0;
             var bestCard;
 
-            console.log('--------');
+            //console.log('--------');
             this.cards.forEach(function (card) {
 
-                console.log(card.question);
+                //console.log(card.question);
                 if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
 
                     //var pr = this.getPredictedRetention(card, $scope.time);

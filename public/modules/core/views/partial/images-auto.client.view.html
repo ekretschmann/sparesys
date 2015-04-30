@@ -77,7 +77,7 @@
                 Question: {{card.question}}
 
                     </span>
-                 <span data-ng-if="card.readFrontForward" class="left-padded-s top-padded-s" style="position: absolute;" >
+                 <span data-ng-if="card.imagesReadFront" class="left-padded-s top-padded-s" style="position: absolute;" >
 
                     <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
@@ -116,7 +116,7 @@
                 Expected answer: {{card.answer}}
 
                     </span>
-                 <span data-ng-if="card.readBackForward" class="left-padded-s top-padded-s" style="position: absolute;" >
+                 <span data-ng-if="card.imagesReadBack" class="left-padded-s top-padded-s" style="position: absolute;" >
 
                     <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>

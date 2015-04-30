@@ -161,18 +161,36 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         };
 
         $scope.adjustScoreToDueDate = function (card, time) {
-            var weight = 1;
-            if (card.due) {
-                var dueInSecs = new Date(card.due).getTime() - time;
+
+            var pr = card.predictedRetention;
+            if (card.dueDate) {
+                var dueInSecs = new Date(card.dueDate).getTime() - time;
                 var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
                 var factor = 10 - dueInDays;
 
+                console.log(card.question);
                 if (factor > 0 && factor < 10) {
-                    weight = ((factor + 2) / 4);
+
+                    var dOptimal = 0.4 - pr;
+
+                    if (pr > 0.4) {
+
+                        dOptimal = pr - 0.4;
+                        //var dMaximal = 1 - pr;
+                        return Math.abs(pr - dOptimal/factor -0.4);
+                    } else {
+                        //var dMinimal = pr;
+
+                        return Math.abs(pr + (dOptimal/factor) - 0.4);
+                    }
+
                 }
             }
-            return weight;
+            return Math.abs(card.predictedRetention - 0.4);
         };
+
+        //1. how far away is the card from 0.4
+        //2. make this difference smaller by 10-days left
 
         $scope.nextCard = function () {
 
@@ -181,16 +199,22 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             var bestValue = 1.0;
             var bestCard;
 
+            console.log('--------');
             this.cards.forEach(function (card) {
 
+                console.log(card.question);
                 if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
 
                     //var pr = this.getPredictedRetention(card, $scope.time);
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
 
 
-                    card.score = Math.abs(card.predictedRetention - 0.4) * $scope.adjustScoreToDueDate(card, $scope.time);
 
+                    //card.score = Math.abs(card.predictedRetention - 0.4) / $scope.adjustScoreToDueDate(card, $scope.time);
+                    card.score = $scope.adjustScoreToDueDate(card, $scope.time);
+
+                    //console.log('  '+card.predictedRetention);
+                    //console.log('  '+card.score);
 
                     if (card.score < bestValue && card.modes.length > 0) {
                         if (this.cards.length > 1 && card.question !== $scope.card.question) {

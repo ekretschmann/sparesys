@@ -78,13 +78,14 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
 
         $scope.page = 0;
         $scope.totalResults = 0;
-        $scope.online = false;
-
-
-        $scope.$watch('online', function(newStatus) {
-            $scope.online = newStatus;
-
-        });
+        //$scope.online = false;
+        //
+        //
+        //$scope.$watch('online', function(newStatus) {
+        //
+        //    $scope.online = newStatus;
+        //
+        //});
 
 
         $scope.search_offline = function () {
@@ -154,11 +155,11 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
         };
 
         $scope.search = function () {
-
-            if (!$scope.online) {
-                $scope.search_offline();
-                return;
-            }
+            //
+            //if (!$scope.online) {
+            //    $scope.search_offline();
+            //    return;
+            //}
 
             $http({ method: 'GET',
                 url: 'https://connect.gettyimages.com:443/v3/search/images/creative?phrase='+$scope.search.text+'&page_size=9&page='+$scope.page,

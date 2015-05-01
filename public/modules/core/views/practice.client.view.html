@@ -54,11 +54,14 @@
                 </tr>
 
                 <tr>
-                    <td class="nowrap" ng-style="doneColorCode">Done Score</td>
-                    <td class="left-padded-s" ng-style="doneColorCode">:</td>
-                    <td class="left-padded-s" ng-style="doneColorCode">
+                    <td class="nowrap" ng-style="doneColorCode" data-ng-if="doneScore">Done Score</td>
+                    <td class="nowrap" ng-style="doneColorCode" data-ng-if="!doneScore"></td>
+                    <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore">:</td>
+                    <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="!doneScore"></td>
+                    <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore">
                         {{doneScore}}
                     </td>
+                    <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="!doneScore"></td>
 
                     <td class="expands"></td>
 

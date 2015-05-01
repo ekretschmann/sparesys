@@ -255,31 +255,32 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             }
 
             if ($scope.requiredRetention === 0) {
-                $scope.doneScore = 100;
+                $scope.doneScore = -1;
             } else {
                 $scope.doneScore = Math.round(100 * $scope.dueRetention / $scope.requiredRetention);
-            }
-            $scope.doneScore = Math.max($scope.previousDoneScore, $scope.doneScore);
 
-            var green = (Math.round(Math.min(90, $scope.doneScore)*2));
-            var red = (Math.round(Math.max(10, (100-$scope.doneScore))*2));
-            var blue = Math.round(Math.min(green, red)/3);
+                $scope.doneScore = Math.max($scope.previousDoneScore, $scope.doneScore);
 
-            red = red.toString(16);
-            green = green.toString(16);
-            blue = blue.toString(16);
-            if(red.length === 1) {
-                red = '0'+red;
-            }
-            if(green.length === 1) {
-                green = '0'+green;
-            }
-            if(blue.length === 1) {
-                blue = '0'+blue;
-            }
+                var green = (Math.round(Math.min(90, $scope.doneScore) * 2));
+                var red = (Math.round(Math.max(10, (100 - $scope.doneScore)) * 2));
+                var blue = Math.round(Math.min(green, red) / 3);
 
-            var col = '#'+red+''+green+''+blue;
-            $scope.doneColorCode = {'color': col};
+                red = red.toString(16);
+                green = green.toString(16);
+                blue = blue.toString(16);
+                if (red.length === 1) {
+                    red = '0' + red;
+                }
+                if (green.length === 1) {
+                    green = '0' + green;
+                }
+                if (blue.length === 1) {
+                    blue = '0' + blue;
+                }
+
+                var col = '#' + red + '' + green + '' + blue;
+                $scope.doneColorCode = {'color': col};
+            }
 
             $scope.card = bestCard;
 

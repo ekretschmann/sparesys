@@ -16,7 +16,6 @@ angular.module('core').controller('ImagesSelfController', ['$scope', '$state', '
 
 
         $scope.$watch('card', function() {
-            console.log('xxxx');
             if ($scope.card.imagesReadFront && $scope.mode === 'images' && $scope.assess==='self') {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
             }

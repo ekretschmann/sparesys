@@ -13,7 +13,7 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
 
 
         $scope.$watch('card', function() {
-            if ($scope.card.imagesReadFront) {
+            if ($scope.card.imagesReadFront && $scope.mode === 'images' && $scope.assess==='auto') {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
             }
         });

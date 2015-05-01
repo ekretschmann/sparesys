@@ -115,13 +115,17 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
                 var studentHasCourse = false;
                 for (var i=0; i<courses.length; i++) {
                     var c = courses[i];
-                    if (masterCourse.slaves.indexOf(c._id !== -1)) {
+                    //console.log(masterCourse.slaves);
+                    //console.log(c._id);
+                    //console.log(masterCourse.slaves.indexOf(c._id));
+                    if (masterCourse.slaves.indexOf(c._id) !== -1) {
                         c.visible = true;
                         c.$update();
                         studentHasCourse = true;
                     }
                 }
 
+                console.log(studentHasCourse);
 
                 if (!studentHasCourse) {
                     var res = CoursesService.copyCourseFor(studentId);

@@ -223,7 +223,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     //var pr = this.getPredictedRetention(card, $scope.time);
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
 
-                    card.retention = Math.round(card.predictedRetention*100)/100;
+                    card.retention = Math.round(card.predictedRetention*100);
 
                     //card.score = Math.abs(card.predictedRetention - 0.4) / $scope.adjustScoreToDueDate(card, $scope.time);
                     card.score = $scope.adjustScoreToDueDate(card, $scope.time);

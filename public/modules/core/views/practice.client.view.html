@@ -27,7 +27,7 @@
                     <td>Score</td>
                     <td class="left-padded-s">:</td>
                     <td class="left-padded-s">
-                        <span data-ng-if="cards">{{ round(card.score) }}</span>
+                        <span data-ng-if="cards">{{ cardScore }}</span>
                         <span data-ng-if="!cards">0</span>
 
                     </td>
@@ -49,6 +49,24 @@
                     <td class="left-padded-s">:</td>
                     <td class="left-padded-s">
                         <span data-ng-if="cards">{{mode}}</span>
+
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="nowrap" ng-style="doneColorCode">Done Score</td>
+                    <td class="left-padded-s" ng-style="doneColorCode">:</td>
+                    <td class="left-padded-s" ng-style="doneColorCode">
+                        {{doneScore}}
+                    </td>
+
+                    <td class="expands"></td>
+
+
+                    <td>Retention</td>
+                    <td class="left-padded-s">:</td>
+                    <td class="left-padded-s">
+                        {{card.retention}}%
 
                     </td>
                 </tr>

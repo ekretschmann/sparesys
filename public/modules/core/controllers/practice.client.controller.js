@@ -209,6 +209,12 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             var bestCard;
 
             //console.log('--------');
+            $scope.courseRetention = 0;
+            $scope.dueRetention = 0;
+            $scope.previousDoneScore = $scope.doneScore || 0;
+            $scope.requiredRetention = 0;
+            $scope.dueCards = 0;
+
             this.cards.forEach(function (card) {
 
                 //console.log(card.question);
@@ -217,7 +223,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     //var pr = this.getPredictedRetention(card, $scope.time);
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
 
-
+                    card.retention = Math.round(card.predictedRetention*100)/100;
 
                     //card.score = Math.abs(card.predictedRetention - 0.4) / $scope.adjustScoreToDueDate(card, $scope.time);
                     card.score = $scope.adjustScoreToDueDate(card, $scope.time);
@@ -232,10 +238,55 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                         }
                     }
                 }
+                // calculate when am I done
+                if (card.dueDate) {
+                    var dueInSecs = new Date(card.dueDate).getTime() - $scope.time;
+                    var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
+                    $scope.dueRetention += card.predictedRetention;
+                    $scope.dueCards++;
+                    $scope.requiredRetention += 1 - dueInDays * 0.05;
+                }
             }, this);
+
+
+
+            if ($scope.requiredRetention === 0) {
+                $scope.doneScore = 100;
+            } else {
+                $scope.doneScore = Math.round(100 * $scope.dueRetention / $scope.requiredRetention);
+            }
+            $scope.doneScore = Math.max($scope.previousDoneScore, $scope.doneScore);
+
+            var green = (Math.round(Math.min(90, $scope.doneScore)*2));
+            var red = (Math.round(Math.max(10, (100-$scope.doneScore))*2));
+            var blue = Math.round(Math.min(green, red)/3);
+
+            red = red.toString(16);
+            green = green.toString(16);
+            blue = blue.toString(16);
+            if(red.length === 1) {
+                red = '0'+red;
+            }
+            if(green.length === 1) {
+                green = '0'+green;
+            }
+            if(blue.length === 1) {
+                blue = '0'+blue;
+            }
+
+            var col = '#'+red+''+green+''+blue;
+            $scope.doneColorCode = {'color': col};
 
             $scope.card = bestCard;
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
+
+            $scope.cardScore = 0;
+
+            $scope.card.history.forEach(function(time) {
+                $scope.cardScore += time.assessment;
+            }, this);
+
+
 
             if(!$scope.card.history || $scope.card.history.length ===0) {
                 $scope.inPlay ++;
@@ -288,6 +339,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     //  console.log(angular.element('#focus-question'));
                 }, 100);
             }
+
+
 
             //console.log('ga next card');
             //console.log('/practice/card/:id');

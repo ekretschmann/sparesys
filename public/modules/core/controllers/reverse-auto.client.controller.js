@@ -14,6 +14,12 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
 
 
         $scope.setSpecialCharacters = function () {
+            if (!$scope.card.languageFront && $scope.state === 'question') {
+                return;
+            }
+            if (!$scope.card.languageBack && $scope.state === 'answer') {
+                return;
+            }
             var lang = $scope.card.languageBack.name;
 
             if ($scope.state === 'question') {

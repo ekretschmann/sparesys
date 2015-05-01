@@ -278,6 +278,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.doneColorCode = {'color': col};
 
             $scope.card = bestCard;
+
             $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
 
             $scope.cardScore = 0;

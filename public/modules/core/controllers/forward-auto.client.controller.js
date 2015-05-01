@@ -18,6 +18,12 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         };
 
         $scope.setSpecialCharacters = function () {
+            if (!$scope.card.languageFront && $scope.state === 'question') {
+                return;
+            }
+            if (!$scope.card.languageBack && $scope.state === 'answer') {
+                return;
+            }
             var lang = $scope.card.languageFront.name;
 
             if ($scope.state === 'question') {

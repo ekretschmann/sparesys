@@ -13,6 +13,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.answer = {};
 
         $scope.authentication = Authentication;
+        $scope.repeatCard = false;
 
 
         $scope.initSpeech = function () {
@@ -147,6 +148,12 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 newCard.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
                 newCard.history.push({when: time, assessment: assessment, hrt:$scope.card.hrt});
 
+                if(assessment === 0 && $scope.assess === 'auto') {
+                    $scope.repeat = true;
+                } else {
+                    $scope.repeat = false;
+                }
+
                 newCard.$update();
             });
 
@@ -216,38 +223,43 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.dueCards = 0;
 
 
-            this.cards.forEach(function (card) {
+            if ($scope.repeat) {
+                bestCard = $scope.card;
+            } else {
 
-                //console.log(card.question);
-                if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
+                this.cards.forEach(function (card) {
 
-                    //var pr = this.getPredictedRetention(card, $scope.time);
-                    card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
+                    //console.log(card.question);
+                    if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
 
-                    card.retention = Math.round(card.predictedRetention*100);
+                        //var pr = this.getPredictedRetention(card, $scope.time);
+                        card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
 
-                    //card.score = Math.abs(card.predictedRetention - 0.4) / $scope.adjustScoreToDueDate(card, $scope.time);
-                    card.score = $scope.adjustScoreToDueDate(card, $scope.time);
+                        card.retention = Math.round(card.predictedRetention * 100);
 
-                    //console.log('  '+card.predictedRetention);
-                    //console.log('  '+card.score);
+                        //card.score = Math.abs(card.predictedRetention - 0.4) / $scope.adjustScoreToDueDate(card, $scope.time);
+                        card.score = $scope.adjustScoreToDueDate(card, $scope.time);
 
-                    if (card.score < bestValue && card.modes.length > 0) {
-                        if (this.cards.length >= 1 && card.question !== $scope.card.question) {
-                            bestCard = card;
-                            bestValue = card.score;
+                        //console.log('  '+card.predictedRetention);
+                        //console.log('  '+card.score);
+
+                        if (card.score < bestValue && card.modes.length > 0) {
+                            if (this.cards.length >= 1 && card.question !== $scope.card.question) {
+                                bestCard = card;
+                                bestValue = card.score;
+                            }
                         }
                     }
-                }
-                // calculate when am I done
-                if (card.dueDate) {
-                    var dueInSecs = new Date(card.dueDate).getTime() - $scope.time;
-                    var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
-                    $scope.dueRetention += card.predictedRetention;
-                    $scope.dueCards++;
-                    $scope.requiredRetention += 1 - dueInDays * 0.05;
-                }
-            }, this);
+                    // calculate when am I done
+                    if (card.dueDate) {
+                        var dueInSecs = new Date(card.dueDate).getTime() - $scope.time;
+                        var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
+                        $scope.dueRetention += card.predictedRetention;
+                        $scope.dueCards++;
+                        $scope.requiredRetention += 1 - dueInDays * 0.05;
+                    }
+                }, this);
+            }
 
 
             if (!bestCard) {

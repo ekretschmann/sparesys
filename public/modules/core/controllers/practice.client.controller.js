@@ -139,7 +139,16 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             //$scope.card.__v = undefined;
 
-            new Cards($scope.card).$update();
+            Cards.get({
+                cardId: $scope.card._id
+            }, function (newCard) {
+
+
+                newCard.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
+                newCard.history.push({when: time, assessment: assessment, hrt:$scope.card.hrt});
+
+                newCard.$update();
+            });
 
         };
 
@@ -348,22 +357,30 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.clearCourseHistory = function () {
             $scope.cards.forEach(function (card) {
-                $scope.clearHistory(card);
+
+                $scope.cardsUpdated = 0;
+
+                Cards.get({
+                    cardId: card._id
+                }, function (newCard) {
+
+                    newCard.history = [];
+                    newCard.lastRep = undefined;
+                    newCard.hrt = 0.0;
+                    newCard.$update(function(card) {
+                        $scope.cardsUpdated ++;
+                        if ($scope.cardsUpdated === $scope.cards.length) {
+                            $state.go($state.$current, null, { reload: true });
+                        }
+                    }, function(err) {
+                        console.log(err);
+                    });
+                });
 
             });
-            $state.go($state.$current, null, { reload: true });
-        };
-
-        $scope.clearHistory = function (card) {
-            card.history = [];
-            card.lastRep = undefined;
-            card.hrt = 0.0;
-
-            //card.__v = undefined;
-            new Cards(card).$update();
-
 
         };
+
 
         $scope.myAnswerCounts = function (answer, mode) {
 

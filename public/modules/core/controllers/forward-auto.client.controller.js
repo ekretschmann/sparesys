@@ -104,7 +104,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.processCard = function (rating) {
 
-            $scope.recordRate(Date.now(), rating);
+            $scope.recordRate(Date.now(), rating );
             $scope.state = 'question';
 
         };

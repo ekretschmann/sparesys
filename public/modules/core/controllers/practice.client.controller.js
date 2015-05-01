@@ -359,7 +359,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             card.lastRep = undefined;
             card.hrt = 0.0;
 
-            card.__v = undefined;
+            //card.__v = undefined;
             new Cards(card).$update();
 
 

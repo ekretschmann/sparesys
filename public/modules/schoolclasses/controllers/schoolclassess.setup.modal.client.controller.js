@@ -48,7 +48,7 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
             if ($scope.schoolclass.teachers.indexOf(teacherId) === -1) {
                 $scope.schoolclass.teachers.push(teacherId);
             }
-            $scope.schoolclass.__v = undefined;
+            //$scope.schoolclass.__v = undefined;
             new Schoolclasses($scope.schoolclass).$update(function(){
 
                 console.log('ga add teacher to class');
@@ -68,7 +68,7 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
                     $scope.schoolclass.teachers.splice(i, 1);
                 }
             }
-            $scope.schoolclass.__v = undefined;
+            //$scope.schoolclass.__v = undefined;
             new Schoolclasses($scope.schoolclass).$update(function(){
                 console.log('ga remove teacher from class');
                 console.log('/schoolclassess/remove/teacher/:id');
@@ -101,7 +101,7 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
 
             });
 
-            $scope.schoolclass.__v = undefined;
+            //$scope.schoolclass.__v = undefined;
             new Schoolclasses($scope.schoolclass).$update(function(){
                 console.log('ga remove student from class');
                 console.log('/schoolclassess/remove/student/:id');
@@ -124,7 +124,7 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
 
 
 
-            $scope.schoolclass.__v = undefined;
+            //$scope.schoolclass.__v = undefined;
             new Schoolclasses($scope.schoolclass).$update(function () {
 
                 $scope.schoolclass.courses.forEach(function(courseId) {

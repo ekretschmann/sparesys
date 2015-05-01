@@ -55,7 +55,7 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
 
 
             var originalCourses = $scope.schoolclass.courses;
-            $scope.schoolclass.__v = undefined;
+            //$scope.schoolclass.__v = undefined;
             var courses = $scope.schoolclass.courses;
             $scope.schoolclass.courses = [];
 
@@ -94,7 +94,7 @@ angular.module('schoolclasses').controller('AssignCoursesController', ['$scope',
                 $scope.schoolclass.courses.push(course);
             }
 
-            $scope.schoolclass.__v = undefined;
+            //$scope.schoolclass.__v = undefined;
             $scope.updateSchoolclass();
 
 

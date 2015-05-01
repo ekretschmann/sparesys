@@ -215,6 +215,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.requiredRetention = 0;
             $scope.dueCards = 0;
 
+
             this.cards.forEach(function (card) {
 
                 //console.log(card.question);
@@ -232,7 +233,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     //console.log('  '+card.score);
 
                     if (card.score < bestValue && card.modes.length > 0) {
-                        if (this.cards.length > 1 && card.question !== $scope.card.question) {
+                        if (this.cards.length >= 1 && card.question !== $scope.card.question) {
                             bestCard = card;
                             bestValue = card.score;
                         }
@@ -249,6 +250,9 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             }, this);
 
 
+            if (!bestCard) {
+                return;
+            }
 
             if ($scope.requiredRetention === 0) {
                 $scope.doneScore = 100;

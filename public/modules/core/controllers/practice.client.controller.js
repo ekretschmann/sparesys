@@ -223,9 +223,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.dueCards = 0;
 
 
-            if ($scope.repeat) {
-                bestCard = $scope.card;
-            } else {
 
                 this.cards.forEach(function (card) {
 
@@ -259,12 +256,16 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                         $scope.requiredRetention += 1 - dueInDays * 0.05;
                     }
                 }, this);
+
+            if ($scope.repeat) {
+                bestCard = $scope.card;
+                bestValue = $scope.card.score;
             }
 
+                if (!bestCard) {
+                    return;
+                }
 
-            if (!bestCard) {
-                return;
-            }
 
             if ($scope.requiredRetention === 0) {
                 $scope.doneScore = -1;

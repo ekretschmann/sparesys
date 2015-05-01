@@ -40,12 +40,12 @@
     <div data-ng-if="slides && slides.length > 0">
             <imagecarousel slides="slides" size="200"/>
 
-        <div data-ng-if="card.imagesReadFront" class="left-padded-s top-padded-s" style="position: absolute;" >
+        <span data-ng-if="card.imagesReadFront" class="left-padded-s top-padded-m bottom-padded-m" style="position: absolute;" >
 
                     <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
                     </a>
-                </div>
+                </span>
     </div>
 
 

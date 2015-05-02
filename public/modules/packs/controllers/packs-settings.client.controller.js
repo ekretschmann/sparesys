@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal','Cards',
-    function ($scope, $modal, Cards) {
+angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal', '$timeout', 'Cards',
+    function ($scope, $modal, $timeout, Cards) {
 
         $scope.options = {};
 
@@ -20,6 +20,14 @@ angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal
             });
 
 
+        };
+
+        $scope.saveSettings = function () {
+
+            $timeout(function () {
+                $scope.pack.name = $scope.options.name;
+                $scope.pack.$update();
+            }, 100);
         };
 
 

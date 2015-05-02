@@ -14,6 +14,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.authentication = Authentication;
         $scope.repeatCard = false;
+        $scope.cardsRemembered = 0;
 
 
         $scope.initSpeech = function () {
@@ -133,7 +134,9 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.recordRate = function (time, assessment) {
 
-
+            if (assessment > 0) {
+                $scope.cardsRemembered++;
+            }
             $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
 
             $scope.card.history.push({when: time, assessment: assessment, hrt:$scope.card.hrt});
@@ -208,7 +211,20 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         //1. how far away is the card from 0.4
         //2. make this difference smaller by 10-days left
 
+
+        $scope.recoverFromReward = function() {
+            $scope.cardsRemembered ++;
+            $scope.nextCard();
+        };
+
         $scope.nextCard = function () {
+
+
+            if (($scope.cardsRemembered +1) % 3 ===0) {
+                $scope.mode = 'reward';
+                console.log('reward');
+                return;
+            }
 
             $scope.time = Date.now();
 

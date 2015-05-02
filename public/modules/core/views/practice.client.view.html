@@ -80,6 +80,11 @@
 
     <div data-ng-if="cards && cards.length > 0" class="position:relative">
 
+        <div data-ng-show="mode === 'reward'" >
+
+                <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
+        </div>
+
         <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'">
 
             <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">

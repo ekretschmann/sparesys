@@ -26,9 +26,9 @@
 
         <div class="edit-card left-aligned">
 
-            <div  data-ng-if="!course.supervised">
-            <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
-                </div>
+            <div data-ng-if="!course.supervised">
+                <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+            </div>
             <div data-ng-if="state === 'answer' && answer.assessment === 'wrong'">
                 <a data-ng-click="$parent.myAnswerCounts(answer.text)">My answer counts</a>
             </div>
@@ -37,19 +37,16 @@
 
         <div class="center-aligned top-padded-m">
 
-    <div data-ng-if="slides && slides.length > 0">
-            <imagecarousel slides="slides" size="200"/>
+            <div data-ng-if="slides && slides.length > 0">
+                <imagecarousel slides="slides" size="200"/>
 
-        <span data-ng-if="card.imagesReadFront" class="left-padded-s top-padded-m bottom-padded-m" style="position: absolute;" >
+                <div data-ng-if="card.imagesReadFront" class="left-padded-s top-padded-m bottom-padded-m centered">
 
                     <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
                     </a>
-                </span>
-        <br/>
-        <br/>
-        <br/>
-    </div>
+                </div>
+            </div>
 
 
             <div data-ng-if="!slides || slides.length === 0" class="left-padded-l right-padded-l">
@@ -60,7 +57,15 @@
                     </div>
                 </div>
 
-                <infobox logo="woman" >
+                <div data-ng-if="card.imagesReadFront" class="left-padded-s top-padded-m bottom-padded-m centered">
+
+                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
+                </div>
+
+
+                <infobox logo="woman">
                     This card has the image mode switched on but has no images attached. Please
                     edit this card and configure which images to show.
                 </infobox>
@@ -69,14 +74,14 @@
             </div>
 
 
-            <div class="flashcard-input-box top-padded-m" data-ng-if="state === 'question'">
+            <div  class="flashcard-input-box top-padded-m" data-ng-if="state === 'question'">
 
                 <input type="text" required
                        class="focus expands flashcard-input"
                        id="focus-question-images"
-                       data-ng-model="answer.text">
+                       data-ng-model="answer.text"
+                        >
             </div>
-
 
 
             <div data-ng-if="state === 'answer'">
@@ -89,8 +94,6 @@
                     </span>
 
                 </div>
-
-
 
 
             </div>
@@ -117,19 +120,23 @@
 
 
                 <div class="correct-answer-box">
-                <span class="correct-answer">
+
+
+                    <span class="correct-answer" data-ng-if="answer.assessment === 'correct'">
                 Expected answer: {{card.answer}}
 
                     </span>
-                 <span data-ng-if="card.imagesReadBack" class="left-padded-s top-padded-s" style="position: absolute;" >
+                    <span class="incorrect-answer" data-ng-if="answer.assessment === 'wrong'">
+                Expected answer: {{card.answer}}
+
+                    </span>
+                 <span data-ng-if="card.imagesReadBack" class="left-padded-s top-padded-s" style="position: absolute;">
 
                     <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
                     </a>
                 </span>
                 </div>
-
-
 
 
             </div>

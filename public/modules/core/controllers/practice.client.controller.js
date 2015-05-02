@@ -220,10 +220,11 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.nextCard = function () {
 
 
-            if (($scope.cardsRemembered +1) % 3 ===0) {
-                $scope.mode = 'reward';
-                console.log('reward');
-                return;
+            if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
+                if (($scope.cardsRemembered + 1) % 3 === 0) {
+                    $scope.mode = 'reward';
+                    return;
+                }
             }
 
             $scope.time = Date.now();
@@ -331,7 +332,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if($scope.card.check === 'computer') {
                 $scope.assess = 'auto';
             }
-            if ($scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
+            if ($scope.assess === 'mixed' && $scope.card.hrt && $scope.card.hrt > 1000*60*60*24*5) {
                 $scope.assess = 'auto';
             }
 

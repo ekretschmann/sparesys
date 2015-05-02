@@ -111,7 +111,7 @@ angular.module('users').controller('UsersController', ['$scope', '$timeout', '$s
 
 
         // Role management
-        $scope.roles = ['admin', 'user', 'upload-course', 'debug-viewer', 'teacher', 'headmaster', 'help'];
+        $scope.roles = ['admin', 'user', 'upload-course', 'debug-viewer', 'teacher', 'headmaster', 'help', 'receive-rewards'];
 
         // toggle selection for a given user role
         $scope.toggleSelection = function toggleSelection(toggledRole) {

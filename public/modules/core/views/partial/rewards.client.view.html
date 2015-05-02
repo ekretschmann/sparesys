@@ -1,6 +1,9 @@
-<div data-ng-controller="RewardsController" data-ng-init="init()">
+<div data-ng-controller="RewardsController" >
 
-    <div class="flashcard">
+
+
+
+    <div class="flashcard" >
 
 
 
@@ -10,12 +13,18 @@
             Choose a Reward
                 </span>
 
+            <div>
+                {{offers}}
+            <span>(1) A piece of oak wood</span><span class="left-padded-m right-padded-m">(2) A piece of common rock</span><span>(3) A piece of iron</span>
+            </div>
         </div>
 
 
 
 
+
     </div>
+
 
     <div class="center-aligned top-padded">
             <button class="btn btn-rememberators btn-small" data-ng-click="processCard(1)">1</button>
@@ -24,6 +33,9 @@
 
     </div>
 
+    <div>
+        Your inventory
+    </div>
 
 
 </div>

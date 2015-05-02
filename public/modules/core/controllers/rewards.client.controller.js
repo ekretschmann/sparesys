@@ -19,10 +19,15 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
 
 
         $scope.drawOffers = function() {
-            var offers = [];
-            offers.push($scope.selectNumber(offers));
-            offers.push($scope.selectNumber(offers));
-            offers.push($scope.selectNumber(offers));
+            var indexes = [];
+            indexes.push($scope.selectNumber(indexes));
+            indexes.push($scope.selectNumber(indexes));
+            indexes.push($scope.selectNumber(indexes));
+
+            $scope.offers = [];
+            $scope.offers.push($scope.cheapItems[indexes[0]]);
+            $scope.offers.push($scope.cheapItems[indexes[1]]);
+            $scope.offers.push($scope.cheapItems[indexes[2]]);
         };
 
 
@@ -30,9 +35,11 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
 
         $scope.processChoice = function (choice) {
 
-            console.log('you chose ' + choice);
 
+            $scope.authentication.user.inventory.push($scope.offers[choice-1]);
+            //$scope.authentication.user.$update();
             $scope.drawOffers();
+
             $scope.$parent.recoverFromReward();
 
 
@@ -42,6 +49,7 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
 
             var result = Math.floor(Math.random()*$scope.cheapItems.length);
             if (disallowed.indexOf(result) > -1) return $scope.selectNumber(disallowed);
+            return result;
         };
 
         $scope.offers = [];

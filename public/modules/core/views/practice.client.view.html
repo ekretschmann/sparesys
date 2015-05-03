@@ -78,53 +78,61 @@
         </div>
     </div>
 
-    <div data-ng-if="cards && cards.length > 0" class="position:relative" style="height: 500px">
+    <div data-ng-if="cards && cards.length > 0" class="position:relative"  >
 
-        <div data-ng-show="authentication.user.roles.indexOf('receive-rewards') > -1">
-            <div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'">
 
-                <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
+
+            <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
+
+                <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+                    <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
+                </div>
+                <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                    <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
+                </div>
+            </div>
+
+            <div data-ng-show="mode === 'reverse'" data-ng-hide="mode !== 'reverse'" style="height: 500px">
+                <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+                    <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
+                </div>
+
+                <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                    <div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>
+                </div>
+            </div>
+
+            <div data-ng-show="mode === 'images'" data-ng-hide="mode !== 'images'" style="height: 500px">
+
+
+                <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+
+                    <div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>
+                </div>
+
+                <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                    <div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>
+                </div>
+
+
+            </div>
+        <!--</div>-->
+
+
+        <div data-ng-show="authentication.user.roles.indexOf('receive-rewards') > -1" data-ng-controller="RewardsController">
+
+            <!--<div style="height: 500px">-->
+                <div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">
+
+                    <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
+                </div>
+            <!--</div>-->
+
+            <div>
+                <div>{{authentication.user.inventory}}</div>
+                <div>{{possibleRecipes}}</div>
             </div>
         </div>
-
-        <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'">
-
-            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
-                <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
-            </div>
-            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
-                <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
-            </div>
-        </div>
-
-        <div data-ng-show="mode === 'reverse'" data-ng-hide="mode !== 'reverse'">
-            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
-                <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
-            </div>
-
-            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
-                <div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>
-            </div>
-        </div>
-
-        <div data-ng-show="mode === 'images'" data-ng-hide="mode !== 'images'">
-
-
-            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
-
-                <div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>
-            </div>
-
-            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
-                <div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>
-            </div>
-
-
-        </div>
-    </div>
-
-    <div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1">
-        {{authentication.user.inventory}}
     </div>
 
 

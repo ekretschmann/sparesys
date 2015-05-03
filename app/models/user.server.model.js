@@ -76,10 +76,7 @@ var UserSchema = new Schema({
 		default: ['user', 'help']
 	},
 	inventory: {
-		type: [{
-			type: String
-		}],
-		default: []
+		type: Array
 	},
 	updated: {
 		type: Date

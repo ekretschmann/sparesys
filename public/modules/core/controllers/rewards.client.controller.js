@@ -164,8 +164,9 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
                 console.log('after');
                 console.log($scope.user);
                 console.log($scope.user.inventory);
+                console.log(updatedUser);
             }, function(err) {
-                console.log(err);
+                console.log('error '+err);
             });
         };
 

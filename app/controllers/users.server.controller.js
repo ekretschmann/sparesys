@@ -145,6 +145,9 @@ exports.signin = function (req, res, next) {
 exports.update = function (req, res) {
 
 
+    console.log('xxxxxxxxxxxxxxxxxxx')
+    console.log(req.user);
+    console.log('------------------')
     console.log('updating');
     // Init Variables
     var user = req.user;

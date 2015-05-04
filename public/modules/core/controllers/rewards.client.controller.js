@@ -20,17 +20,18 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
         ];
 
 
-        $scope.recipies = [
-            ['brick', ['clay', 1], ['fire', 1]],
-            ['fire', ['coal', 1], ['flint', 1], ['kindle', 1]],
-            ['kindle', ['wood', 1], ['hatchet',1]],
-            ['stone hatchet', ['wooden stick', 1], ['stone blade', 1]],
-            ['stone blade', ['flint', 1], ['rock', 1]],
-            ['wooden stick', ['tree', 1]],
-            ['tree', ['sapling',1], ['soil',1], ['water',1]]
+        $scope.recipies = {
+            'brick': {'ingredients': [{name:'clay', amount:1}, {name: 'fire', amount: 1}], 'receive': {name:'brick', amount: 1}},
+            'fire': {'ingredients': [{name:'coal', amount:1}, {name: 'flint', amount: 1}, {name: 'kindling', amount: 1}], 'receive': {name:'fire', amount: 1}},
+            'kindling': {'ingredients': [{name:'wood', amount:1}, {name: 'stone hatchet', amount: 1}], 'receive': {name:'kindling', amount: 1}},
+            'stone hatchet': {'ingredients': [{name:'wooden stick', amount:1}, {name: 'stone blade', amount: 1}], 'receive': {name:'stone hatchet', amount: 1}},
+            'stone blade': {'ingredients': [{name:'flint', amount:1}, {name: 'rock', amount: 1}], 'receive': {name:'stone blade', amount: 1}},
+            'wooden stick': {'ingredients': [{name:'tree', amount:1}, {name: 'fire', amount: 1}], 'receive': {name:'wooden stick', amount: 1}},
+            'tree': {'ingredients': [{name:'sapling', amount:1}, {name:'water', amount:1}, {name:'soil', amount:1}], 'receive': {name:'tree', amount: 1}}
+        };
+        $scope.offers = ['soil', 'sapling', 'water'];
 
-        ];
-        $scope.offers = ['soil', 'coal', 'water'];
+
 
 
         $scope.drawOffers = function () {
@@ -46,28 +47,60 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
             $scope.offers.push($scope.cheapItems[indexes[2]]);
 
 
-            for (var i = 0; i < $scope.recipies.length; i++) {
-                var recipe = $scope.recipies[i];
-                var target = recipe[0];
+            $scope.offers = ['soil', 'sapling', 'water'];
+            Object.keys($scope.recipies).forEach(function(target) {
+                var recipe = $scope.recipies[target];
+               // var target = recipe[recipe].receive.name;
+
+               //console.log(recipe);
+              //  console.log(t);
+
+
+                console.log(recipe.receive.name);
+
                 var possible = true;
-                for (var j = 1; j < recipe.length; j++) {
+                recipe.ingredients.forEach(function(ingredient) {
 
 
-                    var requiredItem = recipe[j][0];
-                    if (!$scope.inventory[requiredItem]) {
+                    console.log('  '+ingredient.name);
+                    //var requiredItem = recipe[j][0];
+                    if (!$scope.inventory[ingredient.name]) {
                         possible = false;
-                        break;
+                        console.log(' nope');
                     }
 
-                }
+                });
                 if (possible) {
-                    $scope.possibleRecipes.push(target);
+                    $scope.possibleRecipes.push(recipe);
                 }
-            }
+            });
+
 
 
         };
 
+        $scope.getRememberalia = function(choice) {
+
+
+            var item = $scope.inventory[choice];
+
+
+            if(item) {
+
+                var increasedAmount = $scope.inventory[choice].amount++;
+                $scope.inventory[choice] = {name: choice, amount: increasedAmount + 1};
+            } else {
+
+                //item = {};
+                //item[choice] = 1;
+                $scope.inventory[choice] = {name: choice, amount: 1};
+
+            }
+            //console.log($scope.authentication.user.inventory);
+            //console.log($scope.inventory);
+            $scope.authentication.user.inventory = $scope.inventory;
+
+        };
 
         $scope.processChoice = function (selection) {
 
@@ -75,22 +108,7 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
             var choice = $scope.offers[selection - 1];
 
 
-            var item = $scope.inventory[choice];
-            if(item) {
-
-                console.log(item);
-                console.log('increase');
-                $scope.inventory[choice] ++;
-            } else {
-
-                //item = {};
-                //item[choice] = 1;
-                $scope.inventory[choice] = 1;
-
-            }
-            //console.log($scope.authentication.user.inventory);
-            console.log($scope.inventory);
-            $scope.authentication.user.inventory = $scope.inventory;
+            $scope.getRememberalia(choice);
             $scope.drawOffers();
 
             $scope.$parent.recoverFromReward();

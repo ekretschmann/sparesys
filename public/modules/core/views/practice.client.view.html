@@ -129,8 +129,44 @@
             <!--</div>-->
 
             <div>
-                <div>{{authentication.user.inventory}}</div>
-                <div>{{possibleRecipes}}</div>
+
+                <table class="expands" >
+                    <thead>
+                    <tr>
+
+                        <th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Inventory</th>
+                        <th class="right-padded-m  top-padded-sm top-aligned nowrap">Rememberalia</th>
+
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                    <tr>
+                        <td class="top-aligned" width="50%">
+                            <!--{{authentication.user.inventory}}-->
+                            <div data-ng-if="!authentication.user.inventory || authentication.user.inventory.length===0">
+                                You have nothing in your inventory. Keep practicing and you will be offered rewards.
+                            </div>
+                            <div data-ng-repeat="item in authentication.user.inventory">
+                                {{item.amount}} - {{item.name}}
+                            </div>
+                        </td>
+                        <td class="top-aligned"  width="50%">
+
+                            <div data-ng-if="possibleRecipes.length===0">
+                                You can't create any rememberalia at the moment. Fill up your inventory and you will be able to
+                                buy some new ones.
+                            </div>
+                            <div data-ng-repeat="rememberalia in possibleRecipes">
+                                 <a href="" data-ng-click="getRememberalia(rememberalia.receive.name)">{{rememberalia.receive.name}}</a> for
+                                <span data-ng-repeat="ingredient in rememberalia.ingredients">{{ingredient.amount}} {{ingredient.name}}</span>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+
+
             </div>
         </div>
     </div>

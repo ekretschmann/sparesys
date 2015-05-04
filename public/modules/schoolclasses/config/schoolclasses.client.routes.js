@@ -15,6 +15,10 @@ angular.module('schoolclasses').config(['$stateProvider',
                 url: '/schoolclasses/:schoolclassId/admin',
                 templateUrl: 'modules/schoolclasses/views/admin-schoolclass.client.view.html',
                 data: { auth: ['admin']}
+            }).
+            state('classProgressForCourse', {
+                url: '/schoolclasses/:schoolclassId/course/:courseId/progress',
+                templateUrl: 'modules/schoolclasses/views/course-progress.client.view.html'
             });
     }
 ]);

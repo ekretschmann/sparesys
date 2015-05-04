@@ -149,7 +149,7 @@
                             <td class="right-aligned right-padded-s nowrap  top-padded-s">
 
                                 <span data-ng-repeat="course in schoolclass.courses">
-                                    <span>{{course.name}}</span><span
+                                    <span><a href="/#!/schoolclasses/{{schoolclass._id}}/course/{{course._id}}/progress">{{course.name}}</a></span><span
                                         data-ng-if="$index < schoolclass.courses.length-1">, </span>
                                 </span>
                                 <!--<a href="#!/schoolclasses/{{schoolclass._id}}/teach">staistics</a>-->

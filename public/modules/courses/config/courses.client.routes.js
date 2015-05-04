@@ -31,10 +31,6 @@ angular.module('courses').config(['$stateProvider',
                 url: '/courses/:courseId/view',
                 templateUrl: 'modules/courses/views/view-course.client.view.html'
             }).
-            state('courseStats', {
-                url: '/courses/:courseId/stats',
-                templateUrl: 'modules/courses/views/course-stats.client.view.html'
-            }).
             state('searchCourse', {
                 url: '/courses/search',
                 templateUrl: 'modules/courses/views/search-courses.client.view.html'

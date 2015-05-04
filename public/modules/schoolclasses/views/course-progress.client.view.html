@@ -1,8 +1,11 @@
-<section data-ng-controller="StatsController" data-ng-init="findOne()">
+<section data-ng-controller="CourseProgressController" data-ng-init="findOne()">
 
 
     <!--Div that will hold the pie chart-->
     <!--<div id="chart_div"></div>-->
+
+    <div>Statistics about Progress in {{course.name}}</div>
+
 
     <div data-ng-init="drawCharts()">
         <div id="calendar_basic"></div>
@@ -10,4 +13,7 @@
         <!--<div id="chart_div" style="width: 100%"></div>-->
 
     </div>
+
+
+
 </section>

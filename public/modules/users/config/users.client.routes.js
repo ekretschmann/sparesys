@@ -15,6 +15,7 @@ angular.module('users').config(['$stateProvider',
                 templateUrl: 'modules/users/views/admin-user.client.view.html',
                 data: { auth: ['admin']}
             }).
+            
             state('profile', {
                 url: '/settings/profile',
                 templateUrl: 'modules/users/views/settings/edit-profile.client.view.html'

@@ -2,7 +2,7 @@
 
 
 // Courses controller
-angular.module('courses').controller('StatsController',
+angular.module('schoolclasses').controller('CourseProgressController',
     ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService', 'PredictiveSchedulerService',
         function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService, SchedulerService) {
 

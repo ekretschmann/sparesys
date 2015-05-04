@@ -159,6 +159,7 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
             console.log('before');
             console.log($scope.user.inventory);
 
+            Authentication.user.inventory = $scope.user.inventory;
             $scope.user.$update(function(updatedUser) {
                 $scope.user = updatedUser;
                 console.log('after');

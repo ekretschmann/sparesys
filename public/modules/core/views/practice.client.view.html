@@ -135,7 +135,7 @@
                     <tr>
 
                         <th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Inventory</th>
-                        <th class="right-padded-m  top-padded-sm top-aligned nowrap">Rememberalia</th>
+                        <th class="right-padded-m  top-padded-sm top-aligned nowrap">You can craft</th>
 
                     </tr>
                     </thead>
@@ -157,9 +157,19 @@
                                 You can't create any rememberalia at the moment. Fill up your inventory and you will be able to
                                 buy some new ones.
                             </div>
-                            <div data-ng-repeat="rememberalia in possibleRecipes">
-                                 <a href="" data-ng-click="getRememberalia(rememberalia.receive.name)">{{rememberalia.receive.name}}</a> for
-                                <span data-ng-repeat="ingredient in rememberalia.ingredients">{{ingredient.amount}} {{ingredient.name}}</span>
+
+
+                            <div data-ng-if="possibleRecipes.length>0">
+
+                                <table>
+
+                                <tr data-ng-repeat="rememberalia in possibleRecipes">
+
+                                    <td class="top-aligned right-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.receive[0].name)">{{rememberalia.receive[0].name}}</a></td>
+
+                                    <td class="top-aligned"><div data-ng-repeat="ingredient in rememberalia.ingredients">{{ingredient.amount}} {{ingredient.name}}</div></td>
+                                </tr>
+                                </table>
                             </div>
                         </td>
                     </tr>

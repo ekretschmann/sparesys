@@ -148,6 +148,7 @@ exports.update = function (req, res) {
     console.log('updating');
     // Init Variables
     var user = req.user;
+    console.log(user);
     var message = null;
 
 
@@ -158,9 +159,9 @@ exports.update = function (req, res) {
     function updateUser(theUser) {
 
 
-        console.log(theUser.studentInSchools);
+        console.log(theUser.inventory);
         theUser = _.extend(theUser, req.body);
-        console.log(theUser.studentInSchools);
+        console.log(theUser.inventory);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
         if (theUser.teachesClasses === '') {
@@ -168,15 +169,19 @@ exports.update = function (req, res) {
         }
         theUser.save(function (err) {
 
+            console.log('zzzzz');
+            console.log(err);
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)
                 });
             } else {
+                console.log('aaaaa');
                 req.login(user, function (err) {
                     if (err) {
                         res.send(400, err);
                     } else {
+                        console.log(user);
                         res.jsonp(user);
                     }
                 });

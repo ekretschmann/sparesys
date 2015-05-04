@@ -162,7 +162,10 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
             $scope.user.$update(function(updatedUser) {
                 $scope.user = updatedUser;
                 console.log('after');
+                console.log($scope.user);
                 console.log($scope.user.inventory);
+            }, function(err) {
+                console.log(err);
             });
         };
 

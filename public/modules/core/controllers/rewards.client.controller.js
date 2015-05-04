@@ -67,7 +67,7 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
         $scope.determinePossibleRecipies = function () {
             $scope.possibleRecipes = [];
             if (!$scope.user.inventory) {
-                $scope.user.inventory = [];
+                $scope.user.inventory = {};
             }
 
             Object.keys($scope.recipies).forEach(function (target) {
@@ -138,7 +138,7 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
                     var item = $scope.user.inventory[ingredient.name];
                     var newAmount = item.amount - ingredient.amount;
                     if (newAmount === 0) {
-                        delete $scope.userinventory[ingredient.name];
+                        delete $scope.user.inventory[ingredient.name];
                     } else {
                         $scope.user.inventory[ingredient.name] = {name: ingredient.name, amount: newAmount};
                     }
@@ -155,19 +155,13 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
             //$scope.user.inventory = $scope.inventory;
             //$scope.authentication.user.$update();
 
+            //$scope.user.inventory = {};
 
-            console.log('before');
-            console.log($scope.user.inventory);
-
-            Authentication.user.inventory = $scope.user.inventory;
-            $scope.user.$update(function(updatedUser) {
+            new Users($scope.user).$update(function(updatedUser) {
                 $scope.user = updatedUser;
                 console.log('after');
                 console.log($scope.user);
-                console.log($scope.user.inventory);
-                console.log(updatedUser);
-            }, function(err) {
-                console.log('error '+err);
+
             });
         };
 

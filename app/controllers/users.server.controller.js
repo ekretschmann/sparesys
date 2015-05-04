@@ -145,10 +145,10 @@ exports.signin = function (req, res, next) {
 exports.update = function (req, res) {
 
 
-    console.log('xxxxxxxxxxxxxxxxxxx');
-    console.log(req.user);
-    console.log('------------------');
-    console.log(req);
+    //console.log('xxxxxxxxxxxxxxxxxxx');
+    //console.log(req.user);
+    //console.log('------------------');
+    //console.log(req);
 
     //console.log('updating');
     // Init Variables
@@ -186,7 +186,7 @@ exports.update = function (req, res) {
                     if (err) {
                         res.send(400, err);
                     } else {
-                        console.log(user);
+                        //console.log(user);
                         res.jsonp(user);
                     }
                 });

@@ -66,8 +66,6 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
 
         $scope.determinePossibleRecipies = function () {
             $scope.possibleRecipes = [];
-            console.log($scope.user);
-            console.log($scope.user.inventory);
             if (!$scope.user.inventory) {
                 $scope.user.inventory = [];
             }
@@ -158,8 +156,13 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
             //$scope.authentication.user.$update();
 
 
+            console.log('before');
+            console.log($scope.user.inventory);
+
             $scope.user.$update(function(updatedUser) {
                 $scope.user = updatedUser;
+                console.log('after');
+                console.log($scope.user.inventory);
             });
         };
 

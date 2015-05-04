@@ -66,6 +66,12 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
 
         $scope.determinePossibleRecipies = function () {
             $scope.possibleRecipes = [];
+            console.log($scope.user);
+            console.log($scope.user.inventory);
+            if (!$scope.user.inventory) {
+                $scope.user.inventory = [];
+            }
+
             Object.keys($scope.recipies).forEach(function (target) {
                 var recipe = $scope.recipies[target];
 

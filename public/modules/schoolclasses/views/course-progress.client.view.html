@@ -1,18 +1,26 @@
-<section data-ng-controller="CourseProgressController" data-ng-init="findOne()">
+<section data-ng-controller="CourseProgressController" data-ng-init="findData()">
 
 
     <!--Div that will hold the pie chart-->
     <!--<div id="chart_div"></div>-->
 
-    <div>Statistics about Progress in {{course.name}}</div>
+    <div class="content-header">
 
-
-    <div data-ng-init="drawCharts()">
-        <div id="calendar_basic"></div>
-
-        <!--<div id="chart_div" style="width: 100%"></div>-->
-
+        <div class="title">
+            Progress in class {{schoolclass.name}}
+        </div>
+        <div class="title">
+            For course {{course.name}}
+        </div>
     </div>
+
+
+    <!--<div data-ng-init="drawCharts()">-->
+        <!--<div id="calendar_basic"></div>-->
+
+        <!--&lt;!&ndash;<div id="chart_div" style="width: 100%"></div>&ndash;&gt;-->
+
+    <!--</div>-->
 
 
 

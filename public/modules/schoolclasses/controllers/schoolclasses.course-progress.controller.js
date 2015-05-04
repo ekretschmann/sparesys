@@ -3,16 +3,21 @@
 
 // Courses controller
 angular.module('schoolclasses').controller('CourseProgressController',
-    ['$scope', '$stateParams', '$location', '$modal', 'Authentication', 'Courses', 'CoursesService', 'PredictiveSchedulerService',
-        function ($scope, $stateParams, $location, $modal, Authentication, Courses, CoursesService, SchedulerService) {
+    ['$scope', '$stateParams', 'Courses', 'CoursesService', 'Schoolclasses',
+        function ($scope, $stateParams, Courses, CoursesService, Schoolclasses) {
 
 
-            $scope.authentication = Authentication;
+            //$scope.authentication = Authentication;
             // Find existing Course
-            $scope.findOne = function () {
+            $scope.findData = function () {
+                console.log($stateParams);
                 $scope.course = Courses.get({
                     courseId: $stateParams.courseId
                 });
+                $scope.schoolclass = Schoolclasses.get({
+                    schoolclassId: $stateParams.schoolclassId
+                });
+
             };
 
 
@@ -27,12 +32,12 @@ angular.module('schoolclasses').controller('CourseProgressController',
                 res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
                     $scope.cards = cards;
 
-                    SchedulerService.init(cards);
-
-                    console.log('starts');
-                    console.log(SchedulerService.getCourseStart());
-                    console.log('score');
-                    console.log(SchedulerService.getPredictedCourseRetention(Date.now()) * 100);
+                    //SchedulerService.init(cards);
+                    //
+                    //console.log('starts');
+                    //console.log(SchedulerService.getCourseStart());
+                    //console.log('score');
+                    //console.log(SchedulerService.getPredictedCourseRetention(Date.now()) * 100);
 
 
 

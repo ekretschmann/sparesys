@@ -143,6 +143,8 @@
                     </tbody>
                     <tr>
                         <td class="top-aligned" width="50%">
+                            {{user|json}}
+                            {{user.inventory}}
                             <div data-ng-if="!user.inventory || user.inventory.length===0">
                                 You have nothing in your inventory. Keep practicing and you will be offered rewards.
                             </div>

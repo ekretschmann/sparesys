@@ -66,7 +66,11 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
 
         $scope.determinePossibleRecipies = function () {
             $scope.possibleRecipes = [];
-            if (!$scope.user.inventory) {
+            //$scope.user.inventory = [];
+            console.log('aaaa');
+            console.log($scope.user.inventory.length);
+            if (!$scope.user.inventory || $scope.user.inventory.length === 0) {
+                console.log('xxxx');
                 $scope.user.inventory = {};
             }
 

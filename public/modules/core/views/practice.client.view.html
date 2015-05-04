@@ -143,7 +143,8 @@
                     </tbody>
                     <tr>
                         <td class="top-aligned" width="50%">
-                            <div data-ng-if="!user.inventory || user.inventory.length===0">
+
+                            <div data-ng-if="!user.inventory || user.inventory === {}">
                                 You have nothing in your inventory. Keep practicing and you will be offered rewards.
                             </div>
                             <div data-ng-repeat="item in user.inventory">

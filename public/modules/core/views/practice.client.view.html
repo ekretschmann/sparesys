@@ -143,11 +143,10 @@
                     </tbody>
                     <tr>
                         <td class="top-aligned" width="50%">
-                            <!--{{authentication.user.inventory}}-->
-                            <div data-ng-if="!authentication.user.inventory || authentication.user.inventory.length===0">
+                            <div data-ng-if="!user.inventory || user.inventory.length===0">
                                 You have nothing in your inventory. Keep practicing and you will be offered rewards.
                             </div>
-                            <div data-ng-repeat="item in authentication.user.inventory">
+                            <div data-ng-repeat="item in user.inventory">
                                 {{item.amount}} - {{item.name}}
                             </div>
                         </td>
@@ -165,9 +164,9 @@
 
                                 <tr data-ng-repeat="rememberalia in possibleRecipes">
 
-                                    <td class="top-aligned right-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.receive[0].name)">{{rememberalia.receive[0].name}}</a></td>
+                                    <td class="top-aligned right-padded-m bottom-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.receive[0].name)">{{rememberalia.receive[0].name}}</a></td>
 
-                                    <td class="top-aligned"><div data-ng-repeat="ingredient in rememberalia.ingredients">{{ingredient.amount}} {{ingredient.name}}</div></td>
+                                    <td class="top-aligned bottom-padded-m"><div data-ng-repeat="ingredient in rememberalia.ingredients">{{ingredient.amount}} {{ingredient.name}}</div></td>
                                 </tr>
                                 </table>
                             </div>

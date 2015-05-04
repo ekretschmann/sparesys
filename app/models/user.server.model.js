@@ -76,7 +76,7 @@ var UserSchema = new Schema({
 		default: ['user', 'help']
 	},
 	inventory: {
-		type: Array
+		type: Schema.Types.Mixed
 	},
 	updated: {
 		type: Date

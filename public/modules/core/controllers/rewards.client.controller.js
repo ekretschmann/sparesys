@@ -2,11 +2,17 @@
 
 
 // Courses controller
-angular.module('core').controller('RewardsController', ['$scope', '$state', '$document', 'Authentication',
-    function ($scope, $state, $document, Authentication) {
+angular.module('core').controller('RewardsController', ['$scope', '$state', '$document', 'Authentication', 'Users',
+    function ($scope, $state, $document, Authentication, Users) {
 
 
-        $scope.inventory = {};
+        $scope.user = new Users($scope.authentication.user);
+
+
+
+
+
+        //  $scope.inventory = {};
 
         $scope.cheapItems = [
             'soil',
@@ -64,10 +70,12 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
                 var recipe = $scope.recipies[target];
 
                 var possible = true;
+
+
                 recipe.ingredients.forEach(function (ingredient) {
 
 
-                    if (!$scope.inventory[ingredient.name]) {
+                    if (!$scope.user.inventory[ingredient.name]) {
                         possible = false;
                     }
 
@@ -77,6 +85,9 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
                 }
             });
         };
+
+        $scope.determinePossibleRecipies();
+
 
         $scope.drawOffers = function () {
 
@@ -99,17 +110,17 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
         };
 
         $scope.addItem = function (choice) {
-            var item = $scope.inventory[choice];
+            var item = $scope.user.inventory[choice];
 
             if (item) {
 
-                var increasedAmount = $scope.inventory[choice].amount++;
-                $scope.inventory[choice] = {name: choice, amount: increasedAmount + 1};
+                var increasedAmount = $scope.user.inventory[choice].amount++;
+                $scope.user.inventory[choice] = {name: choice, amount: increasedAmount + 1};
             } else {
 
                 //item = {};
                 //item[choice] = 1;
-                $scope.inventory[choice] = {name: choice, amount: 1};
+                $scope.user.inventory[choice] = {name: choice, amount: 1};
 
             }
         };
@@ -120,12 +131,12 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
             if ($scope.recipies[choice]) {
 
                 $scope.recipies[choice].ingredients.forEach(function (ingredient) {
-                    var item = $scope.inventory[ingredient.name];
+                    var item = $scope.user.inventory[ingredient.name];
                     var newAmount = item.amount - ingredient.amount;
                     if (newAmount === 0) {
-                        delete $scope.inventory[ingredient.name];
+                        delete $scope.userinventory[ingredient.name];
                     } else {
-                        $scope.inventory[ingredient.name] = {name: ingredient.name, amount: newAmount};
+                        $scope.user.inventory[ingredient.name] = {name: ingredient.name, amount: newAmount};
                     }
                 });
 
@@ -137,9 +148,13 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
                 $scope.addItem(choice);
             }
             $scope.determinePossibleRecipies();
-            $scope.authentication.user.inventory = $scope.inventory;
-        //    $scope.authentication.user.$update();
+            //$scope.user.inventory = $scope.inventory;
+            //$scope.authentication.user.$update();
 
+
+            $scope.user.$update(function(updatedUser) {
+                $scope.user = updatedUser;
+            });
         };
 
         $scope.processChoice = function (selection) {
@@ -164,7 +179,7 @@ angular.module('core').controller('RewardsController', ['$scope', '$state', '$do
         };
 
         //$scope.offers = [];
-        $scope.possibleRecipes = [];
+        //$scope.possibleRecipes = [];
         // $scope.drawOffers();
 
         $document.bind('keypress', function (event) {

@@ -145,9 +145,11 @@ exports.signin = function (req, res, next) {
 exports.update = function (req, res) {
 
 
-    console.log('xxxxxxxxxxxxxxxxxxx')
+    console.log('xxxxxxxxxxxxxxxxxxx');
     console.log(req.user);
-    console.log('------------------')
+    console.log('------------------');
+    console.log(req);
+
     //console.log('updating');
     // Init Variables
     var user = req.user;
@@ -162,9 +164,9 @@ exports.update = function (req, res) {
     function updateUser(theUser) {
 
 
-        console.log(theUser.inventory);
+        //console.log(theUser.inventory);
         theUser = _.extend(theUser, req.body);
-        console.log(theUser.inventory);
+        //console.log(theUser.inventory);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
         if (theUser.teachesClasses === '') {

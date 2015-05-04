@@ -161,6 +161,19 @@
 
                 <tr>
 
+                    <td class="right-padded-m top-padded-m top-aligned">Inventory</td>
+                    <td class="expands top-padded-m">
+                        <div>
+                            <span class="right-padded-s" ng-repeat="item in inventory">
+                                {{item}}
+
+                            </span>
+                        </div>
+                    </td>
+                </tr>
+
+                <tr>
+
                     <td class="right-padded-m top-padded-m">Created</td>
                     <td class="expands top-padded-m">
                         {{otherUser.created | date: 'short'}}

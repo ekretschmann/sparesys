@@ -274,7 +274,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                         var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
                         $scope.dueRetention += card.predictedRetention;
                         $scope.dueCards++;
-                        $scope.requiredRetention += 1 - dueInDays * 0.05;
+                        $scope.requiredRetention += Math.min(0.99, 1 - dueInDays * 0.03);
                     }
                 }, this);
 

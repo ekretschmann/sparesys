@@ -1,4 +1,4 @@
-<section data-ng-controller="RewardsController" data-ng-init="find()">
+<section data-ng-controller="RewardsController" data-ng-init="findOne()">
     <div class="content-header">
 
         <div class="pull-right">
@@ -84,7 +84,7 @@
             <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s expands">
                 <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
 
-                <a class="pointer" data-ng-click="addIngredient(reward)">{{reward.name}}</a> ({{reward.type}})
+                <a class="pointer" href="/#!/rewards/manage/{{reward._id}}">{{reward.name}}</a> ({{reward.type}})
                 <a >
                     <i data-ng-click="addIngredient(reward)"
                        class="glyphicon glyphicon-plus-sign small">

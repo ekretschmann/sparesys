@@ -80,15 +80,25 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 		//};
         //
 		// Find a list of Rewards
-		$scope.find = function() {
-			$scope.rewards = Rewards.query();
-		};
-        //
-		//// Find existing Reward
-		//$scope.findOne = function() {
-		//	$scope.reward = Rewards.get({
-		//		rewardId: $stateParams.rewardId
-		//	});
+		//$scope.find = function() {
+		//	$scope.rewards = Rewards.query();
 		//};
+        //
+		// Find existing Reward
+		$scope.findOne = function() {
+
+			if($stateParams.rewardId) {
+				$scope.reward = Rewards.get({
+					rewardId: $stateParams.rewardId
+				}, function(r) {
+					$scope.name = r.name;
+					$scope.ingredients = r.ingredients;
+					$scope.selectedType = r.type;
+				});
+			}
+
+			$scope.rewards = Rewards.query();
+
+		};
 	}
 ]);

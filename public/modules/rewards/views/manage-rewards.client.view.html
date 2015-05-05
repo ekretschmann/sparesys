@@ -1,0 +1,106 @@
+<section data-ng-controller="RewardsController" data-ng-init="find()">
+    <div class="content-header">
+
+        <div class="pull-right">
+            <input class="search" ng-model="searchText">
+        </div>
+        <div class="title">
+            Manage Rewards
+        </div>
+
+
+    </div>
+    <div class="content-section">
+        <form data-ng-submit="create()" validate>
+            <table class="top-margin-l expands">
+                <tr>
+                    <td class="right-padded-m nowrap top-padded-s nowrap">Reward Name</td>
+                    <td class="top-padded-s text-min-width">
+                        <input type="text"
+                               data-ng-model="name"
+                               class="form-control"
+                               placeholder="Name"
+                               required>
+
+                    </td>
+                    <td class="right-padded-m nowrap top-padded-s left-padded-l nowrap">Type</td>
+                    <td class="top-padded-s expands">
+                        <div class="btn-group right-padded-l ">
+
+
+                            <button type="button" class="btn btn-default standard-dropdown-width">{{ selectedType }}</button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="type in rewardTypes"><a
+                                        data-ng-click="selectType(type)">{{type}}</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </td>
+                </tr>
+
+                <tr data-ng-repeat="ingredient in ingredients">
+                    <td class="right-padded-m nowrap top-padded-s nowrap" data-ng-if="$index === 0">Ingredients</td>
+                    <td class="right-padded-m nowrap top-padded-s nowrap" data-ng-if="$index > 0"></td>
+                    <td class="top-padded-s expands" colspan="3">
+                        {{ingredient.amount}} {{ingredient.name}}
+                        <span class="left-padded-m"><input data-ng-model="ingredient.keep" type="checkbox" /> keep intact</span>
+                    </td>
+                </tr>
+
+            </table>
+
+            <div class="center-aligned top-padded-m">
+
+                <input type="submit" value="Ok" class="btn btn-rememberators">
+            </div>
+        </form>
+
+
+    </div>
+
+
+    <table id="searchTextResults" class="table-striped" data-ng-hide="rewards.length === 0">
+        <thead>
+        <tr>
+            <th></th>
+            <th class="left-padded-s right-padded-m">Reward</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="reward in rewards | filter:searchText">
+            <td class="left-padded-s top-padded-s nowrap">
+                <a >
+                    <i data-ng-click="remove(reward)"
+                       class="glyphicon glyphicon-remove-sign small">
+                    </i>
+                </a>
+
+            </td>
+            <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s expands">
+                <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
+
+                <a class="pointer" data-ng-click="addIngredient(reward)">{{reward.name}}</a> ({{reward.type}})
+                <a >
+                    <i data-ng-click="addIngredient(reward)"
+                       class="glyphicon glyphicon-plus-sign small">
+                    </i>
+                </a>
+                <!--(<a class="pointer" data-ng-click="addIngredient(reward)">ingredient</a>)-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--<div class="list-group">-->
+        <!--<a data-ng-repeat="reward in rewards" data-ng-href="#!/rewards/{{reward._id}}" class="list-group-item">-->
+            <!--<h4 class="list-group-item-heading" data-ng-bind="reward.name"></h4>-->
+        <!--</a>-->
+    <!--</div>-->
+
+
+</section>

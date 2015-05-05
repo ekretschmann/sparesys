@@ -6,6 +6,13 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 		$scope.authentication = Authentication;
 
 		$scope.ingredients = [];
+		$scope.selectedType = 'Cheap Item';
+		$scope.rewardTypes = ['Cheap Item', 'Rare Item', 'Special Item', 'Common Skill', 'Rare Skill', 'Special Skill'];
+
+
+		$scope.selectType = function(type) {
+			$scope.selectedType = type;
+		};
 
 		$scope.addIngredient = function(reward) {
 
@@ -18,7 +25,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 			});
 
 			if (!found) {
-				$scope.ingredients.push({name: reward.name, amount: 1});
+				$scope.ingredients.push({name: reward.name, amount: 1, keep: false});
 			}
 		};
 
@@ -30,6 +37,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 			});
 
 			reward.ingredients = $scope.ingredients;
+			reward.type = $scope.selectedType;
 
 			$scope.rewards.push(reward);
 			// Redirect after save
@@ -43,22 +51,22 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 			});
 		};
 
-		//// Remove existing Reward
-		//$scope.remove = function(reward) {
-		//	if ( reward ) {
-		//		reward.$remove();
-        //
-		//		for (var i in $scope.rewards) {
-		//			if ($scope.rewards [i] === reward) {
-		//				$scope.rewards.splice(i, 1);
-		//			}
-		//		}
-		//	} else {
-		//		$scope.reward.$remove(function() {
-		//			$location.path('rewards');
-		//		});
-		//	}
-		//};
+		// Remove existing Reward
+		$scope.remove = function(reward) {
+			if ( reward ) {
+				reward.$remove();
+
+				for (var i in $scope.rewards) {
+					if ($scope.rewards [i] === reward) {
+						$scope.rewards.splice(i, 1);
+					}
+				}
+			} else {
+				$scope.reward.$remove(function() {
+
+				});
+			}
+		};
         //
 		//// Update existing Reward
 		//$scope.update = function() {

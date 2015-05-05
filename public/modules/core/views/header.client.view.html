@@ -145,6 +145,9 @@
                         <a href="/#!/schools/subscribe/student" class="font-m">Find School</a>
                     </li>
 
+                    <li data-ng-if="authentication.user.roles.indexOf('admin') > -1">
+                        <a href="/#!/rewards/create"  class="font-m">Manage Rewards</a>
+                    </li>
                    <li data-ng-controller="HomePageController" data-ng-show="authentication.user.provider === 'local'">
                         <a href="" data-ng-click="passwordPopup()" class="font-m">Change Password</a>
                     </li>

@@ -2,7 +2,7 @@
 
 
 // Courses controller
-angular.module('core').controller('RewardsController', ['$scope', '$state', '$document', 'Authentication', 'Users',
+angular.module('core').controller('SelectRewardsController', ['$scope', '$state', '$document', 'Authentication', 'Users',
     function ($scope, $state, $document, Authentication, Users) {
 
 

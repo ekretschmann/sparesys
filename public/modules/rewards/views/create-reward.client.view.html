@@ -25,6 +25,13 @@
                     </td>
                 </tr>
 
+                <tr data-ng-repeat="ingredient in ingredients">
+                    <td class="right-padded-m nowrap top-padded-s nowrap">Ingredients</td>
+                    <td class="top-padded-s expands">
+                        {{ingredient.amount}} {{ingredient.name}}
+                    </td>
+                </tr>
+
             </table>
 
             <div class="center-aligned top-padded-m">
@@ -47,7 +54,7 @@
         <tr data-ng-repeat="reward in rewards | filter:searchText">
             <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s">
                 <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
-                <a class="pointer" data-ng-click="addIngredient(reward)">{{reward.name}}</a>
+                <a class="pointer" data-ng-click="addIngredient(reward)">{{reward.name}} {{reward.ingredients}}</a>
             </td>
         </tr>
         </tbody>

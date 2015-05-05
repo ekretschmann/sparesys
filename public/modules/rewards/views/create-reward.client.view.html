@@ -2,7 +2,7 @@
     <div class="content-header">
 
         <div class="pull-right">
-            <input class="search" ng-model="ingredients">
+            <input class="search" ng-model="searchText">
         </div>
         <div class="title">
             Create Reward
@@ -26,15 +26,38 @@
                 </tr>
 
             </table>
+
+            <div class="center-aligned top-padded-m">
+
+                <input type="submit" value="Create" class="btn btn-rememberators">
+            </div>
         </form>
+
+
     </div>
 
 
-    <div class="list-group">
-        <a data-ng-repeat="reward in rewards" data-ng-href="#!/rewards/{{reward._id}}" class="list-group-item">
-            <h4 class="list-group-item-heading" data-ng-bind="reward.name"></h4>
-        </a>
-    </div>
+    <table id="searchTextResults" class="table-striped" data-ng-hide="rewards.length === 0">
+        <thead>
+        <tr>
+            <th class="left-padded-s right-padded-m">Reward</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr data-ng-repeat="reward in rewards | filter:searchText">
+            <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s">
+                <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
+                <a class="pointer" data-ng-click="addIngredient(reward)">{{reward.name}}</a>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+    <!--<div class="list-group">-->
+        <!--<a data-ng-repeat="reward in rewards" data-ng-href="#!/rewards/{{reward._id}}" class="list-group-item">-->
+            <!--<h4 class="list-group-item-heading" data-ng-bind="reward.name"></h4>-->
+        <!--</a>-->
+    <!--</div>-->
 
 
 </section>

@@ -12,9 +12,10 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 				name: this.name
 			});
 
+			$scope.rewards.push(reward);
 			// Redirect after save
 			reward.$save(function(response) {
-				$location.path('rewards/' + response._id);
+				//$location.path('rewards/' + response._id);
 
 				// Clear form fields
 				$scope.name = '';

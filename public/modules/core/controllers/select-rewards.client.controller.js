@@ -2,14 +2,30 @@
 
 
 // Courses controller
-angular.module('core').controller('SelectRewardsController', ['$scope', '$state', '$document', 'Authentication', 'Users',
-    function ($scope, $state, $document, Authentication, Users) {
+angular.module('core').controller('SelectRewardsController', ['$scope', '$state', '$document', 'Authentication', 'Users', 'Rewards',
+    function ($scope, $state, $document, Authentication, Users, Rewards) {
 
 
         $scope.user = new Users($scope.authentication.user);
+        $scope.recipies = {};
+        $scope.rewards = [];
+
+        $scope.findRewards = function () {
+            //console.log('finding rewards');
+            $scope.rewards = Rewards.query(function () {
+
+                $scope.rewards.forEach(function (reward) {
+                    console.log(reward);
+                    if (reward.type === 'Cheap Item') {
+                        $scope.recipies[reward.name] = reward;
+                        console.log('adding');
+                    }
+
+                }, this);
+            });
 
 
-
+        };
 
 
         //  $scope.inventory = {};
@@ -27,40 +43,40 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         ];
 
 
-        $scope.recipies = {
-            'brick': {
-                'ingredients': [{name: 'clay', amount: 1}, {name: 'fire', amount: 1}],
-                'receive': [{name: 'brick', amount: 5}]
-            },
-            'fire': {
-                'ingredients': [{name: 'coal', amount: 1}, {name: 'flint', amount: 1}, {
-                    name: 'kindling',
-                    amount: 1
-                }], 'receive': [{name: 'fire', amount: 1}]
-            },
-            'kindling': {
-                'ingredients': [{name: 'wooden stick', amount: 1}, {name: 'stone hatchet', amount: 1}],
-                'receive': [{name: 'kindling', amount: 1}]
-            },
-            'stone hatchet': {
-                'ingredients': [{name: 'wooden stick', amount: 1}, {name: 'stone blade', amount: 1}],
-                'receive': [{name: 'stone hatchet', amount: 1}]
-            },
-            'stone blade': {
-                'ingredients': [{name: 'flint', amount: 1}, {name: 'rock', amount: 1}],
-                'receive': [{name: 'stone blade', amount: 1}]
-            },
-            'wooden stick': {
-                'ingredients': [{name: 'tree', amount: 1}],
-                'receive': [{name: 'wooden stick', amount: 3}]
-            },
-            'tree': {
-                'ingredients': [{name: 'sapling', amount: 1}, {name: 'water', amount: 1}, {
-                    name: 'soil',
-                    amount: 1
-                }], 'receive': [{name: 'tree', amount: 1}]
-            }
-        };
+        //$scope.recipies = {
+        //    'brick': {
+        //        'ingredients': [{name: 'clay', amount: 1}, {name: 'fire', amount: 1}],
+        //        'receive': [{name: 'brick', amount: 5}]
+        //    },
+        //    'fire': {
+        //        'ingredients': [{name: 'coal', amount: 1}, {name: 'flint', amount: 1}, {
+        //            name: 'kindling',
+        //            amount: 1
+        //        }], 'receive': [{name: 'fire', amount: 1}]
+        //    },
+        //    'kindling': {
+        //        'ingredients': [{name: 'wooden stick', amount: 1}, {name: 'stone hatchet', amount: 1}],
+        //        'receive': [{name: 'kindling', amount: 1}]
+        //    },
+        //    'stone hatchet': {
+        //        'ingredients': [{name: 'wooden stick', amount: 1}, {name: 'stone blade', amount: 1}],
+        //        'receive': [{name: 'stone hatchet', amount: 1}]
+        //    },
+        //    'stone blade': {
+        //        'ingredients': [{name: 'flint', amount: 1}, {name: 'rock', amount: 1}],
+        //        'receive': [{name: 'stone blade', amount: 1}]
+        //    },
+        //    'wooden stick': {
+        //        'ingredients': [{name: 'tree', amount: 1}],
+        //        'receive': [{name: 'wooden stick', amount: 3}]
+        //    },
+        //    'tree': {
+        //        'ingredients': [{name: 'sapling', amount: 1}, {name: 'water', amount: 1}, {
+        //            name: 'soil',
+        //            amount: 1
+        //        }], 'receive': [{name: 'tree', amount: 1}]
+        //    }
+        //};
         $scope.offers = ['soil', 'sapling', 'water'];
 
 
@@ -108,7 +124,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.offers.push($scope.cheapItems[indexes[2]]);
 
 
-           // $scope.offers = ['soil', 'sapling', 'water'];
+            // $scope.offers = ['soil', 'sapling', 'water'];
 
             $scope.determinePossibleRecipies();
 
@@ -160,8 +176,8 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             //$scope.user.inventory = {};
 
             //$scope.user.inventory = {};
-           // console.log($scope.user.inventory);
-            new Users($scope.user).$update(function(updatedUser) {
+            // console.log($scope.user.inventory);
+            new Users($scope.user).$update(function (updatedUser) {
                 $scope.user = updatedUser;
 
             });

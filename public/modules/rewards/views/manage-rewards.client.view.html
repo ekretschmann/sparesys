@@ -24,7 +24,7 @@
 
                     </td>
                     <td class="right-padded-m nowrap top-padded-s left-padded-l nowrap">Type</td>
-                    <td class="top-padded-s expands">
+                    <td class="top-padded-s expands" data-ng-if="ingredients.length === 0">
                         <div class="btn-group right-padded-l ">
 
 
@@ -41,14 +41,34 @@
 
                         </div>
                     </td>
+
+                    <td class="top-padded-s expands" data-ng-if="ingredients.length > 0">
+                        <input type="text"
+                               value = "Recipe"
+                               class="form-control"
+                               placeholder="Name" disabled>
+                    </td>
                 </tr>
 
-                <tr data-ng-repeat="ingredient in ingredients">
-                    <td class="right-padded-m nowrap top-padded-s nowrap" data-ng-if="$index === 0">Ingredients</td>
-                    <td class="right-padded-m nowrap top-padded-s nowrap" data-ng-if="$index > 0"></td>
+                <tr data-ng-if="ingredients.length > 0">
+                    <td class="right-padded-m nowrap top-padded-s nowrap top-aligned" >Ingredients</td>
                     <td class="top-padded-s expands" colspan="3">
-                        {{ingredient.amount}} {{ingredient.name}}
-                        <span class="left-padded-m"><input data-ng-model="ingredient.keep" type="checkbox" /> keep intact</span>
+
+
+
+                        <table class="left-aligned" >
+                        <tr data-ng-repeat="ingredient in ingredients">
+                            <td class="right-padded-s"><a >
+                                <i data-ng-click="removeIngredient(ingredient)"
+                                   class="glyphicon glyphicon-remove-sign small">
+                                </i>
+                            </a></td>
+                            <td class="right-padded-s">{{ingredient.amount}}</td>
+                            <td class="right-padded-m">{{ingredient.name}}</td>
+                            <td ><input data-ng-model="ingredient.keep" type="checkbox" /> keep intact</td>
+                            </tr>
+                        </table>
+
                     </td>
                 </tr>
 

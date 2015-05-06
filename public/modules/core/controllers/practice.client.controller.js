@@ -22,13 +22,11 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             /* jshint ignore:start */
             $scope.recognition = new webkitSpeechRecognition();
 
-            console.log( $scope.recognition);
 
             $scope.recognition.continuous = true;
             $scope.recognition.interimResults = true;
 
 
-            console.log( $scope.card);
 
             $scope.recognition.lang = $scope.card.languageBack.code;
 

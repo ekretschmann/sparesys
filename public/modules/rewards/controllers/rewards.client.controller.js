@@ -59,7 +59,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 
 
             // Redirect after save
-            if (!$scope.updateReward) {
+            if ($scope.updateReward) {
                 reward.$update();
             } else {
                 reward.$save(function (response) {

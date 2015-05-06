@@ -136,6 +136,7 @@
                     <tr>
 
                         <th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Inventory</th>
+                        <th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Skills</th>
                         <th class="right-padded-m  top-padded-sm top-aligned nowrap">You can craft</th>
 
                     </tr>
@@ -143,16 +144,22 @@
                     <tbody>
                     </tbody>
                     <tr>
-                        <td class="top-aligned" width="50%">
+                        <td class="top-aligned right-padded-m" width="33%">
 
-                            <div data-ng-if="!user.inventory || user.inventory === {}">
+
+                            <div data-ng-if="showEmptyInventoryMessage">
                                 You have nothing in your inventory. Keep practicing and you will be offered rewards.
                             </div>
-                            <div data-ng-repeat="item in user.inventory">
+                            <div data-ng-repeat="item in items">
                                 {{item.amount}} - {{item.name}}
                             </div>
                         </td>
-                        <td class="top-aligned"  width="50%">
+                        <td class="right-padded-m" width="34%">
+                            <div data-ng-repeat="skill in skills">
+                                {{skill.name}}
+                            </div>
+                        </td>
+                        <td class="top-aligned"  width="33%">
 
                             <div data-ng-if="possibleRecipes.length===0">
                                 You can't create any rememberalia at the moment. Fill up your inventory and you will be able to
@@ -166,7 +173,10 @@
 
                                 <tr data-ng-repeat="rememberalia in possibleRecipes">
 
-                                    <td class="top-aligned right-padded-m bottom-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.receive[0].name)">{{rememberalia.receive[0].name}}</a></td>
+                                    <!--x{{//possibleRecipes}}x-->
+
+                                    <!--<td class="top-aligned right-padded-m bottom-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.receive[0].name)">{{rememberalia.receive[0].name}}</a></td>-->
+                                    <td class="top-aligned right-padded-m bottom-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.name)">{{rememberalia.name}}</a></td>
 
                                     <td class="top-aligned bottom-padded-m"><div data-ng-repeat="ingredient in rememberalia.ingredients">{{ingredient.amount}} {{ingredient.name}}</div></td>
                                 </tr>

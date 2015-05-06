@@ -37,6 +37,9 @@ var RewardSchema = new Schema({
             default: false
         }
     }],
+    enables: {
+
+    },
     created: {
         type: Date,
         default: Date.now

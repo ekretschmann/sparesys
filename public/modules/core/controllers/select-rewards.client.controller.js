@@ -9,95 +9,69 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.user = new Users($scope.authentication.user);
         $scope.recipies = {};
         $scope.rewards = [];
+        $scope.skills = [];
+        $scope.items = [];
+
 
         $scope.findRewards = function () {
             //console.log('finding rewards');
             $scope.rewards = Rewards.query(function () {
 
                 $scope.rewards.forEach(function (reward) {
-                    console.log(reward);
-                    if (reward.type === 'Cheap Item') {
+                    if (reward.type === 'Recipe') {
+
                         $scope.recipies[reward.name] = reward;
-                        console.log('adding');
                     }
 
                 }, this);
+
+
+                //console.log($scope.recipies);
+                //$scope.determinePossibleRecipies();
+                $scope.drawOffers();
             });
 
 
         };
 
 
-        //  $scope.inventory = {};
+        $scope.distributeInventory = function() {
 
-        $scope.cheapItems = [
-            'soil',
-            'water',
-            'coal',
-            'clay',
-            'flint',
-            'sapling',
-            'rock'
+            $scope.showEmptyInventoryMessage = true;
 
-
-        ];
-
-
-        //$scope.recipies = {
-        //    'brick': {
-        //        'ingredients': [{name: 'clay', amount: 1}, {name: 'fire', amount: 1}],
-        //        'receive': [{name: 'brick', amount: 5}]
-        //    },
-        //    'fire': {
-        //        'ingredients': [{name: 'coal', amount: 1}, {name: 'flint', amount: 1}, {
-        //            name: 'kindling',
-        //            amount: 1
-        //        }], 'receive': [{name: 'fire', amount: 1}]
-        //    },
-        //    'kindling': {
-        //        'ingredients': [{name: 'wooden stick', amount: 1}, {name: 'stone hatchet', amount: 1}],
-        //        'receive': [{name: 'kindling', amount: 1}]
-        //    },
-        //    'stone hatchet': {
-        //        'ingredients': [{name: 'wooden stick', amount: 1}, {name: 'stone blade', amount: 1}],
-        //        'receive': [{name: 'stone hatchet', amount: 1}]
-        //    },
-        //    'stone blade': {
-        //        'ingredients': [{name: 'flint', amount: 1}, {name: 'rock', amount: 1}],
-        //        'receive': [{name: 'stone blade', amount: 1}]
-        //    },
-        //    'wooden stick': {
-        //        'ingredients': [{name: 'tree', amount: 1}],
-        //        'receive': [{name: 'wooden stick', amount: 3}]
-        //    },
-        //    'tree': {
-        //        'ingredients': [{name: 'sapling', amount: 1}, {name: 'water', amount: 1}, {
-        //            name: 'soil',
-        //            amount: 1
-        //        }], 'receive': [{name: 'tree', amount: 1}]
-        //    }
-        //};
-        $scope.offers = ['soil', 'sapling', 'water'];
+        };
 
 
         $scope.determinePossibleRecipies = function () {
+
+
+            //console.log('determining');
             $scope.possibleRecipes = [];
             //$scope.user.inventory = [];
             if (!$scope.user.inventory || $scope.user.inventory.length === 0) {
 
                 $scope.user.inventory = {};
+                $scope.user.inventory['Making Fire'] = {name: 'Making Fire', type:'Cheap Skill', amount: 1};
+                $scope.distributeInventory();
             }
 
+
             Object.keys($scope.recipies).forEach(function (target) {
+
+                //console.log(target);
                 var recipe = $scope.recipies[target];
+
+                //console.log(recipe);
 
                 var possible = true;
 
 
                 recipe.ingredients.forEach(function (ingredient) {
 
+                    //console.log(ingredient);
 
                     if (!$scope.user.inventory[ingredient.name]) {
+                        //console.log('not possible '+ingredient.name);
                         possible = false;
                     }
 
@@ -108,7 +82,6 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             });
         };
 
-        $scope.determinePossibleRecipies();
 
 
         $scope.drawOffers = function () {
@@ -138,11 +111,13 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
                 var increasedAmount = $scope.user.inventory[choice].amount++;
                 $scope.user.inventory[choice] = {name: choice, amount: increasedAmount + 1};
+                $scope.showEmptyInventoryMessage = false;
             } else {
 
                 //item = {};
                 //item[choice] = 1;
                 $scope.user.inventory[choice] = {name: choice, amount: 1};
+                $scope.showEmptyInventoryMessage = false;
 
             }
         };
@@ -152,7 +127,11 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
             if ($scope.recipies[choice]) {
 
+
+
                 $scope.recipies[choice].ingredients.forEach(function (ingredient) {
+
+
                     var item = $scope.user.inventory[ingredient.name];
                     var newAmount = item.amount - ingredient.amount;
                     if (newAmount === 0) {
@@ -162,10 +141,11 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
                     }
                 });
 
+                $scope.addItem($scope.recipies[choice].name);
 
-                $scope.recipies[choice].receive.forEach(function (rememberalia) {
-                    $scope.addItem(rememberalia.name);
-                });
+                //$scope.recipies[choice].receive.forEach(function (rememberalia) {
+                //    $scope.addItem(rememberalia.name);
+                //});
             } else {
                 $scope.addItem(choice);
             }
@@ -177,6 +157,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
             //$scope.user.inventory = {};
             // console.log($scope.user.inventory);
+            $scope.user.inventory = {};
             new Users($scope.user).$update(function (updatedUser) {
                 $scope.user = updatedUser;
 

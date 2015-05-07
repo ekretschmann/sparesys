@@ -18,27 +18,37 @@ var RewardSchema = new Schema({
     },
     type: {
         type: String,
-        default: 'Cheap Item',
+        default: 'Item',
+        required: 'Please fill Reward name',
         trim: true
     },
-    ingredients: [{
-        name: {
-            type: String,
-            default: '',
-            required: 'Please fill Reward name',
-            trim: true
-        },
-        amount: {
-            type: Number,
-            default: 1
-        },
-        keep: {
-            type: Boolean,
-            default: false
-        }
+    description: {
+        type: String,
+        default: '',
+        required: 'Please fill Reward name',
+        trim: true
+    },
+    rank: {
+        type: Number,
+        default: 1
+    },
+    enables: [{
+        type: String
     }],
-    enables: {
-
+    ingredients: {
+        type: [{
+            name: {
+                type: String,
+                default: '',
+                required: 'Please fill Reward name',
+                trim: true
+            },
+            amount: {
+                type: Number,
+                default: 1
+            }
+        }],
+        default: [{name: 'Making Fire', amount: 1}]
     },
     created: {
         type: Date,

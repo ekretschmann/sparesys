@@ -14,7 +14,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
 
         $scope.findRewards = function () {
-            //console.log('finding rewards');
+            console.log('finding rewards');
             $scope.rewards = Rewards.query(function () {
 
                 $scope.rewards.forEach(function (reward) {
@@ -26,7 +26,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
                 }, this);
 
 
-                //console.log($scope.recipies);
+                console.log($scope.recipies);
                 //$scope.determinePossibleRecipies();
                 $scope.drawOffers();
             });
@@ -180,9 +180,9 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
         $scope.selectNumber = function (disallowed) {
 
-            var result = Math.floor(Math.random() * $scope.cheapItems.length);
-            if (disallowed.indexOf(result) > -1) return $scope.selectNumber(disallowed);
-            return result;
+            //var result = Math.floor(Math.random() * $scope.items.length);
+            //if (disallowed.indexOf(result) > -1) return $scope.selectNumber(disallowed);
+            //return result;
         };
 
         //$scope.offers = [];

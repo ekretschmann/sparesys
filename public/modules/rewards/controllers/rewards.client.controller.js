@@ -6,19 +6,24 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
         $scope.authentication = Authentication;
 
         $scope.ingredients = [];
-        $scope.selectedType = 'Cheap Item';
-        $scope.rewardTypes = ['Cheap Item', 'Rare Item', 'Special Item', 'Common Skill', 'Rare Skill', 'Special Skill'];
+        $scope.enables = [];
+        $scope.rank = 1;
         $scope.updateReward = false;
+        $scope.type = 'Item';
 
-
-        $scope.selectType = function (type) {
-            $scope.selectedType = type;
-        };
 
         $scope.removeIngredient = function (ingredient) {
             for (var i = 0; i < $scope.ingredients.length; i++) {
                 if ($scope.ingredients[i].name === ingredient.name) {
                     $scope.ingredients.splice(i, 1);
+                }
+            }
+        };
+
+        $scope.removePrecursor = function (precursor) {
+            for (var i = 0; i < $scope.enables.length; i++) {
+                if ($scope.enables[i] === precursor) {
+                    $scope.enables.splice(i, 1);
                 }
             }
         };
@@ -34,8 +39,23 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
             });
 
             if (!found) {
-                $scope.ingredients.push({name: reward.name, amount: 1, keep: false});
+                $scope.ingredients.push({name: reward.name, amount: 1});
             }
+        };
+
+        $scope.addPrecursor = function (reward) {
+
+            var found = false;
+            $scope.ingredients.forEach(function (ingredient) {
+                if (ingredient.name === reward.name) {
+                    found = true;
+                }
+            });
+
+            if (!found) {
+                $scope.enables.push(reward.name);
+            }
+
         };
 
         // Create new Reward
@@ -50,12 +70,16 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
             }
 
             reward.ingredients = $scope.ingredients;
-            if (!reward.ingredients || reward.ingredients.length > 0) {
-                reward.type = 'Recipe';
-            } else {
-                reward.type = $scope.selectedType;
+            reward.enables = $scope.enables;
+            reward.description = $scope.description;
+            reward.type = $scope.type;
+            //if (!reward.ingredients || reward.ingredients.length > 0) {
+            //    reward.type = 'Recipe';
+            //} else {
+            //    reward.type = $scope.selectedType;
+            //}
 
-            }
+
 
 
             // Redirect after save
@@ -69,6 +93,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
                     $scope.name = '';
                     $scope.ingredients = [];
                     $scope.updateReward = false;
+                    $scope.enables = [];
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
                 });
@@ -116,7 +141,10 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
                     rewardId: $stateParams.rewardId
                 }, function (r) {
                     $scope.name = r.name;
+                    $scope.description = r.description;
+                    $scope.type = r.type;
                     $scope.ingredients = r.ingredients;
+                    $scope.enables = r.enables;
                     $scope.selectedType = r.type;
                     $scope.updateReward = true;
                 });

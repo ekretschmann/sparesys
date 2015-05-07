@@ -12,6 +12,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
         $scope.type = 'Item';
 
 
+
+
         $scope.removeIngredient = function (ingredient) {
             for (var i = 0; i < $scope.ingredients.length; i++) {
                 if ($scope.ingredients[i].name === ingredient.name) {
@@ -73,11 +75,11 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
             reward.enables = $scope.enables;
             reward.description = $scope.description;
             reward.type = $scope.type;
-            //if (!reward.ingredients || reward.ingredients.length > 0) {
-            //    reward.type = 'Recipe';
-            //} else {
-            //    reward.type = $scope.selectedType;
-            //}
+            if (!reward.ingredients || reward.ingredients.length > 0) {
+                reward.type = 'Recipe';
+            } else {
+                reward.type = $scope.selectedType;
+            }
 
 
 
@@ -152,6 +154,16 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 
             $scope.rewards = Rewards.query();
 
+        };
+
+        $scope.cancel = function() {
+            $scope.name = '';
+            $scope.description = '';
+            $scope.type = 'Item';
+            $scope.ingredients = [];
+            $scope.enables = [];
+            $scope.selectedType = 'Item';
+            $scope.updateReward = false;
         };
     }
 ]);

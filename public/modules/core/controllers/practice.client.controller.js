@@ -219,6 +219,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
 
             if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
+
                 if (($scope.cardsRemembered + 1) % 3 === 0) {
 
                     $timeout(function () {

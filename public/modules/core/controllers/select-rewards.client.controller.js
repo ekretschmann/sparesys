@@ -11,24 +11,50 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.rewards = [];
         $scope.skills = [];
         $scope.items = [];
+        $scope.offers = [];
 
 
         $scope.findRewards = function () {
-            console.log('finding rewards');
             $scope.rewards = Rewards.query(function () {
 
+                var enabledItems = [];
                 $scope.rewards.forEach(function (reward) {
-                    if (reward.type === 'Recipe') {
+                    if (reward.ingredients.length > 0) {
 
                         $scope.recipies[reward.name] = reward;
+                    }
+                    if (reward.type === 'Skill') {
+                        $scope.skills.push(reward.name);
+                        console.log(reward.enables);
+                        reward.enables.forEach(function (enabled) {
+                            enabledItems.push(enabled);
+                        });
+
                     }
 
                 }, this);
 
+                console.log(enabledItems);
+                $scope.rewards.forEach(function (reward) {
 
-                console.log($scope.recipies);
+                    console.log(reward.name);
+                    console.log(enabledItems.indexOf(reward.name));
+                    if (enabledItems.indexOf(reward.name) > -1 ) {
+                        $scope.items.push(reward);
+                        console.log('xxxxx');
+                    }
+                });
+
+                console.log($scope.items);
+
+                    //console.log($scope.recipies);
+                 //   console.log($scope.items);
                 //$scope.determinePossibleRecipies();
-                $scope.drawOffers();
+                $scope.offers.push($scope.items[0]);
+                $scope.offers.push($scope.items[1]);
+                $scope.offers.push($scope.items[2]);
+
+                console.log($scope.offers);
             });
 
 
@@ -86,22 +112,33 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
         $scope.drawOffers = function () {
 
+
             var indexes = [];
             indexes.push($scope.selectNumber(indexes));
             indexes.push($scope.selectNumber(indexes));
             indexes.push($scope.selectNumber(indexes));
 
             $scope.offers = [];
-            $scope.offers.push($scope.cheapItems[indexes[0]]);
-            $scope.offers.push($scope.cheapItems[indexes[1]]);
-            $scope.offers.push($scope.cheapItems[indexes[2]]);
+            $scope.offers.push($scope.items[indexes[0]]);
+            $scope.offers.push($scope.items[indexes[1]]);
+            $scope.offers.push($scope.items[indexes[2]]);
 
+
+            console.log($scope.offers);
 
             // $scope.offers = ['soil', 'sapling', 'water'];
 
             $scope.determinePossibleRecipies();
 
 
+        };
+
+        $scope.selectNumber = function (disallowed) {
+
+            var result = Math.floor(Math.random() * $scope.items.length);
+            console.log(result);
+            //if (disallowed.indexOf(result) > -1) return $scope.selectNumber(disallowed);
+            return result;
         };
 
         $scope.addItem = function (choice) {
@@ -178,12 +215,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
         };
 
-        $scope.selectNumber = function (disallowed) {
 
-            //var result = Math.floor(Math.random() * $scope.items.length);
-            //if (disallowed.indexOf(result) > -1) return $scope.selectNumber(disallowed);
-            //return result;
-        };
 
         //$scope.offers = [];
         //$scope.possibleRecipes = [];

@@ -15,7 +15,11 @@
 
             <div>
 
-            <span>(1) {{offers[0].name}}</span><span class="left-padded-m right-padded-m">(2) {{offers[1].name}}</span><span>(3) {{offers[2].name}}</span>
+                <span data-ng-if="!offers || offers.length ===0">Sorry, there are no offers</span>
+
+            <span data-ng-if="offers[0]">(1) {{offers[0].name}}</span>
+                <span data-ng-if="offers[1]" class="left-padded-m right-padded-m">(2) {{offers[1].name}}</span>
+                <span data-ng-if="offers[2]">(3) {{offers[2].name}}</span>
             </div>
         </div>
 

@@ -129,7 +129,7 @@
                 </div>
             <!--</div>-->
 
-            <div>
+            <div data-ng-if="user.inventory">
 
                 <table class="expands" >
                     <thead>
@@ -147,14 +147,17 @@
                         <td class="top-aligned right-padded-m" width="33%">
 
 
-                            <div data-ng-if="showEmptyInventoryMessage">
+                            <div data-ng-if="!userItems || userItems.length === 0">
                                 You have nothing in your inventory. Keep practicing and you will be offered rewards.
                             </div>
-                            <div data-ng-repeat="item in items">
+                            <div data-ng-repeat="item in userItemsy">
                                 {{item.amount}} - {{item.name}}
                             </div>
                         </td>
                         <td class="right-padded-m" width="34%">
+                            <div data-ng-if="!userSkills || userSkills.length === 0">
+                                You have not learned any skills yet. Keep practicing and you will get them in no time.
+                            </div>
                             <div data-ng-repeat="skill in skills">
                                 {{skill.name}}
                             </div>

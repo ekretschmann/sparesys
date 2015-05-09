@@ -151,7 +151,7 @@
                                 You have nothing in your inventory. Keep practicing and you will be offered rewards.
                             </div>
                             <div data-ng-repeat="item in userItems">
-                                {{item.amount}} - {{item.name}}
+                                {{item.amount}} - <span popover="{{item.description}}" popover-trigger="mouseenter" >{{item.name}}</span>
                             </div>
                         </td>
                         <td class="right-padded-m top-aligned" width="34%">
@@ -159,7 +159,9 @@
                                 You have not learned any skills yet. Keep practicing and you will get them in no time.
                             </div>
                             <div data-ng-repeat="skill in userSkills">
-                                {{skill.name}}
+
+                                <div popover="{{skill.description}}" popover-trigger="mouseenter" >{{skill.name}}</div>
+
                             </div>
                         </td>
                         <td class="top-aligned"  width="33%">

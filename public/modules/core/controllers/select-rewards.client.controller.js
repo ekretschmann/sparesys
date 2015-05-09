@@ -35,7 +35,6 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
                 $scope.user.inventory.push(makingFire);
             }
 
-            $scope.distributeInventory();
 
 
             $scope.rewards = Rewards.query(function () {
@@ -50,6 +49,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
                     }
                 });
                 $scope.determinePossibleRecipies();
+                $scope.distributeInventory();
 
             });
 
@@ -81,6 +81,16 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
         };
 
+        $scope.getDescription = function(name) {
+            var desc = '';
+            $scope.rewards.forEach(function (reward) {
+                if (reward.name === name) {
+                    desc = reward.description;
+                }
+            });
+            return desc;
+        };
+
         $scope.distributeInventory = function () {
 
             // $scope.showEmptyInventoryMessage = true;
@@ -97,6 +107,8 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
                 if (item.type === 'Item' || item.type === 'Recipe') {
                     $scope.userItems.push(item);
                 }
+
+                item.description = $scope.getDescription(item.name);
 
             }, this);
 
@@ -152,15 +164,15 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
             $scope.offers = [];
             if ($scope.possibleOffers.length > 0) {
-                $scope.offers.push($scope.possibleOffers[0]);
+                $scope.offers.push($scope.possibleOffers[indexes[0]]);
             }
             if ($scope.possibleOffers.length > 1) {
 
-                $scope.offers.push($scope.possibleOffers[1]);
+                $scope.offers.push($scope.possibleOffers[indexes[1]]);
             }
             if ($scope.possibleOffers.length > 2) {
 
-                $scope.offers.push($scope.possibleOffers[2]);
+                $scope.offers.push($scope.possibleOffers[indexes[2]]);
             }
 
 

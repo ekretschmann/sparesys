@@ -237,6 +237,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 if ($scope.rewardScore > 6) {
 
                     $timeout(function () {
+                        $scope.rewardScore = 0.0;
                         $scope.mode = 'reward';
                     }, 100);
 

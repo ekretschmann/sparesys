@@ -187,7 +187,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
             var p = Math.random();
             var selectedOffers;
-            if (p <0.5 && $scope.possibleSkillOffers.length > 0) {
+            if (p <0.3 && $scope.possibleSkillOffers.length > 0) {
 
                 selectedOffers = $scope.possibleSkillOffers;
                 $scope.rewardType = 'Skills';

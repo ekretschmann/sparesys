@@ -5,8 +5,20 @@ angular.module('core').service('RetentionCalculatorService', [
 
         return {
 
+            getPredictedCardRetention: function(card) {
+                if (!card.history || card.history.length === 0) {
+                    return 0.0;
+                }
+                var hist = card.history[card.history.length-1];
+                return this.getPredictedRetention(hist.when, hist.hrt, Date.now());
+
+            },
+
             getPredictedRetention: function(lastRep, hrt, time) {
 
+                //console.log(lastRep);
+                //console.log(hrt);
+                //console.log(time);
                 return Math.exp((time - lastRep) / hrt * Math.log(0.5));
             },
 

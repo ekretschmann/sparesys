@@ -63,9 +63,15 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.rewards.forEach(function (reward) {
 
                 if (reward.type === 'Skill') {
-                    reward.enables.forEach(function (enabled) {
-                        enabledItems.push(enabled);
-                    });
+
+
+                    var isInInventory = $scope.getItemFromInventory(reward.name);
+
+                    if (isInInventory) {
+                        reward.enables.forEach(function (enabled) {
+                            enabledItems.push(enabled);
+                        });
+                    }
 
 
                 }
@@ -151,7 +157,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
                     var found = false;
                     $scope.user.inventory.forEach(function (item) {
-                        if (item.name === ingredient.name) {
+                        if (item.name === ingredient.name && item.amount >= ingredient.amount) {
                             found = true;
                         }
                     });

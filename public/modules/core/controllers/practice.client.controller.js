@@ -15,6 +15,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.authentication = Authentication;
         $scope.repeatCard = false;
         $scope.cardsRemembered = 0;
+        $scope.rewardScore = 0;
 
 
         $scope.initSpeech = function () {
@@ -132,10 +133,14 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.recordRate = function (time, assessment) {
 
+
+            $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
+
             if (assessment > 0) {
                 $scope.cardsRemembered++;
+                $scope.rewardScore += (1 - RetentionCalculatorService.getPredictedCardRetention($scope.card));
+              //  console.log($scope.rewardScore);
             }
-            $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
 
             $scope.card.history.push({when: time, assessment: assessment, hrt:$scope.card.hrt});
 
@@ -220,7 +225,16 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
 
-                if (($scope.cardsRemembered + 1) % 10 === 0) {
+                //if (($scope.cardsRemembered + 1) % 3 === 0) {
+                //
+                //    $timeout(function () {
+                //        $scope.mode = 'reward';
+                //    }, 100);
+                //
+                //    return;
+                //}
+
+                if ($scope.rewardScore > 6) {
 
                     $timeout(function () {
                         $scope.mode = 'reward';

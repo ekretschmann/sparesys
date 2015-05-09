@@ -76,7 +76,25 @@ var UserSchema = new Schema({
 		default: ['user', 'help']
 	},
 	inventory: {
-		type: Schema.Types.Mixed
+		type: [{
+			name: {
+				type: String,
+				default: '',
+				required: 'Please fill Reward name',
+				trim: true
+			},
+			type: {
+				type: String,
+				default: '',
+				required: 'Please fill Reward type',
+				trim: true
+			},
+			amount: {
+				type: Number,
+				default: 1
+			}
+		}],
+		default: [{name: 'Making Fire', amount: 1}]
 	},
 	updated: {
 		type: Date

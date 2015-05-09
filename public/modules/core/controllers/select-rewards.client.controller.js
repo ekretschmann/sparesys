@@ -7,73 +7,105 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
 
         $scope.user = new Users($scope.authentication.user);
-        $scope.recipies = {};
+        $scope.recipies = [];
         $scope.rewards = [];
 
         $scope.skills = [];
-        $scope.items = [];
+
+
+        // these are Strings
+        $scope.possibleOffers = [];
 
         $scope.offers = [];
+
+
         $scope.userItems = [];
         $scope.userSkills = [];
+        $scope.userRecipies = [];
 
 
         $scope.findRewards = function () {
+
+
+            // Making fire is a fundamental skill
+            if (!$scope.user.inventory || $scope.user.inventory.length === 0) {
+
+                $scope.user.inventory = [];
+                var makingFire = {name: 'Making Fire', type:'Skill', amount: 1};
+                $scope.user.inventory.push(makingFire);
+            }
+
+            $scope.distributeInventory();
+
+
+
             $scope.rewards = Rewards.query(function () {
 
-                var enabledItems = [];
-                $scope.rewards.forEach(function (reward) {
-                    if (reward.ingredients.length > 0) {
+                $scope.findEnabledItems();
+                $scope.drawOffers();
 
-                        $scope.recipies[reward.name] = reward;
-                    }
-                    if (reward.type === 'Skill') {
-                        $scope.skills.push(reward.name);
-                        reward.enables.forEach(function (enabled) {
-                            enabledItems.push(enabled);
-                        });
 
-                    }
-
-                }, this);
-
-                $scope.rewards.forEach(function (reward) {
-
-                    if (enabledItems.indexOf(reward.name) > -1 ) {
-                        $scope.items.push(reward);
+                $scope.rewards.forEach(function(reward) {
+                    if(reward.type === 'Recipe') {
+                        $scope.recipies.push(reward);
                     }
                 });
-
-                if ($scope.items.length > 0) {
-                    $scope.offers.push($scope.items[0]);
-                }
-                if ($scope.items.length > 1) {
-
-                    $scope.offers.push($scope.items[1]);
-                }
-                if ($scope.items.length >2) {
-
-                    $scope.offers.push($scope.items[2]);
-                }
+                $scope.determinePossibleRecipies();
 
             });
 
 
         };
 
+        $scope.findEnabledItems = function() {
+            var enabledItems = [];
+            $scope.rewards.forEach(function (reward) {
+
+                if (reward.type === 'Skill') {
+                    reward.enables.forEach(function(enabled) {
+                        enabledItems.push(enabled);
+                    });
+
+
+                }
+
+            }, this);
+
+            $scope.rewards.forEach(function (reward) {
+
+                if (enabledItems.indexOf(reward.name) > -1 ) {
+                    $scope.possibleOffers.push(reward);
+                }
+
+            });
+
+
+
+        };
 
         $scope.distributeInventory = function() {
 
            // $scope.showEmptyInventoryMessage = true;
 
+
+            $scope.userSkills = [];
+            $scope.userItems = [];
             $scope.user.inventory.forEach(function(item){
-                if(item.type === 'Skill') {
+
+
+                if (item.type === 'Skill') {
                     $scope.userSkills.push(item);
-                } else if (item.type ==='Item') {
+                }
+                if (item.type === 'Item') {
                     $scope.userItems.push(item);
                 }
-            });
+
+            }, this);
+
+
         };
+
+
 
 
 
@@ -81,21 +113,9 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
 
             $scope.possibleRecipes = [];
-            //$scope.user.inventory = [];
-            console.log($scope.user.inventory);
-            if (!$scope.user.inventory || $scope.user.inventory.length === 0) {
 
-                $scope.user.inventory = {};
-                $scope.user.inventory['Making Fire'] = {name: 'Making Fire', type:'Cheap Skill', amount: 1};
-                console.log('distirbuting');
-                $scope.distributeInventory();
-            }
-
-
-            Object.keys($scope.recipies).forEach(function (target) {
-
-                var recipe = $scope.recipies[target];
-
+            $scope.recipies.forEach(function (recipe) {
+                console.log(recipe.name);
 
                 var possible = true;
 
@@ -103,7 +123,14 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
                 recipe.ingredients.forEach(function (ingredient) {
 
 
-                    if (!$scope.user.inventory[ingredient.name]) {
+                    console.log('  '+ingredient.name);
+                    var found = false;
+                    $scope.user.inventory.forEach(function (item) {
+                        if (item.name === ingredient.name) {
+                            found = true;
+                        }
+                    });
+                    if (!found) {
                         possible = false;
                     }
 
@@ -116,7 +143,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
 
         $scope.deleteInventory = function() {
-            $scope.user.inventory = {};
+            $scope.user.inventory = [];
             new Users($scope.user).$update(function (updatedUser) {
                 $scope.user = updatedUser;
 
@@ -126,52 +153,69 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.drawOffers = function () {
 
 
+
+
+
             var indexes = [];
             indexes.push($scope.selectNumber(indexes));
             indexes.push($scope.selectNumber(indexes));
             indexes.push($scope.selectNumber(indexes));
 
             $scope.offers = [];
-            $scope.offers.push($scope.items[indexes[0]]);
-            $scope.offers.push($scope.items[indexes[1]]);
-            $scope.offers.push($scope.items[indexes[2]]);
+            if ($scope.possibleOffers.length > 0) {
+                $scope.offers.push($scope.possibleOffers[0]);
+            }
+            if ($scope.possibleOffers.length > 1) {
 
+                $scope.offers.push($scope.possibleOffers[1]);
+            }
+            if ($scope.possibleOffers.length >2) {
+
+                $scope.offers.push($scope.possibleOffers[2]);
+            }
 
 
             // $scope.offers = ['soil', 'sapling', 'water'];
-
-            $scope.determinePossibleRecipies();
 
 
         };
 
         $scope.selectNumber = function (disallowed) {
 
-            var result = Math.floor(Math.random() * $scope.items.length);
+            var result = Math.floor(Math.random() * $scope.possibleOffers.length);
+            if (disallowed.indexOf(result) > -1) {
+                return $scope.selectNumber(disallowed);
+            }
             return result;
         };
 
-        $scope.addItem = function (choice) {
+        $scope.addItem = function (addedItem) {
 
+            var choice = addedItem.name;
             if (!$scope.user.inventory) {
-                $scope.user.inventory = {};
+                $scope.user.inventory = [];
             }
-
-            var item = $scope.user.inventory[choice];
+            var item;
+            $scope.user.inventory.forEach(function(inventoryItem) {
+                if(inventoryItem.name === addedItem.name) {
+                    item = inventoryItem;
+                }
+            });
 
             if (item) {
 
-                var increasedAmount = $scope.user.inventory[choice].amount++;
-                $scope.user.inventory[choice] = {name: choice, amount: increasedAmount + 1};
-                $scope.showEmptyInventoryMessage = false;
+                item.amount += 1;
             } else {
 
                 //item = {};
                 //item[choice] = 1;
-                $scope.user.inventory[choice] = {name: choice, amount: 1};
-                $scope.showEmptyInventoryMessage = false;
+                $scope.user.inventory.push({name: choice, amount: 1, type:addedItem.type});
 
             }
+
+            $scope.distributeInventory();
+            $scope.findEnabledItems();
+            $scope.determinePossibleRecipies();
         };
 
         $scope.getRememberalia = function (choice) {

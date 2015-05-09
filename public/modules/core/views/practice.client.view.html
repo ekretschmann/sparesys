@@ -78,60 +78,60 @@
         </div>
     </div>
 
-    <div data-ng-if="cards && cards.length > 0" class="position:relative"  >
+    <div data-ng-if="cards && cards.length > 0" class="position:relative">
 
 
+        <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
 
-            <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
+            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+                <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
+            </div>
+            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
+            </div>
+        </div>
 
-                <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
-                    <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
-                </div>
-                <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
-                    <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
-                </div>
+        <div data-ng-show="mode === 'reverse'" data-ng-hide="mode !== 'reverse'" style="height: 500px">
+            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+                <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
             </div>
 
-            <div data-ng-show="mode === 'reverse'" data-ng-hide="mode !== 'reverse'" style="height: 500px">
-                <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
-                    <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
-                </div>
+            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                <div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>
+            </div>
+        </div>
 
-                <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
-                    <div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>
-                </div>
+        <div data-ng-show="mode === 'images'" data-ng-hide="mode !== 'images'" style="height: 500px">
+
+
+            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+
+                <div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>
             </div>
 
-            <div data-ng-show="mode === 'images'" data-ng-hide="mode !== 'images'" style="height: 500px">
-
-
-                <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
-
-                    <div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>
-                </div>
-
-                <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
-                    <div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>
-                </div>
-
-
+            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                <div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>
             </div>
+
+
+        </div>
         <!--</div>-->
 
 
-        <div data-ng-show="authentication.user.roles.indexOf('receive-rewards') > -1" data-ng-controller="SelectRewardsController" data-ng-init="findRewards()">
+        <div data-ng-show="authentication.user.roles.indexOf('receive-rewards') > -1"
+             data-ng-controller="SelectRewardsController" data-ng-init="findRewards()">
 
 
             <!--<div style="height: 500px">-->
-                <div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">
+            <div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">
 
-                    <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
-                </div>
+                <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
+            </div>
             <!--</div>-->
 
             <div>
 
-                <table class="expands" >
+                <table class="expands">
                     <thead>
                     <tr>
 
@@ -151,7 +151,7 @@
                                 You have nothing in your inventory. Keep practicing and you will be offered rewards.
                             </div>
                             <div data-ng-repeat="item in userItems">
-                                {{item.amount}} - <span popover="{{item.description}}" popover-trigger="mouseenter" >{{item.name}}</span>
+                                {{item.amount}} - <span popover="{{item.description}}" popover-trigger="mouseenter">{{item.name}}</span>
                             </div>
                         </td>
                         <td class="right-padded-m top-aligned" width="34%">
@@ -160,14 +160,15 @@
                             </div>
                             <div data-ng-repeat="skill in userSkills">
 
-                                <div popover="{{skill.description}}" popover-trigger="mouseenter" >{{skill.name}}</div>
+                                <div popover="{{skill.description}}" popover-trigger="mouseenter">{{skill.name}}</div>
 
                             </div>
                         </td>
-                        <td class="top-aligned"  width="33%">
+                        <td class="top-aligned" width="33%">
 
                             <div data-ng-if="!possibleRecipes || possibleRecipes.length===0">
-                                You can't create any rememberalia at the moment. Fill up your inventory and you will be able to
+                                You can't create any rememberalia at the moment. Fill up your inventory and you will be
+                                able to
                                 buy some new ones.
                             </div>
 
@@ -177,25 +178,50 @@
 
                                 <table>
 
-                                <tr data-ng-repeat="rememberalia in possibleRecipes">
+                                    <tr data-ng-repeat="rememberalia in possibleRecipes">
 
-                                    <!--x{{//possibleRecipes}}x-->
+                                        <!--x{{//possibleRecipes}}x-->
 
 
-                                    <!--<td class="top-aligned right-padded-m bottom-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.receive[0].name)">{{rememberalia.receive[0].name}}</a></td>-->
-                                    <td class="top-aligned right-padded-m bottom-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia)">{{rememberalia.name}}</a></td>
+                                        <!--<td class="top-aligned right-padded-m bottom-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.receive[0].name)">{{rememberalia.receive[0].name}}</a></td>-->
+                                        <td class="top-aligned right-padded-m bottom-padded-m"><a href=""
+                                                                                                  data-ng-click="getRememberalia(rememberalia)">{{rememberalia.name}}</a>
+                                        </td>
 
-                                    <td class="top-aligned bottom-padded-m"><div data-ng-repeat="ingredient in rememberalia.ingredients">{{ingredient.amount}} {{ingredient.name}}</div></td>
-                                </tr>
+                                        <td class="top-aligned bottom-padded-m">
+                                            <div data-ng-repeat="ingredient in rememberalia.ingredients">
+                                                {{ingredient.amount}} {{ingredient.name}}
+                                            </div>
+                                        </td>
+                                    </tr>
                                 </table>
                             </div>
                         </td>
                     </tr>
                 </table>
 
-                <a href="" data-ng-click="deleteInventory()">delete inventory</a>
 
+                <section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">
+
+                    <a href="" data-ng-click="deleteInventory()">delete inventory</a>
+
+
+                    <pre>
+                        Possible Items:
+                        {{possibleItemOffers |json}}
+                        </pre>
+                    <pre>
+                        Possible Skills:
+                        {{possibleSkillOffers |json}}
+                        </pre>
+                    <pre>
+                        Possibel Recipies:
+                        {{possibleRecipes |json}}
+                    </pre>
+                </section>
             </div>
+
+
         </div>
     </div>
 

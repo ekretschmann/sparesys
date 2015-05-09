@@ -78,9 +78,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
             if (!reward.ingredients || reward.ingredients.length > 0) {
                 reward.type = 'Recipe';
             } else {
-                reward.type = $scope.selectedType;
+                reward.type = $scope.type;
             }
-
 
 
 
@@ -93,6 +92,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 
                     // Clear form fields
                     $scope.name = '';
+                    $scope.type = 'Item';
                     $scope.ingredients = [];
                     $scope.updateReward = false;
                     $scope.enables = [];

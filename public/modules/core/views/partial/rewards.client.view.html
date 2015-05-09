@@ -9,8 +9,12 @@
 
 
         <div class="question-box" style="position: relative">
-            <span class="question">
+            <span class="question" data-ng-if="rewardType === 'Items'">
             Choose a Reward
+                </span>
+
+            <span class="question" data-ng-if="rewardType === 'Skills'">
+            Choose a new Skill
                 </span>
 
             <div>

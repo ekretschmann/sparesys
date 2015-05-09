@@ -14,7 +14,8 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
 
         // these are Strings
-        $scope.possibleOffers = [];
+        $scope.possibleItemOffers = [];
+        $scope.possibleSkillOffers = [];
 
         $scope.offers = [];
 
@@ -22,6 +23,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.userItems = [];
         $scope.userSkills = [];
         $scope.userRecipies = [];
+        $scope.rewardType = 'Items';
 
 
         $scope.findRewards = function () {
@@ -70,10 +72,29 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
             }, this);
 
+            $scope.possibleItemOffers = [];
+            $scope.possibleSkillOffers = [];
+
             $scope.rewards.forEach(function (reward) {
 
+
                 if (enabledItems.indexOf(reward.name) > -1) {
-                    $scope.possibleOffers.push(reward);
+                    if (reward.type === 'Item') {
+                        $scope.possibleItemOffers.push(reward);
+                    }
+                    if (reward.type === 'Skill') {
+                        //only push if we don't have the skill
+                        var found = false;
+                        $scope.user.inventory.forEach(function(it) {
+                            if (it.name === reward.name) {
+                                found = true;
+                            }
+                        });
+
+                        if (!found) {
+                            $scope.possibleSkillOffers.push(reward);
+                        }
+                    }
                 }
 
             });
@@ -157,22 +178,45 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.drawOffers = function () {
 
 
+
+            var p = Math.random();
+            var selectedOffers;
+            if (p <0.5 && $scope.possibleSkillOffers.length > 0) {
+
+                selectedOffers = $scope.possibleSkillOffers;
+                $scope.rewardType = 'Skills';
+            } else {
+
+                selectedOffers = $scope.possibleItemOffers;
+                $scope.rewardType = 'Items';
+
+            }
+
             var indexes = [];
-            indexes.push($scope.selectNumber(indexes));
-            indexes.push($scope.selectNumber(indexes));
-            indexes.push($scope.selectNumber(indexes));
+            var n = $scope.selectNumber(indexes, selectedOffers);
+            if (n > -1) {
+                indexes.push(n);
+            }
+            n = $scope.selectNumber(indexes, selectedOffers);
+            if (n > -1) {
+                indexes.push(n);
+            }
+            n = $scope.selectNumber(indexes, selectedOffers);
+            if (n > -1) {
+                indexes.push(n);
+            }
 
             $scope.offers = [];
-            if ($scope.possibleOffers.length > 0) {
-                $scope.offers.push($scope.possibleOffers[indexes[0]]);
+            if (selectedOffers.length > 0) {
+                $scope.offers.push(selectedOffers[indexes[0]]);
             }
-            if ($scope.possibleOffers.length > 1) {
+            if (selectedOffers.length > 1) {
 
-                $scope.offers.push($scope.possibleOffers[indexes[1]]);
+                $scope.offers.push(selectedOffers[indexes[1]]);
             }
-            if ($scope.possibleOffers.length > 2) {
+            if (selectedOffers.length > 2) {
 
-                $scope.offers.push($scope.possibleOffers[indexes[2]]);
+                $scope.offers.push(selectedOffers[indexes[2]]);
             }
 
 
@@ -181,11 +225,17 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
         };
 
-        $scope.selectNumber = function (disallowed) {
+        $scope.selectNumber = function (disallowed, selectedOffers) {
 
-            var result = Math.floor(Math.random() * $scope.possibleOffers.length);
+            if (disallowed.length >= selectedOffers.length) {
+                return -1;
+            }
+
+            var result = Math.floor(Math.random() * selectedOffers.length);
+
+            // try another
             if (disallowed.indexOf(result) > -1) {
-                return $scope.selectNumber(disallowed);
+                return $scope.selectNumber(disallowed, selectedOffers);
             }
             return result;
         };
@@ -212,8 +262,6 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.addItem = function (addedItem) {
 
 
-            console.log('adding');
-            console.log(addedItem);
             var choice = addedItem.name;
             if (!$scope.user.inventory) {
                 $scope.user.inventory = [];
@@ -240,8 +288,6 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
         $scope.getRememberalia = function (choice) {
 
-
-            console.log(choice);
 
 
             choice.ingredients.forEach(function (ingredient) {

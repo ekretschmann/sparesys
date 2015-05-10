@@ -89,17 +89,28 @@
                 <span data-ng-if="!otherCourse.user">(unknown user)</span>
             </td>
         </tr>
-        <!---->
-        <!---->
-        <!--<tr>-->
-            <!--<td class="nowrap right-padded-m top-padded-m">Slaves</td>-->
-            <!--<td class="top-padded-m" colspan="5">-->
-                <!--<input type="text"-->
-                       <!--data-ng-model="course.slaves"-->
-                       <!--class="form-control"-->
-                       <!--required>-->
-            <!--</td>-->
-        <!--</tr>-->
+
+
+
+        <tr data-ng-if="!course.packs || course.packs.length ===0">
+            <td class="top-padded-m">Packs</td>
+            <td class="top-padded-m">none</td>
+        </tr>
+
+        <tr data-ng-repeat="pack in course.packs">
+            <td class="right-padded-m nowrap top-padded-m" data-ng-if="$index ===0">Packs</td>
+            <td class="right-padded-m nowrap top-padded-m" data-ng-if="$index !==0"></td>
+            <td class="expands top-padded-m" data-ng-init="findById(pack)" data-ng-controller="PacksController">
+
+                <a>
+                    <i data-ng-click="removePack(pack, course)"
+                       class="glyphicon glyphicon-remove-sign small">
+                    </i>
+                </a>
+
+                {{pack._id}} ({{pack.name}})
+            </td>
+        </tr>
 
     
     </table>

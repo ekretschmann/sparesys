@@ -9,6 +9,8 @@ angular.module('courses').controller('CoursesAdminController',
             $scope.authentication = Authentication;
 
 
+            $scope.packToAdd = '';
+
             if (!$scope.authentication.user) {
                 $location.path('/');
             }
@@ -20,6 +22,13 @@ angular.module('courses').controller('CoursesAdminController',
             };
 
 
+            $scope.addPack = function() {
+                $scope.course.packs.push($scope.packToAdd);
+            };
+
+            $scope.removePack = function(pack) {
+                $scope.course.packs.splice($scope.course.packs.indexOf(pack, 1));
+            };
 
 
             // Update existing Course
@@ -29,8 +38,9 @@ angular.module('courses').controller('CoursesAdminController',
                 if(!course.slaves) {
                     course.slaves=[];
                 }
+
                 course.$update(function () {
-                    $location.path('courses');
+                    $location.path('courses/admin');
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
                 });

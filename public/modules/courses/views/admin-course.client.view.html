@@ -109,7 +109,7 @@
                 </a>
 
 
-                <span data-ng-if="otherCourse.user">{{otherCourse._id}}</span>
+                <span data-ng-if="otherCourse.user">{{slave}}</span>
                 <span data-ng-if="otherCourse.user">({{otherCourse.user.displayName}})</span>
                 <span data-ng-if="!otherCourse.user">(unknown user)</span>
             </td>
@@ -128,7 +128,7 @@
             <td class="expands top-padded-m" data-ng-init="findById(pack)" data-ng-controller="PacksController">
 
                 <a>
-                    <i data-ng-click="removePack(pack, course)"
+                    <i data-ng-click="removePack(pack._id)"
                        class="glyphicon glyphicon-remove-sign small">
                     </i>
                 </a>
@@ -144,8 +144,7 @@
             <td></td>
             <td class="top-padded-m"><input type="text"
                                             data-ng-model="packToAdd"
-                                            class="form-control"
-                                            data-ng-click="addPack()"><a href="">(add pack)</a></td>
+                                            class="form-control"><a href="" data-ng-click="addPack()">(add pack)</a></td>
         </tr>
 
     </table>

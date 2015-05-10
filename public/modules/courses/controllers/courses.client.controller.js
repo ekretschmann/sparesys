@@ -8,6 +8,7 @@ angular.module('courses').controller('CoursesController',
 
             $scope.authentication = Authentication;
             $scope.showhelp = false;
+
             $scope.tabs = [
                 {title: 'Course', active: false},
                 {title: 'Packs', active: true},

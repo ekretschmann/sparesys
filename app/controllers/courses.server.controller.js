@@ -210,6 +210,8 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
 
 
+
+
     if (req.query.userId) {
 
         Course.find({'user': req.query.userId}).exec(function (err, courses) {
@@ -256,17 +258,29 @@ exports.list = function (req, res) {
     }
 };
 
+
+
 /**
  * Course middleware
  */
 exports.courseByID = function (req, res, next, id) {
 
-    Course.findById(id).populate('user', 'displayName').exec(function (err, course) {
-        if (err) return next(err);
-        if (!course) return next(new Error('Failed to load Course ' + id));
-        req.course = course;
-        next();
-    });
+    if (req.query.populateUser && req.query.populateUser === 'false') {
+        Course.findById(id).exec(function (err, course) {
+            if (err) return next(err);
+            if (!course) return next(new Error('Failed to load Course ' + id));
+            req.course = course;
+            next();
+        });
+    } else {
+
+        Course.findById(id).populate('user', 'displayName').exec(function (err, course) {
+            if (err) return next(err);
+            if (!course) return next(new Error('Failed to load Course ' + id));
+            req.course = course;
+            next();
+        });
+    }
 
 
 };

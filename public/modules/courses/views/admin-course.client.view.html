@@ -1,70 +1,95 @@
-<div  data-ng-controller="CoursesController" data-ng-init="findOne()">
-
+<div data-ng-controller="CoursesAdminController" data-ng-init="findOne()">
 
 
     <div class="content-header">
 
         <div class="title">
-        Admin for Course {{course.name}}
+            Admin for Course {{course.name}}
         </div>
     </div>
 
-    <table class="box-margin-s" >
+    <table class="box-margin-s">
 
         <tr>
             <td></td>
             <td class="nowrap top-padded-m">
-                <input  type="checkbox"
-                        data-ng-model="course.teaching">
+                <input type="checkbox"
+                       data-ng-model="course.teaching">
                 <span class="left-padded-s right-padded-m">Course is taught</span>
 
 
-            <input  type="checkbox"
-                    data-ng-model="course.published">
+                <input type="checkbox"
+                       data-ng-model="course.published">
                 <span class="left-padded-s">Course is published</span>
 
             </td>
         </tr>
 
         <tr>
-        <td class="right-padded-m top-padded-m">Name</td>
-        <td class="expands top-padded-m" >
-            <input type="text"
-                   data-ng-model="course.name"
-                   class="focus form-control"
-                   required>
-        </td>
-    </tr>
+            <td class="right-padded-m top-padded-m">User</td>
+            <td class="expands top-padded-m">
+                <input type="text"
+                       data-ng-model="course.user"
+                       class="focus form-control"
+                       required>
+            </td>
+        </tr>
 
-    <tr>
-        <td class="right-padded-m top-padded-m">Description</td>
-        <td class="top-padded-m" colspan="5">
-            <input type="text"
-                   data-ng-model="course.description"
-                   class="form-control"
-                   required>
-        </td>
-    </tr>
+        <tr>
+            <td class="right-padded-m top-padded-m">Name</td>
+            <td class="expands top-padded-m">
+                <input type="text"
+                       data-ng-model="course.name"
+                       class="focus form-control"
+                       required>
+            </td>
+        </tr>
 
-    <tr>
-        <td class="nowrap right-padded-m top-padded-m">Front of Card</td>
-        <td class="top-padded-m" colspan="5">
-            <input type="text"
-                   data-ng-model="course.front"
-                   class="form-control"
-                   required>
-        </td>
-    </tr>
+        <tr>
+            <td class="right-padded-m top-padded-m">Description</td>
+            <td class="top-padded-m" colspan="5">
+                <input type="text"
+                       data-ng-model="course.description"
+                       class="form-control"
+                       required>
+            </td>
+        </tr>
 
-    <tr>
-        <td class="nowrap right-padded-m top-padded-m">Back of Card</td>
-        <td class="top-padded-m" colspan="5">
-            <input type="text"
-                   data-ng-model="course.back"
-                   class="form-control"
-                   required>
-        </td>
-    </tr>
+        <tr>
+            <td class="nowrap right-padded-m top-padded-m">Front of Card</td>
+            <td class="top-padded-m" colspan="5">
+                <input type="text"
+                       data-ng-model="course.front"
+                       class="form-control"
+                       required>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="nowrap right-padded-m top-padded-m">Back of Card</td>
+            <td class="top-padded-m" colspan="5">
+                <input type="text"
+                       data-ng-model="course.back"
+                       class="form-control"
+                       required>
+            </td>
+        </tr>
+
+        <tr>
+            <td class="nowrap right-padded-m top-padded-m">Master</td>
+            <td class="top-padded-m" colspan="5" data-ng-if="!course.master">
+                <input type="text"
+                       data-ng-model="course.master"
+                       class="form-control"
+                       required>
+            </td>
+            <td class="top-padded-m" colspan="5" data-ng-if="course.master">
+                <input type="text"
+                       data-ng-model="course.master"
+                       class="form-control"
+                       required>
+            </td>
+        </tr>
 
 
         <tr data-ng-if="!course.slaves || course.slaves.length ===0">
@@ -91,10 +116,10 @@
         </tr>
 
 
-
         <tr data-ng-if="!course.packs || course.packs.length ===0">
             <td class="top-padded-m">Packs</td>
             <td class="top-padded-m">none</td>
+
         </tr>
 
         <tr data-ng-repeat="pack in course.packs">
@@ -109,10 +134,20 @@
                 </a>
 
                 {{pack._id}} ({{pack.name}})
+
+
             </td>
+
         </tr>
 
-    
+        <tr>
+            <td></td>
+            <td class="top-padded-m"><input type="text"
+                                            data-ng-model="packToAdd"
+                                            class="form-control"
+                                            data-ng-click="addPack()"><a href="">(add pack)</a></td>
+        </tr>
+
     </table>
 
     <div class="center-aligned">

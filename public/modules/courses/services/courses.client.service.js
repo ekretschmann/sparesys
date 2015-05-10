@@ -15,6 +15,8 @@ angular.module('courses').factory('Courses', ['$resource', function ($resource) 
 }]);
 
 
+
+
 angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses', 'Cards',
     function ($q, $resource, Courses, Cards) {
         return {

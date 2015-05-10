@@ -42,6 +42,8 @@ angular.module('courses').controller('AddPackToCourseController', ['$window', '$
 
                 var packid = response._id;
                 $scope.course.packs.push(packid);
+
+
                 $scope.course.$update(function () {
                     $scope.data.name = '';
                     angular.element('.focus').trigger('focus');

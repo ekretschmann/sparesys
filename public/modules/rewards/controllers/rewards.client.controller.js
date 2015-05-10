@@ -1,8 +1,8 @@
 'use strict';
 
 // Rewards controller
-angular.module('rewards').controller('RewardsController', ['$scope', '$stateParams', '$location', 'Authentication', 'Rewards',
-    function ($scope, $stateParams, $location, Authentication, Rewards) {
+angular.module('rewards').controller('RewardsController', ['$scope', '$state', '$stateParams','$location', 'Authentication', 'Rewards',
+    function ($scope, $state, $stateParams, $location, Authentication, Rewards) {
         $scope.authentication = Authentication;
 
         $scope.ingredients = [];
@@ -71,6 +71,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
                 $scope.rewards.push(reward);
             }
 
+            reward.name = $scope.name;
             reward.ingredients = $scope.ingredients;
             reward.enables = $scope.enables;
             reward.description = $scope.description;
@@ -85,7 +86,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
 
             // Redirect after save
             if ($scope.updateReward) {
-                reward.$update();
+                reward.$update(function() {
+                    $state.go($state.$current, null, {reload: true});
+                });
             } else {
                 reward.$save(function (response) {
                     //$location.path('rewards/' + response._id);
@@ -96,6 +99,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
                     $scope.ingredients = [];
                     $scope.updateReward = false;
                     $scope.enables = [];
+                    $state.go($state.$current, null, {reload: true});
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
                 });
@@ -138,6 +142,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
         // Find existing Reward
         $scope.findOne = function () {
 
+
             if ($stateParams.rewardId) {
                 $scope.reward = Rewards.get({
                     rewardId: $stateParams.rewardId
@@ -164,6 +169,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$statePara
             $scope.enables = [];
             $scope.selectedType = 'Item';
             $scope.updateReward = false;
+            $location.path('/rewards/manage/');
         };
     }
 ]);

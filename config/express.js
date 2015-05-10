@@ -73,8 +73,8 @@ module.exports = function(db) {
 	}
 
 	// Request body parsing middleware should be above methodOverride
-	app.use(bodyParser.urlencoded());
-	app.use(bodyParser.json());
+	app.use(bodyParser.urlencoded({limit: '50mb'}));
+	app.use(bodyParser.json({limit: '50mb'}));
 	app.use(methodOverride());
 
 	// Enable jsonp

@@ -142,7 +142,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         // Find existing Reward
         $scope.findOne = function () {
 
-
             if ($stateParams.rewardId) {
                 $scope.reward = Rewards.get({
                     rewardId: $stateParams.rewardId

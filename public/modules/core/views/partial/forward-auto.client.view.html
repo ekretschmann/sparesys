@@ -28,15 +28,19 @@
 
 
         <div class="question-box" style="position: relative">
+            <div>
             <span class="question">
             {{card.question}}
-                </span>
-            <span data-ng-if="card.readFrontForward" class="left-padded-s top-padded-s" style="position: absolute;">
+            </span>
+            <span data-ng-if="card.readFrontForward && card.languageFront" class="left-padded-s top-padded-s small" style="position: absolute;" >
 
-                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
+                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question+ '. '+card.questionExtension)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
                     </a>
                 </span>
+            </div>
+            <div data-ng-if="card.questionExtension">({{card.questionExtension}})</div>
+
         </div>
 
 

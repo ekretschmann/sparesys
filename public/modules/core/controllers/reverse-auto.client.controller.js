@@ -39,6 +39,10 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
         $scope.$watch('card', function() {
             if ($scope.card.readFrontReverse && $scope.mode === 'reverse' && $scope.assess==='auto') {
                 $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
+
+                if($scope.card.answerExtension) {
+                    $scope.$parent.playSound($scope.card.languageBack, $scope.card.answerExtension);
+                }
             }
         });
 

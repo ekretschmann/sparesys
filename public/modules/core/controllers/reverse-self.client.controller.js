@@ -11,6 +11,10 @@ angular.module('core').controller('ReverseSelfController', ['$scope', '$state', 
         $scope.$watch('card', function() {
             if ($scope.card.readFrontReverse && $scope.mode === 'reverse' && $scope.assess==='self') {
                 $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
+
+                if($scope.card.answerExtension) {
+                    $scope.$parent.playSound($scope.card.languageBack, $scope.card.answerExtension);
+                }
             }
         });
 

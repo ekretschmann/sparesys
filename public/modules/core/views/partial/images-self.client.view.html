@@ -46,7 +46,7 @@
                 <span data-ng-if="card.imagesReadFront && card.languageFront" class="left-padded-s top-padded-s"
                       style="position: absolute;">
 
-                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question)">
+                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question+ '. '+card.questionExtension)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
                     </a>
                 </span>

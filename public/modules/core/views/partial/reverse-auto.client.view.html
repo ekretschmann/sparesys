@@ -28,15 +28,19 @@
 
 
         <div class="question-box" style="position: relative">
+            <div>
             <span class="question">
             {{card.answer}}
-                </span>
-            <span data-ng-if="card.readFrontReverse" class="left-padded-s top-padded-s" style="position: absolute;" >
+            </span>
+                       <span data-ng-if="card.readFrontReverse && card.languageBack" class="left-padded-s top-padded-s" style="position: absolute;" >
 
-                    <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer)">
+                    <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer+ '. '+card.answerExtension)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
                     </a>
                 </span>
+            </div>
+            <div data-ng-if="card.answerExtension">({{card.answerExtension}})</div>
+
         </div>
 
         <div class="flashcard-input-box top-padded-m" data-ng-if="state === 'question'">

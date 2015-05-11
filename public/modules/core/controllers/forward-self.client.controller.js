@@ -15,6 +15,10 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
         $scope.$watch('card', function() {
             if ($scope.card.readFrontForward && $scope.mode === 'forward' && $scope.assess==='self') {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
+
+                if($scope.card.questionExtension) {
+                    $scope.$parent.playSound($scope.card.languageFront, $scope.card.questionExtension);
+                }
             }
         });
 

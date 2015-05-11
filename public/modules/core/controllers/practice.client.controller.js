@@ -93,6 +93,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.playSound = function (lang, text) {
 
 
+            console.log(text);
+
             if (!lang || !lang.code) {
                 return;
             }

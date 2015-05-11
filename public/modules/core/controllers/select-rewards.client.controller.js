@@ -295,22 +295,37 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.getRememberalia = function (choice) {
 
 
-
             choice.ingredients.forEach(function (ingredient) {
 
 
                 var item = $scope.getItemFromInventory(ingredient.name);
                 var newAmount = item.amount - ingredient.amount;
+
+
                 if (newAmount === 0) {
                     $scope.removeFromInventory(ingredient.name);
                 } else {
-                    $scope.user.inventory[ingredient.name] = {name: ingredient.name, amount: newAmount};
+                    $scope.removeFromInventory(ingredient.name);
+                    $scope.user.inventory.push({name: ingredient.name, amount: newAmount, type:item.type});
                 }
             }, this);
 
             $scope.addItem(choice);
 
             $scope.determinePossibleRecipies();
+
+            Users.get({
+                userId: $scope.user._id
+            }, function (theUser) {
+
+                theUser.inventory = $scope.user.inventory;
+                theUser.$update(function(user) {
+                    $scope.user = user;
+                }, function(err) {
+                    console.log(err);
+                });
+            });
+
             new Users($scope.user).$update(function (updatedUser) {
                 $scope.user = updatedUser;
 

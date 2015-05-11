@@ -174,6 +174,8 @@ exports.update = function (req, res) {
         }
         theUser.save(function (err) {
 
+
+            console.log(err);
             //console.log('zzzzz');
             //console.log(err);
             if (err) {

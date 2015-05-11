@@ -12,10 +12,10 @@ angular.module('messages').controller('MessagesController', ['$scope', '$modal',
             Cards.get({
                 cardId: message.card
             }, function(card) {
-                if (message.direction === 'forward') {
-                    card.validanswers.push(message.content);
+                if (message.direction === 'forward'|| message.direction === 'images') {
+                    card.acceptedAnswersForward.push(message.content);
                 } else {
-                    card.validreverseanswers.push(message.content);
+                    card.acceptedAnswersReverse.push(message.content);
                 }
 
                 card.$update();
@@ -35,10 +35,10 @@ angular.module('messages').controller('MessagesController', ['$scope', '$modal',
             Cards.get({
                 cardId: message.card
             }, function(card) {
-                if (message.direction === 'forward') {
-                    card.invalidanswers.push(message.content);
+                if (message.direction === 'forward' || message.direction === 'images') {
+                    card.invalidAnswersForward.push(message.content);
                 } else {
-                    card.invalidreverseanswers.push(message.content);
+                    card.invalidAnswersReverse.push(message.content);
                 }
 
                 card.$update();

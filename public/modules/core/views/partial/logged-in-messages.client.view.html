@@ -7,33 +7,22 @@
         <div class="content-section">
 
 
-            <table>
-                <tr>
-                    <td class="top-aligned right-padded top-padded" style="min-width: 72px">
-                        <img class="size-64"
-                             src="/modules/core/img/brand/teacher-man-medium.gif">
-                    </td>
-                    <td class="top-aligned">
+            <div class="title">Messages</div>
 
-                        <div class="title">
-                            Validation Requests
-                        </div>
+            <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+                <infobox logo="philosopher" position="left">
+                    Your students were busy practicing your courses. Some of them
+                    suggest relaxing the validation of particular cards.
+                    Please go through the list below to <span style="font-weight: bold">accept</span> or
+                    <span style="font-weight: bold">decline</span> their suggestions. If you accept the
+                    suggestion and it is given again in the future by any of your students, they will be counted
+                    as
+                    correct. Should you decline, the answer will be counted as incorrect from now on.
+                    Please use <span style="font-weight: bold">ignore</span> for answers that are clear
+                    attempts to cheat.
+                </infobox>
+            </section>
 
-                        <div>
-                            Your students were busy practicing your courses. Some of them
-                            suggest relaxing the validation of particular cards.
-                            Please go through the list below to <span style="font-weight: bold">accept</span> or
-                            <span style="font-weight: bold">decline</span> their suggestions. If you accept the
-                            suggestion and it is given again in the future by any of your students, they will be counted
-                            as
-                            correct. Should you decline, the answer will be counted as incorrect from now on.
-                            Please use <span style="font-weight: bold">ignore</span> for answers that are clear
-                            attempts to cheat.
-                        </div>
-                    </td>
-
-                </tr>
-            </table>
 
             <table class="table-striped" style="margin-top: 15px">
 
@@ -41,9 +30,9 @@
                 <tr>
 
                     <th class="right-padded nowrap">Student</th>
-                    <th class="expands right-padded nowrap">Question</th>
-                    <th class="expands right-padded nowrap">Expected Answer</th>
-                    <th class="expands right-padded nowrap">Suggested Variation</th>
+                    <th class="expands right-padded-m nowrap">Question</th>
+                    <th class="expands right-padded-m nowrap">Expected Answer</th>
+                    <th class="expands right-padded-m nowrap">Suggested Variation</th>
                     <th class="nowrap">Action</th>
                 </tr>
                 </thead>
@@ -51,13 +40,13 @@
                 <tr data-ng-repeat="request in validationRequests" data-ng-init="findById(request.card)"
                     data-ng-controller="CardsController">
 
-                    <td class="right-padded nowrap">
+                    <td class="right-padded-m nowrap">
 
                         {{request.sender}}
 
                     </td>
 
-                    <td class="right-padded expands">
+                    <td class="right-padded-m expands">
 
                     <span data-ng-if="request.direction === 'forward'">
                     {{card.question}}
@@ -68,7 +57,7 @@
                     </span>
 
                     </td>
-                    <td class="right-padded expands">
+                    <td class="right-padded-m expands">
 
                     <span data-ng-if="request.direction === 'forward'">
                     {{card.answer}}
@@ -79,7 +68,7 @@
                     </span>
                     </td>
 
-                    <td class="right-padded expands">
+                    <td class="right-padded-m expands">
                         {{request.content}}
 
                     </td>

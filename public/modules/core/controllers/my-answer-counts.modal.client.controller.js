@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('MyAnswerCountsModalController', ['$scope', '$modalInstance', 'Cards', 'answer', 'mode', 'card',
-    function ($scope, $modalInstance, Cards, answer, mode, card) {
+angular.module('core').controller('MyAnswerCountsModalController', ['$scope', '$modalInstance', 'Cards', 'answer', 'mode', 'card', 'supervised','RetentionCalculatorService', 'Messages', 'Authentication',
+    function ($scope, $modalInstance, Cards, answer, mode, card, supervised, RetentionCalculatorService, Messages, Authentication) {
 
         $scope.answer = answer;
         $scope.mode = mode;
@@ -10,13 +10,28 @@ angular.module('core').controller('MyAnswerCountsModalController', ['$scope', '$
         $scope.ok = function () {
 
 
-            if ($scope.mode === 'reverse') {
-                $scope.card.acceptedAnswersReverse.push(answer);
-            } else {
-                $scope.card.acceptedAnswersForward.push(answer);
-            }
+            console.log('answer '+$scope.answer);
 
-            new Cards($scope.card).$update();
+            $scope.card.history.splice(-1,1);
+            var time = Date.now();
+            var newHrt = RetentionCalculatorService.calculateFor($scope.card, Date.now(), 3);
+            $scope.card.history.push({when: time, assessment: 3, hrt:newHrt});
+
+            if (supervised) {
+                var msg = new Messages({
+                    sender: Authentication.user.displayName,
+                    direction: $scope.mode,
+                    card: $scope.card.master,
+                    content: $scope.answer,
+                    to: [$scope.card.supervisor]
+                });
+
+                console.log(msg);
+                msg.$save();
+            } else {
+                console.log('xxxxxx');
+            }
+            //new Cards($scope.card).$update();
 
 
             $modalInstance.close();

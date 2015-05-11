@@ -493,24 +493,28 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.myAnswerCounts = function (answer, mode) {
 
-            $scope.answer = answer;
-            $scope.mode = mode;
+            console.log($scope.answer);
 
-            $modal.open({
-                templateUrl: 'myAnswerCounts.html',
-                controller: 'MyAnswerCountsModalController',
-                resolve: {
-                    answer: function () {
-                        return $scope.answer;
-                    },
-                    mode: function () {
-                        return $scope.mode;
-                    },
-                    card: function () {
-                        return $scope.card;
+
+                $modal.open({
+                    templateUrl: 'myAnswerCounts.html',
+                    controller: 'MyAnswerCountsModalController',
+                    resolve: {
+                        answer: function () {
+                            return answer;
+                        },
+                        mode: function () {
+                            return mode;
+                        },
+                        card: function () {
+                            return $scope.card;
+                        },
+                        supervised: function () {
+                            return $scope.course.supervised;
+                        }
                     }
-                }
-            });
+                });
+
         };
 
 

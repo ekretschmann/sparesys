@@ -35,6 +35,7 @@ var getErrorMessage = function(err) {
  * Create a Message
  */
 exports.create = function(req, res) {
+
 	var message = new Message(req.body);
 	message.user = req.user;
 

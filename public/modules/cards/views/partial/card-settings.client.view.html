@@ -37,9 +37,11 @@
             </td>
 
             <td class="top-padded-s right-padded-s middle-aligned">
-                {{card.question}}
+                {{card.question}} <span data-ng-if="card.questionExtension">({{card.questionExtension}})</span>
             </td>
         </tr>
+
+
 
         <tr>
             <td class="top-padded-m right-padded-s middle-aligned">
@@ -47,7 +49,7 @@
             </td>
 
             <td class="top-padded-m right-padded-s middle-aligned">
-                {{card.answer}}
+                {{card.answer}} <span data-ng-if="card.answerExtension">({{card.answerExtension}})</span>
             </td>
         </tr>
 

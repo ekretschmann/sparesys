@@ -45,8 +45,11 @@
                 </td>
                 <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
                     <a data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+                    <span data-ng-if="card.questionExtension">({{card.questionExtension}})</span>
                 </td>
-                <td class="right-padded-m top-padded top-aligned text-min-width expands">{{card.answer}}</td>
+                <td class="right-padded-m top-padded top-aligned text-min-width expands">
+                    {{card.answer}} <span data-ng-if="card.answerExtension">({{card.answerExtension}})</span>
+                </td>
 
             </tr>
         </tbody>

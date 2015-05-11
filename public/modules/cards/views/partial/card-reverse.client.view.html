@@ -57,6 +57,25 @@
 
         </tr>
 
+        <tr>
+            <td class="right-padded-m nowrap top-padded-m">
+                <span ng-class="reverseMuted">Extra Information</span>
+            </td>
+            <td class="expands right-padded-s top-padded-m">
+                <input type="text"
+                       data-ng-model="card.answerExtension"
+                       class=" form-control focus standard-input-width"
+                       placeholder="Question"
+                       data-ng-blur="updateCard()"
+                       ng-disabled="!card.hasReverseMode"
+                       required>
+
+
+            </td>
+
+
+        </tr>
+
 
         <tr>
             <td class="top-padded-s bottom-padded-m"></td>
@@ -87,6 +106,8 @@
             </td>
 
         </tr>
+
+
 
 
         <tr data-ng-repeat="alt in card.acceptedAnswersReverse track by $index">

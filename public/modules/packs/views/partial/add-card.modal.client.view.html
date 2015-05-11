@@ -24,7 +24,7 @@
                     <div class="content-header">
                         <table>
                             <tr>
-                                <td class="right-padded-m">{{course.front}}</td>
+                                <td class="right-padded-m nowrap">{{course.front}}</td>
                                 <td class="expands">
                                     <input type="text"
                                            data-ng-model="options.question"
@@ -39,6 +39,25 @@
                                           <!--<span data-ng-repeat="c in specialCharsFront" >-->
                         <!--<button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharFront(c)">{{c}}</button>-->
                                               <!--</span>-->
+                                    <!--</div>-->
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <td class="right-padded-m top-padded-s"></td>
+                                <td class="expands top-padded-s">
+                                    <input type="text"
+                                           data-ng-model="options.questionExtension"
+                                           id="questionextension"
+                                           class="form-control front"
+                                           placeholder="Extra Information"
+                                           tabindex=4
+                                           required>
+
+                                    <!--<div style="text-align: center; padding-bottom: 10px">-->
+                                    <!--<span data-ng-repeat="c in specialCharsFront" >-->
+                                    <!--<button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharFront(c)">{{c}}</button>-->
+                                    <!--</span>-->
                                     <!--</div>-->
                                 </td>
                             </tr>
@@ -69,6 +88,27 @@
                                           <!--<span data-ng-repeat="c in specialCharsBack" >-->
                         <!--<button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharBack(c)">{{c}}</button>-->
                                               <!--</span>-->
+                                    <!--</div>-->
+                                </td>
+                            </tr>
+
+
+
+                            <tr>
+                                <td class="right-padded-m top-padded-s"></td>
+                                <td class="expands top-padded-s">
+                                    <input type="text"
+                                           data-ng-model="options.answerExtension"
+                                           id="answernextension"
+                                           class="form-control front"
+                                           placeholder="Extra Information"
+                                           tabindex=5
+                                           required>
+
+                                    <!--<div style="text-align: center; padding-bottom: 10px">-->
+                                    <!--<span data-ng-repeat="c in specialCharsFront" >-->
+                                    <!--<button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharFront(c)">{{c}}</button>-->
+                                    <!--</span>-->
                                     <!--</div>-->
                                 </td>
                             </tr>

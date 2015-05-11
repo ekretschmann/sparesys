@@ -7,7 +7,10 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
         $scope.options = {};
         $scope.options.format = 'short';
         $scope.options.answer = '';
+        $scope.options.answerExtension = '';
         $scope.options.question = '';
+        $scope.options.questionExtension = '';
+
         $scope.specialCharsFront = [];
         $scope.specialCharsBack = [];
 
@@ -92,7 +95,9 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
 
             var original = new Cards({
                 question: $scope.options.question,
+                questionExtension: $scope.options.questionExtension,
                 answer: $scope.options.answer,
+                answerExtension: $scope.options.answerExtension,
                 packs: [$scope.pack._id],
                 course: $scope.course._id,
                 format:  $scope.options.format,
@@ -101,7 +106,9 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
 
             var self = {};
             self.question = $scope.options.question;
+            self.questionExtension = $scope.options.questionExtension;
             self.answer = $scope.options.answer;
+            self.answerExtension = $scope.options.answerExtension;
             self.format = $scope.options.format;
             original.$save(function () {
 
@@ -138,7 +145,9 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
                                 course: slave.course,
                                 supervisor: original.user,
                                 question: self.question,
+                                questionExtension: self.questionExtension,
                                 answer: self.answer,
+                                answerExtension: self.answerExtension,
                                 format: self.format,
                                 packs: [slaveId]
                             });
@@ -161,41 +170,10 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
             });
 
 
-//            packs.forEach(function (pId) {
-//
-//                var self = {};
-//                self.question = this.question;
-//                self.answer = this.answer;
-//
-//                Packs.query({
-//                    _id: pId
-//                }, function (packs) {
-//                    var card = new Cards({
-//                        question: self.question,
-//                        answer: self.answer,
-//                        packs: [pId],
-//                        user: packs[0].user
-//                    });
-//
-//                    card.$save();
-//                    original.slaves.push(card._id);
-//                    console.log('here');
-//                    console.log(original);
-//
-//                    original.$save(function() {
-//                        $state.go($state.$current, null, { reload: true });
-//                    });
-//
-//
-//                    packs[0].cards.push(card._id);
-//                    packs[0].$update();
-//                });
-//            }, this);
-
-
-            JourneyService.cardCreated();
             $scope.options.question = '';
+            $scope.options.questionExtension = '';
             $scope.options.answer = '';
+            $scope.options.answerExtension = '';
             angular.element('.focus').trigger('focus');
         };
     }

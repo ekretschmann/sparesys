@@ -53,6 +53,23 @@
 
 
             </td>
+</tr>
+        <tr>
+
+            <td class="right-padded-m nowrap top-padded-m">
+                <span ng-class="forward-muted">Extra Information</span>
+            </td>
+            <td class="expands right-padded-s top-padded-m">
+                <input type="text"
+                       data-ng-model="card.questionExtension"
+                       class=" form-control focus standard-input-width"
+                       placeholder="Extra Information"
+                       data-ng-blur="updateCard()"
+                       ng-disabled="!card.hasForwardMode"
+                       required>
+
+
+            </td>
 
 
         </tr>

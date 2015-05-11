@@ -42,10 +42,20 @@ var CardSchema = new Schema({
         default: '',
         trim: true
     },
+    questionExtension: {
+        type: String,
+        default: '',
+        trim: true
+    },
     answer: {
         type: String,
         default: '',
         required: 'Please fill out Card Answer',
+        trim: true
+    },
+    answerExtension: {
+        type: String,
+        default: '',
         trim: true
     },
     created: {

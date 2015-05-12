@@ -52,6 +52,8 @@ exports.signup = function (req, res) {
     user.provider = 'local';
     user.displayName = user.firstName + ' ' + user.lastName;
 
+    user.inventory = [];
+
     // Then save the user
     user.save(function (err) {
         if (err) {
@@ -145,14 +147,11 @@ exports.signin = function (req, res, next) {
 exports.update = function (req, res) {
 
 
-    //console.log('xxxxxxxxxxxxxxxxxxx');
-    //console.log(req.user);
-    //console.log('------------------');
-    //console.log(req);
 
-    //console.log('updating');
     // Init Variables
     var user = req.user;
+
+
     //console.log(user);
     var message = null;
 
@@ -172,10 +171,12 @@ exports.update = function (req, res) {
         if (theUser.teachesClasses === '') {
             theUser.teachesClasses = undefined;
         }
+        if (!theUser.inventory) {
+            theUser.inventory = [];
+        }
         theUser.save(function (err) {
 
 
-            console.log(err);
             //console.log('zzzzz');
             //console.log(err);
             if (err) {
@@ -239,6 +240,9 @@ exports.changePassword = function (req, res, next) {
                     if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
                         user.password = passwordDetails.newPassword;
 
+                        if (!user.inventory) {
+                            user.inventory = [];
+                        }
                         user.save(function (err) {
                             if (err) {
                                 return res.send(400, {
@@ -409,6 +413,9 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                         });
 
                         // And save the user
+                        if (!user.inventory) {
+                            user.inventory = [];
+                        }
                         user.save(function (err) {
                             return done(err, user);
                         });
@@ -434,6 +441,9 @@ exports.saveOAuthUserProfile = function (req, providerUserProfile, done) {
                     user.markModified('additionalProvidersData');
 
                     // And save the user
+                    if (!user.inventory) {
+                        user.inventory = [];
+                    }
                     user.save(function (err) {
                         return done(err, user, '/#!/settings/accounts');
                     });
@@ -461,6 +471,9 @@ exports.removeOAuthProvider = function (req, res, next) {
             user.markModified('additionalProvidersData');
         }
 
+        if (!user.inventory) {
+            user.inventory = [];
+        }
         user.save(function (err) {
             if (err) {
                 return res.send(400, {

@@ -62,11 +62,20 @@
 
     <tr>
         <td class="nowrap right-padded-m top-padded-s">Front of Card</td>
-        <td class="top-padded-s" colspan="5">
+        <td class="top-padded-s" colspan="4">
             <input type="text"
                    data-ng-model="options.front"
                    class="form-control"
                    placeholder="{{course.front}}"
+                   data-ng-blur="saveSettings()"
+                   required>
+        </td>
+
+        <td class="top-padded-s" colspan="5">
+            <input type="text"
+                   data-ng-model="options.languageFront"
+                   class="form-control"
+                   placeholder="{{course.languageFront}}"
                    data-ng-blur="saveSettings()"
                    required>
         </td>

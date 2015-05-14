@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('packs').controller('AddCardToPackController', ['$window', '$scope', '$state', '$timeout', '$modalInstance', 'pack', 'course', 'Cards', 'Packs', 'JourneyService',
-    function ($window, $scope, $state, $timeout, $modalInstance, pack, course, Cards, Packs, JourneyService) {
+angular.module('packs').controller('AddCardToPackController', ['$window', '$scope', '$state', '$timeout', '$modalInstance', 'pack', 'course', 'Cards', 'Packs',
+    function ($window, $scope, $state, $timeout, $modalInstance, pack, course, Cards, Packs) {
         $scope.pack = pack;
         $scope.course = course;
         $scope.options = {};
@@ -38,34 +38,30 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
             angular.element('.back').trigger('focus');
         };
 
-        $scope.setSpecialCharacters = function () {
-//            var langFront = $scope.course.language.name;
-//            var langBack = $scope.course.languageback.name;
+        $scope.setSpecialCharacters = function (lang) {
 
 
-//            if (langFront === 'Spanish') {
-//                $scope.specialCharsFront = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
-//            } else if (langFront === 'French') {
-//                $scope.specialCharsFront = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
-//            } else if (langFront === 'German') {
-//                $scope.specialCharsFront = ['ä', 'é', 'ö', 'ü', 'ß'];
-//            } else if (langFront === 'English (GB)') {
-//                $scope.specialCharsFront = [];
-//            } else if (langFront === '') {
-//                $scope.specialCharsFront = [];
-//            }
-//
-//            if (langBack === 'Spanish') {
-//                $scope.specialCharsBack = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
-//            } else if (langBack === 'French') {
-//                $scope.specialCharsBack = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
-//            } else if (langBack === 'German') {
-//                $scope.specialCharsBack = ['ä', 'é', 'ö', 'ü', 'ß'];
-//            } else if (langBack === 'English (GB)') {
-//                $scope.specialCharsBack = [];
-//            } else if (langBack === '') {
-//                $scope.specialCharsBack = [];
-//            }
+
+
+
+            $scope.specialChars = [];
+            if (lang === 'Spanish') {
+                $scope.specialChars = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+            } else if (lang === 'French') {
+                $scope.specialChars = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+            } else if (lang === 'German') {
+                $scope.specialChars = ['ä', 'é', 'ö', 'ü', 'ß'];
+            }
+            //
+            //
+            //$scope.specialCharsBack = [];
+            //if (langBack === 'Spanish') {
+            //    $scope.specialCharsBack = ['á', 'é', 'í', 'ó', 'ú', 'ü', 'ñ', '¿', '¡'];
+            //} else if (langBack === 'French') {
+            //    $scope.specialCharsBack = ['à', 'â', 'ç', 'é', 'è', 'ê', 'ë', 'î', 'ï', 'ô', 'ù', 'û'];
+            //} else if (langBack === 'German') {
+            //    $scope.specialCharsBack = ['ä', 'é', 'ö', 'ü', 'ß'];
+            //}
         };
 
         $scope.setSpecialCharacters();
@@ -117,7 +113,7 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
                 if ($window.ga) {
                     console.log('sending to ga');
                     $window.ga('send', 'pageview', '/packs/addcardtopack');
-                    $window.ga('send', 'event', 'create pack');
+                    $window.ga('send', 'event', 'create card');
                 }
 
                 $scope.pack.cards.push(original._id);

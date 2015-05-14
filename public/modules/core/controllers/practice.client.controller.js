@@ -227,23 +227,26 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
 
-                //if (($scope.cardsRemembered + 1) % 3 === 0) {
-                //
-                //    $timeout(function () {
-                //        $scope.mode = 'reward';
-                //    }, 100);
-                //
-                //    return;
-                //}
+                if ($scope.authentication.user.roles.indexOf('debug-viewer') > -1) {
+                    if (($scope.cardsRemembered + 1) % 3 === 0) {
 
-                if ($scope.rewardScore > 6) {
+                        $timeout(function () {
+                            $scope.mode = 'reward';
+                        }, 100);
 
-                    $timeout(function () {
-                        $scope.rewardScore = 0.0;
-                        $scope.mode = 'reward';
-                    }, 100);
+                        return;
+                    } else {
 
-                    return;
+                        if ($scope.rewardScore > 6) {
+
+                            $timeout(function () {
+                                $scope.rewardScore = 0.0;
+                                $scope.mode = 'reward';
+                            }, 100);
+
+                            return;
+                        }
+                    }
                 }
             }
 

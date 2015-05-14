@@ -1,7 +1,7 @@
 'use strict';
 
 // Rewards controller
-angular.module('rewards').controller('RewardsController', ['$scope', '$state', '$stateParams','$location', 'Authentication', 'Rewards',
+angular.module('rewards').controller('RewardsController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Rewards',
     function ($scope, $state, $stateParams, $location, Authentication, Rewards) {
         $scope.authentication = Authentication;
 
@@ -11,7 +11,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.updateReward = false;
         $scope.type = 'Item';
 
-
+        $scope.selectedIngredient = '';
+        $scope.selectedEnabler = '';
 
 
         $scope.removeIngredient = function (ingredient) {
@@ -30,32 +31,50 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             }
         };
 
-        $scope.addIngredient = function (reward) {
+        $scope.selectIngredient = function () {
+
 
             var found = false;
             $scope.ingredients.forEach(function (ingredient) {
-                if (ingredient.name === reward.name) {
+                if (ingredient.name === $scope.selectedIngredient) {
                     ingredient.amount += 1;
                     found = true;
                 }
             });
 
             if (!found) {
-                $scope.ingredients.push({name: reward.name, amount: 1});
+                $scope.ingredients.push({name: $scope.selectedIngredient, amount: 1});
+
             }
+            $scope.selectedIngredient = '';
         };
 
-        $scope.addPrecursor = function (reward) {
+        //$scope.addIngredient = function (reward) {
+        //
+        //    var found = false;
+        //    $scope.ingredients.forEach(function (ingredient) {
+        //        if (ingredient.name === reward.name) {
+        //            ingredient.amount += 1;
+        //            found = true;
+        //        }
+        //    });
+        //
+        //    if (!found) {
+        //        $scope.ingredients.push({name: reward.name, amount: 1});
+        //    }
+        //};
+
+        $scope.selectEnabler = function () {
 
             var found = false;
             $scope.ingredients.forEach(function (ingredient) {
-                if (ingredient.name === reward.name) {
+                if (ingredient.name === $scope.selectedEnabler) {
                     found = true;
                 }
             });
 
             if (!found) {
-                $scope.enables.push(reward.name);
+                $scope.enables.push($scope.selectedEnabler);
             }
 
         };
@@ -83,10 +102,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             }
 
 
-
             // Redirect after save
             if ($scope.updateReward) {
-                reward.$update(function() {
+                reward.$update(function () {
                     $state.go($state.$current, null, {reload: true});
                 });
             } else {
@@ -160,7 +178,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         };
 
-        $scope.cancel = function() {
+        $scope.cancel = function () {
             $scope.name = '';
             $scope.description = '';
             $scope.type = 'Item';

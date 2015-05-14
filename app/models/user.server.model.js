@@ -83,6 +83,9 @@ var UserSchema = new Schema({
 				required: 'Please fill Reward name',
 				trim: true
 			},
+			reward: {
+				type: Schema.ObjectId
+			},
 			type: {
 				type: String,
 				default: '',

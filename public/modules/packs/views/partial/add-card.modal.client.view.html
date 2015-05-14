@@ -85,6 +85,8 @@
                                     </span>
 
                                     <!--<div style="text-align: center; padding-bottom: 10px">-->
+
+                                        <!--{{specialCharsBack}}-->
                                           <!--<span data-ng-repeat="c in specialCharsBack" >-->
                         <!--<button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharBack(c)">{{c}}</button>-->
                                               <!--</span>-->
@@ -105,11 +107,11 @@
                                            tabindex=5
                                            required>
 
-                                    <!--<div style="text-align: center; padding-bottom: 10px">-->
-                                    <!--<span data-ng-repeat="c in specialCharsFront" >-->
-                                    <!--<button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharFront(c)">{{c}}</button>-->
-                                    <!--</span>-->
-                                    <!--</div>-->
+                                    <div style="text-align: center; padding-bottom: 10px">
+                                    <span data-ng-repeat="c in specialCharsFront" >
+                                    <button class="btn btn-rememberators btn-small" style="margin-bottom: 3px" data-ng-click="typeSpecialCharFront(c)">{{c}}</button>
+                                    </span>
+                                    </div>
                                 </td>
                             </tr>
 
@@ -128,10 +130,34 @@
                         </table>
                     </div>
 
+                    <div class="center-aligned content-header">
+                        <button class="btn btn-rememberators"
+                                type="Spanish"
+                                tabindex=
+                                        ng-click="addCardToPack()">Spanish
+                        </button>
+
+                        <button class="btn btn-rememberators"
+                                type="French"
+                                tabindex=
+                                        ng-click="addCardToPack()">French
+                        </button>
+
+                        <button class="btn btn-rememberators"
+                                type="German"
+                                tabindex=
+                                        ng-click="addCardToPack()">German
+                        </button>
+
+
+                    </div>
+
+
+
                     <div class="center-aligned">
                         <button class="btn btn-rememberators"
                                 type="submit"
-                                tabindex=3
+                                tabindex=
                                 ng-click="addCardToPack()">Add
                         </button>
 

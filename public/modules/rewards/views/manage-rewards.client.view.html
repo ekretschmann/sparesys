@@ -24,7 +24,7 @@
 
                     </td>
                     <td class="right-padded-m nowrap top-padded-s left-padded-l nowrap">Rank</td>
-                    <td class="top-padded-s right-padded-m" >
+                    <td class="top-padded-s right-padded-m">
                         <input type="number"
                                data-ng-model="rank"
                                class="form-control"
@@ -32,85 +32,140 @@
                                required>
                     </td>
 
-                    <td class="top-padded-s nowrap right-padded-m" >
+                    <td class="top-padded-s nowrap right-padded-m">
                         <input type="radio"
                                data-ng-model="type"
                                value="Item"
-                               > Item
+                                > Item
                     </td>
                     <td class="top-padded-s nowrap right-padded-s">
                         <input type="radio"
                                data-ng-model="type"
                                value="Skill"
 
-                               > Skill
-                            </td>
+                                > Skill
+                    </td>
                     </td>
 
                 </tr>
 
                 <tr>
-                    <td class="right-padded-m nowrap top-padded-s nowrap top-aligned">Description</td>
-                    <td class="top-padded-s text-min-width" colspan="5">
+                    <td class="right-padded-m nowrap top-padded-m nowrap top-aligned">Description</td>
+                    <td class="top-padded-m text-min-width" colspan="5">
                         <textarea type="text"
-                               data-ng-model="description"
-                               class="form-control"
-                               placeholder="Description"
-                               rows="3"
-                               required></textarea>
+                                  data-ng-model="description"
+                                  class="form-control"
+                                  placeholder="Description"
+                                  rows="3"
+                                  required></textarea>
 
                     </td>
 
                 </tr>
 
-                <tr data-ng-if="ingredients.length > 0">
-                    <td class="right-padded-m nowrap top-padded-s nowrap top-aligned" >Ingredients</td>
-                    <td class="top-padded-s expands" colspan="3">
+                <tr>
+                    <td class="right-padded-m nowrap top-padded-m nowrap ">Ingredients</td>
+                    <td class="top-padded-m expands" colspan="5">
 
 
+                        <input style="width: 100%"
+                                type="text"
+                               data-ng-model="selectedIngredient"
+                               typeahead-on-select="selectIngredient()"
+                               typeahead="reward.name for reward in rewards | filter:$viewValue | limitTo:8"
+                               class="form-control">
 
-                        <table class="left-aligned" >
-                        <tr data-ng-repeat="ingredient in ingredients">
-                            <td class="right-padded-s"><a >
-                                <i data-ng-click="removeIngredient(ingredient)"
-                                   class="glyphicon glyphicon-remove-sign small">
-                                </i>
-                            </a></td>
-                            <td class="right-padded-s">{{ingredient.amount}}</td>
-                            <td class="right-padded-m">{{ingredient.name}}</td>
-                            <td ><input data-ng-model="ingredient.keep" type="checkbox" /> keep intact</td>
-                            </tr>
-                        </table>
+
 
                     </td>
                 </tr>
 
-                <tr data-ng-if="enables.length > 0">
-                    <td class="right-padded-m nowrap top-padded-s nowrap top-aligned" >Enables</td>
-                    <td class="top-padded-s expands" colspan="3">
+                <tr>
 
+                    <td></td>
+                    <td class="top-padded-s">
 
-
-                        <table class="left-aligned" >
-                            <tr data-ng-repeat="item in enables">
-                                <td class="right-padded-s"><a >
-                                    <i data-ng-click="removePrecursor(item)"
+                        <table class="left-aligned">
+                            <tr data-ng-repeat="ingredient in ingredients">
+                                <td class="right-padded-s"><a>
+                                    <i data-ng-click="removeIngredient(ingredient)"
                                        class="glyphicon glyphicon-remove-sign small">
                                     </i>
                                 </a></td>
-                                <td class="right-padded-m">{{item}}</td>
+                                <td class="right-padded-s">{{ingredient.amount}}</td>
+                                <td class="right-padded-m">{{ingredient.name}}</td>
+                                <td><input data-ng-model="ingredient.keep" type="checkbox"/> keep intact</td>
                             </tr>
                         </table>
 
                     </td>
                 </tr>
+
+
+                <tr>
+                    <td class="right-padded-m nowrap top-padded-m nowrap ">Enables</td>
+                    <td class="top-padded-m expands" colspan="5">
+
+
+                        <input style="width: 100%"
+                               type="text"
+                               data-ng-model="selectedEnabler"
+                               typeahead-on-select="selectEnabler()"
+                               typeahead="reward.name for reward in rewards | filter:$viewValue | limitTo:8"
+                               class="form-control">
+
+
+
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td></td>
+                    <td class="top-padded-s">
+
+                        <table class="left-aligned">
+                            <tr data-ng-repeat="enabler in enables">
+                                <td class="right-padded-s"><a>
+                                    <i data-ng-click="removeIngredient(enabler)"
+                                       class="glyphicon glyphicon-remove-sign small">
+                                    </i>
+                                </a></td>
+                                <td class="right-padded-m">{{enabler.name}}</td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+
+                <!--<tr data-ng-if="enables.length > 0">-->
+                    <!--<td class="right-padded-m nowrap top-padded-s nowrap top-aligned">Enables</td>-->
+                    <!--<td class="top-padded-s expands" colspan="3">-->
+
+
+                        <!--<table class="left-aligned">-->
+                            <!--<tr data-ng-repeat="item in enables">-->
+                                <!--<td class="right-padded-s"><a>-->
+                                    <!--<i data-ng-click="removePrecursor(item)"-->
+                                       <!--class="glyphicon glyphicon-remove-sign small">-->
+                                    <!--</i>-->
+                                <!--</a></td>-->
+                                <!--<td class="right-padded-m">{{item}}</td>-->
+                            <!--</tr>-->
+                        <!--</table>-->
+
+                    <!--</td>-->
+                <!--</tr>-->
 
             </table>
 
             <div class="center-aligned top-padded-m">
 
                 <input type="submit" value="Ok" class="btn btn-rememberators" style="width: 100px;">
-                <input ng-click="cancel()" value="Cancel" class="btn btn-rememberators" style="width: 100px;">
+                <input ng-click="cancel()" value="New" class="btn btn-rememberators" style="width: 100px;">
+                <input ng-click="remove(reward)" value="Delete" class="btn btn-rememberators" style="width: 100px;">
+
+
             </div>
         </form>
 
@@ -121,39 +176,51 @@
     <table id="searchTextResults" class="table-striped" data-ng-hide="rewards.length === 0">
         <thead>
         <tr>
-            <th></th>
             <th class="left-padded-s right-padded-m">Reward</th>
+            <th class="right-padded-m">Ingredients</th>
+            <th class="right-padded-m">Enables</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="reward in rewards | filter:searchText">
-            <td class="left-padded-s top-padded-s nowrap">
-                <a >
-                    <i data-ng-click="remove(reward)"
-                       class="glyphicon glyphicon-remove-sign small">
-                    </i>
-                </a>
+            <!--<td class="left-padded-s top-padded-s nowrap">-->
+            <!--<a >-->
+            <!--<i data-ng-click="remove(reward)"-->
+            <!--class="glyphicon glyphicon-remove-sign small">-->
+            <!--</i>-->
+            <!--</a>-->
 
-            </td>
-            <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s expands">
+            <!--</td>-->
+            <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s top-aligned">
                 <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
 
-                <a class="pointer" href="/#!/rewards/manage/{{reward._id}}">{{reward.name}}</a> ({{reward.rank}})
-                <a href="" data-ng-click="addIngredient(reward)">(as ingredient)</a>
-                <a href="" data-ng-click="addPrecursor(reward)">(as dependency)</a>
+                <a class="pointer" href="/#!/rewards/manage/{{reward._id}}">{{reward.name}}</a>
+
+                <!--<a href="" data-ng-click="addIngredient(reward)">(as ingredient)</a>-->
+                <!--<a href="" data-ng-click="addPrecursor(reward)">(as dependency)</a>-->
                 <!--(<a class="pointer" data-ng-click="addIngredient(reward)">ingredient</a>)-->
             </td>
+            <td>
+
+                <div class="right-padded-s" data-ng-repeat="ingredient in reward.ingredients">{{ingredient.name}}
+                    ({{ingredient.amount}})
+                </div>
+            </td>
+            <td>
+
+                <div class="right-padded-s" data-ng-repeat="ingredient in reward.enables">{{ingredient}}</div>
+            </td>
             <!--<td class="right-padded-s">-->
-                <!--Enables: {{reward.enables}}, Ingredients: {{reward.ingredients}}-->
+            <!--Enables: {{reward.enables}}, Ingredients: {{reward.ingredients}}-->
             <!--</td>-->
         </tr>
         </tbody>
     </table>
 
     <!--<div class="list-group">-->
-        <!--<a data-ng-repeat="reward in rewards" data-ng-href="#!/rewards/{{reward._id}}" class="list-group-item">-->
-            <!--<h4 class="list-group-item-heading" data-ng-bind="reward.name"></h4>-->
-        <!--</a>-->
+    <!--<a data-ng-repeat="reward in rewards" data-ng-href="#!/rewards/{{reward._id}}" class="list-group-item">-->
+    <!--<h4 class="list-group-item-heading" data-ng-bind="reward.name"></h4>-->
+    <!--</a>-->
     <!--</div>-->
 
 

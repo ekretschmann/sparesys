@@ -15,21 +15,13 @@
             <table class="top-margin-l expands">
                 <tr>
                     <td class="right-padded-m nowrap top-padded-s nowrap">Reward Name</td>
-                    <td class="top-padded-s text-min-width">
+                    <td class="top-padded-s right-padded-m text-min-width">
                         <input type="text"
                                data-ng-model="name"
                                class="form-control"
                                placeholder="Name"
                                required>
 
-                    </td>
-                    <td class="right-padded-m nowrap top-padded-s left-padded-l nowrap">Rank</td>
-                    <td class="top-padded-s right-padded-m">
-                        <input type="number"
-                               data-ng-model="rank"
-                               class="form-control"
-                               placeholder="Rank"
-                               required>
                     </td>
 
                     <td class="top-padded-s nowrap right-padded-m">
@@ -45,12 +37,20 @@
 
                                 > Skill
                     </td>
+                    <td class="top-padded-s nowrap right-padded-s">
+                        <input type="radio"
+                               data-ng-model="type"
+                               value="Upgrade"
+
+                                > Upgrade
+                    </td>
+
                     </td>
 
                 </tr>
 
                 <tr>
-                    <td class="right-padded-m nowrap top-padded-m nowrap top-aligned">Description</td>
+                    <td class="right-padded-m nowrap nowrap top-padded-m top-aligned">Description</div> </td>
                     <td class="top-padded-m text-min-width" colspan="5">
                         <textarea type="text"
                                   data-ng-model="description"
@@ -127,7 +127,7 @@
                         <table class="left-aligned">
                             <tr data-ng-repeat="enabler in enables">
                                 <td class="right-padded-s"><a>
-                                    <i data-ng-click="removeIngredient(enabler)"
+                                    <i data-ng-click="removePrecursor(enabler)"
                                        class="glyphicon glyphicon-remove-sign small">
                                     </i>
                                 </a></td>

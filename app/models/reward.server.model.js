@@ -28,12 +28,12 @@ var RewardSchema = new Schema({
         required: 'Please fill Reward name',
         trim: true
     },
-    rank: {
+    healthpoints: {
         type: Number,
         default: 1
     },
     enables: [{
-        type: String
+        type: Schema.ObjectId
     }],
     ingredients: {
         type: [{

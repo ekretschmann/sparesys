@@ -49,34 +49,31 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.selectedIngredient = '';
         };
 
-        //$scope.addIngredient = function (reward) {
-        //
-        //    var found = false;
-        //    $scope.ingredients.forEach(function (ingredient) {
-        //        if (ingredient.name === reward.name) {
-        //            ingredient.amount += 1;
-        //            found = true;
-        //        }
-        //    });
-        //
-        //    if (!found) {
-        //        $scope.ingredients.push({name: reward.name, amount: 1});
-        //    }
-        //};
 
         $scope.selectEnabler = function () {
 
+
             var found = false;
             $scope.ingredients.forEach(function (ingredient) {
-                if (ingredient.name === $scope.selectedEnabler) {
+                if (ingredient._id === $scope.selectedEnabler) {
                     found = true;
                 }
             });
 
+
+
             if (!found) {
-                $scope.enables.push($scope.selectedEnabler);
+                $scope.rewards.forEach(function(reward) {
+                   if (reward.name === $scope.selectedEnabler) {
+                       $scope.enables.push(reward);
+                       $scope.reward.enables.push(reward._id);
+                   }
+                });
+
+                //$scope.enables.push($scope.selectedEnabler);
             }
 
+            $scope.selectedEnabler = '';
         };
 
         // Create new Reward
@@ -126,11 +123,13 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         // Remove existing Reward
         $scope.remove = function (reward) {
+
             if (reward) {
                 reward.$remove();
 
                 for (var i in $scope.rewards) {
-                    if ($scope.rewards [i] === reward) {
+
+                    if ($scope.rewards[i]._id === reward._id) {
                         $scope.rewards.splice(i, 1);
                     }
                 }
@@ -139,24 +138,11 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
                 });
             }
+            $scope.cancel();
         };
-        //
-        //// Update existing Reward
-        //$scope.update = function() {
-        //	var reward = $scope.reward;
-        //
-        //	reward.$update(function() {
-        //		$location.path('rewards/' + reward._id);
-        //	}, function(errorResponse) {
-        //		$scope.error = errorResponse.data.message;
-        //	});
-        //};
-        //
-        // Find a list of Rewards
-        //$scope.find = function() {
-        //	$scope.rewards = Rewards.query();
-        //};
-        //
+
+        $scope.rewards = Rewards.query();
+
         // Find existing Reward
         $scope.findOne = function () {
 
@@ -168,13 +154,20 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     $scope.description = r.description;
                     $scope.type = r.type;
                     $scope.ingredients = r.ingredients;
-                    $scope.enables = r.enables;
                     $scope.selectedType = r.type;
                     $scope.updateReward = true;
+                    console.log(r.enables);
+                    $scope.rewards.forEach(function (reward) {
+                        //console.log(reward._id);
+                        //console.log(r.enables);
+                        if (r.enables.indexOf(reward._id) > -1) {
+                            //console.log('xxxxx' +reward);
+                            $scope.enables.push(reward);
+                        }
+                    });
                 });
             }
 
-            $scope.rewards = Rewards.query();
 
         };
 

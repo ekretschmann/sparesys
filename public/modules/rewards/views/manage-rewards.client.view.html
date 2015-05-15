@@ -138,24 +138,6 @@
                     </td>
                 </tr>
 
-                <!--<tr data-ng-if="enables.length > 0">-->
-                    <!--<td class="right-padded-m nowrap top-padded-s nowrap top-aligned">Enables</td>-->
-                    <!--<td class="top-padded-s expands" colspan="3">-->
-
-
-                        <!--<table class="left-aligned">-->
-                            <!--<tr data-ng-repeat="item in enables">-->
-                                <!--<td class="right-padded-s"><a>-->
-                                    <!--<i data-ng-click="removePrecursor(item)"-->
-                                       <!--class="glyphicon glyphicon-remove-sign small">-->
-                                    <!--</i>-->
-                                <!--</a></td>-->
-                                <!--<td class="right-padded-m">{{item}}</td>-->
-                            <!--</tr>-->
-                        <!--</table>-->
-
-                    <!--</td>-->
-                <!--</tr>-->
 
             </table>
 
@@ -208,7 +190,7 @@
             </td>
             <td>
 
-                <div class="right-padded-s" data-ng-repeat="ingredient in reward.enables">{{ingredient}}</div>
+                <div class="right-padded-s" data-ng-repeat="enabler in reward.enables">{{rewardNames[enabler]}}</div>
             </td>
             <!--<td class="right-padded-s">-->
             <!--Enables: {{reward.enables}}, Ingredients: {{reward.ingredients}}-->

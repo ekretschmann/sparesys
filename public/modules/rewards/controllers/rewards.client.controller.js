@@ -49,6 +49,20 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.selectedIngredient = '';
         };
 
+        //
+        //
+        //$scope.getName= function(id) {
+        //
+        //    console.log('calling');
+        //    var name = 'unknown';
+        //    $scope.rewards.forEach(function(reward) {
+        //        if (reward._id === id) {
+        //            name = reward.name;
+        //        }
+        //    });
+        //    $scope.name = name;
+        //    return name;
+        //};
 
         $scope.selectEnabler = function () {
 
@@ -67,6 +81,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                    if (reward.name === $scope.selectedEnabler) {
                        $scope.enables.push(reward);
                        $scope.reward.enables.push(reward._id);
+                       console.log($scope.reward);
                    }
                 });
 
@@ -89,7 +104,11 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
             reward.name = $scope.name;
             reward.ingredients = $scope.ingredients;
-            reward.enables = $scope.enables;
+            if ($scope.reward) {
+                reward.enables = $scope.reward.enables;
+            } else {
+                reward.enables = [];
+            }
             reward.description = $scope.description;
             reward.type = $scope.type;
             if (!reward.ingredients || reward.ingredients.length > 0) {
@@ -141,10 +160,25 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.cancel();
         };
 
-        $scope.rewards = Rewards.query();
+        $scope.getRewardNames = function() {
+            $scope.rewardNames = [];
+
+            $scope.rewards.forEach(function(reward) {
+                $scope.rewardNames[reward._id] = reward.name;
+            }, this);
+        };
+
+        $scope.rewards = Rewards.query(function() {
+            $scope.getRewardNames();
+        });
+
+
+
 
         // Find existing Reward
         $scope.findOne = function () {
+
+
 
             if ($stateParams.rewardId) {
                 $scope.reward = Rewards.get({
@@ -156,7 +190,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     $scope.ingredients = r.ingredients;
                     $scope.selectedType = r.type;
                     $scope.updateReward = true;
-                    console.log(r.enables);
                     $scope.rewards.forEach(function (reward) {
                         //console.log(reward._id);
                         //console.log(r.enables);

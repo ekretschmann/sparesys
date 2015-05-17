@@ -283,9 +283,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
                 item.amount += 1;
             } else {
 
-                //item = {};
-                //item[choice] = 1;
-                $scope.user.inventory.push({name: choice, amount: 1, type: addedItem.type});
+                $scope.user.inventory.push({name: choice, amount: 1, type: addedItem.type, healthpoints:addedItem.healthpoints});
 
             }
 
@@ -294,21 +292,41 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.determinePossibleRecipies();
         };
 
-        $scope.getRememberalia = function (choice) {
+        $scope.craft = function (choice) {
 
 
+            console.log('crafting');
+            console.log(choice.name);
             choice.ingredients.forEach(function (ingredient) {
 
 
                 var item = $scope.getItemFromInventory(ingredient.name);
-                var newAmount = item.amount - ingredient.amount;
 
+                console.log(item);
 
-                if (newAmount === 0) {
+                if (item.healthpoints > 1) {
+
                     $scope.removeFromInventory(ingredient.name);
+                    $scope.user.inventory.push({
+                        name: item.name,
+                        amount: item.amount,
+                        type: item.type,
+                        healthpoints: item.healthpoints-1
+                    });
                 } else {
-                    $scope.removeFromInventory(ingredient.name);
-                    $scope.user.inventory.push({name: ingredient.name, amount: newAmount, type:item.type});
+                    var newAmount = item.amount - ingredient.amount;
+
+                    if (newAmount === 0) {
+                        $scope.removeFromInventory(ingredient.name);
+                    } else {
+                        $scope.removeFromInventory(ingredient.name);
+                        $scope.user.inventory.push({
+                            name: item.name,
+                            amount: newAmount,
+                            type: item.type,
+                            healthpoints: choice.healthpoints
+                        });
+                    }
                 }
             }, this);
 
@@ -316,22 +334,22 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
             $scope.determinePossibleRecipies();
 
-            Users.get({
-                userId: $scope.user._id
-            }, function (theUser) {
-
-                theUser.inventory = $scope.user.inventory;
-                theUser.$update(function(user) {
-                    $scope.user = user;
-                }, function(err) {
-                    console.log(err);
-                });
-            });
-
-            new Users($scope.user).$update(function (updatedUser) {
-                $scope.user = updatedUser;
-
-            });
+            //Users.get({
+            //    userId: $scope.user._id
+            //}, function (theUser) {
+            //
+            //    theUser.inventory = $scope.user.inventory;
+            //    theUser.$update(function(user) {
+            //        $scope.user = user;
+            //    }, function(err) {
+            //        console.log(err);
+            //    });
+            //});
+            //
+            //new Users($scope.user).$update(function (updatedUser) {
+            //    $scope.user = updatedUser;
+            //
+            //});
         };
 
         $scope.processChoice = function (selection) {
@@ -340,7 +358,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             var choice = $scope.offers[selection - 1];
 
 
-            $scope.getRememberalia(choice);
+            $scope.craft(choice);
             $scope.drawOffers();
 
             $scope.$parent.recoverFromReward();

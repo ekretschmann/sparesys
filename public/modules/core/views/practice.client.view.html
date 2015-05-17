@@ -158,7 +158,7 @@
                                 You have nothing in your inventory. Keep practicing and you will be offered rewards.
                             </div>
                             <div data-ng-repeat="item in userItems">
-                                {{item.amount}} - <span popover="{{item.description}}" popover-trigger="mouseenter">{{item.name}}</span>
+                                {{item.amount}} - <span popover="{{item.description}}" popover-trigger="mouseenter">{{item.name}}</span> ({{item.healthpoints}})
                             </div>
                         </td>
                         <td class="right-padded-m top-aligned" width="34%">
@@ -192,7 +192,7 @@
 
                                         <!--<td class="top-aligned right-padded-m bottom-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.receive[0].name)">{{rememberalia.receive[0].name}}</a></td>-->
                                         <td class="top-aligned right-padded-m bottom-padded-m"><a href=""
-                                                                                                  data-ng-click="getRememberalia(rememberalia)">{{rememberalia.name}}</a>
+                                                                                                  data-ng-click="craft(rememberalia)">{{rememberalia.name}}</a>
                                         </td>
 
                                         <td class="top-aligned bottom-padded-m">

@@ -92,7 +92,7 @@ var UserSchema = new Schema({
 				required: 'Please fill Reward type',
 				trim: true
 			},
-			health: {
+			healthpoints: {
 				type: Number,
 				default: 1
 			},

@@ -92,6 +92,10 @@ var UserSchema = new Schema({
 				required: 'Please fill Reward type',
 				trim: true
 			},
+			health: {
+				type: Number,
+				default: 1
+			},
 			amount: {
 				type: Number,
 				default: 1

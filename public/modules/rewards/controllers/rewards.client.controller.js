@@ -9,6 +9,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.enables = [];
         $scope.updateReward = false;
         $scope.type = 'Item';
+        $scope.health = 1;
 
         $scope.selectedIngredient = '';
         $scope.selectedEnabler = '';
@@ -106,6 +107,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             reward.name = $scope.name;
             reward.ingredients = $scope.ingredients;
             reward.enables = [];
+            reward.healthpoints = $scope.health;
 
             $scope.enables.forEach(function(en) {
                 reward.enables.push(en._id);
@@ -190,6 +192,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     $scope.ingredients = r.ingredients;
                     $scope.selectedType = r.type;
                     $scope.updateReward = true;
+                    $scope.health = r.healthpoints;
                     $scope.rewards.forEach(function (reward) {
                         //console.log(reward._id);
                         //console.log(r.enables);
@@ -212,6 +215,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.enables = [];
             $scope.selectedType = 'Item';
             $scope.updateReward = false;
+            $scope.health = 1;
             $location.path('/rewards/manage/');
         };
     }

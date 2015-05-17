@@ -139,14 +139,14 @@
                                 <a class="right-padded-m" href="" data-ng-click="assignCoursesPopup(schoolclass)">{{schoolclass.name}}</a>
                             </td>
 
-                            <td class="right-padded-s expands nowrap  top-padded-s">
+                            <td class="right-padded-s top-padded-s">
                                 <span data-ng-repeat="student in schoolclass.students">
                                     <span>{{student.displayName}}</span><span
                                         data-ng-if="$index < schoolclass.students.length-1">, </span>
                                 </span>
                             </td>
 
-                            <td class="right-aligned right-padded-s nowrap  top-padded-s">
+                            <td class="right-aligned right-padded-s top-padded-s">
 
                                 <span data-ng-repeat="course in schoolclass.courses">
                                     <span><a href="/#!/schoolclasses/{{schoolclass._id}}/course/{{course._id}}/progress">{{course.name}}</a></span><span

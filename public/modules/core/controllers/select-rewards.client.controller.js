@@ -29,6 +29,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.findRewards = function () {
 
 
+
             // Making fire is a fundamental skill
             if (!$scope.user.inventory || $scope.user.inventory.length === 0) {
 
@@ -46,6 +47,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
 
                 $scope.rewards.forEach(function (reward) {
+
                     if (reward.type === 'Recipe') {
                         $scope.recipies.push(reward);
                     }
@@ -63,7 +65,6 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.rewards.forEach(function (reward) {
 
                 if (reward.type === 'Skill') {
-
 
                     var isInInventory = $scope.getItemFromInventory(reward.name);
 
@@ -84,7 +85,8 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.rewards.forEach(function (reward) {
 
 
-                if (enabledItems.indexOf(reward.name) > -1) {
+
+                if (enabledItems.indexOf(reward._id) > -1) {
                     if (reward.type === 'Item') {
                         $scope.possibleItemOffers.push(reward);
                     }

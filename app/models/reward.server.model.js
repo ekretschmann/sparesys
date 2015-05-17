@@ -33,7 +33,8 @@ var RewardSchema = new Schema({
         default: 1
     },
     enables: [{
-        type: Schema.ObjectId
+        type: Schema.ObjectId,
+        default: []
     }],
     ingredients: {
         type: [{

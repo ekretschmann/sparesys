@@ -7,7 +7,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.ingredients = [];
         $scope.enables = [];
-        $scope.rank = 1;
         $scope.updateReward = false;
         $scope.type = 'Item';
 
@@ -75,14 +74,16 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             });
 
 
-
             if (!found) {
-                $scope.rewards.forEach(function(reward) {
-                   if (reward.name === $scope.selectedEnabler) {
-                       $scope.enables.push(reward);
-                       $scope.reward.enables.push(reward._id);
-                       console.log($scope.reward);
-                   }
+                $scope.rewards.forEach(function (reward) {
+                    if (reward.name === $scope.selectedEnabler) {
+                        $scope.enables.push(reward);
+                        //if(!$scope.reward.enables) {
+                        //    $scope.reward.enables = [];
+                        //}
+                        //$scope.reward.enables.push(reward._id);
+                        //console.log($scope.reward);
+                    }
                 });
 
                 //$scope.enables.push($scope.selectedEnabler);
@@ -104,11 +105,11 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
             reward.name = $scope.name;
             reward.ingredients = $scope.ingredients;
-            if ($scope.reward) {
-                reward.enables = $scope.reward.enables;
-            } else {
-                reward.enables = [];
-            }
+            reward.enables = [];
+
+            $scope.enables.forEach(function(en) {
+                reward.enables.push(en._id);
+            }, this);
             reward.description = $scope.description;
             reward.type = $scope.type;
             if (!reward.ingredients || reward.ingredients.length > 0) {
@@ -124,10 +125,12 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     $state.go($state.$current, null, {reload: true});
                 });
             } else {
+                console.log(reward);
                 reward.$save(function (response) {
                     //$location.path('rewards/' + response._id);
 
                     // Clear form fields
+                    console.log(response);
                     $scope.name = '';
                     $scope.type = 'Item';
                     $scope.ingredients = [];
@@ -160,24 +163,21 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.cancel();
         };
 
-        $scope.getRewardNames = function() {
+        $scope.getRewardNames = function () {
             $scope.rewardNames = [];
 
-            $scope.rewards.forEach(function(reward) {
+            $scope.rewards.forEach(function (reward) {
                 $scope.rewardNames[reward._id] = reward.name;
             }, this);
         };
 
-        $scope.rewards = Rewards.query(function() {
+        $scope.rewards = Rewards.query(function () {
             $scope.getRewardNames();
         });
 
 
-
-
         // Find existing Reward
         $scope.findOne = function () {
-
 
 
             if ($stateParams.rewardId) {

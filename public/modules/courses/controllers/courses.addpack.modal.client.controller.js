@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('courses').controller('AddPackToCourseController', ['$window', '$scope', '$state', '$timeout', '$modalInstance', 'course', 'Packs', 'Courses', 'JourneyService',
-    function ($window, $scope, $state, $timeout, $modalInstance, course, Packs, Courses, JourneyService) {
+angular.module('courses').controller('AddPackToCourseController', ['$window', '$scope', '$state', '$timeout', '$modalInstance', 'course', 'Packs', 'Courses',
+    function ($window, $scope, $state, $timeout, $modalInstance, course, Packs, Courses) {
         $scope.course = course;
         $scope.data = {};
         $scope.data.name = '';

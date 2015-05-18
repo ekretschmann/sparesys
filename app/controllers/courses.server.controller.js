@@ -7,7 +7,6 @@ var mongoose = require('mongoose'),
     Course = mongoose.model('Course'),
     Pack = mongoose.model('Pack'),
     Card = mongoose.model('Card'),
-    Journey = mongoose.model('Journey'),
     _ = require('lodash'),
     q = require('q');
 

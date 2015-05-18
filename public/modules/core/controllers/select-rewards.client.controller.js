@@ -34,7 +34,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             if (!$scope.user.inventory || $scope.user.inventory.length === 0) {
 
                 $scope.user.inventory = [];
-                var makingFire = {name: 'Making Fire', type: 'Skill', amount: 1};
+                var makingFire = {_id: 1, name: 'Making Fire', type: 'Skill', amount: 1};
                 $scope.user.inventory.push(makingFire);
             }
 

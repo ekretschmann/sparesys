@@ -13,6 +13,13 @@ module.exports = function(config) {
 
 		// List of files / patterns to load in the browser
 		files: applicationConfiguration.assets.lib.js.concat(applicationConfiguration.assets.js, applicationConfiguration.assets.tests),
+		//files: [
+		//	{pattern: '**/tests/unit/**/*.js', watched: true, included: true, served: true},
+		//	{pattern: '**/services/**/*.js', watched: true, included: true, served: true},
+		//],
+
+		proxies: {'/modules/core/views/home.client.view.html': 'home.client.view.html'},
+
 
 		// Test results reporter to use
 		// Possible values: 'dots', 'progress', 'junit', 'growl', 'coverage'
@@ -24,7 +31,7 @@ module.exports = function(config) {
             // source files, that you wanna generate coverage for
             // do not include tests or libraries
             // (these files will be instrumented by Istanbul)
-            'public/modules/courses/controllers/courses.client.controller.js': ['coverage']
+           // 'public/modules/courses/controllers/courses.client.controller.js': ['coverage']
         },
 
         coverageReporter: { type : 'html', dir : 'coverage/' },

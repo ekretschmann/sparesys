@@ -48,6 +48,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
                 $scope.rewards.forEach(function (reward) {
 
+                    console.log(reward);
                     if (reward.type === 'Recipe') {
                         $scope.recipies.push(reward);
                     }

@@ -14,10 +14,12 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             state('practice', {
                 url: '/practice/:courseId',
                 templateUrl: 'modules/core/views/practice.client.view.html'
-            }).state('home', {
+            })
+            .state('home', {
                 url: '/',
                 templateUrl: 'modules/core/views/home.client.view.html'
-            });
+            })
+        ;
     }
 ]);
 

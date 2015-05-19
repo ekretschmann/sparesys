@@ -12,6 +12,24 @@
             Service = _RewardsInventoryService_;
         }));
 
+        //
+        it('should serve simple item to item trades', function () {
+            Service.rewards = testRewards;
+            Service.rewards.push({
+                    _id: '5',
+                    name: 'Tree',
+                    type: 'Item',
+                    ingredients:[{_id:'2', amount: 1}, {_id: '3', amount:1}, {_id:'4', amount:1}]
+                }
+            );
+            Service.inventory = [{rewardId: '101', amount: 1},
+                {rewardId: '2', amount: 1},
+                {rewardId: '3', amount: 1},
+                {rewardId: '4', amount: 1},
+            ];
+            Service.trade('5');
+            expect(Service.inventory.length).toBe(2);
+        });
 
         it('should get user items correcty', function () {
             Service.rewards = testRewards;
@@ -101,9 +119,9 @@
 
         var testRewards = [
             {_id: '4', name: 'Rock', type: 'Item'},
-            {_id: '3', name: 'Soil', type: 'Item', amount: 1},
-            {_id: '2', name: 'Water', type: 'Item', amount: 1},
-            {_id: '1', name: 'Sapling', type: 'Item', amount: 1},
+            {_id: '3', name: 'Soil', type: 'Item'},
+            {_id: '2', name: 'Water', type: 'Item'},
+            {_id: '1', name: 'Sapling', type: 'Item'},
             {_id: '102', name: 'Making Fire', type: 'Skill', enables: ['2', '3', '4']},
             {_id: '101', name: 'Building a House', type: 'Skill', enables: ['1', '2', '3']}
         ];

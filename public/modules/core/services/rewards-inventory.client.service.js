@@ -7,6 +7,45 @@ angular.module('core').service('RewardsInventoryService', [
         this.inventory = [];
         this.possibeRecipies = [];
 
+        this.trade = function(rewardId) {
+
+            var reward = this.getReward(rewardId);
+            var inventoryCopy = this.inventory.slice(0);
+            var canTrade = true;
+            if (reward.ingredients) {
+                reward.ingredients.forEach(function (ingredient) {
+                    var found = false;
+                    inventoryCopy.forEach(function (item) {
+                        if (item.rewardId === ingredient._id && item.amount >= ingredient.amount) {
+                            found = true;
+                            item.amount -= ingredient.amount;
+                        }
+                    }, this);
+                    if (!found) {
+                        canTrade = false;
+                    }
+                }, this);
+                if (canTrade) {
+                    this.inventory = [];
+                    inventoryCopy.forEach(function(item) {
+                        if(item.amount > 0) {
+                            this.inventory.push(item);
+                        }
+                    }, this);
+                    this.inventory.push({rewardId: rewardId, amount: 1});
+                }
+            }
+        };
+
+        this.getReward = function(rewardId) {
+            var result = {};
+            this.rewards.forEach(function(reward) {
+                if (reward._id === rewardId) {
+                    result = reward;
+                }
+            }, this);
+            return result;
+        };
 
         this.getUserItems = function() {
             var result = [];

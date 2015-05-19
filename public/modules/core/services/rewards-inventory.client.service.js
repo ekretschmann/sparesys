@@ -5,14 +5,45 @@ angular.module('core').service('RewardsInventoryService', [
 
         this.rewards = [];
         this.inventory = [];
+        this.possibeRecipies = [];
 
+
+        this.getUserItems = function() {
+            var result = [];
+            this.inventory.forEach(function(item) {
+                if (this.getType(item) !== 'Skill') {
+                    result.push(item);
+                }
+            }, this);
+            return result;
+        };
+
+        this.getUserSkills = function() {
+            var result = [];
+            this.inventory.forEach(function(item) {
+                if (this.getType(item) === 'Skill') {
+                    result.push(item);
+                }
+            }, this);
+            return result;
+        };
+
+        this.getType = function(item) {
+            var result;
+            this.rewards.forEach(function (reward) {
+                if (item.rewardId === reward._id) {
+                    result = reward.type;
+                }
+            }, this);
+            return result;
+        };
 
         this.getEnabledItems = function() {
             var ids = [];
             var result = [];
             this.rewards.forEach(function(reward) {
                 this.inventory.forEach(function(item) {
-                    if (item.reward === reward._id) {
+                    if (item.rewardId === reward._id) {
                         if (reward.enables) {
                             reward.enables.forEach(function (id) {
                                 if (ids.indexOf(id) === -1) {
@@ -31,31 +62,34 @@ angular.module('core').service('RewardsInventoryService', [
             return result;
         };
 
-        this.getEnabledRecipies = function() {
+        this.calculatePossibleRecipies = function() {
             var possibleRecipes = [];
 
-            this.recipies.forEach(function (recipe) {
+            this.rewards.forEach(function (reward) {
 
                 var possible = true;
 
 
-                recipe.ingredients.forEach(function (ingredient) {
+                if (reward.ingredients) {
+                    reward.ingredients.forEach(function (ingredient) {
 
-                    var found = false;
-                    this.inventory.forEach(function (item) {
-                        if (item.name === ingredient.name && item.amount >= ingredient.amount) {
-                            found = true;
+                        //console.log(ingredient);
+                        var found = false;
+                        this.inventory.forEach(function (item) {
+                            if (item.rewardId === ingredient._id && item.amount >= ingredient.amount) {
+                                found = true;
+                            }
+                        });
+                        if (!found) {
+                            possible = false;
                         }
-                    });
-                    if (!found) {
-                        possible = false;
-                    }
 
-                });
-                if (possible) {
-                    $scope.possibleRecipes.push(recipe);
+                    }, this);
+                    if (possible) {
+                        this.possibeRecipies.push(reward);
+                    }
                 }
-            });
+            }, this);
         };
 
     }

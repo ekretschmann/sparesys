@@ -28,7 +28,7 @@ var RewardSchema = new Schema({
         required: 'Please fill Reward name',
         trim: true
     },
-    healthpoints: {
+    defaulthealthpoints: {
         type: Number,
         default: 1
     },

@@ -7,7 +7,7 @@ angular.module('core').service('RewardsInventoryService', [
         this.inventory = [];
         this.possibeRecipies = [];
 
-        this.trade = function(rewardId) {
+        this.trade = function (rewardId) {
 
             var reward = this.getReward(rewardId);
             var inventoryCopy = this.inventory.slice(0);
@@ -16,9 +16,20 @@ angular.module('core').service('RewardsInventoryService', [
                 reward.ingredients.forEach(function (ingredient) {
                     var found = false;
                     inventoryCopy.forEach(function (item) {
-                        if (item.rewardId === ingredient._id && item.amount >= ingredient.amount) {
-                            found = true;
-                            item.amount -= ingredient.amount;
+
+                        if (item.rewardId === ingredient._id) {
+                            for (var i = 0; i < ingredient.amount; i++) {
+                                found = true;
+                                if (item.healthpoints && item.healthpoints > 0) {
+                                    item.healthpoints -= 1;
+                                    if (item.healthpoints === 0) {
+                                        item.amount -= 1;
+                                        item.healthpoints = this.getReward(item.rewardId).defaulthealthpoints;
+                                    }
+                                } else {
+                                    item.amount -= 1;
+                                }
+                            }
                         }
                     }, this);
                     if (!found) {
@@ -27,8 +38,8 @@ angular.module('core').service('RewardsInventoryService', [
                 }, this);
                 if (canTrade) {
                     this.inventory = [];
-                    inventoryCopy.forEach(function(item) {
-                        if(item.amount > 0) {
+                    inventoryCopy.forEach(function (item) {
+                        if (item.amount > 0) {
                             this.inventory.push(item);
                         }
                     }, this);
@@ -37,9 +48,9 @@ angular.module('core').service('RewardsInventoryService', [
             }
         };
 
-        this.getReward = function(rewardId) {
+        this.getReward = function (rewardId) {
             var result = {};
-            this.rewards.forEach(function(reward) {
+            this.rewards.forEach(function (reward) {
                 if (reward._id === rewardId) {
                     result = reward;
                 }
@@ -47,9 +58,9 @@ angular.module('core').service('RewardsInventoryService', [
             return result;
         };
 
-        this.getUserItems = function() {
+        this.getUserItems = function () {
             var result = [];
-            this.inventory.forEach(function(item) {
+            this.inventory.forEach(function (item) {
                 if (this.getType(item) !== 'Skill') {
                     result.push(item);
                 }
@@ -57,9 +68,9 @@ angular.module('core').service('RewardsInventoryService', [
             return result;
         };
 
-        this.getUserSkills = function() {
+        this.getUserSkills = function () {
             var result = [];
-            this.inventory.forEach(function(item) {
+            this.inventory.forEach(function (item) {
                 if (this.getType(item) === 'Skill') {
                     result.push(item);
                 }
@@ -67,7 +78,7 @@ angular.module('core').service('RewardsInventoryService', [
             return result;
         };
 
-        this.getType = function(item) {
+        this.getType = function (item) {
             var result;
             this.rewards.forEach(function (reward) {
                 if (item.rewardId === reward._id) {
@@ -77,11 +88,11 @@ angular.module('core').service('RewardsInventoryService', [
             return result;
         };
 
-        this.getEnabledItems = function() {
+        this.getEnabledItems = function () {
             var ids = [];
             var result = [];
-            this.rewards.forEach(function(reward) {
-                this.inventory.forEach(function(item) {
+            this.rewards.forEach(function (reward) {
+                this.inventory.forEach(function (item) {
                     if (item.rewardId === reward._id) {
                         if (reward.enables) {
                             reward.enables.forEach(function (id) {
@@ -93,15 +104,15 @@ angular.module('core').service('RewardsInventoryService', [
                     }
                 }, this);
             }, this);
-            this.rewards.forEach(function(reward) {
-                if(ids.indexOf(reward._id)>-1) {
+            this.rewards.forEach(function (reward) {
+                if (ids.indexOf(reward._id) > -1) {
                     result.push(reward);
                 }
             }, this);
             return result;
         };
 
-        this.calculatePossibleRecipies = function() {
+        this.calculatePossibleRecipies = function () {
             var possibleRecipes = [];
 
             this.rewards.forEach(function (reward) {

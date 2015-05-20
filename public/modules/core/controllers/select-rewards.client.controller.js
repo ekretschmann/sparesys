@@ -14,8 +14,8 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
 
         // these are Strings
-        $scope.possibleItemOffers = [];
-        $scope.possibleSkillOffers = [];
+        $scope.enabledItems = [];
+        $scope.enabledSkills = [];
 
         $scope.offers = [];
 
@@ -25,80 +25,26 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.userRecipies = [];
         $scope.rewardType = 'Items';
 
-        $scope.inventoryService;
+        $scope.inventoryService = RewardsInventoryService;
 
         $scope.findRewards = function () {
 
 
 
-            //// Making fire is a fundamental skill
-            //if (!$scope.user.inventory || $scope.user.inventory.length === 0) {
-            //
-            //    $scope.user.inventory = [];
-            //    var makingFire = {_id: 1, name: 'Making Fire', type: 'Skill', amount: 1};
-            //    $scope.user.inventory.push(makingFire);
-            //}
 
-
-            $scope.inventoryService = new RewardsInventoryService();
 
             $scope.rewards = Rewards.query(function() {
+
                 $scope.inventoryService.init($scope.rewards, $scope.user.inventory);
 
+                $scope.enabledItems = $scope.inventoryService.getEnabledItems();
             });
-
 
 
         };
 
         $scope.findEnabledItems = function () {
-            var enabledItems = [];
-            $scope.rewards.forEach(function (reward) {
-
-                if (reward.type === 'Skill') {
-
-                    var isInInventory = $scope.getItemFromInventory(reward.name);
-
-                    if (isInInventory) {
-                        reward.enables.forEach(function (enabled) {
-                            enabledItems.push(enabled);
-                        });
-                    }
-
-
-                }
-
-            }, this);
-
-            $scope.possibleItemOffers = [];
-            $scope.possibleSkillOffers = [];
-
-            $scope.rewards.forEach(function (reward) {
-
-
-
-                if (enabledItems.indexOf(reward._id) > -1) {
-                    if (reward.type === 'Item') {
-                        $scope.possibleItemOffers.push(reward);
-                    }
-                    if (reward.type === 'Skill') {
-                        //only push if we don't have the skill
-                        var found = false;
-                        $scope.user.inventory.forEach(function(it) {
-                            if (it.name === reward.name) {
-                                found = true;
-                            }
-                        });
-
-                        if (!found) {
-                            $scope.possibleSkillOffers.push(reward);
-                        }
-                    }
-                }
-
-            });
-
-
+            return RewardsInventoryService.getEnabledItems();
         };
 
         $scope.getDescription = function(name) {
@@ -261,26 +207,26 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.addItem = function (addedItem) {
 
 
-            var choice = addedItem.name;
-            if (!$scope.user.inventory) {
-                $scope.user.inventory = [];
-            }
-            var item = $scope.getItemFromInventory(addedItem.name);
-
-
-
-            if (item) {
-
-                item.amount += 1;
-            } else {
-
-                $scope.user.inventory.push({name: choice, amount: 1, type: addedItem.type, healthpoints:addedItem.healthpoints});
-
-            }
-
-            $scope.distributeInventory();
-            $scope.findEnabledItems();
-            $scope.determinePossibleRecipies();
+            //var choice = addedItem.name;
+            //if (!$scope.user.inventory) {
+            //    $scope.user.inventory = [];
+            //}
+            //var item = $scope.getItemFromInventory(addedItem.name);
+            //
+            //
+            //
+            //if (item) {
+            //
+            //    item.amount += 1;
+            //} else {
+            //
+            //    $scope.user.inventory.push({name: choice, amount: 1, type: addedItem.type, healthpoints:addedItem.healthpoints});
+            //
+            //}
+            //
+            //$scope.distributeInventory();
+            //$scope.findEnabledItems();
+            //$scope.determinePossibleRecipies();
         };
 
         $scope.craft = function (choice) {

@@ -10,6 +10,16 @@ angular.module('core').service('RewardsInventoryService', [
         this.init = function(rewards, inventory) {
             this.rewards = rewards;
             this.inventory = inventory;
+
+            // Making fire is a fundamental skill
+            if (!this.inventory || this.inventory.length === 0) {
+
+                this.rewards.forEach(function(reward) {
+                    if (reward.name === 'Making Fire') {
+                        this.inventory.push({rewardId: reward._id, amount: 1});
+                    }
+                }, this);
+            }
         };
 
         this.trade = function (rewardId) {

@@ -232,7 +232,7 @@
         });
 
         it('should get simple recipe correct', function () {
-            Service.rewards = testRewards.slice(0);;
+            Service.rewards = testRewards.slice(0);
             Service.rewards.push({_id: '1005',
                     name: 'Tree',
                 type: 'Item',
@@ -248,21 +248,21 @@
         });
 
         it('should have overlapping items enabled correctly', function () {
-            Service.rewards = testRewards.slice(0);;
+            Service.rewards = testRewards.slice(0);
             Service.inventory = [{rewardId: '101'}, {rewardId: '102'}];
             expect(Service.getEnabledItems().length).toBe(4);
         });
 
 
         it('should have items enabled correctly', function () {
-            Service.rewards = testRewards.slice(0);;
+            Service.rewards = testRewards.slice(0);
             Service.inventory = [{rewardId: '101'}];
             expect(Service.getEnabledItems().length).toBe(3);
         });
 
 
         it('should have all rewards when initialized', function () {
-            Service.rewards = testRewards.slice(0);;
+            Service.rewards = testRewards.slice(0);
             expect(Service.rewards).toBeTruthy();
             expect(Service.rewards.length).toBe(testRewards.length);
         });

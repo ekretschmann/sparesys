@@ -18,7 +18,7 @@ module.exports = function(config) {
 		//	{pattern: '**/services/**/*.js', watched: true, included: true, served: true},
 		//],
 
-		proxies: {'/modules/core/views/home.client.view.html': 'home.client.view.html'},
+		proxies: {'/modules/': '/public/modules/'},
 
 
 		// Test results reporter to use

@@ -8,6 +8,8 @@
         // Load the main application module
         beforeEach(module(ApplicationConfiguration.applicationModuleName));
 
+
+
         beforeEach(inject(function (_RewardsInventoryService_) {
             Service = _RewardsInventoryService_;
         }));

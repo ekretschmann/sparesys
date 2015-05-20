@@ -103,6 +103,23 @@ angular.module('core').service('RewardsInventoryService', [
             return result;
         };
 
+        this.getNewItems = function() {
+            var enabledItems = this.getEnabledItems();
+            var result = [];
+            enabledItems.forEach(function(item) {
+                var found = false;
+                this.inventory.forEach(function(inInventory) {
+                      if (inInventory.rewardId === item._id) {
+                          found = true;
+                      }
+                }, this);
+                if (!found && item.type === 'Item') {
+                    result.push(item);
+                }
+            }, this);
+            console.log(result);
+        };
+
         this.getEnabledItems = function () {
             var ids = [];
             var result = [];

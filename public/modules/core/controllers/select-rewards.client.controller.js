@@ -16,6 +16,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         // these are Strings
         $scope.enabledItems = [];
         $scope.enabledSkills = [];
+        $scope.enabledRecipies = [];
 
         $scope.offers = [];
 
@@ -28,18 +29,11 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.inventoryService = RewardsInventoryService;
 
         $scope.findRewards = function () {
-
-
-
-
-
             $scope.rewards = Rewards.query(function() {
-
                 $scope.inventoryService.init($scope.rewards, $scope.user.inventory);
-
-                $scope.enabledItems = $scope.inventoryService.getEnabledItems();
+                $scope.enabledItems = $scope.inventoryService.getNewItems();
+                //$scope.enabledSkills = $scope.inventoryService.getEnabledSkills();
             });
-
 
         };
 
@@ -126,9 +120,9 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
             var p = Math.random();
             var selectedOffers;
-            if (p <0.3 && $scope.possibleSkillOffers.length > 0) {
+            if (p <0.3 && $scope.enabledSkills.length > 0) {
 
-                selectedOffers = $scope.possibleSkillOffers;
+                selectedOffers = $scope.enabledSkills;
                 $scope.rewardType = 'Skills';
             } else {
 

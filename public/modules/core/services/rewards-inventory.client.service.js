@@ -7,6 +7,11 @@ angular.module('core').service('RewardsInventoryService', [
         this.inventory = [];
         this.possibeRecipies = [];
 
+        this.init = function(rewards, inventory) {
+            this.rewards = rewards;
+            this.inventory = inventory;
+        };
+
         this.trade = function (rewardId) {
 
             var reward = this.getReward(rewardId);

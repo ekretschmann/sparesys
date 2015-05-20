@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('SelectRewardsController', ['$scope', '$state', '$document', 'Authentication', 'Users', 'Rewards',
-    function ($scope, $state, $document, Authentication, Users, Rewards) {
+angular.module('core').controller('SelectRewardsController', ['$scope', '$state', '$document', 'Authentication', 'Users', 'Rewards', 'RewardsInventoryService',
+    function ($scope, $state, $document, Authentication, Users, Rewards, RewardsInventoryService) {
 
 
         $scope.user = new Users($scope.authentication.user);
@@ -25,38 +25,28 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.userRecipies = [];
         $scope.rewardType = 'Items';
 
+        $scope.inventoryService;
 
         $scope.findRewards = function () {
 
 
 
-            // Making fire is a fundamental skill
-            if (!$scope.user.inventory || $scope.user.inventory.length === 0) {
-
-                $scope.user.inventory = [];
-                var makingFire = {_id: 1, name: 'Making Fire', type: 'Skill', amount: 1};
-                $scope.user.inventory.push(makingFire);
-            }
-
-
-
-            $scope.rewards = Rewards.query(function () {
-
-                $scope.findEnabledItems();
-                $scope.drawOffers();
+            //// Making fire is a fundamental skill
+            //if (!$scope.user.inventory || $scope.user.inventory.length === 0) {
+            //
+            //    $scope.user.inventory = [];
+            //    var makingFire = {_id: 1, name: 'Making Fire', type: 'Skill', amount: 1};
+            //    $scope.user.inventory.push(makingFire);
+            //}
 
 
-                $scope.rewards.forEach(function (reward) {
+            $scope.inventoryService = new RewardsInventoryService();
 
-                    console.log(reward);
-                    if (reward.type === 'Recipe') {
-                        $scope.recipies.push(reward);
-                    }
-                });
-                $scope.determinePossibleRecipies();
-                $scope.distributeInventory();
+            $scope.rewards = Rewards.query(function() {
+                $scope.inventoryService.init($scope.rewards, $scope.user.inventory);
 
             });
+
 
 
         };

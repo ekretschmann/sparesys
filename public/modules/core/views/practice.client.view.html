@@ -174,29 +174,26 @@
                         <td class="top-aligned" width="33%">
 
                             <div data-ng-if="!possibleRecipes || possibleRecipes.length===0">
-                                You can't create any rememberalia at the moment. Fill up your inventory and you will be
+                                You can't create any new things at the moment. Fill up your inventory and you will be
                                 able to
                                 buy some new ones.
                             </div>
 
 
-                            <div data-ng-if="possibleRecipes && possibleRecipes.length>0">
+                            <div data-ng-if="enabledRecipies && enabledRecipies.length>0">
 
 
                                 <table>
 
-                                    <tr data-ng-repeat="rememberalia in possibleRecipes">
+                                    <tr data-ng-repeat="recipie in enabledRecipies">
 
-                                        <!--x{{//possibleRecipes}}x-->
-
-
-                                        <!--<td class="top-aligned right-padded-m bottom-padded-m"><a href="" data-ng-click="getRememberalia(rememberalia.receive[0].name)">{{rememberalia.receive[0].name}}</a></td>-->
-                                        <td class="top-aligned right-padded-m bottom-padded-m"><a href=""
-                                                                                                  data-ng-click="craft(rememberalia)">{{rememberalia.name}}</a>
+                                        <td class="top-aligned right-padded-m bottom-padded-m">
+                                            <a href=""
+                                             data-ng-click="craft(recipie)">{{recipie.name}}</a>
                                         </td>
 
                                         <td class="top-aligned bottom-padded-m">
-                                            <div data-ng-repeat="ingredient in rememberalia.ingredients">
+                                            <div data-ng-repeat="ingredient in recipie.ingredients">
                                                 {{ingredient.amount}} {{ingredient.name}}
                                             </div>
                                         </td>
@@ -214,17 +211,26 @@
 
 
                     <pre>
-                        Possible Items:
-                        {{enabledItems |json}}
-                        </pre>
-                    <pre>
-                        Possible Skills:
-                        {{enabledSkills |json}}
-                        </pre>
-                    <pre>
-                        Possibel Recipies:
-                        {{enabledRecipies |json}}
+                        Rewards:
+                        {{rewards | json}}
                     </pre>
+
+                    <pre>
+                        Invetnroy:
+                        {{user.inventory | json}}
+                    </pre>
+                    <!--<pre>-->
+                        <!--Possible Item offers:-->
+                        <!--{{itemOffers | json}}-->
+                    <!--</pre>-->
+                    <!--<pre>-->
+                        <!--Possible Skill offers:-->
+                        <!--{{skillOffers |json}}-->
+                    <!--</pre>-->
+                    <!--<pre>-->
+                        <!--Possible Recipies:-->
+                        <!--{{enabledRecipies |json}}-->
+                    <!--</pre>-->
                 </section>
             </div>
 

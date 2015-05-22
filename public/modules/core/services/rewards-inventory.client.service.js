@@ -7,6 +7,41 @@ angular.module('core').service('RewardsInventoryService', [
         this.inventory = [];
         this.possibeRecipies = [];
 
+        this.addRewardToInventory = function(reward) {
+
+          //  var reward = this.getReward(item.rewardId);
+
+
+            var found = false;
+            this.inventory.forEach(function(piece) {
+                if (piece.rewardId === reward._id) {
+                    if(reward.type === 'Item') {
+                        piece.amount += 1;
+
+                    }
+                    found = true;
+                }
+            });
+
+            var healthpoints = reward.defaulthealthpoints;
+            if(!healthpoints) {
+                healthpoints = 1;
+            }
+
+            if (!found) {
+                var item = {
+                    name: reward.name,
+                    rewardId: reward._id,
+                    type: reward.type,
+                    healthpoints: healthpoints,
+                    amount: 1
+                };
+                this.inventory.push(item);
+                //console.log('reward id: '+reward._id);
+                //console.log('item     : '+item.rewardId);
+            }
+        };
+
         this.init = function(rewards, inventory) {
             this.rewards = rewards;
             this.inventory = inventory;
@@ -16,7 +51,7 @@ angular.module('core').service('RewardsInventoryService', [
 
                 this.rewards.forEach(function(reward) {
                     if (reward.name === 'Making Fire') {
-                        this.inventory.push({rewardId: reward._id, amount: 1});
+                        this.inventory.push({name:'Making Fire', rewardId: reward._id, amount: 1, type: 'Skill', healthpoints: 1});
                     }
                 }, this);
             }
@@ -103,7 +138,25 @@ angular.module('core').service('RewardsInventoryService', [
             return result;
         };
 
-        this.getNewItems = function() {
+
+        this.getSkillOffers = function() {
+            var enabledItems = this.getEnabledItems();
+            var result = [];
+            enabledItems.forEach(function(item) {
+                var found = false;
+                this.inventory.forEach(function(inInventory) {
+                    if (inInventory.rewardId === item._id) {
+                        found = true;
+                    }
+                }, this);
+                if (!found && item.type === 'Skill') {
+                    result.push(item);
+                }
+            }, this);
+            return result;
+        };
+
+        this.getItemOffers = function() {
             var enabledItems = this.getEnabledItems();
             var result = [];
             enabledItems.forEach(function(item) {
@@ -117,7 +170,7 @@ angular.module('core').service('RewardsInventoryService', [
                     result.push(item);
                 }
             }, this);
-            console.log(result);
+            return result;
         };
 
         this.getEnabledItems = function () {
@@ -152,14 +205,21 @@ angular.module('core').service('RewardsInventoryService', [
                 var possible = true;
 
 
-                if (reward.ingredients) {
+
+                if (reward.ingredients && reward.ingredients.length > 0) {
+
+
+                    console.log('checking ' +reward.name);
                     reward.ingredients.forEach(function (ingredient) {
 
-                        //console.log(ingredient);
+                        console.log('  checking '+ingredient.name);
                         var found = false;
                         this.inventory.forEach(function (item) {
-                            if (item.rewardId === ingredient._id && item.amount >= ingredient.amount) {
+
+                            console.log('    '+item.rewardId + ' '+ingredient._id);
+                            if (item.rewardId === ingredient.rewardId && item.amount >= ingredient.amount) {
                                 found = true;
+                                console.log('    got it');
                             }
                         });
                         if (!found) {
@@ -172,6 +232,7 @@ angular.module('core').service('RewardsInventoryService', [
                     }
                 }
             }, this);
+            return this.possibeRecipies;
         };
 
     }

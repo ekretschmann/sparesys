@@ -33,6 +33,14 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.selectIngredient = function () {
 
+            var rewardId;
+
+            $scope.rewards.forEach(function(reward) {
+
+                if(reward.name === $scope.selectedIngredient) {
+                    rewardId = reward._id;
+                }
+            }, this);
 
             var found = false;
             $scope.ingredients.forEach(function (ingredient) {
@@ -43,7 +51,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             });
 
             if (!found) {
-                $scope.ingredients.push({name: $scope.selectedIngredient, amount: 1});
+                $scope.ingredients.push({rewardId: rewardId, name: $scope.selectedIngredient, amount: 1});
 
             }
             $scope.selectedIngredient = '';

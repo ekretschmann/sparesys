@@ -15,6 +15,76 @@
         }));
 
 
+        it('should not duplicate skills', function () {
+            Service.rewards = testRewards.slice(0);
+
+            Service.inventory = [{rewardId: '101', amount: 1},
+                {rewardId: '1', amount: 1},
+                {rewardId: '3', amount: 1}];
+
+            Service.addRewardToInventory({_id: '101', name: 'Some Skill', type: 'Skill', defaulthealthpoints: 1});
+            expect(Service.inventory.length).toBe(3);
+            expect(Service.inventory).toContain({rewardId: '101', amount: 1});
+        });
+
+        it('should add item duplicate to inventory', function () {
+            Service.rewards = testRewards.slice(0);
+
+            Service.inventory = [{rewardId: '101'},
+                {rewardId: '1', amount: 1},
+                {rewardId: '3', amount: 1}];
+            Service.addRewardToInventory({_id: '3', name: 'Some Item', type: 'Item', defaulthealthpoints: 1});
+            expect(Service.inventory.length).toBe(3);
+            expect(Service.inventory).toContain({rewardId: '3', amount: 2});
+        });
+
+        it('should add new item to inventory', function () {
+            Service.rewards = testRewards.slice(0);
+
+            Service.inventory = [{rewardId: '101'},
+                {rewardId: '1', amount: 1},
+                {rewardId: '3', amount: 1}];
+            Service.addRewardToInventory({_id: '4', name: 'Some Item', type: 'Item', defaulthealthpoints: 1});
+            expect(Service.inventory.length).toBe(4);
+            expect(Service.inventory).toContain({name: 'Some Item', rewardId: '4', type:'Item', healthpoints: 1, amount: 1});
+        });
+
+        it('should get me correct skill offers', function () {
+            Service.rewards = testRewards.slice(0);
+            Service.rewards.push({_id: '1005',
+                    name: 'Tree',
+                    type: 'Item',
+                    ingredients: [{_id: '1', amount: 1}, {_id: '2', amount: 1}, {_id:'3', amount: 1}],
+                    enables: ['102']
+                }
+            );
+
+            Service.inventory = [{rewardId: '101'},
+                {rewardId: '1', amount: 1},
+                {rewardId: '3', amount: 1}];
+            var itemOffers = Service.getSkillOffers();
+            expect(itemOffers.length).toBe(1);
+            expect(itemOffers).toContain({_id: '102', name: 'Making Fire', type: 'Skill', enables: ['2', '3', '4']});
+        });
+
+        it('should get me correct item offers', function () {
+            Service.rewards = testRewards.slice(0);
+            Service.rewards.push({_id: '1005',
+                    name: 'Tree',
+                    type: 'Item',
+                    ingredients: [{_id: '1', amount: 1}, {_id: '2', amount: 1}, {_id:'3', amount: 1}],
+                    enables: ['2']
+                }
+            );
+
+            Service.inventory = [{rewardId: '101'},
+                {rewardId: '1', amount: 1},
+                {rewardId: '3', amount: 1}];
+            var itemOffers = Service.getItemOffers();
+            expect(itemOffers.length).toBe(1);
+            expect(itemOffers).toContain({_id: '2', name: 'Water', type: 'Item'});
+        });
+
         it('should handle healthpoints for items when more than one is used and remove item', function () {
             Service.rewards = testRewards.slice(0);
             Service.rewards.push({
@@ -250,14 +320,14 @@
         it('should have overlapping items enabled correctly', function () {
             Service.rewards = testRewards.slice(0);
             Service.inventory = [{rewardId: '101'}, {rewardId: '102'}];
-            expect(Service.getEnabledItems().length).toBe(4);
+            expect(Service.getEnabledItems().length).toBe(5);
         });
 
 
         it('should have items enabled correctly', function () {
             Service.rewards = testRewards.slice(0);
             Service.inventory = [{rewardId: '101'}];
-            expect(Service.getEnabledItems().length).toBe(3);
+            expect(Service.getEnabledItems().length).toBe(4);
         });
 
 
@@ -279,7 +349,7 @@
             {_id: '2', name: 'Water', type: 'Item'},
             {_id: '1', name: 'Sapling', type: 'Item'},
             {_id: '102', name: 'Making Fire', type: 'Skill', enables: ['2', '3', '4']},
-            {_id: '101', name: 'Building a House', type: 'Skill', enables: ['1', '2', '3']}
+            {_id: '101', name: 'Building a House', type: 'Skill', enables: ['1', '2', '3', '102']}
         ];
 
 

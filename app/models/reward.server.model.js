@@ -38,7 +38,7 @@ var RewardSchema = new Schema({
     }],
     ingredients: {
         type: [{
-            _id: {
+            rewardId: {
                 type: Schema.ObjectId
             },
             name: {

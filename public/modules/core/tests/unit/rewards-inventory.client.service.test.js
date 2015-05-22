@@ -274,7 +274,7 @@
             Service.rewards.push({_id: '1005',
                     name: 'Tree',
                     type: 'Item',
-                    ingredients: [{_id: '1', amount: 1}, {_id: '2', amount: 2}, {_id:'3', amount: 1}]}
+                    ingredients: [{rewardId: '1', amount: 1}, {rewardId: '2', amount: 2}, {rewardId:'3', amount: 1}]}
             );
 
             Service.inventory = [{rewardId: '101'},
@@ -290,7 +290,7 @@
             Service.rewards.push({_id: '1005',
                     name: 'Tree',
                     type: 'Item',
-                    ingredients: [{_id: '1', amount: 1}, {_id: '2', amount: 2}, {_id:'3', amount: 1}]}
+                    ingredients: [{rewardId: '1', amount: 1}, {rewardId: '2', amount: 2}, {rewardId:'3', amount: 1}]}
             );
 
             Service.inventory = [{rewardId: '101'},
@@ -306,7 +306,7 @@
             Service.rewards.push({_id: '1005',
                     name: 'Tree',
                 type: 'Item',
-                ingredients: [{_id: '1', amount: 1}, {_id: '2', amount: 1}, {_id:'3', amount: 1}]}
+                ingredients: [{rewardId: '1', amount: 1}, {rewardId: '2', amount: 1}, {rewardId:'3', amount: 1}]}
             );
 
             Service.inventory = [{rewardId: '101'},

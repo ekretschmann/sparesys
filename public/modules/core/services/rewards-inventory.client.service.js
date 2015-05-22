@@ -208,18 +208,11 @@ angular.module('core').service('RewardsInventoryService', [
 
                 if (reward.ingredients && reward.ingredients.length > 0) {
 
-
-                    console.log('checking ' +reward.name);
                     reward.ingredients.forEach(function (ingredient) {
-
-                        console.log('  checking '+ingredient.name);
                         var found = false;
                         this.inventory.forEach(function (item) {
-
-                            console.log('    '+item.rewardId + ' '+ingredient._id);
                             if (item.rewardId === ingredient.rewardId && item.amount >= ingredient.amount) {
                                 found = true;
-                                console.log('    got it');
                             }
                         });
                         if (!found) {

@@ -117,10 +117,19 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         $scope.craft = function (choice) {
 
 
-            console.log('crafting');
-            console.log(choice.name);
 
-            RewardsInventoryService.trade(choice);
+            RewardsInventoryService.trade(choice._id);
+
+            $scope.itemOffers = $scope.inventoryService.getItemOffers();
+            $scope.skillOffers = $scope.inventoryService.getSkillOffers();
+            $scope.enabledRecipies = $scope.inventoryService.calculatePossibleRecipies();
+            $scope.userItems = $scope.inventoryService.getUserItems();
+
+            $scope.user.inventory = $scope.userItems;
+            new Users($scope.user).$update(function (updatedUser) {
+                $scope.user = updatedUser;
+            });
+            $scope.drawOffers();
 
         };
 
@@ -136,7 +145,9 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.enabledRecipies = $scope.inventoryService.calculatePossibleRecipies();
 
 
-            console.log($scope.enabledRecipies);
+            new Users($scope.user).$update(function (updatedUser) {
+                $scope.user = updatedUser;
+            });
             $scope.drawOffers();
 
             $scope.$parent.recoverFromReward();

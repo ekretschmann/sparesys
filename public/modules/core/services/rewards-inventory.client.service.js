@@ -64,10 +64,12 @@ angular.module('core').service('RewardsInventoryService', [
             var canTrade = true;
             if (reward.ingredients) {
                 reward.ingredients.forEach(function (ingredient) {
+
                     var found = false;
                     inventoryCopy.forEach(function (item) {
 
-                        if (item.rewardId === ingredient._id) {
+                        if (item.rewardId === ingredient.rewardId) {
+
                             for (var i = 0; i < ingredient.amount; i++) {
                                 found = true;
                                 if (item.healthpoints && item.healthpoints > 0) {
@@ -86,6 +88,7 @@ angular.module('core').service('RewardsInventoryService', [
                         canTrade = false;
                     }
                 }, this);
+
                 if (canTrade) {
                     this.inventory = [];
                     inventoryCopy.forEach(function (item) {
@@ -93,7 +96,7 @@ angular.module('core').service('RewardsInventoryService', [
                             this.inventory.push(item);
                         }
                     }, this);
-                    this.inventory.push({rewardId: rewardId, amount: 1});
+                    this.inventory.push({name: reward.name, rewardId: reward._id, amount: 1, type: 'Item', healthpoints: reward.defaulthealthpoints});
                 }
             }
         };
@@ -198,7 +201,7 @@ angular.module('core').service('RewardsInventoryService', [
         };
 
         this.calculatePossibleRecipies = function () {
-            var possibleRecipes = [];
+            this.possibeRecipies = [];
 
             this.rewards.forEach(function (reward) {
 

@@ -72,7 +72,7 @@
             Service.rewards.push({_id: '1005',
                     name: 'Tree',
                     type: 'Item',
-                    ingredients: [{_id: '1', amount: 1}, {_id: '2', amount: 1}, {_id:'3', amount: 1}],
+                    ingredients: [{rewardId: '1', amount: 1}, {rewardId: '2', amount: 1}, {rewardId:'3', amount: 1}],
                     enables: ['2']
                 }
             );
@@ -90,8 +90,9 @@
             Service.rewards.push({
                     _id: '5',
                     name: 'Tree',
+                    defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{_id:'1', amount: 1}, {_id: '4', amount:4}, {_id:'3', amount:1}]
+                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '4', amount:4}, {rewardId:'3', amount:1}]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -103,7 +104,7 @@
 
             //expect(Service.inventory.length).toBe(4);
             expect(Service.inventory).toContain({rewardId: '101', amount: 1});
-            expect(Service.inventory).toContain({rewardId: '5', amount: 1});
+            expect(Service.inventory).toContain({ name : 'Tree', rewardId : '5', amount : 1, type : 'Item', healthpoints : 3 });
             expect(Service.inventory).toContain({rewardId: '4', amount: 3, healthpoints: 2});
         });
 
@@ -112,8 +113,9 @@
             Service.rewards.push({
                     _id: '5',
                     name: 'Tree',
+                    defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{_id:'1', amount: 1}, {_id: '4', amount:2}, {_id:'3', amount:1}]
+                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '4', amount:2}, {rewardId:'3', amount:1}]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -123,9 +125,10 @@
             ];
             Service.trade('5');
 
+
             //expect(Service.inventory.length).toBe(4);
             expect(Service.inventory).toContain({rewardId: '101', amount: 1});
-            expect(Service.inventory).toContain({rewardId: '5', amount: 1});
+            expect(Service.inventory).toContain({ name : 'Tree', rewardId : '5', amount : 1, type : 'Item', healthpoints : 3 });
             expect(Service.inventory).toContain({rewardId: '4', amount: 4, healthpoints: 1});
         });
 
@@ -134,8 +137,9 @@
             Service.rewards.push({
                     _id: '5',
                     name: 'Tree',
+                    defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{_id:'1', amount: 1}, {_id: '2', amount:2}, {_id:'3', amount:1}]
+                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:2}, {rewardId:'3', amount:1}]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -146,7 +150,7 @@
             Service.trade('5');
             expect(Service.inventory.length).toBe(3);
             expect(Service.inventory).toContain({rewardId: '101', amount: 1});
-            expect(Service.inventory).toContain({rewardId: '5', amount: 1});
+            expect(Service.inventory).toContain({ name : 'Tree', rewardId : '5', amount : 1, type : 'Item', healthpoints : 3 });
             expect(Service.inventory).toContain({rewardId: '2', amount: 2});
         });
 
@@ -156,8 +160,9 @@
             Service.rewards.push({
                     _id: '5',
                     name: 'Tree',
+                    defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{_id:'1', amount: 1}, {_id: '3', amount:1}, {_id:'4', amount:1}]
+                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '3', amount:1}, {rewardId:'4', amount:1}]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -168,7 +173,7 @@
             Service.trade('5');
             expect(Service.inventory.length).toBe(3);
             expect(Service.inventory).toContain({rewardId: '101', amount: 1});
-            expect(Service.inventory).toContain({rewardId: '5', amount: 1});
+            expect(Service.inventory).toContain({ name : 'Tree', rewardId : '5', amount : 1, type : 'Item', healthpoints : 3 });
             expect(Service.inventory).toContain({rewardId: '4', amount: 1, healthpoints: 3});
         });
 
@@ -177,8 +182,9 @@
             Service.rewards.push({
                     _id: '5',
                     name: 'Tree',
+                    defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{_id:'1', amount: 1}, {_id: '2', amount:1}, {_id:'3', amount:1}]
+                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -189,7 +195,7 @@
             Service.trade('5');
             expect(Service.inventory.length).toBe(2);
             expect(Service.inventory).toContain({rewardId: '101', amount: 1});
-            expect(Service.inventory).toContain({rewardId: '5', amount: 1});
+            expect(Service.inventory).toContain({ name : 'Tree', rewardId : '5', amount : 1, type : 'Item', healthpoints : 3 });
         });
 
         it('should reduce the healthpoints of ingredients', function () {
@@ -197,8 +203,9 @@
             Service.rewards.push({
                     _id: '5',
                     name: 'Tree',
+                    defaulthealthpoints:2 ,
                     type: 'Item',
-                    ingredients:[{_id:'1', amount: 1}, {_id: '2', amount:1}, {_id:'3', amount:1}]
+                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -209,7 +216,7 @@
             Service.trade('5');
             expect(Service.inventory.length).toBe(3);
             expect(Service.inventory).toContain({rewardId: '101', amount: 1});
-            expect(Service.inventory).toContain({rewardId: '5', amount: 1});
+            expect(Service.inventory).toContain({ name : 'Tree', rewardId : '5', amount : 1, type : 'Item', healthpoints : 2 });
             expect(Service.inventory).toContain({rewardId: '2', amount: 1, healthpoints: 2});
 
         });
@@ -220,7 +227,8 @@
                     _id: '5',
                     name: 'Tree',
                     type: 'Item',
-                    ingredients:[{_id:'1', amount: 1}, {_id: '2', amount:1}, {_id:'3', amount:1}]
+                    defaulthealthpoints: 4,
+                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -231,7 +239,7 @@
             Service.trade('5');
             expect(Service.inventory.length).toBe(3);
             expect(Service.inventory).toContain({rewardId: '101', amount: 1});
-            expect(Service.inventory).toContain({rewardId: '5', amount: 1});
+            expect(Service.inventory).toContain({name : 'Tree', rewardId : '5', amount : 1, type : 'Item', healthpoints : 4 });
             expect(Service.inventory).toContain({rewardId: '2', amount: 1});
 
         });
@@ -242,7 +250,8 @@
                     _id: '5',
                     name: 'Tree',
                     type: 'Item',
-                    ingredients:[{_id:'1', amount: 1}, {_id: '2', amount:1}, {_id:'3', amount:1}]
+                    defaulthealthpoints: 3,
+                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -253,17 +262,17 @@
             Service.trade('5');
             expect(Service.inventory.length).toBe(2);
             expect(Service.inventory).toContain({rewardId: '101', amount: 1});
-            expect(Service.inventory).toContain({rewardId: '5', amount: 1});
+            expect(Service.inventory).toContain({name:'Tree', healthpoints: 3, type:'Item', rewardId: '5', amount: 1});
 
         });
 
-        it('should get user items correcty', function () {
+        it('should get user items correctly', function () {
             Service.rewards = testRewards.slice(0);
             Service.inventory = [{rewardId: '101'}, {rewardId: '1'}];
             expect(Service.getUserSkills().length).toBe(1);
         });
 
-       it('should get user skills correcty', function () {
+       it('should get user skills correctly', function () {
             Service.rewards = testRewards.slice(0);
             Service.inventory = [{rewardId: '101'}, {rewardId: '1'}];
             expect(Service.getUserSkills().length).toBe(1);

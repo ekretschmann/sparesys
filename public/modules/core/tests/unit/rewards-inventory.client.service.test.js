@@ -22,7 +22,7 @@
                 {rewardId: '1', amount: 1},
                 {rewardId: '3', amount: 1}];
 
-            Service.addRewardToInventory({_id: '101', name: 'Some Skill', type: 'Skill', defaulthealthpoints: 1});
+            Service.addRewardToInventory('101');
             expect(Service.inventory.length).toBe(3);
             expect(Service.inventory).toContain({rewardId: '101', amount: 1});
         });
@@ -33,7 +33,7 @@
             Service.inventory = [{rewardId: '101'},
                 {rewardId: '1', amount: 1},
                 {rewardId: '3', amount: 1}];
-            Service.addRewardToInventory({_id: '3', name: 'Some Item', type: 'Item', defaulthealthpoints: 1});
+            Service.addRewardToInventory('3');
             expect(Service.inventory.length).toBe(3);
             expect(Service.inventory).toContain({rewardId: '3', amount: 2});
         });
@@ -44,9 +44,9 @@
             Service.inventory = [{rewardId: '101'},
                 {rewardId: '1', amount: 1},
                 {rewardId: '3', amount: 1}];
-            Service.addRewardToInventory({_id: '4', name: 'Some Item', type: 'Item', defaulthealthpoints: 1});
+            Service.addRewardToInventory('4');
             expect(Service.inventory.length).toBe(4);
-            expect(Service.inventory).toContain({name: 'Some Item', rewardId: '4', type:'Item', healthpoints: 1, amount: 1});
+            expect(Service.inventory).toContain({ name : 'Rock', rewardId : '4', type : 'Item', healthpoints : 3, amount : 1 });
         });
 
         it('should get me correct skill offers', function () {

@@ -7,21 +7,26 @@ angular.module('core').service('RewardsInventoryService', [
         this.inventory = [];
         this.possibeRecipies = [];
 
-        this.addRewardToInventory = function(reward) {
 
-          //  var reward = this.getReward(item.rewardId);
+        this.addRewardToInventory = function(rewardId) {
 
+
+            var reward = this.getReward(rewardId);
 
             var found = false;
             this.inventory.forEach(function(piece) {
+
+
                 if (piece.rewardId === reward._id) {
-                    if(reward.type === 'Item') {
+
+                    if(reward.type !== 'Skill') {
                         piece.amount += 1;
 
                     }
                     found = true;
                 }
             });
+
 
             var healthpoints = reward.defaulthealthpoints;
             if(!healthpoints) {
@@ -37,8 +42,6 @@ angular.module('core').service('RewardsInventoryService', [
                     amount: 1
                 };
                 this.inventory.push(item);
-                //console.log('reward id: '+reward._id);
-                //console.log('item     : '+item.rewardId);
             }
         };
 
@@ -96,7 +99,9 @@ angular.module('core').service('RewardsInventoryService', [
                             this.inventory.push(item);
                         }
                     }, this);
-                    this.inventory.push({name: reward.name, rewardId: reward._id, amount: 1, type: 'Item', healthpoints: reward.defaulthealthpoints});
+
+                    this.addRewardToInventory(reward._id);
+                    //this.inventory.push({name: reward.name, rewardId: reward._id, amount: 1, type: 'Item', healthpoints: reward.defaulthealthpoints});
                 }
             }
         };

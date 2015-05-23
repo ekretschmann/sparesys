@@ -1,14 +1,31 @@
-<div >
+<div>
 
 
-
-
-    <div class="flashcard" >
-
-
+    <div class="flashcard">
 
 
         <div class="question-box" style="position: relative">
+
+
+            <div data-ng-if="!authentication.user.inventory || authentication.user.inventory.length===0">
+                <span class="question">
+                    You are a Hero!
+                </span>
+
+                <div class="left-padded-l right-padded-l">
+                    <infobox logo="girl" position="right">
+                        And as a hero you are in charge of your tribe. You will have to protect them
+                        and help them build up their skills. You can build wonders for them and go
+                        on adventures. You start with simple tools and resources and you can build more and more
+                        useful things out of them. To start with, you are offered the skill of making fire.
+                        You haven't got everything together to light it. Keep practicing and get all the
+                        things you need and unlock new skills as you go along!
+                    </infobox>
+                </div>
+            </div>
+
+            <div data-ng-if="authentication.user.inventory && authentication.user.inventory.length>0">
+
             <span class="question" data-ng-if="rewardType === 'Items'">
             Choose a Reward
                 </span>
@@ -17,33 +34,35 @@
             Choose a new Skill
                 </span>
 
-            <div>
+
+            </div>
+
+            <div class="top-padded-l">
 
                 <span data-ng-if="!offers || offers.length ===0">Sorry, there are no offers</span>
 
-            <span data-ng-if="offers[0]">(1) {{offers[0].name}}</span>
+                <span data-ng-if="offers[0]">(1) {{offers[0].name}}</span>
                 <span data-ng-if="offers[1]" class="left-padded-m right-padded-m">(2) {{offers[1].name}}</span>
                 <span data-ng-if="offers[2]">(3) {{offers[2].name}}</span>
             </div>
         </div>
 
 
-
-
-
     </div>
 
 
     <div class="center-aligned top-padded">
-            <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(1)">1</button>
-            <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(2)">2</button>
-            <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(3)">3</button>
+        <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(1)" data-ng-if="offers.length>0">
+            1
+        </button>
+        <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(2)" data-ng-if="offers.length>1">
+            2
+        </button>
+        <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(3)" data-ng-if="offers.length>2">
+            3
+        </button>
 
     </div>
-
-
-
-
 
 
 </div>

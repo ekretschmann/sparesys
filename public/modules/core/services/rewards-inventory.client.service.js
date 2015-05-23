@@ -49,15 +49,7 @@ angular.module('core').service('RewardsInventoryService', [
             this.rewards = rewards;
             this.inventory = inventory;
 
-            // Making fire is a fundamental skill
-            if (!this.inventory || this.inventory.length === 0) {
 
-                this.rewards.forEach(function(reward) {
-                    if (reward.name === 'Making Fire') {
-                        this.inventory.push({name:'Making Fire', rewardId: reward._id, amount: 1, type: 'Skill', healthpoints: 1});
-                    }
-                }, this);
-            }
         };
 
         this.trade = function (rewardId) {
@@ -149,23 +141,45 @@ angular.module('core').service('RewardsInventoryService', [
 
         this.getSkillOffers = function() {
             var enabledItems = this.getEnabledItems();
+
             var result = [];
-            enabledItems.forEach(function(item) {
-                var found = false;
-                this.inventory.forEach(function(inInventory) {
-                    if (inInventory.rewardId === item._id) {
-                        found = true;
+            // Making fire is a fundamental skill
+            if (enabledItems.length === 0) {
+
+                this.rewards.forEach(function(reward) {
+                    console.log('xxxx');
+                    if (reward.name === 'Making Fire') {
+                        result.push(reward);
                     }
                 }, this);
-                if (!found && item.type === 'Skill') {
-                    result.push(item);
-                }
-            }, this);
+            } else {
+
+                enabledItems.forEach(function (item) {
+                    var found = false;
+                    this.inventory.forEach(function (inInventory) {
+                        if (inInventory.rewardId === item._id) {
+                            found = true;
+                        }
+                    }, this);
+                    if (!found && item.type === 'Skill') {
+                        result.push(item);
+                    }
+                }, this);
+            }
             return result;
         };
 
         this.getItemOffers = function() {
+
+
+
+
             var enabledItems = this.getEnabledItems();
+
+
+
+
+
             var result = [];
             enabledItems.forEach(function(item) {
                 var found = false;

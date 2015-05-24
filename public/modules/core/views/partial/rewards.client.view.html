@@ -4,7 +4,7 @@
     <div class="flashcard">
 
 
-        <div class="question-box" style="position: relative">
+        <div class="heading-box"  >
 
 
             <div data-ng-if="!authentication.user.inventory || authentication.user.inventory.length===0">
@@ -14,12 +14,16 @@
 
                 <div class="left-padded-l right-padded-l">
                     <infobox logo="girl" position="right">
-                        And as a hero you are in charge of your tribe. You will have to protect them
-                        and help them build up their skills. You can build wonders for them and go
-                        on adventures. You start with simple tools and resources and you can build more and more
-                        useful things out of them. To start with, you are offered the skill of making fire.
-                        You haven't got everything together to light it. Keep practicing and get all the
-                        things you need and unlock new skills as you go along!
+                        And as a hero you are in charge of your tribe. When you practice you will become
+                        a greater and greater hero. You will be able to give your tribe the things that they
+                        love and need. You will be even able to build wonders for them. Who knows, one day
+                        you might take them to space and fly to distant planets.
+                    </infobox>
+                    <infobox logo="boy" position="left">
+                        Here is your first superhero skill. Use it to light a fire! You will need fire to
+                        make other things and you will need lots of it to receive the Breathing Fire special
+                        prize.
+
                     </infobox>
                 </div>
             </div>
@@ -37,13 +41,52 @@
 
             </div>
 
-            <div class="top-padded-l">
 
-                <span data-ng-if="!offers || offers.length ===0">Sorry, there are no offers</span>
+            <div class="top-padded-m" data-ng-if="!offers || offers.length ===0">
+                Sorry, there are no offers
+            </div>
 
-                <span data-ng-if="offers[0]">(1) {{offers[0].name}}</span>
-                <span data-ng-if="offers[1]" class="left-padded-m right-padded-m">(2) {{offers[1].name}}</span>
-                <span data-ng-if="offers[2]">(3) {{offers[2].name}}</span>
+            <div class="top-padded-m left-padded-m" data-ng-if="offers && offers.length > 0">
+
+
+                <div data-ng-if="offers.length === 1">
+                    <!--<div style="font-weight: bold" class="bottom-padded-m">-->
+                        <!--{{offers[0].name}}-->
+                    <!--</div>-->
+
+                    <!--<div class="top-padded-s">Used for:</div>-->
+                    <!--<div data-ng-repeat="item in offers[0].usedfor">{{item.name}} ({{item.recipe}})</div>-->
+
+                    <div class="top-padded-m">
+                        <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(1)">
+                            Get {{offers[0].name}}
+                        </button>
+                    </div>
+
+                </div>
+
+                <table class="expands" data-ng-if="offers.length > 1">
+
+                    <tr>
+
+                        <td class="right-padded-m top-aligned" style="width: 150px"
+                            data-ng-repeat="offer in offers">
+                            <button class="btn btn-rememberators btn-small" data-ng-click="processChoice($index+1)">
+                                {{offer.name}}
+                            </button>
+
+                            <div class="top-padded-m">Used for:</div>
+                            <div data-ng-repeat="item in offer.usedfor">{{item.name}} ({{item.recipe}})</div>
+                        </td>
+                    </tr>
+
+
+                </table>
+
+                <!---->
+                <!--<span data-ng-if="offers[0]">(1) {{offers[0].name}}</span>-->
+                <!--<span data-ng-if="offers[1]" class="left-padded-m right-padded-m">(2) {{offers[1].name}}</span>-->
+                <!--<span data-ng-if="offers[2]">(3) {{offers[2].name}}</span>-->
             </div>
         </div>
 
@@ -51,18 +94,18 @@
     </div>
 
 
-    <div class="center-aligned top-padded">
-        <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(1)" data-ng-if="offers.length>0">
-            1
-        </button>
-        <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(2)" data-ng-if="offers.length>1">
-            2
-        </button>
-        <button class="btn btn-rememberators btn-small" data-ng-click="processChoice(3)" data-ng-if="offers.length>2">
-            3
-        </button>
+    <!--<div class="center-aligned top-padded">-->
+    <!--<button class="btn btn-rememberators btn-small" data-ng-click="processChoice(1)" data-ng-if="offers.length>0">-->
+    <!--1-->
+    <!--</button>-->
+    <!--<button class="btn btn-rememberators btn-small" data-ng-click="processChoice(2)" data-ng-if="offers.length>1">-->
+    <!--2-->
+    <!--</button>-->
+    <!--<button class="btn btn-rememberators btn-small" data-ng-click="processChoice(3)" data-ng-if="offers.length>2">-->
+    <!--3-->
+    <!--</button>-->
 
-    </div>
+    <!--</div>-->
 
 
 </div>

@@ -55,7 +55,7 @@
 
                 <tr>
                     <td class="nowrap" ng-style="doneColorCode" data-ng-if="doneScore > -1">Done Score
-                        <a href="" tooltip="You need 100 to be on track">
+                        <a href="" tooltip="You need 100 to be on track" tooltip-trigger="mouseenter">
                             <i
                                     class="glyphicon glyphicon-info-sign small"></i></a>
                     </td>
@@ -70,7 +70,7 @@
                     <td class="expands"></td>
 
 
-                    <td class="nowrap">Retention <a href="" tooltip="The chance that you remember this card"><i
+                    <td class="nowrap">Retention <a href="" tooltip="The chance that you remember this card" tooltip-trigger="mouseenter"><i
                                                 class="glyphicon glyphicon-info-sign small"></i></a>
 
                     </td>
@@ -158,7 +158,16 @@
                                 You have nothing in your inventory. Keep practicing and you will be offered rewards.
                             </div>
                             <div data-ng-repeat="item in userItems">
-                                {{item.amount}} - <span popover="{{item.description}}" popover-trigger="mouseenter">{{item.name}}</span> ({{item.healthpoints}})
+
+                                <a href="" tooltip="{{item.usedfor}}" tooltip-trigger="mouseenter">
+                                    <i
+                                            class="glyphicon glyphicon-info-sign small"></i></a>
+
+
+                                {{item.amount}} {{item.name}}
+
+
+                                <!--(use for <span data-ng-repeat="use in item.usedfor">{{use.name}}</span>)-->
                             </div>
                         </td>
                         <td class="right-padded-m top-aligned" width="34%">
@@ -167,8 +176,16 @@
                             </div>
                             <div data-ng-repeat="skill in userSkills">
 
-                                <div popover="{{skill.description}}" popover-trigger="mouseenter">{{skill.name}}</div>
 
+
+
+                                <a href="" tooltip="{{skill.usedfor}}" tooltip-trigger="mouseenter">
+                                    <i
+                                            class="glyphicon glyphicon-info-sign small"></i></a>
+
+
+
+                                {{skill.name}}
                             </div>
                         </td>
                         <td class="top-aligned" width="33%">
@@ -205,20 +222,22 @@
                 </table>
 
 
+
+
                 <section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">
 
                     <a href="" data-ng-click="deleteInventory()">delete inventory</a>
 
 
-                    <pre>
-                        Rewards:
-                        {{rewards | json}}
-                    </pre>
+                    <!--<pre>-->
+                        <!--Rewards:-->
+                        <!--{{rewards | json}}-->
+                    <!--</pre>-->
 
-                    <pre>
-                        Invetnroy:
-                        {{user.inventory | json}}
-                    </pre>
+                    <!--<pre>-->
+                        <!--Invetnroy:-->
+                        <!--{{user.inventory | json}}-->
+                    <!--</pre>-->
                     <!--<pre>-->
                         <!--Possible Item offers:-->
                         <!--{{itemOffers | json}}-->

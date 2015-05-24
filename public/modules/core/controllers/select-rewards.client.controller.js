@@ -140,12 +140,15 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.inventoryService.addRewardToInventory(choice._id);
             $scope.userItems = $scope.inventoryService.getUserItems();
             $scope.userSkills = $scope.inventoryService.getUserSkills();
+            $scope.itemOffers = $scope.inventoryService.getItemOffers();
+            $scope.skillOffers = $scope.inventoryService.getSkillOffers();
             $scope.enabledRecipies = $scope.inventoryService.calculatePossibleRecipies();
 
+            RewardsInventoryService.updateUsages();
 
-            new Users($scope.user).$update(function (updatedUser) {
-                $scope.user = updatedUser;
-            });
+
+            $scope.user.inventory = RewardsInventoryService.inventory;
+            $scope.user.$update();
             $scope.drawOffers();
 
             $scope.$parent.recoverFromReward();

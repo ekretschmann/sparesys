@@ -41,22 +41,8 @@ var RewardSchema = new Schema({
         default: []
     }],
     ingredients: {
-        type: [{
-            rewardId: {
-                type: Schema.ObjectId
-            },
-            name: {
-                type: String,
-                default: '',
-                required: 'Please fill Reward name',
-                trim: true
-            },
-            amount: {
-                type: Number,
-                default: 1
-            }
-        }],
-        default: [{name: 'Making Fire', amount: 1}]
+        type: [],
+        default: []
     },
     created: {
         type: Date,

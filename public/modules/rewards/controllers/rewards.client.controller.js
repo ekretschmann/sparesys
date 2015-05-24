@@ -17,6 +17,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selectedGoal = '';
 
 
+
+
         $scope.removeIngredient = function (ingredient) {
             for (var i = 0; i < $scope.ingredients.length; i++) {
                 if ($scope.ingredients[i].name === ingredient.name) {
@@ -152,7 +154,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             }
 
             reward.name = $scope.name;
-            reward.ingredients = $scope.ingredients;
+            reward.ingredients = [$scope.ingredients];
             reward.enables = [];
             reward.goals = [];
             reward.defaulthealthpoints = $scope.defaulthealthpoints;
@@ -196,18 +198,26 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             }
         };
 
+        $scope.removeAll = function() {
+            $scope.rewards.forEach(function(reward) {
+                $scope.remove(reward);
+            });
+        };
+
         // Remove existing Reward
         $scope.remove = function (reward) {
 
             if (reward) {
-                reward.$remove();
+                reward.$remove(function() {
+                    for (var i in $scope.rewards) {
 
-                for (var i in $scope.rewards) {
-
-                    if ($scope.rewards[i]._id === reward._id) {
-                        $scope.rewards.splice(i, 1);
+                        if ($scope.rewards[i]._id === reward._id) {
+                            $scope.rewards.splice(i, 1);
+                        }
                     }
-                }
+                });
+
+
             } else {
                 $scope.reward.$remove(function () {
 
@@ -240,7 +250,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     $scope.name = r.name;
                     $scope.description = r.description;
                     $scope.type = r.type;
-                    $scope.ingredients = r.ingredients;
+                    $scope.ingredients = r.ingredients[0];
                     $scope.selectedType = r.type;
                     $scope.updateReward = true;
                     $scope.defaulthealthpoints = r.defaulthealthpoints;

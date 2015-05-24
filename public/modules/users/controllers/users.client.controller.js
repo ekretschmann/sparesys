@@ -1,8 +1,8 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$timeout', '$stateParams', '$location', 'Authentication', 'Users',
-    function ($scope, $timeout, $stateParams, $location, Authentication, Users) {
+angular.module('users').controller('UsersController', ['$scope', '$state','$timeout', '$stateParams', '$location', 'Authentication', 'Users',
+    function ($scope, $state, $timeout, $stateParams, $location, Authentication, Users) {
         $scope.authentication = Authentication;
 
 
@@ -36,6 +36,22 @@ angular.module('users').controller('UsersController', ['$scope', '$timeout', '$s
                     $location.path('users');
                 });
             }
+        };
+
+        $scope.removeInventories = function() {
+            var n = $scope.users.length;
+            var i = 0;
+            $scope.users.forEach(function(user) {
+                user.inventory = [];
+                user.$update(function(){
+                    i++;
+
+                    if(i===n) {
+                        $state.go($state.$current, null, { reload: true });
+                    }
+                });
+            }, this);
+
         };
 
 //        // Update existing Course

@@ -204,17 +204,19 @@
 
                                     <tr data-ng-repeat="recipie in enabledRecipies">
 
-                                        <td class="top-aligned right-padded-m bottom-padded-m">
+                                        <td class="top-aligned right-padded-m top-padded-s">
 
-                                            <!--<a href="" tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">-->
-                                            <!--<i-->
-                                            <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
 
 
 
                                         <button class="btn btn-rememberators btn-small" data-ng-click="craft(recipie)">
                                             {{recipie.name}}
                                         </button>
+
+                                            <a  href=""  data-ng-if="recipie.usedforItems.length>0" tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">
+                                            <i
+                                            class="glyphicon glyphicon-info-sign small"></i></a>
+
                                         </td>
 
 

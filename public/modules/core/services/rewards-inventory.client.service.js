@@ -107,13 +107,19 @@ angular.module('core').service('RewardsInventoryService', [
             }, this);
 
             this.rewards.forEach(function (reward) {
-                reward.usedfor = [];
+
+                reward.usedfor = 'Used for: ';
+                reward.usedforItems = [];
 
                 if (this.usages[reward.name]) {
                     this.usages[reward.name].forEach(function (usage) {
-                        reward.usedfor.push(usage);
+                        reward.usedforItems.push(usage);
+                        reward.usedfor += usage.name+', ';
                     });
                 }
+
+                reward.usedfor = reward.usedfor.substring(0, reward.usedfor.length - 2);
+
 
 
             }, this);

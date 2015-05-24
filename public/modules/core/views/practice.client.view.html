@@ -205,15 +205,34 @@
                                     <tr data-ng-repeat="recipie in enabledRecipies">
 
                                         <td class="top-aligned right-padded-m bottom-padded-m">
-                                            <a href=""
-                                             data-ng-click="craft(recipie)">{{recipie.name}}</a>
+
+                                            <!--<a href="" tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">-->
+                                            <!--<i-->
+                                            <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
+
+
+
+                                        <button class="btn btn-rememberators btn-small" data-ng-click="craft(recipie)">
+                                            {{recipie.name}}
+                                        </button>
                                         </td>
 
-                                        <td class="top-aligned bottom-padded-m">
-                                            <div data-ng-repeat="ingredient in recipie.ingredients">
-                                                {{ingredient.amount}} {{ingredient.name}}
-                                            </div>
-                                        </td>
+
+                                        <!--<td class="top-aligned right-padded-m bottom-padded-m">-->
+                                            <!--<a href="" tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">-->
+                                                <!--<i-->
+                                                        <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
+
+
+                                            <!--<a href=""-->
+                                             <!--data-ng-click="craft(recipie)">{{recipie.name}}</a>-->
+                                        <!--</td>-->
+
+                                        <!--<td class="top-aligned bottom-padded-m">-->
+                                            <!--<div data-ng-repeat="ingredient in recipie.ingredients">-->
+                                                <!--{{ingredient.amount}} {{ingredient.name}}-->
+                                            <!--</div>-->
+                                        <!--</td>-->
                                     </tr>
                                 </table>
                             </div>
@@ -229,15 +248,11 @@
                     <a href="" data-ng-click="deleteInventory()">delete inventory</a>
 
 
-                    <!--<pre>-->
-                        <!--Rewards:-->
-                        <!--{{rewards | json}}-->
-                    <!--</pre>-->
+                    Rewards:
+                    <pre>{{rewards | json}}</pre>
 
-                    <!--<pre>-->
-                        <!--Invetnroy:-->
-                        <!--{{user.inventory | json}}-->
-                    <!--</pre>-->
+                    Invetnroy:
+                    <pre>{{user.inventory | json}}</pre>
                     <!--<pre>-->
                         <!--Possible Item offers:-->
                         <!--{{itemOffers | json}}-->
@@ -246,10 +261,10 @@
                         <!--Possible Skill offers:-->
                         <!--{{skillOffers |json}}-->
                     <!--</pre>-->
-                    <!--<pre>-->
-                        <!--Possible Recipies:-->
-                        <!--{{enabledRecipies |json}}-->
-                    <!--</pre>-->
+                    <pre>
+                        Possible Recipies:
+                        {{enabledRecipies |json}}
+                    </pre>
                 </section>
             </div>
 

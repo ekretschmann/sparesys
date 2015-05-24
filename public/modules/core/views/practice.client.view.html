@@ -164,7 +164,7 @@
                                             class="glyphicon glyphicon-info-sign small"></i></a>
 
 
-                                {{item.amount}} {{item.name}}
+                                {{item.amount}} {{item.name}} <span data-ng-repeat="a in range(item.healthpoints) track by $index"><span class="heart">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
 
 
                                 <!--(use for <span data-ng-repeat="use in item.usedfor">{{use.name}}</span>)-->

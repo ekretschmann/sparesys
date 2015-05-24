@@ -27,10 +27,9 @@
                     <td class="right-padded-m nowrap top-padded-s left-padded-l nowrap">Health Points</td>
                     <td class="top-padded-s right-padded-m" >
                         <input type="number"
-                               data-ng-model="health"
+                               data-ng-model="defaulthealthpoints"
                                class="form-control"
-                               placeholder="Health"
-                               required>
+                               placeholder="Health">
                     </td>
 
                     <td class="top-padded-s nowrap right-padded-m">
@@ -159,6 +158,7 @@
         <thead>
         <tr>
             <th class="left-padded-s right-padded-m">Reward</th>
+            <th class="left-padded-s right-padded-m">Default Health</th>
             <th class="right-padded-m">Ingredients</th>
             <th class="right-padded-m">Enables</th>
         </tr>
@@ -177,6 +177,15 @@
                 <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
 
                 <a class="pointer" href="/#!/rewards/manage/{{reward._id}}">{{reward.name}}</a>
+
+                <!--<a href="" data-ng-click="addIngredient(reward)">(as ingredient)</a>-->
+                <!--<a href="" data-ng-click="addPrecursor(reward)">(as dependency)</a>-->
+                <!--(<a class="pointer" data-ng-click="addIngredient(reward)">ingredient</a>)-->
+            </td>
+            <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s top-aligned">
+                <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
+
+                {{reward.defaulthealthpoints}}
 
                 <!--<a href="" data-ng-click="addIngredient(reward)">(as ingredient)</a>-->
                 <!--<a href="" data-ng-click="addPrecursor(reward)">(as dependency)</a>-->

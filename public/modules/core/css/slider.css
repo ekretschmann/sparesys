@@ -9,6 +9,7 @@
     width: 64px;
     z-index: 5;
 }
+
 .arrow.prev {
     background-image: url("/modules/core/img/prev.png");
     left: 20px;

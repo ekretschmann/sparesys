@@ -9,7 +9,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.enables = [];
         $scope.updateReward = false;
         $scope.type = 'Item';
-        $scope.health = 1;
+        $scope.defaulthealthpoints = 1;
 
         $scope.selectedIngredient = '';
         $scope.selectedEnabler = '';
@@ -115,7 +115,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             reward.name = $scope.name;
             reward.ingredients = $scope.ingredients;
             reward.enables = [];
-            reward.healthpoints = $scope.health;
+            reward.defaulthealthpoints = $scope.defaulthealthpoints;
 
             $scope.enables.forEach(function(en) {
                 reward.enables.push(en._id);
@@ -135,12 +135,10 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     $state.go($state.$current, null, {reload: true});
                 });
             } else {
-                console.log(reward);
                 reward.$save(function (response) {
                     //$location.path('rewards/' + response._id);
 
                     // Clear form fields
-                    console.log(response);
                     $scope.name = '';
                     $scope.type = 'Item';
                     $scope.ingredients = [];
@@ -200,7 +198,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     $scope.ingredients = r.ingredients;
                     $scope.selectedType = r.type;
                     $scope.updateReward = true;
-                    $scope.health = r.healthpoints;
+                    $scope.defaulthealthpoints = r.defaulthealthpoints;
                     $scope.rewards.forEach(function (reward) {
                         //console.log(reward._id);
                         //console.log(r.enables);

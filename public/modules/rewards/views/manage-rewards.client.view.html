@@ -118,6 +118,8 @@
                     </td>
                 </tr>
 
+
+
                 <tr>
 
                     <td></td>
@@ -131,6 +133,43 @@
                                     </i>
                                 </a></td>
                                 <td class="right-padded-m">{{enabler.name}}</td>
+                            </tr>
+                        </table>
+
+                    </td>
+                </tr>
+
+
+                <tr>
+                    <td class="right-padded-m nowrap top-padded-m nowrap ">Goals</td>
+                    <td class="top-padded-m expands" colspan="5">
+
+
+                        <input style="width: 100%"
+                               type="text"
+                               data-ng-model="selectedGoal"
+                               typeahead-on-select="selectGoal()"
+                               typeahead="reward.name for reward in rewards | filter:$viewValue | limitTo:8"
+                               class="form-control">
+
+
+
+                    </td>
+                </tr>
+
+                <tr>
+
+                    <td></td>
+                    <td class="top-padded-s">
+
+                        <table class="left-aligned">
+                            <tr data-ng-repeat="goal in goals">
+                                <td class="right-padded-s"><a>
+                                    <i data-ng-click="removeGoal(goal)"
+                                       class="glyphicon glyphicon-remove-sign small">
+                                    </i>
+                                </a></td>
+                                <td class="right-padded-m">{{goal.name}}</td>
                             </tr>
                         </table>
 

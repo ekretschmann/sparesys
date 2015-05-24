@@ -54,6 +54,7 @@ angular.module('core').service('RewardsInventoryService', [
 
                     var reward = this.getReward(item.rewardId);
                     if (reward.enables) {
+                        item.description = reward.description;
                         item.usedfor = 'Enables: ';
 
                         reward.enables.forEach(function (enabled) {
@@ -203,6 +204,30 @@ angular.module('core').service('RewardsInventoryService', [
             }, this);
             return result;
         };
+
+        this.getUserGoals = function () {
+            var result = [];
+            this.inventory.forEach(function (item) {
+                if (this.getType(item) === 'Skill') {
+                    var reward = this.getReward(item.rewardId);
+                    reward.goals.forEach(function(goal) {
+
+                        var found = false;
+                        this.inventory.forEach(function (inv) {
+                            if(inv.rewardId === goal) {
+                                found = true;
+                            }
+                        }, this);
+                        if (!found) {
+                            console.log('pushing');
+                            result.push(this.getReward(goal));
+                        }
+                    }, this);
+                }
+            }, this);
+            return result;
+        };
+
 
         this.getType = function (item) {
             var result;

@@ -7,12 +7,14 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.ingredients = [];
         $scope.enables = [];
+        $scope.goals = [];
         $scope.updateReward = false;
         $scope.type = 'Item';
         $scope.defaulthealthpoints = 1;
 
         $scope.selectedIngredient = '';
         $scope.selectedEnabler = '';
+        $scope.selectedGoal = '';
 
 
         $scope.removeIngredient = function (ingredient) {
@@ -27,6 +29,14 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             for (var i = 0; i < $scope.enables.length; i++) {
                 if ($scope.enables[i] === precursor) {
                     $scope.enables.splice(i, 1);
+                }
+            }
+        };
+
+        $scope.removeGoal = function (goal) {
+            for (var i = 0; i < $scope.goals.length; i++) {
+                if ($scope.goals[i] === goal) {
+                    $scope.goals.splice(i, 1);
                 }
             }
         };
@@ -101,6 +111,35 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.selectedEnabler = '';
         };
 
+        $scope.selectGoal = function () {
+
+
+            var found = false;
+            $scope.ingredients.forEach(function (ingredient) {
+                if (ingredient._id === $scope.selectedGoal) {
+                    found = true;
+                }
+            });
+
+
+            if (!found) {
+                $scope.rewards.forEach(function (reward) {
+                    if (reward.name === $scope.selectedGoal) {
+                        $scope.goals.push(reward);
+                        //if(!$scope.reward.enables) {
+                        //    $scope.reward.enables = [];
+                        //}
+                        //$scope.reward.enables.push(reward._id);
+                        //console.log($scope.reward);
+                    }
+                });
+
+                //$scope.enables.push($scope.selectedEnabler);
+            }
+
+            $scope.selectedGoal = '';
+        };
+
         // Create new Reward
         $scope.create = function () {
             // Create new Reward object
@@ -115,11 +154,17 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             reward.name = $scope.name;
             reward.ingredients = $scope.ingredients;
             reward.enables = [];
+            reward.goals = [];
             reward.defaulthealthpoints = $scope.defaulthealthpoints;
 
             $scope.enables.forEach(function(en) {
                 reward.enables.push(en._id);
             }, this);
+
+            $scope.goals.forEach(function(en) {
+                reward.goals.push(en._id);
+            }, this);
+
             reward.description = $scope.description;
             reward.type = $scope.type;
             if (!reward.ingredients || reward.ingredients.length > 0) {
@@ -200,11 +245,11 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     $scope.updateReward = true;
                     $scope.defaulthealthpoints = r.defaulthealthpoints;
                     $scope.rewards.forEach(function (reward) {
-                        //console.log(reward._id);
-                        //console.log(r.enables);
                         if (r.enables.indexOf(reward._id) > -1) {
-                            //console.log('xxxxx' +reward);
                             $scope.enables.push(reward);
+                        }
+                        if (r.goals.indexOf(reward._id) > -1) {
+                            $scope.goals.push(reward);
                         }
                     });
                 });
@@ -219,6 +264,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.type = 'Item';
             $scope.ingredients = [];
             $scope.enables = [];
+            $scope.goals = [];
             $scope.selectedType = 'Item';
             $scope.updateReward = false;
             $scope.health = 1;

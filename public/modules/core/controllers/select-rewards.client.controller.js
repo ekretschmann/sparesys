@@ -22,6 +22,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
         $scope.userItems = [];
         $scope.userSkills = [];
+        $scope.userGoals = [];
        // $scope.userRecipies = [];
        // $scope.rewardType = 'Items';
 
@@ -35,6 +36,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
                 $scope.enabledRecipies = $scope.inventoryService.calculatePossibleRecipies();
                 $scope.userItems = $scope.inventoryService.getUserItems();
                 $scope.userSkills = $scope.inventoryService.getUserSkills();
+                $scope.userGoals = $scope.inventoryService.getUserGoals();
                 $scope.drawOffers();
             });
 
@@ -120,10 +122,6 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.userItems = $scope.inventoryService.getUserItems();
 
             $scope.user.inventory = RewardsInventoryService.inventory;
-
-            //$scope.userSkills.forEach(function(skill) {
-            //    $scope.user.inventory.push(skill);
-            //});
             new Users($scope.user).$update(function (updatedUser) {
                 $scope.user = updatedUser;
             });
@@ -144,6 +142,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.inventoryService.addRewardToInventory(choice._id);
             $scope.userItems = $scope.inventoryService.getUserItems();
             $scope.userSkills = $scope.inventoryService.getUserSkills();
+            $scope.userGoals = $scope.inventoryService.getUserGoals();
             $scope.itemOffers = $scope.inventoryService.getItemOffers();
             $scope.skillOffers = $scope.inventoryService.getSkillOffers();
             $scope.enabledRecipies = $scope.inventoryService.calculatePossibleRecipies();

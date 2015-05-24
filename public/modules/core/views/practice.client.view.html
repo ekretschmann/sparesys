@@ -142,8 +142,8 @@
                     <thead>
                     <tr>
 
+                        <th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Goals</th>
                         <th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Inventory</th>
-                        <th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Skills</th>
                         <th class="right-padded-m  top-padded-sm top-aligned nowrap">You can craft</th>
 
                     </tr>
@@ -151,7 +151,54 @@
                     <tbody>
                     </tbody>
                     <tr>
-                        <td class="top-aligned right-padded-m" width="33%">
+                         <td class="right-padded-m top-aligned" width="25%">
+
+                             <div data-ng-if="!userGoals || userGoals.length === 0">
+                                 You will receive goals once you unlock new skills.
+                             </div>
+
+                             <div data-ng-repeat="goal in userGoals">
+
+
+
+
+                                 <a href="" tooltip="{{goal.description}}" tooltip-trigger="mouseenter">
+                                     <i
+                                             class="glyphicon glyphicon-info-sign small"></i></a>
+
+
+
+                                 {{goal.name}}
+                             </div>
+
+
+                             <div class="top-padded-s">
+                                 <label>Your Skills</label>
+                             </div>
+
+
+                             <div data-ng-if="!userSkills || userSkills.length === 0">
+                                 You have not learned any skills yet. Keep practicing and you will get them in no time.
+                             </div>
+
+
+                             <div data-ng-repeat="skill in userSkills">
+
+
+
+
+                                <a href="" tooltip="{{skill.description}}" tooltip-trigger="mouseenter">
+                                    <i
+                                            class="glyphicon glyphicon-info-sign small"></i></a>
+
+
+
+                                {{skill.name}}
+                            </div>
+
+
+                        </td>
+                        <td class="top-aligned right-padded-m" width="45%">
 
 
                             <div data-ng-if="!userItems || userItems.length === 0">
@@ -170,25 +217,8 @@
                                 <!--(use for <span data-ng-repeat="use in item.usedfor">{{use.name}}</span>)-->
                             </div>
                         </td>
-                        <td class="right-padded-m top-aligned" width="34%">
-                            <div data-ng-if="!userSkills || userSkills.length === 0">
-                                You have not learned any skills yet. Keep practicing and you will get them in no time.
-                            </div>
-                            <div data-ng-repeat="skill in userSkills">
 
-
-
-
-                                <a href="" tooltip="{{skill.usedfor}}" tooltip-trigger="mouseenter">
-                                    <i
-                                            class="glyphicon glyphicon-info-sign small"></i></a>
-
-
-
-                                {{skill.name}}
-                            </div>
-                        </td>
-                        <td class="top-aligned" width="33%">
+                        <td class="top-aligned" width="30%">
 
                             <div data-ng-if="!enabledRecipies || enabledRecipies.length===0">
                                 You can't create any new things at the moment. Fill up your inventory and you will be

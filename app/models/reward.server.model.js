@@ -36,6 +36,10 @@ var RewardSchema = new Schema({
         type: Schema.ObjectId,
         default: []
     }],
+    goals: [{
+        type: Schema.ObjectId,
+        default: []
+    }],
     ingredients: {
         type: [{
             rewardId: {

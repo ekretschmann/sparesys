@@ -257,6 +257,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     }
                 } else {
 
+                    console.log($scope.rewardScore);
                     if ($scope.rewardScore > 6) {
 
                         $timeout(function () {

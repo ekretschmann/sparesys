@@ -184,53 +184,53 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             return Math.exp((time - lastRep) / hrt * Math.log(0.5));
         };
 
-        $scope.adjustScoreToDueDate = function(card, time) {
-
-            if (card.dueDate && card.dueDate >= time) {
-                var dueInSecs = new Date(card.dueDate).getTime() - time;
-                var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
-
-                if (dueInDays < 9) {
-                    var distance = Math.abs(card.predictedRetention - 0.4);
-                    var expectedDistance = (dueInDays * 0.1) * distance;
-                    if (card.predictedRetention > 0.4) {
-                        return 0.4 + expectedDistance;
-                    } else {
-                        return 0.4 - expectedDistance;
-                    }
-                }
-            }
-            return card.predictedRetention;
-        };
-
-        //$scope.adjustScoreToDueDate = function (card, time) {
+        //$scope.adjustScoreToDueDate = function(card, time) {
         //
-        //    var pr = card.predictedRetention;
-        //    if (card.dueDate) {
+        //    if (card.dueDate && card.dueDate >= time) {
         //        var dueInSecs = new Date(card.dueDate).getTime() - time;
         //        var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
-        //        var factor = 10 - dueInDays;
         //
-        //        //console.log(card.question);
-        //        if (factor > 0 && factor < 10) {
-        //
-        //            var dOptimal = 0.4 - pr;
-        //
-        //            if (pr > 0.4) {
-        //
-        //                dOptimal = pr - 0.4;
-        //                //var dMaximal = 1 - pr;
-        //                return Math.abs(pr - dOptimal/factor -0.4);
+        //        if (dueInDays < 9) {
+        //            var distance = Math.abs(card.predictedRetention - 0.4);
+        //            var expectedDistance = (dueInDays * 0.1) * distance;
+        //            if (card.predictedRetention > 0.4) {
+        //                return 0.4 + expectedDistance;
         //            } else {
-        //                //var dMinimal = pr;
-        //
-        //                return Math.abs(pr + (dOptimal/factor) - 0.4);
+        //                return 0.4 - expectedDistance;
         //            }
-        //
         //        }
         //    }
-        //    return Math.abs(card.predictedRetention - 0.4);
+        //    return card.predictedRetention;
         //};
+
+        $scope.adjustScoreToDueDate = function (card, time) {
+
+            var pr = card.predictedRetention;
+            if (card.dueDate) {
+                var dueInSecs = new Date(card.dueDate).getTime() - time;
+                var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
+                var factor = 10 - dueInDays;
+
+                //console.log(card.question);
+                if (factor > 0 && factor < 10) {
+
+                    var dOptimal = 0.4 - pr;
+
+                    if (pr > 0.4) {
+
+                        dOptimal = pr - 0.4;
+                        //var dMaximal = 1 - pr;
+                        return Math.abs(pr - dOptimal/factor -0.4);
+                    } else {
+                        //var dMinimal = pr;
+
+                        return Math.abs(pr + (dOptimal/factor) - 0.4);
+                    }
+
+                }
+            }
+            return Math.abs(card.predictedRetention - 0.4);
+        };
 
         //1. how far away is the card from 0.4
         //2. make this difference smaller by 10-days left

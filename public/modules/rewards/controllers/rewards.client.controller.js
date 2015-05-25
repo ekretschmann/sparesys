@@ -169,7 +169,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
             reward.description = $scope.description;
             reward.type = $scope.type;
-            if (!reward.ingredients || reward.ingredients.length > 0) {
+            if (reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length > 0) {
                 reward.type = 'Recipe';
             } else {
                 reward.type = $scope.type;
@@ -262,6 +262,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                             $scope.goals.push(reward);
                         }
                     });
+                    if (r.ingredients.length ===0) {
+                        $scope.ingredients = [];
+                    }
                 });
             }
 

@@ -40,6 +40,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
                 $scope.drawOffers();
             });
 
+
         };
 
 
@@ -156,6 +157,11 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
             $scope.$parent.recoverFromReward();
 
+
+        };
+
+        $scope.exitScreen = function() {
+            $scope.$parent.recoverFromReward();
 
         };
 

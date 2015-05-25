@@ -89,20 +89,22 @@ angular.module('core').service('RewardsInventoryService', [
             this.usages = [];
 
             this.rewards.forEach(function (reward) {
-                reward.ingredients.forEach(function (ingredient) {
+                if (reward.ingredients[0]) {
+                    reward.ingredients[0].forEach(function (ingredient) {
 
-                    var ingredientNames = '';
-                    reward.ingredients.forEach(function (ingredient) {
-                        ingredientNames += ingredient.amount + ' ' + ingredient.name + ', ';
+                        var ingredientNames = '';
+                        reward.ingredients[0].forEach(function (ingredient) {
+                            ingredientNames += ingredient.amount + ' ' + ingredient.name + ', ';
+                        }, this);
+                        ingredientNames = ingredientNames.substring(0, ingredientNames.length - 2);
+
+                        if (this.usages[ingredient.name]) {
+                            this.usages[ingredient.name].push({name: reward.name, recipe: ingredientNames});
+                        } else {
+                            this.usages[ingredient.name] = [{name: reward.name, recipe: ingredientNames}];
+                        }
                     }, this);
-                    ingredientNames = ingredientNames.substring(0, ingredientNames.length - 2);
-
-                    if (this.usages[ingredient.name]) {
-                        this.usages[ingredient.name].push({name: reward.name, recipe: ingredientNames});
-                    } else {
-                        this.usages[ingredient.name] = [{name: reward.name, recipe: ingredientNames}];
-                    }
-                }, this);
+                }
 
 
             }, this);
@@ -135,7 +137,7 @@ angular.module('core').service('RewardsInventoryService', [
             var inventoryCopy = this.inventory.slice(0);
             var canTrade = true;
             if (reward.ingredients) {
-                reward.ingredients.forEach(function (ingredient) {
+                reward.ingredients[0].forEach(function (ingredient) {
 
                     var found = false;
                     inventoryCopy.forEach(function (item) {
@@ -219,7 +221,6 @@ angular.module('core').service('RewardsInventoryService', [
                             }
                         }, this);
                         if (!found) {
-                            console.log('pushing');
                             result.push(this.getReward(goal));
                         }
                     }, this);
@@ -317,9 +318,9 @@ angular.module('core').service('RewardsInventoryService', [
                 var possible = true;
 
 
-                if (reward.ingredients && reward.ingredients.length > 0) {
+                if (reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length > 0) {
 
-                    reward.ingredients.forEach(function (ingredient) {
+                    reward.ingredients[0].forEach(function (ingredient) {
                         var found = false;
                         this.inventory.forEach(function (item) {
                             if (item.rewardId === ingredient.rewardId && item.amount >= ingredient.amount) {

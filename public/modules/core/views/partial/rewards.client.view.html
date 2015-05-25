@@ -43,7 +43,16 @@
 
 
             <div class="top-padded-m" data-ng-if="!offers || offers.length ===0">
+                <span class="question">
                 Sorry, there are no offers
+                    </span>
+
+                <div class="top-padded-m">
+                    <button class="btn btn-rememberators btn-small" data-ng-click="exitScreen()">
+                        Continue
+                    </button>
+                </div>
+
             </div>
 
             <div class="top-padded-m left-padded-m" data-ng-if="offers && offers.length > 0">

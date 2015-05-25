@@ -33,17 +33,27 @@
                     </td>
 
                     <td class="top-padded-s nowrap right-padded-m">
+
+                        <div data-ng-show="type === 'Recipe'" data-ng-hide="type !== 'Recipe'">
+                            <input type="radio"
+                                   data-ng-model="type"
+                                   value="Recipe"
+                                   disabled
+                                    > Recipe
+
+                        </div>
+                        <div data-ng-show="type !== 'Recipe'" data-ng-hide="type === 'Recipe'">
+
                         <input type="radio"
                                data-ng-model="type"
                                value="Item"
                                 > Item
-                    </td>
-                    <td class="top-padded-s nowrap right-padded-s">
                         <input type="radio"
                                data-ng-model="type"
                                value="Skill"
 
                                 > Skill
+                            </div>
                     </td>
 
                 </tr>
@@ -197,42 +207,38 @@
         <thead>
         <tr>
             <th class="left-padded-s right-padded-m">Reward</th>
-            <th class="left-padded-s right-padded-m">Default Health</th>
+            <th class="left-padded-s right-padded-m">Description</th>
+            <th class="left-padded-s right-padded-m">H</th>
             <th class="right-padded-m">Ingredients</th>
             <th class="right-padded-m">Enables</th>
         </tr>
         </thead>
         <tbody>
         <tr data-ng-repeat="reward in rewards | filter:searchText">
-            <!--<td class="left-padded-s top-padded-s nowrap">-->
-            <!--<a >-->
-            <!--<i data-ng-click="remove(reward)"-->
-            <!--class="glyphicon glyphicon-remove-sign small">-->
-            <!--</i>-->
-            <!--</a>-->
 
-            <!--</td>-->
             <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s top-aligned">
-                <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
 
                 <a class="pointer" href="/#!/rewards/manage/{{reward._id}}">{{reward.name}}</a>
 
-                <!--<a href="" data-ng-click="addIngredient(reward)">(as ingredient)</a>-->
-                <!--<a href="" data-ng-click="addPrecursor(reward)">(as dependency)</a>-->
-                <!--(<a class="pointer" data-ng-click="addIngredient(reward)">ingredient</a>)-->
+                <span data-ng-if="reward.type === 'Item'">(I)</span>
+                <span data-ng-if="reward.type === 'Recipe'">(R)</span>
+                <span data-ng-if="reward.type === 'Skill'">(S)</span>
+
             </td>
             <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s top-aligned">
-                <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
+
+               {{reward.description}}
+
+            </td>
+
+            <td class="left-padded-s right-padded-m top-padded-s bottom-padded-s top-aligned">
 
                 {{reward.defaulthealthpoints}}
 
-                <!--<a href="" data-ng-click="addIngredient(reward)">(as ingredient)</a>-->
-                <!--<a href="" data-ng-click="addPrecursor(reward)">(as dependency)</a>-->
-                <!--(<a class="pointer" data-ng-click="addIngredient(reward)">ingredient</a>)-->
             </td>
             <td>
 
-                <div class="right-padded-s" data-ng-repeat="ingredient in reward.ingredients">{{ingredient.name}}
+                <div class="right-padded-s" data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.name}}
                     ({{ingredient.amount}})
                 </div>
             </td>
@@ -240,9 +246,6 @@
 
                 <div class="right-padded-s" data-ng-repeat="enabler in reward.enables">{{rewardNames[enabler]}}</div>
             </td>
-            <!--<td class="right-padded-s">-->
-            <!--Enables: {{reward.enables}}, Ingredients: {{reward.ingredients}}-->
-            <!--</td>-->
         </tr>
         </tbody>
     </table>

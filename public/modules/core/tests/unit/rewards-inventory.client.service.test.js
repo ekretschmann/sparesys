@@ -54,7 +54,7 @@
             Service.rewards.push({_id: '1005',
                     name: 'Tree',
                     type: 'Item',
-                    ingredients: [{_id: '1', amount: 1}, {_id: '2', amount: 1}, {_id:'3', amount: 1}],
+                    ingredients: [[{_id: '1', amount: 1}, {_id: '2', amount: 1}, {_id:'3', amount: 1}]],
                     enables: ['102']
                 }
             );
@@ -72,7 +72,7 @@
             Service.rewards.push({_id: '1005',
                     name: 'Tree',
                     type: 'Item',
-                    ingredients: [{rewardId: '1', amount: 1}, {rewardId: '2', amount: 1}, {rewardId:'3', amount: 1}],
+                    ingredients: [[{rewardId: '1', amount: 1}, {rewardId: '2', amount: 1}, {rewardId:'3', amount: 1}]],
                     enables: ['2']
                 }
             );
@@ -81,7 +81,7 @@
                 {rewardId: '1', amount: 1},
                 {rewardId: '3', amount: 1}];
             var itemOffers = Service.getItemOffers();
-            expect(itemOffers.length).toBe(1);
+            expect(itemOffers.length).toBe(3);
             expect(itemOffers).toContain({_id: '2', name: 'Water', type: 'Item'});
         });
 
@@ -92,7 +92,7 @@
                     name: 'Tree',
                     defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '4', amount:4}, {rewardId:'3', amount:1}]
+                    ingredients: [[{rewardId:'1', amount: 1}, {rewardId: '4', amount:4}, {rewardId:'3', amount:1}]]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -115,7 +115,7 @@
                     name: 'Tree',
                     defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '4', amount:2}, {rewardId:'3', amount:1}]
+                    ingredients:[[{rewardId:'1', amount: 1}, {rewardId: '4', amount:2}, {rewardId:'3', amount:1}]]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -139,7 +139,7 @@
                     name: 'Tree',
                     defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:2}, {rewardId:'3', amount:1}]
+                    ingredients:[[{rewardId:'1', amount: 1}, {rewardId: '2', amount:2}, {rewardId:'3', amount:1}]]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -162,7 +162,7 @@
                     name: 'Tree',
                     defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '3', amount:1}, {rewardId:'4', amount:1}]
+                    ingredients:[[{rewardId:'1', amount: 1}, {rewardId: '3', amount:1}, {rewardId:'4', amount:1}]]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -184,7 +184,7 @@
                     name: 'Tree',
                     defaulthealthpoints: 3,
                     type: 'Item',
-                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]
+                    ingredients:[[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -205,7 +205,7 @@
                     name: 'Tree',
                     defaulthealthpoints:2 ,
                     type: 'Item',
-                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]
+                    ingredients:[[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -228,7 +228,7 @@
                     name: 'Tree',
                     type: 'Item',
                     defaulthealthpoints: 4,
-                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]
+                    ingredients:[[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -251,7 +251,7 @@
                     name: 'Tree',
                     type: 'Item',
                     defaulthealthpoints: 3,
-                    ingredients:[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]
+                    ingredients:[[{rewardId:'1', amount: 1}, {rewardId: '2', amount:1}, {rewardId:'3', amount:1}]]
                 }
             );
             Service.inventory = [{rewardId: '101', amount: 1},
@@ -280,10 +280,12 @@
 
         it('should get recipe with multiple items when enough items are present', function () {
             Service.rewards = testRewards.slice(0);
-            Service.rewards.push({_id: '1005',
+            Service.rewards.push({
+                    _id: '1005',
                     name: 'Tree',
                     type: 'Item',
-                    ingredients: [{rewardId: '1', amount: 1}, {rewardId: '2', amount: 2}, {rewardId:'3', amount: 1}]}
+                    ingredients: [[{rewardId: '1', amount: 1}, {rewardId: '2', amount: 2}, {rewardId: '3', amount: 1}]]
+                }
             );
 
             Service.inventory = [{rewardId: '101'},
@@ -299,7 +301,8 @@
             Service.rewards.push({_id: '1005',
                     name: 'Tree',
                     type: 'Item',
-                    ingredients: [{rewardId: '1', amount: 1}, {rewardId: '2', amount: 2}, {rewardId:'3', amount: 1}]}
+                    ingredients: [[{rewardId: '1', amount: 1}, {rewardId: '2', amount: 2}, {rewardId:'3', amount: 1}]]
+                }
             );
 
             Service.inventory = [{rewardId: '101'},
@@ -315,7 +318,8 @@
             Service.rewards.push({_id: '1005',
                     name: 'Tree',
                 type: 'Item',
-                ingredients: [{rewardId: '1', amount: 1}, {rewardId: '2', amount: 1}, {rewardId:'3', amount: 1}]}
+                ingredients: [[{rewardId: '1', amount: 1}, {rewardId: '2', amount: 1}, {rewardId:'3', amount: 1}]]
+                }
             );
 
             Service.inventory = [{rewardId: '101'},

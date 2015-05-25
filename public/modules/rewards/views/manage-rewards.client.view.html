@@ -82,7 +82,7 @@
                                 type="text"
                                data-ng-model="selectedIngredient"
                                typeahead-on-select="selectIngredient()"
-                               typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limktTo:12"
+                               typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
                                class="form-control">
 
 
@@ -121,7 +121,7 @@
                                type="text"
                                data-ng-model="selectedEnabler"
                                typeahead-on-select="selectEnabler()"
-                               typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limktTo:12"
+                               typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
                                class="form-control">
 
 
@@ -160,7 +160,7 @@
                                type="text"
                                data-ng-model="selectedGoal"
                                typeahead-on-select="selectGoal()"
-                               typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limktTo:12"
+                               typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
                                class="form-control">
 
 

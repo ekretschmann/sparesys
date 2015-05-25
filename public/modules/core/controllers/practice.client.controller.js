@@ -254,17 +254,17 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                         }, 100);
 
                         return;
-                    } else {
+                    }
+                } else {
 
-                        if ($scope.rewardScore > 6) {
+                    if ($scope.rewardScore > 6) {
 
-                            $timeout(function () {
-                                $scope.rewardScore = 0.0;
-                                $scope.mode = 'reward';
-                            }, 100);
+                        $timeout(function () {
+                            $scope.rewardScore = 0.0;
+                            $scope.mode = 'reward';
+                        }, 100);
 
-                            return;
-                        }
+                        return;
                     }
                 }
             }

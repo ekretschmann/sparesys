@@ -123,15 +123,13 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.userItems = $scope.inventoryService.getUserItems();
 
             $scope.user.inventory = RewardsInventoryService.inventory;
-            new Users($scope.user).$update(function (updatedUser) {
-                $scope.user = updatedUser;
-            });
+            $scope.user.$update();
             $scope.drawOffers();
 
         };
 
         $scope.range = function(n) {
-            return new Array(Math.min(n, 9));
+            return new Array(Math.min(n, 8));
         };
 
         $scope.processChoice = function (selection) {

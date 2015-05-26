@@ -27,8 +27,8 @@
                     <!--<td>Score</td>-->
                     <!--<td class="left-padded-s">:</td>-->
                     <!--<td class="left-padded-s">-->
-                        <!--<span data-ng-if="cards">{{ cardScore }}</span>-->
-                        <!--<span data-ng-if="!cards">0</span>-->
+                    <!--<span data-ng-if="cards">{{ cardScore }}</span>-->
+                    <!--<span data-ng-if="!cards">0</span>-->
 
                     <!--</td>-->
 
@@ -70,8 +70,9 @@
                     <td class="expands"></td>
 
 
-                    <td class="nowrap">Retention <a href="" tooltip="The chance that you remember this card" tooltip-trigger="mouseenter"><i
-                                                class="glyphicon glyphicon-info-sign small"></i></a>
+                    <td class="nowrap">Retention <a href="" tooltip="The chance that you remember this card"
+                                                    tooltip-trigger="mouseenter"><i
+                            class="glyphicon glyphicon-info-sign small"></i></a>
 
                     </td>
                     <td class="left-padded-s">:</td>
@@ -88,7 +89,9 @@
     <div data-ng-if="cards && cards.length > 0" class="position:relative">
 
 
-        <div style="margin-bottom: 0px; padding-left:15px; padding-right: 15px"><progressbar style="height: 1px; margin: 0; padding: 0" value="progress"/> </div>
+        <div style="margin-bottom: 0px; padding-left:15px; padding-right: 15px">
+            <progressbar style="height: 1px; margin: 0; padding: 0" value="progress"/>
+        </div>
 
         <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
 
@@ -154,40 +157,35 @@
                     <tbody>
                     </tbody>
                     <tr>
-                         <td class="right-padded-m top-aligned" width="25%">
+                        <td class="right-padded-m top-aligned" width="25%">
 
-                             <div data-ng-if="!userGoals || userGoals.length === 0">
-                                 You will receive goals once you unlock new skills.
-                             </div>
+                            <div data-ng-if="!userGoals || userGoals.length === 0">
+                                You will receive goals once you unlock new skills.
+                            </div>
 
-                             <div data-ng-repeat="goal in userGoals">
-
-
+                            <div data-ng-repeat="goal in userGoals">
 
 
-                                 <a href="" tooltip="{{goal.description}}" tooltip-trigger="mouseenter">
-                                     <i
-                                             class="glyphicon glyphicon-info-sign small"></i></a>
+                                <a href="" tooltip="{{goal.description}}" tooltip-trigger="mouseenter">
+                                    <i
+                                            class="glyphicon glyphicon-info-sign small"></i></a>
 
 
-
-                                 {{goal.name}}
-                             </div>
-
-
-                             <div class="top-padded-s">
-                                 <label>Your Skills</label>
-                             </div>
+                                {{goal.name}}
+                            </div>
 
 
-                             <div data-ng-if="!userSkills || userSkills.length === 0">
-                                 You have not learned any skills yet. Keep practicing and you will get them in no time.
-                             </div>
+                            <div class="top-padded-s">
+                                <label>Your Skills</label>
+                            </div>
 
 
-                             <div data-ng-repeat="skill in userSkills">
+                            <div data-ng-if="!userSkills || userSkills.length === 0">
+                                You have not learned any skills yet. Keep practicing and you will get them in no time.
+                            </div>
 
 
+                            <div data-ng-repeat="skill in userSkills">
 
 
                                 <a href="" tooltip="{{skill.description}}" tooltip-trigger="mouseenter">
@@ -195,11 +193,8 @@
                                             class="glyphicon glyphicon-info-sign small"></i></a>
 
 
-
                                 {{skill.name}}
                             </div>
-
-
 
 
                         </td>
@@ -216,8 +211,8 @@
                                             class="glyphicon glyphicon-info-sign small"></i></a>
 
 
-                                {{item.amount}} {{item.name}} <span data-ng-repeat="a in range(item.healthpoints) track by $index"><span class="heart">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
-
+                                {{item.amount}} {{item.name}} <span
+                                    data-ng-repeat="a in range(item.healthpoints) track by $index"><span class="heart">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
 
                                 <!--(use for <span data-ng-repeat="use in item.usedfor">{{use.name}}</span>)-->
                             </div>
@@ -242,18 +237,17 @@
                                         <td class="top-aligned right-padded-m top-padded-s">
 
 
+                                            <button class="btn btn-rememberators btn-small"
+                                                    data-ng-click="craft(recipie)">
+                                                {{recipie.name}}
+                                            </button>
 
-
-                                        <button class="btn btn-rememberators btn-small" data-ng-click="craft(recipie)">
-                                            {{recipie.name}}
-                                        </button>
-
-                                            <a  href=""  data-ng-if="recipie.usedforItems.length>0" tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">
-                                            <i
-                                            class="glyphicon glyphicon-info-sign small"></i></a>
+                                            <a href="" data-ng-if="recipie.usedforItems.length>0"
+                                               tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">
+                                                <i
+                                                        class="glyphicon glyphicon-info-sign small"></i></a>
 
                                         </td>
-
 
 
                                     </tr>
@@ -265,40 +259,45 @@
                 </table>
 
 
-                <label class="top-padded-m">Recipe List</label>
+                    <div class="bottom-padded-m">
+                        <label class="top-padded-m">Recipe List</label> <input class="search form-control" ng-model="searchText">
+                    </div>
 
                 <table class="expands">
                     <tr>
-                        <td>
+                        <td class="top-aligned">
 
-                            <div data-ng-repeat="reward in rewards | orderBy: 'name'">
+                            <div data-ng-repeat="reward in rewards | orderBy: 'name' | filter: searchText">
                                 <span data-ng-if="$index % 3 ===0">{{reward.name}}
                                 <span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">
-                                    (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span data-ng-if="!$last">, </span></span>)
+                                    (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span
+                                        data-ng-if="!$last">, </span></span>)
 
                                     </span>
                                     </span>
                             </div>
                         </td>
 
-                        <td>
+                        <td class="top-aligned">
 
-                            <div data-ng-repeat="reward in rewards | orderBy: 'name'">
+                            <div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:searchText">
                                 <span data-ng-if="$index % 3 ===1">{{reward.name}}
                                 <span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">
-                                    (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span data-ng-if="!$last">, </span></span>)
+                                    (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span
+                                        data-ng-if="!$last">, </span></span>)
 
                                     </span>
                                     </span>
                             </div>
                         </td>
 
-                        <td>
+                        <td class="top-aligned">
 
-                            <div data-ng-repeat="reward in rewards | orderBy: 'name'">
+                            <div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:searchText">
                                 <span data-ng-if="$index % 3 ===2">{{reward.name}}
                                 <span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">
-                                    (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span data-ng-if="!$last">, </span></span>)
+                                    (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span
+                                        data-ng-if="!$last">, </span></span>)
 
                                     </span>
                                     </span>
@@ -306,8 +305,6 @@
                         </td>
                     </tr>
                 </table>
-
-
 
 
                 <section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">
@@ -321,12 +318,12 @@
                     Invetnroy:
                     <pre>{{user.inventory | json}}</pre>
                     <!--<pre>-->
-                        <!--Possible Item offers:-->
-                        <!--{{itemOffers | json}}-->
+                    <!--Possible Item offers:-->
+                    <!--{{itemOffers | json}}-->
                     <!--</pre>-->
                     <!--<pre>-->
-                        <!--Possible Skill offers:-->
-                        <!--{{skillOffers |json}}-->
+                    <!--Possible Skill offers:-->
+                    <!--{{skillOffers |json}}-->
                     <!--</pre>-->
                     <pre>
                         Possible Recipies:

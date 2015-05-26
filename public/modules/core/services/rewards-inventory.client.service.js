@@ -127,6 +127,15 @@ angular.module('core').service('RewardsInventoryService', [
 
             }, this);
 
+
+            this.rewards.forEach(function (reward) {
+
+                reward.searchTerm = reward.name;
+                reward.ingredients[0].forEach(function(ingredient) {
+                    reward.searchTerm += ' '+ingredient.name;
+                }, this);
+            }, this);
+
             this.updateUsages();
 
         };

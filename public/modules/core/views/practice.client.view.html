@@ -142,7 +142,7 @@
             </div>
             <!--</div>-->
 
-            <div>
+            <div class="content-header">
 
                 <table class="expands">
                     <thead>
@@ -175,17 +175,17 @@
                             </div>
 
 
-                            <div class="top-padded-s">
+                            <div class="top-padded-m ">
                                 <label>Your Skills</label>
                             </div>
 
 
-                            <div data-ng-if="!userSkills || userSkills.length === 0">
+                            <div class="bottom-padded-m" data-ng-if="!userSkills || userSkills.length === 0">
                                 You have not learned any skills yet. Keep practicing and you will get them in no time.
                             </div>
 
 
-                            <div data-ng-repeat="skill in userSkills">
+                            <div class="bottom-padded-m" data-ng-repeat="skill in userSkills">
 
 
                                 <a href="" tooltip="{{skill.description}}" tooltip-trigger="mouseenter">
@@ -198,7 +198,7 @@
 
 
                         </td>
-                        <td class="top-aligned right-padded-m" width="45%">
+                        <td class="top-aligned right-padded-m bottom-padded-m" width="45%">
 
 
                             <div data-ng-if="!userItems || userItems.length === 0">
@@ -218,7 +218,7 @@
                             </div>
                         </td>
 
-                        <td class="top-aligned" width="30%">
+                        <td class="top-aligned bottom-padded-m" width="30%">
 
                             <div data-ng-if="!enabledRecipies || enabledRecipies.length===0">
                                 You can't create any new things at the moment. Fill up your inventory and you will be
@@ -259,15 +259,25 @@
                 </table>
 
 
-                    <div class="bottom-padded-m">
-                        <label class="top-padded-m">Recipe List</label> <input class="search form-control" ng-model="searchText">
-                    </div>
 
-                <table class="expands">
-                    <tr>
-                        <td class="top-aligned">
 
-                            <div data-ng-repeat="reward in rewards | orderBy: 'name' | filter: searchText">
+
+
+            </div>
+
+
+
+            <div class="bottom-padded-m top-padded-m">
+
+                <label>Recipe List</label> <input class="search form-control" ng-model="recipeName">
+
+            </div>
+
+            <table class="expands">
+                <tr>
+                    <td class="top-aligned">
+
+                        <div data-ng-repeat="reward in rewards | orderBy: 'name' | filter:{searchTerm: recipeName}">
                                 <span data-ng-if="$index % 3 ===0">{{reward.name}}
                                 <span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">
                                     (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span
@@ -275,12 +285,12 @@
 
                                     </span>
                                     </span>
-                            </div>
-                        </td>
+                        </div>
+                    </td>
 
-                        <td class="top-aligned">
+                    <td class="top-aligned">
 
-                            <div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:searchText">
+                        <div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{searchTerm: recipeName}">
                                 <span data-ng-if="$index % 3 ===1">{{reward.name}}
                                 <span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">
                                     (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span
@@ -288,12 +298,12 @@
 
                                     </span>
                                     </span>
-                            </div>
-                        </td>
+                        </div>
+                    </td>
 
-                        <td class="top-aligned">
+                    <td class="top-aligned">
 
-                            <div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:searchText">
+                        <div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{searchTerm: recipeName}">
                                 <span data-ng-if="$index % 3 ===2">{{reward.name}}
                                 <span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">
                                     (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span
@@ -301,36 +311,35 @@
 
                                     </span>
                                     </span>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
+                        </div>
+                    </td>
+                </tr>
+            </table>
 
 
-                <section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">
+            <section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">
 
-                    <a href="" data-ng-click="deleteInventory()">delete inventory</a>
+                <a href="" data-ng-click="deleteInventory()">delete inventory</a>
 
 
-                    Rewards:
-                    <pre>{{rewards | json}}</pre>
+                Rewards:
+                <pre>{{rewards | json}}</pre>
 
-                    Invetnroy:
-                    <pre>{{user.inventory | json}}</pre>
-                    <!--<pre>-->
-                    <!--Possible Item offers:-->
-                    <!--{{itemOffers | json}}-->
-                    <!--</pre>-->
-                    <!--<pre>-->
-                    <!--Possible Skill offers:-->
-                    <!--{{skillOffers |json}}-->
-                    <!--</pre>-->
+                Invetnroy:
+                <pre>{{user.inventory | json}}</pre>
+                <!--<pre>-->
+                <!--Possible Item offers:-->
+                <!--{{itemOffers | json}}-->
+                <!--</pre>-->
+                <!--<pre>-->
+                <!--Possible Skill offers:-->
+                <!--{{skillOffers |json}}-->
+                <!--</pre>-->
                     <pre>
                         Possible Recipies:
                         {{enabledRecipies |json}}
                     </pre>
-                </section>
-            </div>
+            </section>
 
 
         </div>

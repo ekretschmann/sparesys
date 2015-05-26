@@ -49,35 +49,39 @@ angular.module('core').service('RewardsInventoryService', [
 
             this.inventory.forEach(function (item) {
 
+                var reward = this.getReward(item.rewardId);
+                item.description = reward.description;
 
-                if (item.type === 'Skill') {
 
-                    var reward = this.getReward(item.rewardId);
-                    if (reward.enables) {
-                        item.description = reward.description;
-                        item.usedfor = 'Enables: ';
+                //if (item.type === 'Skill') {
 
-                        reward.enables.forEach(function (enabled) {
+                //    var reward = this.getReward(item.rewardId);
+                //    if (reward.enables) {
+                //        item.description = reward.description;
+                //        item.usedfor = 'Enables: ';
+                //        item.description = reward.description;
+                //
+                //        reward.enables.forEach(function (enabled) {
+                //
+                //            var theItem = this.getReward(enabled);
+                //
+                //            item.usedfor += theItem.name + ', ';
+                //        }, this);
+                //
+                //        item.usedfor = item.usedfor.substring(0, item.usedfor.length - 2);
+                //    }
+                //
+                //} else {
+                    //item.usedfor = 'Used for: ';
+                    //
+                    //if (this.usages[item.name]) {
+                    //    this.usages[item.name].forEach(function (usage) {
+                    //        item.usedfor += usage.name + ', ';
+                    //    });
+                    //}
+                    //item.usedfor = item.usedfor.substring(0, item.usedfor.length - 2);
 
-                            var theItem = this.getReward(enabled);
-
-                            item.usedfor += theItem.name + ', ';
-                        }, this);
-
-                        item.usedfor = item.usedfor.substring(0, item.usedfor.length - 2);
-                    }
-
-                } else {
-                    item.usedfor = 'Used for: ';
-
-                    if (this.usages[item.name]) {
-                        this.usages[item.name].forEach(function (usage) {
-                            item.usedfor += usage.name + ', ';
-                        });
-                    }
-                    item.usedfor = item.usedfor.substring(0, item.usedfor.length - 2);
-
-                }
+                //}
 
             }, this);
 

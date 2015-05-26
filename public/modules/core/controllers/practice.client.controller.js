@@ -19,6 +19,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.progress = 30;
 
+        $scope.stopPracitcing = function() {
+            $location.path('/');
+        };
+
 
         $scope.initSpeech = function () {
 //                console.log('got it');

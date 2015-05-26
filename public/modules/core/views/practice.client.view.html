@@ -2,6 +2,11 @@
 
 
     <div class="content-header">
+        <div class="pull-right">
+            <a class="btn btn-rememberators" data-ng-click="stopPracitcing();">
+                <i class="glyphicon glyphicon-stop"></i> Stop Practicing {{course.name}}
+            </a>
+        </div>
         <div class="title">
             {{course.name}}
         </div>
@@ -86,46 +91,52 @@
         </div>
     </div>
 
-    <div data-ng-if="cards && cards.length > 0" class="position:relative">
+    <div data-ng-if="cards && cards.length > 0">
 
+        <div class="content-header">
 
-        <div style="margin-bottom: 0px; padding-left:15px; padding-right: 15px">
-            <progressbar style="height: 1px; margin: 0; padding: 0" value="progress"/>
-        </div>
-
-        <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
-
-            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
-                <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
-            </div>
-            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
-                <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
-            </div>
-        </div>
-
-        <div data-ng-show="mode === 'reverse'" data-ng-hide="mode !== 'reverse'" style="height: 500px">
-            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
-                <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
+            <div style="margin-bottom: 0px; padding-left:15px; padding-right: 15px">
+                <progressbar style="height: 1px; margin: 0; padding: 0" value="progress"/>
             </div>
 
-            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
-                <div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>
-            </div>
-        </div>
+            <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
 
-        <div data-ng-show="mode === 'images'" data-ng-hide="mode !== 'images'" style="height: 500px">
-
-
-            <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
-
-                <div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>
+                <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+                    <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
+                </div>
+                <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                    <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
+                </div>
             </div>
 
-            <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
-                <div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>
+            <div data-ng-show="mode === 'reverse'" data-ng-hide="mode !== 'reverse'" style="height: 500px">
+                <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+                    <div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>
+                </div>
+
+                <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                    <div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>
+                </div>
             </div>
 
+            <div data-ng-show="mode === 'images'" data-ng-hide="mode !== 'images'" style="height: 500px">
 
+
+                <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+
+                    <div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>
+                </div>
+
+                <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                    <div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>
+                </div>
+
+
+            </div>
+            <div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">
+
+                <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
+            </div>
         </div>
 
         <!--</div>-->
@@ -136,10 +147,7 @@
 
 
             <!--<div style="height: 500px">-->
-            <div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">
 
-                <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
-            </div>
             <!--</div>-->
 
             <div class="content-header">
@@ -259,17 +267,12 @@
                 </table>
 
 
-
-
-
-
             </div>
-
 
 
             <div class="bottom-padded-m top-padded-m">
 
-                <label>Recipe List</label> <input class="search form-control" ng-model="recipeName">
+                <label>Search the recipe list:</label> <input class="search form-control" ng-model="recipeName">
 
             </div>
 

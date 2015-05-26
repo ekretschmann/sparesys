@@ -17,6 +17,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.cardsRemembered = 0;
         $scope.rewardScore = 0;
 
+        $scope.progress = 30;
+
 
         $scope.initSpeech = function () {
 //                console.log('got it');
@@ -246,16 +248,18 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
 
-                if ($scope.authentication.user.roles.indexOf('debug-viewer') > -1) {
-                    if (($scope.cardsRemembered + 1) % 3 === 0) {
+                //if ($scope.authentication.user.roles.indexOf('debug-viewer') > -1) {
+                //    if (($scope.cardsRemembered + 1) % 3 === 0) {
+                //
+                //        $timeout(function () {
+                //            $scope.mode = 'reward';
+                //        }, 100);
+                //
+                //        return;
+                //    }
+                //} else {
 
-                        $timeout(function () {
-                            $scope.mode = 'reward';
-                        }, 100);
-
-                        return;
-                    }
-                } else {
+                    $scope.progress = 100* $scope.rewardScore / 6.0;
 
                     if ($scope.rewardScore > 6) {
 
@@ -266,7 +270,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                         return;
                     }
-                }
+                //}
             }
 
             $scope.time = Date.now();

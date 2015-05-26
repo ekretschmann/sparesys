@@ -131,7 +131,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         };
 
         $scope.range = function(n) {
-            return new Array(n);
+            return new Array(Math.min(n, 9));
         };
 
         $scope.processChoice = function (selection) {

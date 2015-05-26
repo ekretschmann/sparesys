@@ -129,6 +129,9 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
         };
 
         $scope.range = function(n) {
+            if (n === 1) {
+                return [];
+            }
             return new Array(Math.min(n, 8));
         };
 

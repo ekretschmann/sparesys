@@ -156,7 +156,6 @@
                     <thead>
                     <tr>
 
-                        <th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Goals</th>
                         <th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Inventory</th>
                         <th class="right-padded-m  top-padded-sm top-aligned nowrap">You can craft</th>
 
@@ -165,7 +164,67 @@
                     <tbody>
                     </tbody>
                     <tr>
-                        <td class="right-padded-m top-aligned" width="25%">
+
+                        <td class="top-aligned right-padded-m bottom-padded-m" width="66%">
+
+
+                            <div data-ng-if="!userItems || userItems.length === 0">
+                                You have nothing in your inventory. Keep practicing and you will be offered rewards.
+                            </div>
+                            <div data-ng-repeat="item in userItems">
+
+                                <a href="" tooltip="{{item.description}}" tooltip-trigger="mouseenter">
+                                    <i
+                                            class="glyphicon glyphicon-info-sign small"></i></a>
+
+
+                                {{item.amount}} {{item.name}} <span
+                                    data-ng-repeat="a in range(item.healthpoints) track by $index"><span class="heart">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
+
+                                <!--(use for <span data-ng-repeat="use in item.usedfor">{{use.name}}</span>)-->
+                            </div>
+                        </td>
+
+                        <td class="top-aligned bottom-padded-m" width="33%">
+
+                            <div data-ng-if="!enabledRecipies || enabledRecipies.length===0">
+                                You can't create any new things at the moment. Fill up your inventory and you will be
+                                able to
+                                buy some new ones.
+                            </div>
+
+
+                            <div data-ng-if="enabledRecipies && enabledRecipies.length>0">
+
+
+                                <table>
+
+                                    <tr data-ng-repeat="recipie in enabledRecipies">
+
+                                        <td class="top-aligned right-padded-m top-padded-s">
+
+
+                                            <button class="btn btn-rememberators btn-small"
+                                                    data-ng-click="craft(recipie)">
+                                                {{recipie.name}}
+                                            </button>
+
+                                            <!--<a href="" data-ng-if="recipie.usedforItems.length>0"-->
+                                               <!--tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">-->
+                                                <!--<i-->
+                                                        <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
+
+                                        </td>
+
+
+                                    </tr>
+                                </table>
+                            </div>
+
+
+                            <div class="top-padded-m ">
+                                <label>Your Goals</label>
+                            </div>
 
                             <div data-ng-if="!userGoals || userGoals.length === 0">
                                 You will receive goals once you unlock new skills.
@@ -202,64 +261,6 @@
 
 
                                 {{skill.name}}
-                            </div>
-
-
-                        </td>
-                        <td class="top-aligned right-padded-m bottom-padded-m" width="45%">
-
-
-                            <div data-ng-if="!userItems || userItems.length === 0">
-                                You have nothing in your inventory. Keep practicing and you will be offered rewards.
-                            </div>
-                            <div data-ng-repeat="item in userItems">
-
-                                <a href="" tooltip="{{item.description}}" tooltip-trigger="mouseenter">
-                                    <i
-                                            class="glyphicon glyphicon-info-sign small"></i></a>
-
-
-                                {{item.amount}} {{item.name}} <span
-                                    data-ng-repeat="a in range(item.healthpoints) track by $index"><span class="heart">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>
-
-                                <!--(use for <span data-ng-repeat="use in item.usedfor">{{use.name}}</span>)-->
-                            </div>
-                        </td>
-
-                        <td class="top-aligned bottom-padded-m" width="30%">
-
-                            <div data-ng-if="!enabledRecipies || enabledRecipies.length===0">
-                                You can't create any new things at the moment. Fill up your inventory and you will be
-                                able to
-                                buy some new ones.
-                            </div>
-
-
-                            <div data-ng-if="enabledRecipies && enabledRecipies.length>0">
-
-
-                                <table>
-
-                                    <tr data-ng-repeat="recipie in enabledRecipies">
-
-                                        <td class="top-aligned right-padded-m top-padded-s">
-
-
-                                            <button class="btn btn-rememberators btn-small"
-                                                    data-ng-click="craft(recipie)">
-                                                {{recipie.name}}
-                                            </button>
-
-                                            <a href="" data-ng-if="recipie.usedforItems.length>0"
-                                               tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">
-                                                <i
-                                                        class="glyphicon glyphicon-info-sign small"></i></a>
-
-                                        </td>
-
-
-                                    </tr>
-                                </table>
                             </div>
                         </td>
                     </tr>

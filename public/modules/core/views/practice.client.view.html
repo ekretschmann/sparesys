@@ -93,9 +93,9 @@
 
     <div data-ng-if="cards && cards.length > 0">
 
-        <div class="content-header">
+        <div ng-class="receiveRewards">
 
-            <div style="margin-bottom: 0px; padding-left:15px; padding-right: 15px">
+            <div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1" style="margin-bottom: 0px; padding-left:15px; padding-right: 15px">
                 <progressbar style="height: 1px; margin: 0; padding: 0" value="progress"/>
             </div>
 
@@ -152,7 +152,7 @@
 
             <!--</div>-->
 
-            <div class="content-header">
+            <div>
 
                 <table class="expands">
                     <thead>

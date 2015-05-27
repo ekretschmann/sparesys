@@ -6,7 +6,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
     function ($scope, $state, $document, Authentication, Users, Rewards, RewardsInventoryService) {
 
 
-        $scope.user = new Users($scope.authentication.user);
+        $scope.user = $scope.authentication.user;
         $scope.recipies = [];
         $scope.rewards = [];
         $scope.skills = [];
@@ -60,10 +60,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
         $scope.deleteInventory = function () {
             $scope.user.inventory = [];
-            new Users($scope.user).$update(function (updatedUser) {
-                $scope.user = updatedUser;
-
-            });
+            $scope.user.$update();
         };
 
         $scope.drawOffers = function () {
@@ -126,7 +123,15 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.userItems = $scope.inventoryService.getUserItems();
 
             $scope.user.inventory = RewardsInventoryService.inventory;
-            $scope.user.$update();
+            Users.get({
+                userId: $scope.authentication.user._id
+            }, function (result) {
+                result.inventory = $scope.user.inventory;
+                result.$update(function() {
+                    Authentication.user = result;
+                });
+
+            });
             $scope.drawOffers();
 
         };
@@ -156,7 +161,15 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
 
             $scope.user.inventory = RewardsInventoryService.inventory;
-            $scope.user.$update();
+            Users.get({
+                userId: $scope.authentication.user._id
+            }, function (result) {
+                result.inventory = $scope.user.inventory;
+                result.$update(function() {
+                    Authentication.user = result;
+                });
+
+            });
             $scope.drawOffers();
 
 

@@ -19,6 +19,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.progress = 30;
 
+        $scope.receiveRewards = '';
+
         $scope.stopPracitcing = function() {
             $location.path('/');
         };
@@ -443,6 +445,9 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.initPractice = function () {
 
 
+            if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
+                $scope.receiveRewards = 'content-header';
+            }
                 //console.log('ga start practicing');
                 //console.log('/practice/:id');
                 if ($window.ga) {

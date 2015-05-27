@@ -160,6 +160,7 @@ exports.update = function (req, res) {
     card.save(function (err) {
 
         if (err) {
+            console.log(err);
             return res.send(400, {
                 message: getErrorMessage(err)
             });

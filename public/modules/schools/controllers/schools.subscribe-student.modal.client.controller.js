@@ -21,7 +21,16 @@ angular.module('schools').controller('SubscribeStudentModalController', ['$scope
 
             if ($scope.authentication.user.studentInSchools.indexOf($scope.school._id) === -1) {
                 $scope.authentication.user.studentInSchools.push($scope.school._id);
-                new Users($scope.authentication.user).$update();
+                console.log('xxxxxx');
+
+                Users.get({
+                    userId: $scope.authentication.user._id
+                }, function (result) {
+                    result.$update(function() {
+                        Authentication.user = result;
+                    });
+
+                });
             }
 
 

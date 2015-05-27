@@ -43,7 +43,7 @@ angular.module('users').controller('OldSettingsController', ['$scope', '$http', 
         // Update a user profile
         $scope.updateUserProfile = function () {
             $scope.success = $scope.error = null;
-            var user = new Users($scope.user);
+            var user = $scope.user;
 
 
             if ($scope.teacher === true) {

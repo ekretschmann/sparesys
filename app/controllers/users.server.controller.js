@@ -180,6 +180,7 @@ exports.update = function (req, res) {
             //console.log('zzzzz');
             //console.log(err);
             if (err) {
+                console.log(err);
                 return res.send(400, {
                     message: getErrorMessage(err)
                 });

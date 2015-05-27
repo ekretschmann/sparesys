@@ -72,6 +72,7 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
 
             var skillOrItem = Math.random();
             $scope.offers = [];
+
             if ($scope.itemOffers.length === 0 || $scope.skillOffers.length === 1 || ($scope.skillOffers.length > 1 && skillOrItem>0.05)) {
 
                 $scope.offers = $scope.skillOffers.slice(0);
@@ -82,10 +83,12 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             }
 
 
+
             while($scope.offers.length>3) {
                 var index = Math.floor(Math.random()*3);
                 $scope.offers.splice(index,1);
             }
+
 
         };
 

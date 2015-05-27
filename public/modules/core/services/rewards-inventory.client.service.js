@@ -286,6 +286,7 @@ angular.module('core').service('RewardsInventoryService', [
         this.getItemOffers = function () {
 
 
+
             var enabledItems = this.getEnabledItems();
 
             var result = [];

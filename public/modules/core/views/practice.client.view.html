@@ -133,10 +133,14 @@
 
 
             </div>
+            <div data-ng-show="authentication.user.roles.indexOf('receive-rewards') > -1"
+                 data-ng-controller="SelectRewardsController" data-ng-init="findRewards()">
+
             <div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">
 
                 <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
             </div>
+                </div>
         </div>
 
         <!--</div>-->

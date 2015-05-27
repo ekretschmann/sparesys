@@ -523,7 +523,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.myAnswerCounts = function (answer, mode) {
 
-            console.log($scope.answer);
+           // console.log($scope.answer);
 
 
                 $modal.open({

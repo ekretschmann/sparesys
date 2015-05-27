@@ -159,6 +159,8 @@ angular.module('core').controller('SelectRewardsController', ['$scope', '$state'
             $scope.user.$update();
             $scope.drawOffers();
 
+
+            console.log($scope.userSkills);
             $scope.$parent.recoverFromReward();
 
 

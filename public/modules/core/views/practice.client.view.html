@@ -133,14 +133,7 @@
 
 
             </div>
-            <div data-ng-show="authentication.user.roles.indexOf('receive-rewards') > -1"
-                 data-ng-controller="SelectRewardsController" data-ng-init="findRewards()">
 
-            <div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">
-
-                <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
-            </div>
-                </div>
         </div>
 
         <!--</div>-->
@@ -149,6 +142,11 @@
         <div data-ng-show="authentication.user.roles.indexOf('receive-rewards') > -1"
              data-ng-controller="SelectRewardsController" data-ng-init="findRewards()">
 
+
+            <div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">
+
+                <div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>
+            </div>
 
             <!--<div style="height: 500px">-->
 
@@ -214,9 +212,9 @@
                                             </button>
 
                                             <!--<a href="" data-ng-if="recipie.usedforItems.length>0"-->
-                                               <!--tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">-->
-                                                <!--<i-->
-                                                        <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
+                                            <!--tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">-->
+                                            <!--<i-->
+                                            <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
 
                                         </td>
 

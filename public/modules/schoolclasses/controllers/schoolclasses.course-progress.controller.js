@@ -8,8 +8,8 @@ angular.module('schoolclasses').controller('CourseProgressController',
 
 
             $scope.slaveCourses = [];
-            //$scope.authentication = Authentication;
-            // Find existing Course
+            $scope.cards = [];
+
             $scope.findData = function () {
                 $scope.course = Courses.get({
                     courseId: $stateParams.courseId
@@ -25,6 +25,14 @@ angular.module('schoolclasses').controller('CourseProgressController',
 
                 $scope.slaveCourses[slave] = Courses.get({
                     courseId: slave
+                });
+
+
+                var res = CoursesService.serverLoadCards();
+                var promise = res.get({courseId: $stateParams.courseId});
+                promise.$promise.then(function (cards) {
+                    $scope.cards[slave] = cards;
+
                 });
             };
 

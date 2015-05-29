@@ -22,6 +22,13 @@
         <div data-ng-init="loadUsageData(slave)">
 
             {{slaveCourses[slave].user.displayName}}
+            <div data-ng-controller="CalendarStatisticsController" data-ng-init="init()">
+
+
+                <div id="cal"></div>
+
+
+            </div>
         </div>
     </div>
     <!--<div data-ng-controller="CalendarStatisticsController" data-ng-init="init()">-->

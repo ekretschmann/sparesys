@@ -1,6 +1,8 @@
 <section data-ng-controller="CourseProgressController" data-ng-init="findData()">
 
 
+
+
     <!--Div that will hold the pie chart-->
     <!--<div id="chart_div"></div>-->
 
@@ -15,12 +17,21 @@
     </div>
 
 
-    <div data-ng-init="drawCharts()">
-        <div id="calendar_basic"></div>
 
-        <div id="chart_div" style="width: 100%"></div>
+    <div data-ng-repeat="slave in course.slaves">
+        <div data-ng-init="loadUsageData(slave)">
 
+            {{slaveCourses[slave].user.displayName}}
+        </div>
     </div>
+    <!--<div data-ng-controller="CalendarStatisticsController" data-ng-init="init()">-->
+
+
+        <!--<div id="cal"></div>-->
+
+
+    <!--</div>-->
+
 
 
 

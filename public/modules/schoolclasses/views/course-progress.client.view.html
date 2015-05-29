@@ -18,19 +18,23 @@
 
 
 
-    <div data-ng-repeat="slave in course.slaves">
-        <div data-ng-init="loadUsageData(slave)">
+    <span data-ng-repeat="slave in course.slaves">
+        <span data-ng-init="loadUsageData(slave)">
 
-            {{slaveCourses[slave].user.displayName}}
-            <div data-ng-controller="CalendarStatisticsController" data-ng-init="init()">
+            <a class="btn btn-primary" data-ng-click="loadCalendarFor(slave);">
+                {{slaveCourses[slave].user.displayName}}
+
+            </a>
 
 
-                <div id="cal"></div>
 
 
-            </div>
-        </div>
-    </div>
+        </span>
+
+    </span>
+
+    <div id="cal"></div>
+
     <!--<div data-ng-controller="CalendarStatisticsController" data-ng-init="init()">-->
 
 

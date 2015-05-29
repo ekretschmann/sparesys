@@ -16,7 +16,8 @@
     "angular-ui-router": "~0.2.10",
     "angular-ui-sortable": "~0.12.8",
     "q": "1.0.1",
-    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.4.5"
+    "angular-hotkeys": "chieffancypants/angular-hotkeys#~1.4.5",
+    "d3": "3.3.10"
   }
 }
 

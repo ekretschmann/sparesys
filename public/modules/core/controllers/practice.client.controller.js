@@ -194,13 +194,19 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.adjustScoreToDueDate = function(card, time) {
 
-            if (card.dueDate && card.dueDate >= time) {
+            //console.log(card.dueDate);
+            //console.log(new Date(time));
+            if (card.dueDate && new Date(card.dueDate).getTime() >= time) {
                 var dueInSecs = new Date(card.dueDate).getTime() - time;
                 var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
 
+               // console.log(dueInDays);
                 if (dueInDays < 9) {
                     var distance = Math.abs(card.predictedRetention - 0.4);
                     var expectedDistance = (dueInDays * 0.1) * distance;
+
+
+
                     if (card.predictedRetention > 0.4) {
                         return 0.4 + expectedDistance;
                     } else {
@@ -304,8 +310,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                         card.retention = Math.round(card.predictedRetention * 100);
 
                         if (card.dueDate) {
-                            card.score = $scope.adjustScoreToDueDate(card, $scope.time);
-                            console.log(card.question+': '+card.score);
+                            card.score = $scope.adjustScoreToDueDate(card, Date.now());
+
                         } else {
                             card.score = Math.abs(card.predictedRetention - 0.4);
                         }

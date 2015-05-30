@@ -279,7 +279,50 @@
 
             </div>
 
+
+
             <table class="expands">
+                <tr>
+                    <td class="top-aligned">
+
+                        <div data-ng-repeat="reward in rewards | orderBy: 'name' | filter:{name: recipeName}">
+                                <span data-ng-if="$index % 3 ===0">{{reward.name}}
+                                <span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">
+                                    (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span
+                                        data-ng-if="!$last">, </span></span>)
+
+                                    </span>
+                                    </span>
+                        </div>
+                    </td>
+
+                    <td class="top-aligned">
+
+                        <div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{name: recipeName}">
+                                <span data-ng-if="$index % 3 ===1">{{reward.name}}
+                                <span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">
+                                    (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span
+                                        data-ng-if="!$last">, </span></span>)
+
+                                    </span>
+                                    </span>
+                        </div>
+                    </td>
+
+                    <td class="top-aligned">
+
+                        <div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{name: recipeName}">
+                                <span data-ng-if="$index % 3 ===2">{{reward.name}}
+                                <span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">
+                                    (<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span
+                                        data-ng-if="!$last">, </span></span>)
+
+                                    </span>
+                                    </span>
+                        </div>
+                    </td>
+                </tr>
+
                 <tr>
                     <td class="top-aligned">
 

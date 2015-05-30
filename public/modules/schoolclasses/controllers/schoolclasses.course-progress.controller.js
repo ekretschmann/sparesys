@@ -95,7 +95,7 @@ angular.module('schoolclasses').controller('CourseProgressController',
                     .enter().append('svg')
                     .attr('width', '100%')
                     //.attr('height', $scope.height)
-                    .attr('class', 'RdYlGn')
+                    .attr('class', 'Greens')
                     .append('g')
                     .attr('transform', 'translate(' + (($scope.width - $scope.cellSize * 53) / 2) + ',' + ($scope.height - $scope.cellSize * 7 - 1) + ')')
                     //.on('mouseover', function(d){
@@ -141,7 +141,7 @@ angular.module('schoolclasses').controller('CourseProgressController',
                             .style('left', (d3.event.pageX+10) + 'px')
                             .style('top', (d3.event.pageY-10) + 'px')
                             .select('#value')
-                            .text(data[d] || '0');
+                            .text(d +': ' + (data[d] || '0'));
                         d3.select('#tooltip').classed('hidden', false);
                     })
                     .on('mouseout', function(){
@@ -164,9 +164,9 @@ angular.module('schoolclasses').controller('CourseProgressController',
 
 
                 rect.filter(function (d) { return d in data; })
-                    .attr('class', function (d) { return 'day ' + color(data[d]); })
-                    .select('title')
-                    .text(function (d) { return d + ': ' + $scope.percent(data[d]);});
+                    .attr('class', function (d) { return 'day ' + color(data[d]); });
+                    //.select('title')
+                    //.text(function (d) { return d + ': ' + $scope.percent(data[d]);});
 
 
             };

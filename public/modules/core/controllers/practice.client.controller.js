@@ -328,11 +328,14 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     }
                     // calculate when am I done
                     if (card.dueDate) {
+                        console.log(card.question);
                         var dueInSecs = new Date(card.dueDate).getTime() - $scope.time;
                         var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
                         $scope.dueRetention += card.predictedRetention;
                         $scope.dueCards++;
                         $scope.requiredRetention += Math.min(0.99, 1 - dueInDays * 0.03);
+                        console.log($scope.dueRetention);
+                        console.log($scope.requiredRetention);
                     }
                 }, this);
 
@@ -349,9 +352,17 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if ($scope.requiredRetention === 0) {
                 $scope.doneScore = -1;
             } else {
+
+                console.log('result:');
+                console.log($scope.dueRetention);
+                console.log($scope.requiredRetention);
+
                 $scope.doneScore = Math.round(100 * $scope.dueRetention / $scope.requiredRetention);
 
-                $scope.doneScore = Math.max($scope.previousDoneScore, $scope.doneScore);
+
+                console.log($scope.doneScore);
+
+               // $scope.doneScore = Math.max($scope.previousDoneScore, $scope.doneScore);
 
                 var green = (Math.round(Math.min(90, $scope.doneScore) * 2));
                 var red = (Math.round(Math.max(10, (100 - $scope.doneScore)) * 2));

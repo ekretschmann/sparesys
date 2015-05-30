@@ -11,6 +11,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.mode = 'forward';
 
         $scope.answer = {};
+        $scope.doneScore = -1;
 
         $scope.authentication = Authentication;
         $scope.repeatCard = false;

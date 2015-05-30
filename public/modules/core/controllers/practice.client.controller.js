@@ -311,13 +311,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                         card.score = Math.abs(card.predictedRetention - 0.4);
 
-                        console.log(card.question);
-                        console.log(card.score);
                         if (card.dueDate) {
-                            card.score = $scope.adjustScoreToDueDate(card, Date.now()) - 0.4;
+                            card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.4);
 
                         }
-                        console.log(card.score);
 
                         //console.log('  '+card.predictedRetention);
                         //console.log('  '+card.score);

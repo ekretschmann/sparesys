@@ -1,7 +1,6 @@
 'use strict';
 
 
-
 /* global d3 */
 angular.module('schoolclasses').controller('CourseProgressController',
     ['$scope', '$stateParams', 'Courses', 'CoursesService', 'Schoolclasses',
@@ -21,7 +20,7 @@ angular.module('schoolclasses').controller('CourseProgressController',
 
             };
 
-            $scope.loadUsageData =function(slave) {
+            $scope.loadUsageData = function (slave) {
 
 
                 $scope.slaveCourses[slave] = Courses.get({
@@ -29,17 +28,15 @@ angular.module('schoolclasses').controller('CourseProgressController',
                 });
 
 
-
             };
 
-            $scope.loadCalendarFor = function(slave) {
+            $scope.loadCalendarFor = function (slave) {
                 var res = CoursesService.serverLoadCards();
                 var promise = res.get({courseId: slave});
                 promise.$promise.then(function (cards) {
                     $scope.init(cards);
                 });
             };
-
 
 
             $scope.width = 720;
@@ -50,7 +47,6 @@ angular.module('schoolclasses').controller('CourseProgressController',
             $scope.week = d3.time.format('%U');
             $scope.percent = d3.format('.1%');
             $scope.format = d3.time.format('%Y-%m-%d');
-
 
 
             $scope.init = function (cards) {
@@ -64,16 +60,16 @@ angular.module('schoolclasses').controller('CourseProgressController',
                 //data['2010-09-28'] = 0.04467222024357327;
                 //data['2010-09-27'] = -0.004418956485387221;
 
-                for(var i=0; i<cards.length; i++) {
+                for (var i = 0; i < cards.length; i++) {
                     var card = cards[i];
-                    for(var j=0; j<cards[i].history.length; j++) {
+                    for (var j = 0; j < cards[i].history.length; j++) {
                         var q = cards[i].history[j];
                         var year = new Date(q.when).getFullYear();
-                        var month = new Date(q.when).getMonth()+1;
+                        var month = new Date(q.when).getMonth() + 1;
                         var day = new Date(q.when).getDate();
-                        var key = year+'-0'+month+'-'+day;
+                        var key = year + '-0' + month + '-' + day;
                         if (month > 9) {
-                            key = year+'-'+month+'-'+day;
+                            key = year + '-' + month + '-' + day;
                         }
 
                         if (data[key]) {
@@ -82,7 +78,7 @@ angular.module('schoolclasses').controller('CourseProgressController',
                             data[key] = 1;
                         }
                     }
-                   //console.log(card.question+': '+card.history);
+                    //console.log(card.question+': '+card.history);
                 }
 
                 var color = d3.scale.quantize()
@@ -101,7 +97,21 @@ angular.module('schoolclasses').controller('CourseProgressController',
                     //.attr('height', $scope.height)
                     .attr('class', 'RdYlGn')
                     .append('g')
-                    .attr('transform', 'translate(' + (($scope.width - $scope.cellSize * 53) / 2) + ',' + ($scope.height - $scope.cellSize * 7 - 1) + ')');
+                    .attr('transform', 'translate(' + (($scope.width - $scope.cellSize * 53) / 2) + ',' + ($scope.height - $scope.cellSize * 7 - 1) + ')')
+                    //.on('mouseover', function(d){
+                    //    d3.select(this).classed('cell-hover',true);
+                    //    d3.select('#tooltip')
+                    //    .style('left', (d3.event.pageX+10) + 'px')
+                    //    .style('top', (d3.event.pageY-10) + 'px')
+                    //    .select('#value')
+                    //    .text(d);
+                    //    d3.select('#tooltip').classed('hidden', false);
+                    //})
+                    //.on('mouseout', function(){
+                    //    d3.select(this).classed('cell-hover',false);
+                    //    d3.select('#tooltip').classed('hidden', true);
+                    //})
+                ;
 
                 svg.append('text')
                     .attr('transform', 'translate(-6,' + $scope.cellSize * 3.5 + ')rotate(-90)')
@@ -124,39 +134,45 @@ angular.module('schoolclasses').controller('CourseProgressController',
                     .attr('y', function (d) {
                         return $scope.day(d) * $scope.cellSize;
                     })
-                    .datum($scope.format);
+                    .datum($scope.format)
+                    .on('mouseover', function(d){
+                        d3.select(this).classed('cell-hover',true);
+                        d3.select('#tooltip')
+                            .style('left', (d3.event.pageX+10) + 'px')
+                            .style('top', (d3.event.pageY-10) + 'px')
+                            .select('#value')
+                            .text(data[d] || '0');
+                        d3.select('#tooltip').classed('hidden', false);
+                    })
+                    .on('mouseout', function(){
+                        d3.select(this).classed('cell-hover',false);
+                        d3.select('#tooltip').classed('hidden', true);
+                    })
+                    ;
+
+
+
 
                 rect.append('title')
-                    .text(function (d) {
-                        return d;
-                    });
+                    .text(function (d) { return d; });
 
                 svg.selectAll('.month')
-                    .data(function (d) {
-                        return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1));
-                    })
+                    .data(function (d) { return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1)); })
                     .enter().append('path')
                     .attr('class', 'month')
                     .attr('d', $scope.monthPath);
 
 
-
-                rect.filter(function (d) {
-                    return d in data;
-                })
-                    .attr('class', function (d) {
-                        return 'day ' + color(data[d]);
-                    })
+                rect.filter(function (d) { return d in data; })
+                    .attr('class', function (d) { return 'day ' + color(data[d]); })
                     .select('title')
-                    .text(function (d) {
-                        return d + ': ' + $scope.percent(data[d]);
-                    });
+                    .text(function (d) { return d + ': ' + $scope.percent(data[d]);});
 
 
             };
 
 
-            $scope.monthPath = function(t0) {
+            $scope.monthPath = function (t0) {
                 var t1 = new Date(t0.getFullYear(), t0.getMonth() + 1, 0),
                     d0 = +$scope.day(t0), w0 = +$scope.week(t0),
                     d1 = +$scope.day(t1), w1 = +$scope.week(t1);

@@ -151,12 +151,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if (assessment > 0) {
                 $scope.cardsRemembered++;
                 $scope.rewardScore += (1 - RetentionCalculatorService.getPredictedCardRetention($scope.card));
-                //  console.log($scope.rewardScore);
             }
 
             $scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
 
-            //$scope.card.__v = undefined;
 
             Cards.get({
                 cardId: $scope.card._id
@@ -195,13 +193,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.adjustScoreToDueDate = function (card, time) {
 
-            //console.log(card.dueDate);
-            //console.log(new Date(time));
-            if (card.dueDate && card.predictedRetention < 0.99 && new Date(card.dueDate).getTime() >= time) {
+              if (card.dueDate && card.predictedRetention < 0.99 && new Date(card.dueDate).getTime() >= time) {
                 var dueInSecs = new Date(card.dueDate).getTime() - time;
                 var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
 
-                // console.log(dueInDays);
                 if (dueInDays < 9) {
                     var distance = Math.abs(card.predictedRetention - 0.4);
                     var expectedDistance = (dueInDays * 0.1) * distance;
@@ -592,31 +587,5 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         };
 
 
-        //$scope.showAnswer = function () {
-        //    $scope.state = 'answer';
-        //};
-        //
-        //$scope.processCard = function (rating) {
-        //    $scope.recordRate(Date.now(), rating);
-        //    $scope.state = 'question';
-        //    $scope.nextCard();
-        //};
-
-
-        //hotkeys.bindTo($scope)
-        //    .add({
-        //        combo: 'ctrl+w',
-        //        description: 'blah blah',
-        //        callback: function() {
-        //            console.log('ctrl w');
-        //        }
-        //    })
-        //    .add ({
-        //    combo: 'ctrl+r',
-        //    description: 'blah blah',
-        //    callback: function() {
-        //        console.log('ctrl r');
-        //    }
-        //});
 
     }]);

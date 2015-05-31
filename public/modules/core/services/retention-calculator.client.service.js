@@ -36,12 +36,14 @@ angular.module('core').service('RetentionCalculatorService', [
                     // 1 day
                     return this.randomize(1000 * 60 * 60 * 24);
                 } else if (assessment === 3) {
-                    // 5 days
-                    //return this.randomize(1000 * 60 * 60 * 24 * 5);
+                    // 3 days
+
+
+                    return this.randomize(1000 * 60 * 60 * 24 * 3);
 
 
                     // 10 s for debugging
-                    return this.randomize(1000 * 10);
+                    //return this.randomize(1000 * 10);
                 }
             },
             calculateWeight: function(pr) {
@@ -95,8 +97,6 @@ angular.module('core').service('RetentionCalculatorService', [
 
                 if (assessment === 3) {
 
-                    //console.log('  ---------');
-                    //console.log('  '+totalWeight);
 
                     // loss than an hour
                     if(card.hrt <= 1000*60*60) {

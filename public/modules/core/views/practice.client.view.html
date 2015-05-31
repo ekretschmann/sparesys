@@ -55,7 +55,7 @@
                 </tr>
 
                 <tr>
-                    <td>In Play</td>
+                    <td class="nowrap">In Play</td>
                     <td class="left-padded-s">:</td>
                     <td class="left-padded-s">
                         <span data-ng-if="cards">{{inPlay}}</span>
@@ -74,19 +74,25 @@
                 </tr>
 
                 <tr>
-                    <td class="nowrap" ng-style="doneColorCode" data-ng-if="doneScore > -1">Done Score
+                    <td class="nowrap"  >
+                        <div ng-style="doneColorCode" data-ng-if="doneScore > -1">Done for today
                         <a href="" tooltip="You need 100 to be on track" tooltip-trigger="mouseenter">
                             <i
                                     class="glyphicon glyphicon-info-sign small"></i></a>
-                    </td>
-                    <td class="nowrap" ng-style="doneColorCode" data-ng-if="doneScore < 0"></td>
-                    <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore >-1">:</td>
-                    <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore < 0"></td>
-                    <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore > -1">
-                        {{doneScore}}%
-                    </td>
-                    <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore <0"></td>
+                            </div>
 
+                        <div ng-style="doneColorCode" data-ng-if="doneScore < 0">
+                            No due dates set
+                        </div>
+                    </td>
+                    <td class="left-padded-s" ng-style="doneColorCode" >
+                        <div data-ng-if="doneScore > -1">:</div>
+                    </td>
+                    <td class="left-padded-s" ng-style="doneColorCode" >
+                        <div data-ng-if="doneScore > -1">
+                        {{doneScore}}%
+                        </div>
+                    </td>
                     <td class="expands"></td>
 
 

@@ -1,22 +1,37 @@
 <section data-ng-controller="PracticeController" data-ng-init="initPractice()">
 
 
+    <div ng-include="'/modules/core/views/partial/practice-options.modal.client.view.html'"></div>
+
+
+
     <div class="content-header">
+
+
+
         <div class="pull-right">
             <a class="btn btn-rememberators" data-ng-click="stopPracitcing();">
                 <i class="glyphicon glyphicon-stop"></i> Stop Practicing {{course.name}}
             </a>
+
+            <a class="btn btn-rememberators-small" data-ng-click="optionsModal();">
+                <i class="glyphicon glyphicon-align-justify"></i>
+            </a>
+
+
         </div>
+
+
         <div class="title">
             {{course.name}}
         </div>
         <div class="headerinfo">
             <table class="info expands">
-                <tr>
-                    <td>Description</td>
-                    <td class="left-padded-s">:</td>
-                    <td class="left-padded-s nowrap">{{course.description}}</td>
-                </tr>
+                <!--<tr>-->
+                    <!--<td>Description</td>-->
+                    <!--<td class="left-padded-s">:</td>-->
+                    <!--<td class="left-padded-s nowrap">{{course.description}}</td>-->
+                <!--</tr>-->
 
 
                 <tr>
@@ -68,7 +83,7 @@
                     <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore >-1">:</td>
                     <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore < 0"></td>
                     <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore > -1">
-                        {{doneScore}}
+                        {{doneScore}}%
                     </td>
                     <td class="left-padded-s" ng-style="doneColorCode" data-ng-if="doneScore <0"></td>
 
@@ -152,7 +167,7 @@
 
             <!--</div>-->
 
-            <div>
+            <div class="content-header">
 
                 <table class="expands">
                     <thead>
@@ -273,7 +288,7 @@
             </div>
 
 
-            <div class="bottom-padded-m top-padded-m">
+            <div class="bottom-padded-m top-padded-m ">
 
                 <label>Search the recipe list:</label> <input class="search form-control" ng-model="recipeName">
 

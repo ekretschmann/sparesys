@@ -508,15 +508,24 @@ body {
   border-color: #4DB22B;
 }
 
-
-.btn-rememberators {
+.btn-rememberators-small {
   background-color: #4E51E5;
   background-image: linear-gradient(to bottom, #4E51E5 0%, #030698 100%);
   border-color: #4E51E5;
   color: #ECECFF;
   font-weight: bold;
+
+}
+
+.btn-rememberators {
+  .btn-rememberators-small;
   min-width: 100px;
 }
+
+.btn-rememberators-small:hover,
+.btn-rememberators-small:focus,
+.btn-rememberators-small:active,
+.btn-rememberators-small.active,
 .btn-rememberators:hover,
 .btn-rememberators:focus,
 .btn-rememberators:active,
@@ -529,6 +538,9 @@ body {
   background-color: #4E51E5;
   color: #ECECFF;
 }
+
+
+
 
 .btn-letter {
   .btn-rememberators;

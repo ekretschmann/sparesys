@@ -21,6 +21,9 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.progress = 30;
 
         $scope.receiveRewards = '';
+        $scope.options = {};
+        $scope.options.dueDateOnly = false;
+
 
         $scope.stopPracitcing = function () {
             $location.path('/');
@@ -101,7 +104,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.playSound = function (lang, text) {
 
 
-            console.log(text);
+            //console.log(text);
 
             if (!lang || !lang.code) {
                 return;
@@ -194,7 +197,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             //console.log(card.dueDate);
             //console.log(new Date(time));
-            if (card.dueDate && new Date(card.dueDate).getTime() >= time) {
+            if (card.dueDate && card.predictedRetention < 0.99 && new Date(card.dueDate).getTime() >= time) {
                 var dueInSecs = new Date(card.dueDate).getTime() - time;
                 var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
 
@@ -294,10 +297,20 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.dueCards = 0;
 
 
-            this.cards.forEach(function (card) {
+            for (var i = 0; i < this.cards.length; i++) {
+
+                var card = this.cards[i];
+
+                if($scope.options.dueDateOnly && !card.dueDate) {
+
+                    continue;
+                }
+
 
                 //console.log(card.question);
                 if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
+
+
 
                     //var pr = this.getPredictedRetention(card, $scope.time);
                     card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
@@ -311,8 +324,9 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                     }
 
+                    //console.log(card.question);
                     //console.log('  '+card.predictedRetention);
-                    //console.log('  '+card.score);
+                    //console.console('  '+card.score);
 
                     if (card.score < bestValue && card.modes.length > 0) {
                         if (this.cards.length >= 1 && card.question !== $scope.card.question) {
@@ -323,16 +337,13 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 }
                 // calculate when am I done
                 if (card.dueDate) {
-                    console.log(card.question);
                     var dueInSecs = new Date(card.dueDate).getTime() - $scope.time;
                     var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
                     $scope.dueRetention += card.predictedRetention;
                     $scope.dueCards++;
                     $scope.requiredRetention += Math.min(0.99, 1 - dueInDays * 0.03);
-                    console.log($scope.dueRetention);
-                    console.log($scope.requiredRetention);
                 }
-            }, this);
+            }
 
             if ($scope.repeat) {
                 bestCard = $scope.card;
@@ -348,17 +359,17 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 $scope.doneScore = -1;
             } else {
 
-                console.log('result:');
-                console.log($scope.dueRetention);
-                console.log($scope.requiredRetention);
+                //console.log('result:');
+                //console.log($scope.dueRetention);
+                //console.log($scope.requiredRetention);
 
-                var currentDoneScore = Math.round(100 * $scope.dueRetention / $scope.requiredRetention);
+                var currentDoneScore = Math.min(100, Math.round(100 * $scope.dueRetention / $scope.requiredRetention));
 
                 if ($scope.doneScore < currentDoneScore) {
                     $scope.doneScore = currentDoneScore;
                 }
 
-                console.log($scope.doneScore);
+                //console.log($scope.doneScore);
 
 
                 var green = (Math.round(Math.min(90, $scope.doneScore) * 2));
@@ -539,6 +550,20 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         };
 
+        $scope.optionsModal = function () {
+            $modal.open({
+                templateUrl: 'practiceOptions.html',
+                controller: 'PracticeOptionsController',
+                resolve: {
+                    options: function () {
+                        return $scope.options;
+                    },
+                    cards: function() {
+                        return $scope.cards;
+                    }
+                }
+            });
+        };
 
         $scope.myAnswerCounts = function (answer, mode) {
 

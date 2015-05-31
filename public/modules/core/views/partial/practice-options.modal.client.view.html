@@ -1,0 +1,39 @@
+<script type="text/ng-template" id="practiceOptions.html">
+    <div class="modal-body" >
+
+        <div class="content-header">
+            <div class="title center-aligned">
+
+                Practice Options
+
+            </div>
+
+        </div>
+
+        <div class="content-header">
+
+            <div data-ng-if="dueDateOnlyEnabled">
+            <input
+
+            type="checkbox"
+            ng-model="options.dueDateOnly"
+            >
+            Only use cards with due date
+            </div>
+
+            <div data-ng-if="!dueDateOnlyEnabled">
+                <input
+
+                        type="checkbox"
+
+                        disabled>
+                <span class="text-muted">Only use cards with due date</span> (there are no cards with due dates in this pack)
+            </div>
+        </div>
+
+        <div style="text-align: center">
+        <button class="btn btn-rememberators" ng-click="ok()">OK</button>
+        <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</script>

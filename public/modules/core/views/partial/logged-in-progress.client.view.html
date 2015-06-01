@@ -15,7 +15,11 @@
                 <tab heading="{{course.name}}" data-ng-repeat="course in courses">
 
 
-                    <div class="default-border standard-min-height">
+                    <div  class="default-border standard-min-height" data-ng-controller="CourseReportController" data-ng-init="init(course._id)">
+
+
+
+
 
                         <div ng-include="'/modules/courses/views/report-course.client.view.html'"></div>
 

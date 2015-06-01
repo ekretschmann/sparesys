@@ -51,7 +51,7 @@ angular.module('schoolclasses').controller('CourseProgressController',
 
             $scope.init = function (cards) {
 
-                //console.log(cards);
+                console.log(d3.time.format('%U'));
 
                 var data = [];
                 //data['2010-10-01'] = 0.037035252073270622;

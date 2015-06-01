@@ -7,6 +7,7 @@ angular.module('core').controller('PracticeOptionsController', ['$scope', '$moda
         $scope.options = options;
         $scope.cards = cards;
         $scope.dueDateOnlyEnabled = false;
+        //$scope.dueDateOnlyEnabled = false;
 
         $scope.init = function() {
 

@@ -23,6 +23,11 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.receiveRewards = '';
         $scope.options = {};
         $scope.options.dueDateOnly = false;
+        $scope.options.repeatOnly = false;
+
+        $scope.delta = {};
+        $scope.delta.number = 0;
+        $scope.delta.difference = 0;
 
 
         $scope.stopPracitcing = function () {
@@ -147,11 +152,18 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
 
             $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
+            var prediction = RetentionCalculatorService.getPredictedCardRetention($scope.card);
 
             if (assessment > 0) {
                 $scope.cardsRemembered++;
-                $scope.rewardScore += (1 - RetentionCalculatorService.getPredictedCardRetention($scope.card));
+                $scope.rewardScore += (1 - prediction);
             }
+
+            $scope.delta.number++;
+            $scope.delta.difference += (assessment / 3) - prediction;
+
+            //console.log($scope.delta.number + ': ' + $scope.delta.difference);
+
 
             $scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
 
@@ -188,12 +200,34 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             var hrt = card.hrt;
 
 
-            return Math.exp((time - lastRep) / hrt * Math.log(0.5));
+            var predicted = Math.exp((time - lastRep) / hrt * Math.log(0.5));
+
+            //console.log(card.question);
+            //console.log('  ' + predicted);
+            //if ($scope.delta.number > 0) {
+            //    //console.log(card.question);
+            //    //console.log('  ' + predicted);
+            //    var factor = $scope.delta.difference / $scope.delta.number;
+            //    //console.log('  ' + factor);
+            //    //var newDistance = predicted / -10 * factor;
+            //    //predicted = newDistance;
+            //    //if ($scope.delta.difference > 0) {
+            //    console.log('  '+factor);
+            //    if (factor > 0) {
+            //        predicted = 1 - ((1 - predicted) * factor);
+            //    } else {
+            //        predicted = predicted * (-factor);
+            //    }
+            //    //}
+            //}
+            //console.log('  ' + predicted);
+
+            return predicted;
         };
 
         $scope.adjustScoreToDueDate = function (card, time) {
 
-              if (card.dueDate && card.predictedRetention < 0.99 && new Date(card.dueDate).getTime() >= time) {
+            if (card.dueDate && card.predictedRetention < 0.99 && new Date(card.dueDate).getTime() >= time) {
                 var dueInSecs = new Date(card.dueDate).getTime() - time;
                 var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
 
@@ -212,38 +246,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             return card.predictedRetention;
         };
 
-        //$scope.adjustScoreToDueDate = function (card, time) {
-        //
-        //    var pr = card.predictedRetention;
-        //    if (card.dueDate) {
-        //        var dueInSecs = new Date(card.dueDate).getTime() - time;
-        //        var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
-        //        var factor = 10 - dueInDays;
-        //
-        //        //console.log(card.question);
-        //        if (factor > 0 && factor < 10) {
-        //
-        //            var dOptimal = 0.4 - pr;
-        //
-        //            if (pr > 0.4) {
-        //
-        //                dOptimal = pr - 0.4;
-        //                //var dMaximal = 1 - pr;
-        //                return Math.abs(pr - dOptimal/factor -0.4);
-        //            } else {
-        //                //var dMinimal = pr;
-        //
-        //                return Math.abs(pr + (dOptimal/factor) - 0.4);
-        //            }
-        //
-        //        }
-        //    }
-        //    return Math.abs(card.predictedRetention - 0.4);
-        //};
-
-        //1. how far away is the card from 0.4
-        //2. make this difference smaller by 10-days left
-
 
         $scope.recoverFromReward = function () {
             $scope.cardsRemembered++;
@@ -255,16 +257,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
 
-                //if ($scope.authentication.user.roles.indexOf('debug-viewer') > -1) {
-                //    if (($scope.cardsRemembered + 1) % 3 === 0) {
-                //
-                //        $timeout(function () {
-                //            $scope.mode = 'reward';
-                //        }, 100);
-                //
-                //        return;
-                //    }
-                //} else {
 
                 $scope.progress = 100 * $scope.rewardScore / 6.0;
 
@@ -277,7 +269,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                     return;
                 }
-                //}
             }
 
             $scope.time = Date.now();
@@ -296,8 +287,12 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                 var card = this.cards[i];
 
-                if($scope.options.dueDateOnly && !card.dueDate) {
+                if ($scope.options.dueDateOnly && !card.dueDate) {
 
+                    continue;
+                }
+
+                if ($scope.options.repeatOnly && card.history.length === 0) {
                     continue;
                 }
 
@@ -553,7 +548,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     options: function () {
                         return $scope.options;
                     },
-                    cards: function() {
+                    cards: function () {
                         return $scope.cards;
                     }
                 }
@@ -585,7 +580,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             });
 
         };
-
 
 
     }]);

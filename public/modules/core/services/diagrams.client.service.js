@@ -17,7 +17,7 @@ angular.module('core').service('DiagramsService', [
 
 
 
-        this.drawCalendar = function (cards) {
+        this.drawCalendar = function (cards, id) {
 
 
             var data = [];
@@ -54,10 +54,8 @@ angular.module('core').service('DiagramsService', [
                         data[key] = 1;
                     }
                 }
-                //console.log(card.question+': '+card.history);
             }
 
-            console.log(data);
 
             var color = d3.scale.quantize()
                 .domain([0, 500])
@@ -65,10 +63,10 @@ angular.module('core').service('DiagramsService', [
                     return 'q' + d + '-11';
                 }));
 
-            var svg = d3.select('#cal');
+            var svg = d3.select(id);
             svg.selectAll('*').remove();
 
-            svg = d3.select('#cal').selectAll('svg')
+            svg = d3.select(id).selectAll('svg')
                 .data(d3.range(2015, 2016))
                 .enter().append('svg')
                 .attr('width', '100%')
@@ -116,10 +114,7 @@ angular.module('core').service('DiagramsService', [
                 ;
 
 
-            rect.append('title')
-                .text(function (d) {
-                    return d;
-                });
+
 
             svg.selectAll('.month')
                 .data(function (d) {

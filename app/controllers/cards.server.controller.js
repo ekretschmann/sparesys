@@ -159,9 +159,13 @@ exports.update = function (req, res) {
 
     card.save(function (err) {
 
+
+
         if (err) {
-            console.log(err);
+            //console.log(err);
+            //console.log(card);
             return res.send(400, {
+
                 message: getErrorMessage(err)
             });
             //console.log('error saving card '+card.question);

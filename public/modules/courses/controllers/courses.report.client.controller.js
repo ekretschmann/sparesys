@@ -13,6 +13,10 @@ angular.module('courses').controller('CourseReportController', ['$scope', 'Cours
             });
         };
 
+        $scope.score = 0;
+
+
+
 
 
     }

@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$window', '$location', '$scope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication', 'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService',
-    function ($window, $location, $scope, $state, $modal, $stateParams, $timeout, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService) {
+angular.module('core').controller('PracticeController', ['$window', '$location', '$scope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication', 'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsService',
+    function ($window, $location, $scope, $state, $modal, $stateParams, $timeout, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -28,6 +28,33 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.delta = {};
         $scope.delta.number = 0;
         $scope.delta.difference = 0;
+
+        $scope.doneColorCode = {'color': '#00FF00'};
+
+        $scope.$watch('doneScore', function() {
+            $scope.loadLiquidFillGauge($scope.doneScore, $scope.doneColorCode);
+        });
+
+        $scope.loadLiquidFillGauge = function(score, colorCode) {
+
+
+            if (score < 0 ) {
+                return;
+            }
+
+            console.log(score);
+            //console.log(colorCode);
+            var config1 = DiagramsService.liquidFillGaugeDefaultSettings();
+            config1.circleColor = colorCode.color;
+            config1.textColor = colorCode.color;
+            config1.waveTextColor = colorCode.color;
+            config1.waveColor = '#CCCCFF';
+            config1.circleThickness = 0.2;
+            config1.textVertPosition = 0.2;
+            config1.waveAnimateTime = 1000;
+            DiagramsService.loadLiquidFillGauge('fillgauge', score, config1);
+
+        };
 
 
         $scope.stopPracitcing = function () {

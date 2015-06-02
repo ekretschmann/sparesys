@@ -4,9 +4,7 @@
     <div ng-include="'/modules/core/views/partial/practice-options.modal.client.view.html'"></div>
 
 
-
     <div class="content-header">
-
 
 
         <div class="pull-right">
@@ -25,12 +23,29 @@
         <div class="title">
             {{course.name}}
         </div>
-        <div class="headerinfo">
-            <table class="info expands">
+        <div class="headerinfo top-padded-m" style="position: relative">
+
+            <div style="position: absolute; top:-45px; left:270px; width:160px" data-ng-show="doneScore > -1">
+
+                <div style="text-align: center">
+                <div>
+                <svg id="fillgauge" width="90px" height="80px"></svg>
+
+                </div>
+                <div >
+                done for today
+                <a href="" tooltip="You need 100% to be on track" tooltip-trigger="mouseenter">
+                    <i
+                            class="glyphicon glyphicon-info-sign small"></i></a>
+                </div>
+                </div>
+
+            </div>
+            <table class="info expands ">
                 <!--<tr>-->
-                    <!--<td>Description</td>-->
-                    <!--<td class="left-padded-s">:</td>-->
-                    <!--<td class="left-padded-s nowrap">{{course.description}}</td>-->
+                <!--<td>Description</td>-->
+                <!--<td class="left-padded-s">:</td>-->
+                <!--<td class="left-padded-s nowrap">{{course.description}}</td>-->
                 <!--</tr>-->
 
 
@@ -44,13 +59,12 @@
 
                     <td class="expands"></td>
 
-                    <!--<td>Score</td>-->
-                    <!--<td class="left-padded-s">:</td>-->
-                    <!--<td class="left-padded-s">-->
-                    <!--<span data-ng-if="cards">{{ cardScore }}</span>-->
-                    <!--<span data-ng-if="!cards">0</span>-->
+                    <td>Mode</td>
+                    <td class="left-padded-s">:</td>
+                    <td class="left-padded-s">
+                        <span data-ng-if="cards">{{mode}}</span>
 
-                    <!--</td>-->
+                    </td>
 
                 </tr>
 
@@ -64,38 +78,6 @@
 
                     <td class="expands"></td>
 
-
-                    <td>Mode</td>
-                    <td class="left-padded-s">:</td>
-                    <td class="left-padded-s">
-                        <span data-ng-if="cards">{{mode}}</span>
-
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="nowrap"  >
-                        <div ng-style="doneColorCode" data-ng-if="doneScore > -1">Done for today
-                        <a href="" tooltip="You need 100 to be on track" tooltip-trigger="mouseenter">
-                            <i
-                                    class="glyphicon glyphicon-info-sign small"></i></a>
-                            </div>
-
-                        <div ng-style="doneColorCode" data-ng-if="doneScore < 0">
-                            No due dates set
-                        </div>
-                    </td>
-                    <td class="left-padded-s" ng-style="doneColorCode" >
-                        <div data-ng-if="doneScore > -1">:</div>
-                    </td>
-                    <td class="left-padded-s" ng-style="doneColorCode" >
-                        <div data-ng-if="doneScore > -1">
-                        {{doneScore}}%
-                        </div>
-                    </td>
-                    <td class="expands"></td>
-
-
                     <td class="nowrap">Retention <a href="" tooltip="The chance that you remember this card"
                                                     tooltip-trigger="mouseenter"><i
                             class="glyphicon glyphicon-info-sign small"></i></a>
@@ -106,7 +88,11 @@
                         {{card.retention}}%
 
                     </td>
+
+
                 </tr>
+
+
 
             </table>
         </div>
@@ -116,7 +102,8 @@
 
         <div ng-class="receiveRewards">
 
-            <div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1" style="margin-bottom: 0px; padding-left:15px; padding-right: 15px">
+            <div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1"
+                 style="margin-bottom: 0px; padding-left:15px; padding-right: 15px">
                 <progressbar style="height: 1px; margin: 0; padding: 0" value="progress"/>
             </div>
 

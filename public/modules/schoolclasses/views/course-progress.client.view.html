@@ -1,8 +1,6 @@
 <section data-ng-controller="CourseProgressController" data-ng-init="findData()">
 
 
-
-
     <!--Div that will hold the pie chart-->
     <!--<div id="chart_div"></div>-->
 
@@ -21,32 +19,44 @@
         <p><span id="value"/></p>
     </div>
 
-    <span data-ng-repeat="slave in course.slaves">
-        <span data-ng-init="loadUsageData(slave)">
+    <div class="rememberators-tabs top-margin-l bottom-padded-m">
+        <tabset>
 
-            <a class="btn btn-primary" data-ng-click="loadCalendarFor(slave);">
-                {{slaveCourses[slave].user.displayName}}
-
-            </a>
+            <tab heading="{{slaveCourses[slave].user.displayName}}" data-ng-repeat="slave in course.slaves"
+                 data-ng-init="loadUsageData(slave)">
 
 
+                <div class="default-border standard-min-height" data-ng-controller="CourseReportController"
+                     data-ng-init="init(slave, $index)">
+
+                    <div ng-include="'/modules/courses/views/report-course.client.view.html'"></div>
+                </div>
+            </tab>
+        </tabset>
+    </div>
+
+    <!--<span data-ng-repeat="slave in course.slaves">-->
+    <!--<span data-ng-init="loadUsageData(slave)">-->
+
+    <!--<a class="btn btn-primary" data-ng-click="loadCalendarFor(slave);">-->
+    <!--{{slaveCourses[slave].user.displayName}}-->
+
+    <!--</a>-->
 
 
-        </span>
+    <!--</span>-->
 
-    </span>
+    <!--</span>-->
 
-    <div id="cal"></div>
+    <!--<div id="cal"></div>-->
 
     <!--<div data-ng-controller="CalendarStatisticsController" data-ng-init="init()">-->
 
 
-        <!--<div id="cal"></div>-->
+    <!--<div id="cal"></div>-->
 
 
     <!--</div>-->
-
-
 
 
 </section>

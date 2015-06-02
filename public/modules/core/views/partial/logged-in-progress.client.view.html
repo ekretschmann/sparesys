@@ -10,58 +10,21 @@
         <div data-ng-if="coursesStudent.length > 0">
 
             <div class="rememberators-tabs top-margin-l bottom-padded-m">
-            <tabset>
+                <tabset>
 
-                <tab heading="{{course.name}}" data-ng-repeat="course in courses">
+                    <tab heading="{{course.name}}" data-ng-repeat="course in courses">
 
 
-                    <div  class="default-border standard-min-height" data-ng-controller="CourseReportController" data-ng-init="init(course._id, $index)">
+                        <div class="default-border standard-min-height" data-ng-controller="CourseReportController"
+                             data-ng-init="init(course._id, $index)">
 
-                        <div ng-include="'/modules/courses/views/report-course.client.view.html'"></div>
-                    </div>
-                </tab>
-            </tabset>
-                </div>
+                            <div ng-include="'/modules/courses/views/report-course.client.view.html'"></div>
+                        </div>
+                    </tab>
+                </tabset>
+            </div>
         </div>
 
-
-        <!--<table class="table-striped top-margin-l">-->
-            <!--<thead>-->
-            <!--<tr>-->
-                <!--<th class="right-padded-m left-padded-s">School</th>-->
-                <!--<th class="right-padded-m">City</th>-->
-                <!--<th class="right-padded-m">Country</th>-->
-                <!--<th class="right-padded-s">Classes</th>-->
-            <!--</tr>-->
-            <!--</thead>-->
-            <!--<tbody>-->
-            <!--<tr data-ng-repeat="schoolId in authentication.user.studentInSchools"-->
-                <!--data-ng-controller="SchoolsController"-->
-                <!--data-ng-init="populateSchoolForUser(schoolId, authentication.user)">-->
-
-
-
-                <!--<td class="right-padded-m  top-aligned top-padded-s left-padded-s">-->
-                    <!--{{school.name}}-->
-                <!--</td>-->
-                <!--<td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>-->
-                <!--<td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>-->
-                <!--<td class="right-padded-s top-aligned top-padded-s expands" >-->
-                    <!--<div data-ng-if="schoolclasses.length>0">-->
-                        <!--<div data-ng-repeat="sc in schoolclasses">-->
-                            <!--{{sc.name}}-->
-                        <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div data-ng-if="schoolclasses.length === 0" class="warning">-->
-                        <!--The School Administrator has not assigned you to your class-->
-                    <!--</div>-->
-                <!--</td>-->
-
-
-            <!--</tr>-->
-            <!--</tbody>-->
-        <!--</table>-->
 
     </div>
 

@@ -15,14 +15,14 @@ angular.module('core').service('DiagramsService', [
 
         var format = d3.time.format('%Y-%m-%d');
 
-        this.liquidFillGaugeDefaultSettings = function(){
+        this.liquidFillGaugeDefaultSettings = function () {
             return {
                 minValue: 0, // The gauge minimum value.
                 maxValue: 100, // The gauge maximum value.
                 circleThickness: 0.05, // The outer circle thickness as a percentage of it's radius.
                 circleFillGap: 0.05, // The size of the gap between the outer circle and wave circle as a percentage of the outer circles radius.
                 circleColor: '#178BCA', // The color of the outer circle.
-                waveHeight: 0.05, // The wave height as a percentage of the radius of the wave circle.
+                waveHeight: 0.1, // The wave height as a percentage of the radius of the wave circle.
                 waveCount: 1, // The number of full waves per width of the wave circle.
                 waveRiseTime: 1000, // The amount of time in milliseconds for the wave to rise from 0 to it's final height.
                 waveAnimateTime: 18000, // The amount of time in milliseconds for a full wave to enter the wave circle.
@@ -40,12 +40,13 @@ angular.module('core').service('DiagramsService', [
             };
         };
 
-        this.loadLiquidFillGauge = function(elementId, value, config) {
+        this.loadLiquidFillGauge = function (elementId, value, config) {
 
             if (config === null) config = this.liquidFillGaugeDefaultSettings();
 
+
             var gauge = d3.select('#' + elementId);
-            console.log(gauge);
+            gauge.selectAll('*').remove();
             var radius = Math.min(parseInt(gauge.style('width')), parseInt(gauge.style('height'))) / 2;
             var locationX = parseInt(gauge.style('width')) / 2 - radius;
             var locationY = parseInt(gauge.style('height')) / 2 - radius;
@@ -211,7 +212,7 @@ angular.module('core').service('DiagramsService', [
                 waveGroup.attr('transform', 'translate(' + waveGroupXPosition + ',' + waveRiseScale(fillPercent) + ')');
             }
 
-            var animateWave =function() {
+            var animateWave = function () {
                 wave.transition()
                     .duration(config.waveAnimateTime)
                     .ease('linear')
@@ -229,40 +230,227 @@ angular.module('core').service('DiagramsService', [
 
         };
 
+        this.drawLineChart = function (cards, id) {
+
+            var margin = {top: 20, right: 20, bottom: 30, left: 50},
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+            var parseDate = d3.time.format('%d-%b-%y').parse;
+
+            var x = d3.time.scale()
+                .range([0, width]);
+
+            var y = d3.scale.linear()
+                .range([height, 0]);
+
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient('bottom');
+
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient('left');
+
+            var line = d3.svg.line()
+                .x(function(d) { return x(d.date); })
+                .y(function(d) { return y(d.close); });
+
+            console.log(id);
+            var svg = d3.select(id).append('svg')
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .attr('background-color', '#FF0000')
+                .append('g')
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+            d3.tsv('/modules/core/data/data.tsv', function(error, data) {
+                data.forEach(function (d) {
+
+                    d.date = parseDate(d.date);
+                    d.close = +d.close;
+                });
+
+                x.domain(d3.extent(data, function (d) {
+                    return d.date;
+                }));
+                y.domain(d3.extent(data, function (d) {
+                    return d.close;
+                }));
+
+                svg.append('g')
+                    .attr('class', 'x axis')
+                    .attr('transform', 'translate(0,' + height + ')')
+                    .call(xAxis);
+
+                svg.append('g')
+                    .attr('class', 'y axis')
+                    .call(yAxis)
+                    .append('text')
+                    .attr('transform', 'rotate(-90)')
+                    .attr('y', 6)
+                    .attr('dy', '.71em')
+                    .style('text-anchor', 'end')
+                    .text('Price ($)');
+
+                svg.append('path')
+                    .datum(data)
+                    .attr('class', 'line')
+                    .attr('d', line);
+            });
+
+        };
+
+        this.drawLineChartx = function (cards, id) {
+
+            var data = [];
+
+            for (var i = 0; i < cards.length; i++) {
+                var card = cards[i];
+                if (card.history.length === 0) {
+                    continue;
+                }
+                var key = this.getDateKey(card.history[0].when);
+                if (data[key]) {
+                    data[key] += 1;
+                } else {
+                    data[key] = 1;
+                }
+
+            }
+
+            var d = [];
+
+            var parseDate = d3.time.format('%Y-%m-%d').parse;
 
 
+            Object.keys(data).forEach(function(key) {
+                d.date = parseDate(key);
+                d.close = data[key];
+            });
+            //console.log(data);
+            //data.forEach(function (d) {
+            //    //console.log(d);
+            //    d.date = parseDate(d.date);
+            //    d.close = +d.close;
+            //});
+
+            console.log(d);
+
+            var margin = {top: 20, right: 20, bottom: 30, left: 50},
+                width = 960 - margin.left - margin.right,
+                height = 500 - margin.top - margin.bottom;
+
+
+            var x = d3.time.scale()
+                .range([0, width]);
+
+            var y = d3.scale.linear()
+                .range([height, 0]);
+
+            var xAxis = d3.svg.axis()
+                .scale(x)
+                .orient('bottom');
+
+            var yAxis = d3.svg.axis()
+                .scale(y)
+                .orient('left');
+
+            var line = d3.svg.line()
+                .x(function (d) {
+                    return x(d.date);
+                })
+                .y(function (d) {
+                    return y(d.close);
+                });
+
+            var svg = d3.select(id)
+                .attr('width', width + margin.left + margin.right)
+                .attr('height', height + margin.top + margin.bottom)
+                .append('g')
+                .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+            //d3.tsv('data.tsv', function (error, data) {
+            //    data.forEach(function (d) {
+            //        d.date = parseDate(d.date);
+            //        d.close = +d.close;
+            //    });
+            //
+            //    x.domain(d3.extent(data, function (d) {
+            //        return d.date;
+            //    }));
+            //    y.domain(d3.extent(data, function (d) {
+            //        return d.close;
+            //    }));
+
+
+            console.log('aaaaa');
+
+            //
+            //x.domain(d3.extent(d, function (d) {
+            //    return d.date;
+            //}));
+            //y.domain(d3.extent(d, function (d) {
+            //    return d.close;
+            //}));
+
+            svg.append('g')
+                .attr('class', 'x axis')
+                .attr('transform', 'translate(0,' + height + ')')
+                .call(xAxis);
+
+            svg.append('g')
+                .attr('class', 'y axis')
+                .call(yAxis)
+                .append('text')
+                .attr('transform', 'rotate(-90)')
+                .attr('y', 6)
+                .attr('dy', '.71em')
+                .style('text-anchor', 'end')
+                .text('Price ($)');
+
+            svg.append('path')
+                .datum(d)
+                .attr('class', 'line')
+                .attr('d', line);
+            //});
+        };
+
+
+        this.getDateKey = function (when) {
+            var date = new Date(when);
+
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var d = date.getDate();
+            var key = year;
+            if (month > 9) {
+
+                key += '-' + month;
+            } else {
+                key += '-0' + month;
+            }
+
+            if (d > 9) {
+                key += '-' + d;
+            } else {
+                key += '-0' + d;
+            }
+            return key;
+        };
 
         this.drawCalendar = function (cards, id) {
 
 
             var data = [];
-            //data['2010-10-01'] = 0.037035252073270622;
-            //data['2010-09-30'] = -0.044213895215559915;
-            //data['2010-09-29'] = -0.02090628275240782;
-            //data['2010-09-28'] = 0.04467222024357327;
-            //data['2010-09-27'] = -0.004418956485387221;
 
             for (var i = 0; i < cards.length; i++) {
                 var card = cards[i];
                 for (var j = 0; j < cards[i].history.length; j++) {
                     var q = cards[i].history[j];
-                    var year = new Date(q.when).getFullYear();
-                    var month = new Date(q.when).getMonth() + 1;
-                    var d = new Date(q.when).getDate();
-                    var key = year;
-                    if (month > 9) {
 
-                        key += '-' + month;
-                    } else {
-                        key += '-0' + month;
-                    }
 
-                    if (d > 9) {
-                        key += '-' + d;
-                    } else {
-                        key += '-0' + d;
-                    }
-
+                    var key = this.getDateKey(q.when);
                     if (data[key]) {
                         data[key] += 1;
                     } else {
@@ -361,4 +549,5 @@ angular.module('core').service('DiagramsService', [
         };
 
     }
-]);
+])
+;

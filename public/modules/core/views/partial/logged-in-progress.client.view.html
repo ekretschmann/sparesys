@@ -10,16 +10,33 @@
         <div data-ng-if="coursesStudent.length > 0">
 
             <div class="rememberators-tabs top-margin-l bottom-padded-m">
+                <div id="tooltip" class="hidden">
+                    <p><span id="value"></span></p>
+                </div>
+
                 <tabset>
 
                     <tab heading="{{course.name}}" data-ng-repeat="course in courses">
 
 
                         <div class="default-border standard-min-height" data-ng-controller="CourseReportController"
-                             data-ng-init="init(course._id, $index)">
+                             data-ng-init="init(course._id, $index)" data-ng-if="$index === 0">
 
-                            <div ng-include="'/modules/courses/views/report-course.client.view.html'"></div>
+                            <div>
 
+                                <div class="left-padded-s top-padded-s" style="font-weight: bold">
+                                    When and how much I have practiced
+                                </div>
+
+                                <div id="cal{{$index}}">
+
+                                </div>
+
+                                <div id="inplay{{$index}}">
+
+                                </div>
+
+                            </div>
 
                         </div>
 

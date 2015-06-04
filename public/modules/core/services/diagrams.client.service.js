@@ -14,6 +14,7 @@ angular.module('core').service('DiagramsService', [
         var percent = d3.format('.1%');
 
         var format = d3.time.format('%Y-%m-%d');
+        var key = '';
 
 
         this.drawLineChart = function (cards, id) {
@@ -27,24 +28,47 @@ angular.module('core').service('DiagramsService', [
                 if (card.history.length === 0) {
                     continue;
                 }
-                var key = this.getDateKey(card.history[0].when);
+                key = this.getDateKey(card.history[0].when);
                 if(card.history[0].when < earliestDate) {
                     earliestDate = card.history[0].when;
                 }
                 if (d[key]) {
-                    d[key] += 1;
+                    d[key] = d[key] + 1;
                 } else {
                     d[key] = 1;
                 }
             }
 
+            var cursor = earliestDate;
+            var now = Date.now();
+            var total = 0;
+            while (cursor < now) {
+
+                key = this.getDateKey(cursor);
+
+                if (d[key]) {
+                    total += d[key];
+                    d[key] = total;
+                }
+
+
+                cursor += 1000*60*60*24;
+            }
+
 
             d[this.getDateKey(earliestDate - 1000*60*60*24)] = 0;
+            d[this.getDateKey(Date.now())] = total;
+
+
+
+
+
+
 
             //var parseDate = d3.time.format('%Y-%m-%d').parse;
 
             var data = [];
-            Object.keys(d).forEach(function(key) {
+            Object.keys(d).sort().forEach(function(key) {
                 var point = {};
 
                 point.date = d3.time.format('%Y-%m-%d').parse(key);
@@ -53,6 +77,8 @@ angular.module('core').service('DiagramsService', [
                 data.push(point);
 
             }, this);
+
+            console.log(data);
 
             var margin = {top: 20, right: 20, bottom: 30, left: 50},
                 width = 680 - margin.left - margin.right,

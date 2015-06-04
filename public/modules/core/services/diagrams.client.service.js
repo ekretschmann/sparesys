@@ -50,19 +50,12 @@ angular.module('core').service('DiagramsService', [
                     total += d[key];
                     d[key] = total;
                 }
-
-
                 cursor += 1000*60*60*24;
             }
 
 
             d[this.getDateKey(earliestDate - 1000*60*60*24)] = 0;
             d[this.getDateKey(Date.now())] = total;
-
-
-
-
-
 
 
             //var parseDate = d3.time.format('%Y-%m-%d').parse;

@@ -80,20 +80,13 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
 
         $scope.setLanguageFront = function(lang) {
             $scope.card.languageFront = lang;
-            new Cards($scope.card).$update(function(c) {
-                $scope.card = c;
-            });
+            $scope.card.$update();
 
-
-            reset();
         };
 
         $scope.setLanguageBack = function(lang) {
             $scope.card.languageBack = lang;
-            new Cards($scope.card).$update(function(c) {
-                $scope.card = c;
-            });
-
+            $scope.card.$update();
             reset();
         };
 
@@ -109,9 +102,7 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
                 $scope.card.check = 'mixed';
             }
 
-            new Cards($scope.card).$update(function(c) {
-                $scope.card = c;
-            });
+            $scope.card.$update();
 
             reset();
         };
@@ -146,7 +137,7 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
                     $scope.card.dueDate = undefined;
                 }
 
-                new Cards($scope.card).$update();
+                $scope.card.$update();
 
 
             reset();

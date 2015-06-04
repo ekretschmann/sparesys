@@ -10,16 +10,18 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
             var mode = 'forward';
             if ($scope.card.modes.indexOf(mode) === -1) {
                 $scope.card.modes.push(mode);
+
             } else {
                 for (var i in $scope.card.modes) {
                     if ($scope.card.modes[i] === mode) {
                         $scope.card.modes.splice(i, 1);
                     }
                 }
+
             }
 
             $scope.updateCard();
-                $scope.updateView();
+                //$scope.updateView();
 
         };
 
@@ -52,7 +54,10 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
                     angular.element('#alternative').trigger('focus');
                 }, 100);
             }
-            new Cards($scope.card).$update();
+
+            $scope.card.$update(function() {
+                $scope.card.hasForwardMode = $scope.card.modes.indexOf('forward') > -1;
+            });
 
 
         };

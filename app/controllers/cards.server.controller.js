@@ -72,8 +72,11 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
     var card = req.card;
 
+
     //card.__v = undefined;
     card = _.extend(card, req.body);
+
+
 
 
     if (!req.body.startDate) {
@@ -94,6 +97,13 @@ exports.update = function (req, res) {
         card.question = undefined;
     }
 
+    if (!req.body.questionExtension) {
+        card.questionExtension = undefined;
+    }
+
+    if (!req.body.answerExtension) {
+        card.answerExtension = undefined;
+    }
 
     card.slaves.forEach(function (cid) {
 
@@ -131,6 +141,9 @@ exports.update = function (req, res) {
             c.invalidAnswersForward = card.invalidAnswersForward;
             c.acceptedAnswersReverse = card.acceptedAnswersReverse;
             c.invalidAnswersReverse = card.invalidAnswersReverse;
+            c.questionExtension = card.questionExtension;
+            c.questionExtension = card.questionExtension;
+            c.answerExtension = card.answerExtension;
 
             //c.question = card.question;
             //c.validanswers = card.validanswers;

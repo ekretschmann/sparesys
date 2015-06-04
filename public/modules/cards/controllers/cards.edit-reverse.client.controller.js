@@ -19,7 +19,6 @@ angular.module('cards').controller('EditCardReverseController', ['$scope', '$tim
             }
 
             $scope.updateCard();
-                $scope.updateView();
 
         };
 
@@ -52,7 +51,10 @@ angular.module('cards').controller('EditCardReverseController', ['$scope', '$tim
                     angular.element('#alternativeReverse').trigger('focus');
                 }, 100);
             }
-            new Cards($scope.card).$update();
+
+            $scope.card.$update(function() {
+                $scope.card.hasReverseMode = $scope.card.modes.indexOf('reverse') > -1;
+            });
 
 
         };

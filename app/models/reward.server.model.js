@@ -19,13 +19,13 @@ var RewardSchema = new Schema({
     type: {
         type: String,
         default: 'Item',
-        required: 'Please fill Reward name',
+        required: 'Please fill Reward type',
         trim: true
     },
     description: {
         type: String,
         default: '',
-        required: 'Please fill Reward name',
+        required: 'Please fill Reward description',
         trim: true
     },
     defaulthealthpoints: {

@@ -166,6 +166,9 @@ module.exports = function(grunt) {
     // Test task.
     grunt.registerTask('test', ['env:test', 'mochaTest', 'karma:unit', 'protractor:run']);
 
+
+    grunt.registerTask('mocha', ['env:test', 'mochaTest']);
+
     grunt.loadNpmTasks('grunt-contrib-less');
 
     grunt.loadNpmTasks('grunt-karma');

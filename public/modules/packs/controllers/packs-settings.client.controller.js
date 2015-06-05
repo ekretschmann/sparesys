@@ -126,6 +126,7 @@ angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal
                     card.dueDate = undefined;
                 }
 
+                // this is all right, as we are only updating subdocuments
                 new Cards(card).$update();
 
 

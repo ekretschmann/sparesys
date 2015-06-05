@@ -1,7 +1,14 @@
 'use strict';
 
-angular.module('cards').controller('EditCardForwardController', ['$scope', '$timeout','Cards',
-    function ($scope, $timeout, Cards) {
+angular.module('cards').controller('EditCardForwardController', ['$scope', '$timeout',
+    function ($scope, $timeout) {
+
+
+        $scope.hasMode = false;
+
+        $scope.init = function() {
+            $scope.hasMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
+        };
 
 
         $scope.toggleMode = function () {
@@ -21,7 +28,6 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
             }
 
             $scope.updateCard();
-                //$scope.updateView();
 
         };
 
@@ -56,7 +62,7 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
             }
 
             $scope.card.$update(function() {
-                $scope.card.hasForwardMode = $scope.card.modes.indexOf('forward') > -1;
+                $scope.hasMode =  $scope.card.modes.indexOf('forward') > -1;
             });
 
 

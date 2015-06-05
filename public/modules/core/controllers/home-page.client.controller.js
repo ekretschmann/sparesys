@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('core').controller('HomePageController',
-    ['$window', '$location','$scope', '$stateParams', '$state', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService', 'TestDataService',
-        function ($window, $location, $scope, $stateParams, $state, $modal, Authentication, Courses, Packs, Cards, CoursesService, TestDataService) {
+    ['$window', '$location','$scope', '$stateParams', '$state', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService',
+        function ($window, $location, $scope, $stateParams, $state, $modal, Authentication, Courses, Packs, Cards, CoursesService) {
 
             $scope.authentication = Authentication;
 

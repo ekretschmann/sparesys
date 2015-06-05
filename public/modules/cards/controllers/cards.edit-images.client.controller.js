@@ -1,7 +1,14 @@
 'use strict';
 
-angular.module('cards').controller('EditCardImagesController', ['$scope', '$modal','$timeout','Cards',
-    function ($scope, $modal, $timeout, Cards) {
+angular.module('cards').controller('EditCardImagesController', ['$scope', '$modal',
+    function ($scope, $modal) {
+
+
+        $scope.hasMode = false;
+
+        $scope.init = function() {
+            $scope.hasMode = $scope.card.modes && $scope.card.modes.indexOf('images') !== -1;
+        };
 
 
         $scope.manageImages = function (card) {
@@ -38,7 +45,6 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
             }
 
             $scope.updateCard();
-                $scope.updateView();
 
         };
 
@@ -70,7 +76,9 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
 
         $scope.updateCard = function () {
 
-            new Cards($scope.card).$update();
+            $scope.card.$update(function() {
+                $scope.hasMode =  $scope.card.modes.indexOf('images') > -1;
+            });
 
         };
 

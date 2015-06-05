@@ -121,42 +121,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
         };
 
 
-        $scope.forwardMuted = '';
-        $scope.reverseMuted = '';
-        $scope.imagesMuted = '';
-        $scope.imageMuted = '';
 
-        $scope.updateView = function () {
-
-            $scope.card.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
-            $scope.card.hasReverseMode = $scope.card.modes && $scope.card.modes.indexOf('reverse') !== -1;
-            $scope.card.hasImagesMode = $scope.card.modes && $scope.card.modes.indexOf('images') !== -1;
-
-            if ($scope.card.hasForwardMode) {
-                $scope.forwardMuted = '';
-            } else {
-                $scope.forwardMuted = 'text-muted';
-            }
-
-            if ($scope.card.hasReverseMode) {
-                $scope.reverseMuted = '';
-            } else {
-                $scope.reverseMuted = 'text-muted';
-            }
-
-            if ($scope.card.hasImagesMode) {
-                $scope.imagesMuted = '';
-            } else {
-                $scope.imagesMuted = 'text-muted';
-            }
-
-            if ($scope.card.hasImagesMode) {
-                $scope.imageMuted = '';
-            } else {
-                $scope.imageMuted = 'image-muted';
-            }
-
-        };
 
 
 
@@ -186,7 +151,6 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
                 cardId: $stateParams.cardId
             }, function () {
 
-                $scope.updateView();
 
 
                 Courses.get({

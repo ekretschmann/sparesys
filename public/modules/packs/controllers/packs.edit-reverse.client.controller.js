@@ -66,9 +66,7 @@ angular.module('packs').controller('EditPackReverseController', ['$scope', 'Card
 
 
 
-
-                var nc =  new Cards(card);
-                nc.$update();
+                new Cards(card).$update();
 
             });
 

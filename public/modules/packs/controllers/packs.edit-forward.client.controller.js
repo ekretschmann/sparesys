@@ -66,6 +66,7 @@ angular.module('packs').controller('EditPackForwardController', ['$scope', 'Card
                     }
                 }
 
+                // ok here
                 new Cards(card).$update();
 
             });

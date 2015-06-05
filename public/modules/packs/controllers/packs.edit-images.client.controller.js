@@ -27,8 +27,6 @@ angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards
 
         $scope.updateCards = function () {
 
-            var cardsToUpdate = $scope.pack.cards.length;
-            var cardsUpdated = 0;
 
             $scope.pack.cards.forEach(function (card) {
 
@@ -69,18 +67,7 @@ angular.module('packs').controller('EditPackImagesController', ['$scope', 'Cards
                 }
 
 
-                new Cards(card).$update(function(c) {
-
-
-                    cardsUpdated++;
-
-                    if (cardsUpdated === cardsToUpdate) {
-                        $scope.options.readFront = 'leave';
-                        $scope.options.readBack = 'leave';
-                        $scope.options.mode = 'leave';
-                        $scope.options.speech = 'leave';
-                    }
-                });
+                new Cards(card).$update();
 
             });
 

@@ -28,8 +28,24 @@
 
                 <div class="default-border standard-min-height" data-ng-controller="CourseReportController"
                      data-ng-init="init(slave, $index)">
+                    <div>
 
-                    <div ng-include="'/modules/courses/views/report-course.client.view.html'"></div>
+                        <div class="left-padded-s top-padded-s" style="font-weight: bold">
+                            When and how much I have they practiced
+                        </div>
+
+                        <div id="cal{{$index}}">
+
+                        </div>
+
+                        <div class="left-padded-s" style="font-weight: bold">
+                            Cards memorized
+                        </div>
+                        <div id="inplay{{$index}}">
+
+                        </div>
+
+                    </div>
                 </div>
             </tab>
         </tabset>

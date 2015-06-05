@@ -314,7 +314,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                 var card = this.cards[i];
 
-                if ($scope.options.dueDateOnly && !card.dueDate) {
+                if ($scope.options.dueDateOnly && (!card.dueDate || $scope.time >= new Date(card.dueDate).getTime())) {
 
                     continue;
                 }

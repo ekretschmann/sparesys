@@ -65,7 +65,6 @@ exports.update = function(req, res) {
 	reward = _.extend(reward , req.body);
 
 	reward.save(function(err) {
-		console.log(err);
 		if (err) {
 			return res.status(400).send({
 				message: getErrorMessage(err)

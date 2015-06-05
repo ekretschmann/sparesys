@@ -19,7 +19,7 @@ module.exports = function(app) {
 
 	app.route('/users/me').get(users.me);
 	app.route('/users').put(users.update)
-        .get(users.list);
+        .get(users.requiresLogin, users.hasAuthorization, users.list);
 
 	app.route('/users/accounts').delete(users.removeOAuthProvider);
 

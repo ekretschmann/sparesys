@@ -154,8 +154,17 @@ exports.update = function (req, res) {
     var message = null;
 
 
-    // For security measurement we remove the roles from the req.body object
-//	delete req.body.roles;
+    // you can not add an admin role when you are not an admin
+    if (req.body.roles) {
+        if (req.body.roles.indexOf('admin') > -1) {
+            if(req.user.roles .indexOf('admin') === -1) {
+                return res.send(400, {
+                    message: getErrorMessage('forbidden')
+                });
+            }
+
+        }
+    }
 
 
     function updateUser(theUser) {
@@ -354,20 +363,27 @@ exports.requiresLogin = function (req, res, next) {
 /**
  * User authorizations routing middleware
  */
-exports.hasAuthorization = function (roles) {
-    var _this = this;
+exports.hasAuthorization = function (req, res, next) {
+    if (req.user.roles.indexOf('admin') === -1) {
+        return res.send(403, 'User is not authorized');
+    } else {
+        next();
+    }
 
-    return function (req, res, next) {
-        _this.requiresLogin(req, res, function () {
-            if (_.intersection(req.user.roles, roles).length) {
-                return next();
-            } else {
-                return res.send(403, {
-                    message: 'User is not authorized'
-                });
-            }
-        });
-    };
+    //
+    //var _this = this;
+    //
+    //return function (req, res, next) {
+    //    _this.requiresLogin(req, res, function () {
+    //        if (_.intersection(req.user.roles, roles).length) {
+    //            return next();
+    //        } else {
+    //            return res.send(403, {
+    //                message: 'User is not authorized'
+    //            });
+    //        }
+    //    });
+    //};
 };
 
 /**

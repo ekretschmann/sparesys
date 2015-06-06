@@ -353,7 +353,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     }
                 }
                 // calculate when am I done
-                if (card.dueDate) {
+                if (card.dueDate && $scope.time < new Date(card.dueDate).getTime()) {
                     var dueInSecs = new Date(card.dueDate).getTime() - $scope.time;
                     var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
                     $scope.dueRetention += card.predictedRetention;

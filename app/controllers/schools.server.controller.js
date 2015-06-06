@@ -66,6 +66,8 @@ exports.read = function(req, res) {
  * Update a School
  */
 exports.update = function(req, res) {
+
+
 	var school = req.school ;
     var originalUserId;
 
@@ -97,6 +99,9 @@ exports.update = function(req, res) {
     }
 
 	school.save(function(err) {
+
+
+
 		if (err) {
 			return res.send(400, {
 				message: getErrorMessage(err)

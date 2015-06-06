@@ -35,6 +35,7 @@ var getErrorMessage = function (err) {
  * Create a Reward
  */
 exports.create = function(req, res) {
+
 	var reward = new Reward(req.body);
 	reward.user = req.user;
 

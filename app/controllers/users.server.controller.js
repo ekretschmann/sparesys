@@ -350,6 +350,9 @@ exports.userByID = function (req, res, next, id) {
  */
 exports.requiresLogin = function (req, res, next) {
 
+    //console.log(req['user']);
+    //console.log(req);
+    //console.log(req.isAuthenticated());
 
     if (!req.isAuthenticated()) {
         return res.send(401, {

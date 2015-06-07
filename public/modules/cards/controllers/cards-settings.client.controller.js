@@ -79,12 +79,14 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
         reset();
 
         $scope.setLanguageFront = function(lang) {
+            $scope.options.languageFront.name = lang.name;
             $scope.card.languageFront = lang;
             $scope.card.$update();
 
         };
 
         $scope.setLanguageBack = function(lang) {
+            $scope.options.languageBack.name = lang.name;
             $scope.card.languageBack = lang;
             $scope.card.$update();
             reset();

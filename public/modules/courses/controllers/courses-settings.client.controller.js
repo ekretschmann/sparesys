@@ -66,14 +66,25 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
         $scope.options.checks = ['Don\'t Change', 'Computer Checks', 'Self Check', 'Mixed Checks'];
 
 
+        $scope.setLanguageFront = function(lang) {
+            $scope.options.languageOnlyFront = lang.name;
+            console.log('set default for language front');
+
+        };
+
+        $scope.setLanguageBack = function(lang) {
+            $scope.options.languageOnlyBack = lang.name;
+            console.log('set default for language back');
+        };
+
         var reset = function () {
             $scope.options.openDueDateCalendar = false;
             $scope.options.openStartDateCalendar = false;
 
             $scope.options.languageFront = $scope.languages[0];
-            $scope.options.languageOnlyFront = $scope.languagesOnly[0];
+            $scope.options.languageOnlyFront = $scope.languagesOnly[0].name;
             $scope.options.languageBack = $scope.languages[0];
-            $scope.options.languageOnlyBack = $scope.languagesOnly[0];
+            $scope.options.languageOnlyBack = $scope.languagesOnly[0].name;
 
             $scope.options.changeStartDate = 'off';
             $scope.options.changeDueDate = 'off';

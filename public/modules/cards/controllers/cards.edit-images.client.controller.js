@@ -4,29 +4,18 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
     function ($scope, $modal) {
 
 
-        $scope.hasMode = false;
+        $scope.hasImageMode = false;
 
         $scope.init = function() {
-            console.log('init fwd');
-            console.log($scope.card.question);
-            $scope.hasMode = $scope.card.modes && $scope.card.modes.indexOf('images') !== -1;
-            console.log($scope.hasMode);
-
+            $scope.card.hasImageMode = $scope.card.modes && $scope.card.modes.indexOf('images') !== -1;
         };
 
 
         $scope.manageImages = function () {
 
-
-            console.log('manage images');
-            console.log($scope.hasMode);
-
-
-            //if (!$scope.hasMode) {
-            //    return;
-            //}
-
-
+            if (!$scope.card.hasImageMode) {
+                return;
+            }
 
             $modal.open({
                 templateUrl: 'manageImages.html',
@@ -85,12 +74,8 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
 
         $scope.updateCard = function () {
 
-            console.log('img update');
-            console.log($scope.card.question);
-            console.log($scope.hasMode);
             $scope.card.$update(function() {
-                $scope.hasMode =  $scope.card.modes.indexOf('images') > -1;
-                console.log($scope.hasMode);
+                $scope.card.hasImageMode =  $scope.card.modes.indexOf('images') > -1;
             });
 
         };

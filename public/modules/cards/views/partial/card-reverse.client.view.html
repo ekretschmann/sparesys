@@ -27,7 +27,7 @@
             <td class="right-padded-m nowrap" colspan="2">
 
 
-                <input type="checkbox" data-ng-model="hasMode" data-ng-click="toggleMode()"/>
+                <input type="checkbox" data-ng-model="card.hasReverseMode" data-ng-click="toggleMode()"/>
 
 
                 <span>Use Reverse Mode</span>
@@ -40,7 +40,7 @@
 
         <tr>
             <td class="right-padded-m nowrap top-padded-m">
-                <span ng-class="{'text-muted': !hasMode}">Front Text</span>
+                <span ng-class="{'text-muted': !card.hasReverseMode}">Front Text</span>
             </td>
             <td class="expands right-padded-s top-padded-m">
                 <input type="text"
@@ -48,7 +48,7 @@
                        class=" form-control focus standard-input-width"
                        placeholder="Question"
                        data-ng-blur="updateCard()"
-                       ng-disabled="!hasMode"
+                       ng-disabled="!card.hasReverseMode"
                        required>
 
 
@@ -59,7 +59,7 @@
 
         <tr>
             <td class="right-padded-m nowrap top-padded-m">
-                <span ng-class="{'text-muted': !hasMode}">Extra Information</span>
+                <span ng-class="{'text-muted': !card.hasReverseMode}">Extra Information</span>
             </td>
             <td class="expands right-padded-s top-padded-m">
                 <input type="text"
@@ -67,7 +67,7 @@
                        class=" form-control focus standard-input-width"
                        placeholder="Question"
                        data-ng-blur="updateCard()"
-                       ng-disabled="!hasMode"
+                       ng-disabled="!card.hasReverseMode"
                        required>
 
 
@@ -80,18 +80,18 @@
         <tr>
             <td class="top-padded-s bottom-padded-m"></td>
             <td class="nowrap top-padded-s middle-aligned bottom-padded-m">
-                <input ng-disabled="!hasMode"
+                <input ng-disabled="!card.hasReverseMode"
                        data-ng-model="card.readFrontReverse"
                        data-ng-click="toggleReadFrontReverse()"
                        type="checkbox"/>
-                <span ng-class="{'text-muted': !hasMode}">Read out loud</span>
+                <span ng-class="{'text-muted': !card.hasReverseMode}">Read out loud</span>
             </td>
 
         </tr>
 
         <tr>
             <td class="right-padded-m top-padded-s nowrap">
-                <div data-ng-class="{'text-muted': !hasMode}">Expected Answer</div>
+                <div data-ng-class="{'text-muted': !card.hasReverseMode}">Expected Answer</div>
 
             </td>
 
@@ -101,7 +101,7 @@
                            class="standard-input-width form-control"
                            placeholder="Answer"
                            data-ng-blur="updateCard()"
-                           ng-disabled="!hasMode"
+                           ng-disabled="!card.hasReverseMode"
                            required>
             </td>
 
@@ -112,7 +112,7 @@
 
         <tr data-ng-repeat="alt in card.acceptedAnswersReverse track by $index">
             <td class="right-padded-m nowrap">
-                <div data-ng-class="{'text-muted': !hasMode}">Also Accepted</div>
+                <div data-ng-class="{'text-muted': !card.hasReverseMode}">Also Accepted</div>
             </td>
             <td class="expands top-padded-s right-padded-s">
 
@@ -121,7 +121,7 @@
                            id="alternatives"
                            class="standard-input-width form-control"
                            data-ng-blur="updateAlternative($index, alt)"
-                           ng-disabled="!hasMode"
+                           ng-disabled="!card.hasReverseMode"
                            placeholder="Alternative Answer">
 
             </td>
@@ -135,7 +135,7 @@
                            id="alternativeReverse"
                            class="standard-input-width form-control alternative"
                            placeholder="Alternative Answer"
-                           ng-disabled="!hasMode"
+                           ng-disabled="!card.hasReverseMode"
                            data-ng-blur="updateCard()">
             </td>
         </tr>
@@ -149,22 +149,22 @@
 
                 <input data-ng-model="card.speechRecognitionReverse"
                        type="checkbox"
-                       ng-disabled="!hasMode"
+                       ng-disabled="!card.hasReverseMode"
                        data-ng-click="toggleSpeechRecognitionReverse()"
 
                         />
 
-                <span ng-class="{'text-muted': !hasMode}">Recognize Speech</span>
+                <span ng-class="{'text-muted': !card.hasReverseMode}">Recognize Speech</span>
 
 
             <span class="left-padded-m">
             <input data-ng-model="card.readBackReverse" type="checkbox"
-                   ng-disabled="!hasMode"
+                   ng-disabled="!card.hasReverseMode"
                    data-ng-click="toggleReadBackReverse()"
 
                     />
 
-                <span ng-class="{'text-muted': !hasMode}">Read out loud</span>
+                <span ng-class="{'text-muted': !card.hasReverseMode}">Read out loud</span>
             </span>
 
 

@@ -125,9 +125,7 @@ angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal
                 }
 
                 // this is all right, as we are only updating subdocuments
-                new Cards(card).$update(function (card) {
-                    console.log(card.question);
-                });
+                new Cards(card).$update();
 
 
             });

@@ -96,5 +96,76 @@
 
     </table>
 
+    <div class="tab-subheader">
+        Card Defaults
+    </div>
+
+    <table class="box-margin-s" data-ng-if="course.showCards.length > 0">
+
+
+        <tr>
+            <td class="top-padded-s right-padded-m middle-aligned">
+                Language Front
+            </td>
+            <td class="top-padded-s right-padded-m middle-aligned">
+
+
+                <div class="btn-group right-padded-l nowrap">
+
+
+                    <button type="button" class="btn btn-default standard-dropdown-width">{{ options.languageOnlyFront.name }}</button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="lang in languagesOnly"><a
+                                data-ng-click="options.languageOnlyFront=lang">{{lang.name}}</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+                <span class="right-padded-s">
+                 Language Back
+                    </span>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default standard-dropdown-width">{{ options.languageOnlyBack.name }}</button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="lang in languagesOnly"><a
+                                data-ng-click="options.languageOnlyBack = lang">{{lang.name}}</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td class="right-padded-m top-padded-sm">Checks</td>
+            <td class="top-padded-sm ">
+                <div class="btn-group">
+                    <button type="button"
+                            class="btn btn-default standard-dropdown-width">{{ options.check }}
+                    </button>
+                    <button type="button"
+                            class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="check in options.checks"><a
+                                data-ng-click="options.check = check">{{check}}</a></li>
+                    </ul>
+                </div>
+            </td>
+        </tr>
+</table>
 
 </div>

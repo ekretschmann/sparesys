@@ -50,6 +50,19 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
             {name: 'Spanish', code: 'es-ES'}
         ];
 
+        $scope.languagesOnly = [
+            {name: 'None', code: ''},
+            {name: 'Chinese', code: 'zh-CN'},
+            {name: 'English (GB)', code: 'en-GB'},
+            {name: 'English (US)', code: 'en-US'},
+            {name: 'French', code: 'fr-FR'},
+            {name: 'German', code: 'de-DE'},
+            {name: 'Italian', code: 'it-IT'},
+            {name: 'Japanese', code: 'ja-JP'},
+            {name: 'Korean', code: 'ko-KR'},
+            {name: 'Spanish', code: 'es-ES'}
+        ];
+
         $scope.options.checks = ['Don\'t Change', 'Computer Checks', 'Self Check', 'Mixed Checks'];
 
 
@@ -58,7 +71,9 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
             $scope.options.openStartDateCalendar = false;
 
             $scope.options.languageFront = $scope.languages[0];
+            $scope.options.languageOnlyFront = $scope.languagesOnly[0];
             $scope.options.languageBack = $scope.languages[0];
+            $scope.options.languageOnlyBack = $scope.languagesOnly[0];
 
             $scope.options.changeStartDate = 'off';
             $scope.options.changeDueDate = 'off';

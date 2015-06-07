@@ -166,6 +166,42 @@
                 </div>
             </td>
         </tr>
+
+        <tr>
+            <td class="right-padded-m top-padded-sm">Modes</td>
+            <td class="top-padded-sm ">
+                <input type="checkbox" data-ng-model="options.defaultForward"> <span class="right-padded-m">Forward</span>
+                <input type="checkbox" data-ng-model="options.defaultReverse"> <span class="right-padded-m">Reverse</span>
+                <input type="checkbox" data-ng-model="options.defaultImages"> <span class="right-padded-m">Images</span>
+            </td>
+        </tr>
+
+        <tr data-ng-if="options.defaultForward">
+            <td class="right-padded-m top-padded-sm">Forward</td>
+            <td class="top-padded-sm ">
+                <input type="checkbox" data-ng-model="options.defaultForwardReadQuestion"> <span class="right-padded-m">Read Questions</span>
+                <input type="checkbox" data-ng-model="options.defaultForwardReadAnser"> <span class="right-padded-m">Read Answer</span>
+                <input type="checkbox" data-ng-model="options.defaultForwardSpeechRecognition"> <span class="right-padded-m">Speech Recognition</span>
+            </td>
+        </tr>
+
+        <tr data-ng-if="options.defaultReverse">
+            <td class="right-padded-m top-padded-sm">Reverse</td>
+            <td class="top-padded-sm ">
+                <input type="checkbox" data-ng-model="options.defaultReverseReadQuestion"> <span class="right-padded-m">Read Questions</span>
+                <input type="checkbox" data-ng-model="options.defaultReverseReadAnser"> <span class="right-padded-m">Read Answer</span>
+                <input type="checkbox" data-ng-model="options.defaultReverseSpeechRecognition"> <span class="right-padded-m">Speech Recognition</span>
+            </td>
+        </tr>
+
+        <tr data-ng-if="options.defaultImages">
+            <td class="right-padded-m top-padded-sm">Images</td>
+            <td class="top-padded-sm ">
+                <input type="checkbox" data-ng-model="options.defaultImagesReadQuestion"> <span class="right-padded-m">Read Questions</span>
+                <input type="checkbox" data-ng-model="options.defaultImagesReadAnser"> <span class="right-padded-m">Read Answer</span>
+                <input type="checkbox" data-ng-model="options.defaultImagesSpeechRecognition"> <span class="right-padded-m">Speech Recognition</span>
+            </td>
+        </tr>
 </table>
 
 </div>

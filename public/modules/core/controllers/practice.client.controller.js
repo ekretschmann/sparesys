@@ -25,9 +25,9 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.options.dueDateOnly = false;
         $scope.options.repeatOnly = false;
 
-        $scope.delta = {};
-        $scope.delta.number = 0;
-        $scope.delta.difference = 0;
+        //$scope.delta = {};
+        //$scope.delta.number = 0;
+        //$scope.delta.difference = 0;
 
         $scope.doneColorCode = {'color': '#00FF00'};
 
@@ -186,8 +186,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 $scope.rewardScore += (1 - prediction);
             }
 
-            $scope.delta.number++;
-            $scope.delta.difference += (assessment / 3) - prediction;
+            //$scope.delta.number++;
+            //$scope.delta.difference += (assessment / 3) - prediction;
 
             //console.log($scope.delta.number + ': ' + $scope.delta.difference);
 

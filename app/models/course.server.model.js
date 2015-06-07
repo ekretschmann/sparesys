@@ -10,6 +10,23 @@ var mongoose = require('mongoose'),
  * Course Schema
  */
 var CourseSchema = new Schema({
+    cardDefaults: {
+        type: {
+            forward: {
+                type: Boolean,
+                default: false
+            },
+            reverse: {
+                type: Boolean,
+                default: false
+            },
+            images: {
+                type: Boolean,
+                default: false
+            }
+
+        }
+    },
     published: {
         type: Boolean,
         default: false

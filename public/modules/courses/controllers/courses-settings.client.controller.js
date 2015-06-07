@@ -7,6 +7,11 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
         $scope.options = {};
 
 
+       $scope.changeDefaults = function() {
+
+       };
+
+
         $scope.saveSettings = function () {
 
             $timeout(function () {

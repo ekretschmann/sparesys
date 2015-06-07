@@ -31,18 +31,19 @@ angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal
         };
 
 
-        $scope.openDueDateCalendar = function($event) {
+        $scope.openDueDateCalendar = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
-            $scope.options.openDueDateCalendar = true;
+            $scope.options.openDueDateCalendar = !$scope.options.openDueDateCalendar;
+            //$scope.options.openDueDateCalendar = !$scope.options.openDueDateCalendar;
         };
 
-        $scope.openStartDateCalendar = function($event) {
+        $scope.openStartDateCalendar = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
 
-            $scope.options.openStartDateCalendar = true;
+            $scope.options.openStartDateCalendar = !$scope.options.openStartDateCalendar;
         };
 
 
@@ -62,8 +63,7 @@ angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal
         $scope.options.checks = ['Don\'t Change', 'Computer Checks', 'Self Check', 'Mixed Checks'];
 
 
-
-        var reset = function() {
+        var reset = function () {
             $scope.options.openDueDateCalendar = false;
             $scope.options.openStartDateCalendar = false;
 
@@ -108,13 +108,11 @@ angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal
                 }
 
 
-
-
-                if($scope.options.startDate) {
+                if ($scope.options.startDate) {
                     card.startDate = $scope.options.startDate;
                 }
 
-                if($scope.options.dueDate) {
+                if ($scope.options.dueDate) {
                     card.dueDate = $scope.options.dueDate;
                 }
 
@@ -127,7 +125,9 @@ angular.module('packs').controller('PacksSettingsController', ['$scope', '$modal
                 }
 
                 // this is all right, as we are only updating subdocuments
-                new Cards(card).$update();
+                new Cards(card).$update(function (card) {
+                    console.log(card.question);
+                });
 
 
             });

@@ -7,7 +7,10 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
         $scope.hasMode = false;
 
         $scope.init = function() {
+            console.log('init fwd');
+            console.log($scope.card.question);
             $scope.hasMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
+            console.log($scope.hasMode);
         };
 
 
@@ -61,8 +64,13 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
                 }, 100);
             }
 
+            console.log('fwd update');
+            console.log($scope.card.question);
+            console.log($scope.hasMode);
+
             $scope.card.$update(function() {
                 $scope.hasMode =  $scope.card.modes.indexOf('forward') > -1;
+                console.log($scope.hasMode);
             });
 
 

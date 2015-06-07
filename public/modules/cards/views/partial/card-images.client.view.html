@@ -1,7 +1,7 @@
 <div data-ng-controller="EditCardImagesController" data-ng-init="init()" >
 
 
-    <div class="tab-header">
+    <div class="tab-header" >
 
 
 
@@ -55,7 +55,7 @@
                 <tr>
                     <td class="right-padded-m top-padded-m" data-ng-repeat="img in card.images">
 
-                        <img ng-class="imageMuted" ng-src="{{img}}" style="max-width: 128px; max-height: 128px" />
+                        <img ng-class="{'text-muted': !hasMode}" ng-src="{{img}}" style="max-width: 128px; max-height: 128px" />
                     </td>
                 </tr>
             </table>
@@ -66,7 +66,7 @@
     <tr>
         <td class="top-padded-s"></td>
         <td  class="top-padded-s"> <a href=""
-                data-ng-click="manageImages(card)"
+                data-ng-click="manageImages()"
                 data-ng-show="authentication.user._id == card.user._id"
                 ng-class="{'text-muted': !hasMode}">
             (Manage Images)

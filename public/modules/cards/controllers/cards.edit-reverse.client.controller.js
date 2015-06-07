@@ -6,7 +6,10 @@ angular.module('cards').controller('EditCardReverseController', ['$scope', '$tim
         $scope.hasMode = false;
 
         $scope.init = function() {
+            console.log('init reverse');
+            console.log($scope.card.question);
             $scope.hasMode = $scope.card.modes && $scope.card.modes.indexOf('reverse') !== -1;
+            console.log($scope.hasMode);
         };
 
         $scope.toggleMode = function () {
@@ -57,8 +60,14 @@ angular.module('cards').controller('EditCardReverseController', ['$scope', '$tim
                 }, 100);
             }
 
+            console.log('reverse update');
+            console.log($scope.card.question);
+            console.log($scope.hasMode);
+
             $scope.card.$update(function() {
                 $scope.hasMode = $scope.card.modes && $scope.card.modes.indexOf('reverse') !== -1;
+
+                console.log($scope.hasMode);
             });
 
 

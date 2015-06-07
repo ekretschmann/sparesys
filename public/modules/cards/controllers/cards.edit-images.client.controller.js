@@ -22,9 +22,9 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
             console.log($scope.hasMode);
 
 
-            if (!$scope.hasMode) {
-                return;
-            }
+            //if (!$scope.hasMode) {
+            //    return;
+            //}
 
 
 

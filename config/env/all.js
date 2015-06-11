@@ -30,7 +30,10 @@ module.exports = {
 				'public/lib/angular-ui-utils/ui-utils.js',
 				'public/lib/angular-bootstrap/ui-bootstrap-tpls.js',
                 'public/lib/angular-ui-sortable/sortable.js',
-				'public/lib/d3/d3.min.js'
+				'public/lib/d3/d3.min.js',
+				'public/lib/localforage/dist/localForage.min.js',
+				'public/lib/angular-localforage/dist/angular-localForage.min.js'
+
 			]
 		},
 		css: [

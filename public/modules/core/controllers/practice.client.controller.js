@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$window', '$location', '$scope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication', 'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsService',
-    function ($window, $location, $scope, $state, $modal, $stateParams, $timeout, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService) {
+angular.module('core').controller('PracticeController', ['$window', '$localForage','$location', '$scope', '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication', 'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsService',
+    function ($window, $localForage, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -176,6 +176,25 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         };
 
         $scope.recordRate = function (time, assessment) {
+
+            if ($rootScope.online) {
+                $scope.recordRateOnline(time, assessment);
+                return;
+            }
+
+
+            console.log($localForage.getItem('cards'));
+
+            //$localForage.setItem('cards','Olivier Combe').then(function() {
+            //    $localForage.getItem('myName').then(function(data) {
+            //        var myName = data;
+            //    });
+            //});
+
+
+        };
+
+        $scope.recordRateOnline = function (time, assessment) {
 
 
             $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);

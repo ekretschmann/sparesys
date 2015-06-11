@@ -604,6 +604,9 @@ exports.getCardsForCourse = function (req, res, next, id) {
 
 };
 
+exports.cardDefaults = function (req, res, next, id) {
+    console.log(req);
+};
 
 exports.copyCourse = function (req, res, next, id) {
 

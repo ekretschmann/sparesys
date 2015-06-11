@@ -13,18 +13,59 @@ var CourseSchema = new Schema({
     cardDefaults: {
         type: {
             forward: {
-                type: Boolean,
-                default: false
+                enabled: {
+                    type: Boolean,
+                    default: false
+                },
+                readFront: {
+                    type: Boolean,
+                    default: false
+                },
+                readBack: {
+                    type: Boolean,
+                    default: false
+                },
+                speechRecognition: {
+                    type: Boolean,
+                    default: false
+                }
             },
             reverse: {
-                type: Boolean,
-                default: false
+                enabled: {
+                    type: Boolean,
+                    default: false
+                },
+                readFront: {
+                    type: Boolean,
+                    default: false
+                },
+                readBack: {
+                    type: Boolean,
+                    default: false
+                },
+                speechRecognition: {
+                    type: Boolean,
+                    default: false
+                }
             },
             images: {
-                type: Boolean,
-                default: false
+                enabled: {
+                    type: Boolean,
+                    default: false
+                },
+                readFront: {
+                    type: Boolean,
+                    default: false
+                },
+                readBack: {
+                    type: Boolean,
+                    default: false
+                },
+                speechRecognition: {
+                    type: Boolean,
+                    default: false
+                }
             }
-
         }
     },
     published: {

@@ -1,13 +1,18 @@
 'use strict';
 
-angular.module('courses').controller('CoursesSettingsController', ['$window', '$scope', '$timeout', 'Cards',
-    function ($window, $scope, $timeout, Cards) {
+angular.module('courses').controller('CoursesSettingsController', ['$window', '$scope', '$timeout', 'Cards', 'CoursesService',
+    function ($window, $scope, $timeout, Cards, CoursesService) {
 
 
         $scope.options = {};
 
 
        $scope.changeDefaults = function() {
+           console.log('changing');
+            CoursesService.changeCardDefaults($scope.options);
+
+           var res = CoursesService.changeCardDefaults();
+           res.post({settings: $scope.options});
 
        };
 

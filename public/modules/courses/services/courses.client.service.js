@@ -69,6 +69,13 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                     }
                 });
             },
+            changeCardDefaults: function () {
+                return $resource('courses/cardDefaults/:courseId', [], {
+                    post: {
+                        method: 'POST'
+                    }
+                });
+            },
             uploadCourse: function () {
                 return $resource('courses/upload', [], {
                     post: {

@@ -27,14 +27,19 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
 angular.module('core').run(function($window, $rootScope) {
     $rootScope.online = navigator.onLine;
 
+    console.log($rootScope.online + 'a');
+
+
     $window.addEventListener('offline', function () {
         $rootScope.$apply(function() {
             $rootScope.online = false;
+            console.log($rootScope.online + 'x');
         });
     }, false);
     $window.addEventListener('online', function () {
         $rootScope.$apply(function() {
             $rootScope.online = true;
+            console.log($rootScope.online + 'y');
         });
     }, false);
 

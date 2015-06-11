@@ -20,6 +20,9 @@ module.exports = function(app) {
     app.route('/courses/copy/:cId2')
         .post(courses.copyCourse);
 
+	app.route('courses/cardDefaults/:courseId')
+		.post(courses.cardDefaults);
+
 
     app.route('/courses/:courseId')
 		.get(courses.read)

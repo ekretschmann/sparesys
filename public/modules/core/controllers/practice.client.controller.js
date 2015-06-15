@@ -183,19 +183,66 @@ angular.module('core').controller('PracticeController', ['$window', '$localForag
             }
 
 
-            console.log($localForage.getItem('cards'));
+            $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
 
-            //$localForage.setItem('cards','Olivier Combe').then(function() {
-            //    $localForage.getItem('myName').then(function(data) {
-            //        var myName = data;
-            //    });
-            //});
+            var hrt = $scope.card.hrt;
+
+            $localForage.getItem('cards').then(function(data) {
+                var offlineResults = data;
+
+                if(!offlineResults) {
+                    offlineResults = [];
+                }
+                offlineResults.push({id: $scope.card._id, assessment: assessment, time: time, hrt: hrt});
+                $localForage.setItem('cards', offlineResults);
+
+            });
+
+
+            $scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
+
+            if (assessment === 0 && $scope.assess === 'auto') {
+                $scope.repeat = true;
+            } else {
+                $scope.repeat = false;
+            }
+
 
 
         };
 
+        $scope.storeOfflineRecords = function(offlineResults) {
+
+
+            offlineResults.forEach(function (point) {
+
+
+                Cards.get({
+                    cardId: point.id
+                }, function (newCard) {
+
+                    newCard.hrt = point.hrt;
+                    newCard.history.push({when: point.time, assessment: point.assessment, hrt: point.hrt});
+                    newCard.$update();
+                });
+            });
+
+
+
+            $localForage.clear();
+        };
+
         $scope.recordRateOnline = function (time, assessment) {
 
+
+            $localForage.getItem('cards').then(function(data) {
+                var offlineResults = data;
+
+                if(offlineResults) {
+                   //console.log(offlineResults);
+                   $scope.storeOfflineRecords(offlineResults);
+                }
+            });
 
             $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
             var prediction = RetentionCalculatorService.getPredictedCardRetention($scope.card);

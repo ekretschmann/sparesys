@@ -12,6 +12,15 @@ var mongoose = require('mongoose'),
 var CourseSchema = new Schema({
     cardDefaults: {
         type: {
+            languageFront: {
+                name: String,
+                code: String
+            },
+
+            languageback: {
+                name: String,
+                code: String
+            },
             forward: {
                 enabled: {
                     type: Boolean,
@@ -66,7 +75,8 @@ var CourseSchema = new Schema({
                     default: false
                 }
             }
-        }
+        },
+        default: []
     },
     published: {
         type: Boolean,

@@ -61,6 +61,12 @@ exports.read = function (req, res) {
     res.jsonp(req.course);
 };
 
+
+exports.updateDefaultSettings = function(req, res) {
+    console.log(req);
+    res.jsonp({});
+};
+
 /**
  * Update a Course
  */
@@ -69,8 +75,10 @@ exports.update = function (req, res) {
     var course = req.course;
 
 
+
     var packsBefore = course.packs;
     course = _.extend(course, req.body);
+
     course.updated = Date.now();
     var newPack;
 

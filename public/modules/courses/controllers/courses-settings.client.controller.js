@@ -76,9 +76,20 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
         $scope.options.checks = ['Don\'t Change', 'Computer Checks', 'Self Check', 'Mixed Checks'];
 
 
+        $scope.updateDefaults = function() {
+            if ($scope.options.languageOnlyFront) {
+                  $scope.course.cardDefaults.languageFront = $scope.options.languageOnlyFront;
+            }
+
+            console.log($scope.course.cardDefaults);
+           // var res = CoursesService.setCourseDefaults();
+           // var promise = res.post({courseId: $scope.course._id});
+
+        };
+
         $scope.setLanguageFront = function(lang) {
             $scope.options.languageOnlyFront = lang.name;
-            console.log('set default for language front');
+            $scope.updateDefaults();
 
         };
 

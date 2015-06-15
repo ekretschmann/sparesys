@@ -30,6 +30,11 @@ module.exports = function(app) {
 		.post(users.requiresLogin, courses.hasAuthorization, courses.update)
 	    .delete(users.requiresLogin, courses.hasAuthorization, courses.delete);
 
+	app.route('/courses/defaults/:courseId')
+		.put(users.requiresLogin, courses.hasAuthorization, courses.update);
+
+
+
 	// Finish by binding the Course middleware
 	app.param('courseId', courses.courseByID);
 	app.param('cId', courses.getCardsForCourse);

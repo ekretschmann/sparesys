@@ -279,6 +279,7 @@ angular.module('courses').controller('CoursesController',
                 $scope.duplicateCourse = false;
 
 
+                console.log('xxxxxx');
                 $scope.course = Courses.get({
                     courseId: $stateParams.courseId
                 }, function () {
@@ -286,7 +287,7 @@ angular.module('courses').controller('CoursesController',
 
                     var res = CoursesService.serverLoadCards();
                     res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
-
+                        console.log('aaaaaaa');
                         $scope.course.cards = cards;
                         $scope.course.showCards = [];
                         var showSize = Math.min(cards.length, $scope.MAX_SHOW_CARDS);

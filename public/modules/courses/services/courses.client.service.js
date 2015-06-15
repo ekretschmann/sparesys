@@ -61,8 +61,9 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
 
                 return true;
             },
-            setCourseDefaults: function() {
-                return $resource('courses/defaults/:courseId', [], {
+            setCourseDefaults: function(id) {
+                return $resource('courses/:courseId/defaults', {courseId: id}, {
+
                     post: {
                         method: 'POST',
                         isArray: true

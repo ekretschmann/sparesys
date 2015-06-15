@@ -63,7 +63,7 @@ exports.read = function (req, res) {
 
 
 exports.updateDefaultSettings = function(req, res) {
-    console.log(req);
+    console.log(req.body);
     res.jsonp({});
 };
 

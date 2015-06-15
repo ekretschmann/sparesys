@@ -78,12 +78,14 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
 
         $scope.updateDefaults = function() {
             if ($scope.options.languageOnlyFront) {
-                  $scope.course.cardDefaults.languageFront = $scope.options.languageOnlyFront;
+                  $scope.course.cardDefaults= {languageFront: $scope.options.languageOnlyFront};
+                console.log($scope.course.cardDefaults);
             }
 
-            console.log($scope.course.cardDefaults);
-           // var res = CoursesService.setCourseDefaults();
-           // var promise = res.post({courseId: $scope.course._id});
+            //console.log($scope.course.cardDefaults);
+            //$scope.course.cardDefaults = $scope.options.languageOnlyFront;
+            var res = CoursesService.setCourseDefaults($scope.course._id);
+            res.post({defaults: $scope.course.cardDefaults});
 
         };
 

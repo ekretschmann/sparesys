@@ -20,8 +20,11 @@ module.exports = function(app) {
     app.route('/courses/copy/:cId2')
         .post(courses.copyCourse);
 
-	app.route('courses/cardDefaults/:courseId')
-		.post(courses.cardDefaults);
+	//app.route('courses/cardDefaults/:courseId')
+	//	.post(courses.cardDefaults);
+
+	app.route('/courses/:courseId/defaults')
+		.post(users.requiresLogin, courses.hasAuthorization, courses.updateDefaultSettings);
 
 
     app.route('/courses/:courseId')
@@ -30,8 +33,6 @@ module.exports = function(app) {
 		.post(users.requiresLogin, courses.hasAuthorization, courses.update)
 	    .delete(users.requiresLogin, courses.hasAuthorization, courses.delete);
 
-	app.route('/courses/defaults/:courseId')
-		.put(users.requiresLogin, courses.hasAuthorization, courses.update);
 
 
 

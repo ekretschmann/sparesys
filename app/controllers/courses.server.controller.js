@@ -63,8 +63,24 @@ exports.read = function (req, res) {
 
 
 exports.updateDefaultSettings = function(req, res) {
-    console.log(req.body);
-    res.jsonp({});
+    //console.log(req.body);
+    var course = req.course;
+
+
+    course = _.extend(course, req.body);
+
+    //console.log(course);
+
+    course.save(function (err) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(course);
+        }
+    });
+
 };
 
 /**

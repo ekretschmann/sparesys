@@ -7,15 +7,13 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
         $scope.options = {};
 
 
-       $scope.changeDefaults = function() {
-           console.log('changing');
-            CoursesService.changeCardDefaults($scope.options);
 
-           var res = CoursesService.changeCardDefaults();
-           res.post({settings: $scope.options});
+        $scope.init = function () {
 
-       };
-
+            if ($scope.course && $scope.course.cardDefaults) {
+                $scope.options.languageOnlyFront = $scope.course.cardDefaults.languageFront;
+            }
+        };
 
         $scope.saveSettings = function () {
 
@@ -76,26 +74,25 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
         $scope.options.checks = ['Don\'t Change', 'Computer Checks', 'Self Check', 'Mixed Checks'];
 
 
-        $scope.updateDefaults = function() {
+        $scope.updateDefaults = function () {
             if ($scope.options.languageOnlyFront) {
-                  $scope.course.cardDefaults= {languageFront: $scope.options.languageOnlyFront};
-                console.log($scope.course.cardDefaults);
+                $scope.course.cardDefaults = {languageFront: $scope.options.languageOnlyFront};
             }
 
             //console.log($scope.course.cardDefaults);
             //$scope.course.cardDefaults = $scope.options.languageOnlyFront;
             var res = CoursesService.setCourseDefaults($scope.course._id);
-            res.post({defaults: $scope.course.cardDefaults});
+            res.post({cardDefaults: $scope.course.cardDefaults});
 
         };
 
-        $scope.setLanguageFront = function(lang) {
+        $scope.setLanguageFront = function (lang) {
             $scope.options.languageOnlyFront = lang.name;
             $scope.updateDefaults();
 
         };
 
-        $scope.setLanguageBack = function(lang) {
+        $scope.setLanguageBack = function (lang) {
             $scope.options.languageOnlyBack = lang.name;
             console.log('set default for language back');
         };

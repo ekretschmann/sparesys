@@ -65,8 +65,7 @@ angular.module('courses').service('CoursesService', ['$q', '$resource', 'Courses
                 return $resource('courses/:courseId/defaults', {courseId: id}, {
 
                     post: {
-                        method: 'POST',
-                        isArray: true
+                        method: 'POST'
                     }
                 });
             },

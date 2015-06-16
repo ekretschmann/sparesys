@@ -172,27 +172,27 @@
         <tr>
             <td class="right-padded-m top-padded-sm">Modes</td>
             <td class="top-padded-sm ">
-                <input type="checkbox" data-ng-model="options.defaultForward" data-ng-click="changeDefaults()"> <span class="right-padded-m">Forward</span>
-                <input type="checkbox" data-ng-model="options.defaultReverse" data-ng-click="changeDefaults()"> <span class="right-padded-m">Reverse</span>
+                <input type="checkbox" data-ng-model="options.forward.enabled" data-ng-click="updateDefaults()"> <span class="right-padded-m">Forward</span>
+                <input type="checkbox" data-ng-model="options.reverse.enabled" data-ng-click="updateDefaults()"> <span class="right-padded-m">Reverse</span>
                 <input type="checkbox" data-ng-model="options.defaultImages" data-ng-click="changeDefaults()"> <span class="right-padded-m">Images</span>
             </td>
         </tr>
 
-        <tr data-ng-if="options.defaultForward">
+        <tr data-ng-if="options.forward.enabled">
             <td class="right-padded-m top-padded-sm">Forward</td>
             <td class="top-padded-sm ">
-                <input type="checkbox" data-ng-model="options.defaultForwardReadQuestion" data-ng-click="changeDefaults()"> <span class="right-padded-m">Read Questions</span>
-                <input type="checkbox" data-ng-model="options.defaultForwardReadAnser" data-ng-click="changeDefaults()"> <span class="right-padded-m">Read Answers</span>
-                <input type="checkbox" data-ng-model="options.defaultForwardSpeechRecognition" data-ng-click="changeDefaults()"> <span class="right-padded-m">Speech Recognition</span>
+                <input type="checkbox" data-ng-model="options.forward.readFront" data-ng-click="updateDefaults()"> <span class="right-padded-m">Read Questions</span>
+                <input type="checkbox" data-ng-model="options.forward.readBack" data-ng-click="updateDefaults()"> <span class="right-padded-m">Read Answers</span>
+                <input type="checkbox" data-ng-model="options.forward.speechRecognition" data-ng-click="updateDefaults()"> <span class="right-padded-m">Speech Recognition</span>
             </td>
         </tr>
 
-        <tr data-ng-if="options.defaultReverse">
+        <tr data-ng-if="options.reverse.enabled">
             <td class="right-padded-m top-padded-sm">Reverse</td>
             <td class="top-padded-sm ">
-                <input type="checkbox" data-ng-model="options.defaultReverseReadQuestion" data-ng-click="changeDefaults()"> <span class="right-padded-m">Read Questions</span>
-                <input type="checkbox" data-ng-model="options.defaultReverseReadAnser" data-ng-click="changeDefaults()"> <span class="right-padded-m">Read Answers</span>
-                <input type="checkbox" data-ng-model="options.defaultReverseSpeechRecognition" data-ng-click="changeDefaults()"> <span class="right-padded-m">Speech Recognition</span>
+                <input type="checkbox" data-ng-model="options.reverse.readFront" data-ng-click="updateDefaults()"> <span class="right-padded-m">Read Questions</span>
+                <input type="checkbox" data-ng-model="options.reverse.readBack" data-ng-click="updateDefaults()"> <span class="right-padded-m">Read Answers</span>
+                <input type="checkbox" data-ng-model="options.reverse.speechRecognition" data-ng-click="updateDefaults()"> <span class="right-padded-m">Speech Recognition</span>
             </td>
         </tr>
 

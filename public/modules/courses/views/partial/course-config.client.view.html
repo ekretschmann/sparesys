@@ -174,7 +174,7 @@
             <td class="top-padded-sm ">
                 <input type="checkbox" data-ng-model="options.forward.enabled" data-ng-click="updateDefaults()"> <span class="right-padded-m">Forward</span>
                 <input type="checkbox" data-ng-model="options.reverse.enabled" data-ng-click="updateDefaults()"> <span class="right-padded-m">Reverse</span>
-                <input type="checkbox" data-ng-model="options.defaultImages" data-ng-click="changeDefaults()"> <span class="right-padded-m">Images</span>
+                <input type="checkbox" data-ng-model="options.images.enabled" data-ng-click="updateDefaults()"> <span class="right-padded-m">Images</span>
             </td>
         </tr>
 
@@ -196,12 +196,12 @@
             </td>
         </tr>
 
-        <tr data-ng-if="options.defaultImages">
+        <tr data-ng-if="options.images.enabled">
             <td class="right-padded-m top-padded-sm">Images</td>
             <td class="top-padded-sm ">
-                <input type="checkbox" data-ng-model="options.defaultImagesReadQuestion"> <span class="right-padded-m">Read Questions</span>
-                <input type="checkbox" data-ng-model="options.defaultImagesReadAnser"> <span class="right-padded-m">Read Answesr</span>
-                <input type="checkbox" data-ng-model="options.defaultImagesSpeechRecognition"> <span class="right-padded-m">Speech Recognition</span>
+                <input type="checkbox" data-ng-model="options.images.readFront" data-ng-click="updateDefaults()"> <span class="right-padded-m">Read Questions</span>
+                <input type="checkbox" data-ng-model="options.images.readBack" data-ng-click="updateDefaults()"> <span class="right-padded-m">Read Answesr</span>
+                <input type="checkbox" data-ng-model="options.images.speechRecognition" data-ng-click="updateDefaults()"> <span class="right-padded-m">Speech Recognition</span>
             </td>
         </tr>
 </table>

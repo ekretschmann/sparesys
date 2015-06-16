@@ -40,6 +40,22 @@ angular.module('courses').controller('CoursesConfigController', ['$window', '$sc
                 $scope.options.reverse.readBack = $scope.course.cardDefaults.reverse.readBack;
                 $scope.options.reverse.speechRecognition = $scope.course.cardDefaults.reverse.speechRecognition;
 
+
+
+                if (!$scope.course.cardDefaults.images) {
+                    $scope.course.cardDefaults.images = {};
+                    $scope.course.cardDefaults.images.enabled = false;
+                    $scope.course.cardDefaults.images.readFront = false;
+                    $scope.course.cardDefaults.images.readBack = false;
+                    $scope.course.cardDefaults.images.speechRecognition = false;
+                }
+                $scope.options.images = {};
+                $scope.options.images.enabled = $scope.course.cardDefaults.images.enabled;
+                $scope.options.images.readFront = $scope.course.cardDefaults.images.readFront;
+                $scope.options.images.readBack = $scope.course.cardDefaults.images.readBack;
+                $scope.options.images.speechRecognition = $scope.course.cardDefaults.images.speechRecognition;
+
+
             }
 
             //console.log($scope.course.cardDefaults);
@@ -88,6 +104,8 @@ angular.module('courses').controller('CoursesConfigController', ['$window', '$sc
                     $scope.course.cardDefaults.forward.speechRecognition = $scope.options.forward.speechRecognition;
                 }
 
+
+
                 if ($scope.options.reverse) {
 
                     $scope.course.cardDefaults.reverse = {};
@@ -96,7 +114,14 @@ angular.module('courses').controller('CoursesConfigController', ['$window', '$sc
                     $scope.course.cardDefaults.reverse.readBack = $scope.options.reverse.readBack;
                     $scope.course.cardDefaults.reverse.speechRecognition = $scope.options.reverse.speechRecognition;
                 }
+                if ($scope.options.images) {
 
+                    $scope.course.cardDefaults.images = {};
+                    $scope.course.cardDefaults.images.enabled = $scope.options.images.enabled;
+                    $scope.course.cardDefaults.images.readFront = $scope.options.images.readFront;
+                    $scope.course.cardDefaults.images.readBack = $scope.options.images.readBack;
+                    $scope.course.cardDefaults.images.speechRecognition = $scope.options.images.speechRecognition;
+                }
                 var res = CoursesService.setCourseDefaults($scope.course._id);
                 res.post({cardDefaults: $scope.course.cardDefaults});
             }, 200);

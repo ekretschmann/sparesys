@@ -1,4 +1,4 @@
-<div  data-ng-controller="CoursesSettingsController" data-ng-init="init()">
+<div  data-ng-controller="CoursesConfigController" data-ng-init="init()">
 
     <div class="pull-right right-padded-s top-padded-s bottom-padded-m" >
 
@@ -162,7 +162,7 @@
                     </button>
                     <ul class="dropdown-menu" role="menu">
                         <li data-ng-repeat="check in options.checksOnly"
-                            data-ng-click="setCecks(check)"><a
+                            data-ng-click="setCheck(check)"><a
                                 data-ng-click="options.check = check">{{check}}</a></li>
                     </ul>
                 </div>

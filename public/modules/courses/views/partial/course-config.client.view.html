@@ -161,7 +161,8 @@
                         <span class="sr-only">Split button!</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="check in options.checks"><a
+                        <li data-ng-repeat="check in options.checksOnly"
+                            data-ng-click="setCecks(check)"><a
                                 data-ng-click="options.check = check">{{check}}</a></li>
                     </ul>
                 </div>

@@ -21,6 +21,10 @@ var CourseSchema = new Schema({
                 name: String,
                 code: String
             },
+            checks: {
+                name: String,
+                default: 'mixed'
+            },
             forward: {
                 enabled: {
                     type: Boolean,

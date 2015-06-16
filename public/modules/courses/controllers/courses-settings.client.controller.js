@@ -12,6 +12,14 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
 
             if ($scope.course && $scope.course.cardDefaults) {
                 $scope.options.languageOnlyFront = $scope.course.cardDefaults.languageFront;
+                $scope.options.languageOnlyBack = $scope.course.cardDefaults.languageBack;
+                if($scope.course.cardDefaults === 'mixed') {
+                    $scope.options.check = 'Mixed Checks';
+                } else if($scope.course.cardDefaults === 'self') {
+                    $scope.options.check = 'Self Check';
+                } else if($scope.course.cardDefaults === 'computer') {
+                    $scope.options.check = 'Computer Checks';
+                }
             }
         };
 
@@ -72,15 +80,21 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
         ];
 
         $scope.options.checks = ['Don\'t Change', 'Computer Checks', 'Self Check', 'Mixed Checks'];
+        $scope.options.checksOnly = ['Computer Checks', 'Self Check', 'Mixed Checks'];
 
 
         $scope.updateDefaults = function () {
+            $scope.course.cardDefaults = {};
             if ($scope.options.languageOnlyFront) {
-                $scope.course.cardDefaults = {languageFront: $scope.options.languageOnlyFront};
+                $scope.course.cardDefaults.languageFront = $scope.options.languageOnlyFront;
+            }
+            if ($scope.options.languageOnlyBack) {
+                $scope.course.cardDefaults.languageBack  = $scope.options.languageOnlyBack;
+            }
+            if ($scope.options.check) {
+                $scope.course.cardDefaults.checks  = $scope.options.check;
             }
 
-            //console.log($scope.course.cardDefaults);
-            //$scope.course.cardDefaults = $scope.options.languageOnlyFront;
             var res = CoursesService.setCourseDefaults($scope.course._id);
             res.post({cardDefaults: $scope.course.cardDefaults});
 
@@ -94,7 +108,12 @@ angular.module('courses').controller('CoursesSettingsController', ['$window', '$
 
         $scope.setLanguageBack = function (lang) {
             $scope.options.languageOnlyBack = lang.name;
-            console.log('set default for language back');
+            $scope.updateDefaults();
+        };
+
+        $scope.setCheck = function (check) {
+            $scope.options.check = check;
+            $scope.updateDefaults();
         };
 
         var reset = function () {

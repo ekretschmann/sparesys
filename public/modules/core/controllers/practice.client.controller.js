@@ -519,6 +519,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             // dont make this an else if
             if ($scope.challenge === 'eighty') {
+
+                console.log(Math.round(100 * $scope.cardsAbove80 / ($scope.cards.length - $scope.newCards)));
                 currentDoneScore = Math.min(100, Math.round(100 * $scope.cardsAbove80 / ($scope.cards.length - $scope.newCards)));
                 if ($scope.doneScore < currentDoneScore) {
                     $scope.doneScore = currentDoneScore;

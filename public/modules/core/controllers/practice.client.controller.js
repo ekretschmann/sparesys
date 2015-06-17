@@ -25,7 +25,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.options.dueDateOnly = false;
         $scope.options.repeatOnly = false;
 
-        $scope.challenge = 'dueDate';
+        $scope.challenge = 'eighty';
 
         //$scope.delta = {};
         //$scope.delta.number = 0;

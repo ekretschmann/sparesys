@@ -33,7 +33,9 @@
 
                 </div>
                 <div >
-                done for today
+
+                <span data-ng-if="challenge==='dueDate'">on track</span>
+                <span data-ng-if="challenge==='eighty'">all cards over 80%</span>
                 <a href="" tooltip="You need 100% to be on track" tooltip-trigger="mouseenter">
                     <i
                             class="glyphicon glyphicon-info-sign small"></i></a>

@@ -107,10 +107,18 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
                     original.languageFront = $scope.course.cardDefaults.languageFront;
                 }
                 if ($scope.course.cardDefaults.languageBack) {
-                    original.languageFront = $scope.course.cardDefaults.languageBack;
+                    original.languageBack = $scope.course.cardDefaults.languageBack;
                 }
                 if ($scope.course.cardDefaults.checks) {
-                    original.check = $scope.course.cardDefaults.checks;
+                    if ($scope.course.cardDefaults.checks === 'Mixed Checks') {
+                        original.check = 'mixed';
+                    }
+                    if ($scope.course.cardDefaults.checks === 'Self Checks') {
+                        original.check = 'self';
+                    }
+                    if ($scope.course.cardDefaults.checks === 'Computer Checks') {
+                        original.check = 'computer';
+                    }
                 }
                 if ($scope.course.cardDefaults.forward) {
                     if($scope.course.cardDefaults.forward.enabled) {
@@ -122,6 +130,30 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
                     original.readFrontForward = $scope.course.cardDefaults.forward.readFront;
                     original.readBackForward = $scope.course.cardDefaults.forward.readBack;
                     original.speechRecognitionForward = $scope.course.cardDefaults.forward.speechRecognition;
+                }
+
+                if ($scope.course.cardDefaults.reverse) {
+                    if($scope.course.cardDefaults.reverse.enabled) {
+                        if(!original.modes) {
+                            original.modes = [];
+                        }
+                        original.modes.push('reverse');
+                    }
+                    original.readFrontReverse = $scope.course.cardDefaults.reverse.readFront;
+                    original.readBackReverse = $scope.course.cardDefaults.reverse.readBack;
+                    original.speechRecognitionReverse = $scope.course.cardDefaults.reverse.speechRecognition;
+                }
+
+                if ($scope.course.cardDefaults.images) {
+                    if($scope.course.cardDefaults.images.enabled) {
+                        if(!original.modes) {
+                            original.modes = [];
+                        }
+                        original.modes.push('images');
+                    }
+                    original.readFrontImages = $scope.course.cardDefaults.images.readFront;
+                    original.readBackImages = $scope.course.cardDefaults.images.readBack;
+                    original.speechRecognitionImages = $scope.course.cardDefaults.images.speechRecognition;
                 }
             }
 

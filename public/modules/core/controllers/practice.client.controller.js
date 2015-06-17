@@ -381,7 +381,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                     card.score = Math.abs(card.predictedRetention - 0.4);
 
-                    if(card.retention >= 0.8) {
+                    if(card.retention >= 80) {
                         $scope.cardsAbove80 ++;
                     }
                     if(!card.history || card.history.length === 0) {
@@ -520,6 +520,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             // dont make this an else if
             if ($scope.challenge === 'eighty') {
 
+                console.log($scope.cardsAbove80);
                 console.log(100 * $scope.cardsAbove80 / ($scope.cards.length - $scope.newCards));
                 currentDoneScore = Math.min(100, Math.round(100 * $scope.cardsAbove80 / ($scope.cards.length - $scope.newCards)));
                 if ($scope.doneScore < currentDoneScore) {

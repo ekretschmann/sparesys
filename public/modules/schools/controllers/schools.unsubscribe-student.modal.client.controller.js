@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('schools').controller('UnsubscribeStudentModalController', ['$scope', '$location', '$window','$modalInstance', 'Authentication', 'school',
-    function ($scope, $location, $window, $modalInstance, Authentication, school) {
+angular.module('schools').controller('UnsubscribeStudentModalController', ['$scope', '$location', '$window','$modalInstance', 'Authentication', 'Users', 'school',
+    function ($scope, $location, $window, $modalInstance, Authentication, Users, school) {
 
         $scope.authentication = Authentication;
         $scope.school = school;
@@ -21,6 +21,22 @@ angular.module('schools').controller('UnsubscribeStudentModalController', ['$sco
                 $window.ga('send', 'pageview', '/schools/unsubscribe/student/:id');
                 $window.ga('send', 'event', 'user unsubscribes from a school as student');
             }
+
+            var idx = $scope.authentication.user.studentInSchools.indexOf(school._id);
+            if(idx > -1) {
+                $scope.authentication.user.studentInSchools.splice(idx, 1);
+            }
+
+            Users.get({
+                userId: $scope.authentication.user._id
+            }, function (result) {
+                result.studentInSchools = $scope.authentication.user.studentInSchools;
+                result.$update(function(updatedUser) {
+                    Authentication.user = updatedUser;
+                });
+
+            });
+
 
             $modalInstance.close();
 

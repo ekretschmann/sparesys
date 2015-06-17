@@ -19,19 +19,22 @@ angular.module('schools').controller('SubscribeStudentModalController', ['$scope
                 $window.ga('send', 'event', 'user subscribes to a school as student');
             }
 
+            // should be solved server sided with a rest call, really
             if ($scope.authentication.user.studentInSchools.indexOf($scope.school._id) === -1) {
                 $scope.authentication.user.studentInSchools.push($scope.school._id);
-                console.log('xxxxxx');
+            }
+
 
                 Users.get({
                     userId: $scope.authentication.user._id
                 }, function (result) {
-                    result.$update(function() {
-                        Authentication.user = result;
+                    result.studentInSchools = $scope.authentication.user.studentInSchools;
+                    result.$update(function(updatedUser) {
+                        Authentication.user = updatedUser;
                     });
 
                 });
-            }
+
 
 
             $modalInstance.close();

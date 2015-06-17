@@ -129,13 +129,13 @@ angular.module('courses').controller('CoursesConfigController', ['$window', '$sc
         };
 
         $scope.setLanguageFront = function (lang) {
-            $scope.options.languageOnlyFront = lang.name;
+            $scope.options.languageOnlyFront = lang;
             $scope.updateDefaults();
 
         };
 
         $scope.setLanguageBack = function (lang) {
-            $scope.options.languageOnlyBack = lang.name;
+            $scope.options.languageOnlyBack = lang;
             $scope.updateDefaults();
         };
 

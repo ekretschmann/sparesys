@@ -87,6 +87,8 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
 
         $scope.addCardToPack = function () {
 
+            console.log('xxx');
+            console.log($scope.course.cardDefaults);
 
 
             var original = new Cards({
@@ -99,6 +101,29 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
                 format:  $scope.options.format,
                 slaves: []
             });
+
+            if ($scope.course.cardDefaults) {
+                if ($scope.course.cardDefaults.languageFront) {
+                    original.languageFront = $scope.course.cardDefaults.languageFront;
+                }
+                if ($scope.course.cardDefaults.languageBack) {
+                    original.languageFront = $scope.course.cardDefaults.languageBack;
+                }
+                if ($scope.course.cardDefaults.checks) {
+                    original.check = $scope.course.cardDefaults.checks;
+                }
+                if ($scope.course.cardDefaults.forward) {
+                    if($scope.course.cardDefaults.forward.enabled) {
+                        if(!original.modes) {
+                            original.modes = [];
+                        }
+                        original.modes.push('forward');
+                    }
+                    original.readFrontForward = $scope.course.cardDefaults.forward.readFront;
+                    original.readBackForward = $scope.course.cardDefaults.forward.readBack;
+                    original.speechRecognitionForward = $scope.course.cardDefaults.forward.speechRecognition;
+                }
+            }
 
             var self = {};
             self.question = $scope.options.question;
@@ -134,7 +159,6 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
                     }, function (slavePacks) {
                         if (slavePacks.length === 1) {
                             var slave = slavePacks[0];
-//                            console.log(slave.user);
                             var card = new Cards({
                                 userId: slave.user,
                                 master: original._id,

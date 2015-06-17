@@ -512,6 +512,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     }
 
 
+                } else {
+                    $scope.challenge === 'eighty';
                 }
             }
 

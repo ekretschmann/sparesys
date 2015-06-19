@@ -2,8 +2,11 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$window', '$location', '$scope', '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication', 'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsService',
-    function ($window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication, Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService) {
+angular.module('core').controller('PracticeController', ['$window', '$location', '$scope',
+    '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication',
+    'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsService', 'ChallengeCalculatorService',
+    function ($window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
+              Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService, ChallengeCalculatorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -25,22 +28,22 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.options.dueDateOnly = false;
         $scope.options.repeatOnly = false;
 
-        $scope.challenge = 'eighty';
-
+        //$scope.challenge = 'eighty';
+        //
         //$scope.delta = {};
         //$scope.delta.number = 0;
         //$scope.delta.difference = 0;
 
         $scope.doneColorCode = {'color': '#00FF00'};
 
-        $scope.$watch('doneScore', function() {
+        $scope.$watch('doneScore', function () {
             $scope.loadLiquidFillGauge($scope.doneScore, $scope.doneColorCode);
         });
 
-        $scope.loadLiquidFillGauge = function(score, colorCode) {
+        $scope.loadLiquidFillGauge = function (score, colorCode) {
 
 
-            if (score < 0 ) {
+            if (score < 0) {
                 return;
             }
 
@@ -179,7 +182,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.recordRate = function (time, assessment) {
 
             //if ($rootScope.online) {
-                $scope.recordRateOnline(time, assessment);
+            $scope.recordRateOnline(time, assessment);
             //    return;
             //}
             //
@@ -207,7 +210,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             //} else {
             //    $scope.repeat = false;
             //}
-
 
 
         };
@@ -254,7 +256,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             //$scope.delta.number++;
             //$scope.delta.difference += (assessment / 3) - prediction;
-
 
 
             $scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
@@ -353,16 +354,16 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.dueRetention = 0;
             $scope.requiredRetention = 0;
             $scope.dueCards = 0;
-
-            $scope.cardsAbove80 = 0;
             $scope.newCards = 0;
 
+
+            ChallengeCalculatorService.reset();
+            ChallengeCalculatorService.setCardTotal(this.cards.length);
             for (var i = 0; i < this.cards.length; i++) {
 
                 var card = this.cards[i];
 
                 if ($scope.options.dueDateOnly && (!card.dueDate || $scope.time >= new Date(card.dueDate).getTime())) {
-
                     continue;
                 }
 
@@ -370,38 +371,36 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     continue;
                 }
 
+                if (card.startDate || $scope.time < new Date(card.startDate).getTime()) {
+                    continue;
+                }
 
-                if (!card.startDate || $scope.time >= new Date(card.startDate).getTime()) {
-
-
-
-                    card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
-
-                    card.retention = Math.round(card.predictedRetention * 100);
-
-                    card.score = Math.abs(card.predictedRetention - 0.4);
-
-                    if(card.retention >= 80) {
-                        $scope.cardsAbove80 ++;
-                    }
-                    if(!card.history || card.history.length === 0) {
-                        $scope.newCards++;
-                    }
-
-                    if (card.dueDate) {
-                        card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.4);
-
-                    }
+                ChallengeCalculatorService.candidateCard();
 
 
+                card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
+                card.retention = Math.round(card.predictedRetention * 100);
+                card.score = Math.abs(card.predictedRetention - 0.4);
 
-                    if (card.score < bestValue && card.modes.length > 0) {
-                        if (this.cards.length >= 1 && card.question !== $scope.card.question) {
-                            bestCard = card;
-                            bestValue = card.score;
-                        }
+                ChallengeCalculatorService.retention(card.predictedRetention);
+
+                if (!card.history || card.history.length === 0) {
+                    $scope.newCards++;
+                } else {
+                    ChallengeCalculatorService.oldCard();
+                }
+
+                if (card.dueDate) {
+                    card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.4);
+                }
+
+                if (card.score < bestValue && card.modes.length > 0) {
+                    if (this.cards.length >= 1 && card.question !== $scope.card.question) {
+                        bestCard = card;
+                        bestValue = card.score;
                     }
                 }
+
                 // calculate when am I done
                 if (card.dueDate && $scope.time < new Date(card.dueDate).getTime()) {
                     var dueInSecs = new Date(card.dueDate).getTime() - $scope.time;
@@ -422,7 +421,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             }
 
 
-            $scope.handleChallenges();
+            $scope.doneScore = ChallengeCalculatorService.getDoneScore();
+            $scope.doneColorCode = {'color': ChallengeCalculatorService.getColor()};
 
 
             $scope.card = bestCard;
@@ -492,61 +492,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         };
 
-        $scope.handleChallenges = function() {
-            var currentDoneScore = -1;
-            if ($scope.challenge === 'dueDate') {
-                if ($scope.requiredRetention > 0) {
-
-
-                    var actualScore = Math.round(100 * $scope.dueRetention / $scope.requiredRetention);
-                    currentDoneScore = Math.min(100, actualScore);
-
-                    if ($scope.doneScore < currentDoneScore) {
-                        $scope.doneScore = currentDoneScore;
-                    }
-
-                    if(actualScore > 100) {
-                        $scope.challenge = 'eighty';
-                        $scope.doneScore = 0;
-                        currentDoneScore =0;
-                    }
-
-
-                } else {
-                    $scope.challenge === 'eighty';
-                }
-            }
-
-            // dont make this an else if
-            if ($scope.challenge === 'eighty') {
-
-                console.log($scope.cardsAbove80);
-                console.log(100 * $scope.cardsAbove80 / ($scope.cards.length - $scope.newCards));
-                currentDoneScore = Math.min(100, Math.round(100 * $scope.cardsAbove80 / ($scope.cards.length - $scope.newCards)));
-                if ($scope.doneScore < currentDoneScore) {
-                    $scope.doneScore = currentDoneScore;
-                }
-            }
-            var green = (Math.round(Math.min(90, $scope.doneScore) * 2));
-            var red = (Math.round(Math.max(10, (100 - $scope.doneScore)) * 2));
-            var blue = Math.round(Math.min(green, red) / 3);
-
-            red = red.toString(16);
-            green = green.toString(16);
-            blue = blue.toString(16);
-            if (red.length === 1) {
-                red = '0' + red;
-            }
-            if (green.length === 1) {
-                green = '0' + green;
-            }
-            if (blue.length === 1) {
-                blue = '0' + blue;
-            }
-
-            var col = '#' + red + '' + green + '' + blue;
-            $scope.doneColorCode = {'color': col};
-        };
 
         $scope.initPractice = function () {
 

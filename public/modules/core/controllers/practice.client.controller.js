@@ -403,11 +403,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                 // calculate when am I done
                 if (card.dueDate && $scope.time < new Date(card.dueDate).getTime()) {
-                    var dueInSecs = new Date(card.dueDate).getTime() - $scope.time;
-                    var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
-                    $scope.dueRetention += card.predictedRetention;
-                    $scope.dueCards++;
-                    $scope.requiredRetention += Math.min(0.99, 1 - dueInDays * 0.03);
+                    ChallengeCalculatorService.dueCard(card.dueDate, $scope.time, card.predictedRetention);
+
                 }
             }
 
@@ -420,10 +417,14 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 return;
             }
 
+            if (!bestCard.history || bestCard.history.length === 0) {
+                ChallengeCalculatorService.newCard();
+            }
 
             $scope.doneScore = ChallengeCalculatorService.getDoneScore();
             $scope.doneColorCode = {'color': ChallengeCalculatorService.getColor()};
-
+            $scope.challengeName = ChallengeCalculatorService.getChallengeName();
+            $scope.challengeDescription = ChallengeCalculatorService.getChallengeDescription();
 
             $scope.card = bestCard;
 

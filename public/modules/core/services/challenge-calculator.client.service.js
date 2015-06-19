@@ -3,15 +3,31 @@
 angular.module('core').service('ChallengeCalculatorService', [
     function () {
 
-        console.log('xxxxx');
+        this.challenge = 'due';
         this.minimalDoneScore = 0;
         this.total = 0;
         this.candidates = 0;
         this.over80 = 0;
         this.old = 0;
+        this.new = 0;
+        this.dueRetention = 0;
+        this.requiredRetention = 0;
+
+        this.dueCard = function(dueDate, time, predictedRetention) {
+            var dueInSecs = new Date(dueDate).getTime() - time;
+            var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
+            this.dueRetention += predictedRetention;
+            //$scope.dueCards++;
+            this.requiredRetention += Math.min(0.99, 1 - dueInDays * 0.03);
+        };
 
         this.oldCard = function () {
             this.old++;
+        };
+
+
+        this.newCard = function () {
+            this.new++;
         };
 
         this.retention = function (retention) {
@@ -28,6 +44,10 @@ angular.module('core').service('ChallengeCalculatorService', [
             this.total = 0;
             this.candidates = 0;
             this.over80 = 0;
+            this.old = 0;
+            this.dueRetention = 0;
+            this.requiredRetention = 0;
+
         };
 
         this.setCardTotal = function (total) {
@@ -36,44 +56,63 @@ angular.module('core').service('ChallengeCalculatorService', [
 
         this.getDoneScore = function () {
 
-            //var currentDoneScore = -1;
-            ////if ($scope.challenge === 'dueDate') {
-            ////    if ($scope.requiredRetention > 0) {
-            ////
-            ////
-            ////        var actualScore = Math.round(100 * $scope.dueRetention / $scope.requiredRetention);
-            ////        currentDoneScore = Math.min(100, actualScore);
-            ////
-            ////        if ($scope.doneScore < currentDoneScore) {
-            ////            $scope.doneScore = currentDoneScore;
-            ////        }
-            ////
-            ////        if(actualScore > 100) {
-            ////            $scope.challenge = 'eighty';
-            ////            $scope.doneScore = 0;
-            ////            currentDoneScore =0;
-            ////        }
-            ////
-            ////
-            ////    } else {
-            ////        $scope.challenge === 'eighty';
-            ////    }
-            ////}
-            //
-            //// dont make this an else if
-            //if ($scope.challenge === 'eighty') {
+            var score = 0;
+            if (this.challenge === 'due') {
+                score = this.getDueDoneScore();
+                if (score < 100) {
+                    return score;
+                }
+                this.challenge = 'over80';
+                this.minimalDoneScore = 0;
+            }
 
+
+            if (this.challenge === 'over80') {
+                score = this.getOver80DoneScore();
+                if (score < 100) {
+                    return score;
+                }
+                this.challenge = '10new';
+                this.minimalDoneScore = 0;
+            }
+
+            if (this.challenge === '10new') {
+                score = this.get10NewDoneScore();
+                if (score < 100) {
+                    return score;
+                }
+                this.challenge = 'none';
+                this.minimalDoneScore = 0;
+            }
+
+            if (this.challenge === 'none') {
+                return 100;
+            }
+
+        };
+
+        this.get10NewDoneScore = function() {
+            var actualScore = Math.round(10 * this.new);
+            return this.getReportedDoneScore(Math.min(100, actualScore));
+        };
+        this.getDueDoneScore = function() {
+            var actualScore = Math.round(100 * this.dueRetention / this.requiredRetention);
+            return this.getReportedDoneScore(Math.min(100, actualScore));
+        };
+
+        this.getOver80DoneScore = function() {
             if(!this.old) {
-                return 0;
+                return this.getReportedDoneScore(0);
             }
 
-            var doneScore = Math.min(100, Math.round(this.over80 / this.old));
-            if (this.minimalDoneScore < doneScore) {
-                this.minimalDoneScore = doneScore;
+            return this.getReportedDoneScore(Math.min(100, Math.round(100*this.over80 / this.old)));
+        };
+
+        this.getReportedDoneScore = function(score) {
+            if (this.minimalDoneScore < score) {
+                this.minimalDoneScore = score;
             }
-            console.log(this.minimalDoneScore);
             return this.minimalDoneScore;
-
         };
 
         this.getColor = function () {
@@ -95,6 +134,29 @@ angular.module('core').service('ChallengeCalculatorService', [
             }
 
             var col = '#' + red + '' + green + '' + blue;
+            return col;
         };
+
+        this.getChallengeName = function() {
+
+            switch(this.challenge) {
+                case 'due': return 'Get on track!';
+                case 'over80': return 'Get all cards above 80%';
+                case '10new': return 'Learn 10 new cards';
+                case 'none': return 'You have mastered all challenges';
+                default: return 'unknown challenge';
+            }
+        };
+
+        this.getChallengeDescription = function() {
+            switch(this.challenge) {
+                case 'due': return 'When you reach 100% you are on track for your goals';
+                case 'over80': return 'Make sure you don\'t forget your old cards';
+                case '10new': return 'Make sure you learn new things';
+                case 'none': return 'You worked very hard! Well done!';
+                default: return 'unknown challenge';
+            }
+        };
+
     }
 ]);

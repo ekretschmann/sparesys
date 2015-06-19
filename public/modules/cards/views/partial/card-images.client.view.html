@@ -27,8 +27,7 @@
             <td></td>
             <td class="right-padded-m nowrap" colspan="2">
 
-
-                <input type="checkbox" data-ng-model="card.hasImageMode" data-ng-click="toggleMode()"/>
+                <input type="checkbox"  data-ng-click="toggleMode()"/>
 
 
                 <span>Use Image Mode</span>
@@ -40,11 +39,11 @@
 
 
         <tr>
-        <td class="top-aligned nowrap right-padded-m top-padded-m"><span ng-class="{'text-muted': !card.hasImageMode}">Images</span></td>
+        <td class="top-aligned nowrap right-padded-m top-padded-m"><span ng-class="{'text-muted': !hasImageMode}">Images</span></td>
 
         <td class="right-padded-m top-padded-m" data-ng-if="card.images.length  === 0">
 
-            <span ng-class="{'text-muted': !card.hasImageMode}">no images configured for this card</span>
+            <span ng-class="{'text-muted': !hasImageMode}">no images configured for this card</span>
 
 
         </td>
@@ -55,7 +54,7 @@
                 <tr>
                     <td class="right-padded-m top-padded-m" data-ng-repeat="img in card.images">
 
-                        <img ng-class="{'text-muted': !card.hasImageMode}" ng-src="{{img}}" style="max-width: 128px; max-height: 128px" />
+                        <img ng-class="{'text-muted': !hasImageMode}" ng-src="{{img}}" style="max-width: 128px; max-height: 128px" />
                     </td>
                 </tr>
             </table>
@@ -68,7 +67,7 @@
         <td  class="top-padded-s"> <a href=""
                 data-ng-click="manageImages()"
                 data-ng-show="authentication.user._id == card.user._id"
-                ng-class="{'text-muted': !card.hasImageMode}">
+                ng-class="{'text-muted': !hasImageMode}">
             (Manage Images)
         </a>
         </td>
@@ -77,12 +76,12 @@
     <tr>
         <td class="right-padded-m nowrap top-padded-m">
             <section>
-                <span ng-class="{'text-muted': !card.hasImageMode}">Front Text</span>
+                <span ng-class="{'text-muted': !hasImageMode}">Front Text</span>
             </section>
 
         </td>
         <td class="expands right-padded-m top-padded-m">
-            <span ng-class="{'text-muted': !card.hasImageMode}">{{card.question}}</span>
+            <span ng-class="{'text-muted': !hasImageMode}">{{card.question}}</span>
 
         </td>
 
@@ -99,9 +98,9 @@
 
 
                         <span class="right-padded-m top-padded-s">
-                        <input data-ng-model="card.imagesReadFront" type="checkbox" ng-disabled="!card.hasImageMode"
+                        <input data-ng-model="card.imagesReadFront" type="checkbox" ng-disabled="!hasImageMode"
                                 data-ng-click="toggleImagesReadFront()"/>
-                            <span ng-class="{'text-muted': !card.hasImageMode}">Read out loud</span>
+                            <span ng-class="{'text-muted': !hasImageMode}">Read out loud</span>
                         </span>
 
 
@@ -113,11 +112,11 @@
 
     <tr>
         <td class="right-padded-m top-padded-m top-aligned nowrap">
-            <span ng-class="{'text-muted': !card.hasImageMode}">Expected Answer</span>
+            <span ng-class="{'text-muted': !hasImageMode}">Expected Answer</span>
         </td>
 
         <td class="expands  top-padded-m right-padded-m">
-            <span ng-class="{'text-muted': !card.hasImageMode}">{{card.answer}}</span>
+            <span ng-class="{'text-muted': !hasImageMode}">{{card.answer}}</span>
         </td>
 
     </tr>
@@ -129,15 +128,15 @@
 
 
             <span class="right-padded-m">
-            <input data-ng-model="card.speechRecognitionImages"  ng-disabled="!card.hasImageMode" type="checkbox"
+            <input data-ng-model="card.speechRecognitionImages"  ng-disabled="!hasImageMode" type="checkbox"
                     data-ng-click="toggleImagesRecognizeSpeech()"/>
-                <span ng-class="{'text-muted': !card.hasImageMode}">Recognize Speech</span>
+                <span ng-class="{'text-muted': !hasImageMode}">Recognize Speech</span>
             </span>
 
             <span class="right-padded-m top-padded-m">
-            <input data-ng-model="card.imagesReadBack"  ng-disabled="!card.hasImageMode" type="checkbox"
+            <input data-ng-model="card.imagesReadBack"  ng-disabled="!hasImageMode" type="checkbox"
                     data-ng-click="toggleImagesReadBack()"/>
-                <span ng-class="{'text-muted': !card.hasImageMode}">Read out loud</span>
+                <span ng-class="{'text-muted': !hasImageMode}">Read out loud</span>
             </span>
 
 

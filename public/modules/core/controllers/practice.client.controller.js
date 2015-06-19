@@ -386,6 +386,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                 if (!card.history || card.history.length === 0) {
                     $scope.newCards++;
+                    ChallengeCalculatorService.newCard();
                 } else {
                     ChallengeCalculatorService.oldCard();
                 }
@@ -418,7 +419,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             }
 
             if (!bestCard.history || bestCard.history.length === 0) {
-                ChallengeCalculatorService.newCard();
+                ChallengeCalculatorService.newCardAsked();
             }
 
             $scope.doneScore = ChallengeCalculatorService.getDoneScore();
@@ -485,16 +486,20 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 }, 100);
             }
 
+            ChallengeCalculatorService.cardAsked();
+
             if ($window.ga) {
                 $window.ga('send', 'pageview', '/practice/card/:id');
                 $window.ga('send', 'event', 'next card');
             }
 
 
+
         };
 
 
         $scope.initPractice = function () {
+
 
 
             if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
@@ -510,6 +515,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             var promise = res.get({courseId: $stateParams.courseId});
             promise.$promise.then(function (cards) {
                 $scope.cards = cards;
+                ChallengeCalculatorService.init(cards);
                 $scope.inPlay = cards.length;
                 $scope.cards.forEach(function (c) {
 

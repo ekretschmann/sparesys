@@ -12,6 +12,32 @@ angular.module('core').service('ChallengeCalculatorService', [
         this.new = 0;
         this.dueRetention = 0;
         this.requiredRetention = 0;
+        this.cardsProcessed = 0;
+        this.highscore = 0;
+        this.totalNewCards = 0;
+
+        this.init = function(cards) {
+
+            var counter = {};
+            cards.forEach(function (c) {
+                c.history.forEach(function(h){
+                    var d = new Date(h.when);
+                    var day = d.getFullYear()+'-'+ d.getMonth()+'-'+ d.getDate();
+                    if (counter[day]) {
+                        counter[day] = counter[day]+1;
+                    } else {
+                        counter[day] = 1;
+                    }
+                });
+            });
+
+            Object.keys(counter).forEach(function(score){
+                if (counter[score] > this.highscore) {
+                    this.highscore = counter[score];
+                }
+            }, this);
+
+        };
 
         this.dueCard = function(dueDate, time, predictedRetention) {
             var dueInSecs = new Date(dueDate).getTime() - time;
@@ -21,12 +47,20 @@ angular.module('core').service('ChallengeCalculatorService', [
             this.requiredRetention += Math.min(0.99, 1 - dueInDays * 0.03);
         };
 
+        this.cardAsked = function() {
+            this.cardsProcessed++;
+        };
+
         this.oldCard = function () {
             this.old++;
         };
 
 
         this.newCard = function () {
+            this.totalNewCards++;
+        };
+
+        this.newCardAsked = function () {
             this.new++;
         };
 
@@ -77,7 +111,32 @@ angular.module('core').service('ChallengeCalculatorService', [
             }
 
             if (this.challenge === '10new') {
-                score = this.get10NewDoneScore();
+
+                if (this.totalNewCards +this.new > 10) {
+
+                    score = this.get10NewDoneScore();
+                    if (score < 100) {
+                        return score;
+                    }
+                    this.challenge = '250cards';
+                    this.minimalDoneScore = 0;
+                } else {
+                    this.challenge = '250cards';
+                    this.minimalDoneScore = 0;
+                }
+            }
+
+            if (this.challenge === '250cards') {
+                score = this.get250NewCardsDoneScore();
+                if (score < 100) {
+                    return score;
+                }
+                this.challenge = 'highscore';
+                this.minimalDoneScore = 0;
+            }
+
+            if (this.challenge === 'highscore') {
+                score = this.getHighscoreDoneScore();
                 if (score < 100) {
                     return score;
                 }
@@ -91,10 +150,21 @@ angular.module('core').service('ChallengeCalculatorService', [
 
         };
 
+        this.getHighscoreDoneScore = function() {
+            var actualScore = Math.round(100 * this.cardsProcessed / this.highscore);
+            return this.getReportedDoneScore(Math.min(100, actualScore));
+        };
+
+        this.get250NewCardsDoneScore = function() {
+            var actualScore = Math.round(100 * this.cardsProcessed / 250);
+            return this.getReportedDoneScore(Math.min(100, actualScore));
+        };
+
         this.get10NewDoneScore = function() {
             var actualScore = Math.round(10 * this.new);
             return this.getReportedDoneScore(Math.min(100, actualScore));
         };
+
         this.getDueDoneScore = function() {
             var actualScore = Math.round(100 * this.dueRetention / this.requiredRetention);
             return this.getReportedDoneScore(Math.min(100, actualScore));
@@ -133,8 +203,7 @@ angular.module('core').service('ChallengeCalculatorService', [
                 blue = '0' + blue;
             }
 
-            var col = '#' + red + '' + green + '' + blue;
-            return col;
+            return '#' + red + '' + green + '' + blue;
         };
 
         this.getChallengeName = function() {
@@ -143,6 +212,8 @@ angular.module('core').service('ChallengeCalculatorService', [
                 case 'due': return 'Get on track!';
                 case 'over80': return 'Get all cards above 80%';
                 case '10new': return 'Learn 10 new cards';
+                case '250cards': return 'Work through 250 questions';
+                case 'highscore': return 'Go through more cards than ever!';
                 case 'none': return 'You have mastered all challenges';
                 default: return 'unknown challenge';
             }
@@ -153,6 +224,8 @@ angular.module('core').service('ChallengeCalculatorService', [
                 case 'due': return 'When you reach 100% you are on track for your goals';
                 case 'over80': return 'Make sure you don\'t forget your old cards';
                 case '10new': return 'Make sure you learn new things';
+                case '250cards': return 'Wreck your brain!';
+                case 'highscore': return 'Break your personal best';
                 case 'none': return 'You worked very hard! Well done!';
                 default: return 'unknown challenge';
             }

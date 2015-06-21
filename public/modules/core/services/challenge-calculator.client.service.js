@@ -92,12 +92,14 @@ angular.module('core').service('ChallengeCalculatorService', [
 
             var score = 0;
             if (this.challenge === 'due') {
-                score = this.getDueDoneScore();
-                if (score < 100) {
-                    return score;
+                if (this.requiredRetention > 0) {
+                    score = this.getDueDoneScore();
+                    if (score < 100) {
+                        return score;
+                    }
+                    this.challenge = 'over80';
+                    this.minimalDoneScore = 0;
                 }
-                this.challenge = 'over80';
-                this.minimalDoneScore = 0;
             }
 
 

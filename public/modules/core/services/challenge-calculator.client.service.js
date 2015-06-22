@@ -92,7 +92,6 @@ angular.module('core').service('ChallengeCalculatorService', [
 
             var score = 0;
             if (this.challenge === 'due') {
-                console.log(this.requiredRetention);
 
                 if (this.requiredRetention > 0) {
                     score = this.getDueDoneScore();

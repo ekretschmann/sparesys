@@ -5,8 +5,10 @@
 angular.module('core').controller('PracticeController', ['$window', '$location', '$scope',
     '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication',
     'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsService', 'ChallengeCalculatorService',
+    'ModeSelectorService',
     function ($window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
-              Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService, ChallengeCalculatorService) {
+              Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService, ChallengeCalculatorService,
+                ModeSelectorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -258,7 +260,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             //$scope.delta.difference += (assessment / 3) - prediction;
 
 
-            $scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
+            $scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt, mode: $scope.mode, check: $scope.assess});
 
 
             Cards.get({
@@ -430,7 +432,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             $scope.card = bestCard;
 
-            $scope.mode = bestCard.modes[Math.floor(Math.random() * bestCard.modes.length)];
+            var repetitionParameters = ModeSelectorService.getRepetitionParameters(bestCard);
+            $scope.mode = repetitionParameters.mode;
+            $scope.assess = repetitionParameters.assess;
+
 
             $scope.cardScore = 0;
 
@@ -441,14 +446,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             if (!$scope.card.history || $scope.card.history.length === 0) {
                 $scope.inPlay++;
-            }
-            $scope.assess = 'self';
-
-            if ($scope.card.check === 'computer') {
-                $scope.assess = 'auto';
-            }
-            if ($scope.assess === 'mixed' && $scope.card.hrt && $scope.card.hrt > 1000 * 60 * 60 * 24 * 5) {
-                $scope.assess = 'auto';
             }
 
 

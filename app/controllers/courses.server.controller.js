@@ -378,8 +378,7 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.invalidAnswersReverse = original.invalidAnswersReverse;
             copy.question = original.question;
             copy.answer = original.answer;
-            copy.dueDate = original.dueDate;
-            copy.startDate = original.startDate;
+
             copy.check = original.check;
             copy.images = original.images;
             copy.packs = [newPackId];
@@ -387,10 +386,17 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.supervisor = original.user;
             copy.format = original.format;
             copy.course = newCourseId;
+
+            if (isSupervised) {
+                copy.dueDate = original.dueDate;
+                copy.startDate = original.startDate;
+            }
+
             copy.save();
 
 
             if (isSupervised) {
+
 
                 if (!original.slaves) {
                     original.slaves = [];

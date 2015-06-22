@@ -382,12 +382,13 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 card.retention = Math.round(card.predictedRetention * 100);
                 card.score = Math.abs(card.predictedRetention - 0.4);
 
-                ChallengeCalculatorService.retention(card.predictedRetention);
+
 
                 if (!card.history || card.history.length === 0) {
                     $scope.newCards++;
                     ChallengeCalculatorService.newCard();
                 } else {
+                    ChallengeCalculatorService.retention(card.predictedRetention);
                     ChallengeCalculatorService.oldCard();
                 }
 

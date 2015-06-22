@@ -71,7 +71,6 @@ angular.module('core').service('DiagramsService', [
 
             }, this);
 
-            console.log(data);
 
             var margin = {top: 20, right: 20, bottom: 30, left: 50},
                 width = 680 - margin.left - margin.right,

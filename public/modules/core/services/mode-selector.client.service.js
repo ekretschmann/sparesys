@@ -6,10 +6,10 @@ angular.module('core').service('ModeSelectorService', [
 
         this.getRepetitionParameters = function(card) {
 
-            console.log('aaaaa');
-            console.log(card.modes);
-            console.log(card.check);
-            console.log(card.history);
+            //console.log('aaaaa');
+            //console.log(card.modes);
+            //console.log(card.check);
+            //console.log(card.history);
 
             return {mode: card.modes[Math.floor(Math.random() * card.modes.length)],
                 assess: 'self'};

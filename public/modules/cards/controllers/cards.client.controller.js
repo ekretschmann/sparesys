@@ -152,6 +152,7 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
             }, function () {
 
 
+                $scope.hasImageMode = $scope.card.modes && $scope.card.modes.indexOf('images') !== -1;
 
                 Courses.get({
                     courseId: $scope.card.course

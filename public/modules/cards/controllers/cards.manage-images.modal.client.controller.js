@@ -88,7 +88,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
         //});
 
 
-        $scope.search_offline = function () {
+        $scope.search = function () {
 
 
             $scope.totalResults = 50;
@@ -154,7 +154,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             $scope.search();
         };
 
-        $scope.search = function () {
+        $scope.search_offliene = function () {
             //
             //if (!$scope.online) {
             //    $scope.search_offline();
@@ -205,9 +205,9 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
 
 
 
-            var modeToggle = $scope.card.hasImagesMode;
+            //var modeToggle = $scope.hasImagesMode;
             $scope.card.$update(function() {
-                $scope.card.hasImagesMode = modeToggle;
+                //$scope.hasImagesMode = modeToggle;
                 $state.go($state.$current, null, { reload: true });
             });
 

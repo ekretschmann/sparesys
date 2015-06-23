@@ -4,16 +4,12 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
     function ($scope, $modal) {
 
 
-        $scope.hasImageMode = false;
 
-        $scope.init = function() {
-            $scope.hasImageMode = $scope.card.modes && $scope.card.modes.indexOf('images') !== -1;
-        };
 
 
         $scope.manageImages = function () {
 
-            if (!$scope.card.hasImageMode) {
+            if (!$scope.hasImageMode) {
                 return;
             }
 
@@ -30,10 +26,6 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
 
 
 
-        //$scope.$watch('card.hasImageMode', function() {
-        //    console.log('aaaa');
-        //    $scope.toggleMode();
-        //});
 
         $scope.toggleMode = function () {
 
@@ -41,7 +33,8 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
             var mode = 'images';
             if ($scope.card.modes.indexOf(mode) === -1) {
                 $scope.card.modes.push(mode);
-                $scope.hasImageMode = true;
+                //$scope.hasImageMode = true;
+
 
             } else {
                 for (var i in $scope.card.modes) {
@@ -49,7 +42,7 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
                         $scope.card.modes.splice(i, 1);
                     }
                 }
-                $scope.hasImageMode = false;
+                //$scope.hasImageMode = false;
             }
              $scope.updateCard();
 

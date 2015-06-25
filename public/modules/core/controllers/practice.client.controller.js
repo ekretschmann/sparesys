@@ -8,7 +8,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
     'ModeSelectorService',
     function ($window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
               Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService, ChallengeCalculatorService,
-                ModeSelectorService) {
+              ModeSelectorService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -29,6 +29,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.options = {};
         $scope.options.dueDateOnly = false;
         $scope.options.repeatOnly = false;
+
+        $scope.delta = {};
 
         //$scope.challenge = 'eighty';
         //
@@ -260,7 +262,34 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             //$scope.delta.difference += (assessment / 3) - prediction;
 
 
-            $scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt, mode: $scope.mode, check: $scope.assess});
+            if ($scope.card.history && $scope.card.history.length > 0) {
+                if ($scope.delta[$scope.card.packs[0]]) {
+                    var delta = $scope.delta[$scope.card.packs[0]];
+                    $scope.delta[$scope.card.packs[0]] = {
+                        predicted: $scope.card.predictedRetention + delta.predicted,
+                        cards: 1 + delta.cards,
+                        score: assessment + delta.score
+                    };
+                } else {
+                    $scope.delta[$scope.card.packs[0]] = {
+                        predicted: $scope.card.predictedRetention,
+                        cards: 1,
+                        score: assessment
+                    };
+                }
+                //console.log($scope.delta[$scope.card.packs[0]]);
+            }
+
+
+            $scope.card.history.push({
+                when: time,
+                assessment: assessment,
+                hrt: $scope.card.hrt,
+                mode: $scope.mode,
+                check: $scope.assess
+            });
+
+
 
 
             Cards.get({
@@ -385,7 +414,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 card.score = Math.abs(card.predictedRetention - 0.4);
 
 
-
                 if (!card.history || card.history.length === 0) {
                     $scope.newCards++;
                     ChallengeCalculatorService.newCard();
@@ -492,12 +520,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             }
 
 
-
         };
 
 
         $scope.initPractice = function () {
-
 
 
             if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {

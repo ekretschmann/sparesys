@@ -23,7 +23,6 @@ angular.module('core').service('ModeSelectorService', [
 
             var mode = 'forward';
             if (card.modes.length > 1) {
-                //console.log(card.history);
                 if (!card.history || card.history.length === 0) {
                     if (card.modes.indexOf('forward') === -1) {
                         if (card.modes.indexOf('images') === -1) {
@@ -36,8 +35,6 @@ angular.module('core').service('ModeSelectorService', [
                     var lastAssessForward = 0;
                     var lastAssessReverse = 0;
                     var lastAssessImages = 0;
-                    var lastHrtForward = 0;
-                    var lastHrtReverse = 0;
                     var lastHrt = {};
 
                     for (var i=0; i < card.history.length; i++) {
@@ -52,7 +49,7 @@ angular.module('core').service('ModeSelectorService', [
                             lastHrt.images = card.history[i].hrt;
                         }
                     }
-                    var modes = this.getLowestAssessment(lastAssessForward, lastAssessReverse, lastAssessImages);
+                    var modes = this.getLowestAssessment(lastAssessForward, lastAssessReverse, lastAssessImages, card.modes);
                     if (modes.length === 1) {
                         mode = modes[0];
                     } else {
@@ -76,16 +73,25 @@ angular.module('core').service('ModeSelectorService', [
             return {mode: mode, assess: assess};
         };
 
-        this.getLowestAssessment = function(lastAssessForward, lastAssessReverse, lastAssessImages) {
-            if (lastAssessForward < lastAssessImages && lastAssessForward < lastAssessReverse) {
-                return ['forward'];
+        this.getLowestAssessment = function(lastAssessForward, lastAssessReverse, lastAssessImages, modes) {
+
+
+            if (lastAssessImages < lastAssessForward && lastAssessImages < lastAssessReverse) {
+                if (modes.indexOf('images') > -1) {
+                    return ['images'];
+                }
             }
             if (lastAssessReverse < lastAssessImages && lastAssessReverse < lastAssessForward) {
-                return ['reverse'];
+                if (modes.indexOf('reverse') > -1) {
+                    return ['reverse'];
+                }
             }
-            if (lastAssessImages < lastAssessForward && lastAssessImages < lastAssessReverse) {
-                return ['images'];
+            if (lastAssessForward < lastAssessImages && lastAssessForward < lastAssessReverse) {
+                if (modes.indexOf('forward') > -1) {
+                    return ['forward'];
+                }
             }
+
             if (lastAssessForward === lastAssessReverse && lastAssessReverse === lastAssessImages) {
                 return ['forward', 'reverse', 'images'];
             }

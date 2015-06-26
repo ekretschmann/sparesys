@@ -390,6 +390,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             ChallengeCalculatorService.reset();
             ChallengeCalculatorService.setCardTotal(this.cards.length);
+            console.log('');
             for (var i = 0; i < this.cards.length; i++) {
 
                 var card = this.cards[i];
@@ -410,9 +411,23 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
 
                 card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
+
+                var before = card.predictedRetention;
+                var d = 0;
+
+                if (card.history && card.history.length > 0 && $scope.delta[card.packs[0]]) {
+
+                    var delta = $scope.delta[card.packs[0]];
+                    d = Math.max(Math.min(1, card.predictedRetention + (delta.score / (3 * delta.cards))), 0.01);
+                }
+
+
+
                 card.retention = Math.round(card.predictedRetention * 100);
                 card.score = Math.abs(card.predictedRetention - 0.4);
 
+                //console.log(card.question+ ': '+card.predictedRetention+'   '+before+ '   '+(card.predictedRetention-before));
+                console.log(card.question+ ': '+d);
 
                 if (!card.history || card.history.length === 0) {
                     $scope.newCards++;

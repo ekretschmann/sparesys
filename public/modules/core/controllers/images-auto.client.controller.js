@@ -84,9 +84,12 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
                 return;
             }
 
+            console.log('images key');
 
             if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text && $scope.answer.text !== '') {
                 $scope.showAnswer();
+                console.log('images sets to answer');
+                $scope.state = 'answer';
                 return;
             }
 

@@ -145,6 +145,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
                 if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text) {
                     $scope.showAnswer();
+                    console.log('forward sets to answer');
                     $scope.state = 'answer';
 
                 }
@@ -153,6 +154,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         //};
 
         $scope.nextCard = function () {
+            console.log('forward sets to question');
 
             $scope.state = 'question';
             $scope.$parent.nextCard();

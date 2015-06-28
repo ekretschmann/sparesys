@@ -121,9 +121,12 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
                 return;
             }
 
+            console.log('reverse key');
 
             if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text) {
                 $scope.showAnswer();
+                console.log('reverse sets to answer');
+                $scope.state = 'answer';
                 return;
             }
 
@@ -156,6 +159,8 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
         });
 
         $scope.nextCard = function () {
+
+            console.log('reverse setting to question');
 
             $scope.state = 'question';
             $scope.$parent.nextCard();

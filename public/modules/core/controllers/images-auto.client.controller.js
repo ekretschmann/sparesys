@@ -105,8 +105,9 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
         $scope.nextCard = function () {
 
 
-            $scope.$parent.nextCard();
             $scope.state = 'question';
+            $scope.$parent.nextCard();
+
 
             $scope.answer.text = '';
 

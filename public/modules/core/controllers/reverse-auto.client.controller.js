@@ -157,8 +157,9 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
 
         $scope.nextCard = function () {
 
-            $scope.$parent.nextCard();
             $scope.state = 'question';
+            $scope.$parent.nextCard();
+
 
             $scope.answer.text = '';
 

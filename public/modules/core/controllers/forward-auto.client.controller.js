@@ -154,12 +154,13 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.nextCard = function () {
 
+            $scope.state = 'question';
             $scope.$parent.nextCard();
 
 
             $scope.answer.text = '';
 
-            $scope.state = 'question';
+
             $scope.setSpecialCharacters();
 
 

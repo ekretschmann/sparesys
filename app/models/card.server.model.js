@@ -11,6 +11,10 @@ var mongoose = require('mongoose'),
  */
 var CardSchema = new Schema({
 
+    priority: {
+        type: Number,
+        default: 3
+    },
     imagesReadFront: {
         type: Boolean,
         default: false

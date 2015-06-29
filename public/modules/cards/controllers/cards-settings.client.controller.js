@@ -20,6 +20,13 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
             $scope.options.openStartDateCalendar = true;
         };
 
+        $scope.priorities = [
+            'essential',
+            'high',
+            'average',
+            'low',
+            'nice to know'
+        ];
 
         $scope.languages = [
             {name: 'None', code: ''},
@@ -74,6 +81,8 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
                 $scope.options.languageBack = $scope.languages[0];
             }
 
+            $scope.options.priority = $scope.priorities[$scope.card.priority - 1];
+
         };
 
         reset();
@@ -81,6 +90,13 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
         $scope.setLanguageFront = function(lang) {
             $scope.options.languageFront.name = lang.name;
             $scope.card.languageFront = lang;
+            $scope.card.$update();
+
+        };
+
+        $scope.setPriority = function(p) {
+            $scope.options.priority = p;
+            $scope.card.priority = $scope.priorities.indexOf(p) +1;
             $scope.card.$update();
 
         };

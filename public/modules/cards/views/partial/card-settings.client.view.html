@@ -55,6 +55,31 @@
 
         <tr>
             <td class="top-padded-m right-padded-s middle-aligned">
+                Priority
+            </td>
+
+            <td class="top-padded-m right-padded-s middle-aligned">
+                <div class="btn-group right-padded-l nowrap">
+
+
+                    <button type="button" class="btn btn-default standard-dropdown-width">{{ options.priority }}</button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="priority in priorities"><a
+                                data-ng-click="setPriority(priority)">{{priority}}</a>
+                        </li>
+                    </ul>
+
+                </div>
+
+            </td>
+        </tr>
+
+        <tr>
+            <td class="top-padded-m right-padded-s middle-aligned">
                 Language Front
             </td>
             <td class="top-padded-m right-padded-m middle-aligned">

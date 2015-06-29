@@ -33,16 +33,12 @@ angular.module('cards').controller('EditCardImagesController', ['$scope', '$moda
             var mode = 'images';
             if ($scope.card.modes.indexOf(mode) === -1) {
                 $scope.card.modes.push(mode);
-                //$scope.hasImageMode = true;
-
-
             } else {
                 for (var i in $scope.card.modes) {
                     if ($scope.card.modes[i] === mode) {
                         $scope.card.modes.splice(i, 1);
                     }
                 }
-                //$scope.hasImageMode = false;
             }
              $scope.updateCard();
 

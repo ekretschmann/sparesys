@@ -4,11 +4,11 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
     function ($scope, $timeout) {
 
 
-        $scope.card.hasForwardMode = false;
-
-        $scope.init = function() {
-            $scope.card.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
-        };
+        //$scope.card.hasForwardMode = false;
+        //
+        //$scope.init = function() {
+        //    $scope.card.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
+        //};
 
 
         $scope.toggleMode = function () {
@@ -61,9 +61,7 @@ angular.module('cards').controller('EditCardForwardController', ['$scope', '$tim
                 }, 100);
             }
 
-            $scope.card.$update(function() {
-                $scope.card.hasForwardMode =  $scope.card.modes.indexOf('forward') > -1;
-            });
+            $scope.card.$update();
 
 
         };

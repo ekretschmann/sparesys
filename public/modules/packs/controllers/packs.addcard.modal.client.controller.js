@@ -87,9 +87,6 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
 
         $scope.addCardToPack = function () {
 
-            console.log('xxx');
-            console.log($scope.course.cardDefaults);
-
 
             var original = new Cards({
                 question: $scope.options.question,

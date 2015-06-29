@@ -153,6 +153,8 @@ angular.module('cards').controller('CardsController', ['$scope', '$modal', '$tim
 
 
                 $scope.hasImageMode = $scope.card.modes && $scope.card.modes.indexOf('images') !== -1;
+                $scope.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
+                $scope.hasReverseMode = $scope.card.modes && $scope.card.modes.indexOf('reverse') !== -1;
 
                 Courses.get({
                     courseId: $scope.card.course

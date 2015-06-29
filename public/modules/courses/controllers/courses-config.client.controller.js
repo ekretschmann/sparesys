@@ -11,8 +11,22 @@ angular.module('courses').controller('CoursesConfigController', ['$window', '$sc
         $scope.init = function () {
 
             if ($scope.course && $scope.course.cardDefaults) {
+
+
+                if(!$scope.course.cardDefaults.languageFront) {
+                     $scope.course.cardDefaults.languageFront = $scope.languagesOnly[0];
+                }
                 $scope.options.languageOnlyFront = $scope.course.cardDefaults.languageFront;
+
+
+                if(!$scope.course.cardDefaults.languageBack) {
+                    $scope.course.cardDefaults.languageBack = $scope.languagesOnly[0];
+                }
                 $scope.options.languageOnlyBack = $scope.course.cardDefaults.languageBack;
+
+                if(!$scope.course.cardDefaults.checks) {
+                    $scope.course.cardDefaults.checks = 'Mixed Checks';
+                }
                 $scope.options.check = $scope.course.cardDefaults.checks;
                 if (!$scope.course.cardDefaults.forward) {
                     $scope.course.cardDefaults.forward = {};

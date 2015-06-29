@@ -330,6 +330,14 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             return predicted;
         };
 
+        $scope.adjustScoreToPriority = function (card) {
+            if (card.priority && card.priority !== 3) {
+                var distance = Math.abs(card.predictedRetention - 0.4);
+
+            }
+            return card.predictedRetention;
+        };
+
         $scope.adjustScoreToDueDate = function (card, time) {
 
             if (card.dueDate && card.predictedRetention < 0.99 && new Date(card.dueDate).getTime() >= time) {
@@ -439,6 +447,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                 if (card.dueDate) {
                     card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.4);
+                }
+
+                if (card.priority !== 3) {
+                    card.score = Math.abs($scope.adjustScoreToPriority(card) - 0.4);
                 }
 
                 if (card.score < bestValue && card.modes.length > 0) {

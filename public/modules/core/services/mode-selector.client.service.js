@@ -4,19 +4,18 @@ angular.module('core').service('ModeSelectorService', [
     function () {
 
 
-        this.getRepetitionParametersOld = function (card) {
-            return {
-                mode: card.modes[Math.floor(Math.random() * card.modes.length)],
-                assess: 'self'
-            };
+        this.getRepetitionParametersOld = function(card) {
+            return {mode: card.modes[Math.floor(Math.random() * card.modes.length)],
+                assess: 'self'};
         };
 
-        this.getRepetitionParameters = function (card) {
+        this.getRepetitionParameters = function(card) {
 
-            // console.log('aaaaa');
+           // console.log('aaaaa');
             //console.log(card.modes);
             //console.log(card.check);
             //console.log(card.history);
+
 
 
             var assess = this.getAssess(card);
@@ -38,8 +37,8 @@ angular.module('core').service('ModeSelectorService', [
                     var lastAssessImages = 0;
                     var lastHrt = {};
 
-                    for (var i = 0; i < card.history.length; i++) {
-                        if (card.history[i].mode === 'forward') {
+                    for (var i=0; i < card.history.length; i++) {
+                        if(card.history[i].mode === 'forward') {
                             lastAssessForward = card.history[i].assessment;
                             lastHrt.forward = card.history[i].hrt;
                         } else if (card.history[i].mode === 'reverse') {
@@ -56,7 +55,7 @@ angular.module('core').service('ModeSelectorService', [
                     } else {
                         var min = lastHrt[modes [0]];
                         var minMode = modes[0];
-                        for (var j = 1; j < modes.length; j++) {
+                        for(var j=1; j < modes.length; j++) {
                             var m = modes[j];
                             if (lastHrt[m] < min) {
                                 minMode = m;
@@ -74,63 +73,128 @@ angular.module('core').service('ModeSelectorService', [
             return {mode: mode, assess: assess};
         };
 
-        this.getLowestAssessment = function (lastAssessForward, lastAssessReverse, lastAssessImages, modes) {
+        //this.getLowestAssessment = function (lastAssessForward, lastAssessReverse, lastAssessImages, modes) {
+        //
+        //
+        //    if (lastAssessImages < lastAssessForward && lastAssessImages < lastAssessReverse) {
+        //        if (modes.indexOf('images') > -1) {
+        //            return ['images'];
+        //        }
+        //    }
+        //    if (lastAssessReverse < lastAssessImages && lastAssessReverse < lastAssessForward) {
+        //        if (modes.indexOf('reverse') > -1) {
+        //            return ['reverse'];
+        //        }
+        //    }
+        //    if (lastAssessForward < lastAssessImages && lastAssessForward < lastAssessReverse) {
+        //        if (modes.indexOf('forward') > -1) {
+        //            return ['forward'];
+        //        }
+        //
+        //
+        //        if (lastAssessForward === lastAssessReverse && lastAssessReverse === lastAssessImages) {
+        //            return ['forward', 'reverse', 'images'];
+        //        }
+        //        if (lastAssessReverse === lastAssessImages) {
+        //            return ['reverse', 'images'];
+        //        }
+        //        if (lastAssessForward === lastAssessImages) {
+        //            return ['forward', 'images'];
+        //        }
+        //        if (lastAssessForward === lastAssessReverse) {
+        //            return ['forward', 'reverse'];
+        //        }
+        //
+        //    }
+        //    return ['forward'];
+        //};
 
+        this.getLowestAssessment = function(lastAssessForward, lastAssessReverse, lastAssessImages, modes) {
+            //console.log(lastAssessForward+' '+lastAssessReverse+' '+lastAssessImages);
+            if (lastAssessForward < lastAssessImages && lastAssessForward < lastAssessReverse) {
 
-            if (lastAssessImages < lastAssessForward && lastAssessImages < lastAssessReverse) {
-                if (modes.indexOf('images') > -1) {
-                    return ['images'];
+                if (modes.indexOf('forward') > -1) {
+                    return ['forward'];
+                } else {
+                    if (lastAssessReverse < lastAssessImages) {
+                        return ['reverse'];
+                    } else {
+                        if (lastAssessReverse === lastAssessImages) {
+                            return ['reverse', 'images'];
+                        } else {
+                            return ['images'];
+                        }
+                    }
                 }
             }
             if (lastAssessReverse < lastAssessImages && lastAssessReverse < lastAssessForward) {
                 if (modes.indexOf('reverse') > -1) {
                     return ['reverse'];
-                }
-            }
-            if (lastAssessForward < lastAssessImages && lastAssessForward < lastAssessReverse) {
-                if (modes.indexOf('forward') > -1) {
-                    return ['forward'];
-                }
-
-
-                if (lastAssessForward === lastAssessReverse && lastAssessReverse === lastAssessImages) {
-                    return ['forward', 'reverse', 'images'];
-                }
-                if (lastAssessReverse === lastAssessImages) {
-                    return ['reverse', 'images'];
-                }
-                if (lastAssessForward === lastAssessImages) {
-                    return ['forward', 'images'];
-                }
-                if (lastAssessForward === lastAssessReverse) {
-                    return ['forward', 'reverse'];
-                }
-
-            }
-
-
-            this.getAssess = function (card) {
-                var assess = card.check;
-                if (card.check === 'mixed') {
-                    if (!card.history || card.history.length === 0) {
-                        assess = 'self';
+                } else {
+                    if (lastAssessForward < lastAssessImages) {
+                        return ['forward'];
                     } else {
-                        assess = 'self';
-                        for (var i = 0; i < card.history.length; i++) {
-                            if (card.history[i].hrt > 1000 * 3600 * 24 * 5) {
-                                assess = 'auto';
-                            }
+                        if (lastAssessForward === lastAssessImages) {
+                            return ['forward', 'images'];
+                        } else {
+                            return ['images'];
+                        }
+                    }
+                }
+            }
+            if (lastAssessImages < lastAssessForward && lastAssessImages < lastAssessReverse) {
+                if (modes.indexOf('images') > -1) {
+                    return ['images'];
+                } else {
+                    if (lastAssessForward < lastAssessReverse) {
+                        return ['forward'];
+                    } else {
+                        if (lastAssessForward === lastAssessReverse) {
+                            return ['forward', 'reverse'];
+                        } else {
+                            return ['reverse'];
                         }
                     }
                 }
 
-                if (assess === 'computer') {
-                    assess = 'auto';
-                }
-                return assess;
-            };
-
+            }
+            if (lastAssessForward === lastAssessReverse && lastAssessReverse === lastAssessImages) {
+                return ['forward', 'reverse', 'images'];
+            }
+            if (lastAssessReverse === lastAssessImages) {
+                return ['reverse', 'images'];
+            }
+            if (lastAssessForward === lastAssessImages) {
+                return ['forward', 'images'];
+            }
+            if (lastAssessForward === lastAssessReverse) {
+                return ['forward', 'reverse'];
+            }
 
         };
+
+
+        this.getAssess = function(card) {
+            var assess = card.check;
+            if (card.check === 'mixed') {
+                if (!card.history || card.history.length === 0) {
+                    assess = 'self';
+                } else {
+                    assess = 'self';
+                    for (var i=0; i < card.history.length; i++) {
+                        if (card.history[i].hrt > 1000*3600*24*5) {
+                            assess = 'auto';
+                        }
+                    }
+                }
+            }
+
+            if(assess ==='computer') {
+                assess = 'auto';
+            }
+            return assess;
+        };
+
+
     }
-   ]);
+]);

@@ -14,14 +14,25 @@
             Service = _ModeSelectorService_;
         }));
 
+        it('should return forward only when forward is in there', function () {
+            var card = {check: 'mixed', modes:['images', 'reverse'],
+                history: [
+                    {when: 10, assessment: 3, mode: 'images', hrt: 6},
+                    {when: 15, assessment: 3, mode: 'images', hrt: 1},
+                    {when: 20, assessment: 1, mode: 'forward', hrt: 5},
+                    {when: 30, assessment: 2, mode: 'reverse', hrt: 3}
+                ]};
+            var params = Service.getRepetitionParameters(card);
+            expect(params.mode).toBe('reverse');
+        });
 
         it('should return images only when images is in there', function () {
             var card = {check: 'mixed', modes:['reverse', 'forward'],
                 history: [
-                    {when: 10, assessment: 1, mode: 'forward', hrt: 6},
-                    {when: 10, assessment: 2, mode: 'forward', hrt: 1},
+                    {when: 10, assessment: 3, mode: 'forward', hrt: 6},
+                    {when: 15, assessment: 3, mode: 'forward', hrt: 1},
                     {when: 20, assessment: 1, mode: 'images', hrt: 5},
-                    {when: 30, assessment: 1, mode: 'reverse', hrt: 3}
+                    {when: 30, assessment: 2, mode: 'reverse', hrt: 3}
                 ]};
             var params = Service.getRepetitionParameters(card);
             expect(params.mode).toBe('reverse');
@@ -31,9 +42,9 @@
             var card = {check: 'mixed', modes:['images', 'reverse', 'forward'],
                 history: [
                     {when: 10, assessment: 1, mode: 'forward', hrt: 6},
-                    {when: 10, assessment: 2, mode: 'forward', hrt: 1},
+                    {when: 15, assessment: 2, mode: 'forward', hrt: 1},
                     {when: 20, assessment: 1, mode: 'images', hrt: 5},
-                    {when: 20, assessment: 1, mode: 'images', hrt: 2},
+                    {when: 25, assessment: 1, mode: 'images', hrt: 2},
                     {when: 30, assessment: 1, mode: 'reverse', hrt: 3}
                 ]};
             var params = Service.getRepetitionParameters(card);

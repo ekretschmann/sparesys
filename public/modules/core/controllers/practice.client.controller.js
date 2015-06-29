@@ -334,6 +334,15 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if (card.priority && card.priority !== 3) {
                 var distance = Math.abs(card.predictedRetention - 0.4);
 
+
+
+                if (card.predictedRetention > 0.4) {
+
+                    return Math.max(1, Math.min(0.4, 0.4 + (distance * (0.7 + (card.priority * 0.1)))));
+
+                } else {
+                    return Math.min(0.01, Math.max(0.4, 0.4 - (distance * (0.7 + (card.priority * 0.1)))));
+                }
             }
             return card.predictedRetention;
         };
@@ -450,7 +459,11 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 }
 
                 if (card.priority !== 3) {
+                    //console.log('');
+                    //console.log('priority '+card.priority);
+                    //console.log('before   '+card.score);
                     card.score = Math.abs($scope.adjustScoreToPriority(card) - 0.4);
+                    //console.log('after    '+card.score);
                 }
 
                 if (card.score < bestValue && card.modes.length > 0) {

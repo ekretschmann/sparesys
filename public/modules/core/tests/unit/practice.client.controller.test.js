@@ -16,6 +16,17 @@
         }));
 
 
+
+        //it('if priority is 1, predicted retention does not change', function () {
+        //    var adjustedRetention = $scope.adjustScoreToPriority({predictedRetention: 0.2, priority: 3});
+        //    expect(adjustedRetention).toBeCloseTo(0.2, 3);
+        //});
+
+        it('if priority is 3, predicted retention does not change', function () {
+            var adjustedRetention = $scope.adjustScoreToPriority({predictedRetention: 0.2, priority: 3});
+            expect(adjustedRetention).toBeCloseTo(0.2, 3);
+        });
+
         it('if due date is in the past, predicted retention does not change', function () {
             var due = new Date();
             due.setDate(due.getDate()-1);

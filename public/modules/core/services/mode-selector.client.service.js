@@ -73,42 +73,6 @@ angular.module('core').service('ModeSelectorService', [
             return {mode: mode, assess: assess};
         };
 
-        //this.getLowestAssessment = function (lastAssessForward, lastAssessReverse, lastAssessImages, modes) {
-        //
-        //
-        //    if (lastAssessImages < lastAssessForward && lastAssessImages < lastAssessReverse) {
-        //        if (modes.indexOf('images') > -1) {
-        //            return ['images'];
-        //        }
-        //    }
-        //    if (lastAssessReverse < lastAssessImages && lastAssessReverse < lastAssessForward) {
-        //        if (modes.indexOf('reverse') > -1) {
-        //            return ['reverse'];
-        //        }
-        //    }
-        //    if (lastAssessForward < lastAssessImages && lastAssessForward < lastAssessReverse) {
-        //        if (modes.indexOf('forward') > -1) {
-        //            return ['forward'];
-        //        }
-        //
-        //
-        //        if (lastAssessForward === lastAssessReverse && lastAssessReverse === lastAssessImages) {
-        //            return ['forward', 'reverse', 'images'];
-        //        }
-        //        if (lastAssessReverse === lastAssessImages) {
-        //            return ['reverse', 'images'];
-        //        }
-        //        if (lastAssessForward === lastAssessImages) {
-        //            return ['forward', 'images'];
-        //        }
-        //        if (lastAssessForward === lastAssessReverse) {
-        //            return ['forward', 'reverse'];
-        //        }
-        //
-        //    }
-        //    return ['forward'];
-        //};
-
         this.getLowestAssessment = function(lastAssessForward, lastAssessReverse, lastAssessImages, modes) {
             //console.log(lastAssessForward+' '+lastAssessReverse+' '+lastAssessImages);
             if (lastAssessForward < lastAssessImages && lastAssessForward < lastAssessReverse) {

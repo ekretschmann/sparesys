@@ -1,10 +1,18 @@
 'use strict';
 
-angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards',
-    function ($scope, Cards) {
+angular.module('packs').controller('CardsSettingsController', ['$scope',
+    function ($scope) {
 
         $scope.options = {};
 
+
+
+        $scope.$watch(function() {
+            //return $scope.card._id;
+            return $scope.card._id;
+        }, function () {
+            $scope.reset();
+        });
 
         $scope.openDueDateCalendar = function($event) {
             $event.preventDefault();
@@ -46,7 +54,7 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
 
 
 
-        var reset = function() {
+        $scope.reset = function() {
             $scope.options.openDueDateCalendar = false;
             $scope.options.openStartDateCalendar = false;
 
@@ -81,11 +89,15 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
                 $scope.options.languageBack = $scope.languages[0];
             }
 
-            $scope.options.priority = $scope.priorities[$scope.card.priority - 1];
+            if ($scope.card.priority) {
+                $scope.options.priority = $scope.priorities[$scope.card.priority - 1];
+            } else {
+                $scope.options.priority = 'average';
+            }
 
         };
 
-        reset();
+
 
         $scope.setLanguageFront = function(lang) {
             $scope.options.languageFront.name = lang.name;
@@ -105,7 +117,7 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
             $scope.options.languageBack.name = lang.name;
             $scope.card.languageBack = lang;
             $scope.card.$update();
-            reset();
+            $scope.reset();
         };
 
 
@@ -122,7 +134,7 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
 
             $scope.card.$update();
 
-            reset();
+            $scope.reset();
         };
 
         $scope.updateCards = function () {
@@ -158,7 +170,7 @@ angular.module('packs').controller('CardsSettingsController', ['$scope', 'Cards'
                 $scope.card.$update();
 
 
-            reset();
+            $scope.reset();
         };
     }
 ]);

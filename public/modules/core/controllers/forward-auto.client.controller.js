@@ -147,7 +147,6 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         });
 
         $scope.nextCard = function () {
-            console.log('forward sets to question');
 
             $scope.state = 'question';
             $scope.$parent.nextCard();

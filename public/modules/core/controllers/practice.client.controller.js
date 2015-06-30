@@ -660,6 +660,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.myAnswerCounts = function (answer, mode) {
 
+            $scope.repeat = false;
 
             $modal.open({
                 templateUrl: 'myAnswerCounts.html',

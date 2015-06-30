@@ -9,9 +9,6 @@ angular.module('core').controller('MyAnswerCountsModalController', ['$scope', '$
 
         $scope.ok = function () {
 
-
-            console.log('answer '+$scope.answer);
-
             $scope.card.history.splice(-1,1);
             var time = Date.now();
             var newHrt = RetentionCalculatorService.calculateFor($scope.card, Date.now(), 3);
@@ -29,7 +26,22 @@ angular.module('core').controller('MyAnswerCountsModalController', ['$scope', '$
                 console.log(msg);
                 msg.$save();
             } else {
-                console.log('xxxxxx');
+
+                Cards.get({
+                    cardId: $scope.card._id
+                }, function(c) {
+                    if ($scope.mode === 'forward' || $scope.mode === 'images') {
+                        c.acceptedAnswersForward.push($scope.answer);
+                        $scope.card.acceptedAnswersForward.push($scope.answer);
+
+                    } else {
+                        c.acceptedAnswersReverse.push($scope.answer);
+                        $scope.card.acceptedAnswersReverse.push($scope.answer);
+                    }
+                    c.$update();
+                });
+
+
             }
             //new Cards($scope.card).$update();
 

@@ -134,6 +134,8 @@ angular.module('core').service('ModeSelectorService', [
             if (lastAssessForward === lastAssessReverse) {
                 return ['forward', 'reverse'];
             }
+            // this shouldn't happen
+            return ['forward'];
 
         };
 

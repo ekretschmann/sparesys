@@ -121,40 +121,15 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
                 return;
             }
 
-            console.log('reverse key');
 
             if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text) {
-                $scope.showAnswer();
-                console.log('reverse sets to answer');
-                $scope.state = 'answer';
-                return;
-            }
+                $timeout(function () {
+                    $scope.showAnswer();
+                }, 100);
 
-            if ($scope.state === 'question') {
-                return;
-            }
-
-            if ($scope.state === 'answer' && event.keyCode === 13) {
-                $scope.nextCard();
-                return;
             }
 
 
-
-            if ($scope.state === 'answer') {
-                if (event.charCode === 49) {
-                    $scope.processCard(1);
-                }
-                if (event.charCode === 50) {
-                    $scope.processCard(2);
-                }
-                if (event.charCode === 51) {
-                    $scope.processCard(3);
-                }
-                if (event.charCode === 48) {
-                    $scope.processCard(0);
-                }
-            }
 
         });
 

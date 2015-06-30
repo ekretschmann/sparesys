@@ -12,7 +12,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.specialChars = [];
 
 
-        $scope.init = function() {
+        $scope.init = function () {
             $scope.state = 'question';
             $scope.setSpecialCharacters();
         };
@@ -41,18 +41,16 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         };
 
 
-
-        $scope.$watch('card', function() {
-            if ($scope.card.readFrontForward && $scope.mode === 'forward' && $scope.assess==='auto') {
+        $scope.$watch('card', function () {
+            if ($scope.card.readFrontForward && $scope.mode === 'forward' && $scope.assess === 'auto') {
                 $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
-                if($scope.card.questionExtension) {
+                if ($scope.card.questionExtension) {
                     $scope.$parent.playSound($scope.card.languageFront, $scope.card.questionExtension);
                 }
             }
         });
 
-        $scope.$watch('state', function() {
-
+        $scope.$watch('state', function () {
 
 
             if ($scope.state === 'answer' && $scope.card.readBackForward) {
@@ -68,7 +66,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             }
         });
 
-        $scope.addChar = function(c) {
+        $scope.addChar = function (c) {
             if (!$scope.answer.text) {
                 $scope.answer.text = '';
             }
@@ -113,45 +111,40 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.processCard = function (rating) {
 
-            $scope.recordRate(Date.now(), rating );
+            $scope.recordRate(Date.now(), rating);
             $scope.state = 'question';
 
         };
 
 
+        $document.bind('keypress', function (event) {
 
-        //$scope.bindKeys = function() {
-            $document.bind('keypress', function (event) {
-
-                $state.go($state.current);
+            $state.go($state.current);
 
 
-                if ($scope.mode !== 'forward' || $scope.assess !== 'auto') {
-                    return;
-                }
+            if ($scope.mode !== 'forward' || $scope.assess !== 'auto') {
+                return;
+            }
 
 
+            if ($state.$current.url.source !== '/practice/:courseId') {
+                return;
+            }
 
-                if ($state.$current.url.source !== '/practice/:courseId') {
-                    return;
-                }
+            if ($scope.state === 'answer' && event.keyCode === 13) {
 
-                if ($scope.state === 'answer' && event.keyCode === 13) {
+                $scope.nextCard();
+                $scope.state = 'question';
+                return;
+            }
 
-                    $scope.nextCard();
-                    $scope.state = 'question';
-                    return;
-                }
-
-                if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text) {
+            if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text) {
+                $timeout(function () {
                     $scope.showAnswer();
-                    console.log('forward sets to answer');
-                    $scope.state = 'answer';
+                }, 100);
 
-                }
-            });
-
-        //};
+            }
+        });
 
         $scope.nextCard = function () {
             console.log('forward sets to question');

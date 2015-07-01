@@ -334,14 +334,12 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if (card.priority && card.priority !== 3) {
                 var distance = Math.abs(card.predictedRetention - 0.4);
 
-
-
                 if (card.predictedRetention > 0.4) {
 
-                    return Math.max(1, Math.min(0.4, 0.4 + (distance * (0.7 + (card.priority * 0.1)))));
+                    return Math.min(1, Math.max(0, 0.4 + (distance * (0.7 + (card.priority * 0.1)))));
 
                 } else {
-                    return Math.min(0.01, Math.max(0.4, 0.4 - (distance * (0.7 + (card.priority * 0.1)))));
+                    return Math.min(1, Math.max(0.01, 0.4 - (distance * (0.7 + (card.priority * 0.1)))));
                 }
             }
             return card.predictedRetention;

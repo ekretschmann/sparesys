@@ -22,9 +22,22 @@
         //    expect(adjustedRetention).toBeCloseTo(0.2, 3);
         //});
 
+
+        it('if priority is 2, predicted retention goes closer to 0.4', function () {
+            var adjustedRetention = $scope.adjustScoreToPriority({predictedRetention: 0.2, priority: 1});
+
+            expect(adjustedRetention).toBeGreaterThan(0.2);
+        });
+
+        it('if priority is 2, predicted retention goes closer to 0.4', function () {
+            var adjustedRetention = $scope.adjustScoreToPriority({predictedRetention: 0.8, priority: 2});
+
+            expect(adjustedRetention).toBeLessThan(0.8);
+        });
+
         it('if priority is 3, predicted retention does not change', function () {
             var adjustedRetention = $scope.adjustScoreToPriority({predictedRetention: 0.2, priority: 3});
-            expect(adjustedRetention).toBeCloseTo(0.2, 3);
+            expect(adjustedRetention).toBeTruthy(adjustedRetention === 0.2);
         });
 
         it('if due date is in the past, predicted retention does not change', function () {

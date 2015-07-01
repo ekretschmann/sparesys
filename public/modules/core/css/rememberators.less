@@ -1,8 +1,9 @@
 @background-color: #FFF9DE;
 @inverse-background-color: #030698;
-
 @background-color-contrast: #ECECFF;
 @foreground-color: #333333;
+
+@default-padding-unit: 5px;
 
 // Fonts
 @font-face {
@@ -21,9 +22,57 @@
   font-size: 12px;
 }
 
+.font-xxl {
+  font-family: 'Grinched';
+
+  @media screen {
+    @media (min-width: 310px) {
+      font-size: 24pt;
+    }
+    @media (min-width: 620px) {
+      font-size: 36pt;
+    }
+    @media (min-width: 800px) {
+      font-size: 64pt;
+    }
+  }
+}
+
+.font-xl {
+  font-family: 'Grinched';
+
+  @media screen {
+    @media (min-width: 310px) {
+      font-size: 18pt;
+    }
+    @media (min-width: 620px) {
+      font-size: 24pt;
+    }
+    @media (min-width: 800px) {
+      font-size: 36pt;
+    }
+
+  }
+}
+
+//images
+.image-192 {
+  max-width: 220px;
+  max-height: 220px;
+}
+
 // Margins
 .bottom-margin-xl {
   margin-bottom: 20px;
+}
+
+// Paddings
+.top-padded-s {
+  padding-top: @default-padding-unit;
+}
+
+.content {
+  margin-top: 60px;
 }
 
 .flashcard {
@@ -89,16 +138,6 @@
   color: @foreground-color;
   .font-m;
 }
-
-
-
-
-
-
-
-
-
-
 
 //@dark-stripes: #FEE67A;
 //@light-inverse-background-color: #4E51E5;
@@ -212,9 +251,7 @@
 //
 //
 //
-//.content {
-//  margin-top: 50px;
-//}
+
 //
 //
 //.header {
@@ -368,9 +405,7 @@
 //  margin-left:100px
 //}
 //
-//.top-padded-s {
-//  padding-top: @default-padding-unit;
-//}
+
 //
 //.top-padded-sm {
 //  padding-top: @default-padding-unit * 2;
@@ -687,10 +722,7 @@
 //  max-height: 128px;
 //}
 //
-//.image-192 {
-//  max-width: 220px;
-//  max-height: 220px;
-//}
+
 //
 //.searchimage {
 //  text-align:center;

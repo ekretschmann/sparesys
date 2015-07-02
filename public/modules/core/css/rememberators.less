@@ -2,7 +2,9 @@
 @inverse-background-color: #030698;
 @background-color-contrast: #ECECFF;
 @foreground-color: #333333;
-
+@light-inverse-background-color: #4E51E5;
+@inverse-font-color: #d0d8dd;
+//@inverse-font-color: #ff0000;
 
 
 @default-padding-unit: 5px;
@@ -72,6 +74,11 @@ body {
     }
 
   }
+}
+
+.font-l {
+  font-family: 'Grinched';
+  font-size: 24pt;
 }
 
 //images
@@ -218,9 +225,39 @@ body {
   padding-top: @default-padding-unit;
 }
 
+.inverse-font-color {
+    color: @inverse-font-color;
+  }
+
+.inverse-background-color {
+  background-color: red;
+}
+
+
+// textures
+.texture-dark {
+//  background-color: @inverse-background-color;
+  background: @inverse-background-color url('/modules/core/img/brand/bg.png') left top repeat; /* ie fallback */
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-gradient(linear, 0 0, 0 bottom, from(@inverse-background-color), to(@light-inverse-background-color));
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-linear-gradient(@inverse-background-color, @light-inverse-background-color);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -moz-linear-gradient(@inverse-background-color, @light-inverse-background-color);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -ms-linear-gradient(@inverse-background-color, @light-inverse-background-color);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -o-linear-gradient(@inverse-background-color, @light-inverse-background-color);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  linear-gradient(@inverse-background-color, @light-inverse-background-color);
+
+
+//  background-image: url('/modules/core/img/brand/bg.png'), linear-gradient(to bottom, @inverse-background-color 0%, @light-inverse-background-color 100%);
+}
+
 //@dark-stripes: #FEE67A;
-//@light-inverse-background-color: #4E51E5;
-//@inverse-font-color: #d0d8dd;
+//
+//
 //@inverse-font-color-darker: darken(#d0d8dd,5%);
 //@inverse-font-color-lighter: lighten(#d0d8dd,5%);
 //

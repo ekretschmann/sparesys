@@ -7,6 +7,9 @@
 
 @default-padding-unit: 5px;
 
+.container {
+  width:100%;
+}
 
 body {
   background: @background-color;
@@ -193,9 +196,11 @@ body {
   padding-right: 3*@default-padding-unit;
   padding-bottom: @default-padding-unit;
   padding-top: @default-padding-unit;
+  padding-left: @default-padding-unit;
 }
 
 .infobox-title {
+
 
   @media screen {
     @media (min-width: 310px) {
@@ -210,6 +215,7 @@ body {
 
   }
   font-weight: bold;
+  padding-top: @default-padding-unit;
 }
 
 //@dark-stripes: #FEE67A;

@@ -1,6 +1,6 @@
 
 
-<div class="col-xs-12 infobox">
+<div class="col-xs-12 col-md-6 infobox">
     <div data-ng-if="!position || position !== 'right'" class="infobox-title">
         {{title}}
     </div>
@@ -25,7 +25,7 @@
                  ng-src="{{image}}">
         </div>
 
-        <div ng-transclude="" style="text-align: justify">
+        <div ng-transclude="" >
             content
         </div>
 
@@ -35,37 +35,3 @@
 
 </div>
 
-
-<!--<table class="expands top-margin-l">-->
-
-    <!--<tr data-ng-if="title">-->
-
-        <!--<td colspan="2">-->
-        <!--<div data-ng-if="!position || position !== 'right'" class="infobox-title left-aligned">-->
-            <!--{{title}}-->
-        <!--</div>-->
-
-            <!--<div data-ng-if="position && position === 'right'" class="infobox-title left-aligned" >-->
-                <!--{{title}}-->
-            <!--</div>-->
-        <!--</td>-->
-    <!--</tr>-->
-    <!--<tr>-->
-
-        <!--<td data-ng-if="!position || position !== 'right'" class="top-aligned right-padded-m top-padded-s">-->
-            <!--<img class="small-image"-->
-                 <!--ng-src="{{image}}">-->
-        <!--</td>-->
-        <!--<td class="top-aligned">-->
-
-            <!--<div ng-transclude="" style="text-align: justify">-->
-                <!--content-->
-            <!--</div>-->
-        <!--</td>-->
-        <!--<td data-ng-if="position && position === 'right'" class="top-aligned left-padded-m top-padded-s">-->
-            <!--<img class="small-image"-->
-                 <!--ng-src="{{image}}">-->
-        <!--</td>-->
-
-    <!--</tr>-->
-<!--</table>-->

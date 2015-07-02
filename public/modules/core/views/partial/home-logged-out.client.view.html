@@ -1,49 +1,41 @@
 <section data-ng-controller="LandingPageController" ng-init="ga()">
 
 
+    <!--<div ng-include="'/modules/users/views/partial/signin.client.view.html'"></div>-->
+    <!--<div ng-include="'/modules/users/views/partial/signup.client.view.html'"></div>-->
+
+
+
     <div class="row">
-        <div class="col-xs-12 col-md-8 col-md-offset-2">
+        <div class="col-xs-12 col-md-10 col-md-offset-1 col-lg-8 col-lg-offset-2">
             <div class="flashcard-landing">
-                <p class="font-xxl top-padded-s">Rememberators!</p>
+                <p class="font-xxl top-padded-m">Rememberators!</p>
                 <imagecarousel slides="slides"></imagecarousel>
             </div>
         </div>
     </div>
 
 
-    <div class="center-aligned">
+    <div class="signup-button">
         <a class="btn btn-lg btn-success font-l"
            data-ng-click="signupPopup()">I'll give it a shot</a>
     </div>
 
-    <!--<div ng-include="'/modules/users/views/partial/signin.client.view.html'"></div>-->
-    <!--<div ng-include="'/modules/users/views/partial/signup.client.view.html'"></div>-->
-
-    <!--<div class="content-section">-->
-    <!--<div class="flashcard-landing">-->
-    <!--<p class="font-xxl top-padded-s">Rememberators!</p>-->
-    <!--<imagecarousel slides="slides"></imagecarousel>-->
-    <!--</div>-->
 
 
-    <!--<div class="center-aligned">-->
-    <!--<a class="btn btn-lg btn-success font-l"-->
-    <!--data-ng-click="signupPopup()">I'll give it a shot</a>-->
-    <!--</div>-->
+
+    <infobox logo="girl" title="Is this site for kids?" position="left">
+    Of course it is, but you don't have to be one to use Rememberators. Kids are the people, who spend much of
+    their time learning, so we are trying to make this site as attractive as possible for them. If you are
+    grown up or the games and animations get into your way, you will be able to switch them off.
+    </infobox>
 
 
-    <!--<infobox logo="girl" title="Is this site for kids?" position="left">-->
-    <!--Of course it is, but you don't have to be one to use Rememberators. Kids are the people, who spend much of-->
-    <!--their time learning, so we are trying to make this site as attractive as possible for them. If you are-->
-    <!--grown up or the games and animations get into your way, you will be able to switch them off.-->
-    <!--</infobox>-->
-
-
-    <!--<infobox logo="woman" title="Rememberators get you prepared" position="right">-->
-    <!--You have to know it all at a certain date? There is this important test, and you want to make sure-->
-    <!--you spend enough time preparing for it? Tell the Rememberators when it is and what you will have to know,-->
-    <!--and they will optimize your learning so that you succeed.-->
-    <!--</infobox>-->
+    <infobox logo="woman" title="Rememberators get you prepared" position="right">
+    You have to know it all at a certain date? There is this important test, and you want to make sure
+    you spend enough time preparing for it? Tell the Rememberators when it is and what you will have to know,
+    and they will optimize your learning so that you succeed.
+    </infobox>
 
 
     <!--<infobox logo="boy" title="Is it for free?" position="left">-->

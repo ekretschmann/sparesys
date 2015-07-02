@@ -3,9 +3,25 @@
 @background-color-contrast: #ECECFF;
 @foreground-color: #333333;
 
+
+
 @default-padding-unit: 5px;
 
+
+body {
+  background: @background-color;
+  background-image: url('/modules/core/img/brand/bg.png');
+  font-family: @standard-font;
+  font-size: @standard-font-size;
+  color: @foreground-color;
+  //padding-top: 20px;
+  //padding-bottom: 20px;
+}
+
 // Fonts
+@standard-font: 'Exo+2', sans-serif;
+@standard-font-size: 11pt;
+
 @font-face {
   font-family: 'Grinched';
   src: url('grinched.eot');
@@ -61,6 +77,10 @@
   max-height: 220px;
 }
 
+.small-image {
+  height: 84px
+}
+
 // Margins
 .bottom-margin-xl {
   margin-bottom: 20px;
@@ -69,6 +89,10 @@
 // Paddings
 .top-padded-s {
   padding-top: @default-padding-unit;
+}
+
+.top-padded-m {
+  padding-top: 2 * @default-padding-unit;
 }
 
 .content {
@@ -129,14 +153,63 @@
 
 .flashcard-landing {
   .flashcard;
-  min-height: 440px;
+  @media screen {
+    @media (min-width: 310px) {
+      min-height: 350px;
+      //max-height: 200px;
+    }
+    @media (min-width: 620px) {
+      min-height: 400px;
+    }
+    @media (min-width: 800px) {
+      min-height: 450px;
+    }
+
+  }
+
 }
 
 .rememberators-footer {
-  padding-top: 10px;
+  padding-left: 0;
+  margin-top: 3*@default-padding-unit;
+  padding-top: @default-padding-unit;
   border-top: 4px double @inverse-background-color;
   color: @foreground-color;
   .font-m;
+  text-align: left;
+}
+
+.signup-button {
+  text-align: center;
+}
+
+//infobox
+.infobox {
+  padding-left: 0;
+  .top-padded-m
+}
+
+.infobox-image {
+  padding-right: 3*@default-padding-unit;
+  padding-bottom: @default-padding-unit;
+  padding-top: @default-padding-unit;
+}
+
+.infobox-title {
+
+  @media screen {
+    @media (min-width: 310px) {
+      font-size: large;
+    }
+    @media (min-width: 620px) {
+      font-size: x-large;
+    }
+    @media (min-width: 800px) {
+      font-size:x-large;
+    }
+
+  }
+  font-weight: bold;
 }
 
 //@dark-stripes: #FEE67A;
@@ -233,15 +306,7 @@
 //}
 //
 //
-//body {
-//  background: @background-color;
-//  background-image: url('/modules/core/img/brand/bg.png');
-//  font-family: @standard-font;
-//  font-size: @standard-font-size;
-//  color: @foreground-color;
-//  padding-top: 20px;
-//  padding-bottom: 20px;
-//}
+
 //
 //@media (min-width: 768px) {
 //  .container {
@@ -445,10 +510,7 @@
 //  margin-bottom: 0.5em;
 //}
 //
-//.infobox-title {
-//  font-size: x-large;
-//  font-weight: bold;
-//}
+
 //.btn-std-width {
 //  min-width: 100px;
 //}

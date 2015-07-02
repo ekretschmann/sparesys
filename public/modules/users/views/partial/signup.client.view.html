@@ -1,94 +1,91 @@
 <script type="text/ng-template" id="signup.html">
 
-    <div class="modal-body">
-        <div class="popup-header">
-            <div class="title center-aligned">
-                Sig Up for Rememberators
-            </div>
-        </div>
+    <div class="rememberators-modal">
+
 
         <form class="signup form-horizontal" autocomplete="off" data-ng-submit="signup()">
-			<fieldset>
-                <div class="content-header">
+            <fieldset>
 
-                    <table>
-                        <tr>
-                            <td class="nowrap right-padded-m">First Name</td>
-                            <td class="expands">
-                                <input type="text"
-                                       data-ng-model="credentials.firstName"
-                                       class="form-control focus"
-                                       placeholder="First Name"
-                                       data-ng-init="setFocus()"
-                                       required></td>
-                        </tr>
+                <div class="rememberators-modal-header">
+                    Sig Up for Rememberators
+                </div>
 
-                        <tr>
-                            <td class="nowrap right-padded-m top-padded-s">Last Name</td>
-                            <td class="expands top-padded-s">
-                                <input type="text"
-                                       data-ng-model="credentials.lastName"
-                                       class="form-control"
-                                       placeholder="Last Name"
-                                       required></td>
-                        </tr>
+                <div class="row rememberators-form-group form-group">
+                    <div class=" col-xs-4">First Name</div>
+                    <div class="expands col-xs-8">
+                        <input type="text"
+                               data-ng-model="credentials.firstName"
+                               class="form-control focus"
+                               placeholder="First Name"
+                               data-ng-init="setFocus()"
+                               required></div>
+                </div>
 
-                        <tr>
-                            <td class="right-padded-m top-padded-s">email</td>
-                            <td class="expands top-padded-s">
-                                <input type="text"
-                                       data-ng-model="credentials.email"
-                                       class="form-control"
-                                       placeholder="email"
-                                       required></td>
-                        </tr>
+                <div class="row rememberators-form-group form-group">
+                    <div class=" col-xs-4">Last Name</div>
+                    <div class="expands col-xs-8">
+                        <input type="text"
+                               data-ng-model="credentials.lastName"
+                               class="form-control"
+                               placeholder="Last Name"
+                               required></div>
+                </div>
 
-                        <tr>
-                            <td class="right-padded-m top-padded-s">Username</td>
-                            <td class="expands top-padded-s">
-                                <input type="text"
-                                       data-ng-model="credentials.username"
-                                       class="form-control"
-                                       placeholder="username"
-                                       required></td>
-                        </tr>
+                <div class="row rememberators-form-group form-group">
+                    <div class="col-xs-4">email</div>
+                    <div class="col-xs-8">
+                        <input type="text"
+                               data-ng-model="credentials.email"
+                               class="form-control"
+                               placeholder="email"
+                               required></div>
+                </div>
 
-                        <tr class="controls">
-                            <td class="right-padded-m top-padded-s">Password</td>
-                            <td class="expands top-padded-s">
-                                <input type="password"
-                                       data-ng-model="credentials.password"
-                                       class="form-control"
-                                       placeholder="Password"
-                                       required></td>
-                        </tr>
+                <div class="row rememberators-form-group form-group">
+                    <div class="col-xs-4">Username</div>
+                    <div class="col-xs-8">
+                        <input type="text"
+                               data-ng-model="credentials.username"
+                               class="form-control"
+                               placeholder="username"
+                               required></div>
+                </div>
 
-                        <tr class="controls top-padded-s">
-                            <td class="nowrap right-padded-m top-padded-s">Repeat Password</td>
-                            <td class="expands top-padded-s">
-                                <input type="password"
-                                       data-ng-model="credentials.password_repeat"
-                                       class="form-control"
-                                       placeholder="Password"
-                                       required></td>
-                        </tr>
-                    </table>
+                <div class="row rememberators-form-group form-group">
+                    <div class="col-xs-4">Password</div>
+                    <div class="col-xs-8">
+                        <input type="password"
+                               data-ng-model="credentials.password"
+                               class="form-control"
+                               placeholder="Password"
+                               required></div>
+                </div>
+
+                <div class="row rememberators-form-group form-group">
+                    <div class="col-xs-4">Repeat Password</div>
+                    <div class="col-xs-8">
+                        <input type="password"
+                               data-ng-model="credentials.password_repeat"
+                               class="form-control"
+                               placeholder="Password"
+                               required></div>
                 </div>
 
 
-                <div style="text-align: center">
+                <div class="rememberators-modal-footer">
                     <button class="btn btn-rememberators"
-                            type="submit">Sign Up</button>
+                            type="submit">Sign Up
+                    </button>
 
 
                     <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
 
                 </div>
 
-				<div data-ng-show="error" class="text-center text-danger">
-					<strong>{{error}}</strong>
-				</div>
-			</fieldset>
-		</form>
-	</div>
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong>{{error}}</strong>
+                </div>
+            </fieldset>
+        </form>
+    </div>
 </script>

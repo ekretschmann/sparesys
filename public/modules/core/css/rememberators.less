@@ -4,10 +4,12 @@
 @foreground-color: #333333;
 @light-inverse-background-color: #4E51E5;
 @inverse-font-color: #d0d8dd;
-//@inverse-font-color: #ff0000;
 
 
 @default-padding-unit: 5px;
+
+@seperator: 4px double @inverse-font-color;
+
 
 .container {
   width:100%;
@@ -25,7 +27,7 @@ body {
 
 // Fonts
 @standard-font: 'Exo+2', sans-serif;
-@standard-font-size: 11pt;
+@standard-font-size: 13pt;
 
 @font-face {
   font-family: 'Grinched';
@@ -45,10 +47,10 @@ body {
 
   @media screen {
     @media (min-width: 310px) {
-      font-size: 24pt;
+      font-size: 36pt;
     }
     @media (min-width: 620px) {
-      font-size: 36pt;
+      font-size: 48pt;
     }
     @media (min-width: 800px) {
       font-size: 64pt;
@@ -184,11 +186,14 @@ body {
 
 }
 
+
+
 .rememberators-footer {
+
   padding-left: 0;
   margin-top: 3*@default-padding-unit;
   padding-top: @default-padding-unit;
-  border-top: 4px double @inverse-font-color;
+  border-top: @seperator;
   color: @foreground-color;
   .font-m;
   text-align: left;
@@ -244,6 +249,24 @@ body {
   background-color: red;
 }
 
+//buttons
+.btn-rememberators {
+  min-width: 100px;
+  background-color: #4E51E5;
+  background-image: linear-gradient(to bottom, #4E51E5 0%, #030698 100%);
+  border-color: #4E51E5;
+  color: #ECECFF;
+  font-weight: bold;
+}
+
+.btn-rememberators:hover,
+.btn-rememberators:focus,
+.btn-rememberators:active,
+.btn-rememberators.active {
+  background-image: none;
+  background-color: #4E51E5;
+  color: #ECECFF;
+}
 
 // textures
 .texture-dark {
@@ -264,6 +287,37 @@ body {
 
 
 //  background-image: url('/modules/core/img/brand/bg.png'), linear-gradient(to bottom, @inverse-background-color 0%, @light-inverse-background-color 100%);
+}
+
+// modals
+.rememberators-modal {
+  padding: 2*@default-padding-unit;
+  background-color: @background-color;
+  border-radius: 6px;
+  box-shadow: 5px 5px 5px #333;
+}
+
+
+.rememberators-modal-header {
+  border-bottom: @seperator;
+  font-size: x-large;
+  font-weight: bold;
+  text-align: center;
+  padding-bottom: @default-padding-unit;
+  margin-bottom: 2*@default-padding-unit;
+}
+
+.rememberators-modal-footer {
+  text-align: center;
+  border-top: @seperator;
+  padding-top: 2*@default-padding-unit;
+  margin-top: @default-padding-unit;
+}
+
+.rememberators-form-group {
+
+  margin-top: 0;
+  margin-bottom: @default-padding-unit;
 }
 
 //@dark-stripes: #FEE67A;
@@ -684,15 +738,9 @@ body {
 //  font-size: 16pt;
 //}
 //
-//// modals
-//.modal-content {
-//
-//  background-color: @background-color;
-//  border-radius: 6px;
-//  box-shadow: 5px 5px 5px #333;
-//}
-//
-//// buttons
+
+
+// buttons
 //
 //.btn-success, .btn-success:hover {
 //  background-color: #4DB22B;
@@ -709,27 +757,7 @@ body {
 //
 //}
 //
-//.btn-rememberators {
-//  .btn-rememberators-small;
-//  min-width: 100px;
-//}
-//
-//.btn-rememberators-small:hover,
-//.btn-rememberators-small:focus,
-//.btn-rememberators-small:active,
-//.btn-rememberators-small.active,
-//.btn-rememberators:hover,
-//.btn-rememberators:focus,
-//.btn-rememberators:active,
-//.btn-rememberators.active,
-//.btn-letter:hover,
-//.btn-letter:hover,
-//.btn-letter:hover,
-//.btn-letter:hover,{
-//  background-image: none;
-//  background-color: #4E51E5;
-//  color: #ECECFF;
-//}
+
 //
 //
 //

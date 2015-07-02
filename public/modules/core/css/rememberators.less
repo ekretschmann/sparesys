@@ -19,7 +19,7 @@ body {
   font-family: @standard-font;
   font-size: @standard-font-size;
   color: @foreground-color;
-  //padding-top: 20px;
+  padding-top: 20px;
   //padding-bottom: 20px;
 }
 
@@ -38,10 +38,7 @@ body {
   font-style: normal;
 }
 
-.font-m {
-  font-family: 'Grinched';
-  font-size: 12px;
-}
+
 
 .font-xxl {
   font-family: 'Grinched';
@@ -79,6 +76,11 @@ body {
 .font-l {
   font-family: 'Grinched';
   font-size: 24pt;
+}
+
+.font-m {
+  font-family: 'Grinched';
+  font-size: 18px;
 }
 
 //images
@@ -162,17 +164,20 @@ body {
 }
 
 .flashcard-landing {
+  text-align: center;
   .flashcard;
   @media screen {
     @media (min-width: 310px) {
       min-height: 350px;
-      //max-height: 200px;
+      max-width: 500px;
     }
     @media (min-width: 620px) {
       min-height: 400px;
+      max-width: 750px;
     }
     @media (min-width: 800px) {
       min-height: 450px;
+      max-width: 800px;
     }
 
   }
@@ -183,13 +188,15 @@ body {
   padding-left: 0;
   margin-top: 3*@default-padding-unit;
   padding-top: @default-padding-unit;
-  border-top: 4px double @inverse-background-color;
+  border-top: 4px double @inverse-font-color;
   color: @foreground-color;
   .font-m;
   text-align: left;
 }
 
 .signup-button {
+  padding-top: 4 * @default-padding-unit;
+  padding-bottom: 4 * @default-padding-unit;
   text-align: center;
 }
 
@@ -228,6 +235,10 @@ body {
 .inverse-font-color {
     color: @inverse-font-color;
   }
+
+.inverse-font-color:hover {
+  color: white;
+}
 
 .inverse-background-color {
   background-color: red;

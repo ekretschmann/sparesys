@@ -1,4 +1,4 @@
-<div class="container" data-ng-controller="HeaderController">
+<div class="container texture-dark" data-ng-controller="HeaderController">
     <div class="navbar-header texture-dark">
         <button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
             <span class="sr-only">Toggle navigation</span>
@@ -7,24 +7,25 @@
             <span class="icon-bar" style="background-color:#d0d8dd"></span>
         </button>
         <div class="top-padded-s">
-        <a href="/#!/" class="navbar-brand font-l navigation "><span class=" inverse-font-color">Rememberators</span></a>
+        <a href="/#!/" class="navbar-brand font-l navigation "><span class="inverse-font-color">Rememberators</span></a>
         </div>
     </div>
-    <nav class="collapse navbar-collapse" collapse="!isCollapsed" role="navigation">
+    <nav class="collapse navbar-collapse texture-dark" collapse="!isCollapsed" role="navigation">
         <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
             <li data-ng-repeat="item in menu.items" data-ng-if="item.shouldRender(authentication.user);"
                 ui-route="{{item.uiRoute}}" ng-class="{active: $uiRoute}">
                 <a href="/#!/{{item.link}}">{{item.title}}</a>
             </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" data-ng-hide="authentication.user">
+        <ul class="nav navbar-nav navbar-right " data-ng-hide="authentication.user">
             <li ui-route="/signup" ng-class="{active: $uiRoute}">
                 <a id="signup-link font-l" data-ng-controller="LandingPageController" href="" ng-click="signupPopup()"
-                   class="font-m">Signup</a>
+                   class="font-m"><span class="inverse-font-color">Signup</span></a>
             </li>
             <li class="divider-vertical"></li>
             <li ui-route="/signin" ng-class="{active: $uiRoute}">
-                <a id="signin-link" data-ng-controller="LandingPageController" href="" ng-click="signinPopup()" class="font-m">Signin</a>
+                <a id="signin-link" data-ng-controller="LandingPageController" href="" ng-click="signinPopup()" class="font-m">
+                    <span class="inverse-font-color">Signin</span></a>
             </li>
         </ul>
         <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user" data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">

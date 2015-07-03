@@ -11,6 +11,22 @@
 @seperator: 4px double @inverse-font-color;
 
 
+@base-green: #4DB22B;
+
+
+.Greens .q0-11{fill:lighten(@base-green, 50%)}
+.Greens .q1-11{fill:lighten(@base-green, 40%)}
+.Greens .q2-11{fill:lighten(@base-green, 30%)}
+.Greens .q3-11{fill:lighten(@base-green, 20%)}
+.Greens .q4-11{fill:lighten(@base-green, 10%)}
+.Greens .q5-11{fill:lighten(@base-green, 0%)}
+.Greens .q6-11{fill:darken(@base-green, 10%)}
+.Greens .q7-11{fill:darken(@base-green, 20%)}
+.Greens .q8-11{fill:darken(@base-green, 30%)}
+.Greens .q9-11{fill:darken(@base-green, 40%)}
+.Greens .q10-11{fill:darken(@base-green, 50%)}
+
+
 .container {
   width:100%;
 }
@@ -19,15 +35,25 @@ body {
   background: @background-color;
   background-image: url('/modules/core/img/brand/bg.png');
   font-family: @standard-font;
-  font-size: @standard-font-size;
+
+
+
   color: @foreground-color;
   padding-top: 20px;
-  //padding-bottom: 20px;
+  @media (min-width: 310px) {
+    font-size: 14px;
+  }
+  @media (min-width: 620px) {
+    font-size: 15px;
+  }
+  @media (min-width: 800px) {
+    font-size: @standard-font-size;
+  }
 }
 
 // Fonts
 @standard-font: 'Exo+2', sans-serif;
-@standard-font-size: 13pt;
+@standard-font-size: 16pt;
 
 @font-face {
   font-family: 'Grinched';
@@ -92,7 +118,16 @@ body {
 }
 
 .small-image {
-  height: 84px
+  @media (min-width: 310px) {
+    height: 84px
+  }
+  @media (min-width: 620px) {
+    height: 96px
+  }
+  @media (min-width: 800px) {
+    height: 112px
+  }
+
 }
 
 // Margins
@@ -199,24 +234,34 @@ body {
   text-align: left;
 }
 
-.signup-button {
-  padding-top: 4 * @default-padding-unit;
-  padding-bottom: 4 * @default-padding-unit;
-  text-align: center;
-}
+
 
 //infobox
 .infobox {
-  padding-left: 0;
-  text-align: justify;
-  .top-padded-m
+  @media screen {
+    @media (min-width: 310px) {
+      padding: 0;
+      line-height: 24px;
+    }
+    @media (min-width: 620px) {
+      padding: 0;
+      line-height: 36px;
+    }
+    @media (min-width: 800px) {
+      padding: 8*@default-padding-unit;
+      line-height: 48px;
+    }
+
+  }
+
+
 }
 
 .infobox-image {
-  padding-right: 3*@default-padding-unit;
-  padding-bottom: @default-padding-unit;
-  padding-top: @default-padding-unit;
-  padding-left: @default-padding-unit;
+  padding-right: 6*@default-padding-unit;
+  padding-bottom: 6*@default-padding-unit;
+  padding-top: 6*@default-padding-unit;
+  padding-left: 6*@default-padding-unit;
 }
 
 .infobox-title {
@@ -224,18 +269,19 @@ body {
 
   @media screen {
     @media (min-width: 310px) {
-      font-size: large;
+      font-size: 24px;
     }
     @media (min-width: 620px) {
-      font-size: x-large;
+      font-size: 32px;
     }
     @media (min-width: 800px) {
-      font-size:x-large;
+      font-size: 36px;
     }
 
   }
   font-weight: bold;
-  padding-top: @default-padding-unit;
+  padding-top: 3*@default-padding-unit;
+  padding-bottom: 3*@default-padding-unit;
 }
 
 .inverse-font-color {
@@ -246,9 +292,6 @@ body {
   color: white;
 }
 
-.inverse-background-color {
-  background-color: red;
-}
 
 //buttons
 .btn-rememberators {
@@ -267,6 +310,31 @@ body {
   background-image: none;
   background-color: #4E51E5;
   color: #ECECFF;
+}
+
+.signup-button {
+  .btn-rememberators;
+  .font-xl;
+  border-radius: 12px;
+  border: 1px solid transparent;
+  background-image: linear-gradient(to bottom, lighten(@base-green,10%) 0%, darken(@base-green, 10%) 100%);
+  padding: 4 * @default-padding-unit;
+  margin: 4 * @default-padding-unit;
+  text-align: center;
+}
+
+.signup-button:hover,
+.signup-button:focus,
+.signup-button:active,
+.signup-button.active {
+  background-image: linear-gradient(to bottom, @base-green 0%, darken(@base-green, 20%) 100%);
+  color: #ECECFF;
+}
+
+.signup-button-row {
+    text-align: center;
+  padding-top: 8 * @default-padding-unit;
+  padding-bottom: 8 * @default-padding-unit;
 }
 
 // textures
@@ -1003,20 +1071,7 @@ body {
 //  stroke-width: 2px;
 //}
 //
-//@base-green: #4DB22B;
-//
-//
-//.Greens .q0-11{fill:lighten(@base-green, 50%)}
-//.Greens .q1-11{fill:lighten(@base-green, 40%)}
-//.Greens .q2-11{fill:lighten(@base-green, 30%)}
-//.Greens .q3-11{fill:lighten(@base-green, 20%)}
-//.Greens .q4-11{fill:lighten(@base-green, 10%)}
-//.Greens .q5-11{fill:lighten(@base-green, 0%)}
-//.Greens .q6-11{fill:darken(@base-green, 10%)}
-//.Greens .q7-11{fill:darken(@base-green, 20%)}
-//.Greens .q8-11{fill:darken(@base-green, 30%)}
-//.Greens .q9-11{fill:darken(@base-green, 40%)}
-//.Greens .q10-11{fill:darken(@base-green, 50%)}
+
 //
 //
 //#tooltip {

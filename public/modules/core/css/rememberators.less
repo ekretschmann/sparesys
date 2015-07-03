@@ -40,21 +40,24 @@ body {
 
   color: @foreground-color;
   padding-top: 20px;
-  @media (min-width: 310px) {
-    font-size: 14px;
-  }
-  @media (min-width: 620px) {
-    font-size: 15px;
-  }
-  @media (min-width: 800px) {
-    font-size: @standard-font-size;
-  }
+
 }
 
 // Fonts
 @standard-font: 'Exo+2', sans-serif;
-@standard-font-size: 16pt;
+@standard-font-size: 12pt;
 
+.font-large {
+  @media (min-width: 310px) {
+    font-size: 14px;
+  }
+  @media (min-width: 620px) {
+    font-size: 17px;
+  }
+  @media (min-width: 800px) {
+    font-size: 20px;
+  }
+}
 @font-face {
   font-family: 'Grinched';
   src: url('grinched.eot');

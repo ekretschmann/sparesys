@@ -153,6 +153,7 @@ body {
 
 .flashcard {
   .bottom-margin-xl;
+  .texture-light;
 
   position: relative;
   background-color: @background-color-contrast;
@@ -161,18 +162,7 @@ body {
   box-shadow: 5px 5px 5px #CCC;
   min-height: 380px;
 
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -webkit-gradient(linear, 0 0, 0 bottom, from(@background-color-contrast), to(@background-color-contrast));
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -webkit-linear-gradient(@background-color-contrast, @background-color-contrast);
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -moz-linear-gradient(@background-color-contrast, @background-color-contrast);
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -ms-linear-gradient(@background-color-contrast, @background-color-contrast);
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -o-linear-gradient(@background-color-contrast, @background-color-contrast);
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  linear-gradient(@background-color-contrast, @background-color-contrast);
+
 
   //.question-box {
   //  padding-top: 3em;
@@ -340,9 +330,35 @@ body {
   padding-bottom: 8 * @default-padding-unit;
 }
 
+.rememberators-dropdown-menu {
+
+  .texture-light;
+  border-radius: 6px;
+
+}
+
+.navbar-nav > li > .dropdown-menu {
+  border-top-left-radius: 6px;
+}
+
+
 // textures
+.texture-light {
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-gradient(linear, 0 0, 0 bottom, from(@background-color-contrast), to(@background-color-contrast));
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -moz-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -ms-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -o-linear-gradient(@background-color-contrast, @background-color-contrast);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  linear-gradient(@background-color-contrast, @background-color-contrast);
+
+}
 .texture-dark {
-//  background-color: @inverse-background-color;
   background: @inverse-background-color url('/modules/core/img/brand/bg.png') left top repeat; /* ie fallback */
   background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
   -webkit-gradient(linear, 0 0, 0 bottom, from(@inverse-background-color), to(@light-inverse-background-color));
@@ -357,8 +373,6 @@ body {
   background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
   linear-gradient(@inverse-background-color, @light-inverse-background-color);
 
-
-//  background-image: url('/modules/core/img/brand/bg.png'), linear-gradient(to bottom, @inverse-background-color 0%, @light-inverse-background-color 100%);
 }
 
 // modals

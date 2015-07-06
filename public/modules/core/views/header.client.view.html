@@ -28,15 +28,15 @@
                     <span class="inverse-font-color">Signin</span></a>
             </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right" data-ng-show="authentication.user" data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
+        <ul class="nav navbar-nav navbar-right " data-ng-show="authentication.user" data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
 
 
-            <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown"
+            <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown "
                 data-ng-show="authentication.user.roles.indexOf('admin') > -1">
                 <a href="#" class="dropdown-toggle font-m" id="admin-dropdown-toggle" data-toggle="dropdown">
-                    Admin <b class="caret"></b>
+                    <span class="inverse-font-color">Admin <b class="caret"></b></span>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="rememberators-dropdown-menu dropdown-menu ">
                     <!--<li>-->
                     <!--<a href="/#!/courses">Find</a>-->
                     <!--</li>-->
@@ -72,10 +72,10 @@
             <li ui-route="/courses" ng-class="{active: $uiRoute}" class="dropdown"
                 data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
                 <a href="#" class="dropdown-toggle font-m" data-toggle="dropdown">
-                    Teaching <b class="caret"></b>
+                    <span class="inverse-font-color">Teaching <b class="caret"></b></span>
                 </a>
 
-                <ul  class="dropdown-menu" data-ng-controller="SchoolclassesController" data-ng-init="findForTeacher(authentication.user._id)">
+                <ul  class="dropdown-menu rememberators-dropdown-menu" data-ng-controller="SchoolclassesController" data-ng-init="findForTeacher(authentication.user._id)">
 
                     <li>
                         <a href="/#!/schools/subscribe/teacher" class="font-m">Subscribe to School</a>
@@ -95,9 +95,9 @@
 
             <li ui-route="/courses" ng-class="{active: $uiRoute}" class="dropdown">
                 <a href="#" class="dropdown-toggle font-m" data-toggle="dropdown">
-                    Courses <b class="caret"></b>
+                    <span class="inverse-font-color">Courses <b class="caret"></b></span>
                 </a>
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu rememberators-dropdown-menu">
                     <li>
                         <a href="/#!/courses/create" class="font-m">Create</a>
                     </li>
@@ -128,11 +128,11 @@
 
             <li class="dropdown">
                 <a href="#" class="dropdown-toggle font-m" data-toggle="dropdown">
-                    {{authentication.user.displayName}} <b class="caret"></b>
+                    <span class="inverse-font-color">{{authentication.user.displayName}} <b class="caret"></b></span>
                 </a>
 
 
-                <ul class="dropdown-menu">
+                <ul class="dropdown-menu rememberators-dropdown-menu">
                     <li data-ng-controller="HomePageController">
                         <a href="" data-ng-click="settingsPopup()" class="font-m">Edit Profile</a>
                     </li>

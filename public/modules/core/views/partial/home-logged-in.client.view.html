@@ -10,8 +10,12 @@
     </div>
 
 
-    <div class="col-xs-12 col-md-6">
-        <div ng-include="'/modules/core/views/partial/logged-in-schools.client.view.html'"></div>
+    <div class="col-xs-12 col-md-6" data-ng-if="authentication.user.studentInSchools.length > 0">
+        <div ng-include="'/modules/core/views/partial/student-in-classes.client.view.html'"></div>
+    </div>
+
+    <div class="col-xs-12 col-md-6"  data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+        <div ng-include="'/modules/core/views/partial/teacher-in-classes.client.view.html'"></div>
     </div>
 
     <div class="col-xs-12 col-md-6">

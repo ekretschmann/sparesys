@@ -5,34 +5,38 @@
     <div ng-include="'/modules/users/views/partial/password.modal.client.view.html'"></div>
 
 
-    <div class="col-xs-12 col-md-6">
-        <div ng-include="'/modules/core/views/partial/logged-in-courses.client.view.html'"></div>
-    </div>
+    <div class="row" style="margin:20px">
+        <div class="col-xs-12 col-md-6 dashboard-section">
+            <div ng-include="'/modules/core/views/partial/logged-in-courses.client.view.html'"></div>
+        </div>
 
 
-    <div class="col-xs-12 col-md-6" data-ng-if="authentication.user.studentInSchools.length > 0">
-        <div ng-include="'/modules/core/views/partial/student-in-classes.client.view.html'"></div>
-    </div>
+        <div class="col-xs-12 col-md-6 dashboard-section " data-ng-if="authentication.user.studentInSchools.length > 0">
+            <div ng-include="'/modules/core/views/partial/student-in-classes.client.view.html'"></div>
+        </div>
 
-    <div class="col-xs-12 col-md-6"  data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
-        <div ng-include="'/modules/core/views/partial/teacher-in-classes.client.view.html'"></div>
-    </div>
 
-    <div class="col-xs-12 col-md-6">
-        <div ng-include="'/modules/core/views/partial/logged-in-progress.client.view.html'"></div>
-    </div>
+        <div class="col-xs-12 col-md-6 dashboard-section"
+             data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
+            <div ng-include="'/modules/core/views/partial/teacher-in-classes.client.view.html'"></div>
+        </div>
 
-    <div class="col-xs-12 col-md-6">
-        <div ng-include="'/modules/core/views/partial/logged-in-teacher.client.view.html'"></div>
+        <div class="col-xs-12 dashboard-section">
+            <div ng-include="'/modules/core/views/partial/logged-in-progress.client.view.html'"></div>
+        </div>
 
-    </div>
-    <div class="col-xs-12 col-md-6">
-        <div ng-include="'/modules/core/views/partial/logged-in-school-admin.client.view.html'"></div>
+        <div class="col-xs-12 col-md-6 dashboard-section">
+            <div ng-include="'/modules/core/views/partial/logged-in-teacher.client.view.html'"></div>
 
+        </div>
     </div>
-    <div class="col-xs-12 col-md-6">
-        <div ng-include="'/modules/core/views/partial/logged-in-messages.client.view.html'"></div>
-    </div>
+    <!--<div class="col-xs-12 col-md-6">-->
+    <!--<div ng-include="'/modules/core/views/partial/logged-in-school-admin.client.view.html'"></div>-->
+
+    <!--</div>-->
+    <!--<div class="col-xs-12 col-md-6">-->
+    <!--<div ng-include="'/modules/core/views/partial/logged-in-messages.client.view.html'"></div>-->
+    <!--</div>-->
 </section>
 
 

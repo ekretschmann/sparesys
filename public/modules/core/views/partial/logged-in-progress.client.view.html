@@ -14,38 +14,46 @@
                     <p><span id="value"></span></p>
                 </div>
 
-                <tabset>
-
-                    <tab heading="{{course.name}}" data-ng-repeat="course in courses">
-
+                <carousel>
+                    <slide data-ng-repeat="course in courses" >
 
                         <div class="default-border standard-min-height" data-ng-controller="CourseReportController"
-                             data-ng-init="init(course._id, $index)" >
+                        data-ng-init="init(course._id, $index)" >
 
-                            <div>
+                        <div>
 
-                                <div class="left-padded-s top-padded-s" style="font-weight: bold">
-                                    When and how much I have practiced
-                                </div>
+                            <div>{{course.name}}</div>
+                        <!--<div class="left-padded-s top-padded-s" style="font-weight: bold">-->
+                        <!--When and how much I have practiced-->
+                        <!--</div>-->
 
-                                <div id="cal{{$index}}">
+                        <!--<div id="cal{{$index}}">-->
 
-                                </div>
+                        <!--</div>-->
 
-                                <div class="left-padded-s" style="font-weight: bold">
-                                    Cards memorized
-                                </div>
-                                <div id="inplay{{$index}}">
+                        <!--<div class="left-padded-s" style="font-weight: bold">-->
+                        <!--Cards memorized-->
+                        <!--</div>-->
+                        <!--<div id="inplay{{$index}}">-->
 
-                                </div>
-
-                            </div>
+                        <!--</div>-->
 
                         </div>
 
+                        </div>
+                    </slide>
+                </carousel>
 
-                    </tab>
-                </tabset>
+                <!--<tabset>-->
+
+                    <!--<tab heading="{{course.name}}" data-ng-repeat="course in courses">-->
+
+
+
+
+
+                    <!--</tab>-->
+                <!--</tabset>-->
             </div>
         </div>
 

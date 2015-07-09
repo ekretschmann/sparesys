@@ -52,10 +52,10 @@
 
     <div class="infobox-title">My Courses</div>
         <div style="display: inline-block;" data-ng-repeat="course in coursesStudent" >
-            <button data-ng-if="!course.supervised" type="button" class="btn btn-course font-m" data-ng-click="practice(course)" tooltip="{{course.description}}">
+            <button data-ng-if="!course.supervised" type="button" class="btn btn-course font-s" data-ng-click="practice(course)" tooltip="{{course.description}}">
                 {{course.name}}
             </button>
-            <button data-ng-if="course.supervised" type="button" class="btn btn-course-supervised font-m" data-ng-click="practice(course)" tooltip="{{course.description}}">
+            <button data-ng-if="course.supervised" type="button" class="btn btn-course-supervised font-s" data-ng-click="practice(course)" tooltip="{{course.description}}">
                 <div>{{course.name}}</div>
                 <div class="font-s">(supervised)</div>
 

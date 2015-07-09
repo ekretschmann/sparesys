@@ -1,4 +1,4 @@
-<div class="container texture-dark" data-ng-controller="HeaderController">
+<div class="container texture-dark rememberators-header" data-ng-controller="HeaderController">
     <div class="navbar-header texture-dark">
         <button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
             <span class="sr-only">Toggle navigation</span>
@@ -6,11 +6,11 @@
             <span class="icon-bar" ></span>
             <span class="icon-bar" ></span>
         </button>
-        <div class="top-padded-s">
+        <div class="rememberators-logo">
         <a href="/#!/" class="navbar-brand font-l navigation "><span class="inverse-font-color">Rememberators</span></a>
         </div>
     </div>
-    <nav class="collapse navbar-collapse texture-dark" collapse="!isCollapsed" role="navigation">
+    <nav class="collapse navbar-collapse texture-dark rememberators-menu" collapse="!isCollapsed" role="navigation">
         <ul class="nav navbar-nav" data-ng-if="menu.shouldRender(authentication.user);">
             <li data-ng-repeat="item in menu.items" data-ng-if="item.shouldRender(authentication.user);"
                 ui-route="{{item.uiRoute}}" ng-class="{active: $uiRoute}">

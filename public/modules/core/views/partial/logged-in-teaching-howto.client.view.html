@@ -1,0 +1,19 @@
+<section data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
+
+    <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="infobox-title">Teaching</div>
+
+        <div class="content-section font-large">
+            <infobox logo="man" position="left" >
+                If you are a teacher and your school is set up with Rememberators, use the
+                <a href="" data-ng-click="settingsPopup()">settings</a> in the {{user.displayName}} menu
+                to register for the role of a teacher. You will get a Teaching menu with all the details
+                to manage your students.
+            </infobox>
+
+        </div>
+    </section>
+
+
+</section>
+

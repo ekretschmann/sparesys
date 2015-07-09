@@ -241,7 +241,7 @@ body {
       line-height: 36px;
     }
     @media (min-width: 800px) {
-      padding: 8*@default-padding-unit;
+      padding: @default-padding-unit;
       line-height: 48px;
     }
 
@@ -273,8 +273,8 @@ body {
 
   }
   font-weight: bold;
-  padding-top: 3*@default-padding-unit;
-  padding-bottom: 3*@default-padding-unit;
+  padding-top: @default-padding-unit;
+  padding-bottom: 4*@default-padding-unit;
 }
 
 .inverse-font-color {
@@ -460,12 +460,22 @@ body {
 
 .dashboard-row {
 
-  margin: 20px;
-
+  margin-left:20px;
+  margin-right:20px;
 }
 .dashboard-section {
+  overflow: scroll;
   padding: 20px;
   border: 1px solid black;
+  margin-top:20px;
+
+  //height:100%;
+  @media (min-width: 800px) {
+    min-height:460px;
+  }
+
+  //background-color:#990000;
+  //min-height: 320px;
   //margin: 20px;
   //width: 100%;
 }

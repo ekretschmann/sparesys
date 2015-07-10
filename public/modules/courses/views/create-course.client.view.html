@@ -7,20 +7,24 @@
     </div>
 
 
-    <section class="content-section" data-ng-if="authentication.user.roles.indexOf('help') > -1">
+    <section class="row font-large" data-ng-if="authentication.user.roles.indexOf('help') > -1">
 
+        <div class="col-xs-12 col-md-6">
         <infobox logo="girl">
             Wow! You are creating a
             course! You have to give your course a name
             and a short description of what your course is going to be about. Once that
             is done you will be able to add packs to your course and cards to the packs.
         </infobox>
+        </div>
 
+        <div class="col-xs-12 col-md-6">
         <infobox logo="boy" position="right">
             It is also useful to describe what the front and back of your cards are. It
             not always easy to remember which way around a card is written, especially
             when you allow for prompting your cards both ways.
         </infobox>
+            </div>
     </section>
 
 

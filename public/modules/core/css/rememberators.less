@@ -26,6 +26,32 @@
 .Greens .q9-11{fill:darken(@base-green, 40%)}
 .Greens .q10-11{fill:darken(@base-green, 50%)}
 
+.dashboard-section {
+  .texture-light;
+  overflow: scroll;
+  border: 1px solid #4E51E5;
+  box-shadow: 5px 5px 5px #CCC;
+  border-radius: 12px;
+  background-color: @background-color-contrast;
+
+  //height:100%;
+  @media screen {
+    @media (min-width: 310px) {
+      padding: 5px;
+      margin-top:5px;
+    }
+    @media (min-width: 620px) {
+      padding: 10px;
+      margin-top:10px;
+    }
+    @media (min-width: 800px) {
+      padding: 20px;
+      margin-top:20px;
+      min-height:480px;
+    }
+
+  }
+}
 
 .container {
   width:100%;
@@ -317,7 +343,7 @@ body {
   padding-left: 6*@default-padding-unit;
 }
 
-.infobox-title {
+.infobox-title, .title {
 
 
   @media screen {
@@ -567,37 +593,7 @@ body {
 
   }
 }
-.dashboard-section {
-  overflow: scroll;
-  border: 1px solid black;
 
-
-  //height:100%;
-  @media screen {
-    @media (min-width: 310px) {
-      padding: 5px;
-      margin-top:5px;
-    }
-    @media (min-width: 620px) {
-      padding: 10px;
-      margin-top:10px;
-    }
-    @media (min-width: 800px) {
-      padding: 20px;
-      margin-top:20px;
-      min-height:480px;
-    }
-
-  }
-
-
-
-
-  //background-color:#990000;
-  //min-height: 320px;
-  //margin: 20px;
-  //width: 100%;
-}
 
 //@dark-stripes: #FEE67A;
 //

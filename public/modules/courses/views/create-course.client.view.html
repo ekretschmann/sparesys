@@ -1,5 +1,5 @@
 <div data-ng-controller="CoursesController">
-    <div class="content-header">
+    <div class="content-header" data-ng-if="authentication.user.roles.indexOf('help') === -1">
 
         <div class="title">
             Create Course
@@ -7,24 +7,35 @@
     </div>
 
 
-    <section class="row font-large" data-ng-if="authentication.user.roles.indexOf('help') > -1">
+    <section class="row font-large dashboard-row" data-ng-if="authentication.user.roles.indexOf('help') > -1">
 
-        <div class="col-xs-12 col-md-6">
-        <infobox logo="girl">
-            Wow! You are creating a
-            course! You have to give your course a name
-            and a short description of what your course is going to be about. Once that
-            is done you will be able to add packs to your course and cards to the packs.
-        </infobox>
+        <div class="col-xs-12 col-md-6 dashboard-col">
+            <div class="dashboard-section">
+                <div class="title">
+                    Creating a Course
+                </div>
+                <infobox logo="girl">
+                    Wow! You are creating a
+                    course! You have to give your course a name
+                    and a short description of what your course is going to be about. Once that
+                    is done you will be able to add packs to your course and cards to the packs.
+                </infobox>
+            </div>
         </div>
 
-        <div class="col-xs-12 col-md-6">
-        <infobox logo="boy" position="right">
-            It is also useful to describe what the front and back of your cards are. It
-            not always easy to remember which way around a card is written, especially
-            when you allow for prompting your cards both ways.
-        </infobox>
+        <div class="col-xs-12 col-md-6 dashboard-col">
+
+            <div class="dashboard-section">
+                <div class="title">
+                    Course Properties
+                </div>
+                <infobox logo="boy" position="right">
+                    It is also useful to describe what the front and back of your cards are. It
+                    not always easy to remember which way around a card is written, especially
+                    when you allow for prompting your cards both ways.
+                </infobox>
             </div>
+        </div>
     </section>
 
 
@@ -74,84 +85,82 @@
                 </tr>
 
                 <!--<tr>-->
-                    <!--<th class="right-padded-m nowrap top-padded-m bottom-padded-m" colspan="3">Default Settings for-->
-                        <!--Cards-->
-                    <!--</th>-->
+                <!--<th class="right-padded-m nowrap top-padded-m bottom-padded-m" colspan="3">Default Settings for-->
+                <!--Cards-->
+                <!--</th>-->
                 <!--</tr>-->
 
                 <!--<tr>-->
-                    <!--<td class="right-padded-m nowrap top-padded-s">Language on Front</td>-->
-                    <!--<td class="expands">-->
+                <!--<td class="right-padded-m nowrap top-padded-s">Language on Front</td>-->
+                <!--<td class="expands">-->
 
 
-                        <!--<div class="btn-group top-padded-s">-->
-                            <!--<button type="button" class="btn btn-default btn-std-width">{{ languageFront.name }}</button>-->
-                            <!--<button type="button" class="btn btn-default dropdown-toggle">-->
-                                <!--<span class="caret"></span>-->
-                                <!--<span class="sr-only">Split button!</span>-->
-                            <!--</button>-->
-                            <!--<ul class="dropdown-menu" role="menu">-->
-                                <!--<li data-ng-repeat="lang in languages"><a data-ng-click="setLanguageFront(lang)">{{lang.name}}</a>-->
-                                <!--</li>-->
-                            <!--</ul>-->
-                        <!--</div>-->
+                <!--<div class="btn-group top-padded-s">-->
+                <!--<button type="button" class="btn btn-default btn-std-width">{{ languageFront.name }}</button>-->
+                <!--<button type="button" class="btn btn-default dropdown-toggle">-->
+                <!--<span class="caret"></span>-->
+                <!--<span class="sr-only">Split button!</span>-->
+                <!--</button>-->
+                <!--<ul class="dropdown-menu" role="menu">-->
+                <!--<li data-ng-repeat="lang in languages"><a data-ng-click="setLanguageFront(lang)">{{lang.name}}</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+                <!--</div>-->
 
 
-                    <!--</td>-->
-
-                <!--</tr>-->
-
-                <!--<tr>-->
-                    <!--<td class="right-padded-m nowrap top-padded-s">Language on Back</td>-->
-                    <!--<td class="expands">-->
-
-
-                        <!--<div class="btn-group top-padded-s">-->
-                            <!--<button type="button" class="btn btn-default btn-std-width">{{ languageBack.name }}</button>-->
-                            <!--<button type="button" class="btn btn-default dropdown-toggle">-->
-                                <!--<span class="caret"></span>-->
-                                <!--<span class="sr-only">Split button!</span>-->
-                            <!--</button>-->
-                            <!--<ul class="dropdown-menu" role="menu">-->
-                                <!--<li data-ng-repeat="lang in languages"><a data-ng-click="setLanguageBack(lang)">{{lang.name}}</a>-->
-                                <!--</li>-->
-                            <!--</ul>-->
-                        <!--</div>-->
-
-
-                    <!--</td>-->
+                <!--</td>-->
 
                 <!--</tr>-->
 
                 <!--<tr>-->
-                    <!--<td class="right-padded-m nowrap top-padded-m">-->
-                        <!--<input  type="checkbox"-->
-                               <!--data-ng-model="bothWays"><span class="left-padded-m">Practice Cards Both Ways</span></td>-->
+                <!--<td class="right-padded-m nowrap top-padded-s">Language on Back</td>-->
+                <!--<td class="expands">-->
+
+
+                <!--<div class="btn-group top-padded-s">-->
+                <!--<button type="button" class="btn btn-default btn-std-width">{{ languageBack.name }}</button>-->
+                <!--<button type="button" class="btn btn-default dropdown-toggle">-->
+                <!--<span class="caret"></span>-->
+                <!--<span class="sr-only">Split button!</span>-->
+                <!--</button>-->
+                <!--<ul class="dropdown-menu" role="menu">-->
+                <!--<li data-ng-repeat="lang in languages"><a data-ng-click="setLanguageBack(lang)">{{lang.name}}</a>-->
+                <!--</li>-->
+                <!--</ul>-->
+                <!--</div>-->
+
+
+                <!--</td>-->
 
                 <!--</tr>-->
 
                 <!--<tr>-->
-                    <!--<td class="right-padded-m nowrap top-padded-m">-->
-                        <!--<input  type="checkbox"-->
-                                <!--data-ng-model="speechRecognition"><span class="left-padded-m">Enable Speech Recognition</span></td>-->
+                <!--<td class="right-padded-m nowrap top-padded-m">-->
+                <!--<input  type="checkbox"-->
+                <!--data-ng-model="bothWays"><span class="left-padded-m">Practice Cards Both Ways</span></td>-->
 
                 <!--</tr>-->
 
                 <!--<tr>-->
-                    <!--<td class="right-padded-m nowrap top-padded-m">-->
-                        <!--<input  type="checkbox"-->
-                                <!--data-ng-model="readFront"><span class="left-padded-m">Read Out Questions</span></td>-->
+                <!--<td class="right-padded-m nowrap top-padded-m">-->
+                <!--<input  type="checkbox"-->
+                <!--data-ng-model="speechRecognition"><span class="left-padded-m">Enable Speech Recognition</span></td>-->
 
                 <!--</tr>-->
 
                 <!--<tr>-->
-                    <!--<td class="right-padded-m nowrap top-padded-m">-->
-                        <!--<input  type="checkbox"-->
-                                <!--data-ng-model="readBack"><span class="left-padded-m">Read Out Expected Solution</span></td>-->
+                <!--<td class="right-padded-m nowrap top-padded-m">-->
+                <!--<input  type="checkbox"-->
+                <!--data-ng-model="readFront"><span class="left-padded-m">Read Out Questions</span></td>-->
 
                 <!--</tr>-->
 
+                <!--<tr>-->
+                <!--<td class="right-padded-m nowrap top-padded-m">-->
+                <!--<input  type="checkbox"-->
+                <!--data-ng-model="readBack"><span class="left-padded-m">Read Out Expected Solution</span></td>-->
 
+                <!--</tr>-->
 
 
             </table>

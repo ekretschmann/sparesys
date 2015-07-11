@@ -51,7 +51,12 @@
 
             <div  class="correct-answer">
 
-                <div>{{card.question}}</div>
+                <div>{{card.question}}<span data-ng-if="card.readBackReverse && card.languageFront" class="left-padded-s top-padded-s small" style="position: absolute;" >
+
+                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question+ '. '+card.questionExtension)">
+                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                    </a>
+                </span></div>
             </div>
 
 

@@ -20,29 +20,6 @@
     <!--</div>-->
 
 
-    <!--<div class="title">-->
-    <!--{{course.name}}-->
-    <!--</div>-->
-    <!--<div class="headerinfo top-padded-m" style="position: relative">-->
-
-
-    <!--<div style="position: absolute; top:-45px; left:240px; width:200px" data-ng-show="doneScore > -1">-->
-
-    <!--<div style="text-align: center">-->
-    <!--<div>-->
-    <!--<svg id="fillgauge" width="90px" height="80px"></svg>-->
-
-    <!--</div>-->
-    <!--<div >-->
-
-    <!--<span tooltip="{{challengeDescription}}" >{{challengeName}}-->
-    <!--<a href="" tooltip-trigger="mouseenter">-->
-    <!--<i-->
-    <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
-    <!--</span>-->
-    <!--</div>-->
-    <!--</div>-->
-
     <!--</div>-->
     <!--<table class="info expands ">-->
     <!--&lt;!&ndash;<tr>&ndash;&gt;-->
@@ -105,13 +82,27 @@
 
         <div class="row">
 
+            <div class="col-md-2">
+
+                <div class="title">
+                    {{course.name}}
+                </div>
+                <div>
+                    <svg id="fillgauge" width="90px" height="80px"></svg>
+                </div>
+
+                <div tooltip="{{challengeDescription}}">{{challengeName}}
+                    <a href="" tooltip-trigger="mouseenter"><i class="glyphicon glyphicon-info-sign small"></i></a>
+                </div>
+
+            </div>
 
             <!--<div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1"-->
             <!--style="margin-bottom: 0px; padding-left:15px; padding-right: 15px">-->
             <!--<progressbar style="height: 1px; margin: 0; padding: 0" value="progress"/>-->
             <!--</div>-->
 
-            <div class="col-xs-12 col-md-8 col-md-offset-2 col-lg-6 col-lg-offset-3">
+            <div class="col-xs-12 col-md-8 col-lg-6 col-lg-offset-1">
 
                 <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
 

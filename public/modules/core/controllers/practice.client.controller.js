@@ -41,10 +41,13 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.doneColorCode = {'color': '#00FF00'};
 
         $scope.$watch('doneScore', function () {
-            $scope.loadLiquidFillGauge($scope.doneScore, $scope.doneColorCode);
+            $timeout(function() {
+                $scope.loadLiquidFillGauge($scope.doneScore, $scope.doneColorCode);
+            }, 200);
         });
 
         $scope.loadLiquidFillGauge = function (score, colorCode) {
+
 
 
             if (score < 0) {

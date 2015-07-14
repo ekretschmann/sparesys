@@ -178,8 +178,6 @@ angular.module('core').service('DiagramsService', [
             if (!gauge[0][0]) {
                 return;
             }
-
-            console.log('aaaa');
             var radius = Math.min(parseInt(gauge.style('width')), parseInt(gauge.style('height'))) / 2;
             var locationX = parseInt(gauge.style('width')) / 2 - radius;
             var locationY = parseInt(gauge.style('height')) / 2 - radius;

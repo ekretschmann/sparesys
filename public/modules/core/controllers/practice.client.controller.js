@@ -46,6 +46,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             }, 200);
         });
 
+
+        $scope.lastRepetition = new Date(Date.now);
+
+
         $scope.loadLiquidFillGauge = function (score, colorCode) {
 
 
@@ -396,6 +400,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             $scope.time = Date.now();
 
+
             var bestValue = 1.0;
             var bestCard;
 
@@ -481,6 +486,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 }
             }
 
+
             if ($scope.repeat) {
                 bestCard = $scope.card;
                 bestValue = $scope.card.score;
@@ -500,6 +506,12 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.challengeDescription = ChallengeCalculatorService.getChallengeDescription();
 
             $scope.card = bestCard;
+
+            if ($scope.card.history && $scope.card.history.length>0) {
+                $scope.lastRepetition = new Date($scope.card.history[$scope.card.history.length-1].when);
+            } else {
+                $scope.lastRepetition = 'this is a new card';
+            }
 
             var repetitionParameters = ModeSelectorService.getRepetitionParameters(bestCard);
             $scope.mode = repetitionParameters.mode;

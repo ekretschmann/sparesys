@@ -32,7 +32,7 @@
 
             <div class="col-md-2 flashcard-left col-lg-3">
 
-                <div class="title" >
+                <div class="title">
                     {{course.name}}
                 </div>
                 <div>
@@ -43,6 +43,9 @@
                     <a href="" tooltip-trigger="mouseenter"><i class="glyphicon glyphicon-info-sign small"></i></a>
                 </div>
 
+
+
+
             </div>
 
             <!--<div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1"-->
@@ -50,7 +53,7 @@
             <!--<progressbar style="height: 1px; margin: 0; padding: 0" value="progress"/>-->
             <!--</div>-->
 
-            <div class="col-xs-12 col-md-8 col-lg-6" >
+            <div class="col-xs-12 col-md-8 col-lg-6">
 
                 <div data-ng-show="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
 
@@ -58,41 +61,39 @@
                         <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
                     </div>
                     <!--<div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">-->
-                        <!--<div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>-->
+                    <!--<div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>-->
                     <!--</div>-->
                 </div>
 
                 <!--<div data-ng-show="mode === 'reverse'" data-ng-hide="mode !== 'reverse'" style="height: 500px">-->
-                    <!--<div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">-->
-                        <!--<div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>-->
-                    <!--</div>-->
+                <!--<div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">-->
+                <!--<div ng-include="'/modules/core/views/partial/reverse-self.client.view.html'"></div>-->
+                <!--</div>-->
 
-                    <!--<div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">-->
-                        <!--<div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>-->
-                    <!--</div>-->
+                <!--<div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">-->
+                <!--<div ng-include="'/modules/core/views/partial/reverse-auto.client.view.html'"></div>-->
+                <!--</div>-->
                 <!--</div>-->
 
                 <!--<div data-ng-show="mode === 'images'" data-ng-hide="mode !== 'images'" style="height: 500px">-->
 
 
-                    <!--<div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">-->
+                <!--<div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">-->
 
-                        <!--<div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>-->
-                    <!--</div>-->
+                <!--<div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>-->
+                <!--</div>-->
 
-                    <!--<div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">-->
-                        <!--<div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>-->
-                    <!--</div>-->
+                <!--<div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">-->
+                <!--<div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>-->
+                <!--</div>-->
 
 
                 <!--</div>-->
             </div>
 
 
+            <div class="col-md-2 col-lg-3 flashcard-right ">
 
-            <div class="col-md-2 col-lg-3 flashcard-right" >
-
-                <table class="info expands ">
                 <!--<tr>-->
                 <!--<td>Description</td>-->
                 <!--<td class="left-padded-s">:</td>-->
@@ -100,394 +101,372 @@
                 <!--</tr>-->
 
 
-                <tr>
-                <td>Cards</td>
-                <td class="left-padded-s">:</td>
-                <td class="left-padded-s">
-                <span data-ng-if="cards">{{cards.length}}</span>
-                <span data-ng-if="!cards">0</span>
-                </td>
-
-                <td class="expands"></td>
-
-                <td>Mode</td>
-                <td class="left-padded-s">:</td>
-                <td class="left-padded-s">
-                <span data-ng-if="cards">{{mode}}</span>
-
-                </td>
-
-                </tr>
-
-                <tr>
-                <td class="nowrap">In Play</td>
-                <td class="left-padded-s">:</td>
-                <td class="left-padded-s">
-                <span data-ng-if="cards">{{inPlay}}</span>
-                <span data-ng-if="!cards">0</span>
-                </td>
-
-                <td class="expands"></td>
-
-                <td class="nowrap">Retention <a href="" tooltip="The chance that you remember this card"
-                tooltip-trigger="mouseenter"><i
-                class="glyphicon glyphicon-info-sign small"></i></a>
-
-                </td>
-                <td class="left-padded-s">:</td>
-                <td class="left-padded-s">
-                {{card.retention}}%
-
-                </td>
 
 
-                </tr>
+
+                <div class="title">Statistics</div>
+                <div style="text-align: left">
+                    {{card.retention}}% chance you remember this card
+                </div>
+                <div>
+                    {{lastRepetition}}
+                </div>
+                <div style="text-align: left">Question mode is {{mode}}</div>
 
 
-                </table>
+                <div style="text-align: left">
+                    <div data-ng-if="cards" style="display: inline">{{cards.length}}</div>
+                    <div data-ng-if="!cards" style="display: inline">0</div>
+                    <div style="display: inline"> Cards in this course</div>
+                </div>
+
+                <div style="text-align: left">
+                    <div data-ng-if="cards" style="display: inline">{{inPlay}}</div>
+                    <div data-ng-if="!cards" style="display: inline">No cards </div>
+                    <div style="display: inline"> are in play</div>
+                </div>
 
             </div>
 
+            <!--</div>-->
+
+
+            <!--<div data-ng-show="authentication.user.roles.indexOf('receive-rewards') > -1"-->
+            <!--data-ng-controller="SelectRewardsController" data-ng-init="findRewards()">-->
+
+
+            <!--<div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">-->
+
+            <!--<div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>-->
+            <!--</div>-->
+
+            <!--&lt;!&ndash;<div style="height: 500px">&ndash;&gt;-->
+
+            <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+            <!--<div class="content-header">-->
+
+            <!--<table class="expands">-->
+            <!--<thead>-->
+            <!--<tr>-->
+
+            <!--<th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Inventory</th>-->
+            <!--<th class="right-padded-m  top-padded-sm top-aligned nowrap">You can craft</th>-->
+
+            <!--</tr>-->
+            <!--</thead>-->
+            <!--<tbody>-->
+            <!--</tbody>-->
+            <!--<tr>-->
+
+            <!--<td class="top-aligned right-padded-m bottom-padded-m" width="66%">-->
+
+
+            <!--<div data-ng-if="!userItems || userItems.length === 0">-->
+            <!--You have nothing in your inventory. Keep practicing and you will be offered rewards.-->
+            <!--</div>-->
+            <!--<div data-ng-repeat="item in userItems">-->
+
+            <!--<a href="" tooltip="{{item.description}}" tooltip-trigger="mouseenter">-->
+            <!--<i-->
+            <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
+
+
+            <!--{{item.amount}} {{item.name}} <span-->
+            <!--data-ng-repeat="a in range(item.healthpoints) track by $index"><span class="heart">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>-->
+
+            <!--&lt;!&ndash;(use for <span data-ng-repeat="use in item.usedfor">{{use.name}}</span>)&ndash;&gt;-->
+            <!--</div>-->
+            <!--</td>-->
+
+            <!--<td class="top-aligned bottom-padded-m" width="33%">-->
+
+            <!--<div data-ng-if="!enabledRecipies || enabledRecipies.length===0">-->
+            <!--You can't create any new things at the moment. Fill up your inventory and you will be-->
+            <!--able to-->
+            <!--buy some new ones.-->
+            <!--</div>-->
+
+
+            <!--<div data-ng-if="enabledRecipies && enabledRecipies.length>0">-->
+
+
+            <!--<table>-->
+
+            <!--<tr data-ng-repeat="recipie in enabledRecipies">-->
+
+            <!--<td class="top-aligned right-padded-m top-padded-s">-->
+
+
+            <!--<button class="btn btn-rememberators btn-small"-->
+            <!--data-ng-click="craft(recipie)">-->
+            <!--{{recipie.name}}-->
+            <!--</button>-->
+
+            <!--&lt;!&ndash;<a href="" data-ng-if="recipie.usedforItems.length>0"&ndash;&gt;-->
+            <!--&lt;!&ndash;tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">&ndash;&gt;-->
+            <!--&lt;!&ndash;<i&ndash;&gt;-->
+            <!--&lt;!&ndash;class="glyphicon glyphicon-info-sign small"></i></a>&ndash;&gt;-->
+
+            <!--</td>-->
+
+
+            <!--</tr>-->
+            <!--</table>-->
+            <!--</div>-->
+
+
+            <!--<div class="top-padded-m ">-->
+            <!--<label>Your Goals</label>-->
+            <!--</div>-->
+
+            <!--<div data-ng-if="!userGoals || userGoals.length === 0">-->
+            <!--You will receive goals once you unlock new skills.-->
+            <!--</div>-->
+
+            <!--<div data-ng-repeat="goal in userGoals">-->
+
+
+            <!--<a href="" tooltip="{{goal.description}}" tooltip-trigger="mouseenter">-->
+            <!--<i-->
+            <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
+
+
+            <!--{{goal.name}}-->
+            <!--</div>-->
+
+
+            <!--<div class="top-padded-m ">-->
+            <!--<label>Your Skills</label>-->
+            <!--</div>-->
+
+
+            <!--<div class="bottom-padded-m" data-ng-if="!userSkills || userSkills.length === 0">-->
+            <!--You have not learned any skills yet. Keep practicing and you will get them in no time.-->
+            <!--</div>-->
+
+
+            <!--<div class="bottom-padded-m" data-ng-repeat="skill in userSkills">-->
+
+
+            <!--<a href="" tooltip="{{skill.description}}" tooltip-trigger="mouseenter">-->
+            <!--<i-->
+            <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
+
+
+            <!--{{skill.name}}-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--</tr>-->
+
+            <!--</table>-->
+
+
+            <!--</div>-->
+
+
+            <!--<div class="bottom-padded-m top-padded-m ">-->
+
+            <!--<label>Search the recipe list:</label> <input class="search form-control" ng-model="recipeName">-->
+
+            <!--</div>-->
+
+            <!--<table class="expands">-->
+            <!--<tr>-->
+            <!--<td class="top-aligned">-->
+
+            <!--<div data-ng-repeat="reward in rewards | orderBy: 'name' | filter:{name: recipeName}">-->
+            <!--<span data-ng-if="$index % 3 ===0">{{reward.name}}-->
+            <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
+            <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
+            <!--data-ng-if="!$last">, </span></span>)-->
+
+            <!--</span>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--</td>-->
+
+            <!--<td class="top-aligned">-->
+
+            <!--<div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{name: recipeName}">-->
+            <!--<span data-ng-if="$index % 3 ===1">{{reward.name}}-->
+            <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
+            <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
+            <!--data-ng-if="!$last">, </span></span>)-->
+
+            <!--</span>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--</td>-->
+
+            <!--<td class="top-aligned">-->
+
+            <!--<div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{name: recipeName}">-->
+            <!--<span data-ng-if="$index % 3 ===2">{{reward.name}}-->
+            <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
+            <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
+            <!--data-ng-if="!$last">, </span></span>)-->
+
+            <!--</span>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--</table>-->
+
+            <!--<table class="expands">-->
+            <!--<tr>-->
+            <!--<td class="top-aligned">-->
+
+            <!--<div data-ng-repeat="reward in rewards | orderBy: 'name' | filter:{searchTerm: recipeName}">-->
+            <!--<span data-ng-if="$index % 3 ===0">{{reward.name}}-->
+            <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
+            <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
+            <!--data-ng-if="!$last">, </span></span>)-->
+
+            <!--</span>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--</td>-->
+
+            <!--<td class="top-aligned">-->
+
+            <!--<div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{searchTerm: recipeName}">-->
+            <!--<span data-ng-if="$index % 3 ===1">{{reward.name}}-->
+            <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
+            <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
+            <!--data-ng-if="!$last">, </span></span>)-->
+
+            <!--</span>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--</td>-->
+
+            <!--<td class="top-aligned">-->
+
+            <!--<div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{searchTerm: recipeName}">-->
+            <!--<span data-ng-if="$index % 3 ===2">{{reward.name}}-->
+            <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
+            <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
+            <!--data-ng-if="!$last">, </span></span>)-->
+
+            <!--</span>-->
+            <!--</span>-->
+            <!--</div>-->
+            <!--</td>-->
+            <!--</tr>-->
+            <!--</table>-->
+
+
+            <!--<section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">-->
+
+            <!--<a href="" data-ng-click="deleteInventory()">delete inventory</a>-->
+
+
+            <!--Rewards:-->
+            <!--<pre>{{rewards | json}}</pre>-->
+
+            <!--Invetnroy:-->
+            <!--<pre>{{user.inventory | json}}</pre>-->
+            <!--&lt;!&ndash;<pre>&ndash;&gt;-->
+            <!--&lt;!&ndash;Possible Item offers:&ndash;&gt;-->
+            <!--&lt;!&ndash;{{itemOffers | json}}&ndash;&gt;-->
+            <!--&lt;!&ndash;</pre>&ndash;&gt;-->
+            <!--&lt;!&ndash;<pre>&ndash;&gt;-->
+            <!--&lt;!&ndash;Possible Skill offers:&ndash;&gt;-->
+            <!--&lt;!&ndash;{{skillOffers |json}}&ndash;&gt;-->
+            <!--&lt;!&ndash;</pre>&ndash;&gt;-->
+            <!--<pre>-->
+            <!--Possible Recipies:-->
+            <!--{{enabledRecipies |json}}-->
+            <!--</pre>-->
+            <!--</section>-->
+
+
+            <!--</div>-->
         </div>
 
-        <!--</div>-->
 
+        <div data-ng-if="!cards || cards.length === 0">
+            <infobox logo="man" position="right">
 
-        <!--<div data-ng-show="authentication.user.roles.indexOf('receive-rewards') > -1"-->
-        <!--data-ng-controller="SelectRewardsController" data-ng-init="findRewards()">-->
+                There are no cards in this course. You will have to create some in order to practice. You
+                can do this by going to your home page (click on Rememberators on the top of this screen)
+                and select the edit action for this course or simply <a
+                    data-ng-href="#!/courses/{{course._id}}/edit">follow
+                this link</a>.
 
 
-        <!--<div data-ng-show="mode === 'reward'" data-ng-hide="mode !== 'reward'" style="height: 500px">-->
-
-        <!--<div ng-include="'/modules/core/views/partial/rewards.client.view.html'"></div>-->
-        <!--</div>-->
-
-        <!--&lt;!&ndash;<div style="height: 500px">&ndash;&gt;-->
-
-        <!--&lt;!&ndash;</div>&ndash;&gt;-->
-
-        <!--<div class="content-header">-->
-
-        <!--<table class="expands">-->
-        <!--<thead>-->
-        <!--<tr>-->
-
-        <!--<th class="right-padded-m  top-padded-sm top-aligned nowrap">Your Inventory</th>-->
-        <!--<th class="right-padded-m  top-padded-sm top-aligned nowrap">You can craft</th>-->
-
-        <!--</tr>-->
-        <!--</thead>-->
-        <!--<tbody>-->
-        <!--</tbody>-->
-        <!--<tr>-->
-
-        <!--<td class="top-aligned right-padded-m bottom-padded-m" width="66%">-->
-
-
-        <!--<div data-ng-if="!userItems || userItems.length === 0">-->
-        <!--You have nothing in your inventory. Keep practicing and you will be offered rewards.-->
-        <!--</div>-->
-        <!--<div data-ng-repeat="item in userItems">-->
-
-        <!--<a href="" tooltip="{{item.description}}" tooltip-trigger="mouseenter">-->
-        <!--<i-->
-        <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
-
-
-        <!--{{item.amount}} {{item.name}} <span-->
-        <!--data-ng-repeat="a in range(item.healthpoints) track by $index"><span class="heart">&nbsp;&nbsp;&nbsp;&nbsp;</span></span>-->
-
-        <!--&lt;!&ndash;(use for <span data-ng-repeat="use in item.usedfor">{{use.name}}</span>)&ndash;&gt;-->
-        <!--</div>-->
-        <!--</td>-->
-
-        <!--<td class="top-aligned bottom-padded-m" width="33%">-->
-
-        <!--<div data-ng-if="!enabledRecipies || enabledRecipies.length===0">-->
-        <!--You can't create any new things at the moment. Fill up your inventory and you will be-->
-        <!--able to-->
-        <!--buy some new ones.-->
-        <!--</div>-->
-
-
-        <!--<div data-ng-if="enabledRecipies && enabledRecipies.length>0">-->
-
-
-        <!--<table>-->
-
-        <!--<tr data-ng-repeat="recipie in enabledRecipies">-->
-
-        <!--<td class="top-aligned right-padded-m top-padded-s">-->
-
-
-        <!--<button class="btn btn-rememberators btn-small"-->
-        <!--data-ng-click="craft(recipie)">-->
-        <!--{{recipie.name}}-->
-        <!--</button>-->
-
-        <!--&lt;!&ndash;<a href="" data-ng-if="recipie.usedforItems.length>0"&ndash;&gt;-->
-        <!--&lt;!&ndash;tooltip="{{recipie.usedfor}}" tooltip-trigger="mouseenter">&ndash;&gt;-->
-        <!--&lt;!&ndash;<i&ndash;&gt;-->
-        <!--&lt;!&ndash;class="glyphicon glyphicon-info-sign small"></i></a>&ndash;&gt;-->
-
-        <!--</td>-->
-
-
-        <!--</tr>-->
-        <!--</table>-->
-        <!--</div>-->
-
-
-        <!--<div class="top-padded-m ">-->
-        <!--<label>Your Goals</label>-->
-        <!--</div>-->
-
-        <!--<div data-ng-if="!userGoals || userGoals.length === 0">-->
-        <!--You will receive goals once you unlock new skills.-->
-        <!--</div>-->
-
-        <!--<div data-ng-repeat="goal in userGoals">-->
-
-
-        <!--<a href="" tooltip="{{goal.description}}" tooltip-trigger="mouseenter">-->
-        <!--<i-->
-        <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
-
-
-        <!--{{goal.name}}-->
-        <!--</div>-->
-
-
-        <!--<div class="top-padded-m ">-->
-        <!--<label>Your Skills</label>-->
-        <!--</div>-->
-
-
-        <!--<div class="bottom-padded-m" data-ng-if="!userSkills || userSkills.length === 0">-->
-        <!--You have not learned any skills yet. Keep practicing and you will get them in no time.-->
-        <!--</div>-->
-
-
-        <!--<div class="bottom-padded-m" data-ng-repeat="skill in userSkills">-->
-
-
-        <!--<a href="" tooltip="{{skill.description}}" tooltip-trigger="mouseenter">-->
-        <!--<i-->
-        <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
-
-
-        <!--{{skill.name}}-->
-        <!--</div>-->
-        <!--</td>-->
-        <!--</tr>-->
-
-        <!--</table>-->
-
-
-        <!--</div>-->
-
-
-        <!--<div class="bottom-padded-m top-padded-m ">-->
-
-        <!--<label>Search the recipe list:</label> <input class="search form-control" ng-model="recipeName">-->
-
-        <!--</div>-->
-
-        <!--<table class="expands">-->
-        <!--<tr>-->
-        <!--<td class="top-aligned">-->
-
-        <!--<div data-ng-repeat="reward in rewards | orderBy: 'name' | filter:{name: recipeName}">-->
-        <!--<span data-ng-if="$index % 3 ===0">{{reward.name}}-->
-        <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
-        <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
-        <!--data-ng-if="!$last">, </span></span>)-->
-
-        <!--</span>-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--</td>-->
-
-        <!--<td class="top-aligned">-->
-
-        <!--<div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{name: recipeName}">-->
-        <!--<span data-ng-if="$index % 3 ===1">{{reward.name}}-->
-        <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
-        <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
-        <!--data-ng-if="!$last">, </span></span>)-->
-
-        <!--</span>-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--</td>-->
-
-        <!--<td class="top-aligned">-->
-
-        <!--<div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{name: recipeName}">-->
-        <!--<span data-ng-if="$index % 3 ===2">{{reward.name}}-->
-        <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
-        <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
-        <!--data-ng-if="!$last">, </span></span>)-->
-
-        <!--</span>-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--</table>-->
-
-        <!--<table class="expands">-->
-        <!--<tr>-->
-        <!--<td class="top-aligned">-->
-
-        <!--<div data-ng-repeat="reward in rewards | orderBy: 'name' | filter:{searchTerm: recipeName}">-->
-        <!--<span data-ng-if="$index % 3 ===0">{{reward.name}}-->
-        <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
-        <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
-        <!--data-ng-if="!$last">, </span></span>)-->
-
-        <!--</span>-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--</td>-->
-
-        <!--<td class="top-aligned">-->
-
-        <!--<div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{searchTerm: recipeName}">-->
-        <!--<span data-ng-if="$index % 3 ===1">{{reward.name}}-->
-        <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
-        <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
-        <!--data-ng-if="!$last">, </span></span>)-->
-
-        <!--</span>-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--</td>-->
-
-        <!--<td class="top-aligned">-->
-
-        <!--<div data-ng-repeat="reward in rewards | orderBy: 'name'| filter:{searchTerm: recipeName}">-->
-        <!--<span data-ng-if="$index % 3 ===2">{{reward.name}}-->
-        <!--<span data-ng-if="reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length>0">-->
-        <!--(<span data-ng-repeat="ingredient in reward.ingredients[0]">{{ingredient.amount}} {{ingredient.name}}<span-->
-        <!--data-ng-if="!$last">, </span></span>)-->
-
-        <!--</span>-->
-        <!--</span>-->
-        <!--</div>-->
-        <!--</td>-->
-        <!--</tr>-->
-        <!--</table>-->
+            </infobox>
+        </div>
 
 
         <!--<section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">-->
 
-        <!--<a href="" data-ng-click="deleteInventory()">delete inventory</a>-->
+
+        <!--<table class="table-striped top-margin-l top-padded-l card-border-top" data-ng-if="cards.length > 0">-->
+        <!--<thead>-->
+        <!--<tr>-->
+
+        <!--<th class="right-padded-m  top-padded-sm">Question</th>-->
+        <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Predicted Retention [hrs]</th>-->
+        <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Score</th>-->
+        <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">History</th>-->
 
 
-        <!--Rewards:-->
-        <!--<pre>{{rewards | json}}</pre>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
 
-        <!--Invetnroy:-->
-        <!--<pre>{{user.inventory | json}}</pre>-->
-        <!--&lt;!&ndash;<pre>&ndash;&gt;-->
-        <!--&lt;!&ndash;Possible Item offers:&ndash;&gt;-->
-        <!--&lt;!&ndash;{{itemOffers | json}}&ndash;&gt;-->
-        <!--&lt;!&ndash;</pre>&ndash;&gt;-->
-        <!--&lt;!&ndash;<pre>&ndash;&gt;-->
-        <!--&lt;!&ndash;Possible Skill offers:&ndash;&gt;-->
-        <!--&lt;!&ndash;{{skillOffers |json}}&ndash;&gt;-->
-        <!--&lt;!&ndash;</pre>&ndash;&gt;-->
-        <!--<pre>-->
-        <!--Possible Recipies:-->
-        <!--{{enabledRecipies |json}}-->
-        <!--</pre>-->
-        <!--</section>-->
+        <!--<tr>-->
 
+
+        <!--<tr data-ng-repeat="card in cards">-->
+
+
+        <!--<td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">-->
+
+        <!--<a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>-->
+        <!--</td>-->
+
+
+        <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
+
+
+        <!--<div data-ng-if="card.hrt">-->
+        <!--&lt;!&ndash;{{toHours(card.hrt)}}&ndash;&gt;-->
+        <!--{{toHours(card.hrt)}} hrs-->
+        <!--({{toSeconds(card.hrt)}} s)-->
+        <!--</div>-->
+
+        <!--<div data-ng-if="!card.hrt">-->
+        <!--n/a-->
+        <!--</div>-->
+        <!--</td>-->
+
+        <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
+
+
+        <!--{{ round(card.score)}}-->
+        <!--</td>-->
+
+        <!--<td class="text-muted right-padded-m nowrap center-aligned top-aligned">-->
+
+        <!--<div data-ng-repeat="h in card.history">-->
+        <!--{{toDate(h.when) | date:'d/M h:mm:ss'}}-->
+        <!--</div>-->
+        <!--</td>-->
+
+
+        <!--</tr>-->
+
+        <!--</tbody>-->
+        <!--</table>-->
+
+        <!--<div class="center-aligned top-padded-m">-->
+        <!--<button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card History</button>-->
+        <!--<button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History</button>-->
 
         <!--</div>-->
-    </div>
-
-
-    <div data-ng-if="!cards || cards.length === 0">
-        <infobox logo="man" position="right">
-
-            There are no cards in this course. You will have to create some in order to practice. You
-            can do this by going to your home page (click on Rememberators on the top of this screen)
-            and select the edit action for this course or simply <a data-ng-href="#!/courses/{{course._id}}/edit">follow
-            this link</a>.
-
-
-        </infobox>
-    </div>
-
-
-    <!--<section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">-->
-
-
-    <!--<table class="table-striped top-margin-l top-padded-l card-border-top" data-ng-if="cards.length > 0">-->
-    <!--<thead>-->
-    <!--<tr>-->
-
-    <!--<th class="right-padded-m  top-padded-sm">Question</th>-->
-    <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Predicted Retention [hrs]</th>-->
-    <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Score</th>-->
-    <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">History</th>-->
-
-
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-
-    <!--<tr>-->
-
-
-    <!--<tr data-ng-repeat="card in cards">-->
-
-
-    <!--<td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">-->
-
-    <!--<a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>-->
-    <!--</td>-->
-
-
-    <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
-
-
-    <!--<div data-ng-if="card.hrt">-->
-    <!--&lt;!&ndash;{{toHours(card.hrt)}}&ndash;&gt;-->
-    <!--{{toHours(card.hrt)}} hrs-->
-    <!--({{toSeconds(card.hrt)}} s)-->
-    <!--</div>-->
-
-    <!--<div data-ng-if="!card.hrt">-->
-    <!--n/a-->
-    <!--</div>-->
-    <!--</td>-->
-
-    <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
-
-
-    <!--{{ round(card.score)}}-->
-    <!--</td>-->
-
-    <!--<td class="text-muted right-padded-m nowrap center-aligned top-aligned">-->
-
-    <!--<div data-ng-repeat="h in card.history">-->
-    <!--{{toDate(h.when) | date:'d/M h:mm:ss'}}-->
-    <!--</div>-->
-    <!--</td>-->
-
-
-    <!--</tr>-->
-
-    <!--</tbody>-->
-    <!--</table>-->
-
-    <!--<div class="center-aligned top-padded-m">-->
-    <!--<button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card History</button>-->
-    <!--<button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History</button>-->
-
-    <!--</div>-->
-    <!--</section>-->
+        <!--</section>-->
 </section>

@@ -21,59 +21,7 @@
 
 
     <!--</div>-->
-    <!--<table class="info expands ">-->
-    <!--&lt;!&ndash;<tr>&ndash;&gt;-->
-    <!--&lt;!&ndash;<td>Description</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;<td class="left-padded-s">:</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;<td class="left-padded-s nowrap">{{course.description}}</td>&ndash;&gt;-->
-    <!--&lt;!&ndash;</tr>&ndash;&gt;-->
 
-
-    <!--<tr>-->
-    <!--<td>Cards</td>-->
-    <!--<td class="left-padded-s">:</td>-->
-    <!--<td class="left-padded-s">-->
-    <!--<span data-ng-if="cards">{{cards.length}}</span>-->
-    <!--<span data-ng-if="!cards">0</span>-->
-    <!--</td>-->
-
-    <!--<td class="expands"></td>-->
-
-    <!--<td>Mode</td>-->
-    <!--<td class="left-padded-s">:</td>-->
-    <!--<td class="left-padded-s">-->
-    <!--<span data-ng-if="cards">{{mode}}</span>-->
-
-    <!--</td>-->
-
-    <!--</tr>-->
-
-    <!--<tr>-->
-    <!--<td class="nowrap">In Play</td>-->
-    <!--<td class="left-padded-s">:</td>-->
-    <!--<td class="left-padded-s">-->
-    <!--<span data-ng-if="cards">{{inPlay}}</span>-->
-    <!--<span data-ng-if="!cards">0</span>-->
-    <!--</td>-->
-
-    <!--<td class="expands"></td>-->
-
-    <!--<td class="nowrap">Retention <a href="" tooltip="The chance that you remember this card"-->
-    <!--tooltip-trigger="mouseenter"><i-->
-    <!--class="glyphicon glyphicon-info-sign small"></i></a>-->
-
-    <!--</td>-->
-    <!--<td class="left-padded-s">:</td>-->
-    <!--<td class="left-padded-s">-->
-    <!--{{card.retention}}%-->
-
-    <!--</td>-->
-
-
-    <!--</tr>-->
-
-
-    <!--</table>-->
     <!--</div>-->
     <!--</div>-->
 
@@ -144,7 +92,59 @@
 
             <div class="col-md-2 col-lg-3 flashcard-right" >
 
-                Some more info
+                <table class="info expands ">
+                <!--<tr>-->
+                <!--<td>Description</td>-->
+                <!--<td class="left-padded-s">:</td>-->
+                <!--<td class="left-padded-s nowrap">{{course.description}}</td>-->
+                <!--</tr>-->
+
+
+                <tr>
+                <td>Cards</td>
+                <td class="left-padded-s">:</td>
+                <td class="left-padded-s">
+                <span data-ng-if="cards">{{cards.length}}</span>
+                <span data-ng-if="!cards">0</span>
+                </td>
+
+                <td class="expands"></td>
+
+                <td>Mode</td>
+                <td class="left-padded-s">:</td>
+                <td class="left-padded-s">
+                <span data-ng-if="cards">{{mode}}</span>
+
+                </td>
+
+                </tr>
+
+                <tr>
+                <td class="nowrap">In Play</td>
+                <td class="left-padded-s">:</td>
+                <td class="left-padded-s">
+                <span data-ng-if="cards">{{inPlay}}</span>
+                <span data-ng-if="!cards">0</span>
+                </td>
+
+                <td class="expands"></td>
+
+                <td class="nowrap">Retention <a href="" tooltip="The chance that you remember this card"
+                tooltip-trigger="mouseenter"><i
+                class="glyphicon glyphicon-info-sign small"></i></a>
+
+                </td>
+                <td class="left-padded-s">:</td>
+                <td class="left-padded-s">
+                {{card.retention}}%
+
+                </td>
+
+
+                </tr>
+
+
+                </table>
 
             </div>
 

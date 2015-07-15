@@ -275,7 +275,7 @@ body {
       .soundicon {
         font-size: xx-small;
         position: absolute;
-        bottom: -1em;
+        //bottom: -1.5em;
         padding-left: 0.5em;
       }
     }
@@ -442,6 +442,15 @@ body {
 .btn-course:focus,
 .btn-course:active,
 .btn-course.active {
+  background-image: none;
+  background-color: #4E51E5;
+  color: #ECECFF;
+}
+
+.edit-card:hover,
+.edit-card:focus,
+.edit-card:active,
+.edit-card.active {
   background-image: none;
   background-color: #4E51E5;
   color: #ECECFF;
@@ -622,8 +631,6 @@ body {
 
 .dashboard-row {
 
-
-
   @media screen {
     @media (min-width: 310px) {
       margin-left:0;
@@ -644,10 +651,12 @@ body {
 }
 
 .edit-card {
+  .btn-rememberators;
   position: absolute;
   top: 10px;
   left: 10px;
-
+  border-radius: 3px;
+  padding: 3px;
 }
 
 .edit-card:hover {

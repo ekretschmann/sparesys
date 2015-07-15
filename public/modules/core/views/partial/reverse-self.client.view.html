@@ -23,44 +23,37 @@
         </div>
 
 
-
-        <div class="question-box" style="position: relative">
-
-            <div>
-            <span class="question">
-            {{card.answer}}
-            </span>
-                       <span data-ng-if="card.readFrontReverse && card.languageBack" class="left-padded-s top-padded-s" style="position: absolute;" >
-
-                    <a class="small" href="" data-ng-click="playSound(card.languageBack, card.answer+ '. '+card.answerExtension)">
-                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-                    </a>
-                </span>
+        <div class="question-box">
+            <div class="question">
+                {{card.answer}}
+                <a class="soundicon" data-ng-if="card.readFrontReverse && card.languageBack"
+                   data-ng-click="playSound(card.languageBack, card.answer+ '. '+card.answerExtension)">
+                    <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+                </a>
             </div>
             <div data-ng-if="card.answerExtension">({{card.answerExtension}})</div>
 
+            <div class="answer" data-ng-if="state === 'answer'">
 
-        </div>
+                <div>{{card.question}} <span data-ng-if="card.readBackReverse && card.languageFront">
 
-        <div class="edit-card"  data-ng-if="!course.supervised">
-            <a data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
-        </div>
-
-        <div class="left-padded-m right-padded-m top-padded-m" data-ng-if="state === 'answer'">
-
-
-            <div  class="correct-answer">
-
-                <div>{{card.question}}<span data-ng-if="card.readBackReverse && card.languageFront" class="left-padded-s top-padded-s small" style="position: absolute;" >
-
-                    <a class="small" href="" data-ng-click="playSound(card.languageFront, card.question+ '. '+card.questionExtension)">
+                    <a class="soundicon" href=""
+                       data-ng-click="playSound(card.languageFront, card.question+ '. '+card.questionExtension)">
                         <i class="glyphicon glyphicon-volume-up sound-replay"></i>
                     </a>
                 </span></div>
+
             </div>
-
-
         </div>
+
+
+
+
+        <div  data-ng-if="!course.supervised && state === 'answer'">
+            <a class="edit-card" data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+        </div>
+
+
     </div>
 
     <div class="center-aligned top-padded">

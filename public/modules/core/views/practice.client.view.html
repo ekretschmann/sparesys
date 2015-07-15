@@ -44,8 +44,6 @@
                 </div>
 
 
-
-
             </div>
 
             <!--<div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1"-->
@@ -101,31 +99,35 @@
                 <!--</tr>-->
 
 
-
-
-
-                <div class="title">Statistics</div>
                 <div style="text-align: left">
-                    {{card.retention}}% chance you remember this card
-                </div>
-                <div>
-                    {{lastRepetition}}
-                </div>
-                <div style="text-align: left">Question mode is {{mode}}</div>
+
+                    <div class="title">Statistics</div>
+                    <div>
+                        {{card.retention}}% chance you remember this card
+                    </div>
+                    <div>
+                        <div data-ng-if="lastRepetition">
+                            Last repetition was on {{lastRepetition | date:'mediumDate'}}
+                        </div>
+                    </div>
+                    <div >Question mode is {{mode}}</div>
 
 
-                <div style="text-align: left">
-                    <div data-ng-if="cards" style="display: inline">{{cards.length}}</div>
-                    <div data-ng-if="!cards" style="display: inline">0</div>
-                    <div style="display: inline"> Cards in this course</div>
-                </div>
+                    <div style="padding-top: 1em">
+                        <div data-ng-if="cards" style="display: inline">{{cards.length}}</div>
+                        <div data-ng-if="!cards" style="display: inline">0</div>
+                        <div style="display: inline"> Cards in this course</div>
+                    </div>
 
-                <div style="text-align: left">
-                    <div data-ng-if="cards" style="display: inline">{{inPlay}}</div>
-                    <div data-ng-if="!cards" style="display: inline">No cards </div>
-                    <div style="display: inline"> are in play</div>
+                    <div>
+                        <div data-ng-if="cards" style="display: inline">{{inPlay}}</div>
+                        <div data-ng-if="!cards" style="display: inline">No cards</div>
+                        <div style="display: inline"> are in play</div>
+                    </div>
+                    <div>
+                        {{cardsRepeated}} cards repeated in this session
+                    </div>
                 </div>
-
             </div>
 
             <!--</div>-->

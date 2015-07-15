@@ -21,6 +21,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.authentication = Authentication;
         $scope.repeatCard = false;
         $scope.cardsRemembered = 0;
+        $scope.cardsRepeated = 0;
         $scope.rewardScore = 0;
 
         $scope.progress = 30;
@@ -510,7 +511,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             if ($scope.card.history && $scope.card.history.length>0) {
                 $scope.lastRepetition = new Date($scope.card.history[$scope.card.history.length-1].when);
             } else {
-                $scope.lastRepetition = 'this is a new card';
+                $scope.lastRepetition = undefined;
             }
 
             var repetitionParameters = ModeSelectorService.getRepetitionParameters(bestCard);
@@ -519,6 +520,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
 
             $scope.cardScore = 0;
+            $scope.cardsRepeated++;
 
             $scope.card.history.forEach(function (time) {
                 $scope.cardScore += time.assessment;

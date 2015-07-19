@@ -39,7 +39,7 @@
             </div>
             <div data-ng-if="card.questionExtension">({{card.questionExtension}})</div>
 
-            <div class="flashcard-input-box top-padded-m" data-ng-if="state === 'question'">
+            <div class="flashcard-input-box" data-ng-if="state === 'question'">
 
                 <input type="text" required
                        id="focus-question"
@@ -47,8 +47,8 @@
                        data-ng-model="answer.text">
 
 
-                <div class="top-padded-s">
-                    <span class="left-padded-s" data-ng-repeat="character in specialChars"
+                <div >
+                    <span data-ng-repeat="character in specialChars"
                           data-ng-click="addChar(character)"><button class="btn btn-letter">{{character}}
                     </button></span>
                 </div>
@@ -82,7 +82,7 @@
         </div>
 
 
-        <div data-ng-if="state === 'answer'" >
+        <div data-ng-if="state === 'answer'" class="answer">
 
 
             <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
@@ -95,9 +95,10 @@
                 </a>
             </div>
 
-            <div data-ng-if="answer.assessment === 'wrong'" class="incorrect-answer">
+            <div data-ng-if="answer.assessment === 'wrong'">
 
-                Expected answer: {{card.answer}}
+
+                <span class="incorrect-answer">Expected answer: {{card.answer}}</span>
 
                 <a data-ng-if="card.readBackForward" class="soundicon" href=""
                    data-ng-click="playSound(card.languageBack, card.answer)">
@@ -112,7 +113,7 @@
     </div>
 
 
-    <div class="center-aligned top-padded">
+    <div class="submit-buttons-section">
         <div data-ng-show="state === 'question'">
             <button class="btn btn-rememberators" data-ng-click="showAnswer()">Enter</button>
         </div>

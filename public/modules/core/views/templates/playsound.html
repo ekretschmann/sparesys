@@ -1,14 +1,18 @@
-
-
 <div class="playsound">
-    {{text}}
 
 
-    <a data-ng-if="playwhen" class="soundicon" href=""
-       data-ng-click="playSound()">
-        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-    </a>
+    <div style="position: relative; display: inline">
+        {{text}}
 
+
+        <a data-ng-if="playwhen" class="soundicon" href="" style="position: absolute; font-size: x-small; right: -1.5em; top:0.1em"
+           data-ng-click="playSound(language, text, extension)">
+            <i class="glyphicon glyphicon-volume-up sound-replay"></i>
+        </a>
+    </div>
+
+
+    <div data-ng-if="extension" style="font-size: large; padding-top: 0.5em">({{extension}})</div>
 
 
 </div>

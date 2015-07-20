@@ -37,17 +37,13 @@
                            playwhen="{{card.readFrontForward && card.languageFront}}"/>
 
             </div>
-            <div data-ng-if="card.questionExtension">({{card.questionExtension}})</div>
 
             <div class="answer" data-ng-if="state === 'answer'">
 
-                <div>{{card.answer}}
-
-                    <a data-ng-if="card.readBackForward && card.languageBack" class="soundicon" href=""
-                       data-ng-click="playSound(card.languageBack, card.answer+ '. '+card.answerExtension)">
-                        <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-                    </a>
-                </div>
+                <playsound language="{{card.languageBack}}"
+                           text="{{card.answer}}"
+                           extension="{{card.answerExtension}}"
+                           playwhen="{{card.readBackForward && card.languageBack}}"/>
 
             </div>
         </div>

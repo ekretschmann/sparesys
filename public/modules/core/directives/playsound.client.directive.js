@@ -16,16 +16,15 @@ angular.module('core').directive('playsound',
 
 
 
-                scope.playSound = function (lang, text) {
+                scope.playSound = function (lang, text, extension) {
 
 
-                    console.log(scope.text);
+                    //console.log(scope.text);
   //                  console.log(scope.playwhen);
-                    console.log(scope.language);
+  //                  console.log(scope.language);
 //                    console.log(scope.extension);
 
-                    if (!scope.language.name || !scope.language.code) {
-                        console.log('aaaaa');
+                    if (lang.name || lang.code) {
                         return;
                     }
 
@@ -33,10 +32,16 @@ angular.module('core').directive('playsound',
                     if (window.SpeechSynthesisUtterance !== undefined) {
 
 
-                        console.log('aaaaa');
-                        // console.log('playing sound: '+text+ ' ('+lang.code+')');
+                        console.log(lang);
+
 
                         var msg = new SpeechSynthesisUtterance(text);
+                        msg.lang = lang.code;
+                        window.speechSynthesis.speak(msg);
+                        console.log(msg);
+
+
+                        msg = new SpeechSynthesisUtterance(extension);
                         msg.lang = lang.code;
                         window.speechSynthesis.speak(msg);
 
@@ -47,7 +52,7 @@ angular.module('core').directive('playsound',
 
                 };
 
-                scope.playSound('aaa',scope.text);
+                scope.playSound(scope.language, scope.text, scope.extension);
 
                 
             },

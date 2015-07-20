@@ -152,24 +152,25 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.playSound = function (lang, text) {
 
 
-            //console.log(text);
-
-            if (!lang || !lang.code) {
-                return;
-            }
-
-            /* jshint ignore:start */
-            if (window.SpeechSynthesisUtterance !== undefined) {
-
-
-                // console.log('playing sound: '+text+ ' ('+lang.code+')');
-
-                var msg = new SpeechSynthesisUtterance(text);
-                msg.lang = lang.code;
-                window.speechSynthesis.speak(msg);
-
-            }
-            /* jshint ignore:end */
+            ////console.log(text);
+            //
+            //if (!lang || !lang.code) {
+            //    return;
+            //}
+            //
+            ///* jshint ignore:start */
+            //if (window.SpeechSynthesisUtterance !== undefined) {
+            //
+            //
+            //     console.log('playing sound: '+text+ ' ('+lang.code+')');
+            //    console.log(window);
+            //
+            //    var msg = new SpeechSynthesisUtterance(text);
+            //    msg.lang = lang.code;
+            //    window.speechSynthesis.speak(msg);
+            //
+            //}
+            ///* jshint ignore:end */
 
         };
 

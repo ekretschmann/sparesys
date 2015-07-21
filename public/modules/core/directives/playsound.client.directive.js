@@ -19,29 +19,15 @@ angular.module('core').directive('playsound',
                 scope.playSound = function (lang, text, extension) {
 
 
-                    //console.log(scope.text);
-  //                  console.log(scope.playwhen);
-  //                  console.log(scope.language);
-                    console.log(lang);
-                    //console.log(lang.name);
-                    //console.log(lang.code);
-//                    console.log(scope.extension);
-//
-//                    if (lang.name || lang.code) {
-//                        return;
-//                    }
+
 
                     /* jshint ignore:start */
                     if (window.SpeechSynthesisUtterance !== undefined) {
 
 
-                        //console.log(lang);
-
-
                         var msg = new SpeechSynthesisUtterance(text);
                         msg.lang = lang;
                         window.speechSynthesis.speak(msg);
-                        console.log(msg);
 
 
                         msg = new SpeechSynthesisUtterance(extension);
@@ -55,8 +41,10 @@ angular.module('core').directive('playsound',
 
                 };
 
-                scope.playSound(scope.language, scope.text, scope.extension);
 
+                scope.$watch('text', function() {
+                    scope.playSound(scope.language, scope.text, scope.extension);
+                });
                 
             },
             templateUrl: '/modules/core/views/templates/playsound.html'

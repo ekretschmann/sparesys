@@ -5,39 +5,29 @@
 
     <div class="flashcard">
 
-        <!--<div class="card-score">-->
-        <!--<div data-ng-if="card.history.length === 0">-->
-        <!--<table class="new-card">-->
-        <!--<tr>-->
+        <div data-ng-if="card.history.length === 0">
+            <div class="new-card">
+                <div>
+                    <img class="tiny-image"
+                         src="/modules/core/img/brand/superhero-boy-medium.gif">
+                </div>
+                New Card!
+            </div>
+        </div>
 
-        <!--<td class="top-aligned nowrap">-->
-        <!--<div class="font-m">-->
-        <!--New Card!-->
-        <!--</div>-->
-        <!--</td>-->
-        <!--<td class="top-aligned">-->
-        <!--<img class="tiny-image"-->
-        <!--src="/modules/core/img/brand/superhero-boy-medium.gif">-->
-        <!--</td>-->
-
-        <!--</tr>-->
-        <!--</table>-->
-
-        <!--</div>-->
-        <!--</div>-->
+        <div data-ng-if="!course.supervised && state === 'answer'">
+            <a class="edit-card" data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
+        </div>
 
 
         <div class="question-box">
             <div class="question">
-                {{card.question}}
+                <playsound language="{{card.languageFront.code}}"
+                           text="{{card.question}}"
+                           extension="{{card.questionExtension}}"
+                           playwhen="{{card.readFrontForward && card.languageFront}}"/>
 
-                <a data-ng-if="card.readFrontForward && card.languageFront"
-                   class="soundicon" href=""
-                   data-ng-click="playSound(card.languageFront, card.question+ '. '+card.questionExtension)">
-                    <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-                </a>
             </div>
-            <div data-ng-if="card.questionExtension">({{card.questionExtension}})</div>
 
             <div class="flashcard-input-box" data-ng-if="state === 'question'">
 
@@ -47,7 +37,7 @@
                        data-ng-model="answer.text">
 
 
-                <div >
+                <div>
                     <span data-ng-repeat="character in specialChars"
                           data-ng-click="addChar(character)"><button class="btn btn-letter">{{character}}
                     </button></span>
@@ -55,59 +45,58 @@
             </div>
 
 
-        <div data-ng-if="!course.supervised && state === 'answer'">
-            <a class="edit-card" data-ng-href="#!/cards/{{card._id}}/edit">Edit this card</a>
-        </div>
-
-        <div data-ng-if="state === 'answer' && answer.assessment === 'wrong'">
-            <a class="answer-counts" data-ng-click="$parent.myAnswerCounts(answer.text, 'forward')" href="">My answer
-                counts</a>
-        </div>
 
 
-        <div data-ng-if="state === 'answer'">
-
-
-            <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
-
-                <div>Your answer: {{answer.text}}</div>
-            </div>
-
-            <div data-ng-if="answer.assessment === 'wrong'" class="incorrect-answer">
-
-                <div>Your answer: {{answer.text}}</div>
+            <div data-ng-if="state === 'answer' && answer.assessment === 'wrong'">
+                <a class="answer-counts" data-ng-click="$parent.myAnswerCounts(answer.text, 'forward')" href="">My
+                    answer
+                    counts</a>
             </div>
 
 
-        </div>
 
 
-        <div data-ng-if="state === 'answer'" class="answer">
+
+            <div data-ng-if="state === 'answer'" class="answer">
 
 
-            <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
+                <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
 
-                Expected answer: {{card.answer}}
+                    <playsound language="{{card.languageBack.code}}"
+                               text="{{card.answer}}"
+                               extension="{{card.answerExtension}}"
+                               playwhen="{{card.readBackForward && card.languageBack}}"/>
 
-                <a data-ng-if="card.readBackForward" class="soundicon" href=""
-                   data-ng-click="playSound(card.languageBack, card.answer)">
-                    <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-                </a>
+                </div>
+
+                <div data-ng-if="answer.assessment === 'wrong'" class="incorrect-answer">
+
+
+                    <playsound language="{{card.languageBack.code}}"
+                               text="{{card.answer}}"
+                               extension="{{card.answerExtension}}"
+                               playwhen="{{card.readBackForward && card.languageBack}}"/>
+
+                </div>
+
+
             </div>
 
-            <div data-ng-if="answer.assessment === 'wrong'">
+            <div data-ng-if="state === 'answer'">
 
 
-                <span class="incorrect-answer">Expected answer: {{card.answer}}</span>
+                <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
 
-                <a data-ng-if="card.readBackForward" class="soundicon" href=""
-                   data-ng-click="playSound(card.languageBack, card.answer)">
-                    <i class="glyphicon glyphicon-volume-up sound-replay"></i>
-                </a>
+                    <div>Your answer: {{answer.text}}</div>
+                </div>
+
+                <div data-ng-if="answer.assessment === 'wrong'" class="incorrect-answer">
+
+                    <div>Your answer: {{answer.text}}</div>
+                </div>
+
+
             </div>
-
-
-        </div>
 
         </div>
     </div>

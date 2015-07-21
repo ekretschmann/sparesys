@@ -55,10 +55,10 @@
 
                 <div data-ng-if="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
 
-                    <div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">
+                    <div data-ng-if="assess === 'self'" data-ng-hide="assess === 'auto'">
                         <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
                     </div>
-                    <div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">
+                    <div data-ng-if="assess === 'auto'" data-ng-hide="assess === 'self'">
                         <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
                     </div>
                 </div>

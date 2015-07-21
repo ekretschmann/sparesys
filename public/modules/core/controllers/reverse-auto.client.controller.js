@@ -122,6 +122,13 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
             }
 
 
+            if ($scope.state === 'answer' && event.keyCode === 13) {
+
+                $scope.nextCard();
+                $scope.state = 'question';
+                return;
+            }
+
             if ($scope.state === 'question' && event.keyCode === 13 && $scope.answer.text) {
                 $timeout(function () {
                     $scope.showAnswer();

@@ -441,6 +441,17 @@ body {
   background-image: none;
   background-color: #4E51E5;
   color: #ECECFF;
+  text-decoration: none;
+}
+
+.answer-counts:hover,
+.answer-counts:focus,
+.answer-counts:active,
+.answer-counts.active {
+  background-image: none;
+  background-color: #4E51E5;
+  color: #ECECFF;
+  text-decoration: none;
 }
 
 .signup-button {
@@ -625,29 +636,34 @@ body {
 
   }
 }
+.flashcard-top {
+  height: 2em;
+}
+.flashcard-nw {
+  text-align: left;
+  padding-top: 10px;
+  padding-left: 20px;
+}
+
+.flashcard-ne {
+  text-align: right;
+  padding-top: 10px;
+  padding-right: 20px;
+}
 
 .edit-card {
   .btn-rememberators;
-  position: absolute;
-  top: 10px;
-  left: 10px;
   border-radius: 5px;
   padding: 5px;
-
+  //position: absolute;
+  //top: 10px;
+  //left: 10px;
 }
 
 .answer-counts {
   .btn-rememberators;
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  border-radius: 3px;
+  border-radius: 5px;
   padding: 5px;
-
-}
-
-.edit-card:hover {
-  text-decoration: none;
 }
 
 .center-aligned {

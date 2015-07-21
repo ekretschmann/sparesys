@@ -22,27 +22,30 @@ angular.module('core').directive('playsound',
                     //console.log(scope.text);
   //                  console.log(scope.playwhen);
   //                  console.log(scope.language);
+                    console.log(lang);
+                    //console.log(lang.name);
+                    //console.log(lang.code);
 //                    console.log(scope.extension);
-
-                    if (lang.name || lang.code) {
-                        return;
-                    }
+//
+//                    if (lang.name || lang.code) {
+//                        return;
+//                    }
 
                     /* jshint ignore:start */
                     if (window.SpeechSynthesisUtterance !== undefined) {
 
 
-                        console.log(lang);
+                        //console.log(lang);
 
 
                         var msg = new SpeechSynthesisUtterance(text);
-                        msg.lang = lang.code;
+                        msg.lang = lang;
                         window.speechSynthesis.speak(msg);
                         console.log(msg);
 
 
                         msg = new SpeechSynthesisUtterance(extension);
-                        msg.lang = lang.code;
+                        msg.lang = lang;
                         window.speechSynthesis.speak(msg);
 
                     } else {

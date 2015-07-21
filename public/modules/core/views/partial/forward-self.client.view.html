@@ -31,7 +31,7 @@
         <div class="question-box">
             <div class="question">
 
-                <playsound language="{{card.languageFront}}"
+                <playsound language="{{card.languageFront.code}}"
                            text="{{card.question}}"
                            extension="{{card.questionExtension}}"
                            playwhen="{{card.readFrontForward && card.languageFront}}"/>
@@ -40,7 +40,7 @@
 
             <div class="answer" data-ng-if="state === 'answer'">
 
-                <playsound language="{{card.languageBack}}"
+                <playsound language="{{card.languageBack.code}}"
                            text="{{card.answer}}"
                            extension="{{card.answerExtension}}"
                            playwhen="{{card.readBackForward && card.languageBack}}"/>

@@ -5,10 +5,10 @@
 angular.module('core').controller('PracticeController', ['$window', '$location', '$scope',
     '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication',
     'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsService', 'ChallengeCalculatorService',
-    'ModeSelectorService',
+    'ModeSelectorService', 'SpeechRecognitionService',
     function ($window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
               Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService, ChallengeCalculatorService,
-              ModeSelectorService) {
+              ModeSelectorService, SpeechRecognitionService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -33,11 +33,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.delta = {};
 
-        //$scope.challenge = 'eighty';
-        //
-        //$scope.delta = {};
-        //$scope.delta.number = 0;
-        //$scope.delta.difference = 0;
 
         $scope.doneColorCode = {'color': '#00FF00'};
 
@@ -78,101 +73,13 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         };
 
 
-        $scope.initSpeech = function () {
-//                console.log('got it');
-            /* jshint ignore:start */
-            $scope.recognition = new webkitSpeechRecognition();
 
 
-            $scope.recognition.continuous = true;
-            $scope.recognition.interimResults = true;
 
-
-            $scope.recognition.lang = $scope.card.languageBack.code;
-
-
-            $scope.recognition.onresult = $scope.onSpeechResult;
-
-            $scope.recognition.onstart = function () {
-                console.log('start');
-                $scope.answer.text = '';
-            };
-
-            $scope.recognition.onerror = function (event) {
-
-                console.log('error');
-                console.log(event);
-            };
-            $scope.recognition.onend = function () {
-                console.log('end');
-                recognition.start();
-            };
-
-            console.log('and starting');
-            $scope.recognition.start();
-            /* jshint ignore:end */
-        };
-
-        $scope.onSpeechResult = function (event) {
-            /* jshint ignore:start */
-
-
-            var interim_transcript = '';
-            if (typeof(event.results) === 'undefined') {
-//                    console.log('ending');
-                $scope.recognition.onend = null;
-                $scope.recognition.stop();
-//                    upgrade();
-                return;
-            }
-            for (var i = event.resultIndex; i < event.results.length; ++i) {
-                console.log(i);
-
-                //if ($scope.state==='question' && $scope.practice.direction === 'forward') {
-                //    if (event.results[i].isFinal) {
-                //        if ($scope.answer.text === undefined) {
-                //            $scope.answer.text = '';
-                //        }
-                //
-                //        $scope.answer.text += event.results[i][0].transcript.trim();
-                //        $state.go($state.$current);
-                //    } else {
-                //        interim_transcript += event.results[i][0].transcript.trim();
-                //    }
-                //}
-            }
-            /* jshint ignore:end */
-
-        };
 
 
         $scope.soundSupport = false;
 
-
-        $scope.playSound = function (lang, text) {
-
-
-            ////console.log(text);
-            //
-            //if (!lang || !lang.code) {
-            //    return;
-            //}
-            //
-            ///* jshint ignore:start */
-            //if (window.SpeechSynthesisUtterance !== undefined) {
-            //
-            //
-            //     console.log('playing sound: '+text+ ' ('+lang.code+')');
-            //    console.log(window);
-            //
-            //    var msg = new SpeechSynthesisUtterance(text);
-            //    msg.lang = lang.code;
-            //    window.speechSynthesis.speak(msg);
-            //
-            //}
-            ///* jshint ignore:end */
-
-        };
 
 
         $scope.round = function (num) {
@@ -535,13 +442,13 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
             $scope.updateSlides();
             if ($scope.mode === 'forward' && $scope.card.speechRecognitionForward) {
-                $scope.initSpeech();
+                SpeechRecognitionService.initSpeech();
             }
             if ($scope.mode === 'reverse' && $scope.card.speechRecognitionReverse) {
-                $scope.initSpeech();
+                SpeechRecognitionService.initSpeech();
             }
             if ($scope.mode === 'images' && $scope.card.speechRecognitionImages) {
-                $scope.initSpeech();
+                SpeechRecognitionService.initSpeech();
             }
 
 

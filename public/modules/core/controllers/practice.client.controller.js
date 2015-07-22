@@ -495,9 +495,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 courseId: $stateParams.courseId
             }, function (course) {
                 $scope.course = course;
-                console.log('xxxx');
-                console.log(ChallengeCalculatorService.getDoneScore());
-                console.log(ChallengeCalculatorService.getColor());
                 GaugeService.loadLiquidFillGauge(ChallengeCalculatorService.getDoneScore(), ChallengeCalculatorService.getColor());
 
 

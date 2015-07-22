@@ -99,7 +99,7 @@
                 <!--</tr>-->
 
 
-                <div style="text-align: left">
+                <div class="section-right section-right-first">
 
                     <div class="title">Statistics</div>
                     <div>
@@ -129,7 +129,7 @@
                     </div>
                 </div>
 
-                <div style="text-align: left; padding-top: 3em">
+                <div class="section-right">
 
                     <div class="title">Options</div>
 
@@ -181,102 +181,99 @@
                 </div>
 
 
+                <div class="section-right">
 
 
+                    <div class="title">Debug</div>
 
 
-                <div class="title" style="text-align: left; padding-top: 2em">Debug</div>
+                    <!--<section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">-->
 
 
-                <!--<section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">-->
+                    <!--<table class="table-striped top-margin-l top-padded-l card-border-top" data-ng-if="cards.length > 0">-->
+                    <!--<thead>-->
+                    <!--<tr>-->
+
+                    <!--<th class="right-padded-m  top-padded-sm">Question</th>-->
+                    <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Predicted Retention [hrs]</th>-->
+                    <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Score</th>-->
+                    <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">History</th>-->
 
 
-                <!--<table class="table-striped top-margin-l top-padded-l card-border-top" data-ng-if="cards.length > 0">-->
-                <!--<thead>-->
-                <!--<tr>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
 
-                <!--<th class="right-padded-m  top-padded-sm">Question</th>-->
-                <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Predicted Retention [hrs]</th>-->
-                <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Score</th>-->
-                <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">History</th>-->
+                    <!--<tr>-->
 
 
-                <!--</tr>-->
-                <!--</thead>-->
-                <!--<tbody>-->
-
-                <!--<tr>-->
+                    <!--<tr data-ng-repeat="card in cards">-->
 
 
-                <!--<tr data-ng-repeat="card in cards">-->
+                    <!--<td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">-->
+
+                    <!--<a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>-->
+                    <!--</td>-->
 
 
-                <!--<td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">-->
-
-                <!--<a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>-->
-                <!--</td>-->
+                    <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
 
 
-                <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
+                    <!--<div data-ng-if="card.hrt">-->
+                    <!--&lt;!&ndash;{{toHours(card.hrt)}}&ndash;&gt;-->
+                    <!--{{toHours(card.hrt)}} hrs-->
+                    <!--({{toSeconds(card.hrt)}} s)-->
+                    <!--</div>-->
+
+                    <!--<div data-ng-if="!card.hrt">-->
+                    <!--n/a-->
+                    <!--</div>-->
+                    <!--</td>-->
+
+                    <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
 
 
-                <!--<div data-ng-if="card.hrt">-->
-                <!--&lt;!&ndash;{{toHours(card.hrt)}}&ndash;&gt;-->
-                <!--{{toHours(card.hrt)}} hrs-->
-                <!--({{toSeconds(card.hrt)}} s)-->
-                <!--</div>-->
+                    <!--{{ round(card.score)}}-->
+                    <!--</td>-->
 
-                <!--<div data-ng-if="!card.hrt">-->
-                <!--n/a-->
-                <!--</div>-->
-                <!--</td>-->
+                    <!--<td class="text-muted right-padded-m nowrap center-aligned top-aligned">-->
 
-                <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
+                    <!--<div data-ng-repeat="h in card.history">-->
+                    <!--{{toDate(h.when) | date:'d/M h:mm:ss'}}-->
+                    <!--</div>-->
+                    <!--</td>-->
 
 
-                <!--{{ round(card.score)}}-->
-                <!--</td>-->
+                    <!--</tr>-->
 
-                <!--<td class="text-muted right-padded-m nowrap center-aligned top-aligned">-->
+                    <!--</tbody>-->
+                    <!--</table>-->
 
-                <!--<div data-ng-repeat="h in card.history">-->
-                <!--{{toDate(h.when) | date:'d/M h:mm:ss'}}-->
-                <!--</div>-->
-                <!--</td>-->
+                    <!--<div class="center-aligned top-padded-m">-->
+                    <button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card History</button>
+                    <button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History</button>
 
-
-                <!--</tr>-->
-
-                <!--</tbody>-->
-                <!--</table>-->
-
-                <!--<div class="center-aligned top-padded-m">-->
-                <!--<button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card History</button>-->
-                <!--<button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History</button>-->
-
-                <!--</div>-->
-                <!--</section>-->
+                    <!--</div>-->
+                    <!--</section>-->
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 
-
 <!--<div data-ng-if="!cards || cards.length === 0">-->
-    <!--<infobox logo="man" position="right">-->
+<!--<infobox logo="man" position="right">-->
 
-        <!--There are no cards in this course. You will have to create some in order to practice. You-->
-        <!--can do this by going to your home page (click on Rememberators on the top of this screen)-->
-        <!--and select the edit action for this course or simply <a-->
-            <!--data-ng-href="#!/courses/{{course._id}}/edit">follow-->
-        <!--this link</a>.-->
+<!--There are no cards in this course. You will have to create some in order to practice. You-->
+<!--can do this by going to your home page (click on Rememberators on the top of this screen)-->
+<!--and select the edit action for this course or simply <a-->
+<!--data-ng-href="#!/courses/{{course._id}}/edit">follow-->
+<!--this link</a>.-->
 
 
-    <!--</infobox>-->
+<!--</infobox>-->
 <!--</div>-->
-
-
 
 
 <!--</div>-->

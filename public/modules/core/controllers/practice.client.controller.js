@@ -4,10 +4,10 @@
 // Courses controller
 angular.module('core').controller('PracticeController', ['$window', '$location', '$scope',
     '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication',
-    'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsService', 'ChallengeCalculatorService',
+    'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'GaugeService', 'ChallengeCalculatorService',
     'ModeSelectorService', 'SpeechRecognitionService',
     function ($window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
-              Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsService, ChallengeCalculatorService,
+              Courses, Cards, CoursesService, RetentionCalculatorService, GaugeService, ChallengeCalculatorService,
               ModeSelectorService, SpeechRecognitionService) {
 
         $scope.time = Date.now();
@@ -34,38 +34,14 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.delta = {};
 
 
-        $scope.doneColorCode = {'color': '#00FF00'};
 
-        $scope.$watch('doneScore', function () {
-            $timeout(function() {
-                $scope.loadLiquidFillGauge($scope.doneScore, $scope.doneColorCode);
-            }, 200);
-        });
+
 
 
         $scope.lastRepetition = new Date(Date.now);
 
 
-        $scope.loadLiquidFillGauge = function (score, colorCode) {
 
-
-
-            if (score < 0) {
-                return;
-            }
-
-            //console.log(colorCode);
-            var config1 = DiagramsService.liquidFillGaugeDefaultSettings();
-            config1.circleColor = colorCode.color;
-            config1.textColor = colorCode.color;
-            config1.waveTextColor = colorCode.color;
-            config1.waveColor = '#CCCCFF';
-            config1.circleThickness = 0.2;
-            config1.textVertPosition = 0.2;
-            config1.waveAnimateTime = 1000;
-            DiagramsService.loadLiquidFillGauge('fillgauge', score, config1);
-
-        };
 
 
         $scope.stopPracitcing = function () {
@@ -409,8 +385,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 ChallengeCalculatorService.newCardAsked();
             }
 
-            $scope.doneScore = ChallengeCalculatorService.getDoneScore();
-            $scope.doneColorCode = {'color': ChallengeCalculatorService.getColor()};
+            GaugeService.loadLiquidFillGauge(ChallengeCalculatorService.getDoneScore(), ChallengeCalculatorService.getColor());
+
             $scope.challengeName = ChallengeCalculatorService.getChallengeName();
             $scope.challengeDescription = ChallengeCalculatorService.getChallengeDescription();
 
@@ -519,6 +495,10 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                 courseId: $stateParams.courseId
             }, function (course) {
                 $scope.course = course;
+                console.log('xxxx');
+                console.log(ChallengeCalculatorService.getDoneScore());
+                console.log(ChallengeCalculatorService.getColor());
+                GaugeService.loadLiquidFillGauge(ChallengeCalculatorService.getDoneScore(), ChallengeCalculatorService.getColor());
 
 
             });

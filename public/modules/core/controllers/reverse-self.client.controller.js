@@ -2,27 +2,10 @@
 
 
 // Courses controller
-angular.module('core').controller('ReverseSelfController', ['$scope', '$state', '$document', '$timeout',
-    function ($scope, $state, $document, $timeout) {
+angular.module('core').controller('ReverseSelfController', ['$scope', '$state', '$document',
+    function ($scope, $state, $document) {
 
         $scope.state = 'question';
-
-
-        $scope.$watch('card', function() {
-            if ($scope.card.readFrontReverse && $scope.mode === 'reverse' && $scope.assess==='self') {
-                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
-
-                if($scope.card.answerExtension) {
-                    $scope.$parent.playSound($scope.card.languageBack, $scope.card.answerExtension);
-                }
-            }
-        });
-
-        $scope.$watch('state', function() {
-            if ($scope.state === 'answer' && $scope.card.readBackReverse) {
-                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
-            }
-        });
 
         $scope.showAnswer = function () {
             $scope.state = 'answer';

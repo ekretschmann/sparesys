@@ -2,40 +2,14 @@
 
 
 // Courses controller
-angular.module('core').controller('ForwardSelfController', ['$scope', '$state', '$document', '$timeout',
-    function ($scope, $state, $document, $timeout) {
+angular.module('core').controller('ForwardSelfController', ['$scope', '$state', '$document',
+    function ($scope, $state, $document) {
 
         $scope.init = function() {
             $scope.state = 'question';
 
         };
 
-
-
-        $scope.$watch('card', function() {
-            if ($scope.card.readFrontForward && $scope.mode === 'forward' && $scope.assess==='self') {
-                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
-
-                if($scope.card.questionExtension) {
-                    $scope.$parent.playSound($scope.card.languageFront, $scope.card.questionExtension);
-                }
-            }
-        });
-
-        $scope.$watch('state', function() {
-            if ($scope.state === 'answer' && $scope.card.readBackForward) {
-                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
-            }
-
-            //if ($scope.state === 'question') {
-            //
-            //    $timeout(function () {
-            //        angular.element('#focus-question').trigger('focus');
-            //        //  console.log(angular.element('#focus-question'));
-            //    }, 100);
-            //}
-
-        });
 
         $scope.showAnswer = function () {
             $scope.state = 'answer';

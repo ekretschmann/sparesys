@@ -36,19 +36,13 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
             }
         };
 
-        $scope.$watch('card', function() {
-            if ($scope.card.readFrontReverse && $scope.mode === 'reverse' && $scope.assess==='auto') {
-                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
-
-                if($scope.card.answerExtension) {
-                    $scope.$parent.playSound($scope.card.languageBack, $scope.card.answerExtension);
-                }
-            }
-        });
 
         $scope.$watch('state', function() {
-            if ($scope.state === 'answer' && $scope.card.readBackReverse) {
-                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
+            if ($scope.state === 'question') {
+
+                $timeout(function () {
+                    angular.element('#focus-question').trigger('focus');
+                }, 100);
             }
 
         });
@@ -142,7 +136,6 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
 
         $scope.nextCard = function () {
 
-            console.log('reverse setting to question');
 
             $scope.state = 'question';
             $scope.$parent.nextCard();

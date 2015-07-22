@@ -41,27 +41,13 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         };
 
 
-        $scope.$watch('card', function () {
-            if ($scope.card.readFrontForward && $scope.mode === 'forward' && $scope.assess === 'auto') {
-                $scope.$parent.playSound($scope.card.languageFront, $scope.card.question);
-                if ($scope.card.questionExtension) {
-                    $scope.$parent.playSound($scope.card.languageFront, $scope.card.questionExtension);
-                }
-            }
-        });
 
         $scope.$watch('state', function () {
-
-
-            if ($scope.state === 'answer' && $scope.card.readBackForward) {
-                $scope.$parent.playSound($scope.card.languageBack, $scope.card.answer);
-            }
 
             if ($scope.state === 'question') {
 
                 $timeout(function () {
                     angular.element('#focus-question').trigger('focus');
-                    //  console.log(angular.element('#focus-question'));
                 }, 100);
             }
         });

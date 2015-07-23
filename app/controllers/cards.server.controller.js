@@ -72,12 +72,12 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
 
 
-    //if (true) {
-    //    return res.send(400, {
-    //
-    //        message: 'test'
-    //    });
-    //}
+    if (true) {
+        return res.send(400, {
+
+            message: 'test'
+        });
+    }
 
     var card = req.card;
 

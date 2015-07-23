@@ -202,7 +202,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                 newCard.$update(function(resp) {
                     //console.log(resp);
-                    $scope.error = undefined;
+                    //$scope.error = undefined;
                 }, function(z) {
                     console.log(z);
                     console.log(z.data);
@@ -276,21 +276,21 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.nextCard = function () {
 
 
-            if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
-
-
-                $scope.progress = 100 * $scope.rewardScore / 6.0;
-
-                if ($scope.rewardScore > 6) {
-
-                    $timeout(function () {
-                        $scope.rewardScore = 0.0;
-                        $scope.mode = 'reward';
-                    }, 100);
-
-                    return;
-                }
-            }
+            //if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
+            //
+            //
+            //    $scope.progress = 100 * $scope.rewardScore / 6.0;
+            //
+            //    if ($scope.rewardScore > 6) {
+            //
+            //        $timeout(function () {
+            //            $scope.rewardScore = 0.0;
+            //            $scope.mode = 'reward';
+            //        }, 100);
+            //
+            //        return;
+            //    }
+            //}
 
             $scope.time = Date.now();
 
@@ -474,9 +474,9 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.initPractice = function () {
 
 
-            if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
-                $scope.receiveRewards = 'content-header';
-            }
+            //if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
+            //    $scope.receiveRewards = 'content-header';
+            //}
             if ($window.ga) {
                 $window.ga('send', 'pageview', '/practice/:id');
                 $window.ga('send', 'event', 'start practicing');

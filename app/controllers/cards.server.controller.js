@@ -70,6 +70,15 @@ exports.read = function (req, res) {
  * Update a Card
  */
 exports.update = function (req, res) {
+
+
+    //if (true) {
+    //    return res.send(400, {
+    //
+    //        message: 'test'
+    //    });
+    //}
+
     var card = req.card;
 
 

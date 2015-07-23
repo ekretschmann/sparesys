@@ -33,6 +33,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.delta = {};
 
+        $scope.error = undefined;
+
 
 
 
@@ -198,7 +200,14 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
                     $scope.repeat = false;
                 }
 
-                newCard.$update();
+                newCard.$update(function(resp) {
+                    //console.log(resp);
+                    $scope.error = undefined;
+                }, function(z) {
+                    console.log(z);
+                    console.log(z.data);
+                    $scope.error = 'Error message: '+z.data.message;
+                });
             });
 
         };

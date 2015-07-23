@@ -27,13 +27,13 @@ angular.module('core').directive('playsound',
 
                         var msg = new SpeechSynthesisUtterance(text);
                         msg.lang = lang;
-                        msg.rate = 8;
+                        msg.rate = 0;
                         window.speechSynthesis.speak(msg);
 
 
                         msg = new SpeechSynthesisUtterance(extension);
                         msg.lang = lang;
-                        msg.rate = 8;
+                        msg.rate = 0;
                         window.speechSynthesis.speak(msg);
 
                     } else {

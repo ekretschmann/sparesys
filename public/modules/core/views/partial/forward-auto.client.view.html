@@ -44,7 +44,7 @@
 
             </div>
 
-            <div class="flashcard-input-box" data-ng-if="state === 'question'">
+            <div class="flashcard-input-box" data-ng-if="state === 'question'" >
 
                 <input type="text" required
                        id="focus-question"
@@ -52,7 +52,7 @@
                        data-ng-model="answer.text">
 
 
-                <div>
+                <div >
                     <span data-ng-repeat="character in specialChars"
                           data-ng-click="addChar(character)"><button class="btn btn-letter">{{character}}
                     </button></span>

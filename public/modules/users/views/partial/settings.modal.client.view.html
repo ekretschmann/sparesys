@@ -1,96 +1,98 @@
 <script type="text/ng-template" id="settings.html">
 
-    <div class="modal-body">
+    <div class="rememberators-modal">
 
-        <div class="content-header center-aligned">
-            <div class="title">
-                Change User Settings
-            </div>
 
-        </div>
-
-        <form ng-submit="changeDetails()" class="signin form-horizontal"  autocomplete="off">
+        <form ng-submit="changeDetails()" class="signin form-horizontal" autocomplete="off">
             <fieldset>
-                <div class="content-header">
-
-                    <table>
-                        <tr>
-                            <td class="right-padded-m">Username</td>
-                            <td class="expands">
-                                <input type="text"
-                                       data-ng-model="userDetails.username"
-                                       class="form-control focus"
-                                       placeholder="Username"
-                                       required>
-                            </td>
-                        </tr>
-
-                        <tr>
-                            <td class="right-padded-m nowrap top-padded-s">First Name</td>
-                            <td class="top-padded-s">
-                                <input type="text"
-                                       data-ng-model="userDetails.firstName"
-                                       class="form-control"
-                                       placeholder="First Name"
-                                       required>
-                            </td>
-                        </tr>
-
-                        <tr>
-
-                            <td class="right-padded-m nowrap top-padded-s">Last Name</td>
-                            <td class="top-padded-s">
-                                <input type="text"
-                                       data-ng-model="userDetails.lastName"
-                                       class="form-control"
-                                       placeholder="Last Name"
-                                       required>
-                            </td>
-                        </tr>
-
-                        <tr>
-
-                            <td class="right-padded-m top-padded-s">Email</td>
-                            <td class="top-padded-s">
-                                <input type="text"
-                                       data-ng-model="userDetails.email"
-                                       class="form-control"
-                                       placeholder="email"
-                                       required>
-                            </td>
-                        </tr>
-
-                        <tr>
-
-                            <td class="right-padded-m top-padded-s">Teacher</td>
-
-                            <td class="top-padded-s middle-aligned" >
-
-                                <input  type="checkbox"
-                                        data-ng-model="roleSettings.teacher"
-                                        > <span class="left-padded-s text-muted">(You plan to teach one or more students)</span>
-                            </td>
-                        </tr>
-
-                        <tr>
-
-                            <td class="right-padded-m top-padded-s nowrap">School Administrator</td>
-
-                            <td class="middle-aligned top-padded-s">
-                                <input
-                                        type="checkbox"
-                                        data-ng-model="roleSettings.headmaster"
-                                        > <span class="left-padded-s text-muted">(You plan to organize teachers and students)</span>
-                            </td>
-                        </tr>
 
 
-                    </table>
+                <div class="rememberators-modal-header">
+                    Change User Settings
+                </div>
+
+                <div class="rememberators-modal-section">
+
+                    <label class="rememberators-modal-section-label">My Account Details</label>
+
+                    <div class="row rememberators-form-group form-group">
+                        <div class=" col-xs-4">First Name</div>
+                        <div class=" col-xs-8">
+                            <input type="text"
+                                   data-ng-model="userDetails.firstName"
+                                   class="form-control focus"
+                                   placeholder="First Name"
+                                   data-ng-init="setFocus()"
+                                   required></div>
+                    </div>
+
+                    <div class="row rememberators-form-group form-group">
+                        <div class=" col-xs-4">Last Name</div>
+                        <div class=" col-xs-8">
+                            <input type="text"
+                                   data-ng-model="userDetails.lastName"
+                                   class="form-control"
+                                   placeholder="Last Name"
+                                   required></div>
+                    </div>
+
+                    <div class="row rememberators-form-group form-group">
+                        <div class="col-xs-4">email</div>
+                        <div class="col-xs-8">
+                            <input type="text"
+                                   data-ng-model="userDetails.email"
+                                   class="form-control"
+                                   placeholder="email"
+                                   required></div>
+                    </div>
+
+                    <div class="row rememberators-form-group form-group">
+                        <div class="col-xs-4">Username</div>
+                        <div class="col-xs-8">
+                            <input type="text"
+                                   data-ng-model="userDetails.username"
+                                   class="form-control"
+                                   placeholder="username"
+                                   required></div>
+                    </div>
 
                 </div>
+                <div class="rememberators-modal-section">
+
+                    <label class="rememberators-modal-section-label">My Roles</label>
+
+                    <div class="row rememberators-form-group form-group">
+                        <div class="col-xs-4">
+                            <div class="btn-group">
+                                <div class="rememberators-checkbox">
+                                    <input type="checkbox"
+                                           data-ng-model="roleSettings.teacher">
+                                </div>
+                                I want to teach
+                                </label>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-8">
+                            <div class="btn-group">
+                                <div class="rememberators-checkbox">
+                                    <input type="checkbox"
+                                           data-ng-model="roleSettings.headmaster">
+                                </div>
+                                I want to run a school
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
                 <div class="center-aligned">
                     <button class="btn btn-rememberators"
-                            type="submit">OK</button>
+                            type="submit">OK
+                    </button>
 
                     <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
 

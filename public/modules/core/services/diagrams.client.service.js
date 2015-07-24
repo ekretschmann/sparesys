@@ -73,7 +73,7 @@ angular.module('core').service('DiagramsService', [
 
 
             var margin = {top: 20, right: 20, bottom: 30, left: 50},
-                width = 680 - margin.left - margin.right,
+                width =  920 - margin.left - margin.right,
                 height = 300 - margin.top - margin.bottom;
 
 
@@ -414,10 +414,11 @@ angular.module('core').service('DiagramsService', [
             var svg = d3.select(id);
             svg.selectAll('*').remove();
 
+
             svg = d3.select(id).selectAll('svg')
                 .data(d3.range(2015, 2016))
                 .enter().append('svg')
-                .attr('width', '100%')
+                .attr('width', '920px')
                 .attr('class', 'Greens')
                 .append('g')
                 .attr('transform', 'translate(' + ((width - cellSize * 53) / 2) + ',' + (height - cellSize * 7 - 1) + ')')

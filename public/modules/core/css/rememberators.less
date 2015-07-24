@@ -57,7 +57,10 @@
 
 
 .navbar-inverse .navbar-nav .open .dropdown-menu > li > a {
-  color: @inverse-font-color;
+  @media (max-width: 768px) {
+    color: @inverse-font-color;
+  }
+
 }
 
 .dashboard-section {

@@ -35,7 +35,17 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.error = undefined;
 
+        $scope.speechSpeed = 1;
 
+
+        $scope.setSpeed = function(value) {
+            $scope.speechSpeed = value;
+        };
+
+
+        $scope.speedClick = function() {
+            console.log('xxxxx');
+        };
 
 
 
@@ -50,13 +60,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $location.path('/');
         };
 
-
-
-
-
-
-
-        $scope.soundSupport = false;
 
 
 
@@ -472,6 +475,14 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
 
         $scope.initPractice = function () {
+
+
+            $scope.options.repeatOnly = false;
+            $scope.options.selfChecksOnly = false;
+            $scope.options.useForwardMode = true;
+            $scope.options.useReverseMode = true;
+            $scope.options.useImageMode = true;
+            $scope.options.speechSpeed = 1;
 
 
             //if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {

@@ -145,36 +145,47 @@
                     <!--pack)</span>-->
                     <!--</div>-->
 
-                    <div>
+                    <div class="practice-option">
                         <input type="checkbox"
                                ng-model="options.repeatOnly">
                         Only repeat questions. No new Cards, please.
                     </div>
 
-                    <div>
+                    <div class="practice-option">
                         <input type="checkbox"
-                               ng-model="options.repeatOnly">
+                               ng-model="options.selfChecksOnly">
                         Self checks only. I'll practice spelling later.
                     </div>
 
-                    <div>
+                    <div class="practice-option">
                         <input type="checkbox"
-                               ng-model="options.repeatOnly">
+                               ng-model="options.useForwardMode">
                         Use forward mode.
                     </div>
 
 
-                    <div>
+                    <div class="practice-option">
                         <input type="checkbox"
-                               ng-model="options.repeatOnly">
+                               ng-model="options.useReverseMode">
                         Use reverse mode.
                     </div>
 
 
-                    <div>
+                    <div class="practice-option">
                         <input type="checkbox"
-                               ng-model="options.repeatOnly">
+                               ng-model="options.useImageMode">
                         Use image mode.
+                    </div>
+
+                    <div class="practice-option">
+
+                        Reading speed:
+
+                        <rating max="5"
+                                min="1"
+                               ng-model="speechSpeed"
+                                on-hover="setSpeed(value)"
+                                data-ng-click="speedClick()">
                     </div>
 
 

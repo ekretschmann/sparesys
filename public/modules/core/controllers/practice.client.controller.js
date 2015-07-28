@@ -38,21 +38,19 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.speechSpeed = 1;
 
 
-        $scope.setSpeed = function(value) {
+
+
+
+        $scope.speedHover = function(value) {
             $scope.speechSpeed = value;
         };
 
-
         $scope.speedClick = function() {
-            console.log('xxxxx');
+            $scope.options.speechSpeed = 2*($scope.speechSpeed-1);
         };
 
 
-
-
         $scope.lastRepetition = new Date(Date.now);
-
-
 
 
 
@@ -482,7 +480,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
             $scope.options.useForwardMode = true;
             $scope.options.useReverseMode = true;
             $scope.options.useImageMode = true;
-            $scope.options.speechSpeed = 1;
+            $scope.speechSpeed = 1;
 
 
             //if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {

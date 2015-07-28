@@ -181,11 +181,13 @@
 
                         Reading speed:
 
-                        <rating max="5"
+                        <rating style="padding-left: 0.5em"
+                                max="6"
                                 min="1"
-                               ng-model="speechSpeed"
-                                on-hover="setSpeed(value)"
-                                data-ng-click="speedClick()">
+                               value="speechSpeed"
+                                on-hover="speedHover(value)"
+                                data-ng-click="speedClick()"
+                                state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'">
                     </div>
 
 
@@ -271,9 +273,9 @@
         </div>
     </div>
 
-    <div data-ng-if="error" class="warning">
-        {{error}}
-    </div>
+    <!--<div data-ng-if="error" class="warning">-->
+        <!--{{error}}-->
+    <!--</div>-->
 </section>
 
 

@@ -9,17 +9,22 @@ angular.module('core').directive('playsound',
                 text: '@',
                 extension: '@',
                 language: '@',
-                playwhen: '@'
+                playwhen: '@',
+                speed: '='
             },
             link: function(scope, elem, attrs) {
 
 
+                //console.log(scope.options);
 
+                ////scope.playSound = function (lang, text, extension, speed) {
+                scope.playSound = function (lang, text, extension, speed) {
 
-                scope.playSound = function (lang, text, extension) {
+                    if (!speed) {
+                        speed = 3;
+                    }
 
-
-
+                    speed = parseInt(speed);
 
                     /* jshint ignore:start */
                     if (window.SpeechSynthesisUtterance !== undefined) {
@@ -27,14 +32,17 @@ angular.module('core').directive('playsound',
 
                         var msg = new SpeechSynthesisUtterance(text);
                         msg.lang = lang;
-                        msg.rate = 0;
+                        msg.rate = speed;
                         window.speechSynthesis.speak(msg);
 
 
                         msg = new SpeechSynthesisUtterance(extension);
                         msg.lang = lang;
-                        msg.rate = 0;
+                        msg.rate = speed;
                         window.speechSynthesis.speak(msg);
+
+                        console.log('speaking '+msg);
+
 
                     } else {
                         console.log('playing sound: '+text);
@@ -45,7 +53,7 @@ angular.module('core').directive('playsound',
 
 
                 scope.$watch('text', function() {
-                    scope.playSound(scope.language, scope.text, scope.extension);
+                    scope.playSound(scope.language, scope.text, scope.extension, scope.speed);
                 });
                 
             },

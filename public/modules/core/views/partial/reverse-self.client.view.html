@@ -21,6 +21,7 @@
             </div>
         </div>
 
+        {{options}}
 
         <div class="question-box">
             <div class="question">
@@ -28,15 +29,18 @@
                 <playsound language="{{card.languageBack.code}}"
                            text="{{card.answer}}"
                            extension="{{card.answerExtension}}"
-                           playwhen="{{card.readBackForward && card.languageBack}}"/>
+                           playwhen="{{card.readBackForward && card.languageBack}}"
+                           speed="options.speechSpeed"/>
 
             </div>
 
             <div class="answer" data-ng-if="state === 'answer'">
+
                 <playsound language="{{card.languageFront.code}}"
                            text="{{card.question}}"
                            extension="{{card.questionExtension}}"
-                           playwhen="{{card.readFrontForward && card.languageFront}}"/>
+                           playwhen="{{card.readFrontForward && card.languageFront}}"
+                           speed="options.speechSpeed"/>
 
 
 

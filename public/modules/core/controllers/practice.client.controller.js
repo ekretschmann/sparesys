@@ -5,10 +5,10 @@
 angular.module('core').controller('PracticeController', ['$window', '$location', '$scope',
     '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication',
     'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'GaugeService', 'ChallengeCalculatorService',
-    'ModeSelectorService', 'SpeechRecognitionService',
+    'ModeSelectorService', 'SpeechRecognitionService', 'PracticeOptionsService',
     function ($window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
               Courses, Cards, CoursesService, RetentionCalculatorService, GaugeService, ChallengeCalculatorService,
-              ModeSelectorService, SpeechRecognitionService) {
+              ModeSelectorService, SpeechRecognitionService, PracticeOptionsService) {
 
         $scope.time = Date.now();
         $scope.card = {};
@@ -27,26 +27,21 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.progress = 30;
 
         $scope.receiveRewards = '';
-        $scope.options = {};
-        $scope.options.dueDateOnly = false;
-        $scope.options.repeatOnly = false;
+
 
         $scope.delta = {};
 
         $scope.error = undefined;
 
-        $scope.speechSpeed = 1;
 
 
 
-
-
-        $scope.speedHover = function(value) {
-            $scope.speechSpeed = value;
+        $scope.rateHover = function(value) {
+            PracticeOptionsService.rateHover(value);
         };
 
-        $scope.speedClick = function() {
-            $scope.options.speechSpeed = 2*($scope.speechSpeed-1);
+        $scope.rateClick = function() {
+            PracticeOptionsService.rateClick();
         };
 
 
@@ -313,11 +308,11 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
                 var card = this.cards[i];
 
-                if ($scope.options.dueDateOnly && (!card.dueDate || $scope.time >= new Date(card.dueDate).getTime())) {
+                if (PracticeOptionsService.dueDateOnly && (!card.dueDate || $scope.time >= new Date(card.dueDate).getTime())) {
                     continue;
                 }
 
-                if ($scope.options.repeatOnly && card.history.length === 0) {
+                if (PracticeOptionsService.repeatOnly && card.history.length === 0) {
                     continue;
                 }
 
@@ -475,13 +470,6 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.initPractice = function () {
 
 
-            $scope.options.repeatOnly = false;
-            $scope.options.selfChecksOnly = false;
-            $scope.options.useForwardMode = true;
-            $scope.options.useReverseMode = true;
-            $scope.options.useImageMode = true;
-            $scope.speechSpeed = 1;
-
 
             //if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
             //    $scope.receiveRewards = 'content-header';
@@ -561,20 +549,7 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         };
 
-        $scope.optionsModal = function () {
-            $modal.open({
-                templateUrl: 'practiceOptions.html',
-                controller: 'PracticeOptionsController',
-                resolve: {
-                    options: function () {
-                        return $scope.options;
-                    },
-                    cards: function () {
-                        return $scope.cards;
-                    }
-                }
-            });
-        };
+
 
         $scope.myAnswerCounts = function (answer, mode) {
 

@@ -34,6 +34,7 @@
 
                 <div class="title">
                     {{course.name}}
+
                 </div>
                 <div>
                     <svg id="fillgauge" width="90px" height="80px"></svg>
@@ -52,6 +53,7 @@
             <!--</div>-->
 
             <div class="col-xs-12 col-md-8 col-lg-6">
+
 
                 <div data-ng-if="mode === 'forward'" data-ng-hide="mode !== 'forward'" style="height: 500px">
 
@@ -185,8 +187,8 @@
                                 max="6"
                                 min="1"
                                value="speechSpeed"
-                                on-hover="speedHover(value)"
-                                data-ng-click="speedClick()"
+                                on-hover="rateHover(value)"
+                                data-ng-click="rateClick()"
                                 state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'">
                     </div>
 

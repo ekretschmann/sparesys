@@ -5,6 +5,8 @@
 angular.module('core').controller('ForwardSelfController', ['$scope', '$state', '$document',
     function ($scope, $state, $document) {
 
+
+
         $scope.init = function() {
             $scope.state = 'question';
 

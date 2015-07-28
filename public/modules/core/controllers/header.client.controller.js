@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Users','Menus',
-	function($scope, Authentication, Users, Menus) {
+angular.module('core').controller('HeaderController', ['$scope', 'Authentication', 'Users','Menus', 'PracticeOptionsService',
+	function($scope, Authentication, Users, Menus, PracticeOptionsService) {
 
 		$scope.authentication = Authentication;
 		$scope.isCollapsed = false;
@@ -41,6 +41,14 @@ angular.module('core').controller('HeaderController', ['$scope', 'Authentication
 
             });
 
+        };
+
+        $scope.rateHover = function(value) {
+            PracticeOptionsService.rateHover(value);
+        };
+
+        $scope.rateClick = function() {
+            PracticeOptionsService.rateClick();
         };
 	}
 ]);

@@ -41,7 +41,7 @@ angular.module('core').directive('playsound',
                         msg.rate = speed;
                         window.speechSynthesis.speak(msg);
 
-                        console.log('speaking '+msg);
+                        console.log('speaking '+msg+ ' '+ speed);
 
 
                     } else {

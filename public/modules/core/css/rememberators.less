@@ -363,7 +363,7 @@ body {
 .small-screen-practice {
   display: none!important;
   @media screen {
-    @media (max-width: 990px) {
+    @media (max-width: 768px) {
       display: block!important;
     }
   }
@@ -696,23 +696,29 @@ body {
 
 }
 
+.standard-dropdown-width {
+  min-width: 120px;
+}
+
 .dashboard-row {
 
+  margin-top: 10px;
 
   @media screen {
     @media (min-width: 310px) {
-      margin-left: 0;
-      margin-right: 0;
-      padding: 0;
+      margin-left: 5px;
+      margin-right: 5px;
+      margin-bottom: 5px;
     }
     @media (min-width: 620px) {
-      margin-left: 0;
-      margin-right: 0;
-      padding: 0;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-bottom: 10px;
     }
     @media (min-width: 800px) {
       margin-left: 20px;
       margin-right: 20px;
+      margin-bottom: 20px;
     }
 
   }

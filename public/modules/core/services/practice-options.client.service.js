@@ -10,17 +10,15 @@ angular.module('core').service('PracticeOptionsService', [
             this.useForwardMode = true;
             this.useReverseMode = true;
             this.useImageMode = true;
-            this.speechRate = 1;
+            this.speechRate = 4;
             this.hoverRate = 0;
 
 
         this.rateHover = function(value) {
-            console.log('hover');
             this.hoverRate = value;
         };
 
         this.rateClick = function() {
-            console.log('click');
             this.speechRate = 2*(this.hoverRate-1);
         };
 

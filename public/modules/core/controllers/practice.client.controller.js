@@ -34,6 +34,8 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
         $scope.error = undefined;
 
 
+        $scope.speechRate = 4;
+        $scope.speechIcons = 3;
 
 
         $scope.rateHover = function(value) {
@@ -42,7 +44,18 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.rateClick = function() {
             PracticeOptionsService.rateClick();
+
         };
+
+        $scope.$watch(function() {
+            //return $scope.card._id;
+            return PracticeOptionsService.speechRate;
+        }, function () {
+            $scope.speechRate = PracticeOptionsService.speechRate;
+            $scope.speechIcons = Math.floor($scope.speechRate / 2)+1;
+        });
+
+
 
 
         $scope.lastRepetition = new Date(Date.now);

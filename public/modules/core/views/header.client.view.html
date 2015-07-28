@@ -2,12 +2,12 @@
     <div class="navbar-header texture-dark">
         <button class="navbar-toggle" type="button" data-ng-click="toggleCollapsibleMenu()">
             <span class="sr-only">Toggle navigation</span>
-            <span class="icon-bar" ></span>
-            <span class="icon-bar" ></span>
-            <span class="icon-bar" ></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
         </button>
         <div class="rememberators-logo">
-        <a href="/#!/" class="navbar-brand font-l navigation "><span class="inverse-font-color">Rememberators</span></a>
+            <a href="/#!/" class="navbar-brand font-l navigation "><span class="inverse-font-color">Rememberators</span></a>
         </div>
     </div>
     <nav class="collapse navbar-collapse texture-dark rememberators-menu" collapse="!isCollapsed" role="navigation">
@@ -24,11 +24,13 @@
             </li>
             <li class="divider-vertical"></li>
             <li ui-route="/signin" ng-class="{active: $uiRoute}">
-                <a id="signin-link" data-ng-controller="LandingPageController" href="" ng-click="signinPopup()" class="font-m">
+                <a id="signin-link" data-ng-controller="LandingPageController" href="" ng-click="signinPopup()"
+                   class="font-m">
                     <span class="inverse-font-color">Signin</span></a>
             </li>
         </ul>
-        <ul class="nav navbar-nav navbar-right " data-ng-show="authentication.user" data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
+        <ul class="nav navbar-nav navbar-right " data-ng-show="authentication.user"
+            data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
 
 
             <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown "
@@ -56,10 +58,10 @@
                         <a href="/#!/messages/admin" class="font-m">Messages</a>
                     </li>
                     <!--<li>-->
-                        <!--<a href="/#!/packs/admin" class="font-m">Packs</a>-->
+                    <!--<a href="/#!/packs/admin" class="font-m">Packs</a>-->
                     <!--</li>-->
                     <!--<li>-->
-                        <!--<a href="/#!/cards/admin" class="font-m" >Cards</a>-->
+                    <!--<a href="/#!/cards/admin" class="font-m" >Cards</a>-->
                     <!--</li>-->
                     <!--<li class="divider"></li>-->
                     <!--<li>-->
@@ -75,7 +77,8 @@
                     <span class="inverse-font-color">Teaching <b class="caret"></b></span>
                 </a>
 
-                <ul  class="dropdown-menu rememberators-dropdown-menu" data-ng-controller="SchoolclassesController" data-ng-init="findForTeacher(authentication.user._id)">
+                <ul class="dropdown-menu rememberators-dropdown-menu" data-ng-controller="SchoolclassesController"
+                    data-ng-init="findForTeacher(authentication.user._id)">
 
                     <li>
                         <a href="/#!/schools/subscribe/teacher" class="font-m">Subscribe to School</a>
@@ -149,15 +152,16 @@
                     </li>
 
                     <li data-ng-if="authentication.user.roles.indexOf('admin') > -1">
-                        <a href="/#!/rewards/manage"  class="font-m">Manage Rewards</a>
+                        <a href="/#!/rewards/manage" class="font-m">Manage Rewards</a>
                     </li>
-                   <li data-ng-controller="HomePageController" data-ng-show="authentication.user.provider === 'local'">
+                    <li data-ng-controller="HomePageController" data-ng-show="authentication.user.provider === 'local'">
                         <a href="" data-ng-click="passwordPopup()" class="font-m">Change Password</a>
                     </li>
 
                     <li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1" class="divider"></li>
 
-                    <li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1" data-ng-controller="SchoolsController">
+                    <li data-ng-show="authentication.user.roles.indexOf('headmaster') > -1"
+                        data-ng-controller="SchoolsController">
                         <a href="" data-ng-click="registerSchoolPopup()" class="font-m">Register School</a>
                     </li>
 
@@ -168,6 +172,31 @@
                     </li>
                 </ul>
             </li>
+
+                <li class="dropdown small-screen-practice">
+                    <!--<a href="#" class="dropdown-toggle font-m" data-toggle="dropdown">-->
+                    <!--<span class="inverse-font-color">Practice Options <b class="caret"></b></span>-->
+                    <!--</a>-->
+                    <!--<ul class="dropdown-menu rememberators-dropdown-menu">-->
+                    <a>
+
+                        <div class="font-m inverse-font-color">
+                            Reading speed:
+
+                            <rating style="padding-left: 0.5em"
+                                    max="6"
+                                    min="1"
+                                    value="speechSpeed"
+                                    on-hover="speedHover(value)"
+                                    data-ng-click="speedClick()"
+                                    state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'">
+                        </div>
+
+                    </a>
+                    <!--</ul>-->
+                </li>
+
+
         </ul>
     </nav>
 </div>

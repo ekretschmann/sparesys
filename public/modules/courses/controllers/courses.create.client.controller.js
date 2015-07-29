@@ -10,6 +10,9 @@ angular.module('courses').controller('CoursesCreateController',
             $scope.showhelp = false;
 
 
+            $scope.checks = ['Self Checks', 'Computer Checks', 'Mixed Checks'];
+
+
             $scope.languages = [
                 {name: '---', code: ''},
                 {name: 'Chinese', code: 'zh-CN'},
@@ -25,8 +28,10 @@ angular.module('courses').controller('CoursesCreateController',
 
             var selectedIndexFront = 0;
             var selectedIndexBack = 0;
+            var selectedIndexChecks = 0;
             $scope.languageFront = $scope.languages[selectedIndexFront];
             $scope.languageBack = $scope.languages[selectedIndexBack];
+            $scope.check = $scope.checks[selectedIndexChecks];
 
             $scope.setLanguageFront = function (lang) {
                 $scope.languageFront = lang;
@@ -35,6 +40,10 @@ angular.module('courses').controller('CoursesCreateController',
 
             $scope.setLanguageBack = function (lang) {
                 $scope.languageBack = lang;
+            };
+
+            $scope.setCheck = function (check) {
+                $scope.check = check;
             };
 
 

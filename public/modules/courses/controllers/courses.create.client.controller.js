@@ -9,6 +9,8 @@ angular.module('courses').controller('CoursesCreateController',
             $scope.authentication = Authentication;
             $scope.showhelp = false;
             $scope.useForwardMode = true;
+            $scope.useReverseMode = false;
+            $scope.useImagesMode = false;
 
 
             $scope.checks = ['Self Checks', 'Computer Checks', 'Mixed Checks'];

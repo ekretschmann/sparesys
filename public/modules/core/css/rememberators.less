@@ -84,7 +84,7 @@
     @media (min-width: 800px) {
       padding: 20px;
       margin-top: 20px;
-      min-height: 480px;
+      min-height: 520px;
     }
 
   }
@@ -680,6 +680,7 @@ body {
 .dashboard-col {
 
   margin-top: 1.5em;
+
   @media screen {
     @media (min-width: 310px) {
       margin-left: 0;
@@ -847,6 +848,15 @@ body {
     }
   }
 
+}
+
+.large-screen-only {
+
+  @media screen {
+    @media (max-width: 1124px) {
+      display: none;
+    }
+  }
 }
 
 .tiny-image {

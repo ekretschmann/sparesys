@@ -454,11 +454,13 @@ angular.module('core').service('DiagramsService', [
                             .style('top', (d3.event.pageY - 10) + 'px')
                             .select('#value')
                             .text(d + ': ' + (data[d] || '0'));
-                        d3.select('#tooltip').classed('hidden', false);
+                        //d3.select('#tooltip').classed('hidden', false);
+
+                        console.log(d3.event.pageX);
                     })
                     .on('mouseout', function () {
                         d3.select(this).classed('cell-hover', false);
-                        d3.select('#tooltip').classed('hidden', true);
+                        //d3.select('#tooltip').classed('hidden', false);
                     })
                 ;
 

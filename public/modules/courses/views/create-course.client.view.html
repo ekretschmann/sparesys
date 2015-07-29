@@ -167,13 +167,13 @@
                                 </div>
 
 
-                                <div class="col-xs-4">
-                                    <input type="checkbox" ng-model="readQuestionsForward">
+                                <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
+                                    <input type="checkbox" ng-model="readQuestionsForward" ng-disabled="!useForwardMode">
                                     Read Questions
                                 </div>
 
-                                <div class="col-xs-4">
-                                    <input type="checkbox" ng-model="readAnswersForward">
+                                <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
+                                    <input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">
                                     Read Answers
                                 </div>
 

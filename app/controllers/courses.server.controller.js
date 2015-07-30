@@ -42,7 +42,11 @@ exports.create = function (req, res) {
     var course = new Course(req.body);
     course.user = req.user;
 
+
+    console.log(course);
+
     course.save(function (err) {
+        console.log(err);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

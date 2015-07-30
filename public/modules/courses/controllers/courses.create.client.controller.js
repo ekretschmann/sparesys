@@ -11,6 +11,12 @@ angular.module('courses').controller('CoursesCreateController',
             $scope.useForwardMode = true;
             $scope.useReverseMode = false;
             $scope.useImagesMode = false;
+            $scope.readQuestionsForward= false;
+            $scope.readAnswersForward= false;
+            $scope.readQuestionsReverse= false;
+            $scope.readAnswersReverse= false;
+            $scope.readQuestionsImages= false;
+            $scope.readAnswersImages= false;
 
 
             $scope.checks = ['Self Checks', 'Computer Checks', 'Mixed Checks'];
@@ -51,22 +57,44 @@ angular.module('courses').controller('CoursesCreateController',
 
 
             // Create new Course
-            $scope.create = function () {
+            $scope.createCourse = function () {
+
+                var cardDefaults = {
+                    languageFront: $scope.languageFront,
+                    languageback: $scope.languageBack,
+                    checks: $scope.check,
+                    forward: {
+                        enabled: $scope.useForwardMode,
+                        readFront: $scope.readQuestionsForward,
+                        readBack: $scope.readAnswersForward,
+                        speechRecognition: false
+                    },
+                    reverse: {
+                        enabled: $scope.useReverseMode,
+                        readFront: $scope.readQuestionsReverse,
+                        readBack: $scope.readAnswersReverse,
+                        speechRecognition: false
+                    },
+                    images: {
+                    enabled: $scope.useImagesMode,
+                        readFront: $scope.readQuestionsImages,
+                        readBack: $scope.readAnswersImages,
+                        speechRecognition: false
+                }
+                };
+
                 var course = new Courses({
                     name: this.name,
                     description: this.description,
                     back: this.back,
                     front: this.front,
-                    readfront: this.readFront,
-                    readback: this.readBack,
-                    language: this.languageFront,
-                    languageback: this.languageback,
-                    speechrecognition: this.speechRecognition,
-                    teaching: this.teaching
+                    cardDefaults: cardDefaults
+
                 });
 
                 // Redirect after save
                 course.$save(function (response) {
+
 
                     console.log('ga create course');
                     console.log($location.url());

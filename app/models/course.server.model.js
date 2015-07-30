@@ -95,7 +95,6 @@ var CourseSchema = new Schema({
     description: {
         type: String,
         default: '',
-        required: 'Can not create a course without a description',
         trim: true
     },
     front: {

@@ -1,13 +1,21 @@
 <div data-ng-controller="CoursesCreateController">
 
 
+    <div class="large-screen-only title" data-ng-if="authentication.user.roles.indexOf('help') === -1">
+            Create New Course
+    </div>
+
+    <div class="small-screen-only title">
+        Create New Course
+    </div>
+
     <form data-ng-submit="create()" class="font-large" validate>
 
         <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
              data-ng-if="authentication.user.roles.indexOf('help') > -1">
             <div class="dashboard-section">
                 <div class="title">
-                    Creating a Course
+                    Create New Course
                 </div>
                 <infobox logo="girl">
                     Wow! You are creating a

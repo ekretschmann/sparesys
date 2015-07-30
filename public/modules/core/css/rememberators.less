@@ -456,7 +456,7 @@ body {
   }
   font-weight: bold;
   padding-top: @default-padding-unit;
-  padding-bottom: 4*@default-padding-unit;
+  padding-bottom: 1*@default-padding-unit;
 }
 
 .inverse-font-color {
@@ -679,7 +679,7 @@ body {
 
 .dashboard-col {
 
-  margin-top: 1.5em;
+  margin-bottom: 1.5em;
 
   @media screen {
     @media (min-width: 310px) {
@@ -854,6 +854,15 @@ body {
 
   @media screen {
     @media (max-width: 1124px) {
+      display: none;
+    }
+  }
+}
+
+.small-screen-only {
+
+  @media screen {
+    @media (min-width: 1124px) {
       display: none;
     }
   }

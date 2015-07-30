@@ -449,18 +449,15 @@ angular.module('core').service('DiagramsService', [
                     .datum(format)
                     .on('mouseover', function (d) {
                         d3.select(this).classed('cell-hover', true);
-                        d3.select('#tooltip')
-                            .style('left', (d3.event.pageX + 10) + 'px')
-                            .style('top', (d3.event.pageY - 10) + 'px')
-                            .select('#value')
-                            .text(d + ': ' + (data[d] || '0'));
-                        //d3.select('#tooltip').classed('hidden', false);
+                        d3.select('#practice-date').text(d+': ');
+                        d3.select('#number-of-cards').text((data[d] || '0'));
 
-                        console.log(d3.event.pageX);
                     })
                     .on('mouseout', function () {
                         d3.select(this).classed('cell-hover', false);
-                        //d3.select('#tooltip').classed('hidden', false);
+                        d3.select('#practice-date').text('');
+                        d3.select('#number-of-cards').text('');
+
                     })
                 ;
 

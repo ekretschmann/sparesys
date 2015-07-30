@@ -18,10 +18,9 @@
 
 
                         <div class="default-border" data-ng-controller="CourseReportController"
-                             data-ng-init="init(course._id, $index)" >
+                             data-ng-init="init(course._id, $index)">
 
                             <div>
-
 
 
                                 <div class="left-padded-s" style="font-weight: bold; padding-top: 2em">
@@ -32,18 +31,17 @@
                                 </div>
 
 
-
                                 <div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">
-                                    When and how much I have practiced
+                                    When and how much I have practiced:
                                 </div>
 
-                                <div id="tooltip" >
-                                    <p><span id="value"></span></p>
-                                </div>
+                                    <div>
+                                        <span id="practice-date"></span>&nbsp;<span id="number-of-cards"></span>
+                                    </div>
 
-                                <div id="cal{{$index}}">
+                                    <div id="cal{{$index}}">
 
-                                </div>
+                                    </div>
                             </div>
 
                         </div>

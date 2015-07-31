@@ -2,148 +2,256 @@
 
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
-    <div class="content-header">
-
-
-        <div class="title">
-            My Courses
-        </div>
-
+    <div class="large-screen-only title" data-ng-if="authentication.user.roles.indexOf('help') === -1">
+        Manage Courses
     </div>
 
-
-    <section data-ng-if="authentication.user.roles.indexOf('help') > -1" data-ng-show="courses.length > 0"
-             class="content-section">
-        <infobox logo="man">
-
-            This is the list of courses you have subscribed to. You can use the
-            <a href="">
-                <i class="small glyphicon glyphicon-remove-sign">
-                </i></a>
-            next to each course to delete the courses you no longer need. If you can't
-            find the course you are looking for in this list, you can
-            either <a href="/#!/courses/create">
-            create a new course
-            </a> or <a href="#!/courses/search">
-            search for an existing course.
-            </a>
-        </infobox>
-    </section>
-
-
-    <div data-ng-show="courses.length === 0">
-        <div class="content-section">
-            <infobox logo="woman">
-                New to Rememberators? I see, that you haven't got any courses, yet.
-                Whatever you learn on Rememberators is put into courses. Courses help you to
-                keep the subjects you learn separated so that you can concentrate on one thing
-                at a time. So how to you get your courses?
-
-            </infobox>
-
-            <infobox logo="girl" position="right">
-                Superheros sometimes <a href="#!/courses/create">create their own courses</a>. This is great
-                when you have
-                something special that you find interesting. Why not have your very own
-                course on horse breeds or facts about your favorite football stars? Once you
-                have created a course you can decide to publish it and share it with others here
-                on Rememberators - or you can keep it for yourself forever. Use the Courses
-                Menu to get going!
-            </infobox>
-
-            <infobox logo="philosopher">
-                Well, well, well. If everybody starts sharing, there will
-                be plenty of courses to choose from. You can use the Courses Menu to
-                have a look at what is there already
-                and <a href="#!/courses/search">search for courses</a> of things you are interested in. Once
-                you subscribe
-                to a course it turns into your own course - so you are free to change it in
-                any way that you like. You can turn it into exactly what you want it be!
-            </infobox>
-
-            <infobox logo="man" position="right">
-
-                Rememberators are also great for your teachers. They let them put courses together for
-                you and help you learn your facts. This way, they can spot what you are working on
-                and give you all the support that you need to succeed. If your school works with the
-                Rememberators, you can use the courses menu to <a
-                    href="#!/schools/subscribe/student">find</a>
-                your school and enrol. Your teachers will then be able to assign your coursework.
-            </infobox>
-
-        </div>
-
-
+    <div class="small-screen-only title">
+        Manage Courses
     </div>
 
-
-    <div data-ng-if="courses.length >0" class="content-section bottom-padded-m">
-        <table class="table-striped expands">
-            <thead>
-            <tr>
-                <th></th>
-                <th>Course
-
-
-                </th>
-                <th>Description</th>
-                <th>Role</th>
-                <th class="right-padded-s">Created</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-ng-repeat="course in courses | filter:searchText">
-                <td class="left-padded-s right-padded-s top-padded-s">
-                    <a href="" data-ng-if="!course.supervised">
-                        <i data-ng-click="areYouSureToDeleteCourse(course)"
-                           class="small glyphicon glyphicon-remove-sign">
-                        </i>
-                    </a>
-                </td>
-                <td class="right-padded-m nowrap top-padded-s">
-
-                    <a data-ng-if="!course.supervised || authentication.user.roles.indexOf('debug-viewer') !== -1"
-                       data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
-                <span class="text-muted"
-                      data-ng-if="course.supervised && authentication.user.roles.indexOf('debug-viewer') === -1">{{course.name}}</span>
-                </td>
-
-                <td class="right-padded-m expands top-padded-s">
-
-                    <span data-ng-if="!course.supervised">{{course.description}}</span>
-                <span data-ng-if="course.supervised"
-                      class="text-muted">{{course.description}} (managed by teacher)</span>
-
-                </td>
-
-                <td class="right-padded-m top-padded-s">
-                    <div data-ng-if="course.teaching">Teacher</div>
-                    <div data-ng-if="!course.teaching">Student</div>
-                </td>
-
-                <td class="right-aligned right-padded-s top-padded-s">
-                    <span data-ng-if="!course.supervised">{{course.created | date:'shortDate'}}</span>
-                <span data-ng-if="course.supervised"
-                      class="text-muted">{{course.created | date:'shortDate'}}</span>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-
-        <div class="top-padded-m right-aligned" data-ng-if="authentication.user.roles.indexOf('help') === -1">
-            Not found the course you need?
-            <div>
-                <a href="/#!/courses/create" data-ng-if="!course.supervised">
-                    Create a new course
+    <div class="font-large">
+        <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
+             data-ng-if="authentication.user.roles.indexOf('help') > -1">
+            <div class="dashboard-section">
+                <div class="title">
+                    Manage Courses
+                </div>
+                <infobox logo="man">
+                    This is the list of courses you have subscribed to. You can use the
+                    <a href="">
+                        <i class="small glyphicon glyphicon-remove-sign">
+                        </i></a>
+                    next to each course to delete the courses you no longer need. If you can't
+                    find the course you are looking for in this list, you can
+                    either <a href="/#!/courses/create">
+                    create a new course
+                </a> or <a href="#!/courses/search">
+                    search for an existing course.
                 </a>
-            </div>
-            <div>
-                <a href="#!/courses/search" data-ng-if="!course.supervised">
-                    Search for a course
-                </a>
+                </infobox>
             </div>
         </div>
+
+
+        <div class="col-xs-12 col-md-6 dashboard-col" data-ng-repeat="course in courses">
+            <div class="dashboard-section">
+                <div class="title">
+                    {{course.name}}
+
+                    <div class="pull-right">
+
+
+
+                        <button class="btn btn-icon" data-ng-click="areYouSureToDeleteCourse(course)"><i class="glyphicon glyphicon-edit"></i></button>
+
+                        <button class="btn btn-icon" data-ng-href="#!/courses/{{course._id}}/edit"><i class="glyphicon glyphicon-trash"></i></button>
+
+                    </div>
+                </div>
+
+
+
+                <div class="row dashboard-row">
+                    <div class="col-xs-12">
+                        <div>Description</div>
+                        <div class="font-medium">
+                            <div data-ng-if="course.description">
+                                {{course.description}}
+                            </div>
+
+                            <div data-ng-if="!course.description" class="text-muted">
+                                no description
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row dashboard-row">
+                    <div class="col-xs-6">
+                        <div>Front</div>
+                        <div class="font-medium">
+                            {{course.front}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div>Back</div>
+                        <div class="font-medium">
+                            {{course.back}}
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row dashboard-row">
+                    <div class="col-xs-6">
+                        <div>Language Front</div>
+                        <div class="font-medium">
+                            {{course.cardDefaults.languageFront.name}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div>Language Back</div>
+                        <div class="font-medium">
+                            {{course.cardDefaults.languageBack.name}}
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row dashboard-row">
+                    <div class="col-xs-6">
+                        <div>My Role</div>
+                        <div class="font-medium">
+                            <div data-ng-if="course.teaching">Teacher</div>
+                            <div data-ng-if="!course.teaching">Student</div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div>Supervision</div>
+                        <div class="font-medium">
+                            <div  data-ng-if="course.supervised">This course is supervised</div>
+                            <div  data-ng-if="!course.supervised">You are managing this course yourself</div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <!--<pre>{{course |json}}</pre>-->
+
+            </div>
+        </div>
+
     </div>
 
-    <div>rememberators.com</div>
+    <!--<section data-ng-if="authentication.user.roles.indexOf('help') > -1" data-ng-show="courses.length > 0"-->
+    <!--class="content-section">-->
+    <!--<infobox logo="man">-->
+
+
+    <!--</infobox>-->
+    <!--</section>-->
+
+
+    <!--<div data-ng-show="courses.length === 0">-->
+    <!--<div class="content-section">-->
+    <!--<infobox logo="woman">-->
+    <!--New to Rememberators? I see, that you haven't got any courses, yet.-->
+    <!--Whatever you learn on Rememberators is put into courses. Courses help you to-->
+    <!--keep the subjects you learn separated so that you can concentrate on one thing-->
+    <!--at a time. So how to you get your courses?-->
+
+    <!--</infobox>-->
+
+    <!--<infobox logo="girl" position="right">-->
+    <!--Superheros sometimes <a href="#!/courses/create">create their own courses</a>. This is great-->
+    <!--when you have-->
+    <!--something special that you find interesting. Why not have your very own-->
+    <!--course on horse breeds or facts about your favorite football stars? Once you-->
+    <!--have created a course you can decide to publish it and share it with others here-->
+    <!--on Rememberators - or you can keep it for yourself forever. Use the Courses-->
+    <!--Menu to get going!-->
+    <!--</infobox>-->
+
+    <!--<infobox logo="philosopher">-->
+    <!--Well, well, well. If everybody starts sharing, there will-->
+    <!--be plenty of courses to choose from. You can use the Courses Menu to-->
+    <!--have a look at what is there already-->
+    <!--and <a href="#!/courses/search">search for courses</a> of things you are interested in. Once-->
+    <!--you subscribe-->
+    <!--to a course it turns into your own course - so you are free to change it in-->
+    <!--any way that you like. You can turn it into exactly what you want it be!-->
+    <!--</infobox>-->
+
+    <!--<infobox logo="man" position="right">-->
+
+    <!--Rememberators are also great for your teachers. They let them put courses together for-->
+    <!--you and help you learn your facts. This way, they can spot what you are working on-->
+    <!--and give you all the support that you need to succeed. If your school works with the-->
+    <!--Rememberators, you can use the courses menu to <a-->
+    <!--href="#!/schools/subscribe/student">find</a>-->
+    <!--your school and enrol. Your teachers will then be able to assign your coursework.-->
+    <!--</infobox>-->
+
+    <!--</div>-->
+
+
+    <!--</div>-->
+
+
+    <!--<div data-ng-if="courses.length >0" class="content-section bottom-padded-m">-->
+    <!--<table class="table-striped expands">-->
+    <!--<thead>-->
+    <!--<tr>-->
+    <!--<th></th>-->
+    <!--<th>Course-->
+
+
+    <!--</th>-->
+    <!--<th>Description</th>-->
+    <!--<th>Role</th>-->
+    <!--<th class="right-padded-s">Created</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr data-ng-repeat="course in courses | filter:searchText">-->
+    <!--<td class="left-padded-s right-padded-s top-padded-s">-->
+    <!--<a href="" data-ng-if="!course.supervised">-->
+    <!--<i data-ng-click="areYouSureToDeleteCourse(course)"-->
+    <!--class="small glyphicon glyphicon-remove-sign">-->
+    <!--</i>-->
+    <!--</a>-->
+    <!--</td>-->
+    <!--<td class="right-padded-m nowrap top-padded-s">-->
+
+    <!--<a data-ng-if="!course.supervised || authentication.user.roles.indexOf('debug-viewer') !== -1"-->
+    <!--data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a>-->
+    <!--<span class="text-muted"-->
+    <!--data-ng-if="course.supervised && authentication.user.roles.indexOf('debug-viewer') === -1">{{course.name}}</span>-->
+    <!--</td>-->
+
+    <!--<td class="right-padded-m expands top-padded-s">-->
+
+    <!--<span data-ng-if="!course.supervised">{{course.description}}</span>-->
+    <!--<span data-ng-if="course.supervised"-->
+    <!--class="text-muted">{{course.description}} (managed by teacher)</span>-->
+
+    <!--</td>-->
+
+    <!--<td class="right-padded-m top-padded-s">-->
+    <!--<div data-ng-if="course.teaching">Teacher</div>-->
+    <!--<div data-ng-if="!course.teaching">Student</div>-->
+    <!--</td>-->
+
+    <!--<td class="right-aligned right-padded-s top-padded-s">-->
+    <!--<span data-ng-if="!course.supervised">{{course.created | date:'shortDate'}}</span>-->
+    <!--<span data-ng-if="course.supervised"-->
+    <!--class="text-muted">{{course.created | date:'shortDate'}}</span>-->
+    <!--</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
+
+    <!--<div class="top-padded-m right-aligned" data-ng-if="authentication.user.roles.indexOf('help') === -1">-->
+    <!--Not found the course you need?-->
+    <!--<div>-->
+    <!--<a href="/#!/courses/create" data-ng-if="!course.supervised">-->
+    <!--Create a new course-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--<div>-->
+    <!--<a href="#!/courses/search" data-ng-if="!course.supervised">-->
+    <!--Search for a course-->
+    <!--</a>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <div class="rememberators-footer col-xs-12">
+
+        rememberators.com
+    </div>
 </section>

@@ -1,24 +1,30 @@
-
 <div data-ng-if="!coursesStudent || coursesStudent.length===0">
-    <div class="infobox-title">Learning</div>
+    <!--<div class="infobox-title">Learning</div>-->
 
     <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <infobox logo="boy" position="right" >
-            New to Rememberators? I see, that you haven't got any courses, yet.
-            Whatever you learn on Rememberators is put into courses. Courses help you to
-            keep the subjects you learn separated so that you can concentrate on one thing
-            at a time. So here is how to you get your courses:
-        </infobox>
+        <div class="dashboard-section font-large">
+            <div class="title">Are you new?</div>
+            <infobox logo="boy" position="right">
+                New to Rememberators? I see, that you haven't got any courses, yet.
+                Whatever you learn on Rememberators is put into courses. Courses help you to
+                keep the subjects you learn separated so that you can concentrate on one thing
+                at a time.
+            </infobox>
+        </div>
 
-        <infobox logo="girl" position="left">
-            Superheros sometimes <a href="#!/courses/create">create their own courses</a>. This is great
-            when you have
-            something special that you find interesting. Why not have your very own
-            course on horse breeds or facts about your favorite football stars? Once you
-            have created a course you can decide to publish it and share it with others here
-            on Rememberators - or you can keep it for yourself forever. Use the Courses
-            Menu to get going!
-        </infobox>
+        <div class="dashboard-section font-large">
+            <div class="title">Courses</div>
+            <infobox logo="girl" position="left">
+                So here is how to you get your courses:
+                Superheros sometimes <a href="#!/courses/create">create their own courses</a>. This is great
+                when you have
+                something special that you find interesting. Why not have your very own
+                course on horse breeds or facts about your favorite football stars? Once you
+                have created a course you can decide to publish it and share it with others here
+                on Rememberators - or you can keep it for yourself forever. Use the Courses
+                Menu to get going!
+            </infobox>
+        </div>
 
         <infobox logo="philosopher" position="right">
             Well, well, well. If everybody starts sharing, there will
@@ -50,15 +56,19 @@
 
 <div data-ng-if="coursesStudent.length > 0">
 
-    <div class="infobox-title">My Courses</div>
-        <div style="display: inline-block;" data-ng-repeat="course in coursesStudent" >
-            <button data-ng-if="!course.supervised" type="button" class="btn btn-course font-s" data-ng-click="practice(course)" tooltip="{{course.description}}">
+    <div class="dashboard-section">
+        <div class="infobox-title">Practice</div>
+        <div style="display: inline-block;" data-ng-repeat="course in coursesStudent">
+            <button data-ng-if="!course.supervised" type="button" class="btn btn-course font-s"
+                    data-ng-click="practice(course)" tooltip="{{course.description}}">
                 {{course.name}}
             </button>
-            <button data-ng-if="course.supervised" type="button" class="btn btn-course font-s" data-ng-click="practice(course)" tooltip="{{course.description}}">
+            <button data-ng-if="course.supervised" type="button" class="btn btn-course font-s"
+                    data-ng-click="practice(course)" tooltip="{{course.description}}">
                 <div>{{course.name}}</div>
                 <div class="font-s">(supervised)</div>
 
             </button>
         </div>
+    </div>
 </div>

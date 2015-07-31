@@ -1,25 +1,22 @@
 <script type="text/ng-template" id="areYouSureToDeleteCourse.html">
-    <div class="modal-body">
+    <div class="rememberators-modal">
 
-        <div class="content-header">
-            <div class="title center-aligned" >
-                Delete Course
-            </div>
+        <div class="rememberators-modal-header">
+            Delete Course
+        </div>
+
+        <div class="modal-warning">
+            Are you sure you want to delete course {{course.name}}?
+        </div>
+
+        <div class="rememberators-modal-footer">
+            <button class="btn btn-rememberators"
+                    ng-click="ok(toCourseList)">Yes
+            </button>
 
 
-
-            <div class="title">
-                <div class="title center-aligned font-m">
-                    <span class="warning">{{course.name}}</span>
-                </div>
-
-            </div>
+            <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
 
         </div>
-        <div class="center-aligned">
-            <button class="btn btn-rememberators"
-                    ng-click="ok(toCourseList)">OK</button>
-            <button class="btn btn-rememberators"
-                    ng-click="cancel()">Cancel</button>
     </div>
 </script>

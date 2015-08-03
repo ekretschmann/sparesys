@@ -32,13 +32,17 @@ module.exports = {
                 'public/lib/angular-ui-sortable/sortable.js',
 				'public/lib/d3/d3.min.js',
 				'public/lib/localforage/dist/localForage.min.js',
-				'public/lib/angular-localforage/dist/angular-localForage.min.js'
+				'public/lib/angular-localforage/dist/angular-localForage.min.js',
+				'public/lib/angular-slick/dist/slick.js',
+				'public/lib/slick-carousel/slick/slick.js',
+
 
 			]
 		},
 		css: [
 			'public/modules/**/css/*.css',
-            'http://fonts.googleapis.com/css?family=PT+Sans'
+            'http://fonts.googleapis.com/css?family=PT+Sans',
+			'public/lib/slick-carousel/slick/slick.css'
 		],
 		js: [
 			'public/config.js',

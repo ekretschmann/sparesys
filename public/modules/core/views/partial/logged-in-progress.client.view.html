@@ -11,44 +11,69 @@
 
             <div>
 
+                <slick infinite="true" slides-to-show="3" slides-to-scroll="3">
+                    <div>
+                        a
+                    </div>
 
-                <tabset vertical="true">
+                    <div>
+                        b
+                    </div>
 
-                    <tab heading="{{course.name}}" data-ng-repeat="course in courses">
+                    <div>
+                        c
+                    </div>
 
+                    <div>
+                        d
+                    </div>
 
-                        <div class="default-border" data-ng-controller="CourseReportController"
-                             data-ng-init="init(course._id, $index)">
+                    <div>
+                        e
+                    </div>
 
-                            <div>
+                    <div>
+                        f
+                    </div>
+                </slick>
 
+                <!--<tabset vertical="true">-->
 
-                                <div class="left-padded-s" style="font-weight: bold; padding-top: 2em">
-                                    Cards memorized
-                                </div>
-                                <div id="inplay{{$index}}">
-
-                                </div>
-
-
-                                <div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">
-                                    When and how much I have practiced:
-                                </div>
-
-                                    <div>
-                                        <span id="practice-date"></span>&nbsp;<span id="number-of-cards"></span>
-                                    </div>
-
-                                    <div id="cal{{$index}}">
-
-                                    </div>
-                            </div>
-
-                        </div>
+                    <!--<tab heading="{{course.name}}" data-ng-repeat="course in courses">-->
 
 
-                    </tab>
-                </tabset>
+                        <!--<div class="default-border" data-ng-controller="CourseReportController"-->
+                             <!--data-ng-init="init(course._id, $index)">-->
+
+                            <!--<div>-->
+
+
+                                <!--<div class="left-padded-s" style="font-weight: bold; padding-top: 2em">-->
+                                    <!--Cards memorized-->
+                                <!--</div>-->
+                                <!--<div id="inplay{{$index}}">-->
+
+                                <!--</div>-->
+
+
+                                <!--<div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">-->
+                                    <!--When and how much I have practiced:-->
+                                <!--</div>-->
+
+                                    <!--<div>-->
+                                        <!--<span id="practice-date"></span>&nbsp;<span id="number-of-cards"></span>-->
+                                    <!--</div>-->
+
+                                    <!--<div id="cal{{$index}}">-->
+
+                                    <!--</div>-->
+                            <!--</div>-->
+
+                        <!--</div>-->
+
+
+                    <!--</tab>-->
+                <!--</tabset>-->
             </div>
         </div>
 

@@ -19,12 +19,18 @@
                 </div>
                 <infobox logo="man">
                     This is the list of courses you have subscribed to. You can use the
-                    <a href="">
-                        <i class="small glyphicon glyphicon-remove-sign">
+                    <a href="" class="nolink" >
+                        <i class="small glyphicon glyphicon-trash">
                         </i></a>
-                    next to each course to delete the courses you no longer need. If you can't
+                    next to each course to delete the courses you no longer need. You can
+                    edit, configure and change an existing course by clicking on the
+                    <a href="" class="nolink" >
+                        <i class="small glyphicon glyphicon-edit">
+                        </i></a> icon.
+
+                    If you can't
                     find the course you are looking for in this list, you can
-                    either <a href="/#!/courses/create">
+                    either <a href="/#!/courses/create" >
                     create a new course
                 </a> or <a href="#!/courses/search">
                     search for an existing course.
@@ -45,7 +51,7 @@
 
                         <a data-ng-href="#!/courses/{{course._id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>
 
-                        <a data-ng-click="areYouSureToDeleteCourse(course)"><i class="glyphicon glyphicon-trash"></i></a>
+                        <a href="" data-ng-click="areYouSureToDeleteCourse(course)"><i class="glyphicon glyphicon-trash"></i></a>
 
                     </div>
                 </div>

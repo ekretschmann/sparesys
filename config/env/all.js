@@ -32,7 +32,7 @@ module.exports = {
                 'public/lib/angular-ui-sortable/sortable.js',
 				'public/lib/d3/d3.min.js',
 				'public/lib/localforage/dist/localForage.js',
-				'public/lib/angular-localforage/dist/angular-localForage.js',
+				//'public/lib/angular-localforage/dist/angular-localForage.js',
 				'public/lib/angular-slick/dist/slick.js',
 				'public/lib/slick-carousel/slick/slick.js'
 

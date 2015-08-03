@@ -42,7 +42,9 @@ module.exports = {
 		css: [
 			'public/modules/**/css/*.css',
             'http://fonts.googleapis.com/css?family=PT+Sans',
-			'public/lib/slick-carousel/slick/slick.css'
+			'public/lib/slick-carousel/slick/slick.css',
+			'public/lib/slick-carousel/slick/slick-theme.css',
+
 		],
 		js: [
 			'public/config.js',

@@ -34,7 +34,7 @@ module.exports = {
 				'public/lib/localforage/dist/localForage.min.js',
 				'public/lib/angular-localforage/dist/angular-localForage.min.js',
 				'public/lib/angular-slick/dist/slick.js',
-				'public/lib/slick-carousel/slick/slick.js',
+				'public/lib/slick-carousel/slick/slick.js'
 
 
 			]

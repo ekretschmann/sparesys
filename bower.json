@@ -23,6 +23,7 @@
     "angular-localforage": "~1.2.x"
   },
   "resolutions": {
-    "angular": "~1.4.x"
+    "angular": "~1.4.x",
+    "localforage": "~1.2.6"
   }
 }

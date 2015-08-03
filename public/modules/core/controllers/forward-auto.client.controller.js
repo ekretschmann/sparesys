@@ -26,7 +26,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             }
             var lang = $scope.card.languageFront.name;
 
-            if ($scope.state === 'question') {
+            if ($scope.state === 'question' && $scope.card.languageBack) {
                 lang = $scope.card.languageBack.name;
             }
 

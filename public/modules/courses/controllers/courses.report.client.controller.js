@@ -9,7 +9,7 @@ angular.module('courses').controller('CourseReportController', ['$scope', 'Cours
             var res = CoursesService.serverLoadCards();
             var promise = res.get({courseId: id});
             promise.$promise.then(function (cards) {
-                DiagramsService.drawCalendar(cards, '#cal'+index);
+                DiagramsService.drawCalendar(cards, '#cal'+index, '#practice-date'+index, '#number-of-cards'+index);
                 DiagramsService.drawLineChart(cards, '#inplay'+index);
             });
         };

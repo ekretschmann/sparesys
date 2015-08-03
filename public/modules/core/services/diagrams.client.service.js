@@ -384,7 +384,7 @@ angular.module('core').service('DiagramsService', [
             return key;
         };
 
-        this.drawCalendar = function (cards, id) {
+        this.drawCalendar = function (cards, id, practiceDateId, numberOfCardsId) {
 
 
             var data = [];
@@ -449,14 +449,14 @@ angular.module('core').service('DiagramsService', [
                     .datum(format)
                     .on('mouseover', function (d) {
                         d3.select(this).classed('cell-hover', true);
-                        d3.select('#practice-date').text(d+': ');
-                        d3.select('#number-of-cards').text((data[d] || '0'));
+                        d3.select(practiceDateId).text(d+': ');
+                        d3.select(numberOfCardsId).text((data[d] || '0'));
 
                     })
                     .on('mouseout', function () {
                         d3.select(this).classed('cell-hover', false);
-                        d3.select('#practice-date').text('');
-                        d3.select('#number-of-cards').text('');
+                        d3.select(practiceDateId).text('');
+                        d3.select(numberOfCardsId).text('');
 
                     })
                 ;

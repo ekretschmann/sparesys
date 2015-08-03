@@ -460,6 +460,25 @@ body {
   padding-bottom: 1*@default-padding-unit;
 }
 
+.subtitle {
+
+  @media screen {
+    @media (min-width: 310px) {
+      font-size: 18px;
+    }
+    @media (min-width: 620px) {
+      font-size: 24px;
+    }
+    @media (min-width: 800px) {
+      font-size: 30px;
+    }
+
+  }
+  font-weight: bold;
+  padding-top: @default-padding-unit;
+  padding-bottom: 1*@default-padding-unit;
+}
+
 .inverse-font-color {
   color: @inverse-font-color;
 }

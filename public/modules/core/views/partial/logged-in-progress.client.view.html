@@ -9,71 +9,48 @@
 
         <div data-ng-if="coursesStudent.length > 0">
 
-            <div>
+            <div style="padding-left: 2em; padding-right: 2em">
 
-                <slick infinite="true" slides-to-show="3" slides-to-scroll="3">
-                    <div>
-                        a
-                    </div>
+                <slick infinite="true" slides-to-show="1" slides-to-scroll="1"
+                       style="padding-left: 1em; padding-right: 1em">
 
-                    <div>
-                        b
-                    </div>
+                    <div data-ng-repeat="course in courses">
 
-                    <div>
-                        c
-                    </div>
+                        <div class="subtitle">{{course.name}}</div>
 
-                    <div>
-                        d
-                    </div>
+                        <div class="default-border"
+                             data-ng-controller="CourseReportController"
+                             data-ng-init="init(course._id, $index)">
 
-                    <div>
-                        e
-                    </div>
+                            <div class="col-xs-6">
 
-                    <div>
-                        f
+                                <div class="left-padded-s" style="font-weight: bold; padding-top: 2em">
+                                    Cards memorized
+                                </div>
+                                <div id="inplay{{$index}}" style="overflow: scroll">
+
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6">
+                                <div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">
+                                    When and how much I have practiced:
+                                </div>
+
+                                <div>
+                                    <span id="practice-date{{$index}}"></span>&nbsp;<span id="number-of-cards{{$index}}"></span>
+                                </div>
+
+                                <div id="cal{{$index}}" style="overflow: scroll">
+
+                                </div>
+                            </div>
+
+                        </div>
                     </div>
                 </slick>
 
-                <!--<tabset vertical="true">-->
 
-                    <!--<tab heading="{{course.name}}" data-ng-repeat="course in courses">-->
-
-
-                        <!--<div class="default-border" data-ng-controller="CourseReportController"-->
-                             <!--data-ng-init="init(course._id, $index)">-->
-
-                            <!--<div>-->
-
-
-                                <!--<div class="left-padded-s" style="font-weight: bold; padding-top: 2em">-->
-                                    <!--Cards memorized-->
-                                <!--</div>-->
-                                <!--<div id="inplay{{$index}}">-->
-
-                                <!--</div>-->
-
-
-                                <!--<div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">-->
-                                    <!--When and how much I have practiced:-->
-                                <!--</div>-->
-
-                                    <!--<div>-->
-                                        <!--<span id="practice-date"></span>&nbsp;<span id="number-of-cards"></span>-->
-                                    <!--</div>-->
-
-                                    <!--<div id="cal{{$index}}">-->
-
-                                    <!--</div>-->
-                            <!--</div>-->
-
-                        <!--</div>-->
-
-
-                    <!--</tab>-->
-                <!--</tabset>-->
             </div>
         </div>
 

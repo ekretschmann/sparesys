@@ -33,7 +33,7 @@
             data-ng-controller="CoursesController" data-ng-init="findForCurrentUser()">
 
 
-            <li ui-route="/users" ng-class="{active: $uiRoute}" class="dropdown "
+            <li ui-route="/users" class="dropdown "
                 data-ng-show="authentication.user.roles.indexOf('admin') > -1">
                 <a href="#" class="dropdown-toggle font-m" id="admin-dropdown-toggle" data-toggle="dropdown">
                     <span class="inverse-font-color">Admin <b class="caret"></b></span>
@@ -71,7 +71,7 @@
             </li>
 
 
-            <li ui-route="/courses" ng-class="{active: $uiRoute}" class="dropdown"
+            <li ui-route="/courses" class="dropdown"
                 data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
                 <a href="#" class="dropdown-toggle font-m" data-toggle="dropdown">
                     <span class="inverse-font-color">Teaching <b class="caret"></b></span>

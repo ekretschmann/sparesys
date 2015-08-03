@@ -32,16 +32,20 @@ angular.module('core').directive('playsound',
 
                         var msg = new SpeechSynthesisUtterance(text);
                         msg.lang = lang;
-                        msg.rate = speed;
+                        //msg.rate = speed;
                         window.speechSynthesis.speak(msg);
 
+                        if( extension) {
 
-                        msg = new SpeechSynthesisUtterance(extension);
-                        msg.lang = lang;
-                        msg.rate = speed;
-                        window.speechSynthesis.speak(msg);
-
-                        console.log('speaking '+msg+ ' '+ speed);
+                            msg = new SpeechSynthesisUtterance(extension);
+                            msg.lang = lang;
+                            //msg.rate = speed;
+                            window.speechSynthesis.speak(msg);
+                        }
+                        //console.log(text);
+                        //console.log(lang);
+                        //console.log(speed);
+                        //console.log('speaking '+msg+ ' '+ speed);
 
 
                     } else {

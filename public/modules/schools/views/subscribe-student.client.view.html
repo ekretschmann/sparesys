@@ -1,78 +1,120 @@
-<section data-ng-controller="SchoolsController" data-ng-init="find()">
+<section data-ng-controller="SchoolsController" data-ng-init="find()" class="font-large">
 
     <div ng-include="'/modules/schools/views/partial/subscribe-student.modal.client.view.html'"></div>
     <div ng-include="'/modules/schools/views/partial/unsubscribe-student.modal.client.view.html'"></div>
 
-    <div class="popup-header">
-        <div class="pull-right">
-            <input ng-model="searchText"
-                   class="form-control search focus"
-                   placeholder="Search">
-        </div>
-        <div class="title">
-            Student School Subscriptions
-        </div>
 
+    <div class="large-screen-only title" data-ng-if="authentication.user.roles.indexOf('help') === -1">
+        Find School
     </div>
 
-    <div data-ng-if="schools.length > 0">
+    <div class="small-screen-only title">
+        Find School
+    </div>
 
+    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
+         data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="dashboard-section">
+            <div class="title">
+                Find School
 
-        <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
-            <div class="content-section">
-                <infobox logo="boy" position="left">
-                    Select your school(s) from the list below. You can use the search box to
-                    narrow down the options. After you have subscribed, your school administrator
-                    will be able to assign you to your class. You will find a pencil icon next
-                    to all the schools you have subscribed to. If you want to unsubscribe from
-                    a school, click on the school name again.
-                </infobox>
+                <div class="pull-right" style="padding-top: 10px">
+                    <input ng-model="searchText"
+                           class="form-control search focus"
+                           placeholder="Search">
+                </div>
             </div>
-        </section>
 
-        <table id="searchTextResults" class="table-striped">
-            <thead>
-            <tr>
 
-                <th class="expands right-padded-m">School</th>
-                <th class="right-padded-m">City</th>
-                <th class="right-padded-m">Country</th>
-                <th>Administrator</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr data-ng-repeat="school in schools | filter:searchText">
-
-                <td class="right-padded-m nowrap left-padded-s top-padded-s">
-                    <div data-ng-if="school.students.indexOf(authentication.user._id) != -1">
-                        <a href="" data-ng-click="unsubscribeStudentPopup(school)">{{school.name}}
-                            <i
-                                    class="glyphicon glyphicon-pencil">
-                            </i>
-                        </a>
-                    </div>
-
-                    <div data-ng-if="school.students.indexOf(authentication.user._id) === -1">
-                        <a href="" data-ng-click="subscribeStudentPopup(school)">{{school.name}}</a>
-                    </div>
-                </td>
-
-                <td class="right-padded-m nowrap top-padded-s">{{school.city}}</td>
-                <td class="right-padded-m nowrap top-padded-s">{{school.country}}</td>
-
-                <td class="nowrap right-padded-s top-padded-s">{{school.user.displayName}}</td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-
-    <div data-ng-hide="!schools.$resolved || schools.length">
-        There are no Schools yet.
-
-        <div data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
-            In your role as headmaster, you can register a school following this
-            <a href="/#!/schools/register">link</a> or use the menu.
-
+            <infobox logo="boy">
+                Select your school(s) from the search results. You can use the search box to
+                narrow down the options. After you have subscribed, your school administrator
+                will be able to assign you to your class.
+            </infobox>
         </div>
     </div>
+
+
+    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only">
+        <div class="col-xs-6 col-md-4 dashboard-col dashboard-section-xs"
+             data-ng-repeat="school in schools | filter:searchText">
+            <div class="">
+                CIS
+            </div>
+        </div>
+    </div>
+
+
+    <!--<div class="popup-header">-->
+    <!--<div class="pull-right">-->
+    <!--<input ng-model="searchText"-->
+    <!--class="form-control search focus"-->
+    <!--placeholder="Search">-->
+    <!--</div>-->
+    <!--<div class="title">-->
+    <!--Student School Subscriptions-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+    <!--<div data-ng-if="schools.length > 0">-->
+
+
+    <!--<section data-ng-if="authentication.user.roles.indexOf('help') > -1">-->
+    <!--<div class="content-section">-->
+    <!--<infobox logo="boy" position="left">-->
+    <!--Select your school(s) from the list below. You can use the search box to-->
+    <!--narrow down the options. After you have subscribed, your school administrator-->
+    <!--will be able to assign you to your class. You will find a pencil icon next-->
+    <!--to all the schools you have subscribed to. If you want to unsubscribe from-->
+    <!--a school, click on the school name again.-->
+    <!--</infobox>-->
+    <!--</div>-->
+    <!--</section>-->
+
+    <!--<table id="searchTextResults" class="table-striped">-->
+    <!--<thead>-->
+    <!--<tr>-->
+
+    <!--<th class="expands right-padded-m">School</th>-->
+    <!--<th class="right-padded-m">City</th>-->
+    <!--<th class="right-padded-m">Country</th>-->
+    <!--<th>Administrator</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr data-ng-repeat="school in schools | filter:searchText">-->
+
+    <!--<td class="right-padded-m nowrap left-padded-s top-padded-s">-->
+    <!--<div data-ng-if="school.students.indexOf(authentication.user._id) != -1">-->
+    <!--<a href="" data-ng-click="unsubscribeStudentPopup(school)">{{school.name}}-->
+    <!--<i-->
+    <!--class="glyphicon glyphicon-pencil">-->
+    <!--</i>-->
+    <!--</a>-->
+    <!--</div>-->
+
+    <!--<div data-ng-if="school.students.indexOf(authentication.user._id) === -1">-->
+    <!--<a href="" data-ng-click="subscribeStudentPopup(school)">{{school.name}}</a>-->
+    <!--</div>-->
+    <!--</td>-->
+
+    <!--<td class="right-padded-m nowrap top-padded-s">{{school.city}}</td>-->
+    <!--<td class="right-padded-m nowrap top-padded-s">{{school.country}}</td>-->
+
+    <!--<td class="nowrap right-padded-s top-padded-s">{{school.user.displayName}}</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
+    <!--</div>-->
+
+    <!--<div data-ng-hide="!schools.$resolved || schools.length">-->
+    <!--There are no Schools yet.-->
+
+    <!--<div data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">-->
+    <!--In your role as headmaster, you can register a school following this-->
+    <!--<a href="/#!/schools/register">link</a> or use the menu.-->
+
+    <!--</div>-->
+    <!--</div>-->
 </section>

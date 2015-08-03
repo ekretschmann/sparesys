@@ -95,12 +95,12 @@
     </div>
 
     <div  data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="col-xs-12 col-md-6  dashboard-col">
+        <div class="col-xs-12 col-md-6  dashboard-col" data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
             <div class="dashboard-section">
                 <div ng-include="'/modules/core/views/partial/logged-in-teaching-howto.client.view.html'"></div>
             </div>
         </div>
-        <div class="col-xs-12 col-md-6  dashboard-col">
+        <div class="col-xs-12 col-md-6  dashboard-col" data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
             <div class="dashboard-section">
                 <div ng-include="'/modules/core/views/partial/logged-in-schools-howto.client.view.html'"></div>
             </div>

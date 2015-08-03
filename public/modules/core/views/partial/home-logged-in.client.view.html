@@ -5,37 +5,96 @@
     <div ng-include="'/modules/users/views/partial/password.modal.client.view.html'"></div>
 
 
-    <div class="row dashboard-row" >
-        <div class="col-xs-12 col-md-6  dashboard-col">
-            <div>
-                <div ng-include="'/modules/core/views/partial/logged-in-courses.client.view.html'"></div>
-            </div>
-        </div>
+    <div data-ng-if="!coursesStudent || coursesStudent.length===0">
+        <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
 
-        <div class="col-xs-12 col-md-6  dashboard-col" data-ng-if="authentication.user.studentInSchools.length > 0">
-            <div class="dashboard-section">
-                <div ng-include="'/modules/core/views/partial/student-in-classes.client.view.html'"></div>
+            <div class="col-xs-12 col-md-6">
+                <div class="dashboard-section font-large">
+                    <div class="title">Are you new?</div>
+                    <infobox logo="boy" position="right">
+                        New to Rememberators? I see, that you haven't got any courses, yet.
+                        Whatever you learn on Rememberators is put into courses. Courses help you to
+                        keep the subjects you learn separated so that you can concentrate on one thing
+                        at a time.
+                    </infobox>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <div class="dashboard-section font-large">
+                    <div class="title">Courses</div>
+                    <infobox logo="girl" position="left">
+                        So here is how to you get your courses:
+                        Superheros sometimes <a href="#!/courses/create">create their own courses</a>. This is great
+                        when you have
+                        something special that you find interesting. Why not have your very own
+                        course on horse breeds or facts about your favorite football stars? Once you
+                        have created a course you can decide to publish it and share it with others here
+                        on Rememberators - or you can keep it for yourself forever. Use the Courses
+                        Menu to get going!
+                    </infobox>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6">
+                <div class="dashboard-section font-large">
+                    <div class="title">Sharing</div>
+                    <infobox logo="philosopher" position="right">
+                        Well, well, well. If everybody starts sharing, there will
+                        be plenty of courses to choose from. You can use the Courses Menu to
+                        have a look at what is there already
+                        and <a href="#!/courses/search">search for courses</a> of things you are interested in. Once
+                        you subscribe
+                        to a course it turns into your own course - so you are free to change it in
+                        any way that you like. You can turn it into exactly what you want it be!
+                    </infobox>
+                </div>
+            </div>
+
+
+            <div class="col-xs-12 col-md-6">
+                <div class="dashboard-section font-large">
+                    <div class="title">Teaching</div>
+                    <infobox logo="guru" position="left">
+                        Rememberators are also great for your teachers. They let them put courses together for
+                        you and help you learn your facts. This way, they can spot what you are working on
+                        and give you all the support that you need to succeed. If your school works with the
+                        Rememberators, you can use the courses menu to <a
+                            href="#!/schools/subscribe/student">find
+                        your school</a> and enrol. Your teachers will then be able to assign your coursework.
+                    </infobox>
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+
+    <div data-ng-if="coursesStudent && coursesStudent.length>0">
+
+            <div class="col-xs-12 col-md-6  dashboard-col">
+                <div>
+                    <div ng-include="'/modules/core/views/partial/logged-in-courses.client.view.html'"></div>
+                </div>
+            </div>
+
+            <div class="col-xs-12 col-md-6  dashboard-col" data-ng-if="authentication.user.studentInSchools.length > 0">
+                <div class="dashboard-section">
+                    <div ng-include="'/modules/core/views/partial/student-in-classes.client.view.html'"></div>
+                </div>
+            </div>
+
+
+        <div class="large-screen-only" data-ng-if="coursesStudent.length>0">
+            <div class="col-xs-12 dashboard-col">
+                <div class="dashboard-section">
+                    <div ng-include="'/modules/core/views/partial/logged-in-progress.client.view.html'"></div>
+                </div>
             </div>
         </div>
     </div>
 
-    <!--<div class="row" data-ng-if="authentication.user.roles.indexOf('teacher') > -1">-->
-        <!--<div class="col-xs-12 col-md-6" >-->
-            <!--<div class="dashboard-section">-->
-                <!--<div ng-include="'/modules/core/views/partial/teacher-in-classes.client.view.html'"></div>-->
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
-
-    <div  class="row dashboard-row large-screen-only">
-        <div class="col-xs-12 dashboard-col">
-            <div class="dashboard-section">
-                <div ng-include="'/modules/core/views/partial/logged-in-progress.client.view.html'"></div>
-            </div>
-        </div>
-    </div>
-
-    <div  class="row dashboard-row" data-ng-if="authentication.user.roles.indexOf('help') > -1">
+    <div  data-ng-if="authentication.user.roles.indexOf('help') > -1">
         <div class="col-xs-12 col-md-6  dashboard-col">
             <div class="dashboard-section">
                 <div ng-include="'/modules/core/views/partial/logged-in-teaching-howto.client.view.html'"></div>

@@ -2,11 +2,11 @@
 
 
 // Courses controller
-angular.module('core').controller('PracticeController', ['$window', '$location', '$scope',
+angular.module('core').controller('PracticeController', ['$localForage', '$window', '$location', '$scope',
     '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication',
     'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'GaugeService', 'ChallengeCalculatorService',
     'ModeSelectorService', 'SpeechRecognitionService', 'PracticeOptionsService',
-    function ($window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
+    function ($localForage, $window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
               Courses, Cards, CoursesService, RetentionCalculatorService, GaugeService, ChallengeCalculatorService,
               ModeSelectorService, SpeechRecognitionService, PracticeOptionsService) {
 
@@ -88,59 +88,59 @@ angular.module('core').controller('PracticeController', ['$window', '$location',
 
         $scope.recordRate = function (time, assessment) {
 
-            //if ($rootScope.online) {
+            if ($rootScope.online) {
             $scope.recordRateOnline(time, assessment);
-            //    return;
-            //}
-            //
-            //
-            //$scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
-            //
-            //var hrt = $scope.card.hrt;
-            //
-            //$localForage.getItem('cards').then(function(data) {
-            //    var offlineResults = data;
-            //
-            //    if(!offlineResults) {
-            //        offlineResults = [];
-            //    }
-            //    offlineResults.push({id: $scope.card._id, assessment: assessment, time: time, hrt: hrt});
-            //    $localForage.setItem('cards', offlineResults);
-            //
-            //});
-            //
-            //
-            //$scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
-            //
-            //if (assessment === 0 && $scope.assess === 'auto') {
-            //    $scope.repeat = true;
-            //} else {
-            //    $scope.repeat = false;
-            //}
+                return;
+            }
+
+
+            $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
+
+            var hrt = $scope.card.hrt;
+
+            $localForage.getItem('cards').then(function(data) {
+                var offlineResults = data;
+
+                if(!offlineResults) {
+                    offlineResults = [];
+                }
+                offlineResults.push({id: $scope.card._id, assessment: assessment, time: time, hrt: hrt});
+                $localForage.setItem('cards', offlineResults);
+
+            });
+
+
+            $scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
+
+            if (assessment === 0 && $scope.assess === 'auto') {
+                $scope.repeat = true;
+            } else {
+                $scope.repeat = false;
+            }
 
 
         };
 
-        //$scope.storeOfflineRecords = function(offlineResults) {
-        //
-        //
-        //    offlineResults.forEach(function (point) {
-        //
-        //
-        //        Cards.get({
-        //            cardId: point.id
-        //        }, function (newCard) {
-        //
-        //            newCard.hrt = point.hrt;
-        //            newCard.history.push({when: point.time, assessment: point.assessment, hrt: point.hrt});
-        //            newCard.$update();
-        //        });
-        //    });
-        //
-        //
-        //
-        //    //$localForage.clear();
-        //};
+        $scope.storeOfflineRecords = function(offlineResults) {
+
+
+            offlineResults.forEach(function (point) {
+
+
+                Cards.get({
+                    cardId: point.id
+                }, function (newCard) {
+
+                    newCard.hrt = point.hrt;
+                    newCard.history.push({when: point.time, assessment: point.assessment, hrt: point.hrt});
+                    newCard.$update();
+                });
+            });
+
+
+
+            //$localForage.clear();
+        };
 
         $scope.recordRateOnline = function (time, assessment) {
 

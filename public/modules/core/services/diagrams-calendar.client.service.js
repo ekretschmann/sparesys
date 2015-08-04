@@ -5,7 +5,7 @@ angular.module('core').service('DiagramsCalendarService', ['$timeout',
     function ($timeout) {
 
 
-        var width = 720;
+        //var width = 720;
         var height = 100;
         var cellSize = 12;
 
@@ -16,7 +16,11 @@ angular.module('core').service('DiagramsCalendarService', ['$timeout',
         var format = d3.time.format('%Y-%m-%d');
         var key = '';
 
-        this.drawCalendar = function (cards, id, practiceDateId, numberOfCardsId) {
+        this.drawCalendar = function (cards, id, practiceDateId, numberOfCardsId, windowWidth) {
+
+
+
+            cellSize = windowWidth/60;
 
 
             var data = [];
@@ -50,10 +54,10 @@ angular.module('core').service('DiagramsCalendarService', ['$timeout',
             svg = d3.select(id).selectAll('svg')
                 .data(d3.range(2015, 2016))
                 .enter().append('svg')
-                .attr('width', '920px')
+                .attr('width', windowWidth+'px')
                 .attr('class', 'Greens')
                 .append('g')
-                .attr('transform', 'translate(' + ((width - cellSize * 53) / 2) + ',' + (height - cellSize * 7 - 1) + ')')
+                .attr('transform', 'translate(' + ((windowWidth - cellSize * 53) / 2) + ',' + (height - cellSize * 7 - 1) + ')')
 
             ;
 

@@ -1,7 +1,7 @@
 'use strict';
 
 /* global d3 */
-angular.module('core').service('DiagramsService', [
+angular.module('core').service('DiagramsCardsInPlayService', [
     function () {
 
 

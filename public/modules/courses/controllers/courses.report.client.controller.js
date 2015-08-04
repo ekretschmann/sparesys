@@ -2,15 +2,15 @@
 
 
 /* global d3 */
-angular.module('courses').controller('CourseReportController', ['$scope', 'CoursesService', 'DiagramsCalendarService',
-    function ($scope, CoursesService, DiagramsCalendarService) {
+angular.module('courses').controller('CourseReportController', ['$scope', 'CoursesService', 'DiagramsCalendarService', 'DiagramsCardsInPlayService',
+    function ($scope, CoursesService, DiagramsCalendarService, DiagramsCardsInPlayService) {
 
         $scope.init = function (id, index) {
             var res = CoursesService.serverLoadCards();
             var promise = res.get({courseId: id});
             promise.$promise.then(function (cards) {
                 DiagramsCalendarService.drawCalendar(cards, '#cal'+index, '#practice-date'+index, '#number-of-cards'+index);
-                //DiagramsService.drawLineChart(cards, '#inplay'+index);
+                DiagramsCardsInPlayService.drawLineChart(cards, '#inplay'+index);
             });
         };
 

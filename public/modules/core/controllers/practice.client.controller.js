@@ -4,10 +4,10 @@
 // Courses controller
 angular.module('core').controller('PracticeController', ['$localForage', '$window', '$location', '$scope',
     '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication',
-    'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'GaugeService', 'ChallengeCalculatorService',
+    'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsGaugeService', 'ChallengeCalculatorService',
     'ModeSelectorService', 'SpeechRecognitionService', 'PracticeOptionsService',
     function ($localForage, $window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
-              Courses, Cards, CoursesService, RetentionCalculatorService, GaugeService, ChallengeCalculatorService,
+              Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsGaugeService, ChallengeCalculatorService,
               ModeSelectorService, SpeechRecognitionService, PracticeOptionsService) {
 
         $scope.time = Date.now();
@@ -403,7 +403,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 ChallengeCalculatorService.newCardAsked();
             }
 
-            GaugeService.loadLiquidFillGauge(ChallengeCalculatorService.getDoneScore(), ChallengeCalculatorService.getColor());
+            DiagramsGaugeService.loadLiquidFillGauge(ChallengeCalculatorService.getDoneScore(), ChallengeCalculatorService.getColor());
 
             $scope.challengeName = ChallengeCalculatorService.getChallengeName();
             $scope.challengeDescription = ChallengeCalculatorService.getChallengeDescription();
@@ -514,7 +514,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 courseId: $stateParams.courseId
             }, function (course) {
                 $scope.course = course;
-                GaugeService.loadLiquidFillGauge(ChallengeCalculatorService.getDoneScore(), ChallengeCalculatorService.getColor());
+                DiagramsGaugeService.loadLiquidFillGauge(ChallengeCalculatorService.getDoneScore(), ChallengeCalculatorService.getColor());
 
 
             });

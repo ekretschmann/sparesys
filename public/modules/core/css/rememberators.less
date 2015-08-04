@@ -1588,9 +1588,13 @@ a:hover {
 }
 
 .bar {
-  fill: orange;
+  fill: @light-inverse-background-color;
 }
 
 .bar:hover {
-  fill: orangered ;
+  fill: @inverse-background-color;
+}
+
+.x.axis .tick text{
+  display: none;
 }

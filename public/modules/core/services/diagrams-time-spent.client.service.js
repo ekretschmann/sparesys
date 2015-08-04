@@ -54,7 +54,6 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
 
 
                 if(stamps) {
-                    console.log(this.getDateKey(current));
                     var sortedStamps = stamps.sort();
                     var totalTime = 0;
                     for (var i = 0; i < sortedStamps.length; i++) {

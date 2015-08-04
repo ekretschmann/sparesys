@@ -5,13 +5,91 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
     function ($timeout) {
 
 
+        this.getPracticePerDay = function(cards) {
+            var days = {};
+            var earliest;
+            var latest;
+            for (var i = 0; i < cards.length; i++) {
+                var card = cards[i];
+                for (var j = 0; j < cards[i].history.length; j++) {
+                    var q = cards[i].history[j].when;
+
+                    if (!earliest || earliest > q) {
+                        earliest = q;
+                    }
+
+                    if (!latest || latest < q) {
+                        latest = q;
+                    }
+
+                    var key = this.getDateKey(q);
+                    if (!days[key]) {
+                        days[key] = [];
+                    }
+                    days[key].push(q);
+                }
+            }
+            return {practicePerDay: days, earliest: earliest, latest: latest};
+        };
+
         this.drawBarChart = function (cards, id, windwoWidth) {
 
 
+            var practiceData = this.getPracticePerDay(cards);
+
+            var days = practiceData.practicePerDay;
+            var earliest = practiceData.earliest;
+            var latest = practiceData.latest;
+
+
+
+
+            var current = earliest;
+            var dayInMs = 1000*60*60*24;
+            var totals = [];
+            var maxTotal = 0;
+            while(current < latest +dayInMs) {
+
+                var stamps = days[this.getDateKey(current)];
+
+
+                if(stamps) {
+                    console.log(this.getDateKey(current));
+                    var sortedStamps = stamps.sort();
+                    var totalTime = 0;
+                    for (var i = 0; i < sortedStamps.length; i++) {
+                        var diff = 0;
+                        if (sortedStamps[i+1]) {
+                            diff = sortedStamps[i+1] - sortedStamps[i];
+                        } else {
+                            // 10s for the last card
+                            diff = 10000;
+                        }
+
+                        if (diff > 1000*60*3) {
+                            diff = 10000;
+                        }
+                        totalTime += diff;
+
+                    }
+
+                    totalTime = totalTime / (1000*60);
+
+                    if (totalTime > maxTotal) {
+                        maxTotal = totalTime;
+                    }
+                    totals.push({date:this.getDateKey(current), time:totalTime});
+
+                } else {
+                    totals.push({date:this.getDateKey(current), time:0});
+                }
+                current += dayInMs;
+            }
+
 
             var margin = {top: 40, right: 20, bottom: 30, left: 40},
-                width = 960 - margin.left - margin.right,
-                height = 500 - margin.top - margin.bottom;
+                width = windwoWidth - margin.left - margin.right,
+                height = 400 - margin.top - margin.bottom;
 
             var formatPercent = d3.format('.0%');
 
@@ -27,15 +105,9 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
 
             var yAxis = d3.svg.axis()
                 .scale(y)
-                .orient('left')
-                .tickFormat(formatPercent);
+                .orient('left');
+                //.tickFormat(formatPercent);
 
-            //var tip = d3.tip()
-            //    .attr('class', 'd3-tip')
-            //    .offset([-10, 0])
-            //    .html(function (d) {
-            //        return '<strong>Frequency:</strong> <span style='color:red'>' + d.frequency + '</span>';
-            //    })
 
             var svg = d3.select(id).append('svg')
                 .attr('width', width + margin.left + margin.right)
@@ -43,19 +115,13 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
                 .append('g')
                 .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
-            //svg.call(tip);
-
-            //d3.tsv('data.tsv', type, function(error, data) {
-
-            var data = [];
-            data.push({letter: 'A', frequency:10});
-            data.push({letter: 'B', frequency:30});
-            data.push({letter: 'C', frequency:20});
-            x.domain(data.map(function (d) {
-                return d.letter;
+            x.domain(totals.map(function (d) {
+                return d.date;
+                //return 'A';
             }));
-            y.domain([0, d3.max(data, function (d) {
-                return d.frequency;
+            y.domain([0, d3.max(totals, function (d) {
+                //return d.totalTime / 1000;
+                return maxTotal * 1.2;
             })]);
 
             svg.append('g')
@@ -71,124 +137,51 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
                 .attr('y', 6)
                 .attr('dy', '.71em')
                 .style('text-anchor', 'end')
-                .text('Frequency');
+                .text('Minutes');
 
             svg.selectAll('.bar')
-                .data(data)
+                .data(totals)
                 .enter().append('rect')
                 .attr('class', 'bar')
                 .attr('x', function (d) {
-                    return x(d.letter);
+                    return x(d.date);
                 })
                 .attr('width', x.rangeBand())
                 .attr('y', function (d) {
-                    return y(d.frequency);
+                    return y(d.time);
                 })
                 .attr('height', function (d) {
-                    return height - y(d.frequency);
+                    return height - y(d.time);
                 });
-                //.on('mouseover', tip.show)
-                //.on('mouseout', tip.hide);
+            //.on('mouseover', tip.show)
+            //.on('mouseout', tip.hide);
 
 
-            //
-            //    cellSize = windowWidth/60;
-            //
-            //
-            //    var data = [];
-            //
-            //    for (var i = 0; i < cards.length; i++) {
-            //        var card = cards[i];
-            //        for (var j = 0; j < cards[i].history.length; j++) {
-            //            var q = cards[i].history[j];
-            //
-            //
-            //            var key = this.getDateKey(q.when);
-            //            if (data[key]) {
-            //                data[key] += 1;
-            //            } else {
-            //                data[key] = 1;
-            //            }
-            //        }
-            //    }
-            //
-            //
-            //    var color = d3.scale.quantize()
-            //        .domain([0, 500])
-            //        .range(d3.range(11).map(function (d) {
-            //            return 'q' + d + '-11';
-            //        }));
-            //
-            //    var svg = d3.select(id);
-            //    svg.selectAll('*').remove();
-            //
-            //
-            //    svg = d3.select(id).selectAll('svg')
-            //        .data(d3.range(2015, 2016))
-            //        .enter().append('svg')
-            //        .attr('width', windowWidth+'px')
-            //        .attr('class', 'Greens')
-            //        .append('g')
-            //        .attr('transform', 'translate(' + ((windowWidth - cellSize * 53) / 2) + ',' + (height - cellSize * 7 - 1) + ')')
-            //
-            //    ;
-            //
-            //    svg.append('text')
-            //        .attr('transform', 'translate(-6,' + cellSize * 3.5 + ')rotate(-90)')
-            //        .style('text-anchor', 'middle')
-            //        .text(function (d) {
-            //            return d;
-            //        });
-            //
-            //    var rect = svg.selectAll('.day')
-            //            .data(function (d) {
-            //                return d3.time.days(new Date(d, 0, 1), new Date(d + 1, 0, 1));
-            //            })
-            //            .enter().append('rect')
-            //            .attr('class', 'day')
-            //            .attr('width', cellSize)
-            //            .attr('height', cellSize)
-            //            .attr('x', function (d) {
-            //                return week(d) * cellSize;
-            //            })
-            //            .attr('y', function (d) {
-            //                return day(d) * cellSize;
-            //            })
-            //            .datum(format)
-            //            .on('mouseover', function (d) {
-            //                d3.select(this).classed('cell-hover', true);
-            //                d3.select(practiceDateId).text(d+': ');
-            //                d3.select(numberOfCardsId).text((data[d] || '0'));
-            //
-            //            })
-            //            .on('mouseout', function () {
-            //                d3.select(this).classed('cell-hover', false);
-            //                d3.select(practiceDateId).text('');
-            //                d3.select(numberOfCardsId).text('');
-            //
-            //            })
-            //        ;
-            //
-            //
-            //    svg.selectAll('.month')
-            //        .data(function (d) {
-            //            return d3.time.months(new Date(d, 0, 1), new Date(d + 1, 0, 1));
-            //        })
-            //        .enter().append('path')
-            //        .attr('class', 'month')
-            //        .attr('d', this.monthPath);
-            //
-            //
-            //    rect.filter(function (d) {
-            //        return d in data;
-            //    })
-            //        .attr('class', function (d) {
-            //            return 'day ' + color(data[d]);
-            //        });
-            //
-            //
+
         };
 
+
+        this.getDateKey = function (when) {
+            var date = new Date(when);
+
+            var year = date.getFullYear();
+            var month = date.getMonth() + 1;
+            var d = date.getDate();
+            var key = year;
+            if (month > 9) {
+
+                key += '-' + month;
+            } else {
+                key += '-0' + month;
+            }
+
+            if (d > 9) {
+                key += '-' + d;
+            } else {
+                key += '-0' + d;
+            }
+            return key;
+        };
 
     }
 ])

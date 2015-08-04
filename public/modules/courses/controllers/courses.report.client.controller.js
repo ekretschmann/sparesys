@@ -13,7 +13,7 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$wind
             promise.$promise.then(function (cards) {
                 DiagramsCalendarService.drawCalendar(cards, '#cal'+index, '#practice-date'+index, '#number-of-cards'+index, ($window.innerWidth / 2)-130);
                 DiagramsCardsInPlayService.drawLineChart(cards, '#inplay'+index, $window.innerWidth);
-                DiagramsTimeSpentService.drawBarChart(cards, '#timespent'+index, ($window.innerWidth / 2)-130);
+                DiagramsTimeSpentService.drawBarChart(cards, '#timespent'+index, '#spent-practice-date'+index, '#spent-practice-time'+index, ($window.innerWidth / 2)-130);
             });
         };
 

@@ -5,7 +5,7 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
     function ($timeout) {
 
 
-        this.getPracticePerDay = function(cards) {
+        this.getPracticePerDay = function (cards) {
             var days = {};
             var earliest;
             var latest;
@@ -32,7 +32,7 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
             return {practicePerDay: days, earliest: earliest, latest: latest};
         };
 
-        this.drawBarChart = function (cards, id, windwoWidth) {
+        this.drawBarChart = function (cards, id, practiceDateId, timeSpentId, windwoWidth) {
 
 
             var practiceData = this.getPracticePerDay(cards);
@@ -42,45 +42,43 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
             var latest = practiceData.latest;
 
 
-
-
             var current = earliest;
-            var dayInMs = 1000*60*60*24;
+            var dayInMs = 1000 * 60 * 60 * 24;
             var totals = [];
             var maxTotal = 0;
-            while(current < latest +dayInMs) {
+            while (current < latest + dayInMs) {
 
                 var stamps = days[this.getDateKey(current)];
 
 
-                if(stamps) {
+                if (stamps) {
                     var sortedStamps = stamps.sort();
                     var totalTime = 0;
                     for (var i = 0; i < sortedStamps.length; i++) {
                         var diff = 0;
-                        if (sortedStamps[i+1]) {
-                            diff = sortedStamps[i+1] - sortedStamps[i];
+                        if (sortedStamps[i + 1]) {
+                            diff = sortedStamps[i + 1] - sortedStamps[i];
                         } else {
                             // 10s for the last card
                             diff = 10000;
                         }
 
-                        if (diff > 1000*60*3) {
+                        if (diff > 1000 * 60 * 3) {
                             diff = 10000;
                         }
                         totalTime += diff;
 
                     }
 
-                    totalTime = totalTime / (1000*60);
+                    totalTime = totalTime / (1000 * 60);
 
                     if (totalTime > maxTotal) {
                         maxTotal = totalTime;
                     }
-                    totals.push({date:this.getDateKey(current), time:totalTime});
+                    totals.push({date: this.getDateKey(current), time: totalTime});
 
                 } else {
-                    totals.push({date:this.getDateKey(current), time:0});
+                    totals.push({date: this.getDateKey(current), time: 0});
                 }
                 current += dayInMs;
             }
@@ -105,7 +103,7 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
             var yAxis = d3.svg.axis()
                 .scale(y)
                 .orient('left');
-                //.tickFormat(formatPercent);
+            //.tickFormat(formatPercent);
 
 
             var svg = d3.select(id).append('svg')
@@ -151,11 +149,19 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
                 })
                 .attr('height', function (d) {
                     return height - y(d.time);
+                })
+                .on('mouseover', function (d) {
+                    d3.select(this).classed('cell-hover', true);
+                    d3.select(practiceDateId).text(d.date+': ');
+                    d3.select(timeSpentId).text(Math.ceil(d.time) + ' min');
+
+                })
+                .on('mouseout', function () {
+                    d3.select(this).classed('cell-hover', false);
+                    d3.select(practiceDateId).text('');
+                    d3.select(timeSpentId).text('');
+
                 });
-            //.on('mouseover', tip.show)
-            //.on('mouseout', tip.hide);
-
-
 
         };
 

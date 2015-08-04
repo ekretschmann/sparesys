@@ -2,8 +2,9 @@
 
 
 /* global d3 */
-angular.module('courses').controller('CourseReportController', ['$scope', '$window', 'CoursesService', 'DiagramsCalendarService', 'DiagramsCardsInPlayService',
-    function ($scope, $window, CoursesService, DiagramsCalendarService, DiagramsCardsInPlayService) {
+angular.module('courses').controller('CourseReportController', ['$scope', '$window', 'CoursesService', 'DiagramsCalendarService',
+    'DiagramsCardsInPlayService', 'DiagramsTimeSpentService',
+    function ($scope, $window, CoursesService, DiagramsCalendarService, DiagramsCardsInPlayService, DiagramsTimeSpentService) {
 
         $scope.init = function (id, index) {
 
@@ -12,6 +13,7 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$wind
             promise.$promise.then(function (cards) {
                 DiagramsCalendarService.drawCalendar(cards, '#cal'+index, '#practice-date'+index, '#number-of-cards'+index, ($window.innerWidth / 2)-100);
                 DiagramsCardsInPlayService.drawLineChart(cards, '#inplay'+index, $window.innerWidth);
+                DiagramsTimeSpentService.drawBarChart(cards, '#timespent'+index, $window.innerWidth);
             });
         };
 

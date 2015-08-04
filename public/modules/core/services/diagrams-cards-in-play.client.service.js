@@ -8,7 +8,7 @@ angular.module('core').service('DiagramsCardsInPlayService', [
 
         var key = '';
 
-        this.drawLineChart = function (cards, id) {
+        this.drawLineChart = function (cards, id, windwoWidth) {
 
             var d = [];
             var earliestDate = Date.now();
@@ -64,7 +64,7 @@ angular.module('core').service('DiagramsCardsInPlayService', [
 
 
             var margin = {top: 20, right: 20, bottom: 30, left: 50},
-                width =  920 - margin.left - margin.right,
+                width =  windwoWidth - margin.left - margin.right - 230,
                 height = 300 - margin.top - margin.bottom;
 
 

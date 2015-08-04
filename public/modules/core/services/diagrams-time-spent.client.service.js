@@ -84,7 +84,7 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
             }
 
 
-            var margin = {top: 40, right: 20, bottom: 30, left: 40},
+            var margin = {top: 16, right: 20, bottom: 30, left: 40},
                 width = windwoWidth - margin.left - margin.right,
                 height = 400 - margin.top - margin.bottom;
 

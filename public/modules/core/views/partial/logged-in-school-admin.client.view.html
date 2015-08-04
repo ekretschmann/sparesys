@@ -1,4 +1,4 @@
-<div class="content-section">
+<div class="font-large">
     <div ng-include="'/modules/schools/views/partial/register-school.modal.client.view.html'"></div>
     <div ng-include="'/modules/schools/views/partial/edit-school.modal.client.view.html'"></div>
     <div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>
@@ -7,118 +7,119 @@
     <div ng-include="'/modules/schoolclasses/views/partial/setup-class.modal.client.view.html'"></div>
 
 
-    <div class="title">School Administration</div>
-
-    <div data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
-        <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
-            <infobox logo="woman" position="right">
-                Rememberators organise teaching in schools and classes.
-                If you are planning to use Rememberators for your school, or to set yourself up as teacher
-                for your own children, go to your
-                <a href="" data-ng-click="settingsPopup()">settings</a> in the {{user.displayName}} menu and register as
-                a school administrator to manage teachers and classes.
-            </infobox>
-        </section>
-    </div>
-
-    <div data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">
-
-
-
-        <div data-ng-if="authentication.user.administersSchools.length === 0">
-
-            <infobox logo="woman" position="right">
-                <div class="warning" data-ng-controller="SchoolsController">
-                    You are set up as a school administrator but you are not managing any schools, yet. To
-                    get started, you will have to register your school using the Schools Menu.
-                    Alternatively, you can also follow
-                    <a href="" data-ng-click="registerSchoolPopup()">this link</a>.
+    <div data-ng-if="authentication.user.administersSchools.length === 0">
+        <div>
+            <div class="col-xs-12 col-md-6">
+                <div class="dashboard-section font-large" data-ng-controller="SchoolsController">
+                    <div class="title">School Administration</div>
+                    <infobox class="warning" logo="woman" position="right">
+                        You have set yourself up as a school administrator but you are not managing any schools. To
+                        get started, you will have to register your school using the menu.
+                        Alternatively, you can also follow
+                        <a href="" data-ng-click="registerSchoolPopup()">this link</a>.
+                    </infobox>
                 </div>
-            </infobox>
-        </div>
-
-        <div data-ng-if="authentication.user.administersSchools.length > 0">
-
-
-            <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
-                <infobox logo="woman" position="right">
-                    As a school administrator, you organise the teachers
-                    students of your schools and assign them to their classes. Click on the link<span
-                        data-ng-if="authentication.user.administersSchools.length>1">s</span>
-                    to your school<span data-ng-if="schools.length>1">s</span> to create and manage
-                    classes.
-                </infobox>
             </div>
-
-            <div data-ng-if="authentication.user.roles.indexOf('help') === -1">
-                You are the administrator of the following School<span
-                    data-ng-if="authentication.user.administersSchools.length>1">s</span>:
-            </div>
-
-            <table class="table-striped top-margin-l" data-ng-if="authentication.user.administersSchools.length > 0">
-                <thead>
-                <tr>
-                    <th class="right-padded-s left-padded-s"></th>
-                    <th class="right-padded-m">School</th>
-                    <th class="right-padded-m">City</th>
-                    <th class="right-padded-m">Country</th>
-                    <th class="right-padded-s">Classes</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr data-ng-repeat="schoolId in authentication.user.administersSchools | filter:searchText"
-                    data-ng-controller="SchoolsController"
-                    data-ng-init="findById(schoolId)">
-
-                    <td class="right-padded-s top-aligned top-padded-s">
-                        <a href="">
-                            <i data-ng-click="areYouSureToDeleteSchool(school)"
-                               class="small left-padded-s glyphicon glyphicon-remove-sign">
-                            </i>
-                        </a>
-                    </td>
-
-                    <td class="expands right-padded-m  top-aligned top-padded-s">
-                        <a href="" data-ng-click="editSchoolPopup(school)">{{school.name}}</a></td>
-                    <td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>
-                    <td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>
-                    <td class="nowrap right-padded-s top-aligned top-padded-s">
-                        <div data-ng-if="school.schoolclasses.length > 0">
-                            <div data-ng-repeat="schoolclass in school.schoolclasses">
-                                <a href="">
-                                    <i data-ng-click="areYouSureToDeleteClass(schoolclass)"
-                                       class="small glyphicon glyphicon-remove-sign">
-                                    </i>
-                                </a>
-
-
-                                <a data-ng-click="setupClassPopup(schoolclass, school)" class="pointer">{{schoolclass.name}}</a>
-
-                            <span class="warning left-padded-s"
-                                  data-ng-if="schoolclass.students.length === 0 || schoolclass.teachers.length === 0">
-                                (not set up)
-                            </span>
-                            </div>
-                        </div>
-
-                        <div data-ng-if="school.schoolclasses.length === 0" class="warning">
-                            School has no classes
-                        </div>
-                        <div data-ng-if="school.schoolclasses.length === 0">
-                            <a href="" data-ng-click="addClassPopup()">add classes</a>
-                        </div>
-                        <div data-ng-if="school.schoolclasses.length > 0">
-                            <a href="" data-ng-click="addClassPopup()">add more classes</a>
-                        </div>
-                    </td>
-
-
-                </tr>
-                </tbody>
-            </table>
-
-
         </div>
-
     </div>
 </div>
+
+<!--<div data-ng-if="authentication.user.roles.indexOf('headmaster') > -1">-->
+
+
+<!--<div data-ng-if="authentication.user.administersSchools.length === 0">-->
+
+<!--<infobox logo="woman" position="right">-->
+<!--<div class="warning" data-ng-controller="SchoolsController">-->
+<!--You are set up as a school administrator but you are not managing any schools, yet. To-->
+<!--get started, you will have to register your school using the Schools Menu.-->
+<!--Alternatively, you can also follow-->
+<!--<a href="" data-ng-click="registerSchoolPopup()">this link</a>.-->
+<!--</div>-->
+<!--</infobox>-->
+<!--</div>-->
+
+<!--<div data-ng-if="authentication.user.administersSchools.length > 0">-->
+
+
+<!--<div data-ng-if="authentication.user.roles.indexOf('help') > -1">-->
+<!--<infobox logo="woman" position="right">-->
+<!--As a school administrator, you organise the teachers-->
+<!--students of your schools and assign them to their classes. Click on the link<span-->
+<!--data-ng-if="authentication.user.administersSchools.length>1">s</span>-->
+<!--to your school<span data-ng-if="schools.length>1">s</span> to create and manage-->
+<!--classes.-->
+<!--</infobox>-->
+<!--</div>-->
+
+<!--<div data-ng-if="authentication.user.roles.indexOf('help') === -1">-->
+<!--You are the administrator of the following School<span-->
+<!--data-ng-if="authentication.user.administersSchools.length>1">s</span>:-->
+<!--</div>-->
+
+<!--<table class="table-striped top-margin-l" data-ng-if="authentication.user.administersSchools.length > 0">-->
+<!--<thead>-->
+<!--<tr>-->
+<!--<th class="right-padded-s left-padded-s"></th>-->
+<!--<th class="right-padded-m">School</th>-->
+<!--<th class="right-padded-m">City</th>-->
+<!--<th class="right-padded-m">Country</th>-->
+<!--<th class="right-padded-s">Classes</th>-->
+<!--</tr>-->
+<!--</thead>-->
+<!--<tbody>-->
+<!--<tr data-ng-repeat="schoolId in authentication.user.administersSchools | filter:searchText"-->
+<!--data-ng-controller="SchoolsController"-->
+<!--data-ng-init="findById(schoolId)">-->
+
+<!--<td class="right-padded-s top-aligned top-padded-s">-->
+<!--<a href="">-->
+<!--<i data-ng-click="areYouSureToDeleteSchool(school)"-->
+<!--class="small left-padded-s glyphicon glyphicon-remove-sign">-->
+<!--</i>-->
+<!--</a>-->
+<!--</td>-->
+
+<!--<td class="expands right-padded-m  top-aligned top-padded-s">-->
+<!--<a href="" data-ng-click="editSchoolPopup(school)">{{school.name}}</a></td>-->
+<!--<td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>-->
+<!--<td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>-->
+<!--<td class="nowrap right-padded-s top-aligned top-padded-s">-->
+<!--<div data-ng-if="school.schoolclasses.length > 0">-->
+<!--<div data-ng-repeat="schoolclass in school.schoolclasses">-->
+<!--<a href="">-->
+<!--<i data-ng-click="areYouSureToDeleteClass(schoolclass)"-->
+<!--class="small glyphicon glyphicon-remove-sign">-->
+<!--</i>-->
+<!--</a>-->
+
+
+<!--<a data-ng-click="setupClassPopup(schoolclass, school)" class="pointer">{{schoolclass.name}}</a>-->
+
+<!--<span class="warning left-padded-s"-->
+<!--data-ng-if="schoolclass.students.length === 0 || schoolclass.teachers.length === 0">-->
+<!--(not set up)-->
+<!--</span>-->
+<!--</div>-->
+<!--</div>-->
+
+<!--<div data-ng-if="school.schoolclasses.length === 0" class="warning">-->
+<!--School has no classes-->
+<!--</div>-->
+<!--<div data-ng-if="school.schoolclasses.length === 0">-->
+<!--<a href="" data-ng-click="addClassPopup()">add classes</a>-->
+<!--</div>-->
+<!--<div data-ng-if="school.schoolclasses.length > 0">-->
+<!--<a href="" data-ng-click="addClassPopup()">add more classes</a>-->
+<!--</div>-->
+<!--</td>-->
+
+
+<!--</tr>-->
+<!--</tbody>-->
+<!--</table>-->
+
+
+<!--</div>-->
+
+<!--</div>-->

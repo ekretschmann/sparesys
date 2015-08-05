@@ -1,68 +1,69 @@
 <script type="text/ng-template" id="editSchool.html">
-    <div>
 
-        <div class="modal-body">
-            <div class="popup-header">
-                <div class="title center-aligned">
-                    Edit School: {{school.name}}
+
+    <div class="rememberators-modal">
+
+
+
+        <form class="signup form-horizontal" autocomplete="off" data-ng-submit="ok()">
+            <fieldset>
+                <div class="rememberators-modal-header">
+                    Edit School
                 </div>
-            </div>
 
-            <form class="form-horizontal" >
-                <fieldset>
-                    <div class="content-header">
-                        <table>
-                            <tr>
-                                <td class="right-padded-m">Name</td>
-                                <td class="expands">
-                                    <input type="text"
-                                           data-ng-model="model.name"
-                                           class="form-control focus"
-                                           placeholder="School Name"
 
-                                           required>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="right-padded-m top-padded-s">City</td>
-                                <td class="expands top-padded-s">
-                                    <input type="text"
-                                           data-ng-model="model.city"
-                                           class="form-control"
-                                           placeholder="City"
-                                           required>
-                                </td>
-                            </tr>
-
-                            <tr>
-                                <td class="right-padded-m top-padded-s">Country</td>
-                                <td class="expands top-padded-s">
-                                    <input type="text"
-                                           data-ng-model="model.country"
-                                           id="country"
-                                           class="form-control"
-                                           placeholder="Country"
-                                           required></td>
-                            </tr>
-
-                        </table>
+                <div class="row rememberators-form-group form-group">
+                    <div class="col-xs-4 ">School Name</div>
+                    <div class="col-xs-8">
+                        <input type="text"
+                               data-ng-model="school.name"
+                               class="form-control focus"
+                               placeholder="School Name"
+                               required>
                     </div>
+                </div>
 
-                    <div class="center-aligned">
-                        <button class="btn btn-rememberators"
-                                data-ng-click="ok()">OK</button>
-
-                        <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
-
+                <div class="row rememberators-form-group form-group">
+                    <div class="col-xs-4 ">City</div>
+                    <div class="col-xs-8">
+                        <input type="text"
+                               data-ng-model="school.city"
+                               class="form-control"
+                               placeholder="City" required>
                     </div>
+                </div>
 
+                <div class="row rememberators-form-group form-group">
+                    <div class="col-xs-4 ">Country</div>
+                    <div class="col-xs-8">
+                        <input type="text" data-ng-model="school.country"
+                               class="form-control"
+                               placeholder="Country" required>
+                    </div>
+                </div>
 
-                </fieldset>
-            </form>
+                <div class="rememberators-modal-footer">
+                    <button class="btn btn-rememberators"
+                            type="submit"
+                            tabindex=3>Register
+                    </button>
 
-        </div>
+                    <button class="btn btn-rememberators"
+                            tabindex=4
+                            ng-click="cancel()">Cancel
+                    </button>
 
+                </div>
 
+                <div data-ng-show="error" class="text-center text-danger">
+                    <strong>{{error}}</strong>
+                </div>
+            </fieldset>
+        </form>
     </div>
+
+
+
+
+
 </script>

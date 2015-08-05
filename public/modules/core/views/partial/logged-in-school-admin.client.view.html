@@ -61,7 +61,7 @@
                     <div class="col-xs-12">
                         <div>City</div>
                         <div class="font-medium">
-                                {{school.city}}
+                            {{school.city}}
                         </div>
                     </div>
                 </div>
@@ -77,13 +77,89 @@
 
                 <div class="row dashboard-row" data-ng-if="school.schoolclasses.length === 0">
                     <div class="col-xs-12 warning">
-                        <div>Classes <a href="" data-ng-click="addClassPopup()"><i class="glyphicon glyphicon-plus-sign"></i></a></div>
+                        <div>Classes <a href="" data-ng-click="addClassPopup()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a></div>
                         <div class="font-medium">
                             School has no classes
                         </div>
                     </div>
                 </div>
 
+                <div class="row dashboard-row" data-ng-if="school.schoolclasses.length > 0">
+                    <div class="col-xs-12">
+
+                        <div class="row">
+
+                            <div class="col-xs-6">
+                                <div>Classes <a href="" data-ng-click="addClassPopup()"><i
+                                        class="glyphicon glyphicon-plus-sign"></i></a></div>
+
+                            </div>
+
+                            <div class="col-xs-3">
+                                Teachers
+                            </div>
+
+                            <div class="col-xs-3">
+                                Students
+                            </div>
+                        </div>
+                        <div data-ng-repeat="schoolclass in school.schoolclasses">
+                            <!--<a href="">-->
+                            <!--<i data-ng-click="areYouSureToDeleteClass(schoolclass)"-->
+                            <!--class="small glyphicon glyphicon-remove-sign">-->
+                            <!--</i>-->
+                            <!--</a>-->
+
+
+
+                            <div class="row">
+
+                                <div class="col-xs-6">
+                                    <a href="" data-ng-click="setupClassPopup(schoolclass, school)(school)"><i
+                                            class="glyphicon glyphicon-edit"></i></a>
+
+                                    <a href="" data-ng-click="areYouSureToDeleteClass(schoolclass, school)"><i
+                                            class="glyphicon glyphicon-trash"></i></a>
+
+                                    {{schoolclass.name}}
+                                </div>
+
+                                <div class="col-xs-3">
+                                    <div class="danger"
+                                         data-ng-if="schoolclass.teachers.length === 0">
+                                        none
+                                    </div>
+
+                                    <div
+                                         data-ng-if="schoolclass.teachers.length > 0">
+                                        {{schoolclass.teachers.length}}
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-3">
+                                    <div class="danger"
+                                         data-ng-if="schoolclass.students.length === 0">
+                                        none
+                                    </div>
+
+                                    <div
+                                         data-ng-if="schoolclass.students.length > 0">
+                                        {{schoolclass.students.length}}
+                                    </div>
+                                </div>
+
+
+                            </div>
+
+                            <!--<a data-ng-click="setupClassPopup(schoolclass, school)" class="pointer">{{schoolclass.name}}</a>-->
+
+                            <!--<span class="warning left-padded-s"-->
+                            <!--data-ng-if="schoolclass.students.length === 0 || schoolclass.teachers.length === 0">-->
+                            <!--(not set up)-->
+                            <!--</span>-->
+                        </div>
+                    </div>
 
 
                     <!--School has no classes-->
@@ -94,82 +170,82 @@
                     <!--<div data-ng-if="school.schoolclasses.length > 0">-->
                     <!--<a href="" data-ng-click="addClassPopup()">add more classes</a>-->
                     <!--</div>-->
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
-<!--
-<!--<div data-ng-if="authentication.user.roles.indexOf('help') === -1">-->
-<!--You are the administrator of the following School<span-->
-<!--data-ng-if="authentication.user.administersSchools.length>1">s</span>:-->
-<!--</div>-->
+    <!--
+    <!--<div data-ng-if="authentication.user.roles.indexOf('help') === -1">-->
+    <!--You are the administrator of the following School<span-->
+    <!--data-ng-if="authentication.user.administersSchools.length>1">s</span>:-->
+    <!--</div>-->
 
-<!--<table class="table-striped top-margin-l" data-ng-if="authentication.user.administersSchools.length > 0">-->
-<!--<thead>-->
-<!--<thead>-->
-<!--<tr>-->
-<!--<th class="right-padded-s left-padded-s"></th>-->
-<!--<th class="right-padded-m">School</th>-->
-<!--<th class="right-padded-m">City</th>-->
-<!--<th class="right-padded-m">Country</th>-->
-<!--<th class="right-padded-s">Classes</th>-->
-<!--</tr>-->
-<!--</thead>-->
-<!--<tbody>-->
-<!--<tr data-ng-repeat="schoolId in authentication.user.administersSchools | filter:searchText"-->
-<!--data-ng-controller="SchoolsController"-->
-<!--data-ng-init="findById(schoolId)">-->
+    <!--<table class="table-striped top-margin-l" data-ng-if="authentication.user.administersSchools.length > 0">-->
+    <!--<thead>-->
+    <!--<thead>-->
+    <!--<tr>-->
+    <!--<th class="right-padded-s left-padded-s"></th>-->
+    <!--<th class="right-padded-m">School</th>-->
+    <!--<th class="right-padded-m">City</th>-->
+    <!--<th class="right-padded-m">Country</th>-->
+    <!--<th class="right-padded-s">Classes</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr data-ng-repeat="schoolId in authentication.user.administersSchools | filter:searchText"-->
+    <!--data-ng-controller="SchoolsController"-->
+    <!--data-ng-init="findById(schoolId)">-->
 
-<!--<td class="right-padded-s top-aligned top-padded-s">-->
-<!--<a href="">-->
-<!--<i data-ng-click="areYouSureToDeleteSchool(school)"-->
-<!--class="small left-padded-s glyphicon glyphicon-remove-sign">-->
-<!--</i>-->
-<!--</a>-->
-<!--</td>-->
+    <!--<td class="right-padded-s top-aligned top-padded-s">-->
+    <!--<a href="">-->
+    <!--<i data-ng-click="areYouSureToDeleteSchool(school)"-->
+    <!--class="small left-padded-s glyphicon glyphicon-remove-sign">-->
+    <!--</i>-->
+    <!--</a>-->
+    <!--</td>-->
 
-<!--<td class="expands right-padded-m  top-aligned top-padded-s">-->
-<!--<a href="" data-ng-click="editSchoolPopup(school)">{{school.name}}</a></td>-->
-<!--<td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>-->
-<!--<td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>-->
-<!--<td class="nowrap right-padded-s top-aligned top-padded-s">-->
-<!--<div data-ng-if="school.schoolclasses.length > 0">-->
-<!--<div data-ng-repeat="schoolclass in school.schoolclasses">-->
-<!--<a href="">-->
-<!--<i data-ng-click="areYouSureToDeleteClass(schoolclass)"-->
-<!--class="small glyphicon glyphicon-remove-sign">-->
-<!--</i>-->
-<!--</a>-->
-
-
-<!--<a data-ng-click="setupClassPopup(schoolclass, school)" class="pointer">{{schoolclass.name}}</a>-->
-
-<!--<span class="warning left-padded-s"-->
-<!--data-ng-if="schoolclass.students.length === 0 || schoolclass.teachers.length === 0">-->
-<!--(not set up)-->
-<!--</span>-->
-<!--</div>-->
-<!--</div>-->
-
-<!--<div data-ng-if="school.schoolclasses.length === 0" class="warning">-->
-<!--School has no classes-->
-<!--</div>-->
-<!--<div data-ng-if="school.schoolclasses.length === 0">-->
-<!--<a href="" data-ng-click="addClassPopup()">add classes</a>-->
-<!--</div>-->
-<!--<div data-ng-if="school.schoolclasses.length > 0">-->
-<!--<a href="" data-ng-click="addClassPopup()">add more classes</a>-->
-<!--</div>-->
-<!--</td>-->
+    <!--<td class="expands right-padded-m  top-aligned top-padded-s">-->
+    <!--<a href="" data-ng-click="editSchoolPopup(school)">{{school.name}}</a></td>-->
+    <!--<td class="right-padded-m nowrap top-aligned top-padded-s ">{{school.city}}</td>-->
+    <!--<td class="nowrap right-padded-m top-aligned top-padded-s ">{{school.country}}</td>-->
+    <!--<td class="nowrap right-padded-s top-aligned top-padded-s">-->
+    <!--<div data-ng-if="school.schoolclasses.length > 0">-->
+    <!--<div data-ng-repeat="schoolclass in school.schoolclasses">-->
+    <!--<a href="">-->
+    <!--<i data-ng-click="areYouSureToDeleteClass(schoolclass)"-->
+    <!--class="small glyphicon glyphicon-remove-sign">-->
+    <!--</i>-->
+    <!--</a>-->
 
 
-<!--</tr>-->
-<!--</tbody>-->
-<!--</table>-->
+    <!--<a data-ng-click="setupClassPopup(schoolclass, school)" class="pointer">{{schoolclass.name}}</a>-->
+
+    <!--<span class="warning left-padded-s"-->
+    <!--data-ng-if="schoolclass.students.length === 0 || schoolclass.teachers.length === 0">-->
+    <!--(not set up)-->
+    <!--</span>-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div data-ng-if="school.schoolclasses.length === 0" class="warning">-->
+    <!--School has no classes-->
+    <!--</div>-->
+    <!--<div data-ng-if="school.schoolclasses.length === 0">-->
+    <!--<a href="" data-ng-click="addClassPopup()">add classes</a>-->
+    <!--</div>-->
+    <!--<div data-ng-if="school.schoolclasses.length > 0">-->
+    <!--<a href="" data-ng-click="addClassPopup()">add more classes</a>-->
+    <!--</div>-->
+    <!--</td>-->
 
 
-<!--</div>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
 
-<!--</div>-->
+
+    <!--</div>-->
+
+    <!--</div>-->

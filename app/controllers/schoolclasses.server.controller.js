@@ -178,6 +178,8 @@ exports.delete = function (req, res) {
             res.jsonp({school: school, schoolclass: schoolclass});
         }
     });
+
+    //@TODO: Remove references from teachers and students
 };
 
 /**

@@ -210,7 +210,7 @@ exports.list = function(req, res) {
  */
 exports.schoolByID = function(req, res, next, id) {
 
-    School.findById(id).populate('user', 'displayName').populate('user').populate('schoolclasses').exec(function(err, school) {
+    School.findById(id).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('schoolclasses').exec(function(err, school) {
 
 
 		if (err) return next(err);

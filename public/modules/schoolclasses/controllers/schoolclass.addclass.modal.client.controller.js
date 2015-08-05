@@ -9,7 +9,9 @@ angular.module('schoolclasses').controller('AddClassController', ['$scope', '$st
 
         $scope.setFocus = function () {
             $timeout(function(){
-                angular.element('.focus').trigger('focus');
+                if (angular.element('.focus')) {
+                    angular.element('.focus').trigger('focus');
+                }
             },100);
         };
 

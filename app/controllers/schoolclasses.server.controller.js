@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
     Schoolclass = mongoose.model('Schoolclass'),
+    School = mongoose.model('School'),
     User = mongoose.model('User'),
     _ = require('lodash');
 
@@ -144,6 +145,29 @@ exports.update = function (req, res) {
  */
 exports.delete = function (req, res) {
     var schoolclass = req.schoolclass;
+    var school;
+    School.find({'_id': schoolclass.school}).exec(function (err, schools) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            school = schools[0];
+            for(var i=0; i<school.schoolclasses.length; i++) {
+                if (schoolclass._id.toString() === school.schoolclasses[i].toString()) {
+                    school.schoolclasses.splice(i,1);
+                }
+            }
+
+            school.save(function(err) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                }
+            });
+        }
+    });
 
     schoolclass.remove(function (err) {
         if (err) {
@@ -151,7 +175,7 @@ exports.delete = function (req, res) {
                 message: getErrorMessage(err)
             });
         } else {
-            res.jsonp(schoolclass);
+            res.jsonp({school: school, schoolclass: schoolclass});
         }
     });
 };

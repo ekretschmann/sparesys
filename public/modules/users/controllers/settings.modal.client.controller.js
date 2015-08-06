@@ -11,6 +11,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$timeout', 
         $scope.userDetails.email = user.email;
         $scope.roleSettings.teacher = user.roles.indexOf('teacher') > -1;
         $scope.roleSettings.headmaster = user.roles.indexOf('headmaster') > -1;
+        $scope.roleSettings.student = user.roles.indexOf('nostudent') === -1;
         $scope.passwordDetails = {};
         $scope.cancelled = false;
 
@@ -37,6 +38,7 @@ angular.module('users').controller('SettingsController', ['$scope', '$timeout', 
             }
             var teacher = $scope.roleSettings.teacher;
             var headmaster = $scope.roleSettings.headmaster;
+            var student = $scope.roleSettings.student;
 
             if (teacher === true) {
                 if ($scope.user.roles.indexOf('teacher') < 0) {
@@ -59,6 +61,18 @@ angular.module('users').controller('SettingsController', ['$scope', '$timeout', 
                 for (var j in $scope.user.roles) {
                     if ($scope.user.roles[j] === 'headmaster') {
                         $scope.user.roles.splice(j, 1);
+                    }
+                }
+            }
+
+            if (student === false) {
+                if ($scope.user.roles.indexOf('nostudent') < 0) {
+                    $scope.user.roles.push('nostudent');
+                }
+            } else {
+                for (var k in $scope.user.roles) {
+                    if ($scope.user.roles[k] === 'nostudent') {
+                        $scope.user.roles.splice(k, 1);
                     }
                 }
             }

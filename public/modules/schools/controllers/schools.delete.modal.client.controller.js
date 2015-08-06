@@ -11,10 +11,19 @@ angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '
                 new Schoolclasses(schoolclass).$remove();
             });
 
-            new Schools(school).$remove(function() {
-                $state.go($state.current, null, { reload: true});
-            });
+            //new Schools(school).$remove(function() {
+            //    $state.go($state.current, null, { reload: true});
+            //});
 
+            Schools.get({
+                schoolId: $scope.school._id
+            }, function (s) {
+
+                s.$remove(function(result) {
+                    $state.go($state.$current, null, {reload: true});
+                });
+
+            });
             $modalInstance.close();
 
         };

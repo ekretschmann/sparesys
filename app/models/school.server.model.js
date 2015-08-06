@@ -36,14 +36,14 @@ var SchoolSchema = new Schema({
         required: 'Please fill City',
         trim: true
     },
-    teachers: {
-        type: [Schema.Types.ObjectId],
-        default: []
-    },
-    students: {
-        type: [Schema.Types.ObjectId],
-        default: []
-    },
+    teachers: [{
+        type: Schema.ObjectId,
+        ref: 'User'
+    }],
+    students: [{
+        type: Schema.ObjectId,
+        ref: 'User'
+    }],
     schoolclasses:
         [{
             type: Schema.ObjectId,

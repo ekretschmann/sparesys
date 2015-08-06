@@ -1,6 +1,6 @@
 <div class="font-large">
     <div ng-include="'/modules/schools/views/partial/register-school.modal.client.view.html'"></div>
-    <div ng-include="'/modules/schools/views/partial/edit-school.modal.client.view.html'"></div>
+    <!--<div ng-include="'/modules/schools/views/partial/edit-school.modal.client.view.html'"></div>-->
     <div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>
     <div ng-include="'/modules/schoolclasses/views/partial/add-class.modal.client.view.html'"></div>
     <div ng-include="'/modules/schoolclasses/views/partial/delete-class.modal.client.view.html'"></div>
@@ -47,7 +47,7 @@
                     <div class="pull-right">
 
 
-                        <a href="" data-ng-click="editSchoolPopup(school)"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="#!/schools/{{school._id}}"><i class="glyphicon glyphicon-edit"></i></a>
 
                         <a href="" data-ng-click="areYouSureToDeleteSchool(school)"><i
                                 class="glyphicon glyphicon-trash"></i></a>
@@ -101,8 +101,12 @@
                         <div class="row">
 
                             <div class="col-xs-6">
-                                <div>Classes <a href="" data-ng-click="addClassPopup()"><i
-                                        class="glyphicon glyphicon-plus-sign"></i></a></div>
+                                Classes
+                                <!--<div>Classes -->
+                                    <!--<a href="" data-ng-click="addClassPopup()"><i-->
+                                        <!--class="glyphicon glyphicon-plus-sign"></i></a>-->
+                                <!-- -->
+                                <!--</div>-->
 
                             </div>
 
@@ -125,11 +129,11 @@
                             <div class="row">
 
                                 <div class="col-xs-6">
-                                    <a href="" data-ng-click="setupClassPopup(schoolclass, school)(school)"><i
-                                            class="glyphicon glyphicon-edit"></i></a>
+                                    <!--<a href="" data-ng-click="setupClassPopup(schoolclass, school)(school)"><i-->
+                                            <!--class="glyphicon glyphicon-edit"></i></a>-->
 
-                                    <a href="" data-ng-click="areYouSureToDeleteClass(schoolclass, school)"><i
-                                            class="glyphicon glyphicon-trash"></i></a>
+                                    <!--<a href="" data-ng-click="areYouSureToDeleteClass(schoolclass, school)"><i-->
+                                            <!--class="glyphicon glyphicon-trash"></i></a>-->
 
                                     {{schoolclass.name}}
                                 </div>

@@ -1,9 +1,7 @@
 <section data-ng-controller="AuthenticationController">
 
         <div data-ng-if="authentication.user" ng-include="'/modules/core/views/partial/home-logged-in.client.view.html'"></div>
-        <div data-ng-if="!authentication.user"
-             ng-include="'/modules/core/views/partial/home-logged-out.client.view.html'"></div>
-
+        <div data-ng-if="!authentication.user" ng-include="'/modules/core/views/partial/home-logged-out.client.view.html'"></div>
         <div class="rememberators-footer col-xs-12">
 
             rememberators.com

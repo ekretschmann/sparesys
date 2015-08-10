@@ -65,7 +65,7 @@ angular.module('core').service('DiagramsCardsInPlayService', [
 
             var margin = {top: 20, right: 20, bottom: 30, left: 50},
                 width =  windwoWidth - margin.left - margin.right - 230,
-                height = 300 - margin.top - margin.bottom;
+                height = 310 - margin.top - margin.bottom;
 
 
             var x = d3.time.scale()

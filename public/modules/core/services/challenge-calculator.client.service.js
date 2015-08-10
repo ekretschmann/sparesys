@@ -25,6 +25,7 @@ angular.module('core').service('ChallengeCalculatorService', [
                 cardsProcessed: this.cardsProcessed,
                 oldCards: this.old,
                 newCards: this.new,
+                over80: this.over80,
                 doneScore: this.getDoneScore()
             };
         };

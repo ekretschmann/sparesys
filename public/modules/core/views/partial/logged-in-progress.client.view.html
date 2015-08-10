@@ -1,77 +1,116 @@
-<div>
-
-    <div class="content-header">
-        <div class="infobox-title">My Progress</div>
-
-        <div data-ng-if="coursesStudent.length === 0" class="warning">
-            You have not subscribed to a course
-        </div>
-
-        <div data-ng-if="coursesStudent.length > 0">
-
-            <div style="padding-left: 2em; padding-right: 2em">
-
-                <slick infinite="true" slides-to-show="1" slides-to-scroll="1"
-                       style="padding-left: 1em; padding-right: 1em">
-
-                    <div data-ng-repeat="course in courses">
-
-                        <div class="subtitle">{{course.name}}</div>
-
-                        <div class="default-border"
-                             data-ng-controller="CourseReportController"
-                             data-ng-init="init(course._id, $index)">
-
-                            <div class="col-xs-12">
-
-                                <div class="left-padded-s" style="font-weight: bold; padding-top: 2em">
-                                    Cards memorized
-                                </div>
-                                <div >&nbsp;</div>
-                                <div id="inplay{{$index}}" class="diagram" >
-
-                                </div>
-                            </div>
-
-                            <div class="col-xs-6">
-                                <div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">
-                                    When and how much I have practiced:
-                                </div>
-
-                                <div >
-                                    <span id="practice-date{{$index}}"></span>&nbsp;<span id="number-of-cards{{$index}}"></span>
-                                </div>
-
-                                <div id="cal{{$index}}" class="diagram">
-
-                                </div>
-                            </div>
+<div class="dasboard-section">
 
 
-                            <div class="col-xs-6">
-
-                                <div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">
-                                    How long I have practiced:
-                                </div>
-
-                                <div >
-                                    <span id="spent-practice-date{{$index}}"></span>&nbsp;<span id="spent-practice-time{{$index}}"></span>
-                                </div>
-
-                                <div class="timespent diagram" id="timespent{{$index}}" >
-
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-                </slick>
-
-
-            </div>
-        </div>
-
-
+    <div data-ng-if="coursesStudent.length === 0" class="warning">
+        You have not subscribed to a course
     </div>
 
+
+
+
+    <div data-ng-if="coursesStudent.length > 0">
+
+
+        <div class="title">
+            Progresss
+
+            <div class="pull-right">
+
+
+                <a href="" data-ng-click="areYouSureToDeleteSchool(school)"><i
+                        class="glyphicon glyphicon-stats"></i></a>
+
+            </div>
+
+
+        </div>
+
+        <div style="padding-left: 1em; padding-right: 1em">
+
+            <slick infinite="true" slides-to-show="1" slides-to-scroll="1"
+                  >
+
+                <div data-ng-repeat="course in courses">
+
+                    <!--<div class="infobox-title">-->
+
+                        <!--<div class="pull-right" style="text-align: center; top: 0">-->
+                            <!--<div>-->
+                                <!--<a href="" style="font-size: medium">-->
+                                    <!--<i class="glyphicon glyphicon-stats">-->
+                                    <!--</i>-->
+                                <!--</a>-->
+                            <!--</div>-->
+                            <!--<div style="font-size: small">-->
+                                <!--More stats-->
+                            <!--</div>-->
+                        <!--</div>-->
+
+                        <!--Progress for {{course.name}}-->
+
+
+                    <!--</div>-->
+
+                    <!--<div>-->
+                        <!--{{course.name}} Cards memorized-->
+
+                    <!--</div>-->
+                    <div class="default-border"
+                         data-ng-controller="CourseReportController"
+                         data-ng-init="init(course._id, $index)">
+
+                        <div class="col-xs-12">
+
+
+                            <div>&nbsp;</div>
+                            <div id="inplay{{$index}}" class="diagram">
+
+                            </div>
+                        </div>
+
+                        <!--<div class="col-xs-6">-->
+                        <!--<div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">-->
+                        <!--When and how much I have practiced:-->
+                        <!--</div>-->
+
+                        <!--<div >-->
+                        <!--<span id="practice-date{{$index}}"></span>&nbsp;<span id="number-of-cards{{$index}}"></span>-->
+                        <!--</div>-->
+
+                        <!--<div id="cal{{$index}}" class="diagram">-->
+
+                        <!--</div>-->
+                        <!--</div>-->
+
+
+                        <!--<div class="col-xs-6">-->
+
+                        <!--<div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">-->
+                        <!--How long I have practiced:-->
+                        <!--</div>-->
+
+                        <!--<div >-->
+                        <!--<span id="spent-practice-date{{$index}}"></span>&nbsp;<span id="spent-practice-time{{$index}}"></span>-->
+                        <!--</div>-->
+
+                        <!--<div class="timespent diagram" id="timespent{{$index}}" >-->
+
+                        <!--</div>-->
+                        <!--</div>-->
+
+                    </div>
+
+                    <div style="text-align: center; font-size: large">
+                    {{course.name}} - Cards Memorized
+
+                    </div>
+                </div>
+            </slick>
+
+
+        </div>
+    </div>
+
+
 </div>
+

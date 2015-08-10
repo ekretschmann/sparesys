@@ -24,7 +24,8 @@ angular.module('core').service('ChallengeCalculatorService', [
                 candidates: this.candidates,
                 cardsProcessed: this.cardsProcessed,
                 oldCards: this.old,
-                newCards: this.new
+                newCards: this.new,
+                doneScore: this.getDoneScore()
             };
         };
 
@@ -105,22 +106,22 @@ angular.module('core').service('ChallengeCalculatorService', [
             var score = 0;
             if (this.challenge === 'due') {
 
-                //if (this.requiredRetention > 0) {
-                //    score = this.getDueDoneScore();
-                //    if (score < 100) {
-                //        return score;
-                //    }
-                //    this.challenge = 'over80';
-                //    this.minimalDoneScore = 0;
-                //} else {
+                if (this.requiredRetention > 0) {
+                    score = this.getDueDoneScore();
+                    if (score < 100) {
+                        return score;
+                    }
                     this.challenge = 'over80';
-                //}
+                    this.minimalDoneScore = 0;
+                } else {
+                    this.challenge = 'over80';
+                }
             }
 
 
             if (this.challenge === 'over80') {
                 score = this.getOver80DoneScore();
-                if (score < 100) {
+                if (this.old > 3 && score < 100) {
                     return score;
                 }
                 this.challenge = '10new';

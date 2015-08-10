@@ -393,8 +393,10 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
                 }
 
-                ChallengeCalculatorService.exportData();
+
             }
+
+            ChallengeCalculatorService.exportData();
 
 
             if ($scope.repeat) {

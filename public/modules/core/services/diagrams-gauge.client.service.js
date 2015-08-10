@@ -5,8 +5,6 @@ angular.module('core').service('DiagramsGaugeService', ['$timeout',
     function ($timeout) {
 
 
-
-
         this.liquidFillGaugeDefaultSettings = function () {
             return {
                 minValue: 0, // The gauge minimum value.
@@ -38,11 +36,22 @@ angular.module('core').service('DiagramsGaugeService', ['$timeout',
             if (config === null) config = this.liquidFillGaugeDefaultSettings();
 
 
-
-           // console.log(elementId);
-
             var gauge = d3.select('#' + elementId);
 
+            if (!gauge[0][0]) {
+                var self = this;
+                $timeout(function () {
+                    gauge = d3.select('#' + elementId);
+                    self.drawLiquidFillGaugeElement(elementId, value, config, gauge);
+                }, 500);
+
+            } else {
+                this.drawLiquidFillGaugeElement(elementId, value, config, gauge);
+            }
+        };
+
+
+        this.drawLiquidFillGaugeElement = function (elementId, value, config, gauge) {
             gauge.selectAll('*').remove();
 
             if (!gauge[0][0]) {
@@ -238,16 +247,17 @@ angular.module('core').service('DiagramsGaugeService', ['$timeout',
                 return;
             }
 
+
             //$timeout(function () {
-                var config1 = this.liquidFillGaugeDefaultSettings();
-                config1.circleColor = colorCode;
-                config1.textColor = colorCode;
-                config1.waveTextColor = colorCode;
-                config1.waveColor = '#CCCCFF';
-                config1.circleThickness = 0.2;
-                config1.textVertPosition = 0.2;
-                config1.waveAnimateTime = 1000;
-                this.drawLiquidFillGauge('fillgauge', score, config1);
+            var config1 = this.liquidFillGaugeDefaultSettings();
+            config1.circleColor = colorCode;
+            config1.textColor = colorCode;
+            config1.waveTextColor = colorCode;
+            config1.waveColor = '#CCCCFF';
+            config1.circleThickness = 0.2;
+            config1.textVertPosition = 0.2;
+            config1.waveAnimateTime = 1000;
+            this.drawLiquidFillGauge('fillgauge', score, config1);
             //}, 200);
 
         };

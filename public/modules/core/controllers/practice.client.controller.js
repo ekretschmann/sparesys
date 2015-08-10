@@ -514,7 +514,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 courseId: $stateParams.courseId
             }, function (course) {
                 $scope.course = course;
-                DiagramsGaugeService.loadLiquidFillGauge(ChallengeCalculatorService.getDoneScore(), ChallengeCalculatorService.getColor());
+                //DiagramsGaugeService.loadLiquidFillGauge(ChallengeCalculatorService.getDoneScore(), ChallengeCalculatorService.getColor());
 
 
             });

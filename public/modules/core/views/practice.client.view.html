@@ -45,6 +45,12 @@
                 </div>
 
 
+                <div class="flashcard-section">
+                    <a class="btn btn-rememberators" data-ng-click="stopPracitcing();">
+                        <i class="glyphicon glyphicon-stop"></i> Stop Practicing
+                    </a>
+
+                </div>
             </div>
 
             <!--<div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1"-->
@@ -185,7 +191,7 @@
                         <rating style="padding-left: 0.5em"
                                 max="6"
                                 min="1"
-                               value="speechIcons"
+                                value="speechIcons"
                                 on-hover="rateHover(value)"
                                 data-ng-click="rateClick()"
                                 state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'">
@@ -265,7 +271,8 @@
 
                     <!--<div class="center-aligned top-padded-m">-->
                     <button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card History</button>
-                    <button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History</button>
+                    <button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History
+                    </button>
 
                     <!--</div>-->
                     <!--</section>-->
@@ -275,7 +282,7 @@
     </div>
 
     <!--<div data-ng-if="error" class="warning">-->
-        <!--{{error}}-->
+    <!--{{error}}-->
     <!--</div>-->
 </section>
 

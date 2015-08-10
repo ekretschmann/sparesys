@@ -284,7 +284,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
         $scope.challengeData = {};
         $scope.exportChallengeData = function() {
-            this.challengeData = ChallengeCalculatorService.exportData();
+            $scope.challengeData = ChallengeCalculatorService.exportData();
         };
 
         $scope.nextCard = function () {
@@ -392,6 +392,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     ChallengeCalculatorService.dueCard(card.dueDate, $scope.time, card.predictedRetention);
 
                 }
+
+                ChallengeCalculatorService.exportData();
             }
 
 
@@ -482,6 +484,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             }
 
 
+            $scope.exportChallengeData();
         };
 
 

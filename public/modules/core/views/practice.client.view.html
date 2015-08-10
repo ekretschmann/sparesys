@@ -80,6 +80,35 @@
                     </div>
                 </div>
 
+
+                <div data-ng-init="exportChallengeData()">
+                    <pre>{{challengeData}}</pre>
+
+                    <div class="col-xs-6">
+                        Challenge
+                    </div>
+
+                    <div class="col-xs-6">
+                        {{challengeData.challenge}}
+                    </div>
+
+                    <div class="col-xs-6">
+                        Cards in this course
+                    </div>
+
+                    <div class="col-xs-6">
+                        {{challengeData.total}}
+                    </div>
+
+                    <div class="col-xs-6">
+                        Cards in play
+                    </div>
+
+                    <div class="col-xs-6">
+                        {{challengeData.candidates}}
+                    </div>
+                </div>
+
                 <!--<div data-ng-show="mode === 'images'" data-ng-hide="mode !== 'images'" style="height: 500px">-->
 
 
@@ -280,6 +309,8 @@
             </div>
         </div>
     </div>
+
+
 
     <!--<div data-ng-if="error" class="warning">-->
     <!--{{error}}-->

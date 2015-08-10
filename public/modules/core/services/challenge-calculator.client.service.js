@@ -16,6 +16,15 @@ angular.module('core').service('ChallengeCalculatorService', [
         this.highscore = 0;
         this.totalNewCards = 0;
 
+
+        this.exportData = function() {
+            return {
+                challenge: this.challenge,
+                total: this.total,
+                candidates: this.candidates
+            };
+        };
+
         this.init = function(cards) {
 
             var counter = {};

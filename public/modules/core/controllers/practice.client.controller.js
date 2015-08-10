@@ -282,6 +282,11 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             $scope.nextCard();
         };
 
+        $scope.challengeData = {};
+        $scope.exportChallengeData = function() {
+            this.challengeData = ChallengeCalculatorService.exportData();
+        };
+
         $scope.nextCard = function () {
 
 

@@ -12,7 +12,12 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$wind
             var promise = res.get({courseId: id});
             promise.$promise.then(function (cards) {
                 //DiagramsCalendarService.drawCalendar(cards, '#cal'+index, '#practice-date'+index, '#number-of-cards'+index, ($window.innerWidth / 2)-130);
-                DiagramsCardsInPlayService.drawLineChart(cards, '#inplay'+index, ($window.innerWidth / 2)+60);
+
+                var w = $window.innerWidth + 110;
+                if ($window.innerWidth > 990){
+                    w = ($window.innerWidth / 2) + 60;
+                }
+                DiagramsCardsInPlayService.drawLineChart(cards, '#inplay'+index, w);
                 //DiagramsTimeSpentService.drawBarChart(cards, '#timespent'+index, '#spent-practice-date'+index, '#spent-practice-time'+index, ($window.innerWidth / 2)-130);
             });
         };

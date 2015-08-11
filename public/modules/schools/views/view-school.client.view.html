@@ -1,8 +1,8 @@
 <section data-ng-controller="SchoolsController" class="font-large" data-ng-init="findOne()">
 
 
-    <div class="col-xs-12 col-md-6" data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="dashboard-section font-large">
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="dashboard-section font-large virtual-card">
             <div class="title">Manage School</div>
             <infobox class="warning" logo="woman" position="left">
                 This screeen is to manage schools
@@ -10,8 +10,8 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-6">
-        <div class="dashboard-section font-large">
+    <div class="col-xs-12 col-md-6 dashboard-col">
+        <div class="dashboard-section font-large virtual-card">
             <div class="title">{{school.name}}</div>
             <form class="signup form-horizontal" autocomplete="off" data-ng-submit="ok()">
                 <fieldset>
@@ -78,31 +78,31 @@
 
     </div>
 
-    <!--<div class="col-xs-12 col-md-6" data-ng-repeat="sc in school.schoolclasses">-->
-        <!--<div class="dashboard-section font-large" >-->
-            <!--<div class="title">Class {{sc.name}}</div>-->
-            <!--<div class="row" >-->
-                <!--<div class="col-xs-6 ">Teachers</div>-->
-                <!--<div class="col-xs-6 ">Students</div>-->
-                <!--<div class="col-xs-6 ">-->
+    <div class="col-xs-12 col-md-6 dashboard-col" data-ng-repeat="sc in school.schoolclasses">
+        <div class="dashboard-section font-large virtual-card" >
+            <div class="title">Class {{sc.name}}</div>
+            <div class="row" >
+                <div class="col-xs-6 ">Teachers</div>
+                <div class="col-xs-6 ">Students</div>
+                <div class="col-xs-6 ">
 
-                    <!--<div class="danger" data-ng-if="sc.teachers.length ===0">-->
-                        <!--none-->
-                    <!--</div>-->
-                    <!--<div data-ng-repeat="teacher in school.teachers">{{teacher.displayName}}</div>-->
+                    <div class="danger" data-ng-if="sc.teachers.length ===0">
+                        none
+                    </div>
+                    <div data-ng-repeat="teacher in school.teachers">{{teacher.displayName}}</div>
 
-                <!--</div>-->
-                <!--<div class="col-xs-6 ">-->
-                    <!--<div class="danger" data-ng-if="school.students.length ===0">-->
-                        <!--none-->
-                    <!--</div>-->
-                    <!--<div data-ng-repeat="student in school.students">{{student.displayName}}</div>-->
+                </div>
+                <div class="col-xs-6 ">
+                    <div class="danger" data-ng-if="school.students.length ===0">
+                        none
+                    </div>
+                    <div data-ng-repeat="student in school.students">{{student.displayName}}</div>
 
-                <!--</div>-->
+                </div>
 
-            <!--</div>-->
-        <!--</div>-->
-    <!--</div>-->
+            </div>
+        </div>
+    </div>
 
 
     <!--<div class="sparesys-header">-->

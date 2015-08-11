@@ -1,26 +1,27 @@
-<div data-ng-if="authentication.user.studentInSchools.length > 0" class="font-large">
-
-    <!--<div class="content-header">-->
-    <div class="infobox-title">My Classes</div>
+<div data-ng-if="authentication.user.studentInSchools.length > 0">
 
 
-    <div data-ng-repeat="schoolId in authentication.user.studentInSchools"
-         data-ng-controller="SchoolsController"
-         data-ng-init="populateSchoolForUser(schoolId, authentication.user)">
-
-        <div data-ng-if="schoolclasses.length>0">
-            <div data-ng-repeat="sc in schoolclasses">
-                {{sc.name}}
-                <div>{{school.name}}, {{school.city}}, {{school.country}}</div>
-
-                <div data-ng-if="!sc.courses || sc.courses.length === 0">
-                    no courses
-                </div>
-
-                <div data-ng-if="sc.courses && sc.courses.length > 0">
+    <div class="font-large virtual-card">
+        <div class="infobox-title">My Classes</div>
 
 
-                    Courses:
+        <div data-ng-repeat="schoolId in authentication.user.studentInSchools"
+             data-ng-controller="SchoolsController"
+             data-ng-init="populateSchoolForUser(schoolId, authentication.user)">
+
+            <div data-ng-if="schoolclasses.length>0">
+                <div data-ng-repeat="sc in schoolclasses">
+                    {{sc.name}}
+                    <div>{{school.name}}, {{school.city}}, {{school.country}}</div>
+
+                    <div data-ng-if="!sc.courses || sc.courses.length === 0">
+                        no courses
+                    </div>
+
+                    <div data-ng-if="sc.courses && sc.courses.length > 0">
+
+
+                        Courses:
 
                     <span data-ng-repeat="courseId in sc.courses">
                         <span data-ng-controller="CoursesController" data-ng-init="findById(courseId)">
@@ -28,41 +29,42 @@
                         </span>
 
                     </span>
-                </div>
+                    </div>
 
-                <div data-ng-if="!sc.teachers || sc.teachers.length === 0">
-                    no teachers
-                </div>
+                    <div data-ng-if="!sc.teachers || sc.teachers.length === 0">
+                        no teachers
+                    </div>
 
-                <div data-ng-if="sc.teachers && sc.teachers.length > 0">
+                    <div data-ng-if="sc.teachers && sc.teachers.length > 0">
 
-                    Teachers:
+                        Teachers:
                     <span data-ng-repeat="userId in sc.teachers">
                         <span data-ng-controller="UsersController" data-ng-init="findById(userId)">
                            {{displayName}}<span data-ng-if="$index < sc.teachers.length-1">, </span>
                         </span>
                     </span>
-                </div>
+                    </div>
 
-                <div data-ng-if="sc.students && sc.students.length > 0">
+                    <div data-ng-if="sc.students && sc.students.length > 0">
 
-                    Students:
+                        Students:
                     <span data-ng-repeat="userId in sc.students">
                         <span data-ng-controller="UsersController" data-ng-init="findById(userId)">
                            {{displayName}}<span data-ng-if="$index < sc.students.length-1">, </span>
                         </span>
                     </span>
+                    </div>
+
                 </div>
-
             </div>
+
+
+            <div data-ng-if="schoolclasses.length === 0" class="warning">
+                The School Administrator has not assigned you to your class
+            </div>
+
+
         </div>
-
-
-        <div data-ng-if="schoolclasses.length === 0" class="warning">
-            The School Administrator has not assigned you to your class
-        </div>
-
-
     </div>
 </div>
 

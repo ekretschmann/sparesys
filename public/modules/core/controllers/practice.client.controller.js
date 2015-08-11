@@ -393,14 +393,15 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     $scope.newCards++;
                     ChallengeCalculatorService.newCard();
                 } else {
-                    ChallengeCalculatorService.retention(card.score);
+
+                    ChallengeCalculatorService.retention(card.predictedRetention, card.score);
                     ChallengeCalculatorService.oldCard();
                 }
 
 
             }
 
-            ChallengeCalculatorService.exportData();
+           // ChallengeCalculatorService.exportData();
 
 
             if ($scope.repeat) {

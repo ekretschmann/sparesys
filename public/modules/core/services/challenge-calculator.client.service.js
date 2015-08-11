@@ -15,6 +15,8 @@ angular.module('core').service('ChallengeCalculatorService', [
         this.cardsProcessed = 0;
         this.highscore = 0;
         this.totalNewCards = 0;
+        this.firstRun = true;
+        this.startOver80 = 0;
 
 
         this.exportData = function() {
@@ -63,6 +65,11 @@ angular.module('core').service('ChallengeCalculatorService', [
 
         this.cardAsked = function() {
             this.cardsProcessed++;
+            if (this.firstRun) {
+                this.startOver80 = this.over80;
+                this.firstRun = false;
+            }
+
         };
 
         this.oldCard = function () {
@@ -78,9 +85,9 @@ angular.module('core').service('ChallengeCalculatorService', [
             this.new++;
         };
 
-        this.retention = function (retention) {
+        this.retention = function (retention, score) {
 
-            if (retention > 0.8) {
+            if (retention > 0.8 && score > 0.4) {
                 this.over80++;
             }
         };
@@ -122,9 +129,11 @@ angular.module('core').service('ChallengeCalculatorService', [
 
 
             if (this.challenge === 'over80') {
-                score = this.getOver80DoneScore();
-                if (this.old > 3 && this.over80 < this.old) {
-                    return score;
+                if (this.firstRun) {
+                    return 0;
+                }
+                if (this.old > 3 && this.over80 < this.old && this.old > this.startOver80) {
+                    return this.getOver80DoneScore();
                 }
                 this.challenge = '10new';
                 this.minimalDoneScore = 0;
@@ -195,7 +204,11 @@ angular.module('core').service('ChallengeCalculatorService', [
                 return this.getReportedDoneScore(0);
             }
 
-            return this.getReportedDoneScore(Math.min(100, Math.round(100*this.over80 / this.old)));
+
+            //console.log(this.old - this.startOver80);
+            //console.log(this.over80);
+            //console.log(Math.round(100*this.over80 / (this.old-this.startOver80)));
+            return this.getReportedDoneScore(Math.min(100, Math.round(100*this.over80 / (this.old-this.startOver80))));
         };
 
         this.getReportedDoneScore = function(score) {

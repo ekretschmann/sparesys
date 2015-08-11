@@ -324,6 +324,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             //console.log('');
             for (var i = 0; i < this.cards.length; i++) {
 
+
+
                 var card = this.cards[i];
 
                 if (PracticeOptionsService.dueDateOnly && (!card.dueDate || $scope.time >= new Date(card.dueDate).getTime())) {
@@ -360,13 +362,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 //console.log(card.question+ ': '+card.predictedRetention+'   '+before+ '   '+(card.predictedRetention-before));
                 //console.log(card.question+ ': '+d);
 
-                if (!card.history || card.history.length === 0) {
-                    $scope.newCards++;
-                    ChallengeCalculatorService.newCard();
-                } else {
-                    ChallengeCalculatorService.retention(card.predictedRetention);
-                    ChallengeCalculatorService.oldCard();
-                }
+
 
                 if (card.dueDate) {
                     card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.4);
@@ -391,6 +387,14 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 if (card.dueDate && $scope.time < new Date(card.dueDate).getTime()) {
                     ChallengeCalculatorService.dueCard(card.dueDate, $scope.time, card.predictedRetention);
 
+                }
+
+                if (!card.history || card.history.length === 0) {
+                    $scope.newCards++;
+                    ChallengeCalculatorService.newCard();
+                } else {
+                    ChallengeCalculatorService.retention(card.score);
+                    ChallengeCalculatorService.oldCard();
                 }
 
 

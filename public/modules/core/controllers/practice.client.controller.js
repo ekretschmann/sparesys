@@ -338,7 +338,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     continue;
                 }
 
-                ChallengeCalculatorService.candidateCard();
+               // ChallengeCalculatorService.candidateCard();
 
 
                 card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);

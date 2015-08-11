@@ -6,7 +6,7 @@ angular.module('core').service('ChallengeCalculatorService', [
         this.challenge = 'due';
         this.minimalDoneScore = 0;
         this.total = 0;
-        this.candidates = 0;
+        //this.candidates = 0;
         this.over80 = 0;
         this.old = 0;
         this.new = 0;
@@ -21,7 +21,7 @@ angular.module('core').service('ChallengeCalculatorService', [
             return {
                 challenge: this.challenge,
                 total: this.total,
-                candidates: this.candidates,
+                //candidates: this.candidates,
                 cardsProcessed: this.cardsProcessed,
                 oldCards: this.old,
                 newCards: this.new,
@@ -79,18 +79,19 @@ angular.module('core').service('ChallengeCalculatorService', [
         };
 
         this.retention = function (retention) {
+
             if (retention > 0.8) {
                 this.over80++;
             }
         };
 
-        this.candidateCard = function () {
-            this.candidates++;
-        };
+        //this.candidateCard = function () {
+        //    this.candidates++;
+        //};
 
         this.reset = function () {
             this.total = 0;
-            this.candidates = 0;
+            //this.candidates = 0;
             this.over80 = 0;
             this.old = 0;
             this.dueRetention = 0;
@@ -122,7 +123,7 @@ angular.module('core').service('ChallengeCalculatorService', [
 
             if (this.challenge === 'over80') {
                 score = this.getOver80DoneScore();
-                if (this.old > 3 && score < 100) {
+                if (this.old > 3 && this.over80 < this.old) {
                     return score;
                 }
                 this.challenge = '10new';

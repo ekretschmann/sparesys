@@ -22,7 +22,7 @@
     </div>
 
     <div data-ng-if="authentication.user.administersSchools.length > 0">
-        <div class="col-xs-12 col-md-6">
+        <div class="col-xs-12 col-md-6 dashboard-col">
             <div class="dashboard-section font-large" data-ng-controller="SchoolsController">
                 <div class="title">School Administration</div>
                 <infobox class="warning" logo="woman" position="left">
@@ -39,7 +39,7 @@
         </div>
 
         <div data-ng-repeat="schoolId in authentication.user.administersSchools" data-ng-controller="SchoolsController"
-             data-ng-init="findById(schoolId)" class="col-xs-12 col-md-6">
+             data-ng-init="findById(schoolId)" class="col-xs-12 col-md-6 dashboard-col">
             <div class="dashboard-section">
                 <div class="title">
                     {{school.name}}
@@ -100,94 +100,74 @@
                 </div>
 
                 <div data-ng-if="school.schoolclasses.length > 0">
-                    <div class="col-xs-12 dashboard-col">
 
-                        <div class="row">
+                    <div class="flashcard-section">
 
-                            <div class="col-xs-6">
-                                Classes
-                                <!--<div>Classes -->
-                                <!--<a href="" data-ng-click="addClassPopup()"><i-->
-                                <!--class="glyphicon glyphicon-plus-sign"></i></a>-->
-                                <!-- -->
-                                <!--</div>-->
+                        <div class="col-xs-6 dashboard-col-attached">
+                            Classes
 
-                            </div>
 
-                            <div class="col-xs-3">
-                                Teachers
-                            </div>
-
-                            <div class="col-xs-3">
-                                Students
-                            </div>
                         </div>
-                        <div data-ng-repeat="schoolclass in school.schoolclasses">
-                            <!--<a href="">-->
-                            <!--<i data-ng-click="areYouSureToDeleteClass(schoolclass)"-->
-                            <!--class="small glyphicon glyphicon-remove-sign">-->
-                            <!--</i>-->
-                            <!--</a>-->
 
-
-                            <div class="row">
-
-                                <div class="col-xs-6">
-                                    <!--<a href="" data-ng-click="setupClassPopup(schoolclass, school)(school)"><i-->
-                                    <!--class="glyphicon glyphicon-edit"></i></a>-->
-
-                                    <!--<a href="" data-ng-click="areYouSureToDeleteClass(schoolclass, school)"><i-->
-                                    <!--class="glyphicon glyphicon-trash"></i></a>-->
-
-                                    {{schoolclass.name}}
-                                </div>
-
-                                <div class="col-xs-3">
-                                    <div class="danger"
-                                         data-ng-if="schoolclass.teachers.length === 0">
-                                        none
-                                    </div>
-
-                                    <div
-                                            data-ng-if="schoolclass.teachers.length > 0">
-                                        {{schoolclass.teachers.length}}
-                                    </div>
-                                </div>
-
-                                <div class="col-xs-3">
-                                    <div class="danger"
-                                         data-ng-if="schoolclass.students.length === 0">
-                                        none
-                                    </div>
-
-                                    <div
-                                            data-ng-if="schoolclass.students.length > 0">
-                                        {{schoolclass.students.length}}
-                                    </div>
-                                </div>
-
-
-                            </div>
-
-                            <!--<a data-ng-click="setupClassPopup(schoolclass, school)" class="pointer">{{schoolclass.name}}</a>-->
-
-                            <!--<span class="warning left-padded-s"-->
-                            <!--data-ng-if="schoolclass.students.length === 0 || schoolclass.teachers.length === 0">-->
-                            <!--(not set up)-->
-                            <!--</span>-->
+                        <div class="col-xs-3 dashboard-col-attached">
+                            Teachers
                         </div>
+
+                        <div class="col-xs-3 dashboard-col-attached">
+                            Students
+                        </div>
+
                     </div>
+                    <div data-ng-repeat="schoolclass in school.schoolclasses">
 
 
-                    <!--School has no classes-->
-                    <!--</div>-->
-                    <!--<div data-ng-if="school.schoolclasses.length === 0">-->
-                    <!--<a href="" data-ng-click="addClassPopup()">add classes</a>-->
-                    <!--</div>-->
-                    <!--<div data-ng-if="school.schoolclasses.length > 0">-->
-                    <!--<a href="" data-ng-click="addClassPopup()">add more classes</a>-->
-                    <!--</div>-->
+                        <div class="col-xs-6 dashboard-col">
+
+                            {{schoolclass.name}}
+                        </div>
+
+                        <div class="col-xs-3 dashboard-col">
+                            <div class="danger"
+                                 data-ng-if="schoolclass.teachers.length === 0">
+                                none
+                            </div>
+
+                            <div
+                                    data-ng-if="schoolclass.teachers.length > 0">
+                                {{schoolclass.teachers.length}}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-3 dashboard-col">
+                            <div class="danger"
+                                 data-ng-if="schoolclass.students.length === 0">
+                                none
+                            </div>
+
+                            <div
+                                    data-ng-if="schoolclass.students.length > 0">
+                                {{schoolclass.students.length}}
+                            </div>
+                        </div>
+
+                        <!--<a data-ng-click="setupClassPopup(schoolclass, school)" class="pointer">{{schoolclass.name}}</a>-->
+
+                        <!--<span class="warning left-padded-s"-->
+                        <!--data-ng-if="schoolclass.students.length === 0 || schoolclass.teachers.length === 0">-->
+                        <!--(not set up)-->
+                        <!--</span>-->
+                    </div>
                 </div>
+
+
+                <!--School has no classes-->
+                <!--</div>-->
+                <!--<div data-ng-if="school.schoolclasses.length === 0">-->
+                <!--<a href="" data-ng-click="addClassPopup()">add classes</a>-->
+                <!--</div>-->
+                <!--<div data-ng-if="school.schoolclasses.length > 0">-->
+                <!--<a href="" data-ng-click="addClassPopup()">add more classes</a>-->
+                <!--</div>-->
             </div>
         </div>
     </div>

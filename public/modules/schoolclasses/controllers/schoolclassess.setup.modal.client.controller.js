@@ -44,23 +44,23 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
             $modalInstance.dismiss('cancel');
         };
 
-        $scope.addTeacherToClass = function (teacherId) {
-            if ($scope.schoolclass.teachers.indexOf(teacherId) === -1) {
-                $scope.schoolclass.teachers.push(teacherId);
-            }
-            //$scope.schoolclass.__v = undefined;
-            new Schoolclasses($scope.schoolclass).$update(function(){
-
-                console.log('ga add teacher to class');
-                console.log('/schoolclassess/add/teacher/:id');
-                if ($window.ga) {
-                    console.log('sending to ga');
-                    $window.ga('send', 'pageview', '/schoolclassess/add/teacher/:id');
-                    $window.ga('send', 'event', 'school admin adds teacher to class');
-                }
-                $scope.initSchoolclassSetup();
-            });
-        };
+        //$scope.addTeacherToClass = function (teacherId) {
+        //    if ($scope.schoolclass.teachers.indexOf(teacherId) === -1) {
+        //        $scope.schoolclass.teachers.push(teacherId);
+        //    }
+        //    //$scope.schoolclass.__v = undefined;
+        //    new Schoolclasses($scope.schoolclass).$update(function(){
+        //
+        //        console.log('ga add teacher to class');
+        //        console.log('/schoolclassess/add/teacher/:id');
+        //        if ($window.ga) {
+        //            console.log('sending to ga');
+        //            $window.ga('send', 'pageview', '/schoolclassess/add/teacher/:id');
+        //            $window.ga('send', 'event', 'school admin adds teacher to class');
+        //        }
+        //        $scope.initSchoolclassSetup();
+        //    });
+        //};
 
         $scope.removeTeacherFromClass = function (teacherId) {
             for (var i = 0; i < $scope.schoolclass.teachers.length; i++) {

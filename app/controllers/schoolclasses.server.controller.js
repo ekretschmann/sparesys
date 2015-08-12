@@ -75,6 +75,9 @@ exports.update = function (req, res) {
 
 
 
+    console.log(req.body);
+    console.log(schoolclass);
+
 
 
     schoolclass.save(function (err) {
@@ -85,6 +88,7 @@ exports.update = function (req, res) {
         } else {
             var currentTeachers = schoolclass.teachers;
             var currentStudents = schoolclass.students;
+
             originalTeachers.forEach(function(originalTeacherId) {
                 if (currentTeachers.indexOf(originalTeacherId) === -1) {
                     User.findOne({_id: originalTeacherId}, 'teachesClasses').exec(function (err, originalTeacher) {
@@ -98,6 +102,9 @@ exports.update = function (req, res) {
                     });
                 }
             });
+
+
+            console.log(currentTeachers);
 
             currentTeachers.forEach(function(currentTeacherId) {
                 User.findOne({_id: currentTeacherId}, 'teachesClasses').exec(function (err, currentTeacher) {

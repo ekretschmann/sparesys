@@ -285,11 +285,10 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.addStudentToClass = function (student) {
 
-            console.log(student);
 
             var found = false;
             for (var i = 0; i < $scope.schoolclass.students.length; i++) {
-                if ($scope.schoolclass.students[i]._id === student._i) {
+                if ($scope.schoolclass.students[i]._id === student._id) {
                     found = true;
                 }
             }
@@ -299,13 +298,14 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 
                 //$scope.schoolclass.__v = undefined;
-                $scope.schoolclass.$update(function () {
+                $scope.schoolclass.$update(function (x) {
 
                     $scope.schoolclass.courses.forEach(function (courseId) {
                         $scope.addCourseForStudent(student._id, courseId);
                     });
 
 
+                    console.log(x);
                     console.log('ga add student to class');
                     console.log('/schoolclassess/add/student/:id');
                     if ($window.ga) {
@@ -318,6 +318,40 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
+                });
+            }
+        };
+
+        $scope.addTeacherToClass = function (teacher) {
+
+            console.log(teacher);
+
+            var found = false;
+            for (var i = 0; i < $scope.schoolclass.teachers.length; i++) {
+                if ($scope.schoolclass.teachers[i]._id === teacher._id) {
+                    found = true;
+                }
+            }
+
+
+            if (!found) {
+                $scope.schoolclass.teachers.push(teacher);
+
+                //console.log($scope.schoolclass.teachers);
+                $scope.schoolclass.$update(function (x) {
+
+
+                    console.log(x);
+                    console.log('ga add teacher to class');
+                    console.log('/schoolclassess/add/teacher/:id');
+                    if ($window.ga) {
+                        console.log('sending to ga');
+                        $window.ga('send', 'pageview', '/schoolclassess/add/teacher/:id');
+                        $window.ga('send', 'event', 'school admin adds teacher to class');
+                    }
+                    //$scope.initSchoolclassSetup();
+                }, function(err) {
+                    console.log(err);
                 });
             }
         };

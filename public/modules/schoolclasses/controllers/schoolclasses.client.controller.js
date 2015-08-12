@@ -202,6 +202,8 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.findById = function (id) {
 
+            console.log(id);
+
             $scope.schoolclass = Schoolclasses.get({
                 schoolclassId: id
             });

@@ -165,7 +165,7 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
 
         $scope.unsubscribeStudentPopup = function (school) {
 
-            $scope.school = school;
+            //$scope.school = school;
             $modal.open({
                 templateUrl: 'unsubscribeStudent.html',
                 controller: 'UnsubscribeStudentModalController',

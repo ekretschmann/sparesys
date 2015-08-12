@@ -747,19 +747,35 @@ body {
 
 .virtual-card {
   padding:10px;
+
+
+
+  .texture-light;
+  overflow: scroll;
+  border: 1px solid @inverse-font-color;
+  box-shadow: 5px 5px 5px #CCC;
+  border-radius: 12px;
+  background-color: @background-color-contrast;
+
+  //height:100%;
   @media screen {
     @media (min-width: 310px) {
+      padding: 5px;
+      margin-top: 5px;
       min-height: 230px;
     }
     @media (min-width: 620px) {
+      padding: 10px;
+      margin-top: 10px;
       min-height: 300px;
     }
     @media (min-width: 800px) {
+      padding: 20px;
+      margin-top: 20px;
       min-height: 500px;
     }
 
   }
-
 }
 
 .dashboard-col {

@@ -9,7 +9,7 @@
 
     <div data-ng-if="authentication.user.administersSchools.length === 0">
         <div class="col-xs-12 col-md-6">
-            <div class="dashboard-section font-large" data-ng-controller="SchoolsController">
+            <div class="font-large" data-ng-controller="SchoolsController">
                 <div class="title">School Administration</div>
                 <infobox class="warning" logo="woman" position="left">
                     You have set yourself up as a school administrator but you are not managing any schools. To
@@ -23,7 +23,7 @@
 
     <div data-ng-if="authentication.user.administersSchools.length > 0">
         <div class="col-xs-12 col-md-6 dashboard-col">
-            <div class="dashboard-section font-large virtual-card" data-ng-controller="SchoolsController">
+            <div class="font-large virtual-card" data-ng-controller="SchoolsController">
                 <div class="title">School Administration</div>
                 <infobox class="warning" logo="woman" position="left">
 
@@ -40,7 +40,7 @@
 
         <div data-ng-repeat="schoolId in authentication.user.administersSchools" data-ng-controller="SchoolsController"
              data-ng-init="findById(schoolId)" class="col-xs-12 col-md-6 dashboard-col">
-            <div class="dashboard-section virtual-card">
+            <div class="virtual-card">
                 <div class="title">
                     {{school.name}}
 

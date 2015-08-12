@@ -82,37 +82,38 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
         };
 
         $scope.removeStudentFromClass = function (studentId) {
-            for (var i in $scope.schoolclass.students) {
-                if ($scope.schoolclass.students[i] === studentId) {
-                    $scope.schoolclass.students.splice(i, 1);
-                }
-            }
-
-            Courses.query({
-                userId: studentId
-            }, function(courses) {
-                courses.forEach(function(course) {
-                    if ($scope.schoolclass.courses.indexOf(course.master) > -1) {
-                        course.visble = true;
-                        course.supervised = false;
-                        course.$update();
-                    }
-                }, this);
-
-            });
-
-            //$scope.schoolclass.__v = undefined;
-            new Schoolclasses($scope.schoolclass).$update(function(){
-                console.log('ga remove student from class');
-                console.log('/schoolclassess/remove/student/:id');
-
-                if ($window.ga) {
-                    console.log('sending to ga');
-                    $window.ga('send', 'pageview', '/schoolclassess/remove/student/:id');
-                    $window.ga('send', 'event', 'school admin removes student from class');
-                }
-                $scope.initSchoolclassSetup();
-            });
+            console.log(studentId);
+            //for (var i in $scope.schoolclass.students) {
+            //    if ($scope.schoolclass.students[i] === studentId) {
+            //        $scope.schoolclass.students.splice(i, 1);
+            //    }
+            //}
+            //
+            //Courses.query({
+            //    userId: studentId
+            //}, function(courses) {
+            //    courses.forEach(function(course) {
+            //        if ($scope.schoolclass.courses.indexOf(course.master) > -1) {
+            //            course.visble = true;
+            //            course.supervised = false;
+            //            course.$update();
+            //        }
+            //    }, this);
+            //
+            //});
+            //
+            ////$scope.schoolclass.__v = undefined;
+            //new Schoolclasses($scope.schoolclass).$update(function(){
+            //    console.log('ga remove student from class');
+            //    console.log('/schoolclassess/remove/student/:id');
+            //
+            //    if ($window.ga) {
+            //        console.log('sending to ga');
+            //        $window.ga('send', 'pageview', '/schoolclassess/remove/student/:id');
+            //        $window.ga('send', 'event', 'school admin removes student from class');
+            //    }
+            //    $scope.initSchoolclassSetup();
+            //});
         };
 
         $scope.addStudentToClass = function (studentId) {

@@ -1,8 +1,8 @@
 'use strict';
 
 // Schoolclasses controller
-angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$state', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService','Users',
-    function ($scope, $state, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService, Users) {
+angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$window','$state', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService','Users',
+    function ($scope, $window, $state, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService, Users) {
 
         $scope.authentication = Authentication;
 
@@ -202,7 +202,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.findById = function (id) {
 
-            console.log(id);
 
             $scope.schoolclass = Schoolclasses.get({
                 schoolclassId: id
@@ -251,6 +250,43 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             });
 
         };
+
+        $scope.removeStudentFromClass = function (studentId) {
+            console.log(studentId);
+            for (var i in $scope.schoolclass.students) {
+                console.log($scope.schoolclass.students[i]);
+                if ($scope.schoolclass.students[i]._id === studentId) {
+                    $scope.schoolclass.students.splice(i, 1);
+                }
+            }
+
+            Courses.query({
+                userId: studentId
+            }, function(courses) {
+                courses.forEach(function(course) {
+                    if ($scope.schoolclass.courses.indexOf(course.master) > -1) {
+                        course.visble = true;
+                        course.supervised = false;
+                        course.$update();
+                    }
+                }, this);
+
+            });
+
+            $scope.schoolclass.$update(function(x){
+
+                console.log(x);
+                console.log('ga remove student from class');
+                console.log('/schoolclassess/remove/student/:id');
+
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/schoolclassess/remove/student/:id');
+                    $window.ga('send', 'event', 'school admin removes student from class');
+                }
+            });
+        };
+
 
 
 

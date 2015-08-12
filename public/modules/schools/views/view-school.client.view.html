@@ -83,21 +83,25 @@
         <div class="virtual-card font-large" >
             <div class="title">Class {{schoolclass.name}}</div>
             <div class="flashcard-section" >
-                <div class="col-xs-6 field-label">Teachers</div>
-                <div class="col-xs-6 field-label">Students</div>
+                <div class="col-xs-6 field-label">Teachers <a href="" data-ng-click="addClassPopup()"><i
+                        class="glyphicon glyphicon-plus-sign"></i></a></div>
+                <div class="col-xs-6 field-label">Students <a href="" data-ng-click="addClassPopup()"><i
+                        class="glyphicon glyphicon-plus-sign"></i></a></div>
                 <div class="col-xs-6 field-data">
 
                     <div class="danger" data-ng-if="schoolclass.teachers.length ===0">
                         none
                     </div>
-                    <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher}}</div>
+                    <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher}} <a href="" data-ng-click="removeTeacherFromClass(teacher._id)"><i
+                            class="glyphicon glyphicon-minus-sign"></i></a></div>
 
                 </div>
                 <div class="col-xs-6 field-data">
                     <div class="danger" data-ng-if="schoolclass.students.length ===0">
                         none
                     </div>
-                    <div data-ng-repeat="student in schoolclass.students">{{student.displayName}}</div>
+                    <div data-ng-repeat="student in schoolclass.students">{{student.displayName}} <a href="" data-ng-click="removeStudentFromClass(student._id)"><i
+                            class="glyphicon glyphicon-minus-sign"></i></a></div>
 
                 </div>
 

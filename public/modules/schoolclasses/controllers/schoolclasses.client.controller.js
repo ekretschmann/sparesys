@@ -1,11 +1,10 @@
 'use strict';
 
 // Schoolclasses controller
-angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$window','$state', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService','Users',
+angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$window', '$state', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService', 'Users',
     function ($scope, $window, $state, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService, Users) {
 
         $scope.authentication = Authentication;
-
 
 
         $scope.addCourseToClass = function (course) {
@@ -50,15 +49,14 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         };
 
-        $scope.removeSchoolclass= function(schoolclass) {
-            schoolclass.$remove(function(){
-                $state.go($state.$current, null, {reload:true});
+        $scope.removeSchoolclass = function (schoolclass) {
+            schoolclass.$remove(function () {
+                $state.go($state.$current, null, {reload: true});
             });
 
         };
 
         $scope.areYouSureToDeleteClass = function (schoolclass, school) {
-
 
 
             $scope.schoolclass = schoolclass;
@@ -185,16 +183,14 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
 
-        $scope.removeAsTeacher = function(schoolclass, user) {
+        $scope.removeAsTeacher = function (schoolclass, user) {
             var index = user.teachesClasses.indexOf(schoolclass._id);
             user.teachesClasses.splice(index, 1);
             user.$update();
         };
 
 
-
-
-        $scope.removeAsStudent = function(schoolclass, user) {
+        $scope.removeAsStudent = function (schoolclass, user) {
             var index = user.studentInClasses.indexOf(schoolclass._id);
             user.studentInClasses.splice(index, 1);
             user.$update();
@@ -262,8 +258,8 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             Courses.query({
                 userId: studentId
-            }, function(courses) {
-                courses.forEach(function(course) {
+            }, function (courses) {
+                courses.forEach(function (course) {
                     if ($scope.schoolclass.courses.indexOf(course.master) > -1) {
                         course.visble = true;
                         course.supervised = false;
@@ -273,7 +269,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             });
 
-            $scope.schoolclass.$update(function(x){
+            $scope.schoolclass.$update(function (x) {
 
                 console.log(x);
                 console.log('ga remove student from class');
@@ -287,9 +283,68 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             });
         };
 
+        $scope.addStudentToClass = function (student) {
+
+            console.log(student);
+
+            var found = false;
+            for (var i = 0; i < $scope.schoolclass.students.length; i++) {
+                if ($scope.schoolclass.students[i]._id === student._i) {
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                $scope.schoolclass.students.push(student);
 
 
+                //$scope.schoolclass.__v = undefined;
+                $scope.schoolclass.$update(function () {
 
+                    $scope.schoolclass.courses.forEach(function (courseId) {
+                        $scope.addCourseForStudent(student._id, courseId);
+                    });
+
+
+                    console.log('ga add student to class');
+                    console.log('/schoolclassess/add/student/:id');
+                    if ($window.ga) {
+                        console.log('sending to ga');
+                        $window.ga('send', 'pageview', '/schoolclassess/add/student/:id');
+                        $window.ga('send', 'event', 'school admin adds student to class');
+                    }
+                    //$scope.initSchoolclassSetup();
+
+
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+            }
+        };
+
+        $scope.addCourseForStudent = function (studentId, courseId) {
+            Courses.query({
+                userId: studentId
+            }).$promise.then(function (studentCourses) {
+
+                    var setVisible = false;
+                    studentCourses.forEach(function (studentCourse) {
+
+                        // if the course existed, then just set it visible
+                        if ( studentCourse.master === courseId) {
+                            studentCourse.supervised = true;
+                            studentCourse.visible = true;
+                            studentCourse.$update();
+                            setVisible = true;
+                        }
+                    });
+                    if (!setVisible) {
+                        var res = CoursesService.copyCourseFor(studentId);
+                        res.get({courseId: courseId});
+
+                    }
+                });
+        };
 
 
     }

@@ -91,7 +91,7 @@
                             Add a Teacher <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-                            <li role="menuitem" data-ng-repeat="teacher in school.teachers"><a href="#">{{teacher.displayName}}</a>
+                            <li role="menuitem" data-ng-repeat="teacher in school.teachers"><a href="">{{teacher.displayName}}</a>
                             </li>
                         </ul>
                     </div>
@@ -111,7 +111,8 @@
                             Add a Student <span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-                            <li role="menuitem" data-ng-repeat="student in school.students"><a href="#">{{student.displayName}}</a>
+                            <li role="menuitem" data-ng-repeat="student in school.students"><a href=""
+                                                                                               data-ng-click="addStudentToClass(student)">{{student.displayName}}</a>
                             </li>
                         </ul>
                     </div>

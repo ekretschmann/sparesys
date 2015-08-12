@@ -116,62 +116,62 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
             //});
         };
 
-        $scope.addStudentToClass = function (studentId) {
+        //$scope.addStudentToClass = function (studentId) {
+        //
+        //    if ($scope.schoolclass.students.indexOf(studentId) === -1) {
+        //        $scope.schoolclass.students.push(studentId);
+        //    }
+        //
+        //
+        //
+        //
+        //    //$scope.schoolclass.__v = undefined;
+        //    new Schoolclasses($scope.schoolclass).$update(function () {
+        //
+        //        $scope.schoolclass.courses.forEach(function(courseId) {
+        //            $scope.addCourseForStudent(studentId, courseId);
+        //        });
+        //
+        //
+        //        console.log('ga add student to class');
+        //        console.log('/schoolclassess/add/student/:id');
+        //        if ($window.ga) {
+        //            console.log('sending to ga');
+        //            $window.ga('send', 'pageview', '/schoolclassess/add/student/:id');
+        //            $window.ga('send', 'event', 'school admin adds student to class');
+        //        }
+        //        $scope.initSchoolclassSetup();
+        //
+        //
+        //    }, function (errorResponse) {
+        //        $scope.error = errorResponse.data.message;
+        //    });
+        //};
 
-            if ($scope.schoolclass.students.indexOf(studentId) === -1) {
-                $scope.schoolclass.students.push(studentId);
-            }
 
-
-
-
-            //$scope.schoolclass.__v = undefined;
-            new Schoolclasses($scope.schoolclass).$update(function () {
-
-                $scope.schoolclass.courses.forEach(function(courseId) {
-                    $scope.addCourseForStudent(studentId, courseId);
-                });
-
-
-                console.log('ga add student to class');
-                console.log('/schoolclassess/add/student/:id');
-                if ($window.ga) {
-                    console.log('sending to ga');
-                    $window.ga('send', 'pageview', '/schoolclassess/add/student/:id');
-                    $window.ga('send', 'event', 'school admin adds student to class');
-                }
-                $scope.initSchoolclassSetup();
-
-
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
-        };
-
-
-        $scope.addCourseForStudent = function (studentId, courseId) {
-            Courses.query({
-                userId: studentId
-            }).$promise.then(function (studentCourses) {
-
-                    var setVisible = false;
-                    studentCourses.forEach(function (studentCourse) {
-
-                        // if the course existed, then just set it visible
-                        if ( studentCourse.master === courseId) {
-                            studentCourse.supervised = true;
-                            studentCourse.visible = true;
-                            studentCourse.$update();
-                            setVisible = true;
-                        }
-                    });
-                    if (!setVisible) {
-                        var res = CoursesService.copyCourseFor(studentId);
-                        res.get({courseId: courseId});
-
-                    }
-                });
-        };
+        //$scope.addCourseForStudent = function (studentId, courseId) {
+        //    Courses.query({
+        //        userId: studentId
+        //    }).$promise.then(function (studentCourses) {
+        //
+        //            var setVisible = false;
+        //            studentCourses.forEach(function (studentCourse) {
+        //
+        //                // if the course existed, then just set it visible
+        //                if ( studentCourse.master === courseId) {
+        //                    studentCourse.supervised = true;
+        //                    studentCourse.visible = true;
+        //                    studentCourse.$update();
+        //                    setVisible = true;
+        //                }
+        //            });
+        //            if (!setVisible) {
+        //                var res = CoursesService.copyCourseFor(studentId);
+        //                res.get({courseId: courseId});
+        //
+        //            }
+        //        });
+        //};
 
 
     }

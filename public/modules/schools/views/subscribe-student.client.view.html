@@ -7,27 +7,35 @@
     <div class="col-xs-6 dashboard-col">
         <div class="virtual-card">
             <div class="title">
-                Find your School
+                 Schools
             </div>
 
 
             <div class="flashcard-section row">
+
                 <div class="col-xs-6">
-                    <div class="field-label">School</div>
+                    <div class="field-label">Your Schools</div>
+
+                    <div data-ng-if="authentication.user.studentInSchools.length ===0">
+                        none
+                    </div>
+
+                    <div class="field-data" data-ng-controller="SchoolsController" data-ng-repeat="sid in authentication.user.studentInSchools" data-ng-init="findById(sid)">
+                        {{school.name}} <a href=""
+                                           data-ng-click="unsubscribeStudentPopup(school._id)"><i
+                            class="glyphicon glyphicon-minus-sign"></i></a>
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="field-label">Find New School</div>
                     <input type="text"
                            data-ng-model="searchText"
                            class="form-control search"
                            placeholder="School Name">
                 </div>
 
-                <div class="col-xs-6">
-                    <div class="field-label">Your Schools</div>
 
-
-                    <div class="field-data" data-ng-controller="SchoolsController" data-ng-repeat="sid in authentication.user.studentInSchools" data-ng-init="findById(sid)">
-                        {{school.name}}
-                    </div>
-                </div>
             </div>
 
 

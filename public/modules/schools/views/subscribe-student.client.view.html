@@ -22,147 +22,141 @@
 
         </div>
     </div>
-    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
+    <div class="virtual-card col-xs-6 dashboard-col large-screen-only"
          data-ng-show="authentication.user.roles.indexOf('help') > -1">
-        <div class="virtual-card">
-            <div class="title">
-                Find your School
-            </div>
-
-
-            <infobox logo="boy">
-                Select your school(s) from the search results. You can use the search box to
-                narrow down the options. After you have subscribed, your school administrator
-                will be able to assign you to your class.
-            </infobox>
-
-            <div style="padding-top: 1em">
-                School <input type="text"
-                              data-ng-model="searchText"
-                              class="form-control search"
-                              placeholder="School Name">
-            </div>
-
+        <div class="title">
+            Find your School
         </div>
+
+
+        <infobox logo="boy">
+            Select your school(s) from the search results. You can use the search box to
+            narrow down the options. After you have subscribed, your school administrator
+            will be able to assign you to your class.
+        </infobox>
+
+        <div style="padding-top: 1em">
+            School <input type="text"
+                          data-ng-model="searchText"
+                          class="form-control search"
+                          placeholder="School Name">
+        </div>
+
     </div>
 
 
-    <div class="col-xs-12 col-md-6">
+    <div class="virtual-card col-xs-6 dashboard-col" data-ng-repeat="school in schools | filter: searchText | limitTo: 25">
 
-        <div class="virtual-card" data-ng-repeat="school in schools | filter: searchText | limitTo: 25">
-
-            <div class="title">
-                {{school.name}}
-                <div class="pull-right"> <a href="" data-ng-click="subscribeStudentPopup(school)"> <i
+        <div class="title">
+            {{school.name}}
+            <div class="pull-right"><a href="" data-ng-click="subscribeStudentPopup(school)"> <i
                     class="glyphicon glyphicon-plus-sign"></i></a>
-                </div>
             </div>
-            <div class="flashcard-section">
-                <div class="col-xs-4 dashboard-col">
-                    <div class="field-label">City</div>
-                    <div class="font-medium">
-                        {{school.city}}
-                    </div>
-                </div>
-
-                <div class="col-xs-4 dashboard-col">
-                    <div class="field-label">Country</div>
-                    <div class="font-medium">
-                        {{school.country}}
-                    </div>
-                </div>
-
-                <div class="col-xs-4 dashboard-col">
-                    <div class="field-label">Administrator</div>
-                    <div class="font-medium">
-                        {{school.user.displayName}}
-                    </div>
+        </div>
+        <div class="flashcard-section">
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label">City</div>
+                <div class="font-medium">
+                    {{school.city}}
                 </div>
             </div>
 
-            <div class="flashcard-section">
-                <div class="col-xs-4 dashboard-col">
-                    <div class="field-label">Teachers</div>
-                    <div class="font-medium">
-                        {{school.teachers.length}}
-                    </div>
-                </div>
-
-                <div class="col-xs-8 dashboard-col">
-                    <div class="field-label">Students</div>
-                    <div class="font-medium">
-                        {{school.students.length}}
-                    </div>
-                </div>
-
-            </div>
-
-            <div data-ng-if="school.schoolclasses.length === 0">
-                <div class="col-xs-12 warning dashboard-col">
-                    <div class="field-label">Classes</div>
-                    <div class="font-medium">
-                        School has no classes
-                    </div>
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label">Country</div>
+                <div class="font-medium">
+                    {{school.country}}
                 </div>
             </div>
 
-
-            <div data-ng-if="school.schoolclasses.length > 0">
-
-                <div class="flashcard-section">
-
-                    <div class="col-xs-4 dashboard-col-attached field-label">
-                        Classes
-                    </div>
-
-                    <div class="col-xs-4 dashboard-col-attached field-label">
-                        Teachers
-                    </div>
-
-                    <div class="col-xs-4 dashboard-col-attached field-label">
-                        Students
-                    </div>
-
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label">Administrator</div>
+                <div class="font-medium">
+                    {{school.user.displayName}}
                 </div>
-                <div data-ng-repeat="schoolclass in school.schoolclasses">
+            </div>
+        </div>
 
-
-                    <div class="col-xs-4 dashboard-col-attached font-medium">
-
-                        {{schoolclass.name}}
-                    </div>
-
-                    <div class="col-xs-4 dashboard-col-attached font-medium">
-                        <div class="danger"
-                             data-ng-if="schoolclass.teachers.length === 0">
-                            none
-                        </div>
-
-                        <div
-                                data-ng-if="schoolclass.teachers.length > 0">
-                            {{schoolclass.teachers.length}}
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4 dashboard-col-attached font-medium">
-                        <div class="danger"
-                             data-ng-if="schoolclass.students.length === 0">
-                            none
-                        </div>
-
-                        <div
-                                data-ng-if="schoolclass.students.length > 0">
-                            {{schoolclass.students.length}}
-                        </div>
-                    </div>
-
-
+        <div class="flashcard-section">
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label">Teachers</div>
+                <div class="font-medium">
+                    {{school.teachers.length}}
                 </div>
             </div>
 
-
+            <div class="col-xs-8 dashboard-col">
+                <div class="field-label">Students</div>
+                <div class="font-medium">
+                    {{school.students.length}}
+                </div>
+            </div>
 
         </div>
+
+        <div data-ng-if="school.schoolclasses.length === 0">
+            <div class="col-xs-12 warning dashboard-col">
+                <div class="field-label">Classes</div>
+                <div class="font-medium">
+                    School has no classes
+                </div>
+            </div>
+        </div>
+
+
+        <div data-ng-if="school.schoolclasses.length > 0">
+
+            <div class="flashcard-section">
+
+                <div class="col-xs-4 dashboard-col-attached field-label">
+                    Classes
+                </div>
+
+                <div class="col-xs-4 dashboard-col-attached field-label">
+                    Teachers
+                </div>
+
+                <div class="col-xs-4 dashboard-col-attached field-label">
+                    Students
+                </div>
+
+            </div>
+            <div data-ng-repeat="schoolclass in school.schoolclasses">
+
+
+                <div class="col-xs-4 dashboard-col-attached font-medium">
+
+                    {{schoolclass.name}}
+                </div>
+
+                <div class="col-xs-4 dashboard-col-attached font-medium">
+                    <div class="danger"
+                         data-ng-if="schoolclass.teachers.length === 0">
+                        none
+                    </div>
+
+                    <div
+                            data-ng-if="schoolclass.teachers.length > 0">
+                        {{schoolclass.teachers.length}}
+                    </div>
+                </div>
+
+                <div class="col-xs-4 dashboard-col-attached font-medium">
+                    <div class="danger"
+                         data-ng-if="schoolclass.students.length === 0">
+                        none
+                    </div>
+
+                    <div
+                            data-ng-if="schoolclass.students.length > 0">
+                        {{schoolclass.students.length}}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
     </div>
 
     <!--<div class="popup-header">-->

@@ -515,16 +515,33 @@ exports.removeOAuthProvider = function (req, res, next) {
  */
 exports.list = function (req, res) {
 
-    User.find({},'-salt -password -__v -provider').sort('-created').populate('_id').exec(function (err, users) {
+    console.log(req.query.text);
+    if (req.query && req.query.text) {
+        var search = req.query.text;
+        User.find( { $or: [{'firstName': {$regex: '^'+search}}, {'lastName': {$regex: '^'+search}}]}).limit(3).exec(function(err, users){
+            //console.log(err);
+            //console.log(users);
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(users);
+            }
+        });
+    } else {
 
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.jsonp(users);
-        }
-    });
+        User.find({}, '-salt -password -__v -provider').sort('-created').populate('_id').exec(function (err, users) {
+
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(users);
+            }
+        });
+    }
 };
 
 /**

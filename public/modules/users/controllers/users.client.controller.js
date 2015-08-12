@@ -71,6 +71,18 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
             $scope.users = Users.query();
         };
 
+        $scope.options = {};
+        $scope.updateSearch = function () {
+
+
+            Users.query({
+                text: $scope.options.searchText
+            }, function(users) {
+                $scope.users = users;
+
+            });
+        };
+
         // Find existing User
         $scope.findOne = function () {
             $scope.otherUser = Users.get({

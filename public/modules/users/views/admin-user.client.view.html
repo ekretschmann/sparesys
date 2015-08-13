@@ -24,8 +24,6 @@
                                    placeholder="Username">
                         </div>
                     </div>
-
-
                 </div>
             </div>
 
@@ -67,7 +65,9 @@
 
             <div class="flashcard-section" data-ng-repeat="s in otherUser.studentInSchools"
                  data-ng-controller="SchoolsController" data-ng-init="findById(s)">
-                <div class="field-title">{{s}}</div>
+                <div class="field-title">{{s}} <a href="" data-ng-click="removeSchool(s, otherUser)"><i class="glyphicon glyphicon-minus-sign"></i></a>
+
+                </div>
 
                 <div class="danger" data-ng-if="error">
                     {{error}}

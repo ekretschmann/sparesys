@@ -114,6 +114,10 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
         };
 
 
+        $scope.removeSchool = function(school, user) {
+            user.studentInSchools.splice(user.studentInSchools.indexOf(school), 1);
+            user.$update();
+        };
 
         $scope.removeSchoolAdmin = function(school, user) {
             var index = user.administersSchools.indexOf(school._id);

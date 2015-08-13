@@ -1,4 +1,64 @@
 <section data-ng-controller="SchoolsController" data-ng-init="findOne()">
+
+    <div class="col-xs-12 col-md-6 dashboard-col ">
+        <div class="virtual-card">
+            <div class="title">{{school.name}}</div>
+
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-6">
+                        <div class="field-label">ID</div>
+                        <div class="field-data">
+                            {{school._id}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="field-label">Administrator</div>
+                        <div class="field-data">
+                            {{school.user.displayName}}
+
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-6">
+                        <div class="field-label">Country</div>
+                        <div class="field-data">
+                            <input type="text"
+                                   data-ng-model="school.country"
+                                   class="form-control"
+                                   placeholder="First Name">
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-xs-6">
+                        <div class="field-label">City</div>
+                        <div class="field-data">
+                            <input type="text"
+                                   data-ng-model="school.city"
+                                   class="form-control"
+                                   placeholder="Username">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
     <div class="content-header">
 
 

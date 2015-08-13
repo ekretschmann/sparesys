@@ -320,6 +320,8 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
                     schoolId: id
                 }, function (s) {
                     $scope.schoolclasses = s.schoolclasses;
+                }, function (err) {
+                    $scope.error = err.data.message;
                 });
             }
         };

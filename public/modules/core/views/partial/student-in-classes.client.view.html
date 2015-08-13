@@ -5,7 +5,7 @@
         <div class="infobox-title">My Classes</div>
 
 
-        {{//authentication.user.studentInSchools}}
+        {{authentication.user.studentInSchools}}
         <div data-ng-repeat="schoolId in authentication.user.studentInSchools"
              data-ng-controller="SchoolsController"
              data-ng-init="populateSchoolForUser(schoolId, authentication.user)">

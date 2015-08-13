@@ -60,6 +60,31 @@
     </div>
 
 
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="otherUser.studentInSchools.length > 0">
+        <div class="virtual-card">
+            <div class="title">Student in Schools</div>
+
+
+            <div class="flashcard-section" data-ng-repeat="s in otherUser.studentInSchools"
+                 data-ng-controller="SchoolsController" data-ng-init="findById(s)">
+                <div class="field-title">{{s}}</div>
+
+                <div class="danger" data-ng-if="error">
+                    {{error}}
+                </div>
+
+
+                <div class="row" data-ng-if="!error">
+                    <div class="field-label col-xs-6">Name</div>
+                    <div class="field-data col-sx-6">
+                        {{school.name}}
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
 
     <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="otherUser.studentInClasses.length > 0">
         <div class="virtual-card">

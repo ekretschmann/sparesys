@@ -167,7 +167,21 @@ exports.list = function(req, res) {
                         message: getErrorMessage(err)
                     });
                 } else {
-                    res.jsonp(schools);
+                    if (schools.length === 0 ) {
+                        School.findById(search[0]).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function(err, school) {
+
+                            console.log(school);
+                            if (school) {
+                                res.jsonp([school]);
+                            } else {
+                                res.jsonp([]);
+                            }
+
+                        });
+
+                    } else {
+                        res.jsonp(schools);
+                    }
                 }
             });
         } else if (search.length === 2) {
@@ -246,10 +260,20 @@ exports.schoolByID = function(req, res, next, id) {
     School.findById(id).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function(err, school) {
 
 
-		if (err) return next(err);
-		if (! school) return next(new Error('Failed to load School ' + id));
-		req.school = school ;
-		next();
+        console.log(err);
+        console.log(school);
+
+		if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        }
+		if (! school) {
+            return res.send(400, {
+                message: 'no shools with ID '+id
+            });
+        }
+        res.jsonp(school) ;
 	});
 };
 

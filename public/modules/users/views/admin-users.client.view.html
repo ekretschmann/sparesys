@@ -54,6 +54,7 @@
 
             </div>
 
+
             <div class="flashcard-section">
                 <div class="row rememberators-form-group form-group">
 
@@ -127,7 +128,7 @@
                 <div class="row rememberators-form-group form-group">
 
 
-                    <div class="col-xs-12">
+                    <div class="col-xs-6">
                         <div class="field-label">Administers Schools</div>
                         <div class="field-data">
                             <div data-ng-if="user.administersSchools.length ===0">
@@ -140,6 +141,19 @@
                         </div>
                     </div>
 
+
+                    <div class="col-xs-6">
+                        <div class="field-label">Student in schools</div>
+                        <div class="field-data">
+                            <div data-ng-if="user.studentInSchools.length ===0">
+                                none
+                            </div>
+
+                            <div data-ng-repeat="s in user.studentInSchools">
+                                {{s}}
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

@@ -1,199 +1,346 @@
 <section data-ng-controller="UsersController" data-ng-init="findOne()">
 
-    <div class="content-header">
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="virtual-card">
+            <div class="title">{{otherUser.displayName}}</div>
 
-        <div class="title">
-            Edit User
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-6">
+                        <div class="field-label">ID</div>
+                        <div class="field-data">
+                            {{otherUser._id}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="field-label">Username</div>
+                        <div class="field-data">
+                            <input type="text"
+                                   data-ng-model="otherUser.username"
+                                   class="form-control"
+                                   placeholder="Username">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-6">
+                        <div class="field-label">First Name</div>
+                        <div class="field-data">
+                            <input type="text"
+                                   data-ng-model="otherUser.firstName"
+                                   class="form-control"
+                                   placeholder="First Name">
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="field-label">Last Name</div>
+                        <div class="field-data">
+                            <input type="text"
+                                   data-ng-model="otherUser.lastName"
+                                   class="form-control"
+                                   placeholder="Last Name">
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
         </div>
     </div>
 
 
-    <form class="form-horizontal" data-ng-submit="update()" novalidate>
-        <fieldset>
+
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="otherUser.studentInClasses.length > 0">
+        <div class="virtual-card">
+            <div class="title">Student in Classes</div>
 
 
-            <table class="expands" data-ng-controller="CoursesController" data-ng-init="findCoursesForUser(otherUser)">
+            <div class="flashcard-section" data-ng-repeat="s in otherUser.studentInClasses"
+                 data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
+                <div class="field-title">{{s}}</div>
+                <div class="row">
+                    <div class="field-label col-xs-6">Name</div>
+                    <div class="field-data col-sx-6">
+                        {{schoolclass.name}}
+                    </div>
+                </div>
 
-                <tr>
-                    <td class="right-padded-m">Id</td>
-                    <td>
-                        {{otherUser._id}}
-                    </td>
-                </tr>
-
-
-                <tr>
-                    <td class="right-padded-m top-padded-m">Username</td>
-                    <td class="expands top-padded-m">
-                        <input type="text"
-                               data-ng-model="otherUser.username"
-                               id="username"
-                               class="form-control"
-                               placeholder="Username"
-                               required>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="right-padded-m nowrap top-padded-m">First Name</td>
-                    <td class="expands top-padded-m">
-                        <input type="text"
-                               data-ng-model="otherUser.firstName"
-                               id="firstName"
-                               class="form-control"
-                               placeholder="First Name" required>
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td class="right-padded-m nowrap top-padded-m">Last Name</td>
-                    <td class="expands top-padded-m">
-                        <input type="text"
-                               data-ng-model="otherUser.lastName"
-                               id="description"
-                               class="form-control"
-                               placeholder="Last Name" required>
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td class="right-padded-m top-padded-m">Email</td>
-                    <td class="expands top-padded-m">
-                        <input type="text"
-                               data-ng-model="otherUser.email"
-                               id="email"
-                               class="form-control"
-                               placeholder="email" required>
-                    </td>
-                </tr>
-
-                <tr data-ng-repeat="school in otherUser.administersSchools">
-
-                    <td class="right-padded-m top-padded-m nowrap top-aligned" data-ng-if="$index === 0">Administers Schools</td>
-                    <td class="right-padded-m top-padded-m nowrap top-aligned" data-ng-if="$index !== 0"></td>
-                    <td class="expands top-padded-m top-aligned" data-ng-controller="SchoolsController" data-ng-init="findById(school)">
-                        <a>
-                            <i data-ng-click="removeSchoolAdmin(school, otherUser)"
-                               class="glyphicon glyphicon-remove-sign small">
-                            </i>
-                        </a> {{school.name}} ({{school._id}})
-
-                    </td>
-                </tr>
-
-                <tr data-ng-repeat="teachesClass in otherUser.teachesClasses">
-
-                    <td class="right-padded-m top-padded-m nowrap">Teaches Classes</td>
-                    <td class="expands top-padded-m" data-ng-controller="SchoolclassesController" data-ng-init="findById(teachesClass)">
-                        <a>
-                            <i data-ng-click="removeAsTeacher(schoolclass, otherUser)"
-                               class="glyphicon glyphicon-remove-sign small">
-                            </i>
-                        </a> {{schoolclass.name}} ({{schoolclass._id}})
-                    </td>
-                </tr>
+            </div>
 
 
-                <tr data-ng-repeat="schoolId in otherUser.studentInSchools">
 
-                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Student in Schools</td>
-                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>
-                    <td class="expands top-padded-m" data-ng-controller="SchoolsController" data-ng-init="findById(schoolId)">
-                        <a>
-                            <i data-ng-click="removeStudentFromSchool(schoolId, otherUser)"
-                                    class="glyphicon glyphicon-remove-sign small">
-                            </i>
-                        </a>
-                        {{school.name ? school.name : 'unknown school'}} ({{schoolId}})
+        </div>
+    </div>
 
-                    </td>
-                </tr>
+    <!--<div class="flashcard-section">-->
+    <!--<div class="field-label">Student in Classes</div>-->
+    <!--<div class="field-data">-->
+    <!--<div data-ng-if="otherUser.studentInClasses.length ===0">-->
+    <!--none-->
+    <!--</div>-->
 
-                <tr data-ng-repeat="takesClass in otherUser.studentInClasses">
+    <!--<div data-ng-repeat="s in otherUser.studentInClasses" data-ng-controller="SchoolclassesController"-->
+    <!--data-ng-init="findById(s)">-->
+    <!--{{s}}-->
+    <!--{{schoolclass.name}}-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
 
-                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Takes Classes</td>
-                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>
-                    <td class="expands top-padded-m" data-ng-controller="SchoolclassesController" data-ng-init="findById(takesClass)">
-                        <a>
-                            <i data-ng-click="removeAsStudent(schoolclass, otherUser)"
-                               class="glyphicon glyphicon-remove-sign small">
-                            </i>
-                        </a> {{schoolclass.name}} ({{schoolclass._id}})
-                    </td>
-                </tr>
+    <!--<div class="flashcard-section">-->
+    <!--<div class="field-label">Teacher in Classes</div>-->
+    <!--<div class="field-data">-->
+    <!--<div data-ng-if="otherUser.teachesClasses.length ===0">-->
+    <!--none-->
+    <!--</div>-->
 
-                <tr  data-ng-repeat="course in otherUserCourses">
+    <!--<div data-ng-repeat="s in otherUser.teachesClasses" data-ng-controller="SchoolclassesController"-->
+    <!--data-ng-init="findById(s)">-->
+    <!--{{s}}-->
+    <!--{{schoolclass}}-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
 
-                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Takes Courses</td>
-                    <td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>
-                    <td class="expands top-padded-m">
-                        <a>
-                            <i data-ng-click="removeCourse(course)"
-                               class="glyphicon glyphicon-remove-sign small">
-                            </i>
-                        </a> {{course.name}} {{course.visible ? 'visible' : '(not visible)'}} ({{course._id}}) {{course.supervised ? ' - supervised' : ''}}
-                    </td>
-
-                </tr>
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="otherUser.administersSchools.length > 0">
+        <div class="virtual-card">
+            <div class="title">Administers Schools</div>
 
 
-                <tr>
+            <div class="flashcard-section" data-ng-repeat="s in otherUser.administersSchools"
+                 data-ng-controller="SchoolsController" data-ng-init="findById(s)">
+                <div class="field-title">{{s}}</div>
+                <div class="row">
+                    <div class="field-label col-xs-6">Name</div>
+                    <div class="field-data col-sx-6">
+                        {{school.name}}
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="field-label col-xs-6">City</div>
+                    <div class="field-data col-sx-6">
+                        {{school.city}}
+                    </div>
+                </div>
 
-                    <td class="right-padded-m top-padded-m top-aligned">Roles</td>
-                    <td class="expands top-padded-m">
-                        <div>
-                            <label class="right-padded-m" ng-repeat="role in roles">
-                                <input
-
-                                        type="checkbox"
-                                        name="selectedRole[]"
-                                        value="{{role}}"
-                                        ng-checked="otherUser.roles.indexOf(role) > -1"
-                                        ng-click="toggleSelection(role)">
-                                {{role}}
-
-                            </label>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td class="right-padded-m top-padded-m top-aligned">Inventory</td>
-                    <td class="expands top-padded-m">
-                        <div>
-                            <span class="right-padded-s" ng-repeat="item in otherUser.inventory">
-                                {{item}}
-
-                            </span>
-                        </div>
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td class="right-padded-m top-padded-m">Created</td>
-                    <td class="expands top-padded-m">
-                        {{otherUser.created | date: 'short'}}
-                    </td>
-                </tr>
-
-                <tr class="controls">
-
-                    <td class="right-padded-m top-padded-m nowrap">Last Update</td>
-                    <td class="expands top-padded-m">
-                        {{otherUser.updated | date: 'short'}}
-                    </td>
-                </tr>
-
-            </table>
-            <div class="center-aligned">
-                <div class="form-group">
-                    <input type="submit" class="btn btn-rememberators">
+                <div class="row">
+                    <div class="field-label col-xs-6">Coutry</div>
+                    <div class="field-data col-sx-6">
+                        {{school.country}}
+                    </div>
                 </div>
             </div>
-        </fieldset>
-    </form>
+
+
+
+        </div>
+    </div>
+
+
+    <!--<form class="form-horizontal" data-ng-submit="update()" novalidate>-->
+    <!--<fieldset>-->
+
+
+    <!--<table class="expands" data-ng-controller="CoursesController" data-ng-init="findCoursesForUser(otherUser)">-->
+
+    <!--<tr>-->
+    <!--<td class="right-padded-m">Id</td>-->
+    <!--<td>-->
+    <!--{{otherUser._id}}-->
+    <!--</td>-->
+    <!--</tr>-->
+
+
+    <!--<tr>-->
+    <!--<td class="right-padded-m top-padded-m">Username</td>-->
+    <!--<td class="expands top-padded-m">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="otherUser.username"-->
+    <!--id="username"-->
+    <!--class="form-control"-->
+    <!--placeholder="Username"-->
+    <!--required>-->
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr>-->
+    <!--<td class="right-padded-m nowrap top-padded-m">First Name</td>-->
+    <!--<td class="expands top-padded-m">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="otherUser.firstName"-->
+    <!--id="firstName"-->
+    <!--class="form-control"-->
+    <!--placeholder="First Name" required>-->
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr>-->
+
+    <!--<td class="right-padded-m nowrap top-padded-m">Last Name</td>-->
+    <!--<td class="expands top-padded-m">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="otherUser.lastName"-->
+    <!--id="description"-->
+    <!--class="form-control"-->
+    <!--placeholder="Last Name" required>-->
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr>-->
+
+    <!--<td class="right-padded-m top-padded-m">Email</td>-->
+    <!--<td class="expands top-padded-m">-->
+    <!--<input type="text"-->
+    <!--data-ng-model="otherUser.email"-->
+    <!--id="email"-->
+    <!--class="form-control"-->
+    <!--placeholder="email" required>-->
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr data-ng-repeat="school in otherUser.administersSchools">-->
+
+    <!--<td class="right-padded-m top-padded-m nowrap top-aligned" data-ng-if="$index === 0">Administers-->
+    <!--Schools-->
+    <!--</td>-->
+    <!--<td class="right-padded-m top-padded-m nowrap top-aligned" data-ng-if="$index !== 0"></td>-->
+    <!--<td class="expands top-padded-m top-aligned" data-ng-controller="SchoolsController"-->
+    <!--data-ng-init="findById(school)">-->
+    <!--<a>-->
+    <!--<i data-ng-click="removeSchoolAdmin(school, otherUser)"-->
+    <!--class="glyphicon glyphicon-remove-sign small">-->
+    <!--</i>-->
+    <!--</a> {{school.name}} ({{school._id}})-->
+
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr data-ng-repeat="teachesClass in otherUser.teachesClasses">-->
+
+    <!--<td class="right-padded-m top-padded-m nowrap">Teaches Classes</td>-->
+    <!--<td class="expands top-padded-m" data-ng-controller="SchoolclassesController"-->
+    <!--data-ng-init="findById(teachesClass)">-->
+    <!--<a>-->
+    <!--<i data-ng-click="removeAsTeacher(schoolclass, otherUser)"-->
+    <!--class="glyphicon glyphicon-remove-sign small">-->
+    <!--</i>-->
+    <!--</a> {{schoolclass.name}} ({{schoolclass._id}})-->
+    <!--</td>-->
+    <!--</tr>-->
+
+
+    <!--<tr data-ng-repeat="schoolId in otherUser.studentInSchools">-->
+
+    <!--<td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Student in Schools</td>-->
+    <!--<td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>-->
+    <!--<td class="expands top-padded-m" data-ng-controller="SchoolsController"-->
+    <!--data-ng-init="findById(schoolId)">-->
+    <!--<a>-->
+    <!--<i data-ng-click="removeStudentFromSchool(schoolId, otherUser)"-->
+    <!--class="glyphicon glyphicon-remove-sign small">-->
+    <!--</i>-->
+    <!--</a>-->
+    <!--{{school.name ? school.name : 'unknown school'}} ({{schoolId}})-->
+
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr data-ng-repeat="takesClass in otherUser.studentInClasses">-->
+
+    <!--<td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Takes Classes</td>-->
+    <!--<td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>-->
+    <!--<td class="expands top-padded-m" data-ng-controller="SchoolclassesController"-->
+    <!--data-ng-init="findById(takesClass)">-->
+    <!--<a>-->
+    <!--<i data-ng-click="removeAsStudent(schoolclass, otherUser)"-->
+    <!--class="glyphicon glyphicon-remove-sign small">-->
+    <!--</i>-->
+    <!--</a> {{schoolclass.name}} ({{schoolclass._id}})-->
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr data-ng-repeat="course in otherUserCourses">-->
+
+    <!--<td class="right-padded-m top-padded-m nowrap" data-ng-if="$index === 0">Takes Courses</td>-->
+    <!--<td class="right-padded-m top-padded-m nowrap" data-ng-if="$index !== 0"></td>-->
+    <!--<td class="expands top-padded-m">-->
+    <!--<a>-->
+    <!--<i data-ng-click="removeCourse(course)"-->
+    <!--class="glyphicon glyphicon-remove-sign small">-->
+    <!--</i>-->
+    <!--</a> {{course.name}} {{course.visible ? 'visible' : '(not visible)'}} ({{course._id}})-->
+    <!--{{course.supervised ? ' - supervised' : ''}}-->
+    <!--</td>-->
+
+    <!--</tr>-->
+
+
+    <!--<tr>-->
+
+    <!--<td class="right-padded-m top-padded-m top-aligned">Roles</td>-->
+    <!--<td class="expands top-padded-m">-->
+    <!--<div>-->
+    <!--<label class="right-padded-m" ng-repeat="role in roles">-->
+    <!--<input-->
+
+    <!--type="checkbox"-->
+    <!--name="selectedRole[]"-->
+    <!--value="{{role}}"-->
+    <!--ng-checked="otherUser.roles.indexOf(role) > -1"-->
+    <!--ng-click="toggleSelection(role)">-->
+    <!--{{role}}-->
+
+    <!--</label>-->
+    <!--</div>-->
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr>-->
+
+    <!--<td class="right-padded-m top-padded-m top-aligned">Inventory</td>-->
+    <!--<td class="expands top-padded-m">-->
+    <!--<div>-->
+    <!--<span class="right-padded-s" ng-repeat="item in otherUser.inventory">-->
+    <!--{{item}}-->
+
+    <!--</span>-->
+    <!--</div>-->
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr>-->
+
+    <!--<td class="right-padded-m top-padded-m">Created</td>-->
+    <!--<td class="expands top-padded-m">-->
+    <!--{{otherUser.created | date: 'short'}}-->
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--<tr class="controls">-->
+
+    <!--<td class="right-padded-m top-padded-m nowrap">Last Update</td>-->
+    <!--<td class="expands top-padded-m">-->
+    <!--{{otherUser.updated | date: 'short'}}-->
+    <!--</td>-->
+    <!--</tr>-->
+
+    <!--</table>-->
+    <!--<div class="center-aligned">-->
+    <!--<div class="form-group">-->
+    <!--<input type="submit" class="btn btn-rememberators">-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</fieldset>-->
+    <!--</form>-->
 </section>

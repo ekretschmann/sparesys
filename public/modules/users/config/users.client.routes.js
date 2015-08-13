@@ -11,7 +11,7 @@ angular.module('users').config(['$stateProvider',
                 data: { auth: ['admin']}
             }).
             state('adminUser', {
-                url: '/users/:userId/admin',
+                url: '/users/:userId',
                 templateUrl: 'modules/users/views/admin-user.client.view.html',
                 data: { auth: ['admin']}
             }).

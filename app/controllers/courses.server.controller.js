@@ -43,10 +43,8 @@ exports.create = function (req, res) {
     course.user = req.user;
 
 
-    console.log(course);
 
     course.save(function (err) {
-        console.log(err);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -639,7 +637,7 @@ exports.getCardsForCourse = function (req, res, next, id) {
 };
 
 exports.cardDefaults = function (req, res, next, id) {
-    console.log(req);
+    //console.log(req);
 };
 
 exports.copyCourse = function (req, res, next, id) {

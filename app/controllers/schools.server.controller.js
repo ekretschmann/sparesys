@@ -126,7 +126,6 @@ exports.delete = function(req, res) {
 
 
         if (err) {
-            console.log(err);
 			return res.send(400, {
 				message: getErrorMessage(err)
 			});
@@ -156,7 +155,6 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
 
-    console.log('aaaa');
 
     if (req.query && req.query.text) {
         var search = req.query.text.split(' ');
@@ -186,8 +184,6 @@ exports.list = function(req, res) {
             });
         } else if (search.length === 2) {
             School.find({$and: [{'name': {$regex: '^' + search[0]}}, {'city': {$regex: '^' + search[1]}}]}).limit(25).exec(function (err, schools) {
-                //console.log(err);
-                //console.log(users);
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)
@@ -214,8 +210,6 @@ exports.list = function(req, res) {
             });
         } else if (req.query.teachers) {
             School.find({'teachers': req.query.teachers}).populate('user').populate('schoolclasses').exec(function (err, schools) {
-//            console.log(err);
-//            console.log(schools);
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)

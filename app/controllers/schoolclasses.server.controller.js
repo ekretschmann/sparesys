@@ -73,11 +73,12 @@ exports.update = function (req, res) {
 
     schoolclass = _.extend(schoolclass, req.body);
 
+    schoolclass.students = req.body.students;
+    schoolclass.teachers = req.body.teachers;
 
 
-    console.log(req.body);
-    console.log(schoolclass);
 
+    //console.log(schoolclass);
 
 
     schoolclass.save(function (err) {
@@ -104,7 +105,6 @@ exports.update = function (req, res) {
             });
 
 
-            console.log(currentTeachers);
 
             currentTeachers.forEach(function(currentTeacherId) {
                 User.findOne({_id: currentTeacherId}, 'teachesClasses').exec(function (err, currentTeacher) {

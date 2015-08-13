@@ -150,7 +150,6 @@ exports.update = function (req, res) {
     var user = req.user;
 
 
-    //console.log(user);
     var message = null;
 
 
@@ -169,10 +168,7 @@ exports.update = function (req, res) {
 
     function updateUser(theUser) {
 
-
-        //console.log(theUser.inventory);
         theUser = _.extend(theUser, req.body);
-        //console.log(theUser.inventory);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
         if (theUser.teachesClasses === '') {
@@ -183,21 +179,15 @@ exports.update = function (req, res) {
         }
         theUser.save(function (err) {
 
-
-            //console.log('zzzzz');
-            //console.log(err);
             if (err) {
-                console.log(err);
                 return res.send(400, {
                     message: getErrorMessage(err)
                 });
             } else {
-                //console.log('aaaaa');
                 req.login(user, function (err) {
                     if (err) {
                         res.send(400, err);
                     } else {
-                        //console.log(user);
                         res.jsonp(user);
                     }
                 });
@@ -350,9 +340,6 @@ exports.userByID = function (req, res, next, id) {
  */
 exports.requiresLogin = function (req, res, next) {
 
-    console.log(req['user']);
-    console.log(req);
-    console.log(req.isAuthenticated());
 
     if (!req.isAuthenticated()) {
         return res.send(401, {
@@ -520,8 +507,6 @@ exports.list = function (req, res) {
 
         if (search.length === 1) {
             User.find({$or: [{'firstName': {$regex: '^' + search[0]}}, {'lastName': {$regex: '^' + search[0]}}]}).limit(25).exec(function (err, users) {
-                //console.log(err);
-                //console.log(users);
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)
@@ -531,10 +516,7 @@ exports.list = function (req, res) {
                 }
             });
         } else if (search.length === 2) {
-            console.log(search);
             User.find({$and: [{'firstName': {$regex: '^' + search[0]}}, {'lastName': {$regex: '^' + search[1]}}]}).limit(25).exec(function (err, users) {
-                //console.log(err);
-                //console.log(users);
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)

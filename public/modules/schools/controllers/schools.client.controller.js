@@ -283,9 +283,23 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
 
         $scope.removeStudent = function (studentId) {
 
-            var index = $scope.school.students.indexOf(studentId);
+            console.log(studentId);
+            console.log($scope.school.students);
+            var index;
+            for (var i=0; i<$scope.school.students.length; i++) {
+                if ($scope.school.students[i]._id === studentId) {
+                    index = i;
+                }
+            }
+            console.log(index);
             $scope.school.students.splice(index, 1);
-            $scope.school.$update();
+
+
+            $scope.school.$update(function(x) {
+                console.log(x);
+            }, function (y) {
+                console.log(y);
+            });
         };
 
         // Update existing School

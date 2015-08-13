@@ -40,7 +40,6 @@
                     </div>
 
 
-
                     <div class="col-xs-6">
                         <div class="field-label">City</div>
                         <div class="field-data">
@@ -58,151 +57,43 @@
     </div>
 
 
+    <div class="col-xs-12 col-md-6 dashboard-col ">
+        <div class="virtual-card">
+            <div class="title">Teachers</div>
 
-    <div class="content-header">
+            <div data-ng-repeat="teacher in school.teachers">
 
 
-        <div class="title">
-            Administer School
+                <div class="flashcard-section">
+                    <div class="field-title">{{teacher._id}}</div>
+
+                    <div class="field-data">
+                        {{teacher.displayName}}
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 
-    <form class="form-horizontal" data-ng-submit="update()" novalidate>
-        <fieldset>
 
-            <table class="expands">
+    <div class="col-xs-12 col-md-6 dashboard-col ">
+        <div class="virtual-card">
+            <div class="title">Students</div>
 
-                <tr>
-                    <td class="right-padded-m">Id</td>
-                    <td>
-                        {{school._id}}
-                    </td>
-                </tr>
+            <div data-ng-repeat="student in school.students">
 
 
-                <tr>
-                    <td class="right-padded-m top-padded-s">Name</td>
-                    <td class="expands top-padded-s">
-                        <input type="text"
-                               data-ng-model="school.name"
-                               class="form-control"
-                               placeholder="Name"
-                               required>
-                    </td>
-                </tr>
-
-                <tr>
-                    <td class="right-padded-m nowrap top-padded-s">City</td>
-                    <td class="expands top-padded-s">
-                        <input type="text"
-                               data-ng-model="school.city"
-                               class="form-control"
-                               placeholder="City" required>
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td class="right-padded-m nowrap top-padded-s">Country</td>
-                    <td class="expands top-padded-s">
-                        <input type="text"
-                               data-ng-model="school.country"
-                               class="form-control"
-                               placeholder="Country" required>
-                    </td>
-                </tr>
-
-                <tr>
-
-                    <td class="right-padded-m nowrap top-padded-s">Administrator</td>
-                    <td class="expands top-padded-s">
-                        <table>
-                            <tr>
-                                <td class="right-padded-m"><input type="text"
-                                                                  style="width:16em"
-                                                                  data-ng-model="school.user._id"
-                                                                  class="form-control"
-                                                                  placeholder="Administrator" required></td>
-                                <td>{{school.user.displayName}}</td>
-                            </tr>
-                        </table>
-
-
-                    </td>
-                </tr>
-
-
-
-                <tr data-ng-repeat="schoolclass in school.schoolclasses">
-                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index ===0">Classes</td>
-                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index !==0"></td>
-                    <td class="expands top-padded-s">
-                        <a>
-                            <i data-ng-click="removeSchoolclass(schoolclass)"
-                               class="glyphicon glyphicon-remove-sign small">
-                            </i>
-                        </a>
-
-                        {{schoolclass.name}} ({{schoolclass._id}})
-                    </td>
-                </tr>
-
-                <tr data-ng-repeat="student in school.students">
-                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index ===0">Students</td>
-                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index !==0"></td>
-                    <td class="expands top-padded-s" data-ng-controller="UsersController" data-ng-init="findById(student)">
-                        <a>
-                            <i data-ng-click="removeStudent(student)"
-                               class="glyphicon glyphicon-remove-sign small">
-                            </i>
-                        </a>
-
-                        {{displayName}} ({{student}})
-                    </td>
-                </tr>
-
-
-                <tr data-ng-repeat="teacher in school.teachers">
-                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index ===0">Teachers</td>
-                    <td class="right-padded-m nowrap top-padded-s" data-ng-if="$index !==0"></td>
-                    <td class="expands top-padded-s" data-ng-controller="UsersController" data-ng-init="findById(teacher)">
-                        <a>
-                            <i data-ng-click="removeTeacher(teacher)"
-                               class="glyphicon glyphicon-remove-sign small">
-                            </i>
-                        </a>
-
-                        {{displayName}} ({{teacher}})
-                    </td>
-                </tr>
-
-                <!--<tr>-->
-
-                    <!--<td class="right-padded-m nowrap top-padded-s">Classes</td>-->
-                    <!--<td class="expands top-padded-s">-->
-                        <!--<table>-->
-                            <!--<tr data-ng-repeat="schoolclass in schoolclasses">-->
-                                <!--<td class="right-padded-m"><input type="text"-->
-                                                                  <!--style="width:16em"-->
-                                                                  <!--data-ng-model="schoolclass"-->
-                                                                  <!--class="form-control"-->
-                                                                  <!--placeholder="Administrator" required></td>-->
-                                <!--<td>{{schoolclass}}</td>-->
-                            <!--</tr>-->
-                        <!--</table>-->
-
-
-                    <!--</td>-->
-                <!--</tr>-->
-
-            </table>
-
-
-            <div class="center-aligned top-padded-m">
-                <div class="form-group">
-                    <input type="submit" class="btn btn-rememberators">
+                <div class="flashcard-section">
+                    <div class="field-title">{{student._id}} <a href="" data-ng-click="removeStudent(student._id)"><i class="glyphicon glyphicon-minus-sign"></i></a></div>
+                    <div class="field-data">
+                        {{student.displayName}}
+                    </div>
                 </div>
+
             </div>
-        </fieldset>
-    </form>
+        </div>
+    </div>
+
+
 </section>

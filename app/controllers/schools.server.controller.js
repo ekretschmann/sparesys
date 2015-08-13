@@ -68,7 +68,7 @@ exports.read = function(req, res) {
 exports.update = function(req, res) {
 
 
-	var school = req.school ;
+    var school = req.school ;
     var originalUserId;
 
     if (school.user) {
@@ -156,6 +156,7 @@ exports.delete = function(req, res) {
  */
 exports.list = function(req, res) {
 
+    console.log('aaaa');
 
     if (req.query && req.query.text) {
         var search = req.query.text.split(' ');
@@ -170,7 +171,6 @@ exports.list = function(req, res) {
                     if (schools.length === 0 ) {
                         School.findById(search[0]).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function(err, school) {
 
-                            console.log(school);
                             if (school) {
                                 res.jsonp([school]);
                             } else {
@@ -260,27 +260,18 @@ exports.schoolByID = function(req, res, next, id) {
     School.findById(id).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function(err, school) {
 
 
-        console.log(err);
-        console.log(school);
-
-		if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        }
-		if (! school) {
-            return res.send(400, {
-                message: 'no shools with ID '+id
-            });
-        }
-        res.jsonp(school) ;
-	});
+        if (err) return next(err);
+        if (! school) return next(new Error('Failed to load School ' + id));
+        req.school = school ;
+        next();
+    });
 };
 
 /**
  * School authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
+
     if (req.user.roles.indexOf('admin') > -1) {
         next();
     } else if (req.school.user && (req.school.user.id !== req.user.id)) {

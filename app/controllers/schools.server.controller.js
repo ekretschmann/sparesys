@@ -157,50 +157,82 @@ exports.delete = function(req, res) {
 exports.list = function(req, res) {
 
 
-    if (req.query.student) {
-        School.find({'students': req.query.student}).populate('user').populate('schoolclasses').exec(function (err, schools) {
-            if (err) {
-                return res.send(400, {
-                    message: getErrorMessage(err)
-                });
-            } else {
-                res.jsonp(schools);
-            }
-        });
-    } else if (req.query.teachers) {
-        School.find({'teachers': req.query.teachers}).populate('user').populate('schoolclasses').exec(function (err, schools) {
+    if (req.query && req.query.text) {
+        var search = req.query.text.split(' ');
+
+        if (search.length === 1) {
+            School.find({$or: [{'name': {$regex: '^' + search[0]}}, {'city': {$regex: '^' + search[0]}}, {'country': {$regex: '^' + search[0]}}]}).limit(25).exec(function (err, schools) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(schools);
+                }
+            });
+        } else if (search.length === 2) {
+            School.find({$and: [{'name': {$regex: '^' + search[0]}}, {'city': {$regex: '^' + search[1]}}]}).limit(25).exec(function (err, schools) {
+                //console.log(err);
+                //console.log(users);
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(schools);
+                }
+            });
+        } else {
+            res.jsonp([]);
+        }
+    } else {
+
+
+        if (req.query.student) {
+            School.find({'students': req.query.student}).populate('user').populate('schoolclasses').exec(function (err, schools) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(schools);
+                }
+            });
+        } else if (req.query.teachers) {
+            School.find({'teachers': req.query.teachers}).populate('user').populate('schoolclasses').exec(function (err, schools) {
 //            console.log(err);
 //            console.log(schools);
-            if (err) {
-                return res.send(400, {
-                    message: getErrorMessage(err)
-                });
-            } else {
-                res.jsonp(schools);
-            }
-        });
-    } else if (req.query.userId) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(schools);
+                }
+            });
+        } else if (req.query.userId) {
 
 
-        School.find({'user': req.query.userId}).populate('user').populate('schoolclasses').exec(function (err, courses) {
-            if (err) {
-                return res.send(400, {
-                    message: getErrorMessage(err)
-                });
-            } else {
-                res.jsonp(courses);
-            }
-        });
-    } else {
-        School.find().sort('-created').populate('user').populate('schoolclasses').exec(function (err, schools) {
-            if (err) {
-                return res.send(400, {
-                    message: getErrorMessage(err)
-                });
-            } else {
-                res.jsonp(schools);
-            }
-        });
+            School.find({'user': req.query.userId}).populate('user').populate('schoolclasses').exec(function (err, courses) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(courses);
+                }
+            });
+        } else {
+            School.find().sort('-created').populate('user').populate('schoolclasses').exec(function (err, schools) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(schools);
+                }
+            });
+        }
     }
 };
 

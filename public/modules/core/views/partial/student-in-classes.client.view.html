@@ -5,9 +5,14 @@
         <div class="infobox-title">My Classes</div>
 
 
+        {{//authentication.user.studentInSchools}}
         <div data-ng-repeat="schoolId in authentication.user.studentInSchools"
              data-ng-controller="SchoolsController"
              data-ng-init="populateSchoolForUser(schoolId, authentication.user)">
+
+            <!--<div class="field-title">-->
+                <!--{{school}}-->
+            <!--</div>-->
 
             <div data-ng-if="schoolclasses.length>0">
                 <div data-ng-repeat="sc in schoolclasses">

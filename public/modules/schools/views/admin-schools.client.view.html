@@ -1,43 +1,125 @@
-<section data-ng-controller="SchoolsController" data-ng-init="find()">
+<section data-ng-controller="SchoolsController">
 
     <div ng-include="'/modules/schools/views/partial/delete-school.modal.client.view.html'"></div>
 
-    <div class="content-header">
 
-        <div class="title">
-            Schools Administration
+    <div class="col-xs-12 col-md-6 dashboard-col ">
+        <div class="virtual-card font-large">
+            <div class="title">Schools</div>
+            <div class="flashcard-section row">
+
+                <!--<div class="col-xs-6">-->
+                <!--<div class="field-label">Find User</div>-->
+
+                <!-- -->
+
+                <!--<div class="field-data" data-ng-controller="SchoolsController" data-ng-repeat="sid in authentication.user.studentInSchools" data-ng-init="findById(sid)">-->
+                <!--{{school.name}} <a href=""-->
+                <!--data-ng-click="unsubscribeStudentPopup(school._id)"><i-->
+                <!--class="glyphicon glyphicon-minus-sign"></i></a>-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <div class="col-xs-12">
+                    <div class="field-label">Find School</div>
+                    <input type="text"
+                           ng-model="options.searchText"
+                           class="form-control search"
+                           data-ng-change="updateSearch()"
+                           placeholder="Name">
+                </div>
+
+
+            </div>
         </div>
     </div>
 
-    <div data-ng-if="schools.length === 0">
-        No Schools Registered.
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="!schools || schools.length === 0">
+
+        <div class="virtual-card font-large">
+            <div class="title">No Schools Found</div>
+            <div class="danger">There are no users matching your search criteria</div>
+        </div>
     </div>
 
-    <table id="searchTextResults" class="table-striped" data-ng-if="schools.length > 0">
-        <thead>
-        <tr>
-            <th class="left-paddes-s right-padded-s"></th>
-            <th class="right-padded-m">School</th>
-            <th class="right-padded-m">City</th>
-            <th class="right-padded-m">Country</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-ng-repeat="school in schools | filter:searchText">
-            <td class="right-padded-s left-padded-s top-padded-s">
-                <a href="">
-                    <i data-ng-click="areYouSureToDeleteSchool(school)"
-                       class="small glyphicon glyphicon-remove-sign">
-                    </i>
-                </a>
-            </td>
-            <td class="right-padded-m expands top-padded-s">
-                <a data-ng-href="#!/schools/{{school._id}}/admin">{{school.name}}</a>
-            </td>
-            <td class="right-padded-m top-padded-s">{{school.city}}</td>
-            <td class="right-padded-s top-padded-s">{{school.country}}</td>
 
-        </tr>
-        </tbody>
-    </table>
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-repeat="school in schools">
+        <div class="virtual-card font-large">
+            <div class="title">{{school.name}}
+
+                <div class="pull-right">
+                    <a href="#!/schools/{{school._id}}"><i class="glyphicon glyphicon-edit"></i></a>
+                </div>
+
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-6">
+                        <div class="field-label">ID</div>
+                        <div class="field-data">
+                            {{school._id}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="field-label">Name</div>
+                        <div class="field-data">
+                            {{school.name}}
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-6">
+                        <div class="field-label">City</div>
+                        <div class="field-data">
+                            {{school.city}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <div class="field-label">Country</div>
+                        <div class="field-data">
+                            {{school.country}}
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--<table id="searchTextResults" class="table-striped" data-ng-if="schools.length > 0">-->
+        <!--<thead>-->
+        <!--<tr>-->
+            <!--<th class="left-paddes-s right-padded-s"></th>-->
+            <!--<th class="right-padded-m">School</th>-->
+            <!--<th class="right-padded-m">City</th>-->
+            <!--<th class="right-padded-m">Country</th>-->
+        <!--</tr>-->
+        <!--</thead>-->
+        <!--<tbody>-->
+        <!--<tr data-ng-repeat="school in schools | filter:searchText">-->
+            <!--<td class="right-padded-s left-padded-s top-padded-s">-->
+                <!--<a href="">-->
+                    <!--<i data-ng-click="areYouSureToDeleteSchool(school)"-->
+                       <!--class="small glyphicon glyphicon-remove-sign">-->
+                    <!--</i>-->
+                <!--</a>-->
+            <!--</td>-->
+            <!--<td class="right-padded-m expands top-padded-s">-->
+                <!--<a data-ng-href="#!/schools/{{school._id}}/admin">{{school.name}}</a>-->
+            <!--</td>-->
+            <!--<td class="right-padded-m top-padded-s">{{school.city}}</td>-->
+            <!--<td class="right-padded-s top-padded-s">{{school.country}}</td>-->
+
+        <!--</tr>-->
+        <!--</tbody>-->
+    <!--</table>-->
 </section>

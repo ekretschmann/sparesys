@@ -515,7 +515,6 @@ exports.removeOAuthProvider = function (req, res, next) {
  */
 exports.list = function (req, res) {
 
-    console.log(req.query.text);
     if (req.query && req.query.text) {
         var search = req.query.text.split(' ');
 

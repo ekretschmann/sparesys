@@ -328,9 +328,11 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
 
         $scope.populateSchoolForUser = function (schoolId, user) {
 
-            $scope.school = Schools.get({
+            Schools.get({
                 schoolId: schoolId
             }, function (s) {
+                console.log(s);
+                $scope.school = s;
                 $scope.schoolclasses = s.schoolclasses;
                 $scope.schoolclasses = [];
                 for (var i = 0; i < $scope.school.schoolclasses.length; i++) {
@@ -359,6 +361,20 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
                         return $scope.school;
                     }
                 }
+            });
+        };
+
+        $scope.options = {};
+
+        $scope.updateSearch = function () {
+
+            console.log($scope.options);
+
+            Schools.query({
+                text: $scope.options.searchText
+            }, function(schools) {
+                $scope.schools = schools;
+
             });
         };
 

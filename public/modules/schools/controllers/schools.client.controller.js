@@ -283,15 +283,12 @@ angular.module('schools').controller('SchoolsController', ['$scope', '$timeout',
 
         $scope.removeStudent = function (studentId) {
 
-            console.log(studentId);
-            console.log($scope.school.students);
             var index;
             for (var i=0; i<$scope.school.students.length; i++) {
                 if ($scope.school.students[i]._id === studentId) {
                     index = i;
                 }
             }
-            console.log(index);
             $scope.school.students.splice(index, 1);
 
 

@@ -340,7 +340,6 @@ exports.userByID = function (req, res, next, id) {
  */
 exports.requiresLogin = function (req, res, next) {
 
-
     if (!req.isAuthenticated()) {
         return res.send(401, {
             message: 'User is not logged in'

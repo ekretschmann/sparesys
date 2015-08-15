@@ -146,11 +146,13 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         // Find existing Schoolclass
         $scope.findOne = function () {
 
-            console.log($stateParams.schoolclassId);
             Schoolclasses.get({
                 schoolclassId: $stateParams.schoolclassId
             }, function (schoolclass) {
                 $scope.schoolclass = schoolclass;
+                //
+                //console.log('begi');
+                //console.log($scope.schoolclass);
                 Schools.get({
                     schoolId: $scope.schoolclass.school
                 }, function (school) {
@@ -326,6 +328,8 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             console.log(teacher);
 
+
+
             var found = false;
             for (var i = 0; i < $scope.schoolclass.teachers.length; i++) {
                 if ($scope.schoolclass.teachers[i]._id === teacher._id) {
@@ -338,6 +342,11 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 $scope.schoolclass.teachers.push(teacher);
 
                 //console.log($scope.schoolclass.teachers);
+
+                //console.log('end');
+                //console.log($scope.schoolclass);
+
+
                 $scope.schoolclass.$update(function (x) {
 
 
@@ -355,6 +364,26 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 });
             }
         };
+
+
+        //$scope.removeTeacherFromClass = function (teacherId) {
+        //    for (var i = 0; i < $scope.schoolclass.teachers.length; i++) {
+        //        if ($scope.schoolclass.teachers[i] === teacherId) {
+        //            $scope.schoolclass.teachers.splice(i, 1);
+        //        }
+        //    }
+        //    //$scope.schoolclass.__v = undefined;
+        //    $scope.schoolclass.$update(function(){
+        //        console.log('ga remove teacher from class');
+        //        console.log('/schoolclassess/remove/teacher/:id');
+        //        if ($window.ga) {
+        //            console.log('sending to ga');
+        //            $window.ga('send', 'pageview', '/schoolclassess/remove/teacher/:id');
+        //            $window.ga('send', 'event', 'school admin removes teacher from class');
+        //        }
+        //        $scope.initSchoolclassSetup();
+        //    });
+        //};
 
         $scope.addCourseForStudent = function (studentId, courseId) {
             Courses.query({

@@ -62,24 +62,24 @@ angular.module('schoolclasses').controller('SetupClassController', ['$scope', '$
         //    });
         //};
 
-        $scope.removeTeacherFromClass = function (teacherId) {
-            for (var i = 0; i < $scope.schoolclass.teachers.length; i++) {
-                if ($scope.schoolclass.teachers[i] === teacherId) {
-                    $scope.schoolclass.teachers.splice(i, 1);
-                }
-            }
-            //$scope.schoolclass.__v = undefined;
-            new Schoolclasses($scope.schoolclass).$update(function(){
-                console.log('ga remove teacher from class');
-                console.log('/schoolclassess/remove/teacher/:id');
-                if ($window.ga) {
-                    console.log('sending to ga');
-                    $window.ga('send', 'pageview', '/schoolclassess/remove/teacher/:id');
-                    $window.ga('send', 'event', 'school admin removes teacher from class');
-                }
-                $scope.initSchoolclassSetup();
-            });
-        };
+        //$scope.removeTeacherFromClass = function (teacherId) {
+        //    for (var i = 0; i < $scope.schoolclass.teachers.length; i++) {
+        //        if ($scope.schoolclass.teachers[i] === teacherId) {
+        //            $scope.schoolclass.teachers.splice(i, 1);
+        //        }
+        //    }
+        //    //$scope.schoolclass.__v = undefined;
+        //    new Schoolclasses($scope.schoolclass).$update(function(){
+        //        console.log('ga remove teacher from class');
+        //        console.log('/schoolclassess/remove/teacher/:id');
+        //        if ($window.ga) {
+        //            console.log('sending to ga');
+        //            $window.ga('send', 'pageview', '/schoolclassess/remove/teacher/:id');
+        //            $window.ga('send', 'event', 'school admin removes teacher from class');
+        //        }
+        //        $scope.initSchoolclassSetup();
+        //    });
+        //};
 
         $scope.removeStudentFromClass = function (studentId) {
             console.log(studentId);

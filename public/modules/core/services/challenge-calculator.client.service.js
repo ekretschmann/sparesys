@@ -205,13 +205,13 @@ angular.module('core').service('ChallengeCalculatorService', [
             }
 
 
-            console.log('old:         '+this.old);
-            console.log('startOver80: '+this.startOver80);
-            console.log('over80:      '+this.over80);
-            console.log('todo         '+(this.old-this.startOver80));
-            console.log('done         '+(this.over80-this.startOver80));
-            console.log('per cent     '+Math.round(100*(this.over80-this.startOver80) / (this.old-this.startOver80)));
-            console.log(Math.round(1000*(this.over80-this.startOver80) / (this.old-this.startOver80))/10);
+            //console.log('old:         '+this.old);
+            //console.log('startOver80: '+this.startOver80);
+            //console.log('over80:      '+this.over80);
+            //console.log('todo         '+(this.old-this.startOver80));
+            //console.log('done         '+(this.over80-this.startOver80));
+            //console.log('per cent     '+Math.round(100*(this.over80-this.startOver80) / (this.old-this.startOver80)));
+            //console.log(Math.round(1000*(this.over80-this.startOver80) / (this.old-this.startOver80))/10);
             return this.getReportedDoneScore(Math.min(100, Math.round(1000*(this.over80-this.startOver80) / (this.old-this.startOver80))/10));
         };
 

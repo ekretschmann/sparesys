@@ -287,6 +287,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             $scope.challengeData = ChallengeCalculatorService.exportData();
         };
 
+        $scope.orderedCards = [];
+
         $scope.nextCard = function () {
 
 
@@ -322,6 +324,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             ChallengeCalculatorService.reset();
             ChallengeCalculatorService.setCardTotal(this.cards.length);
             //console.log('');
+            $scope.orderedCards = [];
             for (var i = 0; i < this.cards.length; i++) {
 
 
@@ -399,7 +402,19 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 }
 
 
+                $scope.orderedCards.push({new: card.history.length === 0, name: card.question, score: Math.round(card.score*100)/100, predictedRetention: Math.round(card.predictedRetention*100)/100});
+
             }
+
+            function compare(a,b) {
+                if (a.score < b.score)
+                    return -1;
+                if (a.score > b.score)
+                    return 1;
+                return 0;
+            }
+
+            $scope.orderedCards.sort(compare);
 
            // ChallengeCalculatorService.exportData();
 

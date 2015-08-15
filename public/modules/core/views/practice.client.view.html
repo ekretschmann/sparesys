@@ -161,23 +161,46 @@
                     <div style="padding-top: 1em">
 
                         <div class="row" data-ng-repeat="c in orderedCards">
-                            <div class="col-xs-1">
-                                {{$index}}
+                            <div style="color: green" data-ng-if="!c.new">
+                                <div class="col-xs-1">
+                                    {{$index}}
+                                </div>
+
+
+                                <div class="col-xs-5">
+                                    {{c.name}}
+                                </div>
+
+
+                                <div class="col-xs-3">
+
+                                    {{c.score}}
+                                </div>
+
+                                <div class="col-xs-3">
+                                    {{c.predictedRetention}}
+                                </div>
                             </div>
 
-                            <div class="col-xs-5">
-                                {{c.name}}
-                            </div>
+                            <div style="color: red" data-ng-if="c.new">
+                                <div class="col-xs-1">
+                                    {{$index}}
+                                </div>
 
 
+                                <div class="col-xs-5">
+                                    {{c.name}}
+                                </div>
 
-                            <div class="col-xs-3">
 
-                                {{c.score}}
-                            </div>
+                                <div class="col-xs-3">
 
-                            <div class="col-xs-3">
-                                {{c.predictedRetention}}
+                                    {{c.score}}
+                                </div>
+
+                                <div class="col-xs-3">
+                                    {{c.predictedRetention}}
+                                </div>
                             </div>
                         </div>
                     </div>

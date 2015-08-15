@@ -402,7 +402,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 }
 
 
-                $scope.orderedCards.push({new: card.history.length === 0, name: card.question, score: Math.round(card.score*100)/100, predictedRetention: Math.round(card.predictedRetention*100)/100});
+                $scope.orderedCards.push({new: card.history.length === 0, name: card.question, score: Math.round(card.score*10000)/10000,
+                    predictedRetention: Math.round(card.predictedRetention*10000)/10000});
 
             }
 

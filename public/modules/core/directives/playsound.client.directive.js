@@ -26,21 +26,31 @@ angular.module('core').directive('playsound',
 
                     speed = parseInt(speed);
 
+
+
+                    console.log('xxxx');
+
                     /* jshint ignore:start */
                     if (window.SpeechSynthesisUtterance !== undefined) {
 
 
+                        console.log(text);
                         var msg = new SpeechSynthesisUtterance(text);
                         msg.lang = lang;
-                        msg.rate = speed;
+                        //msg.rate = speed;
+
+                        console.log(msg);
+
                         window.speechSynthesis.speak(msg);
 
                         if( extension) {
 
                             msg = new SpeechSynthesisUtterance(extension);
                             msg.lang = lang;
-                            msg.rate = speed;
+                            //msg.rate = speed;
                             window.speechSynthesis.speak(msg);
+
+
                         }
                         //console.log(text);
                         //console.log(lang);

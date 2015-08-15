@@ -368,7 +368,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
                 if (card.dueDate) {
-                    card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.4);
+                    card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.3999);
                 }
 
                 if (card.priority !== 3) {

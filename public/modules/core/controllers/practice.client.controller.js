@@ -372,12 +372,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     card.score = Math.abs($scope.adjustScoreToPriority(card) - 0.4);
                 }
 
-                if (card.score < bestValue && card.modes.length > 0) {
-                    if (this.cards.length >= 1 && card.question !== $scope.card.question) {
-                        bestCard = card;
-                        bestValue = card.score;
-                    }
-                }
+
 
                 // calculate when am I done
                 if (card.dueDate && $scope.time < new Date(card.dueDate).getTime()) {
@@ -398,6 +393,12 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 }
 
 
+                if (card.score < bestValue && card.modes.length > 0) {
+                    if (this.cards.length >= 1 && card.question !== $scope.card.question) {
+                        bestCard = card;
+                        bestValue = card.score;
+                    }
+                }
 
 
                 $scope.orderedCards.push({new: card.history.length === 0, name: card.question, score: Math.round(card.score*10000)/10000, 

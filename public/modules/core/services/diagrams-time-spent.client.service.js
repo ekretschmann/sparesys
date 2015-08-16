@@ -86,7 +86,7 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
 
             var margin = {top: 16, right: 20, bottom: 30, left: 40},
                 width = windwoWidth - margin.left - margin.right,
-                height = 400 - margin.top - margin.bottom;
+                height = 340 - margin.top - margin.bottom;
 
             var formatPercent = d3.format('.0%');
 

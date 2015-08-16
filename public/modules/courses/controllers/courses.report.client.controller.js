@@ -2,11 +2,39 @@
 
 
 /* global d3 */
-angular.module('courses').controller('CourseReportController', ['$scope', '$window', 'CoursesService', 'DiagramsCalendarService',
-    'DiagramsCardsInPlayService', 'DiagramsTimeSpentService',
-    function ($scope, $window, CoursesService, DiagramsCalendarService, DiagramsCardsInPlayService, DiagramsTimeSpentService) {
+angular.module('courses').controller('CourseReportController', ['$scope', '$stateParams','$window', 'CoursesService', 'DiagramsCalendarService',
+    'DiagramsCardsInPlayService', 'DiagramsTimeSpentService', 'Courses',
+    function ($scope, $stateParams, $window, CoursesService, DiagramsCalendarService, DiagramsCardsInPlayService, DiagramsTimeSpentService, Courses) {
 
-        $scope.init = function (id, index) {
+        $scope.init = function () {
+
+
+            $scope.course = Courses.get({
+                courseId: $stateParams.courseId
+            }, function () {
+
+
+
+
+                var res = CoursesService.serverLoadCards();
+                var promise = res.get({courseId: $stateParams.courseId});
+                promise.$promise.then(function (cards) {
+                    DiagramsCalendarService.drawCalendar(cards, '#cal', '#practice-date', '#number-of-cards', ($window.innerWidth / 2)-130);
+
+                    var w = $window.innerWidth + 110;
+                    if ($window.innerWidth > 990){
+                        w = ($window.innerWidth / 2) + 60;
+                    }
+                    DiagramsCardsInPlayService.drawLineChart(cards, '#inplay', w);
+                    DiagramsTimeSpentService.drawBarChart(cards, '#timespent', '#spent-practice-date', '#spent-practice-time', ($window.innerWidth / 2)-130);
+                });
+            });
+
+
+        };
+
+
+        $scope.initProgress = function (id, index) {
 
             var res = CoursesService.serverLoadCards();
             var promise = res.get({courseId: id});

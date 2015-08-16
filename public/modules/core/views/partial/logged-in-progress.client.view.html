@@ -50,7 +50,7 @@
                     <!--</div>-->
                     <div class="default-border"
                          data-ng-controller="CourseReportController"
-                         data-ng-init="init(course._id, $index)">
+                         data-ng-init="initProgress(course._id, $index)">
 
                         <div class="col-xs-12">
 
@@ -99,7 +99,7 @@
                     <div style="text-align: center; font-size: large">
 
 
-                        <a href="" data-ng-click="areYouSureToDeleteSchool(school)">more diagrams</a>
+                        <a href="#!/courses/{{course._id}}/stats" >more diagrams</a>
 
                     </div>
                 </div>

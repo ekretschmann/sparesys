@@ -34,9 +34,9 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         $scope.error = undefined;
 
 
-        $scope.maxScoreForOldCards = 0.3999;
         $scope.speechRate = 4;
         $scope.speechIcons = 3;
+        $scope.maxScoreForOldCards = 0.3999;
 
 
         $scope.rateHover = function(value) {
@@ -215,8 +215,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     //console.log(resp);
                     //$scope.error = undefined;
                 }, function(z) {
-                    console.log(z);
-                    console.log(z.data);
                     $scope.error = 'Error message: '+z.data.message;
                 });
             });
@@ -244,14 +242,14 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
         $scope.adjustScoreToPriority = function (card) {
             if (card.priority && card.priority !== 3) {
-                var distance = Math.abs(card.predictedRetention - $scope.maxScoreForOldCards);
+                var distance = Math.abs(card.predictedRetention - 0.4);
 
-                if (card.predictedRetention > $scope.maxScoreForOldCards) {
+                if (card.predictedRetention > 0.4) {
 
-                    return Math.min(1, Math.max(0, $scope.maxScoreForOldCards + (distance * (0.7 + (card.priority * 0.1)))));
+                    return Math.min(1, Math.max(0, 0.4 + (distance * (0.7 + (card.priority * 0.1)))));
 
                 } else {
-                    return Math.min(1, Math.max(0.01, $scope.maxScoreForOldCards - (distance * (0.7 + (card.priority * 0.1)))));
+                    return Math.min(1, Math.max(0.01, 0.4 - (distance * (0.7 + (card.priority * 0.1)))));
                 }
             }
             return card.predictedRetention;
@@ -264,14 +262,14 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 var dueInDays = dueInSecs / (1000 * 60 * 60 * 24);
 
                 if (dueInDays < 9) {
-                    var distance = Math.abs(card.predictedRetention - $scope.maxScoreForOldCards);
+                    var distance = Math.abs(card.predictedRetention - 0.4);
                     var expectedDistance = (dueInDays * 0.1) * distance;
 
 
-                    if (card.predictedRetention > $scope.maxScoreForOldCards) {
-                        return $scope.maxScoreForOldCards + expectedDistance;
+                    if (card.predictedRetention > 0.4) {
+                        return 0.4 + expectedDistance;
                     } else {
-                        return $scope.maxScoreForOldCards - expectedDistance;
+                        return 0.4 - expectedDistance;
                     }
                 }
             }
@@ -325,7 +323,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
             ChallengeCalculatorService.reset();
             ChallengeCalculatorService.setCardTotal(this.cards.length);
-            //console.log('');
             $scope.orderedCards = [];
             for (var i = 0; i < this.cards.length; i++) {
 
@@ -362,23 +359,17 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
                 card.retention = Math.round(card.predictedRetention * 100);
-                card.score = Math.abs(card.predictedRetention - $scope.maxScoreForOldCards);
+                card.score = Math.abs(card.predictedRetention - 0.4);
 
-                //console.log(card.question+ ': '+card.predictedRetention+'   '+before+ '   '+(card.predictedRetention-before));
-                //console.log(card.question+ ': '+d);
 
 
 
                 if (card.dueDate) {
-                    card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - $scope.maxScoreForOldCards);
+                    card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.4);
                 }
 
                 if (card.priority !== 3) {
-                    //console.log('');
-                    //console.log('priority '+card.priority);
-                    //console.log('before   '+card.score);
-                    card.score = Math.abs($scope.adjustScoreToPriority(card) - $scope.maxScoreForOldCards);
-                    //console.log('after    '+card.score);
+                    card.score = Math.abs($scope.adjustScoreToPriority(card) - 0.4);
                 }
 
                 if (card.score < bestValue && card.modes.length > 0) {
@@ -399,9 +390,14 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     ChallengeCalculatorService.newCard();
                 } else {
 
+                    if (card.predictedRetention < 0.4 && (card.score > $scope.maxScoreForOldCards)) {
+                        card.score = $scope.maxScoreForOldCards;
+                    }
                     ChallengeCalculatorService.retention(card.predictedRetention, card.score);
                     ChallengeCalculatorService.oldCard();
                 }
+
+
 
 
                 $scope.orderedCards.push({new: card.history.length === 0, name: card.question, score: Math.round(card.score*10000)/10000, 

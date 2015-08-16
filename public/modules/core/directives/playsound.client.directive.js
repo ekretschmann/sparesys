@@ -28,7 +28,7 @@ angular.module('core').directive('playsound',
 
 
 
-                    console.log('xxxx');
+                    //console.log('xxxx');
 
                     /* jshint ignore:start */
                     if (window.SpeechSynthesisUtterance !== undefined) {

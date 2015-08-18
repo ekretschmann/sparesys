@@ -1,0 +1,370 @@
+<section data-ng-controller="PacksController"
+         data-ng-init="findOne()">
+
+
+    <div class="col-xs-6">
+        <div class="col-xs-12 dashboard-col">
+            <div class="virtual-card font-large">
+                <div class="title">
+                    {{pack.name}}
+
+                    <div class="pull-right">
+
+
+                        <!--<a href="#!/schools/{{school._id}}"><i class="glyphicon glyphicon-edit"></i></a>-->
+
+                        <a href="" data-ng-click="areYouSureToDeleteCourse(course)"><i
+                                class="glyphicon glyphicon-trash"></i></a>
+
+                    </div>
+
+
+                </div>
+
+                <div class="flashcard-section">
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Title</div>
+                        <div class="font-medium">
+                            {{pack.name}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Course</div>
+                        <div class="font-medium">
+                            {{pack.course.name}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Created</div>
+                        <div class="font-medium">
+                            {{pack.created | date:'shortDate'}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Updated</div>
+                        <div class="font-medium">
+                            {{pack.updated | date:'shortDate'}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="virtual-card font-large">
+
+                <div class="title">
+                    Change settings for all cards
+                </div>
+
+                <div class="flashcard-section">
+                    <div class="col-xs-4">
+
+
+                        <div class="field-label">
+                            Language Front
+                        </div>
+                        <div class="field-data">
+
+                            <div class="btn-group right-padded-l nowrap">
+
+
+                                <button type="button" class="btn btn-default standard-dropdown-width">
+                                    {{languageFront.name}}
+                                </button>
+                                <button type="button" class="btn btn-default dropdown-toggle">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Split button!</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
+                                        <a>{{lang.name}}</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-4">
+
+                        <div class="field-label">
+                            Language Back
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default standard-dropdown-width">
+                                {{languageBack.name }}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
+                                    <a>{{lang.name}}</a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-4">
+
+                        <div class="field-label">
+                            Checks
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default standard-dropdown-width">
+                                {{check }}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="check in checks" data-ng-click="setCheck(check)">
+                                    <a>{{check}}</a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12">
+                    <div class="flashcard-section">
+                        <div class="field-label">
+
+                            Forward
+                        </div>
+
+
+                        <div class="row font-medium">
+
+                            <div class="col-xs-4">
+                                <input type="checkbox" ng-model="useForwardMode">
+                                Use Mode
+                            </div>
+
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
+                                <input type="checkbox" ng-model="readQuestionsForward"
+                                       ng-disabled="!useForwardMode">
+                                Read Questions
+                            </div>
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
+                                <input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">
+                                Read Answers
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12">
+                    <div class="flashcard-section">
+
+                        <div class="field-label">
+
+                            Reverse
+                        </div>
+
+
+                        <div class="row font-medium">
+
+                            <div class="col-xs-4">
+                                <input type="checkbox" ng-model="useReverseMode">
+                                Use Mode
+                            </div>
+
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">
+                                <input type="checkbox" ng-model="readQuestionsReverse"
+                                       ng-disabled="!useReverseMode">
+                                Read Questions
+                            </div>
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">
+                                <input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">
+                                Read Answers
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12">
+                    <div class="flashcard-section">
+
+                        <div class="field-label">
+
+                            Images
+                        </div>
+
+
+                        <div class="row font-medium">
+
+                            <div class="col-xs-4">
+                                <input type="checkbox" ng-model="useImagesMode">
+                                Use Mode
+                            </div>
+
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">
+                                <input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">
+                                Read Questions
+                            </div>
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">
+                                <input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">
+                                Read Answers
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+    </div>
+
+
+    <div class="col-xs-6">
+
+
+        <div class="col-xs-12 dashboard-col">
+            <div class="half-virtual-card font-large" data-ng-repeat="card in pack.cards">
+                <div class="title">
+                    {{card.question}}
+
+                    <div class="pull-right">
+
+
+                        <a href="#!/cards/{{card._id}}"><i class="glyphicon glyphicon-edit"></i></a>
+
+                        <a href="" data-ng-click="areYouSureToDeleteCourse(course)"><i
+                                class="glyphicon glyphicon-trash"></i></a>
+
+                    </div>
+
+
+                </div>
+
+                <div class="flashcard-section">
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Question</div>
+                        <div class="font-medium">
+                            {{card.question}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Answer</div>
+                        <div class="font-medium">
+                            {{card.answer}}
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label">Forward Mode</div>
+                        <div class="font-medium" data-ng-if="card.modes.indexOf('forward') === -1">
+                            not used
+                        </div>
+                        <div class="font-medium " data-ng-if="card.modes.indexOf('forward') > -1">
+
+                            <div>
+                                <input type="checkbox"  data-ng-model="card.readFrontForward" disabled> Read question
+
+                            </div>
+                            <div>
+                                <input type="checkbox"  data-ng-model="card.readBackForward" disabled> Read answer
+
+                            </div>
+                            <div>
+                                <input type="checkbox"  data-ng-model="card.speechRecognitionForward" disabled> Speech
+                                recognition
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label">Reverse Mode</div>
+                        <div class="font-medium" data-ng-if="card.modes.indexOf('reverse') === -1">
+                            not used
+                        </div>
+                        <div class="font-medium " data-ng-if="card.modes.indexOf('reverse') > -1">
+
+                            <div>
+                                <input type="checkbox"  data-ng-model="card.readFrontReverse" disabled> Read question
+
+                            </div>
+                            <div>
+                                <input type="checkbox"  data-ng-model="card.readBackReverse" disabled> Read answer
+
+                            </div>
+                            <div>
+                                <input type="checkbox"  data-ng-model="card.speechRecognitionReverse" disabled> Speech
+                                recognition
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label">Image Mode</div>
+                        <div class="font-medium" data-ng-if="card.modes.indexOf('images') === -1">
+                            not used
+                        </div>
+                        <div class="font-medium " data-ng-if="card.modes.indexOf('images') > -1">
+
+                            <div>
+                                <input type="checkbox"  data-ng-model="card.readFrontImages" disabled> Read question
+
+                            </div>
+                            <div>
+                                <input type="checkbox"  data-ng-model="card.readBackImages" disabled> Read answer
+
+                            </div>
+                            <div>
+                                <input type="checkbox" data-ng-model="card.speechRecognitionImages" disabled> Speech
+                                recognition
+
+                            </div>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="rememberators-footer col-xs-12">rememberators.com</div>
+
+</section>

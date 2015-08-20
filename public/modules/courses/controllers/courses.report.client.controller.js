@@ -26,7 +26,7 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
                         w = ($window.innerWidth / 2) + 60;
                     }
                     DiagramsCardsInPlayService.drawLineChart(cards, '#inplay', w);
-                    DiagramsTimeSpentService.drawBarChart(cards, '#timespent', '#spent-practice-date', '#spent-practice-time', ($window.innerWidth / 2)-130);
+                    DiagramsTimeSpentService.drawBarChart(cards, '#timespent', '#spent-practice-date', '#spent-practice-time','#spent-all-time', ($window.innerWidth / 2)-130);
                 });
             });
 

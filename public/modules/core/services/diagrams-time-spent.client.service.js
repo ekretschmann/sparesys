@@ -32,7 +32,7 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
             return {practicePerDay: days, earliest: earliest, latest: latest};
         };
 
-        this.drawBarChart = function (cards, id, practiceDateId, timeSpentId, windwoWidth) {
+        this.drawBarChart = function (cards, id, practiceDateId, timeSpentId, spentAllTimeId,windwoWidth) {
 
 
             var practiceData = this.getPracticePerDay(cards);
@@ -46,6 +46,7 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
             var dayInMs = 1000 * 60 * 60 * 24;
             var totals = [];
             var maxTotal = 0;
+            var timeSpentTotal = 0;
             while (current < latest + dayInMs) {
 
                 var stamps = days[this.getDateKey(current)];
@@ -76,6 +77,7 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
                         maxTotal = totalTime;
                     }
                     totals.push({date: this.getDateKey(current), time: totalTime});
+                    timeSpentTotal += totalTime;
 
                 } else {
                     totals.push({date: this.getDateKey(current), time: 0});
@@ -111,6 +113,8 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
                 .attr('height', height + margin.top + margin.bottom)
                 .append('g')
                 .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
+
+            d3.select(spentAllTimeId).text(Math.ceil(timeSpentTotal) + ' min');
 
             x.domain(totals.map(function (d) {
                 return d.date;

@@ -1,0 +1,70 @@
+<section data-ng-controller="CoursesController"
+         data-ng-init="findOne()">
+
+
+    <div class="col-xs-12 col-md-6 dashboard-col">
+        <div class="virtual-card font-large">
+            <div class="title">
+                {{course.name}}
+
+
+            </div>
+
+            <div class="flashcard-section">
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Search Card</div>
+                    <div class="font-medium">
+                        {{course.name}}
+                    </div>
+                </div>
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Pack</div>
+                    <div class="font-medium">
+                        {{course.description}}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+    </div>
+
+
+    <div class="col-xs-12 col-md-6 dashboard-col" data-ng-repeat="card in course.cards">
+
+        <div class="virtual-card font-large">
+            <div class="title">
+                {{card.question}}
+
+
+            </div>
+
+            <div class="flashcard-section">
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Question</div>
+                    <div class="font-medium">
+                        {{card.question}}
+                    </div>
+                </div>
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Answer</div>
+                    <div class="font-medium">
+                        {{card.answer}}
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="rememberators-footer col-xs-12">rememberators.com</div>
+
+</section>

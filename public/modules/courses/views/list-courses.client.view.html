@@ -18,6 +18,8 @@
                     Manage Courses
                 </div>
                 <infobox logo="man">
+
+                    <div>
                     This is the list of courses you have subscribed to. You can use the
                     <a href="" class="nolink" >
                         <i class="small glyphicon glyphicon-trash">
@@ -28,6 +30,14 @@
                         <i class="small glyphicon glyphicon-edit">
                         </i></a> icon.
 
+                    You can quickly edit the contents of the cards in a course by clicking
+                    on the <a href="" class="nolink" >
+                    <i class="small glyphicon glyphicon-th">
+                    </i></a> icon.
+                    </div>
+
+
+                    <div>
                     If you can't
                     find the course you are looking for in this list, you can
                     either <a href="/#!/courses/create" >
@@ -35,6 +45,7 @@
                 </a> or <a href="#!/courses/search">
                     search for an existing course.
                 </a>
+                    </div>
                 </infobox>
             </div>
         </div>
@@ -50,6 +61,9 @@
 
 
                         <a data-ng-href="#!/courses/{{course._id}}"><i class="glyphicon glyphicon-edit"></i></a>
+
+                        <a href="#!/courses/{{course._id}}/cards"><i class="glyphicon glyphicon-th"></i></a>
+
 
                         <a href="" data-ng-click="areYouSureToDeleteCourse(course)"><i class="glyphicon glyphicon-trash"></i></a>
 

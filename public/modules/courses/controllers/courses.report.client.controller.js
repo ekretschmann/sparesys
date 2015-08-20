@@ -25,7 +25,7 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
                     if ($window.innerWidth > 990){
                         w = ($window.innerWidth / 2) + 60;
                     }
-                    DiagramsCardsInPlayService.drawLineChart(cards, '#inplay', w);
+                    DiagramsCardsInPlayService.drawLineChart(cards, '#inplay', '#total-cards-learned', w);
                     DiagramsTimeSpentService.drawBarChart(cards, '#timespent', '#spent-practice-date', '#spent-practice-time','#spent-all-time', ($window.innerWidth / 2)-130);
                 });
             });
@@ -45,7 +45,7 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
                 if ($window.innerWidth > 990){
                     w = ($window.innerWidth / 2) + 60;
                 }
-                DiagramsCardsInPlayService.drawLineChart(cards, '#inplay'+index, w);
+                DiagramsCardsInPlayService.drawLineChart(cards, '#inplay'+index, undefined, w);
                 //DiagramsTimeSpentService.drawBarChart(cards, '#timespent'+index, '#spent-practice-date'+index, '#spent-practice-time'+index, ($window.innerWidth / 2)-130);
             });
         };

@@ -114,6 +114,8 @@ angular.module('core').service('DiagramsTimeSpentService', ['$timeout',
                 .append('g')
                 .attr('transform', 'translate(' + margin.left + ',' + margin.top + ')');
 
+            //var xxx = d3.select(spentAllTimeId);
+            //console.log(xxx);
             d3.select(spentAllTimeId).text(Math.ceil(timeSpentTotal) + ' min');
 
             x.domain(totals.map(function (d) {

@@ -8,17 +8,20 @@ angular.module('core').service('DiagramsCardsInPlayService', [
 
         var key = '';
 
-        this.drawLineChart = function (cards, id, windwoWidth) {
+        this.drawLineChart = function (cards, id, totalCardsLearnedId, windwoWidth) {
+
 
             var d = [];
             var earliestDate = Date.now();
 
+            var totalCardsLearned = 0;
 
             for (var i = 0; i < cards.length; i++) {
                 var card = cards[i];
                 if (card.history.length === 0) {
                     continue;
                 }
+                totalCardsLearned ++;
                 key = this.getDateKey(card.history[0].when);
                 if(card.history[0].when < earliestDate) {
                     earliestDate = card.history[0].when;
@@ -86,6 +89,9 @@ angular.module('core').service('DiagramsCardsInPlayService', [
                 .x(function(d) { return x(d.date); })
                 .y(function(d) { return y(d.close); });
 
+            if (totalCardsLearned) {
+                d3.select(totalCardsLearnedId).text(totalCardsLearned+' cards');
+            }
             var svg = d3.select(id).append('svg')
                 .attr('width', width + margin.left + margin.right)
                 .attr('height', height + margin.top + margin.bottom)

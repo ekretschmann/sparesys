@@ -60,7 +60,7 @@
 
                 <div class="row dashboard-row">
                     <div class="col-xs-12">
-                        <div>Description</div>
+                        <div  class="field-label">Description</div>
                         <div class="font-medium">
                             <div data-ng-if="course.description">
                                 {{course.description}}
@@ -75,14 +75,14 @@
 
                 <div class="row dashboard-row">
                     <div class="col-xs-6">
-                        <div>Front</div>
-                        <div class="font-medium">
+                        <div class="field-label">Front</div>
+                        <div class="field-data">
                             {{course.front}}
                         </div>
                     </div>
 
                     <div class="col-xs-6">
-                        <div>Back</div>
+                        <div  class="field-label">Back</div>
                         <div class="font-medium">
                             {{course.back}}
                         </div>
@@ -91,14 +91,14 @@
 
                 <div class="row dashboard-row">
                     <div class="col-xs-6">
-                        <div>Language Front</div>
+                        <div  class="field-label">Language Front</div>
                         <div class="font-medium">
                             {{course.cardDefaults.languageFront.name}}
                         </div>
                     </div>
 
                     <div class="col-xs-6">
-                        <div>Language Back</div>
+                        <div  class="field-label">Language Back</div>
                         <div class="font-medium">
                             {{course.cardDefaults.languageBack.name}}
                         </div>
@@ -108,7 +108,7 @@
 
                 <div class="row dashboard-row">
                     <div class="col-xs-6">
-                        <div>My Role</div>
+                        <div class="field-label">My Role</div>
                         <div class="font-medium">
                             <div data-ng-if="course.teaching">Teacher</div>
                             <div data-ng-if="!course.teaching">Student</div>
@@ -116,7 +116,7 @@
                     </div>
 
                     <div class="col-xs-6">
-                        <div>Supervision</div>
+                        <div class="field-label">Supervision</div>
                         <div class="font-medium">
                             <div  data-ng-if="course.supervised">This course is supervised</div>
                             <div  data-ng-if="!course.supervised">You are managing this course yourself</div>

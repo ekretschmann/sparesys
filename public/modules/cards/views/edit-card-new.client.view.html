@@ -1,0 +1,127 @@
+<section data-ng-controller="CardsController" data-ng-init="findOne()">
+
+    <!--{{card}}-->
+    <div class="col-xs-6 dashboard-col">
+        <div class="virtual-card font-large">
+            <div class="title">
+                {{card.question}}
+
+                <div class="pull-right">
+
+
+                    <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i
+                            class="glyphicon glyphicon-trash"></i></a>
+
+                </div>
+
+
+            </div>
+
+            <div class="flashcard-section">
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Question</div>
+                    <div class="font-medium">
+                        {{card.question}}
+                    </div>
+                </div>
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Answer</div>
+                    <div class="font-medium">
+                        {{card.answer}}
+                    </div>
+                </div>
+
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Course</div>
+                    <div class="font-medium">
+                        {{course.name}}
+                    </div>
+                </div>
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Pack</div>
+                    <div class="font-medium">
+                        {{pack.name}}
+                    </div>
+                </div>
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Created</div>
+                    <div class="font-medium">
+                        {{pack.created | date:'shortDate'}}
+                    </div>
+                </div>
+
+                <div class="col-xs-6 dashboard-col">
+                    <div class="field-label">Updated</div>
+                    <div class="font-medium">
+                        {{pack.updated | date:'shortDate'}}
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xs-6 dashboard-col">
+        <div class="virtual-card font-large">
+            <div class="title">
+                Forward mode
+
+                <div class="pull-right">
+
+
+                    <a href="" data-ng-click="areYouSureToDeleteCard(card)" data-ng-if="card.modes.indexOf('forward') > -1"><i  class="glyphicon glyphicon-ok-circle"></i></a>
+                    <a href="" data-ng-click="areYouSureToDeleteCard(card)" data-ng-if="card.modes.indexOf('forward') === -1"><i  class="glyphicon glyphicon-ban-circle"></i></a>
+
+                </div>
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6 dashboard-col">
+        <div class="virtual-card font-large">
+            <div class="title">
+                Reverse mode
+
+                <!--<div class="pull-right">-->
+
+
+                <!--<a href="" data-ng-click="areYouSureToDeleteCard(card)"><i-->
+                <!--class="glyphicon glyphicon-trash"></i></a>-->
+
+                <!--</div>-->
+
+
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xs-6 dashboard-col">
+        <div class="virtual-card font-large">
+            <div class="title">
+                Images mode
+
+                <!--<div class="pull-right">-->
+
+
+                <!--<a href="" data-ng-click="areYouSureToDeleteCard(card)"><i-->
+                <!--class="glyphicon glyphicon-trash"></i></a>-->
+
+                <!--</div>-->
+
+
+            </div>
+        </div>
+    </div>
+
+    <div class="rememberators-footer col-xs-12">rememberators.com</div>
+
+</section>

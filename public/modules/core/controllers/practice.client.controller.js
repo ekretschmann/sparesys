@@ -364,6 +364,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
 
+
                 if (card.dueDate) {
                     card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.4);
                 }
@@ -401,8 +402,18 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 }
 
 
-                $scope.orderedCards.push({new: card.history.length === 0, name: card.question, score: Math.round(card.score*10000)/10000, 
-                    predictedRetention: Math.round(card.predictedRetention*100)/100});
+                var cardSummary = {hrt: 0,
+                    new: card.history.length === 0,
+                    name: card.question,
+                    score: Math.round(card.score*10000)/10000,
+                    predictedRetention: Math.round(card.predictedRetention*1000)/1000
+                };
+
+                if (card.history && card.history.length > 0) {
+                    cardSummary.hrt = Math.round((100*card.history[card.history.length -1].hrt)/(3600*1000))/100;
+                }
+
+                $scope.orderedCards.push(cardSummary);
 
             }
 

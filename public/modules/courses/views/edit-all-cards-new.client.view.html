@@ -30,7 +30,7 @@
     </div>
 
 
-    <div  class="col-xs-6 col-md-6 dashboard-col" data-ng-repeat="card in course.cards | filter: searchText ">
+    <div  class="col-xs-6 col-md-6 dashboard-col" data-ng-repeat="card in course.cards | filter: searchText | limitTo:10">
         <div class="virtual-card font-large" >
 
 
@@ -72,6 +72,34 @@
                         {{card.priority}}
                     </div>
                 </div>
+
+
+                <div class="col-xs-4 dashboard-col">
+                    <div class="field-label">Language Front</div>
+                    <div class="font-medium">
+                        <div data-ng-if="card.languageFront">
+                            {{card.languageFront.name}}
+                        </div>
+
+                        <div data-ng-if="!card.languageFront">
+                            none
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-8 dashboard-col">
+                    <div class="field-label">Language Back</div>
+                    <div class="font-medium">
+                        <div data-ng-if="card.languageBack">
+                            {{card.languageBack.name}}
+                        </div>
+
+                        <div data-ng-if="!card.languageBack">
+                            none
+                        </div>
+                    </div>
+                </div>
+
 
                 <div class="col-xs-4 dashboard-col">
                     <div class="field-label">Start Date</div>

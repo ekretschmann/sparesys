@@ -723,7 +723,7 @@ body {
 
 .rememberators-modal-section {
   border-bottom: @seperator;
-  padding-bottom: @default-padding-unit;
+  padding-bottom: 2*@default-padding-unit;
   margin-bottom: 2*@default-padding-unit;
 }
 
@@ -734,7 +734,7 @@ body {
 
 .rememberators-modal-footer {
   text-align: center;
-  border-top: @seperator;
+  //border-top: @seperator;
   padding-top: 2*@default-padding-unit;
   margin-top: @default-padding-unit;
 }
@@ -763,6 +763,26 @@ body {
       padding: 20px;
       margin-top: 20px;
       min-height: 250px;
+    }
+
+  }
+}
+
+.virtual-card-header {
+  padding: 10px;
+  //height:100%;
+  @media screen {
+    @media (min-width: 310px) {
+      padding: 5px;
+      margin-top: 5px;
+    }
+    @media (min-width: 620px) {
+      padding: 10px;
+      margin-top: 10px;
+    }
+    @media (min-width: 800px) {
+      padding: 20px;
+      margin-top: 20px;
     }
 
   }

@@ -1,7 +1,7 @@
 <script type="text/ng-template" id="addPackToCourse.html">
 
-    <div class="modal-body">
-        <div class="content-header center-aligned">
+    <div class="rememberators-modal">
+        <div class="rememberators-modal-header">
             <div class="title">
                 Add Packs to
             </div>
@@ -14,21 +14,19 @@
             </div>
         </div>
 
-        <form class="form-horizontal" >
+        <form class="form-horizontal font-large">
             <fieldset>
-                    <table>
-                        <tr>
-                            <td class="right-padded-m nowrap">New Pack</td>
-                            <td class="expands">
-                                <input type="text"
-                                       data-ng-model="data.name"
-                                       class="form-control focus"
-                                       placeholder="Name"
-                                       required></td>
-                        </tr>
-                    </table>
+                <div class="rememberators-modal-section">
+                    <div class="field-label">New Pack</div>
+                    <div class="field-data">
+                        <input type="text"
+                               data-ng-model="data.name"
+                               class="form-control focus"
+                               placeholder="Name"
+                               required></div>
+                </div>
 
-                <div class="center-aligned top-padded-m">
+                <div class="rememberators-modal-footer">
                     <button class="btn btn-rememberators"
                             type="submit"
                             ng-click="addPackToCourse()"

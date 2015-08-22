@@ -34,8 +34,8 @@ module.exports = {
 				'public/lib/localforage/dist/localforage.js',
 				'public/lib/angular-localforage/dist/angular-localForage.js',
 				'public/lib/angular-slick/dist/slick.js',
-				'public/lib/slick-carousel/slick/slick.js',
-				'public/lib/angular-scroll-glue/src/scrollglue.js'
+				'public/lib/slick-carousel/slick/slick.js'
+				//, 'public/lib/angular-scroll-glue/src/scrollglue.js'
 
 
 			]

@@ -181,7 +181,9 @@
                                     {{c.predictedRetention}}
                                 </div>
                                 <div class="col-xs-2">
-                                    {{c.hrt}}
+                                    <div data-ng-if="c.due">
+                                    {{c.due | date:'shortDate'}}
+                                    </div>
                                 </div>
                             </div>
 
@@ -205,6 +207,9 @@
                                     {{c.predictedRetention}}
                                 </div>
                                 <div class="col-xs-2">
+                                    <div data-ng-if="c.due">
+                                        {{c.due | date:'shortDate'}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

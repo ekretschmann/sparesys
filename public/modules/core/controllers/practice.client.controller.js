@@ -406,7 +406,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     new: card.history.length === 0,
                     name: card.question,
                     score: Math.round(card.score*10000)/10000,
-                    predictedRetention: Math.round(card.predictedRetention*1000)/1000
+                    predictedRetention: Math.round(card.predictedRetention*1000)/1000,
+                    due: card.dueDate
                 };
 
                 if (card.history && card.history.length > 0) {

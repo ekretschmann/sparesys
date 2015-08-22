@@ -107,14 +107,24 @@
                     <div class="col-xs-6">
                         <div  class="field-label">Language Front</div>
                         <div class="font-medium">
-                            {{course.cardDefaults.languageFront.name}}
+                            <div data-ng-if="course.cardDefaults.languageFront">
+                                {{course.cardDefaults.languageFront.name}}
+                            </div>
+                            <div data-ng-if="!course.cardDefaults.languageFront">
+                                none
+                            </div>
                         </div>
                     </div>
 
                     <div class="col-xs-6">
                         <div  class="field-label">Language Back</div>
                         <div class="font-medium">
-                            {{course.cardDefaults.languageBack.name}}
+                            <div data-ng-if="course.cardDefaults.languageBack">
+                                {{course.cardDefaults.languageBack.name}}
+                            </div>
+                            <div data-ng-if="!course.cardDefaults.languageBack">
+                                none
+                            </div>
                         </div>
                     </div>
                 </div>

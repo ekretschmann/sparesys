@@ -8,35 +8,27 @@ angular.module('packs').controller('DeletePackController', ['$scope', '$location
         $scope.ok = function () {
 
 
-            var courseId = pack.course;
-            pack.slaves.forEach(function(slaveId) {
-                Packs.query({
-                    _id: slaveId
-                }, function (slavePacks) {
-                    CoursesService.removePack(slavePacks[0], function () {
-
-                    });
-
-
-                });
-            });
-
-            console.log(pack);
+            //var courseId = pack.course;
+            //pack.slaves.forEach(function(slaveId) {
+            //    Packs.query({
+            //        _id: slaveId
+            //    }, function (slavePacks) {
+            //        CoursesService.removePack(slavePacks[0], function () {
+            //
+            //        });
+            //
+            //
+            //    });
+            //});
+            //
             for (var i=0; i<$scope.course.packs.length; i++) {
                 var p = $scope.course.packs[i];
-                console.log(p);
                 if (p === pack._id) {
-                    console.log('remove');
                     $scope.course.packs.splice(i,1);
                 }
             }
 
             pack.$remove();
-
-
-
-
-
 
 
             $modalInstance.close();

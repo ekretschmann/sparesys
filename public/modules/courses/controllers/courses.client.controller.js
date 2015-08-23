@@ -429,7 +429,6 @@ angular.module('courses').controller('CoursesController',
 
             $scope.addPackToCourse = function () {
 
-                console.log($scope.newpack.name);
 
                 var self = {};
                 self.name = this.name;
@@ -462,10 +461,14 @@ angular.module('courses').controller('CoursesController',
                     $scope.course.$update(function () {
                         $scope.newpack.name = '';
                         angular.element('.focus').trigger('focus');
-                        $timeout(function() {
-                            console.log('xxxx');
-                            $window.scrollTo(0,document.body.scrollHeight);
-                        });
+
+                        $scope.newpack.name = '';
+
+                        if ($scope.course.packs.length>3) {
+                            $timeout(function () {
+                                $window.scrollTo(0, document.body.scrollHeight);
+                            });
+                        }
 
 //                    $state.go($state.$current, null, { reload: true });
                     }, function (errorResponse) {
@@ -473,51 +476,51 @@ angular.module('courses').controller('CoursesController',
                     });
 
 
-                    $scope.course.slaves.forEach(function (slaveId) {
-                        Courses.query({
-                            _id: slaveId
-                        }, function (slaveCourses) {
-
-                            if (slaveCourses.length === 0) {
-                                // course does not exist any more
-                                self.slavesSaved++;
-                                for (var i in $scope.course.slaves) {
-                                    if ($scope.course.slaves[i] === slaveId) {
-                                        $scope.course.slaves.splice(i, 1);
-                                    }
-                                }
-                            }
-
-                            if (slaveCourses.length === 1) {
-                                var slaveCourse = slaveCourses[0];
-
-                                var slavePack = new Packs({
-                                    name: self.name,
-                                    course: slaveCourse._id
-                                });
-
-                                slavePack.$save(function () {
-                                    slaveCourse.packs.push(slavePack._id);
-                                    self.slaves.push(slavePack._id);
-                                    self.slavesSaved++;
-                                    if (self.slavesSaved === self.slavesToSave) {
-                                        pack.slaves = self.slaves;
-                                        pack.$update(function (err) {
-//                                        console.log('updated pack '+pack);
-//                                        console.log(err);
-                                        });
-                                        slaveCourse.$update(function (err) {
-//                                        console.log('updated course '+slaveCourse);
-//                                        console.log(err);
-                                        });
-                                        $scope.course.$update();
-                                    }
-                                });
-
-
-                            }
-                        });
-                    });
+//                    $scope.course.slaves.forEach(function (slaveId) {
+//                        Courses.query({
+//                            _id: slaveId
+//                        }, function (slaveCourses) {
+//
+//                            if (slaveCourses.length === 0) {
+//                                // course does not exist any more
+//                                self.slavesSaved++;
+//                                for (var i in $scope.course.slaves) {
+//                                    if ($scope.course.slaves[i] === slaveId) {
+//                                        $scope.course.slaves.splice(i, 1);
+//                                    }
+//                                }
+//                            }
+//
+//                            if (slaveCourses.length === 1) {
+//                                var slaveCourse = slaveCourses[0];
+//
+//                                var slavePack = new Packs({
+//                                    name: self.name,
+//                                    course: slaveCourse._id
+//                                });
+//
+//                                slavePack.$save(function () {
+//                                    slaveCourse.packs.push(slavePack._id);
+//                                    self.slaves.push(slavePack._id);
+//                                    self.slavesSaved++;
+//                                    if (self.slavesSaved === self.slavesToSave) {
+//                                        pack.slaves = self.slaves;
+//                                        pack.$update(function (err) {
+////                                        console.log('updated pack '+pack);
+////                                        console.log(err);
+//                                        });
+//                                        slaveCourse.$update(function (err) {
+////                                        console.log('updated course '+slaveCourse);
+////                                        console.log(err);
+//                                        });
+//                                        $scope.course.$update();
+//                                    }
+//                                });
+//
+//
+//                            }
+//                        });
+//                    });
 
 
 

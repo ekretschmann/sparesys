@@ -46,7 +46,7 @@ angular.module('courses').controller('CoursesController',
             $scope.languageBack = $scope.languages[selectedIndexBack];
 
 
-            $scope.ga = function() {
+            $scope.ga = function () {
 
                 console.log('ga seraching');
                 console.log('/courses/search');
@@ -98,12 +98,11 @@ angular.module('courses').controller('CoursesController',
             };
 
 
-            $scope.removeSlave = function(slave, course) {
+            $scope.removeSlave = function (slave, course) {
                 var index = course.slaves.indexOf(slave);
                 course.slaves.splice(index, 1);
                 course.$update();
             };
-
 
 
             $scope.copy = function (course, target) {
@@ -173,7 +172,7 @@ angular.module('courses').controller('CoursesController',
                             $scope.courses.splice(i, 1);
                         }
                     }
-                    $state.go($state.current, null, {reload:true});
+                    $state.go($state.current, null, {reload: true});
                 } else {
                     $scope.course.$remove(function () {
                         $location.path('courses');
@@ -186,8 +185,8 @@ angular.module('courses').controller('CoursesController',
                 var course = $scope.course;
 
                 console.log(course.slaves);
-                if(!course.slaves) {
-                    course.slaves=[];
+                if (!course.slaves) {
+                    course.slaves = [];
                 }
                 course.$update(function () {
                     $location.path('courses');
@@ -203,7 +202,7 @@ angular.module('courses').controller('CoursesController',
             };
 
 
-            $scope.manageCourses = function() {
+            $scope.manageCourses = function () {
                 console.log('ga view courses');
                 console.log('/courses');
                 if ($window.ga) {
@@ -248,7 +247,7 @@ angular.module('courses').controller('CoursesController',
             $scope.findCoursesForUser = function (otherUser) {
 
                 if (otherUser.$promise) {
-                    otherUser.$promise.then(function() {
+                    otherUser.$promise.then(function () {
                         Courses.query({
                             userId: otherUser._id
                         }, function (courses) {
@@ -263,9 +262,6 @@ angular.module('courses').controller('CoursesController',
                     });
                 }
             };
-
-
-
 
 
             $scope.findPublished = function () {
@@ -375,7 +371,7 @@ angular.module('courses').controller('CoursesController',
             };
 
 
-            $scope.subscribePopup = function(course) {
+            $scope.subscribePopup = function (course) {
                 $modal.open({
                     templateUrl: 'subscribeToCourse.html',
                     controller: 'SubscribeToCourseController',
@@ -429,5 +425,106 @@ angular.module('courses').controller('CoursesController',
 
                 }
             };
+
+
+            $scope.addPackToCourse = function () {
+
+                //console.log($scope.newpack.name);
+
+                var self = {};
+                self.name = this.name;
+                self.slavesToSave = $scope.course.slaves.length;
+                self.slavesSaved = 0;
+                self.slaves = [];
+
+                // Create new Pack object
+                var pack = new Packs({
+                    name: $scope.newpack.name,
+                    course: $scope.course._id
+                });
+
+
+                pack.$save(function (response) {
+
+
+                    ////console.log('ga create pack');
+                    ////console.log('/courses/addpacktocourse');
+                    //if ($window.ga) {
+                    //    console.log('sending to ga');
+                    //    $window.ga('send', 'pageview', '/courses/addpacktocourse');
+                    //    $window.ga('send', 'event', 'create pack');
+                    //}
+
+                    var packid = response._id;
+                    $scope.course.packs.push(packid);
+
+
+                    $scope.course.$update(function () {
+                        $scope.newpack.name = '';
+                        angular.element('.focus').trigger('focus');
+//                    $state.go($state.$current, null, { reload: true });
+                    }, function (errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                    });
+
+
+                    $scope.course.slaves.forEach(function (slaveId) {
+                        Courses.query({
+                            _id: slaveId
+                        }, function (slaveCourses) {
+
+                            if (slaveCourses.length === 0) {
+                                // course does not exist any more
+                                self.slavesSaved++;
+                                for (var i in $scope.course.slaves) {
+                                    if ($scope.course.slaves[i] === slaveId) {
+                                        $scope.course.slaves.splice(i, 1);
+                                    }
+                                }
+                            }
+
+                            if (slaveCourses.length === 1) {
+                                var slaveCourse = slaveCourses[0];
+
+                                var slavePack = new Packs({
+                                    name: self.name,
+                                    course: slaveCourse._id
+                                });
+
+                                slavePack.$save(function () {
+                                    slaveCourse.packs.push(slavePack._id);
+                                    self.slaves.push(slavePack._id);
+                                    self.slavesSaved++;
+                                    if (self.slavesSaved === self.slavesToSave) {
+                                        pack.slaves = self.slaves;
+                                        pack.$update(function (err) {
+//                                        console.log('updated pack '+pack);
+//                                        console.log(err);
+                                        });
+                                        slaveCourse.$update(function (err) {
+//                                        console.log('updated course '+slaveCourse);
+//                                        console.log(err);
+                                        });
+                                        $scope.course.$update();
+                                    }
+                                });
+
+
+                            }
+                        });
+                    });
+
+                    $location.hash('pageend');
+
+
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+
+
+            };
+
+
         }
+
     ]);

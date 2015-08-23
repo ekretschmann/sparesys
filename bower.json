@@ -20,7 +20,8 @@
     "d3": "3.3.10",
     "moment": "~2.10.3",
     "angular-slick": "~0.2.1",
-    "angular-localforage": "~1.2.x"
+    "angular-localforage": "~1.2.x",
+    "angular-scroll-glue": "~2.0.6"
   },
   "resolutions": {
     "angular": "~1.4.x",

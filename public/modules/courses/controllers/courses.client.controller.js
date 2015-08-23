@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesController',
-    ['$window', '$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService',
-        function ($window, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService) {
+    ['$window', '$timeout','$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService',
+        function ($window, $timeout, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService) {
 
             $scope.authentication = Authentication;
             $scope.showhelp = false;
@@ -429,7 +429,7 @@ angular.module('courses').controller('CoursesController',
 
             $scope.addPackToCourse = function () {
 
-                //console.log($scope.newpack.name);
+                console.log($scope.newpack.name);
 
                 var self = {};
                 self.name = this.name;
@@ -462,6 +462,11 @@ angular.module('courses').controller('CoursesController',
                     $scope.course.$update(function () {
                         $scope.newpack.name = '';
                         angular.element('.focus').trigger('focus');
+                        $timeout(function() {
+                            console.log('xxxx');
+                            $window.scrollTo(0,document.body.scrollHeight);
+                        });
+
 //                    $state.go($state.$current, null, { reload: true });
                     }, function (errorResponse) {
                         $scope.error = errorResponse.data.message;
@@ -514,7 +519,7 @@ angular.module('courses').controller('CoursesController',
                         });
                     });
 
-                    $location.hash('pageend');
+
 
 
                 }, function (errorResponse) {

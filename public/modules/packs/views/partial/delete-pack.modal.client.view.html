@@ -1,19 +1,18 @@
 <script type="text/ng-template" id="areYouSureToDeletePack.html">
-    <div class="modal-body">
+    <div class="rememberators-modal">
 
-        <div class="content-header">
+        <div class="rememberators-modal-header">
             <div class="title center-aligned" style="text-align: center">
                 Delete Pack
             </div>
-            <div class="title">
-                <div class="title center-aligned font-m">
-                    <span class="warning">{{pack.name}}</span>
-                </div>
+            <div class="modal-danger">
+
+                Are you sure you want to delete pack {{pack.name}}
 
             </div>
 
         </div>
-        <div class="center-aligned">
+        <div class="rememberators-modal-footer">
         <button class="btn btn-rememberators" ng-click="ok()">OK</button>
         <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
         </div>

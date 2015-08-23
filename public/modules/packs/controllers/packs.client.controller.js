@@ -20,31 +20,27 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         $scope.activeTab = 'Content';
 
 
-        $scope.switchTab = function(activeTab) {
+        $scope.switchTab = function (activeTab) {
             $scope.activeTab = activeTab;
         };
 
         $scope.tabs = [
-            { title:'Pack', active: false },
-            { title:'Content', active: true },
-            { title:'Cards', active: false },
-            { title:'Forward', active: false },
-            { title:'Reverse', active: false },
-            { title:'Images', active: false  }
+            {title: 'Pack', active: false},
+            {title: 'Content', active: true},
+            {title: 'Cards', active: false},
+            {title: 'Forward', active: false},
+            {title: 'Reverse', active: false},
+            {title: 'Images', active: false}
         ];
-
-
 
 
         if (!$scope.authentication.user) {
             $location.path('/');
         }
 
-        $scope.help = function() {
-            $scope.showhelp = ! $scope.showhelp;
+        $scope.help = function () {
+            $scope.showhelp = !$scope.showhelp;
         };
-
-
 
 
         // Remove existing Pack
@@ -83,11 +79,11 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
         // Find existing Pack
         $scope.findOne = function () {
 
-            if($stateParams.tab) {
+            if ($stateParams.tab) {
 
                 $scope.activeTab = $stateParams.tab;
 
-                $scope.tabs.forEach(function(tab) {
+                $scope.tabs.forEach(function (tab) {
                     if (tab.title === $stateParams.tab) {
                         tab.active = true;
                     } else {
@@ -99,15 +95,15 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
             $scope.pack = Packs.get({
                 packId: $stateParams.packId
-            }, function() {
+            }, function () {
                 var prev, next;
 
-                for (var i=0; i<$scope.pack.course.packs.length; i++) {
+                for (var i = 0; i < $scope.pack.course.packs.length; i++) {
                     var packId = $scope.pack.course.packs[i];
                     if (packId === $scope.pack._id) {
                         $scope.prevPack = prev;
                         if ($scope.pack.course.packs.length > i) {
-                            $scope.nextPack = $scope.pack.course.packs[i+1];
+                            $scope.nextPack = $scope.pack.course.packs[i + 1];
                         }
                     } else {
                         prev = packId;
@@ -116,11 +112,11 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             });
         };
 
-        $scope.clearPacks = function() {
-            $scope.packs.forEach(function(pack) {
+        $scope.clearPacks = function () {
+            $scope.packs.forEach(function (pack) {
                 if (pack.courseName === 'undefined') {
-                    pack.$remove(function() {
-                        $state.go($state.$current, null, { reload: true });
+                    pack.$remove(function () {
+                        $state.go($state.$current, null, {reload: true});
                     });
 
                 }
@@ -153,33 +149,22 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
             $scope.pack = pack;
 
-            Courses.query({
-                _id: pack.course._id
-            }, function (courses) {
-                if (courses.length === 1) {
-                    $scope.course = courses[0];
+            $modal.open({
+                templateUrl: 'areYouSureToDeletePack.html',
+                controller: 'DeletePackController',
+                resolve: {
 
-                    $modal.open({
-                        templateUrl: 'areYouSureToDeletePack.html',
-                        controller: 'DeletePackController',
-                        resolve: {
-
-                            pack: function () {
-                                return $scope.pack;
-                            },
-                            course: function () {
-                                return $scope.course;
-                            }
-                        }
-                    });
+                    pack: function () {
+                        return $scope.pack;
+                    },
+                    course: function () {
+                        return $scope.course;
+                    }
                 }
             });
-
-
         };
 
         $scope.addCardToPackPopup = function () {
-
 
 
             Courses.query({
@@ -258,7 +243,7 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
                 //    console.log(c.question);
                 //});
 
-                $scope.pack.$update(function(e) {
+                $scope.pack.$update(function (e) {
                     $scope.pack.courseName = courseName;
                 });
 

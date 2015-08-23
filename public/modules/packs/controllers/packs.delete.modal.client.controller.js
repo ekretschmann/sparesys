@@ -21,13 +21,19 @@ angular.module('packs').controller('DeletePackController', ['$scope', '$location
                 });
             });
 
-            CoursesService.removePack(pack, function () {
-                if ($state.$current.url.source === '/courses/:courseId/edit') {
-                    $state.go($state.$current, null, {reload:true});
-                } else {
-                    $location.path('courses/' + courseId + '/edit');
+            console.log(pack);
+            for (var i=0; i<$scope.course.packs.length; i++) {
+                var p = $scope.course.packs[i];
+                console.log(p);
+                if (p === pack._id) {
+                    console.log('remove');
+                    $scope.course.packs.splice(i,1);
                 }
-            });
+            }
+
+            pack.$remove();
+
+
 
 
 

@@ -1,0 +1,176 @@
+<div class="virtual-card font-large">
+
+
+    <div class="title">
+        {{card.question}}
+
+        <div class="pull-right">
+
+
+            <a href="#!/cards/{{card._id}}"><i class="glyphicon glyphicon-edit"></i></a>
+
+            <a href="" data-ng-click="areYouSureToDeleteCourse(course)"><i
+                    class="glyphicon glyphicon-trash"></i></a>
+
+        </div>
+
+
+    </div>
+
+    <div class="flashcard-section">
+
+        <div class="row">
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label">Question</div>
+                <div class="font-medium">
+                    {{card.question}}
+                </div>
+            </div>
+
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label">Answer</div>
+                <div class="font-medium">
+                    {{card.answer}}
+                </div>
+            </div>
+
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label">Priority</div>
+                <div class="font-medium">
+                    {{card.priority}}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label">Language Front</div>
+                <div class="font-medium">
+                    <div data-ng-if="card.languageFront">
+                        {{card.languageFront.name}}
+                    </div>
+
+                    <div data-ng-if="!card.languageFront">
+                        none
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-8 dashboard-col">
+                <div class="field-label">Language Back</div>
+                <div class="font-medium">
+                    <div data-ng-if="card.languageBack">
+                        {{card.languageBack.name}}
+                    </div>
+
+                    <div data-ng-if="!card.languageBack">
+                        none
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label">Start Date</div>
+                <div class="font-medium">
+                    <div data-ng-if="card.startDate">
+                        {{card.startDate | date: 'shortDate'}}
+                    </div>
+
+                    <div data-ng-if="!card.startDate">
+                        none
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-xs-8 dashboard-col">
+                <div class="field-label">Due Date</div>
+                <div class="font-medium">
+                    <div data-ng-if="card.dueDate">
+                        {{card.dueDate | date: 'shortDate'}}
+                    </div>
+
+                    <div data-ng-if="!card.dueDate">
+                        none
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Forward Mode</div>
+                <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('forward') === -1">
+                    not used
+                </div>
+                <div class="font-medium " data-ng-if="card.modes.indexOf('forward') > -1">
+
+                    <div ng-class="{'text-muted': !card.readFrontForward}">
+                        Read question
+
+                    </div>
+                    <div ng-class="{'text-muted': !card.readBackForward}">
+                         Read answer
+
+                    </div>
+                    <div ng-class="{'text-muted': !card.speechRecognitionForward}">
+                         Speech recognition
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">Reverse Mode</div>
+                <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('reverse') === -1">
+                    not used
+                </div>
+                <div class="font-medium " data-ng-if="card.modes.indexOf('reverse') > -1">
+
+                    <div ng-class="{'text-muted': !card.readFrontReverse}">
+                        Read question
+
+                    </div>
+                    <div ng-class="{'text-muted': !card.readBackReverse}">
+                        Read answer
+
+                    </div>
+                    <div ng-class="{'text-muted': !card.speechRecognitionReverse}">
+                        Speech recognition
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="col-xs-4 dashboard-col">
+                <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('images') === -1}">Image Mode</div>
+                <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('images') === -1">
+                    not used
+                </div>
+                <div class="font-medium " data-ng-if="card.modes.indexOf('images') > -1">
+
+                    <div ng-class="{'text-muted': !card.readFrontImages}">
+                        Read question
+
+                    </div>
+                    <div ng-class="{'text-muted': !card.readBackImages}">
+                        Read answer
+
+                    </div>
+                    <div ng-class="{'text-muted': !card.speechRecognitionImages}">
+                        Speech recognition
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>

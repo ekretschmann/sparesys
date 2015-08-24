@@ -65,6 +65,10 @@ angular.module('courses').controller('CoursesController',
                 $scope.showhelp = !$scope.showhelp;
             };
 
+            $scope.scrollDown = function() {
+                $window.scrollTo(0, document.body.scrollHeight);
+                angular.element('.focus').trigger('focus');
+            };
 
             $scope.cleanDatabase = function () {
                 Courses.query(function (courses) {

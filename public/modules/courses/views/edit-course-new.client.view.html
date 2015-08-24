@@ -462,7 +462,31 @@
     <div class="col-xs-6">
 
 
-        <div class="col-xs-12 dashboard-col" >
+        <div class="col-xs-12 dashboard-col">
+
+
+            <div class="font-large virtual-card-header title" style="text-align: center">
+
+                <div class="row">
+                    <div class="col-xs-1" >
+                        <a href="" data-ng-click="scrollDown()"><i
+                                class="glyphicon glyphicon-circle-arrow-down"></i></a>
+                    </div>
+
+                    <div class="col-xs-10" >
+                        <a href="" data-ng-click="scrollDown()">Scroll down to add more
+                            packs
+                        </a>
+                    </div>
+
+                    <div class="col-xs-1" >
+                        <a href="" data-ng-click="scrollDown()"><i
+                                class="glyphicon glyphicon-circle-arrow-down"></i></a>
+                    </div>
+                </div>
+
+
+            </div>
 
 
             <div class="half-virtual-card font-large" data-ng-repeat="pack in course.packs"
@@ -494,10 +518,23 @@
                     </div>
 
                     <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Cards</div>
-                        <div class="font-medium">
-                            {{pack.cards.length}}
+                        <div data-ng-if="pack.cards.length === 0" >
+                            <div class="field-label-danger">Cards</div>
+                            <div class="font-medium danger">
+                                {{pack.cards.length}}
+                            </div>
                         </div>
+
+                        <div data-ng-if="pack.cards.length > 0">
+                            <div class="field-label">Cards</div>
+                            <div class="font-medium">
+                                {{pack.cards.length}}
+                            </div>
+                        </div>
+
+
+
+
                     </div>
 
 
@@ -508,10 +545,17 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-6 dashboard-col">
+                    <div class="col-xs-6 dashboard-col" data-ng-if="pack.updated">
                         <div class="field-label">Updated</div>
                         <div class="font-medium">
                             {{pack.updated | date:'shortDate'}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 dashboard-col" data-ng-if="!pack.updated">
+                        <div class="field-label">Updated</div>
+                        <div class="font-medium">
+                            {{pack.created | date:'shortDate'}}
                         </div>
                     </div>
 
@@ -522,27 +566,29 @@
 
             <div class="font-large virtual-card-header">
 
-                <div class="title">
+                <form data-ng-submit="addPackToCourse()" validate>
+
+                    <div class="title">
 
 
+                        <div class="pull-right">
 
 
-                    <div class="pull-right">
+                            <a href="" data-ng-click="addPackToCourse()"><i
+                                    class="glyphicon glyphicon-plus-sign"></i></a>
 
 
-                        <a href="" data-ng-click="addPackToCourse()"><i class="glyphicon glyphicon-plus-sign"></i></a>
+                        </div>
+                        Add pack <input type="text" data-ng-model="newpack.name"
+                                        id="firstName" class="form-control focus"
+                                        placeholder="Name"
+                            >
 
 
                     </div>
-                    Add pack <input type="text" data-ng-model="newpack.name"
-                                    id="firstName" class="form-control focus"
-                                    placeholder="Name"
-                                    >
 
 
-                </div>
-
-
+                </form>
 
             </div>
 

@@ -23,6 +23,7 @@
                     <div class="col-xs-6 dashboard-col">
                         <div class="field-label">Language Question</div>
                         <div class="font-medium">
+                            <!--<language card="card" direction="front"></language>-->
                             <div class="btn-group right-padded-l nowrap">
 
 
@@ -295,16 +296,24 @@
 
 
                     <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Answer</div>
+                        <div class="field-label">Expected answer</div>
                         <div class="font-medium">
                             {{card.answer}}
                         </div>
                     </div>
 
                     <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Alternative Answers</div>
+                        <div class="field-label">Also accepted as answer</div>
+                        <div class="font-medium" data-ng-repeat="aa in card.acceptedAnswersForward">
+                            <i
+                                    class="glyphicon glyphicon-trash"></i></a>{{aa}}
+                        </div>
                         <div class="font-medium">
-
+                            <input type="text"
+                                   data-ng-model="data.alternativeAnswerFront"
+                                   class="form-control "
+                                   ng-blur="addAlternativeAnswerFront()"
+                                   placeholder="Add another answer">
                         </div>
                     </div>
                 </div>

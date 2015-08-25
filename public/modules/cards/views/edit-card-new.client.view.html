@@ -277,18 +277,45 @@
                     </div>
 
                     <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Question Extra Info</div>
+                        <div class="font-medium" >
+                            <input type="text"
+                                   data-ng-model="card.questionExtension"
+                                   class="form-control "
+                                   ng-blur="update()"
+                                   placeholder="Card">
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <div class="row">
+
+
+                    <div class="col-xs-6 dashboard-col">
                         <div class="field-label">Answer</div>
                         <div class="font-medium">
                             {{card.answer}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Alternative Answers</div>
+                        <div class="font-medium">
+
                         </div>
                     </div>
                 </div>
 
                 <div class="row">
 
-                    <div class="col-xs-6 dashboard-col">
+                    <div class="col-xs-12 dashboard-col">
 
-                        <div class="field-label">
+                        <div class="field-label">Extras</div>
+
+                        <div class="font-medium col-xs-4">
                             <a href="" data-ng-click="toggleSetting(card, 'readFrontForward')"
                                data-ng-show="card.readFrontForward"><i
                                     class="glyphicon glyphicon-ok-circle"></i></a>
@@ -299,12 +326,9 @@
                         </div>
 
 
-                    </div>
 
 
-                    <div class="col-xs-6 dashboard-col">
-
-                        <div class="field-label">
+                        <div class="field-data col-xs-4">
                             <a href="" data-ng-click="toggleSetting(card, 'readBackForward')"
                                data-ng-show="card.readBackForward"><i
                                     class="glyphicon glyphicon-ok-circle"></i></a>
@@ -315,13 +339,9 @@
                         </div>
 
 
-                    </div>
-                </div>
 
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
 
-                        <div class="field-label">
+                        <div class="field-data col-xs-4">
                             <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionForward')"
                                data-ng-show="card.speechRecognitionForward"><i
                                     class="glyphicon glyphicon-ok-circle"></i></a>

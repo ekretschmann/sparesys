@@ -37,6 +37,19 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
         $scope.language = $scope.languages[selectedIndex];
 
 
+        $scope.addAlternativeAnswerFront = function() {
+            if ($scope.data.alternativeAnswerFront) {
+                $scope.card.acceptedAnswersForward.push($scope.data.alternativeAnswerFront);
+                $scope.card.$update();
+                $scope.data.alternativeAnswerFront = '';
+            }
+        };
+
+        $scope.deleteAlternativeAnswerFront = function(index) {
+            $scope.card.acceptedAnswersForward.splice(index, 1);
+            $scope.card.$update();
+        };
+
         $scope.toggleMode = function(card, mode) {
 
             if(card.modes.indexOf(mode) === -1) {

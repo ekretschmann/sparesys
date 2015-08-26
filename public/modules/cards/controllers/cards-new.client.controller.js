@@ -10,14 +10,16 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
         $scope.authentication = Authentication;
 
         $scope.check = 'self-checked for new cards';
-        $scope.checks = ['always computer-checked', 'always self-checked', 'self-checked for new cards'];
+        $scope.checks = ['computer-checked', 'self-checked', 'mixed'];
 
-        $scope.readQuestions = ['yes', 'no'];
-        $scope.readAnswers = ['yes', 'no'];
-        $scope.directions = ['one way', 'both ways'];
 
         $scope.modes = ['forward', 'reverse', 'images', 'multiple choice'];
+        $scope.priorities = ['highest', 'high', 'medium', 'low', 'lowest'];
 
+        $scope.calendar={};
+        $scope.calendar.format = 'dd/MMMM/yyyy';
+        $scope.calendar.openStartDateCalendar = false;
+        $scope.calendar.openDueDateCalendar = false;
 
 
         $scope.languages = [
@@ -36,6 +38,22 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
         var selectedIndex = 0;
         $scope.language = $scope.languages[selectedIndex];
 
+
+
+
+        $scope.openStartDateCalendar = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.calendar.openStartDateCalendar = true;
+        };
+
+        $scope.openDueDateCalendar = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.calendar.openDueDateCalendar = true;
+        };
 
         $scope.addAlternativeAnswerFront = function() {
             if ($scope.data.alternativeAnswerFront) {
@@ -81,6 +99,22 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
 
         $scope.setLanguageBack = function(lang) {
             $scope.card.languageBack = lang;
+            $scope.card.$update();
+        };
+
+        $scope.setPriority = function(p) {
+          $scope.card.priority = p ;
+            $scope.card.$update();
+        };
+
+        $scope.setChecks = function(c) {
+            if (c === 'self-checked') {
+                $scope.card.check = 'self';
+            } else if (c === 'computer-checked') {
+                $scope.card.check = 'computer';
+            } else if (c === 'mixed') {
+                $scope.card.check = 'mixed';
+            }
             $scope.card.$update();
         };
 

@@ -4,7 +4,30 @@
 
     <div ng-include="'/modules/packs/views/partial/bulk-edit-pack.modal.client.view.html'"></div>
 
+    <div class="col-xs-12  font-large title" style="text-align: center">
+        <div class="row">
+            <div class="col-xs-1" >
+                <a href="" data-ng-click="scrollDown()"><i
+                        class="glyphicon glyphicon-circle-arrow-down"></i></a>
+            </div>
+
+            <div class="col-xs-10" >
+                <a href="" data-ng-click="scrollDown()">Scroll down to add more
+                    cards
+                </a>
+            </div>
+
+            <div class="col-xs-1" >
+                <a href="" data-ng-click="scrollDown()"><i
+                        class="glyphicon glyphicon-circle-arrow-down"></i></a>
+            </div>
+        </div>
+    </div>
+
+
     <div class="col-xs-6 dashboard-col">
+
+
         <div class="virtual-card font-large">
             <div class="title">
                 {{pack.name}}
@@ -69,195 +92,20 @@
                     </div>
                 </div>
 
+
+
             </div>
         </div>
 
-        <!--<div class="virtual-card font-large">-->
-
-        <!--<div class="title">-->
-        <!--Change settings for all cards-->
-        <!--</div>-->
-
-        <!--<div class="flashcard-section">-->
-        <!--<div class="col-xs-4">-->
 
 
-        <!--<div class="field-label">-->
-        <!--Language Front-->
-        <!--</div>-->
-        <!--<div class="field-data">-->
-
-        <!--<div class="btn-group right-padded-l nowrap">-->
 
 
-        <!--<button type="button" class="btn btn-default standard-dropdown-width">-->
-        <!--{{languageFront.name}}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default dropdown-toggle">-->
-        <!--<span class="caret"></span>-->
-        <!--<span class="sr-only">Split button!</span>-->
-        <!--</button>-->
-        <!--<ul class="dropdown-menu" role="menu">-->
-        <!--<li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">-->
-        <!--<a>{{lang.name}}</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-4">-->
-
-        <!--<div class="field-label">-->
-        <!--Language Back-->
-        <!--</div>-->
-
-        <!--<div class="btn-group">-->
-        <!--<button type="button" class="btn btn-default standard-dropdown-width">-->
-        <!--{{languageBack.name }}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default dropdown-toggle">-->
-        <!--<span class="caret"></span>-->
-        <!--<span class="sr-only">Split button!</span>-->
-        <!--</button>-->
-        <!--<ul class="dropdown-menu" role="menu">-->
-        <!--<li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">-->
-        <!--<a>{{lang.name}}</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--</div>-->
-
-        <!--</div>-->
-
-        <!--<div class="col-xs-4">-->
-
-        <!--<div class="field-label">-->
-        <!--Checks-->
-        <!--</div>-->
-
-        <!--<div class="btn-group">-->
-        <!--<button type="button" class="btn btn-default standard-dropdown-width">-->
-        <!--{{check }}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default dropdown-toggle">-->
-        <!--<span class="caret"></span>-->
-        <!--<span class="sr-only">Split button!</span>-->
-        <!--</button>-->
-        <!--<ul class="dropdown-menu" role="menu">-->
-        <!--<li data-ng-repeat="check in checks" data-ng-click="setCheck(check)">-->
-        <!--<a>{{check}}</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-12">-->
-        <!--<div class="flashcard-section">-->
-        <!--<div class="field-label">-->
-
-        <!--Forward-->
-        <!--</div>-->
-
-
-        <!--<div class="row font-medium">-->
-
-        <!--<div class="col-xs-4">-->
-        <!--<input type="checkbox" ng-model="useForwardMode">-->
-        <!--Use Mode-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">-->
-        <!--<input type="checkbox" ng-model="readQuestionsForward"-->
-        <!--ng-disabled="!useForwardMode">-->
-        <!--Read Questions-->
-        <!--</div>-->
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">-->
-        <!--<input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">-->
-        <!--Read Answers-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-12">-->
-        <!--<div class="flashcard-section">-->
-
-        <!--<div class="field-label">-->
-
-        <!--Reverse-->
-        <!--</div>-->
-
-
-        <!--<div class="row font-medium">-->
-
-        <!--<div class="col-xs-4">-->
-        <!--<input type="checkbox" ng-model="useReverseMode">-->
-        <!--Use Mode-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">-->
-        <!--<input type="checkbox" ng-model="readQuestionsReverse"-->
-        <!--ng-disabled="!useReverseMode">-->
-        <!--Read Questions-->
-        <!--</div>-->
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">-->
-        <!--<input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">-->
-        <!--Read Answers-->
-        <!--</div>-->
-
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-12">-->
-        <!--<div class="flashcard-section">-->
-
-        <!--<div class="field-label">-->
-
-        <!--Images-->
-        <!--</div>-->
-
-
-        <!--<div class="row font-medium">-->
-
-        <!--<div class="col-xs-4">-->
-        <!--<input type="checkbox" ng-model="useImagesMode">-->
-        <!--Use Mode-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">-->
-        <!--<input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">-->
-        <!--Read Questions-->
-        <!--</div>-->
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">-->
-        <!--<input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">-->
-        <!--Read Answers-->
-        <!--</div>-->
-
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
 
 
     </div>
+
+
 
 
     <div data-ng-repeat="card in pack.cards">
@@ -265,6 +113,80 @@
             <div ng-include="'/modules/cards/views/partial/view-card.client.view.html'"></div>
 
         </div>
+    </div>
+
+    <div class="col-xs-6 dashboard-col">
+        <div class=" font-large">
+            <div class="title">
+                Add card to this pack
+
+                <div class="pull-right">
+
+
+                    <!--<a href="#!/schools/{{school._id}}"><i class="glyphicon glyphicon-edit"></i></a>-->
+
+
+                    <a href="" data-ng-click="bulkEditPackModal(pack)"><i
+                            class="glyphicon glyphicon-plus-sign"></i></a>
+
+
+
+
+                </div>
+
+
+            </div>
+
+            <div class="flashcard-section">
+
+                <div class="row">
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Name</div>
+                        <div class="font-medium">
+                            <input type="text"
+                                   data-ng-model="pack.name"
+                                   class="form-control "
+                                   ng-blur="update()"
+                                   placeholder="Name of the Pack">
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Course</div>
+                        <div class="font-medium">
+                            <a href="#!/courses/{{pack.course._id}}">{{pack.course.name}}</a>
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Created</div>
+                        <div class="font-medium">
+                            {{pack.created | date:'shortDate'}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Updated</div>
+                        <div class="font-medium">
+                            {{pack.updated | date:'shortDate'}}
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+
+
+
+
     </div>
 
 

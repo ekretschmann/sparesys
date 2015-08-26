@@ -62,13 +62,15 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
         // Update existing Pack
         $scope.update = function () {
-            var pack = $scope.pack;
 
-            pack.$update(function () {
-                $location.path('packs/' + pack._id);
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
+            $scope.pack.$update();
+            //var pack = $scope.pack;
+            //
+            //pack.$update(function () {
+            //    $location.path('packs/' + pack._id);
+            //}, function (errorResponse) {
+            //    $scope.error = errorResponse.data.message;
+            //});
         };
 
         // Find a list of Packs
@@ -142,6 +144,22 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
             });
 
 
+        };
+
+        $scope.bulkEditPackModal= function (pack) {
+
+            $scope.pack = pack;
+
+            $modal.open({
+                templateUrl: 'bulkEditPack.html',
+                controller: 'BulkEditPackController',
+                resolve: {
+
+                    pack: function () {
+                        return $scope.pack;
+                    }
+                }
+            });
         };
 
 

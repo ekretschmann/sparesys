@@ -1,0 +1,199 @@
+<script type="text/ng-template" id="bulkEditPack.html">
+    <div class="rememberators-modal">
+
+        <div class="rememberators-modal-header">
+            <div class="title center-aligned" style="text-align: center">
+                Change all cards in pack {{pack.name}}
+            </div>
+
+
+        </div>
+
+        <div>
+
+            <div class="row">
+                <div class="col-xs-6 " style="padding-bottom: 1em">
+                    <div class="field-label">Language Questions</div>
+                    <div class="font-medium">
+                        <div class="btn-group right-padded-l nowrap">
+
+
+                            <button type="button" class="btn btn-default standard-dropdown-width">
+                                {{data.languageFront.name}}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
+                                    <a>{{lang.name}}</a>
+                                </li>
+                            </ul>
+
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 ">
+                    <div class="field-label">Language Answers</div>
+                    <div class="font-medium">
+                        <div class="btn-group right-padded-l nowrap">
+                            <button type="button" class="btn btn-default standard-dropdown-width">
+                                {{data.languageBack.name}}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
+                                    <a>{{lang.name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" style="padding-bottom: 1em">
+                <div class="col-xs-6 ">
+                    <div class="field-label">Priority</div>
+                    <div class="font-medium">
+                        <div class="btn-group right-padded-l nowrap">
+                            <button type="button" class="btn btn-default standard-dropdown-width">
+                                {{data.priority}}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="p in priorities" data-ng-click="setPriority($index)">
+                                    <a>{{p}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-xs-6 ">
+                    <div class="field-label">Checks</div>
+                    <div class="font-medium">
+                        <div class="btn-group right-padded-l nowrap">
+                            <button type="button" class="btn btn-default standard-dropdown-width">
+                                {{data.check}}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="c in checks" data-ng-click="setChecks(c)">
+                                    <a>{{c}}</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-xs-12 ">
+                    <div class="field-label">Start Date</div>
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-xs-4 dashboard-col" style="padding-top: 5px; padding-left: 0">
+                                <a href="" data-ng-click="toggleStartDate()"
+                                   data-ng-if="data.changeStartDate"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                                <a href="" data-ng-click="toggleStartDate()"
+                                   data-ng-if="!data.changeStartDate">
+                                    <i class="glyphicon glyphicon-ban-circle"></i></a>
+
+                                Change start date
+                            </div>
+
+                            <div class="col-xs-8 dashboard-col">
+
+                                <div class="input-group">
+                                    <input type="text"
+                                           class="form-control"
+                                           datepicker-popup="{{calendar.format}}"
+                                           is-open="calendar.openStartDateCalendar"
+                                           min-date="minDate"
+                                           ng-required="false"
+                                           close-text="Close"
+                                           data-ng-model="data.startDate"
+                                           ng-disabled="!data.changeStartDate"
+                                            />
+
+
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default"
+                                                ng-click="openStartDateCalendar($event)"
+                                                ng-disabled="!data.changeStartDate">
+                                            <i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="row">
+                <div class="col-xs-12 ">
+                    <div class="field-label">Due Date</div>
+
+                    <div class="container">
+                        <div class="row">
+
+                            <div class="col-xs-4 dashboard-col" style="padding-top: 5px; padding-left: 0">
+                                <a href="" data-ng-click="toggleDueDate()"
+                                   data-ng-if="data.changeDueDate"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                                <a href="" data-ng-click="toggleDueDate()"
+                                   data-ng-if="!data.changeDueDate">
+                                    <i class="glyphicon glyphicon-ban-circle"></i></a>
+
+                                Change due date
+                            </div>
+
+                            <div class="col-xs-8 dashboard-col">
+
+                                <div class="input-group">
+                                    <input type="text"
+                                           class="form-control"
+                                           datepicker-popup="{{calendar.format}}"
+                                           is-open="calendar.openDueDateCalendar"
+                                           min-date="minDate"
+                                           ng-required="false"
+                                           close-text="Close"
+                                           data-ng-model="data.dueDate"
+                                           ng-disabled="!data.changeDueDate"
+                                            />
+
+
+                                    <div class="input-group-btn">
+                                        <button type="button" class="btn btn-default"
+                                                ng-click="openDuetDateCalendar($event)"
+                                                ng-disabled="!data.changeDueDate">
+                                            <i class="glyphicon glyphicon-calendar"></i></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="rememberators-modal-footer">
+            <button class="btn btn-rememberators" ng-click="ok()">OK</button>
+            <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+</script>

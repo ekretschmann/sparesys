@@ -63,18 +63,33 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
             }
         };
 
+        $scope.addAlternativeAnswerBack = function() {
+            if ($scope.data.alternativeAnswerBack) {
+                $scope.card.acceptedAnswersReverse.push($scope.data.alternativeAnswerBack);
+                $scope.card.$update();
+                $scope.data.alternativeAnswerBack = '';
+            }
+        };
+
         $scope.deleteAlternativeAnswerFront = function(index) {
             $scope.card.acceptedAnswersForward.splice(index, 1);
             $scope.card.$update();
         };
 
-        $scope.toggleMode = function(card, mode) {
+        $scope.deleteAlternativeAnswerBack = function(index) {
+            $scope.card.acceptedAnswersReverse.splice(index, 1);
+            $scope.card.$update();
+        };
 
-            if(card.modes.indexOf(mode) === -1) {
-                card.modes.push(mode);
+        $scope.toggleMode = function(mode) {
+
+            if($scope.card.modes.indexOf(mode) === -1) {
+                $scope.card.modes.push(mode);
             } else {
-                card.modes.splice(card.modes.indexOf(mode), 1);
+                $scope.card.modes.splice($scope.card.modes.indexOf(mode), 1);
             }
+
+            $scope.card.$update();
 
 
         };

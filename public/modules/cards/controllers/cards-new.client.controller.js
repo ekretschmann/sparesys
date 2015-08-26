@@ -96,7 +96,7 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
 
         $scope.toggleSetting = function(card, setting) {
             card[setting] = !card[setting];
-            console.log(card[setting]);
+            $scope.card.$update();
         };
 
 

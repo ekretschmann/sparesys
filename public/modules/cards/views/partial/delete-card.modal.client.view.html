@@ -1,23 +1,29 @@
 <script type="text/ng-template" id="areYouSureToDeleteCard.html">
-    <div class="modal-body" >
 
-        <div class="content-header">
-            <div class="title center-aligned">
-                Delete Card: {{card.question}}
+
+    <div class="rememberators-modal">
+
+        <div class="rememberators-modal-header">
+            <div class="title center-aligned" style="text-align: center">
+                {{card.question}}
             </div>
-            <div class="title center-aligned">
-               {{card.answer}}
+            <div class="title center-aligned" style="text-align: center">
+                {{card.answer}}
             </div>
+
+
         </div>
-        <!--<div class="sparesys-header">-->
 
-            <!--<div class="sparesys-subtitle">-->
-                <!--Are you sure?-->
-            <!--</div>-->
-        <!--</div>-->
-        <div style="text-align: center">
-        <button class="btn btn-rememberators" ng-click="ok()">OK</button>
-        <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
+        <div class="rememberators-modal-section modal-danger">
+
+            Are you sure you want to delete this card
+
+        </div>
+        <div class="rememberators-modal-footer">
+            <button class="btn btn-rememberators" ng-click="ok()">OK</button>
+            <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
         </div>
     </div>
+
+
 </script>

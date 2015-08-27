@@ -257,8 +257,16 @@ body {
 }
 
 .font-m {
+  @media (min-width: 310px) {
+    font-size: 16pt;
+  }
+  @media (min-width: 620px) {
+    font-size: 18pt;
+  }
+  @media (min-width: 800px) {
+    font-size: 24pt;
+  }
   font-family: 'Grinched';
-  font-size: 24px;
 }
 
 .font-s {
@@ -644,7 +652,7 @@ body {
 }
 
 .modal-danger {
-  .font-l;
+  .font-m;
   text-align: center;
   color: @danger-color;
 }

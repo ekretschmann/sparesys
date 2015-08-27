@@ -68,17 +68,25 @@ exports.update = function (req, res) {
 
 
     var schoolclass = req.schoolclass;
-    var originalTeachers = schoolclass.teachers;
-    var originalStudents = schoolclass.students;
-
-    schoolclass = _.extend(schoolclass, req.body);
+    //var originalTeachers = schoolclass.teachers;
+    //var originalStudents = schoolclass.students;
+    //
+    //schoolclass = _.extend(schoolclass, req.body);
 
     //schoolclass.students = req.body.students;
     //schoolclass.teachers = req.body.teachers;
 
 
+    schoolclass = _.extend(schoolclass, req.body);
+    console.log(schoolclass.teachers);
+    console.log(req.body.teachers);
 
-    console.log(schoolclass);
+
+    //console.log(schoolclass.teachers);
+
+
+
+    //console.log(schoolclass);
 
 
     //schoolclass.save(function (err) {

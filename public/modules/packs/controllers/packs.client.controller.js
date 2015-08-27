@@ -267,5 +267,9 @@ angular.module('packs').controller('PacksController', ['$scope', '$stateParams',
 
             }
         };
+
+
+
+
     }
 ]);

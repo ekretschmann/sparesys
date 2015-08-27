@@ -37,6 +37,7 @@ var getErrorMessage = function (err) {
  */
 exports.create = function (req, res) {
 
+
     var card = new Card(req.body);
 
 
@@ -48,6 +49,7 @@ exports.create = function (req, res) {
 
 
     card.save(function (err) {
+        console.log(err);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

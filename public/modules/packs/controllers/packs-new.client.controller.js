@@ -1,10 +1,9 @@
 'use strict';
 
 // Packs controller
-angular.module('packs').controller('PacksControllerNew', ['$window', '$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards',
-    function ($window, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards) {
+angular.module('packs').controller('PacksControllerNew', ['$window', '$timeout','$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards',
+    function ($window, $timeout, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards) {
         $scope.authentication = Authentication;
-
 
 
         // Update existing Pack
@@ -77,7 +76,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$scope', '
 
         };
 
-        $scope.bulkEditPackModal= function (pack) {
+        $scope.bulkEditPackModal = function (pack) {
 
             $scope.pack = pack;
 
@@ -116,17 +115,32 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$scope', '
 
         $scope.areYouSureToDeleteCard = function (card) {
 
-            $scope.card = card;
-
             $modal.open({
                 templateUrl: 'areYouSureToDeleteCard.html',
                 controller: 'DeleteCardController',
                 resolve: {
                     card: function () {
-                        return $scope.card;
+                        return card;
+                    },
+                    pack: function () {
+                        return $scope.pack;
                     }
                 }
-            });
+            }).result.then(function (x) {
+
+                    var scrollpos = document.body.scrollHeight;
+
+
+                    $scope.pack = Packs.get({
+                        packId: $scope.pack._id
+                    }, function() {
+                        $timeout(function() {
+                            $window.scrollTo(0, scrollpos);
+                        });
+
+                    });
+
+                });
 
 
         };
@@ -139,7 +153,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$scope', '
         $scope.newCard.answerExtension = '';
 
 
-        $scope.scrollDown = function() {
+        $scope.scrollDown = function () {
             $window.scrollTo(0, document.body.scrollHeight);
             angular.element('.focus').trigger('focus');
         };
@@ -179,8 +193,8 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$scope', '
                     }
                 }
                 if ($scope.pack.course.cardDefaults.forward) {
-                    if($scope.pack.course.cardDefaults.forward.enabled) {
-                        if(!original.modes) {
+                    if ($scope.pack.course.cardDefaults.forward.enabled) {
+                        if (!original.modes) {
                             original.modes = [];
                         }
                         original.modes.push('forward');
@@ -191,8 +205,8 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$scope', '
                 }
 
                 if ($scope.pack.course.cardDefaults.reverse) {
-                    if($scope.pack.course.cardDefaults.reverse.enabled) {
-                        if(!original.modes) {
+                    if ($scope.pack.course.cardDefaults.reverse.enabled) {
+                        if (!original.modes) {
                             original.modes = [];
                         }
                         original.modes.push('reverse');
@@ -203,8 +217,8 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$scope', '
                 }
 
                 if ($scope.pack.course.cardDefaults.images) {
-                    if($scope.pack.course.cardDefaults.images.enabled) {
-                        if(!original.modes) {
+                    if ($scope.pack.course.cardDefaults.images.enabled) {
+                        if (!original.modes) {
                             original.modes = [];
                         }
                         original.modes.push('images');
@@ -223,7 +237,9 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$scope', '
             //self.format = $scope.options.format;
             original.$save(function (x) {
 
-                console.log(x);
+
+
+                //console.log(x);
 
                 //console.log('ga create card');
                 //console.log('/packs/addcardtopack');
@@ -233,9 +249,16 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$scope', '
                 //    $window.ga('send', 'event', 'create card');
                 //}
 
-                $scope.pack.cards.push(original._id);
+                $scope.pack.cards.push(original);
                 $scope.pack.$update(function () {
-                    //$state.go($state.$current, null, { reload: true });
+                    $scope.pack = Packs.get({
+                        packId: $scope.pack._id
+                    }, function() {
+                        angular.element('.focus').trigger('focus');
+                        $timeout(function() {
+                            $window.scrollTo(0, document.body.scrollHeight);
+                        });
+                    });
                 });
 
 

@@ -130,51 +130,54 @@
             <div class="flashcard-section">
 
                 <form data-ng-submit="addCardToPack()" validate>
-                    <div class="row">
-                        <div class="col-xs-6 dashboard-col">
-                            <div class="field-label">Front of card</div>
-                            <div class="font-medium">
-                                <input type="text"
-                                       data-ng-model="newCard.question"
-                                       class="form-control focus"
-                                        >
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-xs-6 dashboard-col">
+                                <div class="field-label">Front of card</div>
+                                <div class="font-medium">
+                                    <input type="text"
+                                           data-ng-model="newCard.question"
+                                           class="form-control focus"
+                                            >
+                                </div>
                             </div>
+
+
+                            <div class="col-xs-6 dashboard-col">
+                                <div class="field-label">Back of card</div>
+                                <div class="font-medium">
+                                    <input type="text"
+                                           data-ng-model="newCard.answer"
+                                           class="form-control "
+                                            >
+                                </div>
+                            </div>
+
                         </div>
 
 
-                        <div class="col-xs-6 dashboard-col">
-                            <div class="field-label">Back of card</div>
-                            <div class="font-medium">
-                                <input type="text"
-                                       data-ng-model="newCard.answer"
-                                       class="form-control "
-                                        >
+                        <div class="row">
+                            <div class="col-xs-6 dashboard-col">
+                                <div class="field-label">Additional info front</div>
+                                <div class="font-medium">
+                                    <input type="text"
+                                           data-ng-model="newCard.questionExtension"
+                                           class="form-control "
+                                            >
+                                </div>
+                            </div>
+
+                            <div class="col-xs-6 dashboard-col">
+                                <div class="field-label">Additional info back</div>
+                                <div class="font-medium">
+                                    <input type="text"
+                                           data-ng-model="newCard.answerExtension"
+                                           class="form-control ">
+                                </div>
                             </div>
                         </div>
-
-                    </div>
-
-
-                    <div class="row">
-                        <div class="col-xs-6 dashboard-col">
-                            <div class="field-label">Additional info front</div>
-                            <div class="font-medium">
-                                <input type="text"
-                                       data-ng-model="newCard.questionExtension"
-                                       class="form-control "
-                                        >
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6 dashboard-col">
-                            <div class="field-label">Additional info back</div>
-                            <div class="font-medium">
-                                <input type="text"
-                                       data-ng-model="newCard.answerExtension"
-                                       class="form-control ">
-                            </div>
-                        </div>
-                    </div>
+                        <div class="hidden"><button type="submit" class="btn btn-rememberators"></button></div>
+                    </fieldset>
                 </form>
             </div>
         </div>

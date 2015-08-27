@@ -6,6 +6,12 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$timeout',
         $scope.authentication = Authentication;
 
 
+        $scope.priorities = ['highest', 'high', 'medium', 'low', 'lowest'];
+        $scope.checks = {};
+        $scope.checks.self = 'self-checked';
+        $scope.checks.mixed = 'mixed';
+        $scope.checks.computer = 'computer-checked';
+
         // Update existing Pack
         $scope.update = function () {
 

@@ -141,77 +141,10 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
         // Find existing Card
         $scope.findOne = function () {
 
-            if($stateParams.tab) {
-
-                $scope.activeTab = $stateParams.tab;
-
-                    $scope.tabs.forEach(function(tab) {
-                    if (tab.title === $stateParams.tab) {
-                        tab.active = true;
-                    } else {
-                        tab.active = false;
-                    }
-                });
-
-            }
 
 
             $scope.card = Cards.get({
                 cardId: $stateParams.cardId
-            }, function () {
-
-
-                $scope.hasImageMode = $scope.card.modes && $scope.card.modes.indexOf('images') !== -1;
-                $scope.hasForwardMode = $scope.card.modes && $scope.card.modes.indexOf('forward') !== -1;
-                $scope.hasReverseMode = $scope.card.modes && $scope.card.modes.indexOf('reverse') !== -1;
-
-                Courses.get({
-                    courseId: $scope.card.course
-                }, function(course) {
-                    $scope.course = course;
-                });
-
-                Packs.get({
-                    packId: $scope.card.packs[0]
-                }, function (pack) {
-
-
-                    $scope.pack = pack;
-                    var prev;
-                    var next;
-                    for (var i =0; i< $scope.pack.cards.length; i++) {
-                        if ($scope.pack.cards[i]._id === $scope.card._id) {
-                            if (i>0) {
-                                prev = $scope.pack.cards[i-1]._id;
-                            }
-                            if (i<$scope.pack.cards.length-1) {
-                                next = $scope.pack.cards[i+1]._id;
-                            }
-                        }
-                    }
-
-
-                    if (next) {
-                        Cards.get({
-                            cardId: next
-                        }, function (nextc) {
-                            $scope.nextCard = nextc;
-                        });
-                    }
-
-                    if (prev) {
-                        Cards.get({
-                            cardId: prev
-                        }, function (prevc) {
-                            $scope.prevCard = prevc;
-                        });
-                    }
-
-
-
-
-                });
-
             });
         };
 

@@ -1,542 +1,573 @@
 <section data-ng-controller="CardsControllerNew" data-ng-init="findOne()">
 
-    <!--{{card}}-->
-    <div class="col-xs-6 dashboard-col">
-        <div class="virtual-card font-large">
+
+    <div class="col-xs-6 dashboard-col" data-ng-if="!card.question">
+        <div class="virtual-card font-large danger">
             <div class="title">
-                {{card.question}}
-
-                <div class="pull-right">
-
-
-                    <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i
-                            class="glyphicon glyphicon-trash"></i></a>
-
-                </div>
-
-
-            </div>
-
-            <div class="flashcard-section">
-
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Language Question</div>
-                        <div class="font-medium">
-                            <div class="btn-group right-padded-l nowrap">
-
-
-                                <button type="button" class="btn btn-default standard-dropdown-width">
-                                    {{card.languageFront.name}}
-                                </button>
-                                <button type="button" class="btn btn-default dropdown-toggle">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Split button!</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
-                                        <a>{{lang.name}}</a>
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Language Answer</div>
-                        <div class="font-medium">
-                            <div class="btn-group right-padded-l nowrap">
-                                <button type="button" class="btn btn-default standard-dropdown-width">
-                                    {{card.languageBack.name}}
-                                </button>
-                                <button type="button" class="btn btn-default dropdown-toggle">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Split button!</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
-                                        <a>{{lang.name}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Question</div>
-                        <div class="font-medium">
-                            <input type="text"
-                                   data-ng-model="card.question"
-                                   class="form-control "
-                                   ng-blur="update()"
-                                   placeholder="Card">
-
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Answer</div>
-                        <div class="font-medium">
-                            <input type="text"
-                                   data-ng-model="card.answer"
-                                   class="form-control "
-                                   ng-blur="update()"
-                                   placeholder="Card">
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Course</div>
-                        <div class="font-medium">
-                            <a href="#!/courses/{{course._id}}">{{course.name}}</a>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Pack</div>
-                        <div class="font-medium">
-                            <a href="#!/packs/{{pack._id}}">{{pack.name}}</a>
-                        </div>
-                    </div>
-                </div>
-
-                <!--<div class="col-xs-6 dashboard-col">-->
-                <!--<div class="field-label">Created</div>-->
-                <!--<div class="font-medium">-->
-                <!--{{pack.created | date:'shortDate'}}-->
-                <!--</div>-->
-                <!--</div>-->
-
-                <!--<div class="col-xs-6 dashboard-col">-->
-                <!--<div class="field-label">Updated</div>-->
-                <!--<div class="font-medium">-->
-                <!--{{pack.updated | date:'shortDate'}}-->
-                <!--</div>-->
-                <!--</div>-->
-
+                Sorry, this card does not exist.
             </div>
         </div>
     </div>
 
 
-    <div class="col-xs-6 dashboard-col">
-        <div class="virtual-card font-large">
-            <div class="title">
-                &nbsp;
+    <div data-ng-if="card.question">
+
+        <div class="col-xs-6 dashboard-col">
+            <div class="virtual-card font-large">
+                <div class="title">
+                    {{card.question}}
+
+                    <div class="pull-right">
+
+
+                        <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i
+                                class="glyphicon glyphicon-trash"></i></a>
+
+                    </div>
+
+
+                </div>
+
+                <div class="flashcard-section">
+
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Language Question</div>
+                            <div class="font-medium">
+                                <div class="btn-group right-padded-l nowrap">
+
+
+                                    <button type="button" class="btn btn-default standard-dropdown-width">
+                                        {{card.languageFront.name}}
+                                    </button>
+                                    <button type="button" class="btn btn-default dropdown-toggle">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Split button!</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
+                                            <a>{{lang.name}}</a>
+                                        </li>
+                                    </ul>
+
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Language Answer</div>
+                            <div class="font-medium">
+                                <div class="btn-group right-padded-l nowrap">
+                                    <button type="button" class="btn btn-default standard-dropdown-width">
+                                        {{card.languageBack.name}}
+                                    </button>
+                                    <button type="button" class="btn btn-default dropdown-toggle">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Split button!</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
+                                            <a>{{lang.name}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Question</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       data-ng-model="card.question"
+                                       class="form-control "
+                                       ng-blur="update()"
+                                       placeholder="Card">
+
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Answer</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       data-ng-model="card.answer"
+                                       class="form-control "
+                                       ng-blur="update()"
+                                       placeholder="Card">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Course</div>
+                            <div class="font-medium">
+                                <a href="#!/courses/{{course._id}}">{{course.name}}</a>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Pack</div>
+                            <div class="font-medium">
+                                <a href="#!/packs/{{pack._id}}">{{pack.name}}</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!--<div class="col-xs-6 dashboard-col">-->
+                    <!--<div class="field-label">Created</div>-->
+                    <!--<div class="font-medium">-->
+                    <!--{{pack.created | date:'shortDate'}}-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-xs-6 dashboard-col">-->
+                    <!--<div class="field-label">Updated</div>-->
+                    <!--<div class="font-medium">-->
+                    <!--{{pack.updated | date:'shortDate'}}-->
+                    <!--</div>-->
+                    <!--</div>-->
+
+                </div>
             </div>
-
-            <div class="flashcard-section">
-
-
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Start Date</div>
-                        <div class="input-group">
-                            <input type="text"
-                                   class="form-control"
-                                   datepicker-popup="{{calendar.format}}"
-                                   is-open="calendar.openStartDateCalendar"
-                                   min-date="minDate"
-                                   ng-required="false"
-                                   close-text="Close"
-                                   data-ng-model="card.startDate"
-                                   data-ng-change="update()"
-                                    />
+        </div>
 
 
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="openStartDateCalendar($event)">
-                                    <i
-                                            class="glyphicon glyphicon-calendar"></i></button>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Due Date</div>
-                        <div class="input-group">
-                            <input type="text"
-                                   class="form-control"
-                                   datepicker-popup="{{calendar.format}}"
-
-                                   is-open="calendar.openDueDateCalendar"
-                                   min-date="minDate"
-                                   ng-required="false"
-                                   close-text="Close"
-                                   data-ng-model="card.dueDate"
-                                   data-ng-change="update()"/>
-
-
-                            <div class="input-group-btn">
-                                <button type="button" class="btn btn-default" ng-click="openDueDateCalendar($event)">
-                                    <i
-                                            class="glyphicon glyphicon-calendar"></i></button>
-                            </div>
-                        </div>
-                    </div>
+        <div class="col-xs-6 dashboard-col">
+            <div class="virtual-card font-large">
+                <div class="title">
+                    &nbsp;
                 </div>
 
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Priority</div>
-                        <div class="font-medium">
-                            <div class="btn-group right-padded-l nowrap">
-                                <button type="button" class="btn btn-default standard-dropdown-width">
-                                    {{priorities[card.priority]}}
-                                </button>
-                                <button type="button" class="btn btn-default dropdown-toggle">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Split button!</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li data-ng-repeat="p in priorities" data-ng-click="setPriority($index)">
-                                        <a>{{p}}</a>
-                                    </li>
-                                </ul>
+                <div class="flashcard-section">
+
+
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Start Date</div>
+                            <div class="input-group">
+                                <input type="text"
+                                       class="form-control"
+                                       datepicker-popup="{{calendar.format}}"
+                                       is-open="calendar.openStartDateCalendar"
+                                       min-date="minDate"
+                                       ng-required="false"
+                                       close-text="Close"
+                                       data-ng-model="card.startDate"
+                                       data-ng-change="update()"
+                                        />
+
+
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="openStartDateCalendar($event)">
+                                        <i
+                                                class="glyphicon glyphicon-calendar"></i></button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Due Date</div>
+                            <div class="input-group">
+                                <input type="text"
+                                       class="form-control"
+                                       datepicker-popup="{{calendar.format}}"
+
+                                       is-open="calendar.openDueDateCalendar"
+                                       min-date="minDate"
+                                       ng-required="false"
+                                       close-text="Close"
+                                       data-ng-model="card.dueDate"
+                                       data-ng-change="update()"/>
+
+
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="openDueDateCalendar($event)">
+                                        <i
+                                                class="glyphicon glyphicon-calendar"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Checks</div>
-                        <div class="font-medium">
-                            <div class="btn-group right-padded-l nowrap">
-                                <button type="button" class="btn btn-default standard-dropdown-width">
-                                    {{card.check}}
-                                </button>
-                                <button type="button" class="btn btn-default dropdown-toggle">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Split button!</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li data-ng-repeat="c in checks" data-ng-click="setChecks(c)">
-                                        <a>{{c}}</a>
-                                    </li>
-                                </ul>
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Priority</div>
+                            <div class="font-medium">
+                                <div class="btn-group right-padded-l nowrap">
+                                    <button type="button" class="btn btn-default standard-dropdown-width">
+                                        {{priorities[card.priority]}}
+                                    </button>
+                                    <button type="button" class="btn btn-default dropdown-toggle">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Split button!</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li data-ng-repeat="p in priorities" data-ng-click="setPriority($index)">
+                                            <a>{{p}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Checks</div>
+                            <div class="font-medium">
+                                <div class="btn-group right-padded-l nowrap">
+                                    <button type="button" class="btn btn-default standard-dropdown-width">
+                                        {{card.check}}
+                                    </button>
+                                    <button type="button" class="btn btn-default dropdown-toggle">
+                                        <span class="caret"></span>
+                                        <span class="sr-only">Split button!</span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu">
+                                        <li data-ng-repeat="c in checks" data-ng-click="setChecks(c)">
+                                            <a>{{c}}</a>
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Created</div>
+                            <div class="font-medium">
+                                {{card.created | date:'shortDate'}}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Updated</div>
+                            <div class="font-medium">
+                                {{card.updated | date:'shortDate'}}
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Created</div>
-                        <div class="font-medium">
-                            {{card.created | date:'shortDate'}}
+            </div>
+        </div>
+
+        <div class="col-xs-6 dashboard-col">
+            <div class="virtual-card font-large">
+                <div class="title" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">
+                    Forward mode
+
+                    <div class="pull-right">
+
+
+                        <a href="" data-ng-click="toggleMode('forward')"
+                           data-ng-if="card.modes.indexOf('forward') > -1"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                        <a href="" data-ng-click="toggleMode('forward')"
+                           data-ng-if="card.modes.indexOf('forward') === -1"><i
+                                class="glyphicon glyphicon-ban-circle"></i></a>
+
+                    </div>
+
+
+                </div>
+
+
+                <div class="flashcard-section" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">
+
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Question</div>
+                            <div class="font-medium">
+                                {{card.question}}
+
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Question Extra Info</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       ng-disabled="card.modes.indexOf('forward') === -1"
+                                       data-ng-model="card.questionExtension"
+                                       class="form-control "
+                                       ng-blur="update()"
+                                       placeholder="Card">
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Expected answer</div>
+                            <div class="font-medium">
+                                {{card.answer}}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label" style="padding-bottom: 5px">Also accepted as answer</div>
+                            <div class="font-medium row" ng-repeat="aa in card.acceptedAnswersForward track by $index">
+
+                                <div class="col-xs-1" style="margin-top: 2px">
+                                    <a href="" style="padding-left: 5px"
+                                       data-ng-click="deleteAlternativeAnswerFront($index)"><i
+                                            class="glyphicon glyphicon-trash"></i></a>
+                                </div>
+                                <div class="col-xs-11">{{aa}}</div>
+                            </div>
+                            <div class="font-medium row" style="padding-top: 5px">
+
+
+                                <div class="col-xs-1" style="margin-top: 5px">
+                                    <a href="" style="padding-left: 5px;" data-ng-click="addAlternativeAnswerFront()"><i
+                                            class="glyphicon glyphicon-plus-sign"></i></a>
+                                </div>
+                                <div class="col-xs-11">
+                                    <form class="form-horizontal" data-ng-submit="addAlternativeAnswerFront()"
+                                          novalidate>
+                                        <fieldset>
+                                            <input type="text"
+                                                   ng-disabled="card.modes.indexOf('forward') === -1"
+                                                   data-ng-model="data.alternativeAnswerFront"
+                                                   class="form-control "
+                                                   placeholder="Add another answer">
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+                            </div>
                         </div>
                     </div>
 
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Updated</div>
-                        <div class="font-medium">
-                            {{card.updated | date:'shortDate'}}
+                    <div class="row">
+
+                        <div class="col-xs-12 dashboard-col">
+
+                            <div class="field-label">Extras</div>
+
+                            <div class="row">
+                                <div class="font-medium col-xs-4">
+                                    <a href="" data-ng-click="toggleSetting(card, 'readFrontForward')"
+                                       data-ng-show="card.readFrontForward"><i
+                                            class="glyphicon glyphicon-ok-circle"></i></a>
+                                    <a href="" data-ng-click="toggleSetting(card, 'readFrontForward')"
+                                       data-ng-show="!card.readFrontForward"><i
+                                            class="glyphicon glyphicon-ban-circle"></i></a>
+                                    <span ng-class="{'text-muted': !card.readFrontForward}">Read Question</span>
+                                </div>
+
+
+                                <div class="field-data col-xs-4">
+                                    <a href="" data-ng-click="toggleSetting(card, 'readBackForward')"
+                                       data-ng-show="card.readBackForward"><i
+                                            class="glyphicon glyphicon-ok-circle"></i></a>
+                                    <a href="" data-ng-click="toggleSetting(card, 'readBackForward')"
+                                       data-ng-show="!card.readBackForward"><i
+                                            class="glyphicon glyphicon-ban-circle"></i></a>
+                                    <span ng-class="{'text-muted': !card.readBackForward}">Read Answer</span>
+                                </div>
+
+
+                                <div class="field-data col-xs-4">
+                                    <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionForward')"
+                                       data-ng-show="card.speechRecognitionForward"><i
+                                            class="glyphicon glyphicon-ok-circle"></i></a>
+                                    <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionForward')"
+                                       data-ng-show="!card.speechRecognitionForward"><i
+                                            class="glyphicon glyphicon-ban-circle"></i></a>
+                                    <span ng-class="{'text-muted': !card.speechRecognitionForward}">Speech Recognition</span>
+                                </div>
+                            </div>
+
+
                         </div>
                     </div>
                 </div>
 
             </div>
         </div>
-    </div>
 
-    <div class="col-xs-6 dashboard-col">
-        <div class="virtual-card font-large">
-            <div class="title" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">
-                Forward mode
+        <div class="col-xs-6 dashboard-col">
+            <div class="virtual-card font-large">
+                <div class="title" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">
+                    Reverse mode
 
-                <div class="pull-right">
+                    <div class="pull-right">
 
 
-                    <a href="" data-ng-click="toggleMode('forward')"
-                       data-ng-if="card.modes.indexOf('forward') > -1"><i class="glyphicon glyphicon-ok-circle"></i></a>
-                    <a href="" data-ng-click="toggleMode('forward')"
-                       data-ng-if="card.modes.indexOf('forward') === -1"><i
-                            class="glyphicon glyphicon-ban-circle"></i></a>
+                        <a href="" data-ng-click="toggleMode('reverse')"
+                           data-ng-if="card.modes.indexOf('reverse') > -1"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                        <a href="" data-ng-click="toggleMode('reverse')"
+                           data-ng-if="card.modes.indexOf('reverse') === -1"><i
+                                class="glyphicon glyphicon-ban-circle"></i></a>
+
+                    </div>
+
 
                 </div>
 
+
+                <div class="flashcard-section" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">
+
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Question</div>
+                            <div class="font-medium">
+                                {{card.answer}}
+
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Question Extra Info</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       ng-disabled="card.modes.indexOf('reverse') === -1"
+                                       data-ng-model="card.answerExtension"
+                                       class="form-control "
+                                       ng-blur="update()"
+                                       placeholder="Card">
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="row">
+
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Expected answer</div>
+                            <div class="font-medium">
+                                {{card.question}}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label" style="padding-bottom: 5px">Also accepted as answer</div>
+                            <div class="font-medium row" ng-repeat="aa in card.acceptedAnswersReverse track by $index">
+
+                                <div class="col-xs-1" style="margin-top: 2px">
+                                    <a href="" style="padding-left: 5px"
+                                       data-ng-click="deleteAlternativeAnswerBack($index)"><i
+                                            class="glyphicon glyphicon-trash"></i></a>
+                                </div>
+                                <div class="col-xs-11">{{aa}}</div>
+                            </div>
+                            <div class="font-medium row" style="padding-top: 5px">
+
+
+                                <div class="col-xs-1" style="margin-top: 5px">
+                                    <a href="" style="padding-left: 5px;" data-ng-click="addAlternativeAnswerBack()"><i
+                                            class="glyphicon glyphicon-plus-sign"></i></a>
+                                </div>
+                                <div class="col-xs-11">
+                                    <form class="form-horizontal" data-ng-submit="addAlternativeAnswerBack()"
+                                          novalidate>
+                                        <fieldset>
+                                            <input type="text"
+                                                   ng-disabled="card.modes.indexOf('reverse') === -1"
+                                                   data-ng-model="data.alternativeAnswerBack"
+                                                   class="form-control "
+                                                   placeholder="Add another answer">
+                                        </fieldset>
+                                    </form>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+
+                        <div class="col-xs-12 dashboard-col">
+
+                            <div class="field-label">Extras</div>
+
+                            <div class="row">
+                                <div class="font-medium col-xs-4">
+                                    <a href="" data-ng-click="toggleSetting(card, 'readFrontReverse')"
+
+                                       data-ng-show="card.readFrontReverse"><i
+                                            class="glyphicon glyphicon-ok-circle"></i></a>
+                                    <a href="" data-ng-click="toggleSetting(card, 'readFrontReverse')"
+                                       data-ng-show="!card.readFrontReverse"><i
+                                            class="glyphicon glyphicon-ban-circle"></i></a>
+                                    <span ng-class="{'text-muted': !card.readFrontReverse}">Read Question</span>
+                                </div>
+
+
+                                <div class="field-data col-xs-4">
+                                    <a href="" data-ng-click="toggleSetting(card, 'readBackReverse')"
+                                       data-ng-show="card.readBackReverse"><i
+                                            class="glyphicon glyphicon-ok-circle"></i></a>
+                                    <a href="" data-ng-click="toggleSetting(card, 'readBackReverse')"
+                                       data-ng-show="!card.readBackReverse"><i
+                                            class="glyphicon glyphicon-ban-circle"></i></a>
+                                    <span ng-class="{'text-muted': !card.readBackReverse}">Read Answer</span>
+                                </div>
+
+
+                                <div class="field-data col-xs-4">
+                                    <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionReverse')"
+                                       data-ng-show="card.speechRecognitionReverse"><i
+                                            class="glyphicon glyphicon-ok-circle"></i></a>
+                                    <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionReverse')"
+                                       data-ng-show="!card.speechRecognitionReverse"><i
+                                            class="glyphicon glyphicon-ban-circle"></i></a>
+                                    <span ng-class="{'text-muted': !card.speechRecognitionReverse}">Speech Recognition</span>
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
 
             </div>
-
-
-            <div class="flashcard-section" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">
-
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Question</div>
-                        <div class="font-medium">
-                            {{card.question}}
-
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Question Extra Info</div>
-                        <div class="font-medium">
-                            <input type="text"
-                                   ng-disabled="card.modes.indexOf('forward') === -1"
-                                   data-ng-model="card.questionExtension"
-                                   class="form-control "
-                                   ng-blur="update()"
-                                   placeholder="Card">
-
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <div class="row">
-
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Expected answer</div>
-                        <div class="font-medium">
-                            {{card.answer}}
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label" style="padding-bottom: 5px">Also accepted as answer</div>
-                        <div class="font-medium row" ng-repeat="aa in card.acceptedAnswersForward track by $index">
-
-                            <div class="col-xs-1" style="margin-top: 2px">
-                                <a href="" style="padding-left: 5px"
-                                   data-ng-click="deleteAlternativeAnswerFront($index)"><i
-                                        class="glyphicon glyphicon-trash"></i></a>
-                            </div>
-                            <div class="col-xs-11">{{aa}}</div>
-                        </div>
-                        <div class="font-medium row" style="padding-top: 5px">
-
-
-                            <div class="col-xs-1" style="margin-top: 5px">
-                                <a href="" style="padding-left: 5px;" data-ng-click="addAlternativeAnswerFront()"><i
-                                        class="glyphicon glyphicon-plus-sign"></i></a>
-                            </div>
-                            <div class="col-xs-11">
-                                <form class="form-horizontal" data-ng-submit="addAlternativeAnswerFront()" novalidate>
-                                    <fieldset>
-                                        <input type="text"
-                                               ng-disabled="card.modes.indexOf('forward') === -1"
-                                               data-ng-model="data.alternativeAnswerFront"
-                                               class="form-control "
-                                               placeholder="Add another answer">
-                                    </fieldset>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-xs-12 dashboard-col">
-
-                        <div class="field-label">Extras</div>
-
-                        <div class="row">
-                            <div class="font-medium col-xs-4">
-                                <a href="" data-ng-click="toggleSetting(card, 'readFrontForward')"
-                                   data-ng-show="card.readFrontForward"><i
-                                        class="glyphicon glyphicon-ok-circle"></i></a>
-                                <a href="" data-ng-click="toggleSetting(card, 'readFrontForward')"
-                                   data-ng-show="!card.readFrontForward"><i
-                                        class="glyphicon glyphicon-ban-circle"></i></a>
-                                <span ng-class="{'text-muted': !card.readFrontForward}">Read Question</span>
-                            </div>
-
-
-                            <div class="field-data col-xs-4">
-                                <a href="" data-ng-click="toggleSetting(card, 'readBackForward')"
-                                   data-ng-show="card.readBackForward"><i
-                                        class="glyphicon glyphicon-ok-circle"></i></a>
-                                <a href="" data-ng-click="toggleSetting(card, 'readBackForward')"
-                                   data-ng-show="!card.readBackForward"><i
-                                        class="glyphicon glyphicon-ban-circle"></i></a>
-                                <span ng-class="{'text-muted': !card.readBackForward}">Read Answer</span>
-                            </div>
-
-
-                            <div class="field-data col-xs-4">
-                                <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionForward')"
-                                   data-ng-show="card.speechRecognitionForward"><i
-                                        class="glyphicon glyphicon-ok-circle"></i></a>
-                                <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionForward')"
-                                   data-ng-show="!card.speechRecognitionForward"><i
-                                        class="glyphicon glyphicon-ban-circle"></i></a>
-                                <span ng-class="{'text-muted': !card.speechRecognitionForward}">Speech Recognition</span>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
         </div>
-    </div>
-
-    <div class="col-xs-6 dashboard-col">
-        <div class="virtual-card font-large">
-            <div class="title" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">
-                Reverse mode
-
-                <div class="pull-right">
 
 
-                    <a href="" data-ng-click="toggleMode('reverse')"
-                       data-ng-if="card.modes.indexOf('reverse') > -1"><i class="glyphicon glyphicon-ok-circle"></i></a>
-                    <a href="" data-ng-click="toggleMode('reverse')"
-                       data-ng-if="card.modes.indexOf('reverse') === -1"><i
-                            class="glyphicon glyphicon-ban-circle"></i></a>
+        <div class="col-xs-6 dashboard-col">
+            <div class="virtual-card font-large">
+                <div class="title">
+                    Images mode
 
-                </div>
-
-
-            </div>
+                    <!--<div class="pull-right">-->
 
 
-            <div class="flashcard-section" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">
+                    <!--<a href="" data-ng-click="areYouSureToDeleteCard(card)"><i-->
+                    <!--class="glyphicon glyphicon-trash"></i></a>-->
 
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Question</div>
-                        <div class="font-medium">
-                            {{card.answer}}
-
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Question Extra Info</div>
-                        <div class="font-medium">
-                            <input type="text"
-                                   ng-disabled="card.modes.indexOf('reverse') === -1"
-                                   data-ng-model="card.answerExtension"
-                                   class="form-control "
-                                   ng-blur="update()"
-                                   placeholder="Card">
-
-                        </div>
-                    </div>
+                    <!--</div>-->
 
 
-                </div>
-
-                <div class="row">
-
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Expected answer</div>
-                        <div class="font-medium">
-                            {{card.question}}
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label" style="padding-bottom: 5px">Also accepted as answer</div>
-                        <div class="font-medium row" ng-repeat="aa in card.acceptedAnswersReverse track by $index">
-
-                            <div class="col-xs-1" style="margin-top: 2px">
-                                <a href="" style="padding-left: 5px"
-                                   data-ng-click="deleteAlternativeAnswerBack($index)"><i
-                                        class="glyphicon glyphicon-trash"></i></a>
-                            </div>
-                            <div class="col-xs-11">{{aa}}</div>
-                        </div>
-                        <div class="font-medium row" style="padding-top: 5px">
-
-
-                            <div class="col-xs-1" style="margin-top: 5px">
-                                <a href="" style="padding-left: 5px;" data-ng-click="addAlternativeAnswerBack()"><i
-                                        class="glyphicon glyphicon-plus-sign"></i></a>
-                            </div>
-                            <div class="col-xs-11">
-                                <form class="form-horizontal" data-ng-submit="addAlternativeAnswerBack()" novalidate>
-                                    <fieldset>
-                                        <input type="text"
-                                               ng-disabled="card.modes.indexOf('reverse') === -1"
-                                               data-ng-model="data.alternativeAnswerBack"
-                                               class="form-control "
-                                               placeholder="Add another answer">
-                                    </fieldset>
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <div class="row">
-
-                    <div class="col-xs-12 dashboard-col">
-
-                        <div class="field-label">Extras</div>
-
-                        <div class="row">
-                            <div class="font-medium col-xs-4">
-                                <a href="" data-ng-click="toggleSetting(card, 'readFrontReverse')"
-
-                                   data-ng-show="card.readFrontReverse"><i
-                                        class="glyphicon glyphicon-ok-circle"></i></a>
-                                <a href="" data-ng-click="toggleSetting(card, 'readFrontReverse')"
-                                   data-ng-show="!card.readFrontReverse"><i
-                                        class="glyphicon glyphicon-ban-circle"></i></a>
-                                <span ng-class="{'text-muted': !card.readFrontReverse}">Read Question</span>
-                            </div>
-
-
-                            <div class="field-data col-xs-4">
-                                <a href="" data-ng-click="toggleSetting(card, 'readBackReverse')"
-                                   data-ng-show="card.readBackReverse"><i
-                                        class="glyphicon glyphicon-ok-circle"></i></a>
-                                <a href="" data-ng-click="toggleSetting(card, 'readBackReverse')"
-                                   data-ng-show="!card.readBackReverse"><i
-                                        class="glyphicon glyphicon-ban-circle"></i></a>
-                                <span ng-class="{'text-muted': !card.readBackReverse}">Read Answer</span>
-                            </div>
-
-
-                            <div class="field-data col-xs-4">
-                                <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionReverse')"
-                                   data-ng-show="card.speechRecognitionReverse"><i
-                                        class="glyphicon glyphicon-ok-circle"></i></a>
-                                <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionReverse')"
-                                   data-ng-show="!card.speechRecognitionReverse"><i
-                                        class="glyphicon glyphicon-ban-circle"></i></a>
-                                <span ng-class="{'text-muted': !card.speechRecognitionReverse}">Speech Recognition</span>
-                            </div>
-                        </div>
-
-
-                    </div>
                 </div>
             </div>
-
         </div>
-    </div>
 
 
-    <div class="col-xs-6 dashboard-col">
-        <div class="virtual-card font-large">
-            <div class="title">
-                Images mode
-
-                <!--<div class="pull-right">-->
+        <div class="col-xs-6 dashboard-col" data-ng-if="card.slaves && card.slaves.length > 0">
+            <div class="virtual-card font-large">
+                <div class="title">
+                    Slaves
 
 
-                <!--<a href="" data-ng-click="areYouSureToDeleteCard(card)"><i-->
-                <!--class="glyphicon glyphicon-trash"></i></a>-->
+                </div>
 
-                <!--</div>-->
-
-
+                <div data-ng-repeat="slave in card.slaves">
+                    <a href="/#!/cards/{{slave}}">{{slave}}</a>
+                </div>
             </div>
         </div>
     </div>

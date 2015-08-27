@@ -1,6 +1,26 @@
 <section data-ng-controller="SchoolsController" class="font-large" data-ng-init="findOne()">
 
 
+    <div class="col-xs-12  font-large title" style="text-align: center">
+        <div class="row">
+            <div class="col-xs-1">
+                <a href="" data-ng-click="scrollDown()"><i
+                        class="glyphicon glyphicon-circle-arrow-down"></i></a>
+            </div>
+
+            <div class="col-xs-10">
+                <a href="" data-ng-click="scrollDown()">Scroll down to add more
+                    classes
+                </a>
+            </div>
+
+            <div class="col-xs-1">
+                <a href="" data-ng-click="scrollDown()"><i
+                        class="glyphicon glyphicon-circle-arrow-down"></i></a>
+            </div>
+        </div>
+    </div>
+
     <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="authentication.user.roles.indexOf('help') > -1">
         <div class="virtual-card font-large virtual-card">
             <div class="title">Manage School</div>
@@ -146,6 +166,38 @@
                 </div>
 
             </div>
+        </div>
+
+
+    </div>
+
+    <div class="col-xs-6 dashboard-col">
+
+        <div class="font-large virtual-card-header">
+
+            <form data-ng-submit="addSchoolclassToSchool()" validate>
+
+                <div class="title">
+
+
+                    <div class="pull-right">
+
+
+                        <a href="" data-ng-click="addSchoolclassToSchool()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+
+
+                    </div>
+                    Add another class <input type="text" data-ng-model="newclass.name"
+                                             class="form-control focus"
+                                             placeholder="Name">
+
+
+                </div>
+
+
+            </form>
+
         </div>
     </div>
 

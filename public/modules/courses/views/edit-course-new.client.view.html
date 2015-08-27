@@ -219,106 +219,139 @@
             </div>
 
 
-            <div class="col-xs-12">
-                <div class="flashcard-section">
-                    <div class="field-label">
-
-                        Forward
-                    </div>
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="flashcard-section" ng-class="{'text-muted': !course.cardDefaults.forward.enabled}">
+                        <div class="field-label">
 
 
-                    <div class="row font-medium">
+                            <a href="" data-ng-click="toggleMode('forward')"
+                               data-ng-if="course.cardDefaults.forward.enabled"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleMode('forward')"
+                               data-ng-if="!course.cardDefaults.forward.enabled"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
 
-                        <div class="col-xs-4">
-                            <input type="checkbox" ng-model="useForwardMode">
-                            Use Mode
+                            Forward Mode
                         </div>
 
 
-                        <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
-                            <input type="checkbox" ng-model="readQuestionsForward"
-                                   ng-disabled="!useForwardMode">
+                        <div class="field-data" ng-if="course.cardDefaults.forward.enabled" >
+
+
+                            <a href="" data-ng-click="toggleSetting('forward', 'readFront')"
+                               data-ng-if="course.cardDefaults.forward.readFront"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('forward', 'readFront')"
+                               data-ng-if="!course.cardDefaults.forward.readFront"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
                             Read Questions
                         </div>
 
-                        <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
-                            <input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">
+
+                        <div class="field-data" ng-if="course.cardDefaults.forward.enabled">
+
+
+                            <a href="" data-ng-click="toggleSetting('forward', 'readBack')"
+                               data-ng-if="course.cardDefaults.forward.readBack"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('forward', 'readBack')"
+                               data-ng-if="!course.cardDefaults.forward.readFront"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
                             Read Answers
                         </div>
+
+                        <div class="field-data" ng-if="course.cardDefaults.forward.enabled">
+
+
+                            <a href="" data-ng-click="toggleSetting('forward', 'speechRecognition')"
+                               data-ng-if="course.cardDefaults.forward.speechRecognition"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('forward', 'speechRecognition')"
+                               data-ng-if="!course.cardDefaults.forward.speechRecognition"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+                            Speech Recognition
+                        </div>
+
+                        <!--<div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">-->
+                        <!--<input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">-->
+                        <!--Read Answers-->
+                        <!--</div>-->
 
                     </div>
                 </div>
             </div>
-
-
-            <div class="col-xs-12">
-                <div class="flashcard-section">
-
-                    <div class="field-label">
-
-                        Reverse
-                    </div>
-
-
-                    <div class="row font-medium">
-
-                        <div class="col-xs-4">
-                            <input type="checkbox" ng-model="useReverseMode">
-                            Use Mode
-                        </div>
-
-
-                        <div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">
-                            <input type="checkbox" ng-model="readQuestionsReverse"
-                                   ng-disabled="!useReverseMode">
-                            Read Questions
-                        </div>
-
-                        <div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">
-                            <input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">
-                            Read Answers
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
-
-            <div class="col-xs-12">
-                <div class="flashcard-section">
-
-                    <div class="field-label">
-
-                        Images
-                    </div>
-
-
-                    <div class="row font-medium">
-
-                        <div class="col-xs-4">
-                            <input type="checkbox" ng-model="useImagesMode">
-                            Use Mode
-                        </div>
-
-
-                        <div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">
-                            <input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">
-                            Read Questions
-                        </div>
-
-                        <div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">
-                            <input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">
-                            Read Answers
-                        </div>
-
-
-                    </div>
-                </div>
-            </div>
-
-
         </div>
+
+
+        <!--<div class="col-xs-12">-->
+        <!--<div class="flashcard-section">-->
+
+        <!--<div class="field-label">-->
+
+        <!--Reverse-->
+        <!--</div>-->
+
+
+        <!--<div class="row font-medium">-->
+
+        <!--<div class="col-xs-4">-->
+        <!--<input type="checkbox" ng-model="useReverseMode">-->
+        <!--Use Mode-->
+        <!--</div>-->
+
+
+        <!--<div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">-->
+        <!--<input type="checkbox" ng-model="readQuestionsReverse"-->
+        <!--ng-disabled="!useReverseMode">-->
+        <!--Read Questions-->
+        <!--</div>-->
+
+        <!--<div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">-->
+        <!--<input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">-->
+        <!--Read Answers-->
+        <!--</div>-->
+
+
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+
+        <!--<div class="col-xs-12">-->
+        <!--<div class="flashcard-section">-->
+
+        <!--<div class="field-label">-->
+
+        <!--Images-->
+        <!--</div>-->
+
+
+        <!--<div class="row font-medium">-->
+
+        <!--<div class="col-xs-4">-->
+        <!--<input type="checkbox" ng-model="useImagesMode">-->
+        <!--Use Mode-->
+        <!--</div>-->
+
+
+        <!--<div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">-->
+        <!--<input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">-->
+        <!--Read Questions-->
+        <!--</div>-->
+
+        <!--<div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">-->
+        <!--<input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">-->
+        <!--Read Answers-->
+        <!--</div>-->
+
+
+        <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+
+
+    </div>
 
 
     </div>

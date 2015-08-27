@@ -69,6 +69,13 @@ angular.module('courses').controller('CoursesControllerNew',
                 $scope.course.$update();
             };
 
+            $scope.toggleMode = function(mode) {
+                if(mode === 'forward') {
+                    $scope.course.cardDefaults.forward.enabled = !$scope.course.cardDefaults.forward.enabled;
+                }
+                $scope.course.$update();
+            };
+
 
             $scope.scrollDown = function() {
                 $window.scrollTo(0, document.body.scrollHeight);

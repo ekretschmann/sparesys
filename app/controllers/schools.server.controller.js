@@ -160,7 +160,7 @@ exports.list = function(req, res) {
         var search = req.query.text.split(' ');
 
         if (search.length === 1) {
-            School.find({$or: [{'name': {$regex: '^' + search[0]}}, {'city': {$regex: '^' + search[0]}}, {'country': {$regex: '^' + search[0]}}]}).limit(25).exec(function (err, schools) {
+            School.find({$or: [{'name': {$regex: search[0]}}, {'city': {$regex: '^' + search[0]}}, {'country': {$regex: '^' + search[0]}}]}).limit(25).exec(function (err, schools) {
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)
@@ -183,7 +183,7 @@ exports.list = function(req, res) {
                 }
             });
         } else if (search.length === 2) {
-            School.find({$and: [{'name': {$regex: '^' + search[0]}}, {'city': {$regex: '^' + search[1]}}]}).limit(25).exec(function (err, schools) {
+            School.find({$and: [{'name': {$regex: search[0]}}, {'city': {$regex: '^' + search[1]}}]}).limit(25).exec(function (err, schools) {
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)

@@ -325,9 +325,9 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //            });
 //        };
 //
-//        $scope.find = function () {
-//            $scope.schools = Schools.query();
-//        };
+        $scope.find = function () {
+            $scope.schools = Schools.query();
+        };
 //
 //        // Find existing School
 //        $scope.findById = function (id) {
@@ -384,17 +384,17 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //
 //        $scope.options = {};
 //
-//        $scope.updateSearch = function () {
-//
-//            console.log($scope.options);
-//
-//            Schools.query({
-//                text: $scope.options.searchText
-//            }, function(schools) {
-//                $scope.schools = schools;
-//
-//            });
-//        };
+        $scope.updateSearch = function () {
+
+            console.log($scope.options);
+
+            Schools.query({
+                text: $scope.options.searchText
+            }, function(schools) {
+                $scope.schools = schools;
+
+            });
+        };
 
 
     }

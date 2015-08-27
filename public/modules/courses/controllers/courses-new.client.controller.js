@@ -70,9 +70,44 @@ angular.module('courses').controller('CoursesControllerNew',
             };
 
             $scope.toggleMode = function(mode) {
+
                 if(mode === 'forward') {
                     $scope.course.cardDefaults.forward.enabled = !$scope.course.cardDefaults.forward.enabled;
+                } else if(mode === 'reverse') {
+                    $scope.course.cardDefaults.reverse.enabled = !$scope.course.cardDefaults.reverse.enabled;
+                } else if(mode === 'images') {
+                    $scope.course.cardDefaults.images.enabled = !$scope.course.cardDefaults.images.enabled;
                 }
+                $scope.course.$update();
+            };
+
+            $scope.toggleSetting = function(mode, setting) {
+                if (mode === 'forward') {
+                    if (setting === 'readFront') {
+                        $scope.course.cardDefaults.forward.readFront = !$scope.course.cardDefaults.forward.readFront;
+                    } else if (setting === 'readBack') {
+                        $scope.course.cardDefaults.forward.readBack = !$scope.course.cardDefaults.forward.readBack;
+                    } else if (setting === 'speechRecognition') {
+                        $scope.course.cardDefaults.forward.speechRecognition = !$scope.course.cardDefaults.forward.speechRecognition;
+                    }
+                } else if (mode === 'reverse') {
+                    if (setting === 'readFront') {
+                        $scope.course.cardDefaults.reverse.readFront = !$scope.course.cardDefaults.reverse.readFront;
+                    } else if (setting === 'readBack') {
+                        $scope.course.cardDefaults.reverse.readBack = !$scope.course.cardDefaults.reverse.readBack;
+                    } else if (setting === 'speechRecognition') {
+                        $scope.course.cardDefaults.reverse.speechRecognition = !$scope.course.cardDefaults.reverse.speechRecognition;
+                    }
+                } else if (mode === 'images') {
+                    if (setting === 'readFront') {
+                        $scope.course.cardDefaults.images.readFront = !$scope.course.cardDefaults.images.readFront;
+                    } else if (setting === 'readBack') {
+                        $scope.course.cardDefaults.images.readBack = !$scope.course.cardDefaults.images.readBack;
+                    } else if (setting === 'speechRecognition') {
+                        $scope.course.cardDefaults.images.speechRecognition = !$scope.course.cardDefaults.images.speechRecognition;
+                    }
+                }
+
                 $scope.course.$update();
             };
 

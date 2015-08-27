@@ -221,10 +221,10 @@
 
             <div class="row">
                 <div class="col-xs-4">
-                    <div class="flashcard-section" ng-class="{'text-muted': !course.cardDefaults.forward.enabled}">
-                        <div class="field-label">
+                    <div class="flashcard-section">
 
 
+                        <div class="field-data">
                             <a href="" data-ng-click="toggleMode('forward')"
                                data-ng-if="course.cardDefaults.forward.enabled"><i
                                     class="glyphicon glyphicon-ok-circle"></i></a>
@@ -232,7 +232,7 @@
                                data-ng-if="!course.cardDefaults.forward.enabled"><i
                                     class="glyphicon glyphicon-ban-circle"></i></a>
 
-                            Forward Mode
+                            <span class="field-label" ng-class="{'text-muted': !course.cardDefaults.forward.enabled}">Forward Mode</span>
                         </div>
 
 
@@ -245,7 +245,7 @@
                             <a href="" data-ng-click="toggleSetting('forward', 'readFront')"
                                data-ng-if="!course.cardDefaults.forward.readFront"><i
                                     class="glyphicon glyphicon-ban-circle"></i></a>
-                            Read Questions
+                            <span ng-class="{'text-muted': !course.cardDefaults.forward.readFront}">Read Questions</span>
                         </div>
 
 
@@ -256,9 +256,9 @@
                                data-ng-if="course.cardDefaults.forward.readBack"><i
                                     class="glyphicon glyphicon-ok-circle"></i></a>
                             <a href="" data-ng-click="toggleSetting('forward', 'readBack')"
-                               data-ng-if="!course.cardDefaults.forward.readFront"><i
+                               data-ng-if="!course.cardDefaults.forward.readBack"><i
                                     class="glyphicon glyphicon-ban-circle"></i></a>
-                            Read Answers
+                            <span ng-class="{'text-muted': !course.cardDefaults.forward.readBack}">Read Answers</span>
                         </div>
 
                         <div class="field-data" ng-if="course.cardDefaults.forward.enabled">
@@ -270,7 +270,130 @@
                             <a href="" data-ng-click="toggleSetting('forward', 'speechRecognition')"
                                data-ng-if="!course.cardDefaults.forward.speechRecognition"><i
                                     class="glyphicon glyphicon-ban-circle"></i></a>
-                            Speech Recognition
+                            <span ng-class="{'text-muted': !course.cardDefaults.forward.speechRecognition}">Speech Recognition</span>
+                        </div>
+
+                        <!--<div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">-->
+                        <!--<input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">-->
+                        <!--Read Answers-->
+                        <!--</div>-->
+
+                    </div>
+                </div>
+
+
+                <div class="col-xs-4">
+                    <div class="flashcard-section">
+
+
+                        <div class="field-data">
+                            <a href="" data-ng-click="toggleMode('reverse')"
+                               data-ng-if="course.cardDefaults.reverse.enabled"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleMode('reverse')"
+                               data-ng-if="!course.cardDefaults.reverse.enabled"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+
+                            <span class="field-label" ng-class="{'text-muted': !course.cardDefaults.reverse.enabled}">Reverse Mode</span>
+                        </div>
+
+
+                        <div class="field-data" ng-if="course.cardDefaults.reverse.enabled" >
+
+
+                            <a href="" data-ng-click="toggleSetting('reverse', 'readFront')"
+                               data-ng-if="course.cardDefaults.reverse.readFront"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('reverse', 'readFront')"
+                               data-ng-if="!course.cardDefaults.reverse.readFront"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+                            <span ng-class="{'text-muted': !course.cardDefaults.reverse.readFront}">Read Questions</span>
+                        </div>
+
+
+                        <div class="field-data" ng-if="course.cardDefaults.reverse.enabled">
+
+
+                            <a href="" data-ng-click="toggleSetting('reverse', 'readBack')"
+                               data-ng-if="course.cardDefaults.reverse.readBack"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('reverse', 'readBack')"
+                               data-ng-if="!course.cardDefaults.reverse.readBack"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+                            <span ng-class="{'text-muted': !course.cardDefaults.reverse.readBack}">Read Answers</span>
+                        </div>
+
+                        <div class="field-data" ng-if="course.cardDefaults.reverse.enabled">
+
+
+                            <a href="" data-ng-click="toggleSetting('reverse', 'speechRecognition')"
+                               data-ng-if="course.cardDefaults.reverse.speechRecognition"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('reverse', 'speechRecognition')"
+                               data-ng-if="!course.cardDefaults.reverse.speechRecognition"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+                            <span ng-class="{'text-muted': !course.cardDefaults.reverse.speechRecognition}">Speech Recognition</span>
+                        </div>
+
+
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-xs-4">
+                    <div class="flashcard-section">
+
+
+                        <div class="field-data">
+                            <a href="" data-ng-click="toggleMode('images')"
+                               data-ng-if="course.cardDefaults.images.enabled"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleMode('images')"
+                               data-ng-if="!course.cardDefaults.images.enabled"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+
+                            <span class="field-label" ng-class="{'text-muted': !course.cardDefaults.images.enabled}">Images Mode</span>
+                        </div>
+
+
+                        <div class="field-data" ng-if="course.cardDefaults.images.enabled" >
+
+
+                            <a href="" data-ng-click="toggleSetting('images', 'readFront')"
+                               data-ng-if="course.cardDefaults.images.readFront"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('images', 'readFront')"
+                               data-ng-if="!course.cardDefaults.images.readFront"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+                            <span ng-class="{'text-muted': !course.cardDefaults.images.readFront}">Read Questions</span>
+                        </div>
+
+
+                        <div class="field-data" ng-if="course.cardDefaults.images.enabled">
+
+
+                            <a href="" data-ng-click="toggleSetting('images', 'readBack')"
+                               data-ng-if="course.cardDefaults.images.readBack"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('images', 'readBack')"
+                               data-ng-if="!course.cardDefaults.images.readBack"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+                            <span ng-class="{'text-muted': !course.cardDefaults.images.readBack}">Read Answers</span>
+                        </div>
+
+                        <div class="field-data" ng-if="course.cardDefaults.images.enabled">
+
+
+                            <a href="" data-ng-click="toggleSetting('images', 'speechRecognition')"
+                               data-ng-if="course.cardDefaults.images.speechRecognition"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('images', 'speechRecognition')"
+                               data-ng-if="!course.cardDefaults.images.speechRecognition"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+                            <span ng-class="{'text-muted': !course.cardDefaults.images.speechRecognition}">Speech Recognition</span>
                         </div>
 
                         <!--<div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">-->

@@ -41,16 +41,36 @@ exports.create = function (req, res) {
     var schoolclass = new Schoolclass(req.body);
     schoolclass.user = req.user;
 
-    schoolclass.save(function (err) {
-        console.log(err);
+    School.findById(schoolclass.school).exec(function (err, school) {
+
+
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
             });
         } else {
-            res.jsonp(schoolclass);
+            schoolclass.save(function (err) {
+
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+
+                    school.schoolclasses.push(schoolclass._id);
+                    school.save(function(err, s) {
+                        console.log(s);
+                        res.jsonp(schoolclass);
+                    });
+
+
+                }
+            });
         }
+
     });
+
+
 };
 
 /**
@@ -99,9 +119,9 @@ exports.addTeacher = function (req, res) {
 exports.update = function (req, res) {
 
 
-    var schoolclass = req.schoolclass ;
+    var schoolclass = req.schoolclass;
 
-    schoolclass = _.extend(schoolclass , req.body);
+    schoolclass = _.extend(schoolclass, req.body);
 
 
     console.log(schoolclass);
@@ -139,7 +159,6 @@ exports.update = function (req, res) {
 
 
     //console.log(schoolclass.teachers);
-
 
 
     //console.log(schoolclass);
@@ -261,50 +280,50 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
 
 
-        if (req.query.teacher) {
+    if (req.query.teacher) {
 
-            Schoolclass.find({'teachers': req.query.teacher}).populate('students', 'displayName').populate('courses').exec(function (err, schoolclasses) {
-                if (err) {
-                    return res.send(400, {
-                        message: getErrorMessage(err)
-                    });
-                } else {
-                    res.jsonp(schoolclasses);
-                }
-            });
-        } else if (req.query.userId) {
+        Schoolclass.find({'teachers': req.query.teacher}).populate('students', 'displayName').populate('courses').exec(function (err, schoolclasses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(schoolclasses);
+            }
+        });
+    } else if (req.query.userId) {
 
-            Schoolclass.find({'user': req.query.userId}).exec(function (err, schoolclasses) {
-                if (err) {
-                    return res.send(400, {
-                        message: getErrorMessage(err)
-                    });
-                } else {
-                    res.jsonp(schoolclasses);
-                }
-            });
-        } else if (req.query.courses) {
+        Schoolclass.find({'user': req.query.userId}).exec(function (err, schoolclasses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(schoolclasses);
+            }
+        });
+    } else if (req.query.courses) {
 
-            Schoolclass.find({'courses': req.query.courses}).exec(function (err, schoolclasses) {
-                if (err) {
-                    return res.send(400, {
-                        message: getErrorMessage(err)
-                    });
-                } else {
-                    res.jsonp(schoolclasses);
-                }
-            });
-        } else {
-            Schoolclass.find().exec(function (err, schoolclasses) {
-                if (err) {
-                    return res.send(400, {
-                        message: getErrorMessage(err)
-                    });
-                } else {
-                    res.jsonp(schoolclasses);
-                }
-            });
-        }
+        Schoolclass.find({'courses': req.query.courses}).exec(function (err, schoolclasses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(schoolclasses);
+            }
+        });
+    } else {
+        Schoolclass.find().exec(function (err, schoolclasses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(schoolclasses);
+            }
+        });
+    }
 
 };
 

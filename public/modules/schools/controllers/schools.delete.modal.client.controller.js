@@ -20,11 +20,11 @@ angular.module('schools').controller('DeleteSchoolModalController', ['$scope', '
             }, function (s) {
 
                 s.$remove(function(result) {
-                    $state.go($state.$current, null, {reload: true});
+                    $modalInstance.close();
                 });
 
             });
-            $modalInstance.close();
+
 
         };
 

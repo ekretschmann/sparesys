@@ -1,7 +1,7 @@
 'use strict';
 
 // Schools controller
-angular.module('schools').controller('SchoolsController', ['$window', '$scope', '$timeout', '$state','$stateParams', '$location', '$modal', 'Authentication', 'Schools',
+angular.module('schools').controller('SchoolsController', ['$window', '$scope', '$timeout', '$state', '$stateParams', '$location', '$modal', 'Authentication', 'Schools',
     function ($window, $scope, $timeout, $state, $stateParams, $location, $modal, Authentication, Schools) {
         $scope.authentication = Authentication;
 
@@ -15,12 +15,12 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //            angular.element('.focus').trigger('focus');
 //        }, 100);
 //
-//        $scope.registerSchoolPopup = function () {
-//            $modal.open({
-//                templateUrl: 'registerSchool.html',
-//                controller: 'RegisterSchoolController'
-//            });
-//        };
+        $scope.registerSchoolPopup = function () {
+            $modal.open({
+                templateUrl: 'registerSchool.html',
+                controller: 'RegisterSchoolController'
+            });
+        };
 //
 //
 //        $scope.subscribeTeacher = function (user) {
@@ -189,7 +189,8 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //            $scope.school = school;
 //            $modal.open({
 //                templateUrl: 'subscribeTeacher.html',
-//                controller: 'SubscribeTeacherModalController',
+//                controller: 'SubscribeTeacherModalController',    qwe
+
 //                resolve: {
 //                    school: function () {
 //                        return $scope.school;
@@ -199,21 +200,30 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //
 //        };
 //
-//        $scope.areYouSureToDeleteSchool = function (school) {
-//
-//            $scope.school = school;
-//            $modal.open({
-//                templateUrl: 'areYouSureToDeleteSchool.html',
-//                controller: 'DeleteSchoolModalController',
-//                resolve: {
-//
-//                    school: function () {
-//                        return $scope.school;
-//                    }
-//                }
-//            });
-//
-//        };
+        $scope.areYouSureToDeleteSchool = function (school) {
+
+            //console.log($scope.authentication.user.administersSchools);
+            var index = $scope.authentication.user.administersSchools.indexOf(school._id);
+
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteSchool.html',
+                controller: 'DeleteSchoolModalController',
+                resolve: {
+
+                    school: function () {
+                        return school;
+                    }
+                }
+            }).result.then(function () {
+                    if (index > -1) {
+                        $scope.authentication.user.administersSchools.splice(index, 1);
+                    }
+                    if ($scope.schools) {
+                        $scope.schools = Schools.query();
+                    }
+                });
+
+        };
 //
 //        $scope.findForTeacher = function (teacher) {
 //            $scope.schools = Schools.query({
@@ -390,7 +400,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
             Schools.query({
                 text: $scope.options.searchText
-            }, function(schools) {
+            }, function (schools) {
                 $scope.schools = schools;
 
             });

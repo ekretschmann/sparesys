@@ -37,10 +37,12 @@ var getErrorMessage = function (err) {
  * Create a Schoolclass
  */
 exports.create = function (req, res) {
+
     var schoolclass = new Schoolclass(req.body);
     schoolclass.user = req.user;
 
     schoolclass.save(function (err) {
+        console.log(err);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -97,20 +99,43 @@ exports.addTeacher = function (req, res) {
 exports.update = function (req, res) {
 
 
+    var schoolclass = req.schoolclass ;
 
-    var schoolclass = req.schoolclass;
-    //var originalTeachers = schoolclass.teachers;
-    //var originalStudents = schoolclass.students;
+    schoolclass = _.extend(schoolclass , req.body);
+
+
+    console.log(schoolclass);
+
+
+    //$scope.school.schoolclasses.push(schoolClass);
+    //$scope.school.$save(function(){
+    //
+    //});
+
+    //schoolclass.save(function(err) {
+    //    if (err) {
+    //        return res.send(400, {
+    //            message: getErrorMessage(err)
+    //        });
+    //    } else {
+    //        res.jsonp(message);
+    //    }
+    //});
+
+
+    //var schoolclass = req.schoolclass;
+    ////var originalTeachers = schoolclass.teachers;
+    ////var originalStudents = schoolclass.students;
+    ////
+    ////schoolclass = _.extend(schoolclass, req.body);
+    //
+    ////schoolclass.students = req.body.students;
+    ////schoolclass.teachers = req.body.teachers;
+    //
     //
     //schoolclass = _.extend(schoolclass, req.body);
-
-    //schoolclass.students = req.body.students;
-    //schoolclass.teachers = req.body.teachers;
-
-
-    schoolclass = _.extend(schoolclass, req.body);
-    console.log(schoolclass.teachers);
-    console.log(req.body.teachers);
+    //console.log(schoolclass.teachers);
+    //console.log(req.body.teachers);
 
 
     //console.log(schoolclass.teachers);
@@ -198,20 +223,22 @@ exports.delete = function (req, res) {
                 message: getErrorMessage(err)
             });
         } else {
-            school = schools[0];
-            for(var i=0; i<school.schoolclasses.length; i++) {
-                if (schoolclass._id.toString() === school.schoolclasses[i].toString()) {
-                    school.schoolclasses.splice(i,1);
+            if (school) {
+                school = schools[0];
+                for (var i = 0; i < school.schoolclasses.length; i++) {
+                    if (schoolclass._id.toString() === school.schoolclasses[i].toString()) {
+                        school.schoolclasses.splice(i, 1);
+                    }
                 }
-            }
 
-            school.save(function(err) {
-                if (err) {
-                    return res.send(400, {
-                        message: getErrorMessage(err)
-                    });
-                }
-            });
+                school.save(function (err) {
+                    if (err) {
+                        return res.send(400, {
+                            message: getErrorMessage(err)
+                        });
+                    }
+                });
+            }
         }
     });
 

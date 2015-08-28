@@ -1,8 +1,9 @@
 'use strict';
 
 // Schools controller
-angular.module('schools').controller('SchoolsController', ['$window', '$scope', '$timeout', '$state', '$stateParams', '$location', '$modal', 'Authentication', 'Schools',
-    function ($window, $scope, $timeout, $state, $stateParams, $location, $modal, Authentication, Schools) {
+angular.module('schools').controller('SchoolsController', ['$window', '$scope', '$timeout', '$state', '$stateParams', '$location', '$modal',
+    'Authentication', 'Schools', 'Schoolclasses',
+    function ($window, $scope, $timeout, $state, $stateParams, $location, $modal, Authentication, Schools, Schoolclasses) {
         $scope.authentication = Authentication;
 
 
@@ -33,20 +34,43 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //        };
 //
 //
-//        $scope.addClassPopup = function (size) {
-//
-//            $modal.open({
-//                templateUrl: 'addClass.html',
-//                controller: 'AddClassController',
-//                size: size,
-//                resolve: {
-//                    school: function () {
-//                        return $scope.school;
-//                    }
-//                }
-//            });
-//
-//        };
+
+        $scope.newClass = {};
+        $scope.newClass.name = '';
+        $scope.addSchoolclassToSchool = function () {
+
+            console.log($scope.school);
+
+            var schoolClass = new Schoolclasses({
+                name: $scope.newClass.name,
+                school: $scope.school._id
+
+            });
+
+            schoolClass.$save(function(sc) {
+
+                console.log('ga create schoolclass');
+                console.log('/schools/:id/addclass/:id');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/schools/:id/addclass/:id');
+                    $window.ga('send', 'event', 'user creates schoolclass');
+                }
+
+                $scope.school.schoolclasses.push(schoolClass);
+                $scope.school.$save(function(){
+
+                });
+
+
+
+            });
+
+
+            this.newClass.name = '';
+            angular.element('.focus').trigger('focus');
+
+        };
 //
 //        $scope.setupClassPopup = function (schoolclass, school) {
 //

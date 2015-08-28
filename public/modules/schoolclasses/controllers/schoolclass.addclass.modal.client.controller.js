@@ -38,10 +38,7 @@ angular.module('schoolclasses').controller('AddClassController', ['$scope', '$st
                     $window.ga('send', 'event', 'user creates schoolclass');
                 }
 
-                $scope.school.schoolclasses.push(schoolClass);
-                $scope.school.$save(function(){
 
-                });
 
 
 

@@ -9,6 +9,9 @@ module.exports = function(app) {
 		.get(schoolclasses.list)
 		.post(users.requiresLogin, schoolclasses.create);
 
+	app.route('/schoolclasses/:schoolclassId/addTeacher/:userId')
+		.post(users.requiresLogin, schoolclasses.hasAuthorization, schoolclasses.addTeacher);
+
 	app.route('/schoolclasses/:schoolclassId')
 		.get(schoolclasses.read)
 		.put(users.requiresLogin, schoolclasses.update)

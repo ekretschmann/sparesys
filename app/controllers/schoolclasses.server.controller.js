@@ -59,6 +59,37 @@ exports.read = function (req, res) {
 };
 
 
+exports.addTeacher = function (req, res) {
+    //console.log(req.schoolclass);
+    //console.log(req.params);
+    //console.log(req.params.userId);
+
+
+    var schoolclass = req.schoolclass;
+    console.log(schoolclass);
+    schoolclass.teachers.push(req.params.userId);
+
+    console.log(schoolclass);
+    schoolclass.save(function (err) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            console.log(schoolclass);
+            res.jsonp(schoolclass);
+        }
+    });
+
+    //Schoolclass.findById(id).populate('user', 'displayName').populate('teachers', 'displayName').populate('students', 'displayName').exec(function (err, schoolclass) {
+    //    if (err) return next(err);
+    //    if (!schoolclass) return next(new Error('Failed to load Schoolclass ' + id));
+    //    req.schoolclass = schoolclass;
+    //    next();
+    //});
+
+
+};
 
 /**
  * Update a Schoolclass

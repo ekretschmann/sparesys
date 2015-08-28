@@ -330,37 +330,37 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
         };
 //
 //        // Find existing School
-//        $scope.findById = function (id) {
-//            if (id) {
-//                $scope.school = Schools.get({
-//                    schoolId: id
-//                }, function (s) {
-//                    $scope.schoolclasses = s.schoolclasses;
-//                }, function (err) {
-//                    $scope.error = err.data.message;
-//                });
-//            }
-//        };
+        $scope.findById = function (id) {
+            if (id) {
+                $scope.school = Schools.get({
+                    schoolId: id
+                }, function (s) {
+                    $scope.schoolclasses = s.schoolclasses;
+                }, function (err) {
+                    $scope.error = err.data.message;
+                });
+            }
+        };
 //
-//        $scope.schoolclasses = [];
-//
-//        $scope.populateSchoolForUser = function (schoolId, user) {
-//
-//            Schools.get({
-//                schoolId: schoolId
-//            }, function (s) {
-//                console.log(s);
-//                $scope.school = s;
-//                $scope.schoolclasses = s.schoolclasses;
-//                $scope.schoolclasses = [];
-//                for (var i = 0; i < $scope.school.schoolclasses.length; i++) {
-//                    var schoolclass = $scope.school.schoolclasses[i];
-//                    if (user.studentInClasses.indexOf(schoolclass._id) !== -1) {
-//                        $scope.schoolclasses.push(schoolclass);
-//                    }
-//                }
-//            });
-//        };
+        $scope.schoolclasses = [];
+
+        $scope.populateSchoolForUser = function (schoolId, user) {
+
+            Schools.get({
+                schoolId: schoolId
+            }, function (s) {
+                console.log(s);
+                $scope.school = s;
+                $scope.schoolclasses = s.schoolclasses;
+                $scope.schoolclasses = [];
+                for (var i = 0; i < $scope.school.schoolclasses.length; i++) {
+                    var schoolclass = $scope.school.schoolclasses[i];
+                    if (user.studentInClasses.indexOf(schoolclass._id) !== -1) {
+                        $scope.schoolclasses.push(schoolclass);
+                    }
+                }
+            });
+        };
 //
         // Find existing School
         $scope.findOne = function () {

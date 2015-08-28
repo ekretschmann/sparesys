@@ -49,8 +49,13 @@ angular.module('courses').controller('CoursesControllerNew',
 
 
             $scope.setLanguageFront = function(lang) {
+                if($scope.course.cardDefaults === []) {
+                    $scope.course.cardDefaults = {};
+                }
                 $scope.course.cardDefaults.languageFront = lang;
-                $scope.course.$update();
+                $scope.course.$update(function(c) {
+                    console.log(c);
+                });
             };
 
             $scope.setLanguageBack = function(lang) {
@@ -256,19 +261,20 @@ angular.module('courses').controller('CoursesControllerNew',
 
                 $scope.course = Courses.get({
                     courseId: $stateParams.courseId
-                }, function () {
+                }, function (c) {
 
+                    //console.log(c);
 
-                    var res = CoursesService.serverLoadCards();
-                    res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
-                        $scope.course.cards = cards;
-                        $scope.course.showCards = [];
-                        var showSize = Math.min(cards.length, $scope.MAX_SHOW_CARDS);
-                        for (var i = 0; i < showSize; i++) {
-                            $scope.course.showCards.push(cards[i]);
-                        }
-
-                    });
+                    //var res = CoursesService.serverLoadCards();
+                    //res.get({courseId: $stateParams.courseId}).$promise.then(function (cards) {
+                    //    $scope.course.cards = cards;
+                    //    $scope.course.showCards = [];
+                    //    var showSize = Math.min(cards.length, $scope.MAX_SHOW_CARDS);
+                    //    for (var i = 0; i < showSize; i++) {
+                    //        $scope.course.showCards.push(cards[i]);
+                    //    }
+                    //
+                    //});
                 });
 
 

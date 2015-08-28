@@ -150,8 +150,11 @@
                             <div class="btn-group right-padded-l nowrap">
 
 
-                                <button type="button" class="btn btn-default standard-dropdown-width">
+                                <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="course.cardDefaults.languageFront">
                                     {{course.cardDefaults.languageFront.name}}
+                                </button>
+                                <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="!course.cardDefaults.languageFront">
+                                    {{languages[0].name}}
                                 </button>
                                 <button type="button" class="btn btn-default dropdown-toggle">
                                     <span class="caret"></span>

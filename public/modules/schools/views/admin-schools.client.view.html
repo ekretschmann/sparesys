@@ -109,6 +109,12 @@
                     </div>
 
 
+                    <div class="col-xs-6">
+                        <div class="field-label">Classes</div>
+                        <div class="field-data" data-ng-repeat="c in school.schoolclasses">
+                            <a href="/#!/schoolclasses/admin/{{c._id}}">{{c.name}}</a>
+                        </div>
+                    </div>
 
                 </div>
             </div>

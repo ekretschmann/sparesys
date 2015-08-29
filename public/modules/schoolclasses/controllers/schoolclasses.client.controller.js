@@ -59,8 +59,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         $scope.areYouSureToDeleteClass = function (schoolclass, school) {
 
 
-            $scope.schoolclass = schoolclass;
-            $scope.school = school;
+
             $modal.open({
                 templateUrl: 'areYouSureToDeleteClass.html',
                 controller: 'DeleteClassModalController',

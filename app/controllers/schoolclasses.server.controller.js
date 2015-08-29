@@ -58,6 +58,7 @@ exports.create = function (req, res) {
                 } else {
 
                     school.schoolclasses.push(schoolclass._id);
+
                     school.save(function(err, s) {
                         console.log(s);
                         res.jsonp(schoolclass);

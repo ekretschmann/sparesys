@@ -57,65 +57,73 @@
 
             </div>
 
-            <div class="row">
-                <div class="col-xs-6 dashboard-col">
+            <div class="flashcard-section">
+                <div class="row">
+                    <div class="col-xs-6 dashboard-col">
 
-                    <div class="field-label">ID</div>
-                    <div class="field-data">
-                        {{sc._id}}
+                        <div class="field-label">ID</div>
+                        <div class="field-data">
+                            {{sc._id}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Name</div>
+                        <div class="field-data">
+                            {{sc.name}}
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-xs-6 dashboard-col">
-                    <div class="field-label">Name</div>
-                    <div class="field-data">
-                        {{sc.name}}
+
+                <div class="row">
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">School</div>
+                        <div class="field-data">
+                            {{sc.school}}
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+                <div class="row">
+                    <div class="col-xs-6 field-label dashboard-col-attached">Teachers</div>
+                    <div class="col-xs-6 field-label dashboard-col-attached">Students</div>
+                </div>
+
+
+                <div class="row ">
+                    <div class="col-xs-6 field-label dashboard-col">
+                        <div class="field-data danger" data-ng-if="!sc.teachers || sc.teachers.length === 0">
+                            none
+                        </div>
+                        <div data-ng-repeat="teacher in sc.teachers">
+
+
+                            <div class="field-data">
+                                {{teacher.displayName}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 field-label dashboard-col">
+                        <div class="field-data danger" data-ng-if="!sc.students || sc.students.length === 0">
+                            none
+                        </div>
+                        <div data-ng-repeat="students in sc.students">
+
+                            <div class="field-data">
+                                {{students.displayName}}
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
 
-
-            <div class="row">
-
-                <div class="col-xs-6 dashboard-col">
-                    <div class="field-label">School</div>
-                    <div class="field-data">
-                        {{sc.school}}
-                    </div>
-                </div>
-
-                <!--<div class="col-xs-6">-->
-                <!--<div class="field-label">Name</div>-->
-                <!--<div class="field-data">-->
-                <!--{{sc.name}}-->
-                <!--</div>-->
-                <!--</div>-->
-
-
-            </div>
-
-            <div class="row">
-
-                <div class="col-xs-6 dashboard-col">
-                    <div class="field-label">Teachers</div>
-                    <div class="field-data">
-                        {{sc.teachers}}
-                    </div>
-                </div>
-
-
-                <div class="col-xs-6 dashboard-col">
-                    <div class="field-label">Students</div>
-                    <div class="field-data">
-                        {{sc.students}}
-                    </div>
-                </div>
-
-
-            </div>
         </div>
-
-
     </div>
 
 

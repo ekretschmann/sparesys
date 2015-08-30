@@ -89,11 +89,11 @@
             <div class="title">Subscribed teachers and students</div>
             <div class="flashcard-section">
                 <div class="row">
-                    <div class="col-xs-6 field-label">Teachers</div>
-                    <div class="col-xs-6 field-label">Students</div>
+                    <div class="col-xs-6 field-label dashboard-col-attached">Teachers</div>
+                    <div class="col-xs-6 field-label dashboard-col-attached">Students</div>
                 </div>
                 <div class="row">
-                    <div class="col-xs-6 field-data">
+                    <div class="col-xs-6 field-data dashboard-col">
 
                         <div class="danger" data-ng-if="school.teachers.length ===0">
                             none
@@ -101,7 +101,7 @@
                         <div data-ng-repeat="teacher in school.teachers">{{teacher.displayName}}</div>
 
                     </div>
-                    <div class="col-xs-6 field-data">
+                    <div class="col-xs-6 field-data dashboard-col">
                         <div class="danger" data-ng-if="school.students.length ===0">
                             none
                         </div>

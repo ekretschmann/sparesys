@@ -271,6 +271,25 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
         };
 
+        $scope.areYouSureToRemoveStudent = function(student) {
+            $modal.open({
+                templateUrl: 'areYouSureToRemoveStudent.html',
+                controller: 'RemoveStudentFromSchoolModalController',
+                resolve: {
+
+                    student: function () {
+                        return student;
+                    },
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            }).result.then(function () {
+
+                    console.log('finished');
+                });
+        };
+
 
 //
 //        $scope.findForTeacher = function (teacher) {
@@ -419,9 +438,12 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }
             });
         };
+
+
 //
         // Find existing School
         $scope.findOne = function () {
+            $scope.stateParamId = $stateParams.schoolId;
             $scope.school = Schools.get({
                 schoolId: $stateParams.schoolId
             });

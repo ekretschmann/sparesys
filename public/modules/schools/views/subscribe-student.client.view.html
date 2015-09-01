@@ -13,19 +13,7 @@
 
             <div class="flashcard-section row">
 
-                <div class="col-xs-6">
-                    <div class="field-label">Your Schools</div>
 
-                    <div data-ng-if="authentication.user.studentInSchools.length ===0">
-                        none
-                    </div>
-
-                    <div class="field-data" data-ng-controller="SchoolsController" data-ng-repeat="sid in authentication.user.studentInSchools" data-ng-init="findById(sid)">
-                        {{school.name}} <a href=""
-                                           data-ng-click="unsubscribeStudentPopup(school._id)"><i
-                            class="glyphicon glyphicon-minus-sign"></i></a>
-                    </div>
-                </div>
 
                 <div class="col-xs-6">
                     <div class="field-label">Find New School</div>
@@ -36,16 +24,33 @@
                 </div>
 
 
+                <div class="col-xs-6">
+                    <div class="field-label">Your Schools</div>
+
+                    <div data-ng-if="authentication.user.studentInSchools.length ===0">
+                        none
+                    </div>
+
+                    <div class="field-data" data-ng-controller="SchoolsController" data-ng-repeat="sid in authentication.user.studentInSchools" data-ng-init="findById(sid)">
+                        <a href=""
+                                           data-ng-click="unsubscribeStudentPopup(school._id)"><i
+                            class="glyphicon glyphicon-minus-sign"></i></a>
+
+                        {{school.name}}
+                    </div>
+                </div>
+
+
             </div>
 
 
-            <div class="flashcard-section" data-ng-show="authentication.user.roles.indexOf('help') > -1">
-                <infobox logo="boy" class="info">
-                    Select your school(s) from the search results. You can use the search box to
-                    narrow down the options. After you have subscribed, your school administrator
-                    will be able to assign you to your class.
-                </infobox>
-            </div>
+            <!--<div class="flashcard-section" data-ng-show="authentication.user.roles.indexOf('help') > -1">-->
+                <!--<infobox logo="boy" class="info">-->
+                    <!--Select your school(s) from the search results. You can use the search box to-->
+                    <!--narrow down the options. After you have subscribed, your school administrator-->
+                    <!--will be able to assign you to your class.-->
+                <!--</infobox>-->
+            <!--</div>-->
 
 
         </div>

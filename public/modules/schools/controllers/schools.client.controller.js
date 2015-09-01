@@ -2,8 +2,8 @@
 
 // Schools controller
 angular.module('schools').controller('SchoolsController', ['$window', '$scope', '$timeout', '$state', '$stateParams', '$location', '$modal',
-    'Authentication', 'Schools', 'Schoolclasses',
-    function ($window, $scope, $timeout, $state, $stateParams, $location, $modal, Authentication, Schools, Schoolclasses) {
+    'Authentication', 'Schools', 'Schoolclasses', 'Users',
+    function ($window, $scope, $timeout, $state, $stateParams, $location, $modal, Authentication, Schools, Schoolclasses, Users) {
         $scope.authentication = Authentication;
 
 
@@ -177,20 +177,20 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //        };
 //
 //
-//        $scope.subscribeStudentPopup = function (school) {
-//
-//            $scope.school = school;
-//            $modal.open({
-//                templateUrl: 'subscribeStudent.html',
-//                controller: 'SubscribeStudentModalController',
-//                resolve: {
-//                    school: function () {
-//                        return $scope.school;
-//                    }
-//                }
-//            });
-//
-//        };
+        $scope.subscribeStudentPopup = function (school) {
+
+            $scope.school = school;
+            $modal.open({
+                templateUrl: 'subscribeStudent.html',
+                controller: 'SubscribeStudentModalController',
+                resolve: {
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            });
+
+        };
 //
 //        $scope.unsubscribeStudentPopup = function (school) {
 //
@@ -248,6 +248,30 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 });
 
         };
+
+        $scope.areYouSureToRemoveSchool = function (schoolId, user) {
+
+
+            $modal.open({
+                templateUrl: 'areYouSureToRemoveSchool.html',
+                controller: 'RemoveSchoolFromUserModalController',
+                resolve: {
+
+                    schoolId: function () {
+                        return schoolId;
+                    },
+                    user: function () {
+                        return user;
+                    }
+                }
+            }).result.then(function () {
+
+                    $scope.otherUser = Users.findById(user._id);
+                });
+
+        };
+
+
 //
 //        $scope.findForTeacher = function (teacher) {
 //            $scope.schools = Schools.query({
@@ -371,7 +395,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }, function (s) {
                     $scope.schoolclasses = s.schoolclasses;
                 }, function (err) {
-                    $scope.error = err.data.message;
+                    $scope.error = 'school '+id+' does not exist';
                 });
             }
         };

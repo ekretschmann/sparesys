@@ -254,6 +254,8 @@ exports.schoolByID = function(req, res, next, id) {
     School.findById(id).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function(err, school) {
 
 
+
+
         if (err) return next(err);
         if (! school) return next(new Error('Failed to load School ' + id));
         req.school = school ;

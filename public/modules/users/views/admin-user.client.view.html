@@ -1,6 +1,9 @@
 <section data-ng-controller="UsersController" data-ng-init="findOne()">
 
-    <div class="col-xs-12 col-md-6 dashboard-col ">
+
+    <div ng-include="'/modules/users/views/partial/remove-school.modal.client.view.html'"></div>
+
+    <div class="col-xs-12 col-md-6 dashboard-col font-large">
         <div class="virtual-card">
             <div class="title">{{otherUser.displayName}}</div>
 
@@ -58,55 +61,91 @@
     </div>
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="otherUser.studentInSchools.length > 0">
-        <div class="virtual-card">
-            <div class="title">Student in Schools</div>
+    <div class="col-xs-12 col-md-6 dashboard-col ">
+        <div class="virtual-card font-large">
+            <div class="title">&nbsp;</div>
 
 
-            <div class="flashcard-section" data-ng-repeat="s in otherUser.studentInSchools"
-                 data-ng-controller="SchoolsController" data-ng-init="findById(s)">
-                <div class="field-title">{{s}} <a href="" data-ng-click="removeSchool(s, otherUser)"><i class="glyphicon glyphicon-minus-sign"></i></a>
+            <div class="flashcard-section">
+                <div class="col-xs-12 col-md-6 dashboard-col">
 
-                </div>
+                    <div class="field-label">
+                        Student in Schools
+                    </div>
 
-                <div class="danger" data-ng-if="error">
-                    {{error}}
-                </div>
+                    <div class="field-data" data-ng-if="otherUser.studentInSchools.length === 0">
+                        none
+                    </div>
 
+                    <div data-ng-if="otherUser.studentInSchools.length > 0">
+                        <div class="field-data" data-ng-repeat="s in otherUser.studentInSchools"
+                             data-ng-controller="SchoolsController" data-ng-init="findById(s)">
 
-                <div class="row" data-ng-if="!error">
-                    <div class="field-label col-xs-6">Name</div>
-                    <div class="field-data col-sx-6">
-                        {{school.name}}
+                            <div ng-class="{'danger': error}">
+                                {{s}} <a href="" data-ng-click="areYouSureToRemoveSchool(s, otherUser)"><i
+                                    class="glyphicon glyphicon-minus-sign"></i></a>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
-            </div>
 
-        </div>
-    </div>
-
-    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="otherUser.studentInClasses.length > 0">
-        <div class="virtual-card">
-            <div class="title">Student in Classes</div>
+                <div class="col-xs-12 col-md-6 dashboard-col">
 
 
-            <div class="flashcard-section" data-ng-repeat="s in otherUser.studentInClasses"
-                 data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
-                <div class="field-title">{{s}}</div>
-                <div class="row">
-                    <div class="field-label col-xs-6">Name</div>
-                    <div class="field-data col-sx-6">
-                        {{schoolclass.name}}
+                    <div class="field-label">
+                        Student in Classes
                     </div>
+
+                    <div class="field-data" data-ng-if="otherUser.studentInClasses.length === 0">
+                        none
+                    </div>
+
+                    <div data-ng-if="otherUser.studentInClasses.length > 0">
+                        <div class="field-data" data-ng-repeat="s in otherUser.studentInClasses"
+                             data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
+
+                            <div ng-class="{'danger': error}">
+                                {{s}} <a href="" data-ng-click="areYouSureToRemoveSchoolclass(s, otherUser)"><i
+                                    class="glyphicon glyphicon-minus-sign"></i></a>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <!--<div class="row" data-ng-if="!error">-->
+                    <!--<div class="field-label col-xs-6">Name</div>-->
+                    <!--<div class="field-data col-sx-6">-->
+                    <!--{{school}}-->
+                    <!--</div>-->
+                    <!--</div>-->
+
                 </div>
 
             </div>
-
-
-
         </div>
     </div>
+
+    <!--<div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="otherUser.studentInClasses.length > 0">-->
+    <!--<div class="virtual-card">-->
+    <!--<div class="title">Student in Classes</div>-->
+
+
+    <!--<div class="flashcard-section" data-ng-repeat="s in otherUser.studentInClasses"-->
+    <!--data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">-->
+    <!--<div class="field-title">{{s}}</div>-->
+    <!--<div class="row">-->
+    <!--<div class="field-label col-xs-6">Name</div>-->
+    <!--<div class="field-data col-sx-6">-->
+    <!--{{schoolclass.name}}-->
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+
+    <!--</div>-->
+    <!--</div>-->
 
     <!--<div class="flashcard-section">-->
     <!--<div class="field-label">Student in Classes</div>-->
@@ -166,7 +205,6 @@
                     </div>
                 </div>
             </div>
-
 
 
         </div>

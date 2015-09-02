@@ -2,6 +2,7 @@
 
 
     <div ng-include="'/modules/users/views/partial/remove-school.modal.client.view.html'"></div>
+    <div ng-include="'/modules/users/views/partial/remove-teacher-from-class.modal.client.view.html'"></div>
 
     <div class="col-xs-12 col-md-6 dashboard-col font-large">
         <div class="admin-card">
@@ -52,6 +53,25 @@
                                    placeholder="Last Name">
                         </div>
                     </div>
+
+
+                </div>
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-6">
+                        <div class="field-label">email</div>
+                        <div class="field-data">
+                            <input type="text"
+                                   data-ng-model="otherUser.email"
+                                   class="form-control"
+                                   placeholder="email address">
+                        </div>
+                    </div>
+
+
 
 
                 </div>
@@ -168,7 +188,7 @@
                              data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
 
                             <div ng-class="{'danger': error}">
-                                <a href="#!/schoolclasses/{{s}}/admin">{{s}}</a> <a href="" data-ng-click="areYouSureToRemoveSchoolclass(s, otherUser)"><i
+                                <a href="#!/schoolclasses/{{s}}/admin">{{s}}</a> <a href="" data-ng-click="areYouSureToRemoveTeacherFromClass(s, otherUser)"><i
                                     class="glyphicon glyphicon-minus-sign"></i></a>
                             </div>
                         </div>

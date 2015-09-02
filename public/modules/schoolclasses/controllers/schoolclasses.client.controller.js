@@ -76,6 +76,26 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         };
 
+        $scope.areYouSureToRemoveTeacherFromClass = function (schoolclass, teacher) {
+
+
+
+            $modal.open({
+                templateUrl: 'areYouSureToRemoveTeacherFromClass.html',
+                controller: 'RemoveTeacherFromClassModalController',
+                resolve: {
+
+                    schoolclass: function () {
+                        return schoolclass;
+                    },
+                    teacher: function () {
+                        return teacher;
+                    }
+                }
+            });
+
+        };
+
         $scope.removeStudent = function (studentId) {
 
             var index = $scope.schoolclass.students.indexOf(studentId);

@@ -4,7 +4,7 @@
 
 
     <div class="col-xs-12 col-md-6 dashboard-col ">
-        <div class="virtual-card font-large">
+        <div class="admin-card font-large">
             <div class="title">Schools</div>
             <div class="flashcard-section row">
 
@@ -36,7 +36,7 @@
 
     <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="!schools || schools.length === 0">
 
-        <div class="virtual-card font-large">
+        <div class="admin-card font-large">
             <div class="title">No Schools Found</div>
             <div class="danger">There are no users matching your search criteria</div>
         </div>
@@ -44,7 +44,7 @@
 
 
     <div class="col-xs-12 col-md-6 dashboard-col " data-ng-repeat="school in schools | limitTo: 10">
-        <div class="virtual-card font-large">
+        <div class="admin-card font-large">
             <div class="title">{{school.name}}
 
                 <div class="pull-right">

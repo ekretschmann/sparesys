@@ -124,111 +124,78 @@ exports.update = function (req, res) {
 
     schoolclass = _.extend(schoolclass, req.body);
 
-
-    console.log(schoolclass);
-
-
-    //$scope.school.schoolclasses.push(schoolClass);
-    //$scope.school.$save(function(){
-    //
-    //});
-
-    //schoolclass.save(function(err) {
-    //    if (err) {
-    //        return res.send(400, {
-    //            message: getErrorMessage(err)
-    //        });
-    //    } else {
-    //        res.jsonp(message);
-    //    }
-    //});
+    var originalTeachers = schoolclass.teachers;
+    var originalStudents = schoolclass.students;
 
 
-    //var schoolclass = req.schoolclass;
-    ////var originalTeachers = schoolclass.teachers;
-    ////var originalStudents = schoolclass.students;
-    ////
-    ////schoolclass = _.extend(schoolclass, req.body);
-    //
-    ////schoolclass.students = req.body.students;
-    ////schoolclass.teachers = req.body.teachers;
-    //
-    //
-    //schoolclass = _.extend(schoolclass, req.body);
-    //console.log(schoolclass.teachers);
-    //console.log(req.body.teachers);
-
-
-    //console.log(schoolclass.teachers);
-
-
+    console.log(req.body);
     //console.log(schoolclass);
 
 
-    //schoolclass.save(function (err) {
-    //    if (err) {
-    //        return res.send(400, {
-    //            message: getErrorMessage(err)
-    //        });
-    //    } else {
-    //        var currentTeachers = schoolclass.teachers;
-    //        var currentStudents = schoolclass.students;
-    //
-    //        originalTeachers.forEach(function(originalTeacherId) {
-    //            if (currentTeachers.indexOf(originalTeacherId) === -1) {
-    //                User.findOne({_id: originalTeacherId}, 'teachesClasses').exec(function (err, originalTeacher) {
-    //
-    //                    for (var j in originalTeacher.teachesClasses) {
-    //                        if (originalTeacher.teachesClasses[j].toString() === schoolclass._id.toString()) {
-    //                            originalTeacher.teachesClasses.splice(j, 1);
-    //                        }
-    //                    }
-    //                    originalTeacher.save();
-    //                });
-    //            }
-    //        });
-    //
-    //
-    //
-    //        currentTeachers.forEach(function(currentTeacherId) {
-    //            User.findOne({_id: currentTeacherId}, 'teachesClasses').exec(function (err, currentTeacher) {
-    //
-    //                if (currentTeacher.teachesClasses.indexOf(schoolclass._id) === -1) {
-    //                    currentTeacher.teachesClasses.push(schoolclass._id);
-    //                }
-    //                currentTeacher.save();
-    //            });
-    //        });
-    //
-    //
-    //        originalStudents.forEach(function(originalStudentId) {
-    //            if (currentStudents.indexOf(originalStudentId) === -1) {
-    //                User.findOne({_id: originalStudentId}, 'studentInClasses').exec(function (err, originalStudent) {
-    //
-    //                    for (var j in originalStudent.studentInClasses) {
-    //                        if (originalStudent.studentInClasses[j].toString() === schoolclass._id.toString()) {
-    //                            originalStudent.studentInClasses.splice(j, 1);
-    //                        }
-    //                    }
-    //                    originalStudent.save();
-    //                });
-    //            }
-    //        });
-    //
-    //        currentStudents.forEach(function(currentStudentId) {
-    //            User.findOne({_id: currentStudentId}, 'studentInClasses').exec(function (err, currentStudent) {
-    //
-    //                if (currentStudent.studentInClasses.indexOf(schoolclass._id) === -1) {
-    //                    currentStudent.studentInClasses.push(schoolclass._id);
-    //                }
-    //                currentStudent.save();
-    //            });
-    //        });
-    //
-    //
-    //        res.jsonp(schoolclass);
-    //    }
-    //});
+    schoolclass.save(function (err) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            var currentTeachers = schoolclass.teachers;
+            var currentStudents = schoolclass.students;
+
+            originalTeachers.forEach(function(originalTeacherId) {
+                if (currentTeachers.indexOf(originalTeacherId) === -1) {
+                    User.findOne({_id: originalTeacherId}, 'teachesClasses').exec(function (err, originalTeacher) {
+
+                        for (var j in originalTeacher.teachesClasses) {
+                            if (originalTeacher.teachesClasses[j].toString() === schoolclass._id.toString()) {
+                                originalTeacher.teachesClasses.splice(j, 1);
+                            }
+                        }
+                        originalTeacher.save();
+                    });
+                }
+            });
+
+
+
+            currentTeachers.forEach(function(currentTeacherId) {
+                User.findOne({_id: currentTeacherId}, 'teachesClasses').exec(function (err, currentTeacher) {
+
+                    if (currentTeacher.teachesClasses.indexOf(schoolclass._id) === -1) {
+                        currentTeacher.teachesClasses.push(schoolclass._id);
+                    }
+                    currentTeacher.save();
+                });
+            });
+
+
+            originalStudents.forEach(function(originalStudentId) {
+                if (currentStudents.indexOf(originalStudentId) === -1) {
+                    User.findOne({_id: originalStudentId}, 'studentInClasses').exec(function (err, originalStudent) {
+
+                        for (var j in originalStudent.studentInClasses) {
+                            if (originalStudent.studentInClasses[j].toString() === schoolclass._id.toString()) {
+                                originalStudent.studentInClasses.splice(j, 1);
+                            }
+                        }
+                        originalStudent.save();
+                    });
+                }
+            });
+
+            currentStudents.forEach(function(currentStudentId) {
+                User.findOne({_id: currentStudentId}, 'studentInClasses').exec(function (err, currentStudent) {
+
+                    if (currentStudent.studentInClasses.indexOf(schoolclass._id) === -1) {
+                        currentStudent.studentInClasses.push(schoolclass._id);
+                    }
+                    currentStudent.save();
+                });
+            });
+
+
+            res.jsonp(schoolclass);
+        }
+    });
 };
 
 /**

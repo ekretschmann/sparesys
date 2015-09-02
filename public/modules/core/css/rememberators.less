@@ -1,6 +1,7 @@
 @background-color: #FFF9DE;
 @inverse-background-color: #030698;
 @background-color-contrast: #ECECFF;
+@background-color-admin: #ECCCCC;
 @foreground-color: #333333;
 @light-inverse-background-color: #4E51E5;
 @inverse-font-color: #d0d8dd;
@@ -699,6 +700,23 @@ body {
 
 }
 
+
+.texture-admin {
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-gradient(linear, 0 0, 0 bottom, from(@background-color-admin), to(@background-color-admin));
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -webkit-linear-gradient(@background-color-admin, @background-color-admin);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -moz-linear-gradient(@background-color-admin, @background-color-admin);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -ms-linear-gradient(@background-color-admin, @background-color-admin);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  -o-linear-gradient(@background-color-admin, @background-color-admin);
+  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
+  linear-gradient(@background-color-admin, @background-color-admin);
+
+}
+
 .texture-dark {
   background: @inverse-background-color url('/modules/core/img/brand/bg.png') left top repeat; /* ie fallback */
   background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
@@ -800,17 +818,18 @@ body {
   }
 }
 
-.virtual-card {
+
+.generic-card {
   padding:10px;
 
 
 
-  .texture-light;
+
   overflow: scroll;
-  border: 1px solid @inverse-font-color;
-  box-shadow: 5px 5px 5px #CCC;
+
+
   border-radius: 12px;
-  background-color: @background-color-contrast;
+  //background-color: @background-color-contrast;
 
   //height:100%;
   @media screen {
@@ -831,6 +850,21 @@ body {
     }
 
   }
+}
+
+.virtual-card {
+  .generic-card;
+  .texture-light;
+  box-shadow: 5px 5px 5px #CCC;
+  border: 1px solid @inverse-font-color;
+}
+
+.admin-card {
+  .generic-card;
+  .texture-admin;
+  box-shadow: 5px 5px 5px #C99;
+  border: 1px solid darken(@background-color-admin, 5%);
+
 }
 
 .dashboard-col {

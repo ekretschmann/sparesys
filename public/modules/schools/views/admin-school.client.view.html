@@ -4,7 +4,6 @@
     <div ng-include="'/modules/schoolclasses/views/partial/delete-class.modal.client.view.html'"></div>
 
 
-
     <div data-ng-if="!school || !school._id">
         <div class="col-xs-12 col-md-6 dashboard-col font-large">
             <div class="virtual-card">
@@ -21,7 +20,7 @@
 
     <div data-ng-if="school && school._id">
         <div class="col-xs-12 col-md-6 dashboard-col font-large">
-            <div class="virtual-card">
+            <div class="admin-card">
                 <div class="title">{{school.name}}</div>
 
 
@@ -96,7 +95,7 @@
 
 
         <div class="col-xs-12 col-md-6 dashboard-col font-large">
-            <div class="virtual-card">
+            <div class="admin-card">
                 <div class="title">Subscribed teachers and students</div>
 
 
@@ -117,7 +116,7 @@
 
 
                                 <div class="field-data">
-                                     {{teacher.displayName}}
+                                    {{teacher.displayName}}
                                 </div>
                             </div>
                         </div>
@@ -144,17 +143,20 @@
 
         <div data-ng-repeat="sc in school.schoolclasses">
 
-            <div class="col-xs-12 col-md-6 dashboard-col " data-ng-controller="SchoolclassesController" data-ng-init="findById(sc._id)">
-                <div class="virtual-card">
+            <div class="col-xs-12 col-md-6 dashboard-col " data-ng-controller="SchoolclassesController"
+                 data-ng-init="findById(sc._id)">
+                <div class="admin-card">
                     <div class="title">
                         {{sc.name}}
 
-                        <a href="" data-ng-click="areYouSureToDeleteClass(class, school)"><i
-                                class="glyphicon glyphicon-trash"></i></a>
+                        <div class="pull-right">
+                            <a href="#!/schoolclasses/{{sc._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="" data-ng-click="areYouSureToDeleteClass(class, school)"><i
+                                    class="glyphicon glyphicon-trash"></i></a>
 
+
+                        </div>
                     </div>
-
-
 
 
                     <div class="flashcard-section">
@@ -163,14 +165,10 @@
                             Teachers
 
 
-
-
                         </div>
                         <div class="col-xs-6 field-label">
 
                             Students
-
-
 
 
                         </div>
@@ -185,7 +183,8 @@
                                         class="glyphicon glyphicon-minus-sign"></i></a></div>
 
                                 <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                            ng-disabled="disabled">
                                         Add a Teacher <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
@@ -204,7 +203,8 @@
                                                                                                                  data-ng-click="removeStudentFromClass(student._id)"><i
                                         class="glyphicon glyphicon-minus-sign"></i></a></div>
                                 <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
-                                    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+                                    <button type="button" class="btn btn-primary dropdown-toggle"
+                                            ng-disabled="disabled">
                                         Add a Student <span class="caret"></span>
                                     </button>
                                     <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">

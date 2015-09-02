@@ -118,6 +118,10 @@ var UserSchema = new Schema({
 		type: [Schema.Types.ObjectId],
 		default: []
 	},
+	teacherInSchools: {
+		type: [Schema.Types.ObjectId],
+		default: []
+	},
     teachesClasses: {
         type: [Schema.Types.ObjectId],
         default: []

@@ -1,6 +1,8 @@
 <section data-ng-controller="SchoolsController" data-ng-init="findOne()">
 
     <div ng-include="'/modules/schools/views/partial/remove-student.modal.client.view.html'"></div>
+    <div ng-include="'/modules/schoolclasses/views/partial/delete-class.modal.client.view.html'"></div>
+
 
 
     <div data-ng-if="!school || !school._id">
@@ -142,46 +144,111 @@
 
         <div data-ng-repeat="sc in school.schoolclasses">
 
-            <div class="col-xs-12 col-md-6 dashboard-col ">
+            <div class="col-xs-12 col-md-6 dashboard-col " data-ng-controller="SchoolclassesController" data-ng-init="findById(sc._id)">
                 <div class="virtual-card">
-                    <div class="title">{{sc.name}}</div>
+                    <div class="title">
+                        {{sc.name}}
+
+                        <a href="" data-ng-click="areYouSureToDeleteClass(class, school)"><i
+                                class="glyphicon glyphicon-trash"></i></a>
+
+                    </div>
+
+
 
 
                     <div class="flashcard-section">
-                        <div class="row">
-                            <div class="col-xs-6 field-label">Teachers</div>
-                            <div class="col-xs-6 field-label">Students</div>
+                        <div class="col-xs-6 field-label">
+
+                            Teachers
+
+
+
+
                         </div>
+                        <div class="col-xs-6 field-label">
+
+                            Students
 
 
-                        <div class="row ">
-                            <div class="col-xs-6 field-label">
-                                <div class="field-data danger" data-ng-if="!sc.teachers || sc.teachers.length === 0">
+
+
+                        </div>
+                        <div>
+                            <div class="col-xs-6 field-data">
+
+                                <div class="danger" data-ng-if="schoolclass.teachers.length ===0">
                                     none
                                 </div>
-                                <div data-ng-repeat="teacher in sc.teachers">
+                                <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}} <a href=""
+                                                                                                                 data-ng-click="removeTeacherFromClass(teacher._id)"><i
+                                        class="glyphicon glyphicon-minus-sign"></i></a></div>
 
-
-                                    <div class="field-data">
-                                        {{teacher.displayName}}
-                                    </div>
+                                <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+                                        Add a Teacher <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                                        <li role="menuitem" data-ng-repeat="teacher in school.teachers"><a href=""
+                                                                                                           data-ng-click="addTeacherToClass(teacher)">{{teacher.displayName}}</a>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
 
-                            <div class="col-xs-6 field-label">
-                                <div class="field-data danger" data-ng-if="!sc.students || sc.students.length === 0">
+                            </div>
+                            <div class="col-xs-6 field-data">
+                                <div class="danger" data-ng-if="schoolclass.students.length ===0">
                                     none
                                 </div>
-                                <div data-ng-repeat="students in sc.students">
-
-                                    <div class="field-data">
-                                        {{students.displayName}}
-                                    </div>
+                                <div data-ng-repeat="student in schoolclass.students">{{student.displayName}} <a href=""
+                                                                                                                 data-ng-click="removeStudentFromClass(student._id)"><i
+                                        class="glyphicon glyphicon-minus-sign"></i></a></div>
+                                <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
+                                    <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+                                        Add a Student <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                                        <li role="menuitem" data-ng-repeat="student in school.students"><a href=""
+                                                                                                           data-ng-click="addStudentToClass(student)">{{student.displayName}}</a>
+                                        </li>
+                                    </ul>
                                 </div>
+
                             </div>
                         </div>
+
                     </div>
                 </div>
+            </div>
+        </div>
+
+        <div class="col-xs-6 dashboard-col">
+
+            <div class="font-large virtual-card-header">
+
+                <form data-ng-submit="addSchoolclassToSchool()" validate>
+
+                    <div class="title">
+
+
+                        <div class="pull-right">
+
+
+                            <a href="" data-ng-click="addSchoolclassToSchool()"><i
+                                    class="glyphicon glyphicon-plus-sign"></i></a>
+
+
+                        </div>
+                        Add another class <input type="text" data-ng-model="newClass.name"
+                                                 class="form-control focus"
+                                                 placeholder="Name">
+
+
+                    </div>
+
+
+                </form>
+
             </div>
         </div>
 

@@ -6,6 +6,8 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
     'DiagramsCardsInPlayService', 'DiagramsTimeSpentService', 'Courses',
     function ($scope, $stateParams, $window, CoursesService, DiagramsCalendarService, DiagramsCardsInPlayService, DiagramsTimeSpentService, Courses) {
 
+        $scope.cards = undefined;
+
         $scope.init = function () {
 
 
@@ -16,9 +18,12 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
 
 
 
+
                 var res = CoursesService.serverLoadCards();
                 var promise = res.get({courseId: $stateParams.courseId});
                 promise.$promise.then(function (cards) {
+
+                    $scope.cards = cards;
                     DiagramsCalendarService.drawCalendar(cards, '#cal', '#practice-date', '#number-of-cards', ($window.innerWidth / 2)-130);
 
                     var w = $window.innerWidth + 110;

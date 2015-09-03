@@ -64,6 +64,47 @@
         </div>
     </div>
 
+    <div class="col-xs-12 col-md-6 dashboard-col ">
+
+        <div class="virtual-card">
+            <div class="title">
+                <div>Time series </div>
+
+            </div>
+
+            <div class="col-xs-4">
+                <div class="field-label">Card 1</div>
+                <div class="field-data">
+
+                    <input type="text" ng-model="card1" typeahead="card as card.question for card in cards | filter:$viewValue | limitTo:8" class="form-control">
+                    <!--<pre>Model: {{card1 | json}}</pre>-->
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="field-label">Card 2</div>
+                <div class="field-data">
+                    <input type="text" ng-model="card2" typeahead="card as card.question for card in cards | filter:$viewValue | limitTo:8" class="form-control">
+
+                </div>
+            </div>
+
+            <div class="col-xs-4">
+                <div class="field-label">Card 3</div>
+                <div class="field-data">
+                    <input type="text" ng-model="card3" typeahead="card as card.question for card in cards | filter:$viewValue | limitTo:8" class="form-control">
+
+                </div>
+            </div>
+
+            <!--<div id="inplay" class="diagram">-->
+
+            <!--</div>-->
+
+
+        </div>
+    </div>
+
 
     <div class="rememberators-footer col-xs-12">
 

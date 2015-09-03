@@ -124,13 +124,10 @@
                     </div>
 
                     <div data-ng-if="otherUser.studentInClasses.length > 0">
-                        <div class="field-data" data-ng-repeat="s in otherUser.studentInClasses"
-                             data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
+                        <div class="field-data" data-ng-repeat="s in otherUser.studentInClasses track by $index">
 
-                            <div ng-class="{'danger': error}">
-                                {{s}} <a href="" data-ng-click="areYouSureToRemoveSchoolclass(s, otherUser)"><i
-                                    class="glyphicon glyphicon-minus-sign"></i></a>
-                            </div>
+                            <a href="#!/schoolclasses/{{s}}/admin">{{s}}</a> <a href="" data-ng-click="removeStudentFromClass(otherUser, s)"><i
+                                class="glyphicon glyphicon-minus-sign"></i></a>
                         </div>
                     </div>
 
@@ -185,12 +182,9 @@
 
                     <div data-ng-if="otherUser.teachesClasses.length > 0">
                         <div class="field-data" data-ng-repeat="s in otherUser.teachesClasses track by $index">
-                             <!--data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">-->
 
-                            <!--<div ng-class="{'danger': error}">-->
                                 <a href="#!/schoolclasses/{{s}}/admin">{{s}}</a> <a href="" data-ng-click="removeTeacherFromClass(otherUser, s)"><i
                                     class="glyphicon glyphicon-minus-sign"></i></a>
-                            <!--</div>-->
                         </div>
                     </div>
 

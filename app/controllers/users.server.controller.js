@@ -177,6 +177,17 @@ exports.update = function (req, res) {
         });
     }
 
+    function removeStudentFromSchoolclass(id, theUser) {
+        Schoolclass.findOne({_id: id}).exec(function (err, sc) {
+            if (!err) {
+                if (sc.students.indexOf(theUser._id) > -1) {
+                    sc.students.splice(sc.students.indexOf(theUser._id), 1);
+                    sc.save();
+                }
+            }
+        });
+    }
+
     function updateUser(theUser) {
 
 
@@ -185,14 +196,28 @@ exports.update = function (req, res) {
 
         var deletedClasses = [];
         for (var i=0;i<originalClasses.length; i++) {
-            //console.log(newClasses.indexOf[originalClasses[i]]);
             if (newClasses.indexOf(originalClasses[i]) === -1) {
                 deletedClasses.push(originalClasses[i]);
             }
         }
 
-        for(var j=0; j<deletedClasses.length; j++) {
-            removeTeacherFromSchoolclass(deletedClasses[j], theUser);
+        for(i=0; i<deletedClasses.length; i++) {
+            removeTeacherFromSchoolclass(deletedClasses[i], theUser);
+        }
+
+
+        originalClasses= theUser.studentInClasses;
+        newClasses = req.body.studentInClasses;
+
+        deletedClasses = [];
+        for (i=0;i<originalClasses.length; i++) {
+            if (newClasses.indexOf(originalClasses[i]) === -1) {
+                deletedClasses.push(originalClasses[i]);
+            }
+        }
+
+        for(i=0; i<deletedClasses.length; i++) {
+            removeStudentFromSchoolclass(deletedClasses[i], theUser);
         }
 
 

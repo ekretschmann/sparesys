@@ -177,5 +177,16 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
             otherUser.$update();
         };
 
+        $scope.removeStudentFromClass = function(otherUser, s) {
+            console.log(otherUser);
+            console.log(s);
+            for(var i=0; i<otherUser.studentInClasses.length; i++) {
+                if (otherUser.studentInClasses[i] === s) {
+                    otherUser.studentInClasses.splice(i, 1);
+                }
+            }
+            otherUser.$update();
+        };
+
     }
 ]);

@@ -80,19 +80,19 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 
 
-            $modal.open({
-                templateUrl: 'areYouSureToRemoveTeacherFromClass.html',
-                controller: 'RemoveTeacherFromClassModalController',
-                resolve: {
-
-                    schoolclass: function () {
-                        return schoolclass;
-                    },
-                    teacher: function () {
-                        return teacher;
-                    }
-                }
-            });
+            //$modal.open({
+            //    templateUrl: 'areYouSureToRemoveTeacherFromClass.html',
+            //    controller: 'RemoveTeacherFromClassModalController',
+            //    resolve: {
+            //
+            //        schoolclass: function () {
+            //            return schoolclass;
+            //        },
+            //        teacher: function () {
+            //            return teacher;
+            //        }
+            //    }
+            //});
 
         };
 
@@ -398,15 +398,15 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 
         $scope.removeTeacherFromClass = function (teacherId) {
-            console.log(teacherId);
             for (var i = 0; i < $scope.schoolclass.teachers.length; i++) {
-                if ($scope.schoolclass.teachers[i] === teacherId) {
+                //console.log($scope.schoolclass.teachers[i]);
+                if ($scope.schoolclass.teachers[i]._id === teacherId) {
                     $scope.schoolclass.teachers.splice(i, 1);
                 }
             }
 
-            $scope.schoolclass.$update(function(){
-
+            $scope.schoolclass.$update(function(x){
+                console.log(x);
             });
         };
 

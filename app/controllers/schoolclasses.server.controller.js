@@ -128,7 +128,7 @@ exports.update = function (req, res) {
     var originalStudents = schoolclass.students;
 
 
-    console.log(req.body);
+    //console.log(req.body);
     //console.log(schoolclass);
 
 
@@ -140,6 +140,7 @@ exports.update = function (req, res) {
         } else {
             var currentTeachers = schoolclass.teachers;
             var currentStudents = schoolclass.students;
+
 
             originalTeachers.forEach(function(originalTeacherId) {
                 if (currentTeachers.indexOf(originalTeacherId) === -1) {
@@ -154,7 +155,6 @@ exports.update = function (req, res) {
                     });
                 }
             });
-
 
 
             currentTeachers.forEach(function(currentTeacherId) {

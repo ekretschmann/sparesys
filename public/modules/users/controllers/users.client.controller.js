@@ -168,5 +168,14 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
             }
         };
 
+        $scope.removeTeacherFromClass = function(otherUser, s) {
+            for(var i=0; i<otherUser.teachesClasses.length; i++) {
+                if (otherUser.teachesClasses[i] === s) {
+                    otherUser.teachesClasses.splice(i, 1);
+                }
+            }
+            otherUser.$update();
+        };
+
     }
 ]);

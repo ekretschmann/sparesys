@@ -14,63 +14,63 @@ angular.module('core').service('DiagramsTimeSeriesService', ['$timeout',
         // ---------------------------------- Time Manipulation ----------------------------------------
         // ---------------------------------------------------------------------------------------------
 
-        this.lessThanDay = function(d) {
-            return (d === 'hours' || d === 'minutes' || d === 'seconds') ? true : false;
-        };
-
-        this.getDate = function(d) {
-            var date = moment(d);
-            date.hour(1);
-            date.minute(0);
-            date.second(0);
-            return date.valueOf();
-        };
-
-        this.getTime = function(d) {
-            var date = moment(d);
-            date.date(1);
-            date.month(0);
-            date.year(2012);
-            return date.valueOf();
-        };
+        //this.lessThanDay = function(d) {
+        //    return (d === 'hours' || d === 'minutes' || d === 'seconds') ? true : false;
+        //};
+        //
+        //this.getDate = function(d) {
+        //    var date = moment(d);
+        //    date.hour(1);
+        //    date.minute(0);
+        //    date.second(0);
+        //    return date.valueOf();
+        //};
+        //
+        //this.getTime = function(d) {
+        //    var date = moment(d);
+        //    date.date(1);
+        //    date.month(0);
+        //    date.year(2012);
+        //    return date.valueOf();
+        //};
 
         /*
          Given a list of time stamps, compute the minimum and maxium dates. Return a padded
          version of the min and max dates based on the temporal distance between them.
          */
-        this.timeRangePad = function(dates) {
-            var minDate, maxDate, pad;
-            if (dates.length > 1) {
-                minDate = moment(_.min(dates));
-                maxDate = moment(_.max(dates));
-                pad = getDatePadding(minDate, maxDate);
-                minDate.subtract(1, pad);
-                maxDate.add(1, pad);
-            } else {
-                minDate = moment(dates[0]).subtract(1, 'hour');
-                maxDate = moment(dates[0]).add(1, 'hour');
-            }
-            return {
-                'minDate': minDate,
-                'maxDate': maxDate,
-                'pad': pad
-            };
-        };
+        //this.timeRangePad = function(dates) {
+        //    var minDate, maxDate, pad;
+        //    if (dates.length > 1) {
+        //        minDate = moment(_.min(dates));
+        //        maxDate = moment(_.max(dates));
+        //        pad = getDatePadding(minDate, maxDate);
+        //        minDate.subtract(1, pad);
+        //        maxDate.add(1, pad);
+        //    } else {
+        //        minDate = moment(dates[0]).subtract(1, 'hour');
+        //        maxDate = moment(dates[0]).add(1, 'hour');
+        //    }
+        //    return {
+        //        'minDate': minDate,
+        //        'maxDate': maxDate,
+        //        'pad': pad
+        //    };
+        //};
 
-        this.getDatePadding = function(minDate, maxDate) {
-            if (maxDate.diff(minDate, 'years') > 0)
-                return 'months';
-            else if (maxDate.diff(minDate, 'months') > 0)
-                return 'days';
-            else if (maxDate.diff(minDate, 'days') > 0)
-                return 'days';
-            else if (maxDate.diff(minDate, 'hours') > 0)
-                return 'hours';
-            else if (maxDate.diff(minDate, 'minutes') > 0)
-                return 'minutes';
-            else
-                return 'seconds';
-        };
+        //this.getDatePadding = function(minDate, maxDate) {
+        //    if (maxDate.diff(minDate, 'years') > 0)
+        //        return 'months';
+        //    else if (maxDate.diff(minDate, 'months') > 0)
+        //        return 'days';
+        //    else if (maxDate.diff(minDate, 'days') > 0)
+        //        return 'days';
+        //    else if (maxDate.diff(minDate, 'hours') > 0)
+        //        return 'hours';
+        //    else if (maxDate.diff(minDate, 'minutes') > 0)
+        //        return 'minutes';
+        //    else
+        //        return 'seconds';
+        //};
 
 
 

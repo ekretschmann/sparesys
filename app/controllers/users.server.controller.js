@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     passport = require('passport'),
     User = mongoose.model('User'),
+    Schoolclass = mongoose.model('Schoolclass'),
     _ = require('lodash');
 
 /**
@@ -165,8 +166,35 @@ exports.update = function (req, res) {
         }
     }
 
+    function removeTeacherFromSchoolclass(id, theUser) {
+        Schoolclass.findOne({_id: id}).exec(function (err, sc) {
+            if (!err) {
+                if (sc.teachers.indexOf(theUser._id) > -1) {
+                    sc.teachers.splice(sc.teachers.indexOf(theUser._id), 1);
+                    sc.save();
+                }
+            }
+        });
+    }
 
     function updateUser(theUser) {
+
+
+        var originalClasses= theUser.teachesClasses;
+        var newClasses = req.body.teachesClasses;
+
+        var deletedClasses = [];
+        for (var i=0;i<originalClasses.length; i++) {
+            //console.log(newClasses.indexOf[originalClasses[i]]);
+            if (newClasses.indexOf(originalClasses[i]) === -1) {
+                deletedClasses.push(originalClasses[i]);
+            }
+        }
+
+        for(var j=0; j<deletedClasses.length; j++) {
+            removeTeacherFromSchoolclass(deletedClasses[j], theUser);
+        }
+
 
         theUser = _.extend(theUser, req.body);
         theUser.updated = Date.now();
@@ -188,11 +216,14 @@ exports.update = function (req, res) {
                     if (err) {
                         res.send(400, err);
                     } else {
-                        res.jsonp(user);
+                        res.jsonp(theUser);
                     }
                 });
             }
         });
+
+
+        res.jsonp(theUser);
     }
 
     if (user) {

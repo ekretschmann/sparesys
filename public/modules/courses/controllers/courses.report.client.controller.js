@@ -3,10 +3,10 @@
 
 /* global d3 */
 angular.module('courses').controller('CourseReportController', ['$scope', '$stateParams','$window', 'CoursesService', 'DiagramsCalendarService',
-    'DiagramsCardsInPlayService', 'DiagramsTimeSpentService', 'Courses',
-    function ($scope, $stateParams, $window, CoursesService, DiagramsCalendarService, DiagramsCardsInPlayService, DiagramsTimeSpentService, Courses) {
+    'DiagramsCardsInPlayService', 'DiagramsTimeSpentService', 'DiagramsTimeSeriesService','Courses',
+    function ($scope, $stateParams, $window, CoursesService, DiagramsCalendarService, DiagramsCardsInPlayService, DiagramsTimeSpentService, DiagramsTimeSeriesService, Courses) {
 
-        $scope.cards = undefined;
+
 
         $scope.init = function () {
 
@@ -58,6 +58,18 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
         $scope.score = 0;
 
 
+        $scope.selectedCards = [];
+        $scope.initTimeSeries = function (item, model, label) {
+            //console.log(item);
+            //console.log(model);
+            //console.log(label);
+
+            var w = $window.innerWidth + 110;
+            if ($window.innerWidth > 990){
+                w = ($window.innerWidth / 2) + 60;
+            }
+            DiagramsTimeSeriesService.drawTimeSeries($scope.selectedCards, '#timeseries', w);
+        };
 
 
 

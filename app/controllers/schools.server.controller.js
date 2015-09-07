@@ -78,35 +78,60 @@ exports.update = function (req, res) {
 
     var originalTeachers = [];
     for (var i = 0; i < school.teachers.length; i++) {
-        originalTeachers.push(school.teachers[i]);
+        originalTeachers.push(school.teachers[i].id);
     }
 
     school = _.extend(school, req.body);
 
-    var newTeachers = [];
-    for (i = 0; i < originalTeachers.length; i++) {
-        if (school.teachers.indexOf(originalTeachers[i]) === -1) {
-            newTeachers.push(originalTeachers[i]);
+    var currentTeachers = [];
+    for (i = 0; i < school.teachers.length; i++) {
+        if(school.teachers[i]._id) {
+            currentTeachers.push('' + school.teachers[i]._id);
+        } else {
+            currentTeachers.push('' + school.teachers[i]);
         }
     }
 
-    //console.log(school);
+    var newTeachers = [];
+    for (i = 0; i < currentTeachers.length; i++) {
+        if (originalTeachers.indexOf(currentTeachers[i]) === -1) {
+            newTeachers.push(currentTeachers[i]);
+        }
+    }
 
-    var addSchoolToTeacher = function (id) {
-        User.findOne({_id: id}, 'teacherInSchools').exec(function (err, newUser) {
+    var removedTeachers = [];
+    for (i = 0; i < originalTeachers.length; i++) {
+        if (currentTeachers.indexOf(originalTeachers[i]) === -1) {
+            removedTeachers.push(originalTeachers[i]);
+        }
+    }
 
-            //console.log(newUser);
-            if (newUser.teacherInSchools.indexOf(school._id) === -1) {
-                newUser.teacherInSchools.push(school._id);
+
+    var addSchoolToTeacher = function (userId, schoolId) {
+        User.findOne({_id: userId}, 'teacherInSchools').exec(function (err, newUser) {
+
+            if (newUser.teacherInSchools.indexOf(schoolId) === -1) {
+                newUser.teacherInSchools.push(schoolId);
             }
             newUser.save();
-            //console.log(newUser);
+        });
+    };
+
+    var removeSchoolFromTeacher = function (userId, schoolId) {
+        User.findOne({_id: userId}, 'teacherInSchools').exec(function (err, newUser) {
+
+            newUser.teacherInSchools.splice(newUser.teacherInSchools.indexOf(schoolId));
+            newUser.save();
         });
     };
 
 
     for (i = 0; i < newTeachers.length; i++) {
-        addSchoolToTeacher(newTeachers[i]);
+        addSchoolToTeacher(newTeachers[i], school._id);
+    }
+
+    for (i = 0; i < removedTeachers.length; i++) {
+        removeSchoolFromTeacher(removedTeachers[i], school._id);
     }
 
     //if (originalUserId && school.user._id.toString() !== originalUserId.toString()) {

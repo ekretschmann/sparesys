@@ -47,7 +47,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
             });
 
-            schoolClass.$save(function(sc) {
+            schoolClass.$save(function (sc) {
 
                 console.log('ga create schoolclass');
                 console.log('/schools/:id/addclass/:id');
@@ -58,10 +58,9 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }
 
                 $scope.school.schoolclasses.push(schoolClass);
-                $scope.school.$save(function(){
+                $scope.school.$save(function () {
 
                 });
-
 
 
             });
@@ -157,7 +156,18 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                         return $scope.school;
                     }
                 }
-            });
+            }).result.then(function () {
+
+                    Users.get({
+                        userId: $scope.authentication.user._id
+                    }, function(user) {
+                        $scope.authentication.user = user;
+                        console.log(user);
+
+                    });
+
+
+                });
 
         };
 
@@ -172,7 +182,9 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                         return $scope.school;
                     }
                 }
-            });
+            }).result.then(function () {
+                    // so something
+                });
 
         };
 //
@@ -188,7 +200,9 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                         return $scope.school;
                     }
                 }
-            });
+            }).result.then(function () {
+                 // do something
+                });
 
         };
 //
@@ -271,7 +285,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
         };
 
-        $scope.areYouSureToRemoveStudent = function(student) {
+        $scope.areYouSureToRemoveStudent = function (student) {
             $modal.open({
                 templateUrl: 'areYouSureToRemoveStudent.html',
                 controller: 'RemoveStudentFromSchoolModalController',
@@ -290,7 +304,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 });
         };
 
-        $scope.areYouSureToRemoveTeacher = function(teacher) {
+        $scope.areYouSureToRemoveTeacher = function (teacher) {
             $modal.open({
                 templateUrl: 'areYouSureToRemoveTeacher.html',
                 controller: 'RemoveTeacherFromSchoolModalController',
@@ -428,7 +442,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }, function (s) {
                     $scope.schoolclasses = s.schoolclasses;
                 }, function (err) {
-                    $scope.error = 'school '+id+' does not exist';
+                    $scope.error = 'school ' + id + ' does not exist';
                 });
             }
         };

@@ -48,6 +48,7 @@
                                            data-ng-model="school.name"
                                            class="form-control"
                                            placeholder="School Name"
+                                           ng-blur="update()"
                                            required>
 
                                 </div>
@@ -61,6 +62,7 @@
                                     <input type="text"
                                            data-ng-model="school.city"
                                            class="form-control"
+                                           ng-blur="update()"
                                            placeholder="City" required>
 
                                 </div>
@@ -70,6 +72,7 @@
                                 <div class="font-medium">
                                     <input type="text" data-ng-model="school.country"
                                            class="form-control"
+                                           ng-blur="update()"
                                            placeholder="Country" required>
                                 </div>
                             </div>

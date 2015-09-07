@@ -382,15 +382,11 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //        };
 //
 //        // Update existing School
-//        $scope.update = function () {
-//            var school = $scope.school;
-//
-//            school.$update(function () {
-//                $location.path('schools/admin');
-//            }, function (errorResponse) {
-//                $scope.error = errorResponse.data.message;
-//            });
-//        };
+        $scope.update = function () {
+            var school = $scope.school;
+
+            school.$update();
+        };
 //
 //        // Find a list of Schools
 //        $scope.findForUser = function () {

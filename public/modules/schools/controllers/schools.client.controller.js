@@ -290,6 +290,24 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 });
         };
 
+        $scope.areYouSureToRemoveTeacher = function(teacher) {
+            $modal.open({
+                templateUrl: 'areYouSureToRemoveTeacher.html',
+                controller: 'RemoveTeacherFromSchoolModalController',
+                resolve: {
+
+                    teacher: function () {
+                        return teacher;
+                    },
+                    school: function () {
+                        return $scope.school;
+                    }
+                }
+            }).result.then(function () {
+
+                    console.log('finished');
+                });
+        };
 
 //
 //        $scope.findForTeacher = function (teacher) {

@@ -148,13 +148,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         // Update existing Schoolclass
         $scope.update = function () {
-            var schoolclass = $scope.schoolclass;
-
-            schoolclass.$update(function () {
-                $location.path('schoolclasses/' + schoolclass._id);
-            }, function (errorResponse) {
-                $scope.error = errorResponse.data.message;
-            });
+            $scope.schoolclass.$update();
         };
 
         // Find a list of Schoolclasses

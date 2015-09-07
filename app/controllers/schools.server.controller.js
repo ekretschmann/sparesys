@@ -4,132 +4,162 @@
  * Module dependencies.
  */
 var mongoose = require('mongoose'),
-	School = mongoose.model('School'),
-	User = mongoose.model('User'),
-	_ = require('lodash');
+    School = mongoose.model('School'),
+    User = mongoose.model('User'),
+    _ = require('lodash');
 
 /**
  * Get the error message from error object
  */
-var getErrorMessage = function(err) {
-	var message = '';
+var getErrorMessage = function (err) {
+    var message = '';
 
-	if (err.code) {
-		switch (err.code) {
-			case 11000:
-			case 11001:
-				message = 'School already exists';
-				break;
-			default:
-				message = 'Something went wrong';
-		}
-	} else {
-		for (var errName in err.errors) {
-			if (err.errors[errName].message) message = err.errors[errName].message;
-		}
-	}
+    if (err.code) {
+        switch (err.code) {
+            case 11000:
+            case 11001:
+                message = 'School already exists';
+                break;
+            default:
+                message = 'Something went wrong';
+        }
+    } else {
+        for (var errName in err.errors) {
+            if (err.errors[errName].message) message = err.errors[errName].message;
+        }
+    }
 
-	return message;
+    return message;
 };
 
 /**
  * Create a School
  */
-exports.create = function(req, res) {
-	var school = new School(req.body);
-	school.user = req.user;
+exports.create = function (req, res) {
+    var school = new School(req.body);
+    school.user = req.user;
 
 
-	school.save(function(err) {
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
+    school.save(function (err) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
             req.user.administersSchools.push(school._id);
-            req.user.save(function() {
+            req.user.save(function () {
                 res.jsonp(school);
             });
 
-		}
-	});
+        }
+    });
 };
 
 /**
  * Show the current School
  */
-exports.read = function(req, res) {
-	res.jsonp(req.school);
+exports.read = function (req, res) {
+    res.jsonp(req.school);
 };
 
 /**
  * Update a School
  */
-exports.update = function(req, res) {
+exports.update = function (req, res) {
 
 
-    var school = req.school ;
+    var school = req.school;
     var originalUserId;
 
     if (school.user) {
         originalUserId = school.user._id;
     }
 
-	school = _.extend(school , req.body);
 
-
-    if (originalUserId && school.user._id.toString() !== originalUserId.toString()) {
-
-        User.findOne({_id: school.user._id}, 'administersSchools').exec(function (err, newUser) {
-
-            if (newUser.administersSchools.indexOf(school._id) === -1) {
-                newUser.administersSchools.push(school._id);
-            }
-            newUser.save();
-        });
-
-        User.findOne({_id: originalUserId}, 'administersSchools').exec(function (err, originalUser) {
-            for (var j in originalUser.administersSchools) {
-                if (originalUser.administersSchools[j].toString() === school._id.toString()) {
-                    originalUser.administersSchools.splice(j, 1);
-                }
-            }
-            originalUser.save();
-        });
+    var originalTeachers = [];
+    for (var i = 0; i < school.teachers.length; i++) {
+        originalTeachers.push(school.teachers[i]);
     }
 
-	school.save(function(err) {
+    school = _.extend(school, req.body);
+
+    var newTeachers = [];
+    for (i = 0; i < originalTeachers.length; i++) {
+        if (school.teachers.indexOf(originalTeachers[i]) === -1) {
+            newTeachers.push(originalTeachers[i]);
+        }
+    }
+
+    //console.log(school);
+
+    var addSchoolToTeacher = function (id) {
+        User.findOne({_id: id}, 'teacherInSchools').exec(function (err, newUser) {
+
+            //console.log(newUser);
+            if (newUser.teacherInSchools.indexOf(school._id) === -1) {
+                newUser.teacherInSchools.push(school._id);
+            }
+            newUser.save();
+            //console.log(newUser);
+        });
+    };
 
 
+    for (i = 0; i < newTeachers.length; i++) {
+        addSchoolToTeacher(newTeachers[i]);
+    }
 
-		if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
-			res.jsonp(school);
-		}
-	});
+    //if (originalUserId && school.user._id.toString() !== originalUserId.toString()) {
+    //
+    //   User.findOne({_id: school.user._id}, 'administersSchools').exec(function (err, newUser) {
+    //
+    //       if (newUser.administersSchools.indexOf(school._id) === -1) {
+    //           newUser.administersSchools.push(school._id);
+    //       }
+    //       newUser.save();
+    //   });
+    //
+    //   User.findOne({_id: originalUserId}, 'administersSchools').exec(function (err, originalUser) {
+    //       for (var j in originalUser.administersSchools) {
+    //           if (originalUser.administersSchools[j].toString() === school._id.toString()) {
+    //               originalUser.administersSchools.splice(j, 1);
+    //           }
+    //       }
+    //       originalUser.save();
+    //   });
+    //}
+    //
+    school.save(function (err) {
+
+
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            res.jsonp(school);
+        }
+    });
 };
 
 /**
  * Delete an School
  */
-exports.delete = function(req, res) {
-	var school = req.school ;
+exports.delete = function (req, res) {
+    var school = req.school;
 
     if (school.user) {
         var userId = school.user._id;
     }
 
-	school.remove(function(err) {
+    school.remove(function (err) {
 
 
         if (err) {
-			return res.send(400, {
-				message: getErrorMessage(err)
-			});
-		} else {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
 
             if (userId) {
 
@@ -145,15 +175,15 @@ exports.delete = function(req, res) {
             }
 
 
-			res.jsonp(school);
-		}
-	});
+            res.jsonp(school);
+        }
+    });
 };
 
 /**
  * List of Schools
  */
-exports.list = function(req, res) {
+exports.list = function (req, res) {
 
 
     if (req.query && req.query.text) {
@@ -166,8 +196,8 @@ exports.list = function(req, res) {
                         message: getErrorMessage(err)
                     });
                 } else {
-                    if (schools.length === 0 ) {
-                        School.findById(search[0]).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function(err, school) {
+                    if (schools.length === 0) {
+                        School.findById(search[0]).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function (err, school) {
 
                             if (school) {
                                 res.jsonp([school]);
@@ -245,20 +275,18 @@ exports.list = function(req, res) {
 };
 
 /**
-/**
+ /**
  * School middleware
  */
-exports.schoolByID = function(req, res, next, id) {
+exports.schoolByID = function (req, res, next, id) {
 
 
-    School.findById(id).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function(err, school) {
-
-
+    School.findById(id).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function (err, school) {
 
 
         if (err) return next(err);
-        if (! school) return next(new Error('Failed to load School ' + id));
-        req.school = school ;
+        if (!school) return next(new Error('Failed to load School ' + id));
+        req.school = school;
         next();
     });
 };
@@ -266,7 +294,7 @@ exports.schoolByID = function(req, res, next, id) {
 /**
  * School authorization middleware
  */
-exports.hasAuthorization = function(req, res, next) {
+exports.hasAuthorization = function (req, res, next) {
 
     if (req.user.roles.indexOf('admin') > -1) {
         next();

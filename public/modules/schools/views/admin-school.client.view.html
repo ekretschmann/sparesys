@@ -1,6 +1,7 @@
 <section data-ng-controller="SchoolsController" data-ng-init="findOne()">
 
     <div ng-include="'/modules/schools/views/partial/remove-student.modal.client.view.html'"></div>
+    <div ng-include="'/modules/schools/views/partial/remove-teacher.modal.client.view.html'"></div>
     <div ng-include="'/modules/schoolclasses/views/partial/delete-class.modal.client.view.html'"></div>
 
 
@@ -116,7 +117,8 @@
 
 
                                 <div class="field-data">
-                                    {{teacher.displayName}}
+                                        <a href="" data-ng-click="areYouSureToRemoveTeacher(teacher)">
+                                            <i class="glyphicon glyphicon-trash"></i></a> {{teacher.displayName}}
                                 </div>
                             </div>
                         </div>

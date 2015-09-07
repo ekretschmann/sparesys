@@ -10,6 +10,7 @@ angular.module('schools').controller('SubscribeTeacherModalController', ['$scope
             school.teachers.push($scope.authentication.user._id);
             school.$update();
 
+
             console.log('ga teacher subscribes to school');
             console.log('/schools/subscribe/teacher/:id');
             if ($window.ga) {

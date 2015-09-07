@@ -118,7 +118,6 @@
     </div>
 
 
-
     <div class="col-xs-12 col-md-6 dashboard-col" data-ng-repeat="sc in school.schoolclasses"
          data-ng-controller="SchoolclassesController" data-ng-init="findById(sc._id)">
         <div class="virtual-card font-large">
@@ -127,31 +126,47 @@
                 <div class="pull-right">
 
 
-                <a href="" data-ng-click="areYouSureToDeleteClass(class, school)"><i
-                class="glyphicon glyphicon-trash"></i></a>
+                    <a href="" data-ng-click="areYouSureToDeleteClass(class, school)"><i
+                            class="glyphicon glyphicon-trash"></i></a>
 
                 </div>
 
             </div>
             <div class="flashcard-section">
-                <div class="col-xs-6 field-label">
-
-                    Teachers
 
 
+                <div class="row">
+                    <div class="col-xs-12 dashboard-col">
+                        <div class="field-label">Class Name</div>
+                        <div class="font-medium">
+                            <input type="text"
+                                   data-ng-model="schoolclass.name"
+                                   class="form-control"
+                                   placeholder="Class Name"
+                                   ng-blur="update()"
+                                   required>
 
-
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-6 field-label">
-
-                    Students
 
 
+                <div class="row">
+                    <div class="col-xs-6 field-label dashboard-col-attached">
+
+                        Teachers
 
 
+                    </div>
+                    <div class="col-xs-6 field-label dashboard-col-attached">
+
+                        Students
+
+
+                    </div>
                 </div>
-                <div>
-                    <div class="col-xs-6 field-data">
+                <div  class="row">
+                    <div class="col-xs-6 field-data dashboard-col-attached">
 
                         <div class="danger" data-ng-if="schoolclass.teachers.length ===0">
                             none

@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('schools').controller('RemoveSchoolFromUserModalController', ['$scope', '$state', '$location', '$modalInstance', 'schoolId', 'user', 'Schools', 'Schoolclasses', 'Authentication',
-    function ($scope, $state, $location, $modalInstance, schoolId, user, Schools, Schoolclasses, Authentication) {
-        $scope.schoolId = schoolId;
+angular.module('schools').controller('RemoveSchoolFromStudentModalController', ['$scope', '$state', '$location', '$modalInstance', 'school', 'user',
+    function ($scope, $state, $location, $modalInstance, school, user) {
+        $scope.school = school;
         $scope.user = user;
 
         $scope.ok = function () {
@@ -12,7 +12,7 @@ angular.module('schools').controller('RemoveSchoolFromUserModalController', ['$s
             //
 
             for (var i=0; i<=user.studentInSchools.length; i++) {
-                if (user.studentInSchools[i] === schoolId) {
+                if (user.studentInSchools[i] === school._id) {
                     user.studentInSchools.splice(i, 1);
                 }
             }

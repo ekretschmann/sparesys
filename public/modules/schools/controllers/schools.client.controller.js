@@ -158,13 +158,17 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }
             }).result.then(function () {
 
-                    Users.get({
-                        userId: $scope.authentication.user._id
-                    }, function(user) {
-                        $scope.authentication.user = user;
-                        console.log(user);
 
-                    });
+                    //if ( $scope.authentication.user.teacherInSchools.indexOf(school._id) === -1) {
+                    //    $scope.authentication.user.teacherInSchools.push(school._id);
+                    //}
+
+                    //Users.get({
+                    //    userId: $scope.authentication.user._id
+                    //}, function(user) {
+                    //    $scope.authentication.user = user;
+                    //
+                    //});
 
 
                 });
@@ -263,16 +267,18 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
         };
 
-        $scope.areYouSureToRemoveSchool = function (schoolId, user) {
+        $scope.areYouSureToRemoveSchoolFromStudent = function (school, user) {
 
+            //console.log(school);
+            //console.log(user);
 
             $modal.open({
-                templateUrl: 'areYouSureToRemoveSchool.html',
-                controller: 'RemoveSchoolFromUserModalController',
+                templateUrl: 'areYouSureToRemoveSchoolFromStudent.html',
+                controller: 'RemoveSchoolFromStudentModalController',
                 resolve: {
 
-                    schoolId: function () {
-                        return schoolId;
+                    school: function () {
+                        return school;
                     },
                     user: function () {
                         return user;
@@ -280,7 +286,38 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }
             }).result.then(function () {
 
-                    $scope.otherUser = Users.findById(user._id);
+                    Users.get({
+                        userId: user._id
+                    }, function(user) {
+                        $scope.otherUser = user;
+
+                    });
+                });
+
+        };
+
+        $scope.areYouSureToRemoveSchoolFromTeacher = function (school, user) {
+
+            $modal.open({
+                templateUrl: 'areYouSureToRemoveSchoolFromTeacher.html',
+                controller: 'RemoveSchoolFromTeacherModalController',
+                resolve: {
+
+                    school: function () {
+                        return school;
+                    },
+                    user: function () {
+                        return user;
+                    }
+                }
+            }).result.then(function () {
+
+                    Users.get({
+                        userId: user._id
+                    }, function(user) {
+                        $scope.otherUser = user;
+
+                    });
                 });
 
         };

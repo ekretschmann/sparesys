@@ -35,7 +35,7 @@
 
 
                         <div class="field-data" data-ng-controller="SchoolsController"
-                             data-ng-repeat="sid in authentication.user.teacherInSchools" data-ng-init="findById(sid)">
+                             data-ng-repeat="sid in authentication.user.teacherInSchools track by $index" data-ng-init="findById(sid)">
 
                             <a href=""
                                data-ng-click="unsubscribeTeacherPopup(school._id)"><i

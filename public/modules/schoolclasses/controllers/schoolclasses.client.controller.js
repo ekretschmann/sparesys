@@ -399,10 +399,10 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 }
             }
 
-            $scope.schoolclass.$update(function(x){
-                console.log(x);
-            });
+            $scope.schoolclass.$update();
         };
+
+
 
         $scope.addCourseForStudent = function (studentId, courseId) {
             Courses.query({

@@ -1,0 +1,21 @@
+<script type="text/ng-template" id="areYouSureToRemoveSchoolFromTeacher.html">
+
+    <div class="rememberators-modal">
+
+        <div class="rememberators-modal-header">
+            {{user.displayName}} is no longer teacher in {{schoolId}}
+            Remove School {{schoolId}} from user {{user.displayName}}
+        </div>
+
+        <div class="modal-danger">
+            Are you sure?
+        </div>
+
+        <div class="rememberators-modal-footer">
+            <button class="btn btn-rememberators" ng-click="ok()">OK</button>
+            <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
+        </div>
+    </div>
+
+
+</script>

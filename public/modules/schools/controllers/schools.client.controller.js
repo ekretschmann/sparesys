@@ -158,17 +158,9 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }
             }).result.then(function () {
 
-
-                    if ( $scope.authentication.user.teacherInSchools.indexOf(school._id) === -1) {
+                    if ($scope.authentication.user.teacherInSchools.indexOf(school._id) === -1) {
                         $scope.authentication.user.teacherInSchools.push(school._id);
                     }
-
-                    //Users.get({
-                    //    userId: $scope.authentication.user._id
-                    //}, function(user) {
-                    //    $scope.authentication.user = user;
-                    //
-                    //});
 
 
                 });
@@ -177,7 +169,6 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
         $scope.unsubscribeTeacherPopup = function (school) {
 
-            $scope.school = school;
             $modal.open({
                 templateUrl: 'unsubscribeTeacher.html',
                 controller: 'UnsubscribeTeacherModalController',
@@ -187,7 +178,16 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                     }
                 }
             }).result.then(function () {
-                    // so something
+
+
+                    $scope.authentication.user.teacherInSchools.splice($scope.authentication.user.teacherInSchools.indexOf($scope.school._id),1);
+                    //Schools.get({
+                    //    schoolId: $scope.school._id
+                    //}, function (updatedSchool) {
+                    //    console.log(updatedSchool);
+                    //    $scope.school = updatedSchool;
+                    //
+                    //});
                 });
 
         };
@@ -205,7 +205,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                     }
                 }
             }).result.then(function () {
-                 // do something
+                    // do something
                 });
 
         };
@@ -288,7 +288,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
                     Users.get({
                         userId: user._id
-                    }, function(user) {
+                    }, function (user) {
                         $scope.otherUser = user;
 
                     });
@@ -314,7 +314,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
                     Users.get({
                         userId: user._id
-                    }, function(user) {
+                    }, function (user) {
                         $scope.otherUser = user;
 
                     });
@@ -358,7 +358,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
                     Schools.get({
                         schoolId: $scope.school._id
-                    }, function(updatedSchool) {
+                    }, function (updatedSchool) {
                         $scope.school = updatedSchool;
 
                     });

@@ -9,21 +9,25 @@ angular.module('schools').controller('UnsubscribeTeacherModalController', ['$sco
         $scope.ok = function () {
 
 
-            console.log('ga teacher unsubscribes from school');
-            console.log('/schools/unsubscribe/teacher/:id');
-            if ($window.ga) {
-                console.log('sending to ga');
-                $window.ga('send', 'pageview', '/schools/unsubscribe/teacher/:id');
-                $window.ga('send', 'event', 'user unsubscribes from a school as teacher');
-            }
+            //console.log('ga teacher unsubscribes from school');
+            //console.log('/schools/unsubscribe/teacher/:id');
+            //if ($window.ga) {
+            //    console.log('sending to ga');
+            //    $window.ga('send', 'pageview', '/schools/unsubscribe/teacher/:id');
+            //    $window.ga('send', 'event', 'user unsubscribes from a school as teacher');
+            //}
 
-            for (var i in school.teachers) {
-                if (school.teachers[i] === $scope.authentication.user._id) {
-                    school.teachers.splice(i, 1);
+
+            for (var i in $scope.school.teachers) {
+                if ($scope.school.teachers[i]._id === $scope.authentication.user._id) {
+                    $scope.school.teachers.splice(i, 1);
                 }
             }
-            school.$update();
-            $modalInstance.close();
+
+            $scope.school.$update(function() {
+                $modalInstance.close();
+            });
+
 
         };
 

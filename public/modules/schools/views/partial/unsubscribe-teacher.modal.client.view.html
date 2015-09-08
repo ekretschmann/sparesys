@@ -1,38 +1,32 @@
 <script type="text/ng-template" id="unsubscribeTeacher.html">
-    <div class="modal-body">
-        <div class="content-header">
+
+    <div class="rememberators-modal">
+        <div class="rememberators-modal-header">
+
 
             <div>
                 <div class="title center-aligned">
-                    Un-Subscribe as Teacher from School
+                    Stop being teacher in school
                 </div>
-                <div class="title center-aligned"
-                     data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
+
+                <div class="title center-aligned">
                     {{school.name}}
                 </div>
             </div>
         </div>
 
+        <div class="rememberators-modal-section modal-danger">
 
-        <div class="content-header">
-
-            <div class="title center-aligned font-l"><div class="warning">Are You Really Sure?</div> </div>
-
-            <div class="center-aligned warning"
-                 data-ng-if="school.teachers.indexOf(authentication.user._id) != -1">
-                This action will permanently remove you from all the classes you are in
-
-            </div>
-
+            This action will permanently remove you from all the classes you are in
 
         </div>
 
 
-
-    <div class="title center-aligned">
-        <button class="btn btn-rememberators" ng-click="ok()">OK</button>
-        <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
+        <div class="title center-aligned">
+            <button class="btn btn-rememberators" ng-click="ok()">OK</button>
+            <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
+        </div>
     </div>
 
-    </div>
+
 </script>

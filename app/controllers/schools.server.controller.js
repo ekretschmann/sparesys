@@ -81,9 +81,13 @@ exports.update = function (req, res) {
         originalTeachers.push(school.teachers[i].id);
     }
 
+
     school = _.extend(school, req.body);
 
+
     var currentTeachers = [];
+
+
     for (i = 0; i < school.teachers.length; i++) {
         if(school.teachers[i]._id) {
             currentTeachers.push('' + school.teachers[i]._id);
@@ -105,7 +109,6 @@ exports.update = function (req, res) {
             removedTeachers.push(originalTeachers[i]);
         }
     }
-
 
     var addSchoolToTeacher = function (userId, schoolId) {
         User.findOne({_id: userId}, 'teacherInSchools').exec(function (err, newUser) {
@@ -154,6 +157,23 @@ exports.update = function (req, res) {
     //   });
     //}
     //
+
+    var uniqueTeachers = [];
+    for (i=0; i<school.teachers.length; i++) {
+        var t = school.teachers[i];
+        if (t._id) {
+            t = t._id+'';
+        } else {
+            t = t+'';
+        }
+        if (uniqueTeachers.indexOf(t) === -1) {
+            uniqueTeachers.push(t);
+        }
+    }
+
+    console.log(uniqueTeachers);
+
+    school.teachers = uniqueTeachers;
     school.save(function (err) {
 
 

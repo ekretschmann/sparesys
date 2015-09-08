@@ -159,9 +159,9 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
             }).result.then(function () {
 
 
-                    //if ( $scope.authentication.user.teacherInSchools.indexOf(school._id) === -1) {
-                    //    $scope.authentication.user.teacherInSchools.push(school._id);
-                    //}
+                    if ( $scope.authentication.user.teacherInSchools.indexOf(school._id) === -1) {
+                        $scope.authentication.user.teacherInSchools.push(school._id);
+                    }
 
                     //Users.get({
                     //    userId: $scope.authentication.user._id
@@ -356,7 +356,12 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }
             }).result.then(function () {
 
-                    console.log('finished');
+                    Schools.get({
+                        schoolId: $scope.school._id
+                    }, function(updatedSchool) {
+                        $scope.school = updatedSchool;
+
+                    });
                 });
         };
 

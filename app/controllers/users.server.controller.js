@@ -378,6 +378,8 @@ exports.oauthCallback = function (strategy) {
  */
 exports.userByID = function (req, res, next, id) {
 
+    console.log('aaaaaaa');
+
     User.findOne({
         _id: id
     }).exec(function (err, user) {

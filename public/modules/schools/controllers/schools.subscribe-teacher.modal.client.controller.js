@@ -8,7 +8,9 @@ angular.module('schools').controller('SubscribeTeacherModalController', ['$scope
 
         $scope.ok = function () {
             school.teachers.push($scope.authentication.user._id);
-            school.$update();
+            school.$update(function() {
+                $modalInstance.close();
+            });
 
 
             console.log('ga teacher subscribes to school');
@@ -18,7 +20,7 @@ angular.module('schools').controller('SubscribeTeacherModalController', ['$scope
                 $window.ga('send', 'pageview', '/schools/subscribe/teacher/:id');
                 $window.ga('send', 'event', 'user subscribes to a school as teacher');
             }
-            $modalInstance.close();
+
         };
 
         $scope.cancel = function () {

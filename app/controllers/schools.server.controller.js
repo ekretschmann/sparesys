@@ -104,16 +104,18 @@ var updateTeachers = function(school, originalTeachers) {
                    deferred.newTeachers--;
                    if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
                        console.log('resolved 1');
+                       console.log('saved teacher:'+newUser.teacherInSchools);
                        deferred.resolve(true);
                    }
                });
-           } else {
-               deferred.newTeachers--;
-               if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
-                   console.log('resolved 1');
-                   deferred.resolve(true);
-               }
            }
+           //} else {
+           //    deferred.newTeachers--;
+           //    if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
+           //        console.log('resolved 1');
+           //        deferred.resolve(true);
+           //    }
+           //}
         });
     };
 
@@ -129,28 +131,28 @@ var updateTeachers = function(school, originalTeachers) {
                         deferred.resolve(true);
                     }
                 });
-            } else {
-                deferred.newTeachers--;
-                if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
-                    console.log('resolved 1');
-                    deferred.resolve(true);
-                }
             }
+            //} else {
+            //    deferred.newTeachers--;
+            //    if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
+            //        console.log('resolved 1');
+            //        deferred.resolve(true);
+            //    }
+            //}
         });
     };
 
     deferred.newTeachers = newTeachers.length;
     deferred.removedTeachers = removedTeachers.length;
     if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
-        console.log('resolved 3');
         deferred.resolve(true);
     }
-
-    console.log('new teachers');
-    console.log(newTeachers);
-
-    console.log('removed teachers');
-    console.log(removedTeachers);
+    //
+    //console.log('new teachers');
+    //console.log(newTeachers);
+    //
+    //console.log('removed teachers');
+    //console.log(removedTeachers);
 
 
     for (i = 0; i < newTeachers.length; i++) {
@@ -165,6 +167,7 @@ var updateTeachers = function(school, originalTeachers) {
 
     return deferred.promise;
 
+    //return true;
 };
 
 /**
@@ -191,7 +194,7 @@ exports.update = function (req, res) {
 
 
 
-    school.teachers = updateTeachers(school, originalTeachers).then(function(){
+    updateTeachers(school, originalTeachers).then(function(){
 
         var uniqueTeachers = [];
         for (i=0; i<school.teachers.length; i++) {
@@ -206,6 +209,10 @@ exports.update = function (req, res) {
             }
         }
 
+        school.teachers=uniqueTeachers;
+
+        console.log(school.teachers);
+
         school.save(function (err) {
 
 
@@ -214,6 +221,7 @@ exports.update = function (req, res) {
                     message: getErrorMessage(err)
                 });
             } else {
+                console.log('returning school');
                 res.jsonp(school);
             }
     });
@@ -383,6 +391,14 @@ exports.list = function (req, res) {
 exports.schoolByID = function (req, res, next, id) {
 
 
+    //School.findById(id).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('students', 'displayName').populate('schoolclasses').exec(function (err, school) {
+    //
+    //
+    //    if (err) return next(err);
+    //    if (!school) return next(new Error('Failed to load School ' + id));
+    //    req.school = school;
+    //    next();
+    //});
     School.findById(id).populate('user', 'displayName').populate('user', '-salt -password -__v -provider').populate('teachers', 'displayName').populate('students', 'displayName').populate('schoolclasses').exec(function (err, school) {
 
 

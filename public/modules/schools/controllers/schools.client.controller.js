@@ -161,6 +161,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                     Users.get({
                         userId: $scope.authentication.user._id
                     }, function (user) {
+                        console.log(user.teacherInSchools);
                         $scope.authentication.user = user;
 
                     });
@@ -180,6 +181,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                     }
                 }
             }).result.then(function () {
+
 
 
                     Users.get({
@@ -340,6 +342,14 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                     console.log('finished');
                 });
         };
+
+
+        $scope.removeDeadTeacherId = function(id) {
+            console.log(id);
+            $scope.school.teachers.splice($scope.school.teachers.indexOf(id),1);
+            $scope.school.$update();
+        };
+
 
         $scope.areYouSureToRemoveTeacher = function (teacher) {
             $modal.open({

@@ -116,9 +116,18 @@
                             <div data-ng-repeat="teacher in school.teachers">
 
 
+                                <div data-ng-if="teacher.displayName">
                                 <div class="field-data">
                                         <a href="" data-ng-click="areYouSureToRemoveTeacher(teacher)">
                                             <i class="glyphicon glyphicon-trash"></i></a> {{teacher.displayName}}
+                                </div>
+                                </div>
+
+                                <div data-ng-if="!teacher.displayName">
+                                    <div class="field-data danger">
+                                        <a href="" data-ng-click="removeDeadTeacherId(teacher)">
+                                            <i class="glyphicon glyphicon-trash"></i></a> {{teacher}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -180,6 +189,7 @@
                                 <div class="danger" data-ng-if="schoolclass.teachers.length ===0">
                                     none
                                 </div>
+
                                 <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}} <a href=""
                                                                                                                  data-ng-click="removeTeacherFromClass(teacher._id)"><i
                                         class="glyphicon glyphicon-minus-sign"></i></a></div>

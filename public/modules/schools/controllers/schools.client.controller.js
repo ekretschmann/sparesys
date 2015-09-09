@@ -158,10 +158,12 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }
             }).result.then(function () {
 
-                    if ($scope.authentication.user.teacherInSchools.indexOf(school._id) === -1) {
-                        $scope.authentication.user.teacherInSchools.push(school._id);
-                    }
+                    Users.get({
+                        userId: $scope.authentication.user._id
+                    }, function (user) {
+                        $scope.authentication.user = user;
 
+                    });
 
                 });
 
@@ -180,14 +182,12 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
             }).result.then(function () {
 
 
-                    $scope.authentication.user.teacherInSchools.splice($scope.authentication.user.teacherInSchools.indexOf($scope.school._id),1);
-                    //Schools.get({
-                    //    schoolId: $scope.school._id
-                    //}, function (updatedSchool) {
-                    //    console.log(updatedSchool);
-                    //    $scope.school = updatedSchool;
-                    //
-                    //});
+                    Users.get({
+                        userId: $scope.authentication.user._id
+                    }, function (user) {
+                        $scope.authentication.user = user;
+
+                    });
                 });
 
         };

@@ -6,7 +6,8 @@
 var mongoose = require('mongoose'),
     School = mongoose.model('School'),
     User = mongoose.model('User'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    q = require('q');
 
 /**
  * Get the error message from error object
@@ -62,33 +63,14 @@ exports.read = function (req, res) {
     res.jsonp(req.school);
 };
 
-/**
- * Update a School
- */
-exports.update = function (req, res) {
 
 
-    var school = req.school;
-    var originalUserId;
+var updateTeachers = function(school, originalTeachers) {
 
-    if (school.user) {
-        originalUserId = school.user._id;
-    }
-
-
-    var originalTeachers = [];
-    for (var i = 0; i < school.teachers.length; i++) {
-        originalTeachers.push(school.teachers[i].id);
-    }
-
-
-    school = _.extend(school, req.body);
-
+    var deferred = q.defer();
 
     var currentTeachers = [];
-
-
-    for (i = 0; i < school.teachers.length; i++) {
+    for (var i = 0; i < school.teachers.length; i++) {
         if(school.teachers[i]._id) {
             currentTeachers.push('' + school.teachers[i]._id);
         } else {
@@ -113,20 +95,62 @@ exports.update = function (req, res) {
     var addSchoolToTeacher = function (userId, schoolId) {
         User.findOne({_id: userId}, 'teacherInSchools').exec(function (err, newUser) {
 
-            if (newUser.teacherInSchools.indexOf(schoolId) === -1) {
-                newUser.teacherInSchools.push(schoolId);
-            }
-            newUser.save();
+           if (newUser) {
+               if (newUser.teacherInSchools.indexOf(schoolId) === -1) {
+                   newUser.teacherInSchools.push(schoolId);
+               }
+
+               newUser.save(function () {
+                   deferred.newTeachers--;
+                   if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
+                       console.log('resolved 1');
+                       deferred.resolve(true);
+                   }
+               });
+           } else {
+               deferred.newTeachers--;
+               if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
+                   console.log('resolved 1');
+                   deferred.resolve(true);
+               }
+           }
         });
     };
 
     var removeSchoolFromTeacher = function (userId, schoolId) {
         User.findOne({_id: userId}, 'teacherInSchools').exec(function (err, newUser) {
 
-            newUser.teacherInSchools.splice(newUser.teacherInSchools.indexOf(schoolId));
-            newUser.save();
+            if (newUser) {
+                newUser.teacherInSchools.splice(newUser.teacherInSchools.indexOf(schoolId));
+                newUser.save(function () {
+                    deferred.removedTeachers--;
+                    if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
+                        console.log('resolved 2');
+                        deferred.resolve(true);
+                    }
+                });
+            } else {
+                deferred.newTeachers--;
+                if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
+                    console.log('resolved 1');
+                    deferred.resolve(true);
+                }
+            }
         });
     };
+
+    deferred.newTeachers = newTeachers.length;
+    deferred.removedTeachers = removedTeachers.length;
+    if (deferred.newTeachers === 0 && deferred.removedTeachers === 0) {
+        console.log('resolved 3');
+        deferred.resolve(true);
+    }
+
+    console.log('new teachers');
+    console.log(newTeachers);
+
+    console.log('removed teachers');
+    console.log(removedTeachers);
 
 
     for (i = 0; i < newTeachers.length; i++) {
@@ -136,6 +160,64 @@ exports.update = function (req, res) {
     for (i = 0; i < removedTeachers.length; i++) {
         removeSchoolFromTeacher(removedTeachers[i], school._id);
     }
+
+
+
+    return deferred.promise;
+
+};
+
+/**
+ * Update a School
+ */
+exports.update = function (req, res) {
+
+
+    var school = req.school;
+    var originalUserId;
+
+    if (school.user) {
+        originalUserId = school.user._id;
+    }
+
+
+    var originalTeachers = [];
+    for (var i = 0; i < school.teachers.length; i++) {
+        originalTeachers.push(school.teachers[i].id);
+    }
+
+
+    school = _.extend(school, req.body);
+
+
+
+    school.teachers = updateTeachers(school, originalTeachers).then(function(){
+
+        var uniqueTeachers = [];
+        for (i=0; i<school.teachers.length; i++) {
+            var t = school.teachers[i];
+            if (t._id) {
+                t = t._id+'';
+            } else {
+                t = t+'';
+            }
+            if (uniqueTeachers.indexOf(t) === -1) {
+                uniqueTeachers.push(t);
+            }
+        }
+
+        school.save(function (err) {
+
+
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(school);
+            }
+    });
+
 
     //if (originalUserId && school.user._id.toString() !== originalUserId.toString()) {
     //
@@ -158,32 +240,7 @@ exports.update = function (req, res) {
     //}
     //
 
-    var uniqueTeachers = [];
-    for (i=0; i<school.teachers.length; i++) {
-        var t = school.teachers[i];
-        if (t._id) {
-            t = t._id+'';
-        } else {
-            t = t+'';
-        }
-        if (uniqueTeachers.indexOf(t) === -1) {
-            uniqueTeachers.push(t);
-        }
-    }
 
-    console.log(uniqueTeachers);
-
-    school.teachers = uniqueTeachers;
-    school.save(function (err) {
-
-
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        } else {
-            res.jsonp(school);
-        }
     });
 };
 

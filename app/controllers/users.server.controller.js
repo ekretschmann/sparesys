@@ -195,6 +195,7 @@ var updateSchoolForTeacher = function (theUser, req) {
 var updateSchoolForStudent = function (theUser, req) {
 
     function removeStudentFromSchool(id, theUser) {
+        console.log('removing user '+theUser.displayName);
         School.findOne({_id: id}).exec(function (err, s) {
             if (!err && s) {
                 if (s.students.indexOf(theUser._id) > -1) {
@@ -207,9 +208,11 @@ var updateSchoolForStudent = function (theUser, req) {
 
     function addStudentToSchool(id, theUser) {
 
+
         School.findOne({_id: id}).exec(function (err, s) {
 
-            if (!err & s) {
+
+            if (!err && s) {
                 s.students.push(theUser._id);
                 s.save();
             }
@@ -219,8 +222,6 @@ var updateSchoolForStudent = function (theUser, req) {
     var originalSchools = theUser.studentInSchools;
     var newSchools = req.body.studentInSchools;
 
-    console.log(originalSchools);
-    console.log(newSchools);
 
     var deletedSchools = [];
     for (var i=0;i<originalSchools.length; i++) {
@@ -228,7 +229,6 @@ var updateSchoolForStudent = function (theUser, req) {
             deletedSchools.push(originalSchools[i]+'');
         }
     }
-    console.log(deletedSchools);
 
     for(i=0; i<deletedSchools.length; i++) {
         removeStudentFromSchool(deletedSchools[i], theUser);

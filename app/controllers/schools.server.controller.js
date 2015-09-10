@@ -211,7 +211,6 @@ exports.update = function (req, res) {
 
         school.teachers=uniqueTeachers;
 
-        console.log(school.teachers);
 
         school.save(function (err) {
 

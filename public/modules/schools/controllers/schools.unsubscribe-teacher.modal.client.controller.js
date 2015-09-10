@@ -1,13 +1,24 @@
 'use strict';
 
-angular.module('schools').controller('UnsubscribeTeacherModalController', ['$scope', '$location', '$window','$modalInstance', 'Authentication', 'school',
-    function ($scope, $location, $window, $modalInstance, Authentication, school) {
+angular.module('schools').controller('UnsubscribeTeacherModalController', ['$scope', '$location', '$window','$modalInstance', 'Authentication', 'Users', 'school', 'user',
+    function ($scope, $location, $window, $modalInstance, Authentication, Users, school, user) {
 
-        $scope.authentication = Authentication;
+        $scope.user = user;
         $scope.school = school;
 
         $scope.ok = function () {
 
+
+            Users.get({
+                userId: user._id
+            }, function (result) {
+
+                result.teacherInSchools.splice(result.teacherInSchools.indexOf($scope.school._id), 1);
+                result.$update(function() {
+                    $scope.user.teacherInSchools.splice($scope.user.teacherInSchools.indexOf($scope.school._id), 1);
+                    $modalInstance.close();
+                });
+            });
 
             //console.log('ga teacher unsubscribes from school');
             //console.log('/schools/unsubscribe/teacher/:id');
@@ -18,15 +29,6 @@ angular.module('schools').controller('UnsubscribeTeacherModalController', ['$sco
             //}
 
 
-            for (var i in $scope.school.teachers) {
-                if ($scope.school.teachers[i]._id === $scope.authentication.user._id) {
-                    $scope.school.teachers.splice(i, 1);
-                }
-            }
-
-            $scope.school.$update(function() {
-                $modalInstance.close();
-            });
 
 
         };

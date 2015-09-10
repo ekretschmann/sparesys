@@ -145,52 +145,38 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //        };
 //
 //
-        $scope.subscribeTeacherPopup = function (school) {
+        $scope.subscribeTeacherPopup = function (school, user) {
 
-            $scope.school = school;
             $modal.open({
                 templateUrl: 'subscribeTeacher.html',
                 controller: 'SubscribeTeacherModalController',
                 resolve: {
                     school: function () {
-                        return $scope.school;
+                        return school;
+                    },
+                    user: function () {
+
+                        return user;
                     }
                 }
-            }).result.then(function () {
-
-                    Users.get({
-                        userId: $scope.authentication.user._id
-                    }, function (user) {
-                        console.log(user.teacherInSchools);
-                        $scope.authentication.user = user;
-
-                    });
-
-                });
+            });
 
         };
 
-        $scope.unsubscribeTeacherPopup = function (school) {
+        $scope.unsubscribeTeacherPopup = function (school, user) {
 
             $modal.open({
                 templateUrl: 'unsubscribeTeacher.html',
                 controller: 'UnsubscribeTeacherModalController',
                 resolve: {
                     school: function () {
-                        return $scope.school;
+                        return school;
+                    },
+                    user: function () {
+                        return user;
                     }
                 }
-            }).result.then(function () {
-
-
-
-                    Users.get({
-                        userId: $scope.authentication.user._id
-                    }, function (user) {
-                        $scope.authentication.user = user;
-
-                    });
-                });
+            });
 
         };
 //

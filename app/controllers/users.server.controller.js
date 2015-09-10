@@ -7,6 +7,7 @@ var mongoose = require('mongoose'),
     passport = require('passport'),
     User = mongoose.model('User'),
     Schoolclass = mongoose.model('Schoolclass'),
+    School = mongoose.model('School'),
     _ = require('lodash');
 
 /**
@@ -177,6 +178,29 @@ exports.update = function (req, res) {
         });
     }
 
+    function removeTeacherFromSchool(id, theUser) {
+        School.findOne({_id: id}).exec(function (err, s) {
+            if (!err) {
+                if (s.teachers.indexOf(theUser._id) > -1) {
+                    s.teachers.splice(s.teachers.indexOf(theUser._id), 1);
+                    s.save();
+                }
+            }
+        });
+    }
+
+    function addTeacherToSchool(id, theUser) {
+
+        School.findOne({_id: id}).exec(function (err, s) {
+
+            if (!err) {
+                s.teachers.push(theUser._id);
+                s.save();
+            }
+        });
+    }
+
+
     function removeStudentFromSchoolclass(id, theUser) {
         Schoolclass.findOne({_id: id}).exec(function (err, sc) {
             if (!err) {
@@ -191,11 +215,51 @@ exports.update = function (req, res) {
     function updateUser(theUser) {
 
 
+
+        var originalSchools = theUser.teacherInSchools;
+        var newSchools = req.body.teacherInSchools;
+
+        console.log('original');
+        console.log(originalSchools);
+        console.log('new');
+        console.log(newSchools);
+
+
+        var deletedSchools = [];
+        for (var i=0;i<originalSchools.length; i++) {
+            if (newSchools.indexOf(originalSchools[i]+'') === -1) {
+                deletedSchools.push(originalSchools[i]+'');
+            }
+        }
+
+        console.log('deleted');
+        console.log(deletedSchools);
+        for(i=0; i<deletedSchools.length; i++) {
+            removeTeacherFromSchool(deletedSchools[i], theUser);
+        }
+
+        var addedSchools = [];
+        for ( i=0;i<newSchools.length; i++) {
+            if (originalSchools.indexOf(newSchools[i]) === -1) {
+                addedSchools.push(newSchools[i]);
+            }
+        }
+
+        console.log('added');
+        console.log(addedSchools);
+        for(i=0; i<addedSchools.length; i++) {
+            addTeacherToSchool(addedSchools[i], theUser);
+        }
+
+
+
         var originalClasses= theUser.teachesClasses;
         var newClasses = req.body.teachesClasses;
 
+
+
         var deletedClasses = [];
-        for (var i=0;i<originalClasses.length; i++) {
+        for ( i=0;i<originalClasses.length; i++) {
             if (newClasses.indexOf(originalClasses[i]) === -1) {
                 deletedClasses.push(originalClasses[i]);
             }
@@ -378,7 +442,7 @@ exports.oauthCallback = function (strategy) {
  */
 exports.userByID = function (req, res, next, id) {
 
-    console.log('aaaaaaa');
+
 
     User.findOne({
         _id: id

@@ -7,37 +7,21 @@ angular.module('schools').controller('RemoveSchoolFromStudentModalController', [
 
         $scope.ok = function () {
 
-            //console.log(schoolId);
-            //console.log(user);
-            //
 
+
+            console.log(user.studentInSchools);
+            console.log(school);
             for (var i=0; i<=user.studentInSchools.length; i++) {
-                if (user.studentInSchools[i] === school._id) {
+                if (user.studentInSchools[i] === school) {
                     user.studentInSchools.splice(i, 1);
                 }
             }
+            console.log(user.studentInSchools);
 
             user.$update(function() {
                 $modalInstance.close();
             });
 
-            //school.schoolclasses.forEach(function(schoolclass) {
-            //    new Schoolclasses(schoolclass).$remove();
-            //});
-            //
-            ////new Schools(school).$remove(function() {
-            ////    $state.go($state.current, null, { reload: true});
-            ////});
-            //
-            //Schools.get({
-            //    schoolId: $scope.school._id
-            //}, function (s) {
-            //
-            //    s.$remove(function(result) {
-            //        $modalInstance.close();
-            //    });
-            //
-            //});
 
 
         };

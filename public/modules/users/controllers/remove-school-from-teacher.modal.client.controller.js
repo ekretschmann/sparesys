@@ -7,9 +7,7 @@ angular.module('schools').controller('RemoveSchoolFromTeacherModalController', [
 
         $scope.ok = function () {
 
-            //console.log(schoolId);
-            //console.log(user);
-            //
+
 
             for (var i=0; i<=user.teacherInSchools.length; i++) {
                 if (user.teacherInSchools[i] === school._id) {
@@ -20,24 +18,6 @@ angular.module('schools').controller('RemoveSchoolFromTeacherModalController', [
             user.$update(function() {
                 $modalInstance.close();
             });
-
-            //school.schoolclasses.forEach(function(schoolclass) {
-            //    new Schoolclasses(schoolclass).$remove();
-            //});
-            //
-            ////new Schools(school).$remove(function() {
-            ////    $state.go($state.current, null, { reload: true});
-            ////});
-            //
-            //Schools.get({
-            //    schoolId: $scope.school._id
-            //}, function (s) {
-            //
-            //    s.$remove(function(result) {
-            //        $modalInstance.close();
-            //    });
-            //
-            //});
 
 
         };

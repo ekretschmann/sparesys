@@ -39,7 +39,7 @@
                              data-ng-init="findById(sid)">
 
                             <a href=""
-                               data-ng-click="unsubscribeTeacherPopup(school, authentication.user)"><i
+                               data-ng-click="unsubscribeTeacherPopup(school._id)"><i
                                     class="glyphicon glyphicon-minus-sign"></i></a>
 
                             {{school.name}}
@@ -64,7 +64,7 @@
                 <div class="title">
                     {{school.name}}
                     <div class="pull-right">
-                        <a href="" data-ng-click="subscribeTeacherPopup(school, authentication.user)"> <i
+                        <a href="" data-ng-click="subscribeTeacherPopup(school)"> <i
                                 class="glyphicon glyphicon-plus-sign"></i></a>
                     </div>
                 </div>
@@ -95,6 +95,7 @@
                     <div class="col-xs-4 dashboard-col">
                         <div class="field-label">Teachers</div>
                         <div class="font-medium">
+                            {{school.tachers}}
                             {{school.teachers.length}}
                         </div>
                     </div>

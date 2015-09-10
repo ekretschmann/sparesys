@@ -192,9 +192,24 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                         return $scope.school;
                     }
                 }
-            }).result.then(function () {
-                    // do something
-                });
+            });
+
+        };
+
+        $scope.unsubscribeStudentPopup = function (school, user) {
+
+            $modal.open({
+                templateUrl: 'unsubscribeStudent.html',
+                controller: 'UnsubscribeStudentModalController',
+                resolve: {
+                    school: function () {
+                        return school;
+                    },
+                    user: function () {
+                        return user;
+                    }
+                }
+            });
 
         };
 //

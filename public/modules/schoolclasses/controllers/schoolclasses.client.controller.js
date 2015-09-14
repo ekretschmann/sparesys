@@ -347,14 +347,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.addTeacherToClass = function (teacher) {
 
-            //$http.post('/schoolclasses/'+$scope.schoolclass._id+'/addTeacher/'+teacher._id).
-            //    then(function(response) {
-            //        console.log(response);
-            //    }, function(response) {
-            //        console.log(response);
-            //    });
-
-
 
             var found = false;
             for (var i = 0; i < $scope.schoolclass.teachers.length; i++) {
@@ -367,23 +359,10 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             if (!found) {
                 $scope.schoolclass.teachers.push(teacher);
 
-                //console.log($scope.schoolclass.teachers);
-
-                //console.log('end');
-                //console.log($scope.schoolclass);
 
 
                 $scope.schoolclass.$update(function () {
 
-
-                    //console.log('ga add teacher to class');
-                    //console.log('/schoolclassess/add/teacher/:id');
-                    //if ($window.ga) {
-                    //    console.log('sending to ga');
-                    //    $window.ga('send', 'pageview', '/schoolclassess/add/teacher/:id');
-                    //    $window.ga('send', 'event', 'school admin adds teacher to class');
-                    //}
-                    //$scope.initSchoolclassSetup();
                 }, function(err) {
                     console.log(err);
                 });

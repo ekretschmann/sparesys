@@ -39,7 +39,7 @@
                              data-ng-init="findById(sid)">
 
                             <a href=""
-                               data-ng-click="unsubscribeTeacherPopup(school._id)"><i
+                               data-ng-click="unsubscribeTeacherPopup(school._id, authentication.user)"><i
                                     class="glyphicon glyphicon-minus-sign"></i></a>
 
                             {{school.name}}

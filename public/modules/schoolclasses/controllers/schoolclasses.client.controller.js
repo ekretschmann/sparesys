@@ -428,6 +428,32 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 });
         };
 
+        $scope.areYouSureToRemoveSchoolclassFromTeacher = function (schoolclass, user) {
+
+
+            $modal.open({
+                templateUrl: 'areYouSureToRemoveSchoolclassFromTeacher.html',
+                controller: 'RemoveSchoolclassFromTeacherModalController',
+                resolve: {
+
+                    schoolclass: function () {
+                        return schoolclass;
+                    },
+                    teacher: function () {
+                        return user;
+                    }
+                }
+            }).result.then(function () {
+
+                    Users.get({
+                        userId: user._id
+                    }, function (user) {
+                        $scope.otherUser = user;
+
+                    });
+                });
+
+        };
 
     }
 ]);

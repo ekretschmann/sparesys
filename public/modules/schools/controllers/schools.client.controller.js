@@ -147,6 +147,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //
         $scope.subscribeTeacherPopup = function (school, user) {
 
+            console.log(user);
             $modal.open({
                 templateUrl: 'subscribeTeacher.html',
                 controller: 'SubscribeTeacherModalController',
@@ -326,31 +327,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
         };
 
 
-        $scope.areYouSureToRemoveSchoolclassFromTeacher = function (schoolclass, user) {
 
-            $modal.open({
-                templateUrl: 'areYouSureToRemoveSchoolclassFromTeacher.html',
-                controller: 'RemoveSchoolclassFromTeacherModalController',
-                resolve: {
-
-                    schoolclass: function () {
-                        return schoolclass;
-                    },
-                    user: function () {
-                        return user;
-                    }
-                }
-            }).result.then(function () {
-
-                    Users.get({
-                        userId: user._id
-                    }, function (user) {
-                        $scope.otherUser = user;
-
-                    });
-                });
-
-        };
 
         $scope.areYouSureToRemoveStudent = function (student) {
             $modal.open({

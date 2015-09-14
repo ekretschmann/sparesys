@@ -10,6 +10,7 @@ angular.module('schools').controller('SubscribeTeacherModalController', ['$scope
         $scope.ok = function () {
 
 
+            console.log(user);
             Users.get({
                 userId: user._id
             }, function (result) {

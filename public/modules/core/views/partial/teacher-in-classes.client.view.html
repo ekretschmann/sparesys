@@ -125,13 +125,84 @@
     </div>
 
     <div data-ng-repeat="schoolId in authentication.user.teachesClasses">
-        <div class=" virtual-card font-large" data-ng-controller="SchoolclassesController" data-ng-init="findById(schoolId)">
+        <div class=" virtual-card font-large" data-ng-controller="SchoolclassesController"
+             data-ng-init="findById(schoolId)">
             <div class="title">{{schoolclass.name}}</div>
 
 
             <div class="flashcard-section">
-                {{schoolclass}}
+                <div class="row">
+                    <div class="col-xs-6 field-label dashboard-col-attached">
+
+                        Teachers
+
+
+                    </div>
+                    <div class="col-xs-6 field-label dashboard-col-attached">
+
+                        Students
+
+
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-xs-6 field-data dashboard-col-attached">
+
+
+                        <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}}</div>
+
+
+                    </div>
+                    <div class="col-xs-6 field-data dashboard-col-attached">
+
+                        <div data-ng-repeat="student in schoolclass.students">{{student.displayName}}</div>
+
+                    </div>
+                </div>
+
+
             </div>
+
+            <div class="flashcard-section">
+                <div class="row">
+                    <div class="col-xs-12 field-label dashboard-col-attached">
+
+
+                        Courses
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-xs-12 field-data dashboard-col-attached">
+
+
+                        <div data-ng-if="schoolclass.courses.length === 0">
+                            none
+                        </div>
+                        <div data-ng-if="schoolclass.courses.length > 0">
+                            {{schoolclass.courses}}
+                        </div>
+
+                        <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
+                            <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+                                Add a Course <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                                <li role="menuitem" data-ng-repeat="course in coursesTeacher"><a href=""
+                                                                                                   data-ng-click="addCourse(course)">{{course.name}}</a>
+                                </li>
+                            </ul>
+                        </div>
+
+
+                    </div>
+
+                </div>
+            </div>
+
+
         </div>
     </div>
 

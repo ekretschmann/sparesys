@@ -263,9 +263,12 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
         $scope.removeStudentFromClass = function (studentId) {
-            console.log(studentId);
+
+            if (studentId._id) {
+                studentId = studentId._id;
+            }
+
             for (var i in $scope.schoolclass.students) {
-                console.log($scope.schoolclass.students[i]);
                 if ($scope.schoolclass.students[i]._id === studentId) {
                     $scope.schoolclass.students.splice(i, 1);
                 }

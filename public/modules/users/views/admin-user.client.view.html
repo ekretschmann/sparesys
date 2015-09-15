@@ -127,9 +127,10 @@
                     </div>
 
                     <div data-ng-if="otherUser.studentInClasses.length > 0">
-                        <div class="field-data" data-ng-repeat="s in otherUser.studentInClasses track by $index">
+                        <div class="field-data" data-ng-repeat="s in otherUser.studentInClasses track by $index"
+                                data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
 
-                            <a href="#!/schoolclasses/{{s}}/admin">{{s}}</a> <a href="" data-ng-click="removeStudentFromClass(otherUser, s)"><i
+                            <a href="#!/schoolclasses/{{s}}/admin">{{schoolclass.name}}</a> <a href="" data-ng-click="removeStudentFromClass(otherUser, s)"><i
                                 class="glyphicon glyphicon-minus-sign"></i></a>
                         </div>
                     </div>

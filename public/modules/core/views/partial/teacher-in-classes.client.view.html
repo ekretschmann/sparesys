@@ -185,15 +185,22 @@
                             {{schoolclass.courses}}
                         </div>
 
-                        <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
-                            <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
-                                Add a Course <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-                                <li role="menuitem" data-ng-repeat="course in coursesTeacher"><a href=""
-                                                                                                   data-ng-click="addCourse(course)">{{course.name}}</a>
-                                </li>
-                            </ul>
+                        <div data-ng-if="coursesTeacher.length > 0">
+                            <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
+                                <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
+                                    Add a Course <span class="caret"></span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                                    <li role="menuitem" data-ng-repeat="course in coursesTeacher"><a href=""
+                                                                                                     data-ng-click="addCourse(course)">{{course.name}}</a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div data-ng-if="coursesTeacher.length === 0" class="danger">
+                            You are not teaching any courses. Set the teacher role on at least one course so that you
+                            can assign it to students.
                         </div>
 
 

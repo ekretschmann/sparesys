@@ -105,6 +105,15 @@
                             {{course.user.displayName}}
                         </div>
                     </div>
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Role</div>
+                        <div class="font-medium">
+                            <input data-ng-model="course.teaching" type="radio" ng-value="true" data-ng-click="update()"/> Teacher
+                            <input style="margin-left: 10px" data-ng-model="course.teaching" type="radio" ng-value="false" data-ng-click="update()"/> Student
+
+                        </div>
+                    </div>
                 </div>
 
 
@@ -119,7 +128,12 @@
                     <div class="col-xs-6 dashboard-col">
                         <div class="field-label">Updated</div>
                         <div class="font-medium">
+                            <div data-ng-if="course.updated">
                             {{course.updated | date:'shortDate'}}
+                                </div>
+                            <div data-ng-if="!course.updated">
+                                {{course.created | date:'shortDate'}}
+                            </div>
                         </div>
                     </div>
                 </div>

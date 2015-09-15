@@ -380,6 +380,25 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 });
         };
 
+        $scope.hasClassAssigned = function(userId) {
+
+            var found = false;
+            for (var i = 0; i < $scope.schoolclasses.length; i++) {
+
+                for (var j = 0; j < $scope.schoolclasses[i].teachers.length; j++) {
+
+                    if($scope.schoolclasses[i].teachers[j] === $scope.authentication.user._id) {
+                        found = true;
+                    }
+
+                }
+
+            }
+
+            console.log(found);
+            return found;
+        };
+
 //
 //        $scope.findForTeacher = function (teacher) {
 //            $scope.schools = Schools.query({

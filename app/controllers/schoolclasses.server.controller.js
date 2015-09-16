@@ -123,13 +123,38 @@ exports.update = function (req, res) {
     var schoolclass = req.schoolclass;
     var originalTeachers = schoolclass.teachers;
     var originalStudents = schoolclass.students;
+    var originalTeacherIds = [];
+    var originalStudentIds = [];
+
+
+    for (var i = 0; i < schoolclass.teachers.length; i++) {
+        originalTeacherIds.push(schoolclass.teachers[i]._id + '');
+
+    }
+
+    for (i = 0; i < schoolclass.students.length; i++) {
+        originalStudentIds.push(schoolclass.students[i]._id + '');
+
+    }
 
     schoolclass = _.extend(schoolclass, req.body);
 
 
-    //console.log(req.body);
-    //console.log(schoolclass);
+    var currentTeachers = schoolclass.teachers;
+    var currentStudents = schoolclass.students;
+    var currentTeacherIds = [];
+    var currentStudentIds = [];
 
+
+    for (i = 0; i < schoolclass.teachers.length; i++) {
+        currentTeacherIds.push(schoolclass.teachers[i]._id + '');
+
+    }
+
+    for (i = 0; i < schoolclass.students.length; i++) {
+        currentStudentIds.push(schoolclass.students[i]._id + '');
+
+    }
 
     schoolclass.save(function (err) {
         if (err) {
@@ -137,11 +162,17 @@ exports.update = function (req, res) {
                 message: getErrorMessage(err)
             });
         } else {
-            var currentTeachers = schoolclass.teachers;
-            var currentStudents = schoolclass.students;
+
+
+            console.log(currentTeachers);
+            console.log(originalTeachers);
 
             originalTeachers.forEach(function (originalTeacher) {
-                if (currentTeachers.indexOf(originalTeacher._id) === -1) {
+                console.log(currentTeacherIds);
+                console.log(originalTeacher._id);
+                console.log(currentTeacherIds.indexOf(originalTeacher._id + ''));
+                if (currentTeacherIds.indexOf(originalTeacher._id + '') === -1) {
+                    console.log('removing class for teacher ' + schoolclass._id);
                     User.findOne({_id: originalTeacher._id}, 'teachesClasses').exec(function (err, originalTeacher) {
                         originalTeacher.teachesClasses.splice(originalTeacher.teachesClasses.indexOf(schoolclass._id), 1);
                         originalTeacher.save();
@@ -150,7 +181,7 @@ exports.update = function (req, res) {
             });
 
 
-            currentTeachers.forEach(function (currentTeacherId) {
+            currentTeacherIds.forEach(function (currentTeacherId) {
                 User.findOne({_id: currentTeacherId}, 'teachesClasses').exec(function (err, currentTeacher) {
 
                     if (currentTeacher.teachesClasses.indexOf(schoolclass._id) === -1) {
@@ -163,7 +194,7 @@ exports.update = function (req, res) {
 
 
             originalStudents.forEach(function (originalStudent) {
-                if (currentStudents.indexOf(originalStudent._id) === -1) {
+                if (currentStudentIds.indexOf(originalStudent._id + '') === -1) {
                     User.findOne({_id: originalStudent._id}, 'studentInClasses').exec(function (err, originalStudent) {
                         originalStudent.studentInClasses.splice(originalStudent.studentInClasses.indexOf(schoolclass._id), 1);
                         originalStudent.save();
@@ -172,7 +203,7 @@ exports.update = function (req, res) {
             });
 
 
-            currentStudents.forEach(function (currentStudentId) {
+            currentStudentIds.forEach(function (currentStudentId) {
                 User.findOne({_id: currentStudentId}, 'studentInClasses').exec(function (err, currentStudent) {
 
                     if (currentStudent.studentInClasses.indexOf(schoolclass._id) === -1) {
@@ -181,8 +212,6 @@ exports.update = function (req, res) {
                     currentStudent.save();
                 });
             });
-
-
 
 
             res.jsonp(schoolclass);

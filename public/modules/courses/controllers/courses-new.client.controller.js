@@ -32,6 +32,19 @@ angular.module('courses').controller('CoursesControllerNew',
             $scope.languageBack = $scope.languages[selectedIndexBack];
 
 
+
+            $scope.options = {};
+            $scope.updateSearch = function () {
+
+
+                Courses.query({
+                    text: $scope.options.searchText
+                }, function(users) {
+                    $scope.users = users;
+
+                });
+            };
+
             $scope.ga = function () {
 
                 console.log('ga seraching');

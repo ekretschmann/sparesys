@@ -1,67 +1,199 @@
-<section data-ng-controller="CoursesController" data-ng-init="find()">
+<section data-ng-controller="CoursesControllerNew" data-ng-init="find()">
 
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
-    <div class="content-header">
-        <!--<div class="pull-right">-->
-            <!--<a class="menu-link"-->
-               <!--href=""-->
-               <!--data-ng-click="createDummyCourse()">Dummy Course</a>-->
 
-            <!--<a class="menu-link"-->
-               <!--href=""-->
-               <!--data-ng-click="cleanDatabase()">Clean Database</a>-->
+    <div class="col-xs-12 col-md-6 dashboard-col ">
+        <div class="admin-card font-large">
+            <div class="title">Administer Courses</div>
+            <div class="flashcard-section row">
 
 
-            <!--&lt;!&ndash;<button class="btn btn-rememberators"&ndash;&gt;-->
-                    <!--&lt;!&ndash;data-ng-controller="TestDataController"&ndash;&gt;-->
-                    <!--&lt;!&ndash;data-ng-click="createDummyCourse()">Create Dummy Course</button>&ndash;&gt;-->
-        <!--</div>-->
+                <div class="col-xs-12">
+                    <div class="field-label">Find Course</div>
+                    <input type="text"
+                           ng-model="options.searchText"
+                           class="form-control search"
+                           data-ng-change="updateSearch()"
+                           placeholder="Name">
+                </div>
 
-        <div class="title">
-            Courses Administration
+
+            </div>
         </div>
-
     </div>
 
-    <div data-ng-if="!courses || courses.length === 0">
-        There are no courses in the database.
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="!courses || courses.length === 0">
+
+        <div class="admin-card font-large">
+            <div class="title">No Courses Found</div>
+            <div class="danger">There are no courses matching your search criteria</div>
+        </div>
     </div>
 
-    <table id="searchTextResults" class="table-striped expands" data-ng-if="courses && courses.length>0">
-        <thead>
-        <tr>
-            <th></th>
-            <th class="right-padded-m">Course</th>
-            <th class="right-padded-m">Description</th>
-            <th class="right-padded-m">By</th>
-            <th class="right-padded-m">Visible</th>
-            <th>Created</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-ng-repeat="course in courses | filter:searchText">
-            <td class="nowrap right-padded-s middle-aligned left-padded-s top-padded-s bottom-padded-s">
-                <a href="">
-                    <i data-ng-click="areYouSureToDeleteCourse(course)"
-                       class="glyphicon glyphicon-remove-sign">
-                    </i>
-                </a>
 
-                <a data-ng-href="#!/courses/{{course._id}}/edit">
-                    <i class="glyphicon glyphicon-edit">
-                    </i>
-                </a>
-            </td>
-            <td class="nowrap right-padded-m top-aligned top-padded-s bottom-padded-s">
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-repeat="c in courses">
+        <div class="admin-card font-large">
+            <div class="title">{{c.name}}
 
-                <a data-ng-href="#!/courses/{{course._id}}/admin">{{course.name}}</a></td>
-            <td class="expands right-padded-m top-padded-s bottom-padded-s">{{course.description}}</td>
-            <td class="nowrap right-padded-m top-aligned top-padded-s bottom-padded-s">{{course.user.displayName}}</td>
-            <td class="nowrap right-padded-m top-aligned top-padded-s bottom-padded-s">{{course.visible}}</td>
-            <td class="nowrap top-aligned right-padded-s top-padded-s bottom-padded-s">{{course.created | date:'shortDate'}}</td>
-        </tr>
-        </tbody>
-    </table>
+                <div class="font-medium">
+                    {{c.description}}
+                </div>
+
+                <!--<div class="pull-right">-->
+                <!--<a href="/#!/users/{{user._id}}"><i class="glyphicon glyphicon-edit"></i></a>-->
+                <!--</div>-->
+
+            </div>
+
+
+            <div class="flashcard-section">
+
+
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-4">
+                        <div class="field-label">User</div>
+                        <div class="field-data">
+                            {{c.user.displayName}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <div class="field-label">Published</div>
+                        <div class="field-data">
+                            {{c.published}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <div class="field-label">Role</div>
+                        <div class="field-data">
+                            <div data-ng-if="c.teaching">Teacher</div>
+                            <div data-ng-if="!c.teaching">Student</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-4">
+                        <div class="field-label">Front</div>
+                        <div class="field-data">
+                            {{c.front}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <div class="field-label">Back</div>
+                        <div class="field-data">
+                            {{c.back}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-4">
+                        <div class="field-label">Language front</div>
+                        <div class="field-data">
+                            <div data-ng-if="c.languageFront">
+                                {{c.languageFront.name}}
+                            </div>
+
+                            <div data-ng-if="!c.languageFront">
+                                not set
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <div class="field-label">Language back</div>
+                        <div class="field-data">
+                            <div data-ng-if="c.languageBack">
+                                {{c.languageBack.name}}
+                            </div>
+
+                            <div data-ng-if="!c.languageBack">
+                                not set
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <!--{{c}}-->
+        </div>
+    </div>
+
+
+    <!--<div class="content-header">-->
+    <!--&lt;!&ndash;<div class="pull-right">&ndash;&gt;-->
+    <!--&lt;!&ndash;<a class="menu-link"&ndash;&gt;-->
+    <!--&lt;!&ndash;href=""&ndash;&gt;-->
+    <!--&lt;!&ndash;data-ng-click="createDummyCourse()">Dummy Course</a>&ndash;&gt;-->
+
+    <!--&lt;!&ndash;<a class="menu-link"&ndash;&gt;-->
+    <!--&lt;!&ndash;href=""&ndash;&gt;-->
+    <!--&lt;!&ndash;data-ng-click="cleanDatabase()">Clean Database</a>&ndash;&gt;-->
+
+
+    <!--&lt;!&ndash;&lt;!&ndash;<button class="btn btn-rememberators"&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;data-ng-controller="TestDataController"&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;&lt;!&ndash;data-ng-click="createDummyCourse()">Create Dummy Course</button>&ndash;&gt;&ndash;&gt;-->
+    <!--&lt;!&ndash;</div>&ndash;&gt;-->
+
+    <!--<div class="title">-->
+    <!--Courses Administration-->
+    <!--</div>-->
+
+    <!--</div>-->
+
+    <!--<div data-ng-if="!courses || courses.length === 0">-->
+    <!--There are no courses in the database.-->
+    <!--</div>-->
+
+    <!--<table id="searchTextResults" class="table-striped expands" data-ng-if="courses && courses.length>0">-->
+    <!--<thead>-->
+    <!--<tr>-->
+    <!--<th></th>-->
+    <!--<th class="right-padded-m">Course</th>-->
+    <!--<th class="right-padded-m">Description</th>-->
+    <!--<th class="right-padded-m">By</th>-->
+    <!--<th class="right-padded-m">Visible</th>-->
+    <!--<th>Created</th>-->
+    <!--</tr>-->
+    <!--</thead>-->
+    <!--<tbody>-->
+    <!--<tr data-ng-repeat="course in courses | filter:searchText">-->
+    <!--<td class="nowrap right-padded-s middle-aligned left-padded-s top-padded-s bottom-padded-s">-->
+    <!--<a href="">-->
+    <!--<i data-ng-click="areYouSureToDeleteCourse(course)"-->
+    <!--class="glyphicon glyphicon-remove-sign">-->
+    <!--</i>-->
+    <!--</a>-->
+
+    <!--<a data-ng-href="#!/courses/{{course._id}}/edit">-->
+    <!--<i class="glyphicon glyphicon-edit">-->
+    <!--</i>-->
+    <!--</a>-->
+    <!--</td>-->
+    <!--<td class="nowrap right-padded-m top-aligned top-padded-s bottom-padded-s">-->
+
+    <!--<a data-ng-href="#!/courses/{{course._id}}/admin">{{course.name}}</a></td>-->
+    <!--<td class="expands right-padded-m top-padded-s bottom-padded-s">{{course.description}}</td>-->
+    <!--<td class="nowrap right-padded-m top-aligned top-padded-s bottom-padded-s">{{course.user.displayName}}</td>-->
+    <!--<td class="nowrap right-padded-m top-aligned top-padded-s bottom-padded-s">{{course.visible}}</td>-->
+    <!--<td class="nowrap top-aligned right-padded-s top-padded-s bottom-padded-s">{{course.created | date:'shortDate'}}</td>-->
+    <!--</tr>-->
+    <!--</tbody>-->
+    <!--</table>-->
 
 </section>

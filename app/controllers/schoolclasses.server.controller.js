@@ -274,27 +274,12 @@ exports.update = function (req, res) {
 
             updateUsers(originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass).then(
                 function() {
-                    console.log('searching');
                     for (i=0; i<currentCourses.length;i++) {
-                        console.log(currentCourses[i]);
-                        console.log(originalCourses.indexOf(currentCourses[i]+''));
                         if (originalCourses.indexOf(currentCourses[i]+'') === -1) {
 
                             for (var j=0; j<currentStudentIds.length; j++) {
-
-                                console.log('copying');
                                 var copy = courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
-                                currentStudents[j].courses.push(copy._id);
-                                currentStudents[i].save();
-
                             }
-
-                            //$http.post('courses/copy/'+currentCourses[i]).success(function(newCourse) {
-                            //    console.log(newCourse);
-                            //}).error(function(response) {
-                            //    console.log(error);
-                            //
-                            //});
                         }
                     }
 

@@ -75,13 +75,13 @@
                     </div>
 
 
-
-
                 </div>
             </div>
 
         </div>
     </div>
+
+
 
 
     <div class="col-xs-12 col-md-6  ">
@@ -128,9 +128,10 @@
 
                     <div data-ng-if="otherUser.studentInClasses.length > 0">
                         <div class="field-data" data-ng-repeat="s in otherUser.studentInClasses track by $index"
-                                data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
+                             data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
 
-                            <a href="#!/schoolclasses/{{s}}/admin">{{schoolclass.name}}</a> <a href="" data-ng-click="removeStudentFromClass(otherUser, s)"><i
+                            <a href="#!/schoolclasses/{{s}}/admin">{{schoolclass.name}}</a> <a href=""
+                                                                                               data-ng-click="removeStudentFromClass(otherUser, s)"><i
                                 class="glyphicon glyphicon-minus-sign"></i></a>
                         </div>
                     </div>
@@ -190,8 +191,9 @@
                         <div class="field-data" data-ng-repeat="sc in otherUser.teachesClasses track by $index"
                              data-ng-controller="SchoolclassesController" data-ng-init="findById(sc)">
 
-                                <a href="#!/schoolclasses/{{sc}}/admin">{{schoolclass.name}}</a> <a href="" data-ng-click="areYouSureToRemoveSchoolclassFromTeacher(schoolclass, otherUser)"><i
-                                    class="glyphicon glyphicon-minus-sign"></i></a>
+                            <a href="#!/schoolclasses/{{sc}}/admin">{{schoolclass.name}}</a> <a href=""
+                                                                                                data-ng-click="areYouSureToRemoveSchoolclassFromTeacher(schoolclass, otherUser)"><i
+                                class="glyphicon glyphicon-minus-sign"></i></a>
                         </div>
                     </div>
 

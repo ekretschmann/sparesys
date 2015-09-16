@@ -13,11 +13,11 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 $scope.schoolclass.courses.push(course._id);
                 $scope.schoolclass.$update();
 
-                $scope.schoolclass.students.forEach(function (studentId) {
-
-                    $scope.addCourseForStudent(studentId, course._id);
-
-                });
+                //$scope.schoolclass.students.forEach(function (studentId) {
+                //
+                //    $scope.addCourseForStudent(studentId, course._id);
+                //
+                //});
             }
         };
 
@@ -33,19 +33,19 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             $scope.schoolclass.$update();
 
-            $scope.schoolclass.students.forEach(function (studentId) {
-
-                Courses.query({
-                    userId: studentId
-                }).$promise.then(function (studentCourses) {
-                        studentCourses.forEach(function (studentCourse) {
-                            if (studentCourse.supervised && studentCourse.master.toString() === course._id) {
-                                studentCourse.visible = false;
-                                studentCourse.$update();
-                            }
-                        });
-                    });
-            }, this);
+            //$scope.schoolclass.students.forEach(function (studentId) {
+            //
+            //    Courses.query({
+            //        userId: studentId
+            //    }).$promise.then(function (studentCourses) {
+            //            studentCourses.forEach(function (studentCourse) {
+            //                if (studentCourse.supervised && studentCourse.master.toString() === course._id) {
+            //                    studentCourse.visible = false;
+            //                    studentCourse.$update();
+            //                }
+            //            });
+            //        });
+            //}, this);
 
         };
 

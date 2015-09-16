@@ -447,51 +447,6 @@ angular.module('courses').controller('CoursesControllerNew',
                     });
 
 
-//                    $scope.course.slaves.forEach(function (slaveId) {
-//                        Courses.query({
-//                            _id: slaveId
-//                        }, function (slaveCourses) {
-//
-//                            if (slaveCourses.length === 0) {
-//                                // course does not exist any more
-//                                self.slavesSaved++;
-//                                for (var i in $scope.course.slaves) {
-//                                    if ($scope.course.slaves[i] === slaveId) {
-//                                        $scope.course.slaves.splice(i, 1);
-//                                    }
-//                                }
-//                            }
-//
-//                            if (slaveCourses.length === 1) {
-//                                var slaveCourse = slaveCourses[0];
-//
-//                                var slavePack = new Packs({
-//                                    name: self.name,
-//                                    course: slaveCourse._id
-//                                });
-//
-//                                slavePack.$save(function () {
-//                                    slaveCourse.packs.push(slavePack._id);
-//                                    self.slaves.push(slavePack._id);
-//                                    self.slavesSaved++;
-//                                    if (self.slavesSaved === self.slavesToSave) {
-//                                        pack.slaves = self.slaves;
-//                                        pack.$update(function (err) {
-////                                        console.log('updated pack '+pack);
-////                                        console.log(err);
-//                                        });
-//                                        slaveCourse.$update(function (err) {
-////                                        console.log('updated course '+slaveCourse);
-////                                        console.log(err);
-//                                        });
-//                                        $scope.course.$update();
-//                                    }
-//                                });
-//
-//
-//                            }
-//                        });
-//                    });
 
 
 

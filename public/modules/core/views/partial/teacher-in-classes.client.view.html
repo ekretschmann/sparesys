@@ -1,108 +1,6 @@
 <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
 
 
-    <!--<div ng-include="'/modules/schoolclasses/views/partial/assign-courses.modal.client.view.html'"></div>-->
-
-    <!--<div class="infobox-title">You Teach</div>-->
-
-    <!--<div data-ng-controller="SchoolsController" data-ng-init="findForTeacher(authentication.user._id)">-->
-
-
-    <!--<div data-ng-if="schools.length === 0">-->
-
-
-    <!--<div class="warning">You are a teacher without an associated school. Please find your-->
-    <!--school in the Teaching menu or by clicking this-->
-    <!--<a href="/#!/schools/subscribe/teacher">link</a>.-->
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div data-ng-if="schools.length > 0 && authentication.user.schoolclasses.length === 0 ">-->
-    <!--<div> You are not teaching any classes, yet. Ask your school-->
-    <!--administrator to assign-->
-    <!--you-->
-    <!--to your classes.-->
-    <!--</div>-->
-    <!--</div>-->
-
-
-    <!--<div class="warning top-margin-l bottom-padding-l" style="text-align: justify"-->
-    <!--data-ng-if="coursesTeacher.length===0">-->
-    <!--... nothing so far! Please choose or create the courses you would like to teach. Use the-->
-    <!--<a href="/#!/courses/search">search</a> or <a href="/#!/courses/create">create</a> functionality in the-->
-    <!--course-->
-    <!--menu to compile the coursework for your students.-->
-    <!--</div>-->
-
-
-    <!--<div class="bottom-padded-m">-->
-    <!--These courses:-->
-    <!--<span data-ng-repeat="course in coursesTeacher">-->
-    <!--<span><a data-ng-href="#!/courses/{{course._id}}/edit">{{course.name}}</a></span><span-->
-    <!--data-ng-if="$index < coursesTeacher.length-1">, </span>-->
-    <!--</span>-->
-    <!--</div>-->
-
-
-    <!--<div data-ng-repeat="school in schools" data-ng-init="populateSchoolForUser(school._id, authentication.user)">-->
-    <!--<div>{{school.name}}, {{school.city}}, {{school.country}}</div>-->
-
-
-    <!--<div data-ng-repeat="sc in school.schoolclasses">-->
-    <!--{{sc.name}}-->
-
-    <!--<div data-ng-if="!sc.courses || sc.courses.length === 0">-->
-    <!--Courses: none-->
-    <!--</div>-->
-
-    <!--<div data-ng-if="sc.courses && sc.courses.length > 0">-->
-
-
-    <!--Courses:-->
-
-    <!--<span data-ng-repeat="courseId in sc.courses">-->
-    <!--<span data-ng-controller="CoursesController" data-ng-init="findById(courseId)">-->
-    <!--{{course.name}}<span data-ng-if="$index < sc.courses.length-1">, </span>-->
-    <!--</span>-->
-
-    <!--</span>-->
-    <!--</div>-->
-
-    <!--<div data-ng-if="!sc.teachers || sc.teachers.length === 0">-->
-    <!--Teachers: none-->
-    <!--</div>-->
-
-
-    <!--<div data-ng-if="sc.teachers && sc.teachers.length > 0">-->
-
-    <!--Teachers:-->
-    <!--<span data-ng-repeat="userId in sc.teachers">-->
-    <!--<span data-ng-controller="UsersController" data-ng-init="findById(userId)">-->
-    <!--{{displayName}}<span data-ng-if="$index < sc.teachers.length-1">, </span>-->
-    <!--</span>-->
-    <!--</span>-->
-    <!--</div>-->
-
-
-    <!--<div data-ng-if="!sc.teachers || sc.teachers.length === 0">-->
-    <!--Students: none-->
-    <!--</div>-->
-
-    <!--<div data-ng-if="sc.students && sc.students.length > 0">-->
-
-    <!--Students:-->
-    <!--<span data-ng-repeat="userId in sc.students">-->
-    <!--<span data-ng-controller="UsersController" data-ng-init="findById(userId)">-->
-    <!--{{displayName}}<span data-ng-if="$index < sc.teachers.length-1">, </span>-->
-    <!--</span>-->
-    <!--</span>-->
-    <!--</div>-->
-    <!--</div>-->
-
-
-    <!--</div>-->
-
-    <!--</div>-->
 
 
     <div data-ng-repeat="schoolId in authentication.user.teacherInSchools">
@@ -182,7 +80,12 @@
                             none
                         </div>
                         <div data-ng-if="schoolclass.courses.length > 0">
-                            {{schoolclass.courses}}
+                            <div data-ng-repeat="c in schoolclass.courses">
+                                <div data-ng-controller="CoursesControllerNew" data-ng-init="findById(c)">
+                                    <a href="" data-ng-click="removeCourseFromClass(course)"><i
+                                        class="glyphicon glyphicon-minus-sign"></i></a> {{course.name}}
+                                </div>
+                            </div>
                         </div>
 
                         <div data-ng-if="coursesTeacher.length > 0">
@@ -192,7 +95,7 @@
                                 </button>
                                 <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
                                     <li role="menuitem" data-ng-repeat="course in coursesTeacher"><a href=""
-                                                                                                     data-ng-click="addCourse(course)">{{course.name}}</a>
+                                                                                                     data-ng-click="addCourseToClass(course)">{{course.name}}</a>
                                     </li>
                                 </ul>
                             </div>

@@ -36,13 +36,18 @@
         <div class="admin-card font-large">
             <div class="title">{{c.name}}
 
+                <div class="pull-right">
+                    <a href="" data-ng-click="areYouSureToDeleteCourse(c)"><i class="glyphicon glyphicon-trash"></i></a>
+                </div>
+                <div class="pull-right">
+                    <a href="/#!/courses/{{c._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
+                </div>
                 <div class="font-medium">
                     {{c.description}}
                 </div>
 
-                <!--<div class="pull-right">-->
-                <!--<a href="/#!/users/{{user._id}}"><i class="glyphicon glyphicon-edit"></i></a>-->
-                <!--</div>-->
+
+
 
             </div>
 

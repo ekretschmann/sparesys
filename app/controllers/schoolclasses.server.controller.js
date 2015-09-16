@@ -7,7 +7,9 @@ var mongoose = require('mongoose'),
     Schoolclass = mongoose.model('Schoolclass'),
     School = mongoose.model('School'),
     User = mongoose.model('User'),
-    _ = require('lodash');
+    courses = require('../../app/controllers/courses'),
+    _ = require('lodash'),
+    q = require('q');
 
 /**
  * Get the error message from error object
@@ -115,12 +117,43 @@ exports.addTeacher = function (req, res) {
 };
 
 var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass) {
+
+    var deferred = q.defer();
+    var updates = 0;
     originalTeachers.forEach(function (originalTeacher) {
         if (currentTeacherIds.indexOf(originalTeacher._id + '') === -1) {
-            console.log('removing class for teacher ' + schoolclass._id);
+           updates++;
+        }
+    });
+
+
+    currentTeacherIds.forEach(function (currentTeacherId) {
+        updates++;
+    });
+
+
+    originalStudents.forEach(function (originalStudent) {
+        if (currentStudentIds.indexOf(originalStudent._id + '') === -1) {
+            updates++;
+        }
+    });
+
+
+    currentStudentIds.forEach(function (currentStudentId) {
+        updates++;
+    });
+
+
+    originalTeachers.forEach(function (originalTeacher) {
+        if (currentTeacherIds.indexOf(originalTeacher._id + '') === -1) {
             User.findOne({_id: originalTeacher._id}, 'teachesClasses').exec(function (err, originalTeacher) {
                 originalTeacher.teachesClasses.splice(originalTeacher.teachesClasses.indexOf(schoolclass._id), 1);
-                originalTeacher.save();
+                originalTeacher.save(function() {
+                    updates--;
+                    if (updates === 0) {
+                        deferred.resolve();
+                    }
+                });
             });
         }
     });
@@ -130,10 +163,14 @@ var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds
         User.findOne({_id: currentTeacherId}, 'teachesClasses').exec(function (err, currentTeacher) {
 
             if (currentTeacher.teachesClasses.indexOf(schoolclass._id) === -1) {
-                console.log('done');
                 currentTeacher.teachesClasses.push(schoolclass._id);
             }
-            currentTeacher.save();
+            currentTeacher.save(function() {
+                updates--;
+                if (updates === 0) {
+                    deferred.resolve();
+                }
+            });
         });
     });
 
@@ -142,7 +179,12 @@ var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds
         if (currentStudentIds.indexOf(originalStudent._id + '') === -1) {
             User.findOne({_id: originalStudent._id}, 'studentInClasses').exec(function (err, originalStudent) {
                 originalStudent.studentInClasses.splice(originalStudent.studentInClasses.indexOf(schoolclass._id), 1);
-                originalStudent.save();
+                originalStudent.save(function() {
+                    updates--;
+                    if (updates === 0) {
+                        deferred.resolve();
+                    }
+                });
             });
         }
     });
@@ -154,10 +196,16 @@ var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds
             if (currentStudent.studentInClasses.indexOf(schoolclass._id) === -1) {
                 currentStudent.studentInClasses.push(schoolclass._id);
             }
-            currentStudent.save();
+            currentStudent.save(function() {
+                updates--;
+                if (updates === 0) {
+                    deferred.resolve();
+                }
+            });
         });
     });
 
+    return deferred.promise;
 };
 
 /**
@@ -169,9 +217,10 @@ exports.update = function (req, res) {
     var schoolclass = req.schoolclass;
     var originalTeachers = schoolclass.teachers;
     var originalStudents = schoolclass.students;
-    var originalCourses = schoolclass.courses;
+    var originalCourses = [];
     var originalTeacherIds = [];
     var originalStudentIds = [];
+
 
 
     for (var i = 0; i < schoolclass.teachers.length; i++) {
@@ -184,12 +233,15 @@ exports.update = function (req, res) {
 
     }
 
+    for (i=0; i< schoolclass.courses.length; i++) {
+        originalCourses.push(schoolclass.courses[i]+'');
+    }
     schoolclass = _.extend(schoolclass, req.body);
 
 
     var currentTeachers = schoolclass.teachers;
     var currentStudents = schoolclass.students;
-    var currentCourses = schoolclass.courses;
+    var currentCourses = [];
     var currentTeacherIds = [];
     var currentStudentIds = [];
 
@@ -202,7 +254,13 @@ exports.update = function (req, res) {
         currentStudentIds.push(schoolclass.students[i]._id + '');
     }
 
+    for (i=0; i< schoolclass.courses.length; i++) {
+        currentCourses.push(schoolclass.courses[i]+'');
+    }
+
+    console.log('original');
     console.log(originalCourses);
+    console.log('current');
     console.log(currentCourses);
 
 
@@ -214,11 +272,41 @@ exports.update = function (req, res) {
             });
         } else {
 
-            updateUsers(originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass);
+            updateUsers(originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass).then(
+                function() {
+                    console.log('searching');
+                    for (i=0; i<currentCourses.length;i++) {
+                        console.log(currentCourses[i]);
+                        console.log(originalCourses.indexOf(currentCourses[i]+''));
+                        if (originalCourses.indexOf(currentCourses[i]+'') === -1) {
+
+                            for (var j=0; j<currentStudentIds.length; j++) {
+
+                                console.log('copying');
+                                var copy = courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
+                                currentStudents[j].courses.push(copy._id);
+                                currentStudents[i].save();
+
+                            }
+
+                            //$http.post('courses/copy/'+currentCourses[i]).success(function(newCourse) {
+                            //    console.log(newCourse);
+                            //}).error(function(response) {
+                            //    console.log(error);
+                            //
+                            //});
+                        }
+                    }
 
 
 
-            res.jsonp(schoolclass);
+                    res.jsonp(schoolclass);
+                }
+            );
+
+
+
+
         }
     });
 };

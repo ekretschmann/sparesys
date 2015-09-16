@@ -667,6 +667,7 @@ exports.copyCourse = function (req, res, next, id) {
     findCourse.then(function (findCourseResult) {
 
 
+
         var original = findCourseResult[0];
 
 
@@ -706,11 +707,11 @@ exports.copyCourse = function (req, res, next, id) {
 
 
             copy.save(function () {
-                res.jsonp(copy);
+//                res.jsonp(copy);
+                return copy;
             });
         });
 
-        //res.jsonp(copy);
 
     });
 

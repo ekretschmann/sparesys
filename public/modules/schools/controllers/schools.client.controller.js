@@ -146,8 +146,6 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //
 //
         $scope.subscribeTeacherPopup = function (school, user) {
-
-            console.log(user);
             $modal.open({
                 templateUrl: 'subscribeTeacher.html',
                 controller: 'SubscribeTeacherModalController',
@@ -350,7 +348,6 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
 
         $scope.removeDeadTeacherId = function(id) {
-            console.log(id);
             $scope.school.teachers.splice($scope.school.teachers.indexOf(id),1);
             $scope.school.$update();
         };
@@ -394,8 +391,6 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 }
 
             }
-
-            console.log(found);
             return found;
         };
 
@@ -530,7 +525,6 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
             Schools.get({
                 schoolId: schoolId
             }, function (s) {
-                console.log(s);
                 $scope.school = s;
                 $scope.schoolclasses = s.schoolclasses;
                 $scope.schoolclasses = [];
@@ -570,7 +564,6 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 //
         $scope.updateSearch = function () {
 
-            console.log($scope.options);
 
             Schools.query({
                 text: $scope.options.searchText

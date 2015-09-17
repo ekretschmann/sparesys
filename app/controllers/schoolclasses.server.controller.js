@@ -5,6 +5,7 @@
  */
 var mongoose = require('mongoose'),
     Schoolclass = mongoose.model('Schoolclass'),
+    Course = mongoose.model('Course'),
     School = mongoose.model('School'),
     User = mongoose.model('User'),
     courses = require('../../app/controllers/courses'),
@@ -258,14 +259,9 @@ exports.update = function (req, res) {
         currentCourses.push(schoolclass.courses[i]+'');
     }
 
-    console.log('original');
-    console.log(originalCourses);
-    console.log('current');
-    console.log(currentCourses);
 
 
-
-    schoolclass.save(function (err) {
+    schoolclass.save(function (err, sc) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -279,6 +275,29 @@ exports.update = function (req, res) {
                             for (var j=0; j<currentStudentIds.length; j++) {
                                 courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
                             }
+                        }
+                    }
+
+                    var findAndUnlockCourse = function(id) {
+                        Course.findOne({'_id': id}).exec(function (err, cm) {
+                            for(var k=0; k< cm.slaves.length; k++) {
+                                Course.findOne({'_id': cm.slaves[k]}).exec(function (err, cs) {
+
+
+                                    console.log(cs.user);
+                                    console.log(sc.students);
+                                });
+                            }
+                        });
+                    };
+
+                    for (i=0; i<originalCourses.length;i++) {
+                        if (currentCourses.indexOf(originalCourses[i]+'') === -1) {
+
+
+                            console.log(originalCourses[i]);
+                            findAndUnlockCourse(originalCourses[i]);
+
                         }
                     }
 

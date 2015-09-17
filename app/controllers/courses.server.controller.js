@@ -43,7 +43,6 @@ exports.create = function (req, res) {
     course.user = req.user;
 
 
-
     course.save(function (err) {
         if (err) {
             return res.send(400, {
@@ -64,7 +63,7 @@ exports.read = function (req, res) {
 };
 
 
-exports.updateDefaultSettings = function(req, res) {
+exports.updateDefaultSettings = function (req, res) {
     //console.log(req.body);
     var course = req.course;
 
@@ -91,7 +90,6 @@ exports.updateDefaultSettings = function(req, res) {
 exports.update = function (req, res) {
 
     var course = req.course;
-
 
 
     var packsBefore = course.packs;
@@ -235,8 +233,6 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
 
 
-
-
     if (req.query.userId) {
 
         Course.find({'user': req.query.userId}).exec(function (err, courses) {
@@ -282,7 +278,6 @@ exports.list = function (req, res) {
         });
     }
 };
-
 
 
 /**
@@ -653,66 +648,84 @@ exports.copyCourse = function (req, res, next, id) {
         userId = req.user;
     }
 
-
-    var findCourse = Course.find({'_id': id}).exec(function (err) {
-
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        }
-    });
-
-
-    findCourse.then(function (findCourseResult) {
-
-
-
-        var original = findCourseResult[0];
-
-
-        var copy = new Course();
-
-        copy.user = userId;
-        copy.name = original.name;
-        copy.description = original.description;
-        copy.languageFront = original.languageFront;
-        copy.languageBack = original.languageBack;
-        copy.front = original.front;
-        copy.back = original.back;
-        copy.master = original._id;
-        copy.supervised = isSupervised;
-
-
-        if (req.query && req.query.target && req.query.target.toString() === 'teach') {
-            copy.teaching = true;
-        }
-        if (!original.slaves) {
-            original.slaves = [];
-        }
-        original.slaves.push(copy._id);
-
-
-        original.save(function (err) {
+    var userHasCourse = false;
+    Course.find()
+        .where('user').equals(userId)
+        .exec(function (err, courses) {
             if (err) {
                 console.log(err);
+                return undefined;
+            } else {
+                for (var i = 0; i < courses.length; i++) {
+                    if (courses[i].master + '' === id + '') {
+                        userHasCourse = true;
+                    }
+                }
+
+                if (userHasCourse) {
+                    return undefined;
+                }
+
+                var findCourse = Course.find({'_id': id}).exec(function (err) {
+
+                    if (err) {
+                        return res.send(400, {
+                            message: getErrorMessage(err)
+                        });
+                    }
+                });
+
+
+                findCourse.then(function (findCourseResult) {
+
+
+                    var original = findCourseResult[0];
+
+
+                    var copy = new Course();
+
+                    copy.user = userId;
+                    copy.name = original.name;
+                    copy.description = original.description;
+                    copy.languageFront = original.languageFront;
+                    copy.languageBack = original.languageBack;
+                    copy.front = original.front;
+                    copy.back = original.back;
+                    copy.master = original._id;
+                    copy.supervised = isSupervised;
+
+
+                    if (req.query && req.query.target && req.query.target.toString() === 'teach') {
+                        copy.teaching = true;
+                    }
+                    if (!original.slaves) {
+                        original.slaves = [];
+                    }
+                    original.slaves.push(copy._id);
+
+
+                    original.save(function (err) {
+                        if (err) {
+                            console.log(err);
+                        }
+                    });
+
+                    var packPromise = copyPacks(original.packs, userId, copy._id, isSupervised);
+
+
+                    packPromise.then(function (packs) {
+                        copy.packs = packs;
+
+
+                        copy.save(function () {
+                            return copy;
+                        });
+                    });
+
+
+                });
             }
         });
 
-        var packPromise = copyPacks(original.packs, userId, copy._id, isSupervised);
-
-
-        packPromise.then(function (packs) {
-            copy.packs = packs;
-
-
-            copy.save(function () {
-//                res.jsonp(copy);
-                return copy;
-            });
-        });
-
-
-    });
 
 };

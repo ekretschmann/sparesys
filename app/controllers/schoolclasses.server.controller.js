@@ -276,9 +276,8 @@ exports.update = function (req, res) {
                 function() {
                     for (i=0; i<currentCourses.length;i++) {
                         if (originalCourses.indexOf(currentCourses[i]+'') === -1) {
-
                             for (var j=0; j<currentStudentIds.length; j++) {
-                                var copy = courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
+                                courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
                             }
                         }
                     }

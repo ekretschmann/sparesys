@@ -39,8 +39,8 @@ angular.module('courses').controller('CoursesControllerNew',
 
                 Courses.query({
                     text: $scope.options.searchText
-                }, function(users) {
-                    $scope.users = users;
+                }, function(courses) {
+                    $scope.courses = courses;
 
                 });
             };

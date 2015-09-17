@@ -269,6 +269,21 @@ exports.list = function (req, res) {
                 res.jsonp(courses);
             }
         });
+    } else if (req.query.text) {
+
+        var search = req.query.text.split(' ');
+        Course.find({$or: [
+            {'name': {$regex: '^' + search[0]}},
+            {'description': {$regex: '^' + search[0]}}]}).
+            limit(25).populate('user', 'displayName').exec(function (err, courses) {
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                res.jsonp(courses);
+            }
+        });
     } else {
         Course.find().sort('-created').populate('user', 'displayName').exec(function (err, courses) {
             if (err) {

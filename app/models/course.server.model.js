@@ -21,10 +21,7 @@ var CourseSchema = new Schema({
                 name: String,
                 code: String
             },
-            checks: {
-                name: String,
-                default: 'mixed'
-            },
+            checks: String,
             forward: {
                 enabled: {
                     type: Boolean,
@@ -80,7 +77,37 @@ var CourseSchema = new Schema({
                 }
             }
         },
-        default: []
+        default: {
+            languageFront: {
+                name: '---',
+                code: ''
+            },
+
+            languageback: {
+                name: '---',
+                code: ''
+            },
+            checks: 'mixed',
+            forward: {
+                enabled: true,
+                readFront: false,
+                readBack: false,
+                speechRecognition: false
+            },
+            reverse: {
+                enabled: false,
+                readFront: false,
+                readBack: false,
+                speechRecognition: false
+            },
+            images: {
+                enabled: false,
+                readFront: false,
+                readBack: false,
+                speechRecognition: false
+            }
+
+        }
     },
     published: {
         type: Boolean,

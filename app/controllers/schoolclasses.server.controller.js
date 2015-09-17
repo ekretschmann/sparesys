@@ -280,14 +280,14 @@ exports.update = function (req, res) {
 
                     var findAndUnlockCourse = function(id) {
                         Course.findOne({'_id': id}).exec(function (err, cm) {
-                            for(var k=0; k< cm.slaves.length; k++) {
-                                Course.findOne({'_id': cm.slaves[k]}).exec(function (err, cs) {
-
-
-                                    console.log(cs.user);
-                                    console.log(sc.students);
-                                });
-                            }
+                            //for(var k=0; k< cm.slaves.length; k++) {
+                                //Course.findOne({'_id': cm.slaves[k]}).exec(function (err, cs) {
+                                //
+                                //
+                                //    console.log(cs.user);
+                                //    console.log(sc.students);
+                                //});
+                            //}
                         });
                     };
 

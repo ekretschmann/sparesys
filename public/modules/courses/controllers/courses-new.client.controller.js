@@ -62,13 +62,9 @@ angular.module('courses').controller('CoursesControllerNew',
 
 
             $scope.setLanguageFront = function(lang) {
-                if($scope.course.cardDefaults === []) {
-                    $scope.course.cardDefaults = {};
-                }
+
                 $scope.course.cardDefaults.languageFront = lang;
-                $scope.course.$update(function(c) {
-                    console.log(c);
-                });
+                $scope.course.$update();
             };
 
             $scope.setLanguageBack = function(lang) {

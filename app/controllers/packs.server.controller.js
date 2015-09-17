@@ -65,6 +65,7 @@ exports.update = function (req, res) {
     var pack = req.pack;
 
 
+    console.log(req.body);
     pack = _.extend(pack, req.body);
     pack.updated = Date.now();
 

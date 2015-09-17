@@ -92,12 +92,15 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
         };
 
 
+
+
         $scope.findById = function (userId) {
+            console.log(userId);
             Users.get({
                 userId: userId
             }, function(user) {
                 $scope.displayName = user.displayName;
-
+                console.log($scope.displayName);
             });
         };
 

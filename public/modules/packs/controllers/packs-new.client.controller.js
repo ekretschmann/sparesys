@@ -177,7 +177,6 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$timeout',
                 slaves: []
             });
 
-            console.log(original);
 
 
             if ($scope.pack.course.cardDefaults) {
@@ -273,7 +272,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$timeout',
                 //self.slavesSaved = 0;
                 //
                 //// take care of slaves
-                //pack.slaves.forEach(function (slaveId) {
+                //$scope.pack.slaves.forEach(function (slaveId) {
                 //
                 //    Packs.query({
                 //        _id: slaveId

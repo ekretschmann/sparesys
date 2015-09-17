@@ -97,27 +97,52 @@
                     </div>
                 </div>
 
-
                 <div class="row">
                     <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Created</div>
-                        <div class="font-medium">
-                            {{course.created | date:'shortDate'}}
+                        <div class="field-label">User</div>
+
+                        <div class="field-data">
+                            {{course.user.displayName}}
+                            <!--{{displayName}}-->
+                        </div>
+                    </div>
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Slaves</div>
+                        <div class="field-data">
+                            <div data-ng-if="course.slaves.length === 0">
+                                none
+                            </div>
+                            <div data-ng-repeat="s in course.slaves">
+                                {{s}}
+                            </div>
+                            <!--{{course.slaves}}-->
                         </div>
                     </div>
 
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Updated</div>
-                        <div class="font-medium">
-                            <div data-ng-if="course.updated">
-                                {{course.updated | date:'shortDate'}}
-                            </div>
-                            <div data-ng-if="!course.updated">
-                                {{course.created | date:'shortDate'}}
-                            </div>
-                        </div>
-                    </div>
+
                 </div>
+
+
+                <!--<div class="row">-->
+                <!--<div class="col-xs-6 dashboard-col">-->
+                <!--<div class="field-label">Created</div>-->
+                <!--<div class="font-medium">-->
+                <!--{{course.created | date:'shortDate'}}-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-xs-6 dashboard-col">-->
+                <!--<div class="field-label">Updated</div>-->
+                <!--<div class="font-medium">-->
+                <!--<div data-ng-if="course.updated">-->
+                <!--{{course.updated | date:'shortDate'}}-->
+                <!--</div>-->
+                <!--<div data-ng-if="!course.updated">-->
+                <!--{{course.created | date:'shortDate'}}-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
+                <!--</div>-->
 
 
             </div>
@@ -459,66 +484,91 @@
 
 
                     </div>
+                </div>
 
-
+                <div class="flashcard-section">
                     <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Created</div>
-                        <div class="font-medium">
-                            {{pack.created | date:'shortDate'}}
+                        <div class="field-label">User</div>
+
+                        <div class="field-data">
+                            {{pack.user.displayName}}
+                            <!--{{displayName}}-->
                         </div>
                     </div>
-
-                    <div class="col-xs-6 dashboard-col" data-ng-if="pack.updated">
-                        <div class="field-label">Updated</div>
-                        <div class="font-medium">
-                            {{pack.updated | date:'shortDate'}}
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col" data-ng-if="!pack.updated">
-                        <div class="field-label">Updated</div>
-                        <div class="font-medium">
-                            {{pack.created | date:'shortDate'}}
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">Slaves</div>
+                        <div class="field-data">
+                            <div data-ng-repeat="s in pack.slaves">
+                                {{s}}
+                            </div>
+                            <div data-ng-if="pack.slaves.length === 0">
+                                none
+                            </div>
                         </div>
                     </div>
 
 
                 </div>
+
+
+                <!--<div class="col-xs-6 dashboard-col">-->
+                <!--<div class="field-label">Created</div>-->
+                <!--<div class="font-medium">-->
+                <!--{{pack.created | date:'shortDate'}}-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-xs-6 dashboard-col" data-ng-if="pack.updated">-->
+                <!--<div class="field-label">Updated</div>-->
+                <!--<div class="font-medium">-->
+                <!--{{pack.updated | date:'shortDate'}}-->
+                <!--</div>-->
+                <!--</div>-->
+
+                <!--<div class="col-xs-6 dashboard-col" data-ng-if="!pack.updated">-->
+                <!--<div class="field-label">Updated</div>-->
+                <!--<div class="font-medium">-->
+                <!--{{pack.created | date:'shortDate'}}-->
+                <!--</div>-->
+                <!--</div>-->
+
+
             </div>
         </div>
     </div>
+</div>
 
-    <div class="col-xs-6 dashboard-col">
+<div class="col-xs-6 dashboard-col">
 
-        <div class="font-large virtual-card-header">
+    <div class="font-large virtual-card-header">
 
-            <form data-ng-submit="addPackToCourse()" validate>
+        <form data-ng-submit="addPackToCourse()" validate>
 
-                <div class="title">
-
-
-                    <div class="pull-right">
+            <div class="title">
 
 
-                        <a href="" data-ng-click="addPackToCourse()"><i
-                                class="glyphicon glyphicon-plus-sign"></i></a>
+                <div class="pull-right">
 
 
-                    </div>
-                    Add pack <input type="text" data-ng-model="newpack.name"
-                                    id="firstName" class="form-control focus"
-                                    placeholder="Name">
+                    <a href="" data-ng-click="addPackToCourse()"><i
+                            class="glyphicon glyphicon-plus-sign"></i></a>
 
 
                 </div>
+                Add pack <input type="text" data-ng-model="newpack.name"
+                                id="firstName" class="form-control focus"
+                                placeholder="Name">
 
 
-            </form>
+            </div>
 
-        </div>
+
+        </form>
+
     </div>
+</div>
 
 
-    <div class="rememberators-footer col-xs-12">rememberators.com</div>
+<div class="rememberators-footer col-xs-12">rememberators.com</div>
 
 </div>

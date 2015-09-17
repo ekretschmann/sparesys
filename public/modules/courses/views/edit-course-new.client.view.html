@@ -100,9 +100,11 @@
 
                 <div class="row">
                     <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Owner</div>
+                        <div class="field-label">Published</div>
                         <div class="font-medium">
-                            {{course.user.displayName}}
+                            <input data-ng-model="course.published" type="radio" ng-value="true" data-ng-click="update()"/> yes
+                            <input style="margin-left: 10px" data-ng-model="course.published" type="radio" ng-value="false" data-ng-click="update()"/> no
+
                         </div>
                     </div>
 

@@ -270,9 +270,12 @@ exports.update = function (req, res) {
 
             updateUsers(originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass).then(
                 function() {
+                    console.log(originalCourses);
+                    console.log(currentCourses);
                     for (i=0; i<currentCourses.length;i++) {
                         if (originalCourses.indexOf(currentCourses[i]+'') === -1) {
                             for (var j=0; j<currentStudentIds.length; j++) {
+                                console.log('copying');
                                 courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
                             }
                         }
@@ -294,8 +297,6 @@ exports.update = function (req, res) {
                     for (i=0; i<originalCourses.length;i++) {
                         if (currentCourses.indexOf(originalCourses[i]+'') === -1) {
 
-
-                            console.log(originalCourses[i]);
                             findAndUnlockCourse(originalCourses[i]);
 
                         }

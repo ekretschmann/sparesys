@@ -89,6 +89,7 @@ exports.updateDefaultSettings = function (req, res) {
  */
 exports.update = function (req, res) {
 
+
     var course = req.course;
 
 
@@ -116,13 +117,16 @@ exports.update = function (req, res) {
                     if (err) {
                         console.log(err);
                     } else {
+
+                        console.log(course.cardDefaults);
                         c.name = course.name;
                         c.description = course.description;
-                        c.language = course.language;
+                        //c.language = course.language;
                         c.front = course.front;
                         c.back = course.back;
-                        c.languageback = course.languageback;
-                        c.speechrecognition = course.speechrecognition;
+                        //c.languageback = course.languageback;
+                        //c.speechrecognition = course.speechrecognition;
+                        c.cardDefaults = course.cardDefaults;
                         c.save();
 
                         if (newPack) {
@@ -681,18 +685,19 @@ exports.copyCourse = function (req, res, next, id) {
                     var original = findCourseResult[0];
 
 
+                    console.log(original.cardDefaults);
                     var copy = new Course();
 
                     copy.user = userId;
                     copy.name = original.name;
                     copy.description = original.description;
-                    copy.languageFront = original.languageFront;
-                    copy.languageBack = original.languageBack;
+                    //copy.languageFront = original.languageFront;
+                    //copy.languageBack = original.languageBack;
                     copy.front = original.front;
                     copy.back = original.back;
                     copy.master = original._id;
                     copy.supervised = isSupervised;
-
+                    copy.cardDefaults = original.cardDefaults;
 
                     if (req.query && req.query.target && req.query.target.toString() === 'teach') {
                         copy.teaching = true;

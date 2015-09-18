@@ -258,32 +258,50 @@ exports.list = function (req, res) {
                 res.jsonp(courses);
             }
         });
-    } else if (req.query.published) {
-
-        Course.find({'published': req.query.published}).exec(function (err, courses) {
-            if (err) {
-                return res.send(400, {
-                    message: getErrorMessage(err)
-                });
-            } else {
-                res.jsonp(courses);
-            }
-        });
-    } else if (req.query.text) {
+    } else if (req.query.text || req.query.text === '') {
 
         var search = req.query.text.split(' ');
-        Course.find({$or: [
-            {'name': {$regex: '^' + search[0]}},
-            {'description': {$regex: '^' + search[0]}}]}).
-            limit(25).populate('user', 'displayName').exec(function (err, courses) {
-            if (err) {
-                return res.send(400, {
-                    message: getErrorMessage(err)
+        if (req.query.published) {
+
+
+
+
+            Course.find(
+                {
+                    $and: [{'published': req.query.published},
+                        {$or: [
+                            {'name': {$regex: '^' + search[0]}},
+                            {'description': {$regex: '^' + search[0]}}]}
+                    ]
+                }).
+
+                limit(25).populate('user', 'displayName').exec(function (err, courses) {
+                    if (err) {
+                        return res.send(400, {
+                            message: getErrorMessage(err)
+                        });
+                    } else {
+                        res.jsonp(courses);
+                    }
                 });
-            } else {
-                res.jsonp(courses);
-            }
-        });
+
+
+        } else {
+            Course.find({
+                $or: [
+                    {'name': {$regex: '^' + search[0]}},
+                    {'description': {$regex: '^' + search[0]}}]
+            }).
+                limit(25).populate('user', 'displayName').exec(function (err, courses) {
+                    if (err) {
+                        return res.send(400, {
+                            message: getErrorMessage(err)
+                        });
+                    } else {
+                        res.jsonp(courses);
+                    }
+                });
+        }
     } else {
         Course.find().sort('-created').populate('user', 'displayName').exec(function (err, courses) {
             if (err) {
@@ -737,6 +755,9 @@ exports.copyCourse = function (req, res, next, id) {
 
 
                         copy.save(function () {
+                            if (res.jsonp) {
+                                res.jsonp('ok');
+                            }
                             return copy;
                         });
                     });

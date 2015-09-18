@@ -1,50 +1,94 @@
-<section data-ng-controller="CoursesController" data-ng-init="findPublished(); ga()">
+<section data-ng-controller="CoursesControllerNew" data-ng-init="updatePublishedSearch()">
 
 
     <div ng-include="'/modules/courses/views/partial/course-subscribe.modal.client.view.html'"></div>
 
 
-    <div class="content-header">
-        <div class="pull-right">
-            Search: <input class="search" ng-model="searchText">
-        </div>
 
-        <div class="title">
-            Available Courses
-        </div>
+    <div class="col-xs-12 col-md-6 dashboard-col ">
+        <div class="half-virtual-card font-large">
+            <div class="title">Search for courses</div>
+            <div class="flashcard-section row">
 
+
+                <div class="col-xs-12">
+                    <div class="field-label">Find Course</div>
+                    <input type="text"
+                           ng-model="options.searchText"
+                           class="form-control search"
+                           data-ng-change="updatePublishedSearch()"
+                           placeholder="Name">
+                </div>
+
+
+            </div>
+        </div>
     </div>
 
-    <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="content-section">
-            <infobox logo="boy" position="left">
-                Use the search box above to browse to the course you want to subscribe
-                to. Click on the course name and you will get to a page where you are able to browse the content
-                of the course. From there, you will be able to subscribe to the course.
-            </infobox>
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="!courses || courses.length === 0">
+
+        <div class="half-virtual-card font-large">
+            <div class="title">No Courses Found</div>
+            <div class="danger">There are no courses matching your search criteria</div>
         </div>
-    </section>
-
-    <table id="searchTextResults" class="table-striped" data-ng-hide="courses.length === 0">
-        <thead>
-        <tr>
-            <th class="left-padded-s right-padded-m">Course</th>
-            <th class="">Description</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr data-ng-repeat="course in courses | filter:searchText">
-            <td class="left-padded-s right-padded-m">
-                <!--<a data-ng-href="#!/courses/{{course._id}}/view">{{course.name}}</a>-->
-                <a class="pointer" data-ng-click="subscribePopup(course)">{{course.name}}</a>
-            </td>
-            <td class="right-padded-s">{{course.description}}</td>
-        </tr>
-        </tbody>
-    </table>
-
-    <div data-ng-hide="!courses.$resolved || courses.length">
-        There are no published courses. You can publish a course that you have created yourself.
-
     </div>
+
+
+    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-repeat="c in courses">
+        <div class="half-virtual-card font-large">
+            <div class="title">{{c.name}}
+
+                <div class="pull-right">
+                    <a href="" data-ng-click="subscribePopup(c)"><i class="glyphicon glyphicon-plus-sign"></i></a>
+                </div>
+
+                <div class="font-medium">
+                    {{c.description}}
+                </div>
+
+
+
+
+            </div>
+
+
+            <div class="flashcard-section">
+
+
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-4">
+                        <div class="field-label">User</div>
+                        <div class="field-data">
+                            {{c.user.displayName}}
+                        </div>
+                    </div>
+
+
+
+                    <div class="col-xs-4">
+                        <div class="field-label">Front of cards</div>
+                        <div class="field-data">
+                            {{c.front}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4">
+                        <div class="field-label">Back of cards</div>
+                        <div class="field-data">
+                            {{c.back}}
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+
+
+        </div>
+    </div>
+
+
+
 </section>

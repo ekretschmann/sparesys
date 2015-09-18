@@ -36,9 +36,27 @@ angular.module('courses').controller('CoursesControllerNew',
             $scope.options = {};
             $scope.updateSearch = function () {
 
+                if (!$scope.options.searchText) {
+                    $scope.options.searchText = '';
+                }
 
                 Courses.query({
                     text: $scope.options.searchText
+                }, function(courses) {
+                    $scope.courses = courses;
+
+                });
+            };
+
+            $scope.updatePublishedSearch = function () {
+
+                if (!$scope.options.searchText) {
+                    $scope.options.searchText = '';
+                }
+
+                Courses.query({
+                    text: $scope.options.searchText,
+                    published: true
                 }, function(courses) {
                     $scope.courses = courses;
 

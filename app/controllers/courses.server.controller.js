@@ -676,8 +676,26 @@ exports.removeDanglingPackSlaves = function (req, res, next, id) {
 
     console.log('removing pack slaves');
 
+    Course.findById(id).populate('packs').exec(function (err, course) {
+        if (err) return next(err);
+        if (!course) return next(new Error('Failed to load Course ' + id));
 
-    res.jsonp('ok');
+        console.log(course.packs);
+        for (var i=0; i< course.packs.length; i++) {
+            for (var j=0; j<course.packs[i].slaves.length; j++) {
+                Pack.findById(id).exec(function (err, pack) {
+                     console.log(err);
+                     console.log(pack);
+                });
+            }
+        }
+
+        res.jsonp('ok');
+
+        next();
+    });
+
+
 };
 
 exports.copyCourse = function (req, res, next, id) {

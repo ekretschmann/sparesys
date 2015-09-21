@@ -145,10 +145,11 @@ var CourseSchema = new Schema({
         type: Schema.ObjectId,
         ref: 'User'
     },
-    packs: {
-        type: [Schema.Types.ObjectId],
+    packs: [{
+        type: Schema.ObjectId,
+        ref: 'Pack',
         default: []
-    },
+    }],
     languageFront: {
         name: String,
         code: String

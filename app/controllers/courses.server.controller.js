@@ -674,19 +674,61 @@ exports.cardDefaults = function (req, res, next, id) {
 
 exports.removeDanglingPackSlaves = function (req, res, next, id) {
 
-    console.log('removing pack slaves');
+    //console.log('removing pack slaves');
+
+    var checkIfPackExists = function(id) {
+        var deferred = q.defer();
+        Pack.findById(id).exec(function (err, pack) {
+
+            if (!pack || err) {
+                deferred.resolve({id: id, exists: false});
+            } else {
+                deferred.resolve({id: id, exists: true});
+            }
+        });
+        return deferred.promise;
+    };
+
+    var checkAllSlaves = function(pack) {
+        var allSlaves = pack.slaves;
+        var newSlaves = [];
+        var target = allSlaves.length;
+        var processed = 0;
+
+
+        var processResult = function (result) {
+
+            processed++;
+            if (result.exists) {
+                //console.log('pushing');
+                newSlaves.push(result.id);
+            }
+            if (processed === target) {
+                //console.log(newSlaves);
+                pack.slaves = newSlaves;
+                pack.save();
+            }
+        };
+
+
+        for (var i=0; i<allSlaves.length; i++) {
+            checkIfPackExists(allSlaves[i]).then(processResult);
+        }
+
+    };
+
+
+
 
     Course.findById(id).populate('packs').exec(function (err, course) {
         if (err) return next(err);
         if (!course) return next(new Error('Failed to load Course ' + id));
 
-        console.log(course.packs);
+
         for (var i=0; i< course.packs.length; i++) {
-            for (var j=0; j<course.packs[i].slaves.length; j++) {
-                Pack.findById(id).exec(function (err, pack) {
-                     console.log(err);
-                     console.log(pack);
-                });
+
+            if (course.packs[i].slaves) {
+                checkAllSlaves(course.packs[i]);
             }
         }
 

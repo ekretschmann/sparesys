@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesAdminController',
-    ['$scope', '$stateParams', '$location','Authentication', 'Courses',
-        function ($scope, $stateParams, $location, Authentication, Courses) {
+    ['$scope', '$http', '$stateParams', '$location','Authentication', 'Courses',
+        function ($scope, $http, $stateParams, $location, Authentication, Courses) {
 
             $scope.authentication = Authentication;
 
@@ -74,6 +74,18 @@ angular.module('courses').controller('CoursesAdminController',
 
                 $scope.otherCourse = Courses.get({
                     courseId: id
+                });
+            };
+
+            $scope.removeDanglingPackSlaves = function() {
+                $http.get('/courses/'+$scope.course._id+'/removeDanglingPackSlaves').success(function(x) {
+                    console.log('xxxx');
+                    console.log(x);
+                }).error(function(response) {
+                    $scope.error = response.message;
+//                console.log('ERROR');
+//                console.log(response);
+
                 });
             };
 

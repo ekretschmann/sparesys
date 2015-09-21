@@ -34,10 +34,17 @@ module.exports = function(app) {
 	    .delete(users.requiresLogin, courses.hasAuthorization, courses.delete);
 
 
+	app.route('/courses/:cId3/removeDanglingPackSlaves')
+		//.get(courses.read);
+		.get(courses.removeDanglingPackSlaves);
+		//.get(courses.removeDanglingPackSlaves, users.requiresLogin, courses.hasAuthorization);
+
+
 
 
 	// Finish by binding the Course middleware
 	app.param('courseId', courses.courseByID);
 	app.param('cId', courses.getCardsForCourse);
 	app.param('cId2', courses.copyCourse);
+	app.param('cId3', courses.removeDanglingPackSlaves);
 };

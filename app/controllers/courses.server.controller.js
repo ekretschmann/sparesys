@@ -671,6 +671,15 @@ exports.cardDefaults = function (req, res, next, id) {
     //console.log(req);
 };
 
+
+exports.removeDanglingPackSlaves = function (req, res, next, id) {
+
+    console.log('removing pack slaves');
+
+
+    res.jsonp('ok');
+};
+
 exports.copyCourse = function (req, res, next, id) {
 
 

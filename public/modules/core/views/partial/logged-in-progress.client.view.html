@@ -25,84 +25,72 @@
 
                 <div data-ng-repeat="course in courses">
 
-                    <!--<div class="infobox-title">-->
 
-                        <!--<div class="pull-right" style="text-align: center; top: 0">-->
-                            <!--<div>-->
-                                <!--<a href="" style="font-size: medium">-->
-                                    <!--<i class="glyphicon glyphicon-stats">-->
-                                    <!--</i>-->
-                                <!--</a>-->
-                            <!--</div>-->
-                            <!--<div style="font-size: small">-->
-                                <!--More stats-->
-                            <!--</div>-->
-                        <!--</div>-->
-
-                        <!--Progress for {{course.name}}-->
-
-
-                    <!--</div>-->
-
-                    <!--<div>-->
-                        <!--{{course.name}} Cards memorized-->
-
-                    <!--</div>-->
                     <div class="default-border"
                          data-ng-controller="CourseReportController"
                          data-ng-init="initProgress(course._id, $index)">
+                        <div data-ng-show="diagramShown" data-ng-hide="!diagramShown">
 
-                        <div class="col-xs-12">
+
+                            <div class="col-xs-12">
+
+                                <div id="inplay{{$index}}" class="diagram">
+
+                                </div>
+                            </div>
 
 
-                            <div id="inplay{{$index}}" class="diagram">
+                            <div style="text-align: center; font-size: large">
+                                {{course.name}} - Cards Memorized
+
+                            </div>
+                            <div style="text-align: center; font-size: large">
+
+
+                                <a href="#!/courses/{{course._id}}/stats">more diagrams</a>
 
                             </div>
                         </div>
 
-                        <!--<div class="col-xs-6">-->
-                        <!--<div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">-->
-                        <!--When and how much I have practiced:-->
-                        <!--</div>-->
 
-                        <!--<div >-->
-                        <!--<span id="practice-date{{$index}}"></span>&nbsp;<span id="number-of-cards{{$index}}"></span>-->
-                        <!--</div>-->
+                        <div data-ng-show="!diagramShown" data-ng-hide="diagramShown">
+                            <div style="text-align: center; font-size: large">
+                                {{course.name}} - Not enough data to show diagrams
 
-                        <!--<div id="cal{{$index}}" class="diagram">-->
-
-                        <!--</div>-->
-                        <!--</div>-->
-
-
-                        <!--<div class="col-xs-6">-->
-
-                        <!--<div class="left-padded-s top-padded-s" style="font-weight: bold; padding-top: 2em">-->
-                        <!--How long I have practiced:-->
-                        <!--</div>-->
-
-                        <!--<div >-->
-                        <!--<span id="spent-practice-date{{$index}}"></span>&nbsp;<span id="spent-practice-time{{$index}}"></span>-->
-                        <!--</div>-->
-
-                        <!--<div class="timespent diagram" id="timespent{{$index}}" >-->
-
-                        <!--</div>-->
-                        <!--</div>-->
-
-                    </div>
-
-                    <div style="text-align: center; font-size: large">
-                    {{course.name}} - Cards Memorized
-
-                    </div>
-                    <div style="text-align: center; font-size: large">
-
-
-                        <a href="#!/courses/{{course._id}}/stats" >more diagrams</a>
+                            </div>
 
                     </div>
                 </div>
+
+                <!--<div data-ng-repeat="course in courses">-->
+
+                    <!--<div class="default-border"-->
+                         <!--data-ng-controller="CourseReportController"-->
+                         <!--data-ng-init="initProgress(course._id, $index)">-->
+
+                        <!--<div class="col-xs-12">-->
+
+
+                            <!--<div id="inplay{{$index}}" class="diagram">-->
+
+                            <!--</div>-->
+                        <!--</div>-->
+
+                      <!-- -->
+
+                    <!--</div>-->
+
+                    <!--<div style="text-align: center; font-size: large">-->
+                    <!--{{course.name}} - Cards Memorized-->
+
+                    <!--</div>-->
+                    <!--<div style="text-align: center; font-size: large">-->
+
+
+                        <!--<a href="#!/courses/{{course._id}}/stats" >more diagrams</a>-->
+
+                    <!--</div>-->
+                <!--</div>-->
             </slick>
 
 

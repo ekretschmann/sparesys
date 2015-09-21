@@ -717,8 +717,6 @@ exports.copyCourse = function (req, res, next, id) {
 
                     var original = findCourseResult[0];
 
-
-                    console.log(original.cardDefaults);
                     var copy = new Course();
 
                     copy.user = userId;

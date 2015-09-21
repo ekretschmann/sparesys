@@ -39,6 +39,7 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
         };
 
 
+        $scope.diagramShown = false;
         $scope.initProgress = function (id, index) {
 
             var res = CoursesService.serverLoadCards();
@@ -46,6 +47,11 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
             promise.$promise.then(function (cards) {
                 //DiagramsCalendarService.drawCalendar(cards, '#cal'+index, '#practice-date'+index, '#number-of-cards'+index, ($window.innerWidth / 2)-130);
 
+                if (cards.length === 0) {
+                    $scope.diagramShown = false;
+                } else {
+                    $scope.diagramShown = true;
+                }
                 var w = $window.innerWidth + 110;
                 if ($window.innerWidth > 990){
                     w = ($window.innerWidth / 2) + 60;

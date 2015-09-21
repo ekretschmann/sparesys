@@ -79,8 +79,7 @@ angular.module('courses').controller('CoursesAdminController',
 
             $scope.removeDanglingPackSlaves = function() {
                 $http.get('/courses/'+$scope.course._id+'/removeDanglingPackSlaves').success(function(x) {
-                    console.log('xxxx');
-                    console.log(x);
+
                 }).error(function(response) {
                     $scope.error = response.message;
 //                console.log('ERROR');

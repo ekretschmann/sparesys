@@ -1,8 +1,8 @@
 'use strict';
 
 // Packs controller
-angular.module('packs').controller('PacksControllerNew', ['$window', '$timeout','$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards',
-    function ($window, $timeout, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards) {
+angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$timeout','$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards',
+    function ($window, $http, $timeout, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards) {
         $scope.authentication = Authentication;
 
 
@@ -19,10 +19,34 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$timeout',
 
         };
 
-        // Find a list of Packs
-        $scope.find = function () {
-            $scope.packs = Packs.query();
+
+        $scope.options = {};
+        $scope.updateSearch = function () {
+
+            if (!$scope.options.searchText) {
+                $scope.options.searchText = '';
+            }
+
+            Packs.query({
+                text: $scope.options.searchText
+            }, function(packs) {
+                console.log(packs);
+                $scope.packs = packs;
+
+            });
         };
+
+        $scope.removeDanglingPacks = function() {
+            $http.get('/packs/removeDanglingPacks').success(function(x) {
+
+            }).error(function(response) {
+                $scope.error = response.message;
+//                console.log('ERROR');
+//                console.log(response);
+
+            });
+        };
+
 
         // Find existing Pack
         $scope.findOne = function () {

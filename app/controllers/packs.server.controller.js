@@ -65,7 +65,6 @@ exports.update = function (req, res) {
     var pack = req.pack;
 
 
-    console.log(req.body);
     pack = _.extend(pack, req.body);
     pack.updated = Date.now();
 
@@ -99,6 +98,11 @@ exports.update = function (req, res) {
 };
 
 var removePack = function(pack) {
+
+
+
+    console.log(pack.name);
+    console.log('a');
     pack.cards.forEach(function (cardId) {
         Card.find({'_id': cardId}).exec(function (err, cards) {
             if (cards && cards.length === 1) {
@@ -116,9 +120,12 @@ var removePack = function(pack) {
         });
     });
 
+    console.log('b'),
     Course.find({'_id': pack.course}).exec(function (err, courses) {
         if (courses && courses.length === 1) {
 
+            console.log('c');
+            console.log(courses[0].name);
 
             for (var i in courses[0].packs) {
                 if (courses[0].packs[i].toString() === pack._id.toString()) {
@@ -138,6 +145,14 @@ var removePack = function(pack) {
                     });
                 }
             });
+        } else {
+
+            console.log('d');
+            pack.remove(function (err) {
+                if (err) {
+                    console.log(err);
+                }
+            });
         }
     });
 
@@ -151,15 +166,47 @@ exports.delete = function (req, res) {
     var pack = req.pack;
 
 
-    pack.slaves.forEach(function (slaveId) {
-        Pack.findOne({'_id': slaveId}).exec(function (err, p) {
-            removePack(p);
-        });
-    });
+    //pack.slaves.forEach(function (slaveId) {
+    //    Pack.findOne({'_id': slaveId}).exec(function (err, p) {
+    //        removePack(p);
+    //    });
+    //});
 
     removePack(pack);
 
     res.jsonp('ok');
+};
+
+exports.removeDanglingPacks = function(req, res) {
+
+
+    var checkCourse = function(pack) {
+        Course.findOne({'_id': pack.course}).exec(function (err, course) {
+
+
+
+
+            if (!course) {
+                removePack(pack);
+            }
+
+        });
+    };
+
+    Pack.find().exec(function (err, packs) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            //console.log(packs);
+            for(var i=0;i<packs.length;i++) {
+                checkCourse(packs[i]);
+
+            }
+            res.jsonp('ok');
+        }
+    });
 };
 
 /**
@@ -177,6 +224,18 @@ exports.list = function (req, res) {
                 res.jsonp(packs);
             }
         });
+    } else if (req.query.text || req.query.text === '') {
+        var search = req.query.text.split(' ');
+        Pack.find({'name': {$regex: '^' + search[0]}}).
+            limit(25).populate('user', 'displayName').exec(function (err, courses) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(courses);
+                }
+            });
     } else {
         Pack.find().sort('-created').populate('user', 'displayName').exec(function (err, packs) {
             if (err) {

@@ -8,7 +8,11 @@ module.exports = function(app) {
 	app.route('/packs')
 		.get(packs.list)
 		.post(users.requiresLogin, packs.create);
-	
+
+
+	app.route('/packs/removeDanglingPacks')
+		.get(packs.removeDanglingPacks)
+
 	app.route('/packs/:packId')
 		.get(packs.read)
 		.put(users.requiresLogin, packs.update)

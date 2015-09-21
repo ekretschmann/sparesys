@@ -321,14 +321,7 @@ exports.list = function (req, res) {
  */
 exports.courseByID = function (req, res, next, id) {
 
-    //if (req.query.populateUser && req.query.populateUser === 'false') {
-    //    Course.findById(id).exec(function (err, course) {
-    //        if (err) return next(err);
-    //        if (!course) return next(new Error('Failed to load Course ' + id));
-    //        req.course = course;
-    //        next();
-    //    });
-    //} else {
+
 
         Course.findById(id).populate('user', 'displayName').exec(function (err, course) {
             if (err) return next(err);
@@ -336,7 +329,6 @@ exports.courseByID = function (req, res, next, id) {
             req.course = course;
             next();
         });
-    //}
 
 
 };

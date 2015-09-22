@@ -11,6 +11,45 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.checks.self = 'self-checked';
         $scope.checks.mixed = 'mixed';
         $scope.checks.computer = 'computer-checked';
+        $scope.cardOptions = {};
+
+
+        $scope.languages = [
+            {name:'-', code:''},
+            {name:'Chinese', code:'zh-CN'},
+            {name:'English (GB)', code:'en-GB'},
+            {name:'English (US)', code:'en-US'},
+            {name:'French', code:'fr-FR'},
+            {name:'German', code:'de-DE'},
+            {name:'Italian', code:'it-IT'},
+            {name:'Japanese', code:'ja-JP'},
+            {name:'Korean', code:'ko-KR'},
+            {name:'Spanish', code:'es-ES'}
+        ];
+
+
+
+        $scope.cardOptions.languageFrontEnabled = false;
+        $scope.cardOptions.languageFront = $scope.languages[0];
+
+
+        $scope.cardOptions.languageBackEnabled = false;
+        $scope.cardOptions.languageBack = $scope.languages[0];
+
+
+        $scope.toggleLanguageFront = function() {
+
+            $scope.cardOptions.languageFrontEnabled = !$scope.cardOptions.languageFrontEnabled;
+        };
+
+        $scope.setLanguageFront = function(lang) {
+            $http({ method: 'GET',
+                url: '/packs/'+$scope.pack._id+'/update-all-cards',
+                body: {'languageFront': lang}}).
+                success(function (data, status, headers, config) {
+                   console.log('done');
+                });
+        };
 
         // Update existing Pack
         $scope.update = function () {

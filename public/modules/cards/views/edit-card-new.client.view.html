@@ -37,8 +37,11 @@
                                 <div class="btn-group right-padded-l nowrap">
 
 
-                                    <button type="button" class="btn btn-default standard-dropdown-width">
+                                    <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="card.languageFront">
                                         {{card.languageFront.name}}
+                                    </button>
+                                    <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="!card.languageFront">
+                                        {{languages[0].name}}
                                     </button>
                                     <button type="button" class="btn btn-default dropdown-toggle">
                                         <span class="caret"></span>
@@ -58,8 +61,12 @@
                             <div class="field-label">Language Answer</div>
                             <div class="font-medium">
                                 <div class="btn-group right-padded-l nowrap">
-                                    <button type="button" class="btn btn-default standard-dropdown-width">
+
+                                    <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="card.languageBack">
                                         {{card.languageBack.name}}
+                                    </button>
+                                    <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="!card.languageBack">
+                                        {{languages[0].name}}
                                     </button>
                                     <button type="button" class="btn btn-default dropdown-toggle">
                                         <span class="caret"></span>

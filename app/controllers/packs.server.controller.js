@@ -172,6 +172,11 @@ exports.delete = function (req, res) {
     res.jsonp('ok');
 };
 
+exports.updateAllCards = function(req, res) {
+    console.log(req.headers);
+    console.log(req.body);
+};
+
 exports.removeDanglingPacks = function(req, res) {
 
 

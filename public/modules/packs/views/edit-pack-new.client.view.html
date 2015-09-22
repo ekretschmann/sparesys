@@ -100,6 +100,203 @@
 
     </div>
 
+    <div class="col-xs-6 dashboard-col">
+
+
+        <div class="virtual-card font-large">
+            <div class="title">
+                Change settings for all cards
+
+
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row">
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label" ng-class="{'text-muted': !cardOptions.languageFrontEnabled}">
+                            <a href="" data-ng-click="toggleLanguageFront()"
+                               data-ng-if="cardOptions.languageFrontEnabled"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleLanguageFront()"
+                               data-ng-if="!cardOptions.languageFrontEnabled"><i class="glyphicon glyphicon-ban-circle"></i></a>
+
+                            Language Question
+                        </div>
+
+                        <div class="font-medium text-muted" data-ng-if="!cardOptions.languageFrontEnabled">
+                            no change
+                        </div>
+                        <div class="font-medium" data-ng-if="cardOptions.languageFrontEnabled">
+
+                            <div class="btn-group right-padded-l nowrap">
+
+
+                            <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="cardOptions.languageFront">
+                            {{cardOptions.languageFront.name}}
+                            </button>
+                            <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="!cardOptions.languageFront">
+                            {{languages[0].name}}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                            <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
+                            <a>{{lang.name}}</a>
+                            </li>
+                            </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label">Language Back</div>
+                        <div class="font-medium">
+                            <div data-ng-if="card.languageBack">
+                                {{card.languageBack.name}}
+
+                            </div>
+
+                            <div data-ng-if="!card.languageBack">
+                                none
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label">Priority</div>
+                        <div class="font-medium">
+                            {{priorities[card.priority]}}
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row">
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label">Start Date</div>
+                        <div class="font-medium">
+                            <div data-ng-if="card.startDate">
+                                {{card.startDate | date: 'shortDate'}}
+                            </div>
+
+                            <div data-ng-if="!card.startDate">
+                                none
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label">Due Date</div>
+                        <div class="font-medium">
+                            <div data-ng-if="card.dueDate">
+                                {{card.dueDate | date: 'shortDate'}}
+                            </div>
+
+                            <div data-ng-if="!card.dueDate">
+                                none
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label">Checks</div>
+                        <div class="font-medium">
+                            <div data-ng-if="card.check">
+                                {{checks[card.check]}}
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row">
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Forward
+                            Mode
+                        </div>
+                        <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('forward') === -1">
+                            not used
+                        </div>
+                        <div class="font-medium " data-ng-if="card.modes.indexOf('forward') > -1">
+
+                            <div ng-class="{'text-muted': !card.readFrontForward}">
+                                Read question
+
+                            </div>
+                            <div ng-class="{'text-muted': !card.readBackForward}">
+                                Read answer
+
+                            </div>
+                            <div ng-class="{'text-muted': !card.speechRecognitionForward}">
+                                Speech recognition
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">Reverse
+                            Mode
+                        </div>
+                        <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('reverse') === -1">
+                            not used
+                        </div>
+                        <div class="font-medium " data-ng-if="card.modes.indexOf('reverse') > -1">
+
+                            <div ng-class="{'text-muted': !card.readFrontReverse}">
+                                Read question
+
+                            </div>
+                            <div ng-class="{'text-muted': !card.readBackReverse}">
+                                Read answer
+
+                            </div>
+                            <div ng-class="{'text-muted': !card.speechRecognitionReverse}">
+                                Speech recognition
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <div class="col-xs-4 dashboard-col">
+                        <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('images') === -1}">Image
+                            Mode
+                        </div>
+                        <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('images') === -1">
+                            not used
+                        </div>
+                        <div class="font-medium " data-ng-if="card.modes.indexOf('images') > -1">
+
+                            <div ng-class="{'text-muted': !card.readFrontImages}">
+                                Read question
+
+                            </div>
+                            <div ng-class="{'text-muted': !card.readBackImages}">
+                                Read answer
+
+                            </div>
+                            <div ng-class="{'text-muted': !card.speechRecognitionImages}">
+                                Speech recognition
+
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 
     <div data-ng-repeat="card in pack.cards">
         <div class="col-xs-6 dashboard-col">

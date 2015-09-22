@@ -11,7 +11,7 @@ module.exports = function(app) {
 
 
 	app.route('/packs/removeDanglingPacks')
-		.get(packs.removeDanglingPacks)
+		.get(packs.removeDanglingPacks);
 
 	app.route('/packs/:packId')
 		.get(packs.read)

@@ -814,7 +814,8 @@ exports.copyCourse = function (req, res, next, id) {
 
 
                         copy.save(function () {
-                            if (res.jsonp) {
+
+                            if (res && res.jsonp) {
                                 res.jsonp('ok');
                             }
                             return copy;

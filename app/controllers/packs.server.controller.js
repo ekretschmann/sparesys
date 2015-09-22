@@ -101,8 +101,6 @@ var removePack = function(pack) {
 
 
 
-    console.log(pack.name);
-    console.log('a');
     pack.cards.forEach(function (cardId) {
         Card.find({'_id': cardId}).exec(function (err, cards) {
             if (cards && cards.length === 1) {
@@ -120,12 +118,9 @@ var removePack = function(pack) {
         });
     });
 
-    console.log('b'),
     Course.find({'_id': pack.course}).exec(function (err, courses) {
         if (courses && courses.length === 1) {
 
-            console.log('c');
-            console.log(courses[0].name);
 
             for (var i in courses[0].packs) {
                 if (courses[0].packs[i].toString() === pack._id.toString()) {

@@ -180,6 +180,7 @@ angular.module('packs').controller('AddCardToPackController', ['$window', '$scop
                 self.slavesToSave = pack.slaves.length;
                 self.slavesSaved = 0;
 
+
                 // take care of slaves
                 pack.slaves.forEach(function (slaveId) {
 

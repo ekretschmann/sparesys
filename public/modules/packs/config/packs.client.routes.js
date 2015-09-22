@@ -9,6 +9,10 @@ angular.module('packs').config(['$stateProvider',
                 url: '/packs/admin',
                 templateUrl: 'modules/packs/views/admin-packs.client.view.html'
             }).
+            state('adminPack', {
+                url: '/packs/:packId/admin',
+                templateUrl: 'modules/packs/views/admin-pack.client.view.html'
+            }).
             state('editPack', {
                 url: '/packs/:packId/edit',
                 templateUrl: 'modules/packs/views/edit-pack.client.view.html'

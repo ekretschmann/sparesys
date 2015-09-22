@@ -1,6 +1,4 @@
-<div class="virtual-card font-large">
-
-
+<div>
     <div class="title">
         {{card.question}}
 
@@ -76,8 +74,6 @@
         </div>
 
 
-
-
         <div class="row">
             <div class="col-xs-4 dashboard-col">
                 <div class="field-label">Start Date</div>
@@ -120,7 +116,8 @@
 
         <div class="row">
             <div class="col-xs-4 dashboard-col">
-                <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Forward Mode</div>
+                <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Forward Mode
+                </div>
                 <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('forward') === -1">
                     not used
                 </div>
@@ -131,11 +128,11 @@
 
                     </div>
                     <div ng-class="{'text-muted': !card.readBackForward}">
-                         Read answer
+                        Read answer
 
                     </div>
                     <div ng-class="{'text-muted': !card.speechRecognitionForward}">
-                         Speech recognition
+                        Speech recognition
 
                     </div>
 
@@ -143,7 +140,8 @@
             </div>
 
             <div class="col-xs-4 dashboard-col">
-                <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">Reverse Mode</div>
+                <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">Reverse Mode
+                </div>
                 <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('reverse') === -1">
                     not used
                 </div>
@@ -191,4 +189,3 @@
 
 
     </div>
-</div>

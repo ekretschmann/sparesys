@@ -48,6 +48,7 @@ exports.create = function (req, res) {
         card.user = req.user;
     }
 
+    console.log(card);
     var addCardCopyToSlavePack = function(packId, card) {
         Pack.findOne({'_id': packId}).exec(function (err, pack) {
 
@@ -114,13 +115,16 @@ exports.create = function (req, res) {
         });
     });
 
-    card.save(function (err) {
+    console.log('saving');
+    card.save(function (err, theCard) {
+        console.log(theCard);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
             });
         } else {
-            res.jsonp(card);
+            console.log('returning');
+            res.jsonp(theCard);
         }
     });
 };

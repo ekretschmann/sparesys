@@ -6,6 +6,7 @@
 var mongoose = require('mongoose'),
     Card = mongoose.model('Card'),
     Pack = mongoose.model('Pack'),
+    Course = mongoose.model('Course'),
     _ = require('lodash');
 
 /**
@@ -47,9 +48,73 @@ exports.create = function (req, res) {
         card.user = req.user;
     }
 
+    var addCardCopyToSlavePack = function(packId, card) {
+        Pack.findOne({'_id': packId}).exec(function (err, pack) {
+
+            if (!err && pack) {
+
+                var cardCopy = new Card();
+                cardCopy.packs = [];
+                cardCopy.packs.push(packId);
+
+                cardCopy.speechRecognitionReverse = card.speechRecognitionReverse;
+                cardCopy.speechRecognitionForward = card.speechRecognitionForward;
+                cardCopy.readBackReverse = card.readBackReverse;
+                cardCopy.readFrontReverse = card.readFrontReverse;
+                cardCopy.readBackForward = card.readBackForward;
+                cardCopy.readFrontForward = card.readFrontForward;
+                cardCopy.imagesReadBack = card.imagesReadBack;
+                cardCopy.speechRecognitionImages = card.speechRecognitionImages;
+                cardCopy.imagesReadFront = card.imagesReadFront;
+                cardCopy.modes = card.modes;
+                cardCopy.question = card.question;
+                cardCopy.answer = card.answer;
+                cardCopy.questionExtension = card.questionExtension;
+                cardCopy.answerExtension = card.answerExtension;
+
+                cardCopy.save(function() {
+                    pack.cards.push(cardCopy._id);
+                    pack.save();
+                });
+            }
+        });
+    };
+
+    // use course default settings
+    Course.findOne({'_id': card.course}).exec(function (err, course) {
+
+        card.speechRecognitionReverse = course.cardDefaults.reverse.speechRecognition;
+        card.speechRecognitionForward = course.cardDefaults.forward.speechRecognition;
+        card.readBackReverse = course.cardDefaults.reverse.readBack;
+        card.readFrontReverse = course.cardDefaults.reverse.readFront;
+        card.readBackForward = course.cardDefaults.forward.readBack;
+        card.readFrontForward = course.cardDefaults.forward.readFront;
+        card.imagesReadBack = course.cardDefaults.images.readBack;
+        card.speechRecognitionImages = course.cardDefaults.images.speechRecognition;
+        card.imagesReadFront = course.cardDefaults.images.readFront;
+        card.modes = [];
+        if (course.cardDefaults.forward.enabled) {
+            card.modes.push('forward');
+        }
+        if (course.cardDefaults.reverse.enabled) {
+            card.modes.push('reverse');
+        }
+        if (course.cardDefaults.images.enabled) {
+            card.modes.push('images');
+        }
+        Pack.findOne({'_id': card.packs[0]}).exec(function (err, pack) {
+
+            pack.cards.push(card._id);
+            pack.save();
+            //console.log(card);
+            for(var i=0; i< pack.slaves.length; i++) {
+                addCardCopyToSlavePack(pack.slaves[i], card);
+            }
+
+        });
+    });
 
     card.save(function (err) {
-        console.log(err);
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
@@ -86,8 +151,6 @@ exports.update = function (req, res) {
 
     //card.__v = undefined;
     card = _.extend(card, req.body);
-
-
 
 
     if (!req.body.startDate) {
@@ -184,7 +247,6 @@ exports.update = function (req, res) {
     card.save(function (err) {
 
 
-
         if (err) {
             //console.log(err);
             //console.log(card);
@@ -210,7 +272,6 @@ exports.update = function (req, res) {
             //        }
             //    });
             //});
-
 
 
         } else {

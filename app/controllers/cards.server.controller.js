@@ -74,6 +74,8 @@ exports.create = function (req, res) {
                 cardCopy.answerExtension = card.answerExtension;
 
                 cardCopy.save(function() {
+                    console.log('card copy');
+                    console.log(cardCopy.modes);
                     pack.cards.push(cardCopy._id);
                     pack.save();
                 });
@@ -103,6 +105,18 @@ exports.create = function (req, res) {
         if (course.cardDefaults.images.enabled) {
             card.modes.push('images');
         }
+        card.save(function (err, theCard) {
+            console.log('original');
+            console.log(theCard.modes);
+            if (err) {
+                return res.send(400, {
+                    message: getErrorMessage(err)
+                });
+            } else {
+                console.log('returning');
+                res.jsonp(theCard);
+            }
+        });
         Pack.findOne({'_id': card.packs[0]}).exec(function (err, pack) {
 
             pack.cards.push(card._id);
@@ -115,18 +129,7 @@ exports.create = function (req, res) {
         });
     });
 
-    console.log('saving');
-    card.save(function (err, theCard) {
-        console.log(theCard);
-        if (err) {
-            return res.send(400, {
-                message: getErrorMessage(err)
-            });
-        } else {
-            console.log('returning');
-            res.jsonp(theCard);
-        }
-    });
+
 };
 
 /**

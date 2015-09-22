@@ -118,37 +118,38 @@ exports.update = function (req, res) {
                         console.log(err);
                     } else {
 
-                        console.log(course.cardDefaults);
-                        c.name = course.name;
-                        c.description = course.description;
-                        //c.language = course.language;
-                        c.front = course.front;
-                        c.back = course.back;
-                        //c.languageback = course.languageback;
-                        //c.speechrecognition = course.speechrecognition;
-                        c.cardDefaults = course.cardDefaults;
-                        c.save();
+                        if (c) {
+                            c.name = course.name;
+                            c.description = course.description;
+                            //c.language = course.language;
+                            c.front = course.front;
+                            c.back = course.back;
+                            //c.languageback = course.languageback;
+                            //c.speechrecognition = course.speechrecognition;
+                            c.cardDefaults = course.cardDefaults;
+                            c.save();
 
-                        if (newPack) {
-                            Pack.findOne({'_id': newPack}).exec(function (err, p) {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-                                    var addedPack = new Pack();
-                                    addedPack.user = c.user;
-                                    addedPack.course = c._id;
-                                    addedPack.name = p.name;
-                                    addedPack.checks = p.checks;
-                                    addedPack.modes = p.modes;
-                                    addedPack.master = p._id;
+                            if (newPack) {
+                                Pack.findOne({'_id': newPack}).exec(function (err, p) {
+                                    if (err) {
+                                        console.log(err);
+                                    } else {
+                                        var addedPack = new Pack();
+                                        addedPack.user = c.user;
+                                        addedPack.course = c._id;
+                                        addedPack.name = p.name;
+                                        addedPack.checks = p.checks;
+                                        addedPack.modes = p.modes;
+                                        addedPack.master = p._id;
 
-                                    c.packs.push(addedPack._id);
-                                    p.slaves.push(addedPack._id);
-                                    addedPack.save();
-                                    c.save();
-                                    p.save();
-                                }
-                            });
+                                        c.packs.push(addedPack._id);
+                                        p.slaves.push(addedPack._id);
+                                        addedPack.save();
+                                        c.save();
+                                        p.save();
+                                    }
+                                });
+                            }
                         }
 
                     }

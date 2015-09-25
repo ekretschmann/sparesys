@@ -43,11 +43,22 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         };
 
         $scope.setLanguageFront = function(lang) {
-            $http({ method: 'GET',
-                url: '/packs/'+$scope.pack._id+'/update-all-cards',
-                body: {'languageFront': lang}}).
+            $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {languageFront: lang, id: $scope.pack._id}).
                 success(function (data, status, headers, config) {
                    console.log('done');
+                });
+        };
+
+        $scope.toggleLanguageBack = function() {
+
+            $scope.cardOptions.languageBackEnabled = !$scope.cardOptions.languageBackEnabled;
+        };
+
+        $scope.setLanguageBack = function(lang) {
+            console.log(lang);
+            $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {languageBack: lang, id: $scope.pack._id}).
+                success(function (data, status, headers, config) {
+                    console.log('done');
                 });
         };
 

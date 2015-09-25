@@ -19,7 +19,7 @@ module.exports = function(app) {
 	    .delete(users.requiresLogin,  packs.delete);
 
 	app.route('/packs/:packId/update-all-cards')
-		.get(packs.updateAllCards, users.requiresLogin);
+		.post(packs.updateAllCards, users.requiresLogin);
 
 	// Finish by binding the Pack middleware
 	app.param('packId', packs.packByID);

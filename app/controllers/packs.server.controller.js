@@ -7,7 +7,8 @@ var mongoose = require('mongoose'),
     Pack = mongoose.model('Pack'),
     Course = mongoose.model('Course'),
     Card = mongoose.model('Card'),
-    _ = require('lodash');
+    _ = require('lodash'),
+    q = require('q');
 
 /**
  * Get the error message from error object
@@ -69,7 +70,6 @@ exports.update = function (req, res) {
     pack.updated = Date.now();
 
 
-
     if (pack.slaves) {
         pack.slaves.forEach(function (slaveId) {
             Pack.find({'_id': slaveId}).exec(function (err, packs) {
@@ -97,8 +97,7 @@ exports.update = function (req, res) {
     });
 };
 
-var removePack = function(pack) {
-
+var removePack = function (pack) {
 
 
     pack.cards.forEach(function (cardId) {
@@ -172,18 +171,82 @@ exports.delete = function (req, res) {
     res.jsonp('ok');
 };
 
-exports.updateAllCards = function(req, res) {
-    console.log(req.headers);
-    console.log(req.body);
+var getPackTree = function(id) {
+    var deferred = q.defer();
+    var packs = [id];
+    Pack.findOne({'_id': id}).exec(function (err, p) {
+
+        for (var i=0; i< p.slaves.length; i++) {
+            packs.push(p.slaves[i]);
+        }
+
+        deferred.resolve(packs);
+
+    });
+    return deferred.promise;
 };
 
-exports.removeDanglingPacks = function(req, res) {
+var getCardsForPack = function(packId) {
+
+    var deferred = q.defer();
+    var cards = [];
+    var packs = [];
+
+    Pack.findById(packId).exec(function (err, pack) {
+        if (!err && pack) {
+            for (var i = 0; i < pack.cards.length; i++) {
+                packs.push(pack.cards[i]);
+            }
+        }
+        deferred.resolve(cards);
+    });
+
+    return deferred.promise;
+
+};
+
+var addCards = function(cards) {
+    for (var j=0; j<cards.length; j++) {
+        result.push(cards[j]);
+    }
+    count++;
+    console.log(result);
+    if (count === packIds.length) {
+        deferred.resolve(result);
+    }
+};
+
+var getCardsForPacks = function(packIds) {
+    var deferred = q.defer();
+    var result = [];
+    var count = 0;
+    for (var i=0; i<packIds.length; i++) {
+        getCardsForPack(packIds[i]).then(addCards);
+    }
+
+    return deferred.promise;
+};
+
+exports.updateAllCards = function (req, res) {
+    //console.log(req.headers);
+    //console.log(req.body);
+    var pack = req.pack;
+    var cardsToUpdate = [];
+
+    getPackTree(req.pack.id).then(function(packs) {
+        getCardsForPacks(packs).then(function(cards) {
+            console.log(cards);
+        });
+    });
 
 
-    var checkCourse = function(pack) {
+};
+
+exports.removeDanglingPacks = function (req, res) {
+
+
+    var checkCourse = function (pack) {
         Course.findOne({'_id': pack.course}).exec(function (err, course) {
-
-
 
 
             if (!course) {
@@ -200,7 +263,7 @@ exports.removeDanglingPacks = function(req, res) {
             });
         } else {
             //console.log(packs);
-            for(var i=0;i<packs.length;i++) {
+            for (var i = 0; i < packs.length; i++) {
                 checkCourse(packs[i]);
 
             }

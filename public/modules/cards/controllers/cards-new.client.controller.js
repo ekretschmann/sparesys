@@ -40,6 +40,19 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
 
 
 
+        $scope.manageImages = function () {
+
+
+            $modal.open({
+                templateUrl: 'manageImages.html',
+                controller: 'ManageImagesController',
+                resolve: {
+                    card: function () {
+                        return $scope.card;
+                    }
+                }
+            });
+        };
 
         $scope.openStartDateCalendar = function ($event) {
             $event.preventDefault();

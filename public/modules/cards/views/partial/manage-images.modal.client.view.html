@@ -1,133 +1,136 @@
 <script type="text/ng-template" id="manageImages.html">
-    <div class="modal-body" data-ng-init="setFocus()">
 
-        <div class="content-header">
 
-            <form class="form-horizontal" data-ng-submit="search()" novalidate>
-                <fieldset>
-                    <table>
-                        <tr>
-                            <td class="expands title nowrap">
+    <div class="rememberators-modal">
 
-                                {{card.question}}
-                            </td>
+        <div class="rememberators-modal-header">
+            <div class="title center-aligned" style="text-align: center">
+                Manage Images
 
-                            <td class="right-aligned"><input type="search" style="min-width: 200px"
-                                                             class="form-control focus search" ng-model="search.text">
-                            </td>
-                        </tr>
-                    </table>
-                </fieldset>
-            </form>
+            </div>
+
 
         </div>
 
+        <div class="rememberators-modal-section" style="min-height: 4em;">
 
-        <div class="content-section">
+            <div class="col-xs-11">
+                <form class="form-horizontal" data-ng-submit="search()" novalidate>
+                    <fieldset>
+                        <input type="search"
+                               class="form-control focus search" ng-model="search.text">
+                    </fieldset>
+                </form>
+            </div>
 
-            <!--<div class="title">Selected Images</div>-->
+            <div class="col-xs-1 font-large" style="position: relative">
 
-            <!--style="max-width: 560px"-->
-            <table>
-                <tr>
+                <div style="position: absolute; top:7px; right:30px">
+                    <a href="" data-ng-click="search()"><i
+                            class="glyphicon glyphicon-search"></i></a>
+                </div>
+            </div>
 
-                    <!--style="text-align:center;max-width:139px;padding: 3px 5px 24px 0px; border: 1px solid #666666"-->
+
+        </div>
+
+        <div class="rememberators-modal-section">
+            <div class="row">
+
+                <!--style="text-align:center;max-width:139px;padding: 3px 5px 24px 0px; border: 1px solid #666666"-->
 
 
-                    <td class="gallerypic center-aligned"
-                        style="width:30%; min-width:25%; min-height: 120px"
-                        data-ng-repeat="i in [0,1,2,3]">
+                <div class="col-xs-3 gallerypic"
+                     data-ng-repeat="i in [0,1,2,3]">
 
-                        <a href="" data-ng-click="removeImage(selected.images[i])">
-                            <img ng-src="{{selected.images[i]}}" style="max-width: 120px; max-height: 120px;"/>
-                            <section
-                                    data-ng-if="selected.images[i] !== '/modules/core/img/brand/placeholder_icon.png'">
+                    <a href="" data-ng-click="removeImage(selected.images[i])">
+                        <img ng-src="{{selected.images[i]}}" style="max-width: 120px; max-height: 120px;"/>
+                        <section
+                                data-ng-if="selected.images[i] !== '/modules/core/img/brand/placeholder_icon.png'">
 
-                            </section>
+                        </section>
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-3 center-aligned"
+                     data-ng-repeat="i in [0,1,2,3]">
+
+                    <div data-ng-if="selected.images[i] !== '/modules/core/img/brand/placeholder_icon.png'">
+                        <a class="remove-icon" href="" data-ng-click="removeImage(selected.images[i])">
+                            Remove
                         </a>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="center-aligned"
-                        data-ng-repeat="i in [0,1,2,3]">
+                    </div>
+                </div>
+            </div>
 
-                        <div data-ng-if="selected.images[i] !== '/modules/core/img/brand/placeholder_icon.png'">
-                            <a class="remove-icon" href="" data-ng-click="removeImage(selected.images[i])">
-                                Remove
+
+        </div>
+
+        <div class="rememberators-modal-section">
+
+            <div data-ng-if="images.length > 0">
+                <!--<div style="position: absolute; top:50%; font-size: x-large; left:3px">-->
+                <!--<span data-ng-if="images.length >0">-->
+                <!--<span data-ng-if="page > 1">-->
+                <!--<a href="">-->
+                <!--<i data-ng-click="prev()"-->
+                <!--class="glyphicon glyphicon-chevron-left">-->
+                <!--</i>-->
+                <!--</a>-->
+                <!--</span>-->
+
+                <!--<span data-ng-if="page <= 1">-->
+                <!--<i class="glyphicon glyphicon-chevron-left text-muted">-->
+                <!--</i>-->
+                <!--</span>-->
+                <!--</span>-->
+                <!--</div>-->
+
+                <!--<div style="position: absolute; top:50%; right: 3px; font-size: x-large">-->
+                <!--<span data-ng-if="page < max_page">-->
+                <!--<a href="">-->
+                <!--<i data-ng-click="next()"-->
+                <!--class="glyphicon glyphicon-chevron-right">-->
+                <!--</i>-->
+                <!--</a>-->
+                <!--</span>-->
+
+                <!--<span data-ng-if="page >= max_page">-->
+                <!--<i-->
+                <!--class="glyphicon glyphicon-chevron-right text-muted">-->
+                <!--</i>-->
+                <!--</span>-->
+                <!--</div>-->
+                <div>
+                    <div class="row" style="padding-bottom: 5px" data-ng-repeat="row in images track by $index">
+                        <div class="col-xs-4 gallerypic searchimage"
+                             data-ng-repeat="img in row track by $index">
+                            <a href="" data-ng-click="addImage(img)">
+
+
+                                <div style="vertical-align: middle; min-height: 132px; max-height: 132px; text-align: center; vertical-align: middle">
+                                    <!--<span style="height: 100%; vertical-align: middle;display: inline-block;"></span>-->
+                                    <img ng-src="{{img}}" class="image-128" />
+                                </div>
+
+                                <!--<div class="add-icon" style="position: absolute; bottom:2px; left: 44%">-->
+                                    <!--Add-->
+                                <!--</div>-->
                             </a>
-                        </div>
-                    </td>
-                </tr>
 
-            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
         </div>
 
-
-        <!--<div class="title">-->
-
-
-        <!--</span>-->
-        <!--</div>-->
-        <!--<div data-ng-if="images.length === 0">-->
-        <!--No Search Result-->
-        <!--</div>-->
-
-
-        <div data-ng-if="images.length > 0" style="position: relative">
-            <div style="position: absolute; top:50%; font-size: x-large; left:3px">
-                <span data-ng-if="images.length >0">
-                <span data-ng-if="page > 1">
-                <a href="">
-                    <i data-ng-click="prev()"
-                       class="glyphicon glyphicon-chevron-left">
-                    </i>
-                </a>
-                </span>
-
-                <span data-ng-if="page <= 1">
-                <i class="glyphicon glyphicon-chevron-left text-muted">
-                </i>
-                </span>
-                </span>
-            </div>
-
-            <div style="position: absolute; top:50%; right: 3px; font-size: x-large">
-                <span data-ng-if="page < max_page">
-                <a href="">
-                    <i data-ng-click="next()"
-                       class="glyphicon glyphicon-chevron-right">
-                    </i>
-                </a>
-                </span>
-
-                <span data-ng-if="page >= max_page">
-                <i
-                        class="glyphicon glyphicon-chevron-right text-muted">
-                </i>
-                </span>
-            </div>
-            <table width="90%" style="margin-left: 5%; margin-right:5%">
-                <tr data-ng-repeat="row in images track by $index">
-                    <td class="gallerypic searchimage"
-                        style="position: relative"
-                        data-ng-repeat="img in row track by $index">
-                        <a href="" data-ng-click="addImage(img)">
-
-
-                            <div style="height: 128px">
-                                <span style="height: 100%; vertical-align: middle;display: inline-block;"></span>
-                                    <img ng-src="{{img}}" class="image-128" style="vertical-align: middle;"/>
-                            </div>
-
-                            <div class="add-icon" style="position: absolute; bottom:2px; left: 44%">
-                                Add
-                            </div>
-                        </a>
-
-                    </td>
-                </tr>
-            </table>
+        <div class="rememberators-modal-footer">
+            <button class="btn btn-rememberators" ng-click="ok()">OK</button>
+            <button class="btn btn-rememberators" ng-click="cancel()">Cancel</button>
         </div>
     </div>
+
+
 </script>

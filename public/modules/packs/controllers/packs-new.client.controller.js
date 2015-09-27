@@ -241,7 +241,6 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.addCardToPack = function () {
 
 
-
             var original = new Cards({
                 question: $scope.newCard.question,
                 questionExtension: $scope.newCard.questionExtension,
@@ -260,7 +259,12 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
                     $timeout(function() {
                         $window.scrollTo(0, scrollpos);
                     });
+                    $scope.newCard.question = '';
+                    $scope.newCard.answer = '';
 
+                    $scope.newCard.questionExtension = '';
+                    $scope.newCard.answerExtension = '';
+                    $scope.scrollDown();
                 });
             });
 

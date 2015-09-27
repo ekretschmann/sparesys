@@ -86,6 +86,7 @@ exports.create = function (req, res) {
     // use course default settings
     Course.findOne({'_id': card.course}).exec(function (err, course) {
 
+        console.log(course.cardDefaults);
         card.speechRecognitionReverse = course.cardDefaults.reverse.speechRecognition;
         card.speechRecognitionForward = course.cardDefaults.forward.speechRecognition;
         card.readBackReverse = course.cardDefaults.reverse.readBack;
@@ -93,8 +94,8 @@ exports.create = function (req, res) {
         card.readBackForward = course.cardDefaults.forward.readBack;
         card.readFrontForward = course.cardDefaults.forward.readFront;
         card.imagesReadBack = course.cardDefaults.images.readBack;
-        card.speechRecognitionImages = course.cardDefaults.images.speechRecognition;
         card.imagesReadFront = course.cardDefaults.images.readFront;
+        card.speechRecognitionImages = course.cardDefaults.images.speechRecognition;
         card.modes = [];
         if (course.cardDefaults.forward.enabled) {
             card.modes.push('forward');
@@ -105,6 +106,8 @@ exports.create = function (req, res) {
         if (course.cardDefaults.images.enabled) {
             card.modes.push('images');
         }
+
+        console.log(card);
         card.save(function (err, theCard) {
             console.log('original');
             console.log(theCard.modes);

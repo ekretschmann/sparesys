@@ -301,11 +301,11 @@
                         </div>
                         <div class="font-medium " data-ng-if="card.modes.indexOf('images') > -1">
 
-                            <div ng-class="{'text-muted': !card.readFrontImages}">
+                            <div ng-class="{'text-muted': !card.imagesReadFront}">
                                 Read question
 
                             </div>
-                            <div ng-class="{'text-muted': !card.readBackImages}">
+                            <div ng-class="{'text-muted': !card.imagesReadBack}">
                                 Read answer
 
                             </div>
@@ -315,7 +315,9 @@
                             </div>
 
                         </div>
+                        {{card}}
                     </div>
+
                 </div>
             </div>
 

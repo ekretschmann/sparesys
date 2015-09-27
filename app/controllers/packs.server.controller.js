@@ -206,14 +206,16 @@ var getCardsForPack = function(packId) {
 };
 
 var addCards = function(cards) {
-    for (var j=0; j<cards.length; j++) {
-        result.push(cards[j]);
-    }
-    count++;
-    console.log(result);
-    if (count === packIds.length) {
-        deferred.resolve(result);
-    }
+    //var result = [];
+    //var count =0;
+    //for (var j=0; j<cards.length; j++) {
+    //    result.push(cards[j]);
+    //}
+    //count++;
+    //console.log(result);
+    //if (count === packIds.length) {
+    //    deferred.resolve(result);
+    //}
 };
 
 var getCardsForPacks = function(packIds) {
@@ -221,7 +223,8 @@ var getCardsForPacks = function(packIds) {
     var result = [];
     var count = 0;
     for (var i=0; i<packIds.length; i++) {
-        getCardsForPack(packIds[i]).then(addCards);
+        //getCardsForPack(packIds[i]).then(addCards);
+        console.log(packIds[i]);
     }
 
     return deferred.promise;

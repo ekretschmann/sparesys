@@ -97,6 +97,27 @@
 
     </div>
 
+    <div class="col-xs-6 dashboard-col">
+        <div class="admin-card font-large">
+            <div class="title">
+                Slaves
+
+
+            </div>
+
+            <div class="flashcard-section">
+
+                <div data-ng-if="!pack.slaves || pack.slaves.length === 0">
+                    none
+                </div>
+
+                <div data-ng-repeat="s in pack.slaves">
+                    {{s}}
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div data-ng-repeat="card in pack.cards">
         <div class="col-xs-6 dashboard-col">

@@ -122,18 +122,18 @@
                             <!--{{displayName}}-->
                         </div>
                     </div>
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Slaves</div>
-                        <div class="field-data">
-                            <div data-ng-if="course.slaves.length === 0">
-                                none
-                            </div>
-                            <div data-ng-repeat="s in course.slaves">
-                                {{s}}
-                            </div>
-                            <!--{{course.slaves}}-->
-                        </div>
-                    </div>
+                    <!--<div class="col-xs-6 dashboard-col">-->
+                        <!--<div class="field-label">Slaves</div>-->
+                        <!--<div class="field-data">-->
+                            <!--<div data-ng-if="course.slaves.length === 0">-->
+                                <!--none-->
+                            <!--</div>-->
+                            <!--<div data-ng-repeat="s in course.slaves">-->
+                                <!--{{s}}-->
+                            <!--</div>-->
+                            <!--&lt;!&ndash;{{course.slaves}}&ndash;&gt;-->
+                        <!--</div>-->
+                    <!--</div>-->
 
 
                 </div>
@@ -161,6 +161,27 @@
                 <!--</div>-->
 
 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6 dashboard-col">
+        <div class="admin-card font-large">
+            <div class="title">
+                Slaves
+
+
+            </div>
+
+            <div class="flashcard-section">
+
+                <div data-ng-if="!course.slaves || course.slaves.length === 0">
+                    none
+                </div>
+
+                <div data-ng-repeat="s in course.slaves">
+                    {{s}}
+                </div>
             </div>
         </div>
     </div>
@@ -511,17 +532,17 @@
                             <!--{{displayName}}-->
                         </div>
                     </div>
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Slaves</div>
-                        <div class="field-data">
-                            <div data-ng-repeat="s in pack.slaves">
-                                {{s}}
-                            </div>
-                            <div data-ng-if="pack.slaves.length === 0">
-                                none
-                            </div>
-                        </div>
-                    </div>
+                    <!--<div class="col-xs-6 dashboard-col">-->
+                        <!--<div class="field-label">Slaves</div>-->
+                        <!--<div class="field-data">-->
+                            <!--<div data-ng-repeat="s in pack.slaves">-->
+                                <!--{{s}}-->
+                            <!--</div>-->
+                            <!--<div data-ng-if="pack.slaves.length === 0">-->
+                                <!--none-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
 
 
                 </div>

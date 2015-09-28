@@ -275,13 +275,15 @@
                 </div>
 
                 <div class="flashcard-section">
-                    {{card}}
+
                     <div data-ng-if="!card.slaves || card.slaves.length === 0">
                         none
                     </div>
 
-                    <div data-ng-repeat="s in card.slaves">
-                        {{s}}
+                    <div data-ng-repeat="slave in card.slaves">
+                        <div data-ng-repeat="slave in card.slaves">
+                            <a href="/#!/cards/{{slave}}">{{slave}}</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -705,19 +707,19 @@
         </div>
 
 
-        <div class="col-xs-6 dashboard-col" data-ng-if="card.slaves && card.slaves.length > 0">
-            <div class="admin-card font-large">
-                <div class="title">
-                    Slaves
+        <!--<div class="col-xs-6 dashboard-col" data-ng-if="card.slaves && card.slaves.length > 0">-->
+            <!--<div class="admin-card font-large">-->
+                <!--<div class="title">-->
+                    <!--Slaves-->
 
 
-                </div>
+                <!--</div>-->
 
-                <div data-ng-repeat="slave in card.slaves">
-                    <a href="/#!/cards/{{slave}}">{{slave}}</a>
-                </div>
-            </div>
-        </div>
+                <!--<div data-ng-repeat="slave in card.slaves">-->
+                    <!--<a href="/#!/cards/{{slave}}">{{slave}}</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 
     <div class="rememberators-footer col-xs-12">rememberators.com</div>

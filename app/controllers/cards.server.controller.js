@@ -48,13 +48,14 @@ exports.create = function (req, res) {
         card.user = req.user;
     }
 
-    console.log(card);
     var addCardCopyToSlavePack = function(packId, card) {
+        var cardCopy = new Card();
+
         Pack.findOne({'_id': packId}).exec(function (err, pack) {
 
             if (!err && pack) {
 
-                var cardCopy = new Card();
+
                 cardCopy.packs = [];
                 cardCopy.packs.push(packId);
 
@@ -74,13 +75,14 @@ exports.create = function (req, res) {
                 cardCopy.answerExtension = card.answerExtension;
 
                 cardCopy.save(function() {
-                    console.log('card copy');
-                    console.log(cardCopy.modes);
                     pack.cards.push(cardCopy._id);
                     pack.save();
+                    //card.slaves.push(cardCopy._id);
+                    //card.save();
                 });
             }
         });
+        return cardCopy._id;
     };
 
     // use course default settings
@@ -107,28 +109,29 @@ exports.create = function (req, res) {
             card.modes.push('images');
         }
 
-        console.log(card);
-        card.save(function (err, theCard) {
-            console.log('original');
-            console.log(theCard.modes);
-            if (err) {
-                return res.send(400, {
-                    message: getErrorMessage(err)
-                });
-            } else {
-                console.log('returning');
-                res.jsonp(theCard);
-            }
-        });
+
+
         Pack.findOne({'_id': card.packs[0]}).exec(function (err, pack) {
 
             pack.cards.push(card._id);
             pack.save();
-            //console.log(card);
+            var ids = [];
             for(var i=0; i< pack.slaves.length; i++) {
-                addCardCopyToSlavePack(pack.slaves[i], card);
+                var id = addCardCopyToSlavePack(pack.slaves[i], card);
+                if (ids.indexOf(id) === -1) {
+                    ids.push(id);
+                }
             }
-
+            card.slaves = ids;
+            card.save(function (err, theCard) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    res.jsonp(theCard);
+                }
+            });
         });
     });
 

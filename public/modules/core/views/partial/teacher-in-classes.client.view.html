@@ -2,8 +2,7 @@
 
 
 
-
-    <div data-ng-repeat="schoolId in authentication.user.teacherInSchools">
+    <div data-ng-if="schoolId in authentication.user.teacherInSchools">
         <div data-ng-controller="SchoolsController" data-ng-init="findById(schoolId)">
             <div data-ng-if="!hasClassAssigned(authentication.user._id)">
 

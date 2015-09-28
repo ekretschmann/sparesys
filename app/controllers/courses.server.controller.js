@@ -64,13 +64,11 @@ exports.read = function (req, res) {
 
 
 exports.updateDefaultSettings = function (req, res) {
-    //console.log(req.body);
     var course = req.course;
 
 
     course = _.extend(course, req.body);
 
-    //console.log(course);
 
     course.save(function (err) {
         if (err) {
@@ -374,6 +372,7 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
     }
 
     cardIds.forEach(function (cardId) {
+
         var findCard = Card.find({'_id': cardId}).exec(function (err) {
             if (err) {
                 console.log('Error: ' + err);
@@ -427,8 +426,10 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
                 if (!original.slaves) {
                     original.slaves = [];
                 }
-                original.slaves.push(copy._id);
-                original.save();
+                if (original.slaves.indexOf(copy._id) === -1) {
+                    original.slaves.push(copy._id);
+                    original.save();
+                }
             }
 
 
@@ -485,8 +486,10 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
                 if (!original.slaves) {
                     original.slaves = [];
                 }
-                original.slaves.push(copy._id);
-                original.save();
+                if (original.slaves.indexOf(copy._id) === -1) {
+                    original.slaves.push(copy._id);
+                    original.save();
+                }
             }
 
             packsCopied++;
@@ -693,11 +696,9 @@ exports.removeDanglingPackSlaves = function (req, res, next, id) {
 
             processed++;
             if (result.exists) {
-                //console.log('pushing');
                 newSlaves.push(result.id);
             }
             if (processed === target) {
-                //console.log(newSlaves);
                 pack.slaves = newSlaves;
                 pack.save();
             }

@@ -163,15 +163,17 @@ var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds
     currentTeacherIds.forEach(function (currentTeacherId) {
         User.findOne({_id: currentTeacherId}, 'teachesClasses').exec(function (err, currentTeacher) {
 
-            if (currentTeacher.teachesClasses.indexOf(schoolclass._id) === -1) {
-                currentTeacher.teachesClasses.push(schoolclass._id);
-            }
-            currentTeacher.save(function() {
-                updates--;
-                if (updates === 0) {
-                    deferred.resolve();
+            if (currentTeacher) {
+                if (currentTeacher.teachesClasses.indexOf(schoolclass._id) === -1) {
+                    currentTeacher.teachesClasses.push(schoolclass._id);
                 }
-            });
+                currentTeacher.save(function () {
+                    updates--;
+                    if (updates === 0) {
+                        deferred.resolve();
+                    }
+                });
+            }
         });
     });
 
@@ -194,15 +196,17 @@ var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds
     currentStudentIds.forEach(function (currentStudentId) {
         User.findOne({_id: currentStudentId}, 'studentInClasses').exec(function (err, currentStudent) {
 
-            if (currentStudent.studentInClasses.indexOf(schoolclass._id) === -1) {
-                currentStudent.studentInClasses.push(schoolclass._id);
-            }
-            currentStudent.save(function() {
-                updates--;
-                if (updates === 0) {
-                    deferred.resolve();
+            if (currentStudent) {
+                if (currentStudent.studentInClasses.indexOf(schoolclass._id) === -1) {
+                    currentStudent.studentInClasses.push(schoolclass._id);
                 }
-            });
+                currentStudent.save(function () {
+                    updates--;
+                    if (updates === 0) {
+                        deferred.resolve();
+                    }
+                });
+            }
         });
     });
 

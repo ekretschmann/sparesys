@@ -17,6 +17,10 @@ angular.module('cards').config(['$stateProvider',
                 url: '/cards/:cardId',
                 templateUrl: 'modules/cards/views/edit-card-new.client.view.html'
             }).
+            state('adminCard', {
+                url: '/cards/:cardId/admin',
+                templateUrl: 'modules/cards/views/admin-card.client.view.html'
+            }).
             state('editCardOnTab', {
                 url: '/cards/:cardId/tab/:tab/edit',
                 templateUrl: 'modules/cards/views/edit-card.client.view.html'

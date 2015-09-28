@@ -325,6 +325,7 @@ exports.delete = function (req, res) {
 
     card.slaves.forEach(function (cid) {
 
+        console.log(cid);
         var findCard = Card.find({'_id': cid}).exec(function (err) {
             if (err) {
                 console.log('Error: ' + err);
@@ -333,6 +334,8 @@ exports.delete = function (req, res) {
 
         findCard.then(function (findCardResult) {
 
+            console.log('xxxx');
+            console.log(findCardResult);
             deleteCardFromItsPack(findCardResult[0]);
 
             console.log('removing slave: ' + findCardResult[0]._id);

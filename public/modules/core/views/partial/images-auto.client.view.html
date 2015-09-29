@@ -70,24 +70,37 @@
 
 
                 <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
-                    <playsound language="{{card.languageBack.code}}"
-                               text="Correct: {{card.answer}}"
-                               show-text="true"
-                               extension="{{card.answerExtension}}"
-                               playwhen="{{card.readBackForward && card.languageBack}}"
-                               speed="speechRate"/>
+                    <div data-ng-if="card.imagesReadBack">
+                        <playsound language="{{card.languageBack.code}}"
+                                   text="Correct: {{card.answer}}"
+                                   show-text="true"
+                                   extension="{{card.answerExtension}}"
+                                   playwhen="{{card.readBackForward && card.languageBack}}"
+                                   speed="speechRate"/>
+                    </div>
+                    <div data-ng-if="!card.imagesReadBack">
+                        Correct: {{card.answer}}
+                    </div>
 
                 </div>
 
 
                 <div data-ng-if="answer.assessment === 'wrong'" class="incorrect-answer">
 
-                    <playsound language="{{card.languageBack.code}}"
-                               text="Correct answer: {{card.answer}}"
-                               show-text="true"
-                               extension="{{card.answerExtension}}"
-                               playwhen="{{card.readBackForward && card.languageBack}}"
-                               speed="speechRate"/>
+                    <div>
+                        Your answer: {{answer.text}}
+                    </div>
+                    <div data-ng-if="card.imagesReadBack">
+                        <playsound language="{{card.languageBack.code}}"
+                                   text="Correct answer: {{card.answer}}"
+                                   show-text="true"
+                                   extension="{{card.answerExtension}}"
+                                   playwhen="{{card.readBackForward && card.languageBack}}"
+                                   speed="speechRate"/>
+                    </div>
+                    <div data-ng-if="!card.imagesReadBack">
+                        Correct answer: {{card.answer}}
+                    </div>
                 </div>
             </div>
 

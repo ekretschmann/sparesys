@@ -100,6 +100,7 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
 
         $scope.processCard = function (rating) {
 
+
             $scope.recordRate(Date.now(), rating);
             $scope.state = 'question';
 

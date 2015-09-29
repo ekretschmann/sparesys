@@ -39,35 +39,30 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         $scope.maxScoreForOldCards = 0.3999;
 
 
-        $scope.rateHover = function(value) {
+        $scope.rateHover = function (value) {
             PracticeOptionsService.rateHover(value);
         };
 
-        $scope.rateClick = function() {
+        $scope.rateClick = function () {
             PracticeOptionsService.rateClick();
 
         };
 
-        $scope.$watch(function() {
+        $scope.$watch(function () {
             //return $scope.card._id;
             return PracticeOptionsService.speechRate;
         }, function () {
             $scope.speechRate = PracticeOptionsService.speechRate;
-            $scope.speechIcons = Math.floor($scope.speechRate / 2)+1;
+            $scope.speechIcons = Math.floor($scope.speechRate / 2) + 1;
         });
-
-
 
 
         $scope.lastRepetition = new Date(Date.now);
 
 
-
         $scope.stopPracitcing = function () {
             $location.path('/');
         };
-
-
 
 
         $scope.round = function (num) {
@@ -89,40 +84,42 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
         $scope.recordRate = function (time, assessment) {
 
-            if ($rootScope.online) {
             $scope.recordRateOnline(time, assessment);
-                return;
-            }
 
-
-            $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
-
-            var hrt = $scope.card.hrt;
-
-            $localForage.getItem('cards').then(function(data) {
-                var offlineResults = data;
-
-                if(!offlineResults) {
-                    offlineResults = [];
-                }
-                offlineResults.push({id: $scope.card._id, assessment: assessment, time: time, hrt: hrt});
-                $localForage.setItem('cards', offlineResults);
-
-            });
-
-
-            $scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
-
-            if (assessment === 0 && $scope.assess === 'auto') {
-                $scope.repeat = true;
-            } else {
-                $scope.repeat = false;
-            }
+            //if ($rootScope.online) {
+            //    $scope.recordRateOnline(time, assessment);
+            //    return;
+            //}
+            //
+            //
+            //$scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
+            //
+            //var hrt = $scope.card.hrt;
+            //
+            //$localForage.getItem('cards').then(function (data) {
+            //    var offlineResults = data;
+            //
+            //    if (!offlineResults) {
+            //        offlineResults = [];
+            //    }
+            //    offlineResults.push({id: $scope.card._id, assessment: assessment, time: time, hrt: hrt});
+            //    $localForage.setItem('cards', offlineResults);
+            //
+            //});
+            //
+            //
+            //$scope.card.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
+            //
+            //if (assessment === 0 && $scope.assess === 'auto') {
+            //    $scope.repeat = true;
+            //} else {
+            //    $scope.repeat = false;
+            //}
 
 
         };
 
-        $scope.storeOfflineRecords = function(offlineResults) {
+        $scope.storeOfflineRecords = function (offlineResults) {
 
 
             offlineResults.forEach(function (point) {
@@ -137,7 +134,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     newCard.$update();
                 });
             });
-
 
 
             //$localForage.clear();
@@ -185,7 +181,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             //}
 
 
-
             $scope.card.history.push({
                 when: time,
                 assessment: assessment,
@@ -193,8 +188,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 mode: $scope.mode,
                 check: $scope.assess
             });
-
-
 
 
             Cards.get({
@@ -211,11 +204,11 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     $scope.repeat = false;
                 }
 
-                newCard.$update(function(resp) {
+                newCard.$update(function (resp) {
                     //console.log(resp);
                     //$scope.error = undefined;
-                }, function(z) {
-                    $scope.error = 'Error message: '+z.data.message;
+                }, function (z) {
+                    $scope.error = 'Error message: ' + z.data.message;
                 });
             });
 
@@ -283,7 +276,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         };
 
         $scope.challengeData = {};
-        $scope.exportChallengeData = function() {
+        $scope.exportChallengeData = function () {
             $scope.challengeData = ChallengeCalculatorService.exportData();
         };
 
@@ -327,7 +320,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             for (var i = 0; i < this.cards.length; i++) {
 
 
-
                 var card = this.cards[i];
 
                 if (PracticeOptionsService.dueDateOnly && (!card.dueDate || $scope.time >= new Date(card.dueDate).getTime())) {
@@ -342,7 +334,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     continue;
                 }
 
-               // ChallengeCalculatorService.candidateCard();
+                // ChallengeCalculatorService.candidateCard();
 
 
                 card.predictedRetention = $scope.getPredictedRetention(card, $scope.time);
@@ -357,12 +349,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 //}
 
 
-
                 card.retention = Math.round(card.predictedRetention * 100);
                 card.score = Math.abs(card.predictedRetention - 0.4);
-
-
-
 
 
                 if (card.dueDate) {
@@ -372,7 +360,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 if (card.priority !== 3) {
                     card.score = Math.abs($scope.adjustScoreToPriority(card) - 0.4);
                 }
-
 
 
                 // calculate when am I done
@@ -402,23 +389,24 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 }
 
 
-                var cardSummary = {hrt: 0,
+                var cardSummary = {
+                    hrt: 0,
                     new: card.history.length === 0,
                     name: card.question,
-                    score: Math.round(card.score*10000)/10000,
-                    predictedRetention: Math.round(card.predictedRetention*1000)/1000,
+                    score: Math.round(card.score * 10000) / 10000,
+                    predictedRetention: Math.round(card.predictedRetention * 1000) / 1000,
                     due: card.dueDate
                 };
 
                 if (card.history && card.history.length > 0) {
-                    cardSummary.hrt = Math.round((100*card.history[card.history.length -1].hrt)/(3600*1000))/100;
+                    cardSummary.hrt = Math.round((100 * card.history[card.history.length - 1].hrt) / (3600 * 1000)) / 100;
                 }
 
                 $scope.orderedCards.push(cardSummary);
 
             }
 
-            function compare(a,b) {
+            function compare(a, b) {
                 if (a.score < b.score)
                     return -1;
                 if (a.score > b.score)
@@ -428,7 +416,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
             $scope.orderedCards.sort(compare);
 
-           // ChallengeCalculatorService.exportData();
+            // ChallengeCalculatorService.exportData();
 
 
             if ($scope.repeat) {
@@ -451,8 +439,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
             $scope.card = bestCard;
 
-            if ($scope.card.history && $scope.card.history.length>0) {
-                $scope.lastRepetition = new Date($scope.card.history[$scope.card.history.length-1].when);
+            if ($scope.card.history && $scope.card.history.length > 0) {
+                $scope.lastRepetition = new Date($scope.card.history[$scope.card.history.length - 1].when);
             } else {
                 $scope.lastRepetition = undefined;
             }
@@ -603,7 +591,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             });
 
         };
-
 
 
         $scope.myAnswerCounts = function (answer, mode) {

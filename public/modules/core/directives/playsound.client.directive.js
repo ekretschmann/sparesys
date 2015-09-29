@@ -10,7 +10,8 @@ angular.module('core').directive('playsound',
                 extension: '@',
                 language: '@',
                 playwhen: '@',
-                speed: '='
+                speed: '=',
+                showText: '='
             },
             link: function(scope, elem, attrs) {
 

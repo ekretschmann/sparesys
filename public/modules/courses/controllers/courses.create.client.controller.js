@@ -17,6 +17,7 @@ angular.module('courses').controller('CoursesCreateController',
             $scope.readAnswersReverse= false;
             $scope.readQuestionsImages= false;
             $scope.readAnswersImages= false;
+            $scope.teaching= false;
 
 
             $scope.checks = ['Self Checks', 'Computer Checks', 'Mixed Checks'];
@@ -61,7 +62,7 @@ angular.module('courses').controller('CoursesCreateController',
 
                 var cardDefaults = {
                     languageFront: $scope.languageFront,
-                    languageback: $scope.languageBack,
+                    languageBack: $scope.languageBack,
                     checks: $scope.check,
                     forward: {
                         enabled: $scope.useForwardMode,
@@ -88,6 +89,7 @@ angular.module('courses').controller('CoursesCreateController',
                     description: this.description,
                     back: this.back,
                     front: this.front,
+                    teaching: this.teaching,
                     cardDefaults: cardDefaults
 
                 });

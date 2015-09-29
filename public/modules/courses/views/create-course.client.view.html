@@ -52,22 +52,37 @@
                 </div>
 
                 <div class="flashcard-section">
-                    <div class="field-label">Card Front</div>
-                    <div>
-                        <input type="text"
-                               data-ng-model="front"
-                               class="form-control"
-                               placeholder="What is on the Front of the Cards (e.g. English)">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="field-label">Card Front</div>
+                            <div>
+                                <input type="text"
+                                       data-ng-model="front"
+                                       class="form-control"
+                                       placeholder="What is on the Front of the Cards (e.g. English)">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="field-label">Card Back</div>
+                            <div>
+                                <input type="text"
+                                       data-ng-model="back"
+                                       class="form-control"
+                                       placeholder="What is on the Back of the Cards (e.g. Spanish)">
+                            </div>
+                        </div>
                     </div>
                 </div>
 
+
+
                 <div class="flashcard-section">
-                    <div class="field-label">Card Back</div>
+                    <div class="field-label">My role</div>
                     <div>
-                        <input type="text"
-                               data-ng-model="back"
-                               class="form-control"
-                               placeholder="What is on the Back of the Cards (e.g. Spanish)">
+                        <input data-ng-model="teaching" type="radio" ng-value="true"/> Teacher
+                        <input style="margin-left: 10px" data-ng-model="teaching" type="radio" ng-value="false"/> Student
+
                     </div>
                 </div>
 

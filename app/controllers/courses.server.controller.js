@@ -487,7 +487,11 @@ var copyPacks = function (packIds, userId, newCourseId, isSupervised) {
                     original.slaves = [];
                 }
                 if (original.slaves.indexOf(copy._id) === -1) {
+                    console.log('pushing');
+                    console.log(original._id);
+
                     original.slaves.push(copy._id);
+                    console.log(original.slaves);
                     original.save();
                 }
             }

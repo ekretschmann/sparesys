@@ -1,8 +1,8 @@
 <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
 
 
+    <div data-ng-repeat="schoolId in authentication.user.teacherInSchools">
 
-    <div data-ng-if="schoolId in authentication.user.teacherInSchools">
         <div data-ng-controller="SchoolsController" data-ng-init="findById(schoolId)">
             <div data-ng-if="!hasClassAssigned(authentication.user._id)">
 
@@ -82,7 +82,7 @@
                             <div data-ng-repeat="c in schoolclass.courses">
                                 <div data-ng-controller="CoursesControllerNew" data-ng-init="findById(c)">
                                     <a href="" data-ng-click="removeCourseFromClass(course)"><i
-                                        class="glyphicon glyphicon-minus-sign"></i></a> {{course.name}}
+                                            class="glyphicon glyphicon-minus-sign"></i></a> {{course.name}}
                                 </div>
                             </div>
                         </div>
@@ -100,14 +100,19 @@
                             </div>
                         </div>
 
-                        <div data-ng-if="coursesTeacher.length === 0" class="danger">
-                            You are not teaching any courses. Set the teacher role on at least one course so that you
-                            can assign it to students.
-                        </div>
-
 
                     </div>
 
+                </div>
+            </div>
+
+            <div class="row" style="padding-top: 1em">
+                <div class="col-xs-12 field-data dashboard-col-attached">
+
+                    <div data-ng-if="coursesTeacher.length === 0" class="danger">
+                        You are not teaching any courses. Set the teacher role on at least one course so that you
+                        can assign it to students.
+                    </div>
                 </div>
             </div>
 

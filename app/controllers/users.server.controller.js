@@ -357,7 +357,7 @@ exports.update = function (req, res) {
         });
 
 
-        res.jsonp(theUser);
+        //res.jsonp(theUser);
     }
 
     if (user) {

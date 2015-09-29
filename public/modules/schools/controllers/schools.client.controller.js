@@ -385,8 +385,6 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 for (var j = 0; j < $scope.schoolclasses[i].teachers.length; j++) {
 
                     if($scope.schoolclasses[i].teachers[j] === $scope.authentication.user._id) {
-                        console.log($scope.schoolclasses[i]._id);
-                        console.log($scope.authentication.user.teachesClasses);
                         found = true;
                     }
 

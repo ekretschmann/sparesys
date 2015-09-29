@@ -1,6 +1,5 @@
 <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1">
 
-
     <div data-ng-repeat="schoolId in authentication.user.teacherInSchools">
 
         <div data-ng-controller="SchoolsController" data-ng-init="findById(schoolId)">

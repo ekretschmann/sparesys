@@ -88,7 +88,7 @@ exports.create = function (req, res) {
     // use course default settings
     Course.findOne({'_id': card.course}).exec(function (err, course) {
 
-        console.log(course.cardDefaults);
+        //console.log(course.cardDefaults);
         card.speechRecognitionReverse = course.cardDefaults.reverse.speechRecognition;
         card.speechRecognitionForward = course.cardDefaults.forward.speechRecognition;
         card.readBackReverse = course.cardDefaults.reverse.readBack;

@@ -614,7 +614,7 @@
 
 
                                 <div class="col-xs-1" style="margin-top: 5px">
-                                    <a href="" style="padding-left: 5px;" data-ng-click="addAlternativeAnswerFront()"><i
+                                    <a href="" style="padding-left: 5px;"  data-ng-click="addAlternativeAnswerFront()"><i
                                             class="glyphicon glyphicon-plus-sign"></i></a>
                                 </div>
                                 <div class="col-xs-11">
@@ -644,7 +644,6 @@
                             <div class="row">
                                 <div class="font-medium col-xs-4">
                                     <a href="" data-ng-click="toggleSetting(card, 'imagesReadFront')"
-
                                        data-ng-show="card.imagesReadFront"><i
                                             class="glyphicon glyphicon-ok-circle"></i></a>
                                     <a href="" data-ng-click="toggleSetting(card, 'imagesReadFront')"
@@ -686,19 +685,19 @@
         </div>
 
 
-        <div class="col-xs-6 dashboard-col" data-ng-if="card.slaves && card.slaves.length > 0">
-            <div class="virtual-card font-large">
-                <div class="title">
-                    Slaves
+        <!--<div class="col-xs-6 dashboard-col" data-ng-if="card.slaves && card.slaves.length > 0">-->
+            <!--<div class="virtual-card font-large">-->
+                <!--<div class="title">-->
+                    <!--Slaves-->
 
 
-                </div>
+                <!--</div>-->
 
-                <div data-ng-repeat="slave in card.slaves">
-                    <a href="/#!/cards/{{slave}}">{{slave}}</a>
-                </div>
-            </div>
-        </div>
+                <!--<div data-ng-repeat="slave in card.slaves">-->
+                    <!--<a href="/#!/cards/{{slave}}">{{slave}}</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
     </div>
 
     <div class="rememberators-footer col-xs-12">rememberators.com</div>

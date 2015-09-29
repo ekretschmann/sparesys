@@ -19,7 +19,6 @@
 
     </div>
 
-    {{authentication.user.teachesClasses}}
     <div data-ng-repeat="schoolId in authentication.user.teachesClasses">
         <div class=" virtual-card font-large" data-ng-controller="SchoolclassesController"
              data-ng-init="findById(schoolId)">

@@ -11,7 +11,8 @@ angular.module('core').directive('playsound',
                 language: '@',
                 playwhen: '@',
                 speed: '=',
-                showText: '='
+                showText: '@',
+                showIcon: '@'
             },
             link: function(scope, elem, attrs) {
 

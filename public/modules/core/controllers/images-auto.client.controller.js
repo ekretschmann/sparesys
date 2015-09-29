@@ -111,7 +111,7 @@ angular.module('core').controller('ImagesAutoController', ['$scope', '$state', '
             $state.go($state.current);
 
 
-            if ($scope.mode !== 'forward' || $scope.assess !== 'auto') {
+            if ($scope.mode !== 'images' || $scope.assess !== 'auto') {
                 return;
             }
 

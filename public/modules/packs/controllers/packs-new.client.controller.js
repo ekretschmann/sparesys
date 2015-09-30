@@ -12,6 +12,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.checks.mixed = 'mixed';
         $scope.checks.computer = 'computer-checked';
         $scope.cardOptions = {};
+        $scope.settingChanges = {};
 
 
         $scope.languages = [
@@ -27,6 +28,9 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
             {name:'Spanish', code:'es-ES'}
         ];
 
+        $scope.modes = ['forward', 'reverse', 'images', 'multiple choice'];
+        $scope.priorities = ['highest', 'high', 'medium', 'low', 'lowest'];
+
 
 
         $scope.cardOptions.languageFrontEnabled = false;
@@ -36,30 +40,44 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.cardOptions.languageBackEnabled = false;
         $scope.cardOptions.languageBack = $scope.languages[0];
 
+        $scope.cardOptions.priorityEnabled = false;
+        $scope.cardOptions.priority = $scope.priorities[2];
 
         $scope.toggleLanguageFront = function() {
-
             $scope.cardOptions.languageFrontEnabled = !$scope.cardOptions.languageFrontEnabled;
+            //$scope.settingChanges.languageFrontEnabled = $scope.cardOptions.languageFrontEnabled;
         };
 
         $scope.setLanguageFront = function(lang) {
-            $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {languageFront: lang, id: $scope.pack._id}).
-                success(function (data, status, headers, config) {
-                    console.log(data);
-                    $state.go($state.$current, null, { reload: true });
-                });
+            $scope.cardOptions.languageFront = lang;
+            $scope.settingChanges.languageFront = lang;
         };
 
         $scope.toggleLanguageBack = function() {
-
             $scope.cardOptions.languageBackEnabled = !$scope.cardOptions.languageBackEnabled;
+            //$scope.settingChanges.languageBackEnabled = $scope.cardOptions.languageBackEnabled;
         };
 
         $scope.setLanguageBack = function(lang) {
-            console.log(lang);
-            $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {languageBack: lang, id: $scope.pack._id}).
+            $scope.cardOptions.languageBack = lang;
+            $scope.settingChanges.languageBack = lang;
+        };
+
+        $scope.togglePriority = function() {
+            $scope.cardOptions.priorityEnabled = !$scope.cardOptions.priorityEnabled;
+            //$scope.settingChanges.priorityEnabled = $scope.cardOptions.priorityEnabled;
+        };
+
+        $scope.setPriority = function(priority) {
+            $scope.cardOptions.priority = priority;
+            $scope.settingChanges.priority = $scope.priorities.indexOf(priority)+1;
+        };
+
+        $scope.changeDefaultSettings = function() {
+            $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {settings: $scope.settingChanges, id: $scope.pack._id}).
                 success(function (data, status, headers, config) {
-                    console.log('done');
+                    $scope.settingChanges = {};
+                    $state.go($state.$current, null, { reload: true });
                 });
         };
 

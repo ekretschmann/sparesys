@@ -187,14 +187,19 @@ var getPackTree = function(id) {
 };
 
 
-var updateCard = function(cardId, setting) {
+var updateCard = function(cardId, req) {
+    var settings = req.settings;
     var deferred = q.defer();
+    console.log(settings);
     Card.findOne({'_id': cardId }).exec(function (err, card) {
-        if (setting.languageFront) {
-            card.languageFront = setting.languageFront;
+        if (settings.languageFront) {
+            card.languageFront = settings.languageFront;
         }
-        if (setting.languageBack) {
-            card.languageBack = setting.languageBack;
+        if (settings.languageBack) {
+            card.languageBack = settings.languageBack;
+        }
+        if (settings.priority) {
+            card.priority = settings.priority;
         }
         card.save(function() {
             deferred.resolve(true);

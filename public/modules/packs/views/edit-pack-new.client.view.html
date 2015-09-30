@@ -199,15 +199,50 @@
                     </div>
 
                     <div class="col-xs-4 dashboard-col">
-                        <div class="field-label">Priority</div>
-                        <div class="font-medium">
-                            {{priorities[card.priority]}}
+                        <div class="field-label" ng-class="{'text-muted': !cardOptions.priorityEnabled}">
+                            <a href="" data-ng-click="togglePriority()"
+                               data-ng-if="cardOptions.priorityEnabled"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="togglePriority()"
+                               data-ng-if="!cardOptions.priorityEnabled"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+
+                            Priority
                         </div>
+
+                        <div class="font-medium text-muted" data-ng-if="!cardOptions.priorityEnabled">
+                            no change
+                        </div>
+
+                        <div class="font-medium" data-ng-if="cardOptions.priorityEnabled">
+
+                            <div class="btn-group right-padded-l nowrap">
+
+
+                                <button type="button" class="btn btn-default standard-dropdown-width"
+                                        data-ng-if="cardOptions.priority">
+                                    {{cardOptions.priority}}
+                                </button>
+                                <button type="button" class="btn btn-default standard-dropdown-width"
+                                        data-ng-if="!cardOptions.priority">
+                                    {{priorities[2]}}
+                                </button>
+                                <button type="button" class="btn btn-default dropdown-toggle">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Split button!</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li data-ng-repeat="p in priorities" data-ng-click="setPriority(p)">
+                                        <a>{{p}}</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
                     </div>
                 </div>
-            </div>
 
-            <div class="flashcard-section">
                 <div class="row">
                     <div class="col-xs-4 dashboard-col">
                         <div class="field-label">Start Date</div>
@@ -246,9 +281,7 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="flashcard-section">
                 <div class="row">
                     <div class="col-xs-4 dashboard-col">
                         <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Forward
@@ -329,6 +362,14 @@
                 </div>
             </div>
 
+            <div class="flashcard-section" style="text-align: center">
+                <button class="btn btn-rememberators"
+                        type="submit"
+                        ng-click="changeDefaultSettings()"
+                        >
+                    Change Settings
+                </button>
+            </div>
         </div>
     </div>
 

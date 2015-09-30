@@ -201,6 +201,10 @@ var updateCard = function(cardId, req) {
         if (settings.priority) {
             card.priority = settings.priority;
         }
+        if (settings.checks) {
+            console.log(settings.checks);
+            card.checks = settings.checks;
+        }
         card.save(function() {
             deferred.resolve(true);
         });

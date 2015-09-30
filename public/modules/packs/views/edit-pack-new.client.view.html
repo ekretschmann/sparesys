@@ -271,14 +271,52 @@
                     </div>
 
                     <div class="col-xs-4 dashboard-col">
-                        <div class="field-label">Checks</div>
-                        <div class="font-medium">
-                            <div data-ng-if="card.check">
-                                {{checks[card.check]}}
-                            </div>
 
 
+                        <div class="field-label" ng-class="{'text-muted': !cardOptions.checksEnabled}">
+                            <a href="" data-ng-click="toggleChecks()"
+                               data-ng-if="cardOptions.checksEnabled"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleChecks()"
+                               data-ng-if="!cardOptions.checksEnabled"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+
+                            Checks
                         </div>
+
+                        <div class="font-medium text-muted" data-ng-if="!cardOptions.checksEnabled">
+                            no change
+                        </div>
+
+                        <div class="font-medium" data-ng-if="cardOptions.checksEnabled">
+
+                            <div class="btn-group right-padded-l nowrap">
+
+
+                                <button type="button" class="btn btn-default standard-dropdown-width"
+                                        data-ng-if="cardOptions.checks">
+                                    {{cardOptions.checks}}
+                                </button>
+                                <button type="button" class="btn btn-default standard-dropdown-width"
+                                        data-ng-if="!cardOptions.checks">
+                                    {{checks[0]}}
+                                </button>
+                                <button type="button" class="btn btn-default dropdown-toggle">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Split button!</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li data-ng-repeat="c in checks" data-ng-click="setChecks(c)">
+                                        <a>{{c}}</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+
+
+
+
                     </div>
                 </div>
 

@@ -30,6 +30,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.modes = ['forward', 'reverse', 'images', 'multiple choice'];
         $scope.priorities = ['highest', 'high', 'medium', 'low', 'lowest'];
+        $scope.checks = ['computer', 'self', 'mixed'];
 
 
 
@@ -42,10 +43,11 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.cardOptions.priorityEnabled = false;
         $scope.cardOptions.priority = $scope.priorities[2];
+        $scope.cardOptions.priorityEnabled = false;
+        $scope.cardOptions.checks = $scope.checks[0];
 
         $scope.toggleLanguageFront = function() {
             $scope.cardOptions.languageFrontEnabled = !$scope.cardOptions.languageFrontEnabled;
-            //$scope.settingChanges.languageFrontEnabled = $scope.cardOptions.languageFrontEnabled;
         };
 
         $scope.setLanguageFront = function(lang) {
@@ -55,7 +57,6 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.toggleLanguageBack = function() {
             $scope.cardOptions.languageBackEnabled = !$scope.cardOptions.languageBackEnabled;
-            //$scope.settingChanges.languageBackEnabled = $scope.cardOptions.languageBackEnabled;
         };
 
         $scope.setLanguageBack = function(lang) {
@@ -65,12 +66,20 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.togglePriority = function() {
             $scope.cardOptions.priorityEnabled = !$scope.cardOptions.priorityEnabled;
-            //$scope.settingChanges.priorityEnabled = $scope.cardOptions.priorityEnabled;
         };
 
         $scope.setPriority = function(priority) {
             $scope.cardOptions.priority = priority;
             $scope.settingChanges.priority = $scope.priorities.indexOf(priority)+1;
+        };
+
+        $scope.toggleChecks = function() {
+            $scope.cardOptions.checksEnabled = !$scope.cardOptions.checksEnabled;
+        };
+
+        $scope.setChecks = function(checks) {
+            $scope.cardOptions.checks = checks;
+            $scope.settingChanges.checks = checks;
         };
 
         $scope.changeDefaultSettings = function() {

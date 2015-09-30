@@ -36,12 +36,10 @@ angular.module('core').directive('playsound',
                     if (window.SpeechSynthesisUtterance !== undefined) {
 
 
-                        console.log(text);
                         var msg = new SpeechSynthesisUtterance(text);
                         msg.lang = lang;
-                        //msg.rate = speed;
+                        msg.rate = 1;
 
-                        console.log(msg);
 
                         window.speechSynthesis.speak(msg);
 

@@ -378,6 +378,10 @@ body {
 
 }
 
+.school-admin-card {
+
+}
+
 .question {
   font-size: xx-large;
 }
@@ -1818,4 +1822,52 @@ a {
 }
 .timespent .x.axis .tick text{
   display: none;
+}
+
+
+// banner
+.ribbon-card {
+  position: relative;
+  overflow: hidden;
+}
+.default-riboon {
+  position: absolute;
+  right: -5px; bottom: -5px;
+  z-index: 1;
+  overflow: hidden;
+  width: 250px; height: 250px;
+  text-align: right;
+}
+.school-admin-ribbon {
+  .default-riboon;
+}
+.learning-ribbon {
+  .default-riboon;
+}
+
+.default-ribbon-span {
+  font-size: 10px;
+  font-weight: bold;
+  color: #FFF;
+  text-align: center;
+  line-height: 20px;
+  transform: rotate(315deg);
+  -webkit-transform: rotate(315deg);
+  width: 150px;
+  display: block;
+
+  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
+  position: absolute;
+  bottom: 35px; right: -35px;
+}
+.school-admin-ribbon span {
+  .default-ribbon-span;
+  background: #79A70A;
+  background: linear-gradient(lighten(#79A70A, 10%) 0%, #79A70A 100%);
+}
+
+.learning-ribbon span {
+  .default-ribbon-span;
+  background: #1f7ba7;
+  background: linear-gradient(lighten(#1f7ba7, 10%) 0%, #1f7ba7 100%);
 }

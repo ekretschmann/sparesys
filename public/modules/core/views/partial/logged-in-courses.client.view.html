@@ -1,7 +1,10 @@
 
 <div data-ng-if="coursesStudent.length > 0">
 
-    <div class= "virtual-card font-large">
+    <div class= "virtual-card font-large ribbon-card">
+
+        <div class="learning-ribbon"><span>Learning</span></div>
+
         <div class="title">Practice</div>
         <div style="display: inline-block;" data-ng-repeat="course in coursesStudent">
             <button data-ng-if="!course.supervised" type="button" class="btn btn-course font-s"

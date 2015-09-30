@@ -379,28 +379,52 @@
 
                 <div class="row">
                     <div class="col-xs-4 dashboard-col">
-                        <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Forward
-                            Mode
+
+                        <div class="field-label" ng-class="{'text-muted': !cardOptions.forwardEnabled}">
+                            <a href="" data-ng-click="toggleForward()"
+                               data-ng-if="cardOptions.forwardEnabled"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleForward()"
+                               data-ng-if="!cardOptions.forwardEnabled"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+
+                            Forward Mode
                         </div>
-                        <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('forward') === -1">
-                            not used
-                        </div>
-                        <div class="font-medium " data-ng-if="card.modes.indexOf('forward') > -1">
 
-                            <div ng-class="{'text-muted': !card.readFrontForward}">
-                                Read question
 
-                            </div>
-                            <div ng-class="{'text-muted': !card.readBackForward}">
-                                Read answer
-
-                            </div>
-                            <div ng-class="{'text-muted': !card.speechRecognitionForward}">
-                                Speech recognition
-
-                            </div>
+                        <div class="field-data" data-ng-if="cardOptions.forwardEnabled">
+                            <a href="" data-ng-click="toggleForward()"
+                               data-ng-if="cardOptions.forwardEnabled"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleForward()"
+                               data-ng-if="!cardOptions.forwardEnabled"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+                            enabled
 
                         </div>
+
+                        <!--<div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Forward-->
+                            <!--Mode-->
+                        <!--</div>-->
+                        <!--<div class="font-medium text-muted" data-ng-if="card.modes.indexOf('forward') === -1">-->
+                            <!--not used-->
+                        <!--</div>-->
+                        <!--<div class="font-medium " data-ng-if="card.modes.indexOf('forward') > -1">-->
+
+                            <!--<div ng-class="{'text-muted': !card.readFrontForward}">-->
+                                <!--Read question-->
+
+                            <!--</div>-->
+                            <!--<div ng-class="{'text-muted': !card.readBackForward}">-->
+                                <!--Read answer-->
+
+                            <!--</div>-->
+                            <!--<div ng-class="{'text-muted': !card.speechRecognitionForward}">-->
+                                <!--Speech recognition-->
+
+                            <!--</div>-->
+
+                        <!--</div>-->
                     </div>
 
                     <div class="col-xs-4 dashboard-col">

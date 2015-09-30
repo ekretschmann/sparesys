@@ -68,6 +68,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.cardOptions.startDateEnabled = false;
         $scope.cardOptions.dueDateEnabled = false;
+        $scope.cardOptions.forwardEnabled = false;
 
         $scope.toggleLanguageFront = function() {
             $scope.cardOptions.languageFrontEnabled = !$scope.cardOptions.languageFrontEnabled;
@@ -137,6 +138,13 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.setStartDate = function() {
             $scope.settingChanges.dueDate = $scope.cardOptions.dueDate ;
+        };
+
+        $scope.toggleForward = function() {
+            $scope.cardOptions.forwardEnabled = !$scope.cardOptions.forwardEnabled;
+            if (!$scope.cardOptions.forwardEnabled) {
+                $scope.settingChanges.forwardMode = undefined;
+            }
         };
 
         $scope.changeDefaultSettings = function() {

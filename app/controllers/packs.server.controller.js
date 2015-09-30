@@ -190,7 +190,6 @@ var getPackTree = function(id) {
 var updateCard = function(cardId, req) {
     var settings = req.settings;
     var deferred = q.defer();
-    console.log(settings);
     Card.findOne({'_id': cardId }).exec(function (err, card) {
         if (settings.languageFront) {
             card.languageFront = settings.languageFront;
@@ -202,8 +201,7 @@ var updateCard = function(cardId, req) {
             card.priority = settings.priority;
         }
         if (settings.checks) {
-            console.log(settings.checks);
-            card.checks = settings.checks;
+            card.check = settings.checks;
         }
         card.save(function() {
             deferred.resolve(true);

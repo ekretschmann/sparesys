@@ -245,16 +245,56 @@
 
                 <div class="row">
                     <div class="col-xs-4 dashboard-col">
-                        <div class="field-label">Start Date</div>
-                        <div class="font-medium">
-                            <div data-ng-if="card.startDate">
-                                {{card.startDate | date: 'shortDate'}}
-                            </div>
 
-                            <div data-ng-if="!card.startDate">
-                                none
+
+                        <div class="field-label" ng-class="{'text-muted': !cardOptions.startDateEnabled}">
+                            <a href="" data-ng-click="toggleStartDate()"
+                               data-ng-if="cardOptions.startDateEnabled"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleStartDate()"
+                               data-ng-if="!cardOptions.startDateEnabled"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
+
+                            Start Date
+                        </div>
+
+                        <div class="font-medium text-muted" data-ng-if="!cardOptions.startDateEnabled">
+                            no change
+                        </div>
+
+                        <div class="font-medium" data-ng-if="cardOptions.startDateEnabled">
+                            <div class="input-group">
+                                <input type="text"
+                                       class="form-control"
+                                       datepicker-popup="{{calendar.format}}"
+                                       is-open="calendar.openStartDateCalendar"
+                                       min-date="minDate"
+                                       ng-required="false"
+                                       close-text="Close"
+                                       data-ng-model="card.startDate"
+                                       data-ng-change="update()"
+                                        />
+
+
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="openStartDateCalendar($event)">
+                                        <i
+                                                class="glyphicon glyphicon-calendar"></i></button>
+                                </div>
                             </div>
                         </div>
+
+                        <!--<div class="field-label">Start Date</div>-->
+                        <!--<div class="font-medium">-->
+                        <!--<div data-ng-if="card.startDate">-->
+                        <!--{{card.startDate | date: 'shortDate'}}-->
+                        <!--</div>-->
+
+                        <!--<div data-ng-if="!card.startDate">-->
+                        <!--none-->
+                        <!--</div>-->
+                        <!--</div>-->
                     </div>
 
                     <div class="col-xs-4 dashboard-col">
@@ -313,8 +353,6 @@
 
                             </div>
                         </div>
-
-
 
 
                     </div>

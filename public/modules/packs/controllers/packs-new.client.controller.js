@@ -43,8 +43,11 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.cardOptions.priorityEnabled = false;
         $scope.cardOptions.priority = $scope.priorities[2];
+
         $scope.cardOptions.priorityEnabled = false;
         $scope.cardOptions.checks = $scope.checks[0];
+
+        $scope.cardOptions.startDateEnabled = false;
 
         $scope.toggleLanguageFront = function() {
             $scope.cardOptions.languageFrontEnabled = !$scope.cardOptions.languageFrontEnabled;
@@ -80,6 +83,10 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.setChecks = function(checks) {
             $scope.cardOptions.checks = checks;
             $scope.settingChanges.checks = checks;
+        };
+
+        $scope.toggleStartDate = function() {
+            $scope.cardOptions.startDateEnabled = !$scope.cardOptions.startDateEnabled;
         };
 
         $scope.changeDefaultSettings = function() {

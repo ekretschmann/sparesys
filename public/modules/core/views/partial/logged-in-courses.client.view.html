@@ -1,22 +1,25 @@
-
 <div data-ng-if="coursesStudent.length > 0">
 
-    <div class= "virtual-card font-large ribbon-card">
+    <div class="col-xs-12 col-md-6 dashboard-col">
+        <div>
+            <div class="virtual-card font-large ribbon-card">
 
-        <div class="learning-ribbon"><span>Learning</span></div>
+                <div class="learning-ribbon"><span>Learning</span></div>
 
-        <div class="title">Practice</div>
-        <div style="display: inline-block;" data-ng-repeat="course in coursesStudent">
-            <button data-ng-if="!course.supervised" type="button" class="btn btn-course font-s"
-                    data-ng-click="practice(course)" tooltip="{{course.description}}">
-                {{course.name}}
-            </button>
-            <button data-ng-if="course.supervised" type="button" class="btn btn-course font-s"
-                    data-ng-click="practice(course)" tooltip="{{course.description}}">
-                <div>{{course.name}}</div>
-                <div class="font-s">(supervised)</div>
+                <div class="title">Practice</div>
+                <div style="display: inline-block;" data-ng-repeat="course in coursesStudent">
+                    <button data-ng-if="!course.supervised" type="button" class="btn btn-course font-s"
+                            data-ng-click="practice(course)" tooltip="{{course.description}}">
+                        {{course.name}}
+                    </button>
+                    <button data-ng-if="course.supervised" type="button" class="btn btn-course font-s"
+                            data-ng-click="practice(course)" tooltip="{{course.description}}">
+                        <div>{{course.name}}</div>
+                        <div class="font-s">(supervised)</div>
 
-            </button>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 </div>

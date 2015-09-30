@@ -4,12 +4,20 @@
         <div data-ng-controller="SchoolsController" data-ng-init="findById(schoolId)">
             <div data-ng-if="!hasClassAssigned(authentication.user._id)">
 
-                <div class=" virtual-card font-large">
-                    <div class="title">{{school.name}}</div>
+                <div class="col-xs-12 col-md-6">
+                    <div>
+                        <div class=" virtual-card font-large ribbon-card">
+
+                            <div class="teaching-ribbon"><span>Teaching</span></div>
 
 
-                    <div class="flashcard-section danger">
-                        The school administrator has not assigned you to a class in this school
+                            <div class="title">{{school.name}}</div>
+
+
+                            <div class="flashcard-section danger">
+                                The school administrator has not assigned you to a class in this school
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -20,101 +28,110 @@
     </div>
 
     <div data-ng-repeat="schoolId in authentication.user.teachesClasses">
-        <div class=" virtual-card font-large" data-ng-controller="SchoolclassesController"
-             data-ng-init="findById(schoolId)">
-            <div class="title">{{schoolclass.name}}</div>
+        <div class="col-xs-12 col-md-6">
+            <div>
+                <div class=" virtual-card font-large ribbon-card" data-ng-controller="SchoolclassesController"
+                     data-ng-init="findById(schoolId)">
+
+                    <div class="teaching-ribbon"><span>Teaching</span></div>
+
+                    <div class="title">{{schoolclass.name}}</div>
 
 
-            <div class="flashcard-section">
-                <div class="row">
-                    <div class="col-xs-6 field-label dashboard-col-attached">
+                    <div class="flashcard-section">
+                        <div class="row">
+                            <div class="col-xs-6 field-label dashboard-col-attached">
 
-                        Teachers
-
-
-                    </div>
-                    <div class="col-xs-6 field-label dashboard-col-attached">
-
-                        Students
+                                Teachers
 
 
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6 field-data dashboard-col-attached">
+                            </div>
+                            <div class="col-xs-6 field-label dashboard-col-attached">
+
+                                Students
 
 
-                        <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}}</div>
-
-
-                    </div>
-                    <div class="col-xs-6 field-data dashboard-col-attached">
-
-                        <div data-ng-repeat="student in schoolclass.students">{{student.displayName}}</div>
-
-                    </div>
-                </div>
-
-
-            </div>
-
-            <div class="flashcard-section">
-                <div class="row">
-                    <div class="col-xs-12 field-label dashboard-col-attached">
-
-
-                        Courses
-
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-12 field-data dashboard-col-attached">
-
-
-                        <div data-ng-if="schoolclass.courses.length === 0">
-                            none
+                            </div>
                         </div>
-                        <div data-ng-if="schoolclass.courses.length > 0">
-                            <div data-ng-repeat="c in schoolclass.courses">
-                                <div data-ng-controller="CoursesControllerNew" data-ng-init="findById(c)">
-                                    <a href="" data-ng-click="removeCourseFromClass(course)"><i
-                                            class="glyphicon glyphicon-minus-sign"></i></a> {{course.name}}
+                        <div class="row">
+                            <div class="col-xs-6 field-data dashboard-col-attached">
+
+
+                                <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}}</div>
+
+
+                            </div>
+                            <div class="col-xs-6 field-data dashboard-col-attached">
+
+                                <div data-ng-repeat="student in schoolclass.students">{{student.displayName}}</div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="flashcard-section">
+                        <div class="row">
+                            <div class="col-xs-12 field-label dashboard-col-attached">
+
+
+                                Courses
+
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-xs-12 field-data dashboard-col-attached">
+
+
+                                <div data-ng-if="schoolclass.courses.length === 0">
+                                    none
                                 </div>
+                                <div data-ng-if="schoolclass.courses.length > 0">
+                                    <div data-ng-repeat="c in schoolclass.courses">
+                                        <div data-ng-controller="CoursesControllerNew" data-ng-init="findById(c)">
+                                            <a href="" data-ng-click="removeCourseFromClass(course)"><i
+                                                    class="glyphicon glyphicon-minus-sign"></i></a> {{course.name}}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div data-ng-if="coursesTeacher.length > 0">
+                                    <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
+                                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                                ng-disabled="disabled">
+                                            Add a Course <span class="caret"></span>
+                                        </button>
+                                        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                                            <li role="menuitem" data-ng-repeat="course in coursesTeacher"><a href=""
+                                                                                                             data-ng-click="addCourseToClass(course)">{{course.name}}</a>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                </div>
+
+
                             </div>
+
                         </div>
-
-                        <div data-ng-if="coursesTeacher.length > 0">
-                            <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
-                                <button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">
-                                    Add a Course <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-                                    <li role="menuitem" data-ng-repeat="course in coursesTeacher"><a href=""
-                                                                                                     data-ng-click="addCourseToClass(course)">{{course.name}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-
-
                     </div>
+
+                    <div class="row" style="padding-top: 1em">
+                        <div class="col-xs-12 field-data dashboard-col-attached">
+
+                            <div data-ng-if="coursesTeacher.length === 0" class="danger">
+                                You are not teaching any courses. Set the teacher role on at least one course so that
+                                you
+                                can assign it to students.
+                            </div>
+                        </div>
+                    </div>
+
 
                 </div>
             </div>
-
-            <div class="row" style="padding-top: 1em">
-                <div class="col-xs-12 field-data dashboard-col-attached">
-
-                    <div data-ng-if="coursesTeacher.length === 0" class="danger">
-                        You are not teaching any courses. Set the teacher role on at least one course so that you
-                        can assign it to students.
-                    </div>
-                </div>
-            </div>
-
-
         </div>
     </div>
 

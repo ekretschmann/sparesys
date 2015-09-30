@@ -12,25 +12,15 @@
     <div>
 
 
-
-
-
         <div data-ng-if="authentication.user.teacherInSchools.length > 0">
-            <div class="col-xs-12 col-md-6">
-                <div>
 
-
-                    <div ng-include="'/modules/core/views/partial/teacher-in-classes.client.view.html'"></div>
-                </div>
-            </div>
+            <div ng-include="'/modules/core/views/partial/teacher-in-classes.client.view.html'"></div>
         </div>
 
         <div data-ng-if="coursesStudent && coursesStudent.length>0">
-            <div class="col-xs-12 col-md-6 dashboard-col">
-                <div>
-                    <div ng-include="'/modules/core/views/partial/logged-in-courses.client.view.html'"></div>
-                </div>
-            </div>
+
+            <div ng-include="'/modules/core/views/partial/logged-in-courses.client.view.html'"></div>
+
         </div>
 
         <div data-ng-if="authentication.user.studentInSchools.length > 0">
@@ -55,7 +45,7 @@
         <div data-ng-if="!coursesStudent || coursesStudent.length===0">
             <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
 
-                <div class="col-xs-12 col-md-6 dashboard-col">
+                <div class="col-xs-12 col-md-6 ">
                     <div class="font-large virtual-card">
                         <div class="title">Are you new?</div>
                         <infobox logo="boy" position="right">
@@ -78,7 +68,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-md-6 dashboard-col">
+                <div class="col-xs-12 col-md-6 ">
                     <div class="font-large virtual-card">
                         <div class="title">Courses</div>
                         <infobox logo="girl" position="left">
@@ -94,7 +84,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-12 col-md-6 dashboard-col">
+                <div class="col-xs-12 col-md-6 ">
                     <div class="font-large virtual-card">
                         <div class="title">Sharing</div>
                         <infobox logo="philosopher" position="right">
@@ -110,7 +100,7 @@
                 </div>
 
 
-                <div class="col-xs-12 col-md-6 dashboard-col">
+                <div class="col-xs-12 col-md-6 ">
                     <div class="font-large virtual-card">
                         <div class="title">Teaching</div>
                         <infobox logo="guru" position="left">
@@ -129,7 +119,7 @@
 
 
         <div data-ng-if="(!coursesStudent || coursesStudent.length === 0) && authentication.user.roles.indexOf('help') === -1">
-            <div class="col-xs-12 col-md-6  dashboard-col">
+            <div class="col-xs-12 col-md-6  ">
                 <div class="virtual-card">
                     <div class="infobox-title">Courses</div>
                     <div class="font-large danger">
@@ -141,12 +131,12 @@
     </div>
 
     <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="col-xs-12 col-md-6  dashboard-col" data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
+        <div class="col-xs-12 col-md-6  " data-ng-if="authentication.user.roles.indexOf('teacher') === -1">
             <div>
                 <div ng-include="'/modules/core/views/partial/logged-in-teaching-howto.client.view.html'"></div>
             </div>
         </div>
-        <div class="col-xs-12 col-md-6  dashboard-col"
+        <div class="col-xs-12 col-md-6  "
              data-ng-if="authentication.user.roles.indexOf('headmaster') === -1">
             <div>
                 <div ng-include="'/modules/core/views/partial/logged-in-schools-howto.client.view.html'"></div>

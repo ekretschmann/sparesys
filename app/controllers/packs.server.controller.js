@@ -186,63 +186,49 @@ var getPackTree = function(id) {
     return deferred.promise;
 };
 
-var getCardsForPack = function(packId) {
 
+var updateCard = function(cardId, setting) {
     var deferred = q.defer();
-    var cards = [];
-    var packs = [];
-
-    Pack.findById(packId).exec(function (err, pack) {
-        if (!err && pack) {
-            for (var i = 0; i < pack.cards.length; i++) {
-                packs.push(pack.cards[i]);
-            }
+    Card.findOne({'_id': cardId }).exec(function (err, card) {
+        if (setting.languageFront) {
+            card.languageFront = setting.languageFront;
         }
-        deferred.resolve(cards);
-    });
-
-    return deferred.promise;
-
-};
-
-var addCards = function(cards) {
-    //var result = [];
-    //var count =0;
-    //for (var j=0; j<cards.length; j++) {
-    //    result.push(cards[j]);
-    //}
-    //count++;
-    //console.log(result);
-    //if (count === packIds.length) {
-    //    deferred.resolve(result);
-    //}
-};
-
-var getCardsForPacks = function(packIds) {
-    var deferred = q.defer();
-    var result = [];
-    var count = 0;
-    for (var i=0; i<packIds.length; i++) {
-        //getCardsForPack(packIds[i]).then(addCards);
-        console.log(packIds[i]);
-    }
-
-    return deferred.promise;
-};
-
-exports.updateAllCards = function (req, res) {
-    //console.log(req.headers);
-    //console.log(req.body);
-    var pack = req.pack;
-    var cardsToUpdate = [];
-
-    getPackTree(req.pack.id).then(function(packs) {
-        getCardsForPacks(packs).then(function(cards) {
-            console.log(cards);
+        if (setting.languageBack) {
+            card.languageBack = setting.languageBack;
+        }
+        card.save(function() {
+            deferred.resolve(true);
         });
     });
+    return deferred.promise;
+};
 
 
+
+exports.updateAllCards = function (req, res) {
+    var cardsToUpdate = 0;
+    var cardsUpdated = 0;
+
+    var checkAllCardsHaveUpdated = function() {
+        cardsUpdated++;
+        if (cardsUpdated === cardsToUpdate) {
+            res.jsonp('ok');
+        }
+    };
+
+    getPackTree(req.pack.id).then(function(packTree) {
+        Pack.find({'_id': { '$in' : packTree} }).exec(function (err, packs) {
+            for (var i=0; i< packs.length; i++) {
+
+                if (packs[i].cards) {
+                    for (var j = 0; j < packs[i].cards.length; j++) {
+                        cardsToUpdate++;
+                        updateCard(packs[i].cards[j], req.body).then(checkAllCardsHaveUpdated);
+                    }
+                }
+            }
+        });
+    });
 };
 
 exports.removeDanglingPacks = function (req, res) {

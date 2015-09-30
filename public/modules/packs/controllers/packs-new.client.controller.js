@@ -45,7 +45,8 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.setLanguageFront = function(lang) {
             $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {languageFront: lang, id: $scope.pack._id}).
                 success(function (data, status, headers, config) {
-                   console.log('done');
+                    console.log(data);
+                    $state.go($state.$current, null, { reload: true });
                 });
         };
 

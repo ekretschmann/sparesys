@@ -271,8 +271,8 @@
                                        min-date="minDate"
                                        ng-required="false"
                                        close-text="Close"
-                                       data-ng-model="card.startDate"
-                                       data-ng-change="update()"
+                                       data-ng-model="cardOptions.startDate"
+                                       data-ng-change="setStartDate()"
                                         />
 
 
@@ -285,29 +285,48 @@
                             </div>
                         </div>
 
-                        <!--<div class="field-label">Start Date</div>-->
-                        <!--<div class="font-medium">-->
-                        <!--<div data-ng-if="card.startDate">-->
-                        <!--{{card.startDate | date: 'shortDate'}}-->
-                        <!--</div>-->
 
-                        <!--<div data-ng-if="!card.startDate">-->
-                        <!--none-->
-                        <!--</div>-->
-                        <!--</div>-->
                     </div>
 
                     <div class="col-xs-4 dashboard-col">
-                        <div class="field-label">Due Date</div>
-                        <div class="font-medium">
-                            <div data-ng-if="card.dueDate">
-                                {{card.dueDate | date: 'shortDate'}}
-                            </div>
+                        <div class="field-label" ng-class="{'text-muted': !cardOptions.dueDateEnabled}">
+                            <a href="" data-ng-click="toggleDueDate()"
+                               data-ng-if="cardOptions.dueDateEnabled"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleDueDate()"
+                               data-ng-if="!cardOptions.dueDateEnabled"><i
+                                    class="glyphicon glyphicon-ban-circle"></i></a>
 
-                            <div data-ng-if="!card.dueDate">
-                                none
+                            Due Date
+                        </div>
+
+                        <div class="font-medium text-muted" data-ng-if="!cardOptions.dueDateEnabled">
+                            no change
+                        </div>
+
+                        <div class="font-medium" data-ng-if="cardOptions.dueDateEnabled">
+                            <div class="input-group">
+                                <input type="text"
+                                       class="form-control"
+                                       datepicker-popup="{{calendar.format}}"
+                                       is-open="calendar.openStartDateCalendar"
+                                       min-date="minDate"
+                                       ng-required="false"
+                                       close-text="Close"
+                                       data-ng-model="cardOptions.dueDate"
+                                       data-ng-change="setStartDate()"
+                                        />
+
+
+                                <div class="input-group-btn">
+                                    <button type="button" class="btn btn-default"
+                                            ng-click="openStartDateCalendar($event)">
+                                        <i
+                                                class="glyphicon glyphicon-calendar"></i></button>
+                                </div>
                             </div>
                         </div>
+
                     </div>
 
                     <div class="col-xs-4 dashboard-col">

@@ -203,6 +203,12 @@ var updateCard = function(cardId, req) {
         if (settings.checks) {
             card.check = settings.checks;
         }
+        if (settings.startDate) {
+            card.startDate = settings.startDate;
+        }
+        if (settings.dueDate) {
+            card.dueDate = settings.dueDate;
+        }
         card.save(function() {
             deferred.resolve(true);
         });

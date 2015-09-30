@@ -14,6 +14,25 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.cardOptions = {};
         $scope.settingChanges = {};
 
+        $scope.calendar = {};
+        $scope.calendar.format = 'dd/MMMM/yyyy';
+        $scope.calendar.openStartDateCalendar = false;
+        $scope.calendar.openDueDateCalendar = false;
+
+        $scope.openStartDateCalendar = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.calendar.openStartDateCalendar = true;
+        };
+
+        $scope.openDueDateCalendar = function ($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.calendar.openDueDateCalendar = true;
+        };
+
 
         $scope.languages = [
             {name:'-', code:''},
@@ -48,9 +67,13 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.cardOptions.checks = $scope.checks[0];
 
         $scope.cardOptions.startDateEnabled = false;
+        $scope.cardOptions.dueDateEnabled = false;
 
         $scope.toggleLanguageFront = function() {
             $scope.cardOptions.languageFrontEnabled = !$scope.cardOptions.languageFrontEnabled;
+            if (!$scope.cardOptions.languageFrontEnabled) {
+                $scope.settingChanges.languageFront = undefined;
+            }
         };
 
         $scope.setLanguageFront = function(lang) {
@@ -60,6 +83,9 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.toggleLanguageBack = function() {
             $scope.cardOptions.languageBackEnabled = !$scope.cardOptions.languageBackEnabled;
+            if (!$scope.cardOptions.languageBackEnabled) {
+                $scope.settingChanges.languageBack = undefined;
+            }
         };
 
         $scope.setLanguageBack = function(lang) {
@@ -69,6 +95,9 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.togglePriority = function() {
             $scope.cardOptions.priorityEnabled = !$scope.cardOptions.priorityEnabled;
+            if (!$scope.cardOptions.priorityEnabled) {
+                $scope.settingChanges.priority = undefined;
+            }
         };
 
         $scope.setPriority = function(priority) {
@@ -78,6 +107,9 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.toggleChecks = function() {
             $scope.cardOptions.checksEnabled = !$scope.cardOptions.checksEnabled;
+            if (!$scope.cardOptions.checksEnabled) {
+                $scope.settingChanges.checks = undefined;
+            }
         };
 
         $scope.setChecks = function(checks) {
@@ -87,9 +119,28 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.toggleStartDate = function() {
             $scope.cardOptions.startDateEnabled = !$scope.cardOptions.startDateEnabled;
+            if (!$scope.cardOptions.startDateEnabled) {
+                $scope.settingChanges.startDate = undefined;
+            }
+        };
+
+        $scope.setStartDate = function() {
+            $scope.settingChanges.startDate = $scope.cardOptions.startDate ;
+        };
+
+        $scope.toggleDueDate = function() {
+            $scope.cardOptions.dueDateEnabled = !$scope.cardOptions.dueDateEnabled;
+            if (!$scope.cardOptions.dueDateEnabled) {
+                $scope.settingChanges.dueDate = undefined;
+            }
+        };
+
+        $scope.setStartDate = function() {
+            $scope.settingChanges.dueDate = $scope.cardOptions.dueDate ;
         };
 
         $scope.changeDefaultSettings = function() {
+            console.log($scope.settingChanges);
             $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {settings: $scope.settingChanges, id: $scope.pack._id}).
                 success(function (data, status, headers, config) {
                     $scope.settingChanges = {};

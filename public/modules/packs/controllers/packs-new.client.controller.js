@@ -25,6 +25,28 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
             $scope.editMode = mode;
         };
 
+        $scope.manageImages = function (card) {
+
+
+            Cards.get({
+                cardId: card._id
+            }, function(c) {
+                $modal.open({
+                    templateUrl: 'manageImages.html',
+                    controller: 'ManageImagesController',
+                    resolve: {
+                        card: function () {
+                            return c;
+                        }
+                    }
+                }).result.then(function() {
+                        card.images = c.images;
+
+                    });
+            });
+
+        };
+
         $scope.openStartDateCalendar = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();
@@ -272,7 +294,6 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
                 $scope.settingChanges.imagesReadBack = $scope.cardOptions.imagesReadBack;
                 $scope.settingChanges.imagesSpeechRecognition = $scope.cardOptions.imagesSpeechRecognition;
             }
-            console.log($scope.settingChanges.imagesReadFront);
 
         };
 

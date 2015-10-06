@@ -272,7 +272,7 @@ var updateCard = function(cardId, req) {
                 card.imagesReadFront = settings.imagesReadFront;
             }
             if (settings.imagesReadBack === true || settings.imagesReadBack === false) {
-                card.imagesReadFront = settings.imagesReadBack;
+                card.imagesReadBack = settings.imagesReadBack;
             }
             if (settings.imagesSpeechRecognition === true || settings.imagesSpeechRecognition === false) {
                 card.speechRecognitionImages = settings.imagesSpeechRecognition;

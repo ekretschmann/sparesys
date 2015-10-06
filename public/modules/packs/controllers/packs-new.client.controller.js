@@ -82,6 +82,12 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.cardOptions.reverseReadBack = false;
         $scope.cardOptions.reverseSpeechRecognition = false;
 
+        $scope.cardOptions.changeImagesEnabled = false;
+        $scope.cardOptions.imagesEnabled = false;
+        $scope.cardOptions.imagesReadFront = false;
+        $scope.cardOptions.imagesReadBack = false;
+        $scope.cardOptions.imagesSpeechRecognition = false;
+
         $scope.toggleLanguageFront = function() {
             $scope.cardOptions.languageFrontEnabled = !$scope.cardOptions.languageFrontEnabled;
             if (!$scope.cardOptions.languageFrontEnabled) {

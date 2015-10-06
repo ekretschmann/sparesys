@@ -91,7 +91,7 @@
                                 </div>
                                 <div data-ng-if="schoolclass.courses.length > 0">
                                     <div data-ng-repeat="c in schoolclass.courses">
-                                        <div data-ng-controller="CoursesControllerNew" data-ng-init="findById(c)">
+                                        <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
                                             <a href="" data-ng-click="removeCourseFromClass(course)"><i
                                                     class="glyphicon glyphicon-minus-sign"></i></a> {{course.name}}
                                         </div>

@@ -2,7 +2,7 @@
 
 
 // Courses controller
-angular.module('courses').controller('CoursesControllerNew',
+angular.module('courses').controller('CoursesController',
     ['$window', '$timeout','$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService',
         function ($window, $timeout, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService) {
 

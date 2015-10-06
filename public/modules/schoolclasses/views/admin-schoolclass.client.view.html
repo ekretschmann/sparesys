@@ -108,7 +108,7 @@
 
                 <tr data-ng-repeat="course in schoolclass.courses">
                     <td class="right-padded-m nowrap top-padded-m" data-ng-if="$index ===0">Courses</td>
-                    <td class="expands top-padded-m" data-ng-controller="CoursesControllerNew" data-ng-init="findById(course)">
+                    <td class="expands top-padded-m" data-ng-controller="CoursesController" data-ng-init="findById(course)">
                         <a>
                             <i data-ng-click="removeCourse(course)"
                                class="glyphicon glyphicon-remove-sign small">

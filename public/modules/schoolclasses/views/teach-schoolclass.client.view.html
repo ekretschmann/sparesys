@@ -58,7 +58,7 @@
         <tr>
             <td class="top-aligned half-screen  top-padded-m bottom-padded-m">
                 <table class="table-striped expands"
-                       data-ng-controller="CoursesControllerNew"
+                       data-ng-controller="CoursesController"
                        data-ng-init="findForCurrentUser()">
                     <thead>
                     <tr>
@@ -103,7 +103,7 @@
 
 
                         <td class="top-padded-s left-padded-s right-padded-s"
-                            data-ng-controller="CoursesControllerNew" data-ng-init="findById(course)" >
+                            data-ng-controller="CoursesController" data-ng-init="findById(course)" >
                             <a href=""
                                data-ng-click="removeCourseFromClass(course)">
                                 <i class="small glyphicon glyphicon-minus-sign"></i>

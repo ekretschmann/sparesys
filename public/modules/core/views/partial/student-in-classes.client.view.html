@@ -57,7 +57,7 @@
                                     <div data-ng-if="sc.courses && sc.courses.length > 0">
 
                                         <div data-ng-repeat="courseId in sc.courses">
-                                            <div data-ng-controller="CoursesControllerNew"
+                                            <div data-ng-controller="CoursesController"
                                                  data-ng-init="findById(courseId)">
                                                 {{course.name}}
 

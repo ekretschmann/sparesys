@@ -44,8 +44,7 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
                     return;
                 }
 
-
-                if ($scope.state === 'question' && event.keyCode === 13) {
+                if ($scope.state === 'question' && (event.keyCode === 13 || event.keyCode === 32)) {
                     $scope.showAnswer();
                     return;
                 }

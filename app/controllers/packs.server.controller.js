@@ -209,6 +209,84 @@ var updateCard = function(cardId, req) {
         if (settings.dueDate) {
             card.dueDate = settings.dueDate;
         }
+
+        if (settings.forwardEnabled) {
+            if (card.modes.indexOf('forward') === -1) {
+                card.modes.push('forward');
+            }
+
+
+            if (settings.forwardReadFront === true || settings.forwardReadFront === false) {
+                card.readFrontForward = settings.forwardReadFront;
+            }
+            if (settings.forwardReadBack === true || settings.forwardReadBack === false) {
+                card.readBackForward = settings.forwardReadBack;
+            }
+            if (settings.forwardSpeechRecognition === true || settings.forwardSpeechRecognition === false) {
+                card.speechRecognitionForward = settings.forwardSpeechRecognition;
+            }
+
+
+        } else {
+            if (settings.forwardEnabled === false) {
+                if (card.modes.indexOf('forward') > -1) {
+                    card.modes.splice(card.modes.indexOf('forward'),1);
+                }
+            }
+        }
+
+        if (settings.reverseEnabled) {
+            if (card.modes.indexOf('reverse') === -1) {
+                card.modes.push('reverse');
+            }
+
+
+            if (settings.reverseReadFront === true || settings.reverseReadFront === false) {
+                card.readFrontReverse = settings.reverseReadFront;
+            }
+            if (settings.reverseReadBack === true || settings.reverseReadBack === false) {
+                card.readBackReverse = settings.reverseReadBack;
+            }
+            if (settings.reverseSpeechRecognition === true || settings.reverseSpeechRecognition === false) {
+                card.speechRecognitionReverse = settings.reverseSpeechRecognition;
+            }
+
+
+        } else {
+            if (settings.reverseEnabled === false) {
+                if (card.modes.indexOf('reverse') > -1) {
+                    card.modes.splice(card.modes.indexOf('reverse'),1);
+                }
+            }
+        }
+
+        console.log(settings);
+
+        if (settings.imagesEnabled) {
+            if (card.modes.indexOf('images') === -1) {
+                card.modes.push('images');
+            }
+
+
+            if (settings.imagesReadFront === true || settings.imagesReadFront === false) {
+                card.imagesReadFront = settings.imagesReadFront;
+            }
+            if (settings.imagesReadBack === true || settings.imagesReadBack === false) {
+                card.imagesReadFront = settings.imagesReadBack;
+            }
+            if (settings.imagesSpeechRecognition === true || settings.imagesSpeechRecognition === false) {
+                card.speechRecognitionImages = settings.imagesSpeechRecognition;
+            }
+
+
+        } else {
+            if (settings.imagesEnabled === false) {
+                if (card.modes.indexOf('images') > -1) {
+                    card.modes.splice(card.modes.indexOf('images'),1);
+                }
+            }
+        }
+
         card.save(function() {
             deferred.resolve(true);
         });

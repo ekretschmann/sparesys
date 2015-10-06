@@ -60,14 +60,14 @@
             <button class="btn btn-rememberators btn-small" data-ng-click="processCard(1)">1</button>
             <button class="btn btn-rememberators btn-small" data-ng-click="processCard(2)">2</button>
             <button class="btn btn-rememberators btn-small" data-ng-click="processCard(3)">3</button>
-            <div class="text-muted top-padded">rate yourself</div>
-            <div class="text-muted">0=never heard, 1=not quite remembered, 2=remembered with difficulty,
+            <div class="top-padded font-medium">rate yourself</div>
+            <div class="font-medium">0=never heard, 1=not quite remembered, 2=remembered with difficulty,
                 3=easy!
             </div>
         </div>
 
         <div data-ng-show="state === 'question'" data-ng-show="state !== 'question'">
-            <button class="btn btn-rememberators" data-ng-click="showAnswer()">Enter</button>
+            <button class="btn btn-rememberators" data-ng-click="showAnswer()">See answer</button>
         </div>
     </div>
 

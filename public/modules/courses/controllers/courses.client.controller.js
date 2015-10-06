@@ -151,27 +151,6 @@ angular.module('courses').controller('CoursesController',
 
 
 
-
-
-            $scope.copy = function (course, target) {
-
-                $modal.open({
-                    templateUrl: 'copiedCourse.html',
-                    controller: 'CopiedCourseModalController',
-                    resolve: {
-
-                        target: function () {
-                            return target;
-                        },
-                        course: function () {
-                            return course;
-                        }
-                    }
-                });
-
-            };
-
-
             // Create new Course
             $scope.create = function () {
                 var course = new Courses({
@@ -405,18 +384,6 @@ angular.module('courses').controller('CoursesController',
                 });
             };
 
-            $scope.addPackToCoursePopup = function (size) {
-                $modal.open({
-                    templateUrl: 'addPackToCourse.html',
-                    controller: 'AddPackToCourseController',
-                    size: size,
-                    resolve: {
-                        course: function () {
-                            return $scope.course;
-                        }
-                    }
-                });
-            };
 
             $scope.editCoursePopup = function (size) {
                 $modal.open({

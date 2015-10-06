@@ -1,30 +1,11 @@
 'use strict';
 
 
-// Courses controller
 angular.module('courses').controller('CoursesEditorController',
     ['$window', '$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService',
         function ($window, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService) {
 
             $scope.authentication = Authentication;
-
-
-           // $scope.languages = [
-           //     {name: '---', code: ''},
-           //     {name: 'Chinese', code: 'zh-CN'},
-           //     {name: 'English (GB)', code: 'en-GB'},
-           //     {name: 'English (US)', code: 'en-US'},
-           //     {name: 'French', code: 'fr-FR'},
-           //     {name: 'German', code: 'de-DE'},
-           //     {name: 'Italian', code: 'it-IT'},
-           //     {name: 'Japanese', code: 'ja-JP'},
-           //     {name: 'Korean', code: 'ko-KR'},
-           //     {name: 'Spanish', code: 'es-ES'}
-           // ];
-           //
-           //$scope.languageFront = $scope.languages[selectedIndexFront];
-           // $scope.languageBack = $scope.languages[selectedIndexBack];
-
 
 
             if (!$scope.authentication.user) {
@@ -49,7 +30,7 @@ angular.module('courses').controller('CoursesEditorController',
             };
 
 
-            $scope.change = function(card) {
+            $scope.change = function (card) {
 
                 Cards.get({
                     cardId: card._id
@@ -62,11 +43,8 @@ angular.module('courses').controller('CoursesEditorController',
             };
 
 
-
-
             // Find existing Course
             $scope.findOne = function () {
-
 
 
                 $scope.course = Courses.get({

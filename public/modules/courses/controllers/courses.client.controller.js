@@ -420,15 +420,6 @@ angular.module('courses').controller('CoursesController',
 
                 pack.$save(function (response) {
 
-
-                    ////console.log('ga create pack');
-                    ////console.log('/courses/addpacktocourse');
-                    //if ($window.ga) {
-                    //    console.log('sending to ga');
-                    //    $window.ga('send', 'pageview', '/courses/addpacktocourse');
-                    //    $window.ga('send', 'event', 'create pack');
-                    //}
-
                     var packid = response._id;
                     $scope.course.packs.push(packid);
 
@@ -445,7 +436,6 @@ angular.module('courses').controller('CoursesController',
                             });
                         }
 
-//                    $state.go($state.$current, null, { reload: true });
                     }, function (errorResponse) {
                         $scope.error = errorResponse.data.message;
                     });

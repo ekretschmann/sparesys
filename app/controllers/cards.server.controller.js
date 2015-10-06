@@ -98,6 +98,9 @@ exports.create = function (req, res) {
         card.imagesReadBack = course.cardDefaults.images.readBack;
         card.imagesReadFront = course.cardDefaults.images.readFront;
         card.speechRecognitionImages = course.cardDefaults.images.speechRecognition;
+        card.check = course.cardDefaults.checks;
+        card.languageFront = course.cardDefaults.languageFront;
+        card.languageBack = course.cardDefaults.languageBack;
         card.modes = [];
         if (course.cardDefaults.forward.enabled) {
             card.modes.push('forward');

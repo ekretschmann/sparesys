@@ -19,6 +19,12 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.calendar.openStartDateCalendar = false;
         $scope.calendar.openDueDateCalendar = false;
 
+        $scope.editMode = 'data';
+
+        $scope.showMode = function(mode) {
+            $scope.editMode = mode;
+        };
+
         $scope.openStartDateCalendar = function ($event) {
             $event.preventDefault();
             $event.stopPropagation();

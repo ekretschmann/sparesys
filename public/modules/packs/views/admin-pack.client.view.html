@@ -17,13 +17,15 @@
                     <!--<a href="#!/schools/{{school._id}}"><i class="glyphicon glyphicon-edit"></i></a>-->
 
 
-                    <a href="" data-ng-click="bulkEditPackModal(pack)"><i
+                    <a href="" data-ng-click="showMode('images')" data-ng-if="editMode === 'data'"><i
+                            class="glyphicon glyphicon-picture"></i></a>
+                    <i class="glyphicon glyphicon-picture text-muted" data-ng-if="editMode === 'images'"></i>
+                    <a href="" data-ng-click="showMode('data')" data-ng-if="editMode === 'images'"><i
                             class="glyphicon glyphicon-list"></i></a>
-
+                    <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
 
                     <a href="" data-ng-click="areYouSureToDeletePack(pack)"><i
                             class="glyphicon glyphicon-trash"></i></a>
-
 
                 </div>
 
@@ -106,7 +108,7 @@
 
     <div data-ng-repeat="card in pack.cards">
         <div class="col-xs-6 dashboard-col">
-            <div class="admin-card font-large">
+            <div class="admin-card font-large" data-ng-if="editMode === 'data'">
                 <div>
                     <div class="title">
                         {{card.question}}
@@ -126,6 +128,43 @@
                     <div ng-include="'/modules/cards/views/partial/view-card.client.view.html'"></div>
                 </div>
             </div>
+
+
+            <div class="admin-card font-large" data-ng-if="editMode === 'images'">
+                <div>
+                    <div class="title">
+                        {{card.question}}
+
+                        <div class="pull-right">
+
+
+                            <a href="#!/cards/{{card._id}}"><i class="glyphicon glyphicon-edit"></i></a>
+
+                            <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i
+                                    class="glyphicon glyphicon-trash"></i></a>
+
+                        </div>
+
+                    </div>
+
+                    <div class="flashcard-section">
+                        <div class="field-label">Images <a href="" style="padding-left: 5px;"
+                                                           data-ng-click="manageImages(card)"><i
+                                class="glyphicon glyphicon-plus-sign font-medium"></i></a></div>
+                        <div class="font-medium" style="padding-top: 1em">
+                            <div data-ng-if="card.images.length === 0">
+                                no images
+                            </div>
+                                <span data-ng-repeat="img in card.images" style="padding: 5px">
+                                    <img ng-src="{{img}}"
+                                         style="max-width: 128px; max-height: 128px"/>
+                                </span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
         </div>
     </div>
 

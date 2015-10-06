@@ -150,7 +150,21 @@
                         </div>
 
                     </div>
-                    Images
+
+                    <div class="field-label">Images  <a href="" style="padding-left: 5px;" data-ng-click="manageImages()"><i
+                            class="glyphicon glyphicon-plus-sign font-medium"></i></a></div>
+                    <div class="font-medium" style="padding-top: 1em">
+                        <div data-ng-if="card.images.length === 0">
+                            no images
+                        </div>
+                                <span data-ng-repeat="img in card.images">
+                                    <img ng-src="{{img}}"
+                                         style="max-width: 128px; max-height: 128px"/>
+                                </span>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

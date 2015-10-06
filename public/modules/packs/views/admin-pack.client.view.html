@@ -45,8 +45,6 @@
                     </div>
 
 
-
-
                 </div>
 
                 <div class="row">
@@ -97,24 +95,11 @@
 
     </div>
 
+
     <div class="col-xs-6 dashboard-col">
+
         <div class="admin-card font-large">
-            <div class="title">
-                Slaves
-
-
-            </div>
-
-            <div class="flashcard-section">
-
-                <div data-ng-if="!pack.slaves || pack.slaves.length === 0">
-                    none
-                </div>
-
-                <div data-ng-repeat="s in pack.slaves">
-                    {{s}}
-                </div>
-            </div>
+            <div ng-include="'/modules/packs/views/partial/bulk-edit-pack.client.view.html'"></div>
         </div>
     </div>
 
@@ -139,6 +124,27 @@
 
                     </div>
                     <div ng-include="'/modules/cards/views/partial/view-card.client.view.html'"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-6 dashboard-col">
+        <div class="admin-card font-large">
+            <div class="title">
+                Slaves
+
+
+            </div>
+
+            <div class="flashcard-section">
+
+                <div data-ng-if="!pack.slaves || pack.slaves.length === 0">
+                    none
+                </div>
+
+                <div data-ng-repeat="s in pack.slaves">
+                    {{s}}
                 </div>
             </div>
         </div>

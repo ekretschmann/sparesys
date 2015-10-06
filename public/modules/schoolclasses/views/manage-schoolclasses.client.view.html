@@ -56,7 +56,7 @@
                 <div data-ng-if="schoolclass.courses.length === 0">none</div>
 
                 <div data-ng-repeat="course in schoolclass.courses">
-                    <div data-ng-controller="CoursesController" data-ng-init="findById(course)">
+                    <div data-ng-controller="CoursesControllerNew" data-ng-init="findById(course)">
                         {{course.name}}
                     </div>
                 </div>

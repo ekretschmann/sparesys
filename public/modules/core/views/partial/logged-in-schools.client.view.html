@@ -23,7 +23,7 @@
                     Courses:
 
                     <span data-ng-repeat="courseId in sc.courses">
-                        <span data-ng-controller="CoursesController" data-ng-init="findById(courseId)">
+                        <span data-ng-controller="CoursesControllerNew" data-ng-init="findById(courseId)">
                             {{course.name}}<span data-ng-if="$index < sc.courses.length-1">, </span>
                         </span>
 

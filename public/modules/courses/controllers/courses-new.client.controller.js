@@ -334,6 +334,16 @@ angular.module('courses').controller('CoursesControllerNew',
                 // Todo: implement me
             };
 
+            $scope.manageCourses = function () {
+                console.log('ga view courses');
+                console.log('/courses');
+                if ($window.ga) {
+                    console.log('sending to ga');
+                    $window.ga('send', 'pageview', '/courses');
+                    $window.ga('send', 'event', 'user views their courses');
+                }
+                $scope.findForCurrentUser();
+            };
 
             $scope.areYouSureToDeleteCourse = function (course) {
 

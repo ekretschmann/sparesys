@@ -32,6 +32,21 @@ angular.module('courses').controller('CoursesEditorController',
             }
 
 
+            $scope.areYouSureToDeleteCourse = function (course) {
+
+                $scope.course = course;
+                $modal.open({
+                    templateUrl: 'areYouSureToDeleteCourse.html',
+                    controller: 'DeleteCourseModalController',
+                    resolve: {
+
+                        course: function () {
+                            return $scope.course;
+                        }
+                    }
+                });
+
+            };
 
 
             $scope.change = function(card) {

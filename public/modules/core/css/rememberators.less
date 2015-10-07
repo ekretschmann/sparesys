@@ -899,27 +899,27 @@ body {
 
 .dashboard-col {
 
-  //margin-bottom: 1.5em;
-  //
-  //@media screen {
-  //  @media (min-width: 310px) {
-  //    margin-left: 0;
-  //    margin-right: 0;
-  //    padding: 0;
-  //  }
-  //  @media (min-width: 620px) {
-  //    margin-left: 0;
-  //    margin-right: 0;
-  //    //padding: 10px;
-  //  }
-  //  @media (min-width: 800px) {
-  //    margin-left: 0;
-  //    margin-right: 0;
-  //    padding-left: 20px;
-  //    padding-right: 20px;
-  //  }
-  //
-  //}
+  margin-bottom: 1.5em;
+
+  @media screen {
+    @media (min-width: 310px) {
+      margin-left: 0;
+      margin-right: 0;
+      padding: 0;
+    }
+    @media (min-width: 620px) {
+      margin-left: 0;
+      margin-right: 0;
+      //padding: 10px;
+    }
+    @media (min-width: 800px) {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+
+  }
 }
 
 .dashboard-col-attached {
@@ -1851,6 +1851,10 @@ a {
   .default-riboon;
 }
 
+.help-ribbon {
+  .default-riboon;
+}
+
 .default-ribbon-span {
   font-size: 10px;
   font-weight: bold;
@@ -1882,4 +1886,10 @@ a {
   .default-ribbon-span;
   background: #1f7ba7;
   background: linear-gradient(lighten(#a74e95, 10%) 0%, #a74e95 100%);
+}
+
+.help-ribbon span {
+  .default-ribbon-span;
+  background: @base-green;
+  background: linear-gradient(lighten(@base-green, 10%) 0%, @base-green 100%);
 }

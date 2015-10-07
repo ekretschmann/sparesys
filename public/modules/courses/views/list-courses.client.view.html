@@ -13,40 +13,59 @@
     <div class="font-large">
         <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
              data-ng-if="authentication.user.roles.indexOf('help') > -1">
-            <div class="virtual-card">
+            <div class="virtual-card ribbon-card">
+
+
+                <div class="help-ribbon"><span>Help</span></div>
+
                 <div class="title">
                     Manage Courses
                 </div>
-                <!--<infobox logo="man">-->
+                <div data-ng-if="courses.length > 0">
+                    <infobox logo="man">
 
-                <div>
-                    This is the list of courses you have subscribed to. You can use the
-                    <a href="" class="nolink">
-                        <i class="small glyphicon glyphicon-trash">
-                        </i></a>
-                    next to each course to delete the courses you no longer need. You can
-                    edit, configure and change an existing course by clicking on the
-                    <a href="" class="nolink">
-                        <i class="small glyphicon glyphicon-edit">
-                        </i></a> icon.
+                        <div>
+                            This is the list of courses you have subscribed to. You can use the
+                            <a href="" class="nolink">
+                                <i class="small glyphicon glyphicon-trash">
+                                </i></a>
+                            next to each course to delete the courses you no longer need. You can
+                            edit, configure and change an existing course by clicking on the
+                            <a href="" class="nolink">
+                                <i class="small glyphicon glyphicon-edit">
+                                </i></a> icon.
 
-                    You can quickly edit the contents of the cards in a course by clicking
-                    on the <a href="" class="nolink">
-                    <i class="small glyphicon glyphicon-th">
-                    </i></a> icon.
+                            You can quickly edit the contents of the cards in a course by clicking
+                            on the <a href="" class="nolink">
+                            <i class="small glyphicon glyphicon-th">
+                            </i></a> icon.
+                        </div>
+
+
+                        <div>
+                            If you can't
+                            find the course you are looking for in this list, you can
+                            either <a href="/#!/courses/create">
+                            create a new course
+                        </a> or <a href="#!/courses/search">
+                            search for an existing course.
+                        </a>
+                        </div>
+                    </infobox>
                 </div>
+                <div data-ng-if="courses.length === 0">
+                    <infobox logo="man">
 
 
-                <div>
-                    If you can't
-                    find the course you are looking for in this list, you can
-                    either <a href="/#!/courses/create">
-                    create a new course
-                </a> or <a href="#!/courses/search">
-                    search for an existing course.
-                </a>
+                        <div>
+                            You have not subscribed to any courses, yet. You can either <a href="/#!/courses/create">
+                            create a new course
+                        </a> or <a href="#!/courses/search">
+                            search for an existing course.
+                        </a>
+                        </div>
+                    </infobox>
                 </div>
-                <!--</infobox>-->
             </div>
         </div>
 

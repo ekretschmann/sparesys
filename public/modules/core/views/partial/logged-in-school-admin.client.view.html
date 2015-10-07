@@ -9,28 +9,31 @@
 
     <div data-ng-if="authentication.user.administersSchools.length === 0">
         <div class="col-xs-12 col-md-6">
-            <div class="font-large virtual-card" data-ng-controller="SchoolsController">
+            <div class="font-large virtual-card ribbon-card" data-ng-controller="SchoolsController">
+
+                <div class="help-ribbon"><span>Help</span></div>
+
                 <div class="title">School Administration</div>
-                <infobox class="warning" logo="woman" position="left">
-                    TODO: You have set yourself up as a school administrator but you are not managing any schools. To
-                    get started, you will have to register your school using the menu.
-                    Alternatively, you can also follow
+                <infobox class="danger" logo="woman" position="left">
+                    You have set yourself up as a school administrator but you are not managing any schools. To
+                    get started, you will have to register your school. You can do this by using the
+                    <span class="warning" style="font-weight: bold">{{authentication.user.displayName}}</span>  menu.
+                    or you can follow
                     <a href="" data-ng-click="registerSchoolPopup()">this link</a>.
                 </infobox>
             </div>
         </div>
     </div>
 
-    <div data-ng-if="authentication.user.administersSchools.length > 0">
+    <div data-ng-if="authentication.user.administersSchools.length > 0 && authentication.user.roles.indexOf('help') > -1">
         <div class="col-xs-12 col-md-6 ">
             <div class="font-large virtual-card ribbon-card" data-ng-controller="SchoolsController">
-                <div class="school-admin-ribbon"><span>School Admin</span></div>
+                <div class="help-ribbon"><span>Help</span></div>
                 <div class="title">School Administration</div>
-                <div class="info" logo="woman" position="left">
-
+                <infobox class="info" logo="woman" position="left">
 
                     <div>
-                    TODO: As a school administrator, you create and manage schools and
+                    As a school administrator, you create and manage schools and
                     classes. Teachers and will have to be assigned to classes so that
                     they can work together.
                     </div>
@@ -108,7 +111,7 @@
                 </div>
 
                 <div data-ng-if="school.schoolclasses.length === 0">
-                    <div class="col-xs-12 warning dashboard-col">
+                    <div class="col-xs-12 danger dashboard-col">
                         <!--<div class="field-label">Classes <a href="" data-ng-click="addClassPopup()"><i-->
                                 <!--class="glyphicon glyphicon-plus-sign"></i></a></div>-->
                         <div class="font-medium">

@@ -9,11 +9,12 @@ angular.module('messages').config(['$stateProvider',
                 url: '/messages/admin',
                 templateUrl: 'modules/messages/views/admin-messages.client.view.html'
             })
-//            .
-//            state('listMessages', {
-//                url: '/messages',
-//                templateUrl: 'modules/messages/views/list-messages.client.view.html'
-//            }).
+            .
+            state('manageMessages', {
+                url: '/messages/manage-suggestions',
+                templateUrl: 'modules/messages/views/manage-suggestions.client.view.html'
+            })
+            //.
 //            state('createMessage', {
 //                url: '/messages/create',
 //                templateUrl: 'modules/messages/views/create-message.client.view.html'

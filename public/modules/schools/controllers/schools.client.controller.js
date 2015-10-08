@@ -379,11 +379,16 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
         $scope.hasClassAssigned = function(userId) {
 
+             console.log(userId);
+            console.log($scope.schoolclasses);
+
             var found = false;
             for (var i = 0; i < $scope.schoolclasses.length; i++) {
 
+                console.log($scope.schoolclasses[i]);
                 for (var j = 0; j < $scope.schoolclasses[i].teachers.length; j++) {
 
+                    console.log( $scope.schoolclasses[i].teachers);
                     if($scope.schoolclasses[i].teachers[j] === $scope.authentication.user._id) {
                         found = true;
                     }

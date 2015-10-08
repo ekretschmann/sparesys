@@ -296,7 +296,6 @@ angular.module('courses').controller('CoursesController',
             // Find existing Course
             $scope.findById = function (id) {
 
-                console.log(id);
                 $scope.course = Courses.get({
                     courseId: id
                 });

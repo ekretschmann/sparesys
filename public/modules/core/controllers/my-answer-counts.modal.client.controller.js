@@ -29,14 +29,17 @@ angular.module('core').controller('MyAnswerCountsModalController', ['$scope', '$
                 Cards.get({
                     cardId: $scope.card._id
                 }, function(c) {
-                    console.log($scope.mode);
                     if ($scope.mode === 'forward' || $scope.mode === 'images') {
-                        c.acceptedAnswersForward.push($scope.answer);
-                        $scope.card.acceptedAnswersForward.push($scope.answer);
+                        if (c.acceptedAnswersForward.indexOf($scope.answer) === -1) {
+                            c.acceptedAnswersForward.push($scope.answer);
+                            $scope.card.acceptedAnswersForward.push($scope.answer);
+                        }
 
                     } else {
-                        c.acceptedAnswersReverse.push($scope.answer);
-                        $scope.card.acceptedAnswersReverse.push($scope.answer);
+                        if (c.acceptedAnswersReverse.indexOf($scope.answer) === -1) {
+                            c.acceptedAnswersReverse.push($scope.answer);
+                            $scope.card.acceptedAnswersReverse.push($scope.answer);
+                        }
                     }
                     c.$update();
                 });

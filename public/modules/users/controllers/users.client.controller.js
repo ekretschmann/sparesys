@@ -1,8 +1,8 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$state','$timeout', '$stateParams', '$location', 'Authentication', 'Users',
-    function ($scope, $state, $timeout, $stateParams, $location, Authentication, Users) {
+angular.module('users').controller('UsersController', ['$scope', '$state','$timeout', '$modal','$stateParams', '$location', 'Authentication', 'Users',
+    function ($scope, $state, $timeout, $modal, $stateParams, $location, Authentication, Users) {
         $scope.authentication = Authentication;
 
 
@@ -188,6 +188,22 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
             }
             otherUser.$update();
         };
+
+        $scope.areYouSureToDeleteUser = function (user) {
+
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteUser.html',
+                controller: 'DeleteUserModalController',
+                resolve: {
+
+                    user: function () {
+                        return user;
+                    }
+                }
+            });
+
+        };
+
 
     }
 ]);

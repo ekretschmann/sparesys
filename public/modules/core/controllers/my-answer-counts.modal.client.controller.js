@@ -23,13 +23,13 @@ angular.module('core').controller('MyAnswerCountsModalController', ['$scope', '$
                     to: [$scope.card.supervisor]
                 });
 
-                console.log(msg);
                 msg.$save();
             } else {
 
                 Cards.get({
                     cardId: $scope.card._id
                 }, function(c) {
+                    console.log($scope.mode);
                     if ($scope.mode === 'forward' || $scope.mode === 'images') {
                         c.acceptedAnswersForward.push($scope.answer);
                         $scope.card.acceptedAnswersForward.push($scope.answer);

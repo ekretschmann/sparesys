@@ -1,1 +1,92 @@
-bla
+<section data-ng-controller="MessagesController"
+         data-ng-init="findForCurrentUser()">
+
+    <section data-ng-if="validationRequests.length > 0">
+
+        <div class="col-xs-12 col-md-6" data-ng-if="authentication.user.roles.indexOf('help') > -1">
+            <div class="font-large half-virtual-card ribbon-card">
+
+                <div class="help-ribbon"><span>Help</span></div>
+
+                <!--<div class="title">Update your courses</div>-->
+                <infobox logo="philosopher" position="left">
+                    Please go through the list of sugestions to <span style="font-weight: bold">accept</span> or
+                    <span style="font-weight: bold">decline</span> their suggestions.
+                    Please use <span style="font-weight: bold">ignore</span> for answers that are clear
+                    attempts to cheat.
+                </infobox>
+            </div>
+        </div>
+
+        <div data-ng-repeat="request in validationRequests"
+             data-ng-init="findById(request.card)"
+             data-ng-controller="CardsController"
+             class="font-medium">
+            <div class="col-xs-12 col-md-6">
+                <div class="font-large half-virtual-card">
+
+
+                    <div class="flashcard-section">
+
+
+                        <div class="col-xs-4">
+                            <div class="field-label">Student</div>
+                            <div class="font-medium">
+                                {{request.sender}}
+                            </div>
+                        </div>
+
+                        <div class="col-xs-4 ">
+                            <div class="field-label">Question</div>
+                            <div class="font-medium">
+                                {{card.question}}
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-4 ">
+                            <div class="field-label">Answer</div>
+                            <div class="font-medium">
+                                {{card.answer}}
+                            </div>
+                        </div>
+                    </div>
+                    <div class="flashcard-section" >
+                        <div class="col-xs-12" style="padding-top: 1em;">
+                            <div class="field-label">Suggestion</div>
+                            <div class="font-medium">
+                                {{request.content}}
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flashcard-section" >
+
+
+                        <div class="col-xs-4" style="padding-top: 1em;">
+                            <button class="btn btn-rememberators"
+                                    type="submit"
+                                    ng-click="addPackToCourse()">Accept
+                            </button>
+                        </div>
+                        <div class="col-xs-4" style="padding-top: 1em;">
+                            <button class="btn btn-rememberators"
+                                    type="submit"
+                                    ng-click="addPackToCourse()">Reject
+                            </button>
+                        </div>
+                        <div class="col-xs-4" style="padding-top: 1em;">
+                            <button class="btn btn-rememberators"
+                                    type="submit"
+                                    ng-click="addPackToCourse()">Ignore
+                            </button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+
+        </div>
+    </section>
+</section>

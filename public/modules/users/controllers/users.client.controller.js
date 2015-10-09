@@ -200,7 +200,9 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
                         return user;
                     }
                 }
-            });
+            }).result.then(function() {
+                    $state.go($state.$current, null, { reload: true });
+                });
 
         };
 

@@ -2,9 +2,9 @@
          data-ng-init="findOne()">
 
     <!--<div ng-include="'/modules/courses/views/partial/add-pack.modal.client.view.html'"></div>-->
+    <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
     <div ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
-
 
     <div class="font-large virtual-card-header title" style="text-align: center">
 
@@ -28,6 +28,51 @@
 
 
     </div>
+
+    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
+         data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="virtual-card ribbon-card font-large">
+            <div class="help-ribbon"><span>Help</span></div>
+            <div class="title">
+                Adding packs
+            </div>
+            <infobox logo="girl">
+               Each course consists of a number of packs. You can use
+                these to keep similar things together or have all cards
+                that you want to learn by a certain date. Unless you
+                set due dates for your cards, they are
+                introduced in the order of your packs. It is useful to
+                keep simple things in your first packs and the more
+                difficult ones for later.
+            </infobox>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
+         data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="virtual-card ribbon-card font-large">
+            <div class="help-ribbon"><span>Help</span></div>
+            <div class="title">
+                Adding packs
+            </div>
+            <infobox logo="boy">
+                You can also
+                change the settings for your course and the defaults for
+                new cards on this screen. The language settings are used
+                when the Rememberators read questions and answers out loud.
+                Use the <i class="glyphicon glyphicon-th"></i> icon to get
+                to a searchable all card overview page and the
+                <i class="glyphicon glyphicon-trash"></i> icon to delete
+                this course.
+
+            </infobox>
+        </div>
+    </div>
+
+
+
+
+
 
     <div class="col-xs-6 dashboard-col">
         <div class="virtual-card font-large">
@@ -119,26 +164,26 @@
                 </div>
 
 
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Created</div>
-                        <div class="font-medium">
-                            {{course.created | date:'shortDate'}}
-                        </div>
-                    </div>
+                <!--<div class="row">-->
+                    <!--<div class="col-xs-6 dashboard-col">-->
+                        <!--<div class="field-label">Created</div>-->
+                        <!--<div class="font-medium">-->
+                            <!--{{course.created | date:'shortDate'}}-->
+                        <!--</div>-->
+                    <!--</div>-->
 
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Updated</div>
-                        <div class="font-medium">
-                            <div data-ng-if="course.updated">
-                            {{course.updated | date:'shortDate'}}
-                                </div>
-                            <div data-ng-if="!course.updated">
-                                {{course.created | date:'shortDate'}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                    <!--<div class="col-xs-6 dashboard-col">-->
+                        <!--<div class="field-label">Updated</div>-->
+                        <!--<div class="font-medium">-->
+                            <!--<div data-ng-if="course.updated">-->
+                            <!--{{course.updated | date:'shortDate'}}-->
+                                <!--</div>-->
+                            <!--<div data-ng-if="!course.updated">-->
+                                <!--{{course.created | date:'shortDate'}}-->
+                            <!--</div>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                <!--</div>-->
 
 
             </div>

@@ -1,21 +1,22 @@
 <div data-ng-controller="CoursesCreateController">
 
 
-    <div class="large-screen-only title" data-ng-if="authentication.user.roles.indexOf('help') === -1">
-        Create New Course
-    </div>
+    <!--<div class="large-screen-only title" data-ng-if="authentication.user.roles.indexOf('help') === -1">-->
+        <!--Create New Course-->
+    <!--</div>-->
 
-    <div class="small-screen-only title">
-        Create New Course
-    </div>
+    <!--<div class="small-screen-only title">-->
+        <!--Create New Course-->
+    <!--</div>-->
 
     <form data-ng-submit="create()" class="font-large" validate>
 
         <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
              data-ng-if="authentication.user.roles.indexOf('help') > -1">
-            <div class="virtual-card">
+            <div class="virtual-card ribbon-card">
+                <div class="help-ribbon"><span>Help</span></div>
                 <div class="title">
-                    Create New Course
+                    Creating a new course
                 </div>
                 <infobox logo="girl">
                     Wow! You are creating a
@@ -26,9 +27,29 @@
             </div>
         </div>
 
+        <div class="col-xs-12 col-md-6 dashboard-col  large-screen-only "
+             data-ng-if="authentication.user.roles.indexOf('help') > -1">
+
+            <div class="virtual-card ribbon-card">
+                <div class="help-ribbon"><span>Help</span></div>
+                <div class="title">
+                    Course Properties
+                </div>
+                <infobox logo="boy" position="left">
+                    Rememberators can read questions and answer to the students of your course.
+                    If you want to use this, please define the languages to use. You can also define
+                    what modes your cards should be used in. Each card you create in this course will
+                    have these settings by default, but you will be able to change them later.
+                </infobox>
+            </div>
+        </div>
+
         <div class="col-xs-12 col-md-6 dashboard-col ">
 
             <div class="virtual-card">
+                <div class="title">
+                    Course Properties
+                </div>
                 <div class="flashcard-section">
                     <div class="field-label">Course Name</div>
                     <div>
@@ -59,7 +80,7 @@
                                 <input type="text"
                                        data-ng-model="front"
                                        class="form-control"
-                                       placeholder="What is on the Front of the Cards (e.g. English)">
+                                       placeholder="What is on the Front of the Cards (e.g. Countries)">
                             </div>
                         </div>
 
@@ -69,7 +90,7 @@
                                 <input type="text"
                                        data-ng-model="back"
                                        class="form-control"
-                                       placeholder="What is on the Back of the Cards (e.g. Spanish)">
+                                       placeholder="What is on the Back of the Cards (e.g. Capitals)">
                             </div>
                         </div>
                     </div>
@@ -90,22 +111,7 @@
             </div>
         </div>
 
-        <div class="col-xs-12 col-md-6 dashboard-col  large-screen-only "
-             data-ng-if="authentication.user.roles.indexOf('help') > -1">
 
-            <div class="virtual-card">
-                <div class="title">
-                    Course Properties
-                </div>
-                <infobox logo="boy" position="left">
-                    You can also define the languages you want to use for your cards
-                    and what modes are supported. You will be able to change these settings
-                    for the cards, but it is useful to have these in place for new cards.
-                    If you do this, you won't have to remember to set them for each and
-                    every card you create in your course.
-                </infobox>
-            </div>
-        </div>
 
 
         <div class="col-xs-12 col-md-6 dashboard-col">

@@ -47,7 +47,24 @@
 
                 <div class="row">
                     <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Your schools</div>
+                        <div class="field-label">You are a teacher in</div>
+
+                        <div class="field-data" data-ng-if="authentication.user.teacherInSchools.length ===0">
+                            none
+                        </div>
+
+                        <div class="field-data" data-ng-controller="SchoolsController"
+                             data-ng-repeat="sid in authentication.user.studentInSchools" data-ng-init="findById(sid)">
+                            <a href=""
+                               data-ng-click="unsubscribeStudentPopup(school._id, authentication.user)"><i
+                                    class="glyphicon glyphicon-minus-sign"></i></a>
+
+                            {{school.name}}
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6 dashboard-col">
+                        <div class="field-label">You are a student in</div>
 
                         <div class="field-data" data-ng-if="authentication.user.studentInSchools.length ===0">
                             none

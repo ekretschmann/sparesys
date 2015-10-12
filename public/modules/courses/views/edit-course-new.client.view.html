@@ -34,6 +34,28 @@
         <div class="virtual-card ribbon-card font-large">
             <div class="help-ribbon"><span>Help</span></div>
             <div class="title">
+                Changing settings
+            </div>
+            <infobox logo="boy">
+                You can
+                change the settings for your course and the defaults for
+                new cards on this screen. The language settings are used
+                when the Rememberators read questions and answers out loud.
+                Use the <i class="glyphicon glyphicon-th"></i> icon to get
+                to a searchable all card overview page and the
+                <i class="glyphicon glyphicon-trash"></i> icon to delete
+                this course.
+
+            </infobox>
+        </div>
+    </div>
+
+
+    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
+         data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="virtual-card ribbon-card font-large">
+            <div class="help-ribbon"><span>Help</span></div>
+            <div class="title">
                 Adding packs
             </div>
             <infobox logo="girl">
@@ -48,26 +70,6 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
-         data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="virtual-card ribbon-card font-large">
-            <div class="help-ribbon"><span>Help</span></div>
-            <div class="title">
-                Adding packs
-            </div>
-            <infobox logo="boy">
-                You can also
-                change the settings for your course and the defaults for
-                new cards on this screen. The language settings are used
-                when the Rememberators read questions and answers out loud.
-                Use the <i class="glyphicon glyphicon-th"></i> icon to get
-                to a searchable all card overview page and the
-                <i class="glyphicon glyphicon-trash"></i> icon to delete
-                this course.
-
-            </infobox>
-        </div>
-    </div>
 
 
 

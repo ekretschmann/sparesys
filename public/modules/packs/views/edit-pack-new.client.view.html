@@ -27,6 +27,43 @@
         </div>
     </div>
 
+    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
+         data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="virtual-card ribbon-card font-large">
+            <div class="help-ribbon"><span>Help</span></div>
+            <div class="title">
+                Changing settings
+            </div>
+            <infobox logo="boy">
+                You can also
+                change the name for your pack on this screen and
+                change the settings for all cards in the pack in one go.
+               Use the
+                <i class="glyphicon  glyphicon-picture"></i> icon to see which
+                images you want to use for image mode and the <i class="glyphicon  glyphicon-list"></i> icon
+                for all other settings.
+            </infobox>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
+         data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="virtual-card ribbon-card font-large">
+            <div class="help-ribbon"><span>Help</span></div>
+            <div class="title">
+                Adding cards
+            </div>
+            <infobox logo="girl">
+                Each pack consists of a number of cards, which you can add
+                on the bottom of this screen. For some cards you might want
+                some additional information to make clearer which answer you expect.
+                When the card is used in reverse mode, this extra information is
+                not expected as part of the answer.
+            </infobox>
+        </div>
+    </div>
+
+
 
     <div class="col-xs-6 dashboard-col">
 
@@ -75,7 +112,7 @@
                     <div class="col-xs-6 dashboard-col">
                         <div class="field-label">Course</div>
                         <div class="font-medium">
-                            <a href="#!/courses/{{pack.course._id}}">{{pack.course.name}}</a>
+                            <a href="#!/courses/{{pack.course._id}}/edit">{{pack.course.name}}</a>
                         </div>
                     </div>
 
@@ -93,7 +130,12 @@
                     <div class="col-xs-6 dashboard-col">
                         <div class="field-label">Updated</div>
                         <div class="font-medium">
+                            <div data-ng-if="pack.updated">
                             {{pack.updated | date:'shortDate'}}
+                            </div>
+                            <div data-ng-if="!pack.updated">
+                                {{pack.created | date:'shortDate'}}
+                            </div>
                         </div>
                     </div>
                 </div>

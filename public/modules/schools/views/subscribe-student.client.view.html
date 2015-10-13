@@ -16,7 +16,10 @@
             <infobox logo="boy" position="left">
                 <div>
                     Teachers and students subscribe to the same school so that
-                    the teachers can hand out the courses to their classes.
+                    the teachers can hand out the courses to their classes. After
+                    they have subscribed, the
+                    school administrator will be able to assign teachers and students to
+                    their classes.
 
                 </div>
             </infobox>
@@ -54,9 +57,9 @@
                         </div>
 
                         <div class="field-data" data-ng-controller="SchoolsController"
-                             data-ng-repeat="sid in authentication.user.studentInSchools" data-ng-init="findById(sid)">
+                             data-ng-repeat="sid in authentication.user.teacherInSchools" data-ng-init="findById(sid)">
                             <a href=""
-                               data-ng-click="unsubscribeStudentPopup(school._id, authentication.user)"><i
+                               data-ng-click="unsubscribeTeacherPopup(school._id, authentication.user)"><i
                                     class="glyphicon glyphicon-minus-sign"></i></a>
 
                             {{school.name}}
@@ -110,20 +113,20 @@
                     <div class="pull-right">
 
                         <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1 && authentication.user.roles.indexOf('nostudent') === -1">
-                            <a href="" data-ng-click="subscribeTeacherPopup(school)"> <i
+                            <a href="" data-ng-click="subscribeTeacherPopup(school, authentication.user)"> <i
                                     class="glyphicon glyphicon-king"></i></a>
 
-                            <a href="" data-ng-click="subscribeStudentPopup(school)"> <i
+                            <a href="" data-ng-click="subscribeStudentPopup(school, authentication.user)"> <i
                                     class="glyphicon glyphicon-pawn"></i></a>
                         </div>
 
                         <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1 && authentication.user.roles.indexOf('nostudent') > -1">
-                            <a href="" data-ng-click="subscribeTeacherPopup(school)"> <i
+                            <a href="" data-ng-click="subscribeTeacherPopup(school, authentication.user)"> <i
                                     class="glyphicon glyphicon-plus-sign"></i></a>
                         </div>
 
                         <div data-ng-if="authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('nostudent') === -1">
-                            <a href="" data-ng-click="subscribeStudentPopup(school)"> <i
+                            <a href="" data-ng-click="subscribeStudentPopup(school, authentication.user)"> <i
                                     class="glyphicon glyphicon-plus-sign"></i></a>
                         </div>
 

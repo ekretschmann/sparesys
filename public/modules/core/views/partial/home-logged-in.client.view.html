@@ -12,12 +12,13 @@
 
     </div>
 
+
     <div data-ng-if="authentication.user.teacherInSchools.length === 0 && authentication.user.roles.indexOf('teacher') > -1">
 
         <div class="col-xs-12 col-md-6 ">
             <div class="font-large virtual-card ribbon-card">
                 <div class="help-ribbon"><span>Help</span></div>
-                <div class="title">Teaching</div>
+                <div class="title">Teaching in a school</div>
                 <infobox logo="man" position="left">
                     You have not subscribed to your school. Use
                     <a href="/#!/schools/subscribe">this link</a> to find a school as teacher
@@ -25,6 +26,28 @@
                 </infobox>
             </div>
         </div>
+
+    </div>
+
+    <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1 && coursesTeacher.length ===0">
+
+
+        <div class="col-xs-12 col-md-6 ">
+            <div class="font-large virtual-card ribbon-card">
+                <div class="help-ribbon"><span>Help</span></div>
+                <div class="title">Teaching a course</div>
+                <infobox logo="man" position="left">
+
+                    You have registered as a teacher, but you have not created or selected courses
+                    that you intend to teach. Either <a href="#!/courses/create">create a courses</a>
+                    and set your own role as teacher or <a href="#!/courses/search">search for existing courses</a>
+                    and select those you want your for your students.
+                </infobox>
+            </div>
+        </div>
+
+
+
     </div>
 
     <div data-ng-if="authentication.user.teacherInSchools.length > 0">

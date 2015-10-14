@@ -202,6 +202,9 @@ var updateCard = function(cardId, req) {
         }
         if (settings.checks) {
             card.check = settings.checks;
+            if (card.check === 'Self Checks') {
+                card.check == 'self';
+            }
         }
         if (settings.startDate) {
             card.startDate = settings.startDate;

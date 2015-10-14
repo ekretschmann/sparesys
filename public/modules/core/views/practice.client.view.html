@@ -60,6 +60,7 @@
 
             <div class="col-xs-12 col-md-8 col-lg-6">
 
+
                 <div data-ng-if="mode === 'forward'" data-ng-hide="mode !== 'forward'">
 
                     <div data-ng-if="assess === 'self'" data-ng-hide="assess === 'auto'">
@@ -228,20 +229,7 @@
 
                 </div>
 
-                <!--<div data-ng-show="mode === 'images'" data-ng-hide="mode !== 'images'" style="height: 500px">-->
 
-
-                <!--<div data-ng-show="assess === 'self'" data-ng-hide="assess === 'auto'">-->
-
-                <!--<div ng-include="'/modules/core/views/partial/images-self.client.view.html'"></div>-->
-                <!--</div>-->
-
-                <!--<div data-ng-show="assess === 'auto'" data-ng-hide="assess === 'self'">-->
-                <!--<div ng-include="'/modules/core/views/partial/images-auto.client.view.html'"></div>-->
-                <!--</div>-->
-
-
-                <!--</div>-->
             </div>
 
 
@@ -355,72 +343,72 @@
                     <div class="title">Debug</div>
 
 
-                    <!--<section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">-->
+                    <section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">
 
 
-                    <!--<table class="table-striped top-margin-l top-padded-l card-border-top" data-ng-if="cards.length > 0">-->
-                    <!--<thead>-->
-                    <!--<tr>-->
+                    <table class="table-striped top-margin-l top-padded-l card-border-top" data-ng-if="cards.length > 0">
+                    <thead>
+                    <tr>
 
-                    <!--<th class="right-padded-m  top-padded-sm">Question</th>-->
-                    <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Predicted Retention [hrs]</th>-->
-                    <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">Score</th>-->
-                    <!--<th class="right-padded-m center-aligned top-padded-sm nowrap">History</th>-->
-
-
-                    <!--</tr>-->
-                    <!--</thead>-->
-                    <!--<tbody>-->
-
-                    <!--<tr>-->
+                    <th class="right-padded-m  top-padded-sm">Question</th>
+                    <th class="right-padded-m center-aligned top-padded-sm nowrap">Predicted Retention [hrs]</th>
+                    <th class="right-padded-m center-aligned top-padded-sm nowrap">Score</th>
+                    <th class="right-padded-m center-aligned top-padded-sm nowrap">History</th>
 
 
-                    <!--<tr data-ng-repeat="card in cards">-->
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    <tr>
 
 
-                    <!--<td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">-->
-
-                    <!--<a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>-->
-                    <!--</td>-->
+                    <tr data-ng-repeat="card in cards">
 
 
-                    <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
+                    <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
+
+                    <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
+                    </td>
 
 
-                    <!--<div data-ng-if="card.hrt">-->
-                    <!--&lt;!&ndash;{{toHours(card.hrt)}}&ndash;&gt;-->
-                    <!--{{toHours(card.hrt)}} hrs-->
-                    <!--({{toSeconds(card.hrt)}} s)-->
-                    <!--</div>-->
-
-                    <!--<div data-ng-if="!card.hrt">-->
-                    <!--n/a-->
-                    <!--</div>-->
-                    <!--</td>-->
-
-                    <!--<td class="right-padded-m nowrap center-aligned top-aligned">-->
+                    <td class="right-padded-m nowrap center-aligned top-aligned">
 
 
-                    <!--{{ round(card.score)}}-->
-                    <!--</td>-->
+                    <div data-ng-if="card.hrt">
+                    <!--{{toHours(card.hrt)}}-->
+                    {{toHours(card.hrt)}} hrs
+                    ({{toSeconds(card.hrt)}} s)
+                    </div>
 
-                    <!--<td class="text-muted right-padded-m nowrap center-aligned top-aligned">-->
+                    <div data-ng-if="!card.hrt">
+                    n/a
+                    </div>
+                    </td>
 
-                    <!--<div data-ng-repeat="h in card.history">-->
-                    <!--{{toDate(h.when) | date:'d/M h:mm:ss'}}-->
-                    <!--</div>-->
-                    <!--</td>-->
+                    <td class="right-padded-m nowrap center-aligned top-aligned">
 
 
-                    <!--</tr>-->
+                    {{ round(card.score)}}
+                    </td>
 
-                    <!--</tbody>-->
-                    <!--</table>-->
+                    <td class="text-muted right-padded-m nowrap center-aligned top-aligned">
 
-                    <!--<div class="center-aligned top-padded-m">-->
-                    <!--<button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card History</button>-->
-                    <!--<button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History-->
-                    <!--</button>-->
+                    <div data-ng-repeat="h in card.history">
+                    {{toDate(h.when) | date:'d/M h:mm:ss'}}
+                    </div>
+                    </td>
+
+
+                    </tr>
+
+                    </tbody>
+                    </table>
+
+                    <div class="center-aligned top-padded-m">
+                    <button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card History</button>
+                    <button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course History
+                    </button>
                 </div>
             </div>
         </div>

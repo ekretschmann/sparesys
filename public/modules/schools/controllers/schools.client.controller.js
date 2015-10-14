@@ -91,7 +91,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
 
         };
 
-        $scope.subscribeStudentPopup = function (school) {
+        $scope.subscribeStudentPopup = function (school, user) {
 
             $scope.school = school;
             $modal.open({
@@ -100,6 +100,10 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
                 resolve: {
                     school: function () {
                         return $scope.school;
+                    },
+                    user: function () {
+
+                        return user;
                     }
                 }
             });

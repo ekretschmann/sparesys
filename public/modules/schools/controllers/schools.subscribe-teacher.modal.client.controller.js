@@ -14,11 +14,15 @@ angular.module('schools').controller('SubscribeTeacherModalController', ['$scope
                 userId: user._id
             }, function (result) {
 
-                result.teacherInSchools.push($scope.school._id);
-                result.$update(function () {
-                    $scope.user.teacherInSchools.push($scope.school._id);
+                if (result.teacherInSchools.indexOf($scope.school._id) === -1) {
+                    result.teacherInSchools.push($scope.school._id);
+                    result.$update(function () {
+                        $scope.user.teacherInSchools.push($scope.school._id);
+                        $modalInstance.close();
+                    });
+                } else {
                     $modalInstance.close();
-                });
+                }
             });
 
 

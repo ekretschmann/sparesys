@@ -376,6 +376,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         };
 
 
+
         // Find existing Pack
         $scope.findOne = function () {
 
@@ -401,13 +402,30 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
                 for (var i = 0; i < $scope.pack.course.packs.length; i++) {
                     var packId = $scope.pack.course.packs[i];
                     if (packId === $scope.pack._id) {
-                        $scope.prevPack = prev;
+                        $scope.prevPackId = prev;
                         if ($scope.pack.course.packs.length > i) {
-                            $scope.nextPack = $scope.pack.course.packs[i + 1];
+                            $scope.nextPackId = $scope.pack.course.packs[i + 1];
                         }
                     } else {
                         prev = packId;
                     }
+                }
+                console.log($scope.prevPackId);
+                console.log($scope.nextPackId);
+                if ($scope.prevPackId) {
+                    $scope.prevPack = Packs.get({
+                        packId: $scope.prevPackId
+                    }, function () {
+
+                    });
+                }
+
+                if ($scope.nextPackId) {
+                    $scope.nextPack = Packs.get({
+                        packId: $scope.nextPackId
+                    }, function () {
+
+                    });
                 }
             });
         };

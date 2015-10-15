@@ -137,7 +137,6 @@
                 </div>
 
 
-
             </div>
 
             <div class="flashcard-section row">
@@ -234,7 +233,6 @@
     </div>
 
 
-
     <div class="col-xs-12 col-md-6  ">
         <div class="admin-card font-large">
             <div class="title">Roles</div>
@@ -242,9 +240,11 @@
 
             <div class="flashcard-section">
 
-                <div data-ng-repeat="role in otherUser.roles">
+                <div data-ng-repeat="role in roles">
 
-                    {{role}}
+                    <div class="col-xs-6">
+                        <input data-ng-click="updateUserRoles()" data-ng-model="userRoles[$index]" type="checkbox"/> {{role.name}}
+                    </div>
                 </div>
             </div>
         </div>

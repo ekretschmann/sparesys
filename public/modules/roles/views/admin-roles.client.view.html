@@ -1,13 +1,13 @@
 <section data-ng-controller="RolesController" data-ng-init="find()">
 
-    <div class="col-xs-6 dashboard-col" data-ng-repeat="role in roles">
+    <div class="col-xs-3 dashboard-col" data-ng-repeat="role in roles">
         <div class="half-admin-card font-large">
             <div class="title">
                 {{role.name}}
                 <div class="pull-right">
 
 
-                    <a href="" data-ng-click="areYouSureToDeleteRole(role)"><i
+                    <a href="" data-ng-click="remove(role)"><i
                             class="glyphicon glyphicon-trash"></i></a>
 
                 </div>
@@ -17,8 +17,8 @@
         </div>
     </div>
 
-    <div class="col-xs-6 dashboard-col" style="padding-top: 2em">
-        <div class=" font-large">
+    <div class="col-xs-3 dashboard-col" >
+        <div class="half-admin-card font-large">
             <div class="title">
                 Add a role
                 <div class="pull-right">

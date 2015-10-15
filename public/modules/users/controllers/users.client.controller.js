@@ -1,10 +1,9 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$state','$timeout', '$modal','$stateParams', '$location', 'Authentication', 'Users',
-    function ($scope, $state, $timeout, $modal, $stateParams, $location, Authentication, Users) {
+angular.module('users').controller('UsersController', ['$scope', '$state', '$timeout', '$modal', '$stateParams', '$location', 'Authentication', 'Users', 'Roles',
+    function ($scope, $state, $timeout, $modal, $stateParams, $location, Authentication, Users, Roles) {
         $scope.authentication = Authentication;
-
 
 
         $timeout(function () {
@@ -21,16 +20,16 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
             }
         };
 
-        $scope.removeInventories = function() {
+        $scope.removeInventories = function () {
             var n = $scope.users.length;
             var i = 0;
-            $scope.users.forEach(function(user) {
+            $scope.users.forEach(function (user) {
                 user.inventory = [];
-                user.$update(function(){
+                user.$update(function () {
                     i++;
 
-                    if(i===n) {
-                        $state.go($state.$current, null, { reload: true });
+                    if (i === n) {
+                        $state.go($state.$current, null, {reload: true});
                     }
                 });
             }, this);
@@ -60,27 +59,45 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
 
             Users.query({
                 text: $scope.options.searchText
-            }, function(users) {
+            }, function (users) {
                 $scope.users = users;
 
             });
         };
 
         // Find existing User
+        $scope.userRoles = [];
         $scope.findOne = function () {
             $scope.otherUser = Users.get({
                 userId: $stateParams.userId
+            }, function (u) {
+                $scope.roles = Roles.query(function() {
+                    for (var i = 0; i < $scope.roles.length; i++) {
+                        $scope.userRoles[i] = u.roles.indexOf($scope.roles[i].name) > -1;
+                    }
+                });
+
             });
+
 
         };
 
-
+        $scope.updateUserRoles = function() {
+            var newRoles = [];
+            for (var i = 0; i < $scope.roles.length; i++) {
+                if ($scope.userRoles[i]) {
+                    newRoles.push($scope.roles[i].name);
+                }
+            }
+            $scope.otherUser.roles = newRoles;
+            $scope.otherUser.$update();
+        };
 
 
         $scope.findById = function (userId) {
             Users.get({
                 userId: userId
-            }, function(user) {
+            }, function (user) {
                 $scope.displayName = user.displayName;
             });
         };
@@ -98,12 +115,12 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
         };
 
 
-        $scope.removeSchool = function(school, user) {
+        $scope.removeSchool = function (school, user) {
             user.studentInSchools.splice(user.studentInSchools.indexOf(school), 1);
             user.$update();
         };
 
-        $scope.removeSchoolAdmin = function(school, user) {
+        $scope.removeSchoolAdmin = function (school, user) {
             var index = user.administersSchools.indexOf(school._id);
             user.administersSchools.splice(index, 1);
             user.$update();
@@ -113,10 +130,10 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
         $scope.update = function () {
 
 
-            if(!$scope.otherUser.administersSchools) {
+            if (!$scope.otherUser.administersSchools) {
                 $scope.otherUser.administersSchools = [];
             }
-            if(!$scope.otherUser.teachesClasses) {
+            if (!$scope.otherUser.teachesClasses) {
                 $scope.otherUser.teachesClasses = [];
             }
             $scope.otherUser.$update(function () {
@@ -125,9 +142,8 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
         };
 
 
-
         // Role management
-        $scope.roles = ['admin', 'user', 'upload-course', 'debug-viewer', 'teacher', 'headmaster', 'help', 'receive-rewards'];
+        //$scope.roles = ['admin', 'user', 'upload-course', 'debug-viewer', 'teacher', 'headmaster', 'help', 'receive-rewards'];
 
         // toggle selection for a given user role
         $scope.toggleSelection = function toggleSelection(toggledRole) {
@@ -152,8 +168,8 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
             }
         };
 
-        $scope.removeTeacherFromClass = function(otherUser, s) {
-            for(var i=0; i<otherUser.teachesClasses.length; i++) {
+        $scope.removeTeacherFromClass = function (otherUser, s) {
+            for (var i = 0; i < otherUser.teachesClasses.length; i++) {
                 if (otherUser.teachesClasses[i] === s) {
                     otherUser.teachesClasses.splice(i, 1);
                 }
@@ -161,10 +177,10 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
             otherUser.$update();
         };
 
-        $scope.removeStudentFromClass = function(otherUser, s) {
+        $scope.removeStudentFromClass = function (otherUser, s) {
             console.log(otherUser);
             console.log(s);
-            for(var i=0; i<otherUser.studentInClasses.length; i++) {
+            for (var i = 0; i < otherUser.studentInClasses.length; i++) {
                 if (otherUser.studentInClasses[i] === s) {
                     otherUser.studentInClasses.splice(i, 1);
                 }
@@ -183,8 +199,8 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
                         return user;
                     }
                 }
-            }).result.then(function() {
-                    $state.go($state.$current, null, { reload: true });
+            }).result.then(function () {
+                    $state.go($state.$current, null, {reload: true});
                 });
 
         };

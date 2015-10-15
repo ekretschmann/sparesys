@@ -5,19 +5,19 @@ angular.module('roles').controller('RolesController', ['$scope', '$stateParams',
 	function($scope, $stateParams, $location, Authentication, Roles) {
 		$scope.authentication = Authentication;
 
+		$scope.newRole = {};
+		$scope.newRole.name = '';
 		// Create new Role
 		$scope.create = function() {
 			// Create new Role object
 			var role = new Roles ({
-				name: this.name
+				name: $scope.newRole.name
 			});
 
 			// Redirect after save
 			role.$save(function(response) {
-				$location.path('roles/' + response._id);
-
-				// Clear form fields
-				$scope.name = '';
+				$scope.find();
+				$scope.newRole.name = '';
 			}, function(errorResponse) {
 				$scope.error = errorResponse.data.message;
 			});

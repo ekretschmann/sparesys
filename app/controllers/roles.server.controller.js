@@ -17,7 +17,7 @@ exports.create = function(req, res) {
 	role.save(function(err) {
 		if (err) {
 			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+				message: err
 			});
 		} else {
 			res.jsonp(role);
@@ -43,7 +43,7 @@ exports.update = function(req, res) {
 	role.save(function(err) {
 		if (err) {
 			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+				message: err
 			});
 		} else {
 			res.jsonp(role);
@@ -60,7 +60,7 @@ exports.delete = function(req, res) {
 	role.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+				message: err
 			});
 		} else {
 			res.jsonp(role);
@@ -75,7 +75,7 @@ exports.list = function(req, res) {
 	Role.find().sort('-created').populate('user', 'displayName').exec(function(err, roles) {
 		if (err) {
 			return res.status(400).send({
-				message: errorHandler.getErrorMessage(err)
+				message: err
 			});
 		} else {
 			res.jsonp(roles);

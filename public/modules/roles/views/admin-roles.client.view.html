@@ -1,0 +1,55 @@
+<section data-ng-controller="RolesController" data-ng-init="find()">
+
+    <div class="col-xs-6 dashboard-col" data-ng-repeat="role in roles">
+        <div class="half-admin-card font-large">
+            <div class="title">
+                {{role.name}}
+                <div class="pull-right">
+
+
+                    <a href="" data-ng-click="areYouSureToDeleteRole(role)"><i
+                            class="glyphicon glyphicon-trash"></i></a>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="col-xs-6 dashboard-col" style="padding-top: 2em">
+        <div class=" font-large">
+            <div class="title">
+                Add a role
+                <div class="pull-right">
+
+
+                    <a href="" data-ng-click="create()"><i class="glyphicon glyphicon-plus-sign"></i></a>
+
+                </div>
+
+
+            </div>
+
+            <div class="flashcard-section">
+
+                <form data-ng-submit="create()" validate>
+                    <fieldset>
+                        <div class="row">
+                            <div class="col-xs-6 dashboard-col">
+                                <div class="field-label">Role</div>
+                                <div class="font-medium">
+                                    <input type="text"
+                                           data-ng-model="newRole.name"
+                                           class="form-control focus">
+                                </div>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</section>

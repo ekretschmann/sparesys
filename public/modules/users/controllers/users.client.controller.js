@@ -11,24 +11,7 @@ angular.module('users').controller('UsersController', ['$scope', '$state','$time
             angular.element('.focus').trigger('focus');
         }, 100);
 
-//        // Create new Course
-//        $scope.create = function() {
-//        	// Create new Course object
-//            var course = new Courses({
-//                name: this.name
-//            });
-//
-//            // Redirect after save
-//            course.$save(function(response) {
-//                $location.path('courses/' + response._id);
-//            }, function(errorResponse) {
-//				$scope.error = errorResponse.data.message;
-//			});
-//
-//            // Clear form fields
-//            this.name = '';
-//        };
-//
+
         // Remove existing User
         $scope.remove = function (otherUser) {
             if (otherUser) {

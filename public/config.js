@@ -4,7 +4,7 @@
 var ApplicationConfiguration = (function() {
 	// Init module configuration options
 	var applicationModuleName = 'rememberator';
-	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',   'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'ui.sortable', 'slick', 'LocalForageModule'];
+	var applicationModuleVendorDependencies = ['ngResource', 'ngCookies',   'ngSanitize', 'ui.router', 'ui.bootstrap', 'ui.utils', 'ui.sortable', 'slick', 'LocalForageModule', 'ngSanitize', 'ngCsv'];
 
 	// Add a new vertical module
 	var registerModule = function(moduleName) {

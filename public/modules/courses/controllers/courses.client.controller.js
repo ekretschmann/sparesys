@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesController',
-    ['$window', '$timeout','$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService',
-        function ($window, $timeout, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService) {
+    ['$q', '$window', '$timeout', '$scope', '$stateParams', '$state', '$location', '$modal', 'Authentication', 'Courses', 'Packs', 'Cards', 'CoursesService',
+        function ($q, $window, $timeout, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService) {
 
             $scope.authentication = Authentication;
 
@@ -32,8 +32,6 @@ angular.module('courses').controller('CoursesController',
             $scope.languageBack = $scope.languages[selectedIndexBack];
 
 
-
-
             $scope.options = {};
             $scope.updateSearch = function () {
 
@@ -43,26 +41,52 @@ angular.module('courses').controller('CoursesController',
 
                 Courses.query({
                     text: $scope.options.searchText
-                }, function(courses) {
+                }, function (courses) {
                     $scope.courses = courses;
 
                 });
             };
 
-            $scope.download= function(course) {
-               // console.log(course);
-                //CoursesService.serverLoadCards()
+
+            //$scope.deferred = $q.defer();
+            $scope.getArray = [];
+            $scope.download = function (course) {
+                //// console.log(course);
+                CoursesService.serverLoadCards()
+
+                var deferred = $q.defer();
 
                 var res = CoursesService.serverLoadCards();
                 var promise = res.get({courseId: course._id});
                 promise.$promise.then(function (cards) {
                     course.cards = cards;
 
-                    console.log(course);
+                    for (var i=0; i<cards.length; i++) {
+                        $scope.getArray.push(cards[i]);
+                    }
+                    deferred.resolve($scope.getArray);
+
                 });
 
+                return deferred.promise;
 
             };
+
+            //$scope.getHeader = function () {
+            //    return ['A', 'B'];
+            //};
+
+            //$scope.getCSV = function(course) {
+            //    var res = CoursesService.serverLoadCards();
+            //    var promise = res.get({courseId: course._id});
+            //    promise.$promise.then(function (cards) {
+            //        course.cards = cards;
+            //
+            //        //$scope.getArray = course;
+            //        //console.log($scope.getArray);
+            //        return $scope.course;
+            //    });
+            //};
 
             $scope.updatePublishedSearch = function () {
 
@@ -73,7 +97,7 @@ angular.module('courses').controller('CoursesController',
                 Courses.query({
                     text: $scope.options.searchText,
                     published: true
-                }, function(courses) {
+                }, function (courses) {
                     $scope.courses = courses;
 
                 });
@@ -95,41 +119,42 @@ angular.module('courses').controller('CoursesController',
             }
 
 
-            $scope.setLanguageFront = function(lang) {
+            $scope.setLanguageFront = function (lang) {
 
                 $scope.course.cardDefaults.languageFront = lang;
                 $scope.course.$update();
             };
 
-            $scope.setLanguageBack = function(lang) {
+            $scope.setLanguageBack = function (lang) {
                 $scope.course.cardDefaults.languageBack = lang;
                 $scope.course.$update();
             };
 
-            $scope.setCheck = function(check) {
-                if(check === 'computer-checked') {
+            $scope.setCheck = function (check) {
+                if (check === 'computer-checked') {
                     $scope.course.cardDefaults.checks = 'computer';
-                } else if(check === 'self-checked') {
+                } else if (check === 'self-checked') {
                     $scope.course.cardDefaults.checks = 'self';
-                } if(check === 'mixed') {
+                }
+                if (check === 'mixed') {
                     $scope.course.cardDefaults.checks = 'mixed';
                 }
                 $scope.course.$update();
             };
 
-            $scope.toggleMode = function(mode) {
+            $scope.toggleMode = function (mode) {
 
-                if(mode === 'forward') {
+                if (mode === 'forward') {
                     $scope.course.cardDefaults.forward.enabled = !$scope.course.cardDefaults.forward.enabled;
-                } else if(mode === 'reverse') {
+                } else if (mode === 'reverse') {
                     $scope.course.cardDefaults.reverse.enabled = !$scope.course.cardDefaults.reverse.enabled;
-                } else if(mode === 'images') {
+                } else if (mode === 'images') {
                     $scope.course.cardDefaults.images.enabled = !$scope.course.cardDefaults.images.enabled;
                 }
                 $scope.course.$update();
             };
 
-            $scope.toggleSetting = function(mode, setting) {
+            $scope.toggleSetting = function (mode, setting) {
                 if (mode === 'forward') {
                     if (setting === 'readFront') {
                         $scope.course.cardDefaults.forward.readFront = !$scope.course.cardDefaults.forward.readFront;
@@ -160,11 +185,10 @@ angular.module('courses').controller('CoursesController',
             };
 
 
-            $scope.scrollDown = function() {
+            $scope.scrollDown = function () {
                 $window.scrollTo(0, document.body.scrollHeight);
                 angular.element('.focus').trigger('focus');
             };
-
 
 
             // Create new Course
@@ -236,8 +260,6 @@ angular.module('courses').controller('CoursesController',
             };
 
 
-
-
             // Find list for current user
             $scope.findForCurrentUser = function () {
                 if ($scope.authentication.user) {
@@ -265,9 +287,6 @@ angular.module('courses').controller('CoursesController',
                     });
                 }
             };
-
-
-
 
 
             $scope.findPublished = function () {
@@ -414,9 +433,6 @@ angular.module('courses').controller('CoursesController',
             };
 
 
-
-
-
             $scope.addPackToCourse = function () {
 
 
@@ -445,7 +461,7 @@ angular.module('courses').controller('CoursesController',
 
                         $scope.newpack.name = '';
 
-                        if ($scope.course.packs.length>3) {
+                        if ($scope.course.packs.length > 3) {
                             $timeout(function () {
                                 $window.scrollTo(0, document.body.scrollHeight);
                             });
@@ -454,10 +470,6 @@ angular.module('courses').controller('CoursesController',
                     }, function (errorResponse) {
                         $scope.error = errorResponse.data.message;
                     });
-
-
-
-
 
 
                 }, function (errorResponse) {

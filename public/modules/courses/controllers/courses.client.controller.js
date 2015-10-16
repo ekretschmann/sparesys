@@ -33,6 +33,7 @@ angular.module('courses').controller('CoursesController',
 
 
 
+
             $scope.options = {};
             $scope.updateSearch = function () {
 
@@ -46,6 +47,21 @@ angular.module('courses').controller('CoursesController',
                     $scope.courses = courses;
 
                 });
+            };
+
+            $scope.download= function(course) {
+               // console.log(course);
+                //CoursesService.serverLoadCards()
+
+                var res = CoursesService.serverLoadCards();
+                var promise = res.get({courseId: course._id});
+                promise.$promise.then(function (cards) {
+                    course.cards = cards;
+
+                    console.log(course);
+                });
+
+
             };
 
             $scope.updatePublishedSearch = function () {

@@ -73,18 +73,13 @@
         <div class="col-xs-12 col-md-6 dashboard-col" data-ng-repeat="course in courses">
             <div class="virtual-card">
                 <div class="title">
-
+                    &nbsp;
                     <div class="pull-right" data-ng-if="!course.supervised">
 
 
-                        <button class="btn btn-default"
-                                ng-csv="download(course)" csv-header="getHeader()" lazy-load="true" filename="test.csv" field-separator=","
-                                >Export to CSV (Lazy Load)</button>
-
-
-
                         <span data-ng-if="authentication.user.roles.indexOf('download') > -1">
-                            <a data-ng-href="" data-ng-click="download(course)"><i class="glyphicon glyphicon-download"></i></a>
+                            <a ng-csv="download(course)" csv-header="getHeader()" lazy-load="true" filename="test.csv" field-separator=","
+                                    href=""><i class="glyphicon glyphicon-download"></i></a>
                         </span>
 
                         <a data-ng-href="#!/courses/{{course._id}}/edit"><i class="glyphicon glyphicon-edit"></i></a>

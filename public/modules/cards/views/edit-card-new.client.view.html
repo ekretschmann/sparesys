@@ -328,23 +328,25 @@
 
                         <div class="col-xs-6 dashboard-col">
                             <div class="field-label" style="padding-bottom: 5px">Also accepted as answer</div>
-                            <div class="font-medium row" ng-repeat="aa in card.acceptedAnswersForward track by $index">
-
-                                <div class="col-xs-1" style="margin-top: 2px">
+                            <div class="row font-medium" ng-repeat="aa in card.acceptedAnswersForward track by $index">
+                                <div class="col-xs-1" style="margin-top: 2px; text-align: left">
                                     <a href="" style="padding-left: 5px"
                                        data-ng-click="deleteAlternativeAnswerFront($index)"><i
                                             class="glyphicon glyphicon-trash"></i></a>
                                 </div>
-                                <div class="col-xs-11">{{aa}}</div>
+
+                                <div class="col-xs-10" style="text-align: left">
+                                    {{aa}}</div>
+
                             </div>
                             <div class="font-medium row" style="padding-top: 5px">
 
 
-                                <div class="col-xs-1" style="margin-top: 5px">
-                                    <a href="" style="padding-left: 5px;" data-ng-click="addAlternativeAnswerFront()"><i
+                                <div class="col-xs-1" >
+                                    <a href="" style="padding-left: 5px; top:5px; position: absolute" data-ng-click="addAlternativeAnswerFront()"><i
                                             class="glyphicon glyphicon-plus-sign"></i></a>
                                 </div>
-                                <div class="col-xs-11">
+                                <div class="col-xs-10">
                                     <form class="form-horizontal" data-ng-submit="addAlternativeAnswerFront()"
                                           novalidate>
                                         <fieldset>
@@ -470,21 +472,21 @@
                             <div class="field-label" style="padding-bottom: 5px">Also accepted as answer</div>
                             <div class="font-medium row" ng-repeat="aa in card.acceptedAnswersReverse track by $index">
 
-                                <div class="col-xs-1" style="margin-top: 2px">
+                                <div class="col-xs-1" >
                                     <a href="" style="padding-left: 5px"
                                        data-ng-click="deleteAlternativeAnswerBack($index)"><i
                                             class="glyphicon glyphicon-trash"></i></a>
                                 </div>
-                                <div class="col-xs-11">{{aa}}</div>
+                                <div class="col-xs-10">{{aa}}</div>
                             </div>
                             <div class="font-medium row" style="padding-top: 5px">
 
 
-                                <div class="col-xs-1" style="margin-top: 5px">
+                                <div class="col-xs-1" >
                                     <a href="" style="padding-left: 5px;" data-ng-click="addAlternativeAnswerBack()"><i
                                             class="glyphicon glyphicon-plus-sign"></i></a>
                                 </div>
-                                <div class="col-xs-11">
+                                <div class="col-xs-10">
                                     <form class="form-horizontal" data-ng-submit="addAlternativeAnswerBack()"
                                           novalidate>
                                         <fieldset>
@@ -606,21 +608,21 @@
                             <div class="field-label" style="padding-bottom: 5px">Also accepted as answer</div>
                             <div class="font-medium row" ng-repeat="aa in card.acceptedAnswersForward track by $index">
 
-                                <div class="col-xs-1" style="margin-top: 2px">
+                                <div class="col-xs-2" style="margin-top: 2px">
                                     <a href="" style="padding-left: 5px"
                                        data-ng-click="deleteAlternativeAnswerFront($index)"><i
                                             class="glyphicon glyphicon-trash"></i></a>
                                 </div>
-                                <div class="col-xs-11">{{aa}}</div>
+                                <div class="col-xs-10">{{aa}}</div>
                             </div>
                             <div class="font-medium row" style="padding-top: 5px">
 
 
-                                <div class="col-xs-1" style="margin-top: 5px">
+                                <div class="col-xs-2" style="margin-top: 5px">
                                     <a href="" style="padding-left: 5px;"  data-ng-click="addAlternativeAnswerFront()"><i
                                             class="glyphicon glyphicon-plus-sign"></i></a>
                                 </div>
-                                <div class="col-xs-11">
+                                <div class="col-xs-10">
                                     <form class="form-horizontal" data-ng-submit="addAlternativeAnswerFront()"
                                           novalidate>
                                         <fieldset>

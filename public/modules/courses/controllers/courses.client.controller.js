@@ -52,7 +52,7 @@ angular.module('courses').controller('CoursesController',
             $scope.getArray = [];
             $scope.download = function (course) {
                 //// console.log(course);
-                CoursesService.serverLoadCards()
+                CoursesService.serverLoadCards();
 
                 var deferred = $q.defer();
 
@@ -61,8 +61,21 @@ angular.module('courses').controller('CoursesController',
                 promise.$promise.then(function (cards) {
                     course.cards = cards;
 
+                    console.log(cards[0]);
                     for (var i=0; i<cards.length; i++) {
-                        $scope.getArray.push(cards[i]);
+
+                        var acceptedForward = '';
+                        for(var j=0; j<cards[i].acceptedAnswersForward.length; j++) {
+                            acceptedForward += cards[i].acceptedAnswersForward[j]+'#';
+                        }
+
+                        $scope.getArray.push({
+                            front: cards[i].question,
+                            frontExt: cards[i].questionExtension,
+                            accepted: acceptedForward,
+                            back: cards[i].answer,
+                            backExt: cards[i].answerExtension
+                        });
                     }
                     deferred.resolve($scope.getArray);
 
@@ -72,9 +85,9 @@ angular.module('courses').controller('CoursesController',
 
             };
 
-            //$scope.getHeader = function () {
-            //    return ['A', 'B'];
-            //};
+            $scope.getHeader = function () {
+                return ['Front', 'Front Extension', 'Back', 'Back Extension'];
+            };
 
             //$scope.getCSV = function(course) {
             //    var res = CoursesService.serverLoadCards();

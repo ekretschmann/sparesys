@@ -65,7 +65,9 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
             $scope.calendar.openDueDateCalendar = true;
         };
 
+        $scope.data = {};
         $scope.addAlternativeAnswerFront = function () {
+            console.log($scope.data.alternativeAnswerFront);
             if ($scope.data.alternativeAnswerFront) {
                 $scope.card.acceptedAnswersForward.push($scope.data.alternativeAnswerFront);
                 $scope.card.$update();

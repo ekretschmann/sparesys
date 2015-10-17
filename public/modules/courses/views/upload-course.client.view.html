@@ -1,48 +1,359 @@
-<section data-ng-controller="UploadController">
+<section data-ng-controller="CoursesCreateController">
 
+    <form data-ng-submit="upload()" class="font-large" validate>
 
-    <div class="sparesys-header">
-
-        <div class="sparesys-title">
-            Upload Course
+        <div class="col-xs-12 col-md-6"
+             data-ng-if="authentication.user.roles.indexOf('help') > -1">
+            <div class="virtual-card ribbon-card">
+                <div class="help-ribbon"><span>Help</span></div>
+                <div class="title">
+                    Uploading a course
+                </div>
+                <infobox logo="girl">
+                    some detail
+                </infobox>
+            </div>
         </div>
+
+        <!--<div class="col-xs-12 col-md-6 dashboard-col  large-screen-only "-->
+             <!--data-ng-if="authentication.user.roles.indexOf('help') > -1">-->
+
+            <!--<div class="virtual-card ribbon-card">-->
+                <!--<div class="help-ribbon"><span>Help</span></div>-->
+                <!--<div class="title">-->
+                    <!--Course properties-->
+                <!--</div>-->
+                <!--<infobox logo="boy" position="left">-->
+                    <!--Rememberators can read questions and answer to the students of your course.-->
+                    <!--If you want to use this, please define the languages to use. You can also define-->
+                    <!--what modes your cards should be used in. Each card you create in this course will-->
+                    <!--have these settings by default, but you will be able to change them later.-->
+                <!--</infobox>-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <div class="col-xs-12 col-md-6 dashboard-col ">
+
+            <div class="virtual-card">
+                <div class="title">
+                    New course
+                </div>
+                <div class="flashcard-section">
+                    <div class="field-label">Course Name</div>
+                    <div>
+                        <input type="text"
+                               data-ng-model="name"
+                               class="form-control"
+                               placeholder="Name"
+                               required>
+                    </div>
+                </div>
+
+                <div class="flashcard-section">
+                    <div class="field-label">Description</div>
+                    <div>
+                        <input type="text"
+                               data-ng-model="description"
+                               class="form-control"
+                               placeholder="Description"
+                               required>
+                    </div>
+                </div>
+
+                <div class="flashcard-section">
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <div class="field-label">Card Front</div>
+                            <div>
+                                <input type="text"
+                                       data-ng-model="front"
+                                       class="form-control"
+                                       placeholder="What is on the Front of the Cards (e.g. Countries)">
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6">
+                            <div class="field-label">Card Back</div>
+                            <div>
+                                <input type="text"
+                                       data-ng-model="back"
+                                       class="form-control"
+                                       placeholder="What is on the Back of the Cards (e.g. Capitals)">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+
+                <div class="flashcard-section">
+                    <div class="field-label">My role</div>
+                    <div>
+                        <input data-ng-model="teaching" type="radio" ng-value="true"/> Teacher
+                        <input style="margin-left: 10px" data-ng-model="teaching" type="radio" ng-value="false"/> Student
+
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+
+
+        <div class="col-xs-12 col-md-6 dashboard-col">
+            <div class="virtual-card">
+                <div class="flashcard-section">
+                    <div class="col-xs-4">
+
+
+                        <div class="field-label">
+                            Language Front
+                        </div>
+                        <div class="field-data">
+
+                            <div class="btn-group right-padded-l nowrap">
+
+
+                                <button type="button" class="btn btn-default standard-dropdown-width">
+                                    {{languageFront.name}}
+                                </button>
+                                <button type="button" class="btn btn-default dropdown-toggle">
+                                    <span class="caret"></span>
+                                    <span class="sr-only">Split button!</span>
+                                </button>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
+                                        <a>{{lang.name}}</a>
+                                    </li>
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-xs-4">
+
+                        <div class="field-label">
+                            Language Back
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default standard-dropdown-width">
+                                {{languageBack.name }}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
+                                    <a>{{lang.name}}</a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+
+                    <div class="col-xs-4">
+
+                        <div class="field-label">
+                            Checks
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-default standard-dropdown-width">
+                                {{check }}
+                            </button>
+                            <button type="button" class="btn btn-default dropdown-toggle">
+                                <span class="caret"></span>
+                                <span class="sr-only">Split button!</span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li data-ng-repeat="check in checks" data-ng-click="setCheck(check)">
+                                    <a>{{check}}</a>
+                                </li>
+                            </ul>
+
+                        </div>
+
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12">
+                    <div class="flashcard-section">
+                        <div class="field-label">
+
+                            Forward
+                        </div>
+
+
+                        <div class="row font-medium">
+
+                            <div class="col-xs-4">
+                                <input type="checkbox" ng-model="useForwardMode">
+                                Use Mode
+                            </div>
+
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
+                                <input type="checkbox" ng-model="readQuestionsForward"
+                                       ng-disabled="!useForwardMode">
+                                Read Questions
+                            </div>
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
+                                <input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">
+                                Read Answers
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12">
+                    <div class="flashcard-section">
+
+                        <div class="field-label">
+
+                            Reverse
+                        </div>
+
+
+                        <div class="row font-medium">
+
+                            <div class="col-xs-4">
+                                <input type="checkbox" ng-model="useReverseMode">
+                                Use Mode
+                            </div>
+
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">
+                                <input type="checkbox" ng-model="readQuestionsReverse"
+                                       ng-disabled="!useReverseMode">
+                                Read Questions
+                            </div>
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">
+                                <input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">
+                                Read Answers
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12">
+                    <div class="flashcard-section">
+
+                        <div class="field-label">
+
+                            Images
+                        </div>
+
+
+                        <div class="row font-medium">
+
+                            <div class="col-xs-4">
+                                <input type="checkbox" ng-model="useImagesMode">
+                                Use Mode
+                            </div>
+
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">
+                                <input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">
+                                Read Questions
+                            </div>
+
+                            <div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">
+                                <input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">
+                                Read Answers
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="col-xs-12" style="text-align: center; padding-top: 2em">
+                    <button ng-disabled="!name" type="button" class="btn btn-rememberators font-s"
+                            upload
+                            data-ng-click="upload()">
+                        Upload Cards
+                        <input  ng-disabled="!name" type="file" style="position: absolute;top:50px; right:100px" upload/>
+                    </button>
+                    <!--<div class="font-s btn-rememberators">-->
+                        <!--Upload cards-->
+                    <!--<input  type="file"  upload/>-->
+                    <!--</div>-->
+                </div>
+            </div>
+
+
+        </div>
+
+
+    </form>
+
+
+    <div class="rememberators-footer col-xs-12">
+
+        rememberators.com
     </div>
 
-    <form  data-ng-submit="uploadQA()" novalidate>
-    <!--<form class="form-horizontal" data-ng-submit="uploadWordList()" novalidate>-->
-        <fieldset>
-            <div class="form-group">
-                <table class="sparesys-view-object-table">
-                    <tr class="controls">
-                        <td class="sparesys-view-object-label-cell">Name</td>
-                        <td class="sparesys-view-object-content-cell">
-                            <input type="text" data-ng-model="options.name"
-                                   id="name" class="form-control"
-                                   placeholder="Name"
-                                   required></td>
-                    </tr>
 
-                    <tr class="controls">
 
-                        <td class="sparesys-view-object-label-cell">Description</td>
-                        <td class="sparesys-view-object-content-cell">
-                            <input type="text" data-ng-model="options.description"
-                                   id="description" class="form-control"
-                                   placeholder="Description" required></td>
-                    </tr>
-                </table>
-            <textarea data-ng-model="text" style="width: 100%" rows="16">
 
-            </textarea>
-            </div>
-            <div style="text-align: center">
-                <input type="submit" value="Create" class="btn btn-default">
-            </div>
-            <div data-ng-show="error" class="text-danger">
-                <strong>{{error}}</strong>
-            </div>
-        </fieldset>
-    </form>
+    <!--<div class="sparesys-header">-->
+
+        <!--<div class="sparesys-title">-->
+            <!--Upload Course-->
+        <!--</div>-->
+    <!--</div>-->
+
+    <!--<form  data-ng-submit="uploadQA()" novalidate>-->
+    <!--&lt;!&ndash;<form class="form-horizontal" data-ng-submit="uploadWordList()" novalidate>&ndash;&gt;-->
+        <!--<fieldset>-->
+            <!--<div class="form-group">-->
+                <!--<table class="sparesys-view-object-table">-->
+                    <!--<tr class="controls">-->
+                        <!--<td class="sparesys-view-object-label-cell">Name</td>-->
+                        <!--<td class="sparesys-view-object-content-cell">-->
+                            <!--<input type="text" data-ng-model="options.name"-->
+                                   <!--id="name" class="form-control"-->
+                                   <!--placeholder="Name"-->
+                                   <!--required></td>-->
+                    <!--</tr>-->
+
+                    <!--<tr class="controls">-->
+
+                        <!--<td class="sparesys-view-object-label-cell">Description</td>-->
+                        <!--<td class="sparesys-view-object-content-cell">-->
+                            <!--<input type="text" data-ng-model="options.description"-->
+                                   <!--id="description" class="form-control"-->
+                                   <!--placeholder="Description" required></td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+            <!--<textarea data-ng-model="text" style="width: 100%" rows="16">-->
+
+            <!--</textarea>-->
+            <!--</div>-->
+            <!--<div style="text-align: center">-->
+                <!--<input type="submit" value="Create" class="btn btn-default">-->
+            <!--</div>-->
+            <!--<div data-ng-show="error" class="text-danger">-->
+                <!--<strong>{{error}}</strong>-->
+            <!--</div>-->
+        <!--</fieldset>-->
+    <!--</form>-->
 
 
 

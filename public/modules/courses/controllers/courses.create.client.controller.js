@@ -56,6 +56,9 @@ angular.module('courses').controller('CoursesCreateController',
                 $scope.check = check;
             };
 
+            $scope.upload = function() {
+                console.log('here');
+            };
 
             // Create new Course
             $scope.createCourse = function () {

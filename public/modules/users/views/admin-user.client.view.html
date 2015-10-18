@@ -100,16 +100,16 @@
                     </div>
 
                     <div data-ng-if="otherUser.studentInSchools.length > 0">
-                        <div class="field-data" data-ng-repeat="s in otherUser.studentInSchools"
+                        <div data-ng-repeat="s in otherUser.studentInSchools"
                              data-ng-controller="SchoolsController" data-ng-init="findById(s)">
 
-                            <div ng-class="{'danger': error}">
-                                <a href="/#!/schools/{{s}}/admin">{{s}}</a> <a href=""
-                                                                               data-ng-click="areYouSureToRemoveSchoolFromStudent(s, otherUser)"><i
-                                    class="glyphicon glyphicon-minus-sign"></i></a>
+                            <div class="field-data">
+                                <a href="#!/schools/{{s}}/admin">{{school.name}}</a>
                             </div>
                         </div>
                     </div>
+
+
                 </div>
 
 
@@ -128,7 +128,7 @@
                         <div class="field-data" data-ng-repeat="s in otherUser.studentInClasses track by $index"
                              data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
 
-                            <a href="#!/schoolclasses/{{s}}/admin">{{schoolclass.name}}</a> <a href=""
+                            {{schoolclass.name}} <a href=""
                                                                                                data-ng-click="removeStudentFromClass(otherUser, s)"><i
                                 class="glyphicon glyphicon-minus-sign"></i></a>
                         </div>
@@ -151,19 +151,17 @@
                         none
                     </div>
 
-                    <!--{{otherUser.teacherInSchools}}-->
                     <div data-ng-if="otherUser.teacherInSchools.length > 0">
-                        <div class="field-data" data-ng-repeat="s in otherUser.teacherInSchools track by $index"
+                        <div data-ng-repeat="s in otherUser.teacherInSchools"
                              data-ng-controller="SchoolsController" data-ng-init="findById(s)">
 
-                            <div ng-class="{'danger': error}">
-
-                                <a href="/#!/schools/{{s}}/admin">{{s}}</a> <a href=""
-                                                                               data-ng-click="areYouSureToRemoveSchoolFromTeacher(school, otherUser)"><i
-                                    class="glyphicon glyphicon-minus-sign"></i></a>
+                            <div class="field-data">
+                                <a href="#!/schools/{{s}}/admin">{{school.name}}</a>
                             </div>
                         </div>
                     </div>
+
+                   
                 </div>
 
 
@@ -182,7 +180,7 @@
                         <div class="field-data" data-ng-repeat="sc in otherUser.teachesClasses track by $index"
                              data-ng-controller="SchoolclassesController" data-ng-init="findById(sc)">
 
-                            <a href="#!/schoolclasses/{{sc}}/admin">{{schoolclass.name}}</a> <a href=""
+                            {{schoolclass.name}} <a href=""
                                                                                                 data-ng-click="areYouSureToRemoveSchoolclassFromTeacher(schoolclass, otherUser)"><i
                                 class="glyphicon glyphicon-minus-sign"></i></a>
                         </div>
@@ -203,33 +201,19 @@
                     <div class="field-data" data-ng-if="otherUser.administersSchools.length ===0">
                         none
                     </div>
-                    <div class="flashcard-section" data-ng-repeat="s in otherUser.administersSchools"
+                    <div data-ng-repeat="s in otherUser.administersSchools"
                          data-ng-controller="SchoolsController" data-ng-init="findById(s)">
 
-                        <div class="row">
-                            <div class="field-label col-xs-6">Name</div>
-                            <div class="field-data col-sx-6">
-                                {{school.name}}
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="field-label col-xs-6">City</div>
-                            <div class="field-data col-sx-6">
-                                {{school.city}}
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="field-label col-xs-6">Coutry</div>
-                            <div class="field-data col-sx-6">
-                                {{school.country}}
-                            </div>
+                        <div class="field-data">
+                            <a href="#!/schools/{{s}}/admin">{{school.name}}</a>
                         </div>
                     </div>
+
                 </div>
             </div>
-
         </div>
+
+    </div>
     </div>
 
 
@@ -243,7 +227,8 @@
                 <div data-ng-repeat="role in roles">
 
                     <div class="col-xs-6">
-                        <input data-ng-click="updateUserRoles()" data-ng-model="userRoles[$index]" type="checkbox"/> {{role.name}}
+                        <input data-ng-click="updateUserRoles()" data-ng-model="userRoles[$index]" type="checkbox"/>
+                        {{role.name}}
                     </div>
                 </div>
             </div>

@@ -2,13 +2,7 @@
 
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
-    <div class="large-screen-only title" data-ng-if="authentication.user.roles.indexOf('help') === -1">
-        Manage Courses
-    </div>
 
-    <div class="small-screen-only title">
-        Manage Courses
-    </div>
 
     <div class="font-large">
         <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
@@ -42,15 +36,7 @@
                         </div>
 
 
-                        <div>
-                            If you can't
-                            find the course you are looking for in this list, you can
-                            either <a href="/#!/courses/create">
-                            create a new course
-                        </a> or <a href="#!/courses/search">
-                            search for an existing course.
-                        </a>
-                        </div>
+
                     </infobox>
                 </div>
                 <div data-ng-if="courses.length === 0">
@@ -67,6 +53,9 @@
                     </infobox>
                 </div>
             </div>
+
+
+
         </div>
 
 

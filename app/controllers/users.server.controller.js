@@ -315,11 +315,15 @@ exports.update = function (req, res) {
         updateSchoolForTeacher(theUser, req);
         updateSchoolForStudent(theUser, req);
 
-        var originalClasses= theUser.teachesClasses;
+        var originalClassesRaw= theUser.teachesClasses;
         var newClasses = req.body.teachesClasses;
+        var originalClasses = [];
+        for (var i=0; i<originalClassesRaw.length; i++) {
+            originalClasses.push(originalClassesRaw[i]+'');
+        }
 
         var deletedClasses = [];
-        for (var i=0;i<originalClasses.length; i++) {
+        for (i=0;i<originalClasses.length; i++) {
             if (newClasses.indexOf(originalClasses[i]) === -1) {
                 deletedClasses.push(originalClasses[i]);
             }
@@ -330,9 +334,12 @@ exports.update = function (req, res) {
         }
 
 
-        originalClasses= theUser.studentInClasses;
+        originalClassesRaw= theUser.studentInClasses;
         newClasses = req.body.studentInClasses;
-
+        originalClasses = [];
+        for ( i=0; i<originalClassesRaw.length; i++) {
+            originalClasses.push(originalClassesRaw[i]+'');
+        }
         deletedClasses = [];
         for (i=0;i<originalClasses.length; i++) {
             if (newClasses.indexOf(originalClasses[i]) === -1) {
@@ -348,6 +355,9 @@ exports.update = function (req, res) {
         theUser = _.extend(theUser, req.body);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
+
+
+
         if (theUser.teachesClasses === '') {
             theUser.teachesClasses = undefined;
         }
@@ -355,6 +365,7 @@ exports.update = function (req, res) {
             theUser.inventory = [];
         }
         theUser.save(function (err) {
+
 
             if (err) {
                 return res.send(400, {

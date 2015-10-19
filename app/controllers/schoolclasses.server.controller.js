@@ -63,7 +63,6 @@ exports.create = function (req, res) {
                     school.schoolclasses.push(schoolclass._id);
 
                     school.save(function (err, s) {
-                        console.log(s);
                         res.jsonp(schoolclass);
                     });
 
@@ -92,17 +91,14 @@ exports.addTeacher = function (req, res) {
 
 
     var schoolclass = req.schoolclass;
-    console.log(schoolclass);
     schoolclass.teachers.push(req.params.userId);
 
-    console.log(schoolclass);
     schoolclass.save(function (err) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
             });
         } else {
-            console.log(schoolclass);
             res.jsonp(schoolclass);
         }
     });
@@ -218,7 +214,6 @@ var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds
  */
 exports.update = function (req, res) {
 
-
     var schoolclass = req.schoolclass;
     var originalTeachers = schoolclass.teachers;
     var originalStudents = schoolclass.students;
@@ -264,7 +259,6 @@ exports.update = function (req, res) {
     }
 
 
-
     schoolclass.save(function (err, sc) {
         if (err) {
             return res.send(400, {
@@ -274,8 +268,6 @@ exports.update = function (req, res) {
 
             updateUsers(originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass).then(
                 function() {
-                    console.log(originalCourses);
-                    console.log(currentCourses);
                     for (i=0; i<currentCourses.length;i++) {
                         if (originalCourses.indexOf(currentCourses[i]+'') === -1) {
                             for (var j=0; j<currentStudentIds.length; j++) {

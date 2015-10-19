@@ -65,14 +65,12 @@
         <div class="virtual-card ribbon-card font-large">
             <div class="help-ribbon"><span>Help</span></div>
             <div class="title">
-                Adding cards
+                Bulk changes
             </div>
             <infobox logo="girl">
-                Each pack consists of a number of cards, which you can add
-                on the bottom of this screen. For some cards you might want
-                some additional information to make clearer which answer you expect.
-                When the card is used in reverse mode, this extra information is
-                not expected as part of the answer.
+                You can change the settings of all cards in this pack in one go. Switch on
+                the settings you want to change and click the button. Everything that you
+                have not switched on will not be changed.
             </infobox>
         </div>
     </div>
@@ -181,6 +179,16 @@
 
                         <div class="pull-right">
 
+                            <a href="" data-ng-click="showMode('images')" data-ng-if="editMode === 'data'"><i
+                                    class="glyphicon glyphicon-picture"></i></a>
+
+                            <i class="glyphicon glyphicon-picture text-muted" data-ng-if="editMode === 'images'"></i>
+
+                            <a href="" data-ng-click="showMode('data')" data-ng-if="editMode === 'images'"><i
+                                    class="glyphicon glyphicon-list"></i></a>
+
+                            <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
+
 
                             <a href="#!/cards/{{card._id}}"><i class="glyphicon glyphicon-edit"></i></a>
 
@@ -200,6 +208,14 @@
                         {{card.question}}
 
                         <div class="pull-right">
+
+
+                            <a href="" data-ng-click="showMode('images')" data-ng-if="editMode === 'data'"><i
+                                    class="glyphicon glyphicon-picture"></i></a>
+                            <i class="glyphicon glyphicon-picture text-muted" data-ng-if="editMode === 'images'"></i>
+                            <a href="" data-ng-click="showMode('data')" data-ng-if="editMode === 'images'"><i
+                                    class="glyphicon glyphicon-list"></i></a>
+                            <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
 
 
                             <a href="#!/cards/{{card._id}}"><i class="glyphicon glyphicon-edit"></i></a>

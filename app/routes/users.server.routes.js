@@ -11,6 +11,7 @@ module.exports = function(app) {
 
 
     app.route('/users/password').post(users.changePassword);
+    app.route('/users/admin/password').post(users.changeUserPassword);
     app.route('/users/:userId')
         .get(users.read)
         .put(users.update)

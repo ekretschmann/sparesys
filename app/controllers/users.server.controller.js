@@ -418,6 +418,11 @@ exports.update = function (req, res) {
     }
 };
 
+
+exports.changeUserPassword = function (req, res, next) {
+    console.log(req.user);
+
+};
 /**
  * Change Password
  */

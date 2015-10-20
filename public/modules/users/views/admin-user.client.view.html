@@ -258,17 +258,32 @@
             <div class="title">Change password</div>
 
 
+            <div class="flashcard-section ">
+                    <div class="field-label">Your password</div>
+                    <div class="field-data">
+                        <input type="text"
+                               data-ng-model="passwordDetails.admin"
+                               class="form-control"
+                               placeholder="New password">
+                    </div>
+            </div>
 
             <div class="flashcard-section">
-                <input type="text"
-                       data-ng-model="otherUser.password"
-                       class="form-control"
-                       placeholder="New password">
+
+                    <div class="field-label">New user password</div>
+                    <div class="field-data">
+                        <input type="text"
+                               data-ng-model="passwordDetails.user"
+                               class="form-control"
+                               placeholder="New password">
+                    </div>
+
+
             </div>
 
             <div class="flashcard-section" style="text-align: center">
 
-                <button class="btn btn-rememberators" data-ng-click="updatePassword()">Update</button>
+                <button class="btn btn-rememberators" data-ng-click="changeUserPassword()">Update</button>
             </div>
         </div>
     </div>

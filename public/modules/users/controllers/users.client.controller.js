@@ -1,8 +1,8 @@
 'use strict';
 
 // Users controller
-angular.module('users').controller('UsersController', ['$scope', '$state', '$timeout', '$modal', '$stateParams', '$location', 'Authentication', 'Users', 'Roles',
-    function ($scope, $state, $timeout, $modal, $stateParams, $location, Authentication, Users, Roles) {
+angular.module('users').controller('UsersController', ['$http', '$scope', '$state', '$timeout', '$modal', '$stateParams', '$location', 'Authentication', 'Users', 'Roles',
+    function ($http, $scope, $state, $timeout, $modal, $stateParams, $location, Authentication, Users, Roles) {
         $scope.authentication = Authentication;
 
 
@@ -199,6 +199,19 @@ angular.module('users').controller('UsersController', ['$scope', '$state', '$tim
                     $state.go($state.$current, null, {reload: true});
                 });
 
+        };
+
+        $scope.passwordDetails = {};
+        $scope.changeUserPassword = function () {
+            $scope.success = $scope.error = null;
+
+            $http.post('/users/admin/password', $scope.passwordDetails).success(function (response) {
+                // If successful show success message and clear form
+                $scope.success = true;
+                $scope.passwordDetails = null;
+            }).error(function (response) {
+                $scope.error = response.message;
+            });
         };
 
 

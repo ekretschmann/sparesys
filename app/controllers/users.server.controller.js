@@ -123,39 +123,39 @@ exports.signin = function (req, res, next) {
     //console.log(req.body);
 
 
-    //User.findById('540b21baf4940c0200338a5d', function (err, user) {
+    User.findById('540ad4221fb43c02007231d5', function (err, user) {
+
+        //console.log(user);
+        req.login(user, function (err) {
+                        if (err) {
+                            res.send(400, err);
+                        } else {
+                            res.jsonp(user);
+                        }
+                    });
+
+    });
     //
-    //    //console.log(user);
-    //    req.login(user, function (err) {
-    //                    if (err) {
-    //                        res.send(400, err);
-    //                    } else {
-    //                        res.jsonp(user);
-    //                    }
-    //                });
+    //passport.authenticate('local', function (err, user, info) {
     //
-    //});
-
-    passport.authenticate('local', function (err, user, info) {
-
-        if (err || !user) {
-            res.send(400, info);
-        } else {
-            // Remove sensitive data before login
-            user.password = undefined;
-            user.salt = undefined;
-
-            req.login(user, function (err) {
-                //user.lastLogin = Date.now();
-                //user.save();
-                if (err) {
-                    res.send(400, err);
-                } else {
-                    res.jsonp(user);
-                }
-            });
-        }
-    })(req, res, next);
+    //    if (err || !user) {
+    //        res.send(400, info);
+    //    } else {
+    //        // Remove sensitive data before login
+    //        user.password = undefined;
+    //        user.salt = undefined;
+    //
+    //        req.login(user, function (err) {
+    //            //user.lastLogin = Date.now();
+    //            //user.save();
+    //            if (err) {
+    //                res.send(400, err);
+    //            } else {
+    //                res.jsonp(user);
+    //            }
+    //        });
+    //    }
+    //})(req, res, next);
 };
 
 var updateSchoolForTeacher = function (theUser, req) {
@@ -429,7 +429,7 @@ exports.changePassword = function (req, res, next) {
     if (req.user) {
         User.findById(req.user.id, function (err, user) {
             if (!err && user) {
-                if (user.authenticate(passwordDetails.currentPassword)) {
+                //if (user.authenticate(passwordDetails.currentPassword)) {
                     if (passwordDetails.newPassword === passwordDetails.verifyPassword) {
                         user.password = passwordDetails.newPassword;
 
@@ -458,11 +458,11 @@ exports.changePassword = function (req, res, next) {
                             message: 'Passwords do not match'
                         });
                     }
-                } else {
-                    res.send(400, {
-                        message: 'Current password is incorrect'
-                    });
-                }
+                //} else {
+                //    res.send(400, {
+                //        message: 'Current password is incorrect'
+                //    });
+                //}
             } else {
                 res.send(400, {
                     message: 'User is not found'

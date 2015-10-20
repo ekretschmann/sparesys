@@ -146,6 +146,8 @@ exports.signin = function (req, res, next) {
             user.salt = undefined;
 
             req.login(user, function (err) {
+                user.lastLogin = Date.now();
+                user.save();
                 if (err) {
                     res.send(400, err);
                 } else {
@@ -364,14 +366,16 @@ exports.update = function (req, res) {
         if (!theUser.inventory) {
             theUser.inventory = [];
         }
-        theUser.save(function (err) {
 
+        theUser.save(function (err) {
 
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)
                 });
             } else {
+
+
                 req.login(user, function (err) {
                     if (err) {
                         res.send(400, err);

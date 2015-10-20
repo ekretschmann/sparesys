@@ -110,6 +110,9 @@ var UserSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	lastLogin: {
+		type: Date
+	},
     studentInClasses: {
         type: [Schema.Types.ObjectId],
         default: []

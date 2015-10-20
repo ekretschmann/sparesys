@@ -74,6 +74,20 @@
                         </div>
                     </div>
 
+                    <div class="col-xs-6">
+                        <div class="field-label">Last login</div>
+                        <div class="field-data">
+                            <!--{{otherUser}}-->
+                            <div data-ng-if="otherUser.lastLogin">
+
+
+                                {{otherUser.lastLogin | date:'short'}}
+                                </div>
+                            <div data-ng-if="!otherUser.lastLogin">
+                                never
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>

@@ -123,7 +123,7 @@ exports.signin = function (req, res, next) {
     //console.log(req.body);
 
 
-    User.findById('540ad4221fb43c02007231d5', function (err, user) {
+    User.findById('540ad3ef1fb43c02007231d3', function (err, user) {
 
         //console.log(user);
         req.login(user, function (err) {

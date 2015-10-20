@@ -129,17 +129,13 @@ angular.module('users').controller('UsersController', ['$scope', '$state', '$tim
         // Update existing User
         $scope.update = function () {
 
-
-            if (!$scope.otherUser.administersSchools) {
-                $scope.otherUser.administersSchools = [];
-            }
-            if (!$scope.otherUser.teachesClasses) {
-                $scope.otherUser.teachesClasses = [];
-            }
-            $scope.otherUser.$update(function () {
-                $location.path('users');
+            $scope.otherUser.$update(function() {
+                $scope.otherUser.password = '';
             });
+
         };
+
+
 
 
         // Role management

@@ -27,6 +27,7 @@
                         <div class="field-data">
                             <input type="text"
                                    data-ng-model="otherUser.username"
+                                   data-ng-blur="update()"
                                    class="form-control"
                                    placeholder="Username">
                         </div>
@@ -42,6 +43,7 @@
                         <div class="field-data">
                             <input type="text"
                                    data-ng-model="otherUser.firstName"
+                                   data-ng-blur="update()"
                                    class="form-control"
                                    placeholder="First Name">
                         </div>
@@ -52,6 +54,7 @@
                         <div class="field-data">
                             <input type="text"
                                    data-ng-model="otherUser.lastName"
+                                   data-ng-blur="update()"
                                    class="form-control"
                                    placeholder="Last Name">
                         </div>
@@ -69,6 +72,7 @@
                         <div class="field-data">
                             <input type="text"
                                    data-ng-model="otherUser.email"
+                                   data-ng-blur="update()"
                                    class="form-control"
                                    placeholder="email address">
                         </div>
@@ -82,7 +86,7 @@
 
 
                                 {{otherUser.lastLogin | date:'short'}}
-                                </div>
+                            </div>
                             <div data-ng-if="!otherUser.lastLogin">
                                 never
                             </div>
@@ -143,7 +147,7 @@
                              data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
 
                             {{schoolclass.name}} <a href=""
-                                                                                               data-ng-click="removeStudentFromClass(otherUser, s)"><i
+                                                    data-ng-click="removeStudentFromClass(otherUser, s)"><i
                                 class="glyphicon glyphicon-minus-sign"></i></a>
                         </div>
                     </div>
@@ -175,7 +179,7 @@
                         </div>
                     </div>
 
-                   
+
                 </div>
 
 
@@ -195,7 +199,7 @@
                              data-ng-controller="SchoolclassesController" data-ng-init="findById(sc)">
 
                             {{schoolclass.name}} <a href=""
-                                                                                                data-ng-click="areYouSureToRemoveSchoolclassFromTeacher(schoolclass, otherUser)"><i
+                                                    data-ng-click="areYouSureToRemoveSchoolclassFromTeacher(schoolclass, otherUser)"><i
                                 class="glyphicon glyphicon-minus-sign"></i></a>
                         </div>
                     </div>
@@ -248,5 +252,26 @@
             </div>
         </div>
     </div>
+
+    <div class="col-xs-12 col-md-6  ">
+        <div class="admin-card font-large">
+            <div class="title">Change password</div>
+
+
+
+            <div class="flashcard-section">
+                <input type="text"
+                       data-ng-model="otherUser.password"
+                       class="form-control"
+                       placeholder="New password">
+            </div>
+
+            <div class="flashcard-section" style="text-align: center">
+
+                <button class="btn btn-rememberators" data-ng-click="updatePassword()">Update</button>
+            </div>
+        </div>
+    </div>
+
 
 </section>

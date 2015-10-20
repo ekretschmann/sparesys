@@ -142,12 +142,13 @@ exports.signin = function (req, res, next) {
             res.send(400, info);
         } else {
             // Remove sensitive data before login
+            user.lastLogin = Date.now();
+            user.save();
             user.password = undefined;
             user.salt = undefined;
 
             req.login(user, function (err) {
-                //user.lastLogin = Date.now();
-                //user.save();
+
                 if (err) {
                     res.send(400, err);
                 } else {

@@ -4,51 +4,36 @@
     <div ng-include="'/modules/core/views/partial/practice-options.modal.client.view.html'"></div>
 
 
-    <!--<div class="content-header">-->
-
-
-    <!--<div class="pull-right">-->
-    <!--<a class="btn btn-rememberators" data-ng-click="stopPracitcing();">-->
-    <!--<i class="glyphicon glyphicon-stop"></i> Stop Practicing-->
-    <!--</a>-->
-
-    <!--<a class="btn btn-rememberators-small" data-ng-click="optionsModal();">-->
-    <!--<i class="glyphicon glyphicon-align-justify"></i>-->
-    <!--</a>-->
-
-
-    <!--</div>-->
-
-
-    <!--</div>-->
-
-    <!--</div>-->
-    <!--</div>-->
-
     <div data-ng-if="cards && cards.length > 0">
 
 
-        <div class="col-md-2 flashcard-left col-lg-3 flashbox" style="padding-left: 1em">
+        <div class="col-md-2 flashcard-left col-lg-3 " style="padding-left: 1em">
 
-            <div class="title">
-                {{course.name}}
+
+
+            <div class="flashbox">
+                <div class="title">
+                    {{course.name}}
+
+                </div>
+                <div>
+                    <svg id="fillgauge" width="150px" height="140px"></svg>
+                </div>
+
+                <div tooltip="{{challengeDescription}}">{{challengeName}}
+                    <a href="" tooltip-trigger="mouseenter"><i class="glyphicon glyphicon-info-sign small"></i></a>
+                </div>
+
 
             </div>
-            <div>
-                <svg id="fillgauge" width="150px" height="140px"></svg>
-            </div>
 
-            <div tooltip="{{challengeDescription}}">{{challengeName}}
-                <a href="" tooltip-trigger="mouseenter"><i class="glyphicon glyphicon-info-sign small"></i></a>
-            </div>
-
-
-            <div class="flashcard-section">
+            <div class="flashbox">
                 <a class="btn btn-rememberators" data-ng-click="stopPracitcing();">
                     <i class="glyphicon glyphicon-stop"></i> Stop Practicing
                 </a>
 
             </div>
+
         </div>
 
         <!--<div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1"-->
@@ -279,38 +264,54 @@
                 <!--</div>-->
 
                 <div class="flashbox">
-                    <input type="checkbox"
-                           ng-model="options.repeatOnly">
-                    Only repeat questions. No new Cards, please.
+                    <div>
+
+                        <div class="pull-right">
+
+
+                            <a href="" data-ng-click="toggleMode('forward')"
+                               data-ng-if="card.modes.indexOf('forward') > -1"><i class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleMode('forward')"
+                               data-ng-if="card.modes.indexOf('forward') === -1"><i
+                                    class="glyphicon glyphicon-off"></i></a>
+
+                        </div>
+
+
+                    <!--<input type="checkbox"-->
+                           <!--ng-model="options.repeatOnly">-->
+                    </div>
+                    <div>Only repeat questions.</div>
+                    <div>No new cards, please.</div>
                 </div>
 
-                <div class="practice-option">
+                <div class="flashbox">
                     <input type="checkbox"
                            ng-model="options.selfChecksOnly">
                     Self checks only. I'll practice spelling later.
                 </div>
 
-                <div class="practice-option">
+                <div class="flashbox">
                     <input type="checkbox"
                            ng-model="options.useForwardMode">
                     Use forward mode.
                 </div>
 
 
-                <div class="practice-option">
+                <div class="flashbox">
                     <input type="checkbox"
                            ng-model="options.useReverseMode">
                     Use reverse mode.
                 </div>
 
 
-                <div class="practice-option">
+                <div class="flashbox">
                     <input type="checkbox"
                            ng-model="options.useImageMode">
                     Use image mode.
                 </div>
 
-                <div class="practice-option">
+                <div class="flashbox">
 
                     Reading speed:
 

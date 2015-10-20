@@ -146,8 +146,8 @@ exports.signin = function (req, res, next) {
             user.salt = undefined;
 
             req.login(user, function (err) {
-                user.lastLogin = Date.now();
-                user.save();
+                //user.lastLogin = Date.now();
+                //user.save();
                 if (err) {
                     res.send(400, err);
                 } else {

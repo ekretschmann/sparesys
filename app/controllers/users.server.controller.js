@@ -79,11 +79,10 @@ exports.signup = function (req, res) {
 };
 
 /**
-* Signup
-*/
+ * Signup
+ */
 exports.addTeacher = function (req, res) {
 //    delete req.body.roles;
-
 
 
     // Init Variables
@@ -142,10 +141,22 @@ exports.signin = function (req, res, next) {
             res.send(400, info);
         } else {
             // Remove sensitive data before login
-            user.lastLogin = Date.now();
-            user.save();
+
+            // user.lastLogin = Date.now();
+
+            var now = Date.now();
+            User.findById(user._id,'-salt -password -__v -provider', function (err, user) {
+
+                user.lastLogin = now;
+                user.save();
+
+            });
+
+
             user.password = undefined;
             user.salt = undefined;
+            user.lastLogin = now;
+
 
             req.login(user, function (err) {
 
@@ -188,24 +199,24 @@ var updateSchoolForTeacher = function (theUser, req) {
 
 
     var deletedSchools = [];
-    for (var i=0;i<originalSchools.length; i++) {
-        if (newSchools.indexOf(originalSchools[i]+'') === -1) {
-            deletedSchools.push(originalSchools[i]+'');
+    for (var i = 0; i < originalSchools.length; i++) {
+        if (newSchools.indexOf(originalSchools[i] + '') === -1) {
+            deletedSchools.push(originalSchools[i] + '');
         }
     }
 
-    for(i=0; i<deletedSchools.length; i++) {
+    for (i = 0; i < deletedSchools.length; i++) {
         removeTeacherFromSchool(deletedSchools[i], theUser);
     }
 
     var addedSchools = [];
-    for ( i=0;i<newSchools.length; i++) {
+    for (i = 0; i < newSchools.length; i++) {
         if (originalSchools.indexOf(newSchools[i]) === -1) {
             addedSchools.push(newSchools[i]);
         }
     }
 
-    for(i=0; i<addedSchools.length; i++) {
+    for (i = 0; i < addedSchools.length; i++) {
         addTeacherToSchool(addedSchools[i], theUser);
     }
 };
@@ -240,24 +251,24 @@ var updateSchoolForStudent = function (theUser, req) {
     var newSchools = req.body.studentInSchools;
 
     var deletedSchools = [];
-    for (var i=0;i<originalSchools.length; i++) {
-        if (newSchools.indexOf(originalSchools[i]+'') === -1) {
-            deletedSchools.push(originalSchools[i]+'');
+    for (var i = 0; i < originalSchools.length; i++) {
+        if (newSchools.indexOf(originalSchools[i] + '') === -1) {
+            deletedSchools.push(originalSchools[i] + '');
         }
     }
 
-    for(i=0; i<deletedSchools.length; i++) {
+    for (i = 0; i < deletedSchools.length; i++) {
         removeStudentFromSchool(deletedSchools[i], theUser);
     }
 
     var addedSchools = [];
-    for ( i=0;i<newSchools.length; i++) {
+    for (i = 0; i < newSchools.length; i++) {
         if (originalSchools.indexOf(newSchools[i]) === -1) {
             addedSchools.push(newSchools[i]);
         }
     }
 
-    for(i=0; i<addedSchools.length; i++) {
+    for (i = 0; i < addedSchools.length; i++) {
         addStudentToSchool(addedSchools[i], theUser);
     }
 };
@@ -279,7 +290,7 @@ exports.update = function (req, res) {
     // you can not add an admin role when you are not an admin
     if (req.body.roles) {
         if (req.body.roles.indexOf('admin') > -1) {
-            if(req.user.roles .indexOf('admin') === -1) {
+            if (req.user.roles.indexOf('admin') === -1) {
                 return res.send(400, {
                     message: getErrorMessage('forbidden')
                 });
@@ -314,43 +325,42 @@ exports.update = function (req, res) {
     function updateUser(theUser) {
 
 
-
         updateSchoolForTeacher(theUser, req);
         updateSchoolForStudent(theUser, req);
 
-        var originalClassesRaw= theUser.teachesClasses;
+        var originalClassesRaw = theUser.teachesClasses;
         var newClasses = req.body.teachesClasses;
         var originalClasses = [];
-        for (var i=0; i<originalClassesRaw.length; i++) {
-            originalClasses.push(originalClassesRaw[i]+'');
+        for (var i = 0; i < originalClassesRaw.length; i++) {
+            originalClasses.push(originalClassesRaw[i] + '');
         }
 
         var deletedClasses = [];
-        for (i=0;i<originalClasses.length; i++) {
+        for (i = 0; i < originalClasses.length; i++) {
             if (newClasses.indexOf(originalClasses[i]) === -1) {
                 deletedClasses.push(originalClasses[i]);
             }
         }
 
-        for(i=0; i<deletedClasses.length; i++) {
+        for (i = 0; i < deletedClasses.length; i++) {
             removeTeacherFromSchoolclass(deletedClasses[i], theUser);
         }
 
 
-        originalClassesRaw= theUser.studentInClasses;
+        originalClassesRaw = theUser.studentInClasses;
         newClasses = req.body.studentInClasses;
         originalClasses = [];
-        for ( i=0; i<originalClassesRaw.length; i++) {
-            originalClasses.push(originalClassesRaw[i]+'');
+        for (i = 0; i < originalClassesRaw.length; i++) {
+            originalClasses.push(originalClassesRaw[i] + '');
         }
         deletedClasses = [];
-        for (i=0;i<originalClasses.length; i++) {
+        for (i = 0; i < originalClasses.length; i++) {
             if (newClasses.indexOf(originalClasses[i]) === -1) {
                 deletedClasses.push(originalClasses[i]);
             }
         }
 
-        for(i=0; i<deletedClasses.length; i++) {
+        for (i = 0; i < deletedClasses.length; i++) {
             removeStudentFromSchoolclass(deletedClasses[i], theUser);
         }
 
@@ -358,7 +368,6 @@ exports.update = function (req, res) {
         theUser = _.extend(theUser, req.body);
         theUser.updated = Date.now();
         theUser.displayName = theUser.firstName + ' ' + theUser.lastName;
-
 
 
         if (theUser.teachesClasses === '') {
@@ -392,7 +401,7 @@ exports.update = function (req, res) {
     }
 
     if (user) {
-        if(req.body._id.toString() !== user._id.toString()) {
+        if (req.body._id.toString() !== user._id.toString()) {
             User.findById(req.body._id, '-salt -password -__v -provider', function (err, otherUser) {
 
                 if (!err && otherUser) {
@@ -420,8 +429,38 @@ exports.update = function (req, res) {
 
 
 exports.changeUserPassword = function (req, res, next) {
-    console.log(req.user);
+    User.findById(req.body.otherUser, function (err, user) {
 
+        if (!err && user) {
+            user.password = req.body.password;
+
+            if (!user.inventory) {
+                user.inventory = [];
+            }
+            user.save(function (err) {
+                if (err) {
+                    return res.send(400, {
+                        message: getErrorMessage(err)
+                    });
+                } else {
+                    req.login(user, function (err) {
+                        if (err) {
+                            res.send(400, err);
+                        } else {
+                            res.send({
+                                message: 'Password changed successfully'
+                            });
+                        }
+                    });
+                }
+            });
+
+        } else {
+            res.send(400, {
+                message: 'User is not found'
+            });
+        }
+    });
 };
 /**
  * Change Password
@@ -524,11 +563,9 @@ exports.oauthCallback = function (strategy) {
 exports.userByID = function (req, res, next, id) {
 
 
-
     User.findOne({
         _id: id
     }).exec(function (err, user) {
-
 
 
         if (err) return next(err);
@@ -762,10 +799,10 @@ exports.read = function (req, res) {
 /**
  * Delete an User
  */
-exports.delete = function(req, res) {
+exports.delete = function (req, res) {
     var usr = req.profile;
 
-    usr.remove(function(err) {
+    usr.remove(function (err) {
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)

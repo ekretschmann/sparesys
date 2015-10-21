@@ -174,8 +174,6 @@ angular.module('users').controller('UsersController', ['$http', '$scope', '$stat
         };
 
         $scope.removeStudentFromClass = function (otherUser, s) {
-            console.log(otherUser);
-            console.log(s);
             for (var i = 0; i < otherUser.studentInClasses.length; i++) {
                 if (otherUser.studentInClasses[i] === s) {
                     otherUser.studentInClasses.splice(i, 1);
@@ -202,9 +200,11 @@ angular.module('users').controller('UsersController', ['$http', '$scope', '$stat
         };
 
         $scope.passwordDetails = {};
-        $scope.changeUserPassword = function () {
+        $scope.changeUserPassword = function (otherUser) {
             $scope.success = $scope.error = null;
 
+
+            $scope.passwordDetails.otherUser = otherUser._id;
             $http.post('/users/admin/password', $scope.passwordDetails).success(function (response) {
                 // If successful show success message and clear form
                 $scope.success = true;

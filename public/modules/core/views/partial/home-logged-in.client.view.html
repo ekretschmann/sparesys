@@ -2,13 +2,13 @@
          data-ng-init="ga(); findCourses()">
 
 
-    <div >
+    <div>
         <div ng-include="'/modules/core/views/partial/logged-in-messages.client.view.html'"></div>
 
     </div>
 
 
-        <div ng-include="'/modules/core/views/partial/logged-in-school-admin.client.view.html'"></div>
+    <div ng-include="'/modules/core/views/partial/logged-in-school-admin.client.view.html'"></div>
 
     </div>
 
@@ -47,7 +47,6 @@
         </div>
 
 
-
     </div>
 
     <div data-ng-if="authentication.user.teacherInSchools.length > 0">
@@ -61,6 +60,23 @@
 
     </div>
 
+
+    <div class="col-xs-12 col-md-6 ">
+        <div class="font-large virtual-card ribbon-card"
+             data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1">
+
+
+            <div class="learning-ribbon"><span>Learning</span></div>
+            <div class="title">Trophies and Challenges</div>
+
+
+            <div >
+                You have {{authentication.user.trophies}} trophies to swap for items
+            </div>
+
+        </div>
+    </div>
+
     <div data-ng-if="authentication.user.studentInSchools.length > 0">
         <div class="col-xs-12 col-md-6">
             <div>
@@ -71,11 +87,11 @@
 
 
     <!--<div data-ng-if="coursesStudent.length>0">-->
-        <!--<div class="col-xs-12 col-md-6">-->
-            <!--<div>-->
-                <!--<div ng-include="'/modules/core/views/partial/logged-in-progress.client.view.html'"></div>-->
-            <!--</div>-->
-        <!--</div>-->
+    <!--<div class="col-xs-12 col-md-6">-->
+    <!--<div>-->
+    <!--<div ng-include="'/modules/core/views/partial/logged-in-progress.client.view.html'"></div>-->
+    <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
 
 
@@ -90,7 +106,7 @@
                         <div class="title">Are you new?</div>
 
                         <infobox logo="boy" position="left">
-                            <div >
+                            <div>
                                 New to Rememberators? I see, that you haven't got any courses, yet.
                                 Whatever you learn on Rememberators is put into courses. Courses help you to
                                 keep the subjects you learn separated so that you can concentrate on one thing
@@ -167,7 +183,8 @@
                     <div class="infobox-title">Courses</div>
                     <infobox logo="guru" position="left" class="font-large">
 
-                        You have not subscribed to any courses. You can <a href="#!/courses/create">create your own courses</a>,
+                        You have not subscribed to any courses. You can <a href="#!/courses/create">create your own
+                        courses</a>,
                         or <a href="#!/courses/search">search</a> for courses that other users have published.
                     </infobox>
                 </div>

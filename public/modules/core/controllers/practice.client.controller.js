@@ -58,7 +58,21 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
         $scope.lastRepetition = new Date(Date.now);
+        $scope.options = {};
+        $scope.toggleOptions = function(option) {
 
+            if (option === 'repeatOnly') {
+                PracticeOptionsService.repeatOnly = !PracticeOptionsService.repeatOnly;
+                $scope.options.repeatOnly = PracticeOptionsService.repeatOnly;
+            }
+
+            if (option === 'selfChecksOnly') {
+                PracticeOptionsService.selfChecksOnly = !PracticeOptionsService.selfChecksOnly;
+                $scope.options.selfChecksOnly = PracticeOptionsService.selfChecksOnly;
+            }
+
+
+        };
 
         $scope.stopPracitcing = function () {
             $location.path('/');

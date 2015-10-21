@@ -4,10 +4,10 @@
 // Courses controller
 angular.module('core').controller('PracticeController', ['$localForage', '$window', '$location', '$scope',
     '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication',
-    'Courses', 'Cards', 'CoursesService', 'RetentionCalculatorService', 'DiagramsGaugeService', 'ChallengeCalculatorService',
+    'Courses', 'Cards', 'Users','CoursesService', 'RetentionCalculatorService', 'DiagramsGaugeService', 'ChallengeCalculatorService',
     'ModeSelectorService', 'SpeechRecognitionService', 'PracticeOptionsService',
     function ($localForage, $window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
-              Courses, Cards, CoursesService, RetentionCalculatorService, DiagramsGaugeService, ChallengeCalculatorService,
+              Courses, Cards, Users, CoursesService, RetentionCalculatorService, DiagramsGaugeService, ChallengeCalculatorService,
               ModeSelectorService, SpeechRecognitionService, PracticeOptionsService) {
 
         $scope.time = Date.now();
@@ -299,21 +299,28 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         $scope.nextCard = function () {
 
 
-            //if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
-            //
-            //
-            //    $scope.progress = 100 * $scope.rewardScore / 6.0;
-            //
-            //    if ($scope.rewardScore > 6) {
-            //
-            //        $timeout(function () {
-            //            $scope.rewardScore = 0.0;
-            //            $scope.mode = 'reward';
-            //        }, 100);
-            //
-            //        return;
-            //    }
-            //}
+            if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
+
+                var factor = 6.0;
+
+                $scope.progress = 100 * $scope.rewardScore / factor;
+
+                if ($scope.rewardScore > factor) {
+
+                    $scope.authentication.user.trophies++;
+                    Users.get({
+                        userId: $scope.authentication.user._id
+                    }, function(usr) {
+                        usr.trophies =  $scope.authentication.user.trophies;
+                        usr.$update();
+                    });
+
+                    $scope.rewardScore = $scope.rewardScore - factor;
+                    $scope.progress = 100 * $scope.rewardScore / factor;
+
+                    //$scope.authentication.user.save();
+                }
+            }
 
             $scope.time = Date.now();
 

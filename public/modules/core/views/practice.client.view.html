@@ -11,7 +11,7 @@
 
 
             <div class="flashbox">
-                <div class="title">
+                <div class="font-xl">
                     {{course.name}}
 
                 </div>
@@ -26,6 +26,27 @@
 
             </div>
 
+
+
+
+            <div class="flashbox" data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1">
+
+
+
+                <div class="font-xl">
+                    Trophies
+
+                </div>
+                <div class="font-xl">
+                    {{authentication.user.trophies}}
+                </div>
+                <div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1"
+                     style="padding-left:15px; padding-right: 15px">
+                    <progressbar style="height: 3px; margin: 0; padding: 0" value="progress"/>
+                </div>
+            </div>
+            <!--receive-rewards-->
+
             <div class="flashbox">
                 <a class="btn btn-rememberators" data-ng-click="stopPracitcing();">
                     <i class="glyphicon glyphicon-stop"></i> Stop Practicing
@@ -35,10 +56,7 @@
 
         </div>
 
-        <!--<div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1"-->
-        <!--style="margin-bottom: 0px; padding-left:15px; padding-right: 15px">-->
-        <!--<progressbar style="height: 1px; margin: 0; padding: 0" value="progress"/>-->
-        <!--</div>-->
+
 
         <div class="col-xs-12 col-md-8 col-lg-6">
 
@@ -337,76 +355,15 @@
             </div>
 
 
-            <div class="section-right" data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">
+            <div class="section-right" data-ng-if="authentication.user.roles.indexOf('debug') === -1">
 
 
                 <div class="title">Debug</div>
 
 
-                <section data-ng-if="authentication.user.roles.indexOf('debug-viewer') > -1">
+                <section>
 
 
-                    <table class="table-striped top-margin-l top-padded-l card-border-top"
-                           data-ng-if="cards.length > 0">
-                        <thead>
-                        <tr>
-
-                            <th class="right-padded-m  top-padded-sm">Question</th>
-                            <th class="right-padded-m center-aligned top-padded-sm nowrap">Predicted Retention
-                                [hrs]
-                            </th>
-                            <th class="right-padded-m center-aligned top-padded-sm nowrap">Score</th>
-                            <th class="right-padded-m center-aligned top-padded-sm nowrap">History</th>
-
-
-                        </tr>
-                        </thead>
-                        <tbody>
-
-                        <tr>
-
-
-                        <tr data-ng-repeat="card in cards">
-
-
-                            <td class="right-padded-m standard-min-width top-padded top-aligned text-min-width">
-
-                                <a ng-class="checkForward(card)" data-ng-href="#!/cards/{{card._id}}/edit">{{card.question}}</a>
-                            </td>
-
-
-                            <td class="right-padded-m nowrap center-aligned top-aligned">
-
-
-                                <div data-ng-if="card.hrt">
-                                    <!--{{toHours(card.hrt)}}-->
-                                    {{toHours(card.hrt)}} hrs
-                                    ({{toSeconds(card.hrt)}} s)
-                                </div>
-
-                                <div data-ng-if="!card.hrt">
-                                    n/a
-                                </div>
-                            </td>
-
-                            <td class="right-padded-m nowrap center-aligned top-aligned">
-
-
-                                {{ round(card.score)}}
-                            </td>
-
-                            <td class="text-muted right-padded-m nowrap center-aligned top-aligned">
-
-                                <div data-ng-repeat="h in card.history">
-                                    {{toDate(h.when) | date:'d/M h:mm:ss'}}
-                                </div>
-                            </td>
-
-
-                        </tr>
-
-                        </tbody>
-                    </table>
 
                     <div class="center-aligned top-padded-m">
                         <button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card

@@ -110,6 +110,10 @@ var UserSchema = new Schema({
 		type: Date,
 		default: Date.now
 	},
+	trophies: {
+		type: Number,
+		default: 0
+	},
 	lastLogin: {
 		type: Date
 	},

@@ -198,90 +198,93 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             }
         };
 
-        $scope.removeAll = function() {
-            $scope.rewards.forEach(function(reward) {
-                $scope.remove(reward);
-            });
-        };
+        //$scope.removeAll = function() {
+        //    $scope.rewards.forEach(function(reward) {
+        //        $scope.remove(reward);
+        //    });
+        //};
 
         // Remove existing Reward
-        $scope.remove = function (reward) {
+        //$scope.remove = function (reward) {
+        //
+        //    if (reward) {
+        //        reward.$remove(function() {
+        //            for (var i in $scope.rewards) {
+        //
+        //                if ($scope.rewards[i]._id === reward._id) {
+        //                    $scope.rewards.splice(i, 1);
+        //                }
+        //            }
+        //        });
+        //
+        //
+        //    } else {
+        //        $scope.reward.$remove(function () {
+        //
+        //        });
+        //    }
+        //    $scope.cancel();
+        //};
 
-            if (reward) {
-                reward.$remove(function() {
-                    for (var i in $scope.rewards) {
+        //$scope.getRewardNames = function () {
+        //    $scope.rewardNames = [];
+        //
+        //    $scope.rewards.forEach(function (reward) {
+        //        $scope.rewardNames[reward._id] = reward.name;
+        //    }, this);
+        //};
 
-                        if ($scope.rewards[i]._id === reward._id) {
-                            $scope.rewards.splice(i, 1);
-                        }
-                    }
-                });
+        //$scope.rewards = Rewards.query(function () {
+        //    $scope.getRewardNames();
+        //});
 
-
-            } else {
-                $scope.reward.$remove(function () {
-
-                });
-            }
-            $scope.cancel();
+        $scope.find = function () {
+            $scope.rewards = Rewards.query();
         };
-
-        $scope.getRewardNames = function () {
-            $scope.rewardNames = [];
-
-            $scope.rewards.forEach(function (reward) {
-                $scope.rewardNames[reward._id] = reward.name;
-            }, this);
-        };
-
-        $scope.rewards = Rewards.query(function () {
-            $scope.getRewardNames();
-        });
-
 
         // Find existing Reward
-        $scope.findOne = function () {
+        //$scope.findOne = function () {
+        //
+        //
+        //    if ($stateParams.rewardId) {
+        //        $scope.reward = Rewards.get({
+        //            rewardId: $stateParams.rewardId
+        //        }, function (r) {
+        //            $scope.name = r.name;
+        //            $scope.description = r.description;
+        //            $scope.type = r.type;
+        //            $scope.ingredients = r.ingredients[0];
+        //            $scope.selectedType = r.type;
+        //            $scope.updateReward = true;
+        //            $scope.defaulthealthpoints = r.defaulthealthpoints;
+        //            $scope.rewards.forEach(function (reward) {
+        //                if (r.enables.indexOf(reward._id) > -1) {
+        //                    $scope.enables.push(reward);
+        //                }
+        //                if (r.goals.indexOf(reward._id) > -1) {
+        //                    $scope.goals.push(reward);
+        //                }
+        //            });
+        //            if (r.ingredients.length ===0) {
+        //                $scope.ingredients = [];
+        //            }
+        //        });
+        //    }
+        //
+        //
+        //};
 
-
-            if ($stateParams.rewardId) {
-                $scope.reward = Rewards.get({
-                    rewardId: $stateParams.rewardId
-                }, function (r) {
-                    $scope.name = r.name;
-                    $scope.description = r.description;
-                    $scope.type = r.type;
-                    $scope.ingredients = r.ingredients[0];
-                    $scope.selectedType = r.type;
-                    $scope.updateReward = true;
-                    $scope.defaulthealthpoints = r.defaulthealthpoints;
-                    $scope.rewards.forEach(function (reward) {
-                        if (r.enables.indexOf(reward._id) > -1) {
-                            $scope.enables.push(reward);
-                        }
-                        if (r.goals.indexOf(reward._id) > -1) {
-                            $scope.goals.push(reward);
-                        }
-                    });
-                    if (r.ingredients.length ===0) {
-                        $scope.ingredients = [];
-                    }
-                });
-            }
-
-
-        };
-
-        $scope.cancel = function () {
-            $scope.name = '';
-            $scope.description = '';
-            $scope.type = 'Item';
-            $scope.ingredients = [];
-            $scope.enables = [];
-            $scope.goals = [];
-            $scope.selectedType = 'Item';
-            $scope.updateReward = false;
-            $scope.health = 1;
-            $location.path('/rewards/manage/');
-        };
+        //$scope.cancel = function () {
+        //    $scope.name = '';
+        //    $scope.description = '';
+        //    $scope.type = 'Item';
+        //    $scope.ingredients = [];
+        //    $scope.enables = [];
+        //    $scope.goals = [];
+        //    $scope.selectedType = 'Item';
+        //    $scope.updateReward = false;
+        //    $scope.health = 1;
+        //    $location.path('/rewards/manage/');
+        //};
     }
 ]);

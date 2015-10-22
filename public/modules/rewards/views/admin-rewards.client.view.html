@@ -30,7 +30,7 @@
     </div>
 
 
-    <div class="col-xs-6 ">
+    <div class="col-xs-12">
         <div class="admin-card font-large">
             <div class="title">
                 Add reward
@@ -50,7 +50,7 @@
                 <form data-ng-submit="addReward()" validate>
                     <fieldset>
                         <div class="row">
-                            <div class="col-xs-6 dashboard-col">
+                            <div class="col-xs-2 ">
                                 <div class="field-label">Name</div>
                                 <div class="font-medium">
                                     <input type="text"
@@ -59,7 +59,7 @@
                                 </div>
                             </div>
 
-                            <div class="col-xs-6 dashboard-col">
+                            <div class="col-xs-2 ">
                                 <div class="field-label">Health points</div>
                                 <div class="font-medium">
                                     <input type="number"
@@ -68,31 +68,87 @@
                                            placeholder="Health">
                                 </div>
                             </div>
+                            <div class="col-xs-2 ">
 
-                        </div>
-
-                        <div class="row">
-                            <div class="col-xs-6 dashboard-col">
                                 <div class="field-label">Type</div>
                                 <div class="font-medium">
 
-                                        <input type="radio" data-ng-model="type" value="Recipe" disabled> Recipe
-                                        <input type="radio" data-ng-model="type" value="Item" disabled> Item
-                                        <input type="radio" data-ng-model="type" value="Skill" disabled> Skill
+                                    <input type="radio" data-ng-model="type" value="Recipe" disabled> Recipe
+                                    <input type="radio" data-ng-model="type" value="Item" disabled> Item
+                                    <input type="radio" data-ng-model="type" value="Skill" disabled> Skill
 
                                 </div>
                             </div>
 
-                            <!--<div class="col-xs-6 dashboard-col">-->
-                                <!--<div class="field-label">Health points</div>-->
-                                <!--<div class="font-medium">-->
-                                    <!--<input type="number"-->
-                                           <!--data-ng-model="defaulthealthpoints"-->
-                                           <!--class="form-control"-->
-                                           <!--placeholder="Health">-->
-                                <!--</div>-->
-                            <!--</div>-->
+                            <div class="col-xs-6">
+                                <div class="field-label">Description</div>
+                                <div class="font-medium">
 
+                                    <textarea type="text"
+                                              data-ng-model="newReward.description"
+                                              class="form-control"
+                                              placeholder="Description"
+                                              rows="3"/>
+
+                                </div>
+                            </div>
+
+
+
+                        </div>
+
+                        <div class="row" style="margin-top: 1.5em;">
+
+
+                            <div class="col-xs-3">
+                                <div class="field-label">Ingredients</div>
+
+                                <input style="width: 100%"
+                                       type="text"
+                                       data-ng-model="selectedIngredient"
+                                       typeahead-on-select="selectIngredient()"
+                                       typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
+                                       class="form-control">
+                            </div>
+
+
+                            <div class="col-xs-3">
+                                <div data-ng-repeat="ingredient in ingredients">
+                                    <a>
+                                        <i data-ng-click="removeIngredient(ingredient)"
+                                           class="glyphicon glyphicon-remove-sign small">
+                                        </i>
+                                    </a>
+                                    {{ingredient.amount}}
+                                    {{ingredient.name}}
+                                    <input data-ng-model="ingredient.keep" type="checkbox"/> keep intact</td>
+                                </div>
+                            </div>
+
+
+                            <div class="col-xs-6">
+                                <div class="field-label">Enables</div>
+                                <div class="font-medium">
+
+                                    <input style="width: 100%"
+                                    type="text"
+                                    data-ng-model="selectedEnabler"
+                                    typeahead-on-select="selectEnabler()"
+                                    typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
+                                    class="form-control">
+                                </div>
+                            </div>
+
+                            <!--<tr>-->
+                            <!--<td class="right-padded-m nowrap top-padded-m nowrap ">Enables</td>-->
+                            <!--<td class="top-padded-m expands" colspan="5">-->
+
+
+                            <!--<
+
+
+                            <!--</td>-->
+                            <!--</tr>-->
                         </div>
 
 
@@ -126,133 +182,7 @@
     </div>
 
 
-    <!--<div class="content-header">-->
-
-    <!--<div class="pull-right">-->
-    <!--<input class="search" ng-model="searchText">-->
-    <!--</div>-->
-    <!--<div class="title">-->
-    <!--Manage Rewards-->
-    <!--</div>-->
-
-
-    <!--</div>-->
-    <!--<div class="content-section">-->
-    <!--<form data-ng-submit="create()" validate>-->
-    <!--<table class="top-margin-l expands">-->
-    <!--<tr>-->
-
-    <!--<td class="right-padded-m nowrap top-padded-s nowrap">Reward Name</td>-->
-    <!--<td class="top-padded-s right-padded-m text-min-width">-->
-    <!--<input type="text"-->
-    <!--data-ng-model="name"-->
-    <!--class="form-control"-->
-    <!--placeholder="Name"-->
-    <!--required>-->
-
-    <!--</td>-->
-
-    <!--<td class="right-padded-m nowrap top-padded-s left-padded-l nowrap">Health Points</td>-->
-    <!--<td class="top-padded-s right-padded-m" >-->
-    <!--<input type="number"-->
-    <!--data-ng-model="defaulthealthpoints"-->
-    <!--class="form-control"-->
-    <!--placeholder="Health">-->
-    <!--</td>-->
-
-    <!--<td class="top-padded-s nowrap right-padded-m">-->
-
-    <!--<div data-ng-show="type === 'Recipe'" data-ng-hide="type !== 'Recipe'">-->
-    <!--<input type="radio"-->
-    <!--data-ng-model="type"-->
-    <!--value="Recipe"-->
-    <!--disabled-->
-    <!-- > Recipe-->
-
-    <!--</div>-->
-    <!--<div data-ng-show="type !== 'Recipe'" data-ng-hide="type === 'Recipe'">-->
-
-    <!--<input type="radio"-->
-    <!--data-ng-model="type"-->
-    <!--value="Item"-->
-    <!-- > Item -->
-    <!--<input type="radio"-->
-    <!--data-ng-model="type"-->
-    <!--value="Skill"-->
-
-    <!-- > Skill-->
-    <!--</div>-->
-    <!--</td>-->
-
-    <!--</tr>-->
-
-    <!--<tr>-->
-    <!--<td class="right-padded-m nowrap nowrap top-padded-m top-aligned">Description</td>-->
-    <!--<td class="top-padded-m text-min-width" colspan="5">-->
-    <!--<textarea type="text"-->
-    <!--data-ng-model="description"-->
-    <!--class="form-control"-->
-    <!--placeholder="Description"-->
-    <!--rows="3"-->
-    <!--required></textarea>-->
-
-    <!--</td>-->
-
-    <!--</tr>-->
-
-    <!--<tr>-->
-    <!--<td class="right-padded-m nowrap top-padded-m nowrap ">Ingredients</td>-->
-    <!--<td class="top-padded-m expands" colspan="5">-->
-
-
-    <!--<input style="width: 100%"-->
-    <!--type="text"-->
-    <!--data-ng-model="selectedIngredient"-->
-    <!--typeahead-on-select="selectIngredient()"-->
-    <!--typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"-->
-    <!--class="form-control">-->
-
-
-    <!--</td>-->
-    <!--</tr>-->
-
-    <!--<tr>-->
-
-    <!--<td></td>-->
-    <!--<td class="top-padded-s">-->
-
-    <!--<table class="left-aligned">-->
-    <!--<tr data-ng-repeat="ingredient in ingredients">-->
-    <!--<td class="right-padded-s"><a>-->
-    <!--<i data-ng-click="removeIngredient(ingredient)"-->
-    <!--class="glyphicon glyphicon-remove-sign small">-->
-    <!--</i>-->
-    <!--</a></td>-->
-    <!--<td class="right-padded-s">{{ingredient.amount}}</td>-->
-    <!--<td class="right-padded-m">{{ingredient.name}}</td>-->
-    <!--&lt;!&ndash;<td><input data-ng-model="ingredient.keep" type="checkbox"/> keep intact</td>&ndash;&gt;-->
-    <!--</tr>-->
-    <!--</table>-->
-
-    <!--</td>-->
-    <!--</tr>-->
-
-
-    <!--<tr>-->
-    <!--<td class="right-padded-m nowrap top-padded-m nowrap ">Enables</td>-->
-    <!--<td class="top-padded-m expands" colspan="5">-->
-
-
-    <!--<input style="width: 100%"-->
-    <!--type="text"-->
-    <!--data-ng-model="selectedEnabler"-->
-    <!--typeahead-on-select="selectEnabler()"-->
-    <!--typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"-->
-    <!--class="form-control">-->
-
-
-    <!--</td>-->
-    <!--</tr>-->
+    
 
 
     <!--<tr>-->

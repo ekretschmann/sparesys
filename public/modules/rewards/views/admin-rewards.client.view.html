@@ -29,6 +29,30 @@
         </div>
     </div>
 
+    <div data-ng-repeat="reward in rewards">
+        <div class="col-xs-6 dashboard-col">
+            <div class="admin-card font-large">
+                <div>
+                    <div class="title">
+                        {{reward.name}}
+
+                        <div class="pull-right">
+
+
+                            <a href="#!/cards/{{card._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
+
+                            <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i
+                                    class="glyphicon glyphicon-trash"></i></a>
+
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 
     <div class="col-xs-12">
         <div class="admin-card font-large">

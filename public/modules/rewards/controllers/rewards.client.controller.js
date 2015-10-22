@@ -143,59 +143,62 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         };
 
         // Create new Reward
-        $scope.create = function () {
+        $scope.addReward = function () {
             // Create new Reward object
-            var reward = $scope.reward;
-            if (!$scope.updateReward) {
-                reward = new Rewards({
-                    name: this.name
-                });
-                $scope.rewards.push(reward);
-            }
+            console.log('xxxx');
+            console.log($scope.reward);
 
-            reward.name = $scope.name;
-            reward.ingredients = [$scope.ingredients];
-            reward.enables = [];
-            reward.goals = [];
-            reward.defaulthealthpoints = $scope.defaulthealthpoints;
-
-            $scope.enables.forEach(function(en) {
-                reward.enables.push(en._id);
-            }, this);
-
-            $scope.goals.forEach(function(en) {
-                reward.goals.push(en._id);
-            }, this);
-
-            reward.description = $scope.description;
-            reward.type = $scope.type;
-            if (reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length > 0) {
-                reward.type = 'Recipe';
-            } else {
-                reward.type = $scope.type;
-            }
-
-
-            // Redirect after save
-            if ($scope.updateReward) {
-                reward.$update(function () {
-                    $state.go($state.$current, null, {reload: true});
-                });
-            } else {
-                reward.$save(function (response) {
-                    //$location.path('rewards/' + response._id);
-
-                    // Clear form fields
-                    $scope.name = '';
-                    $scope.type = 'Item';
-                    $scope.ingredients = [];
-                    $scope.updateReward = false;
-                    $scope.enables = [];
-                    $state.go($state.$current, null, {reload: true});
-                }, function (errorResponse) {
-                    $scope.error = errorResponse.data.message;
-                });
-            }
+            //var reward = $scope.reward;
+            //if (!$scope.updateReward) {
+            //    reward = new Rewards({
+            //        name: this.name
+            //    });
+            //    $scope.rewards.push(reward);
+            //}
+            //
+            //reward.name = $scope.name;
+            //reward.ingredients = [$scope.ingredients];
+            //reward.enables = [];
+            //reward.goals = [];
+            //reward.defaulthealthpoints = $scope.defaulthealthpoints;
+            //
+            //$scope.enables.forEach(function(en) {
+            //    reward.enables.push(en._id);
+            //}, this);
+            //
+            //$scope.goals.forEach(function(en) {
+            //    reward.goals.push(en._id);
+            //}, this);
+            //
+            //reward.description = $scope.description;
+            //reward.type = $scope.type;
+            //if (reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length > 0) {
+            //    reward.type = 'Recipe';
+            //} else {
+            //    reward.type = $scope.type;
+            //}
+            //
+            //
+            //// Redirect after save
+            //if ($scope.updateReward) {
+            //    reward.$update(function () {
+            //        $state.go($state.$current, null, {reload: true});
+            //    });
+            //} else {
+            //    reward.$save(function (response) {
+            //        //$location.path('rewards/' + response._id);
+            //
+            //        // Clear form fields
+            //        $scope.name = '';
+            //        $scope.type = 'Item';
+            //        $scope.ingredients = [];
+            //        $scope.updateReward = false;
+            //        $scope.enables = [];
+            //        $state.go($state.$current, null, {reload: true});
+            //    }, function (errorResponse) {
+            //        $scope.error = errorResponse.data.message;
+            //    });
+            //}
         };
 
         //$scope.removeAll = function() {

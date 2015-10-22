@@ -17,8 +17,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selectedGoal = '';
 
 
-
-
         $scope.removeIngredient = function (ingredient) {
             for (var i = 0; i < $scope.ingredients.length; i++) {
                 if ($scope.ingredients[i].name === ingredient.name) {
@@ -47,9 +45,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
             var rewardId;
 
-            $scope.rewards.forEach(function(reward) {
+            $scope.rewards.forEach(function (reward) {
 
-                if(reward.name === $scope.selectedIngredient) {
+                if (reward.name === $scope.selectedIngredient) {
                     rewardId = reward._id;
                 }
             }, this);
@@ -143,10 +141,30 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         };
 
         // Create new Reward
+        $scope.newReward = {};
+        $scope.newReward.defaulthealthpoints = 1;
+        $scope.newReward.type = 'Item';
+        $scope.newReward.description = '';
         $scope.addReward = function () {
             // Create new Reward object
             console.log('xxxx');
-            console.log($scope.reward);
+            console.log($scope.newReward);
+
+            var reward = new Rewards({
+                name: $scope.newReward.name,
+                healthpoints: $scope.newReward.defaulthealthpoints,
+                type: $scope.newReward.type,
+                description: $scope.newReward.description
+            });
+
+            reward.$save(function (response) {
+                $scope.newReward.name = '';
+                $scope.newReward.defaulthealthpoints = 1;
+                $scope.newReward.type = 'Item';
+                $scope.newReward.description = '';
+            }, function (errorResponse) {
+                $scope.error = errorResponse.data.message;
+            });
 
             //var reward = $scope.reward;
             //if (!$scope.updateReward) {

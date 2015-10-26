@@ -74,7 +74,7 @@
                                 <div data-ng-if="reward.ingredients.length >0">
                                     <div data-ng-repeat="recipe in reward.ingredients">
                                         <div data-ng-repeat="ingredient in recipe">
-                                            <div>{{ingredient.name}}</div>
+                                            <div>{{ingredient.amount}} {{ingredient.name}}</div>
                                         </div>
                                     </div>
                                 </div>

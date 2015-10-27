@@ -142,6 +142,7 @@ angular.module('core').service('ModeSelectorService', [
 
         this.getAssess = function(card) {
             var assess = card.check;
+
             if (card.check === 'mixed') {
                 if (!card.history || card.history.length === 0) {
                     assess = 'self';
@@ -153,6 +154,11 @@ angular.module('core').service('ModeSelectorService', [
                         }
                     }
                 }
+            }
+
+
+            if(assess ==='Self Checks') {
+                assess = 'self';
             }
 
             if(assess ==='computer') {

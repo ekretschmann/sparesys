@@ -58,13 +58,15 @@
 
         <div class="col-xs-12 col-md-8 col-lg-6">
 
-
             <div data-ng-if="mode === 'forward'" data-ng-hide="mode !== 'forward'">
 
                 <div data-ng-if="assess === 'self'" data-ng-hide="assess === 'auto'">
+                    {{card.timedForward}}
+                    {{card.limitForward}}
                     <div ng-include="'/modules/core/views/partial/forward-self.client.view.html'"></div>
                 </div>
                 <div data-ng-if="assess === 'auto'" data-ng-hide="assess === 'self'">
+
                     <div ng-include="'/modules/core/views/partial/forward-auto.client.view.html'"></div>
                 </div>
             </div>

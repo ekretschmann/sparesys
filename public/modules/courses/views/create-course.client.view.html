@@ -216,12 +216,14 @@
                                 <input type="checkbox" ng-model="timedForward" ng-disabled="!useForwardMode">
                                 Time penalty
 
-                                <div style="padding-left: 1em; padding-right: 1em" data-ng-if="timedForward">
+                                <div style="padding-left: 1em; padding-right: 1em" data-ng-if="timedForward && useForwardMode">
 
                                     <input type="number"
+                                           style="display: inline"
+
                                            data-ng-model="limitForward"
                                            class="form-control"
-                                            >
+                                            > seconds
                                 </div>
 
                             </div>
@@ -254,6 +256,22 @@
                                 Read Answers
                             </div>
 
+                            <div ng-class="{'text-muted': !useReverseMode}">
+                                <input type="checkbox" ng-model="timedReverse" ng-disabled="!useReverseMode">
+                                Time penalty
+
+                                <div style="padding-left: 1em; padding-right: 1em" data-ng-if="timedReverse && useReverseMode">
+
+                                    <input type="number"
+                                           style="display: inline"
+
+                                           data-ng-model="limitReverse"
+                                           class="form-control"
+                                            > seconds
+                                </div>
+
+                            </div>
+
 
                         </div>
                     </div>
@@ -280,6 +298,23 @@
                                 <input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">
                                 Read Answers
                             </div>
+
+                            <div ng-class="{'text-muted': !useImagesMode}">
+                                <input type="checkbox" ng-model="timedImages" ng-disabled="!useImagesMode">
+                                Time penalty
+
+                                <div style="padding-left: 1em; padding-right: 1em" data-ng-if="timedImages && useImagesMode">
+
+                                    <input type="number"
+                                           style="display: inline"
+
+                                           data-ng-model="limitImages"
+                                           class="form-control"
+                                            > seconds
+                                </div>
+
+                            </div>
+
 
 
                         </div>

@@ -18,6 +18,12 @@ angular.module('courses').controller('CoursesCreateController',
             $scope.readQuestionsImages= false;
             $scope.readAnswersImages= false;
             $scope.teaching= false;
+            $scope.timedForward = false;
+            $scope.timedReverse = false;
+            $scope.timedImages = false;
+            $scope.limitForward = 10;
+            $scope.limitReverse = 10;
+            $scope.limitImages = 10;
 
 
             $scope.checks = ['Self Checks', 'Computer Checks', 'Mixed Checks'];

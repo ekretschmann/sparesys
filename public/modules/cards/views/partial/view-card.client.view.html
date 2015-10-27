@@ -119,6 +119,10 @@
                     Speech recognition
 
                 </div>
+                <div ng-class="{'text-muted': !card.timedForward}">
+                    Timed<span data-ng-if="card.timedForward">: {{card.limitForward}}s</span>
+
+                </div>
 
             </div>
         </div>
@@ -144,6 +148,10 @@
 
                 </div>
 
+                <div ng-class="{'text-muted': !card.timedReverse}">
+                    Timed<span data-ng-if="card.timedReverse">: {{card.limitReverse}}s</span>
+
+                </div>
             </div>
         </div>
 
@@ -164,6 +172,11 @@
                 </div>
                 <div ng-class="{'text-muted': !card.speechRecognitionImages}">
                     Speech recognition
+
+                </div>
+
+                <div ng-class="{'text-muted': !card.timedImages}">
+                    Timed<span data-ng-if="card.timedImages">: {{card.limitImages}}s</span>
 
                 </div>
 

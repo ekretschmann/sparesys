@@ -73,6 +73,13 @@ exports.create = function (req, res) {
                 cardCopy.answer = card.answer;
                 cardCopy.questionExtension = card.questionExtension;
                 cardCopy.answerExtension = card.answerExtension;
+                cardCopy.answerExtension = card.answerExtension;
+                cardCopy.timedForward = card.timedForward;
+                cardCopy.limitForward = card.limitForward;
+                cardCopy.timedReverse = card.timedReverse;
+                cardCopy.limitReverse = card.limitReverse;
+                cardCopy.timedImages = card.timedImages;
+                cardCopy.limitImages = card.limitImages;
 
                 cardCopy.save(function() {
                     pack.cards.push(cardCopy._id);
@@ -101,6 +108,12 @@ exports.create = function (req, res) {
         card.check = course.cardDefaults.checks;
         card.languageFront = course.cardDefaults.languageFront;
         card.languageBack = course.cardDefaults.languageBack;
+        card.timedForward = course.cardDefaults.forward.timed;
+        card.timedReverse = course.cardDefaults.reverse.timed;
+        card.timedImages = course.cardDefaults.images.timed;
+        card.limitForward = course.cardDefaults.forward.timeLimit;
+        card.limitReverse = course.cardDefaults.reverse.timeLimit;
+        card.limitImages = course.cardDefaults.images.timeLimit;
         card.modes = [];
         if (course.cardDefaults.forward.enabled) {
             card.modes.push('forward');
@@ -234,6 +247,12 @@ exports.update = function (req, res) {
             c.questionExtension = card.questionExtension;
             c.questionExtension = card.questionExtension;
             c.answerExtension = card.answerExtension;
+            c.timedForward = card.timedForward;
+            c.timedReverse = card.timedReverse;
+            c.timedImages = card.timedImages;
+            c.limitForward = card.limitForward;
+            c.limitReverse = card.limitReverse;
+            c.limitImages = card.limitImages;
 
             //c.question = card.question;
             //c.validanswers = card.validanswers;

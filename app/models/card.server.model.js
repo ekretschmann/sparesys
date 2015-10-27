@@ -163,7 +163,7 @@ var CardSchema = new Schema({
         type: [String],
         default: []
     },
-    timedForward: {
+    timedForward : {
         type: Boolean,
         default: false
     },

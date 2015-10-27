@@ -175,6 +175,8 @@ angular.module('courses').controller('CoursesController',
                         $scope.course.cardDefaults.forward.readBack = !$scope.course.cardDefaults.forward.readBack;
                     } else if (setting === 'speechRecognition') {
                         $scope.course.cardDefaults.forward.speechRecognition = !$scope.course.cardDefaults.forward.speechRecognition;
+                    } else if (setting === 'timed') {
+                        $scope.course.cardDefaults.forward.timed = !$scope.course.cardDefaults.forward.timed;
                     }
                 } else if (mode === 'reverse') {
                     if (setting === 'readFront') {
@@ -183,6 +185,8 @@ angular.module('courses').controller('CoursesController',
                         $scope.course.cardDefaults.reverse.readBack = !$scope.course.cardDefaults.reverse.readBack;
                     } else if (setting === 'speechRecognition') {
                         $scope.course.cardDefaults.reverse.speechRecognition = !$scope.course.cardDefaults.reverse.speechRecognition;
+                    } else if (setting === 'timed') {
+                        $scope.course.cardDefaults.reverse.timed = !$scope.course.cardDefaults.reverse.timed;
                     }
                 } else if (mode === 'images') {
                     if (setting === 'readFront') {
@@ -191,6 +195,8 @@ angular.module('courses').controller('CoursesController',
                         $scope.course.cardDefaults.images.readBack = !$scope.course.cardDefaults.images.readBack;
                     } else if (setting === 'speechRecognition') {
                         $scope.course.cardDefaults.images.speechRecognition = !$scope.course.cardDefaults.images.speechRecognition;
+                    } else if (setting === 'timed') {
+                        $scope.course.cardDefaults.images.timed = !$scope.course.cardDefaults.images.timed;
                     }
                 }
 
@@ -263,6 +269,7 @@ angular.module('courses').controller('CoursesController',
             // Update existing Course
             $scope.update = function () {
 
+                console.log('updating');
                 $scope.course.$update();
             };
 

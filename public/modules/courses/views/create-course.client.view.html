@@ -216,14 +216,14 @@
                                 <input type="checkbox" ng-model="timedForward" ng-disabled="!useForwardMode">
                                 Time penalty
 
-                                <div style="padding-left: 1em; padding-right: 1em" data-ng-if="timedForward && useForwardMode">
+                                <div data-ng-if="timedForward && useForwardMode">
 
                                     <input type="number"
-                                           style="display: inline"
+                                           style="display: inline; width: 40%; margin-left: 1.5em"
 
                                            data-ng-model="limitForward"
                                            class="form-control"
-                                            > seconds
+                                            > sec
                                 </div>
 
                             </div>

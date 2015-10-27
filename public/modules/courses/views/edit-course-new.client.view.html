@@ -321,10 +321,30 @@
                             <span ng-class="{'text-muted': !course.cardDefaults.forward.speechRecognition}">Speech Recognition</span>
                         </div>
 
-                        <!--<div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">-->
-                        <!--<input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">-->
-                        <!--Read Answers-->
-                        <!--</div>-->
+                        <div class="field-data" ng-if="course.cardDefaults.forward.enabled">
+
+
+                            <a href="" data-ng-click="toggleSetting('forward', 'timed')"
+                               data-ng-if="course.cardDefaults.forward.timed"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('forward', 'timed')"
+                               data-ng-if="!course.cardDefaults.forward.timed"><i
+                                    class="glyphicon glyphicon-off"></i></a>
+                            <span ng-class="{'text-muted': !course.cardDefaults.forward.timed}">Timed</span>
+
+                            <div ng-if="course.cardDefaults.forward.timed">
+
+                                <input type="number"
+                                       style="width: 40%; display: inline; margin-left: 1.5em"
+                                       ng-blur="update()"
+                                       data-ng-model="course.cardDefaults.forward.timeLimit"
+                                       class="form-control"
+                                        > sec
+
+                            </div>
+                        </div>
+
+
 
                     </div>
                 </div>
@@ -383,6 +403,28 @@
                             <span ng-class="{'text-muted': !course.cardDefaults.reverse.speechRecognition}">Speech Recognition</span>
                         </div>
 
+                        <div class="field-data" ng-if="course.cardDefaults.reverse.enabled">
+
+
+                            <a href="" data-ng-click="toggleSetting('reverse', 'timed')"
+                               data-ng-if="course.cardDefaults.reverse.timed"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('reverse', 'timed')"
+                               data-ng-if="!course.cardDefaults.reverse.timed"><i
+                                    class="glyphicon glyphicon-off"></i></a>
+                            <span ng-class="{'text-muted': !course.cardDefaults.reverse.timed}">Timed</span>
+
+                            <div ng-if="course.cardDefaults.reverse.timed">
+
+                                <input type="number"
+                                       style="width: 40%; display: inline; margin-left: 1.5em"
+                                       ng-blur="update()"
+                                       data-ng-model="course.cardDefaults.reverse.timeLimit"
+                                       class="form-control"
+                                        > sec
+
+                            </div>
+                        </div>
 
 
                     </div>
@@ -444,82 +486,35 @@
                             <span ng-class="{'text-muted': !course.cardDefaults.images.speechRecognition}">Speech Recognition</span>
                         </div>
 
-                        <!--<div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">-->
-                        <!--<input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">-->
-                        <!--Read Answers-->
-                        <!--</div>-->
+                        <div class="field-data" ng-if="course.cardDefaults.images.enabled">
+
+
+                            <a href="" data-ng-click="toggleSetting('images', 'timed')"
+                               data-ng-if="course.cardDefaults.images.timed"><i
+                                    class="glyphicon glyphicon-ok-circle"></i></a>
+                            <a href="" data-ng-click="toggleSetting('images', 'timed')"
+                               data-ng-if="!course.cardDefaults.images.timed"><i
+                                    class="glyphicon glyphicon-off"></i></a>
+                            <span ng-class="{'text-muted': !course.cardDefaults.images.timed}">Timed</span>
+
+                            <div ng-if="course.cardDefaults.images.timed">
+
+                                <input type="number"
+                                       style="width: 40%; display: inline; margin-left: 1.5em"
+                                       ng-blur="update()"
+                                       data-ng-model="course.cardDefaults.images.timeLimit"
+                                       class="form-control"
+                                        > sec
+
+                            </div>
+                        </div>
+
 
                     </div>
                 </div>
             </div>
         </div>
 
-
-        <!--<div class="col-xs-12">-->
-        <!--<div class="flashcard-section">-->
-
-        <!--<div class="field-label">-->
-
-        <!--Reverse-->
-        <!--</div>-->
-
-
-        <!--<div class="row font-medium">-->
-
-        <!--<div class="col-xs-4">-->
-        <!--<input type="checkbox" ng-model="useReverseMode">-->
-        <!--Use Mode-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">-->
-        <!--<input type="checkbox" ng-model="readQuestionsReverse"-->
-        <!--ng-disabled="!useReverseMode">-->
-        <!--Read Questions-->
-        <!--</div>-->
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">-->
-        <!--<input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">-->
-        <!--Read Answers-->
-        <!--</div>-->
-
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-12">-->
-        <!--<div class="flashcard-section">-->
-
-        <!--<div class="field-label">-->
-
-        <!--Images-->
-        <!--</div>-->
-
-
-        <!--<div class="row font-medium">-->
-
-        <!--<div class="col-xs-4">-->
-        <!--<input type="checkbox" ng-model="useImagesMode">-->
-        <!--Use Mode-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">-->
-        <!--<input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">-->
-        <!--Read Questions-->
-        <!--</div>-->
-
-        <!--<div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">-->
-        <!--<input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">-->
-        <!--Read Answers-->
-        <!--</div>-->
-
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
 
 
     </div>

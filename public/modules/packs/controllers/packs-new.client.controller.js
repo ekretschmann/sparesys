@@ -21,6 +21,13 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.editMode = 'data';
 
+
+
+        $scope.settings = [
+            'Language Front',
+            'Language Back'
+        ];
+
         $scope.showMode = function(mode) {
             $scope.editMode = mode;
         };

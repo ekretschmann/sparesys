@@ -38,6 +38,14 @@ var CourseSchema = new Schema({
                 speechRecognition: {
                     type: Boolean,
                     default: false
+                },
+                timed: {
+                    type: Boolean,
+                    default: false
+                },
+                timeLimit: {
+                    type: Number,
+                    default: 10
                 }
             },
             reverse: {
@@ -56,6 +64,14 @@ var CourseSchema = new Schema({
                 speechRecognition: {
                     type: Boolean,
                     default: false
+                },
+                timed: {
+                    type: Boolean,
+                    default: false
+                },
+                timeLimit: {
+                    type: Number,
+                    default: 10
                 }
             },
             images: {
@@ -74,6 +90,14 @@ var CourseSchema = new Schema({
                 speechRecognition: {
                     type: Boolean,
                     default: false
+                },
+                timed: {
+                    type: Boolean,
+                    default: false
+                },
+                timeLimit: {
+                    type: Number,
+                    default: 10
                 }
             }
         },

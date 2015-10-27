@@ -11,13 +11,13 @@ angular.module('courses').controller('CoursesCreateController',
             $scope.useForwardMode = true;
             $scope.useReverseMode = false;
             $scope.useImagesMode = false;
-            $scope.readQuestionsForward= false;
-            $scope.readAnswersForward= false;
-            $scope.readQuestionsReverse= false;
-            $scope.readAnswersReverse= false;
-            $scope.readQuestionsImages= false;
-            $scope.readAnswersImages= false;
-            $scope.teaching= false;
+            $scope.readQuestionsForward = false;
+            $scope.readAnswersForward = false;
+            $scope.readQuestionsReverse = false;
+            $scope.readAnswersReverse = false;
+            $scope.readQuestionsImages = false;
+            $scope.readAnswersImages = false;
+            $scope.teaching = false;
             $scope.timedForward = false;
             $scope.timedReverse = false;
             $scope.timedImages = false;
@@ -62,7 +62,7 @@ angular.module('courses').controller('CoursesCreateController',
                 $scope.check = check;
             };
 
-            $scope.upload = function() {
+            $scope.upload = function () {
                 console.log('here');
             };
 
@@ -77,20 +77,26 @@ angular.module('courses').controller('CoursesCreateController',
                         enabled: $scope.useForwardMode,
                         readFront: $scope.readQuestionsForward,
                         readBack: $scope.readAnswersForward,
-                        speechRecognition: false
+                        speechRecognition: false,
+                        timed: $scope.timedForward,
+                        timeLimit: $scope.limitForward
                     },
                     reverse: {
                         enabled: $scope.useReverseMode,
                         readFront: $scope.readQuestionsReverse,
                         readBack: $scope.readAnswersReverse,
-                        speechRecognition: false
+                        speechRecognition: false,
+                        timed: $scope.timedReverse,
+                        timeLimit: $scope.limitReverse
                     },
                     images: {
-                    enabled: $scope.useImagesMode,
+                        enabled: $scope.useImagesMode,
                         readFront: $scope.readQuestionsImages,
                         readBack: $scope.readAnswersImages,
-                        speechRecognition: false
-                }
+                        speechRecognition: false,
+                        timed: $scope.timedImages,
+                        timeLimit: $scope.limitImages
+                    }
                 };
 
                 var course = new Courses({
@@ -121,10 +127,6 @@ angular.module('courses').controller('CoursesCreateController',
                     $scope.error = errorResponse.data.message;
                 });
             };
-
-
-
-
 
 
         }

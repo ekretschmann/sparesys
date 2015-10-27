@@ -5,8 +5,7 @@
 
         <span data-ng-if="showText === 'true'">{{text}}</span>
 
-
-        <a data-ng-if="playwhen" class="soundicon" href=""
+        <a data-ng-if="playwhen === 'true'" class="soundicon" href=""
            data-ng-click="playSound(language, text, extension, speed)">
             <i class="glyphicon glyphicon-volume-up sound-replay"></i>
         </a>

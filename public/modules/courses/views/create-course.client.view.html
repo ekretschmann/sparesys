@@ -1,8 +1,6 @@
 <div data-ng-controller="CoursesCreateController">
 
 
-
-
     <form data-ng-submit="create()" class="font-large" validate>
 
         <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
@@ -74,7 +72,7 @@
                                 <input type="text"
                                        data-ng-model="front"
                                        class="form-control"
-                                       placeholder="What is on the Front of the Cards (e.g. Countries)">
+                                       placeholder="The Front of the Cards (e.g. Countries)">
                             </div>
                         </div>
 
@@ -84,19 +82,19 @@
                                 <input type="text"
                                        data-ng-model="back"
                                        class="form-control"
-                                       placeholder="What is on the Back of the Cards (e.g. Capitals)">
+                                       placeholder="The Back of the Cards (e.g. Capitals)">
                             </div>
                         </div>
                     </div>
                 </div>
 
 
-
                 <div class="flashcard-section">
                     <div class="field-label">My role</div>
                     <div>
                         <input data-ng-model="teaching" type="radio" ng-value="true"/> Teacher
-                        <input style="margin-left: 10px" data-ng-model="teaching" type="radio" ng-value="false"/> Student
+                        <input style="margin-left: 10px" data-ng-model="teaching" type="radio" ng-value="false"/>
+                        Student
 
                     </div>
                 </div>
@@ -104,8 +102,6 @@
 
             </div>
         </div>
-
-
 
 
         <div class="col-xs-12 col-md-6 dashboard-col">
@@ -190,62 +186,70 @@
                 </div>
 
 
-                <div class="col-xs-12">
-                    <div class="flashcard-section">
+                <div class="flashcard-section">
+
+                    <div class="col-xs-4" style="margin-top: 1.5em">
                         <div class="field-label">
 
                             Forward
                         </div>
+                        <div class="font-medium">
 
-
-                        <div class="row font-medium">
-
-                            <div class="col-xs-4">
+                            <div>
                                 <input type="checkbox" ng-model="useForwardMode">
                                 Use Mode
                             </div>
 
 
-                            <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
+                            <div ng-class="{'text-muted': !useForwardMode}">
                                 <input type="checkbox" ng-model="readQuestionsForward"
                                        ng-disabled="!useForwardMode">
                                 Read Questions
                             </div>
 
-                            <div class="col-xs-4" ng-class="{'text-muted': !useForwardMode}">
+                            <div ng-class="{'text-muted': !useForwardMode}">
                                 <input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">
                                 Read Answers
                             </div>
 
+                            <div ng-class="{'text-muted': !useForwardMode}">
+                                <input type="checkbox" ng-model="timedForward" ng-disabled="!useForwardMode">
+                                Time penalty
+
+                                <div style="padding-left: 1em; padding-right: 1em" data-ng-if="timedForward">
+
+                                    <input type="number"
+                                           data-ng-model="limitForward"
+                                           class="form-control"
+                                            >
+                                </div>
+
+                            </div>
+
                         </div>
                     </div>
-                </div>
 
-
-                <div class="col-xs-12">
-                    <div class="flashcard-section">
-
+                    <div class="col-xs-4" style="margin-top: 1.5em">
                         <div class="field-label">
 
                             Reverse
                         </div>
 
+                        <div class="field-data">
 
-                        <div class="row font-medium">
-
-                            <div class="col-xs-4">
+                            <div>
                                 <input type="checkbox" ng-model="useReverseMode">
                                 Use Mode
                             </div>
 
 
-                            <div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">
+                            <div ng-class="{'text-muted': !useReverseMode}">
                                 <input type="checkbox" ng-model="readQuestionsReverse"
                                        ng-disabled="!useReverseMode">
                                 Read Questions
                             </div>
 
-                            <div class="col-xs-4" ng-class="{'text-muted': !useReverseMode}">
+                            <div ng-class="{'text-muted': !useReverseMode}">
                                 <input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">
                                 Read Answers
                             </div>
@@ -253,32 +257,26 @@
 
                         </div>
                     </div>
-                </div>
 
-
-                <div class="col-xs-12">
-                    <div class="flashcard-section">
-
+                    <div class="col-xs-4" style="margin-top: 1.5em">
                         <div class="field-label">
 
                             Images
                         </div>
+                        <div class="field-data">
 
-
-                        <div class="row font-medium">
-
-                            <div class="col-xs-4">
+                            <div>
                                 <input type="checkbox" ng-model="useImagesMode">
                                 Use Mode
                             </div>
 
 
-                            <div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">
+                            <div ng-class="{'text-muted': !useImagesMode}">
                                 <input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">
                                 Read Questions
                             </div>
 
-                            <div class="col-xs-4" ng-class="{'text-muted': !useImagesMode}">
+                            <div ng-class="{'text-muted': !useImagesMode}">
                                 <input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">
                                 Read Answers
                             </div>
@@ -287,26 +285,27 @@
                         </div>
                     </div>
                 </div>
-
-
-                <div class="col-xs-12" style="text-align: center; padding-top: 2em">
-                    <button ng-disabled="!name" type="button" class="btn btn-rememberators font-s"
-                            data-ng-click="createCourse()">
-                        Create Course
-                    </button>
-                </div>
             </div>
-
-
         </div>
 
 
+        <div class="col-xs-12" style="text-align: center; padding-top: 2em">
+            <button ng-disabled="!name" type="button" class="btn btn-rememberators font-s"
+                    data-ng-click="createCourse()">
+                Create Course
+            </button>
+        </div>
+
     </form>
+</div>
 
 
-    <div class="rememberators-footer col-xs-12">
+</form>
 
-        rememberators.com
-    </div>
+
+<div class="rememberators-footer col-xs-12">
+
+    rememberators.com
+</div>
 
 </div>

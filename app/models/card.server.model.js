@@ -162,6 +162,30 @@ var CardSchema = new Schema({
     invalidAnswersReverse: {
         type: [String],
         default: []
+    },
+    timedForward: {
+        type: Boolean,
+        default: false
+    },
+    limitForward: {
+        type: Number,
+        default: 10
+    },
+    timedReverse: {
+        type: Boolean,
+        default: false
+    },
+    limitReverse: {
+        type: Number,
+        default: 10
+    },
+    timedImages: {
+        type: Boolean,
+        default: false
+    },
+    limitImages: {
+        type: Number,
+        default: 10
     }
 
 });

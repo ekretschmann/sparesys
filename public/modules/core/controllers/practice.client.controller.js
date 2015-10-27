@@ -103,8 +103,16 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             $scope.endTime = Date.now();
 
             var elapsed = $scope.endTime - $scope.startTime;
-            console.log(elapsed);
 
+            if ($scope.card.limitForward * 1000 < elapsed) {
+                assessment--;
+            }
+
+            if ($scope.card.limitForward * 2000 < elapsed) {
+                assessment--;
+            }
+
+            assessment = Math.max(0, assessment);
 
             $scope.recordRateOnline(time, assessment);
 

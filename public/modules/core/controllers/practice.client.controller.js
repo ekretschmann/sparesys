@@ -27,6 +27,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         $scope.progress = 30;
 
         $scope.receiveRewards = '';
+        $scope.startTime = Date.now;
+        $scope.endTime = Date.now;
 
 
         $scope.delta = {};
@@ -97,6 +99,12 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         };
 
         $scope.recordRate = function (time, assessment) {
+
+            $scope.endTime = Date.now();
+
+            var elapsed = $scope.endTime - $scope.startTime;
+            console.log(elapsed);
+
 
             $scope.recordRateOnline(time, assessment);
 
@@ -459,6 +467,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             $scope.challengeDescription = ChallengeCalculatorService.getChallengeDescription();
 
             $scope.card = bestCard;
+
+            $scope.startTime = Date.now();
 
             if ($scope.card.history && $scope.card.history.length > 0) {
                 $scope.lastRepetition = new Date($scope.card.history[$scope.card.history.length - 1].when);

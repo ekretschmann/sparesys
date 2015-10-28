@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div class="col-xs-4">
+    <div class="col-xs-5">
         <div data-ng-if="selectedSetting === 'Language Front'">
             <div class="font-medium">
 
@@ -184,9 +184,72 @@
                 </div>
             </div>
         </div>
+
+        <div data-ng-if="selectedSetting === 'Forward mode'">
+            <div class="font-medium">
+
+                <div ng-class="{'text-muted': !cardOptions.changeForwardEnabled}">
+                    <a href="" data-ng-click="toggleForward()"
+                       data-ng-if="cardOptions.changeForwardEnabled"><i
+                            class="glyphicon glyphicon-ok-circle"></i></a>
+                    <a href="" data-ng-click="toggleForward()"
+                       data-ng-if="!cardOptions.changeForwardEnabled"><i
+                            class="glyphicon glyphicon-off"></i></a>
+
+                    Enabled
+                </div>
+
+                <div data-ng-if="cardOptions.changeForwardEnabled">
+                    <div ng-class="{'text-muted': !cardOptions.forwardReadFront}">
+                        <a href="" data-ng-click="toggleForwardReadFront()"
+                           data-ng-if="cardOptions.forwardReadFront"><i
+                                class="glyphicon glyphicon-ok-circle"></i></a>
+                        <a href="" data-ng-click="toggleForwardReadFront()"
+                           data-ng-if="!cardOptions.forwardReadFront"><i
+                                class="glyphicon glyphicon-off"></i></a>
+                        Read Front
+                    </div>
+                    <div ng-class="{'text-muted': !cardOptions.forwardReadBack}">
+                        <a href="" data-ng-click="toggleForwardReadBack()"
+                           data-ng-if="cardOptions.forwardReadBack"><i
+                                class="glyphicon glyphicon-ok-circle"></i></a>
+                        <a href="" data-ng-click="toggleForwardReadBack()"
+                           data-ng-if="!cardOptions.forwardReadBack"><i
+                                class="glyphicon glyphicon-off"></i></a>
+                        Read Back
+                    </div>
+                    <div ng-class="{'text-muted': !cardOptions.forwardSpeechRecognition}">
+                        <a href="" data-ng-click="toggleForwardSpeechRecognition()"
+                           data-ng-if="cardOptions.forwardSpeechRecognition"><i
+                                class="glyphicon glyphicon-ok-circle"></i></a>
+                        <a href="" data-ng-click="toggleForwardSpeechRecognition()"
+                           data-ng-if="!cardOptions.forwardSpeechRecognition"><i
+                                class="glyphicon glyphicon-off"></i></a>
+                        Speech Recognition
+                    </div>
+                    <div ng-class="{'text-muted': !cardOptions.forwardTimed}">
+                        <a href="" data-ng-click="toggleForwardTimed()"
+                           data-ng-if="cardOptions.forwardTimed"><i
+                                class="glyphicon glyphicon-ok-circle"></i></a>
+                        <a href="" data-ng-click="toggleForwardTimed()"
+                           data-ng-if="!cardOptions.forwardTimed"><i
+                                class="glyphicon glyphicon-off"></i></a>
+                        Timed<span data-ng-if="cardOptions.forwardTimed">:
+
+                                        <input type="number"
+                                               style="display: inline; width: 30%; margin-left: 0.5em"
+                                               data-ng-change="update()"
+                                               data-ng-model="card.limitForward"
+                                               class="form-control"
+                                                > sec
+                                    </span>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <div class="col-xs-4" data-ng-if="selectedSetting !== 'Choose setting'">
+    <div class="col-xs-3" data-ng-if="selectedSetting !== 'Choose setting'">
         <button class="btn btn-rememberators"
                 type="submit"
                 ng-click="changeDefaultSettings()"
@@ -196,74 +259,7 @@
     </div>
 
 
-    <!--<div class="font-medium" data-ng-if="cardOptions.checksEnabled">-->
-
     <!--
-
-    <!--</div>-->
-    <!--</div>-->
-
-
-    <!--</div>-->
-    <!--</div>-->
-
-    <!--<div class="row">-->
-    <!--<div class="col-xs-4 dashboard-col">-->
-
-    <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.changeForwardEnabled}">-->
-    <!--<a href="" data-ng-click="toggleForward()"-->
-    <!--data-ng-if="cardOptions.changeForwardEnabled"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleForward()"-->
-    <!--data-ng-if="!cardOptions.changeForwardEnabled"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-
-    <!--Forward Mode-->
-    <!--</div>-->
-
-
-    <!--<div class="field-data" data-ng-if="cardOptions.changeForwardEnabled">-->
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleForwardEnabled()"-->
-    <!--data-ng-if="cardOptions.reverseEnabled"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleForwardEnabled()"-->
-    <!--data-ng-if="!cardOptions.forwardEnabled"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Enabled-->
-    <!--</div>-->
-
-
-    <!--<div data-ng-if="cardOptions.forwardEnabled">-->
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleForwardReadFront()"-->
-    <!--data-ng-if="cardOptions.forwardReadFront"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleForwardReadFront()"-->
-    <!--data-ng-if="!cardOptions.forwardReadFront"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Read Front-->
-    <!--</div>-->
-
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleForwardReadBack()"-->
-    <!--data-ng-if="cardOptions.forwardReadBack"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleForwardReadBack()"-->
-    <!--data-ng-if="!cardOptions.forwardReadBack"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Read Back-->
-    <!--</div>-->
-
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleForwardSpeechRecognition()"-->
-    <!--data-ng-if="cardOptions.forwardSpeechRecognition"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleForwardSpeechRecognition()"-->
-    <!--data-ng-if="!cardOptions.forwardSpeechRecognition"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Speech Recognition-->
-    <!--</div>-->
     <!--</div>-->
     <!--</div>-->
 

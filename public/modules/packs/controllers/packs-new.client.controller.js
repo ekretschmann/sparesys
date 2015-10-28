@@ -30,7 +30,11 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
             'Priority',
             'Start Date',
             'Due Date',
-            'Checks'
+            'Checks',
+            'Forward mode',
+            'Reverse mode',
+            'Images mode'
+
         ];
 
         $scope.chooseSetting = function(setting) {
@@ -248,6 +252,11 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.toggleForwardSpeechRecognition = function() {
             $scope.settingChanges.forwardSpeechRecognition = !$scope.settingChanges.forwardSpeechRecognition;
             $scope.cardOptions.forwardSpeechRecognition = !$scope.cardOptions.forwardSpeechRecognition;
+        };
+
+        $scope.toggleForwardTimed = function() {
+            $scope.settingChanges.forwardTimed = !$scope.settingChanges.forwardTimed;
+            $scope.cardOptions.forwardTimed = !$scope.cardOptions.forwardTimed;
         };
 
         $scope.toggleReverse = function() {

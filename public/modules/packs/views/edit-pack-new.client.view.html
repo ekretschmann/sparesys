@@ -66,15 +66,16 @@
                 Bulk changes
             </div>
             <infobox logo="girl">
-                You can change the settings of all cards in this pack in one go. Switch on
-                the settings you want to change and click the button. Everything that you
-                have not switched on will not be changed.
+                You can change the settings of all cards in this pack in one go. Choose
+                the setting you want to change from the dropdown and select the value
+                you want to change it to. Make sure that you are not overriding settings
+                unintentionally.
             </infobox>
         </div>
     </div>
 
 
-    <div class="col-xs-6 dashboard-col">
+    <div class="col-xs-6">
 
 
         <div class="virtual-card font-large">
@@ -84,15 +85,21 @@
                 <div class="pull-right">
 
 
-                    <a href="" data-ng-click="showMode('images')" data-ng-if="editMode === 'data'"><i
+                    <a href="" data-ng-click="showMode('images')" data-ng-if="editMode !== 'images'"><i
                             class="glyphicon glyphicon-picture"></i></a>
+
                     <i class="glyphicon glyphicon-picture text-muted" data-ng-if="editMode === 'images'"></i>
-                    <a href="" data-ng-click="showMode('data')" data-ng-if="editMode === 'images'"><i
+
+                    <a href="" data-ng-click="showMode('data')" data-ng-if="editMode !== 'data'"><i
                             class="glyphicon glyphicon-list"></i></a>
+
                     <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
 
-                    <a href="" data-ng-click="areYouSureToDeletePack(pack)"><i
-                            class="glyphicon glyphicon-trash"></i></a>
+                    <a href="" data-ng-click="showMode('modes')" data-ng-if="editMode !== 'modes'"><i
+                            class="glyphicon glyphicon-option-horizontal"></i></a>
+
+                    <i class="glyphicon glyphicon-option-horizontal text-muted"
+                       data-ng-if="editMode === 'modes'"></i>
 
 
                 </div>
@@ -101,15 +108,6 @@
             </div>
 
             <div class="flashcard-section">
-
-                <div class="row">
-                    <div class="col-xs-12 dashboard-col">
-                        <div class="field-label">Change settings of all cards in this pack</div>
-                        <div class="font-medium">
-                            <div ng-include="'/modules/packs/views/partial/bulk-edit-pack.client.view.html'"></div>
-                        </div>
-                    </div>
-                </div>
 
 
                 <div class="row">
@@ -166,6 +164,24 @@
     </div>
 
 
+    <div class="col-xs-6">
+
+
+        <div class="virtual-card font-large">
+            <div class="title">
+            &nbsp;
+            </div>
+            <div class="flashcard-section">
+                <div class="col-xs-12 dashboard-col">
+                    <div class="field-label">Change settings of all cards in this pack</div>
+                    <div class="font-medium">
+                        <div ng-include="'/modules/packs/views/partial/bulk-edit-pack.client.view.html'"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div data-ng-repeat="card in pack.cards">
 
 
@@ -180,7 +196,8 @@
                             <a href="" data-ng-click="showMode('images')" data-ng-if="editMode !== 'images'"><i
                                     class="glyphicon glyphicon-picture"></i></a>
 
-                            <i class="glyphicon glyphicon-picture text-muted" data-ng-if="editMode === 'images'"></i>
+                            <i class="glyphicon glyphicon-picture text-muted"
+                               data-ng-if="editMode === 'images'"></i>
 
                             <a href="" data-ng-click="showMode('data')" data-ng-if="editMode !== 'data'"><i
                                     class="glyphicon glyphicon-list"></i></a>

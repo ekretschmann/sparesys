@@ -351,6 +351,11 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
             if($scope.cardOptions.dueDate) {
                 $scope.settingChanges.dueDate = $scope.cardOptions.dueDate;
             }
+            if($scope.cardOptions.checks) {
+                $scope.settingChanges.checks = $scope.cardOptions.checks;
+            }
+
+           // console.log($scope.settingChanges);
 
             $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {settings: $scope.settingChanges, id: $scope.pack._id}).
                 success(function (data, status, headers, config) {
@@ -364,7 +369,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.update = function () {
 
 
-            console.log($scope.settingChanges);
+
 
 
             $scope.pack.$update();

@@ -367,13 +367,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         // Update existing Pack
         $scope.update = function () {
-
-
-
-
-
             $scope.pack.$update();
-
         };
 
 

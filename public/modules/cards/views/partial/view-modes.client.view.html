@@ -1,0 +1,93 @@
+<div class="flashcard-section">
+
+
+
+
+    <div class="row">
+        <div class="col-xs-4 dashboard-col">
+            <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Forward Mode
+            </div>
+            <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('forward') === -1">
+                not used
+            </div>
+            <div class="font-medium " data-ng-if="card.modes.indexOf('forward') > -1">
+
+                <div ng-class="{'text-muted': !card.readFrontForward}">
+                    Read question
+
+                </div>
+                <div ng-class="{'text-muted': !card.readBackForward}">
+                    Read answer
+
+                </div>
+                <div ng-class="{'text-muted': !card.speechRecognitionForward}">
+                    Speech recognition
+
+                </div>
+                <div ng-class="{'text-muted': !card.timedForward}">
+                    Timed<span data-ng-if="card.timedForward">: {{card.limitForward}}s</span>
+
+                </div>
+
+            </div>
+        </div>
+
+        <div class="col-xs-4 dashboard-col">
+            <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">Reverse Mode
+            </div>
+            <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('reverse') === -1">
+                not used
+            </div>
+            <div class="font-medium " data-ng-if="card.modes.indexOf('reverse') > -1">
+
+                <div ng-class="{'text-muted': !card.readFrontReverse}">
+                    Read question
+
+                </div>
+                <div ng-class="{'text-muted': !card.readBackReverse}">
+                    Read answer
+
+                </div>
+                <div ng-class="{'text-muted': !card.speechRecognitionReverse}">
+                    Speech recognition
+
+                </div>
+
+                <div ng-class="{'text-muted': !card.timedReverse}">
+                    Timed<span data-ng-if="card.timedReverse">: {{card.limitReverse}}s</span>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="col-xs-4 dashboard-col">
+            <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('images') === -1}">Image Mode</div>
+            <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('images') === -1">
+                not used
+            </div>
+            <div class="font-medium " data-ng-if="card.modes.indexOf('images') > -1">
+
+                <div ng-class="{'text-muted': !card.imagesReadFront}">
+                    Read question
+
+                </div>
+                <div ng-class="{'text-muted': !card.imagesReadBack}">
+                    Read answer
+
+                </div>
+                <div ng-class="{'text-muted': !card.speechRecognitionImages}">
+                    Speech recognition
+
+                </div>
+
+                <div ng-class="{'text-muted': !card.timedImages}">
+                    Timed<span data-ng-if="card.timedImages">: {{card.limitImages}}s</span>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+
+</div>

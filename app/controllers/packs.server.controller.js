@@ -190,6 +190,8 @@ var getPackTree = function(id) {
 var updateCard = function(cardId, req) {
     var settings = req.settings;
     var deferred = q.defer();
+
+    console.log(settings);
     Card.findOne({'_id': cardId }).exec(function (err, card) {
         if (settings.languageFront) {
             card.languageFront = settings.languageFront;
@@ -263,7 +265,6 @@ var updateCard = function(cardId, req) {
             }
         }
 
-        console.log(settings);
 
         if (settings.imagesEnabled) {
             if (card.modes.indexOf('images') === -1) {

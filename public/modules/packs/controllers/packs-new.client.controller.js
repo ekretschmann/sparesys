@@ -6,6 +6,8 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         $scope.authentication = Authentication;
 
 
+
+
         $scope.priorities = ['highest', 'high', 'medium', 'low', 'lowest'];
         $scope.checks = {};
         $scope.checks.self = 'self-checked';
@@ -39,6 +41,18 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.chooseSetting = function(setting) {
             $scope.selectedSetting = setting;
+            if ($scope.selectedSetting === 'Language Front') {
+                $scope.settingChanges.languageFront = $scope.languages[0];
+            }
+            if ($scope.selectedSetting === 'Language Back') {
+                $scope.settingChanges.languageBack = $scope.languages[0];
+            }
+            if ($scope.selectedSetting === 'Priority') {
+                $scope.settingChanges.priority = 3;
+            }
+            if ($scope.selectedSetting === 'Start Date') {
+                $scope.settingChanges.startDate = undefined;
+            }
         };
 
         $scope.showMode = function(mode) {
@@ -186,6 +200,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
         $scope.toggleStartDate = function() {
             $scope.cardOptions.startDateEnabled = !$scope.cardOptions.startDateEnabled;
+
             if (!$scope.cardOptions.startDateEnabled) {
                 $scope.settingChanges.startDate = undefined;
             }
@@ -204,7 +219,8 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         };
 
         $scope.setStartDate = function() {
-            $scope.settingChanges.dueDate = $scope.cardOptions.dueDate ;
+            $scope.settingChanges.startDate = $scope.cardOptions.startDate ;
+            console.log($scope.settingChanges.startDate);
         };
 
         $scope.toggleForward = function() {
@@ -215,12 +231,13 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
                 $scope.settingChanges.forwardReadBack = undefined;
                 $scope.settingChanges.forwardSpeechRecognition = undefined;
             } else {
-                $scope.settingChanges.forwardEnabled = $scope.cardOptions.forwardEnabled;
+                $scope.settingChanges.forwardEnabled = $scope.cardOptions.changeForwardEnabled;
                 $scope.settingChanges.forwardReadFront = $scope.cardOptions.forwardReadFront;
                 $scope.settingChanges.forwardReadBack = $scope.cardOptions.forwardReadBack;
                 $scope.settingChanges.forwardSpeechRecognition = $scope.cardOptions.forwardSpeechRecognition;
             }
-            console.log($scope.settingChanges.forwardReadFront);
+
+            console.log($scope.settingChanges.forwardEnabled);
 
         };
 
@@ -364,13 +381,18 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
                 $scope.settingChanges.checks = $scope.cardOptions.checks;
             }
 
-           // console.log($scope.settingChanges);
+            console.log($scope.settingChanges);
 
             $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {settings: $scope.settingChanges, id: $scope.pack._id}).
                 success(function (data, status, headers, config) {
                     $scope.settingChanges = {};
                     $scope.cardOptions = {};
-                    $state.go($state.$current, null, { reload: true });
+
+
+                    //$state.go($state.$current, null, { reload: true });
+
+                    $scope.findOne();
+                    $scope.selectedSetting = 'Choose setting';
                 });
         };
 

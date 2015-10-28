@@ -23,10 +23,19 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
 
 
+        $scope.selectedSetting = 'Choose setting';
         $scope.settings = [
             'Language Front',
-            'Language Back'
+            'Language Back',
+            'Priority',
+            'Start Date',
+            'Due Date',
+            'Checks'
         ];
+
+        $scope.chooseSetting = function(setting) {
+            $scope.selectedSetting = setting;
+        };
 
         $scope.showMode = function(mode) {
             $scope.editMode = mode;
@@ -178,9 +187,10 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
             }
         };
 
-        $scope.setStartDate = function() {
-            $scope.settingChanges.startDate = $scope.cardOptions.startDate ;
-        };
+        //$scope.setStartDate = function() {
+        //    console.log('start date'+$scope.cardOptions.startDate);
+        //    $scope.settingChanges.startDate = $scope.cardOptions.startDate ;
+        //};
 
         $scope.toggleDueDate = function() {
             $scope.cardOptions.dueDateEnabled = !$scope.cardOptions.dueDateEnabled;
@@ -335,10 +345,17 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
         };
 
         $scope.changeDefaultSettings = function() {
-            console.log($scope.settingChanges);
+            if($scope.cardOptions.startDate) {
+                $scope.settingChanges.startDate = $scope.cardOptions.startDate;
+            }
+            if($scope.cardOptions.dueDate) {
+                $scope.settingChanges.dueDate = $scope.cardOptions.dueDate;
+            }
+
             $http.post('/packs/'+$scope.pack._id+'/update-all-cards', {settings: $scope.settingChanges, id: $scope.pack._id}).
                 success(function (data, status, headers, config) {
                     $scope.settingChanges = {};
+                    $scope.cardOptions = {};
                     $state.go($state.$current, null, { reload: true });
                 });
         };
@@ -417,8 +434,6 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
                         prev = packId;
                     }
                 }
-                console.log($scope.prevPackId);
-                console.log($scope.nextPackId);
                 if ($scope.prevPackId) {
                     $scope.prevPack = Packs.get({
                         packId: $scope.prevPackId

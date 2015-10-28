@@ -1,21 +1,40 @@
-<div>
-    <div class="title">
-        Change settings for all cards
+<div class="row" style="margin-top: 0.5em">
 
 
+    <div class="col-xs-4">
+        <div class="btn-group right-padded-l nowrap">
+
+
+            <button type="button" class="btn btn-default standard-dropdown-width"
+                    data-ng-if="!card.languageFront">
+                {{selectedSetting}}
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="setting in settings" data-ng-click="chooseSetting(setting)">
+                    <a>{{setting}}</a>
+                </li>
+            </ul>
+
+        </div>
     </div>
 
-    <div class="flashcard-section">
-        <div class="row">
-
-            <div class="col-xs-4 dashboard-col">
+    <div class="col-xs-4">
+        <div data-ng-if="selectedSetting === 'Language Front'">
+            <div class="font-medium">
 
                 <div class="btn-group right-padded-l nowrap">
 
 
-
                     <button type="button" class="btn btn-default standard-dropdown-width"
-                            data-ng-if="!card.languageFront">
+                            data-ng-if="cardOptions.languageFront">
+                        {{cardOptions.languageFront.name}}
+                    </button>
+                    <button type="button" class="btn btn-default standard-dropdown-width"
+                            data-ng-if="!cardOptions.languageFront">
                         {{languages[0].name}}
                     </button>
                     <button type="button" class="btn btn-default dropdown-toggle">
@@ -23,475 +42,356 @@
                         <span class="sr-only">Split button!</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="setting in settings" data-ng-click="chooseSetting(setting)">
-                            <a>{{setting}}</a>
+                        <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
+                            <a>{{lang.name}}</a>
+
                         </li>
                     </ul>
+                </div>
+            </div>
+        </div>
 
+        <div data-ng-if="selectedSetting === 'Language Back'">
+            <div class="font-medium">
+
+                <div class="btn-group right-padded-l nowrap">
+
+
+                    <button type="button" class="btn btn-default standard-dropdown-width"
+                            data-ng-if="cardOptions.languageBack">
+                        {{cardOptions.languageBack.name}}
+                    </button>
+                    <button type="button" class="btn btn-default standard-dropdown-width"
+                            data-ng-if="!cardOptions.languageBack">
+                        {{languages[0].name}}
+                    </button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
+                            <a>{{lang.name}}</a>
+
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div data-ng-if="selectedSetting === 'Priority'">
+            <div class="font-medium">
+
+                <div class="btn-group right-padded-l nowrap">
+
+
+                    <button type="button" class="btn btn-default standard-dropdown-width"
+                            data-ng-if="cardOptions.priority">
+                        {{cardOptions.priority}}
+                    </button>
+                    <button type="button" class="btn btn-default standard-dropdown-width"
+                            data-ng-if="!cardOptions.priority">
+                        {{priorities[2]}}
+                    </button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="p in priorities" data-ng-click="setPriority(p)">
+                            <a>{{p}}</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <div data-ng-if="selectedSetting === 'Start Date'">
+            <div class="font-medium">
+
+
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           datepicker-popup="{{calendar.format}}"
+                           is-open="calendar.openStartDateCalendar"
+                           min-date="minDate"
+                           ng-required="false"
+                           close-text="Close"
+                           data-ng-model="cardOptions.startDate"/>
+
+
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default"
+                                ng-click="openStartDateCalendar($event)">
+                            <i class="glyphicon glyphicon-calendar"></i></button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+        <div data-ng-if="selectedSetting === 'Due Date'">
+            <div class="font-medium">
+
+
+                <div class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           datepicker-popup="{{calendar.format}}"
+                           is-open="calendar.openDueDateCalendar"
+                           min-date="minDate"
+                           ng-required="false"
+                           close-text="Close"
+                           data-ng-model="cardOptions.dueDate"/>
+
+
+                    <div class="input-group-btn">
+                        <button type="button" class="btn btn-default"
+                                ng-click="openDueDateCalendar($event)">
+                            <i class="glyphicon glyphicon-calendar"></i></button>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+
+
+        <div data-ng-if="selectedSetting === 'Checks'">
+            <div class="font-medium">
+                <div class="btn-group right-padded-l nowrap">
+
+
+                    <button type="button" class="btn btn-default standard-dropdown-width"
+                            data-ng-if="cardOptions.checks">
+                        {{cardOptions.checks}}
+                    </button>
+                    <button type="button" class="btn btn-default standard-dropdown-width"
+                            data-ng-if="!cardOptions.checks">
+                        {{checks[0]}}
+                    </button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="c in checks" data-ng-click="setChecks(c)">
+                            <a>{{c}}</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>
     </div>
 
-        <!--<div class="flashcard-section">-->
-        <!--<div class="row">-->
-
-        <!--<div class="col-xs-4 dashboard-col">-->
-        <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.languageFrontEnabled}">-->
-        <!--<a href="" data-ng-click="toggleLanguageFront()"-->
-        <!--data-ng-if="cardOptions.languageFrontEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleLanguageFront()"-->
-        <!--data-ng-if="!cardOptions.languageFrontEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-
-        <!--Language Front-->
-        <!--</div>-->
-
-        <!--<div class="font-medium text-muted" data-ng-if="!cardOptions.languageFrontEnabled">-->
-        <!--no change-->
-        <!--</div>-->
-        <!--<div class="font-medium" data-ng-if="cardOptions.languageFrontEnabled">-->
-
-        <!--<div class="btn-group right-padded-l nowrap">-->
-
-
-        <!--<button type="button" class="btn btn-default standard-dropdown-width"-->
-        <!--data-ng-if="cardOptions.languageFront">-->
-        <!--{{cardOptions.languageFront.name}}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default standard-dropdown-width"-->
-        <!--data-ng-if="!cardOptions.languageFront">-->
-        <!--{{languages[0].name}}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default dropdown-toggle">-->
-        <!--<span class="caret"></span>-->
-        <!--<span class="sr-only">Split button!</span>-->
-        <!--</button>-->
-        <!--<ul class="dropdown-menu" role="menu">-->
-        <!--<li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">-->
-        <!--<a>{{lang.name}}</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="col-xs-4 dashboard-col">-->
-        <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.languageBackEnabled}">-->
-        <!--<a href="" data-ng-click="toggleLanguageBack()"-->
-        <!--data-ng-if="cardOptions.languageBackEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleLanguageBack()"-->
-        <!--data-ng-if="!cardOptions.languageBackEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-
-        <!--Language Back-->
-        <!--</div>-->
-
-        <!--<div class="font-medium text-muted" data-ng-if="!cardOptions.languageBackEnabled">-->
-        <!--no change-->
-        <!--</div>-->
-
-        <!--<div class="font-medium" data-ng-if="cardOptions.languageBackEnabled">-->
-
-        <!--<div class="btn-group right-padded-l nowrap">-->
-
-
-        <!--<button type="button" class="btn btn-default standard-dropdown-width"-->
-        <!--data-ng-if="cardOptions.languageBack">-->
-        <!--{{cardOptions.languageBack.name}}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default standard-dropdown-width"-->
-        <!--data-ng-if="!cardOptions.languageBack">-->
-        <!--{{languages[0].name}}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default dropdown-toggle">-->
-        <!--<span class="caret"></span>-->
-        <!--<span class="sr-only">Split button!</span>-->
-        <!--</button>-->
-        <!--<ul class="dropdown-menu" role="menu">-->
-        <!--<li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">-->
-        <!--<a>{{lang.name}}</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="col-xs-4 dashboard-col">-->
-        <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.priorityEnabled}">-->
-        <!--<a href="" data-ng-click="togglePriority()"-->
-        <!--data-ng-if="cardOptions.priorityEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="togglePriority()"-->
-        <!--data-ng-if="!cardOptions.priorityEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-
-        <!--Priority-->
-        <!--</div>-->
-
-        <!--<div class="font-medium text-muted" data-ng-if="!cardOptions.priorityEnabled">-->
-        <!--no change-->
-        <!--</div>-->
-
-        <!--<div class="font-medium" data-ng-if="cardOptions.priorityEnabled">-->
-
-        <!--<div class="btn-group right-padded-l nowrap">-->
-
-
-        <!--<button type="button" class="btn btn-default standard-dropdown-width"-->
-        <!--data-ng-if="cardOptions.priority">-->
-        <!--{{cardOptions.priority}}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default standard-dropdown-width"-->
-        <!--data-ng-if="!cardOptions.priority">-->
-        <!--{{priorities[2]}}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default dropdown-toggle">-->
-        <!--<span class="caret"></span>-->
-        <!--<span class="sr-only">Split button!</span>-->
-        <!--</button>-->
-        <!--<ul class="dropdown-menu" role="menu">-->
-        <!--<li data-ng-repeat="p in priorities" data-ng-click="setPriority(p)">-->
-        <!--<a>{{p}}</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="row">-->
-        <!--<div class="col-xs-4 dashboard-col">-->
-
-
-        <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.startDateEnabled}">-->
-        <!--<a href="" data-ng-click="toggleStartDate()"-->
-        <!--data-ng-if="cardOptions.startDateEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleStartDate()"-->
-        <!--data-ng-if="!cardOptions.startDateEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-
-        <!--Start Date-->
-        <!--</div>-->
-
-        <!--<div class="font-medium text-muted" data-ng-if="!cardOptions.startDateEnabled">-->
-        <!--no change-->
-        <!--</div>-->
-
-        <!--<div class="font-medium" data-ng-if="cardOptions.startDateEnabled">-->
-        <!--<div class="input-group">-->
-        <!--<input type="text"-->
-        <!--class="form-control"-->
-        <!--datepicker-popup="{{calendar.format}}"-->
-        <!--is-open="calendar.openStartDateCalendar"-->
-        <!--min-date="minDate"-->
-        <!--ng-required="false"-->
-        <!--close-text="Close"-->
-        <!--data-ng-model="cardOptions.startDate"-->
-        <!--data-ng-change="setStartDate()"-->
-        <!--/>-->
-
-
-        <!--<div class="input-group-btn">-->
-        <!--<button type="button" class="btn btn-default"-->
-        <!--ng-click="openStartDateCalendar($event)">-->
-        <!--<i-->
-        <!--class="glyphicon glyphicon-calendar"></i></button>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--</div>-->
-
-        <!--<div class="col-xs-4 dashboard-col">-->
-        <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.dueDateEnabled}">-->
-        <!--<a href="" data-ng-click="toggleDueDate()"-->
-        <!--data-ng-if="cardOptions.dueDateEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleDueDate()"-->
-        <!--data-ng-if="!cardOptions.dueDateEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-
-        <!--Due Date-->
-        <!--</div>-->
-
-        <!--<div class="font-medium text-muted" data-ng-if="!cardOptions.dueDateEnabled">-->
-        <!--no change-->
-        <!--</div>-->
-
-        <!--<div class="font-medium" data-ng-if="cardOptions.dueDateEnabled">-->
-        <!--<div class="input-group">-->
-        <!--<input type="text"-->
-        <!--class="form-control"-->
-        <!--datepicker-popup="{{calendar.format}}"-->
-        <!--is-open="calendar.openStartDateCalendar"-->
-        <!--min-date="minDate"-->
-        <!--ng-required="false"-->
-        <!--close-text="Close"-->
-        <!--data-ng-model="cardOptions.dueDate"-->
-        <!--data-ng-change="setStartDate()"-->
-        <!--/>-->
-
-
-        <!--<div class="input-group-btn">-->
-        <!--<button type="button" class="btn btn-default"-->
-        <!--ng-click="openStartDateCalendar($event)">-->
-        <!--<i-->
-        <!--class="glyphicon glyphicon-calendar"></i></button>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--</div>-->
-
-        <!--<div class="col-xs-4 dashboard-col">-->
-
-
-        <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.checksEnabled}">-->
-        <!--<a href="" data-ng-click="toggleChecks()"-->
-        <!--data-ng-if="cardOptions.checksEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleChecks()"-->
-        <!--data-ng-if="!cardOptions.checksEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-
-        <!--Checks-->
-        <!--</div>-->
-
-        <!--<div class="font-medium text-muted" data-ng-if="!cardOptions.checksEnabled">-->
-        <!--no change-->
-        <!--</div>-->
-
-        <!--<div class="font-medium" data-ng-if="cardOptions.checksEnabled">-->
-
-        <!--<div class="btn-group right-padded-l nowrap">-->
-
-
-        <!--<button type="button" class="btn btn-default standard-dropdown-width"-->
-        <!--data-ng-if="cardOptions.checks">-->
-        <!--{{cardOptions.checks}}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default standard-dropdown-width"-->
-        <!--data-ng-if="!cardOptions.checks">-->
-        <!--{{checks[0]}}-->
-        <!--</button>-->
-        <!--<button type="button" class="btn btn-default dropdown-toggle">-->
-        <!--<span class="caret"></span>-->
-        <!--<span class="sr-only">Split button!</span>-->
-        <!--</button>-->
-        <!--<ul class="dropdown-menu" role="menu">-->
-        <!--<li data-ng-repeat="c in checks" data-ng-click="setChecks(c)">-->
-        <!--<a>{{c}}</a>-->
-        <!--</li>-->
-        <!--</ul>-->
-
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="row">-->
-        <!--<div class="col-xs-4 dashboard-col">-->
-
-        <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.changeForwardEnabled}">-->
-        <!--<a href="" data-ng-click="toggleForward()"-->
-        <!--data-ng-if="cardOptions.changeForwardEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleForward()"-->
-        <!--data-ng-if="!cardOptions.changeForwardEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-
-        <!--Forward Mode-->
-        <!--</div>-->
-
-
-        <!--<div class="field-data" data-ng-if="cardOptions.changeForwardEnabled">-->
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleForwardEnabled()"-->
-        <!--data-ng-if="cardOptions.reverseEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleForwardEnabled()"-->
-        <!--data-ng-if="!cardOptions.forwardEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Enabled-->
-        <!--</div>-->
-
-
-        <!--<div data-ng-if="cardOptions.forwardEnabled">-->
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleForwardReadFront()"-->
-        <!--data-ng-if="cardOptions.forwardReadFront"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleForwardReadFront()"-->
-        <!--data-ng-if="!cardOptions.forwardReadFront"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Read Front-->
-        <!--</div>-->
-
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleForwardReadBack()"-->
-        <!--data-ng-if="cardOptions.forwardReadBack"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleForwardReadBack()"-->
-        <!--data-ng-if="!cardOptions.forwardReadBack"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Read Back-->
-        <!--</div>-->
-
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleForwardSpeechRecognition()"-->
-        <!--data-ng-if="cardOptions.forwardSpeechRecognition"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleForwardSpeechRecognition()"-->
-        <!--data-ng-if="!cardOptions.forwardSpeechRecognition"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Speech Recognition-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--</div>-->
-
-        <!--<div class="col-xs-4 dashboard-col">-->
-        <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.changeReverseEnabled}">-->
-        <!--<a href="" data-ng-click="toggleReverse()"-->
-        <!--data-ng-if="cardOptions.changeReverseEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleReverse()"-->
-        <!--data-ng-if="!cardOptions.changeReverseEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-
-        <!--Reverse Mode-->
-        <!--</div>-->
-
-
-        <!--<div class="field-data" data-ng-if="cardOptions.changeReverseEnabled">-->
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleReverseEnabled()"-->
-        <!--data-ng-if="cardOptions.reverseEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleReverseEnabled()"-->
-        <!--data-ng-if="!cardOptions.reverseEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Enabled-->
-        <!--</div>-->
-
-
-        <!--<div data-ng-if="cardOptions.reverseEnabled">-->
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleReverseReadFront()"-->
-        <!--data-ng-if="cardOptions.reverseReadFront"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleReverseReadFront()"-->
-        <!--data-ng-if="!cardOptions.reverseReadFront"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Read Front-->
-        <!--</div>-->
-
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleReverseReadBack()"-->
-        <!--data-ng-if="cardOptions.reverseReadBack"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleReverseReadBack()"-->
-        <!--data-ng-if="!cardOptions.reverseReadBack"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Read Back-->
-        <!--</div>-->
-
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleReverseSpeechRecognition()"-->
-        <!--data-ng-if="cardOptions.reverseSpeechRecognition"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleReverseSpeechRecognition()"-->
-        <!--data-ng-if="!cardOptions.reverseSpeechRecognition"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Speech Recognition-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--<div class="col-xs-4 dashboard-col">-->
-        <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.changeImagesEnabled}">-->
-        <!--<a href="" data-ng-click="toggleImages()"-->
-        <!--data-ng-if="cardOptions.changeImagesEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleImages()"-->
-        <!--data-ng-if="!cardOptions.changeImagesEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-
-        <!--Images Mode-->
-        <!--</div>-->
-
-
-        <!--<div class="field-data" data-ng-if="cardOptions.changeImagesEnabled">-->
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleImagesEnabled()"-->
-        <!--data-ng-if="cardOptions.imagesEnabled"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleImagesEnabled()"-->
-        <!--data-ng-if="!cardOptions.imagesEnabled"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Enabled-->
-        <!--</div>-->
-
-
-        <!--<div data-ng-if="cardOptions.imagesEnabled">-->
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleImagesReadFront()"-->
-        <!--data-ng-if="cardOptions.imagesReadFront"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleImagesReadFront()"-->
-        <!--data-ng-if="!cardOptions.imagesReadFront"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Read Front-->
-        <!--</div>-->
-
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleImagesReadBack()"-->
-        <!--data-ng-if="cardOptions.imagesReadBack"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleImagesReadBack()"-->
-        <!--data-ng-if="!cardOptions.imagesReadBack"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Read Back-->
-        <!--</div>-->
-
-        <!--<div>-->
-        <!--<a href="" data-ng-click="toggleImagesSpeechRecognition()"-->
-        <!--data-ng-if="cardOptions.imagesSpeechRecognition"><i-->
-        <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-        <!--<a href="" data-ng-click="toggleImagesSpeechRecognition()"-->
-        <!--data-ng-if="!cardOptions.imagesSpeechRecognition"><i-->
-        <!--class="glyphicon glyphicon-off"></i></a>-->
-        <!--Speech Recognition-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-        <!--</div>-->
-
-
-        <!--</div>-->
-        <!--</div>-->
-
-        <div class="flashcard-section" style="text-align: center">
-            <button class="btn btn-rememberators"
-                    type="submit"
-                    ng-click="changeDefaultSettings()"
-                    >
-                Change Settings
-            </button>
-        </div>
+    <div class="col-xs-4" data-ng-if="selectedSetting !== 'Choose setting'">
+        <button class="btn btn-rememberators"
+                type="submit"
+                ng-click="changeDefaultSettings()"
+                >
+            Change Setting
+        </button>
     </div>
+
+
+    <!--<div class="font-medium" data-ng-if="cardOptions.checksEnabled">-->
+
+    <!--
+
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--</div>-->
+    <!--</div>-->
+
+    <!--<div class="row">-->
+    <!--<div class="col-xs-4 dashboard-col">-->
+
+    <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.changeForwardEnabled}">-->
+    <!--<a href="" data-ng-click="toggleForward()"-->
+    <!--data-ng-if="cardOptions.changeForwardEnabled"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleForward()"-->
+    <!--data-ng-if="!cardOptions.changeForwardEnabled"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+
+    <!--Forward Mode-->
+    <!--</div>-->
+
+
+    <!--<div class="field-data" data-ng-if="cardOptions.changeForwardEnabled">-->
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleForwardEnabled()"-->
+    <!--data-ng-if="cardOptions.reverseEnabled"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleForwardEnabled()"-->
+    <!--data-ng-if="!cardOptions.forwardEnabled"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Enabled-->
+    <!--</div>-->
+
+
+    <!--<div data-ng-if="cardOptions.forwardEnabled">-->
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleForwardReadFront()"-->
+    <!--data-ng-if="cardOptions.forwardReadFront"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleForwardReadFront()"-->
+    <!--data-ng-if="!cardOptions.forwardReadFront"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Read Front-->
+    <!--</div>-->
+
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleForwardReadBack()"-->
+    <!--data-ng-if="cardOptions.forwardReadBack"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleForwardReadBack()"-->
+    <!--data-ng-if="!cardOptions.forwardReadBack"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Read Back-->
+    <!--</div>-->
+
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleForwardSpeechRecognition()"-->
+    <!--data-ng-if="cardOptions.forwardSpeechRecognition"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleForwardSpeechRecognition()"-->
+    <!--data-ng-if="!cardOptions.forwardSpeechRecognition"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Speech Recognition-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--</div>-->
+
+    <!--<div class="col-xs-4 dashboard-col">-->
+    <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.changeReverseEnabled}">-->
+    <!--<a href="" data-ng-click="toggleReverse()"-->
+    <!--data-ng-if="cardOptions.changeReverseEnabled"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleReverse()"-->
+    <!--data-ng-if="!cardOptions.changeReverseEnabled"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+
+    <!--Reverse Mode-->
+    <!--</div>-->
+
+
+    <!--<div class="field-data" data-ng-if="cardOptions.changeReverseEnabled">-->
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleReverseEnabled()"-->
+    <!--data-ng-if="cardOptions.reverseEnabled"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleReverseEnabled()"-->
+    <!--data-ng-if="!cardOptions.reverseEnabled"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Enabled-->
+    <!--</div>-->
+
+
+    <!--<div data-ng-if="cardOptions.reverseEnabled">-->
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleReverseReadFront()"-->
+    <!--data-ng-if="cardOptions.reverseReadFront"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleReverseReadFront()"-->
+    <!--data-ng-if="!cardOptions.reverseReadFront"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Read Front-->
+    <!--</div>-->
+
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleReverseReadBack()"-->
+    <!--data-ng-if="cardOptions.reverseReadBack"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleReverseReadBack()"-->
+    <!--data-ng-if="!cardOptions.reverseReadBack"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Read Back-->
+    <!--</div>-->
+
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleReverseSpeechRecognition()"-->
+    <!--data-ng-if="cardOptions.reverseSpeechRecognition"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleReverseSpeechRecognition()"-->
+    <!--data-ng-if="!cardOptions.reverseSpeechRecognition"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Speech Recognition-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--<div class="col-xs-4 dashboard-col">-->
+    <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.changeImagesEnabled}">-->
+    <!--<a href="" data-ng-click="toggleImages()"-->
+    <!--data-ng-if="cardOptions.changeImagesEnabled"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleImages()"-->
+    <!--data-ng-if="!cardOptions.changeImagesEnabled"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+
+    <!--Images Mode-->
+    <!--</div>-->
+
+
+    <!--<div class="field-data" data-ng-if="cardOptions.changeImagesEnabled">-->
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleImagesEnabled()"-->
+    <!--data-ng-if="cardOptions.imagesEnabled"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleImagesEnabled()"-->
+    <!--data-ng-if="!cardOptions.imagesEnabled"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Enabled-->
+    <!--</div>-->
+
+
+    <!--<div data-ng-if="cardOptions.imagesEnabled">-->
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleImagesReadFront()"-->
+    <!--data-ng-if="cardOptions.imagesReadFront"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleImagesReadFront()"-->
+    <!--data-ng-if="!cardOptions.imagesReadFront"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Read Front-->
+    <!--</div>-->
+
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleImagesReadBack()"-->
+    <!--data-ng-if="cardOptions.imagesReadBack"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleImagesReadBack()"-->
+    <!--data-ng-if="!cardOptions.imagesReadBack"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Read Back-->
+    <!--</div>-->
+
+    <!--<div>-->
+    <!--<a href="" data-ng-click="toggleImagesSpeechRecognition()"-->
+    <!--data-ng-if="cardOptions.imagesSpeechRecognition"><i-->
+    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
+    <!--<a href="" data-ng-click="toggleImagesSpeechRecognition()"-->
+    <!--data-ng-if="!cardOptions.imagesSpeechRecognition"><i-->
+    <!--class="glyphicon glyphicon-off"></i></a>-->
+    <!--Speech Recognition-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+    <!--</div>-->
+
+
+    <!--</div>-->
+    <!--</div>-->
+
+
+</div>

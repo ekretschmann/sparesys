@@ -9,10 +9,10 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
 
         $scope.priorities = ['highest', 'high', 'medium', 'low', 'lowest'];
-        $scope.checks = {};
-        $scope.checks.self = 'self-checked';
-        $scope.checks.mixed = 'mixed';
-        $scope.checks.computer = 'computer-checked';
+        //$scope.checks = {};
+        //$scope.checks.self = 'self-checked';
+        //$scope.checks.mixed = 'mixed';
+        //$scope.checks.computer = 'computer-checked';
         $scope.cardOptions = {};
         $scope.settingChanges = {};
 
@@ -50,8 +50,14 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
             if ($scope.selectedSetting === 'Priority') {
                 $scope.settingChanges.priority = 3;
             }
+            if ($scope.selectedSetting === 'Checks') {
+                $scope.settingChanges.checks = 'computer';
+            }
             if ($scope.selectedSetting === 'Start Date') {
-                $scope.settingChanges.startDate = undefined;
+                $scope.settingChanges.startDate = 'reset';
+            }
+            if ($scope.selectedSetting === 'Due Date') {
+                $scope.settingChanges.dueDate = 'reset';
             }
         };
 
@@ -115,58 +121,46 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
 
 
 
-        $scope.cardOptions.languageFrontEnabled = false;
-        $scope.cardOptions.languageFront = $scope.languages[0];
+        //$scope.cardOptions.languageFrontEnabled = false;
+        //$scope.cardOptions.languageFront = $scope.languages[0];
+        //
+        //
+        //$scope.cardOptions.languageBackEnabled = false;
+        //$scope.cardOptions.languageBack = $scope.languages[0];
+        //
+        //$scope.cardOptions.priorityEnabled = false;
+        //$scope.cardOptions.priority = $scope.priorities[2];
+        //
+        //$scope.cardOptions.priorityEnabled = false;
+        //$scope.cardOptions.checks = $scope.checks[0];
+        //
+        //$scope.cardOptions.startDateEnabled = false;
+        //$scope.cardOptions.dueDateEnabled = false;
+        //$scope.cardOptions.forwardEnabled = true;
+        //
+        //$scope.cardOptions.changeForwardEnabled = false;
+        //$scope.cardOptions.forwardEnabled = false;
+        //$scope.cardOptions.forwardReadFront = false;
+        //$scope.cardOptions.forwardReadBack = false;
+        //$scope.cardOptions.forwardSpeechRecognition = false;
+        //
+        //$scope.cardOptions.changeReverseEnabled = false;
+        //$scope.cardOptions.reverseEnabled = false;
+        //$scope.cardOptions.reverseReadFront = false;
+        //$scope.cardOptions.reverseReadBack = false;
+        //$scope.cardOptions.reverseSpeechRecognition = false;
+        //
+        //$scope.cardOptions.changeImagesEnabled = false;
+        //$scope.cardOptions.imagesEnabled = false;
+        //$scope.cardOptions.imagesReadFront = false;
+        //$scope.cardOptions.imagesReadBack = false;
+        //$scope.cardOptions.imagesSpeechRecognition = false;
 
 
-        $scope.cardOptions.languageBackEnabled = false;
-        $scope.cardOptions.languageBack = $scope.languages[0];
-
-        $scope.cardOptions.priorityEnabled = false;
-        $scope.cardOptions.priority = $scope.priorities[2];
-
-        $scope.cardOptions.priorityEnabled = false;
-        $scope.cardOptions.checks = $scope.checks[0];
-
-        $scope.cardOptions.startDateEnabled = false;
-        $scope.cardOptions.dueDateEnabled = false;
-        $scope.cardOptions.forwardEnabled = true;
-
-        $scope.cardOptions.changeForwardEnabled = false;
-        $scope.cardOptions.forwardEnabled = false;
-        $scope.cardOptions.forwardReadFront = false;
-        $scope.cardOptions.forwardReadBack = false;
-        $scope.cardOptions.forwardSpeechRecognition = false;
-
-        $scope.cardOptions.changeReverseEnabled = false;
-        $scope.cardOptions.reverseEnabled = false;
-        $scope.cardOptions.reverseReadFront = false;
-        $scope.cardOptions.reverseReadBack = false;
-        $scope.cardOptions.reverseSpeechRecognition = false;
-
-        $scope.cardOptions.changeImagesEnabled = false;
-        $scope.cardOptions.imagesEnabled = false;
-        $scope.cardOptions.imagesReadFront = false;
-        $scope.cardOptions.imagesReadBack = false;
-        $scope.cardOptions.imagesSpeechRecognition = false;
-
-        $scope.toggleLanguageFront = function() {
-            $scope.cardOptions.languageFrontEnabled = !$scope.cardOptions.languageFrontEnabled;
-            if (!$scope.cardOptions.languageFrontEnabled) {
-                $scope.settingChanges.languageFront = undefined;
-            }
-        };
 
         $scope.setLanguageFront = function(lang) {
             $scope.cardOptions.languageFront = lang;
             $scope.settingChanges.languageFront = lang;
-        };
-
-        $scope.toggleLanguageBack = function() {
-            $scope.cardOptions.languageBackEnabled = !$scope.cardOptions.languageBackEnabled;
-            if (!$scope.cardOptions.languageBackEnabled) {
-                $scope.settingChanges.languageBack = undefined;
-            }
         };
 
         $scope.setLanguageBack = function(lang) {
@@ -174,23 +168,9 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
             $scope.settingChanges.languageBack = lang;
         };
 
-        $scope.togglePriority = function() {
-            $scope.cardOptions.priorityEnabled = !$scope.cardOptions.priorityEnabled;
-            if (!$scope.cardOptions.priorityEnabled) {
-                $scope.settingChanges.priority = undefined;
-            }
-        };
-
         $scope.setPriority = function(priority) {
             $scope.cardOptions.priority = priority;
             $scope.settingChanges.priority = $scope.priorities.indexOf(priority)+1;
-        };
-
-        $scope.toggleChecks = function() {
-            $scope.cardOptions.checksEnabled = !$scope.cardOptions.checksEnabled;
-            if (!$scope.cardOptions.checksEnabled) {
-                $scope.settingChanges.checks = undefined;
-            }
         };
 
         $scope.setChecks = function(checks) {
@@ -198,30 +178,6 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
             $scope.settingChanges.checks = checks;
         };
 
-        $scope.toggleStartDate = function() {
-            $scope.cardOptions.startDateEnabled = !$scope.cardOptions.startDateEnabled;
-
-            if (!$scope.cardOptions.startDateEnabled) {
-                $scope.settingChanges.startDate = undefined;
-            }
-        };
-
-        //$scope.setStartDate = function() {
-        //    console.log('start date'+$scope.cardOptions.startDate);
-        //    $scope.settingChanges.startDate = $scope.cardOptions.startDate ;
-        //};
-
-        $scope.toggleDueDate = function() {
-            $scope.cardOptions.dueDateEnabled = !$scope.cardOptions.dueDateEnabled;
-            if (!$scope.cardOptions.dueDateEnabled) {
-                $scope.settingChanges.dueDate = undefined;
-            }
-        };
-
-        $scope.setStartDate = function() {
-            $scope.settingChanges.startDate = $scope.cardOptions.startDate ;
-            console.log($scope.settingChanges.startDate);
-        };
 
         $scope.toggleForward = function() {
             $scope.cardOptions.changeForwardEnabled = !$scope.cardOptions.changeForwardEnabled;
@@ -237,7 +193,7 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
                 $scope.settingChanges.forwardSpeechRecognition = $scope.cardOptions.forwardSpeechRecognition;
             }
 
-            console.log($scope.settingChanges.forwardEnabled);
+           // console.log($scope.settingChanges.forwardEnabled);
 
         };
 
@@ -388,8 +344,6 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http','$t
                     $scope.settingChanges = {};
                     $scope.cardOptions = {};
 
-
-                    //$state.go($state.$current, null, { reload: true });
 
                     $scope.findOne();
                     $scope.selectedSetting = 'Choose setting';

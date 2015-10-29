@@ -209,10 +209,18 @@ var updateCard = function(cardId, req) {
             }
         }
         if (settings.startDate) {
-            card.startDate = settings.startDate;
+            if (settings.startDate === 'reset') {
+                card.startDate = undefined;
+            } else {
+                card.startDate = settings.startDate;
+            }
         }
         if (settings.dueDate) {
-            card.dueDate = settings.dueDate;
+            if (settings.dueDate === 'reset') {
+                card.dueDate = undefined;
+            } else {
+                card.dueDate = settings.dueDate;
+            }
         }
 
         if (settings.forwardEnabled) {

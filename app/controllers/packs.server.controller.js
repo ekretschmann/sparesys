@@ -240,6 +240,7 @@ var updateCard = function(cardId, req) {
             }
             if (settings.forwardTimed === true || settings.forwardTimed === false) {
                 card.timedForward = settings.forwardTimed;
+                card.limitForward = settings.limitForward;
             }
 
 
@@ -268,6 +269,7 @@ var updateCard = function(cardId, req) {
             }
             if (settings.reverseTimed === true || settings.reverseTimed === false) {
                 card.timedReverse = settings.reverseTimed;
+                card.limitReverse = settings.limitReverse;
             }
 
 
@@ -297,6 +299,7 @@ var updateCard = function(cardId, req) {
             }
             if (settings.imagesTimed === true || settings.imagesTimed === false) {
                 card.timedImages = settings.imagesTimed;
+                card.limitImages = settings.limitImages;
             }
 
         } else {

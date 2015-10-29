@@ -138,41 +138,6 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http', '$
         $scope.checks = ['computer', 'self', 'mixed'];
 
 
-        //$scope.cardOptions.languageFrontEnabled = false;
-        //$scope.cardOptions.languageFront = $scope.languages[0];
-        //
-        //
-        //$scope.cardOptions.languageBackEnabled = false;
-        //$scope.cardOptions.languageBack = $scope.languages[0];
-        //
-        //$scope.cardOptions.priorityEnabled = false;
-        //$scope.cardOptions.priority = $scope.priorities[2];
-        //
-        //$scope.cardOptions.priorityEnabled = false;
-        //$scope.cardOptions.checks = $scope.checks[0];
-        //
-        //$scope.cardOptions.startDateEnabled = false;
-        //$scope.cardOptions.dueDateEnabled = false;
-        //$scope.cardOptions.forwardEnabled = true;
-        //
-        //$scope.cardOptions.changeForwardEnabled = false;
-        //$scope.cardOptions.forwardEnabled = false;
-        //$scope.cardOptions.forwardReadFront = false;
-        //$scope.cardOptions.forwardReadBack = false;
-        //$scope.cardOptions.forwardSpeechRecognition = false;
-        //
-        //$scope.cardOptions.changeReverseEnabled = false;
-        //$scope.cardOptions.reverseEnabled = false;
-        //$scope.cardOptions.reverseReadFront = false;
-        //$scope.cardOptions.reverseReadBack = false;
-        //$scope.cardOptions.reverseSpeechRecognition = false;
-        //
-        //$scope.cardOptions.changeImagesEnabled = false;
-        //$scope.cardOptions.imagesEnabled = false;
-        //$scope.cardOptions.imagesReadFront = false;
-        //$scope.cardOptions.imagesReadBack = false;
-        //$scope.cardOptions.imagesSpeechRecognition = false;
-
 
         $scope.setLanguageFront = function (lang) {
             $scope.cardOptions.languageFront = lang;
@@ -198,36 +163,17 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http', '$
         $scope.toggleForward = function () {
             $scope.settingChanges.forwardEnabled = !$scope.settingChanges.forwardEnabled;
             $scope.cardOptions.changeForwardEnabled = $scope.settingChanges.forwardEnabled;
-            //    if (!$scope.cardOptions.changeForwardEnabled) {
-            //        $scope.settingChanges.forwardEnabled = undefined;
-            //        $scope.settingChanges.forwardReadFront = undefined;
-            //        $scope.settingChanges.forwardReadBack = undefined;
-            //        $scope.settingChanges.forwardSpeechRecognition = undefined;
-            //    } else {
-            //        $scope.settingChanges.forwardEnabled = $scope.cardOptions.changeForwardEnabled;
-            //        $scope.settingChanges.forwardReadFront = $scope.cardOptions.forwardReadFront;
-            //        $scope.settingChanges.forwardReadBack = $scope.cardOptions.forwardReadBack;
-            //        $scope.settingChanges.forwardSpeechRecognition = $scope.cardOptions.forwardSpeechRecognition;
-            //    }
-            //
-            //   // console.log($scope.settingChanges.forwardEnabled);
-            //
         };
 
-        //$scope.toggleForwardEnabled = function() {
-        //    $scope.cardOptions.forwardEnabled = !$scope.cardOptions.forwardEnabled;
-        //    $scope.settingChanges.forwardEnabled = $scope.cardOptions.forwardEnabled;
-        //    if (!$scope.cardOptions.forwardEnabled) {
-        //        $scope.settingChanges.forwardReadFront = undefined;
-        //        $scope.settingChanges.forwardReadBack = undefined;
-        //        $scope.settingChanges.forwardSpeechRecognition = undefined;
-        //    } else {
-        //        $scope.settingChanges.forwardReadFront = $scope.cardOptions.forwardReadFront;
-        //        $scope.settingChanges.forwardReadBack = $scope.cardOptions.forwardReadBack;
-        //        $scope.settingChanges.forwardSpeechRecognition = $scope.cardOptions.forwardSpeechRecognition;
-        //    }
-        //    console.log($scope.settingChanges.forwardReadFront);
-        //};
+        $scope.toggleReverse = function () {
+            $scope.settingChanges.reverseEnabled = !$scope.settingChanges.reverseEnabled;
+            $scope.cardOptions.changeReverseEnabled = $scope.settingChanges.reverseEnabled;
+        };
+
+        $scope.toggleImages = function () {
+            $scope.settingChanges.imagesEnabled = !$scope.settingChanges.imagesEnabled;
+            $scope.cardOptions.changeImagesEnabled = $scope.settingChanges.imagesEnabled;
+        };
 
         $scope.toggleForwardReadFront = function () {
             $scope.settingChanges.forwardReadFront = !$scope.settingChanges.forwardReadFront;
@@ -247,39 +193,9 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http', '$
         $scope.toggleForwardTimed = function () {
             $scope.settingChanges.forwardTimed = !$scope.settingChanges.forwardTimed;
             $scope.cardOptions.forwardTimed = !$scope.cardOptions.forwardTimed;
+            $scope.settingChanges.limitForward = 10;
         };
 
-        $scope.toggleReverse = function () {
-            $scope.cardOptions.changeReverseEnabled = !$scope.cardOptions.changeReverseEnabled;
-            if (!$scope.cardOptions.changeReverseEnabled) {
-                $scope.settingChanges.reverseEnabled = undefined;
-                $scope.settingChanges.reverseReadFront = undefined;
-                $scope.settingChanges.reverseReadBack = undefined;
-                $scope.settingChanges.reverseSpeechRecognition = undefined;
-            } else {
-                $scope.settingChanges.reverseEnabled = $scope.cardOptions.reverseEnabled;
-                $scope.settingChanges.reverseReadFront = $scope.cardOptions.reverseReadFront;
-                $scope.settingChanges.reverseReadBack = $scope.cardOptions.reverseReadBack;
-                $scope.settingChanges.reverseSpeechRecognition = $scope.cardOptions.reverseSpeechRecognition;
-            }
-            console.log($scope.settingChanges.reverseReadFront);
-
-        };
-
-        $scope.toggleReverseEnabled = function () {
-            $scope.cardOptions.reverseEnabled = !$scope.cardOptions.reverseEnabled;
-            $scope.settingChanges.reverseEnabled = $scope.cardOptions.reverseEnabled;
-            if (!$scope.cardOptions.reverseEnabled) {
-                $scope.settingChanges.reverseReadFront = undefined;
-                $scope.settingChanges.reverseReadBack = undefined;
-                $scope.settingChanges.reverseSpeechRecognition = undefined;
-            } else {
-                $scope.settingChanges.reverseReadFront = $scope.cardOptions.reverseReadFront;
-                $scope.settingChanges.reverseReadBack = $scope.cardOptions.reverseReadBack;
-                $scope.settingChanges.reverseSpeechRecognition = $scope.cardOptions.reverseSpeechRecognition;
-            }
-            console.log($scope.settingChanges.reverseReadFront);
-        };
 
         $scope.toggleReverseReadFront = function () {
             $scope.settingChanges.reverseReadFront = !$scope.settingChanges.reverseReadFront;
@@ -294,38 +210,6 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http', '$
         $scope.toggleReverseSpeechRecognition = function () {
             $scope.settingChanges.reverseSpeechRecognition = !$scope.settingChanges.reverseSpeechRecognition;
             $scope.cardOptions.reverseSpeechRecognition = !$scope.cardOptions.reverseSpeechRecognition;
-        };
-
-
-        $scope.toggleImages = function () {
-            $scope.cardOptions.changeImagesEnabled = !$scope.cardOptions.changeImagesEnabled;
-            if (!$scope.cardOptions.changeImagesEnabled) {
-                $scope.settingChanges.imagesEnabled = undefined;
-                $scope.settingChanges.imagesReadFront = undefined;
-                $scope.settingChanges.imagesReadBack = undefined;
-                $scope.settingChanges.imagesSpeechRecognition = undefined;
-            } else {
-                $scope.settingChanges.imagesEnabled = $scope.cardOptions.imagesEnabled;
-                $scope.settingChanges.imagesReadFront = $scope.cardOptions.imagesReadFront;
-                $scope.settingChanges.imagesReadBack = $scope.cardOptions.imagesReadBack;
-                $scope.settingChanges.imagesSpeechRecognition = $scope.cardOptions.imagesSpeechRecognition;
-            }
-
-        };
-
-        $scope.toggleImagesEnabled = function () {
-            $scope.cardOptions.imagesEnabled = !$scope.cardOptions.imagesEnabled;
-            $scope.settingChanges.imagesEnabled = $scope.cardOptions.imagesEnabled;
-            if (!$scope.cardOptions.imagesEnabled) {
-                $scope.settingChanges.imagesReadFront = undefined;
-                $scope.settingChanges.imagesReadBack = undefined;
-                $scope.settingChanges.imagesSpeechRecognition = undefined;
-            } else {
-                $scope.settingChanges.imagesReadFront = $scope.cardOptions.imagesReadFront;
-                $scope.settingChanges.imagesReadBack = $scope.cardOptions.imagesReadBack;
-                $scope.settingChanges.imagesSpeechRecognition = $scope.cardOptions.imagesSpeechRecognition;
-            }
-            console.log($scope.settingChanges.imagesReadFront);
         };
 
         $scope.toggleImagesReadFront = function () {

@@ -98,21 +98,24 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
         };
 
+        $scope.elapsedTime = 0;
         $scope.recordRate = function (time, assessment) {
 
             $scope.endTime = Date.now();
 
-            var elapsed = $scope.endTime - $scope.startTime;
+            $scope.elapsedTime = $scope.endTime - $scope.startTime;
 
-            if ($scope.card.limitForward * 1000 < elapsed) {
+            if ($scope.card.limitForward * 1000 < $scope.elapsedTime) {
                 assessment--;
             }
 
-            if ($scope.card.limitForward * 2000 < elapsed) {
+            if ($scope.card.limitForward * 2000 < $scope.elapsedTime) {
                 assessment--;
             }
 
             assessment = Math.max(0, assessment);
+
+            $scope.assessment = assessment;
 
             $scope.recordRateOnline(time, assessment);
 
@@ -315,6 +318,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         $scope.nextCard = function () {
 
 
+
             if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
 
                 var factor = 6.0;
@@ -359,13 +363,17 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
                 var card = this.cards[i];
 
+
                 if (PracticeOptionsService.dueDateOnly && (!card.dueDate || $scope.time >= new Date(card.dueDate).getTime())) {
+
                     continue;
                 }
+
 
                 if (PracticeOptionsService.repeatOnly && card.history.length === 0) {
                     continue;
                 }
+
 
                 if (card.startDate || $scope.time < new Date(card.startDate).getTime()) {
                     continue;
@@ -388,6 +396,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
                 card.retention = Math.round(card.predictedRetention * 100);
                 card.score = Math.abs(card.predictedRetention - 0.4);
+
 
 
                 if (card.dueDate) {
@@ -460,6 +469,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 bestCard = $scope.card;
                 bestValue = $scope.card.score;
             }
+
 
             if (!bestCard) {
                 return;

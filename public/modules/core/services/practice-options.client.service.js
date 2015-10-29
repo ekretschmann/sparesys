@@ -12,6 +12,7 @@ angular.module('core').service('PracticeOptionsService', [
             this.useImageMode = true;
             this.speechRate = 4;
             this.hoverRate = 0;
+            this.dueDateOnly = false;
 
 
         this.rateHover = function(value) {

@@ -7,8 +7,8 @@
 
         <div class="row flashcard-top">
             <div class="col-xs-6  flashcard-nw">
-                <div data-ng-if="!course.supervised && state === 'answer'" >
-                    <a class="edit-card"  href="#!/cards/{{card._id}}/edit">Edit this card</a>
+                <div data-ng-if="!course.supervised && state === 'answer'">
+                    <a class="edit-card" href="#!/cards/{{card._id}}/edit">Edit this card</a>
                 </div>
 
             </div>
@@ -44,11 +44,11 @@
                            show-text="true"
                            extension="{{card.questionExtension}}"
                            playwhen="{{card.readFrontForward && card.languageFront}}"
-                        speed="speechRate"/>
+                           speed="speechRate"/>
 
             </div>
 
-            <div class="flashcard-input-box" data-ng-if="state === 'question'" >
+            <div class="flashcard-input-box" data-ng-if="state === 'question'">
 
                 <input type="text" required
                        id="focus-question"
@@ -56,7 +56,7 @@
                        data-ng-model="answer.text">
 
 
-                <div >
+                <div>
                     <span data-ng-repeat="character in specialChars"
                           data-ng-click="addChar(character)"><button class="btn btn-letter">{{character}}
                     </button></span>
@@ -106,9 +106,20 @@
                 </div>
 
 
+                <div data-ng-if="card.timedForward" style="position: absolute; bottom: 1em; left: 2em">
+                    <div  style="text-align: left">
+                        your time: {{elapsedTime / 1000}}s
+                    </div>
+                    <div style="text-align: left">
+                        limit: {{card.limitForward}}s
+                    </div>
+                    <div  style="text-align: left">
+                        rating: {{assessment}}
+                    </div>
+                </div>
             </div>
-
         </div>
+
     </div>
 
 

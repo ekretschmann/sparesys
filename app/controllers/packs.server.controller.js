@@ -238,6 +238,9 @@ var updateCard = function(cardId, req) {
             if (settings.forwardSpeechRecognition === true || settings.forwardSpeechRecognition === false) {
                 card.speechRecognitionForward = settings.forwardSpeechRecognition;
             }
+            if (settings.forwardTimed === true || settings.forwardTimed === false) {
+                card.timedForward = settings.forwardTimed;
+            }
 
 
         } else {
@@ -262,6 +265,9 @@ var updateCard = function(cardId, req) {
             }
             if (settings.reverseSpeechRecognition === true || settings.reverseSpeechRecognition === false) {
                 card.speechRecognitionReverse = settings.reverseSpeechRecognition;
+            }
+            if (settings.reverseTimed === true || settings.reverseTimed === false) {
+                card.timedReverse = settings.reverseTimed;
             }
 
 
@@ -289,7 +295,9 @@ var updateCard = function(cardId, req) {
             if (settings.imagesSpeechRecognition === true || settings.imagesSpeechRecognition === false) {
                 card.speechRecognitionImages = settings.imagesSpeechRecognition;
             }
-
+            if (settings.imagesTimed === true || settings.imagesTimed === false) {
+                card.timedImages = settings.imagesTimed;
+            }
 
         } else {
             if (settings.imagesEnabled === false) {

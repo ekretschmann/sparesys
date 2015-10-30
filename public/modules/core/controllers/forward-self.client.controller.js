@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('ForwardSelfController', ['$scope', '$state', '$document',
-    function ($scope, $state, $document) {
+angular.module('core').controller('ForwardSelfController', ['$scope', '$state', '$document', '$timeout',
+    function ($scope, $state, $document, $timeout) {
 
 
 
@@ -14,9 +14,12 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
 
         $scope.showAnswer = function () {
-            console.log('changing state');
+           // console.log('changing state');
             $scope.state = 'answer';
-          //  $state.go($state.current);
+            $timeout(function () {
+                $state.go($state.current);
+            }, 100);
+
         };
 
 
@@ -40,7 +43,8 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
                     return;
                 }
 
-                console.log(event);
+               // console.log(event);
+              //  console.log($scope.state);
 
 
 
@@ -49,7 +53,7 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
                 }
 
                 if ($scope.state === 'question' && (event.keyCode === 13 || event.keyCode === 32)) {
-                    console.log('shoul be here');
+                   // console.log('shoul be here');
                     $scope.showAnswer();
                     return;
                 }

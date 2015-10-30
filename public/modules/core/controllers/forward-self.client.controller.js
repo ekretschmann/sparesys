@@ -35,8 +35,11 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
 
                 if ($scope.$parent.mode !== 'forward' || $scope.$parent.assess !== 'self') {
+
                     return;
                 }
+
+                console.log(event);
 
 
 
@@ -45,6 +48,7 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
                 }
 
                 if ($scope.state === 'question' && (event.keyCode === 13 || event.keyCode === 32)) {
+                    console.log('shoul be here');
                     $scope.showAnswer();
                     return;
                 }

@@ -43,7 +43,7 @@
                 <playsound language="{{card.languageFront.code}}"
                            text="{{card.question}}"
                            extension="{{card.questionExtension}}"
-                           playwhen="{{card.readFrontForward && card.languageFront}}"
+                           playwhen="{{card.readFrontForward}}"
                            show-text="false"
                            speed="speechRate"/>
 
@@ -75,7 +75,7 @@
                                    text="Correct: {{card.answer}}"
                                    show-text="true"
                                    extension="{{card.answerExtension}}"
-                                   playwhen="{{card.readBackForward && card.languageBack}}"
+                                   playwhen="{{card.readBackForward}}"
                                    speed="speechRate"/>
                     </div>
                     <div data-ng-if="!card.imagesReadBack">
@@ -95,7 +95,7 @@
                                    text="Correct answer: {{card.answer}}"
                                    show-text="true"
                                    extension="{{card.answerExtension}}"
-                                   playwhen="{{card.readBackForward && card.languageBack}}"
+                                   playwhen="{{card.readBackForward}}"
                                    speed="speechRate"/>
                     </div>
                     <div data-ng-if="!card.imagesReadBack">

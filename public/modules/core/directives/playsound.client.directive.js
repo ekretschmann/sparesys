@@ -17,7 +17,6 @@ angular.module('core').directive('playsound',
             link: function(scope, elem, attrs) {
 
 
-
                 ////scope.playSound = function (lang, text, extension, speed) {
                 scope.playSound = function (lang, text, extension, speed) {
 

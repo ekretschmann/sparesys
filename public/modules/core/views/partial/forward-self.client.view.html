@@ -35,7 +35,7 @@
                            text="{{card.question}}"
                            show-text="true"
                            extension="{{card.questionExtension}}"
-                           playwhen="{{card.readFrontForward && card.languageFront}}"
+                           playwhen="{{card.readFrontForward}}"
                            speed="speechRate"/>
 
             </div>
@@ -46,7 +46,7 @@
                            text="{{card.answer}}"
                            show-text="true"
                            extension="{{card.answerExtension}}"
-                           playwhen="{{card.readBackForward && card.languageBack}}"
+                           playwhen="{{card.readBackForward}}"
                            speed="speechRate"/>
 
             </div>

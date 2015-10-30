@@ -6,7 +6,12 @@ angular.module('courses').controller('CoursesEditorController',
         function ($window, $scope, $stateParams, $state, $location, $modal, Authentication, Courses, Packs, Cards, CoursesService) {
 
             $scope.authentication = Authentication;
+            $scope.editMode = 'data';
 
+
+            $scope.showMode = function (mode) {
+                $scope.editMode = mode;
+            };
 
             if (!$scope.authentication.user) {
                 $location.path('/');

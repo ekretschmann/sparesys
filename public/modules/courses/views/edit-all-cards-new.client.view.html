@@ -10,7 +10,22 @@
                 <div class="pull-right">
 
 
-                    <a href="#!/courses/{{course._id}}/edit"><i class="glyphicon glyphicon-list"></i></a>
+                    <a href="" data-ng-click="showMode('images')" data-ng-if="editMode !== 'images'"><i
+                            class="glyphicon glyphicon-picture"></i></a>
+
+                    <i class="glyphicon glyphicon-picture text-muted"
+                       data-ng-if="editMode === 'images'"></i>
+
+                    <a href="" data-ng-click="showMode('data')" data-ng-if="editMode !== 'data'"><i
+                            class="glyphicon glyphicon-list"></i></a>
+
+                    <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
+
+                    <a href="" data-ng-click="showMode('modes')" data-ng-if="editMode !== 'modes'"><i
+                            class="glyphicon glyphicon-option-horizontal"></i></a>
+
+                    <i class="glyphicon glyphicon-option-horizontal text-muted"
+                       data-ng-if="editMode === 'modes'"></i>
 
                     <a href="" data-ng-click="areYouSureToDeleteCourse(course)"><i
                             class="glyphicon glyphicon-trash"></i></a>
@@ -43,7 +58,65 @@
          data-ng-repeat="card in course.cards | filter: searchText | limitTo:10">
 
         <div class="virtual-card font-large">
-        <div ng-include="'/modules/cards/views/partial/view-card.client.view.html'"></div>
+            <div>
+                <div class="title">
+                    {{card.question}}
+
+                    <div class="pull-right">
+
+                        <a href="" data-ng-click="showMode('images')" data-ng-if="editMode !== 'images'"><i
+                                class="glyphicon glyphicon-picture"></i></a>
+
+                        <i class="glyphicon glyphicon-picture text-muted"
+                           data-ng-if="editMode === 'images'"></i>
+
+                        <a href="" data-ng-click="showMode('data')" data-ng-if="editMode !== 'data'"><i
+                                class="glyphicon glyphicon-list"></i></a>
+
+                        <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
+
+                        <a href="" data-ng-click="showMode('modes')" data-ng-if="editMode !== 'modes'"><i
+                                class="glyphicon glyphicon-option-horizontal"></i></a>
+
+                        <i class="glyphicon glyphicon-option-horizontal text-muted"
+                           data-ng-if="editMode === 'modes'"></i>
+
+
+                        <a href="#!/cards/{{card._id}}"><i class="glyphicon glyphicon-edit"></i></a>
+
+                        <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i
+                                class="glyphicon glyphicon-trash"></i></a>
+
+                    </div>
+
+                </div>
+            </div>
+
+            <div data-ng-if="editMode === 'data'">
+                <div ng-include="'/modules/cards/views/partial/view-card.client.view.html'"></div>
+            </div>
+
+            <div data-ng-if="editMode === 'images'">
+                <div class="flashcard-section">
+                    <div class="field-label">Images <a href="" style="padding-left: 5px;"
+                                                       data-ng-click="manageImages(card)"><i
+                            class="glyphicon glyphicon-plus-sign font-medium"></i></a></div>
+                    <div class="font-medium" style="padding-top: 1em">
+                        <div data-ng-if="card.images.length === 0">
+                            no images
+                        </div>
+                                <span data-ng-repeat="img in card.images" style="padding: 5px">
+                                    <img ng-src="{{img}}"
+                                         style="max-width: 128px; max-height: 128px"/>
+                                </span>
+                    </div>
+                </div>
+            </div>
+
+
+            <div data-ng-if="editMode === 'modes'">
+                <div ng-include="'/modules/cards/views/partial/view-modes.client.view.html'"></div>
+            </div>
         </div>
     </div>
 

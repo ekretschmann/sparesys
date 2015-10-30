@@ -14,6 +14,7 @@ angular.module('core').controller('ForwardSelfController', ['$scope', '$state', 
 
 
         $scope.showAnswer = function () {
+            console.log('changing state');
             $scope.state = 'answer';
           //  $state.go($state.current);
         };

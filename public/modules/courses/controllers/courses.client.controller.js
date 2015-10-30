@@ -63,18 +63,35 @@ angular.module('courses').controller('CoursesController',
 
                     console.log(cards[0]);
                     for (var i=0; i<cards.length; i++) {
-
-                        var acceptedForward = '';
+                        //
+                        var acceptedForward = '{';
                         for(var j=0; j<cards[i].acceptedAnswersForward.length; j++) {
-                            acceptedForward += cards[i].acceptedAnswersForward[j]+'#';
+                            acceptedForward += '\''+cards[i].acceptedAnswersForward[j]+'\'';
+                            if (j<cards[i].acceptedAnswersForward.length-1) {
+                                acceptedForward += ',';
+                            }
                         }
+                        acceptedForward += '}';
+
+                        var acceptedReverse = '{';
+                        for(j=0; j<cards[i].acceptedAnswersReverse.length; j++) {
+                            acceptedReverse += '\''+cards[i].acceptedAnswersReverse[j]+'\'';
+                            if (j<cards[i].acceptedAnswersReverse.length-1) {
+                                acceptedReverse += ',';
+                            }
+                        }
+                        acceptedReverse += '}';
+
+                        console.log(cards[i]);
 
                         $scope.getArray.push({
+                            pack: cards[i].packs[0],
                             front: cards[i].question,
                             frontExt: cards[i].questionExtension,
-                            accepted: acceptedForward,
+                            acceptedForward: acceptedForward,
                             back: cards[i].answer,
-                            backExt: cards[i].answerExtension
+                            backExt: cards[i].answerExtension,
+                            acceptedReverse: acceptedReverse
                         });
                     }
                     deferred.resolve($scope.getArray);
@@ -86,7 +103,7 @@ angular.module('courses').controller('CoursesController',
             };
 
             $scope.getHeader = function () {
-                return ['Front', 'Front Extension', 'Back', 'Back Extension'];
+                return ['Pack', 'Front', 'Front Extension', 'Accepted Forward', 'Back', 'Back Extension', 'Accepted Reverse'];
             };
 
             //$scope.getCSV = function(course) {

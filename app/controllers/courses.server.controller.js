@@ -605,7 +605,7 @@ exports.getCardsForCourse = function (req, res, next, id) {
     var expectedCards = 0;
     var packOrder = {};
 
-    var loadCourse = Course.find({'_id': id}).exec(function (err) {
+    var loadCourse = Course.findOne({'_id': id}).exec(function (err) {
 
         if (err) {
             return res.send(400, {
@@ -614,22 +614,30 @@ exports.getCardsForCourse = function (req, res, next, id) {
         }
     });
 
-    loadCourse.then(function (courses) {
+    loadCourse.then(function (course) {
 
-        courses[0].packs.forEach(function (packId) {
-            var loadPack = Pack.find({'_id': packId}).exec(function (err) {
+        course.packs.forEach(function (packId) {
+            var loadPack = Pack.findOne({'_id': packId}).exec(function (err) {
+                //console.log(err);
+                //console.log(pack);
                 if (err) {
                     return res.send(400, {
                         message: getErrorMessage(err)
                     });
                 }
             });
-            loadPack.then(function (packs) {
-                packOrder[packs[0]._id] = packs[0].cards;
-                expectedCards += packs[0].cards.length;
-                packs[0].cards.forEach(function (cardId) {
+            loadPack.then(function (pack) {
 
-                    var loadCard = Card.find({'_id': cardId}).exec(function (err) {
+
+
+
+                packOrder[pack._id] = pack.cards;
+                expectedCards += pack.cards.length;
+                pack.cards.forEach(function (cardId) {
+
+
+
+                    var loadCard = Card.findOne({'_id': cardId}).exec(function (err) {
                         if (err) {
                             return res.send(400, {
                                 message: getErrorMessage(err)
@@ -638,10 +646,14 @@ exports.getCardsForCourse = function (req, res, next, id) {
                     });
                     loadCard.then(function (card) {
 
-                        result = result.concat(card);
+
+
+                        card.packName = pack.name;
+                        result.push(card);
+
                         if (result.length === expectedCards) {
                             var ordered = [];
-                            courses[0].packs.forEach(function (packId) {
+                            course.packs.forEach(function (packId) {
 
                                 packOrder[packId].forEach(function (cardId) {
                                     result.forEach(function (item) {
@@ -652,6 +664,7 @@ exports.getCardsForCourse = function (req, res, next, id) {
                                     });
                                 });
                             });
+                            //console.log(ordered);
                             res.jsonp(ordered);
                         }
                     });

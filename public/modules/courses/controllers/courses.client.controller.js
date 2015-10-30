@@ -51,47 +51,48 @@ angular.module('courses').controller('CoursesController',
             //$scope.deferred = $q.defer();
             $scope.getArray = [];
             $scope.download = function (course) {
-                //// console.log(course);
-                CoursesService.serverLoadCards();
+
 
                 var deferred = $q.defer();
 
                 var res = CoursesService.serverLoadCards();
                 var promise = res.get({courseId: course._id});
                 promise.$promise.then(function (cards) {
+
                     course.cards = cards;
 
-                    console.log(cards[0]);
-                    for (var i=0; i<cards.length; i++) {
+                    for (var i = 0; i < cards.length; i++) {
                         //
                         var acceptedForward = '{';
-                        for(var j=0; j<cards[i].acceptedAnswersForward.length; j++) {
-                            acceptedForward += '\''+cards[i].acceptedAnswersForward[j]+'\'';
-                            if (j<cards[i].acceptedAnswersForward.length-1) {
+                        for (var j = 0; j < cards[i].acceptedAnswersForward.length; j++) {
+                            acceptedForward += '\'' + cards[i].acceptedAnswersForward[j] + '\'';
+                            if (j < cards[i].acceptedAnswersForward.length - 1) {
                                 acceptedForward += ',';
                             }
                         }
                         acceptedForward += '}';
 
                         var acceptedReverse = '{';
-                        for(j=0; j<cards[i].acceptedAnswersReverse.length; j++) {
-                            acceptedReverse += '\''+cards[i].acceptedAnswersReverse[j]+'\'';
-                            if (j<cards[i].acceptedAnswersReverse.length-1) {
+                        for (j = 0; j < cards[i].acceptedAnswersReverse.length; j++) {
+                            acceptedReverse += '\'' + cards[i].acceptedAnswersReverse[j] + '\'';
+                            if (j < cards[i].acceptedAnswersReverse.length - 1) {
                                 acceptedReverse += ',';
                             }
                         }
                         acceptedReverse += '}';
 
-                        console.log(cards[i]);
-
                         $scope.getArray.push({
-                            pack: cards[i].packs[0],
+                            pack: cards[i].packName,
                             front: cards[i].question,
                             frontExt: cards[i].questionExtension,
                             acceptedForward: acceptedForward,
                             back: cards[i].answer,
                             backExt: cards[i].answerExtension,
-                            acceptedReverse: acceptedReverse
+                            acceptedReverse: acceptedReverse,
+                            languageFront: cards[i].languageFront.name,
+                            languageBack: cards[i].languageBack.name,
+                            priority: cards[i].priority,
+                            checks: cards[i].check
                         });
                     }
                     deferred.resolve($scope.getArray);
@@ -103,7 +104,10 @@ angular.module('courses').controller('CoursesController',
             };
 
             $scope.getHeader = function () {
-                return ['Pack', 'Front', 'Front Extension', 'Accepted Forward', 'Back', 'Back Extension', 'Accepted Reverse'];
+                return ['Pack', 'Front', 'Front Extension', 'Accepted Forward',
+                    'Back', 'Back Extension', 'Accepted Reverse',
+                    'Languge Front', 'Language Back', 'Priority', 'Checks'
+                ];
             };
 
             //$scope.getCSV = function(course) {

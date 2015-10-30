@@ -186,6 +186,10 @@ var CardSchema = new Schema({
     limitImages: {
         type: Number,
         default: 10
+    },
+    packName: {
+        type: String,
+        default: ''
     }
 
 });

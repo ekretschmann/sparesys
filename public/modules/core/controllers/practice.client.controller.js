@@ -4,7 +4,7 @@
 // Courses controller
 angular.module('core').controller('PracticeController', ['$localForage', '$window', '$location', '$scope',
     '$rootScope', '$state', '$modal', '$stateParams', '$timeout', 'Authentication',
-    'Courses', 'Cards', 'Users','CoursesService', 'RetentionCalculatorService', 'DiagramsGaugeService', 'ChallengeCalculatorService',
+    'Courses', 'Cards', 'Users', 'CoursesService', 'RetentionCalculatorService', 'DiagramsGaugeService', 'ChallengeCalculatorService',
     'ModeSelectorService', 'SpeechRecognitionService', 'PracticeOptionsService',
     function ($localForage, $window, $location, $scope, $rootScope, $state, $modal, $stateParams, $timeout, Authentication,
               Courses, Cards, Users, CoursesService, RetentionCalculatorService, DiagramsGaugeService, ChallengeCalculatorService,
@@ -61,7 +61,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
         $scope.lastRepetition = new Date(Date.now);
         $scope.options = {};
-        $scope.toggleOptions = function(option) {
+        $scope.toggleOptions = function (option) {
 
             if (option === 'repeatOnly') {
                 PracticeOptionsService.repeatOnly = !PracticeOptionsService.repeatOnly;
@@ -112,7 +112,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             if ($scope.card.limitForward * 2000 < $scope.elapsedTime) {
                 assessment--;
             }
-
 
 
             assessment = Math.max(0, assessment);
@@ -219,13 +218,13 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             // prolong well known cards
             if ($scope.assess === 'self' && assessment === 3) {
                 if ($scope.elapsedTime < 3000) {
-                    $scope.card.hrt = $scope.card.hrt * Math.abs(5000 - $scope.elapsedTime)/1000;
+                    $scope.card.hrt = $scope.card.hrt * Math.abs(5000 - $scope.elapsedTime) / 1000;
                 }
             }
 
             if ($scope.assess === 'computer' && assessment === 3) {
                 if ($scope.elapsedTime < 5000) {
-                    $scope.card.hrt = $scope.card.hrt * Math.abs(7000 - $scope.elapsedTime)/1500;
+                    $scope.card.hrt = $scope.card.hrt * Math.abs(7000 - $scope.elapsedTime) / 1500;
                 }
             }
 
@@ -334,7 +333,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         $scope.nextCard = function () {
 
 
-
             if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
 
                 var factor = 6.0;
@@ -346,8 +344,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                     $scope.authentication.user.trophies++;
                     Users.get({
                         userId: $scope.authentication.user._id
-                    }, function(usr) {
-                        usr.trophies =  $scope.authentication.user.trophies;
+                    }, function (usr) {
+                        usr.trophies = $scope.authentication.user.trophies;
                         usr.$update();
                     });
 
@@ -415,7 +413,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 card.score = Math.abs(card.predictedRetention - 0.4);
 
 
-
                 if (card.dueDate) {
                     card.score = Math.abs($scope.adjustScoreToDueDate(card, Date.now()) - 0.4);
                 }
@@ -445,7 +442,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
                 if (card.score <= bestValue && card.modes.length > 0) {
-                    if (this.cards.length >= 1 && card.question !== $scope.card.question) {
+
+                    if (card.score === bestValue) {
 
                         if (bestCards.length === 0) {
                             bestCards.push(card);
@@ -454,10 +452,15 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                             if (card.packs[0] === bestCards[0].packs[0]) {
                                 bestCards.push(card);
                             }
-
                         }
-                        bestValue = card.score;
+
+                    } else {
+                        bestCards = [];
+                        bestCards.push(card);
                     }
+
+                    bestValue = card.score;
+                    //console.log(bestCards);
                 }
 
 
@@ -495,10 +498,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 bestCard = $scope.card;
                 bestValue = $scope.card.score;
             } else {
-                bestCard = bestCards[Math.floor(Math.random()*bestCards.length)];
+                bestCard = bestCards[Math.floor(Math.random() * bestCards.length)];
             }
-
-
 
 
             if (!bestCard) {
@@ -698,4 +699,5 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         };
 
 
-    }]);
+    }])
+;

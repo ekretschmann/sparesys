@@ -363,6 +363,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
             var bestValue = 1.0;
             var bestCard;
+            var bestCards = [];
 
             $scope.courseRetention = 0;
             $scope.dueRetention = 0;
@@ -443,9 +444,18 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 }
 
 
-                if (card.score < bestValue && card.modes.length > 0) {
+                if (card.score <= bestValue && card.modes.length > 0) {
                     if (this.cards.length >= 1 && card.question !== $scope.card.question) {
-                        bestCard = card;
+
+                        if (bestCards.length === 0) {
+                            bestCards.push(card);
+
+                        } else {
+                            if (card.packs[0] === bestCards[0].packs[0]) {
+                                bestCards.push(card);
+                            }
+
+                        }
                         bestValue = card.score;
                     }
                 }
@@ -484,7 +494,11 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             if ($scope.repeat) {
                 bestCard = $scope.card;
                 bestValue = $scope.card.score;
+            } else {
+                bestCard = bestCards[Math.floor(Math.random()*bestCards.length)];
             }
+
+
 
 
             if (!bestCard) {

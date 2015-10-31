@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('ReverseSelfController', ['$scope', '$state', '$document',
-    function ($scope, $state, $document) {
+angular.module('core').controller('ReverseSelfController', ['$scope', '$state', '$document', '$timeout',
+    function ($scope, $state, $document, $timeout) {
 
         $scope.state = 'question';
 

@@ -113,6 +113,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 assessment--;
             }
 
+
+
             assessment = Math.max(0, assessment);
 
             $scope.assessment = assessment;
@@ -212,6 +214,20 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             //    }
             //    //console.log($scope.delta[$scope.card.packs[0]]);
             //}
+
+
+            // prolong well known cards
+            if ($scope.assess === 'self' && assessment === 3) {
+                if ($scope.elapsedTime < 3000) {
+                    $scope.card.hrt = $scope.card.hrt * Math.abs(5000 - $scope.elapsedTime)/1000;
+                }
+            }
+
+            if ($scope.assess === 'computer' && assessment === 3) {
+                if ($scope.elapsedTime < 5000) {
+                    $scope.card.hrt = $scope.card.hrt * Math.abs(7000 - $scope.elapsedTime)/1500;
+                }
+            }
 
 
             $scope.card.history.push({

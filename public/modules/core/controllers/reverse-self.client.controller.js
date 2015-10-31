@@ -9,7 +9,10 @@ angular.module('core').controller('ReverseSelfController', ['$scope', '$state', 
 
         $scope.showAnswer = function () {
             $scope.state = 'answer';
-            $state.go($state.current);
+            $timeout(function () {
+                $state.go($state.current);
+            }, 100);
+
         };
 
         $scope.processCard = function (rating) {

@@ -5,6 +5,8 @@
 
     <div class="flashcard">
 
+        <!--{{card}}-->
+
         <div class="row flashcard-top">
             <div class="col-xs-6  flashcard-nw">
                 <div data-ng-if="!course.supervised && state === 'answer'">
@@ -37,8 +39,7 @@
 
         <div class="question-box">
             <div class="question">
-                <!--{{card.readFrontForward}}-->
-                <!--{{card.languageFront}}-->
+
                 <playsound language="{{card.languageFront.code}}"
                            text="{{card.question}}"
                            show-text="true"

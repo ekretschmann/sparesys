@@ -28,10 +28,8 @@ angular.module('core').directive('playsound',
 
 
 
-                    //console.log('xxxx');
-
                     /* jshint ignore:start */
-                    if (window.SpeechSynthesisUtterance !== undefined) {
+                    if (window.SpeechSynthesisUtterance !== undefined && scope.playwhen === 'true') {
 
 
                         var msg = new SpeechSynthesisUtterance(text);

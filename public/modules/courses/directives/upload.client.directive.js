@@ -9,8 +9,6 @@ angular.module('courses').directive('upload',
             link: function(scope, element) {
                 /* jshint ignore:start */
                 $(element).on('change', function(changeEvent) {
-                    console.log('here');
-                    console.log(changeEvent.target.files);
                     var files = changeEvent.target.files;
                     if (files.length) {
                         var r = new FileReader();
@@ -20,7 +18,13 @@ angular.module('courses').directive('upload',
                             //    scope.fileReader = contents;
                             //});
 
-                            console.log(contents);
+                            //console.log(contents);
+                            var lines = contents.split('\n');
+
+                            for (var i=1; i<lines.length; i++) {
+                                console.log(lines[i]);
+                            }
+
                         };
 
                         r.readAsText(files[0]);

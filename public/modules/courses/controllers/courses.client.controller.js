@@ -81,18 +81,47 @@ angular.module('courses').controller('CoursesController',
                         }
                         acceptedReverse += '}';
 
+                        var images = '{';
+                        for (j = 0; j < cards[i].images.length; j++) {
+                            images += '\'' + cards[i].images[j] + '\'';
+                            if (j < cards[i].images.length - 1) {
+                                images += ',';
+                            }
+                        }
+                        images += '}';
+
+                        console.log(cards[i]);
                         $scope.getArray.push({
-                            pack: cards[i].packName,
                             front: cards[i].question,
+                            back: cards[i].answer,
+                            pack: cards[i].packName,
                             frontExt: cards[i].questionExtension,
                             acceptedForward: acceptedForward,
-                            back: cards[i].answer,
                             backExt: cards[i].answerExtension,
                             acceptedReverse: acceptedReverse,
                             languageFront: cards[i].languageFront.name,
                             languageBack: cards[i].languageBack.name,
                             priority: cards[i].priority,
-                            checks: cards[i].check
+                            checks: cards[i].check,
+                            images: images,
+                            forwardEnabled: cards[i].modes.indexOf('forward') > -1,
+                            forwardReadFront: cards[i].readFrontForward,
+                            forwardReadBack: cards[i].readBackForward,
+                            forwardSpeechRecognition: cards[i].speechRecognitionForward,
+                            forwardTimed: cards[i].timedForward,
+                            forwardLimit: cards[i].limitForward,
+                            reverseEnabled: cards[i].modes.indexOf('reverse') > -1,
+                            reverseReadFront: cards[i].readFrontReverse,
+                            reverseReadBack: cards[i].readBackReverse,
+                            reverseSpeechRecognition: cards[i].speechRecognitionReverse,
+                            reverseTimed: cards[i].timedReverse,
+                            reverseLimit: cards[i].limitReverse,
+                            imagesEnabled: cards[i].modes.indexOf('images') > -1,
+                            imagesReadFront: cards[i].imagesReadFront,
+                            imagesReadBack: cards[i].imagesReadBack,
+                            imagesSpeechRecognition: cards[i].speechRecognitionImages,
+                            imagesTimed: cards[i].timedImages,
+                            imagesLimit: cards[i].limitImages
                         });
                     }
                     deferred.resolve($scope.getArray);
@@ -104,9 +133,13 @@ angular.module('courses').controller('CoursesController',
             };
 
             $scope.getHeader = function () {
-                return ['Pack', 'Front', 'Front Extension', 'Accepted Forward',
-                    'Back', 'Back Extension', 'Accepted Reverse',
-                    'Languge Front', 'Language Back', 'Priority', 'Checks'
+                return ['Front', 'Back', 'Pack','Front Extension', 'Accepted Forward',
+                     'Back Extension', 'Accepted Reverse',
+                    'Languge Front', 'Language Back', 'Priority', 'Checks',
+                    'Images',
+                    'Forward Enabled', 'Forward Read Question', 'Forward Read Answer', 'Forward Speech Recognition', 'Forward Timed', 'Forward Time Limit',
+                    'Reverse Enabled', 'Reverse Read Question', 'Reverse Read Answer', 'Reverse Speech Recognition', 'Reverse Timed', 'Reverse Time Limit',
+                    'Images Enabled', 'Images Read Question', 'Images Read Answer', 'Images Speech Recognition', 'Images Timed', 'Images Time Limit'
                 ];
             };
 

@@ -41,7 +41,6 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         };
 
 
-
         $scope.$watch('state', function () {
 
             if ($scope.state === 'question') {
@@ -147,5 +146,76 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $state.go($state.$current);
 
         };
+
+        $scope.recording = false;
+
+        $scope.stopRecording = function () {
+            $scope.recording = !$scope.recording;
+        };
+
+        $scope.startRecording = function (card) {
+            /* jshint ignore:start */
+            $scope.recognition = new webkitSpeechRecognition();
+            $scope.recognition.continuous = false;
+            $scope.recognition.interimResults = true;
+            $scope.recognition.lang = card.languageBack.code;
+            $scope.recognition.onresult = $scope.onSpeechResult;
+
+            $scope.recognition.onstart = function () {
+                console.log('start');
+                $scope.answer.text = 'xxxxx';
+                $scope.recording = true;
+            };
+
+            $scope.recognition.onerror = function (event) {
+
+                console.log('error');
+                console.log(event);
+            };
+            $scope.recognition.onend = function () {
+                console.log('end');
+
+                //recognition.start();
+            };
+
+            console.log('and starting');
+            $scope.recognition.start();
+            /* jshint ignore:end */
+        };
+
+        $scope.onSpeechResult = function (event) {
+            //console.log('result');
+            /* jshint ignore:start */
+
+            // console.log(event.results);//
+            // console.log(event.resultIndex);
+
+            var interim_transcript = '';
+            var final_transcript = '';
+            if (typeof(event.results) === 'undefined') {
+//                    console.log('ending');
+                $scope.recognition.onend = null;
+                $scope.recognition.stop();
+//                    upgrade();
+                return;
+            }
+            for (var i = event.resultIndex; i < event.results.length; ++i) {
+
+
+                if (event.results[i].isFinal) {
+                    final_transcript += event.results[i][0].transcript;
+                } else {
+                    interim_transcript += event.results[i][0].transcript;
+                }
+
+
+            }
+            //console.log('i'+interim_transcript);
+            //console.log('f'+final_transcript);
+            $scope.answer.text = final_transcript;
+            /* jshint ignore:end */
+
+        };
+
 
     }]);

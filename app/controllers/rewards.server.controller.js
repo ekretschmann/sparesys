@@ -41,6 +41,8 @@ exports.create = function(req, res) {
 	var reward = new Reward(req.body);
 	reward.user = req.user;
 
+	console.log(reward);
+
 	reward.save(function(err) {
 		if (err) {
 			return res.status(400).send({

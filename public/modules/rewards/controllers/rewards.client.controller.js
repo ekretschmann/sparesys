@@ -61,7 +61,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             });
 
             if (!found) {
-                $scope.ingredients.push({rewardId: rewardId, name: $scope.selectedIngredient, amount: 1});
+                $scope.ingredients.push({rewardId: rewardId, name: $scope.selectedIngredient, amount: 1, keep: false});
 
             }
             $scope.selectedIngredient = '';
@@ -171,6 +171,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.addReward = function () {
             // Create new Reward object
 
+            console.log('xxxxx');
+            console.log($scope.ingredients);
             var reward = new Rewards({
                 name: $scope.newReward.name,
                 healthpoints: $scope.newReward.defaulthealthpoints,

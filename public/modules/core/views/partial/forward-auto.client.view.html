@@ -23,18 +23,18 @@
                         counts</a>
                 </div>
 
-                <!--<div data-ng-if="state === 'question' && card.speechRecognitionForward">-->
+                <div data-ng-if="state === 'question' && card.speechRecognitionForward">
                     <!--<img-->
                             <!--ng-src="modules/core/img/microphone.png"-->
                             <!--data-ng-click="startRecording(card)">-->
-                   <!--&lt;!&ndash;<div data-ng-if="!recording">&ndash;&gt;-->
-                       <!--&lt;!&ndash;<a class="answer-counts" data-ng-click="startRecording(card)" href="">Record</a>&ndash;&gt;-->
-                   <!--&lt;!&ndash;</div>&ndash;&gt;-->
+                   <div data-ng-if="!recording">
+                       <a class="answer-counts" data-ng-click="startRecording(card)" href="">Record</a>
+                   </div>
 
-                    <!--&lt;!&ndash;<div data-ng-if="recording">&ndash;&gt;-->
-                        <!--&lt;!&ndash;<a class="answer-counts" data-ng-click="stopRecording(card)" href="">Record</a>&ndash;&gt;-->
-                    <!--&lt;!&ndash;</div>&ndash;&gt;-->
-                <!--</div>-->
+                    <div data-ng-if="recording">
+                        <a class="answer-counts" data-ng-click="stopRecording(card)" href="">Stop Recording</a>
+                    </div>
+                </div>
             </div>
         </div>
 

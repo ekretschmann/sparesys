@@ -1,5 +1,7 @@
 <section data-ng-controller="RewardsController" data-ng-init="find()">
 
+    <div  ng-include="'/modules/rewards/views/partial/delete-reward.modal.client.view.html'"></div>
+
 
     <div class="col-xs-12 col-md-6  ">
         <div class="admin-card font-large">
@@ -39,9 +41,9 @@
                         <div class="pull-right">
 
 
-                            <a href="#!/cards/{{card._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
+                            <a href="#!/rewards/{{reward._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
 
-                            <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i
+                            <a href="" data-ng-click="areYouSureToDeleteReward(reward)"><i
                                     class="glyphicon glyphicon-trash"></i></a>
 
                         </div>

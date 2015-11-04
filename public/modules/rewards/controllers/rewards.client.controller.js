@@ -1,8 +1,8 @@
 'use strict';
 
 // Rewards controller
-angular.module('rewards').controller('RewardsController', ['$scope', '$state', '$stateParams', '$location', 'Authentication', 'Rewards',
-    function ($scope, $state, $stateParams, $location, Authentication, Rewards) {
+angular.module('rewards').controller('RewardsController', ['$scope', '$state', '$stateParams', '$location', '$modal','Authentication', 'Rewards',
+    function ($scope, $state, $stateParams, $location, $modal, Authentication, Rewards) {
         $scope.authentication = Authentication;
 
         $scope.ingredients = [];
@@ -140,6 +140,25 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.selectedGoal = '';
         };
 
+        $scope.areYouSureToDeleteReward = function (reward) {
+
+            $scope.reward = reward;
+
+            $modal.open({
+                templateUrl: 'areYouSureToDeleteReward.html',
+                controller: 'DeleteRewardController',
+                resolve: {
+                    reward: function () {
+                        return $scope.reward;
+                    }
+                }
+            }).result.then(function () {
+                    $scope.rewards = Rewards.query();
+                });
+
+
+        };
+
         // Create new Reward
         $scope.newReward = {};
         $scope.newReward.defaulthealthpoints = 1;
@@ -147,8 +166,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.newReward.description = '';
         $scope.addReward = function () {
             // Create new Reward object
-            console.log('xxxx');
-            console.log($scope.newReward);
 
             var reward = new Rewards({
                 name: $scope.newReward.name,
@@ -162,6 +179,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 $scope.newReward.defaulthealthpoints = 1;
                 $scope.newReward.type = 'Item';
                 $scope.newReward.description = '';
+                $scope.rewards.push(reward);
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;
             });

@@ -159,6 +159,10 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         };
 
+        $scope.switchKeep = function(ingredient) {
+            ingredient.keep = !ingredient.keep;
+        };
+
         // Create new Reward
         $scope.newReward = {};
         $scope.newReward.defaulthealthpoints = 1;
@@ -171,6 +175,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 name: $scope.newReward.name,
                 healthpoints: $scope.newReward.defaulthealthpoints,
                 type: $scope.newReward.type,
+                ingredients: $scope.newReward.ingredients,
                 description: $scope.newReward.description
             });
 

@@ -175,7 +175,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 name: $scope.newReward.name,
                 healthpoints: $scope.newReward.defaulthealthpoints,
                 type: $scope.newReward.type,
-                ingredients: $scope.newReward.ingredients,
+                ingredients: $scope.ingredients,
                 description: $scope.newReward.description
             });
 
@@ -184,6 +184,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 $scope.newReward.defaulthealthpoints = 1;
                 $scope.newReward.type = 'Item';
                 $scope.newReward.description = '';
+                $scope.ingredients = [];
                 $scope.rewards.push(reward);
             }, function (errorResponse) {
                 $scope.error = errorResponse.data.message;

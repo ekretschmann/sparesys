@@ -22,12 +22,27 @@
                     <div class="col-xs-6">
                         <div class="field-label">Health points</div>
                         <div class="field-data">
-                            {{reward.healthpoints}}
+                            {{reward.defaulthealthpoints}}
                             <!--<input type="text"-->
-                                   <!--data-ng-model="otherUser.username"-->
-                                   <!--data-ng-blur="update()"-->
-                                   <!--class="form-control"-->
-                                   <!--placeholder="Username">-->
+                            <!--data-ng-model="otherUser.username"-->
+                            <!--data-ng-blur="update()"-->
+                            <!--class="form-control"-->
+                            <!--placeholder="Username">-->
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+
+                    <div class="col-xs-6">
+                        <div class="field-label">Type</div>
+                        <div class="field-data">
+                            {{reward.type}}
                         </div>
                     </div>
                 </div>
@@ -35,13 +50,33 @@
 
             <div class="flashcard-section">
                 <div class="row rememberators-form-group form-group">
-
-                    <div class="col-xs-6">
-                        <div class="field-label">First Name</div>
+                    <div class="col-xs-12">
+                        <div class="field-label">Description</div>
                         <div class="field-data">
-                            bla
+                            {{reward.description}}
                         </div>
                     </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6 dashboard-col font-large">
+        <div class="admin-card">
+            <div class="title">&nbsp</div>
+
+            <div class="flashcard-section">
+                <div class="row rememberators-form-group form-group">
+
+                    <div class="col-xs-6">
+                        <div class="field-label">Ingredients</div>
+                        <div class="field-data">
+                            {{reward._id}}
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
         </div>

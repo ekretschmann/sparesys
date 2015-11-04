@@ -171,8 +171,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.addReward = function () {
             // Create new Reward object
 
-            console.log('xxxxx');
-            console.log($scope.ingredients);
+
             var reward = new Rewards({
                 name: $scope.newReward.name,
                 healthpoints: $scope.newReward.defaulthealthpoints,

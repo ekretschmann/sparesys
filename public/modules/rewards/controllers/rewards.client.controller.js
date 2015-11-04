@@ -290,36 +290,38 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         };
 
         // Find existing Reward
-        //$scope.findOne = function () {
-        //
-        //
-        //    if ($stateParams.rewardId) {
-        //        $scope.reward = Rewards.get({
-        //            rewardId: $stateParams.rewardId
-        //        }, function (r) {
-        //            $scope.name = r.name;
-        //            $scope.description = r.description;
-        //            $scope.type = r.type;
-        //            $scope.ingredients = r.ingredients[0];
-        //            $scope.selectedType = r.type;
-        //            $scope.updateReward = true;
-        //            $scope.defaulthealthpoints = r.defaulthealthpoints;
-        //            $scope.rewards.forEach(function (reward) {
-        //                if (r.enables.indexOf(reward._id) > -1) {
-        //                    $scope.enables.push(reward);
-        //                }
-        //                if (r.goals.indexOf(reward._id) > -1) {
-        //                    $scope.goals.push(reward);
-        //                }
-        //            });
-        //            if (r.ingredients.length ===0) {
-        //                $scope.ingredients = [];
-        //            }
-        //        });
-        //    }
-        //
-        //
-        //};
+        $scope.findOne = function () {
+
+            console.log($stateParams.rewardId);
+
+            if ($stateParams.rewardId) {
+                $scope.reward = Rewards.get({
+                    rewardId: $stateParams.rewardId
+                }, function (r) {
+                    console.log(r);
+                    //$scope.name = r.name;
+                    //$scope.description = r.description;
+                    //$scope.type = r.type;
+                    //$scope.ingredients = r.ingredients[0];
+                    //$scope.selectedType = r.type;
+                    //$scope.updateReward = true;
+                    //$scope.defaulthealthpoints = r.defaulthealthpoints;
+                    //$scope.rewards.forEach(function (reward) {
+                    //    if (r.enables.indexOf(reward._id) > -1) {
+                    //        $scope.enables.push(reward);
+                    //    }
+                    //    if (r.goals.indexOf(reward._id) > -1) {
+                    //        $scope.goals.push(reward);
+                    //    }
+                    //});
+                    //if (r.ingredients.length ===0) {
+                    //    $scope.ingredients = [];
+                    //}
+                });
+            }
+
+
+        };
 
         //$scope.cancel = function () {
         //    $scope.name = '';

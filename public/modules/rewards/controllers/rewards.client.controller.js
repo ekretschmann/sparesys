@@ -163,6 +163,10 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             ingredient.keep = !ingredient.keep;
         };
 
+        $scope.update = function() {
+            $scope.reward.$update();
+        };
+
         // Create new Reward
         $scope.newReward = {};
         $scope.newReward.defaulthealthpoints = 1;

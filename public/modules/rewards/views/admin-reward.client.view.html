@@ -22,12 +22,12 @@
                     <div class="col-xs-6">
                         <div class="field-label">Health points</div>
                         <div class="field-data">
-                            {{reward.defaulthealthpoints}}
-                            <!--<input type="text"-->
-                            <!--data-ng-model="otherUser.username"-->
-                            <!--data-ng-blur="update()"-->
-                            <!--class="form-control"-->
-                            <!--placeholder="Username">-->
+                            <!--{{reward.defaulthealthpoints}}-->
+                            <input type="number"
+                                   data-ng-change="update()"
+                                   data-ng-model="reward.defaulthealthpoints"
+                                   class="form-control"
+                                    >
                         </div>
                     </div>
 
@@ -42,7 +42,10 @@
                     <div class="col-xs-6">
                         <div class="field-label">Type</div>
                         <div class="field-data">
-                            {{reward.type}}
+                            <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Recipe" > Recipe
+                            <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Item" > Item
+                            <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Skill" > Skill
+
                         </div>
                     </div>
                 </div>
@@ -53,7 +56,11 @@
                     <div class="col-xs-12">
                         <div class="field-label">Description</div>
                         <div class="field-data">
-                            {{reward.description}}
+                            <textarea rows="5"
+                                   data-ng-blur="update()"
+                                   data-ng-model="reward.description"
+                                   class="form-control"
+                                    ></textarea>
                         </div>
                     </div>
                 </div>
@@ -71,9 +78,34 @@
 
                     <div class="col-xs-6">
                         <div class="field-label">Ingredients</div>
+                        <!--<input style="width: 100%"-->
+                               <!--type="text"-->
+                               <!--data-ng-model="selectedIngredient"-->
+                               <!--typeahead-on-select="selectIngredient()"-->
+                               <!--typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"-->
+                               <!--class="form-control">-->
                         <div class="field-data">
-                            {{reward._id}}
+                            <div data-ng-repeat="ingredient in reward.ingredients">
+                                {{ingredient.amount}} {{ingredient.name}}
+                                <span data-ng-if="ingredient.keep">(keep intact)</span>
+                                <span data-ng-if="!ingredient.keep">(consume)</span>
+
+
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="col-xs-6">
+                        <!--<div class="field-label">Enables</div>-->
+                        <!--<div class="field-data">-->
+                            <!--<div data-ng-repeat="ingredient in reward.">-->
+                                <!--{{ingredient.amount}} {{ingredient.name}}-->
+                                <!--<span data-ng-if="ingredient.keep">(keep intact)</span>-->
+                                <!--<span data-ng-if="!ingredient.keep">(consume)</span>-->
+
+
+                            <!--</div>-->
+                        <!--</div>-->
                     </div>
 
 

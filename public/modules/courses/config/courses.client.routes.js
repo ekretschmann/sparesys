@@ -5,9 +5,9 @@ angular.module('courses').config(['$stateProvider',
     function ($stateProvider) {
         // Courses state routing
         $stateProvider.
-            state('listCourses', {
+            state('manageCourses', {
                 url: '/courses',
-                templateUrl: 'modules/courses/views/list-courses.client.view.html'
+                templateUrl: 'modules/courses/views/manage-courses.client.view.html'
             }).
             state('adminCourses', {
                 url: '/courses/admin',
@@ -23,18 +23,14 @@ angular.module('courses').config(['$stateProvider',
                 url: '/courses/create',
                 templateUrl: 'modules/courses/views/create-course.client.view.html'
             }).
-            state('editCourseNew', {
-                url: '/courses/:courseId/edit',
-                templateUrl: 'modules/courses/views/edit-course-new.client.view.html'
-            }).
-            state('editCards', {
-                url: '/courses/:courseId/cards',
-                templateUrl: 'modules/courses/views/edit-all-cards-new.client.view.html'
-            }).
             state('editCourse', {
                 url: '/courses/:courseId/edit',
                 templateUrl: 'modules/courses/views/edit-course.client.view.html'
             }).
+            state('editCards', {
+                url: '/courses/:courseId/cards',
+                templateUrl: 'modules/courses/views/edit-all-cards-new.client.view.html'
+            })
             state('courseStats', {
                 url: '/courses/:courseId/stats',
                 templateUrl: 'modules/courses/views/course-stats.client.view.html'

@@ -463,21 +463,6 @@ angular.module('courses').controller('CoursesController',
 
             };
 
-            $scope.areYouSureToPublishCourse = function (course) {
-
-                $scope.course = course;
-                $modal.open({
-                    templateUrl: 'areYouSureToPublishCourse.html',
-                    controller: 'PublishCourseModalController',
-                    resolve: {
-
-                        course: function () {
-                            return $scope.course;
-                        }
-                    }
-                });
-
-            };
 
 
             $scope.subscribePopup = function (course) {

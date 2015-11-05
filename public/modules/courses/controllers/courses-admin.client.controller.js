@@ -3,8 +3,8 @@
 
 // Courses controller
 angular.module('courses').controller('CoursesAdminController',
-    ['$scope', '$http', '$stateParams', '$location','Authentication', 'Courses',
-        function ($scope, $http, $stateParams, $location, Authentication, Courses) {
+    ['$scope', '$http', '$stateParams', '$location', '$timeout', '$window', 'Packs', 'Authentication', 'Courses',
+        function ($scope, $http, $stateParams, $location, $timeout, $window, Packs, Authentication, Courses) {
 
             $scope.authentication = Authentication;
 
@@ -84,6 +84,52 @@ angular.module('courses').controller('CoursesAdminController',
                     $scope.error = response.message;
 
                 });
+            };
+
+            $scope.addPackToCourse = function () {
+
+
+                var self = {};
+                self.name = this.name;
+                self.slavesToSave = $scope.course.slaves.length;
+                self.slavesSaved = 0;
+                self.slaves = [];
+
+                // Create new Pack object
+                var pack = new Packs({
+                    name: $scope.newpack.name,
+                    course: $scope.course._id
+                });
+
+
+                pack.$save(function (response) {
+
+                    var packid = response._id;
+                    $scope.course.packs.push(packid);
+
+
+                    $scope.course.$update(function () {
+                        $scope.newpack.name = '';
+                        angular.element('.focus').trigger('focus');
+
+                        $scope.newpack.name = '';
+
+                        if ($scope.course.packs.length > 3) {
+                            $timeout(function () {
+                                $window.scrollTo(0, document.body.scrollHeight);
+                            });
+                        }
+
+                    }, function (errorResponse) {
+                        $scope.error = errorResponse.data.message;
+                    });
+
+
+                }, function (errorResponse) {
+                    $scope.error = errorResponse.data.message;
+                });
+
+
             };
 
 

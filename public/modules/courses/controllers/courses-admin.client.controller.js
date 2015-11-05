@@ -82,11 +82,11 @@ angular.module('courses').controller('CoursesAdminController',
 
                 }).error(function(response) {
                     $scope.error = response.message;
-//                console.log('ERROR');
-//                console.log(response);
 
                 });
             };
+
+
 
 
         }

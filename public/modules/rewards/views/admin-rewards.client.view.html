@@ -51,7 +51,7 @@
                     </div>
                     <div class="flashcard-section row">
                         <div class="col-xs-4">
-                            <div class="field-label">Health Points</div>
+                            <div class="field-label">Health</div>
                             <div class="field-data">
                                 {{reward.defaulthealthpoints}}
                             </div>
@@ -80,7 +80,7 @@
                                         <span data-ng-if="!ingredient.keep">(consume)</span>
 
                                         <!--<div data-ng-repeat="ingredient in recipe">-->
-                                            <!--<div> {{ingredient.name}}</div>-->
+                                        <!--<div> {{ingredient.name}}</div>-->
                                         <!--</div>-->
                                     </div>
                                 </div>
@@ -130,9 +130,9 @@
     </div>
 
 
-    <div class="col-xs-12">
+    <div class="col-xs-6 ">
         <div class="admin-card font-large">
-            <div class="title">
+            <div class="title" style="padding-left: 12px">
                 Add reward
 
                 <div class="pull-right">
@@ -146,45 +146,69 @@
             </div>
 
 
-            <div style="margin-top: 1.5em">
-                <div class="col-xs-8">
-                    <div class="row">
-                        <div class="col-xs-4">
-                            <div class="field-label">Name</div>
-                            <div class="font-medium">
-                                <input type="text"
-                                       data-ng-model="newReward.name"
-                                       class="form-control focus">
-                            </div>
+            <div class="col-xs-12">
+                <div class="row">
+                    <div class="col-xs-4">
+                        <div class="field-label">Name</div>
+                        <div class="font-medium">
+                            <input type="text"
+                                   data-ng-model="newReward.name"
+                                   class="form-control focus">
                         </div>
-
-                        <div class="col-xs-4">
-                            <div class="field-label">Health points</div>
-                            <div class="font-medium">
-                                <input type="number"
-                                       data-ng-model="newReward.defaulthealthpoints"
-                                       class="form-control"
-                                       placeholder="Health">
-                            </div>
-                        </div>
-                        <div class="col-xs-4">
-
-                            <div class="field-label">Type</div>
-                            <div class="font-medium">
-
-                                <input type="radio" data-ng-model="newReward.type" value="Recipe" > Recipe
-                                <input type="radio" data-ng-model="newReward.type" value="Item" > Item
-                                <input type="radio" data-ng-model="newReward.type" value="Skill" > Skill
-
-                            </div>
-                        </div>
-
-
                     </div>
 
-                    <div class="row" style="margin-top: 1.5em;">
+                    <div class="col-xs-6">
 
 
+                        <div class="field-label">Type</div>
+                        <div class="font-medium">
+
+                            <input type="radio" data-ng-model="newReward.type" value="Recipe"> Recipe
+                            <input type="radio" data-ng-model="newReward.type" value="Item"> Item
+
+                            <input type="radio" data-ng-model="newReward.type" value="Skill"> Skill
+                        </div>
+                    </div>
+
+
+
+
+
+
+                </div>
+
+                <div class="row" style="margin-top: 1.5em;">
+
+
+                    <div class="col-xs-4">
+                        <div class="field-label">Description</div>
+                        <div class="font-medium">
+
+                                    <textarea type="text"
+                                              data-ng-model="newReward.description"
+                                              class="form-control"
+                                              placeholder="Description"
+                                              rows="8"/>
+
+                        </div>
+                    </div>
+
+                    <div data-ng-if="newReward.type === 'Item'">
+                        <div class="col-xs-4">
+                            <div class="field-label">Price</div>
+                            <div class="font-medium">
+                                <input type="number"
+                                       data-ng-model="newReward.price"
+                                       class="form-control"
+                                       placeholder="Price">
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                    <div data-ng-if="newReward.type === 'Recipe'">
                         <div class="col-xs-4">
                             <div class="field-label">Ingredients</div>
 
@@ -194,9 +218,39 @@
                                    typeahead-on-select="selectIngredient()"
                                    typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
                                    class="form-control">
+
+                            <div data-ng-repeat="ingredient in ingredients">
+                                <a>
+                                    <i data-ng-click="removeIngredient(ingredient)"
+                                       class="glyphicon glyphicon-remove-sign small">
+                                    </i>
+                                </a>
+                                <!--{{ingredient}}-->
+                                {{ingredient.amount}}
+                                {{ingredient.name}}
+                                <!--x{{ingredient.keep}}x-->
+                        <span data-ng-if="ingredient.keep"><a href="" data-ng-click="switchKeep(ingredient)">(keep
+                            intact)</a></span>
+                        <span data-ng-if="!ingredient.keep"><a href=""
+                                                               data-ng-click="switchKeep(ingredient)">(consume)</a></span>
+                            </div>
                         </div>
+                    </div>
+
+                    <div data-ng-if="newReward.type === 'Recipe'">
+                        <div class="col-xs-4">
+                            <div class="field-label">Health</div>
+                            <div class="font-medium">
+                                <input type="number"
+                                       data-ng-model="newReward.defaulthealthpoints"
+                                       class="form-control"
+                                       placeholder="Health">
+                            </div>
+                        </div>
+                    </div>
 
 
+                    <div data-ng-if="newReward.type === 'Skill'">
                         <div class="col-xs-4">
                             <div class="field-label">Enables</div>
                             <div class="font-medium">
@@ -209,7 +263,9 @@
                                        class="form-control">
                             </div>
                         </div>
+                    </div>
 
+                    <div data-ng-if="newReward.type === 'Skill'">
                         <div class="col-xs-4">
                             <div class="field-label">Goals</div>
                             <div class="font-medium">
@@ -221,77 +277,52 @@
                                        class="form-control">
                             </div>
                         </div>
-
-
                     </div>
 
-                    <div class="row">
-                        <div class="col-xs-4 font-medium" style="padding-top: 0.5em;">
-
-                            <div data-ng-repeat="ingredient in ingredients">
-                                <a>
-                                    <i data-ng-click="removeIngredient(ingredient)"
-                                       class="glyphicon glyphicon-remove-sign small">
-                                    </i>
-                                </a>
-                                <!--{{ingredient}}-->
-                                {{ingredient.amount}}
-                                {{ingredient.name}}
-                                <!--x{{ingredient.keep}}x-->
-                                <span data-ng-if="ingredient.keep"><a href="" data-ng-click="switchKeep(ingredient)">(keep intact)</a></span>
-                                <span data-ng-if="!ingredient.keep"><a href="" data-ng-click="switchKeep(ingredient)">(consume)</a></span>
-                            </div>
-                        </div>
-
-                        <div class="col-xs-2">
-                            <div data-ng-repeat="enabler in enables">
-                                <a>
-                                    <i data-ng-click="removePrecursor(enabler)"
-                                       class="glyphicon glyphicon-remove-sign small">
-                                    </i>
-                                </a>
-                                {{enabler.name}}
-                            </div>
-
-                            <div class="col-xs-2">
-                                <div data-ng-repeat="goal in goals">
-                                    <a>
-                                        <i data-ng-click="removeGoal(goal)"
-                                           class="glyphicon glyphicon-remove-sign small">
-                                        </i>
-                                    </a>
-                                    {{goal.name}}
-                                </div>
-
-                            </div>
-
-
-                            <div class="hidden">
-                                <button type="submit" class="btn btn-rememberators"></button>
-                            </div>
-                        </div>
-
-
-                    </div>
 
                 </div>
 
-                <div class="col-xs-4">
-                    <div class="field-label">Description</div>
-                    <div class="font-medium">
+                <!--<div class="row">-->
 
-                                    <textarea type="text"
-                                              data-ng-model="newReward.description"
-                                              class="form-control"
-                                              placeholder="Description"
-                                              rows="8"/>
 
-                    </div>
-                </div>
+                  <!-- -->
+                    <!--<div class="col-xs-4 font-medium" style="padding-top: 0.5em;">-->
+                        <!--<div data-ng-repeat="enabler in enables">-->
+                            <!--<a>-->
+                                <!--<i data-ng-click="removePrecursor(enabler)"-->
+                                   <!--class="glyphicon glyphicon-remove-sign small">-->
+                                <!--</i>-->
+                            <!--</a>-->
+                            <!--{{enabler.name}}-->
+                        <!--</div>-->
+                    <!--</div>-->
+
+                    <!--<div class="col-xs-4 font-medium" style="padding-top: 0.5em;">-->
+                        <!--<div data-ng-repeat="goal in goals">-->
+                            <!--<a>-->
+                                <!--<i data-ng-click="removeGoal(goal)"-->
+                                   <!--class="glyphicon glyphicon-remove-sign small">-->
+                                <!--</i>-->
+                            <!--</a>-->
+                            <!--{{goal.name}}-->
+                        <!--</div>-->
+
+                    <!--</div>-->
+
+
+                    <!--<div class="hidden">-->
+                        <!--<button type="submit" class="btn btn-rememberators"></button>-->
+                    <!--</div>-->
+                <!--</div>-->
+
 
             </div>
+
         </div>
+
+
     </div>
 
+    <div class="rememberators-footer col-xs-12" style="margin-top: 3em">rememberators.com</div>
 
 </section>

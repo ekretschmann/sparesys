@@ -16,6 +16,14 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selectedEnabler = '';
         $scope.selectedGoal = '';
 
+        $scope.removeIngredientFromReward = function(ingredient) {
+            for (var i=0; i<$scope.reward.ingredients.length; i++) {
+                if ($scope.reward.ingredients[i].name === ingredient.name) {
+                    $scope.reward.ingredients.splice(i, 1);
+                }
+            }
+            $scope.reward.$update();
+        };
 
         $scope.removeIngredient = function (ingredient) {
             for (var i = 0; i < $scope.ingredients.length; i++) {
@@ -60,9 +68,36 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 }
             });
 
+            console.log($scope.selectedIngredient);
             if (!found) {
                 $scope.ingredients.push({rewardId: rewardId, name: $scope.selectedIngredient, amount: 1, keep: false});
 
+            }
+            $scope.selectedIngredient = '';
+        };
+
+        $scope.selectIngredientForReward = function () {
+
+            var rewardId;
+
+            $scope.rewards.forEach(function (reward) {
+
+                if (reward.name === $scope.selectedIngredient) {
+                    rewardId = reward._id;
+                }
+            }, this);
+
+            var found = false;
+            $scope.ingredients.forEach(function (ingredient) {
+                if (ingredient.name === $scope.selectedIngredient) {
+                    ingredient.amount += 1;
+                    found = true;
+                }
+            });
+
+            if (!found) {
+                $scope.reward.ingredients.push({rewardId: rewardId, name: $scope.selectedIngredient, amount: 1, keep: false});
+                $scope.reward.$update();
             }
             $scope.selectedIngredient = '';
         };
@@ -161,6 +196,11 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.switchKeep = function(ingredient) {
             ingredient.keep = !ingredient.keep;
+        };
+
+        $scope.switchKeepForReward = function(ingredient) {
+            ingredient.keep = !ingredient.keep;
+            $scope.reward.$update();
         };
 
         $scope.update = function() {
@@ -295,31 +335,13 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         // Find existing Reward
         $scope.findOne = function () {
 
-            console.log($stateParams.rewardId);
+
 
             if ($stateParams.rewardId) {
                 $scope.reward = Rewards.get({
                     rewardId: $stateParams.rewardId
                 }, function (r) {
-                    console.log(r);
-                    //$scope.name = r.name;
-                    //$scope.description = r.description;
-                    //$scope.type = r.type;
-                    //$scope.ingredients = r.ingredients[0];
-                    //$scope.selectedType = r.type;
-                    //$scope.updateReward = true;
-                    //$scope.defaulthealthpoints = r.defaulthealthpoints;
-                    //$scope.rewards.forEach(function (reward) {
-                    //    if (r.enables.indexOf(reward._id) > -1) {
-                    //        $scope.enables.push(reward);
-                    //    }
-                    //    if (r.goals.indexOf(reward._id) > -1) {
-                    //        $scope.goals.push(reward);
-                    //    }
-                    //});
-                    //if (r.ingredients.length ===0) {
-                    //    $scope.ingredients = [];
-                    //}
+                    $scope.rewards = Rewards.query();
                 });
             }
 

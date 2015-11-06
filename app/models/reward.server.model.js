@@ -31,6 +31,10 @@ var RewardSchema = new Schema({
         type: Number,
         default: 1
     },
+    price: {
+        type: Number,
+        default: 1
+    },
     enables: [{
         type: Schema.ObjectId,
         default: []

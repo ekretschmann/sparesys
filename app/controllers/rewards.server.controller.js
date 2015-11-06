@@ -128,8 +128,14 @@ exports.rewardByID = function(req, res, next, id) {
  * Reward authorization middleware
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.reward.user.id !== req.user.id) {
-		return res.status(403).send('User is not authorized');
+	//if (req.reward.user.id !== req.user.id) {
+	//	return res.status(403).send('User is not authorized');
+	//}
+	//next();
+	if (req.user.roles.indexOf('admin') === -1) {
+		return res.send(403, 'User is not authorized');
+	} else {
+		next();
 	}
-	next();
+
 };

@@ -118,48 +118,26 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.selectedIngredient = '';
         };
 
-        //
-        //
-        //$scope.getName= function(id) {
-        //
-        //    console.log('calling');
-        //    var name = 'unknown';
-        //    $scope.rewards.forEach(function(reward) {
-        //        if (reward._id === id) {
-        //            name = reward.name;
-        //        }
-        //    });
-        //    $scope.name = name;
-        //    return name;
-        //};
+
 
         $scope.selectEnabler = function () {
 
 
             var found = false;
-            $scope.ingredients.forEach(function (ingredient) {
-                if (ingredient._id === $scope.selectedEnabler) {
+            var rewardId = '';
+            $scope.rewards.forEach(function (ingredient) {
+                if (ingredient.name === $scope.selection.enabler) {
                     found = true;
+                    rewardId = ingredient._id;
                 }
             });
 
+            if (found) {
+                $scope.enables.push($scope.selection.enabler);
 
-            if (!found) {
-                $scope.rewards.forEach(function (reward) {
-                    if (reward.name === $scope.selectedEnabler) {
-                        $scope.enables.push(reward);
-                        //if(!$scope.reward.enables) {
-                        //    $scope.reward.enables = [];
-                        //}
-                        //$scope.reward.enables.push(reward._id);
-                        //console.log($scope.reward);
-                    }
-                });
-
-                //$scope.enables.push($scope.selectedEnabler);
             }
 
-            $scope.selectedEnabler = '';
+            $scope.selection.enabler = '';
         };
 
         $scope.selectGoal = function () {
@@ -237,6 +215,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 healthpoints: $scope.newReward.defaulthealthpoints,
                 type: $scope.newReward.type,
                 ingredients: $scope.ingredients,
+                enables: $scope.enables,
                 description: $scope.newReward.description
             });
 
@@ -251,101 +230,21 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 $scope.error = errorResponse.data.message;
             });
 
-            //var reward = $scope.reward;
-            //if (!$scope.updateReward) {
-            //    reward = new Rewards({
-            //        name: this.name
-            //    });
-            //    $scope.rewards.push(reward);
-            //}
-            //
-            //reward.name = $scope.name;
-            //reward.ingredients = [$scope.ingredients];
-            //reward.enables = [];
-            //reward.goals = [];
-            //reward.defaulthealthpoints = $scope.defaulthealthpoints;
-            //
-            //$scope.enables.forEach(function(en) {
-            //    reward.enables.push(en._id);
-            //}, this);
-            //
-            //$scope.goals.forEach(function(en) {
-            //    reward.goals.push(en._id);
-            //}, this);
-            //
-            //reward.description = $scope.description;
-            //reward.type = $scope.type;
-            //if (reward.ingredients && reward.ingredients[0] && reward.ingredients[0].length > 0) {
-            //    reward.type = 'Recipe';
-            //} else {
-            //    reward.type = $scope.type;
-            //}
-            //
-            //
-            //// Redirect after save
-            //if ($scope.updateReward) {
-            //    reward.$update(function () {
-            //        $state.go($state.$current, null, {reload: true});
-            //    });
-            //} else {
-            //    reward.$save(function (response) {
-            //        //$location.path('rewards/' + response._id);
-            //
-            //        // Clear form fields
-            //        $scope.name = '';
-            //        $scope.type = 'Item';
-            //        $scope.ingredients = [];
-            //        $scope.updateReward = false;
-            //        $scope.enables = [];
-            //        $state.go($state.$current, null, {reload: true});
-            //    }, function (errorResponse) {
-            //        $scope.error = errorResponse.data.message;
-            //    });
-            //}
         };
 
-        //$scope.removeAll = function() {
-        //    $scope.rewards.forEach(function(reward) {
-        //        $scope.remove(reward);
-        //    });
-        //};
 
-        // Remove existing Reward
-        //$scope.remove = function (reward) {
-        //
-        //    if (reward) {
-        //        reward.$remove(function() {
-        //            for (var i in $scope.rewards) {
-        //
-        //                if ($scope.rewards[i]._id === reward._id) {
-        //                    $scope.rewards.splice(i, 1);
-        //                }
-        //            }
-        //        });
-        //
-        //
-        //    } else {
-        //        $scope.reward.$remove(function () {
-        //
-        //        });
-        //    }
-        //    $scope.cancel();
-        //};
-
-        //$scope.getRewardNames = function () {
-        //    $scope.rewardNames = [];
-        //
-        //    $scope.rewards.forEach(function (reward) {
-        //        $scope.rewardNames[reward._id] = reward.name;
-        //    }, this);
-        //};
-
-        //$scope.rewards = Rewards.query(function () {
-        //    $scope.getRewardNames();
-        //});
 
         $scope.find = function () {
-            $scope.rewards = Rewards.query();
+            $scope.rewards = Rewards.query(function() {
+                $scope.items = [];
+                for (var i=0; i<$scope.rewards.length; i++) {
+                    console.log($scope.rewards[i]);
+                    if ($scope.rewards[i].type === 'Item') {
+                        $scope.items.push($scope.rewards[i]);
+                    }
+                }
+            });
+
         };
 
         // Find existing Reward
@@ -363,17 +262,5 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         };
 
-        //$scope.cancel = function () {
-        //    $scope.name = '';
-        //    $scope.description = '';
-        //    $scope.type = 'Item';
-        //    $scope.ingredients = [];
-        //    $scope.enables = [];
-        //    $scope.goals = [];
-        //    $scope.selectedType = 'Item';
-        //    $scope.updateReward = false;
-        //    $scope.health = 1;
-        //    $location.path('/rewards/manage/');
-        //};
     }
 ]);

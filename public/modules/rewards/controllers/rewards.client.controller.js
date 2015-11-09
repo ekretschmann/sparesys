@@ -7,7 +7,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.ingredients = [];
         $scope.enables = [];
+        $scope.enablesIds = [];
         $scope.goals = [];
+        $scope.goalsIds = [];
         $scope.updateReward = false;
         $scope.type = 'Item';
         $scope.defaulthealthpoints = 1;
@@ -16,6 +18,14 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selection.ingredient = '';
         $scope.selection.enabler = '';
         $scope.selection.goal = '';
+
+        $scope.getRewardName = function(rewardId) {
+            for (var i = 0; i < $scope.rewards.length; i++) {
+                if ($scope.rewards[i]._id === rewardId) {
+                    return $scope.rewards[i].name;
+                }
+            }
+        };
 
         $scope.removeIngredientFromReward = function (ingredient) {
             for (var i = 0; i < $scope.reward.ingredients.length; i++) {
@@ -122,51 +132,32 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.selectEnabler = function () {
 
+            $scope.rewards.forEach(function (enabler) {
+                if (enabler.name === $scope.selection.enabler) {
 
-            var found = false;
-            var rewardId = '';
-            $scope.rewards.forEach(function (ingredient) {
-                if (ingredient.name === $scope.selection.enabler) {
-                    found = true;
-                    rewardId = ingredient._id;
+                    $scope.enables.push($scope.selection.enabler);
+                    $scope.enablesIds.push(enabler._id);
                 }
             });
 
-            if (found) {
-                $scope.enables.push($scope.selection.enabler);
-
-            }
 
             $scope.selection.enabler = '';
         };
 
         $scope.selectGoal = function () {
 
+            console.log($scope.selection.goal);
+            $scope.rewards.forEach(function (goal) {
+                if (goal.name === $scope.selection.goal) {
 
-            var found = false;
-            $scope.ingredients.forEach(function (ingredient) {
-                if (ingredient._id === $scope.selectedGoal) {
-                    found = true;
+                    $scope.goals.push($scope.selection.goal);
+                    $scope.goalsIds.push(goal._id);
                 }
             });
 
+            console.log($scope.goals);
 
-            if (!found) {
-                $scope.rewards.forEach(function (reward) {
-                    if (reward.name === $scope.selectedGoal) {
-                        $scope.goals.push(reward);
-                        //if(!$scope.reward.enables) {
-                        //    $scope.reward.enables = [];
-                        //}
-                        //$scope.reward.enables.push(reward._id);
-                        //console.log($scope.reward);
-                    }
-                });
-
-                //$scope.enables.push($scope.selectedEnabler);
-            }
-
-            $scope.selectedGoal = '';
+            $scope.selection.goal = '';
         };
 
         $scope.areYouSureToDeleteReward = function (reward) {
@@ -215,7 +206,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 healthpoints: $scope.newReward.defaulthealthpoints,
                 type: $scope.newReward.type,
                 ingredients: $scope.ingredients,
-                enables: $scope.enables,
+                goals: $scope.goalsIds,
+                enables: $scope.enablesIds,
                 description: $scope.newReward.description
             });
 
@@ -238,7 +230,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.rewards = Rewards.query(function() {
                 $scope.items = [];
                 for (var i=0; i<$scope.rewards.length; i++) {
-                    console.log($scope.rewards[i]);
                     if ($scope.rewards[i].type === 'Item') {
                         $scope.items.push($scope.rewards[i]);
                     }

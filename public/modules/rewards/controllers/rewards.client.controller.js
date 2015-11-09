@@ -1,8 +1,8 @@
 'use strict';
 
 // Rewards controller
-angular.module('rewards').controller('RewardsController', ['$scope', '$state', '$stateParams', '$location', '$modal','Authentication', 'Rewards',
-    function ($scope, $state, $stateParams, $location, $modal, Authentication, Rewards) {
+angular.module('rewards').controller('RewardsController', ['$scope', '$state', '$timeout', '$stateParams', '$location', '$modal', 'Authentication', 'Rewards',
+    function ($scope, $state, $timeout, $stateParams, $location, $modal, Authentication, Rewards) {
         $scope.authentication = Authentication;
 
         $scope.ingredients = [];
@@ -12,12 +12,13 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.type = 'Item';
         $scope.defaulthealthpoints = 1;
 
-        $scope.selectedIngredient = '';
-        $scope.selectedEnabler = '';
-        $scope.selectedGoal = '';
+        $scope.selection = {};
+        $scope.selection.ingredient = '';
+        $scope.selection.enabler = '';
+        $scope.selection.goal = '';
 
-        $scope.removeIngredientFromReward = function(ingredient) {
-            for (var i=0; i<$scope.reward.ingredients.length; i++) {
+        $scope.removeIngredientFromReward = function (ingredient) {
+            for (var i = 0; i < $scope.reward.ingredients.length; i++) {
                 if ($scope.reward.ingredients[i].name === ingredient.name) {
                     $scope.reward.ingredients.splice(i, 1);
                 }
@@ -51,35 +52,45 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.selectIngredient = function () {
 
+
             var rewardId;
+
 
             $scope.rewards.forEach(function (reward) {
 
-                if (reward.name === $scope.selectedIngredient) {
+                if (reward.name === $scope.selection.ingredient) {
                     rewardId = reward._id;
                 }
             }, this);
 
             var found = false;
             $scope.ingredients.forEach(function (ingredient) {
-                if (ingredient.name === $scope.selectedIngredient) {
+                if (ingredient.name === $scope.selection.ingredient) {
                     ingredient.amount += 1;
                     found = true;
                 }
             });
 
-            console.log($scope.selectedIngredient);
+
             if (!found) {
-                $scope.ingredients.push({rewardId: rewardId, name: $scope.selectedIngredient, amount: 1, keep: false});
+                $scope.ingredients.push({
+                    rewardId: rewardId,
+                    name: $scope.selection.ingredient,
+                    amount: 1,
+                    keep: false
+                });
 
             }
-            $scope.selectedIngredient = '';
+            $scope.selection.ingredient = '';
+
         };
+
 
         $scope.selectIngredientForReward = function () {
 
             var rewardId;
 
+
             $scope.rewards.forEach(function (reward) {
 
                 if (reward.name === $scope.selectedIngredient) {
@@ -96,7 +107,12 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             });
 
             if (!found) {
-                $scope.reward.ingredients.push({rewardId: rewardId, name: $scope.selectedIngredient, amount: 1, keep: false});
+                $scope.reward.ingredients.push({
+                    rewardId: rewardId,
+                    name: $scope.selectedIngredient,
+                    amount: 1,
+                    keep: false
+                });
                 $scope.reward.$update();
             }
             $scope.selectedIngredient = '';
@@ -194,16 +210,16 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         };
 
-        $scope.switchKeep = function(ingredient) {
+        $scope.switchKeep = function (ingredient) {
             ingredient.keep = !ingredient.keep;
         };
 
-        $scope.switchKeepForReward = function(ingredient) {
+        $scope.switchKeepForReward = function (ingredient) {
             ingredient.keep = !ingredient.keep;
             $scope.reward.$update();
         };
 
-        $scope.update = function() {
+        $scope.update = function () {
             $scope.reward.$update();
         };
 
@@ -334,7 +350,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         // Find existing Reward
         $scope.findOne = function () {
-
 
 
             if ($stateParams.rewardId) {

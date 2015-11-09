@@ -209,16 +209,17 @@
 
 
                     <div data-ng-if="newReward.type === 'Recipe'">
-                        <div class="col-xs-4">
+                        <div class="col-xs-6">
                             <div class="field-label">Ingredients</div>
 
                             <input style="width: 100%"
                                    type="text"
-                                   data-ng-model="selectedIngredient"
+                                   data-ng-model="selection.ingredient"
                                    typeahead-on-select="selectIngredient()"
                                    typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
                                    class="form-control">
 
+                            <div class="field-data">
                             <div data-ng-repeat="ingredient in ingredients">
                                 <a>
                                     <i data-ng-click="removeIngredient(ingredient)"
@@ -234,11 +235,12 @@
                         <span data-ng-if="!ingredient.keep"><a href=""
                                                                data-ng-click="switchKeep(ingredient)">(consume)</a></span>
                             </div>
+                            </div>
                         </div>
                     </div>
 
                     <div data-ng-if="newReward.type === 'Recipe'">
-                        <div class="col-xs-4">
+                        <div class="col-xs-2">
                             <div class="field-label">Health</div>
                             <div class="font-medium">
                                 <input type="number"

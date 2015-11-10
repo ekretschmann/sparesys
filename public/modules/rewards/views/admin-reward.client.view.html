@@ -12,9 +12,13 @@
             <div class="flashcard-section row">
 
                 <div class="col-xs-6">
-                    <div class="field-label">ID</div>
+                    <div class="field-label">Name</div>
                     <div class="field-data">
-                        {{reward._id}}
+                        <input type="text"
+                               data-ng-blur="update()"
+                               data-ng-model="reward.name"
+                               class="form-control"
+                                >
                     </div>
                 </div>
 
@@ -84,7 +88,7 @@
             <div class="flashcard-section">
                 <div class="row rememberators-form-group form-group">
 
-                    <div class="col-xs-6" data-ng-if="reward.type === 'Item'">
+                    <div class="col-xs-6" data-ng-if="reward.type === 'Recipe'">
                         <div class="field-label">Ingredients</div>
 
                         <input style="width: 100%"
@@ -136,6 +140,33 @@
                                         </a>
 
                                         {{getRewardName(enabler)}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-xs-6" data-ng-if="reward.type === 'Skill'">
+                        <div class="field-label">Goals</div>
+                        <div class="field-data">
+
+                            <input style="width: 100%"
+                                   type="text"
+                                   data-ng-model="selection.goals"
+                                   typeahead-on-select="selectGoal()"
+                                   typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
+                                   class="form-control">
+
+                            <div class="font-medium" style="padding-top: 0.5em; padding-left: 0.5em">
+                                <div class="field-data">
+                                    <div data-ng-repeat="goal in reward.goals">
+                                        <a>
+                                            <i data-ng-click="removeGoal(goal)"
+                                               class="glyphicon glyphicon-remove-sign small">
+                                            </i>
+                                        </a>
+
+                                        {{getRewardName(goal)}}
                                     </div>
                                 </div>
                             </div>

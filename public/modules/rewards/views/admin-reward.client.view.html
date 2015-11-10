@@ -9,46 +9,54 @@
             <div class="title">{{reward.name}}</div>
 
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+            <div class="flashcard-section row">
 
-                    <div class="col-xs-6">
-                        <div class="field-label">ID</div>
-                        <div class="field-data">
-                            {{reward._id}}
-                        </div>
+                <div class="col-xs-6">
+                    <div class="field-label">ID</div>
+                    <div class="field-data">
+                        {{reward._id}}
                     </div>
-
-                    <div class="col-xs-6">
-                        <div class="field-label">Health points</div>
-                        <div class="field-data">
-                            <!--{{reward.defaulthealthpoints}}-->
-                            <input type="number"
-                                   data-ng-change="update()"
-                                   data-ng-model="reward.defaulthealthpoints"
-                                   class="form-control"
-                                    >
-                        </div>
-                    </div>
-
-
                 </div>
+
+                <div class="col-xs-6">
+                    <div class="field-label">Type</div>
+                    <div class="field-data">
+                        <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Recipe"> Recipe
+                        <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Item"> Item
+                        <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Skill"> Skill
+
+                    </div>
+                </div>
+
+
             </div>
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+            <div class="flashcard-section row" data-ng-if="reward.type !== 'Recipe'">
 
-
-                    <div class="col-xs-6">
-                        <div class="field-label">Type</div>
-                        <div class="field-data">
-                            <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Recipe" > Recipe
-                            <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Item" > Item
-                            <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Skill" > Skill
-
-                        </div>
+                <div class="col-xs-6" data-ng-if="reward.type === 'Item'">
+                    <div class="field-label">Health points</div>
+                    <div class="field-data">
+                        <!--{{reward.defaulthealthpoints}}-->
+                        <input type="number"
+                               data-ng-change="update()"
+                               data-ng-model="reward.defaulthealthpoints"
+                               class="form-control"
+                                >
                     </div>
                 </div>
+
+                <div class="col-xs-6">
+                    <div class="field-label">Price</div>
+                    <div class="field-data">
+                        <!--{{reward.defaulthealthpoints}}-->
+                        <input type="number"
+                               data-ng-change="update()"
+                               data-ng-model="reward.price"
+                               class="form-control"
+                                >
+                    </div>
+                </div>
+
             </div>
 
             <div class="flashcard-section">
@@ -57,9 +65,9 @@
                         <div class="field-label">Description</div>
                         <div class="field-data">
                             <textarea rows="5"
-                                   data-ng-blur="update()"
-                                   data-ng-model="reward.description"
-                                   class="form-control"
+                                      data-ng-blur="update()"
+                                      data-ng-model="reward.description"
+                                      class="form-control"
                                     ></textarea>
                         </div>
                     </div>
@@ -85,6 +93,7 @@
                                typeahead-on-select="selectIngredientForReward()"
                                typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
                                class="form-control">
+
                         <div class="field-data" style="padding-top: 0.5em">
                             <div data-ng-repeat="ingredient in reward.ingredients">
                                 <a>
@@ -96,8 +105,11 @@
                                 <!--<span data-ng-if="ingredient.keep">(keep intact)</span>-->
                                 <!--<span data-ng-if="!ingredient.keep">(consume)</span>-->
 
-                                <span data-ng-if="ingredient.keep"><a href="" data-ng-click="switchKeepForReward(ingredient)">(keep intact)</a></span>
-                                <span data-ng-if="!ingredient.keep"><a href="" data-ng-click="switchKeepForReward(ingredient)">(consume)</a></span>
+                                <span data-ng-if="ingredient.keep"><a href=""
+                                                                      data-ng-click="switchKeepForReward(ingredient)">(keep
+                                    intact)</a></span>
+                                <span data-ng-if="!ingredient.keep"><a href=""
+                                                                       data-ng-click="switchKeepForReward(ingredient)">(consume)</a></span>
 
                             </div>
                         </div>
@@ -114,16 +126,16 @@
                                    typeahead="item.name for item in items | filter:{name: $viewValue} | limitTo:12"
                                    class="form-control">
 
-                            <div class="font-medium">
+                            <div class="font-medium" style="padding-top: 0.5em; padding-left: 0.5em">
                                 <div class="field-data">
-                                    <div data-ng-repeat="enabler in enables">
+                                    <div data-ng-repeat="enabler in reward.enables">
                                         <a>
                                             <i data-ng-click="removePrecursor(enabler)"
                                                class="glyphicon glyphicon-remove-sign small">
                                             </i>
                                         </a>
 
-                                        {{enabler}}
+                                        {{getRewardName(enabler)}}
                                     </div>
                                 </div>
                             </div>

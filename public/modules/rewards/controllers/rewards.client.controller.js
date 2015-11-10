@@ -131,7 +131,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.selectEnabler = function () {
 
-            console.log($scope.selection.enabler + 'xxx');
+
+            console.log($scope.enables);
+            console.log($scope.rewards);
 
             $scope.rewards.forEach(function (enabler) {
                 if (enabler.name === $scope.selection.enabler) {
@@ -252,22 +254,28 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         // Find existing Reward
         $scope.findOne = function () {
 
-
-            console.log('xxxx');
             if ($stateParams.rewardId) {
-                $scope.reward = Rewards.get({
-                    rewardId: $stateParams.rewardId
-                }, function () {
-                    Rewards.query(function (allRewards) {
 
-                        $scope.items = [];
-                        for (var i = 0; i < allRewards.length; i++) {
-                            if (allRewards[i].type === 'Item') {
-                                $scope.items.push(allRewards[i]);
-                            }
+                Rewards.query(function (allRewards) {
+
+                    $scope.rewards = allRewards;
+                    $scope.items = [];
+                    for (var i = 0; i < allRewards.length; i++) {
+                        if (allRewards[i].type === 'Item') {
+                            $scope.items.push(allRewards[i]);
                         }
-                    });
+                    }
+
+                    for (i = 0; i < allRewards.length; i++) {
+                        if (allRewards[i]._id ===  $stateParams.rewardId) {
+                            $scope.reward = allRewards[i];
+                        }
+                    }
+
                 });
+
+
+
             }
 
 

@@ -50,8 +50,8 @@
 
                     </div>
 
-                    <div class="flashcard-section row" >
 
+                    <div class="flashcard-section row">
                         <div class="col-xs-4">
                             <div class="field-label">Type</div>
                             <div class="field-data">
@@ -66,18 +66,16 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-4" data-ng-if="reward.type === 'Item'">
+                        <div class="col-xs-4" data-ng-if="reward.type !== 'Recipe'">
                             <div class="field-label">Price</div>
                             <div class="field-data">
                                 {{reward.price}}
                             </div>
                         </div>
+                    </div>
 
 
-
-
-
-
+                    <div class="flashcard-section row">
                         <div class="col-xs-4" data-ng-if="reward.type === 'Recipe'">
                             <div class="field-label">Ingredients</div>
                             <div class="field-data">
@@ -122,15 +120,15 @@
                             </div>
                         </div>
                     </div>
-                    <div class="flashcard-section row">
+                </div>
+                <div class="flashcard-section row">
 
-                        <div class="col-xs-12">
+                    <div class="col-xs-12">
 
 
-                            <div class="field-label">Description</div>
-                            <div class="field-data">
-                                {{reward.description}}
-                            </div>
+                        <div class="field-label">Description</div>
+                        <div class="field-data">
+                            {{reward.description}}
                         </div>
                     </div>
                 </div>
@@ -234,7 +232,7 @@
                                     <div style="display: inline" data-ng-if="ingredient.keep">
                                         <a href="" data-ng-click="switchKeep(ingredient)">(keep intact)</a>
                                     </div>
-                                    <div style="display: inline"  data-ng-if="!ingredient.keep">
+                                    <div style="display: inline" data-ng-if="!ingredient.keep">
                                         <a href="" data-ng-click="switchKeep(ingredient)">(consume)</a>
                                     </div>
                                 </div>
@@ -294,6 +292,7 @@
                                        typeahead-on-select="selectGoal()"
                                        typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
                                        class="form-control">
+
                                 <div class="font-medium">
                                     <div class="field-data">
                                         <div data-ng-repeat="goal in goals">

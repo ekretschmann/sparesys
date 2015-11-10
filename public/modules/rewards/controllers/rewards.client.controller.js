@@ -192,6 +192,17 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.reward.$update();
         };
 
+        $scope.updateSearch = function () {
+
+
+            Rewards.query({
+                text: $scope.options.searchText
+            }, function (rewards) {
+                $scope.rewards = rewards;
+
+            });
+        };
+
         // Create new Reward
         $scope.newReward = {};
         $scope.newReward.defaulthealthpoints = 1;

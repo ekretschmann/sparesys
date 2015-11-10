@@ -19,7 +19,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selection.enabler = '';
         $scope.selection.goal = '';
 
-        $scope.getRewardName = function(rewardId) {
+        $scope.getRewardName = function (rewardId) {
             for (var i = 0; i < $scope.rewards.length; i++) {
                 if ($scope.rewards[i]._id === rewardId) {
                     return $scope.rewards[i].name;
@@ -129,8 +129,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         };
 
 
-
         $scope.selectEnabler = function () {
+
+            console.log($scope.selection.enabler + 'xxx');
 
             $scope.rewards.forEach(function (enabler) {
                 if (enabler.name === $scope.selection.enabler) {
@@ -236,11 +237,10 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         };
 
 
-
         $scope.find = function () {
-            $scope.rewards = Rewards.query(function() {
+            $scope.rewards = Rewards.query(function () {
                 $scope.items = [];
-                for (var i=0; i<$scope.rewards.length; i++) {
+                for (var i = 0; i < $scope.rewards.length; i++) {
                     if ($scope.rewards[i].type === 'Item') {
                         $scope.items.push($scope.rewards[i]);
                     }
@@ -253,11 +253,20 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.findOne = function () {
 
 
+            console.log('xxxx');
             if ($stateParams.rewardId) {
                 $scope.reward = Rewards.get({
                     rewardId: $stateParams.rewardId
-                }, function (r) {
-                    $scope.rewards = Rewards.query();
+                }, function () {
+                    Rewards.query(function (allRewards) {
+
+                        $scope.items = [];
+                        for (var i = 0; i < allRewards.length; i++) {
+                            if (allRewards[i].type === 'Item') {
+                                $scope.items.push(allRewards[i]);
+                            }
+                        }
+                    });
                 });
             }
 

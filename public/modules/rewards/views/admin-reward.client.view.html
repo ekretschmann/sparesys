@@ -76,12 +76,12 @@
             <div class="flashcard-section">
                 <div class="row rememberators-form-group form-group">
 
-                    <div class="col-xs-6">
+                    <div class="col-xs-6" data-ng-if="reward.type === 'Item'">
                         <div class="field-label">Ingredients</div>
 
                         <input style="width: 100%"
                                type="text"
-                               data-ng-model="selectedIngredient"
+                               data-ng-model="selection.ingredient"
                                typeahead-on-select="selectIngredientForReward()"
                                typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
                                class="form-control">
@@ -103,17 +103,31 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-6">
-                        <!--<div class="field-label">Enables</div>-->
-                        <!--<div class="field-data">-->
-                            <!--<div data-ng-repeat="ingredient in reward.">-->
-                                <!--{{ingredient.amount}} {{ingredient.name}}-->
-                                <!--<span data-ng-if="ingredient.keep">(keep intact)</span>-->
-                                <!--<span data-ng-if="!ingredient.keep">(consume)</span>-->
+                    <div class="col-xs-6" data-ng-if="reward.type === 'Skill'">
+                        <div class="field-label">Enables</div>
+                        <div class="field-data">
 
+                            <input style="width: 100%"
+                                   type="text"
+                                   data-ng-model="selection.enabler"
+                                   typeahead-on-select="selectEnabler()"
+                                   typeahead="item.name for item in items | filter:{name: $viewValue} | limitTo:12"
+                                   class="form-control">
 
-                            <!--</div>-->
-                        <!--</div>-->
+                            <div class="font-medium">
+                                <div class="field-data">
+                                    <div data-ng-repeat="enabler in enables">
+                                        <a>
+                                            <i data-ng-click="removePrecursor(enabler)"
+                                               class="glyphicon glyphicon-remove-sign small">
+                                            </i>
+                                        </a>
+
+                                        {{enabler}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
 
 

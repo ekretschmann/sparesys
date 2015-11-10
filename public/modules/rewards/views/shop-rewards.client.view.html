@@ -24,10 +24,21 @@
 
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">
-            <div class="title">Skills</div>
+            <div class="title">Your Skills</div>
             <div class="flashcard-section">
 
-               <!--{{user}}-->
+               {{authentication.user.inventory}}
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6  ">
+        <div class="virtual-card font-large">
+            <div class="title">Your Items</div>
+            <div class="flashcard-section">
+
+                {{authentication.user.inventory}}
 
             </div>
         </div>

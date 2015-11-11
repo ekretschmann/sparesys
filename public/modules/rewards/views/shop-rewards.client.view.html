@@ -53,7 +53,8 @@
             <div class="flashcard-section">
 
                 <div data-ng-repeat="item in items.forSale track by $index">
-                    {{item.name}}
+                    {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span data-ng-if="item.price > 1">trophies</span>)
+
                 </div>
             </div>
         </div>

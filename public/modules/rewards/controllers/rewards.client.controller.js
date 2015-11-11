@@ -139,14 +139,14 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
             $scope.rewards.forEach(function (reward) {
 
-                if (reward.name === $scope.selectedIngredient) {
+                if (reward.name === $scope.selection.ingredient) {
                     rewardId = reward._id;
                 }
             }, this);
 
             var found = false;
             $scope.ingredients.forEach(function (ingredient) {
-                if (ingredient.name === $scope.selectedIngredient) {
+                if (ingredient.name === $scope.selection.ingredient) {
                     ingredient.amount += 1;
                     found = true;
                 }
@@ -155,13 +155,13 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             if (!found) {
                 $scope.reward.ingredients.push({
                     rewardId: rewardId,
-                    name: $scope.selectedIngredient,
+                    name: $scope.selection.ingredient,
                     amount: 1,
                     keep: false
                 });
                 $scope.reward.$update();
             }
-            $scope.selectedIngredient = '';
+            $scope.selection.ingredient = '';
         };
 
 

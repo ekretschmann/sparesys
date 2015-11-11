@@ -126,7 +126,7 @@
                             <input style="width: 100%"
                                    type="text"
                                    data-ng-model="selection.enabler"
-                                   typeahead-on-select="selectEnabler()"
+                                   typeahead-on-select="selectEnablerForReward()"
                                    typeahead="item.name for item in items | filter:{name: $viewValue} | limitTo:12"
                                    class="form-control">
 
@@ -134,7 +134,7 @@
                                 <div class="field-data">
                                     <div data-ng-repeat="enabler in reward.enables">
                                         <a>
-                                            <i data-ng-click="removePrecursor(enabler)"
+                                            <i data-ng-click="removePrecusorFromReward(enabler)"
                                                class="glyphicon glyphicon-remove-sign small">
                                             </i>
                                         </a>
@@ -152,8 +152,8 @@
 
                             <input style="width: 100%"
                                    type="text"
-                                   data-ng-model="selection.goals"
-                                   typeahead-on-select="selectGoal()"
+                                   data-ng-model="selection.goal"
+                                   typeahead-on-select="selectGoalForReward()"
                                    typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
                                    class="form-control">
 
@@ -161,7 +161,7 @@
                                 <div class="field-data">
                                     <div data-ng-repeat="goal in reward.goals">
                                         <a>
-                                            <i data-ng-click="removeGoal(goal)"
+                                            <i data-ng-click="removeGoalFromReward(goal)"
                                                class="glyphicon glyphicon-remove-sign small">
                                             </i>
                                         </a>

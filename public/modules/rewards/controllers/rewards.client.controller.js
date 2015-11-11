@@ -27,6 +27,14 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             }
         };
 
+        $scope.getRewardId = function (rewardName) {
+            for (var i = 0; i < $scope.rewards.length; i++) {
+                if ($scope.rewards[i].name === rewardName) {
+                    return $scope.rewards[i]._id;
+                }
+            }
+        };
+
         $scope.removeIngredientFromReward = function (ingredient) {
             for (var i = 0; i < $scope.reward.ingredients.length; i++) {
                 if ($scope.reward.ingredients[i].name === ingredient.name) {
@@ -59,6 +67,34 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 }
             }
         };
+
+        $scope.removeGoalFromReward = function (goal) {
+
+            for (var i = 0; i < $scope.reward.goals.length; i++) {
+
+                if ($scope.reward.goals[i] === goal) {
+                    $scope.reward.goals.splice(i, 1);
+                }
+            }
+
+            $scope.reward.$update();
+
+        };
+
+        $scope.removePrecusorFromReward = function (precursor) {
+
+            console.log(precursor);
+            for (var i = 0; i < $scope.reward.enables.length; i++) {
+
+                if ($scope.reward.enables[i] === precursor) {
+                    $scope.reward.enables.splice(i, 1);
+                }
+            }
+
+            $scope.reward.$update();
+
+        };
+
 
         $scope.selectIngredient = function () {
 
@@ -132,9 +168,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selectEnabler = function () {
 
 
-            console.log($scope.enables);
-            console.log($scope.rewards);
-
             $scope.rewards.forEach(function (enabler) {
                 if (enabler.name === $scope.selection.enabler) {
 
@@ -149,7 +182,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.selectGoal = function () {
 
-            console.log($scope.selection.goal);
             $scope.rewards.forEach(function (goal) {
                 if (goal.name === $scope.selection.goal) {
 
@@ -158,9 +190,41 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 }
             });
 
-            console.log($scope.goals);
-
             $scope.selection.goal = '';
+        };
+
+        $scope.selectGoalForReward = function () {
+
+            var found = false;
+            for (var i = 0; i < $scope.reward.goals.length; i++) {
+
+                if ($scope.getRewardName($scope.reward.goals[i]) === $scope.selection.goal) {
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                $scope.reward.goals.push($scope.getRewardId($scope.selection.goal));
+            }
+            $scope.selection.goal = '';
+            $scope.reward.$update();
+        };
+
+        $scope.selectEnablerForReward = function () {
+
+            var found = false;
+            for (var i = 0; i < $scope.reward.enables.length; i++) {
+
+                if ($scope.getRewardName($scope.reward.enables[i]) === $scope.selection.enabler) {
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                $scope.reward.enables.push($scope.getRewardId($scope.selection.enabler));
+            }
+            $scope.selection.enabler = '';
+            $scope.reward.$update();
         };
 
         $scope.areYouSureToDeleteReward = function (reward) {

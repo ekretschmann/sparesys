@@ -83,7 +83,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         $scope.removePrecusorFromReward = function (precursor) {
 
-            console.log(precursor);
             for (var i = 0; i < $scope.reward.enables.length; i++) {
 
                 if ($scope.reward.enables[i] === precursor) {
@@ -145,7 +144,12 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             }, this);
 
             var found = false;
-            $scope.ingredients.forEach(function (ingredient) {
+
+
+
+
+            $scope.reward.ingredients.forEach(function (ingredient) {
+                console.log(ingredient.name + ' '+$scope.selection.ingredient);
                 if (ingredient.name === $scope.selection.ingredient) {
                     ingredient.amount += 1;
                     found = true;
@@ -159,8 +163,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     amount: 1,
                     keep: false
                 });
-                $scope.reward.$update();
+               // ;
             }
+            $scope.reward.$update();
             $scope.selection.ingredient = '';
         };
 

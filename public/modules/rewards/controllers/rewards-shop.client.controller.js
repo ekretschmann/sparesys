@@ -239,14 +239,24 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         //};
         //
         //
+        $scope.items = {};
+        $scope.items.forSale = [];
         $scope.find = function () {
+
+
+
             $scope.rewards = Rewards.query(function () {
-                $scope.items = [];
+                //$scope.items = [];
                 for (var i = 0; i < $scope.rewards.length; i++) {
-                    if ($scope.rewards[i].type === 'Item') {
-                        $scope.items.push($scope.rewards[i]);
+                  //  if ($scope.rewards[i].type === 'Item') {
+                  //      $scope.items.push($scope.rewards[i]);
+                  //  }
+                    if($scope.rewards[i].name === 'Making fire') {
+
+                        $scope.items.forSale.push($scope.rewards[i]);
                     }
                 }
+
             });
 
         };

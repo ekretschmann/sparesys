@@ -22,6 +22,9 @@
         </div>
     </div>
 
+
+
+
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">
             <div class="title">Your Skills</div>
@@ -40,6 +43,18 @@
 
                 {{authentication.user.inventory}}
 
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xs-12 col-md-6  ">
+        <div class="virtual-card font-large">
+            <div class="title">You can buy</div>
+            <div class="flashcard-section">
+
+                <div data-ng-repeat="item in items.forSale track by $index">
+                    {{item.name}}
+                </div>
             </div>
         </div>
     </div>

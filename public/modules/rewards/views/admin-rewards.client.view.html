@@ -56,6 +56,8 @@
                             <div class="field-label">Type</div>
                             <div class="field-data">
                                 {{reward.type}}
+                                <span data-ng-if="reward.basic">(basic)</span>
+                                <span data-ng-if="!reward.basic">(enabled)</span>
                             </div>
                         </div>
 
@@ -94,29 +96,32 @@
 
                             </div>
                         </div>
-                        <div class="col-xs-4" data-ng-if="reward.type === 'Skill'">
-                            <div class="field-label">Enables</div>
-                            <div class="field-data">
-                                <div data-ng-if="reward.enables.length ===0">none</div>
-                                <div data-ng-if="reward.enables.length >0">
-                                    <div data-ng-repeat="enabler in reward.enables">
-                                        <div>{{getRewardName(enabler)}}</div>
-                                    </div>
-                                </div>
 
+                        <div data-ng-if="reward.type === 'Skill'">
+                            <div class="col-xs-4">
+                                <div class="field-label">Enables</div>
+                                <div class="field-data">
+                                    <div data-ng-if="reward.enables.length ===0">none</div>
+                                    <div data-ng-if="reward.enables.length >0">
+                                        <div data-ng-repeat="enabler in reward.enables">
+                                            <div>{{getRewardName(enabler)}}</div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-                        </div>
 
-                        <div class="col-xs-4" data-ng-if="reward.type === 'Skill'">
-                            <div class="field-label">Goals</div>
-                            <div class="field-data">
-                                <div data-ng-if="reward.goals.length ===0">none</div>
-                                <div data-ng-if="reward.goals.length >0">
-                                    <div data-ng-repeat="goal in reward.goals">
-                                        <div>{{getRewardName(goal)}}</div>
+                            <div class="col-xs-4">
+                                <div class="field-label">Goals</div>
+                                <div class="field-data">
+                                    <div data-ng-if="reward.goals.length ===0">none</div>
+                                    <div data-ng-if="reward.goals.length >0">
+                                        <div data-ng-repeat="goal in reward.goals">
+                                            <div>{{getRewardName(goal)}}</div>
+                                        </div>
                                     </div>
-                                </div>
 
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -255,8 +260,23 @@
 
 
                     <div data-ng-if="newReward.type === 'Skill'">
+
+                        <div class="col-xs-8" style="padding-bottom: 1em">
+                            <div class="field-label">Price</div>
+                            <div class="font-medium">
+                                <input type="number"
+                                       data-ng-model="newReward.price"
+                                       class="form-control"
+                                       placeholder="Price">
+
+                                <input type="checkbox" data-ng-model="newReward.basic"> Basic Skill
+                            </div>
+
+                        </div>
+
                         <div class="col-xs-4">
                             <div class="field-label">Enables</div>
+
 
 
                             <input style="width: 100%"

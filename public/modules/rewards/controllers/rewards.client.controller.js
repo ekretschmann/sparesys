@@ -291,11 +291,14 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 ingredients: $scope.ingredients,
                 goals: $scope.goalsIds,
                 enables: $scope.enablesIds,
-                description: $scope.newReward.description
+                description: $scope.newReward.description,
+                price: $scope.newReward.price,
+                basic: $scope.newReward.basic
             });
 
             reward.$save(function (response) {
                 $scope.newReward.name = '';
+                $scope.newReward.price = 1;
                 $scope.newReward.defaulthealthpoints = 1;
                 $scope.newReward.type = 'Item';
                 $scope.newReward.description = '';

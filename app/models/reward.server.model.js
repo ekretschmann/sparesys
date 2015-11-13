@@ -54,6 +54,10 @@ var RewardSchema = new Schema({
     user: {
         type: Schema.ObjectId,
         ref: 'User'
+    },
+    basic: {
+        type: Boolean,
+        default: false
     }
 });
 

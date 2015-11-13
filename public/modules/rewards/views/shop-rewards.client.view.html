@@ -23,6 +23,29 @@
     </div>
 
 
+    <div class="col-xs-12 col-md-6  ">
+        <div class="virtual-card font-large">
+            <div class="title">You have {{authentication.user.trophies}} trophies</div>
+            <div class="flashcard-section">
+
+
+                <div class="field-label" style="padding-bottom: 1em">You can buy</div>
+
+
+                <div data-ng-repeat="item in items.forSale track by $index">
+
+                    <div data-ng-if="authentication.user.trophies >= item.price">
+                    <a href="" data-ng-click="purchase(item)"><i class="glyphicon glyphicon-piggy-bank"></i></a>
+                    {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span data-ng-if="item.price > 1">trophies</span>)
+                    </div>
+                    <div data-ng-if="authentication.user.trophies < item.price" class="text-muted">
+                        <i class="glyphicon glyphicon-piggy-bank"></i>
+                        {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span data-ng-if="item.price > 1">trophies</span>)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
 
     <div class="col-xs-12 col-md-6  ">
@@ -47,18 +70,7 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-6  ">
-        <div class="virtual-card font-large">
-            <div class="title">You can buy</div>
-            <div class="flashcard-section">
 
-                <div data-ng-repeat="item in items.forSale track by $index">
-                    {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span data-ng-if="item.price > 1">trophies</span>)
-
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!--<div class="col-xs-12 col-md-6  " data-ng-if="!rewards || rewards.length === 0">-->
 

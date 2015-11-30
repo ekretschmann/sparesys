@@ -29,6 +29,8 @@
                         <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Item"> Item
                         <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Skill"> Skill
 
+
+
                     </div>
                 </div>
 
@@ -49,7 +51,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-6">
+                <div class="col-xs-3">
                     <div class="field-label">Price</div>
                     <div class="field-data">
                         <!--{{reward.defaulthealthpoints}}-->
@@ -58,6 +60,16 @@
                                data-ng-model="reward.price"
                                class="form-control"
                                 >
+                    </div>
+                </div>
+
+                <div class="col-xs-3">
+                    <div class="field-label">&nbsp;</div>
+                    <div class="field-data">
+                        <input type="checkbox"
+                               data-ng-change="update()"
+                               data-ng-model="reward.basic"
+                                > Always on offer
                     </div>
                 </div>
 

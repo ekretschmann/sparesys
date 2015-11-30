@@ -76,32 +76,34 @@ var UserSchema = new Schema({
 		default: ['user', 'help']
 	},
 	inventory: {
-		type: [{
-			name: {
-				type: String,
-				default: '',
-				required: 'Please fill Reward name',
-				trim: true
-			},
-			rewardId: {
-				type: Schema.ObjectId
-			},
-			type: {
-				type: String,
-				default: '',
-				required: 'Please fill Reward type',
-				trim: true
-			},
-			healthpoints: {
-				type: Number,
-				default: 1
-			},
-			amount: {
-				type: Number,
-				default: 1
-			}
-		}],
-		default: [{name: 'Making Fire', amount: 1}]
+		type: [Schema.Types.ObjectId],
+		default: []
+		//type: [{
+		//	name: {
+		//		type: String,
+		//		default: '',
+		//		required: 'Please fill Reward name',
+		//		trim: true
+		//	},
+		//	rewardId: {
+		//		type: Schema.ObjectId
+		//	},
+		//	type: {
+		//		type: String,
+		//		default: '',
+		//		required: 'Please fill Reward type',
+		//		trim: true
+		//	},
+		//	healthpoints: {
+		//		type: Number,
+		//		default: 1
+		//	},
+		//	amount: {
+		//		type: Number,
+		//		default: 1
+		//	}
+		//}],
+		//default: [{name: 'Making Fire', amount: 1}]
 	},
 	updated: {
 		type: Date

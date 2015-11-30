@@ -323,6 +323,16 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         };
 
+        $scope.findById = function (id) {
+            Rewards.get({
+                rewardId: id
+            }, function (reward) {
+
+                $scope.reward = reward;
+            });
+
+        };
+
         // Find existing Reward
         $scope.findOne = function () {
 

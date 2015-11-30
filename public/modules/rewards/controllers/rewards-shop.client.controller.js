@@ -1,8 +1,9 @@
 'use strict';
 
 // Rewards controller
-angular.module('rewards').controller('RewardsShopController', ['$scope', '$state', '$timeout', '$stateParams', '$location', '$modal', 'Authentication', 'Rewards',
-    function ($scope, $state, $timeout, $stateParams, $location, $modal, Authentication, Rewards) {
+angular.module('rewards').controller('RewardsShopController', ['$scope', '$state', '$timeout', '$stateParams', '$location', '$modal',
+    'Authentication', 'Rewards', 'Users',
+    function ($scope, $state, $timeout, $stateParams, $location, $modal, Authentication, Rewards, Users) {
         $scope.authentication = Authentication;
 
         //$scope.ingredients = [];
@@ -250,11 +251,61 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                     if($scope.rewards[i].basic) {
 
-                        $scope.items.forSale.push($scope.rewards[i]);
+                        if ($scope.authentication.user.inventory.indexOf($scope.rewards[i]._id) === -1) {
+                            $scope.items.forSale.push($scope.rewards[i]);
+                        }
                     }
                 }
 
             });
+
+        };
+
+        $scope.getSkills = function () {
+
+            var skills  = [];
+
+            for(var i=0; i<$scope.rewards.length; i++) {
+                if ($scope.authentication.user.inventory.indexOf($scope.rewards[i]._id) > -1) {
+                    if($scope.rewards[i].type === 'Skill') {
+                        skills.push($scope.rewards[i]);
+                    }
+                }
+            }
+            return skills;
+
+        };
+
+        $scope.getItems = function () {
+
+            var skills  = [];
+
+            for(var i=0; i<$scope.rewards.length; i++) {
+                if ($scope.authentication.user.inventory.indexOf($scope.rewards[i]._id) > -1) {
+                    if($scope.rewards[i].type !== 'Skill') {
+                        skills.push($scope.rewards[i]);
+                    }
+                }
+            }
+            return skills;
+
+        };
+
+
+        $scope.purchase = function(item) {
+            if ($scope.authentication.user.trophies > item.price) {
+               // console.log(item);
+
+                //console.log($scope.authentication.user.inventory);
+                $scope.authentication.user.inventory.push(item._id);
+
+                Users.get({
+                    userId: $scope.authentication.user._id
+                }, function (user) {
+                    user.inventory.push(item._id);
+                    user.$update();
+                });
+            }
 
         };
         //

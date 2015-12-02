@@ -242,9 +242,11 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         //
         $scope.items = {};
         $scope.items.forSale = [];
+        $scope.items.owned = [];
         $scope.find = function () {
 
 
+            console.log('XXXX');
 
             $scope.rewards = Rewards.query(function () {
                 for (var i = 0; i < $scope.rewards.length; i++) {
@@ -256,6 +258,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         }
                     }
                 }
+
+                $scope.findItems();
 
             });
 
@@ -276,18 +280,37 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         };
 
-        $scope.getItems = function () {
+        $scope.findItems = function () {
 
-            var skills  = [];
 
-            for(var i=0; i<$scope.rewards.length; i++) {
-                if ($scope.authentication.user.inventory.indexOf($scope.rewards[i]._id) > -1) {
-                    if($scope.rewards[i].type !== 'Skill') {
-                        skills.push($scope.rewards[i]);
+
+            // find items
+            for(var i=0; i<$scope.authentication.user.inventory.length; i++) {
+                for(var j=0; j<$scope.rewards.length; j++) {
+
+                    console.log('trying '+$scope.rewards[j].name);
+                    if($scope.authentication.user.inventory[i] === $scope.rewards[j]._id) {
+
+                        if($scope.rewards[j].type === 'Skill') {
+
+                            for(var k=0; k<$scope.rewards.length; k++) {
+                                if ($scope.rewards[j].enables.indexOf($scope.rewards[k]._id) !== -1) {
+                                    $scope.items.forSale.push($scope.rewards[k]);
+                                }
+                            }
+                        }
                     }
                 }
             }
-            return skills;
+
+            for(i=0; i<$scope.rewards.length; i++) {
+                if ($scope.authentication.user.inventory.indexOf($scope.rewards[i]._id) > -1) {
+                    if($scope.rewards[i].type !== 'Skill') {
+                        $scope.items.owned.push($scope.rewards[i]);
+                    }
+                }
+            }
+
 
         };
 

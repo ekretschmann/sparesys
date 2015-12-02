@@ -75,7 +75,7 @@
             <div class="title">Your Items</div>
             <div class="flashcard-section">
 
-                <div data-ng-if="getItems().length === 0">
+                <div data-ng-if="items.owned.length === 0">
                     <infobox logo="guru" position="left">
                         <div>
                             You haven't got any items so far. Use your trophies to buy skills to
@@ -85,7 +85,7 @@
 
                 </div>
 
-                <div data-ng-repeat="item in getItems()">
+                <div data-ng-repeat="item in items.owned">
                     {{item.name}}
                 </div>
 

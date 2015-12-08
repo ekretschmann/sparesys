@@ -98,13 +98,50 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             if ($scope.authentication.user.trophies > item.price) {
                 // console.log(item);
 
-                //console.log($scope.authentication.user.inventory);
-                $scope.authentication.user.inventory.push(item._id);
+                console.log($scope.authentication.user.inventory);
+
+                console.log(item);
+
+                var newItem = {
+                    name: item.name,
+                    rewardId: item._id,
+                    type: item.type,
+                    healthpoints: item.healthpoints,
+                    amount: 1
+                };
+
+                //type: [{
+                //    name: {
+                //        type: String,
+                //        default: '',
+                //        required: 'Please fill Reward name',
+                //        trim: true
+                //    },
+                //    rewardId: {
+                //        type: Schema.ObjectId
+                //    },
+                //    type: {
+                //        type: String,
+                //        default: '',
+                //        required: 'Please fill Reward type',
+                //        trim: true
+                //    },
+                //    healthpoints: {
+                //        type: Number,
+                //        default: 1
+                //    },
+                //    amount: {
+                //        type: Number,
+                //        default: 1
+                //    }
+                //}]
+
+                //$scope.authentication.user.inventory.push(newItem);
 
                 Users.get({
                     userId: $scope.authentication.user._id
                 }, function (user) {
-                    user.inventory.push(item._id);
+                    user.inventory.push(newItem);
                     user.trophies -= item.price;
 
                     user.$update(function (updatedUser) {

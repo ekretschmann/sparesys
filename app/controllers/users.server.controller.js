@@ -378,6 +378,7 @@ exports.update = function (req, res) {
             theUser.inventory = [];
         }
 
+
         theUser.save(function (err) {
 
             if (err) {

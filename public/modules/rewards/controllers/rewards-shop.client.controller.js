@@ -50,9 +50,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.findItems = function () {
 
-
-            console.log('finding items');
-
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 var item = $scope.authentication.user.inventory[i];
                 if (item.type !== 'Skill') {
@@ -70,8 +67,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     if ($scope.authentication.user.inventory[i].rewardId === $scope.rewards[j]._id) {
 
                         if ($scope.rewards[j].type === 'Skill') {
-
-                            console.log($scope.rewards[j]);
                             for (var k = 0; k < $scope.rewards.length; k++) {
                                 if ($scope.rewards[j].enables.indexOf($scope.rewards[k]._id) !== -1) {
                                     $scope.items.forSale.push($scope.rewards[k]);
@@ -100,9 +95,34 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             if ($scope.authentication.user.trophies > item.price) {
                 // console.log(item);
 
-                console.log($scope.authentication.user.inventory);
 
-                console.log(item);
+                var found = false;
+                for (var i=0; i<$scope.authentication.user.inventory.length; i++) {
+                    if ($scope.authentication.user.inventory[i].name === item.name) {
+                        $scope.authentication.user.inventory[i].amount++;
+                        found = true;
+                        var index = i;
+                        Users.get({
+                            userId: $scope.authentication.user._id
+                        }, function (user) {
+
+                            //console.log(index);
+                            //console.log(user.inventory[index]);
+                            user.inventory[index].amount++;
+
+                            user.trophies -= item.price;
+
+                            user.$update(function (updatedUser) {
+                                $scope.authentication.user = updatedUser;
+                                $state.go($state.$current, null, {reload: true});
+                            });
+                        });
+                    }
+                }
+
+                if (found) {
+                    return;
+                }
 
                 var newItem = {
                     name: item.name,

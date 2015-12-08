@@ -36,6 +36,14 @@ angular.module('users').controller('UsersController', ['$http', '$scope', '$stat
 
         };
 
+        $scope.clearInventory = function (otherUser) {
+
+            otherUser.inventory = [];
+            otherUser.$update();
+
+
+        };
+
 //        // Update existing Course
 //        $scope.update = function() {
 //            var course = $scope.course;

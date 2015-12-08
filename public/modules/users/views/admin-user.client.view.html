@@ -232,8 +232,52 @@
         </div>
 
     </div>
-    </div>
 
+    <div class="col-xs-12 col-md-6  ">
+        <div class="admin-card font-large">
+            <div class="title">Rewards</div>
+
+            <div class="flashcard-section">
+                <div class="field-label">
+                    Trophies
+                </div>
+                <div class="field-data">
+                    <input type="text"
+                           data-ng-model="otherUser.trophies"
+                           data-ng-blur="update()"
+                           class="form-control"
+                           placeholder="Trophies">
+                </div>
+            </div>
+
+
+            <div class="flashcard-section">
+
+                <div class="field-label">
+                    Inventory
+                </div>
+
+                <div data-ng-if="otherUser.inventory.length === 0">
+                    no inventory
+                </div>
+
+                <div data-ng-repeat="item in otherUser.inventory">
+
+                    <div class="col-xs-6">
+                        {{item}}
+                    </div>
+                </div>
+            </div>
+
+            <div class="flashcard-section" data-ng-if="otherUser.inventory.length > 0">
+
+                <button class="btn btn-rememberators" data-ng-click="clearInventory(otherUser)">Clear</button>
+
+
+
+            </div>
+        </div>
+    </div>
 
     <div class="col-xs-12 col-md-6  ">
         <div class="admin-card font-large">
@@ -259,24 +303,24 @@
 
 
             <!--<div class="flashcard-section ">-->
-                    <!--<div class="field-label">Your password</div>-->
-                    <!--<div class="field-data">-->
-                        <!--<input type="text"-->
-                               <!--data-ng-model="passwordDetails.admin"-->
-                               <!--class="form-control"-->
-                               <!--placeholder="New password">-->
-                    <!--</div>-->
+            <!--<div class="field-label">Your password</div>-->
+            <!--<div class="field-data">-->
+            <!--<input type="text"-->
+            <!--data-ng-model="passwordDetails.admin"-->
+            <!--class="form-control"-->
+            <!--placeholder="New password">-->
+            <!--</div>-->
             <!--</div>-->
 
             <div class="flashcard-section">
 
-                    <div class="field-label">New user password</div>
-                    <div class="field-data">
-                        <input type="text"
-                               data-ng-model="passwordDetails.password"
-                               class="form-control"
-                               placeholder="New password">
-                    </div>
+                <div class="field-label">New user password</div>
+                <div class="field-data">
+                    <input type="text"
+                           data-ng-model="passwordDetails.password"
+                           class="form-control"
+                           placeholder="New password">
+                </div>
 
 
             </div>

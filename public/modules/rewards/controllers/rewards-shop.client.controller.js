@@ -11,8 +11,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.items.forSale = [];
         $scope.items.owned = [];
         $scope.skills.owned = [];
+        $scope.skills.forSale = [];
         $scope.recipies = {};
         $scope.recipies.forSale = [];
+
         $scope.find = function () {
 
 
@@ -21,7 +23,19 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                     if ($scope.rewards[i].basic) {
 
-                        if ($scope.authentication.user.inventory.indexOf($scope.rewards[i]._id) === -1) {
+                        var found = false;
+                        for( var j=0; j<$scope.authentication.user.inventory.length; j++) {
+                            if ($scope.authentication.user.inventory[j].rewardId === $scope.rewards[i]._id) {
+                                found = true;
+                            }
+                        }
+
+
+                        if ($scope.rewards[i].type === 'Skill') {
+                            if (!found) {
+                                $scope.skills.forSale.push($scope.rewards[i]);
+                            }
+                        } else {
                             $scope.items.forSale.push($scope.rewards[i]);
                         }
                     }
@@ -61,21 +75,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             }
 
             // find items
-            for (i = 0; i < $scope.authentication.user.inventory.length; i++) {
-                for (var j = 0; j < $scope.rewards.length; j++) {
-
-                    if ($scope.authentication.user.inventory[i].rewardId === $scope.rewards[j]._id) {
-
-                        if ($scope.rewards[j].type === 'Skill') {
-                            for (var k = 0; k < $scope.rewards.length; k++) {
-                                if ($scope.rewards[j].enables.indexOf($scope.rewards[k]._id) !== -1) {
-                                    $scope.items.forSale.push($scope.rewards[k]);
-                                }
-                            }
-                        }
-                    }
-                }
-            }
+            $scope.findForSaleItems();
 
 
             //for (i = 0; i < $scope.rewards.length; i++) {
@@ -90,37 +90,55 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         };
 
+        $scope.findForSaleItems = function () {
+            for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
+                for (var j = 0; j < $scope.rewards.length; j++) {
+
+                    if ($scope.authentication.user.inventory[i].rewardId === $scope.rewards[j]._id) {
+
+                        if ($scope.rewards[j].type === 'Skill') {
+                            for (var k = 0; k < $scope.rewards.length; k++) {
+                                if ($scope.rewards[j].enables.indexOf($scope.rewards[k]._id) !== -1) {
+                                    $scope.items.forSale.push($scope.rewards[k]);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        };
+
 
         $scope.purchase = function (item) {
             if ($scope.authentication.user.trophies > item.price) {
-                // console.log(item);
 
 
                 var found = false;
-                for (var i=0; i<$scope.authentication.user.inventory.length; i++) {
+                for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                     if ($scope.authentication.user.inventory[i].name === item.name) {
-                        $scope.authentication.user.inventory[i].amount++;
                         found = true;
                         var index = i;
-                        Users.get({
-                            userId: $scope.authentication.user._id
-                        }, function (user) {
 
-                            //console.log(index);
-                            //console.log(user.inventory[index]);
-                            user.inventory[index].amount++;
-
-                            user.trophies -= item.price;
-
-                            user.$update(function (updatedUser) {
-                                $scope.authentication.user = updatedUser;
-                                $state.go($state.$current, null, {reload: true});
-                            });
-                        });
                     }
                 }
 
                 if (found) {
+                    Users.get({
+                        userId: $scope.authentication.user._id
+                    }, function (user) {
+
+                        //console.log(index);
+                        //console.log(user.inventory[index]);
+                        user.inventory[index].amount++;
+                        user.trophies -= item.price;
+
+                        user.$update(function (updatedUser) {
+                            $scope.authentication.user.inventory[index].amount++;
+                            $scope.authentication.user.trophies -= item.price;
+
+
+                        });
+                    });
                     return;
                 }
 
@@ -139,9 +157,25 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     user.inventory.push(newItem);
                     user.trophies -= item.price;
 
+
                     user.$update(function (updatedUser) {
-                        $scope.authentication.user = updatedUser;
-                        $state.go($state.$current, null, {reload: true});
+                        $scope.authentication.user.inventory.push(newItem);
+                        $scope.authentication.user.trophies -= item.price;
+
+                        if (newItem.type !== 'Skill') {
+                            $scope.items.owned.push(item);
+                        }
+                        if (newItem.type === 'Skill') {
+                            $scope.skills.owned.push(item);
+
+                            for (var i=0; i<$scope.skills.forSale.length; i++) {
+                                if (item._id === $scope.skills.forSale[i]._id) {
+                                    $scope.skills.forSale.splice(i,1);
+                                }
+                            }
+                        }
+                        $scope.findForSaleItems();
+                        //  $state.go($state.$current, null, {reload: true});
                     });
                 });
             }

@@ -78,6 +78,20 @@
                 <div class="field-label" style="padding-bottom: 1em">You can buy</div>
 
 
+                <div data-ng-repeat="skill in skills.forSale track by $index">
+
+                    <div data-ng-if="authentication.user.trophies >= skill.price">
+                        <a href="" data-ng-click="purchase(skill)"><i class="glyphicon glyphicon-piggy-bank"></i></a>
+                        New skill: {{skill.name}} ({{skill.price}} <span data-ng-if="skill.price === 1">trophy</span><span data-ng-if="skill.price > 1">trophies</span>)
+                    </div>
+                    <div data-ng-if="authentication.user.trophies < skill.price" class="text-muted">
+                        <i class="glyphicon glyphicon-piggy-bank"></i>
+                        New skill: {{skill.name}} ({{skill.price}} <span data-ng-if="skill.price === 1">trophy</span><span data-ng-if="skill.price > 1">trophies</span>)
+                    </div>
+                </div>
+
+
+
                 <div data-ng-repeat="item in items.forSale track by $index">
 
                     <div data-ng-if="authentication.user.trophies >= item.price">

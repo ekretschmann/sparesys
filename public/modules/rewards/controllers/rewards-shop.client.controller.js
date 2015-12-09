@@ -91,6 +91,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
         $scope.findForSaleItems = function () {
+            $scope.items.forSale = [];
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 for (var j = 0; j < $scope.rewards.length; j++) {
 
@@ -99,7 +100,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         if ($scope.rewards[j].type === 'Skill') {
                             for (var k = 0; k < $scope.rewards.length; k++) {
                                 if ($scope.rewards[j].enables.indexOf($scope.rewards[k]._id) !== -1) {
+
+
+
                                     $scope.items.forSale.push($scope.rewards[k]);
+
+
                                 }
                             }
                         }
@@ -163,9 +169,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         $scope.authentication.user.trophies -= item.price;
 
                         if (newItem.type !== 'Skill') {
-                            $scope.items.owned.push(item);
+                            $scope.items.owned.push(newItem);
                         }
                         if (newItem.type === 'Skill') {
+
                             $scope.skills.owned.push(item);
 
                             for (var i=0; i<$scope.skills.forSale.length; i++) {

@@ -24,49 +24,79 @@
 
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">
-            <div class="title">Your Skills</div>
-            <div class="flashcard-section" >
+            <div class="title">Your Inventory</div>
+            <div class="flashcard-section col-md-4" >
 
-                <div data-ng-if="skills.owned.length === 0">
-                    <infobox logo="girl" position="left">
-                        <div>
-                            You haven't got any skills so far. Use your trophies to buy skills to
-                            unlock items.
-                        </div>
-                    </infobox>
+                <div class="field-label" >Skills</div>
+
+
+                <div data-ng-if="skills.owned.length === 0" class="field-data">
+                    none
                 </div>
 
-                <div data-ng-repeat="skill in skills.owned">
+                <div data-ng-repeat="skill in skills.owned" class="field-data">
                     {{skill.name}}
                 </div>
 
             </div>
-        </div>
-    </div>
 
-    <div class="col-xs-12 col-md-6  ">
-        <div class="virtual-card font-large">
-            <div class="title">Your Items</div>
-            <div class="flashcard-section">
+            <div class="flashcard-section col-md-4" >
 
-                <div data-ng-if="items.owned.length === 0">
-                    <infobox logo="guru" position="left">
-                        <div>
-                            You haven't got any items so far. Use your trophies to buy skills to
-                            unlock items.
-                        </div>
-                    </infobox>
+                <div class="field-label" >Items</div>
 
+
+                <div data-ng-if="items.owned.length === 0" class="field-data">
+                    none
                 </div>
 
-                <div data-ng-repeat="item in items.owned">
-                    <!--{{authentication.user.inventory}}-->
+
+                <div data-ng-repeat="item in items.owned" ng-if="$even" class="field-data">
+                    {{item.amount}} {{item.name}}
+                </div>
+
+            </div>
+
+            <div class="flashcard-section col-md-4" >
+
+                <div class="field-label" >&nbsp;</div>
+
+
+                <div data-ng-if="items.owned.length === 0" class="field-data">
+                    none
+                </div>
+
+
+                <div data-ng-repeat="item in items.owned" ng-if="$odd" class="field-data">
                     {{item.amount}} {{item.name}}
                 </div>
 
             </div>
         </div>
     </div>
+
+    <!--<div class="col-xs-12 col-md-6  ">-->
+        <!--<div class="virtual-card font-large">-->
+            <!--<div class="title">Your Items</div>-->
+            <!--<div class="flashcard-section">-->
+
+                <!--<div data-ng-if="items.owned.length === 0">-->
+                    <!--<infobox logo="guru" position="left">-->
+                        <!--<div>-->
+                            <!--You haven't got any items so far. Use your trophies to buy skills to-->
+                            <!--unlock items.-->
+                        <!--</div>-->
+                    <!--</infobox>-->
+
+                <!--</div>-->
+
+                <!--<div data-ng-repeat="item in items.owned">-->
+                    <!--&lt;!&ndash;{{authentication.user.inventory}}&ndash;&gt;-->
+                    <!--{{item.amount}} {{item.name}}-->
+                <!--</div>-->
+
+            <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
 
     <div class="col-xs-12 col-md-6  ">
@@ -78,7 +108,7 @@
                 <div class="field-label" style="padding-bottom: 1em">You can buy</div>
 
 
-                <div data-ng-repeat="skill in skills.forSale track by $index">
+                <div data-ng-repeat="skill in skills.forSale track by $index" class="field-data">
 
                     <div data-ng-if="authentication.user.trophies >= skill.price">
                         <a href="" data-ng-click="purchase(skill)"><i class="glyphicon glyphicon-piggy-bank"></i></a>
@@ -92,7 +122,7 @@
 
 
 
-                <div data-ng-repeat="item in items.forSale track by $index">
+                <div data-ng-repeat="item in items.forSale track by $index" class="field-data">
 
                     <div data-ng-if="authentication.user.trophies >= item.price">
                     <a href="" data-ng-click="purchase(item)"><i class="glyphicon glyphicon-piggy-bank"></i></a>

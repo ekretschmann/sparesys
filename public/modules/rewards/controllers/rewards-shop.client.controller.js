@@ -78,14 +78,29 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             $scope.findForSaleItems();
 
 
-            //for (i = 0; i < $scope.rewards.length; i++) {
-            //    if ($scope.rewards[i].type === 'Recipe') {
-            //        for (j=0; j<$scope.rewards[i].ingredients.length; j++) {
-            //
-            //        }
-            //    }
-            //
-            //}
+            for (i = 0; i < $scope.rewards.length; i++) {
+                if ($scope.rewards[i].type === 'Recipe') {
+
+                    var found = false;
+                    for (var j=0; j<$scope.rewards[i].ingredients.length; j++) {
+                       // var ingredient = $scope.rewards[i].ingredients[j];
+
+                       // console.log(ingredient);
+                        for (var k = 0; k < $scope.authentication.user.inventory.length; k++) {
+                         //   console.log('  '+$scope.authentication.user.inventory[k]);
+                            if ($scope.authentication.user.inventory[k].rewardId === $scope.rewards[i].ingredients[j].rewardId) {
+                                if ($scope.rewards[i].ingredients[j].amount <= $scope.authentication.user.inventory[k].amount) {
+                                    found = true;
+                                }
+                            }
+                        }
+                    }
+                    if (found) {
+                        $scope.recipies.forSale.push($scope.rewards[i]);
+                    }
+                }
+
+            }
 
 
         };

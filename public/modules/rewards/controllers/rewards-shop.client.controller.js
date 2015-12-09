@@ -128,6 +128,21 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
 
+        $scope.craft = function (item) {
+
+            for(var i=0; i< item.ingredients.length; i++) {
+                var ingredient = item.ingredients[i];
+                for (var j=0; j<$scope.authentication.user.inventory.length; j++) {
+                    var inventoryItem = $scope.authentication.user.inventory[j];
+                    if (inventoryItem.rewardId === ingredient.rewardId) {
+                        inventoryItem.amount -= ingredient.amount;
+                    }
+                }
+            }
+
+
+        };
+
         $scope.purchase = function (item) {
             if ($scope.authentication.user.trophies > item.price) {
 

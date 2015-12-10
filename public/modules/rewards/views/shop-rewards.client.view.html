@@ -25,7 +25,7 @@
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">
             <div class="title">Your Inventory</div>
-            <div class="flashcard-section col-md-4" >
+            <div class="flashcard-section col-md-4" style="padding-left: 0">
 
                 <div class="field-label" >Skills</div>
 
@@ -56,7 +56,7 @@
 
             </div>
 
-            <div class="flashcard-section col-md-4" >
+            <div class="flashcard-section col-md-4" style="padding-right:0">
 
                 <div class="field-label" >&nbsp;</div>
 
@@ -142,15 +142,11 @@
             <!--<div class="title">You can build</div>-->
             <div class="flashcard-section"   >
 
-                <div class="field-label" data-ng-if="recipies.forSale.length > 0" style="padding-bottom: 1em">You have enough items to build:</div>
+                <div class="field-label"  style="padding-bottom: 1em">You can build:</div>
 
 
-                <div data-ng-if="recipies.forSale.length === 0">
-                    <infobox logo="girl" position="left">
-                        <div>
-                            You haven't got enough basic items to craft new items.
-                        </div>
-                    </infobox>
+                <div data-ng-if="recipies.forSale.length === 0" class="field-data">
+                    nothing
                 </div>
 
                 <div data-ng-repeat="recipe in recipies.forSale" >

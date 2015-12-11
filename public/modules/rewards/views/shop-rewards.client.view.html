@@ -187,11 +187,35 @@
     <div data-ng-repeat="reward in searchResult">
         <div class="col-xs-6 dashboard-col">
             <div class="virtual-card font-large">
-                <div>
-                    <div class="title">
-                        {{reward.name}}
+                <div class="title">
+                    {{reward.name}}
+                </div>
+
+                <div class="flashcard-section">
+                    <div class="field-label">
+                        {{reward.type}}
+                    </div>
+                    <div class="field-data">
+                        <div data-ng-if="reward.description && reward.description.length>0">{{reward.description}}</div>
+                        <div data-ng-if="!reward.description || reward.description.length===0">No description available</div>
                     </div>
                 </div>
+
+                <div class="flashcard-section" data-ng-if="reward.ingredients.length>0">
+                    <div class="field-label">Ingredients</div>
+                    <div data-ng-repeat="ingredient in reward.ingredients" class="field-data">
+                        {{ingredient.name}}
+                    </div>
+
+                </div>
+                <div class="flashcard-section" data-ng-if="reward.enables.length>0">
+                    <div class="field-label">Enables</div>
+
+                    {{reward.enables}}
+                    <div data-ng-repeat="enabled in reward.enables" class="field-data">
+                        {{enabled.name}}
+                    </div>
+                    </div>
             </div>
         </div>
     </div>

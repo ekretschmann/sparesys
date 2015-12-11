@@ -15,6 +15,20 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.recipies = {};
         $scope.recipies.forSale = [];
 
+        $scope.searchResult = [];
+
+
+        $scope.updateSearch = function () {
+
+
+            Rewards.query({
+                text: $scope.options.searchText
+            }, function (rewards) {
+                $scope.searchResult = rewards;
+
+            });
+        };
+
         $scope.find = function () {
 
 

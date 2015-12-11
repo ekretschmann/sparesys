@@ -102,15 +102,15 @@ exports.delete = function (req, res) {
  */
 exports.list = function (req, res) {
 
-    if (req.query && req.query.text) {
+    if (req.query && req.query.text !== undefined) {
         var search = req.query.text.split(' ');
-        Reward.find({'name': {$regex: search}}).limit(25).exec(function (err, users) {
+        Reward.find({'name': {$regex: new RegExp(search, 'i')}}).populate('enables').populate('goals').limit(25).exec(function (err, rewards) {
             if (err) {
                 return res.send(400, {
                     message: getErrorMessage(err)
                 });
             } else {
-                res.jsonp(users);
+                res.jsonp(rewards);
             }
         });
     } else {

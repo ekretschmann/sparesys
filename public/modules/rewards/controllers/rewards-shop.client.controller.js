@@ -26,6 +26,14 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             }, function (rewards) {
                 $scope.searchResult = rewards;
 
+                // enriching data
+                //for (var i = 0; i<$scope.searchResult.length; i++) {
+                //    var result = $scope.searchResult[i];
+                //    for (var j=0; j<results.enables.length; j++) {
+                //
+                //    }
+                //}
+
             });
         };
 

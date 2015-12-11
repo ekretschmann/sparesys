@@ -35,14 +35,16 @@ var RewardSchema = new Schema({
         type: Number,
         default: 1
     },
-    enables: [{
-        type: Schema.ObjectId,
-        default: []
-    }],
-    goals: [{
-        type: Schema.ObjectId,
-        default: []
-    }],
+    enables: {
+        type: [Schema.Types.ObjectId],
+        default: [],
+        ref: 'Reward'
+    },
+    goals: {
+        type: [Schema.Types.ObjectId],
+        default: [],
+        ref: 'Reward'
+    },
     ingredients: {
         type: [],
         default: []

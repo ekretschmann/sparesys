@@ -197,7 +197,9 @@
                     </div>
                     <div class="field-data">
                         <div data-ng-if="reward.description && reward.description.length>0">{{reward.description}}</div>
-                        <div data-ng-if="!reward.description || reward.description.length===0">No description available</div>
+                        <div data-ng-if="!reward.description || reward.description.length===0">No description
+                            available
+                        </div>
                     </div>
                 </div>
 
@@ -208,14 +210,23 @@
                     </div>
 
                 </div>
-                <div class="flashcard-section" data-ng-if="reward.enables.length>0">
+                <div class="flashcard-section col-xs-6" style="padding-left: 0; padding-right: 0" data-ng-if="reward.enables.length>0">
                     <div class="field-label">Enables</div>
 
-                    {{reward.enables}}
+
                     <div data-ng-repeat="enabled in reward.enables" class="field-data">
                         {{enabled.name}}
                     </div>
+                </div>
+
+                <div class="flashcard-section col-xs-6" style="padding-left: 0; padding-right: 0" data-ng-if="reward.goals.length>0">
+                    <div class="field-label">Goals</div>
+
+
+                    <div data-ng-repeat="goal in reward.goals" class="field-data">
+                        {{goal.name}}
                     </div>
+                </div>
             </div>
         </div>
     </div>

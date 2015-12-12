@@ -45,10 +45,33 @@ var RewardSchema = new Schema({
         default: [],
         ref: 'Reward'
     },
+//{"keep":false,"amount":1,"name":"Soil","rewardId":"5639bb18486fca0000104e84"},
     ingredients: {
-        type: [],
-        default: []
+
+        type: [{
+            name: {
+                type: String,
+                default: '',
+                trim: true
+            },
+            rewardId: {
+                type: Schema.ObjectId
+            },
+            keep: {
+                type: Boolean,
+                default: false,
+            },
+            amount: {
+                type: Number,
+                default: 1
+            }
+        }]
+        //default: [{name: 'Making Fire', amount: 1}]
     },
+    //ingredients: {
+    //    type: [],
+    //    default: []
+    //},
     created: {
         type: Date,
         default: Date.now

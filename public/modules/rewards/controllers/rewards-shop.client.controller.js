@@ -17,6 +17,14 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.searchResult = [];
 
+        $scope.hasIngredients = [];
+
+       // $scope.hasIngredients['Water'] = 2;
+
+        //$scope.hasIngredients = function(reward) {
+        //
+        //    return false;
+        //};
 
         $scope.updateSearch = function () {
 
@@ -37,7 +45,14 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             });
         };
 
+        $scope.updateIngredientArray = function() {
+            for( var i=0; i<$scope.authentication.user.inventory.length; i++) {
+                $scope.hasIngredients[$scope.authentication.user.inventory[i].name] = $scope.authentication.user.inventory[i].amount;
+            }
+        };
+
         $scope.find = function () {
+
 
 
             $scope.rewards = Rewards.query(function () {
@@ -125,6 +140,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             }
 
+            $scope.updateIngredientArray();
+
 
         };
 
@@ -149,6 +166,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
         $scope.craft = function (item) {
+
+
 
             for(var i=0; i< item.ingredients.length; i++) {
                 var ingredient = item.ingredients[i];

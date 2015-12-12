@@ -19,6 +19,40 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selection.enabler = '';
         $scope.selection.goal = '';
 
+        $scope.fixIngredients = function () {
+            for (var i = 0; i < $scope.rewards.length; i++) {
+                var r = $scope.rewards[i];
+                if (r.type === 'Recipe') {
+
+                    //r.ingredients =[{"0":{"amount":1,"name":"Tin","rewardId":"55632ad89affbc030006f6ad"},
+                    //    "1":{"amount":1,"name":"Copper","rewardId":"55632aab9affbc030006f6ac"},
+                    //    "2":{"amount":1,"name":"Coal","rewardId":"556329199affbc030006f6a7"},
+                    //    "3":{"amount":1,"name":"Furnace","rewardId":"55632a539affbc030006f6ab"},
+                    //    "4":{"amount":1,"name":"Fire","rewardId":"5562c8344d90050300a21ed9"},"amount":1,"keep":false,"name":""}]
+
+                    var keys = Object.keys(r.ingredients[0]);
+
+                    var newIng = [];
+                    for (var j = 0; j < keys.length-3; j++) {
+                        var ing = r.ingredients[0][keys[j]];
+                      //  console.log(ing);
+                        newIng.push({
+                            name: ing.name,
+                            rewardId: ing.rewardId,
+                            keep: false,
+                            amount: ing.amount
+                        });
+                    }
+                    r.ingredients = newIng;
+                    console.log(r.name);
+                    for (j = 0; j < r.ingredients.length; j++) {
+                        console.log(r.ingredients[j]);
+                    }
+                    console.log();
+                }
+            }
+        };
+
         $scope.getRewardName = function (rewardId) {
             for (var i = 0; i < $scope.rewards.length; i++) {
                 if ($scope.rewards[i]._id === rewardId) {
@@ -146,10 +180,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             var found = false;
 
 
-
-
             $scope.reward.ingredients.forEach(function (ingredient) {
-                console.log(ingredient.name + ' '+$scope.selection.ingredient);
+                console.log(ingredient.name + ' ' + $scope.selection.ingredient);
                 if (ingredient.name === $scope.selection.ingredient) {
                     ingredient.amount += 1;
                     found = true;
@@ -163,7 +195,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     amount: 1,
                     keep: false
                 });
-               // ;
+                // ;
             }
             $scope.reward.$update();
             $scope.selection.ingredient = '';
@@ -349,13 +381,12 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     }
 
                     for (i = 0; i < allRewards.length; i++) {
-                        if (allRewards[i]._id ===  $stateParams.rewardId) {
+                        if (allRewards[i]._id === $stateParams.rewardId) {
                             $scope.reward = allRewards[i];
                         }
                     }
 
                 });
-
 
 
             }

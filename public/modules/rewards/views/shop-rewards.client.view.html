@@ -203,16 +203,16 @@
                     </div>
                 </div>
 
-                <div class="flashcard-section" data-ng-if="reward.ingredients.length>0">
+                <div class="flashcard-section" data-ng-if="reward.type ==='Recipe'">
                     <div class="field-label">Ingredients</div>
                     <div data-ng-repeat="ingredient in reward.ingredients" class="field-data">
 
-                        <div data-ng-if="hasIngredients[ingredient.name] >= ingredient.amount" class="hasIngredient">
-                            {{ingredient.amount}} {{ingredient.name}}
+                        <div data-ng-if="hasIngredients[ingredient.name] >= ingredient.amount" >
+                             <a class="hasIngredient" href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}} {{ingredient.name}}</a>
                         </div>
 
-                        <div data-ng-if="!(hasIngredients[ingredient.name] >= ingredient.amount)" class="lacksIngredient">
-                            {{ingredient.amount}} {{ingredient.name}}
+                        <div data-ng-if="!(hasIngredients[ingredient.name] >= ingredient.amount)" >
+                            <a class="lacksIngredient" href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}} {{ingredient.name}}</a>
                         </div>
                     </div>
 

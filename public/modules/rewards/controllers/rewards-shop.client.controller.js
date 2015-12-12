@@ -26,6 +26,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         //    return false;
         //};
 
+        $scope.search = function(text) {
+            $scope.options.searchText = text;
+            $scope.updateSearch();
+
+        };
+
         $scope.updateSearch = function () {
 
 

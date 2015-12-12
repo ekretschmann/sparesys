@@ -103,7 +103,8 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
 
     if (req.query && req.query.text !== undefined) {
-        var search = req.query.text.split(' ');
+        //var search = req.query.text.split(' ');
+        var search = req.query.text;
         Reward.find({'name': {$regex: new RegExp(search, 'i')}}).populate('enables').populate('goals').limit(25).exec(function (err, rewards) {
             if (err) {
                 return res.send(400, {

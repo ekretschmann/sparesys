@@ -44,6 +44,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                         });
                     }
                     r.ingredients = newIng;
+                    r.$update();
                     console.log(r.name);
                     for (j = 0; j < r.ingredients.length; j++) {
                         console.log(r.ingredients[j]);

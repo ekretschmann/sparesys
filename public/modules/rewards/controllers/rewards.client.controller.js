@@ -33,7 +33,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     var keys = Object.keys(r.ingredients[0]);
 
                     var newIng = [];
-                    for (var j = 0; j < keys.length-3; j++) {
+                    for (var j = 0; j < keys.length-4; j++) {
                         var ing = r.ingredients[0][keys[j]];
                       //  console.log(ing);
                         newIng.push({

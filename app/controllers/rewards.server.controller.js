@@ -67,9 +67,36 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
     var reward = req.reward;
 
-    reward = _.extend(reward, req.body);
+    var r = exports.rewardByID(reward._id);
+
+    Reward.findById(id).populate('user', 'displayName').exec(function (err, reward) {
+        if (err) return next(err);
+        if (!reward) return next(new Error('Failed to load Reward ' + id));
+        req.reward = reward;
+        next();
+    });
+
+    //console.log(reward.enables);
+    //console.log(reward.goals);
+    //reward = _.extend(reward, req.body);
+    //
+    //console.log(reward.enables);
+    //console.log(reward.goals);
+    //
+    //var enables = [];
+    //var goals = [];
+    //for (var i=0; i<reward.enables.length; i++) {
+    //    enables.push(reward.enables[i]);
+    //}
+    //for (i=0; i<reward.goals.length; i++) {
+    //    goals.push(reward.goals[i]);
+    //}
+    //
+    //reward.enables = enables;
+    //reward.goals = goals;
 
     reward.save(function (err) {
+        console.log(err);
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)

@@ -25,23 +25,51 @@
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">
             <div class="title">Your Inventory</div>
-            <div class="flashcard-section col-md-4" style="padding-left: 0">
+            <div class="col-md-4">
+                <div class="flashcard-section" style="padding-left: 0">
 
-                <div class="field-label">Skills</div>
+                    <div class="field-label">Skills</div>
 
 
-                <div data-ng-if="skills.owned.length === 0" class="field-data">
-                    none
-                </div>
-
-                <div data-ng-repeat="skill in skills.owned" class="field-data">
-                    {{skill.name}}
-
-                    <div>
-                        {{skill.goals}} xx
+                    <div data-ng-if="skills.owned.length === 0" class="field-data">
+                        none
                     </div>
-                </div>
 
+                    <div data-ng-repeat="skill in skills.owned" class="field-data">
+                        {{skill.name}}
+
+                        <!--<div data-ng-repeat="goal in skill.goals">-->
+                        <!--{{goal.name}}-->
+                        <!--</div>-->
+                    </div>
+
+
+                </div>
+                <div class="flashcard-section" style="padding-top: 1em">
+
+                    <div class="field-label">Goals</div>
+
+                    <div data-ng-if="goals.length === 0" class="field-data">
+                        none
+                    </div>
+
+                    <div data-ng-repeat="goal in goals.owned" class="field-data hasIngredient">
+                        {{goal.name}}
+
+                        <!--<div data-ng-repeat="goal in skill.goals">-->
+                        <!--{{goal.name}}-->
+                        <!--</div>-->
+                    </div>
+
+                    <div data-ng-repeat="goal in goals.challenge" class="field-data lacksIngredient">
+                        {{goal.name}}
+
+                        <!--<div data-ng-repeat="goal in skill.goals">-->
+                        <!--{{goal.name}}-->
+                        <!--</div>-->
+                    </div>
+
+                </div>
             </div>
 
             <div class="flashcard-section col-md-4">
@@ -213,17 +241,20 @@
                     <div class="field-label">Ingredients</div>
                     <div data-ng-repeat="ingredient in reward.ingredients" class="field-data">
 
-                        <div data-ng-if="hasIngredients[ingredient.name] >= ingredient.amount" >
-                             <a class="hasIngredient" href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}} {{ingredient.name}}</a>
+                        <div data-ng-if="hasIngredients[ingredient.name] >= ingredient.amount">
+                            <a class="hasIngredient" href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
+                                {{ingredient.name}}</a>
                         </div>
 
-                        <div data-ng-if="!(hasIngredients[ingredient.name] >= ingredient.amount)" >
-                            <a class="lacksIngredient" href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}} {{ingredient.name}}</a>
+                        <div data-ng-if="!(hasIngredients[ingredient.name] >= ingredient.amount)">
+                            <a class="lacksIngredient" href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
+                                {{ingredient.name}}</a>
                         </div>
                     </div>
 
                 </div>
-                <div class="flashcard-section col-xs-6" style="padding-left: 0; padding-right: 0" data-ng-if="reward.enables.length>0">
+                <div class="flashcard-section col-xs-6" style="padding-left: 0; padding-right: 0"
+                     data-ng-if="reward.enables.length>0">
                     <div class="field-label">Enables</div>
 
 
@@ -232,7 +263,8 @@
                     </div>
                 </div>
 
-                <div class="flashcard-section col-xs-6" style="padding-left: 0; padding-right: 0" data-ng-if="reward.goals.length>0">
+                <div class="flashcard-section col-xs-6" style="padding-left: 0; padding-right: 0"
+                     data-ng-if="reward.goals.length>0">
                     <div class="field-label">Goals</div>
 
 

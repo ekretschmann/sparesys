@@ -315,6 +315,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
             $scope.rewards = Rewards.query(function () {
                 $scope.items = [];
                 for (var i = 0; i < $scope.rewards.length; i++) {
+                    //console.log($scope.rewards[i]);
                     if ($scope.rewards[i].type === 'Item') {
                         $scope.items.push($scope.rewards[i]);
                     }

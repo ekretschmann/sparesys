@@ -105,7 +105,7 @@
                                     <div data-ng-if="reward.enables.length ===0">none</div>
                                     <div data-ng-if="reward.enables.length >0">
                                         <div data-ng-repeat="enabler in reward.enables">
-                                            <div>{{getRewardName(enabler)}}</div>
+                                            <div>{{enabler.name}}</div>
                                         </div>
                                     </div>
 
@@ -118,7 +118,7 @@
                                     <div data-ng-if="reward.goals.length ===0">none</div>
                                     <div data-ng-if="reward.goals.length >0">
                                         <div data-ng-repeat="goal in reward.goals">
-                                            <div>{{getRewardName(goal)}}</div>
+                                            <div>{{goal.name}}</div>
                                         </div>
                                     </div>
 

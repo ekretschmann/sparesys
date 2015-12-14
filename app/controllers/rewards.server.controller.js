@@ -115,7 +115,7 @@ exports.list = function (req, res) {
             }
         });
     } else {
-        Reward.find().sort('-created').populate('user', 'displayName').exec(function (err, rewards) {
+        Reward.find().sort('-created').populate('enables').populate('goals').populate('user', 'displayName').exec(function (err, rewards) {
             if (err) {
                 return res.status(400).send({
                     message: getErrorMessage(err)

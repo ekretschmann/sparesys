@@ -36,6 +36,10 @@
 
                 <div data-ng-repeat="skill in skills.owned" class="field-data">
                     {{skill.name}}
+
+                    <div>
+                        {{skill.goals}} xx
+                    </div>
                 </div>
 
             </div>
@@ -93,6 +97,8 @@
                         New skill: {{skill.name}} ({{skill.price}} <span
                             data-ng-if="skill.price === 1">trophy</span><span
                             data-ng-if="skill.price > 1">trophies</span>)
+
+
                     </div>
                     <div data-ng-if="authentication.user.trophies < skill.price" class="text-muted">
                         <i class="glyphicon glyphicon-piggy-bank"></i>
@@ -222,7 +228,7 @@
 
 
                     <div data-ng-repeat="enabled in reward.enables" class="field-data">
-                        {{enabled.name}}
+                        {{enabled}}
                     </div>
                 </div>
 
@@ -231,7 +237,7 @@
 
 
                     <div data-ng-repeat="goal in reward.goals" class="field-data">
-                        {{goal.name}}
+                        {{goal}}
                     </div>
                 </div>
             </div>

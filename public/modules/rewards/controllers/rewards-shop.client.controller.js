@@ -125,11 +125,13 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
         $scope.populateSkills = function() {
+            $scope.goals.owned = [];
+            $scope.goals.challenge = [];
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 var item = $scope.authentication.user.inventory[i];
                 var reward = $scope.getReward(item.rewardId);
                 if (reward.type !== 'Skill') {
-                    $scope.items.owned.push(reward);
+                    $scope.items.owned.push(item);
                 }
                 if (reward.type === 'Skill') {
                     $scope.skills.owned.push(reward);
@@ -212,13 +214,13 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     if ($scope.authentication.user.inventory[i].rewardId === $scope.rewards[j]._id) {
 
                         if ($scope.rewards[j].type === 'Skill') {
-                            console.log($scope.rewards[j].enables);
+                            //console.log($scope.rewards[j].enables);
                             var enabledIds = [];
                             for (var k = 0; k < $scope.rewards[j].enables.length; k++) {
-                                console.log($scope.rewards[j].enables[k]);
-                                enabledIds.push($scope.rewards[j].enables[k].rewardId);
+                                //console.log($scope.rewards[j].enables[k]);
+                                enabledIds.push($scope.rewards[j].enables[k]._id);
                             }
-                            console.log(enabledIds);
+                          //  console.log(enabledIds);
                             for (k = 0; k < $scope.rewards.length; k++) {
                                 if (enabledIds.indexOf($scope.rewards[k]._id) !== -1) {
                                     $scope.items.forSale.push($scope.rewards[k]);

@@ -4,7 +4,7 @@
     <!--<div ng-include="'/modules/rewards/views/partial/delete-reward.modal.client.view.html'"></div>-->
 
 
-    <div class="col-xs-12 col-md-6  " data-ng-if="authentication.user.roles.indexOf('help') > -1">
+    <div class="col-md-6  " data-ng-if="authentication.user.roles.indexOf('help') > -1">
         <div class="virtual-card font-large">
             <div class="title">Rewards Shop</div>
             <div class="flashcard-section">
@@ -14,6 +14,24 @@
                         Welcome to the Rewards Shop. Here you can spend trophies
                         for things that you can use as ingredients to craft bigger
                         prices.
+
+                    </div>
+                </infobox>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-6  " data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="virtual-card font-large">
+            <div class="title">Rewards Shop</div>
+            <div class="flashcard-section">
+
+                <infobox logo="girl" position="left">
+                    <div>
+                        You will need some skills first. Try to create the goals that each
+                        skill will set. When you are stuck, simply look up the goals in
+                        the dictionary and find out how they are crafted.
 
                     </div>
                 </infobox>
@@ -247,12 +265,14 @@
                     <div data-ng-repeat="ingredient in reward.ingredients" class="field-data">
 
                         <div data-ng-if="hasIngredients[ingredient.name] >= ingredient.amount">
-                            <a class="hasIngredient" href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
+                            <a class="hasIngredient" href="" data-ng-click="search(ingredient.name)"><i class="glyphicon glyphicon-ok"></i></a>
+                            <a  href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
                                 {{ingredient.name}}</a>
                         </div>
 
                         <div data-ng-if="!(hasIngredients[ingredient.name] >= ingredient.amount)">
-                            <a class="lacksIngredient" href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
+                            <a class="lacksIngredient" href="" data-ng-click="search(ingredient.name)"><i class="glyphicon glyphicon-remove-sign"></i></a>
+                            <a href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
                                 {{ingredient.name}}</a>
                         </div>
                     </div>
@@ -266,7 +286,7 @@
 
 
                     <div data-ng-repeat="enabled in reward.enables" class="field-data">
-                        {{enabled}}
+                        {{enabled.name}}
                     </div>
                 </div>
 
@@ -276,7 +296,7 @@
 
 
                     <div data-ng-repeat="goal in reward.goals" class="field-data">
-                        {{goal}}
+                        {{goal.name}}
                     </div>
                 </div>
             </div>

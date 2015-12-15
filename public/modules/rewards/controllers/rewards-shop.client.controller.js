@@ -14,12 +14,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.skills.forSale = [];
         $scope.recipies = {};
         $scope.recipies.forSale = [];
+        $scope.recipies.forSaleNames = [];
+
         $scope.goals = {};
         $scope.goals.owned = [];
         $scope.goals.challenge = [];
-
         $scope.searchResult = [];
-
         $scope.hasIngredients = [];
 
        // $scope.hasIngredients['Water'] = 2;
@@ -98,6 +98,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         } else {
 
                             $scope.items.forSale.push($scope.rewards[i]);
+                            $scope.items.forSaleNames.push($scope.rewards[i].name);
                         }
                     }
                 }
@@ -196,6 +197,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     }
                     if (found === $scope.rewards[i].ingredients.length) {
                         $scope.recipies.forSale.push($scope.rewards[i]);
+                        $scope.recipies.forSaleNames.push($scope.rewards[i].name);
                     }
                 }
 
@@ -236,6 +238,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.craft = function (item) {
 
 
+
+            $scope.searchResult = [];
 
             for(var i=0; i< item.ingredients.length; i++) {
                 var ingredient = item.ingredients[i];

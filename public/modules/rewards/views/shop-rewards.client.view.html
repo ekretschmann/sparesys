@@ -221,8 +221,13 @@
     <div data-ng-repeat="reward in searchResult">
         <div class="col-xs-6 dashboard-col">
             <div class="virtual-card font-large">
+                <div data-ng-if="recipies.forSaleNames.indexOf(reward.name) > -1" class="pull-right">
+                        <button data-ng-click="craft(reward)" class="btn btn-rememberators">Craft</button>
+                </div>
                 <div class="title">
                     {{reward.name}}
+
+
                 </div>
 
                 <div class="flashcard-section">
@@ -251,6 +256,8 @@
                                 {{ingredient.name}}</a>
                         </div>
                     </div>
+
+
 
                 </div>
                 <div class="flashcard-section col-xs-6" style="padding-left: 0; padding-right: 0"

@@ -53,16 +53,16 @@
                         none
                     </div>
 
-                    <div data-ng-repeat="goal in goals.owned" class="field-data hasIngredient">
-                        {{goal.name}}
+                    <div data-ng-repeat="goal in goals.owned track by $index" class="field-data hasIngredient">
+                       {{goal.name}}
 
                         <!--<div data-ng-repeat="goal in skill.goals">-->
                         <!--{{goal.name}}-->
                         <!--</div>-->
                     </div>
 
-                    <div data-ng-repeat="goal in goals.challenge" class="field-data lacksIngredient">
-                        {{goal.name}}
+                    <div data-ng-repeat="goal in goals.challenge track by $index" class="field-data lacksIngredient">
+                       {{goal.name}}
 
                         <!--<div data-ng-repeat="goal in skill.goals">-->
                         <!--{{goal.name}}-->
@@ -137,6 +137,7 @@
                 </div>
 
 
+                x{{items.forSale}}x
                 <div data-ng-repeat="item in items.forSale track by $index" class="field-data">
 
                     <div data-ng-if="authentication.user.trophies >= item.price">

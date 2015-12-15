@@ -352,6 +352,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     for (i = 0; i < allRewards.length; i++) {
                         if (allRewards[i]._id === $stateParams.rewardId) {
                             $scope.reward = allRewards[i];
+
+
                         }
                     }
 

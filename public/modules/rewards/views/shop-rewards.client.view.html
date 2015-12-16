@@ -6,7 +6,7 @@
 
     <div class="col-md-6  " data-ng-if="authentication.user.roles.indexOf('help') > -1">
         <div class="virtual-card font-large">
-            <div class="title">Rewards Shop</div>
+            <div class="title">Rewards</div>
             <div class="flashcard-section">
 
                 <infobox logo="boy" position="left">
@@ -24,7 +24,7 @@
 
     <div class="col-md-6  " data-ng-if="authentication.user.roles.indexOf('help') > -1">
         <div class="virtual-card font-large">
-            <div class="title">Rewards Shop</div>
+            <div class="title">Rewards</div>
             <div class="flashcard-section">
 
                 <infobox logo="girl" position="left">
@@ -127,12 +127,15 @@
 
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">
-            <!--<div class="title"></div>-->
+            <div class="pull-right field-label">
+
+                {{authentication.user.trophies}} trophies
+            </div>
+            <div class="title">Location: {{authentication.user.rewardlocation}}</div>
             <div class="flashcard-section">
 
 
-                <div class="field-label" style="padding-bottom: 1em">You have {{authentication.user.trophies}} trophies.
-                    You can buy:
+                <div class="field-label" >You can find these resources here:
                 </div>
 
 
@@ -174,28 +177,13 @@
 
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">
-            <!--<div class="title">You can build</div>-->
+            <div class="title">Workbench</div>
             <div class="flashcard-section">
 
-                <div class="field-label" style="padding-bottom: 1em">You can build:</div>
+                <div class="field-label" style="padding-bottom: 1em">Ingredients</div>
 
 
-                <div data-ng-if="recipies.forSale.length === 0" class="field-data">
-                    nothing
-                </div>
-
-                <div data-ng-repeat="recipe in recipies.forSale">
-
-                    <span class="field-data">
-                    <a href="" data-ng-click="craft(recipe)"><i class="glyphicon glyphicon-piggy-bank"></i></a> {{recipe.name}}
-                    </span>
-
-                    <span class="field-data">
-                    (<span data-ng-repeat="ingredient in recipe.ingredients">{{ingredient.amount}} {{ingredient.name}}<span
-                            data-ng-if="!$last">, </span></span>)
-                    </span>
-
-                </div>
+                <div class="field-label" style="padding-bottom: 1em">Product</div>
 
 
             </div>
@@ -239,9 +227,7 @@
     <div data-ng-repeat="reward in searchResult">
         <div class="col-xs-6 dashboard-col">
             <div class="virtual-card font-large">
-                <div data-ng-if="recipies.forSaleNames.indexOf(reward.name) > -1" class="pull-right">
-                        <button data-ng-click="craft(reward)" class="btn btn-rememberators">Craft</button>
-                </div>
+
                 <div class="title">
                     {{reward.name}}
 

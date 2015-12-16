@@ -16,6 +16,10 @@ var RewardSchema = new Schema({
         required: 'Please fill Reward name',
         trim: true
     },
+    location: {
+        type: String,
+        default: 'Home'
+    },
     type: {
         type: String,
         default: 'Item',

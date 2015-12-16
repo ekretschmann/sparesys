@@ -75,6 +75,10 @@ var UserSchema = new Schema({
 		}],
 		default: ['user', 'help']
 	},
+	rewardlocation: {
+		type: String,
+		default: 'Home'
+	},
 	inventory: {
 
 		type: [{

@@ -19,6 +19,13 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selection.enabler = '';
         $scope.selection.goal = '';
 
+        $scope.options = {};
+        $scope.options.locations = [];
+
+        $scope.addLocation = function() {
+          console.log($scope.selection.location);
+        };
+
 
 
         $scope.getRewardName = function (rewardId) {
@@ -311,9 +318,24 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         };
 
 
+
         $scope.find = function () {
 
-            $scope.options.locations = Globals.query();
+            Globals.query(function(globals) {
+                if (globals.length === 0) {
+                    var global = new Globals({
+                        rewardlocations: []
+                    });
+
+
+                    // Redirect after save
+                    global.$save(function (response) {
+                        $scope.options.locations = [];
+                    });
+                } else {
+                    $scope.options.locations = globals[0].rewardlocations;
+                }
+            });
 
             $scope.rewards = Rewards.query(function () {
                 $scope.items = [];

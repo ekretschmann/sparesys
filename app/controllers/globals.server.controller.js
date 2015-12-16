@@ -148,3 +148,17 @@ exports.hasAuthorization = function (req, res, next) {
     }
 
 };
+
+/**
+ * Require login routing middleware
+ */
+exports.requiresLogin = function (req, res, next) {
+
+    if (!req.isAuthenticated()) {
+        return res.send(401, {
+            message: 'User is not logged in'
+        });
+    }
+
+    next();
+};

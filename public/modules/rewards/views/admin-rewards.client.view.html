@@ -6,17 +6,31 @@
     <div class="col-xs-12 col-md-6  ">
         <div class="admin-card font-large">
             <div class="title">Administer Rewards</div>
-            <div class="flashcard-section row">
+            <div class="flashcard-section">
 
 
-                <div class="col-xs-12">
+
                     <div class="field-label">Find Reward</div>
                     <input type="text"
                            ng-model="options.searchText"
                            class="form-control search"
                            data-ng-change="updateSearch()"
                            placeholder="Name">
+
+
+            </div>
+
+            <div class="flashcard-section">
+
+                <div class="field-label">Locations</div>
+                <div>
+                    {{options.locations}}
                 </div>
+                <!--<input type="text"-->
+                       <!--ng-model="options.searchText"-->
+                       <!--class="form-control search"-->
+                       <!--data-ng-change="updateSearch()"-->
+                       <!--placeholder="Name">-->
 
 
             </div>

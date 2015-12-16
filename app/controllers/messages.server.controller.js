@@ -97,7 +97,9 @@ exports.delete = function(req, res) {
 /**
  * List of Messages
  */
-exports.list = function(req, res) { Message.find().sort('-created').populate('user', 'displayName').exec(
+exports.list = function(req, res) {
+
+	Message.find().sort('-created').populate('user', 'displayName').exec(
 
     function(err, messages) {
 

@@ -1,8 +1,8 @@
 'use strict';
 
 // Rewards controller
-angular.module('rewards').controller('RewardsController', ['$scope', '$state', '$timeout', '$stateParams', '$location', '$modal', 'Authentication', 'Rewards',
-    function ($scope, $state, $timeout, $stateParams, $location, $modal, Authentication, Rewards) {
+angular.module('rewards').controller('RewardsController', ['$scope', '$state', '$timeout', '$stateParams', '$location', '$modal', 'Authentication', 'Rewards', 'Globals',
+    function ($scope, $state, $timeout, $stateParams, $location, $modal, Authentication, Rewards, Globals) {
         $scope.authentication = Authentication;
 
         $scope.ingredients = [];
@@ -312,6 +312,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
 
         $scope.find = function () {
+
+            $scope.options.locations = Globals.query();
+
             $scope.rewards = Rewards.query(function () {
                 $scope.items = [];
                 for (var i = 0; i < $scope.rewards.length; i++) {

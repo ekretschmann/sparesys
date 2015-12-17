@@ -23,7 +23,22 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.options.locations = [];
 
         $scope.addLocation = function() {
-          console.log($scope.selection.location);
+
+            $scope.globals.rewardlocations.push($scope.selection.location);
+            $scope.globals.$update(function(result) {
+
+                $scope.selection.location = '';
+                $scope.loadGlobals();
+            });
+        };
+
+        $scope.removeLocation = function(index) {
+
+
+            $scope.globals.rewardlocations.splice(index, 1);
+            $scope.globals.$update(function (result) {
+                $scope.loadGlobals();
+            });
         };
 
 
@@ -156,7 +171,6 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
 
             $scope.reward.ingredients.forEach(function (ingredient) {
-                console.log(ingredient.name + ' ' + $scope.selection.ingredient);
                 if (ingredient.name === $scope.selection.ingredient) {
                     ingredient.amount += 1;
                     found = true;
@@ -318,9 +332,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         };
 
 
-
-        $scope.find = function () {
-
+        $scope.loadGlobals = function() {
             Globals.query(function(globals) {
                 if (globals.length === 0) {
                     var global = new Globals({
@@ -331,11 +343,21 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     // Redirect after save
                     global.$save(function (response) {
                         $scope.options.locations = [];
+                        $scope.globals = response;
                     });
                 } else {
+                    $scope.globals = globals[0];
                     $scope.options.locations = globals[0].rewardlocations;
                 }
             });
+        };
+
+
+        $scope.find = function () {
+
+
+            $scope.loadGlobals();
+
 
             $scope.rewards = Rewards.query(function () {
                 $scope.items = [];

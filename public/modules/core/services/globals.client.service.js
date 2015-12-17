@@ -5,7 +5,7 @@ angular.module('core').factory('Globals', ['$resource', function ($resource) {
 
 
     return $resource('globals/:globalId', {
-        courseId: '@_id'
+        globalId: '@_id'
     }, {
         update: {
             method: 'PUT'

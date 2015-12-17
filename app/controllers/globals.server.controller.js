@@ -62,21 +62,19 @@ exports.read = function (req, res) {
 exports.update = function (req, res) {
 
 
-    var global = req.global;
-    global = _.extend(global, req.body);
+    var globals = req.globals;
+    globals = _.extend(globals, req.body);
 
 
 
-
-    global.save(function (err) {
-
+    globals.save(function (err) {
 
         if (err) {
             return res.send(400, {
                 message: getErrorMessage(err)
             });
         } else {
-            res.jsonp(global);
+            res.jsonp(globals);
         }
     });
 };
@@ -85,15 +83,15 @@ exports.update = function (req, res) {
  * Delete an Reward
  */
 exports.delete = function (req, res) {
-    var reward = req.reward;
+    var globals = req.globals;
 
-    global.remove(function (err) {
+    globals.remove(function (err) {
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)
             });
         } else {
-            res.jsonp(global);
+            res.jsonp(globals);
         }
     });
 };
@@ -161,4 +159,16 @@ exports.requiresLogin = function (req, res, next) {
     }
 
     next();
+};
+
+/**
+ * Reward middleware
+ */
+exports.globalByID = function (req, res, next, id) {
+    Global.findById(id).populate('user', 'displayName').exec(function (err, globals) {
+        if (err) return next(err);
+        if (!globals) return next(new Error('Failed to load Reward ' + id));
+        req.globals = globals;
+        next();
+    });
 };

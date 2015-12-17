@@ -19,34 +19,45 @@
 
             </div>
 
-            <div class="flashcard-section">
+            <div class="flashcard-section" >
 
                 <div class="field-label">Locations</div>
                 <div data-ng-if="options.locations.length === 0" class="field-data">
                     none
                 </div>
 
-                <div data-ng-if="options.locations.length > 0" class="field-data">
-                    {{options.locations}}
+                <div data-ng-if="options.locations.length > 0" class="field-data" >
+                    <span data-ng-repeat="loc in options.locations track by $index" style="padding-right: 10px">
+                        <a>
+                            <i data-ng-click="removeLocation($index)"
+                               class="glyphicon glyphicon-remove-sign small">
+                            </i>
+                        </a>
+                        {{loc}}
+                    </span>
+
                 </div>
 
 
             </div>
 
-            <div class="flashcard-section">
-                <div class="field-label">Add location</div>
-                <input type="text"
-                       ng-model="selection.location"
-                       class="form-control"
-                       placeholder="Name">
+            <div class="flashcard-section" >
+                <form class="form-horizontal" data-ng-submit="addLocation()"
+                      novalidate>
+                    <div class="field-label">Add location</div>
+                    <input type="text"
+                           ng-model="selection.location"
+                           class="form-control"
+                           placeholder="Name">
 
-                <div style="padding-top: 1em">
-                <button class="btn btn-primary rememberators-button"
-                        ng-click="addLocation()"
-                        >
-                    Add
-                </button>
-                </div>
+                    <div style="padding-top: 1em">
+                        <button class="btn btn-primary rememberators-button"
+                               type="submit"
+                                >
+                            Add
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

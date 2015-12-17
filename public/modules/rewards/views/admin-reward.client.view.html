@@ -46,8 +46,8 @@
 
             <div class="flashcard-section row" data-ng-if="reward.type !== 'Recipe'">
 
-                <div class="col-xs-6" data-ng-if="reward.type === 'Item'">
-                    <div class="field-label">Health points</div>
+                <div class="col-xs-3" data-ng-if="reward.type === 'Item'">
+                    <div class="field-label">Health</div>
                     <div class="field-data">
                         <!--{{reward.defaulthealthpoints}}-->
                         <input type="number"
@@ -55,6 +55,23 @@
                                data-ng-model="reward.defaulthealthpoints"
                                class="form-control"
                                 >
+                    </div>
+                </div>
+
+                <div class="col-xs-3">
+                    <div class="field-label">Location</div>
+                    <div class="field-data">
+                        <div class="btn-group" dropdown is-open="status.isopen">
+                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                    ng-disabled="disabled">
+                                {{reward.location}} <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                                <li role="menuitem" data-ng-repeat="location in options.locations">
+                                    <a href="" data-ng-click="switchLocation(reward,location)">{{location}}</a>
+                                </li>
+                            </ul>
+                        </div>
                     </div>
                 </div>
 

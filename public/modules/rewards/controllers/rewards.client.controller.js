@@ -18,9 +18,20 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selection.ingredient = '';
         $scope.selection.enabler = '';
         $scope.selection.goal = '';
+        $scope.selection.location = 'Home';
 
         $scope.options = {};
         $scope.options.locations = [];
+
+
+        $scope.switchLocation = function(reward, location) {
+            reward.location = location;
+            $scope.update();
+        };
+
+        $scope.chooseLocation = function(location) {
+            $scope.selection.location = location;
+        };
 
         $scope.addLocation = function() {
 
@@ -314,7 +325,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 enables: $scope.enablesIds,
                 description: $scope.newReward.description,
                 price: $scope.newReward.price,
-                basic: $scope.newReward.basic
+                basic: $scope.newReward.basic,
+                location: $scope.selection.location
             });
 
             reward.$save(function (response) {
@@ -383,6 +395,8 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
         // Find existing Reward
         $scope.findOne = function () {
+
+            $scope.loadGlobals();
 
             if ($stateParams.rewardId) {
 

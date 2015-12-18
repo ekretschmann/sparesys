@@ -81,38 +81,36 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             return result;
         };
 
+        $scope.findBasicItems = function() {
+            for (var i = 0; i < $scope.rewards.length; i++) {
+
+
+                if ($scope.rewards[i].basic) {
+
+
+                    if ($scope.rewards[i].type === 'Skill') {
+                        if (!$scope.userHasReward($scope.rewards[i])) {
+                            $scope.skills.forSale.push($scope.rewards[i]);
+                        }
+                    } else {
+
+                        $scope.items.forSale.push($scope.rewards[i]);
+                        $scope.items.forSaleNames.push($scope.rewards[i].name);
+                    }
+                }
+            }
+        };
+
         $scope.find = function () {
 
 
 
             $scope.rewards = Rewards.query(function () {
-                for (var i = 0; i < $scope.rewards.length; i++) {
 
-
-
-                    if ($scope.rewards[i].basic) {
-
-                        var found = false;
-                        for( var j=0; j<$scope.authentication.user.inventory.length; j++) {
-                            if ($scope.authentication.user.inventory[j].rewardId === $scope.rewards[i]._id) {
-                                found = true;
-                            }
-                        }
-
-
-                        if ($scope.rewards[i].type === 'Skill') {
-                            if (!found) {
-                                $scope.skills.forSale.push($scope.rewards[i]);
-                            }
-                        } else {
-
-                            $scope.items.forSale.push($scope.rewards[i]);
-                            $scope.items.forSaleNames.push($scope.rewards[i].name);
-                        }
-                    }
-                }
 
                 $scope.findItems();
+
+                $scope.findBasicItems();
 
             });
 

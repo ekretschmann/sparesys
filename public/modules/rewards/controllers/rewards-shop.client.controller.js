@@ -31,7 +31,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.userHasReward = function(reward) {
             for (var i=0; i<$scope.authentication.user.inventory.length; i++) {
-                if ($scope.authentication.user.inventory[i]._id === reward._id) {
+                if ($scope.authentication.user.inventory[i].rewardId === reward._id) {
                     return true;
                 }
             }
@@ -169,16 +169,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             $scope.items.owned = [];
             $scope.skills.owned = [];
             $scope.recipies.forSale = [];
-            //for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
-            //    var item = $scope.authentication.user.inventory[i];
-            //    if (item.type !== 'Skill') {
-            //        $scope.items.owned.push($scope.getReward(item.rewardId));
-            //    }
-            //    if (item.type === 'Skill') {
-            //        $scope.skills.owned.push($scope.getReward(item.rewardId));
-            //
-            //    }
-            //}
 
             $scope.populateSkills();
 
@@ -361,6 +351,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                 });
                 $scope.findItems();
+                $scope.findBasicItems();
             }
 
         };

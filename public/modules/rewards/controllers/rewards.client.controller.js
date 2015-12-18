@@ -23,6 +23,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.options = {};
         $scope.options.locations = [];
 
+        $scope.items = [];
+       // $scope.skills = [];
+
 
         $scope.switchLocation = function(reward, location) {
             reward.location = location;
@@ -205,7 +208,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selectEnabler = function () {
 
 
+
             $scope.rewards.forEach(function (enabler) {
+
                 if (enabler.name === $scope.selection.enabler) {
 
                     $scope.enables.push($scope.selection.enabler);
@@ -375,7 +380,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                 $scope.items = [];
                 for (var i = 0; i < $scope.rewards.length; i++) {
                     //console.log($scope.rewards[i]);
-                    if ($scope.rewards[i].type === 'Item') {
+                    if ($scope.rewards[i].type === 'Item' || $scope.rewards[i].type === 'Skill') {
                         $scope.items.push($scope.rewards[i]);
                     }
                 }
@@ -405,7 +410,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     $scope.rewards = allRewards;
                     $scope.items = [];
                     for (var i = 0; i < allRewards.length; i++) {
-                        if (allRewards[i].type === 'Item') {
+                        if (allRewards[i].type === 'Item' || allRewards[i].type === 'Skill') {
                             $scope.items.push(allRewards[i]);
                         }
                     }

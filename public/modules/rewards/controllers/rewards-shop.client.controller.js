@@ -29,6 +29,15 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         //    return false;
         //};
 
+        $scope.userHasReward = function(reward) {
+            for (var i=0; i<$scope.authentication.user.inventory.length; i++) {
+                if ($scope.authentication.user.inventory[i]._id === reward._id) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
         $scope.search = function(text) {
             $scope.options.searchText = text;
             $scope.updateSearch();
@@ -210,6 +219,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.findForSaleItems = function () {
             $scope.items.forSale = [];
+            $scope.skills.forSale = [];
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 for (var j = 0; j < $scope.rewards.length; j++) {
 
@@ -225,7 +235,15 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                           //  console.log(enabledIds);
                             for (k = 0; k < $scope.rewards.length; k++) {
                                 if (enabledIds.indexOf($scope.rewards[k]._id) !== -1) {
-                                    $scope.items.forSale.push($scope.rewards[k]);
+                                    if ($scope.rewards[k].type === 'Item') {
+                                        $scope.items.forSale.push($scope.rewards[k]);
+                                    }
+                                    if ($scope.rewards[k].type === 'Skill') {
+                                        //console.log($scope.authentication.user.inventory);
+                                        if ($scope.userHasReward($scope.rewards[k])) {
+                                            $scope.skills.forSale.push($scope.rewards[k]);
+                                        }
+                                    }
                                 }
                             }
                         }

@@ -72,7 +72,7 @@
                     </div>
 
                     <div data-ng-repeat="goal in goals.owned track by $index" class="field-data hasIngredient">
-                       {{goal.name}}
+                        {{goal.name}}
 
                         <!--<div data-ng-repeat="goal in skill.goals">-->
                         <!--{{goal.name}}-->
@@ -80,7 +80,7 @@
                     </div>
 
                     <div data-ng-repeat="goal in goals.challenge track by $index" class="field-data lacksIngredient">
-                       {{goal.name}}
+                        {{goal.name}}
 
                         <!--<div data-ng-repeat="goal in skill.goals">-->
                         <!--{{goal.name}}-->
@@ -135,26 +135,7 @@
             <div class="flashcard-section">
 
 
-                <div class="field-label" >You can find these resources here:
-                </div>
-
-
-                <div data-ng-repeat="skill in skills.forSale track by $index" class="field-data">
-
-                    <div data-ng-if="authentication.user.trophies >= skill.price">
-                        <a href="" data-ng-click="purchase(skill)"><i class="glyphicon glyphicon-piggy-bank"></i></a>
-                        New skill: {{skill.name}} ({{skill.price}} <span
-                            data-ng-if="skill.price === 1">trophy</span><span
-                            data-ng-if="skill.price > 1">trophies</span>)
-
-
-                    </div>
-                    <div data-ng-if="authentication.user.trophies < skill.price" class="text-muted">
-                        <i class="glyphicon glyphicon-piggy-bank"></i>
-                        New skill: {{skill.name}} ({{skill.price}} <span
-                            data-ng-if="skill.price === 1">trophy</span><span
-                            data-ng-if="skill.price > 1">trophies</span>)
-                    </div>
+                <div class="field-label">You can find these resources here:
                 </div>
 
 
@@ -169,6 +150,29 @@
                         <i class="glyphicon glyphicon-piggy-bank"></i>
                         {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span
                             data-ng-if="item.price > 1">trophies</span>)
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="flashcard-section" data-ng-if="skills.forSale.length > 0">
+                <div class="field-label">You can buy new skills:
+                </div>
+                <div data-ng-repeat="skill in skills.forSale track by $index" class="field-data">
+
+                    <div data-ng-if="authentication.user.trophies >= skill.price">
+                        <a href="" data-ng-click="purchase(skill)"><i class="glyphicon glyphicon-piggy-bank"></i></a>
+                        {{skill.name}} ({{skill.price}} <span
+                            data-ng-if="skill.price === 1">trophy</span><span
+                            data-ng-if="skill.price > 1">trophies</span>)
+
+
+                    </div>
+                    <div data-ng-if="authentication.user.trophies < skill.price" class="text-muted">
+                        <i class="glyphicon glyphicon-piggy-bank"></i>
+                        {{skill.name}} ({{skill.price}} <span
+                            data-ng-if="skill.price === 1">trophy</span><span
+                            data-ng-if="skill.price > 1">trophies</span>)
                     </div>
                 </div>
             </div>
@@ -251,18 +255,19 @@
                     <div data-ng-repeat="ingredient in reward.ingredients" class="field-data">
 
                         <div data-ng-if="hasIngredients[ingredient.name] >= ingredient.amount">
-                            <a class="hasIngredient" href="" data-ng-click="search(ingredient.name)"><i class="glyphicon glyphicon-ok"></i></a>
-                            <a  href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
+                            <a class="hasIngredient" href="" data-ng-click="search(ingredient.name)"><i
+                                    class="glyphicon glyphicon-ok"></i></a>
+                            <a href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
                                 {{ingredient.name}}</a>
                         </div>
 
                         <div data-ng-if="!(hasIngredients[ingredient.name] >= ingredient.amount)">
-                            <a class="lacksIngredient" href="" data-ng-click="search(ingredient.name)"><i class="glyphicon glyphicon-remove-sign"></i></a>
+                            <a class="lacksIngredient" href="" data-ng-click="search(ingredient.name)"><i
+                                    class="glyphicon glyphicon-remove-sign"></i></a>
                             <a href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
                                 {{ingredient.name}}</a>
                         </div>
                     </div>
-
 
 
                 </div>

@@ -107,12 +107,22 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
             console.log($scope.mode);
-            if ($scope.card.timedForward) {
+            if ($scope.mode === 'forward' && $scope.card.timedForward) {
                 if ($scope.card.limitForward * 1000 < $scope.elapsedTime) {
                     assessment--;
                 }
 
                 if ($scope.card.limitForward * 2000 < $scope.elapsedTime) {
+                    assessment--;
+                }
+            }
+
+            if ($scope.mode === 'reverse' && $scope.card.timedReverse) {
+                if ($scope.card.limitRevers * 1000 < $scope.elapsedTime) {
+                    assessment--;
+                }
+
+                if ($scope.card.limitReverse * 2000 < $scope.elapsedTime) {
                     assessment--;
                 }
             }

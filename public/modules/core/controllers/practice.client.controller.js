@@ -106,14 +106,15 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             $scope.elapsedTime = $scope.endTime - $scope.startTime;
 
             console.log($scope.card.limitForward);
-            if ($scope.card.limitForward * 1000 < $scope.elapsedTime) {
-                assessment--;
-            }
+            if ($scope.card.timedForward) {
+                if ($scope.card.limitForward * 1000 < $scope.elapsedTime) {
+                    assessment--;
+                }
 
-            if ($scope.card.limitForward * 2000 < $scope.elapsedTime) {
-                assessment--;
+                if ($scope.card.limitForward * 2000 < $scope.elapsedTime) {
+                    assessment--;
+                }
             }
-
 
             assessment = Math.max(0, assessment);
 

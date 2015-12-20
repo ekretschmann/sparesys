@@ -10,6 +10,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.skills = {};
         $scope.items.forSale = [];
         $scope.items.owned = [];
+        $scope.items.used = [];
         $scope.skills.owned = [];
         $scope.skills.forSale = [];
         $scope.recipies = {};
@@ -22,12 +23,103 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.searchResult = [];
         $scope.hasIngredients = [];
 
-       // $scope.hasIngredients['Water'] = 2;
 
-        //$scope.hasIngredients = function(reward) {
-        //
-        //    return false;
-        //};
+        $scope.checkProduct = function() {
+            $scope.recipies.forSale = [];
+            for(var i=0; i<$scope.rewards.length; i++) {
+                var recipeFound = true;
+                for(var j=0; j<$scope.rewards[i].ingredients.length; j++) {
+                    var item1 = $scope.rewards[i].ingredients[j];
+                    var ingredientFound = false;
+                    for(var k=0; k<$scope.items.used.length; k++) {
+                        var item2 = $scope.items.used[k];
+                        if (item1.name === item2.name) {
+                            ingredientFound = true;
+                            if (item1.amount !== item2.amount) {
+                                recipeFound = false;
+                            }
+                        }
+                    }
+                    if (!ingredientFound) {
+                        recipeFound = false;
+                    }
+                }
+                if (recipeFound && $scope.rewards[i].type === 'Recipe' && $scope.items.used.length === $scope.rewards[i].ingredients.length) {
+                    $scope.recipies.forSale.push($scope.rewards[i]);
+                }
+            }
+
+        };
+
+        $scope.removeItemOwned = function(item) {
+            for (var i=0; i<$scope.items.owned.length; i++) {
+                if ($scope.items.owned[i].name === item.name) {
+                    $scope.items.owned.splice(i, 1);
+                }
+            }
+
+        };
+
+        $scope.removeItemFromRecipe = function(item) {
+            for (var i=0; i<$scope.items.used.length; i++) {
+                if ($scope.items.used[i].name === item.name) {
+                    $scope.items.used.splice(i, 1);
+                }
+            }
+        };
+
+        $scope.useIngredient = function(item) {
+
+            item.amount--;
+            if (item.amount === 0) {
+                $scope.removeItemOwned(item);
+            }
+
+            var found = false;
+            for (var i=0; i<$scope.items.used.length; i++) {
+                if ($scope.items.used[i].name === item.name) {
+                    $scope.items.used[i].amount++;
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                $scope.items.used.push({
+                    _id: item._id,
+                    rewardId: item.rewardId,
+                    amount: 1,
+                    name: item.name,
+                    healthpoints: item.healthpoints
+                });
+            }
+            $scope.checkProduct();
+        };
+
+        $scope.removeFromRecipe = function(item) {
+            item.amount--;
+            if (item.amount === 0) {
+                $scope.removeItemFromRecipe(item);
+            }
+
+            var found = false;
+            for (var i=0; i<$scope.items.owned.length; i++) {
+                if ($scope.items.owned[i].name === item.name) {
+                    $scope.items.owned[i].amount++;
+                    found = true;
+                }
+            }
+
+            if (!found) {
+                $scope.items.owned.push({
+                    _id: item._id,
+                    rewardId: item.rewardId,
+                    amount: 1,
+                    name: item.name,
+                    healthpoints: item.healthpoints
+                });
+            }
+            $scope.checkProduct();
+        };
 
         $scope.userHasReward = function(reward) {
             for (var i=0; i<$scope.authentication.user.inventory.length; i++) {
@@ -168,37 +260,37 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             $scope.items.owned = [];
             $scope.skills.owned = [];
-            $scope.recipies.forSale = [];
+          //  $scope.recipies.forSale = [];
 
             $scope.populateSkills();
 
             $scope.findForSaleItems();
 
 
-            for (var i = 0; i < $scope.rewards.length; i++) {
-                if ($scope.rewards[i].type === 'Recipe') {
-
-                    var found = 0;
-                    for (var j=0; j<$scope.rewards[i].ingredients.length; j++) {
-
-                      //  console.log($scope.rewards[i].ingredients[j].rewardId);
-                        for (var k = 0; k < $scope.authentication.user.inventory.length; k++) {
-                        //    console.log('  '+$scope.authentication.user.inventory[k].rewardId);
-                            if ($scope.authentication.user.inventory[k].rewardId === $scope.rewards[i].ingredients[j].rewardId) {
-                          //      console.log('found');
-                                if ($scope.rewards[i].ingredients[j].amount <= $scope.authentication.user.inventory[k].amount) {
-                                    found++;
-                                }
-                            }
-                        }
-                    }
-                    if (found === $scope.rewards[i].ingredients.length) {
-                        $scope.recipies.forSale.push($scope.rewards[i]);
-                        $scope.recipies.forSaleNames.push($scope.rewards[i].name);
-                    }
-                }
-
-            }
+            //for (var i = 0; i < $scope.rewards.length; i++) {
+            //    if ($scope.rewards[i].type === 'Recipe') {
+            //
+            //        var found = 0;
+            //        for (var j=0; j<$scope.rewards[i].ingredients.length; j++) {
+            //
+            //          //  console.log($scope.rewards[i].ingredients[j].rewardId);
+            //            for (var k = 0; k < $scope.authentication.user.inventory.length; k++) {
+            //            //    console.log('  '+$scope.authentication.user.inventory[k].rewardId);
+            //                if ($scope.authentication.user.inventory[k].rewardId === $scope.rewards[i].ingredients[j].rewardId) {
+            //              //      console.log('found');
+            //                    if ($scope.rewards[i].ingredients[j].amount <= $scope.authentication.user.inventory[k].amount) {
+            //                        found++;
+            //                    }
+            //                }
+            //            }
+            //        }
+            //        if (found === $scope.rewards[i].ingredients.length) {
+            //            $scope.recipies.forSale.push($scope.rewards[i]);
+            //            $scope.recipies.forSaleNames.push($scope.rewards[i].name);
+            //        }
+            //    }
+            //
+            //}
 
             $scope.updateIngredientArray();
 

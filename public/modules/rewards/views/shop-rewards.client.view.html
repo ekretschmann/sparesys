@@ -6,7 +6,7 @@
 
     <div class="col-md-6  " data-ng-if="authentication.user.roles.indexOf('help') > -1">
         <div class="virtual-card font-large">
-            <div class="title">Rewards</div>
+            <div class="title">Rewards Shop</div>
             <div class="flashcard-section">
 
                 <infobox logo="boy" position="left">
@@ -24,7 +24,7 @@
 
     <div class="col-md-6  " data-ng-if="authentication.user.roles.indexOf('help') > -1">
         <div class="virtual-card font-large">
-            <div class="title">Rewards</div>
+            <div class="title">Rewards Shop</div>
             <div class="flashcard-section">
 
                 <infobox logo="girl" position="left">
@@ -42,8 +42,8 @@
 
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">
-            <div class="title">Your Inventory</div>
-            <div class="col-md-4">
+            <div class="title">Challenges</div>
+            <div class="col-md-6" style="padding-left: 0">
                 <div class="flashcard-section" style="padding-left: 0">
 
                     <div class="field-label">Skills</div>
@@ -63,7 +63,9 @@
 
 
                 </div>
-                <div class="flashcard-section" style="padding-top: 1em">
+            </div>
+            <div class="col-md-6" style="padding-right: 0">
+                <div class="flashcard-section" >
 
                     <div class="field-label">Goals</div>
 
@@ -96,49 +98,19 @@
                 </div>
             </div>
 
-            <div class="flashcard-section col-md-4">
 
-                <div class="field-label">Items</div>
-
-
-                <div data-ng-if="items.owned.length === 0" class="field-data">
-                    none
-                </div>
-
-
-                <div data-ng-repeat="item in items.owned" ng-if="$even" class="field-data">
-                    {{item.amount}} {{item.name}}
-                </div>
-
-            </div>
-
-            <div class="flashcard-section col-md-4" style="padding-right:0">
-
-                <div class="field-label">&nbsp;</div>
-
-
-                <!--<div data-ng-if="items.owned.length === 0" class="field-data">-->
-                    <!--none-->
-                <!--</div>-->
-
-
-                <div data-ng-repeat="item in items.owned" ng-if="$odd" class="field-data">
-                    {{item.amount}} {{item.name}}
-                </div>
-
-            </div>
         </div>
     </div>
 
 
     <div class="col-xs-12 col-md-6  ">
-        <div class="virtual-card font-large" >
+        <div class="virtual-card font-large">
             <div class="pull-right field-label">
 
                 {{authentication.user.trophies}} trophies
             </div>
             <div class="title">Location: {{authentication.user.rewardlocation}}</div>
-            <div class="flashcard-section"  data-ng-if="items.forSale.length > 0">
+            <div class="flashcard-section" data-ng-if="items.forSale.length > 0" style="padding-top: 1em">
 
 
                 <div class="field-label">You can find these resources here:
@@ -188,15 +160,138 @@
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">
             <div class="title">Workbench</div>
-            <div class="flashcard-section">
+            <div class="row" >
+                <div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">
 
-                <div class="field-label" style="padding-bottom: 1em">Ingredients</div>
+                    <div class="field-label">Ingredients</div>
+
+                    <div data-ng-if="items.owned.length === 0" class="field-data">
+                        none
+                    </div>
 
 
-                <div class="field-label" style="padding-bottom: 1em">Product</div>
+                    <div data-ng-repeat="item in items.owned | orderBy: 'name'" ng-if="$index % 3 === 0" class="field-data">
+                        <a href="" data-ng-click="useIngredient(item)"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                        {{item.amount}} {{item.name}}
+                    </div>
+                </div>
+
+                <div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">
+
+                    <div class="field-label">&nbsp;</div>
 
 
+                    <div data-ng-repeat="item in items.owned | orderBy: 'name'" ng-if="$index % 3 === 1" class="field-data">
+                        <a href="" data-ng-click="useIngredient(item)"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                        {{item.amount}} {{item.name}}
+                    </div>
+
+                </div>
+
+                <div class="flashcard-section col-md-4" style="padding-right:0; padding-top: 0">
+
+                    <div class="field-label">&nbsp;</div>
+
+
+                    <div data-ng-repeat="item in items.owned | orderBy: 'name'" ng-if="$index % 3 === 2" class="field-data">
+                        <a href="" data-ng-click="useIngredient(item)"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                        {{item.amount}} {{item.name}}
+                    </div>
+
+                </div>
             </div>
+
+            <div class="row" style="padding-top: 1em">
+                <div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">
+
+                    <div class="field-label">Recipe</div>
+
+                    <div data-ng-if="items.used.length === 0" class="field-data">
+                        none
+                    </div>
+
+
+                    <div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 0" class="field-data">
+                        <a href="" data-ng-click="removeFromRecipe(item)"><i
+                                class="glyphicon glyphicon-minus-sign"></i></a>
+                        {{item.amount}} {{item.name}}
+                    </div>
+                </div>
+
+                <div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">
+
+                    <div class="field-label">&nbsp;</div>
+
+
+                    <div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 1" class="field-data">
+                        <a href="" data-ng-click="removeFromRecipe(item)"><i
+                                class="glyphicon glyphicon-minus-sign"></i></a>
+                        {{item.amount}} {{item.name}}
+                    </div>
+
+                </div>
+
+                <div class="flashcard-section col-md-4" style="padding-right:0; padding-top: 0">
+
+                    <div class="field-label">&nbsp;</div>
+
+
+                    <div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 2" class="field-data">
+                        <a href="" data-ng-click="removeFromRecipe(item)"><i
+                                class="glyphicon glyphicon-minus-sign"></i></a>
+                        {{item.amount}} {{item.name}}
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="row" style="padding-top: 1em">
+                <div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">
+
+                    <div class="field-label">Product</div>
+
+                    <div data-ng-if="recipies.forSale.length === 0" class="field-data">
+                        none
+                    </div>
+
+
+                    <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 0" class="field-data">
+                        <a href="" data-ng-click="purchase(item)"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                        {{item.amount}} {{item.name}}
+                    </div>
+                </div>
+
+                <div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">
+
+                    <div class="field-label">&nbsp;</div>
+
+
+                    <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 1" class="field-data">
+                        <a href="" data-ng-click="purchase(item)"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                        {{item.amount}} {{item.name}}
+                    </div>
+
+                </div>
+
+                <div class="flashcard-section col-md-4" style="padding-right:0; padding-top: 0">
+
+                    <div class="field-label">&nbsp;</div>
+
+
+                    <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 2" class="field-data">
+                        <a href="" data-ng-click="purchase(item)"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                        {{item.amount}} {{item.name}}
+                    </div>
+
+                </div>
+            </div>
+
         </div>
     </div>
 

@@ -259,7 +259,7 @@
 
 
                     <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 0" class="field-data">
-                        <a href="" data-ng-click="purchase(item)"><i
+                        <a href="" data-ng-click="craft(item)"><i
                                 class="glyphicon glyphicon-plus-sign"></i></a>
                         {{item.amount}} {{item.name}}
                     </div>
@@ -271,7 +271,7 @@
 
 
                     <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 1" class="field-data">
-                        <a href="" data-ng-click="purchase(item)"><i
+                        <a href="" data-ng-click="craft(item)"><i
                                 class="glyphicon glyphicon-plus-sign"></i></a>
                         {{item.amount}} {{item.name}}
                     </div>
@@ -284,7 +284,7 @@
 
 
                     <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 2" class="field-data">
-                        <a href="" data-ng-click="purchase(item)"><i
+                        <a href="" data-ng-click="craft(item)"><i
                                 class="glyphicon glyphicon-plus-sign"></i></a>
                         {{item.amount}} {{item.name}}
                     </div>

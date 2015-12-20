@@ -344,7 +344,9 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 for (var j=0; j<$scope.authentication.user.inventory.length; j++) {
                     var inventoryItem = $scope.authentication.user.inventory[j];
                     if (inventoryItem.rewardId === ingredient.rewardId) {
-                        inventoryItem.amount -= ingredient.amount;
+                        //console.log(inventoryItem.name);
+                        //console.log(inventoryItem.amount);
+                        //inventoryItem.amount -= ingredient.amount;
                         if (inventoryItem.amount === 0) {
                             $scope.authentication.user.inventory.splice(j,1);
                         }
@@ -383,7 +385,11 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 user.inventory= $scope.authentication.user.inventory;
                 user.trophies = $scope.authentication.user.trophies;
 
-                user.$update();
+                user.$update(function() {
+                    $scope.recipies.forSale = [];
+                    $scope.recipies.itemUsed = [];
+                    $scope.items.used = [];
+                });
             });
 
         };

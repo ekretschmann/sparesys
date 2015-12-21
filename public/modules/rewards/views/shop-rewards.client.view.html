@@ -356,16 +356,16 @@
                     <div data-ng-repeat="ingredient in reward.ingredients" class="field-data">
 
                         <div data-ng-if="hasIngredients[ingredient.name] >= ingredient.amount">
-                            <a class="hasIngredient" href="" data-ng-click="search(ingredient.name)"><i
-                                    class="glyphicon glyphicon-ok"></i></a>
-                            <a href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
+                            <!--<a class="hasIngredient" href="" data-ng-click="search(ingredient.name)"><i-->
+                                    <!--class="glyphicon glyphicon-ok"></i></a>-->
+                            {{ingredient.amount}} <a href="" data-ng-click="search(ingredient.name)">
                                 {{ingredient.name}}</a>
                         </div>
 
                         <div data-ng-if="!(hasIngredients[ingredient.name] >= ingredient.amount)">
-                            <a class="lacksIngredient" href="" data-ng-click="search(ingredient.name)"><i
-                                    class="glyphicon glyphicon-remove-sign"></i></a>
-                            <a href="" data-ng-click="search(ingredient.name)">{{ingredient.amount}}
+                            <!--<a class="lacksIngredient" href="" data-ng-click="search(ingredient.name)"><i-->
+                                    <!--class="glyphicon glyphicon-remove-sign"></i></a>-->
+                            {{ingredient.amount}} <a href="" data-ng-click="search(ingredient.name)">
                                 {{ingredient.name}}</a>
                         </div>
                     </div>

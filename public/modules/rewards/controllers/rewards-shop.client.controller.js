@@ -321,7 +321,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                             }
                         }
                         if (reward.enables[j].type === 'Item') {
-                            $scope.items.forSale.push($scope.getReward(reward.enables[j]._id));
+                            if ($scope.authentication.user.rewardlocation === reward.enables[j].location ||
+                                reward.enables[j].location === 'Everywhere') {
+                                $scope.items.forSale.push($scope.getReward(reward.enables[j]._id));
+                            }
                         }
                     }
                 }

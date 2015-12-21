@@ -5,12 +5,12 @@
 
 
     <!--<div class="col-xs-12 col-md-6 dashboard-col">-->
-        <!--<div class="admin-card">-->
+    <!--<div class="admin-card">-->
 
-            <!--{{reward.ingredients}}-->
-            <!--{{reward}}-->
+    <!--{{reward.ingredients}}-->
+    <!--{{reward}}-->
 
-        <!--</div>-->
+    <!--</div>-->
     <!--</div>-->
     <div class="col-xs-12 col-md-6 dashboard-col font-large">
         <div class="admin-card">
@@ -122,28 +122,28 @@
             <div class="title">&nbsp</div>
 
             <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+                <div class="rememberators-form-group form-group">
 
-                    <div class="col-xs-6" data-ng-if="reward.type === 'Recipe'">
-                        <div class="field-label">Ingredients</div>
+                    <div class="row" data-ng-if="reward.type === 'Recipe'">
+                        <div class="col-xs-6">
+                            <div class="field-label">Ingredients</div>
 
-                        <input style="width: 100%"
-                               type="text"
-                               data-ng-model="selection.ingredient"
-                               typeahead-on-select="selectIngredientForReward()"
-                               typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
-                               class="form-control">
+                            <input type="text"
+                                   data-ng-model="selection.ingredient"
+                                   typeahead-on-select="selectIngredientForReward()"
+                                   typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
+                                   class="form-control">
 
-                        <div class="field-data" style="padding-top: 0.5em">
-                            <div data-ng-repeat="ingredient in reward.ingredients">
-                                <a>
-                                    <i data-ng-click="removeIngredientFromReward(ingredient, reward)"
-                                       class="glyphicon glyphicon-remove-sign small">
-                                    </i>
-                                </a>
-                                {{ingredient.amount}} {{ingredient.name}}
-                                <!--<span data-ng-if="ingredient.keep">(keep intact)</span>-->
-                                <!--<span data-ng-if="!ingredient.keep">(consume)</span>-->
+                            <div class="field-data">
+                                <div data-ng-repeat="ingredient in reward.ingredients">
+                                    <a>
+                                        <i data-ng-click="removeIngredientFromReward(ingredient, reward)"
+                                           class="glyphicon glyphicon-remove-sign small">
+                                        </i>
+                                    </a>
+                                    {{ingredient.amount}} {{ingredient.name}}
+                                    <!--<span data-ng-if="ingredient.keep">(keep intact)</span>-->
+                                    <!--<span data-ng-if="!ingredient.keep">(consume)</span>-->
 
                                 <span data-ng-if="ingredient.keep"><a href=""
                                                                       data-ng-click="switchKeepForReward(ingredient)">(keep
@@ -151,22 +151,48 @@
                                 <span data-ng-if="!ingredient.keep"><a href=""
                                                                        data-ng-click="switchKeepForReward(ingredient)">(consume)</a></span>
 
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="col-xs-6" data-ng-if="reward.type === 'Recipe'">
+                            <div class="field-label">Journey</div>
+
+                            <input type="text"
+                                   data-ng-model="selection.journey"
+                                   typeahead-on-select="selectLocation()"
+                                   typeahead="location for location in options.locations | filter: $viewValue | limitTo:12"
+                                   class="form-control">
+
+                            <!--typeahead="loc.name as location in options.locations | filter:{name: $viewValue} | limitTo:12"-->
+
+                            <div class="field-data" data-ng-if="location">
+                                <a>
+                                    <i data-ng-click="removeLocationFromReward(reward)"
+                                       class="glyphicon glyphicon-remove-sign small">
+                                    </i>
+                                </a>
+                                {{location}}
+
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-xs-6" data-ng-if="reward.type !== 'Item'">
+                <div class="row" data-ng-if="reward.type !== 'Item'" style="margin-top: 1em">
+
+                    <div class="col-xs-6">
                         <div class="field-label">Enables</div>
                         <div class="field-data">
 
-                            <input style="width: 100%"
-                                   type="text"
+                            <input type="text"
                                    data-ng-model="selection.enabler"
                                    typeahead-on-select="selectEnablerForReward()"
                                    typeahead="item.name for item in items | filter:{name: $viewValue} | limitTo:12"
                                    class="form-control">
 
-                            <div class="font-medium" style="padding-top: 0.5em; padding-left: 0.5em">
+                            <div class="font-medium" style="padding-top: 0.5em; ">
                                 <div class="field-data">
                                     <div data-ng-repeat="enabler in reward.enables">
                                         <a>
@@ -181,41 +207,43 @@
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div class="col-xs-6" data-ng-if="reward.type === 'Skill'">
-                        <div class="field-label">Goals</div>
-                        <div class="field-data">
 
-                            <input style="width: 100%"
-                                   type="text"
-                                   data-ng-model="selection.goal"
-                                   typeahead-on-select="selectGoalForReward()"
-                                   typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
-                                   class="form-control">
+                <div class="col-xs-6" data-ng-if="reward.type === 'Skill'">
+                    <div class="field-label">Goals</div>
+                    <div class="field-data">
 
-                            <div class="font-medium" style="padding-top: 0.5em; padding-left: 0.5em">
-                                <div class="field-data">
-                                    <div data-ng-repeat="goal in reward.goals">
-                                        <a>
-                                            <i data-ng-click="removeGoalFromReward(goal)"
-                                               class="glyphicon glyphicon-remove-sign small">
-                                            </i>
-                                        </a>
+                        <input style="width: 100%"
+                               type="text"
+                               data-ng-model="selection.goal"
+                               typeahead-on-select="selectGoalForReward()"
+                               typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
+                               class="form-control">
 
-                                        {{goal.name}}
-                                    </div>
+                        <div class="font-medium" style="padding-top: 0.5em; padding-left: 0.5em">
+                            <div class="field-data">
+                                <div data-ng-repeat="goal in reward.goals">
+                                    <a>
+                                        <i data-ng-click="removeGoalFromReward(goal)"
+                                           class="glyphicon glyphicon-remove-sign small">
+                                        </i>
+                                    </a>
+
+                                    {{goal.name}}
                                 </div>
                             </div>
                         </div>
                     </div>
-
-
                 </div>
+
+
             </div>
         </div>
     </div>
+</div>
 
 
-    <div class="rememberators-footer col-xs-12">rememberators.com</div>
+<div class="rememberators-footer col-xs-12">rememberators.com</div>
 
 </div>

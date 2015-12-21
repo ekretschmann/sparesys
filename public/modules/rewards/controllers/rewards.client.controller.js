@@ -18,6 +18,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.selection.ingredient = '';
         $scope.selection.enabler = '';
         $scope.selection.goal = '';
+        $scope.selection.journey = '';
         $scope.selection.location = 'Home';
 
         $scope.options = {};
@@ -26,6 +27,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.items = [];
        // $scope.skills = [];
 
+        $scope.selectLocation = function() {
+            $scope.reward.journey = $scope.selection.journey;
+        };
 
         $scope.switchLocation = function(reward, location) {
             reward.location = location;

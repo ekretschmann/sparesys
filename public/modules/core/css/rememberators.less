@@ -243,8 +243,8 @@ body {
     @media (min-width: 620px) {
       font-size: 24pt;
     }
-    @media (min-width: 800px) {
-      font-size: 36pt;
+    @media (min-width: 767px) {
+      font-size: 32pt;
     }
 
   }
@@ -252,13 +252,13 @@ body {
 
 .font-l {
   @media (min-width: 310px) {
-    font-size: 24pt;
+    font-size: 14pt;
   }
   @media (min-width: 620px) {
-    font-size: 30pt;
+    font-size: 16pt;
   }
-  @media (min-width: 800px) {
-    font-size: 36pt;
+  @media (min-width: 767px) {
+    font-size: 18pt;
   }
   font-family: 'Grinched';
 
@@ -376,14 +376,62 @@ body {
   }
 
   @media screen {
-    @media (max-width: 990px) {
+
+
+    @media (max-width: 767px) {
       min-height: 20em;
-      margin-left: 5%;
-      max-width: 90%;
+      margin-left: 20%;
+      max-width: 60%;
     }
   }
 
 
+}
+
+
+
+.flashcard-left {
+  text-align: center;
+
+
+  @media screen {
+
+    @media (max-width: 767px) {
+      display: none;
+    }
+
+    @media (max-width: 9999px) {
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      float: left;
+      width: 25%;
+    }
+
+
+
+  }
+}
+
+.flashcard-right {
+  text-align: center;
+  @media screen {
+    @media (max-width: 767px) {
+      display: none;
+    }
+
+    @media (max-width: 9999px) {
+      position: relative;
+      min-height: 1px;
+      padding-right: 15px;
+      padding-left: 15px;
+      float: left;
+      width: 25%;
+    }
+
+
+  }
 }
 
 .flashbox {
@@ -426,27 +474,6 @@ body {
 }
 
 
-
-.flashcard-left {
-  text-align: center;
-  @media screen {
-    @media (max-width: 990px) {
-      display: none;
-    }
-    //@media (min-width: 620px) {
-    //  display: inherit;
-    //}
-  }
-}
-
-.flashcard-right {
-  text-align: center;
-  @media screen {
-    @media (max-width: 990px) {
-      display: none;
-    }
-  }
-}
 
 .small-screen-practice {
   display: none!important;

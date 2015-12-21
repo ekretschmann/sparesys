@@ -8,16 +8,16 @@
     <div data-ng-if="cards && cards.length > 0">
 
 
-        <div class="col-md-2 flashcard-left col-lg-3 " style="padding-left: 1em">
+        <div class="flashcard-left" >
 
 
             <div class="flashbox">
-                <div class="font-xl">
+                <div class="font-l">
                     {{course.name}}
 
                 </div>
                 <div>
-                    <svg id="fillgauge" width="150px" height="140px"></svg>
+                    <svg id="fillgauge" width="120px" height="110px"></svg>
                 </div>
 
                 <div tooltip="{{challengeDescription}}">{{challengeName}}
@@ -34,11 +34,11 @@
 
 
 
-                <div class="font-xl">
+                <div class="font-l">
                     Trophies
 
                 </div>
-                <div class="font-xl">
+                <div class="font-l">
                     {{authentication.user.trophies}}
                 </div>
                 <div data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1"
@@ -57,7 +57,7 @@
 
 
 
-        <div class="col-xs-12 col-md-8 col-lg-6">
+        <div class="col-xs-6">
 
 
             <div data-ng-if="mode === 'forward'" data-ng-hide="mode !== 'forward'">
@@ -233,7 +233,7 @@
         </div>
 
 
-        <div class="col-md-2 col-lg-3 flashcard-right ">
+        <div class="flashcard-right ">
 
             <!--<tr>-->
             <!--<td>Description</td>-->
@@ -368,7 +368,6 @@
                             History
                         </button>
                     </div>
-                </section>
             </div>
         </div>
     </div>

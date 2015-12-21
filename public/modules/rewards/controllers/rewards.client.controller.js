@@ -27,8 +27,15 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.items = [];
        // $scope.skills = [];
 
+        $scope.removeLocationFromReward = function() {
+            $scope.reward.journey = '';
+            $scope.update();
+        };
+
         $scope.selectLocation = function() {
             $scope.reward.journey = $scope.selection.journey;
+            $scope.selection.journey = '';
+            $scope.update();
         };
 
         $scope.switchLocation = function(reward, location) {
@@ -422,6 +429,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     for (i = 0; i < allRewards.length; i++) {
                         if (allRewards[i]._id === $stateParams.rewardId) {
                             $scope.reward = allRewards[i];
+
 
 
                         }

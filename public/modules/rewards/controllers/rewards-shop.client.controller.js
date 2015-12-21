@@ -363,15 +363,20 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
             if (!found) {
-                var newItem = {
-                    name: item.name,
-                    rewardId: item._id,
-                    type: item.type,
-                    healthpoints: item.healthpoints,
-                    amount: 1
-                };
+                if (item.journey === '') {
+                    var newItem = {
+                        name: item.name,
+                        rewardId: item._id,
+                        type: item.type,
+                        healthpoints: item.healthpoints,
+                        amount: 1
+                    };
 
-                $scope.authentication.user.inventory.push(newItem);
+
+                    $scope.authentication.user.inventory.push(newItem);
+                } else {
+                    $scope.authentication.user.rewardlocation = item.journey;
+                }
             }
 
             $scope.findItems();
@@ -382,6 +387,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                 user.inventory = $scope.authentication.user.inventory;
                 user.trophies = $scope.authentication.user.trophies;
+                user.rewardlocation = $scope.authentication.user.rewardlocation;
 
                 user.$update(function () {
                     $scope.recipies.forSale = [];

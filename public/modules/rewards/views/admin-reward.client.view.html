@@ -167,13 +167,13 @@
 
                             <!--typeahead="loc.name as location in options.locations | filter:{name: $viewValue} | limitTo:12"-->
 
-                            <div class="field-data" data-ng-if="location">
+                            <div class="field-data" data-ng-if="reward.journey">
                                 <a>
-                                    <i data-ng-click="removeLocationFromReward(reward)"
+                                    <i data-ng-click="removeLocationFromReward()"
                                        class="glyphicon glyphicon-remove-sign small">
                                     </i>
                                 </a>
-                                {{location}}
+                                {{reward.journey}}
 
                             </div>
                         </div>

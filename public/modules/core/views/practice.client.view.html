@@ -351,6 +351,14 @@
                 state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'">
                 </div>
 
+                <div class="flashbox">
+
+                   Card History
+                    <div data-ng-repeat="entry in card.history" style="text-align: left">
+                        {{entry.assessment}} ({{entry.when  | date:'short'}})
+                    </div>
+                </div>
+
 
             </div>
 

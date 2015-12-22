@@ -71,6 +71,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.useIngredient = function (item) {
 
             item.amount--;
+            console.log(item.name);
+            console.log(item.amount);
             if (item.amount === 0) {
                 $scope.removeItemOwned(item);
             }
@@ -342,9 +344,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 for (var j = 0; j < $scope.authentication.user.inventory.length; j++) {
                     var inventoryItem = $scope.authentication.user.inventory[j];
                     if (inventoryItem.rewardId === ingredient.rewardId) {
-                        //console.log(inventoryItem.name);
-                        //console.log(inventoryItem.amount);
-                        //inventoryItem.amount -= ingredient.amount;
+
                         if (inventoryItem.amount === 0) {
                             $scope.authentication.user.inventory.splice(j, 1);
                         }
@@ -389,27 +389,45 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 user.trophies = $scope.authentication.user.trophies;
                 user.rewardlocation = $scope.authentication.user.rewardlocation;
 
-                user.$update(function () {
-                    $scope.recipies.forSale = [];
-                    $scope.recipies.itemUsed = [];
-                    $scope.items.used = [];
-                });
+                for (var i = 0; i < item.ingredients.length; i++) {
+                    if (item.ingredients[i].keep) {
+                        console.log('xxxx');
+                    }
+                }
+                //user.$update(function () {
+                //    $scope.recipies.forSale = [];
+                //    $scope.recipies.itemUsed = [];
+                //    $scope.items.used = [];
+                //});
             });
 
         };
 
+        $scope.resetRecipe = function() {
+            for (var i = 0; i < $scope.items.used; i++) {
+                $scope.removeFromRecipe($scope.items.used[i]);
+            }
+        };
+
         $scope.purchase = function (item) {
+
+
+            $scope.resetRecipe();
+
             if ($scope.authentication.user.trophies > item.price) {
 
 
                 var found = false;
+                var index = -1;
                 for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                     if ($scope.authentication.user.inventory[i].name === item.name) {
                         found = true;
-                        var index = i;
+                        index = i;
 
                     }
                 }
+
+
 
                 if (found) {
                     Users.get({

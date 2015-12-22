@@ -686,6 +686,30 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         };
 
 
+        $scope.prettyPrintHrt = function (hrt) {
+
+            var d = Math.floor(hrt / (1000*24*60*60));
+            hrt = hrt - d*1000*24*60*60;
+            var h = Math.floor(hrt / (1000*24*60));
+            hrt = hrt - h*1000*24*60;
+            var m = Math.floor(hrt / (1000*24));
+            hrt = hrt - m*1000*24;
+            var s = Math.floor(hrt / (1000));
+
+            if (d===0) {
+                if (h===0){
+                    return m+'m '+s+'s';
+                } else {
+                    return h+ 'h '+m+'m ';
+                }
+            } else {
+                return d+'d '+h+ 'h ';
+            }
+
+
+        };
+
+
         $scope.myAnswerCounts = function (answer, mode) {
 
             $scope.repeat = false;

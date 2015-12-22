@@ -355,7 +355,7 @@
 
                    Card History
                     <div data-ng-repeat="entry in card.history" style="text-align: left">
-                        {{entry.assessment}} ({{entry.when  | date:'short'}})
+                        {{entry.assessment}} ({{entry.when  | date:'d/M/yy h:mm:ss'}}) {{prettyPrintHrt(entry.hrt)}}
                     </div>
                 </div>
 

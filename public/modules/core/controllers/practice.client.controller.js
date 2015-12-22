@@ -201,7 +201,9 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             //    }
             //});
 
-            console.log('history  : '+$scope.prettyPrintHrt($scope.card.history[$scope.card.history.length-1].hrt));
+            if ($scope.card.history && $scope.card.history[0]) {
+                console.log('history  : ' + $scope.prettyPrintHrt($scope.card.history[$scope.card.history.length - 1].hrt));
+            }
             console.log('old hrt  : '+$scope.prettyPrintHrt($scope.card.hrt));
 
             $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
@@ -241,8 +243,9 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 check: $scope.assess
             });
 
-            console.log('history  : '+$scope.prettyPrintHrt($scope.card.history[$scope.card.history.length-1].hrt));
-
+            if ($scope.card.history && $scope.card.history[0]) {
+                console.log('history  : ' + $scope.prettyPrintHrt($scope.card.history[$scope.card.history.length - 1].hrt));
+            }
 
 
             var hrtEntry = $scope.card.hrt;
@@ -259,7 +262,9 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 console.log('saving '+newCard.question);
 
 
-                console.log('history  : '+$scope.prettyPrintHrt(newCard.history[newCard.history.length-1].hrt));
+                if (newCard.history && newCard.history[0]) {
+                    console.log('history  : ' + $scope.prettyPrintHrt(newCard.history[newCard.history.length - 1].hrt));
+                }
                 console.log('old hrt  : '+$scope.prettyPrintHrt(newCard.hrt));
 
 
@@ -269,7 +274,9 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
                 console.log('new hrt  : '+$scope.prettyPrintHrt(newCard.hrt));
-                console.log('history  : '+$scope.prettyPrintHrt(newCard.history[newCard.history.length-1].hrt));
+                if (newCard.history && newCard.history[0]) {
+                    console.log('history  : ' + $scope.prettyPrintHrt(newCard.history[newCard.history.length - 1].hrt));
+                }
 
 
 

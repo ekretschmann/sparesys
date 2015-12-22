@@ -201,6 +201,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             //    }
             //});
 
+            console.log('history  : '+$scope.prettyPrintHrt($scope.card.history[$scope.card.history.length-1].hrt));
             console.log('old hrt  : '+$scope.prettyPrintHrt($scope.card.hrt));
 
             $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
@@ -211,27 +212,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 $scope.rewardScore += (1 - prediction);
             }
 
-            //$scope.delta.number++;
-            //$scope.delta.difference += (assessment / 3) - prediction;
-
-
-            //if ($scope.card.history && $scope.card.history.length > 0) {
-            //    if ($scope.delta[$scope.card.packs[0]]) {
-            //        var delta = $scope.delta[$scope.card.packs[0]];
-            //        $scope.delta[$scope.card.packs[0]] = {
-            //            predicted: $scope.card.predictedRetention + delta.predicted,
-            //            cards: 1 + delta.cards,
-            //            score: assessment + delta.score
-            //        };
-            //    } else {
-            //        $scope.delta[$scope.card.packs[0]] = {
-            //            predicted: $scope.card.predictedRetention,
-            //            cards: 1,
-            //            score: assessment
-            //        };
-            //    }
-            //    //console.log($scope.delta[$scope.card.packs[0]]);
-            //}
 
 
             // prolong well known cards
@@ -261,22 +241,37 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 check: $scope.assess
             });
 
+            console.log('history  : '+$scope.prettyPrintHrt($scope.card.history[$scope.card.history.length-1].hrt));
 
 
+
+            var hrtEntry = $scope.card.hrt;
+            if (assessment === 0 && $scope.assess === 'auto') {
+                $scope.repeat = true;
+            } else {
+                $scope.repeat = false;
+            }
 
             Cards.get({
                 cardId: $scope.card._id
             }, function (newCard) {
 
+                console.log('saving '+newCard.question);
 
-                newCard.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
-                newCard.history.push({when: time, assessment: assessment, hrt: $scope.card.hrt});
 
-                if (assessment === 0 && $scope.assess === 'auto') {
-                    $scope.repeat = true;
-                } else {
-                    $scope.repeat = false;
-                }
+                console.log('history  : '+$scope.prettyPrintHrt(newCard.history[newCard.history.length-1].hrt));
+                console.log('old hrt  : '+$scope.prettyPrintHrt(newCard.hrt));
+
+
+                newCard.hrt = hrtEntry;
+                newCard.history.push({when: time, assessment: assessment, hrt: newCard.hrt});
+
+
+
+                console.log('new hrt  : '+$scope.prettyPrintHrt(newCard.hrt));
+                console.log('history  : '+$scope.prettyPrintHrt(newCard.history[newCard.history.length-1].hrt));
+
+
 
                 newCard.$update(function (resp) {
                     //console.log(resp);

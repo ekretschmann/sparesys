@@ -189,6 +189,9 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         $scope.recordRateOnline = function (time, assessment) {
 
 
+            console.log('recording '+$scope.card.question);
+            console.log('time      '+time);
+            console.log('assessmet '+assessment);
             //$localForage.getItem('cards').then(function(data) {
             //    var offlineResults = data;
             //
@@ -249,6 +252,8 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 mode: $scope.mode,
                 check: $scope.assess
             });
+
+            console.log('new hrt: '+$scope.card.hrt);
 
 
             Cards.get({

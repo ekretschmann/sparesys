@@ -72,6 +72,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             var ratedCorrect = false;
 
             $scope.answer.assessment = 'wrong';
+
             if ($scope.card.answer.toLowerCase() === $scope.answer.text.toLowerCase()) {
                 $scope.processCard(3);
                 $scope.answer.assessment = 'correct';

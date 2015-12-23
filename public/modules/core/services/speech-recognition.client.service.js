@@ -60,7 +60,7 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
                         interim_transcript += event.results[i][0].transcript.trim();
 
                         console.log(interim_transcript);
-                        if (interim_transcript.indexOf(card.answer) > -1) {
+                        if (card.answer.toLowerCase().indexOf(interim_transcript.toLowerCase()) > -1) {
                             answer.text = card.answer;
                             answer.error = false;
                             gotTheAnswer = true;

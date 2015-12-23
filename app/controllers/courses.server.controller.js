@@ -633,8 +633,6 @@ exports.getCardsForCourse = function (req, res, next, id) {
             });
             loadPack.then(function (pack) {
 
-                console.log(pack.cards);
-
 
 
                 packOrder[pack._id] = pack.cards;
@@ -654,14 +652,9 @@ exports.getCardsForCourse = function (req, res, next, id) {
                     loadCard.then(function (card) {
 
 
-                        console.log(card.question);
-
-
                         card.packName = pack.name;
                         result.push(card);
 
-                        console.log(result.length);
-                        console.log(expectedCards);
 
                         if (result.length === expectedCards) {
                             var ordered = [];
@@ -676,7 +669,6 @@ exports.getCardsForCourse = function (req, res, next, id) {
                                     });
                                 });
                             });
-                            console.log(ordered);
                             res.jsonp(ordered);
                         }
                     });

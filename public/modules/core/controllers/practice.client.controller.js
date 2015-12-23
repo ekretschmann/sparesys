@@ -636,7 +636,6 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             var promise = res.get({courseId: $stateParams.courseId});
             promise.$promise.then(function (cards) {
 
-                console.log(cards);
                 $scope.cards = cards;
                 ChallengeCalculatorService.init(cards);
                 $scope.inPlay = cards.length;

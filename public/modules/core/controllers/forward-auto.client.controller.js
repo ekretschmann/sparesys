@@ -8,6 +8,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         $scope.answer = {};
         $scope.answer.text = '';
+        $scope.answer.error = false;
         $scope.answer.assessment = undefined;
         $scope.specialChars = [];
 
@@ -156,6 +157,8 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.startRecording = function (card) {
 
 
+            $scope.answer.text = '';
+            $scope.answer.recognized = false;
 
             var promise = SpeechRecognitionService.initSpeech(card, $scope.answer);
 
@@ -163,7 +166,17 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $scope.recording = true;
 
             promise.then(function(x) {
-                $scope.answer.text = x.text;
+                if (x.error) {
+                    console.log('restarting');
+                    $scope.startRecording(card);
+                } else {
+                    if (x.text === '') {
+                        $scope.startRecording(card);
+                    } else {
+                        $scope.answer.text = x.text;
+                        $scope.answer.recognized = true;
+                    }
+                }
             });
 
 

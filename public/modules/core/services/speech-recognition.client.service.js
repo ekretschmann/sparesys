@@ -1,72 +1,101 @@
 'use strict';
 
 /* global d3 */
+/* jshint ignore:start */
 angular.module('core').service('SpeechRecognitionService', ['$q',
     function ($q) {
 
 
+        this.recognition = new webkitSpeechRecognition();
 
         this.initSpeech = function (card, answer) {
 
-            /* jshint ignore:start */
+            if (!this.recognition) {
+                this.recognition = new webkitSpeechRecognition();
+            }
+
+
 
             var deferred = $q.defer();
 
-            var recognition = new webkitSpeechRecognition();
-            recognition.continuous = false;
-            recognition.interimResults = true;
-            recognition.lang = card.languageBack.code;
+            
+            this.recognition.continuous = false;
+            this.recognition.interimResults = true;
+            this.recognition.lang = card.languageBack.code;
 
 
-            recognition.onresult = function (event) {
+            var rec = this.recognition;
+            var gotTheAnswer = false;
+            this.recognition.onresult = function (event) {
+
 
                 var interim_transcript = '';
                 if (typeof(event.results) === 'undefined') {
-                    recognition.onend = null;
-                    recognition.stop();
+                    this.recognition.onend = null;
+                    this.recognition.stop();
                     return;
                 }
+
+
                 for (var i = event.resultIndex; i < event.results.length; ++i) {
+
+                   // console.log(event);
 
                     //if (this.state==='question' && this.practice.direction === 'forward') {
                     if (event.results[i].isFinal) {
-                        if (answer.text === undefined) {
-                            answer.text = '';
+                        if (!gotTheAnswer) {
+                            if (answer.text === undefined) {
+                                answer.text = '';
+                            }
+
+
+                            answer.text = event.results[i][0].transcript.trim();
+
+                            if (answer.text.substring(0, 3).toLowerCase() === 'um ') {
+                                answer.text = answer.text.substring(3);
+                            }
                         }
 
-                        answer.text += event.results[i][0].transcript.trim();
-                        //   $state.go($state.$current);
                     } else {
                         interim_transcript += event.results[i][0].transcript.trim();
+
+                        if (interim_transcript.indexOf(card.answer) > -1) {
+                            answer.text = card.answer;
+                            gotTheAnswer = true;
+                            rec.onend(event);
+
+                        }
                     }
 
                 }
 
             };
 
-            recognition.onstart = function () {
+            this.recognition.onstart = function () {
                 answer.text = '';
             };
 
-            recognition.onerror = function (event) {
 
-                console.log('error');
-                console.log(event);
-            };
+            this.recognition.onerror = function (event) {
 
-            recognition.onend = function () {
+                answer.error = true;
+                rec.stop();
                 deferred.resolve(answer);
-               // recognition.start();
             };
 
-            recognition.start();
+            this.recognition.onend = function () {
+                deferred.resolve(answer);
+               // this.recognition.start();
+            };
+
+            this.recognition.start();
 
             return deferred.promise;
-            /* jshint ignore:end */
+
         };
 
 
 
     }
-])
-;
+]);
+/* jshint ignore:end */

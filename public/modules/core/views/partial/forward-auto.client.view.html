@@ -28,11 +28,11 @@
                             <!--ng-src="modules/core/img/microphone.png"-->
                             <!--data-ng-click="startRecording(card)">-->
                    <div data-ng-if="!recording">
-                       <a class="answer-counts" data-ng-click="startRecording(card)" href="">Record</a>
+                       <a class="answer-counts" data-ng-click="startRecording(card)" href="">Start speech recognition</a>
                    </div>
 
-                    <div data-ng-if="recording">
-                        <a class="answer-counts" data-ng-click="stopRecording(card)" href="">Stop Recording</a>
+                    <div data-ng-if="answer.recognized">
+                        <a class="answer-counts" data-ng-click="startRecording(card)" href="">Record again</a>
                     </div>
                 </div>
             </div>

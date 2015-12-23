@@ -322,7 +322,10 @@ exports.courseByID = function (req, res, next, id) {
 
 
 
+
         Course.findById(id).populate('user', 'displayName').exec(function (err, course) {
+
+
             if (err) return next(err);
             if (!course) return next(new Error('Failed to load Course ' + id));
             req.course = course;
@@ -599,6 +602,8 @@ exports.upload = function (req, res, next) {
 exports.getCardsForCourse = function (req, res, next, id) {
 
 
+
+
     var result = [];
 
 
@@ -628,6 +633,7 @@ exports.getCardsForCourse = function (req, res, next, id) {
             });
             loadPack.then(function (pack) {
 
+                console.log(pack.cards);
 
 
 
@@ -638,6 +644,7 @@ exports.getCardsForCourse = function (req, res, next, id) {
 
 
                     var loadCard = Card.findOne({'_id': cardId}).exec(function (err) {
+
                         if (err) {
                             return res.send(400, {
                                 message: getErrorMessage(err)
@@ -647,9 +654,14 @@ exports.getCardsForCourse = function (req, res, next, id) {
                     loadCard.then(function (card) {
 
 
+                        console.log(card.question);
+
 
                         card.packName = pack.name;
                         result.push(card);
+
+                        console.log(result.length);
+                        console.log(expectedCards);
 
                         if (result.length === expectedCards) {
                             var ordered = [];
@@ -664,7 +676,7 @@ exports.getCardsForCourse = function (req, res, next, id) {
                                     });
                                 });
                             });
-                            //console.log(ordered);
+                            console.log(ordered);
                             res.jsonp(ordered);
                         }
                     });

@@ -83,40 +83,6 @@
 
                     <div class="title">{{schoolclass.name}}</div>
 
-
-                    <div class="flashcard-section">
-                        <div class="row">
-                            <div class="col-xs-6 field-label dashboard-col-attached">
-
-                                Teachers
-
-
-                            </div>
-                            <div class="col-xs-6 field-label dashboard-col-attached">
-
-                                Students
-
-
-                            </div>
-                        </div>
-                        <div class="row">
-                            <div class="col-xs-6 field-data dashboard-col-attached">
-
-
-                                <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}}</div>
-
-
-                            </div>
-                            <div class="col-xs-6 field-data dashboard-col-attached">
-
-                                <div data-ng-repeat="student in schoolclass.students">{{student.displayName}}</div>
-
-                            </div>
-                        </div>
-
-
-                    </div>
-
                     <div class="flashcard-section">
                         <div class="row">
                             <div class="col-xs-12 field-label dashboard-col-attached">
@@ -163,6 +129,41 @@
 
                         </div>
                     </div>
+
+                    <div class="flashcard-section">
+                        <div class="row">
+                            <div class="col-xs-6 field-label dashboard-col-attached">
+
+                                Teachers
+
+
+                            </div>
+                            <div class="col-xs-6 field-label dashboard-col-attached">
+
+                                Students
+
+
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-xs-6 field-data dashboard-col-attached">
+
+
+                                <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}}</div>
+
+
+                            </div>
+                            <div class="col-xs-6 field-data dashboard-col-attached">
+
+                                <div data-ng-repeat="student in schoolclass.students">{{student.displayName}}</div>
+
+                            </div>
+                        </div>
+
+
+                    </div>
+
+
 
                     <div class="row" style="padding-top: 1em">
                         <div class="col-xs-12 field-data dashboard-col-attached">

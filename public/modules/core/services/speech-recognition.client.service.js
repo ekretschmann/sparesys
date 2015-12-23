@@ -68,8 +68,8 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
 
                         }
 
-                        for (var j=0; j<card.answer.acceptedAnswersForward.length; j++) {
-                            var a = card.answer.acceptedAnswersForward[j];
+                        for (var j=0; j<card.acceptedAnswersForward.length; j++) {
+                            var a = card.acceptedAnswersForward[j];
                             if (a.toLowerCase().indexOf(interim_transcript.toLowerCase()) > -1) {
                                 answer.text = card.answer;
                                 answer.error = false;

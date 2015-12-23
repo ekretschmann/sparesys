@@ -7,6 +7,7 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
 
 
         this.recognition = new webkitSpeechRecognition();
+        this.hasStared = false;
 
         this.initSpeech = function (card, answer) {
 
@@ -19,7 +20,7 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
             var deferred = $q.defer();
 
             
-            this.recognition.continuous = false;
+            this.recognition.continuous = true;
             this.recognition.interimResults = true;
             this.recognition.lang = card.languageBack.code;
 
@@ -28,6 +29,7 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
             var gotTheAnswer = false;
             this.recognition.onresult = function (event) {
 
+                console.log('result');
 
                 var interim_transcript = '';
                 if (typeof(event.results) === 'undefined') {
@@ -50,17 +52,17 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
 
 
                             answer.text = event.results[i][0].transcript.trim();
+                            answer.error = false;
 
-                            if (answer.text.substring(0, 3).toLowerCase() === 'um ') {
-                                answer.text = answer.text.substring(3);
-                            }
                         }
 
                     } else {
                         interim_transcript += event.results[i][0].transcript.trim();
 
+                        console.log(interim_transcript);
                         if (interim_transcript.indexOf(card.answer) > -1) {
                             answer.text = card.answer;
+                            answer.error = false;
                             gotTheAnswer = true;
                             rec.onend(event);
 
@@ -72,23 +74,31 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
             };
 
             this.recognition.onstart = function () {
+                console.log('start');
                 answer.text = '';
             };
 
 
             this.recognition.onerror = function (event) {
 
+
+                console.log('error');
                 answer.error = true;
-                rec.stop();
+                console.log(event);
+                //rec.stop();
                 deferred.resolve(answer);
             };
 
             this.recognition.onend = function () {
+                console.log('end');
                 deferred.resolve(answer);
                // this.recognition.start();
             };
 
-            this.recognition.start();
+            if (!this.hasStarted) {
+                this.hasStarted = true;
+                this.recognition.start();
+            }
 
             return deferred.promise;
 

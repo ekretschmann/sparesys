@@ -167,7 +167,6 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
             promise.then(function(x) {
                 if (x.error) {
-                    console.log('restarting');
                     $scope.startRecording(card);
                 } else {
                     if (x.text === '') {

@@ -73,23 +73,16 @@ angular.module('core').service('RetentionCalculatorService', [
                 var totalWeight = 0;
 
                 //console.log(card.question);
-                console.log(card.question);
+
                 for (var i = card.history.length-1; i >=0; i--) {
                     var entry = card.history[i];
 
-                    console.log(entry);
 
                     var timeDiff = endTime - entry.when;
                     var pr = this.getPredictedRetention(entry.when, entry.hrt, endTime);
 
-                    console.log(pr);
-
                     var weight = this.calculateWeight(pr);
-                    //console.log('  '+weight);
-                    //console.log('  '+weight);
-                    if (entry.assessment === 3) {
-                        totalWeight += weight / (counter*counter);
-                    }
+                    totalWeight += (entry.assessment+1)*weight / (counter*counter);
 
                     endTime = entry.when;
 
@@ -117,6 +110,8 @@ angular.module('core').service('RetentionCalculatorService', [
                     if(card.hrt > 1000*60*60*24 && card.hrt <= 1000*60*60*24*30) {
                         maximalMultiplicator = 5;
                     }
+
+
 
                     //console.log(totalWeight);
                     return card.hrt*(1+maximalMultiplicator*totalWeight);

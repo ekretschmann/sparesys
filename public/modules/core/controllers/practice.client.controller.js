@@ -189,9 +189,9 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
         $scope.recordRateOnline = function (time, assessment) {
 
 
-            console.log('recording: '+$scope.card.question);
-            console.log('time     : '+time);
-            console.log('assessmet: '+assessment);
+           // console.log('recording: '+$scope.card.question);
+           // console.log('time     : '+time);
+           // console.log('assessmet: '+assessment);
 
             //$localForage.getItem('cards').then(function(data) {
             //    var offlineResults = data;
@@ -201,10 +201,10 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
             //    }
             //});
 
-            if ($scope.card.history && $scope.card.history[0]) {
-                console.log('history  : ' + $scope.prettyPrintHrt($scope.card.history[$scope.card.history.length - 1].hrt));
-            }
-            console.log('old hrt  : '+$scope.prettyPrintHrt($scope.card.hrt));
+            //if ($scope.card.history && $scope.card.history[0]) {
+            //    console.log('history  : ' + $scope.prettyPrintHrt($scope.card.history[$scope.card.history.length - 1].hrt));
+            //}
+            //console.log('old hrt  : '+$scope.prettyPrintHrt($scope.card.hrt));
 
             $scope.card.hrt = RetentionCalculatorService.calculateFor($scope.card, time, assessment);
             var prediction = RetentionCalculatorService.getPredictedCardRetention($scope.card);
@@ -232,7 +232,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
 
-            console.log('new hrt  : '+$scope.prettyPrintHrt($scope.card.hrt));
+            //console.log('new hrt  : '+$scope.prettyPrintHrt($scope.card.hrt));
 
 
             $scope.card.history.push({
@@ -243,9 +243,9 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 check: $scope.assess
             });
 
-            if ($scope.card.history && $scope.card.history[0]) {
-                console.log('history  : ' + $scope.prettyPrintHrt($scope.card.history[$scope.card.history.length - 1].hrt));
-            }
+            //if ($scope.card.history && $scope.card.history[0]) {
+            //    console.log('history  : ' + $scope.prettyPrintHrt($scope.card.history[$scope.card.history.length - 1].hrt));
+            //}
 
 
             var hrtEntry = $scope.card.hrt;
@@ -259,13 +259,13 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 cardId: $scope.card._id
             }, function (newCard) {
 
-                console.log('saving '+newCard.question);
+                //console.log('saving '+newCard.question);
 
 
-                if (newCard.history && newCard.history[0]) {
-                    console.log('history  : ' + $scope.prettyPrintHrt(newCard.history[newCard.history.length - 1].hrt));
-                }
-                console.log('old hrt  : '+$scope.prettyPrintHrt(newCard.hrt));
+                //if (newCard.history && newCard.history[0]) {
+                //    console.log('history  : ' + $scope.prettyPrintHrt(newCard.history[newCard.history.length - 1].hrt));
+                //}
+                //console.log('old hrt  : '+$scope.prettyPrintHrt(newCard.hrt));
 
 
                 newCard.hrt = hrtEntry;
@@ -273,10 +273,10 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
 
-                console.log('new hrt  : '+$scope.prettyPrintHrt(newCard.hrt));
-                if (newCard.history && newCard.history[0]) {
-                    console.log('history  : ' + $scope.prettyPrintHrt(newCard.history[newCard.history.length - 1].hrt));
-                }
+                //console.log('new hrt  : '+$scope.prettyPrintHrt(newCard.hrt));
+                //if (newCard.history && newCard.history[0]) {
+                //    console.log('history  : ' + $scope.prettyPrintHrt(newCard.history[newCard.history.length - 1].hrt));
+                //}
 
 
 

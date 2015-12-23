@@ -55,7 +55,9 @@ angular.module('core').directive('playsound',
 
 
                     } else {
-                        console.log('playing sound: '+text);
+                        if (scope.playwhen === 'true') {
+                            console.log('playing sound: ' + text);
+                        }
                     }
                     /* jshint ignore:end */
 

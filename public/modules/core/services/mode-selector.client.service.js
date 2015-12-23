@@ -161,7 +161,7 @@ angular.module('core').service('ModeSelectorService', [
                 assess = 'self';
             }
 
-            if(assess ==='computer') {
+            if(assess ==='computer' || assess ==='Computer Checks') {
                 assess = 'auto';
             }
             return assess;

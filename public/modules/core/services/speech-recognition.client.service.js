@@ -1,78 +1,71 @@
 'use strict';
 
 /* global d3 */
-angular.module('core').service('SpeechRecognitionService', [
-    function () {
+angular.module('core').service('SpeechRecognitionService', ['$q',
+    function ($q) {
 
 
-        this.recognition = undefined;
 
-        this.initSpeech = function () {
-//                console.log('got it');
+        this.initSpeech = function (card, answer) {
+
             /* jshint ignore:start */
-            this.recognition = new webkitSpeechRecognition();
+
+            var deferred = $q.defer();
+
+            var recognition = new webkitSpeechRecognition();
+            recognition.continuous = false;
+            recognition.interimResults = true;
+            recognition.lang = card.languageBack.code;
 
 
-            this.recognition.continuous = true;
-            this.recognition.interimResults = true;
+            recognition.onresult = function (event) {
 
+                var interim_transcript = '';
+                if (typeof(event.results) === 'undefined') {
+                    recognition.onend = null;
+                    recognition.stop();
+                    return;
+                }
+                for (var i = event.resultIndex; i < event.results.length; ++i) {
 
-            this.recognition.lang = this.card.languageBack.code;
+                    //if (this.state==='question' && this.practice.direction === 'forward') {
+                    if (event.results[i].isFinal) {
+                        if (answer.text === undefined) {
+                            answer.text = '';
+                        }
 
+                        answer.text += event.results[i][0].transcript.trim();
+                        //   $state.go($state.$current);
+                    } else {
+                        interim_transcript += event.results[i][0].transcript.trim();
+                    }
 
-            this.recognition.onresult = this.onSpeechResult;
+                }
 
-            this.recognition.onstart = function () {
-                console.log('start');
-                this.answer.text = '';
             };
 
-            this.recognition.onerror = function (event) {
+            recognition.onstart = function () {
+                answer.text = '';
+            };
+
+            recognition.onerror = function (event) {
 
                 console.log('error');
                 console.log(event);
             };
-            this.recognition.onend = function () {
-                console.log('end');
-                recognition.start();
+
+            recognition.onend = function () {
+                deferred.resolve(answer);
+               // recognition.start();
             };
 
-            console.log('and starting');
-            this.recognition.start();
+            recognition.start();
+
+            return deferred.promise;
             /* jshint ignore:end */
         };
 
-        this.onSpeechResult = function (event) {
-            /* jshint ignore:start */
 
-
-            var interim_transcript = '';
-            if (typeof(event.results) === 'undefined') {
-//                    console.log('ending');
-                this.recognition.onend = null;
-                this.recognition.stop();
-//                    upgrade();
-                return;
-            }
-            for (var i = event.resultIndex; i < event.results.length; ++i) {
-                console.log(i);
-
-                //if (this.state==='question' && this.practice.direction === 'forward') {
-                //    if (event.results[i].isFinal) {
-                //        if (this.answer.text === undefined) {
-                //            this.answer.text = '';
-                //        }
-                //
-                //        this.answer.text += event.results[i][0].transcript.trim();
-                //        $state.go($state.$current);
-                //    } else {
-                //        interim_transcript += event.results[i][0].transcript.trim();
-                //    }
-                //}
-            }
-            /* jshint ignore:end */
-
-        };
 
     }
 ])

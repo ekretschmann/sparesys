@@ -41,11 +41,18 @@
                         </div>
 
 
+
                         <div data-ng-show="!diagramShown" data-ng-hide="diagramShown">
                             <div style="text-align: center; font-size: large">
-                                {{course.name}} - Not enough data to show diagrams
-
+                                <div style="padding-top: 2em; padding-bottom: 3em">
+                                Not enough data to show diagrams
+</div>
+                                <button type="button" class="btn btn-rememberators font-s"
+                                        data-ng-click="practice(course)" tooltip="{{course.description}}">
+                                    Practice
+                                </button>
                             </div>
+
 
                         </div>
                 </div>

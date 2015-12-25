@@ -6,13 +6,19 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
     function ($q) {
 
 
-        this.recognition = new webkitSpeechRecognition();
-        this.hasStared = false;
+        //if ('webkitSpeechRecognition' in window) {
+            this.recognition = undefined;
+            this.hasStared = false;
+        //}
 
         this.initSpeech = function (card, answer) {
 
             if (!this.recognition) {
-                this.recognition = new webkitSpeechRecognition();
+                if ('webkitSpeechRecognition' in window) {
+                    this.recognition = new webkitSpeechRecognition();
+                }
+            } else {
+                return;
             }
 
 

@@ -11,6 +11,32 @@
         </div>
     </div>
 
+    <div class="col-xs-12 subtitle" style="text-align: center">
+        <div class="row">
+
+            <div class="col-xs-2">
+                <div data-ng-if="prevCard">
+                    <a href="#!/cards/{{prevCard._id}}/admin"><i
+                            class="glyphicon glyphicon-circle-arrow-left"></i> {{prevCard.question}}</a>
+                </div>
+            </div>
+
+
+            <div class="col-xs-8">
+
+            </div>
+
+
+            <div class="col-xs-2" style="text-align: right">
+                <div data-ng-if="nextCard">
+                    <a href="#!/cards/{{nextCard._id}}/admin">{{nextCard.question}} <i
+                            class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
 
     <div data-ng-if="card.question">
 

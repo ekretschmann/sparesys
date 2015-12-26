@@ -3,6 +3,8 @@
     <div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
 
 
+
+
     <div class="col-xs-6">
 
 
@@ -136,6 +138,8 @@
                         <div class="pull-right">
 
 
+
+
                             <a href="" data-ng-click="showMode('images')" data-ng-if="editMode !== 'images'"><i
                                     class="glyphicon glyphicon-picture"></i></a>
 
@@ -151,6 +155,8 @@
 
                             <i class="glyphicon glyphicon-option-horizontal text-muted"
                                data-ng-if="editMode === 'modes'"></i>
+
+                            <a href="#!/cards/{{card._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
 
 
                             <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i

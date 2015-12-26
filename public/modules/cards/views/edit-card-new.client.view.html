@@ -12,6 +12,39 @@
     </div>
 
 
+    <div class="col-xs-12 subtitle" style="text-align: center">
+        <div class="row">
+
+            <div class="col-xs-2">
+                <div data-ng-if="prevCard">
+                    <a href="#!/cards/{{prevCard._id}}"><i
+                            class="glyphicon glyphicon-circle-arrow-left"></i> {{prevCard.question}}</a>
+                </div>
+            </div>
+
+
+            <div class="col-xs-8">
+                <!--<a href="" data-ng-click="scrollDown()"><i-->
+                        <!--class="glyphicon glyphicon-circle-arrow-down"></i></a>-->
+
+                <!--<a href="" data-ng-click="scrollDown()">Scroll down to add more-->
+                    <!--cards-->
+                <!--</a>-->
+                <!--<a href="" data-ng-click="scrollDown()"><i-->
+                        <!--class="glyphicon glyphicon-circle-arrow-down"></i></a>-->
+            </div>
+
+
+            <div class="col-xs-2" style="text-align: right">
+                <div data-ng-if="nextCard">
+                    <a href="#!/cards/{{nextCard._id}}">{{nextCard.question}} <i
+                            class="glyphicon glyphicon-circle-arrow-right"></i></a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div data-ng-if="card.question">
 
         <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"

@@ -19,6 +19,9 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
         $scope.calendar.openStartDateCalendar = false;
         $scope.calendar.openDueDateCalendar = false;
 
+        $scope.prevCard = undefined;
+        $scope.nextCard = undefined;
+
 
         $scope.languages = [
             {name: '-', code: ''},
@@ -151,6 +154,33 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
 
             $scope.card = Cards.get({
                 cardId: $stateParams.cardId
+            }, function () {
+
+
+                $scope.pack = Packs.get({
+                    packId: $scope.card.packs[0]
+                }, function() {
+
+                    for (var i=0; i<$scope.pack.cards.length; i++) {
+                        var theCard = $scope.pack.cards[i];
+                        if (theCard._id === $stateParams.cardId) {
+                            if (i === 0) {
+                                $scope.prevCard = undefined;
+                            } else {
+                                $scope.prevCard = $scope.pack.cards[i-1];
+                            }
+
+                            if (i === $scope.pack.cards.length-1) {
+                                $scope.nextCard = undefined;
+
+                            } else {
+                                $scope.nextCard = $scope.pack.cards[i+1];
+                            }
+                        }
+                    }
+                });
+
+
             });
         };
 

@@ -2,8 +2,8 @@
 
 
 // Courses controller
-angular.module('core').controller('ReverseAutoController', ['$scope', '$state', '$document', '$timeout',
-    function ($scope, $state, $document, $timeout) {
+angular.module('core').controller('ReverseAutoController', ['$scope', '$state', '$document', '$timeout', 'SpeechRecognitionService',
+    function ($scope, $state, $document, $timeout, SpeechRecognitionService) {
 
         $scope.answer = {};
         $scope.answer.text = '';
@@ -146,6 +146,36 @@ angular.module('core').controller('ReverseAutoController', ['$scope', '$state', 
             //$timeout(function () {
             //    angular.element('.focus').trigger('focus');
             //}, 100);
+        };
+
+
+        $scope.startRecording = function (card) {
+
+
+            $scope.answer.text = '';
+            $scope.answer.recognized = false;
+
+            var promise = SpeechRecognitionService.initSpeech(card, $scope.answer);
+
+
+            $scope.recording = true;
+
+
+            promise.then(function(x) {
+                console.log('receiving ', x.text);
+                if (x.error) {
+                    $scope.startRecording(card);
+                } else {
+                    if (x.text === '') {
+                        $scope.startRecording(card);
+                    } else {
+                        $scope.answer.text = x.text;
+                        $scope.answer.recognized = true;
+                    }
+                }
+            });
+
+
         };
 
     }]);

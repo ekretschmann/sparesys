@@ -142,6 +142,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $scope.state = 'question';
             $scope.$parent.nextCard();
 
+            console.log($scope.card);
             $scope.startRecording($scope.card);
 
             $scope.answer.text = '';
@@ -165,7 +166,9 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
             $scope.recording = true;
 
+
             promise.then(function(x) {
+                console.log('receiving ', x.text);
                 if (x.error) {
                     $scope.startRecording(card);
                 } else {

@@ -96,8 +96,9 @@
                                speed="speechRate"/>
 
 
-                    (<span data-ng-repeat="aa in card.alternativeAnswersForward">{{aa}}<span data-ng-if="!$last"> / </span></span>)</div>
-
+                    <div data-ng-if="card.alternativeAnswersForward && card.alternativeAnswersForward.length > 0">
+                        (<span data-ng-repeat="aa in card.alternativeAnswersForward">{{aa}}<span data-ng-if="!$last"> / </span></span>)</div>
+                    </div>
                 <div data-ng-if="answer.assessment === 'wrong'" class="incorrect-answer">
 
 
@@ -107,8 +108,9 @@
                                extension="{{card.answerExtension}}"
                                playwhen="{{card.readBackForward}}"
                                speed="speechRate"/>
-                    (<span data-ng-repeat="aa in card.alternativeAnswersForward">{{aa}}<span data-ng-if="!$last"> / </span></span>)</div>
-
+                    <div data-ng-if="card.alternativeAnswersForward && card.alternativeAnswersForward.length > 0">
+                        (<span data-ng-repeat="aa in card.alternativeAnswersForward">{{aa}}<span data-ng-if="!$last"> / </span></span>)</div>
+</div>
             </div>
 
             <div data-ng-if="state === 'answer'">

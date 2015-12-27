@@ -401,6 +401,7 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.speechRecognitionForward = original.speechRecognitionForward;
             copy.speechRecognitionReverse = original.speechRecognitionReverse;
             copy.acceptedAnswersForward = original.acceptedAnswersForward;
+            copy.alternativeAnswersForward = original.alternativeAnswersForward;
             copy.invalidAnswersForward = original.invalidAnswersForward;
             copy.acceptedAnswersReverse = original.acceptedAnswersReverse;
             copy.invalidAnswersReverse = original.invalidAnswersReverse;

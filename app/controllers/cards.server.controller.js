@@ -241,6 +241,7 @@ exports.update = function (req, res) {
             c.startDate = card.startDate;
             c.format = card.format;
             c.acceptedAnswersForward = card.acceptedAnswersForward;
+            c.alternativeAnswersForward = card.alternativeAnswersForward;
             c.invalidAnswersForward = card.invalidAnswersForward;
             c.acceptedAnswersReverse = card.acceptedAnswersReverse;
             c.invalidAnswersReverse = card.invalidAnswersReverse;

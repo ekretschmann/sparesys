@@ -69,10 +69,39 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
         };
 
         $scope.data = {};
+        $scope.addAcceptedAnswerFront = function () {
+            console.log($scope.data.acceptedAnswerFront);
+            if ($scope.data.acceptedAnswerFront) {
+                $scope.card.acceptedAnswersForward.push($scope.data.acceptedAnswerFront);
+                $scope.card.$update();
+                $scope.data.acceptedAnswerFront = '';
+            }
+        };
+
+        $scope.addAcceptedAnswerBack = function () {
+            if ($scope.data.acceptedAnswerBack) {
+                $scope.card.acceptedAnswersReverse.push($scope.data.acceptedAnswerBack);
+                $scope.card.$update();
+                $scope.data.acceptedAnswerBack = '';
+            }
+        };
+
+        $scope.deleteAcceptedAnswerFront = function (index) {
+            $scope.card.acceptedAnswersForward.splice(index, 1);
+            $scope.card.$update();
+        };
+
+        $scope.deleteAcceptedAnswerBack = function (index) {
+            $scope.card.acceptedAnswersReverse.splice(index, 1);
+            $scope.card.$update();
+        };
+
+
+
         $scope.addAlternativeAnswerFront = function () {
             console.log($scope.data.alternativeAnswerFront);
             if ($scope.data.alternativeAnswerFront) {
-                $scope.card.acceptedAnswersForward.push($scope.data.alternativeAnswerFront);
+                $scope.card.alternativeAnswersForward.push($scope.data.alternativeAnswerFront);
                 $scope.card.$update();
                 $scope.data.alternativeAnswerFront = '';
             }
@@ -80,19 +109,19 @@ angular.module('cards').controller('CardsControllerNew', ['$scope', '$modal', '$
 
         $scope.addAlternativeAnswerBack = function () {
             if ($scope.data.alternativeAnswerBack) {
-                $scope.card.acceptedAnswersReverse.push($scope.data.alternativeAnswerBack);
+                $scope.card.alternativeAnswersReverse.push($scope.data.alternativeAnswerBack);
                 $scope.card.$update();
                 $scope.data.alternativeAnswerBack = '';
             }
         };
 
         $scope.deleteAlternativeAnswerFront = function (index) {
-            $scope.card.acceptedAnswersForward.splice(index, 1);
+            $scope.card.alternativeAnswersForward.splice(index, 1);
             $scope.card.$update();
         };
 
         $scope.deleteAlternativeAnswerBack = function (index) {
-            $scope.card.acceptedAnswersReverse.splice(index, 1);
+            $scope.card.alternativeAnswersReverse.splice(index, 1);
             $scope.card.$update();
         };
 

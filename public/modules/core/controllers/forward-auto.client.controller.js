@@ -90,7 +90,15 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
 
             $scope.card.acceptedAnswersForward.forEach(function (alt) {
-                if (alt.toLowerCase() === $scope.answer.text.toLowerCase()) {
+                if (alt.toLowerCase().replace(/ /g,'') === $scope.answer.text.toLowerCase().replace(/ /g,'')) {
+                    $scope.processCard(3);
+                    $scope.answer.assessment = 'correct';
+                    ratedCorrect = true;
+                }
+            });
+
+            $scope.card.alternativeAnswersForward.forEach(function (alt) {
+                if (alt.toLowerCase().replace(/ /g,'') === $scope.answer.text.toLowerCase().replace(/ /g,'')) {
                     $scope.processCard(3);
                     $scope.answer.assessment = 'correct';
                     ratedCorrect = true;

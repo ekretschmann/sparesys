@@ -10,7 +10,7 @@
         <div class="row flashcard-top">
             <div class="col-xs-6  flashcard-nw">
                 <div data-ng-if="!course.supervised && state === 'answer'">
-                    <a class="edit-card" href="#!/cards/{{card._id}}/edit">Edit this card</a>
+                    <a class="edit-card" href="#!/cards/{{card._id}}">Edit this card</a>
                 </div>
 
             </div>
@@ -95,7 +95,8 @@
                                playwhen="{{card.readBackForward}}"
                                speed="speechRate"/>
 
-                </div>
+
+                    (<span data-ng-repeat="aa in card.alternativeAnswersForward">{{aa}}<span data-ng-if="!$last"> / </span></span>)</div>
 
                 <div data-ng-if="answer.assessment === 'wrong'" class="incorrect-answer">
 
@@ -106,9 +107,7 @@
                                extension="{{card.answerExtension}}"
                                playwhen="{{card.readBackForward}}"
                                speed="speechRate"/>
-
-                </div>
-
+                    (<span data-ng-repeat="aa in card.alternativeAnswersForward">{{aa}}<span data-ng-if="!$last"> / </span></span>)</div>
 
             </div>
 

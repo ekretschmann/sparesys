@@ -247,10 +247,8 @@
                 <div class="flashbox">
                     {{card.retention}}% chance you remember this card
                 </div>
-                <div class="flashbox">
-                    <div data-ng-if="lastRepetition">
+                <div class="flashbox" data-ng-if="lastRepetition">
                         Last repetition was on {{lastRepetition | date:'mediumDate'}}
-                    </div>
                 </div>
                 <div class="flashbox">Question mode is {{mode}}</div>
 
@@ -337,20 +335,20 @@
                 <!--Use image mode.-->
                 <!--</div>-->
 
-                <div class="flashbox">
+                <!--<div class="flashbox">-->
 
-                Reading speed:
+                <!--Reading speed:-->
 
-                <rating style="padding-left: 0.5em"
-                max="6"
-                min="1"
-                value="speechIcons"
-                on-hover="rateHover(value)"
-                data-ng-click="rateClick()"
-                state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'">
-                </div>
+                <!--<rating style="padding-left: 0.5em"-->
+                <!--max="6"-->
+                <!--min="1"-->
+                <!--value="speechIcons"-->
+                <!--on-hover="rateHover(value)"-->
+                <!--data-ng-click="rateClick()"-->
+                <!--state-on="'glyphicon-ok-sign'" state-off="'glyphicon-ok-circle'">-->
+                <!--</div>-->
 
-                <div class="flashbox">
+                <div class="flashbox" data-ng-if="lastRepetition">
 
                    Card History
                     <div data-ng-repeat="entry in card.history" style="text-align: left">

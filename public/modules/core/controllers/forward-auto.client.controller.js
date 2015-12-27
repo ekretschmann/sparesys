@@ -148,7 +148,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $scope.state = 'question';
             $scope.$parent.nextCard();
 
-            console.log($scope.card);
+          //  console.log($scope.card);
             if ($scope.card.speechRecognitionForward) {
 
 
@@ -162,7 +162,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
                 $scope.cardRecods = false;
             }
 
-            console.log($scope.cardRecords);
+           // console.log($scope.cardRecords);
 
             $scope.answer.text = '';
 
@@ -170,7 +170,7 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $scope.setSpecialCharacters();
 
 
-            $state.go($state.$current);
+//            $state.go($state.$current);
 
         };
 

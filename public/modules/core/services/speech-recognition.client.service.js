@@ -55,9 +55,19 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
 
 
                             answer.text = event.results[i][0].transcript.trim();
-                            answer.error = false;
-                            gotTheAnswer = true;
-                            rec.onend(event);
+
+                            if (answer.text === card.question) {
+                                console.log('filtering question');
+                            } else {
+
+                                if (answer.text.startsWith(card.question)) {
+                                    console.log('stripping question');
+                                    answer.text = answer.text.substring(card.question.length).trim();
+                                }
+                                answer.error = false;
+                                gotTheAnswer = true;
+                                rec.onend(event);
+                            }
                         }
 
                     } else {

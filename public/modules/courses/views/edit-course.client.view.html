@@ -59,7 +59,7 @@
                 Adding packs
             </div>
             <infobox logo="girl">
-               Each course consists of a number of packs. You can use
+                Each course consists of a number of packs. You can use
                 these to keep similar things together or have all cards
                 that you want to learn by a certain date. Unless you
                 set due dates for your cards, they are
@@ -69,11 +69,6 @@
             </infobox>
         </div>
     </div>
-
-
-
-
-
 
 
     <div class="col-xs-6 dashboard-col">
@@ -149,8 +144,10 @@
                     <div class="col-xs-6 dashboard-col">
                         <div class="field-label">Published</div>
                         <div class="font-medium">
-                            <input data-ng-model="course.published" type="radio" ng-value="true" data-ng-click="update()"/> yes
-                            <input style="margin-left: 10px" data-ng-model="course.published" type="radio" ng-value="false" data-ng-click="update()"/> no
+                            <input data-ng-model="course.published" type="radio" ng-value="true"
+                                   data-ng-click="update()"/> yes
+                            <input style="margin-left: 10px" data-ng-model="course.published" type="radio"
+                                   ng-value="false" data-ng-click="update()"/> no
 
                         </div>
                     </div>
@@ -158,13 +155,14 @@
                     <div class="col-xs-6 dashboard-col">
                         <div class="field-label">Role</div>
                         <div class="font-medium">
-                            <input data-ng-model="course.teaching" type="radio" ng-value="true" data-ng-click="update()"/> Teacher
-                            <input style="margin-left: 10px" data-ng-model="course.teaching" type="radio" ng-value="false" data-ng-click="update()"/> Student
+                            <input data-ng-model="course.teaching" type="radio" ng-value="true"
+                                   data-ng-click="update()"/> Teacher
+                            <input style="margin-left: 10px" data-ng-model="course.teaching" type="radio"
+                                   ng-value="false" data-ng-click="update()"/> Student
 
                         </div>
                     </div>
                 </div>
-
 
 
             </div>
@@ -192,10 +190,12 @@
                             <div class="btn-group right-padded-l nowrap">
 
 
-                                <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="course.cardDefaults.languageFront">
+                                <button type="button" class="btn btn-default standard-dropdown-width"
+                                        data-ng-if="course.cardDefaults.languageFront">
                                     {{course.cardDefaults.languageFront.name}}
                                 </button>
-                                <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="!course.cardDefaults.languageFront">
+                                <button type="button" class="btn btn-default standard-dropdown-width"
+                                        data-ng-if="!course.cardDefaults.languageFront">
                                     {{languages[0].name}}
                                 </button>
                                 <button type="button" class="btn btn-default dropdown-toggle">
@@ -220,10 +220,12 @@
                         </div>
 
                         <div class="btn-group">
-                            <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="course.cardDefaults.languageBack">
+                            <button type="button" class="btn btn-default standard-dropdown-width"
+                                    data-ng-if="course.cardDefaults.languageBack">
                                 {{course.cardDefaults.languageBack.name }}
                             </button>
-                            <button type="button" class="btn btn-default standard-dropdown-width" data-ng-if="!course.cardDefaults.languageBack">
+                            <button type="button" class="btn btn-default standard-dropdown-width"
+                                    data-ng-if="!course.cardDefaults.languageBack">
                                 {{languages[0].name }}
                             </button>
                             <button type="button" class="btn btn-default dropdown-toggle">
@@ -284,7 +286,7 @@
                         </div>
 
 
-                        <div class="field-data" ng-if="course.cardDefaults.forward.enabled" >
+                        <div class="field-data" ng-if="course.cardDefaults.forward.enabled">
 
 
                             <a href="" data-ng-click="toggleSetting('forward', 'readFront')"
@@ -345,7 +347,6 @@
                         </div>
 
 
-
                     </div>
                 </div>
 
@@ -366,7 +367,7 @@
                         </div>
 
 
-                        <div class="field-data" ng-if="course.cardDefaults.reverse.enabled" >
+                        <div class="field-data" ng-if="course.cardDefaults.reverse.enabled">
 
 
                             <a href="" data-ng-click="toggleSetting('reverse', 'readFront')"
@@ -431,8 +432,6 @@
                 </div>
 
 
-
-
                 <div class="col-xs-4">
                     <div class="flashcard-section">
 
@@ -449,7 +448,7 @@
                         </div>
 
 
-                        <div class="field-data" ng-if="course.cardDefaults.images.enabled" >
+                        <div class="field-data" ng-if="course.cardDefaults.images.enabled">
 
 
                             <a href="" data-ng-click="toggleSetting('images', 'readFront')"
@@ -513,13 +512,17 @@
                     </div>
                 </div>
             </div>
+
+
+            <div class="row" style="position: absolute; bottom: 15px; left: 42%; text-align: center">
+                <button class="btn btn-rememberators" data-ng-click="updateSettings()">
+                    Change all cards
+                </button>
+            </div>
         </div>
 
 
-
     </div>
-
-
 
 
     <div data-ng-repeat="pack in course.packs"

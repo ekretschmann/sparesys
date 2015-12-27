@@ -124,7 +124,7 @@
                         <span class="sr-only">Split button!</span>
                     </button>
                     <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="c in checks"  data-ng-click="setChecks(c)">
+                        <li data-ng-repeat="c in checks" data-ng-click="setChecks(c)">
                             <a>{{c}}</a>
                         </li>
                     </ul>
@@ -186,66 +186,165 @@
         </div>
 
 
-
-
         <div data-ng-if="selectedSetting === 'Forward mode'">
             <div class="font-medium">
 
                 <div ng-class="{'text-muted': !cardOptions.changeForwardEnabled}">
-                    <a href="" data-ng-click="toggleForward()"
-                       data-ng-if="cardOptions.changeForwardEnabled"><i
-                            class="glyphicon glyphicon-ok-circle"></i></a>
-                    <a href="" data-ng-click="toggleForward()"
-                       data-ng-if="!cardOptions.changeForwardEnabled"><i
-                            class="glyphicon glyphicon-off"></i></a>
-
+                    <a href=""
+                       data-ng-click="toggleForward()"
+                       data-ng-if="cardOptions.changeForwardEnabled">
+                        <i class="glyphicon glyphicon-ok-circle"></i>
+                    </a>
+                    <a href=""
+                       data-ng-click="toggleForward()"
+                       data-ng-if="!cardOptions.changeForwardEnabled">
+                        <i class="glyphicon glyphicon-off"></i>
+                    </a>
                     Enabled
                 </div>
 
                 <div data-ng-if="cardOptions.changeForwardEnabled">
                     <div ng-class="{'text-muted': !cardOptions.forwardReadFront}">
-                        <a href="" data-ng-click="toggleForwardReadFront()"
-                           data-ng-if="cardOptions.forwardReadFront"><i
-                                class="glyphicon glyphicon-ok-circle"></i></a>
-                        <a href="" data-ng-click="toggleForwardReadFront()"
-                           data-ng-if="!cardOptions.forwardReadFront"><i
-                                class="glyphicon glyphicon-off"></i></a>
+                        <a href=""
+                           data-ng-click="toggleForwardReadFront()"
+                           data-ng-if="cardOptions.forwardReadFront">
+                            <i class="glyphicon glyphicon-ok-circle"></i>
+                        </a>
+                        <a href=""
+                           data-ng-click="toggleForwardReadFront()"
+                           data-ng-if="!cardOptions.forwardReadFront">
+                            <i class="glyphicon glyphicon-off"></i>
+                        </a>
                         Read Front
                     </div>
                     <div ng-class="{'text-muted': !cardOptions.forwardReadBack}">
-                        <a href="" data-ng-click="toggleForwardReadBack()"
-                           data-ng-if="cardOptions.forwardReadBack"><i
-                                class="glyphicon glyphicon-ok-circle"></i></a>
-                        <a href="" data-ng-click="toggleForwardReadBack()"
-                           data-ng-if="!cardOptions.forwardReadBack"><i
-                                class="glyphicon glyphicon-off"></i></a>
+                        <a href=""
+                           data-ng-click="toggleForwardReadBack()"
+                           data-ng-if="cardOptions.forwardReadBack">
+                            <i class="glyphicon glyphicon-ok-circle"></i>
+                        </a>
+                        <a href=""
+                           data-ng-click="toggleForwardReadBack()"
+                           data-ng-if="!cardOptions.forwardReadBack">
+                            <i class="glyphicon glyphicon-off"></i>
+                        </a>
                         Read Back
                     </div>
                     <div ng-class="{'text-muted': !cardOptions.forwardSpeechRecognition}">
-                        <a href="" data-ng-click="toggleForwardSpeechRecognition()"
-                           data-ng-if="cardOptions.forwardSpeechRecognition"><i
-                                class="glyphicon glyphicon-ok-circle"></i></a>
-                        <a href="" data-ng-click="toggleForwardSpeechRecognition()"
-                           data-ng-if="!cardOptions.forwardSpeechRecognition"><i
-                                class="glyphicon glyphicon-off"></i></a>
+                        <a href=""
+                           data-ng-click="toggleForwardSpeechRecognition()"
+                           data-ng-if="cardOptions.forwardSpeechRecognition">
+                            <i class="glyphicon glyphicon-ok-circle"></i>
+                        </a>
+                        <a href=""
+                           data-ng-click="toggleForwardSpeechRecognition()"
+                           data-ng-if="!cardOptions.forwardSpeechRecognition">
+                            <i class="glyphicon glyphicon-off"></i>
+                        </a>
                         Speech Recognition
                     </div>
                     <div ng-class="{'text-muted': !cardOptions.forwardTimed}">
-                        <a href="" data-ng-click="toggleForwardTimed()"
-                           data-ng-if="cardOptions.forwardTimed"><i
-                                class="glyphicon glyphicon-ok-circle"></i></a>
-                        <a href="" data-ng-click="toggleForwardTimed()"
-                           data-ng-if="!cardOptions.forwardTimed"><i
-                                class="glyphicon glyphicon-off"></i></a>
-                        Timed<span data-ng-if="cardOptions.forwardTimed">:
+                        <a href=""
+                           data-ng-click="toggleForwardTimed()"
+                           data-ng-if="cardOptions.forwardTimed">
+                            <i class="glyphicon glyphicon-ok-circle"></i>
+                        </a>
+                        <a href=""
+                           data-ng-click="toggleForwardTimed()"
+                           data-ng-if="!cardOptions.forwardTimed">
+                            <i class="glyphicon glyphicon-off"></i>
+                        </a>
+                        Timed
+                        <span data-ng-if="cardOptions.forwardTimed">:
+                            <input type="number"
+                                   style="display: inline; width: 30%; margin-left: 0.5em"
+                                   data-ng-change="update()"
+                                   data-ng-model="settingChanges.limitForward"
+                                   class="form-control"> sec
+                        </span>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-                                        <input type="number"
-                                               style="display: inline; width: 30%; margin-left: 0.5em"
-                                               data-ng-change="update()"
-                                               data-ng-model="settingChanges.limitForward"
-                                               class="form-control"
-                                                > sec
-                                    </span>
+
+
+        <div data-ng-if="selectedSetting === 'Reverse mode'">
+            <div class="font-medium">
+
+                <div ng-class="{'text-muted': !cardOptions.changeReverseEnabled}">
+                    <a href=""
+                       data-ng-click="toggleReverse()"
+                       data-ng-if="cardOptions.changeReverseEnabled">
+                        <i class="glyphicon glyphicon-ok-circle"></i>
+                    </a>
+                    <a href=""
+                       data-ng-click="toggleReverse()"
+                       data-ng-if="!cardOptions.changeReverseEnabled">
+                        <i class="glyphicon glyphicon-off"></i>
+                    </a>
+                    Enabled
+                </div>
+
+                <div data-ng-if="cardOptions.changeReverseEnabled">
+                    <div ng-class="{'text-muted': !cardOptions.reverseReadFront}">
+                        <a href=""
+                           data-ng-click="toggleReverseReadFront()"
+                           data-ng-if="cardOptions.reverseReadFront">
+                            <i class="glyphicon glyphicon-ok-circle"></i>
+                        </a>
+                        <a href=""
+                           data-ng-click="toggleReverseReadFront()"
+                           data-ng-if="!cardOptions.reverseReadFront">
+                            <i class="glyphicon glyphicon-off"></i>
+                        </a>
+                        Read Front
+                    </div>
+                    <div ng-class="{'text-muted': !cardOptions.reverseReadBack}">
+                        <a href=""
+                           data-ng-click="toggleReverseReadBack()"
+                           data-ng-if="cardOptions.reverseReadBack">
+                            <i class="glyphicon glyphicon-ok-circle"></i>
+                        </a>
+                        <a href=""
+                           data-ng-click="toggleReverseReadBack()"
+                           data-ng-if="!cardOptions.reverseReadBack">
+                            <i class="glyphicon glyphicon-off"></i>
+                        </a>
+                        Read Back
+                    </div>
+                    <div ng-class="{'text-muted': !cardOptions.reverseSpeechRecognition}">
+                        <a href=""
+                           data-ng-click="toggleReverseSpeechRecognition()"
+                           data-ng-if="cardOptions.reverseSpeechRecognition">
+                            <i class="glyphicon glyphicon-ok-circle"></i>
+                        </a>
+                        <a href=""
+                           data-ng-click="toggleReverseSpeechRecognition()"
+                           data-ng-if="!cardOptions.reverseSpeechRecognition">
+                            <i class="glyphicon glyphicon-off"></i>
+                        </a>
+                        Speech Recognition
+                    </div>
+                    <div ng-class="{'text-muted': !cardOptions.reverseTimed}">
+                        <a href=""
+                           data-ng-click="toggleReverseTimed()"
+                           data-ng-if="cardOptions.reverseTimed">
+                            <i class="glyphicon glyphicon-ok-circle"></i>
+                        </a>
+                        <a href=""
+                           data-ng-click="toggleReverseTimed()"
+                           data-ng-if="!cardOptions.reverseTimed">
+                            <i class="glyphicon glyphicon-off"></i>
+                        </a>
+                        Timed
+                        <span data-ng-if="cardOptions.reverseTimed">:
+                            <input type="number"
+                                   style="display: inline; width: 30%; margin-left: 0.5em"
+                                   data-ng-change="update()"
+                                   data-ng-model="settingChanges.limitReverse"
+                                   class="form-control"> sec
+                        </span>
                     </div>
                 </div>
             </div>
@@ -260,137 +359,6 @@
             Change Setting
         </button>
     </div>
-
-
-    <!--
-    <!--</div>-->
-    <!--</div>-->
-
-
-    <!--</div>-->
-
-    <!--<div class="col-xs-4 dashboard-col">-->
-    <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.changeReverseEnabled}">-->
-    <!--<a href="" data-ng-click="toggleReverse()"-->
-    <!--data-ng-if="cardOptions.changeReverseEnabled"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleReverse()"-->
-    <!--data-ng-if="!cardOptions.changeReverseEnabled"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-
-    <!--Reverse Mode-->
-    <!--</div>-->
-
-
-    <!--<div class="field-data" data-ng-if="cardOptions.changeReverseEnabled">-->
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleReverseEnabled()"-->
-    <!--data-ng-if="cardOptions.reverseEnabled"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleReverseEnabled()"-->
-    <!--data-ng-if="!cardOptions.reverseEnabled"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Enabled-->
-    <!--</div>-->
-
-
-    <!--<div data-ng-if="cardOptions.reverseEnabled">-->
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleReverseReadFront()"-->
-    <!--data-ng-if="cardOptions.reverseReadFront"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleReverseReadFront()"-->
-    <!--data-ng-if="!cardOptions.reverseReadFront"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Read Front-->
-    <!--</div>-->
-
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleReverseReadBack()"-->
-    <!--data-ng-if="cardOptions.reverseReadBack"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleReverseReadBack()"-->
-    <!--data-ng-if="!cardOptions.reverseReadBack"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Read Back-->
-    <!--</div>-->
-
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleReverseSpeechRecognition()"-->
-    <!--data-ng-if="cardOptions.reverseSpeechRecognition"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleReverseSpeechRecognition()"-->
-    <!--data-ng-if="!cardOptions.reverseSpeechRecognition"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Speech Recognition-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-
-
-    <!--<div class="col-xs-4 dashboard-col">-->
-    <!--<div class="field-label" ng-class="{'text-muted': !cardOptions.changeImagesEnabled}">-->
-    <!--<a href="" data-ng-click="toggleImages()"-->
-    <!--data-ng-if="cardOptions.changeImagesEnabled"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleImages()"-->
-    <!--data-ng-if="!cardOptions.changeImagesEnabled"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-
-    <!--Images Mode-->
-    <!--</div>-->
-
-
-    <!--<div class="field-data" data-ng-if="cardOptions.changeImagesEnabled">-->
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleImagesEnabled()"-->
-    <!--data-ng-if="cardOptions.imagesEnabled"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleImagesEnabled()"-->
-    <!--data-ng-if="!cardOptions.imagesEnabled"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Enabled-->
-    <!--</div>-->
-
-
-    <!--<div data-ng-if="cardOptions.imagesEnabled">-->
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleImagesReadFront()"-->
-    <!--data-ng-if="cardOptions.imagesReadFront"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleImagesReadFront()"-->
-    <!--data-ng-if="!cardOptions.imagesReadFront"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Read Front-->
-    <!--</div>-->
-
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleImagesReadBack()"-->
-    <!--data-ng-if="cardOptions.imagesReadBack"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleImagesReadBack()"-->
-    <!--data-ng-if="!cardOptions.imagesReadBack"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Read Back-->
-    <!--</div>-->
-
-    <!--<div>-->
-    <!--<a href="" data-ng-click="toggleImagesSpeechRecognition()"-->
-    <!--data-ng-if="cardOptions.imagesSpeechRecognition"><i-->
-    <!--class="glyphicon glyphicon-ok-circle"></i></a>-->
-    <!--<a href="" data-ng-click="toggleImagesSpeechRecognition()"-->
-    <!--data-ng-if="!cardOptions.imagesSpeechRecognition"><i-->
-    <!--class="glyphicon glyphicon-off"></i></a>-->
-    <!--Speech Recognition-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-    <!--</div>-->
-
-
-    <!--</div>-->
-    <!--</div>-->
 
 
 </div>

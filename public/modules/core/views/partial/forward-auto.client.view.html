@@ -27,13 +27,18 @@
                     <!--<img-->
                             <!--ng-src="modules/core/img/microphone.png"-->
                             <!--data-ng-click="startRecording(card)">-->
-                   <div data-ng-if="!recording">
+                   <div data-ng-if="!recording && cardRecords">
                        <a class="answer-counts" data-ng-click="startRecording(card)" href="">Start speech recognition</a>
                    </div>
 
-                    <div data-ng-if="answer.recognized">
+                    <div data-ng-if="answer.recognized && cardRecords">
                         <a class="answer-counts" data-ng-click="startRecording(card)" href="">Record again</a>
                     </div>
+
+                    <div data-ng-if="recording && !cardRecords">
+                        No speech recognition
+                    </div>
+
                 </div>
             </div>
         </div>

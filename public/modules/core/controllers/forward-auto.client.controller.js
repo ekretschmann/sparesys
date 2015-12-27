@@ -11,11 +11,17 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
         $scope.answer.error = false;
         $scope.answer.assessment = undefined;
         $scope.specialChars = [];
+        $scope.cardRecods = false;
 
 
         $scope.init = function () {
             $scope.state = 'question';
             $scope.setSpecialCharacters();
+            if ($scope.card.speechRecognitionForward) {
+                $scope.cardRecords = true;
+            } else {
+                $scope.cardRecods = false;
+            }
         };
 
         $scope.setSpecialCharacters = function () {
@@ -143,7 +149,20 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
             $scope.$parent.nextCard();
 
             console.log($scope.card);
-            $scope.startRecording($scope.card);
+            if ($scope.card.speechRecognitionForward) {
+
+
+                if ($scope.recording) {
+                    $scope.startRecording($scope.card);
+                }
+
+                $scope.cardRecords = true;
+              //
+            } else {
+                $scope.cardRecods = false;
+            }
+
+            console.log($scope.cardRecords);
 
             $scope.answer.text = '';
 

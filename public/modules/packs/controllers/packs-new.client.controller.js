@@ -227,6 +227,12 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http', '$
             $scope.cardOptions.imagesSpeechRecognition = !$scope.cardOptions.imagesSpeechRecognition;
         };
 
+        $scope.toggleReverseTimed = function () {
+            $scope.settingChanges.reverseTimed = !$scope.settingChanges.reverseTimed;
+            $scope.cardOptions.reverseTimed = !$scope.cardOptions.reverseTimed;
+            $scope.settingChanges.limitReverse = 10;
+        };
+
         $scope.changeDefaultSettings = function () {
             if ($scope.cardOptions.startDate) {
                 $scope.settingChanges.startDate = $scope.cardOptions.startDate;

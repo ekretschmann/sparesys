@@ -60,6 +60,11 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
 
 
+
+
+
+
+
         $scope.addChar = function (c) {
             if (!$scope.answer.text) {
                 $scope.answer.text = '';
@@ -184,13 +189,33 @@ angular.module('core').controller('ForwardAutoController', ['$scope', '$state', 
 
         };
 
+        $scope.interimResult = '';
+
+        $scope.notUnderstoodCallback = function(result) {
+            $scope.interimResult = result;
+            //console.log('xxx '+$scope.options.interimResult);
+            $scope.$apply();
+        };
+
+
+
+        //$scope.getInterimResult = function() {
+        //    return $scope.options.interimResult;
+        //};
+
+        //$scope.$watch('getInterimResult()', function () {
+        //
+        //    console.log('watch');
+        //});
+
         $scope.startRecording = function (card) {
 
 
             $scope.answer.text = '';
             $scope.answer.recognized = false;
 
-            var promise = SpeechRecognitionService.initSpeech(card, $scope.answer);
+
+            var promise = SpeechRecognitionService.initSpeech(card, $scope.answer, $scope.notUnderstoodCallback);
 
 
             $scope.recording = true;

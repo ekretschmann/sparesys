@@ -9,7 +9,7 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
         this.recognition = undefined;
         this.hasStared = false;
 
-        this.initSpeech = function (card, answer) {
+        this.initSpeech = function (card, answer, callback) {
 
             if (!this.recognition) {
                 if ('webkitSpeechRecognition' in window) {
@@ -71,10 +71,12 @@ angular.module('core').service('SpeechRecognitionService', ['$q',
                         }
 
                     } else {
-                        interim_transcript += event.results[i][0].transcript.trim();
+                        interim_transcript = event.results[i][0].transcript.trim();
+
+                        callback(interim_transcript);
 
                         //console.log(interim_transcript);
-                        if (card.answer.toLowerCase().indexOf(interim_transcript.toLowerCase()) > -1) {
+                        if (interim_transcript.toLowerCase().indexOf(card.answer.toLowerCase()) > -1) {
                             answer.text = card.answer;
                             answer.error = false;
                             gotTheAnswer = true;

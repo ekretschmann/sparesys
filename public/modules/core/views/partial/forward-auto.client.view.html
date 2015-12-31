@@ -55,6 +55,7 @@
         </div>
 
 
+
         <div class="question-box">
             <div class="question">
 
@@ -76,12 +77,20 @@
                        data-ng-model="answer.text">
 
 
+
+
                 <div>
                     <span data-ng-repeat="character in specialChars"
                           data-ng-click="addChar(character)"><button class="btn btn-letter">{{character}}
                     </button></span>
                 </div>
             </div>
+
+            <div data-ng-if="interimResult">
+             {{interimResult}}
+            </div>
+
+
 
             <div data-ng-if="state === 'answer'" class="answer">
 

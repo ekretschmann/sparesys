@@ -203,6 +203,9 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                 $scope.findBasicItems();
 
+
+
+
             });
 
         };
@@ -312,6 +315,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 var item = $scope.authentication.user.inventory[i];
                 var reward = $scope.getReward(item.rewardId);
 
+
                 if (reward.type !== 'Item') {
 
                     for (var j = 0; j < reward.enables.length; j++) {
@@ -323,6 +327,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         if (reward.enables[j].type === 'Item') {
                             if ($scope.authentication.user.rewardlocation === reward.enables[j].location ||
                                 reward.enables[j].location === 'Everywhere') {
+
+
                                 $scope.items.forSale.push($scope.getReward(reward.enables[j]._id));
                             }
                         }
@@ -337,8 +343,26 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             $scope.searchResult = [];
 
+            console.log(item);
+
             for (var i = 0; i < item.ingredients.length; i++) {
                 var ingredient = item.ingredients[i];
+                if (ingredient.keep) {
+
+                    //console.log('keeping');
+                    //console.log(ingredient);
+                    //console.log($scope.getReward(ingredient.rewardId));
+                    var theReward = $scope.getReward(ingredient.rewardId);
+                    var newItem = {
+                        name: ingredient.name,
+                        rewardId: ingredient.rewardId,
+                        type: theReward.type,
+                        healthpoints: ingredient.healthpoints,
+                        amount: 1
+                    };
+                     $scope.authentication.user.inventory.push(newItem);
+                    //console.log($scope.authentication.user.inventory);
+                }
                 for (var j = 0; j < $scope.authentication.user.inventory.length; j++) {
                     var inventoryItem = $scope.authentication.user.inventory[j];
                     if (inventoryItem.rewardId === ingredient.rewardId) {
@@ -362,6 +386,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             if (!found) {
                 if (item.journey === '') {
+                   // console.log('no journey');
                     var newItem = {
                         name: item.name,
                         rewardId: item._id,
@@ -373,6 +398,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                     $scope.authentication.user.inventory.push(newItem);
                 } else {
+                  //  console.log('this is a journey');
                     $scope.authentication.user.rewardlocation = item.journey;
                 }
             }

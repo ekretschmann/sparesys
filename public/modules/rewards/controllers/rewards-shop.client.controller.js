@@ -71,8 +71,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.useIngredient = function (item) {
 
             item.amount--;
-            console.log(item.name);
-            console.log(item.amount);
             if (item.amount === 0) {
                 $scope.removeItemOwned(item);
             }
@@ -394,19 +392,38 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         console.log('xxxx');
                     }
                 }
-                //user.$update(function () {
-                //    $scope.recipies.forSale = [];
-                //    $scope.recipies.itemUsed = [];
-                //    $scope.items.used = [];
-                //});
+                user.$update(function () {
+                    $scope.recipies.forSale = [];
+                    $scope.recipies.itemUsed = [];
+                    $scope.items.used = [];
+                });
             });
 
         };
 
         $scope.resetRecipe = function() {
-            for (var i = 0; i < $scope.items.used; i++) {
-                $scope.removeFromRecipe($scope.items.used[i]);
+            for (var i = 0; i < $scope.items.used.length; i++) {
+                var item = $scope.items.used[i];
+                var found = false;
+                for (var j=0; j< $scope.items.owned.length; j++) {
+                    var inInvetory = $scope.items.owned[j];
+                    if (item.rewardId === inInvetory.rewardId) {
+                        inInvetory.amount += item.amount;
+                        found = true;
+                    }
+                }
+                if(!found) {
+                    $scope.items.owned.push({
+                        _id: item._id,
+                        rewardId: item.rewardId,
+                        amount: item.amount,
+                        name: item.name,
+                        healthpoints: item.healthpoints
+                    });
+                }
+
             }
+            $scope.items.used = [];
         };
 
         $scope.purchase = function (item) {
@@ -457,6 +474,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     amount: 1
                 };
 
+
+
                 $scope.authentication.user.inventory.push(newItem);
                 $scope.authentication.user.trophies -= item.price;
 
@@ -470,41 +489,15 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     user.$update();
 
                 });
+
                 $scope.findItems();
                 $scope.findBasicItems();
+
             }
 
         };
-        //
-        //// Find existing Reward
-        //$scope.findOne = function () {
-        //
-        //    if ($stateParams.rewardId) {
-        //
-        //        Rewards.query(function (allRewards) {
-        //
-        //            $scope.rewards = allRewards;
-        //            $scope.items = [];
-        //            for (var i = 0; i < allRewards.length; i++) {
-        //                if (allRewards[i].type === 'Item') {
-        //                    $scope.items.push(allRewards[i]);
-        //                }
-        //            }
-        //
-        //            for (i = 0; i < allRewards.length; i++) {
-        //                if (allRewards[i]._id ===  $stateParams.rewardId) {
-        //                    $scope.reward = allRewards[i];
-        //                }
-        //            }
-        //
-        //        });
-        //
-        //
-        //
-        //    }
-        //
-        //
-        //};
+
+
 
     }
 ]);

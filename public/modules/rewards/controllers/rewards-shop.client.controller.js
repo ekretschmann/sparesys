@@ -353,14 +353,14 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     //console.log(ingredient);
                     //console.log($scope.getReward(ingredient.rewardId));
                     var theReward = $scope.getReward(ingredient.rewardId);
-                    var newItem = {
+                    var oldItem = {
                         name: ingredient.name,
                         rewardId: ingredient.rewardId,
                         type: theReward.type,
                         healthpoints: ingredient.healthpoints,
                         amount: 1
                     };
-                     $scope.authentication.user.inventory.push(newItem);
+                     $scope.authentication.user.inventory.push(oldItem);
                     //console.log($scope.authentication.user.inventory);
                 }
                 for (var j = 0; j < $scope.authentication.user.inventory.length; j++) {
@@ -455,6 +455,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.purchase = function (item) {
 
 
+           // console.log(item);
             $scope.resetRecipe();
 
             if ($scope.authentication.user.trophies > item.price) {
@@ -492,15 +493,19 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     return;
                 }
 
+
+
+
                 var newItem = {
                     name: item.name,
                     rewardId: item._id,
                     type: item.type,
-                    healthpoints: item.healthpoints,
+                    healthpoints: $scope.getReward(item._id).defaulthealthpoints,
                     amount: 1
                 };
 
 
+                console.log(newItem);
 
                 $scope.authentication.user.inventory.push(newItem);
                 $scope.authentication.user.trophies -= item.price;
@@ -524,6 +529,15 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
 
+        $scope.getHealthPoints = function(item) {
+            var reward = $scope.getReward(item.rewardId);
+            var def = reward.defaulthealthpoints;
+            if (def === 1) {
+                return 0;
+            }
+
+            return new Array(item.healthpoints);
+        };
 
     }
 ]);

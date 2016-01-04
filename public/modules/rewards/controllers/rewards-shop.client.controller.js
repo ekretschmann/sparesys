@@ -387,11 +387,11 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 user.trophies = $scope.authentication.user.trophies;
                 user.rewardlocation = $scope.authentication.user.rewardlocation;
 
-                for (var i = 0; i < item.ingredients.length; i++) {
-                    if (item.ingredients[i].keep) {
-                        console.log('xxxx');
-                    }
-                }
+                //for (var i = 0; i < item.ingredients.length; i++) {
+                //    if (item.ingredients[i].keep) {
+                //        console.log('xxxx');
+                //    }
+                //}
                 user.$update(function () {
                     $scope.recipies.forSale = [];
                     $scope.recipies.itemUsed = [];

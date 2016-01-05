@@ -307,7 +307,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             var found = false;
 
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
-                if ($scope.authentication.user.inventory[i].rewardId === item._id) {
+                if ($scope.authentication.user.inventory[i].rewardId === item.rewardId) {
                     $scope.authentication.user.inventory[i].amount++;
                     found = true;
                 }
@@ -343,6 +343,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 if (inventoryItem.rewardId === item.rewardId) {
                     inventoryItem.amount ++;
                     inventoryItem.healthpoints = item.healthpoints;
+                    found = true;
                 }
             }
             if (!found) {

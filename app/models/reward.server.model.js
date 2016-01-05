@@ -67,7 +67,7 @@ var RewardSchema = new Schema({
             },
             keep: {
                 type: Boolean,
-                default: false,
+                default: false
             },
             amount: {
                 type: Number,

@@ -120,6 +120,7 @@ exports.update = function (req, res) {
     reward.save(function (err, theReward) {
 
 
+        console.log(err);
         if (err) {
             return res.status(400).send({
                 message: getErrorMessage(err)

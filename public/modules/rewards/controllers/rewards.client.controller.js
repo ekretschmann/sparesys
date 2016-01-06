@@ -27,6 +27,12 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
         $scope.items = [];
        // $scope.skills = [];
 
+        $scope.selectBasisForReward = function() {
+              $scope.reward.basis = $scope.getRewardId($scope.selection.basis);
+               $scope.selection.basis = '';
+            $scope.update();
+        };
+
         $scope.removeLocationFromReward = function() {
             $scope.reward.journey = '';
             $scope.update();

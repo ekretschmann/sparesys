@@ -44,9 +44,9 @@
 
             </div>
 
-            <div class="flashcard-section row" data-ng-if="reward.type !== 'Recipe'">
+            <div class="flashcard-section row">
 
-                <div class="col-xs-3" data-ng-if="reward.type === 'Item'">
+                <div class="col-xs-3" data-ng-if="reward.type !== 'Skill'">
                     <div class="field-label">Health</div>
                     <div class="field-data">
                         <!--{{reward.defaulthealthpoints}}-->
@@ -58,7 +58,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-3">
+                <div class="col-xs-3" data-ng-if="reward.type !== 'Recipe'">
                     <div class="field-label">Location</div>
                     <div class="field-data">
                         <div class="btn-group" dropdown is-open="status.isopen">
@@ -75,7 +75,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-3">
+                <div class="col-xs-3" data-ng-if="reward.type !== 'Recipe'">
                     <div class="field-label">Price</div>
                     <div class="field-data">
                         <!--{{reward.defaulthealthpoints}}-->
@@ -87,7 +87,7 @@
                     </div>
                 </div>
 
-                <div class="col-xs-3">
+                <div class="col-xs-3" data-ng-if="reward.type !== 'Recipe'">
                     <div class="field-label">&nbsp;</div>
                     <div class="field-data">
                         <input type="checkbox"
@@ -207,43 +207,66 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
 
-                <div class="col-xs-6" data-ng-if="reward.type === 'Skill'">
-                    <div class="field-label">Goals</div>
-                    <div class="field-data">
+                    <div class="col-xs-6" data-ng-if="reward.type === 'Skill'">
+                        <div class="field-label">Goals</div>
+                        <div class="field-data">
 
-                        <input style="width: 100%"
-                               type="text"
-                               data-ng-model="selection.goal"
-                               typeahead-on-select="selectGoalForReward()"
-                               typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
-                               class="form-control">
+                            <input style="width: 100%"
+                                   type="text"
+                                   data-ng-model="selection.goal"
+                                   typeahead-on-select="selectGoalForReward()"
+                                   typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
+                                   class="form-control">
 
-                        <div class="font-medium" style="padding-top: 0.5em; padding-left: 0.5em">
-                            <div class="field-data">
-                                <div data-ng-repeat="goal in reward.goals">
-                                    <a>
-                                        <i data-ng-click="removeGoalFromReward(goal)"
-                                           class="glyphicon glyphicon-remove-sign small">
-                                        </i>
-                                    </a>
+                            <div class="font-medium" style="padding-top: 0.5em; padding-left: 0.5em">
+                                <div class="field-data">
+                                    <div data-ng-repeat="goal in reward.goals">
+                                        <a>
+                                            <i data-ng-click="removeGoalFromReward(goal)"
+                                               class="glyphicon glyphicon-remove-sign small">
+                                            </i>
+                                        </a>
 
-                                    {{goal.name}}
+                                        {{goal.name}}
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
+                    <div class="col-xs-6" data-ng-if="reward.type === 'Recipe'">
+                        <div class="field-label">Basis</div>
+                        <div class="field-data">
+
+                            <input style="width: 100%"
+                                   type="text"
+                                   data-ng-model="selection.basis"
+                                   typeahead-on-select="selectBasisForReward()"
+                                   typeahead="reward.name for reward in rewards | filter:{name: $viewValue} | limitTo:12"
+                                   class="form-control">
+
+                            <div class="font-medium" style="padding-top: 0.5em; padding-left: 0.5em">
+                                <div class="field-data" data-ng-if="reward.basis">
+
+                                    {{getRewardName(reward.basis)}}
+                                </div>
+
+                                <div class="field-data" data-ng-if="!reward.basis">
+
+                                    none
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
-
-
             </div>
         </div>
     </div>
-</div>
 
 
-<div class="rememberators-footer col-xs-12">rememberators.com</div>
+    <div class="rememberators-footer col-xs-12">rememberators.com</div>
 
 </div>

@@ -193,7 +193,18 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 $scope.rewards = rewards;
 
                 for (var i=0; i<rewards.length; i++) {
-                    console.log(rewards[i].basis);
+                    if (rewards[i].basis) {
+                        for (var j = 0; j < $scope.rewards.length; j++) {
+                            for (var k = 0; k < $scope.rewards[j].ingredients.length; k++) {
+                                var ingredient =  $scope.rewards[j].ingredients[k];
+                                if (ingredient.rewardId === rewards[i].basis) {
+                                    console.log(ingredient);
+                                }
+
+                            }
+                        }
+                    }
+
                 }
 
 

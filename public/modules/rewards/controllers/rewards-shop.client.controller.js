@@ -188,7 +188,13 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.find = function () {
 
 
-            $scope.rewards = Rewards.query(function () {
+            Rewards.query(function (rewards) {
+
+                $scope.rewards = rewards;
+
+                for (var i=0; i<rewards.length; i++) {
+                    console.log(rewards[i].basis);
+                }
 
 
                 $scope.findItems();

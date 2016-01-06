@@ -53,6 +53,9 @@ var RewardSchema = new Schema({
         default: [],
         ref: 'Reward'
     },
+    basis: {
+        type: Schema.Types.ObjectId
+    },
 //{"keep":false,"amount":1,"name":"Soil","rewardId":"5639bb18486fca0000104e84"},
     ingredients: {
 

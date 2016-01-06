@@ -7,21 +7,25 @@ angular.module('courses').directive('upload',
                 file:'='
             },
             link: function(scope, element) {
+
                 /* jshint ignore:start */
                 $(element).on('change', function(changeEvent) {
+
+                    console.log(changeEvent);
                     var files = changeEvent.target.files;
+                    console.log(files.length);
                     if (files.length) {
                         var r = new FileReader();
                         r.onload = function(e) {
+
                             var contents = e.target.result;
-                            //scope.$apply(function () {
-                            //    scope.fileReader = contents;
-                            //});
 
                             //console.log(contents);
-                            var lines = contents.split('\n');
-
+                            var lines = contents.split('\r');
+                            console.log(lines.length);
+                            //
                             for (var i=1; i<lines.length; i++) {
+
                                 console.log(lines[i]);
                             }
 

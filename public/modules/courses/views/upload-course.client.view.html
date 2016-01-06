@@ -3,14 +3,16 @@
     <form data-ng-submit="upload()" class="font-large" validate>
 
         <div class="col-xs-12 col-md-6"
-             data-ng-if="authentication.user.roles.indexOf('help') > -1">
+             >
             <div class="virtual-card ribbon-card">
                 <div class="help-ribbon"><span>Help</span></div>
                 <div class="title">
-                    Uploading a course
+                    Uploading cards
                 </div>
                 <infobox logo="girl">
-                    some detail
+                    You can upload cards from a csv file into a new course.
+                    Please fill in the information about the new course and
+                    use the upload button to start the process.
                 </infobox>
             </div>
         </div>
@@ -285,10 +287,9 @@
 
                 <div class="col-xs-12" style="text-align: center; padding-top: 2em">
                     <button ng-disabled="!name" type="button" class="btn btn-rememberators font-s"
-                            upload
-                            data-ng-click="upload()">
+                            upload>
                         Upload Cards
-                        <input  ng-disabled="!name" type="file" style="position: absolute;top:50px; right:100px" upload/>
+                        <input  ng-disabled="!name" type="file" style="position: absolute;top:50px; right:100px" />
                     </button>
                     <!--<div class="font-s btn-rememberators">-->
                         <!--Upload cards-->

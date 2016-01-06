@@ -313,7 +313,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             var found = false;
 
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
-                if ($scope.authentication.user.inventory[i].rewardId === item.rewardId) {
+                // this should use rewardId
+                if ($scope.authentication.user.inventory[i].name === item.name) {
                     $scope.authentication.user.inventory[i].amount++;
                     found = true;
                 }
@@ -327,7 +328,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         name: item.name,
                         rewardId: item.rewardId,
                         type: item.type,
-                        healthpoints: item.healthpoints,
+                        healthpoints: item.defaulthealthpoints,
                         amount: 1
                     };
 
@@ -368,6 +369,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
         $scope.craft = function (item) {
+
+
 
 
             $scope.searchResult = [];
@@ -469,6 +472,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 var found = false;
                 var index = -1;
                 for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
+
                     if ($scope.authentication.user.inventory[i].name === item.name) {
                         found = true;
                         index = i;
@@ -543,11 +547,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
         $scope.getHealthPoints = function(item) {
-            //var reward = $scope.getReward(item.rewardId);
-            //var def = reward.defaulthealthpoints;
-            //if (def === 1) {
-            //    return 0;
-            //}
+
 
             return new Array(item.healthpoints);
         };

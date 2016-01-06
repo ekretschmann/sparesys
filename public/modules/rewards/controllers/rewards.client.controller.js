@@ -340,7 +340,7 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
 
             var reward = new Rewards({
                 name: $scope.newReward.name,
-                healthpoints: $scope.newReward.defaulthealthpoints,
+                defaulthealthpoints: $scope.newReward.defaulthealthpoints,
                 type: $scope.newReward.type,
                 ingredients: $scope.ingredients,
                 goals: $scope.goalsIds,

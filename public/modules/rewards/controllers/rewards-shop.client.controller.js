@@ -31,8 +31,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 for (var j = 0; j < $scope.rewards[i].ingredients.length; j++) {
                     var item1 = $scope.rewards[i].ingredients[j];
                     var ingredientFound = false;
+
                     for (var k = 0; k < $scope.items.used.length; k++) {
                         var item2 = $scope.items.used[k];
+
                         if (item1.name === item2.name) {
                             ingredientFound = true;
                             if (item1.amount !== item2.amount) {
@@ -41,6 +43,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         }
                     }
                     if (!ingredientFound) {
+
                         recipeFound = false;
                     }
                 }
@@ -213,7 +216,15 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                                     var ingredient =  rewards[j].ingredients[l];
                                     if (ingredient.rewardId === rewards[i].basis) {
 
-                                        newIngredientList.push(rewards[i]);
+                                        console.log('xxxx');
+                                        console.log(ingredient.rewardId);
+                                        console.log(rewards[i]._id);
+                                        newIngredientList.push({
+                                            'amount': rewards[j].ingredients[l].amount,
+                                            'keep': rewards[j].ingredients[l].keep,
+                                            'name': rewards[i].name,
+                                            'rewardId': rewards[i]._id
+                                        });
                                     } else {
                                         newIngredientList.push(rewards[j].ingredients[l]);
                                     }
@@ -227,17 +238,17 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                                     'location': rewards[j].location,
                                     'name': rewards[j].name,
                                     'type': rewards[j].type
+
                                 };
 
                                 $scope.rewards.push(newReward);
+
                             }
                         }
                     }
 
 
                 }
-
-              //  console.log($scope.rewards);
 
 
                 $scope.findItems();
@@ -385,7 +396,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.addStableItemToInventory = function(item) {
 
-           // console.log(item);
 
             var found = false;
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {

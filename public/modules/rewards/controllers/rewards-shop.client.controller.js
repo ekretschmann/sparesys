@@ -188,24 +188,56 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.find = function () {
 
 
+
             Rewards.query(function (rewards) {
 
                 $scope.rewards = rewards;
 
                 for (var i=0; i<rewards.length; i++) {
                     if (rewards[i].basis) {
-                        for (var j = 0; j < $scope.rewards.length; j++) {
-                            for (var k = 0; k < $scope.rewards[j].ingredients.length; k++) {
-                                var ingredient =  $scope.rewards[j].ingredients[k];
-                                if (ingredient.rewardId === rewards[i].basis) {
-                                    console.log(ingredient);
+
+                        for (var j = 0; j < rewards.length; j++) {
+                            var found = false;
+                            for (var k = 0; k < rewards[j].ingredients.length; k++) {
+                                //var ingredient =  ;
+                                if (rewards[j].ingredients[k].rewardId === rewards[i].basis) {
+                                    found = true;
                                 }
 
+                            }
+                            if (found) {
+
+                                var newIngredientList = [];
+
+                                for (var l = 0; l < rewards[j].ingredients.length; l++) {
+                                    var ingredient =  rewards[j].ingredients[l];
+                                    if (ingredient.rewardId === rewards[i].basis) {
+
+                                        newIngredientList.push(rewards[i]);
+                                    } else {
+                                        newIngredientList.push(rewards[j].ingredients[l]);
+                                    }
+                                }
+
+                                var newReward = {
+                                    'basic': rewards[j].basic,
+                                    'defaulthealthpoints': rewards[j].defaulthealthpoints,
+                                    'description': rewards[j].description,
+                                    'ingredients': newIngredientList,
+                                    'location': rewards[j].location,
+                                    'name': rewards[j].name,
+                                    'type': rewards[j].type
+                                };
+
+                                $scope.rewards.push(newReward);
                             }
                         }
                     }
 
+
                 }
+
+              //  console.log($scope.rewards);
 
 
                 $scope.findItems();

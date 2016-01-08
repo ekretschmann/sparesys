@@ -516,6 +516,9 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.purchase = function (item) {
            // $scope.resetRecipe();
 
+
+            console.log('purchasing');
+            console.log(item);
             if ($scope.authentication.user.trophies > item.price) {
 
 
@@ -533,12 +536,15 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                 if (found) {
 
+                    console.log('found');
                     for ( i = 0; i < $scope.authentication.user.inventory.length; i++) {
                         if ($scope.authentication.user.inventory[i].amount === 0) {
                             $scope.authentication.user.inventory.splice(i,1);
                         }
                     }
 
+                    console.log($scope.authentication.user.inventory.length);
+                    console.log($scope.authentication.user.inventory);
                     Users.get({
                         userId: $scope.authentication.user._id
                     }, function (user) {
@@ -547,9 +553,11 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         user.trophies -= item.price;
 
                         user.$update(function (updatedUser) {
-                            $scope.authentication.user.inventory[index].amount++;
-                            $scope.authentication.user.trophies -= item.price;
+                            //$scope.authentication.user.inventory[index].amount++;
+                            //$scope.authentication.user.trophies -= item.price;
 
+                            $scope.authentication.user.inventory = updatedUser.inventory;
+                            $scope.authentication.user.trophies = updatedUser.trophies;
 
                         });
                     });

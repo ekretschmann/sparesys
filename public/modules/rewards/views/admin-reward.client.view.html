@@ -67,7 +67,7 @@
                                 {{reward.location}} <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-                                <li role="menuitem" data-ng-repeat="location in options.locations">
+                                <li role="menuitem" data-ng-repeat="location in options.locations track by $index">
                                     <a href="" data-ng-click="switchLocation(reward,location)">{{location}}</a>
                                 </li>
                             </ul>

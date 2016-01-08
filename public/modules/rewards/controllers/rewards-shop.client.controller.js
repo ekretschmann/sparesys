@@ -216,9 +216,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                                     var ingredient =  rewards[j].ingredients[l];
                                     if (ingredient.rewardId === rewards[i].basis) {
 
-                                        console.log('xxxx');
-                                        console.log(ingredient.rewardId);
-                                        console.log(rewards[i]._id);
                                         newIngredientList.push({
                                             'amount': rewards[j].ingredients[l].amount,
                                             'keep': rewards[j].ingredients[l].keep,
@@ -376,17 +373,19 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
             if (!found) {
-                if (item.journey === '') {
+                if (!item.journey || item.journey === '') {
 
                     var newItem = {
                         name: item.name,
-                        rewardId: item.rewardId,
+                        rewardId: item._id,
                         type: item.type,
                         healthpoints: item.defaulthealthpoints,
                         amount: 1
                     };
 
                     $scope.authentication.user.inventory.push(newItem);
+
+
 
                 } else {
                     $scope.authentication.user.rewardlocation = item.journey;
@@ -456,8 +455,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     }
                 }
             }
-
-
             $scope.addItemToInventory(item);
 
 

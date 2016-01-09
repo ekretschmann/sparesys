@@ -553,6 +553,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         user.inventory[index].amount++;
                         user.trophies -= item.price;
 
+                        for (var i=0; i<user.inventory.length; i++) {
+                            if (!user.inventory[i].amount || user.inventory[i].amount === 0) {
+                                user.inventory.splice(i,0);
+                            }
+                        }
+
                         user.$update(function (updatedUser) {
                             //$scope.authentication.user.inventory[index].amount++;
                             //$scope.authentication.user.trophies -= item.price;
@@ -594,6 +600,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     user.inventory = $scope.authentication.user.inventory;
                     user.trophies = $scope.authentication.user.trophies;
 
+
+                    for (var i=0; i<user.inventory.length; i++) {
+                        if (!user.inventory[i].amount || user.inventory[i].amount === 0) {
+                            user.inventory.splice(i,0);
+                        }
+                    }
                     user.$update();
 
                 });

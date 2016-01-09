@@ -478,6 +478,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 user.trophies = $scope.authentication.user.trophies;
                 user.rewardlocation = $scope.authentication.user.rewardlocation;
 
+                for (var i=0; i<user.inventory.length; i++) {
+                    if (!user.inventory[i].amount || user.inventory[i].amount === 0) {
+                        user.inventory.splice(i,0);
+                    }
+                }
+
 
                 user.$update(function () {
                     $scope.recipies.forSale = [];

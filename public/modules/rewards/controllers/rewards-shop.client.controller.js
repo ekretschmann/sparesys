@@ -7,100 +7,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.authentication = Authentication;
 
 
+        $scope.searchResult = [];
+        $scope.searchText = '';
+
         $scope.replaceGenericIngredients = function () {
-            //function hasGenericBasis(reward) {
-            //    return reward.basis;
-            //}
-            //
-            //function hasGenericIngredient (reward, basis) {
-            //    var found = false;
-            //    for (var k = 0; k < reward.ingredients.length; k++) {
-            //        if (reward.ingredients[k].rewardId === basis) {
-            //            found = true;
-            //        }
-            //    }
-            //    return found;
-            //}
-            //
-            //function extendGenericRewards(reward) {
-            //    for (var i = 0; i < $scope.rewards.length; i++) {
-            //        var candidateReward = $scope.rewards[i];
-            //
-            //        if (hasGenericIngredient(candidateReward, reward.basis)) {
-            //
-            //            var newIngredientList = [];
-            //
-            //            for (var l = 0; l < candidateReward.ingredients.length; l++) {
-            //                var ingredient = candidateReward.ingredients[l];
-            //                if (ingredient.rewardId === reward.basis) {
-            //
-            //                    newIngredientList.push({
-            //                        'amount': candidateReward.ingredients[l].amount,
-            //                        'keep': candidateReward.ingredients[l].keep,
-            //                        'name': reward.name,
-            //                        'rewardId': reward._id
-            //                    });
-            //                } else {
-            //                    newIngredientList.push(candidateReward.ingredients[l]);
-            //                }
-            //            }
-            //
-            //            var newReward = {
-            //                'basic': candidateReward.basic,
-            //                'defaulthealthpoints': candidateReward.defaulthealthpoints,
-            //                'description': candidateReward.description,
-            //                'ingredients': newIngredientList,
-            //                'location': candidateReward.location,
-            //                'name': candidateReward.name,
-            //                'type': candidateReward.type
-            //
-            //            };
-            //
-            //            $scope.rewards.push(newReward);
-            //
-            //        }
-            //    }
-            //}
-
-
-            //function getGenericIngredients(reward, genericToSpecific) {
-            //    var result = [];
-            //    for (var i=0; i<reward.ingredients.length; i++) {
-            //        if(genericToSpecific[reward.ingredients[i].rewardId]) {
-            //            result.push(reward.ingredients[i]);
-            //        }
-            //    }
-            //    return result;
-            //}
-
-            //
-            //function getNonGenericIngredients(reward, genericToSpecific) {
-            //    var result = [];
-            //    for (var i=0; i<reward.ingredients.length; i++) {
-            //        if(!genericToSpecific[reward.ingredients[i].rewardId]) {
-            //            result.push(reward.ingredients[i]);
-            //        }
-            //    }
-            //    return result;
-            //}
-
-            //function splitGenericRecipies(rewards, genericToSpecific) {
-            //    var result = [[],[]];
-            //    for (var i=0; i<rewards.length; i++) {
-            //        var found = false;
-            //        for (var j=0; j<rewards[i].ingredients.length;j++) {
-            //            if (genericToSpecific[rewards[i].ingredients[j].rewardId]) {
-            //                found = true;
-            //            }
-            //        }
-            //        if (found) {
-            //            result[0].push(rewards[i]);
-            //        } else {
-            //            result[1].push(rewards[i]);
-            //        }
-            //    }
-            //    return result;
-            //}
 
 
             function getGenericToSpecificMapping(rewards) {
@@ -150,15 +60,9 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                 var result = [];
                 var replacements = genericToSpecific[key];
-               // console.log(reward.name);
-               // console.log(replacements);
                 for (var i = 0; i < replacements.length; i++) {
 
-
                     var newIngredientList = getListWithReplacements(key, reward.ingredients, replacements[i]);
-
-
-
                     var newReward = {
                         'basic': reward.basic,
                         'defaulthealthpoints': reward.defaulthealthpoints,
@@ -198,6 +102,14 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 return result;
             }
 
+            function hasRecipe(recipe, recipeList) {
+                for (var i=0; i<recipeList.length; i++) {
+                    if (recipe._id === recipeList[i]._id) {
+                        return true;
+                    }
+                }
+                return false;
+            }
 
             var genericToSpecific = getGenericToSpecificMapping($scope.rewards);
             var keys = Object.keys(genericToSpecific);
@@ -213,7 +125,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         var newRecipies = replaceIngredient(key, recipe, genericToSpecific);
                         recipeList = recipeList.concat(newRecipies);
                     } else {
-                        recipeList.push(recipe);
+                        if (!hasRecipe(recipe, recipeList)) {
+                            recipeList.push(recipe);
+                        }
+
                     }
                 }
 
@@ -224,9 +139,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             $scope.rewards = removeGenericIngredientsAndRecipes(recipeList, genericToSpecific);
 
 
+            //console.log($scope.rewards);
 
-           // console.log($scope.rewards);
-
+           //
+           //
+           //// console.log($scope.rewards);
+           //
             for (i=0; i<$scope.rewards.length;i++) {
                 console.log(i,$scope.rewards[i].name);
                 for (var k=0; k<$scope.rewards[i].ingredients.length; k++) {
@@ -256,6 +174,22 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         };
 
+        $scope.updateSearch = function () {
+
+
+            $scope.searchResult = [];
+            console.log($scope.searchText);
+            for (var i=0; i< $scope.rewards.length; i++) {
+                var rewardName = $scope.rewards[i].name;
+                if (rewardName.toLowerCase().trim().indexOf($scope.searchText.toLowerCase().trim()) > -1) {
+                    $scope.searchResult.push($scope.rewards[i]);
+                }
+            }
+
+
+
+        };
+
 
         //$scope.items = {};
         //$scope.skills = {};
@@ -271,7 +205,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         //$scope.goals = {};
         //$scope.goals.owned = [];
         //$scope.goals.challenge = [];
-        //$scope.searchResult = [];
+
         //$scope.hasIngredients = [];
 
 
@@ -390,17 +324,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         //
         //};
         //
-        //$scope.updateSearch = function () {
-        //
-        //
-        //    Rewards.query({
-        //        text: $scope.options.searchText
-        //    }, function (rewards) {
-        //        $scope.searchResult = rewards;
-        //
-        //
-        //    });
-        //};
+
         //
         //$scope.updateIngredientArray = function () {
         //    for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {

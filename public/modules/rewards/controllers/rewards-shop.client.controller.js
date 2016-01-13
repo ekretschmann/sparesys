@@ -9,15 +9,49 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.searchResult = [];
         $scope.searchText = '';
 
+
+        $scope.purchaseSkill = function (reward) {
+
+            function addSkill(skill) {
+                var newItem = {
+                    name: skill.name,
+                    rewardId: skill.rewardId,
+                    type: skill.type,
+                    healthpoints: skill.defaulthealthpoints,
+                    amount: 1
+                };
+
+                $scope.authentication.user.inventory.push(newItem);
+
+            }
+
+            function hasSkill() {
+                var found = false;
+                for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
+                    if ($scope.authentication.user.inventory[i].rewardId === reward.rewardId) {
+                        found = true;
+                    }
+                }
+                return found;
+            }
+
+            console.log(hasSkill(reward));
+            if (!hasSkill(reward)) {
+                addSkill(reward);
+                $scope.populateSkills();
+            }
+            //console.log(reward);
+            //console.log(hasSkill(reward));
+        };
+
         $scope.userHasReward = function (reward) {
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
-                if ($scope.authentication.user.inventory[i].rewardId === reward._id) {
+                if ($scope.authentication.user.inventory[i].rewardId === reward.rewardId) {
                     return true;
                 }
             }
             return false;
         };
-
 
 
         $scope.populateForSaleRewards = function () {
@@ -28,7 +62,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 var item = $scope.authentication.user.inventory[i];
                 var reward = $scope.getReward(item.rewardId);
-
 
 
                 if (reward.type !== 'Item') {
@@ -83,14 +116,18 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             }
 
 
-
             function getListWithReplacements(key, ingredients, replacement) {
                 var result = [];
-                for (var i=0; i<ingredients.length; i++) {
+                for (var i = 0; i < ingredients.length; i++) {
                     var candidate = ingredients[i];
 
                     if (candidate.rewardId === key) {
-                        result.push({rewardId: replacement._id, amount: candidate.amount, keep: candidate.keep, name: replacement.name});
+                        result.push({
+                            rewardId: replacement._id,
+                            amount: candidate.amount,
+                            keep: candidate.keep,
+                            name: replacement.name
+                        });
                     } else {
                         result.push(candidate);
                     }
@@ -110,16 +147,20 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     var newIngredientList = getListWithReplacements(key, reward.ingredients, replacements[i]);
                     var newReward = {
                         'basic': reward.basic,
+                        'basis': reward.basis,
+                        'price': reward.price,
                         'defaulthealthpoints': reward.defaulthealthpoints,
                         'description': reward.description,
                         'ingredients': newIngredientList,
+                        'goals': reward.goals,
+                        'enables': reward.enables,
                         'location': reward.location,
                         'name': reward.name,
-                        'type': reward.type
-
+                        'type': reward.type,
+                        'rewardId': reward.rewardId
                     };
 
-                  result.push(newReward);
+                    result.push(newReward);
                 }
 
                 return result;
@@ -127,15 +168,15 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             function removeGenericIngredientsAndRecipes(recipeList, genericToSpecific) {
                 var result = [];
-                for (var i=0; i<recipeList.length; i++) {
+                for (var i = 0; i < recipeList.length; i++) {
                     var recipe = recipeList[i];
-                    if (genericToSpecific[recipe._id]) {
+                    if (genericToSpecific[recipe.rewardId]) {
                         continue;
                     }
                     var found = false;
-                    for (var j=0; j<recipe.ingredients.length; j++) {
+                    for (var j = 0; j < recipe.ingredients.length; j++) {
                         var ingredient = recipe.ingredients[j];
-                        if(genericToSpecific[ingredient.rewardId]) {
+                        if (genericToSpecific[ingredient.rewardId]) {
                             found = true;
                         }
                     }
@@ -148,8 +189,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             }
 
             function hasRecipe(recipe, recipeList) {
-                for (var i=0; i<recipeList.length; i++) {
-                    if (recipe._id === recipeList[i]._id) {
+                for (var i = 0; i < recipeList.length; i++) {
+                    if (recipe.rewardId === recipeList[i].rewardId) {
                         return true;
                     }
                 }
@@ -182,21 +223,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             }
 
             $scope.rewards = removeGenericIngredientsAndRecipes(recipeList, genericToSpecific);
-
-
-
-            //console.log($scope.rewards);
-
-           //
-           //
-           //// console.log($scope.rewards);
-           //
-           // for (i=0; i<$scope.rewards.length;i++) {
-           //     console.log(i,$scope.rewards[i].name);
-           //     for (var k=0; k<$scope.rewards[i].ingredients.length; k++) {
-           //         console.log('   ',$scope.rewards[i].ingredients[k].name);
-           //     }
-           // }
+            //for (i=0; i<$scope.rewards.length;i++) {
+            //    console.log(i,$scope.rewards[i].name);
+            //    for (var k=0; k<$scope.rewards[i].ingredients.length; k++) {
+            //        console.log('   ',$scope.rewards[i].ingredients[k].name);
+            //    }
+            //}
 
 
         };
@@ -212,15 +244,19 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
         $scope.populateSkills = function () {
+
             $scope.goals.owned = [];
             $scope.goals.challenge = [];
+            $scope.skills.owned = [];
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 var item = $scope.authentication.user.inventory[i];
                 var reward = $scope.getReward(item.rewardId);
-                if (reward.type !== 'Skill') {
-                    $scope.items.owned.push(reward);
-                }
+                //if (reward.type !== 'Skill') {
+                //    $scope.items.owned.push(reward);
+                //}
                 if (reward.type === 'Skill') {
+
+                    console.log('x');
                     $scope.skills.owned.push(reward);
                     for (var j = 0; j < reward.goals.length; j++) {
 
@@ -246,19 +282,17 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             for (var i = 0; i < $scope.rewards.length; i++) {
 
 
-                console.log($scope.rewards[i].name, $scope.rewards[i].basic);
                 if ($scope.rewards[i].basic) {
 
 
                     if ($scope.rewards[i].type === 'Skill') {
                         if (!$scope.userHasReward($scope.rewards[i])) {
                             $scope.skills.forSale.push($scope.rewards[i]);
-                            console.log('pushing');
                         }
                     } else {
 
                         $scope.items.forSale.push($scope.rewards[i]);
-                        $scope.items.forSaleNames.push($scope.rewards[i].name);
+                        //  $scope.items.forSale.push($scope.rewards[i].name);
                     }
                 }
             }
@@ -268,16 +302,32 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             Rewards.query(function (rewards) {
 
-                $scope.rewards = rewards;
+                $scope.rewards = [];
+
+                for (var i = 0; i < rewards.length; i++) {
+                    var reward = rewards[i];
+                    //console.log(reward);
+                    $scope.rewards.push({
+                        'basic': reward.basic,
+                        'basis': reward.basis,
+                        'price': reward.price,
+                        'goals': reward.goals,
+                        'enables': reward.enables,
+                        'defaulthealthpoints': reward.defaulthealthpoints,
+                        'description': reward.description,
+                        'ingredients': reward.ingredients,
+                        'location': reward.location,
+                        'name': reward.name,
+                        'type': reward.type,
+                        'rewardId': reward._id
+                    });
+                }
+
 
                 $scope.replaceGenericIngredients();
 
+
                 $scope.populateSkills();
-
-                //console.log($scope.rewards);
-
-
-
 
 
                 $scope.populateForSaleRewards();
@@ -290,13 +340,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
             $scope.searchResult = [];
-            for (var i=0; i< $scope.rewards.length; i++) {
+            for (var i = 0; i < $scope.rewards.length; i++) {
                 var rewardName = $scope.rewards[i].name;
                 if (rewardName.toLowerCase().trim().indexOf($scope.searchText.toLowerCase().trim()) > -1) {
                     $scope.searchResult.push($scope.rewards[i]);
                 }
             }
-
 
 
         };

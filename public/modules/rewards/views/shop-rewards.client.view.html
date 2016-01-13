@@ -102,10 +102,17 @@
 
 
 
-            <div class="col-md-6" style="padding-left: 0">
+            <div class="col-md-12" style="padding-left: 0">
                 <div class="flashcard-section">
 
+                    <div data-ng-if="skills.forSale.length === 0">
+                        <div class="field-label">Achieve your goals to unlock further skills
+                        </div>
+                        </div>
+
                     <div data-ng-if="skills.forSale.length > 0">
+
+
                         <div class="field-label">You can buy new skills:
                         </div>
 
@@ -114,7 +121,7 @@
                             <div data-ng-if="authentication.user.trophies >= skill.price">
                                 <a href="" data-ng-click="purchaseSkill(skill)"><i
                                         class="glyphicon glyphicon-plus-sign"></i></a>
-                                {{skill.name}} ({{skill.price}} <span
+                                {{skill.name}} ({{skill.price}}<span
                                     data-ng-if="skill.price === 1">trophy</span><span
                                     data-ng-if="skill.price > 1">trophies</span>)
 

@@ -19,11 +19,11 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 user.trophies = $scope.authentication.user.trophies;
                 user.rewardlocation = $scope.authentication.user.rewardlocation;
 
-                for (var i = 0; i < user.inventory.length; i++) {
-                    if (!user.inventory[i].amount || user.inventory[i].amount === 0) {
-                        user.inventory.splice(i, 0);
-                    }
-                }
+                //for (var i = 0; i < user.inventory.length; i++) {
+                //    if (!user.inventory[i].amount || user.inventory[i].amount === 0) {
+                //        user.inventory.splice(i, 0);
+                //    }
+                //}
 
 
                 user.$update();
@@ -45,7 +45,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 };
 
                 $scope.authentication.user.inventory.push(newItem);
-                $scope.updateUser();
+
 
             }
 
@@ -61,10 +61,71 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             if (!hasSkill(reward)) {
                 addSkill(reward);
+                $scope.updateUser();
                 $scope.populateSkills();
                 $scope.populateForSaleRewards();
             }
 
+        };
+
+        $scope.purchaseItem = function (reward) {
+
+
+            function addItem(item) {
+
+
+                var reward = getReward(item);
+                if (reward) {
+                    reward.amount ++;
+                } else {
+                    var newItem = {
+                        name: item.name,
+                        rewardId: item.rewardId,
+                        type: item.type,
+                        healthpoints: item.defaulthealthpoints,
+
+                        amount: 1
+                    };
+                    $scope.authentication.user.inventory.push(newItem);
+                }
+
+
+
+
+            }
+
+            function getReward(reward) {
+                for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
+                    if ($scope.authentication.user.inventory[i].rewardId === reward.rewardId) {
+                        return $scope.authentication.user.inventory[i];
+                    }
+                }
+                return undefined;
+            }
+
+
+           // if (!hasItem(reward)) {
+                addItem(reward);
+                //$scope.updateUser();
+                $scope.populateSkills();
+                $scope.populateForSaleRewards();
+                $scope.populateInventory();
+            //}
+
+        };
+
+        $scope.populateInventory = function() {
+
+            $scope.items.owned = [];
+            for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
+
+
+                var item = $scope.authentication.user.inventory[i];
+                if (item.type !== 'Skill') {
+                    $scope.items.owned.push(item);
+                }
+
+            }
         };
 
         $scope.userHasReward = function (reward) {

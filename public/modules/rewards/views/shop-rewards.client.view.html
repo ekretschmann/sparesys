@@ -291,7 +291,8 @@
 
                     <div data-ng-repeat="item in items.owned | orderBy: 'name'" ng-if="$index % 3 === 1"
                          class="field-data">
-                        <a href="" data-ng-click="useIngredient(item)"><i
+                        <a href=""
+                           data-ng-click="useIngredient(item)"><i
                                 class="glyphicon glyphicon-plus-sign"></i></a>
                         {{item.amount}} {{item.name}} <span
                             data-ng-repeat="hp in getHealthPoints(item) track by $index"><i

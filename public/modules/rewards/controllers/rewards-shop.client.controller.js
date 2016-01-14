@@ -290,7 +290,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.populateForSaleRewards = function () {
             $scope.items.forSale = [];
-            //$scope.skills.forSale = [];
+            $scope.skills.forSale = [];
             $scope.populateBasicItems();
 
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
@@ -576,6 +576,11 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             });
 
+        };
+
+        $scope.search = function (text) {
+            $scope.searchText = text;
+            $scope.updateSearch();
         };
 
         $scope.updateSearch = function () {

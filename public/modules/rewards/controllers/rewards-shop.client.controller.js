@@ -27,6 +27,11 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
         $scope.removeItemFromUser = function(item) {
+
+            if (item.keep) {
+                return;
+            }
+
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 var inventoryItem = $scope.authentication.user.inventory[i];
                 if(inventoryItem.rewardId === item.rewardId) {
@@ -39,11 +44,21 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             }
         };
 
+
+
+
         $scope.craft = function (reward) {
-            $scope.addItemToUser(reward);
+
             for (var i=0; i<reward.ingredients.length; i++) {
                 $scope.removeItemFromUser(reward.ingredients[i]);
             }
+
+            if (reward.journey && reward.journey !== '') {
+                $scope.authentication.user.rewardlocation = reward.journey;
+            } else {
+                $scope.addItemToUser(reward);
+            }
+
 
             $scope.updateUser();
             $scope.populateSkills();
@@ -379,6 +394,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 for (var i = 0; i < replacements.length; i++) {
 
                     var newIngredientList = getListWithReplacements(key, reward.ingredients, replacements[i]);
+
                     var newReward = {
                         'basic': reward.basic,
                         'basis': reward.basis,
@@ -390,6 +406,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         'enables': reward.enables,
                         'location': reward.location,
                         'name': reward.name,
+                        'journey': reward.journey,
                         'type': reward.type,
                         'rewardId': reward.rewardId
                     };
@@ -546,7 +563,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                 for (var i = 0; i < rewards.length; i++) {
                     var reward = rewards[i];
-                    //console.log(reward);
+
                     $scope.rewards.push({
                         'basic': reward.basic,
                         'basis': reward.basis,
@@ -559,6 +576,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         'location': reward.location,
                         'name': reward.name,
                         'type': reward.type,
+                        'journey': reward.journey,
                         'rewardId': reward._id
                     });
                 }

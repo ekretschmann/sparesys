@@ -328,7 +328,7 @@
 
                     <div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 0"
                          class="field-data">
-                        <a href="" data-ng-click="removeFromRecipe(item)"><i
+                        <a href="" data-ng-click="unuseIngredient(item)"><i
                                 class="glyphicon glyphicon-minus-sign"></i></a>
                         {{item.amount}} {{item.name}} <span
                             data-ng-repeat="hp in getHealthPoints(item) track by $index"><i
@@ -343,7 +343,7 @@
 
                     <div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 1"
                          class="field-data">
-                        <a href="" data-ng-click="removeFromRecipe(item)"><i
+                        <a href="" data-ng-click="unuseIngredient(item)"><i
                                 class="glyphicon glyphicon-minus-sign"></i></a>
                         {{item.amount}} {{item.name}} <span
                             data-ng-repeat="hp in getHealthPoints(item) track by $index"><i
@@ -359,7 +359,7 @@
 
                     <div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 2"
                          class="field-data">
-                        <a href="" data-ng-click="removeFromRecipe(item)"><i
+                        <a href="" data-ng-click="unuseIngredient(item)"><i
                                 class="glyphicon glyphicon-minus-sign"></i></a>
                         {{item.amount}} {{item.name}} <span
                             data-ng-repeat="hp in getHealthPoints(item) track by $index"><i

@@ -103,6 +103,9 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
         $scope.removeFromInventory = function (item) {
+
+            console.log('removing '+item.name+' from inventory');
+
             for (var i = 0; i < $scope.items.owned.length; i++) {
                 var inventoryItem = $scope.items.owned[i];
                 if (inventoryItem.rewardId === item.rewardId) {
@@ -118,12 +121,17 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
         $scope.addToInventory = function (item) {
+
+            console.log('adding '+item.name+' to inventory');
+
             var found = false;
             for (var i = 0; i < $scope.items.owned.length; i++) {
                 var usedItem = $scope.items.owned[i];
+                console.log('usedItem ', usedItem.rewardId);
                 if (usedItem.rewardId === item.rewardId) {
                     usedItem.amount++;
                     found = true;
+                    console.log('found');
                 }
             }
 
@@ -139,6 +147,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
         $scope.addToWorkbench = function (item) {
+
+            console.log('adding '+item.name+' to workbench');
 
             var found = false;
             for (var i = 0; i < $scope.items.used.length; i++) {
@@ -162,6 +172,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
         $scope.removeFromWorkbench = function (item) {
+            console.log('removing '+item.name+' from workbench');
+
             for (var i = 0; i < $scope.items.used.length; i++) {
                 var inventoryItem = $scope.items.used[i];
 
@@ -183,12 +195,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
         $scope.unuseIngredient = function (item) {
-            console.log($scope.authentication.user.inventory[1].amount);
             $scope.removeFromWorkbench(item);
             $scope.addToInventory(item);
             $scope.calculateProducts();
 
-            console.log($scope.authentication.user.inventory[1].amount);
 
         };
 
@@ -258,12 +268,13 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             } else {
                 var newItem = {
                     name: item.name,
-                    rewardId: item._id,
+                    rewardId: item.rewardId,
                     type: item.type,
                     healthpoints: item.defaulthealthpoints,
 
                     amount: 1
                 };
+                console.log(newItem);
                 $scope.authentication.user.inventory.push(newItem);
             }
         };

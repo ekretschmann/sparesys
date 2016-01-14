@@ -28,6 +28,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.removeItemFromUser = function (item) {
 
+            console.log(item);
             if (item.keep) {
                 return;
             }
@@ -51,9 +52,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.craft = function (reward) {
 
-            console.log('crafting');
-
-            console.log($scope.authentication.user.inventory);
 
             for (var i = 0; i < reward.ingredients.length; i++) {
                 $scope.removeItemFromUser(reward.ingredients[i]);
@@ -260,7 +258,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             } else {
                 var newItem = {
                     name: item.name,
-                    rewardId: item.rewardId,
+                    rewardId: item._id,
                     type: item.type,
                     healthpoints: item.defaulthealthpoints,
 

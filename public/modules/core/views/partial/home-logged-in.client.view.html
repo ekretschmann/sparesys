@@ -62,22 +62,54 @@
 
 
     <div class="col-xs-12 col-md-6 ">
-        <div class="font-large virtual-card ribbon-card"
-             data-ng-if="authentication.user.roles.indexOf('receive-rewards') > -1">
+        <div class="font-large virtual-card ribbon-card">
 
 
             <div class="learning-ribbon"><span>Learning</span></div>
             <div class="title">Trophies and Challenges</div>
 
 
-            <div >
-                You have {{authentication.user.trophies}} trophies to swap for items
+            <div class="flashcard-section">
+                <div class="field-label">
+                    Your trophies
+                </div>
+                <div class="field-data">
+                    {{authentication.user.trophies}}
+                </div>
             </div>
 
 
-            <a href="#!/rewards/shop" style="width: 30%; position: absolute; bottom: 1.5em; left: 35%" class="btn btn-rememberators font-s">
-                Buy Rewards
-            </a>
+            <div class="flashcard-section">
+                <div data-ng-if="authentication.user.inventory.length === 0" class="field-label">
+                    You have no rewards so far
+                </div>
+
+                <div data-ng-if="authentication.user.inventory.length > 0" class="field-label" >
+                    Your rewards
+                </div>
+
+
+                <div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 0"
+                     class="field-data">
+                    <div class="col-xs-4" style="padding: 0">{{item.amount}} {{item.name}}</div>
+                </div>
+
+                <div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 1"
+                     class="field-data">
+                    <div class="col-xs-4" style="padding: 0">{{item.amount}} {{item.name}}</div>
+                </div>
+
+                <div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 2"
+                     class="field-data">
+                    <div class="col-xs-4" style="padding: 0">{{item.amount}} {{item.name}}</div>
+                </div>
+
+
+                <a href="#!/rewards/shop" style="width: 30%; position: absolute; bottom: 1.5em; left: 35%"
+                   class="btn btn-rememberators font-s">
+                    Buy Rewards
+                </a>
+            </div>
         </div>
     </div>
 

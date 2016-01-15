@@ -42,6 +42,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                             $scope.authentication.user.inventory.splice(i, 1);
                         } else {
                             inventoryItem.amount -= item.amount;
+                            inventoryItem.healthpoints = $scope.getReward(item.rewardId).defaulthealthpoints;
                         }
                     }
                 }
@@ -554,7 +555,25 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.getHealthPoints = function (item) {
 
             if (item.healthpoints > 5) {
-                return new Array(1,2,3,4,5);
+                return new Array(5);
+            }
+
+
+
+            return new Array(item.healthpoints);
+        };
+
+        $scope.getInventoryHealthPoints = function (item) {
+
+            if (item.healthpoints > 5) {
+                return new Array(5);
+            }
+
+            for (var i=0; i<$scope.items.used.length; i++) {
+                var usedItem = $scope.items.used[i];
+                if (usedItem.rewardId === item.rewardId) {
+                    return new Array($scope.getReward(item.rewardId).defaulthealthpoints);
+                }
             }
 
             return new Array(item.healthpoints);

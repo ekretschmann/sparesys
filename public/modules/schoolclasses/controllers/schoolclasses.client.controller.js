@@ -13,11 +13,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 $scope.schoolclass.courses.push(course._id);
                 $scope.schoolclass.$update();
 
-                //$scope.schoolclass.students.forEach(function (studentId) {
-                //
-                //    $scope.addCourseForStudent(studentId, course._id);
-                //
-                //});
             }
         };
 
@@ -32,20 +27,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 
             $scope.schoolclass.$update();
-
-            //$scope.schoolclass.students.forEach(function (studentId) {
-            //
-            //    Courses.query({
-            //        userId: studentId
-            //    }).$promise.then(function (studentCourses) {
-            //            studentCourses.forEach(function (studentCourse) {
-            //                if (studentCourse.supervised && studentCourse.master.toString() === course._id) {
-            //                    studentCourse.visible = false;
-            //                    studentCourse.$update();
-            //                }
-            //            });
-            //        });
-            //}, this);
 
         };
 
@@ -76,25 +57,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         };
 
-        $scope.areYouSureToRemoveTeacherFromClass = function (schoolclass, teacher) {
 
-
-
-            //$modal.open({
-            //    templateUrl: 'areYouSureToRemoveTeacherFromClass.html',
-            //    controller: 'RemoveTeacherFromClassModalController',
-            //    resolve: {
-            //
-            //        schoolclass: function () {
-            //            return schoolclass;
-            //        },
-            //        teacher: function () {
-            //            return teacher;
-            //        }
-            //    }
-            //});
-
-        };
 
         $scope.removeStudent = function (studentId) {
 
@@ -156,6 +119,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             $scope.schoolclasses = Schoolclasses.query();
         };
 
+        $scope.courses = [];
         // Find existing Schoolclass
         $scope.findOne = function () {
 
@@ -180,6 +144,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                     Courses.query({
                         _id: courseId
                     }).$promise.then(function (courses) {
+
                             if (courses.length === 0) {
                                 console.log('Course doesnt exist. Removing from schoolclass');
                                 for (var i in schoolclass.courses) {
@@ -188,6 +153,8 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                                     }
                                 }
                                 schoolclass.$update();
+                            } else {
+                                $scope.courses.push(courses[0]);
                             }
 
                         });

@@ -1,21 +1,64 @@
 <section data-ng-controller="SchoolclassesController" data-ng-init="findOne()">
-	<div data-ng-if="authentication.user.roles.indexOf('help') > -1">
-		<div class="col-xs-12 col-md-6">
-			<div>
-				<div class=" virtual-card font-large ribbon-card">
+    <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="col-xs-12 col-md-6">
+            <div>
+                <div class=" virtual-card font-large ribbon-card">
 
-					<div class="help-ribbon"><span>Teaching</span></div>
+                    <div class="help-ribbon"><span>Help</span></div>
 
 
-					<div class="title">Progress in {{schoolclass.name}}</div>
+                    <div class="title">Progress View</div>
 
 
                     <infobox logo="woman">
                         This view allows you to check for the progress of students and the
                         state of the learning in the courses tought in {{schoolclass.name}}
                     </infobox>
-				</div>
-			</div>
-		</div>
-	</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="col-xs-12 col-md-6">
+        <div>
+            <div class=" virtual-card font-large">
+
+
+                <div class="title" style="padding-bottom: 1em">Progress in {{schoolclass.name}}</div>
+
+                <div class="col-xs-6">
+                    <div class="btn-group" dropdown
+                         is-open="status.isopen">
+                        <button type="button" class="btn btn-primary dropdown-toggle">
+                            Students <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                            <li role="menuitem" data-ng-repeat="student in schoolclass.students"><a
+                                    href=""
+                                    data-ng-click="">{{student.displayName}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="col-xs-6">
+                    <div class="btn-group" dropdown
+                         is-open="status.isopen">
+                        <button type="button" class="btn btn-primary dropdown-toggle">
+                            Courses <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                            <li role="menuitem" data-ng-repeat="course in courses"><a
+                                    href=""
+                                    data-ng-click="">{{course.name}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+
+            </div>
+        </div>
+    </div>
 </section>

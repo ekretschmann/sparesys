@@ -52,7 +52,7 @@ angular.module('core').service('DiagramsCalendarService', ['$timeout',
 
 
             svg = d3.select(id).selectAll('svg')
-                .data(d3.range(2015, 2016))
+                .data(d3.range(2015, 2017))
                 .enter().append('svg')
                 .attr('width', windowWidth+'px')
                 .attr('class', 'Greens')

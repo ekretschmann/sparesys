@@ -1,11 +1,58 @@
 'use strict';
 
 // Schoolclasses controller
-angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$window', '$http','$state', '$modal', '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService', 'Users',
-    function ($scope, $window, $http, $state, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService, Users) {
+angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$window', '$http', '$state', '$modal',
+    '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService', 'Users', 'DiagramsCalendarService',
+    function ($scope, $window, $http, $state, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService, Users, DiagramsCalendarService) {
 
         $scope.authentication = Authentication;
 
+
+        $scope.selectStudent = function (student) {
+            Users.get({
+                userId: student._id
+            }, function (theStudent) {
+                console.log(theStudent);
+            });
+        };
+
+        $scope.studentCourses = [];
+
+        $scope.addStudentCourse = function (courseId) {
+
+            Courses.get({
+                courseId: courseId
+            }, function (slaveCourse) {
+                $scope.studentCourses.push(slaveCourse);
+
+                var res = CoursesService.serverLoadCards();
+                var promise = res.get({courseId: slaveCourse._id});
+                promise.$promise.then(function (cards) {
+
+                    $scope.cards = cards;
+                    DiagramsCalendarService.drawCalendar(cards, '#cal', '#practice-date', '#number-of-cards', ($window.innerWidth / 2)-130);
+
+                    var w = $window.innerWidth + 110;
+                    if ($window.innerWidth > 990){
+                        w = ($window.innerWidth / 2) + 60;
+                    }
+                    //DiagramsCardsInPlayService.drawLineChart(cards, '#inplay', '#total-cards-learned', w);
+                    //DiagramsTimeSpentService.drawBarChart(cards, '#timespent', '#spent-practice-date', '#spent-practice-time','#spent-all-time', ($window.innerWidth / 2)-130);
+                });
+
+            });
+        };
+
+        $scope.selectCourse = function (course) {
+            console.log(course);
+
+            $scope.studentCourses = [];
+
+
+            for (var i = 0; i < course.slaves.length; i++) {
+                $scope.addStudentCourse(course.slaves[i]);
+            }
+        };
 
         $scope.addCourseToClass = function (course) {
 
@@ -40,7 +87,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         $scope.areYouSureToDeleteClass = function (schoolclass, school) {
 
 
-
             $modal.open({
                 templateUrl: 'areYouSureToDeleteClass.html',
                 controller: 'DeleteClassModalController',
@@ -56,7 +102,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
             });
 
         };
-
 
 
         $scope.removeStudent = function (studentId) {
@@ -330,10 +375,9 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 $scope.schoolclass.teachers.push(teacher);
 
 
-
                 $scope.schoolclass.$update(function () {
 
-                }, function(err) {
+                }, function (err) {
                     console.log(err);
                 });
             }
@@ -352,7 +396,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
 
-
         $scope.addCourseForStudent = function (studentId, courseId) {
             Courses.query({
                 userId: studentId
@@ -362,7 +405,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                     studentCourses.forEach(function (studentCourse) {
 
                         // if the course existed, then just set it visible
-                        if ( studentCourse.master === courseId) {
+                        if (studentCourse.master === courseId) {
                             studentCourse.supervised = true;
                             studentCourse.visible = true;
                             studentCourse.$update();
@@ -405,4 +448,5 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
     }
-]);
+])
+;

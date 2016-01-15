@@ -105,7 +105,8 @@
                                     <div data-ng-repeat="c in schoolclass.courses">
                                         <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
                                             <a href="" data-ng-click="removeCourseFromClass(course)"><i
-                                                    class="glyphicon glyphicon-minus-sign"></i></a> {{course.name}}
+                                                    class="glyphicon glyphicon-minus-sign"></i></a>
+                                            <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
                                         </div>
                                     </div>
                                 </div>

@@ -19,6 +19,10 @@ angular.module('schoolclasses').config(['$stateProvider',
             state('classProgressForCourse', {
                 url: '/schoolclasses/:schoolclassId/course/:courseId/progress',
                 templateUrl: 'modules/schoolclasses/views/course-progress.client.view.html'
+            }).
+            state('viewSchoolclass', {
+                url: '/schoolclasses/:schoolclassId',
+                templateUrl: 'modules/schoolclasses/views/view-schoolclass.client.view.html'
             });
     }
 ]);

@@ -466,11 +466,9 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                 var reward = $scope.getReward(item.rewardId);
 
-                console.log('trying ',reward.name, item.name);
-                console.log(item);
-                console.log(reward);
+
                 if (reward.type === 'Skill') {
-                    $scope.skills.owned.push(reward);
+                    $scope.skills.owned.push(item);
                     for (var j = 0; j < reward.goals.length; j++) {
 
                         var found = false;
@@ -506,9 +504,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.find = function () {
 
-            for (var k = 0; k < $scope.authentication.user.inventory.length; k++) {
-                console.log($scope.authentication.user.inventory[k].name);
-            }
+
 
             Rewards.query(function (rewards) {
 

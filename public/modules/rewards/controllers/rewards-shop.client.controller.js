@@ -286,9 +286,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.userHasReward = function (reward) {
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 if ($scope.authentication.user.inventory[i].rewardId === reward.rewardId) {
-                    console.log('has it');
-                    console.log($scope.authentication.user.inventory[i]);
-                    console.log(reward);
                     return true;
                 }
             }
@@ -297,7 +294,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
         $scope.populateForSaleRewards = function () {
-            console.log('populateForSaleRewards');
             $scope.items.forSale = [];
             $scope.skills.forSale = [];
             $scope.populateBasicItems();
@@ -308,13 +304,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                 if (reward.type !== 'Item') {
 
-                    console.log(reward.name);
                     if (reward.enables) {
                         for (var j = 0; j < reward.enables.length; j++) {
-                            console.log(reward.enables[j]);
                             if (reward.enables[j].type === 'Skill') {
                                 if (!$scope.userHasReward(reward.enables[j])) {
-                                    console.log('pushing');
                                     $scope.skills.forSale.push(reward.enables[j]);
                                 }
                             }
@@ -472,9 +465,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 var item = $scope.authentication.user.inventory[i];
                 var reward = $scope.getReward(item.rewardId);
 
-                console.log(item.name);
                 if (reward.type === 'Skill') {
-                    console.log('pushing ', reward.name);
                     $scope.skills.owned.push(reward);
                     for (var j = 0; j < reward.goals.length; j++) {
 
@@ -510,6 +501,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         };
 
         $scope.find = function () {
+
+            for (var k = 0; k < $scope.authentication.user.inventory.length; k++) {
+                console.log($scope.authentication.user.inventory[k].name);
+            }
 
             Rewards.query(function (rewards) {
 

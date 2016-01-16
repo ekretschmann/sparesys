@@ -305,9 +305,13 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 if (reward.type !== 'Item') {
 
                     if (reward.enables) {
+                        console.log(reward);
+                        console.log(reward.enables);
                         for (var j = 0; j < reward.enables.length; j++) {
                             if (reward.enables[j].type === 'Skill') {
+                                console.log('Skill');
                                 if (!$scope.userHasReward(reward.enables[j])) {
+                                    console.log('forsale');
                                     $scope.skills.forSale.push(reward.enables[j]);
                                 }
                             }

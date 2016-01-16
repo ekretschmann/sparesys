@@ -466,6 +466,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 var reward = $scope.getReward(item.rewardId);
 
                 if (reward.type === 'Skill') {
+                    console.log('pushing ', reward.name);
                     $scope.skills.owned.push(reward);
                     for (var j = 0; j < reward.goals.length; j++) {
 
@@ -483,6 +484,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     }
                 }
             }
+            console.log('after populate skills');
+            console.log($scope.skills.owned);
         };
 
         $scope.populateBasicItems = function () {
@@ -507,9 +510,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
                 for (var i = 0; i < rewards.length; i++) {
 
-                    console.log('you have');
-                    console.log(rewards[i].name);
-
                     var reward = rewards[i];
 
                     $scope.rewards.push({
@@ -528,27 +528,14 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         'rewardId': reward._id
                     });
                 }
-                console.log('0');
-                console.log($scope.rewards.length);
-                console.log($scope.rewards);
                 $scope.replaceGenericIngredients();
-                console.log('a');
-                console.log($scope.rewards.length);
-                console.log($scope.rewards);
                 $scope.populateSkills();
-                console.log('b');
-                console.log($scope.rewards.length);
-                console.log($scope.rewards);
                 $scope.populateForSaleRewards();
-                console.log('c');
-                console.log($scope.rewards.length);
-                console.log($scope.rewards);
-
+                console.log('a');
+                console.log($scope.skills.owned);
                 $scope.populateInventory();
-
-                console.log('end');
-                console.log($scope.rewards.length);
-                console.log($scope.rewards);
+                console.log('b');
+                console.log($scope.skills.owned);
             });
         };
 

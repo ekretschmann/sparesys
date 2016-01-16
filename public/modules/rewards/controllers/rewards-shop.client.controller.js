@@ -465,6 +465,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 var item = $scope.authentication.user.inventory[i];
                 var reward = $scope.getReward(item.rewardId);
 
+                console.log('trying ',reward.name, item.name);
                 if (reward.type === 'Skill') {
                     $scope.skills.owned.push(reward);
                     for (var j = 0; j < reward.goals.length; j++) {

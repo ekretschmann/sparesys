@@ -201,7 +201,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             function addSkill(skill) {
                 var newItem = {
                     name: skill.name,
-                    rewardId: skill.rewardId,
+                    rewardId: skill._id,
                     type: skill.type,
                     healthpoints: skill.defaulthealthpoints,
                     amount: 1
@@ -463,6 +463,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             $scope.skills.owned = [];
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 var item = $scope.authentication.user.inventory[i];
+
 
                 var reward = $scope.getReward(item.rewardId);
 

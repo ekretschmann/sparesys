@@ -11,6 +11,15 @@ angular.module('users').controller('UsersController', ['$http', '$scope', '$stat
         }, 100);
 
 
+        $scope.removeReward = function(item, otherUser) {
+            for (var i = 0; i < otherUser.inventory.length; i++) {
+                if (otherUser.inventory[i].name === item.name) {
+                    otherUser.inventory.splice(i,1);
+                    otherUser.$update();
+                }
+            }
+        };
+
         // Remove existing User
         $scope.remove = function (otherUser) {
             if (otherUser) {

@@ -285,10 +285,20 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             }
         };
 
-        $scope.userHasReward = function (reward) {
+        $scope.userHasItem = function (reward) {
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 console.log($scope.authentication.user.inventory[i].rewardId, reward.rewardId);
                 if ($scope.authentication.user.inventory[i].rewardId === reward.rewardId) {
+                    return true;
+                }
+            }
+            return false;
+        };
+
+        $scope.userHasRewardId = function (rewardId) {
+            for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
+                console.log($scope.authentication.user.inventory[i].rewardId, rewardId);
+                if ($scope.authentication.user.inventory[i].rewardId === rewardId) {
                     return true;
                 }
             }
@@ -312,9 +322,10 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                             if (reward.enables[j].type === 'Skill') {
 
                                 console.log(reward.enables[j]);
-                                if (!$scope.userHasReward(reward.enables[j])) {
+                                if (!$scope.userHasRewardId(reward.enables[j])) {
                                     console.log('pushing');
-                                    $scope.skills.forSale.push(reward.enables[j]);
+                                    console.log($scope.getReward(reward.enables[j]));
+                                    $scope.skills.forSale.push($scope.getReward(reward.enables[j]));
                                 }
                             }
                             if (reward.enables[j].type === 'Item') {
@@ -499,7 +510,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             for (var i = 0; i < $scope.rewards.length; i++) {
                 if ($scope.rewards[i].basic) {
                     if ($scope.rewards[i].type === 'Skill') {
-                        if (!$scope.userHasReward($scope.rewards[i])) {
+                        if (!$scope.userHasItem($scope.rewards[i])) {
                             $scope.skills.forSale.push($scope.rewards[i]);
                         }
                     } else {

@@ -287,6 +287,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.userHasReward = function (reward) {
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
+                console.log($scope.authentication.user.inventory[i].rewardId, reward.rewardId);
                 if ($scope.authentication.user.inventory[i].rewardId === reward.rewardId) {
                     return true;
                 }
@@ -310,7 +311,9 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         for (var j = 0; j < reward.enables.length; j++) {
                             if (reward.enables[j].type === 'Skill') {
 
+                                console.log(reward.enables[j]);
                                 if (!$scope.userHasReward(reward.enables[j])) {
+                                    console.log('pushing');
                                     $scope.skills.forSale.push(reward.enables[j]);
                                 }
                             }
@@ -471,10 +474,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 var reward = $scope.getReward(item.rewardId);
 
 
-                console.log(reward.name);
-                console.log(reward);
                 if (reward.type === 'Skill') {
-                    $scope.skills.owned.push(item);
                     console.log('pushing');
                     for (var j = 0; j < reward.goals.length; j++) {
 

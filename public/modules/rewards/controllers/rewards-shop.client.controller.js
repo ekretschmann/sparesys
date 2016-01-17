@@ -199,6 +199,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
         $scope.purchaseSkill = function (reward) {
 
             function addSkill(skill) {
+
+                // _id or rewardId????
                 var newItem = {
                     name: skill.name,
                     rewardId: skill._id,
@@ -307,6 +309,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                     if (reward.enables) {
                         for (var j = 0; j < reward.enables.length; j++) {
                             if (reward.enables[j].type === 'Skill') {
+
                                 if (!$scope.userHasReward(reward.enables[j])) {
                                     $scope.skills.forSale.push(reward.enables[j]);
                                 }
@@ -468,8 +471,11 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 var reward = $scope.getReward(item.rewardId);
 
 
+                console.log(reward.name);
+                console.log(reward);
                 if (reward.type === 'Skill') {
                     $scope.skills.owned.push(item);
+                    console.log('pushing');
                     for (var j = 0; j < reward.goals.length; j++) {
 
                         var found = false;

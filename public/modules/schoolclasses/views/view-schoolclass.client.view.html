@@ -62,7 +62,7 @@
                         <div class="btn-group" dropdown
                              is-open="status.isopen">
                             <button type="button" class="btn btn-primary dropdown-toggle">
-                                {{selectedCourse}} <span class="caret"></span>
+                                {{selectedCourseName}} <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
                                 <li role="menuitem" data-ng-repeat="course in courses"><a
@@ -110,10 +110,23 @@
 
                     <div data-ng-if="selectedDiagram === 'Time spent'">
                         <div>
-                            <span id="spent-practice-date{{$index}}"></span>&nbsp;<span id="spent-practice-time{{$index}}"></span>
+                            <span id="spent-practice-date{{$index}}"></span>&nbsp;<span
+                                id="spent-practice-time{{$index}}"></span>
                         </div>
 
                         <div class="timespent diagram" id="timespent{{$index}}">
+
+                        </div>
+                    </div>
+
+                    <div data-ng-if="selectedDiagram === 'Progress'">
+                        <div class="title">
+                            <div>Cards learned (<span id="total-cards-learned{{$index}}"></span>)</div>
+
+                        </div>
+
+
+                        <div id="inplay{{$index}}" class="diagram">
 
                         </div>
                     </div>

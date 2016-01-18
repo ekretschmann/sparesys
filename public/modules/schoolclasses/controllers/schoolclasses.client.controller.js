@@ -3,20 +3,23 @@
 // Schoolclasses controller
 angular.module('schoolclasses').controller('SchoolclassesController', ['$scope', '$window', '$http', '$state', '$modal',
     '$stateParams', '$location', 'Authentication', 'Schoolclasses', 'Schools', 'Courses', 'CoursesService', 'Users',
-    'DiagramsCalendarService', 'DiagramsTimeSpentService',
+    'DiagramsCalendarService', 'DiagramsTimeSpentService', 'DiagramsCardsInPlayService',
     function ($scope, $window, $http, $state, $modal, $stateParams, $location, Authentication, Schoolclasses, Schools, Courses, CoursesService, Users,
-              DiagramsCalendarService, DiagramsTimeSpentService) {
+              DiagramsCalendarService, DiagramsTimeSpentService, DiagramsCardsInPlayService) {
 
         $scope.authentication = Authentication;
 
         $scope.diagrams = ['Calendar', 'Progress', 'Time spent'];
         $scope.selectedDiagram = 'Calendar';
         $scope.selectedStudent = 'All';
-        $scope.selectedCourse = 'All';
+        $scope.selectedCourseName = 'All';
 
 
         $scope.selectDiagram = function (diagram) {
             $scope.selectedDiagram = diagram;
+            if ($scope.selectedStudent === 'All' && $scope.selectedCourseName !== 'All') {
+                $scope.selectCourse($scope.selectedCourse);
+            }
 
         };
 
@@ -43,16 +46,20 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 promise.$promise.then(function (cards) {
 
                     $scope.cards = cards;
-                    if ($scope.selectedDiagram === 'Calendar') {
-                        DiagramsCalendarService.drawCalendar(cards, '#cal' + index, '#practice-date' + index, '#number-of-cards' + index, ($window.innerWidth / 2) - 130);
-                    } else if ($scope.selectedDiagram === 'Time spent') {
-                        DiagramsTimeSpentService.drawBarChart(cards, '#timespent'+index, '#spent-practice-date'+index, '#spent-practice-time'+index,'#spent-all-time'+index, ($window.innerWidth / 2)-130);
-                    }
                     var w = $window.innerWidth + 110;
                     if ($window.innerWidth > 990){
                         w = ($window.innerWidth / 2) + 60;
                     }
-                    //DiagramsCardsInPlayService.drawLineChart(cards, '#inplay', '#total-cards-learned', w);
+
+                    if ($scope.selectedDiagram === 'Calendar') {
+                        DiagramsCalendarService.drawCalendar(cards, '#cal' + index, '#practice-date' + index, '#number-of-cards' + index, ($window.innerWidth / 2) - 130);
+                    } else if ($scope.selectedDiagram === 'Time spent') {
+                        DiagramsTimeSpentService.drawBarChart(cards, '#timespent'+index, '#spent-practice-date'+index, '#spent-practice-time'+index,'#spent-all-time'+index, ($window.innerWidth / 2)-130);
+                    } else if ($scope.selectedDiagram === 'Progress') {
+                        DiagramsCardsInPlayService.drawLineChart(cards, '#inplay'+index, '#total-cards-learned'+index, w);
+                    }
+
+                    //
                 });
 
             });
@@ -62,7 +69,8 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
             $scope.studentCourses = [];
             $scope.selectedStudent = 'All';
-            $scope.selectedCourse = course.name;
+            $scope.selectedCourse = course;
+            $scope.selectedCourseName = course.name;
 
 
             for (var i = 0; i < course.slaves.length; i++) {

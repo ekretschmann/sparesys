@@ -13,24 +13,22 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         $scope.selectedDiagram = 'Calendar';
         $scope.selectedStudent = 'All';
         $scope.selectedCourseName = 'All';
+        $scope.selectedStudentName = 'All';
+        $scope.studentsToCourses = {};
 
 
         $scope.selectDiagram = function (diagram) {
             $scope.selectedDiagram = diagram;
             if ($scope.selectedStudent === 'All' && $scope.selectedCourseName !== 'All') {
                 $scope.selectCourse($scope.selectedCourse);
+            } else {
+                $scope.selectStudent($scope.selectedStudent);
             }
 
         };
 
 
-        $scope.selectStudent = function (student) {
-            Users.get({
-                userId: student._id
-            }, function (theStudent) {
-                console.log(theStudent);
-            });
-        };
+
 
         $scope.studentCourses = [];
         $scope.selectedStudentCourses = [];
@@ -78,10 +76,22 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 
             for (var i = 0; i < course.slaves.length; i++) {
-                //console.log($scope.schoolclass.courses);
-                //console.log(course.slaves[i]);
+
                 $scope.addStudentCourse(course.slaves[i], i);
             }
+        };
+
+        $scope.selectStudent = function (student) {
+
+            $scope.selectedStudentCourses = [];
+            $scope.selectedStudent = student;
+            $scope.selectedCourse = 'All';
+            $scope.selectedStudentName = student.displayName;
+
+            for (var i = 0; i < $scope.studentsToCourses[student._id].length; i++) {
+                $scope.addStudentCourse($scope.studentsToCourses[student._id][i], i);
+            }
+
         };
 
         $scope.addCourseToClass = function (course) {
@@ -211,6 +221,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                     $scope.school = school;
                 });
 
+
                 schoolclass.students.forEach(function (student) {
 
 
@@ -219,9 +230,16 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                     }, function(courses) {
 
 
+
                         for(var i=0; i<courses.length; i++) {
                             if (schoolclass.courses.indexOf(courses[i].master) > -1) {
                                 $scope.studentCourses.push(courses[i]._id);
+                                if ( $scope.studentsToCourses[student._id]) {
+                                    $scope.studentsToCourses[student._id].push([courses[i]._id]);
+                                } else {
+                                    $scope.studentsToCourses[student._id] = [courses[i]._id];
+                                }
+
                             }
                         }
 

@@ -46,7 +46,7 @@
                         <div class="btn-group" dropdown
                              is-open="status.isopen">
                             <button type="button" class="btn btn-primary dropdown-toggle">
-                                {{selectedStudent}} <span class="caret"></span>
+                                {{selectedStudentName}} <span class="caret"></span>
                             </button>
                             <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
                                 <li role="menuitem" data-ng-repeat="student in schoolclass.students"><a
@@ -94,44 +94,65 @@
         </div>
     </div>
 
-    <div data-ng-repeat="course in selectedStudentCourses">
-        <div class="col-xs-12 col-md-6">
-            <div>
-                <div class=" virtual-card font-large">
-                    <div class="title">{{course.user.displayName}}</div>
+    <!--<div data-ng-if="selectedCourseName === 'All'">-->
 
-                    <div data-ng-if="selectedDiagram === 'Calendar'">
-                        <div>
-                            <span id="practice-date{{$index}}"></span>&nbsp;<span id="number-of-cards{{$index}}"></span>
-                        </div>
+        <!--<div data-ng-repeat="course in selectedStudentCourses">-->
+        <!--<div class="col-xs-12 col-md-6">-->
+            <!--<div>-->
+                <!--<div class=" virtual-card font-large">-->
+                    <!--<div class="title">Test</div>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+        <!--</div>-->
+    <!--</div>-->
 
-                        <div id="cal{{$index}}"/>
-                    </div>
-
-                    <div data-ng-if="selectedDiagram === 'Time spent'">
-                        <div>
-                            <span id="spent-practice-date{{$index}}"></span>&nbsp;<span
-                                id="spent-practice-time{{$index}}"></span>
-                        </div>
-
-                        <div class="timespent diagram" id="timespent{{$index}}">
-
-                        </div>
-                    </div>
-
-                    <div data-ng-if="selectedDiagram === 'Progress'">
+    <!--<div data-ng-if="selectedStudent === 'All'">-->
+        <div data-ng-repeat="course in selectedStudentCourses">
+            <div class="col-xs-12 col-md-6">
+                <div >
+                    <div class=" virtual-card font-large">
                         <div class="title">
-                            <div>Cards learned (<span id="total-cards-learned{{$index}}"></span>)</div>
+                            {{course.name}}
 
+                            <span class="pull-right">{{course.user.displayName}}</span>
                         </div>
 
 
-                        <div id="inplay{{$index}}" class="diagram">
+                        <div data-ng-if="selectedDiagram === 'Calendar'">
+                            <div>
+                                <span id="practice-date{{$index}}"></span>&nbsp;<span
+                                    id="number-of-cards{{$index}}"></span>
+                            </div>
 
+                            <div id="cal{{$index}}"/>
+                        </div>
+
+                        <div data-ng-if="selectedDiagram === 'Time spent'">
+                            <div>
+                                <span id="spent-practice-date{{$index}}"></span>&nbsp;<span
+                                    id="spent-practice-time{{$index}}"></span>
+                            </div>
+
+                            <div class="timespent diagram" id="timespent{{$index}}">
+
+                            </div>
+                        </div>
+
+                        <div data-ng-if="selectedDiagram === 'Progress'">
+                            <div class="title">
+                                <div>Cards learned (<span id="total-cards-learned{{$index}}"></span>)</div>
+
+                            </div>
+
+
+                            <div id="inplay{{$index}}" class="diagram">
+
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    <!--</div>-->
 </section>

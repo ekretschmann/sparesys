@@ -69,7 +69,11 @@
                 <div class=" virtual-card font-large">
                     <div class="title">{{course.user.displayName}}</div>
 
-                    <div id="cal"/>
+                    <div>
+                        <span id="practice-date{{$index}}"></span>&nbsp;<span id="number-of-cards{{$index}}"></span>
+                    </div>
+
+                    <div id="cal{{$index}}"/>
                 </div>
             </div>
         </div>

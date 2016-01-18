@@ -18,7 +18,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.studentCourses = [];
 
-        $scope.addStudentCourse = function (courseId) {
+        $scope.addStudentCourse = function (courseId, index) {
 
             Courses.get({
                 courseId: courseId
@@ -30,7 +30,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 promise.$promise.then(function (cards) {
 
                     $scope.cards = cards;
-                    DiagramsCalendarService.drawCalendar(cards, '#cal', '#practice-date', '#number-of-cards', ($window.innerWidth / 2)-130);
+                    DiagramsCalendarService.drawCalendar(cards, '#cal'+index, '#practice-date'+index, '#number-of-cards'+index, ($window.innerWidth / 2)-130);
 
                     var w = $window.innerWidth + 110;
                     if ($window.innerWidth > 990){
@@ -50,7 +50,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
 
             for (var i = 0; i < course.slaves.length; i++) {
-                $scope.addStudentCourse(course.slaves[i]);
+                $scope.addStudentCourse(course.slaves[i], i);
             }
         };
 

@@ -21,7 +21,8 @@ angular.module('core').service('DiagramsCalendarService', ['$timeout',
 
 
             cellSize = windowWidth/60;
-
+            var latestYear = new Date().getFullYear();
+            var earliestYear = new Date().getFullYear();
 
             var data = [];
 
@@ -30,6 +31,9 @@ angular.module('core').service('DiagramsCalendarService', ['$timeout',
                 for (var j = 0; j < cards[i].history.length; j++) {
                     var q = cards[i].history[j];
 
+                    if (earliestYear > new Date(q.when).getFullYear()) {
+                        earliestYear = new Date(q.when).getFullYear();
+                    }
 
                     var key = this.getDateKey(q.when);
                     if (data[key]) {
@@ -51,8 +55,10 @@ angular.module('core').service('DiagramsCalendarService', ['$timeout',
             svg.selectAll('*').remove();
 
 
+
+
             svg = d3.select(id).selectAll('svg')
-                .data(d3.range(2015, 2017))
+                .data(d3.range(earliestYear, latestYear+1))
                 .enter().append('svg')
                 .attr('width', windowWidth+'px')
                 .attr('class', 'Greens')

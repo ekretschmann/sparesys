@@ -203,7 +203,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 // _id or rewardId????
                 var newItem = {
                     name: skill.name,
-                    rewardId: skill._id,
+                    rewardId: skill.rewardId,
                     type: skill.type,
                     healthpoints: skill.defaulthealthpoints,
                     amount: 1
@@ -287,7 +287,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.userHasItem = function (reward) {
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
-                console.log($scope.authentication.user.inventory[i].rewardId, reward.rewardId);
                 if ($scope.authentication.user.inventory[i].rewardId === reward.rewardId) {
                     return true;
                 }
@@ -297,7 +296,6 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.userHasRewardId = function (rewardId) {
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
-                console.log($scope.authentication.user.inventory[i].rewardId, rewardId);
                 if ($scope.authentication.user.inventory[i].rewardId === rewardId) {
                     return true;
                 }
@@ -318,14 +316,12 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 if (reward.type !== 'Item') {
 
                     if (reward.enables) {
+
                         for (var j = 0; j < reward.enables.length; j++) {
                             if (reward.enables[j].type === 'Skill') {
 
-                                console.log(reward.enables[j]);
-                                if (!$scope.userHasRewardId(reward.enables[j])) {
-                                    console.log('pushing');
-                                    console.log($scope.getReward(reward.enables[j]));
-                                    $scope.skills.forSale.push($scope.getReward(reward.enables[j]));
+                                if (!$scope.userHasRewardId(reward.enables[j]._id)) {
+                                    $scope.skills.forSale.push($scope.getReward(reward.enables[j]._id));
                                 }
                             }
                             if (reward.enables[j].type === 'Item') {
@@ -486,7 +482,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
 
                 if (reward.type === 'Skill') {
-                    console.log('pushing');
+                    $scope.skills.owned.push(item);
                     for (var j = 0; j < reward.goals.length; j++) {
 
                         var found = false;

@@ -33,13 +33,17 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
         };
 
         $scope.studentCourses = [];
+        $scope.selectedStudentCourses = [];
 
         $scope.addStudentCourse = function (courseId, index) {
 
             Courses.get({
                 courseId: courseId
             }, function (slaveCourse) {
-                $scope.studentCourses.push(slaveCourse);
+
+                if ($scope.studentCourses.indexOf(slaveCourse._id) > -1) {
+                    $scope.selectedStudentCourses.push(slaveCourse);
+                }
 
                 var res = CoursesService.serverLoadCards();
                 var promise = res.get({courseId: slaveCourse._id});
@@ -67,13 +71,15 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
 
         $scope.selectCourse = function (course) {
 
-            $scope.studentCourses = [];
+            $scope.selectedStudentCourses = [];
             $scope.selectedStudent = 'All';
             $scope.selectedCourse = course;
             $scope.selectedCourseName = course.name;
 
 
             for (var i = 0; i < course.slaves.length; i++) {
+                //console.log($scope.schoolclass.courses);
+                //console.log(course.slaves[i]);
                 $scope.addStudentCourse(course.slaves[i], i);
             }
         };
@@ -204,6 +210,26 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 }, function (school) {
                     $scope.school = school;
                 });
+
+                schoolclass.students.forEach(function (student) {
+
+
+                    Courses.query({
+                        userId: student._id
+                    }, function(courses) {
+
+
+                        for(var i=0; i<courses.length; i++) {
+                            if (schoolclass.courses.indexOf(courses[i].master) > -1) {
+                                $scope.studentCourses.push(courses[i]._id);
+                            }
+                        }
+
+                    });
+
+                });
+
+               // console.log($scope.schoolclass.students);
 
 
                 // remove missing courses

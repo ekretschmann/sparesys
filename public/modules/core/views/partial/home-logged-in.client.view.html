@@ -80,14 +80,16 @@
 
 
             <div class="flashcard-section">
-                <div data-ng-if="authentication.user.inventory.length === 0" class="field-label">
-                    You have no rewards so far
-                </div>
 
-                <div data-ng-if="authentication.user.inventory.length > 0" class="field-label" >
+
+                <div class="field-label" >
                     Your rewards
                 </div>
 
+
+                <div data-ng-if="authentication.user.inventory.length === 0" class="field-data">
+                    You have no rewards so far
+                </div>
 
                 <div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 0"
                      class="field-data">

@@ -212,9 +212,7 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                 schoolclassId: $stateParams.schoolclassId
             }, function (schoolclass) {
                 $scope.schoolclass = schoolclass;
-                //
-                //console.log('begi');
-                //console.log($scope.schoolclass);
+
                 Schools.get({
                     schoolId: $scope.schoolclass.school
                 }, function (school) {
@@ -246,8 +244,6 @@ angular.module('schoolclasses').controller('SchoolclassesController', ['$scope',
                     });
 
                 });
-
-               // console.log($scope.schoolclass.students);
 
 
                 // remove missing courses

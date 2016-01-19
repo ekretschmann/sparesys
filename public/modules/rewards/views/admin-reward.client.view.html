@@ -267,6 +267,35 @@
     </div>
 
 
+    <div class="col-xs-12 col-md-6 dashboard-col font-large">
+        <div class="admin-card">
+            <div class="title">Image</div>
+
+
+            <div class="flashcard-section ">
+
+                <div>
+                    <div class="field-label">URL</div>
+                    <div class="field-data">
+                        <input type="text"
+                               data-ng-blur="update()"
+                               data-ng-model="reward.icon"
+                               class="form-control"
+                                >
+                    </div>
+                </div>
+
+                <div>
+                    <div class="field-label">Preview</div>
+                    <div class="field-data">
+                        <img src="{{reward.icon}}">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
     <div class="rememberators-footer col-xs-12">rememberators.com</div>
 
 </div>

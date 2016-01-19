@@ -399,7 +399,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         'name': reward.name,
                         'journey': reward.journey,
                         'type': reward.type,
-                        'rewardId': reward.rewardId
+                        'rewardId': reward.rewardId,
+                        'icon': reward.icon
                     };
                     result.push(newReward);
                 }
@@ -541,7 +542,8 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         'name': reward.name,
                         'type': reward.type,
                         'journey': reward.journey,
-                        'rewardId': reward._id
+                        'rewardId': reward._id,
+                        'icon': reward.icon
                     });
                 }
                 $scope.replaceGenericIngredients();

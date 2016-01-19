@@ -101,14 +101,13 @@
             </div>
 
 
-
             <div class="col-md-12" style="padding-left: 0">
                 <div class="flashcard-section">
 
                     <div data-ng-if="skills.forSale.length === 0">
                         <div class="field-label">Achieve your goals to unlock further skills
                         </div>
-                        </div>
+                    </div>
 
                     <div data-ng-if="skills.forSale.length > 0">
 
@@ -142,7 +141,6 @@
 
 
     </div>
-
 
 
     <div class="col-xs-12 col-md-6  ">
@@ -402,6 +400,197 @@
         </div>
     </div>
 
+
+    <div class="col-xs-12 col-md-6  ">
+        <div class="virtual-card font-large">
+
+
+            <div class="row">
+                <div class=" col-md-4 field-label" style="margin-top: 0; padding-top: 0.6em; padding-left: 2em">
+                    {{authentication.user.rewardlocation}}
+                </div>
+                <div class="col-md-4 title" style="text-align: center; margin-top: 0; padding-top: 0">Workbench new
+                </div>
+                <div class=" col-md-4 field-label"
+                     style="text-align: right; margin-top: 0; padding-top: 0.6em; padding-right: 2em">
+                    {{authentication.user.trophies}} trophies
+                </div>
+
+            </div>
+
+
+            <div class="row" data-ng-if="items.forSale.length ===0">
+
+                <div class="flashcard-section col-md-12" style="padding-top: 0.5em; margin-top: 0">
+
+                    <div class="field-label">You can buy</div>
+
+                    <div class="field-data">
+                        You have to buy skills first
+                    </div>
+                </div>
+            </div>
+
+            <div class="row" data-ng-if="items.forSale.length > 0">
+
+
+                <div class="flashcard-section col-md-4" style="padding-top: 0.5em; margin-top: 0">
+
+                    <div class="field-label">You can buy</div>
+
+
+                    <div>
+                        <div data-ng-repeat="item in items.forSale track by $index" style="display: inline">
+
+
+                            <span data-ng-if="authentication.user.trophies >= item.price">
+
+                                <a href="" data-ng-click="purchaseItem(item)" title="{{item.name}} ({{item.price}})"
+                                   toggle="tooltip">
+                                    <img width="32px" src="{{item.icon}}">
+                                </a>
+                            </span>
+                            <span data-ng-if="authentication.user.trophies < item.price" class="text-muted">
+                                <a href="" title="{{item.name}} ({{item.price}}) - not enough trophies"
+                                   toggle="tooltip">
+                                    <img width="32px" src="{{item.icon}}" style="opacity: 0.3">
+                                </a>
+                            </span>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+            <div class="row">
+                <div class="flashcard-section col-md-4" style="padding-top: 1em; margin-top: 0">
+
+                    <div class="field-label">Your Inventory</div>
+
+                    <div data-ng-if="items.owned.length === 0" class="field-data">
+                        none
+                    </div>
+
+
+                    <div data-ng-repeat="item in items.owned | orderBy: 'name'"
+                         class="field-data">
+                        <a href="" data-ng-click="useIngredient(item)"></a>
+                        <img width="32px" src="{{item.icon}}">
+                        <div
+                                data-ng-repeat="hp in getInventoryHealthPoints(item) track by $index"><i
+                                class="glyphicon glyphicon-heart hearts"></i></div>
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+
+        <!--<div class="row" style="padding-top: 1em">-->
+        <!--<div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">-->
+
+        <!--<div class="field-label">Recipe</div>-->
+
+        <!--<div data-ng-if="items.used.length === 0" class="field-data">-->
+        <!--none-->
+        <!--</div>-->
+
+
+        <!--<div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 0"-->
+        <!--class="field-data">-->
+        <!--<a href="" data-ng-click="unuseIngredient(item)"><i-->
+        <!--class="glyphicon glyphicon-minus-sign"></i></a>-->
+        <!--{{item.amount}} {{item.name}} <span-->
+        <!--data-ng-repeat="hp in getHealthPoints(item) track by $index"><i-->
+        <!--class="glyphicon glyphicon-heart hearts"></i></span>-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">-->
+
+        <!--<div class="field-label">&nbsp;</div>-->
+
+
+        <!--<div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 1"-->
+        <!--class="field-data">-->
+        <!--<a href="" data-ng-click="unuseIngredient(item)"><i-->
+        <!--class="glyphicon glyphicon-minus-sign"></i></a>-->
+        <!--{{item.amount}} {{item.name}} <span-->
+        <!--data-ng-repeat="hp in getHealthPoints(item) track by $index"><i-->
+        <!--class="glyphicon glyphicon-heart hearts"></i></span>-->
+        <!--</div>-->
+
+        <!--</div>-->
+
+        <!--<div class="flashcard-section col-md-4" style="padding-right:0; padding-top: 0">-->
+
+        <!--<div class="field-label">&nbsp;</div>-->
+
+
+        <!--<div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 2"-->
+        <!--class="field-data">-->
+        <!--<a href="" data-ng-click="unuseIngredient(item)"><i-->
+        <!--class="glyphicon glyphicon-minus-sign"></i></a>-->
+        <!--{{item.amount}} {{item.name}} <span-->
+        <!--data-ng-repeat="hp in getHealthPoints(item) track by $index"><i-->
+        <!--class="glyphicon glyphicon-heart hearts"></i></span>-->
+        <!--</div>-->
+
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="row" style="padding-top: 1em">-->
+        <!--<div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">-->
+
+        <!--<div class="field-label">Product</div>-->
+
+        <!--<div data-ng-if="recipies.forSale.length === 0" class="field-data">-->
+        <!--none-->
+        <!--</div>-->
+
+
+        <!--<div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 0"-->
+        <!--class="field-data">-->
+        <!--<a href="" data-ng-click="craft(item)"><i-->
+        <!--class="glyphicon glyphicon-plus-sign"></i></a>-->
+        <!--{{item.amount}} {{item.name}}-->
+        <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">-->
+
+        <!--<div class="field-label">&nbsp;</div>-->
+
+
+        <!--<div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 1"-->
+        <!--class="field-data">-->
+        <!--<a href="" data-ng-click="craft(item)"><i-->
+        <!--class="glyphicon glyphicon-plus-sign"></i></a>-->
+        <!--{{item.amount}} {{item.name}}-->
+        <!--</div>-->
+
+        <!--</div>-->
+
+        <!--<div class="flashcard-section col-md-4" style="padding-right:0; padding-top: 0">-->
+
+        <!--<div class="field-label">&nbsp;</div>-->
+
+
+        <!--<div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 2"-->
+        <!--class="field-data">-->
+        <!--<a href="" data-ng-click="craft(item)"><i-->
+        <!--class="glyphicon glyphicon-plus-sign"></i></a>-->
+        <!--{{item.amount}} {{item.name}}-->
+        <!--</div>-->
+
+        <!--</div>-->
+        <!--</div>-->
+
+    </div>
+    </div>
 
     <div class="col-xs-12 col-md-6  ">
         <div class="virtual-card font-large">

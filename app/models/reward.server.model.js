@@ -94,6 +94,11 @@ var RewardSchema = new Schema({
     basic: {
         type: Boolean,
         default: false
+    },
+    icon: {
+        type: String,
+        default: '',
+        trim: true
     }
 });
 

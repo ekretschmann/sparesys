@@ -114,6 +114,9 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         $scope.addToInventory = function (item) {
 
+
+
+
             var found = false;
             for (var i = 0; i < $scope.items.owned.length; i++) {
                 var usedItem = $scope.items.owned[i];
@@ -125,6 +128,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             if (!found) {
                 $scope.items.owned.push({
+                    icon: item.icon,
                     name: item.name,
                     rewardId: item.rewardId,
                     type: item.type,
@@ -147,6 +151,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             if (!found) {
                 $scope.items.used.push({
+                    icon: item.icon,
                     name: item.name,
                     rewardId: item.rewardId,
                     type: item.type,
@@ -200,8 +205,9 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
             function addSkill(skill) {
 
-                // _id or rewardId????
+                var icon = $scope.getReward(skill.rewardId).icon;
                 var newItem = {
+                    icon: icon,
                     name: skill.name,
                     rewardId: skill.rewardId,
                     type: skill.type,
@@ -236,6 +242,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 reward.amount++;
             } else {
                 var newItem = {
+
                     name: item.name,
                     rewardId: item.rewardId,
                     type: item.type,
@@ -271,8 +278,14 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
             $scope.items.owned = [];
             for (var i = 0; i < $scope.authentication.user.inventory.length; i++) {
                 var item = $scope.authentication.user.inventory[i];
+
+                var icon = $scope.getReward($scope.authentication.user.inventory[i].rewardId).icon;
+
+
                 if (item.type !== 'Skill') {
+
                     $scope.items.owned.push({
+                        icon: icon,
                         name: item.name,
                         rewardId: item.rewardId,
                         type: item.type,
@@ -283,6 +296,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 }
 
             }
+            console.log($scope.items.owned);
         };
 
         $scope.userHasItem = function (reward) {
@@ -572,6 +586,18 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
 
         };
 
+
+
+        $scope.getDefaultHealthPoints = function (item) {
+
+            if (item.defaulthealthpoints > 5) {
+                return new Array(5);
+            }
+
+
+
+            return new Array(item.defaulthealthpoints);
+        };
 
         $scope.getHealthPoints = function (item) {
 

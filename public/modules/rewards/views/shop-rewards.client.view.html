@@ -542,18 +542,6 @@
                         </div>
                     </div>
 
-                    <!--<div data-ng-if="recipies.forSale.length === 0" class="field-data">-->
-                    <!--none-->
-                    <!--</div>-->
-
-
-                    <!--<div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 0"-->
-                    <!--class="field-data">-->
-                    <!--<a href="" data-ng-click="craft(item)"><i-->
-                    <!--class="glyphicon glyphicon-plus-sign"></i></a>-->
-                    <!--{{item.amount}} {{item.name}}-->
-                    <!--</div>-->
-                    <!--</div>-->
                 </div>
 
 
@@ -561,54 +549,6 @@
         </div>
 
 
-        <!--<div class="row" style="padding-top: 1em">-->
-        <!--<div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">-->
-
-        <!--<div class="field-label">Product</div>-->
-
-        <!--<div data-ng-if="recipies.forSale.length === 0" class="field-data">-->
-        <!--none-->
-        <!--</div>-->
-
-
-        <!--<div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 0"-->
-        <!--class="field-data">-->
-        <!--<a href="" data-ng-click="craft(item)"><i-->
-        <!--class="glyphicon glyphicon-plus-sign"></i></a>-->
-        <!--{{item.amount}} {{item.name}}-->
-        <!--</div>-->
-        <!--</div>-->
-
-        <!--<div class="flashcard-section col-md-4" style="padding-top: 0; margin-top: 0">-->
-
-        <!--<div class="field-label">&nbsp;</div>-->
-
-
-        <!--<div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 1"-->
-        <!--class="field-data">-->
-        <!--<a href="" data-ng-click="craft(item)"><i-->
-        <!--class="glyphicon glyphicon-plus-sign"></i></a>-->
-        <!--{{item.amount}} {{item.name}}-->
-        <!--</div>-->
-
-        <!--</div>-->
-
-        <!--<div class="flashcard-section col-md-4" style="padding-right:0; padding-top: 0">-->
-
-        <!--<div class="field-label">&nbsp;</div>-->
-
-
-        <!--<div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 2"-->
-        <!--class="field-data">-->
-        <!--<a href="" data-ng-click="craft(item)"><i-->
-        <!--class="glyphicon glyphicon-plus-sign"></i></a>-->
-        <!--{{item.amount}} {{item.name}}-->
-        <!--</div>-->
-
-        <!--</div>-->
-        <!--</div>-->
-
-    </div>
     </div>
 
     <div class="col-xs-12 col-md-6  ">
@@ -651,6 +591,9 @@
                 <div class="title">
                     {{reward.name}}
 
+                    <div class="pull-right">
+                        <img width="64px" src="{{reward.icon}}">
+                    </div>
 
                 </div>
 

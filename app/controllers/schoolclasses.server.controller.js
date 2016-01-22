@@ -273,8 +273,6 @@ exports.update = function (req, res) {
                     var lockCourse = function(id, lock) {
                         Course.findOne({'_id': id}).exec(function (err, cs) {
 
-                            console.log(cs);
-                            console.log(lock);
 
                             cs.supervised = lock;
                             cs.save();
@@ -299,7 +297,6 @@ exports.update = function (req, res) {
                                 courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
                             }
                         } else {
-                            console.log('locking');
                             lockCourse(currentCourses[i], true);
                         }
                     }

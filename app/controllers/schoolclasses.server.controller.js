@@ -268,31 +268,46 @@ exports.update = function (req, res) {
 
             updateUsers(originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass).then(
                 function() {
+
+
+                    var lockCourse = function(id, lock) {
+                        Course.findOne({'_id': id}).exec(function (err, cs) {
+
+                            console.log(cs);
+                            console.log(lock);
+
+                            cs.supervised = lock;
+                            cs.save();
+                        });
+                    };
+
+                    var findAndLockCourse = function(id, lock) {
+                        Course.findOne({'_id': id}).exec(function (err, cm) {
+
+
+                            for(var k=0; k< cm.slaves.length; k++) {
+                                lockCourse(cm.slaves[k], lock);
+
+                            }
+                        });
+                    };
+
+
                     for (i=0; i<currentCourses.length;i++) {
                         if (originalCourses.indexOf(currentCourses[i]+'') === -1) {
                             for (var j=0; j<currentStudentIds.length; j++) {
                                 courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
                             }
+                        } else {
+                            console.log('locking');
+                            lockCourse(currentCourses[i], true);
                         }
                     }
-
-                    var findAndUnlockCourse = function(id) {
-                        Course.findOne({'_id': id}).exec(function (err, cm) {
-                            //for(var k=0; k< cm.slaves.length; k++) {
-                                //Course.findOne({'_id': cm.slaves[k]}).exec(function (err, cs) {
-                                //
-                                //
-                                //    console.log(cs.user);
-                                //    console.log(sc.students);
-                                //});
-                            //}
-                        });
-                    };
 
                     for (i=0; i<originalCourses.length;i++) {
                         if (currentCourses.indexOf(originalCourses[i]+'') === -1) {
 
-                            findAndUnlockCourse(originalCourses[i]);
+                            findAndLockCourse(originalCourses[i], false);
 
                         }
                     }

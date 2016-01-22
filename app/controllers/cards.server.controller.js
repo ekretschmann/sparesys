@@ -59,6 +59,8 @@ exports.create = function (req, res) {
                 cardCopy.packs = [];
                 cardCopy.packs.push(packId);
 
+                cardCopy.languageFront = card.languageFront;
+                cardCopy.languageBack = card.languageBack;
                 cardCopy.speechRecognitionReverse = card.speechRecognitionReverse;
                 cardCopy.speechRecognitionForward = card.speechRecognitionForward;
                 cardCopy.readBackReverse = card.readBackReverse;
@@ -71,6 +73,7 @@ exports.create = function (req, res) {
                 cardCopy.modes = card.modes;
                 cardCopy.question = card.question;
                 cardCopy.answer = card.answer;
+                cardCopy.check = card.check;
                 cardCopy.questionExtension = card.questionExtension;
                 cardCopy.answerExtension = card.answerExtension;
                 cardCopy.answerExtension = card.answerExtension;

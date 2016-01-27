@@ -5,6 +5,8 @@
 @import (reference) "../../../lib/bootstrap/less/mixins/grid.less";
 
 @import "atoms/colors.less";
+@import "atoms/textures.less";
+@import "atoms/borders.less";
 @import "organisms/cards.less";
 
 @background-color: #FFF9DE;
@@ -767,22 +769,7 @@ body {
   border-top-left-radius: 6px;
 }
 
-// textures
-.texture-light {
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -webkit-gradient(linear, 0 0, 0 bottom, from(@background-color-contrast), to(@background-color-contrast));
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -webkit-linear-gradient(@background-color-contrast, @background-color-contrast);
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -moz-linear-gradient(@background-color-contrast, @background-color-contrast);
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -ms-linear-gradient(@background-color-contrast, @background-color-contrast);
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  -o-linear-gradient(@background-color-contrast, @background-color-contrast);
-  background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
-  linear-gradient(@background-color-contrast, @background-color-contrast);
 
-}
 
 .texture-pale {
   background: url('/modules/core/img/brand/bg-noise.png') left top repeat,
@@ -921,46 +908,7 @@ body {
 }
 
 
-.generic-card {
-  padding:10px;
 
-
-
-
-  overflow: hidden;
-
-
-  border-radius: 12px;
-  //background-color: @background-color-contrast;
-
-  //height:100%;
-  @media screen {
-    @media (min-width: 310px) {
-      padding: 5px;
-      margin-top: 5px;
-      min-height: 230px;
-    }
-    @media (min-width: 620px) {
-      padding: 10px;
-      margin-top: 10px;
-      min-height: 300px;
-    }
-    @media (min-width: 800px) {
-      padding: 20px;
-      margin-top: 20px;
-      min-height: 500px;
-    }
-
-  }
-}
-
-
-.admin-card {
-  .generic-card;
-  .texture-admin;
-  box-shadow: 5px 5px 5px #C99;
-  border: 1px solid darken(@background-color-admin, 5%);
-}
 
 
 

@@ -41,7 +41,7 @@ module.exports = function(grunt) {
 //                }
 //            },
             clientLESS: {
-                files: ['public/**/css/*.less'],
+                files: ['public/**/css/**/*.less'],
                 tasks: ['less'],
                 options: {
                     livereload: true

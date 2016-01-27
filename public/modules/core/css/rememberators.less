@@ -1,3 +1,21 @@
+
+@import (reference) "../../../lib/bootstrap/less/mixins.less";
+@import (reference) "../../../lib/bootstrap/less/variables.less";
+@import (reference) "../../../lib/bootstrap/less/buttons.less";
+@import (reference) "../../../lib/bootstrap/less/mixins/grid.less";
+
+.title-card {
+  .virtual-card;
+  .make-xs-column(12);
+  .make-sm-column(10);
+  .make-sm-column-offset(1);
+  .make-md-column(8);
+  .make-md-column-offset(2);
+  .make-lg-column(6);
+  .make-lg-column-offset(3);
+  text-align: center;
+}
+
 @background-color: #FFF9DE;
 @inverse-background-color: #030698;
 @background-color-contrast: #ECECFF;
@@ -957,8 +975,9 @@ body {
   .texture-admin;
   box-shadow: 5px 5px 5px #C99;
   border: 1px solid darken(@background-color-admin, 5%);
-
 }
+
+
 
 .half-admin-card {
 

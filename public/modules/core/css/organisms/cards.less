@@ -1,10 +1,9 @@
 
 .virtual-card {
   .generic-card;
-  .texture-light;
+  //.texture-light;
   .default-border;
 }
-
 
 .title-card {
 
@@ -18,36 +17,71 @@
   .make-lg-column-offset(3);
   text-align: center;
 
+  .brand-title {
+    .font-xxl;
+  }
 
-}
+  .brand-subtitle {
+    .font-xl;
+  }
 
+  .large-image {
 
-.generic-card {
-  padding:10px;
-  overflow: hidden;
-  border-radius: 12px;
-
-  min-height: 500px;
-  max-height: 500px;
-
-  @media screen {
-    @media (min-width: @screen-xs-min) {
-
-      //min-height: 500px;
-    }
-    @media (min-width: @screen-sm-min) {
-      //min-height: 300px;
-    }
-    @media (min-width: @screen-md-min) {
-      //min-height: 400px;
-    }
-    @media (min-width: @screen-lg-min) {
-      //min-height: 500px;
+    max-width: 140px;
+    max-height: 140px;
+    min-height: 140px;
+    margin-top: -20px;
+    margin-bottom: 10px;
+    @media screen {
+      @media (min-width: @screen-xs-min) {
+        max-width: 170px;
+        max-height: 170px;
+        min-height: 170px;
+      }
+      @media (min-width: @screen-sm-min) {
+        max-width: 200px;
+        max-height: 200px;
+        min-height: 200px;
+      }
+      @media (min-width: @screen-md-min) {
+        max-width: 230px;
+        min-height: 230px;
+      }
+      @media (min-width: @screen-lg-min) {
+        max-width: 260px;
+        min-height: 260px;
+      }
     }
   }
 
+}
 
-  //background-color: @background-color-contrast;
+.generic-card {
+  padding: 10px;
+  overflow: visible;
+  border-radius: 12px;
+
+  //height: 400px;
+  min-height: 400px;
+  //max-height: 500px;
+
+  @media screen {
+    @media (min-width: @screen-xs-min) {
+      min-height: 500px;
+    }
+    @media (min-width: @screen-sm-min) {
+      min-height: 600px;
+    }
+    @media (min-width: @screen-md-min) {
+      min-height: 700px;
+    }
+    @media (min-width: @screen-lg-min) {
+      min-height: 500px;
+
+    }
+  }
+
+  background-color: @background-color-contrast;
 
   //height:100%;
   //@media screen {
@@ -69,7 +103,6 @@
   //
   //}
 }
-
 
 .admin-card {
   .generic-card;

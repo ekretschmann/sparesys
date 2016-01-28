@@ -1,9 +1,18 @@
 
-.virtual-card {
+.info-card {
+
+
+  .make-xs-column(12);
+  .make-sm-column(5.5);
+  .make-sm-column-offset(0.33);
+  .make-md-column(6);
+  .make-lg-column(6);
   .generic-card;
-  .texture-light;
-  .default-border;
+
+  margin-top: 1em;
 }
+
+
 
 .title-card {
 
@@ -16,7 +25,7 @@
   .make-lg-column(6);
   .make-lg-column-offset(3);
 
-  .virtual-card;
+  .generic-card;
   text-align: center;
 
   .brand-title {
@@ -60,7 +69,13 @@
 }
 
 .generic-card {
-  //padding: 10px;
+
+
+  .card-texture;
+  .default-border;
+
+
+
   overflow: visible;
   border-radius: 12px;
 

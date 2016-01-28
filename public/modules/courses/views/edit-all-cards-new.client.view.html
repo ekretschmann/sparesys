@@ -3,7 +3,7 @@
 
 
     <div class="col-xs-6 col-md-6 dashboard-col">
-        <div class="virtual-card font-large">
+        <div class="info-card font-large">
             <div class="title">
                 {{course.name}}
 
@@ -57,7 +57,7 @@
     <div class="col-xs-6 col-md-6 dashboard-col"
          data-ng-repeat="card in course.cards | filter: searchText | limitTo:10">
 
-        <div class="virtual-card font-large">
+        <div class="info-card font-large">
             <div>
                 <div class="title">
                     {{card.question}}

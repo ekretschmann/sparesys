@@ -5,25 +5,14 @@
         {{title}}
     </div>
 
-    <div data-ng-if="position && position === 'right'" class="infobox-title" >
-        {{title}}
-    </div>
 
-    <!--<div data-ng-if="!position || position !== 'right'" class="col-xs-3">-->
-        <!--<img class="small-image"-->
-             <!--ng-src="{{image}}">-->
-    <!--</div>-->
 
     <div>
 
-        <div data-ng-if="!position || position !== 'right'" class="pull-left infobox-image">
-            <img class="small-image"
+        <!--<div data-ng-if="!position || position !== 'right'" class="infobox-image">-->
+            <img class="infobox-image"
                  ng-src="{{image}}">
-        </div>
-        <div data-ng-if="position && position === 'right'" class="pull-right infobox-image">
-            <img class="small-image"
-                 ng-src="{{image}}">
-        </div>
+        <!--</div>-->
 
         <div ng-transclude="" >
             content

@@ -3,11 +3,14 @@
 @import (reference) "../../../lib/bootstrap/less/variables.less";
 @import (reference) "../../../lib/bootstrap/less/buttons.less";
 @import (reference) "../../../lib/bootstrap/less/mixins/grid.less";
+@import (reference) "../../../lib/bootstrap/less/utilities.less";
 
 @import "atoms/borders.less";
 @import "atoms/colors.less";
 @import "atoms/fonts.less";
 @import "atoms/textures.less";
+
+@import "modecules/infobox.less";
 
 @import "organisms/cards.less";
 
@@ -530,51 +533,7 @@ body {
   text-align: left;
 }
 
-//infobox
-.infobox {
-  @media screen {
-    @media (min-width: 310px) {
-      padding: 0;
-      line-height: 24px;
-    }
-    @media (min-width: 620px) {
-      padding: 0;
-      line-height: 36px;
-    }
-    @media (min-width: 800px) {
-      padding: @default-padding-unit;
-      line-height: 48px;
-    }
 
-  }
-
-}
-
-.infobox-image {
-  padding-right: 6*@default-padding-unit;
-  padding-bottom: 6*@default-padding-unit;
-  padding-top: 6*@default-padding-unit;
-  padding-left: 6*@default-padding-unit;
-}
-
-.infobox-title, .title {
-
-  @media screen {
-    @media (min-width: 310px) {
-      font-size: 24px;
-    }
-    @media (min-width: 620px) {
-      font-size: 32px;
-    }
-    @media (min-width: 800px) {
-      font-size: 36px;
-    }
-
-  }
-  font-weight: bold;
-  padding-top: @default-padding-unit;
-  padding-bottom: 1*@default-padding-unit;
-}
 
 //.subtitle {
 //
@@ -865,8 +824,8 @@ body {
 }
 
 
-.half-virtual-card {
-  .virtual-card;
+.half-info-card {
+  .info-card;
   @media screen {
     @media (min-width: 310px) {
       padding: 5px;
@@ -889,7 +848,7 @@ body {
 
 
 
-.virtual-card-header {
+.info-card-header {
   padding: 10px;
   //height:100%;
   @media screen {

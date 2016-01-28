@@ -17,15 +17,13 @@
 
   margin-top: 1em;
 
-  min-height: 30em;
   font-size: 1.2em;
-  line-height: 1.2em;
+  line-height: 1.5em;
   @media screen {
 
     @media (min-width: @screen-xs-min) {
-      min-height: 30em;
       font-size: 1.25em;
-       line-height: 1.4em;
+       line-height: 2em;
     }
     @media (min-width: @screen-sm-min) {
       min-height: 30em;
@@ -33,13 +31,18 @@
       line-height: 1.6em;
     }
     @media (min-width: @screen-md-min) {
-      min-height: 36em;
+      min-height: 28em;
       font-size: 1.35em;
+      line-height: 1.6em;
+    }
+    @media (min-width: @screen-lg-min) {
+      min-height: 24em;
+      font-size: 1.4em;
       line-height: 1.8em;
     }
-    @media (min-width: 1400px) {
+    @media (min-width: @screen-xl-min) {
       min-height: 36em;
-      font-size: 1.4em;
+      font-size: 1.5em;
       line-height: 2em;
     }
   }

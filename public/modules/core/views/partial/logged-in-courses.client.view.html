@@ -2,55 +2,53 @@
 
 
     <div data-ng-repeat="course in coursesStudent">
-        <div>
-            <div class="info-card ribbon-card">
-                <div class="learning-ribbon"><span>Learning</span></div>
+        <div class="ribbon-card">
+            <div class="learning-ribbon"><span>Learning</span></div>
 
-                <div class="title">{{course.name}} <span data-ng-if="course.supervised">(supervised)</span></div>
+            <div class="title">{{course.name}} <span data-ng-if="course.supervised">(supervised)</span></div>
 
-                <div
-                     data-ng-controller="CourseReportController"
-                     data-ng-init="initProgress(course._id, $index)">
-                    <div data-ng-show="diagramShown" data-ng-hide="!diagramShown">
-
-
-                        <div class="col-xs-12">
-
-                            <div id="inplay{{$index}}" class="diagram">
-
-                            </div>
-                        </div>
+            <div
+                    data-ng-controller="CourseReportController"
+                    data-ng-init="initProgress(course._id, $index)">
+                <div data-ng-show="diagramShown" data-ng-hide="!diagramShown">
 
 
-                        <div style="text-align: center; font-size: large">
+                    <div class="col-xs-12">
 
+                        <div id="inplay{{$index}}" class="diagram">
 
-                            <a href="#!/courses/{{course._id}}/stats" class="btn btn-rememberators font-s">
-                                Diagrams
-                            </a>
-
-
-                            <button type="button" class="btn btn-rememberators font-s"
-                                    data-ng-click="practice(course)" tooltip="{{course.description}}">
-                                Practice
-                            </button>
                         </div>
                     </div>
 
 
-                    <div data-ng-show="!diagramShown" data-ng-hide="diagramShown">
-                        <div style="text-align: center; font-size: large">
-                            <div style="padding-top: 2em; padding-bottom: 3em">
-                                Not enough data to show diagrams
-                            </div>
-                            <button type="button" class="btn btn-rememberators font-s"
-                                    data-ng-click="practice(course)" tooltip="{{course.description}}">
-                                Practice
-                            </button>
-                        </div>
+                    <div style="text-align: center; font-size: large">
 
 
+                        <a href="#!/courses/{{course._id}}/stats" class="btn btn-rememberators font-s">
+                            Diagrams
+                        </a>
+
+
+                        <button type="button" class="btn btn-rememberators font-s"
+                                data-ng-click="practice(course)" tooltip="{{course.description}}">
+                            Practice
+                        </button>
                     </div>
+                </div>
+
+
+                <div data-ng-show="!diagramShown" data-ng-hide="diagramShown">
+                    <div style="text-align: center; font-size: large">
+                        <div style="padding-top: 2em; padding-bottom: 3em">
+                            Not enough data to show diagrams
+                        </div>
+                        <button type="button" class="btn btn-rememberators font-s"
+                                data-ng-click="practice(course)" tooltip="{{course.description}}">
+                            Practice
+                        </button>
+                    </div>
+
+
                 </div>
             </div>
         </div>

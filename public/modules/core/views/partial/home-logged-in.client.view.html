@@ -15,8 +15,7 @@
 
     <div data-ng-if="authentication.user.teacherInSchools.length === 0 && authentication.user.roles.indexOf('teacher') > -1">
 
-        <div class="col-xs-12 col-md-6 ">
-            <div class="font-large info-card ribbon-card">
+            <div class="info-card ribbon-card">
                 <div class="help-ribbon"><span>Help</span></div>
                 <div class="title">Teaching in a school</div>
                 <infobox logo="man" position="left">
@@ -25,7 +24,6 @@
                     or use the <span class="font-small-childish">{{authentication.user.displayName}}</span> menu.
                 </infobox>
             </div>
-        </div>
 
     </div>
 

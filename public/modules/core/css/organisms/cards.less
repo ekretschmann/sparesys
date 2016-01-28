@@ -8,35 +8,39 @@
   .make-md-column(11/2);
   .make-md-column-offset(1/3);
 
-  .make-lg-column(11/3);
-  .make-lg-column-offset(1/4);
+  .make-lg-column(11/2);
+  .make-lg-column-offset(1/3);
+  .make-xl-column(11/3);
+  .make-xl-column-offset(1/4);
   .generic-card;
+
 
   margin-top: 1em;
 
-  font-size: 16px;
-  line-height: 28px;
+  min-height: 30em;
+  font-size: 1.2em;
+  line-height: 1.2em;
   @media screen {
 
     @media (min-width: @screen-xs-min) {
-      min-height: 340px;
-      font-size: 18px;
-       line-height: 36px;
+      min-height: 30em;
+      font-size: 1.25em;
+       line-height: 1.4em;
     }
     @media (min-width: @screen-sm-min) {
-      min-height: 380px;
-      font-size: 19px;
-      line-height: 24px;
+      min-height: 30em;
+      font-size: 1.3em;
+      line-height: 1.6em;
     }
     @media (min-width: @screen-md-min) {
-      min-height: 420px;
-      font-size: 20px;
-      line-height: 28px;
+      min-height: 36em;
+      font-size: 1.35em;
+      line-height: 1.8em;
     }
-    @media (min-width: @screen-lg-min) {
-      min-height: 460px;
-      font-size: 21px;
-      line-height: 28px;
+    @media (min-width: 1400px) {
+      min-height: 36em;
+      font-size: 1.4em;
+      line-height: 2em;
     }
   }
 }
@@ -134,4 +138,10 @@
   .texture-admin;
   box-shadow: 5px 5px 5px #C99;
   border: 1px solid darken(@background-color-admin, 5%);
+}
+
+// banner
+.ribbon-card {
+  position: relative;
+  overflow: hidden;
 }

@@ -5,10 +5,13 @@
 @import (reference) "../../../lib/bootstrap/less/mixins/grid.less";
 @import (reference) "../../../lib/bootstrap/less/utilities.less";
 
+@import "variables.less";
 @import "atoms/borders.less";
 @import "atoms/colors.less";
 @import "atoms/fonts.less";
+@import "atoms/grid.less";
 @import "atoms/textures.less";
+@import "atoms/ribbons.less";
 
 @import "modecules/infobox.less";
 
@@ -157,8 +160,7 @@ body {
 }
 
 // Fonts
-@standard-font: 'Exo+2', sans-serif;
-@standard-font-size: 12pt;
+
 
 .font-large {
   @media (min-width: 310px) {
@@ -190,16 +192,16 @@ body {
   color: @inverse-background-color;
 }
 
-@font-face {
-  font-family: 'Grinched';
-  src: url('grinched.eot');
-  src: url('grinched.eot?#iefix') format('embedded-opentype'),
-  url('grinched.svg#Grinched') format('svg'),
-  url('grinched.woff') format('woff'),
-  url('Grinched.ttf') format('truetype');
-  font-weight: normal;
-  font-style: normal;
-}
+//@font-face {
+//  font-family: 'Grinched';
+//  src: url('grinched.eot');
+//  src: url('grinched.eot?#iefix') format('embedded-opentype'),
+//  url('grinched.svg#Grinched') format('svg'),
+//  url('grinched.woff') format('woff'),
+//  url('Grinched.ttf') format('truetype');
+//  font-weight: normal;
+//  font-style: normal;
+//}
 
 //.font-brand-xxl {
 //  font-family: 'Grinched';
@@ -1837,68 +1839,6 @@ a {
 }
 
 
-// banner
-.ribbon-card {
-  position: relative;
-  overflow: hidden;
-}
-.default-riboon {
-  position: absolute;
-  right: -5px; bottom: -5px;
-  z-index: 1;
-  overflow: hidden;
-  width: 250px; height: 250px;
-  text-align: right;
-}
-.school-admin-ribbon {
-  .default-riboon;
-}
-.learning-ribbon {
-  .default-riboon;
-}
-
-.help-ribbon {
-  .default-riboon;
-}
-
-.default-ribbon-span {
-  font-size: 10px;
-  font-weight: bold;
-  color: #FFF;
-  text-align: center;
-  line-height: 20px;
-  transform: rotate(315deg);
-  -webkit-transform: rotate(315deg);
-  width: 150px;
-  display: block;
-
-  box-shadow: 0 3px 10px -5px rgba(0, 0, 0, 1);
-  position: absolute;
-  bottom: 35px; right: -35px;
-}
-.school-admin-ribbon span {
-  .default-ribbon-span;
-  background: #79A70A;
-  background: linear-gradient(lighten(#79A70A, 10%) 0%, #79A70A 100%);
-}
-
-.learning-ribbon span {
-  .default-ribbon-span;
-  background: #1f7ba7;
-  background: linear-gradient(lighten(#1f7ba7, 10%) 0%, #1f7ba7 100%);
-}
-
-.teaching-ribbon span {
-  .default-ribbon-span;
-  background: #1f7ba7;
-  background: linear-gradient(lighten(#a74e95, 10%) 0%, #a74e95 100%);
-}
-
-.help-ribbon span {
-  .default-ribbon-span;
-  background: @base-green;
-  background: linear-gradient(lighten(@base-green, 10%) 0%, @base-green 100%);
-}
 
 input[type='file'] {
   opacity:0

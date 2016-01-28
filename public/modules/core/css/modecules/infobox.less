@@ -7,14 +7,38 @@
   .pull-left;
   padding-right: 1em;
   padding-top: 0.5em;
+  padding-bottom: 0.5em;
 
-  height: 84px;
+
+  //max-width: 100px;
+  max-height: 100px;
+  min-height: 100px;
+  @media screen {
+    @media (min-width: @screen-xs-min) {
+      //max-width: 110px;
+      max-height: 110px;
+      min-height: 110px;
+    }
+    @media (min-width: @screen-sm-min) {
+      //max-width: 120px;
+      max-height: 120px;
+      min-height: 120px;
+    }
+    @media (min-width: @screen-md-min) {
+      max-width: 130px;
+      min-height: 130px;
+    }
+    @media (min-width: @screen-lg-min) {
+      max-width: 140px;
+      min-height: 140px;
+    }
+  }
 }
 
 .infobox-title, .title {
 
   font-size: 24px;
-  font-weight: bold;
+  font-weight: 800;
   padding-top: 0.5em;
   padding-bottom: 0.5em;
 

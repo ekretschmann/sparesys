@@ -8,7 +8,7 @@
 
                 <div class="title">{{course.name}} <span data-ng-if="course.supervised">(supervised)</span></div>
 
-                <div class="default-border"
+                <div
                      data-ng-controller="CourseReportController"
                      data-ng-init="initProgress(course._id, $index)">
                     <div data-ng-show="diagramShown" data-ng-hide="!diagramShown">

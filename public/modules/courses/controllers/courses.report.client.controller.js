@@ -45,9 +45,14 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
             var res = CoursesService.serverLoadCards();
             var promise = res.get({courseId: id});
             promise.$promise.then(function (cards) {
-                //DiagramsCalendarService.drawCalendar(cards, '#cal'+index, '#practice-date'+index, '#number-of-cards'+index, ($window.innerWidth / 2)-130);
 
-                if (cards.length === 0) {
+                var repetitions = 0;
+                for (var i=0; i<cards.length; i++) {
+                    repetitions+=cards[i].history.length;
+                }
+
+
+                if (repetitions < 3) {
                     $scope.diagramShown = false;
                 } else {
                     $scope.diagramShown = true;

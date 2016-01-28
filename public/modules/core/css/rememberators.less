@@ -7,6 +7,7 @@
 
 @import "variables.less";
 @import "atoms/borders.less";
+@import "atoms/buttons.less";
 @import "atoms/colors.less";
 @import "atoms/fonts.less";
 @import "atoms/grid.less";
@@ -24,7 +25,6 @@
 @background-color-admin: #ECCCCC;
 @foreground-color: #333333;
 @light-inverse-background-color: #4E51E5;
-@inverse-font-color: #d0d8dd;
 
 @default-padding-unit: 5px;
 
@@ -616,24 +616,7 @@ body {
   text-decoration: none;
 }
 
-.signup-button {
-  .btn-rememberators;
-  .font-brand-xl;
-  border-radius: 12px;
-  border: 1px solid transparent;
-  background-image: linear-gradient(to bottom, lighten(@base-green, 10%) 0%, darken(@base-green, 10%) 100%);
-  padding: 4 * @default-padding-unit;
-  margin: 4 * @default-padding-unit;
-  text-align: center;
-}
 
-.signup-button:hover,
-.signup-button:focus,
-.signup-button:active,
-.signup-button.active {
-  background-image: linear-gradient(to bottom, @base-green 0%, darken(@base-green, 20%) 100%);
-  color: #ECECFF;
-}
 
 .signup-button-row {
   text-align: center;

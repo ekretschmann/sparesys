@@ -83,7 +83,8 @@
 
 
             <div data-ng-if="authentication.user.inventory.length === 0" class="field-data">
-                You have no rewards so far
+                You have no rewards so far. Start practicing to win trophies and buy
+                rewards with them.
             </div>
 
             <div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 0"
@@ -101,7 +102,7 @@
                 <div class="inventory-item">{{item.amount}} {{item.name}}</div>
             </div>
 
-            <div class="button-row">
+            <div class="button-row" data-ng-if="authentication.user.trophies > 0">
 
                 <a href="#!/rewards/shop"
                    class="btn btn-rememberators">
@@ -138,8 +139,8 @@
 
                     <infobox logo="boy" position="left">
                         <div>
-                            New to Rememberators? I see, that you haven't got any courses, yet.
-                            Whatever you learn on Rememberators is put into courses. Courses help you to
+                            New to Rememberators? Welcome! I see, you haven't got any courses, yet.
+                            Whatever you learn on Rememberators is put into courses. Courses
                             keep the subjects you learn separated so that you can concentrate on one thing
                             at a time.
 

@@ -283,18 +283,6 @@ body {
 
 }
 
-.font-m {
-  @media (min-width: 310px) {
-    font-size: 16pt;
-  }
-  @media (min-width: 620px) {
-    font-size: 18pt;
-  }
-  @media (min-width: 800px) {
-    font-size: 24pt;
-  }
-  font-family: 'Grinched';
-}
 
 .font-s {
   @media (min-width: 310px) {
@@ -524,17 +512,7 @@ body {
 
 }
 
-.rememberators-footer {
 
-  padding-left: 0;
-  margin-top: 3*@default-padding-unit;
-  padding-top: 3*@default-padding-unit;
-  border-top: @seperator;
-  margin-inside: @default-padding-unit;
-  color: @foreground-color;
-  .font-m;
-  text-align: left;
-}
 
 
 
@@ -649,7 +627,7 @@ body {
   .btn-rememberators;
   margin-inside: 0;
   border-radius: 12px;
-  .font-m;
+  .font-brand-m;
   //width: 1em;
   //height: 3em;
 }
@@ -665,13 +643,13 @@ body {
 }
 
 .modal-danger {
-  .font-m;
+  .font-brand-m;
   text-align: center;
   color: @danger-color;
 }
 
 .modal-info {
-  .font-m;
+  .font-brand-m;
   text-align: center;
   color: @info-color;
 }
@@ -1059,7 +1037,7 @@ body {
 }
 
 .new-card {
-  .font-m;
+  .font-brand-m;
   white-space: nowrap;
   position: absolute;
   right: 25px;

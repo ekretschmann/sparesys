@@ -1,8 +1,6 @@
 <div data-ng-if="authentication.user.studentInSchools.length > 0">
 
 
-    <div class="font-large">
-
 
         <div
                 data-ng-repeat="schoolId in authentication.user.studentInSchools"
@@ -11,11 +9,11 @@
 
 
             <div data-ng-if="schoolclasses.length>0">
-                <div class=" info-card" data-ng-repeat="sc in schoolclasses">
+                <div class="info-card" data-ng-repeat="sc in schoolclasses">
                     <div class="title">My class: {{sc.name}}</div>
 
 
-                    <div class="flashcard-section">
+                    <div class="section">
                         <div class="row">
 
                             <div class="col-xs-4">
@@ -44,7 +42,7 @@
                         </div>
                     </div>
 
-                    <div class="flashcard-section">
+                    <div class="section">
                         <div class="row">
 
                             <div class="col-xs-4">
@@ -126,6 +124,5 @@
         </div>
 
 
-    </div>
 </div>
 

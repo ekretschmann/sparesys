@@ -26,20 +26,17 @@
     </div>
 
     <div data-ng-if="authentication.user.administersSchools.length > 0 && authentication.user.roles.indexOf('help') > -1">
-        <div class="ribbon-card" data-ng-controller="SchoolsController">
-            <div class="help-ribbon"><span>Help</span></div>
+        <div class="action-card" data-ng-controller="SchoolsController">
+            <div class="action-ribbon"><span>Action</span></div>
             <div class="title">School Administration</div>
             <infobox logo="woman" position="left">
 
-                <div>
+                <div class="section">
                     As a school administrator, you create and manage schools and
                     classes. You will assign teachers and students to their classes so that
                     they can work together.
-                </div>
 
-                <div class="flashcard-section">
-                    If you want to remove a school, click on the <i class="glyphicon glyphicon-trash"></i> icon
-                    and use the <i class="glyphicon glyphicon-edit"></i> icon
+                    Use the <i class="glyphicon glyphicon-edit"></i> icon
                     to manage students, teachers and classes.
 
                 </div>
@@ -47,7 +44,7 @@
     </div>
 
     <div data-ng-repeat="schoolId in authentication.user.administersSchools" data-ng-controller="SchoolsController"
-         data-ng-init="findById(schoolId)" class="col-xs-12 col-md-6 ">
+         data-ng-init="findById(schoolId)" >
 
 
         <div class="info-card ribbon-card">

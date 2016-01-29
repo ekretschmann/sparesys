@@ -9,19 +9,16 @@
 
 
     <div data-ng-if="authentication.user.administersSchools.length === 0">
-        <div class="ribbon-card" data-ng-controller="SchoolsController">
+        <div class="action-card" data-ng-controller="SchoolsController">
 
-            <div class="help-ribbon"><span>Help</span></div>
+            <div class="action-ribbon"><span>Help</span></div>
 
             <div class="title">School Administration</div>
             <infobox logo="woman" position="left">
                 You have set yourself up as a school administrator but you are not managing any schools. To
                 get started, you will have to register your school. You can do this by
 
-                following <a href="" ng-click="registerSchoolPopup()">this link</a> or using your
-                <div class="font-small-childish" style="display:inline">{{authentication.user.displayName}}
-                </div>
-                menu.
+                following <a href="" ng-click="registerSchoolPopup()">this link</a>.
 
             </infobox>
 

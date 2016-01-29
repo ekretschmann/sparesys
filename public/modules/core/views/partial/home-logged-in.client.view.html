@@ -15,13 +15,12 @@
 
     <div data-ng-if="authentication.user.teacherInSchools.length === 0 && authentication.user.roles.indexOf('teacher') > -1">
 
-        <div class="info-card ribbon-card">
-            <div class="help-ribbon"><span>Help</span></div>
+        <div class="action-card">
+            <div class="action-ribbon"><span>Action</span></div>
             <div class="title">Teaching in a school</div>
             <infobox logo="man" position="left">
                 You have not subscribed to your school. Use
-                <a href="/#!/schools/subscribe">this link</a> to find a school as teacher
-                or use the <span class="font-small-childish">{{authentication.user.displayName}}</span> menu.
+                <a href="/#!/schools/subscribe">this link</a> to find a school as teacher.
             </infobox>
         </div>
 
@@ -30,8 +29,8 @@
     <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1 && coursesTeacher.length ===0">
 
 
-            <div class="ribbon-card">
-                <div class="help-ribbon"><span>Help</span></div>
+            <div class="action-card">
+                <div class="action-ribbon"><span>Help</span></div>
                 <div class="title">Teaching a course</div>
                 <infobox logo="man" position="left">
 
@@ -56,8 +55,36 @@
 
     </div>
 
+    <div class="action-card"
+         data-ng-if="authentication.user.roles.indexOf('nostudent') > -1 && authentication.user.roles.indexOf('teacher') === -1 && authentication.user.roles.indexOf('headmaster') === -1">
+        <div class="action-ribbon"><span>Action</span></div>
+        <div class="title">Choose your role</div>
+        <infobox logo="guru" position="left">
+            To use rememberators you will have to be a student, a teacher or a school administrator.
+            Choose your role in the <a href="" data-ng-click="settingsPopup()">settings</a>.
+        </infobox>
+    </div>
 
-    <div class="ribbon-card">
+    <div class="action-card" data-ng-if="authentication.user.roles.indexOf('nostudent') === -1 && (!coursesStudent || coursesStudent.length===0)">
+
+        <div class="action-ribbon"><span>Action</span></div>
+        <div class="title">What next?</div>
+
+        <infobox logo="guru" position="left">
+            <div>
+
+
+                You can a <a href="#!/courses/create">create your own courses</a>, or
+                <a href="#!/courses/search">search for existing ones</a>.
+
+                If you belong to a school, you can <a
+                    href="#!/schools/subscribe/student">search
+                for it here</a>.
+            </div>
+        </infobox>
+    </div>
+
+    <div class="ribbon-card" data-ng-if="authentication.user.roles.indexOf('nostudent') === -1">
 
 
         <div class="learning-ribbon"><span>Learning</span></div>
@@ -128,6 +155,8 @@
     <!--</div>-->
 
 
+
+
     <div data-ng-if="authentication.user.roles.indexOf('nostudent') === -1">
         <div data-ng-if="!coursesStudent || coursesStudent.length===0">
             <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
@@ -150,24 +179,7 @@
                 </div>
 
 
-                <div class="action-card">
 
-                    <div class="action-ribbon"><span>Action</span></div>
-                    <div class="title">What next?</div>
-
-                    <infobox logo="guru" position="left">
-                        <div>
-
-
-                            You can a <a href="#!/courses/create">create your own courses</a>, or
-                            <a href="#!/courses/search">search for existing ones</a>.
-
-                            If you belong to a school, you can <a
-                                href="#!/schools/subscribe/student">search
-                            for it here</a>.
-                        </div>
-                    </infobox>
-                </div>
 
                 <div class="ribbon-card">
                     <div class="help-ribbon"><span>Help</span></div>

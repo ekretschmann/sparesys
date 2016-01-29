@@ -29,9 +29,8 @@
 
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
-         data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="info-card ribbon-card font-large">
+    <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="ribbon-card">
             <div class="help-ribbon"><span>Help</span></div>
             <div class="title">
                 Editing a course
@@ -51,9 +50,8 @@
     </div>
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
-         data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="info-card ribbon-card font-large">
+    <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="ribbon-card">
             <div class="help-ribbon"><span>Help</span></div>
             <div class="title">
                 Adding packs
@@ -71,8 +69,7 @@
     </div>
 
 
-    <div class="col-xs-6 dashboard-col">
-        <div class="info-card font-large">
+        <div class="info-card">
             <div class="title">
                 {{course.name}}
 
@@ -167,10 +164,8 @@
 
             </div>
         </div>
-    </div>
-    <div class="col-xs-6 dashboard-col">
 
-        <div class="info-card font-large">
+        <div class="info-card">
 
             <div class="title">
                 New card default settings
@@ -522,13 +517,12 @@
         </div>
 
 
-    </div>
 
 
     <div data-ng-repeat="pack in course.packs"
          data-ng-controller="PacksController" data-ng-init="findById(pack)">
 
-        <div class="col-xs-6">
+
             <div class="half-info-card font-large">
                 <div class="title">
                     {{pack.name}}
@@ -598,10 +592,9 @@
 
                 </div>
             </div>
-        </div>
+
     </div>
 
-    <div class="col-xs-6 dashboard-col">
 
         <div class="font-large info-card-header">
 
@@ -629,7 +622,7 @@
             </form>
 
         </div>
-    </div>
+
 
 
     <div class="rememberators-footer col-xs-12">rememberators.com</div>

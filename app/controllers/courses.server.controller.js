@@ -88,10 +88,14 @@ exports.updateDefaultSettings = function (req, res) {
 exports.update = function (req, res) {
 
 
+
+
     var course = req.course;
 
 
     var packsBefore = course.packs;
+
+
     course = _.extend(course, req.body);
 
     course.updated = Date.now();

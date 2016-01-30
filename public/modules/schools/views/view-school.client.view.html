@@ -1,9 +1,9 @@
-<section data-ng-controller="SchoolsController" class="font-large" data-ng-init="findOne()">
+<section data-ng-controller="SchoolsController" data-ng-init="findOne()">
 
     <div ng-include="'/modules/schoolclasses/views/partial/delete-class.modal.client.view.html'"></div>
 
 
-    <div class="col-xs-12  font-large title" style="text-align: center">
+    <div class="col-xs-12" style="text-align: center">
         <div class="row">
             <div class="col-xs-1">
                 <a href="" data-ng-click="scrollDown()"><i
@@ -23,107 +23,111 @@
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="info-card font-large ribbon-card">
-            <div class="help-ribbon"><span>Help</span></div>
-            <div class="title">Manage School</div>
-            <infobox  logo="woman" position="left">
-                Use this screen to create school classes. Once teachers and students have subscribed to your
-                school, you can add them to or remove them from their classes. This way, the teachers of your
-                schools will be able to assign courses to the students in their classes.
-            </infobox>
-        </div>
+
+    <div class="action-card" data-ng-if="school.schoolclasses.length === 0">
+        <div class="action-ribbon"><span>Action</span></div>
+        <div class="title">Add a class</div>
+        <infobox logo="woman" position="left">
+            Your school has no classes. You have to create classes in order to manage
+            the teachers and students of your schools.
+        </infobox>
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col">
-        <div class="info-card font-large ">
-            <div class="title">{{school.name}}</div>
-            <form class="signup form-horizontal" autocomplete="off" data-ng-submit="ok()">
-                <fieldset>
+    <div class="ribbon-card" data-ng-if="authentication.user.roles.indexOf('help') > -1">
+        <div class="help-ribbon"><span>Help</span></div>
+        <div class="title">Manage School</div>
+        <infobox logo="man" position="left">
+            Use this screen to create school classes. Once teachers and students have subscribed to your
+            school, you can add them to their classes. Teachers of your
+            schools will then be able to assign courses to the students in their classes.
+        </infobox>
+    </div>
+    <div class="info-card ">
+        <div class="title">{{school.name}}</div>
+        <form class="signup form-horizontal" autocomplete="off" data-ng-submit="ok()">
+            <fieldset>
 
-                    <div class="flashcard-section">
+                <div class="flashcard-section">
 
-                        <div class="row">
-                            <div class="col-xs-6 dashboard-col">
-                                <div class="field-label">School Name</div>
-                                <div class="font-medium">
-                                    <input type="text"
-                                           data-ng-model="school.name"
-                                           class="form-control"
-                                           placeholder="School Name"
-                                           ng-blur="update()"
-                                           required>
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">School Name</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       data-ng-model="school.name"
+                                       class="form-control"
+                                       placeholder="School Name"
+                                       ng-blur="update()"
+                                       required>
 
-                                </div>
                             </div>
                         </div>
+                    </div>
 
-                        <div class="row">
-                            <div class="col-xs-6 dashboard-col">
-                                <div class="field-label">City</div>
-                                <div class="font-medium">
-                                    <input type="text"
-                                           data-ng-model="school.city"
-                                           class="form-control"
-                                           ng-blur="update()"
-                                           placeholder="City" required>
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">City</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       data-ng-model="school.city"
+                                       class="form-control"
+                                       ng-blur="update()"
+                                       placeholder="City" required>
 
-                                </div>
-                            </div>
-                            <div class="col-xs-6 dashboard-col">
-                                <div class="field-label">Country</div>
-                                <div class="font-medium">
-                                    <input type="text" data-ng-model="school.country"
-                                           class="form-control"
-                                           ng-blur="update()"
-                                           placeholder="Country" required>
-                                </div>
                             </div>
                         </div>
-
-
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Country</div>
+                            <div class="font-medium">
+                                <input type="text" data-ng-model="school.country"
+                                       class="form-control"
+                                       ng-blur="update()"
+                                       placeholder="Country" required>
+                            </div>
+                        </div>
                     </div>
 
 
-                </fieldset>
-            </form>
-        </div>
+                </div>
+
+
+            </fieldset>
+        </form>
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col">
-        <div class="info-card font-large">
-            <div class="title">Subscribed teachers and students</div>
-            <div class="flashcard-section">
-                <div class="row">
-                    <div class="col-xs-6 field-label dashboard-col-attached">Teachers</div>
-                    <div class="col-xs-6 field-label dashboard-col-attached">Students</div>
-                </div>
-                <div class="row">
-                    <div class="col-xs-6 field-data dashboard-col">
 
-                        <div class="danger" data-ng-if="school.teachers.length ===0">
-                            none
-                        </div>
-                        <div data-ng-repeat="teacher in school.teachers">{{teacher.displayName}}</div>
+    <div class="info-card">
+        <div class="title">Teachers and students</div>
+        <div class="flashcard-section">
+            <div class="row">
+                <div class="col-xs-6 field-label dashboard-col-attached">Teachers</div>
+                <div class="col-xs-6 field-label dashboard-col-attached">Students</div>
+            </div>
+            <div class="row">
+                <div class="col-xs-6 field-data dashboard-col">
 
+                    <div class="danger" data-ng-if="school.teachers.length ===0">
+                        none
                     </div>
-                    <div class="col-xs-6 field-data dashboard-col">
-                        <div class="danger" data-ng-if="school.students.length ===0">
-                            none
-                        </div>
-                        <div data-ng-repeat="student in school.students">{{student.displayName}}</div>
-
-                    </div>
+                    <div data-ng-repeat="teacher in school.teachers">{{teacher.displayName}}</div>
 
                 </div>
+                <div class="col-xs-6 field-data dashboard-col">
+                    <div class="danger" data-ng-if="school.students.length ===0">
+                        none
+                    </div>
+                    <div data-ng-repeat="student in school.students">{{student.displayName}}</div>
+
+                </div>
+
             </div>
         </div>
     </div>
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col" data-ng-repeat="sc in school.schoolclasses"
+    <div data-ng-repeat="sc in school.schoolclasses"
          data-ng-controller="SchoolclassesController" data-ng-init="findById(sc._id)">
-        <div class="info-card font-large">
+        <div class="info-card">
             <div class="title">Class {{schoolclass.name}}
 
                 <div class="pull-right">
@@ -135,7 +139,7 @@
                 </div>
 
             </div>
-            <div class="flashcard-section">
+            <div class="section">
 
 
                 <div class="row">
@@ -168,7 +172,7 @@
 
                     </div>
                 </div>
-                <div  class="row">
+                <div class="row">
                     <div class="col-xs-6 field-data dashboard-col-attached">
 
                         <div class="danger" data-ng-if="schoolclass.teachers.length ===0">
@@ -218,39 +222,37 @@
 
     </div>
 
-    <div class="col-xs-6 dashboard-col">
 
-        <div class="font-large info-card-header">
+    <div class="action-postit">
 
-            <form data-ng-submit="addSchoolclassToSchool()" validate>
+        <form data-ng-submit="addSchoolclassToSchool()" validate>
 
-                <div class="title">
-
-
-                    <div class="pull-right">
+            <div class="title">
 
 
-                        <a href="" data-ng-click="addSchoolclassToSchool()"><i
-                                class="glyphicon glyphicon-plus-sign"></i></a>
+                <div class="pull-right">
 
 
-                    </div>
-
-
-                    <div data-ng-if="school.schoolclasses.length ===0">Add a class</div>
-                    <div data-ng-if="school.schoolclasses.length >0">Add another class</div>
-
-                    <input type="text" data-ng-model="newClass.name"
-                                             class="form-control focus"
-                                             placeholder="Name">
+                    <a href="" data-ng-click="addSchoolclassToSchool()"><i
+                            class="glyphicon glyphicon-plus-sign"></i></a>
 
 
                 </div>
 
 
-            </form>
+                <div data-ng-if="school.schoolclasses.length ===0">Add a class</div>
+                <div data-ng-if="school.schoolclasses.length >0">Add another class</div>
 
-        </div>
+                <input type="text" data-ng-model="newClass.name"
+                       class="form-control focus"
+                       placeholder="Name">
+
+
+            </div>
+
+
+        </form>
+
     </div>
 
 

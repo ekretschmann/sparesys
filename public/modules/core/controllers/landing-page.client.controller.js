@@ -24,7 +24,7 @@ angular.module('core').controller('LandingPageController', ['$window', '$scope',
             {image: '/modules/core/img/brand/superhero-boy-medium.gif', text: 'I dare you to become a Rememberator!'},
             {image: '/modules/core/img/brand/philosopher-medium.gif', text: 'I remember, therefore I am.'},
             {image: '/modules/core/img/brand/gator-skater.png', text: 'Unleash your brainpower!'},
-            {image: '/modules/core/img/brand/teacher-man-medium.gif', text: 'Do something worth Remembering!'},
+            {image: '/modules/core/img/brand/fish.png', text: 'Do something worth Remembering!'},
             {image: '/modules/core/img/brand/teacher-woman-medium.gif', text: 'Forget about Forgetting!'}
 
         ];

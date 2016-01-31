@@ -1,7 +1,25 @@
+.section {
+  padding-bottom: 1em;
+}
+
+.top-section {
+
+}
+
+
+.three-column-section {
+  .make-row(1em);
+  .column {
+    text-align: left;
+    padding: 0 0 1em 0 !important;
+    .make-xs-column(4);
+  }
+
+}
+
+
 .inventory-item {
-  .make-xs-column(4);
-  text-align: left;
-  padding: 0;
+  .three-column-section;
 }
 
 .field-label {
@@ -12,6 +30,7 @@
   font-weight: 100;
   font-size: 14px;
   letter-spacing: -1.5px;
+  margin-top: -1em;
 }
 
 .rememberators-footer {

@@ -19,6 +19,25 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
             });
         };
 
+        $scope.options = {};
+        $scope.options.searchText = '';
+
+        $scope.updateSearch = function () {
+
+            if (!$scope.options.searchText) {
+                $scope.options.searchText = '';
+            }
+
+            Schools.query({
+                text: $scope.options.searchText
+            }, function (schools) {
+                $scope.schools = schools;
+
+            });
+        };
+
+
+
 
         $scope.newClass = {};
         $scope.newClass.name = '';
@@ -327,16 +346,7 @@ angular.module('schools').controller('SchoolsController', ['$window', '$scope', 
             });
         };
 
-        $scope.updateSearch = function () {
 
-
-            Schools.query({
-                text: $scope.options.searchText
-            }, function (schools) {
-                $scope.schools = schools;
-
-            });
-        };
 
 
     }

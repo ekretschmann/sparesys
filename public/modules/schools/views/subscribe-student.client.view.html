@@ -1,4 +1,4 @@
-<section data-ng-controller="SchoolsController" data-ng-init="find()">
+<section data-ng-controller="SchoolsController">
 
     <div ng-include="'/modules/schools/views/partial/subscribe-student.modal.client.view.html'"></div>
     <div ng-include="'/modules/schools/views/partial/unsubscribe-student.modal.client.view.html'"></div>
@@ -34,6 +34,7 @@
 
             <div class="field-label">Find school</div>
             <input type="text"
+                   data-ng-change="updateSearch()"
                    data-ng-model="searchText"
                    class="form-control search"
                    placeholder="School Name">
@@ -151,73 +152,48 @@
 
             </div>
 
-            <!--<div class="section">-->
-                <!--<div data-ng-if="school.schoolclasses.length === 0">-->
-                    <!--<div class="warning ">-->
-                        <!--<div class="field-label">Classes</div>-->
-                        <!--<div class="field-data">-->
-                            <!--School has no classes-->
-                        <!--</div>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+            <div data-ng-if="school.schoolclasses.length === 0">
+
+
+                    <div class="field-label">Classes</div>
+                    <div class="field-data">
+                        School has no classes
+                    </div>
+
+
+            </div>
 
 
             <div data-ng-if="school.schoolclasses.length > 0">
 
-                <!--<div class="section">-->
+                <div class="three-column-headers">
+                    <div class="column">
+                        <div class="field-label">Classes</div>
 
-                <!--<div class="field-label">-->
-                <!--Classes-->
-                <!--</div>-->
+                    </div>
 
-                <!--<div class="field-label">-->
-                <!--Teachers-->
-                <!--</div>-->
 
-                <!--<div class="field-label">-->
-                <!--Students-->
-                <!--</div>-->
+                </div>
 
-                <!--</div>-->
+
                 <div data-ng-repeat="schoolclass in school.schoolclasses">
 
 
-                    <div class="three-column-section">
+                    <div class="three-column-data">
 
-                        <div class="field-label">
-                            Classes
-                        </div>
-                        <div class="field-data">
-
+                        <div class="column field-data">
                             {{schoolclass.name}}
                         </div>
+                        <div class="column field-data">
+
+                            {{schoolclass.teachers.length}} teacher<span data-ng-if="schoolclass.teachers.length !== 1">s</span>
+                        </div>
+
+                        <div class="column field-data">
+
+                            {{schoolclass.students.length}} student<span data-ng-if="schoolclass.students.length !== 1">s</span>
+                        </div>
                     </div>
-
-                    <!--<div class="field-data">-->
-                    <!--<div class="danger"-->
-                    <!--data-ng-if="schoolclass.teachers.length === 0">-->
-                    <!--none-->
-                    <!--</div>-->
-
-                    <!--<div-->
-                    <!--data-ng-if="schoolclass.teachers.length > 0">-->
-                    <!--{{schoolclass.teachers.length}}-->
-                    <!--</div>-->
-                    <!--</div>-->
-
-                    <!--<div class="field-data">-->
-                    <!--<div class="danger"-->
-                    <!--data-ng-if="schoolclass.students.length === 0">-->
-                    <!--none-->
-                    <!--</div>-->
-
-                    <!--<div-->
-                    <!--data-ng-if="schoolclass.students.length > 0">-->
-                    <!--{{schoolclass.students.length}}-->
-                    <!--</div>-->
-                    <!--</div>-->
-
 
                 </div>
             </div>

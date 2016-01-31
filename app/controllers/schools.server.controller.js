@@ -352,6 +352,8 @@ exports.list = function (req, res) {
     if (req.query && req.query.text) {
         var search = req.query.text.split(' ');
 
+
+
         if (search.length === 1) {
             School.find({$or: [{'name': {$regex: search[0]}}, {'city': {$regex: '^' + search[0]}}, {'country': {$regex: '^' + search[0]}}]}).limit(25).exec(function (err, schools) {
                 if (err) {

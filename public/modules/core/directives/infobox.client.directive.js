@@ -14,7 +14,7 @@ angular.module('core').directive('infobox',
 
 
                 switch (scope.logo) {
-                    case 'woman': scope.image = '/modules/core/img/brand/teacher-woman-medium.gif'; break;
+                    case 'woman': scope.image = '/modules/core/img/brand/bear.png'; break;
                     case 'girl': scope.image = '/modules/core/img/brand/superhero-girl-medium.gif'; break;
                     case 'boy': scope.image = '/modules/core/img/brand/superhero-boy-medium.gif'; break;
                     case 'man': scope.image = '/modules/core/img/brand/fish.png'; break;

@@ -18,6 +18,9 @@ angular.module('core').config(['$stateProvider', '$urlRouterProvider',
             .state('home', {
                 url: '/',
                 templateUrl: 'modules/core/views/home.client.view.html'
+            }).state('rememberators', {
+                url: '/rememberators',
+                templateUrl: 'modules/core/views/partial/rememberators.client.view.html'
             })
         ;
     }

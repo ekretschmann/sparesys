@@ -29,69 +29,66 @@
 
     </div>
 
-    <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="ribbon-card">
-            <div class="help-ribbon"><span>Help</span></div>
+    <div class="page-section">
+        <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
+            <div class="ribbon-card-large">
+                <div class="help-ribbon"><span>Help</span></div>
+                <div class="title">
+                    Editing a course
+                </div>
+                <infobox logo="boy">
+                    You can
+                    change the settings for your course and the defaults for
+                    new cards on this screen. The language settings are used
+                    when the Rememberators read questions and answers out loud.
+                    Use the <i class="glyphicon glyphicon-th"></i> icon to get
+                    to a searchable all card overview page and the
+                    <i class="glyphicon glyphicon-trash"></i> icon to delete
+                    this course.
+
+                </infobox>
+            </div>
+
+            <div class="ribbon-card-large">
+                <div class="help-ribbon"><span>Help</span></div>
+                <div class="title">
+                    Adding packs
+                </div>
+                <infobox logo="girl">
+                    Each course consists of a number of packs. You can use
+                    these to keep similar things together or have all cards
+                    that you want to learn by a certain date. Unless you
+                    set due dates for your cards, they are
+                    introduced in the order of your packs. It is useful to
+                    keep simple things in your first packs and the more
+                    difficult ones for later.
+                </infobox>
+            </div>
+        </div>
+
+
+        <div class="info-card-large">
             <div class="title">
-                Editing a course
-            </div>
-            <infobox logo="boy">
-                You can
-                change the settings for your course and the defaults for
-                new cards on this screen. The language settings are used
-                when the Rememberators read questions and answers out loud.
-                Use the <i class="glyphicon glyphicon-th"></i> icon to get
-                to a searchable all card overview page and the
-                <i class="glyphicon glyphicon-trash"></i> icon to delete
-                this course.
+                {{course.name}}
 
-            </infobox>
-        </div>
-    </div>
+                <div class="pull-right">
 
 
-    <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="ribbon-card">
-            <div class="help-ribbon"><span>Help</span></div>
-            <div class="title">
-                Adding packs
-            </div>
-            <infobox logo="girl">
-                Each course consists of a number of packs. You can use
-                these to keep similar things together or have all cards
-                that you want to learn by a certain date. Unless you
-                set due dates for your cards, they are
-                introduced in the order of your packs. It is useful to
-                keep simple things in your first packs and the more
-                difficult ones for later.
-            </infobox>
-        </div>
-    </div>
+                    <a href="#!/courses/{{course._id}}/cards"><i class="glyphicon glyphicon-th"></i></a>
 
+                    <a href="" data-ng-click="areYouSureToDeleteCourse(course)"><i
+                            class="glyphicon glyphicon-trash"></i></a>
 
-    <div class="info-card">
-        <div class="title">
-            {{course.name}}
+                </div>
 
-            <div class="pull-right">
-
-
-                <a href="#!/courses/{{course._id}}/cards"><i class="glyphicon glyphicon-th"></i></a>
-
-                <a href="" data-ng-click="areYouSureToDeleteCourse(course)"><i
-                        class="glyphicon glyphicon-trash"></i></a>
 
             </div>
 
 
-        </div>
-
-        <div class="flashcard-section">
-
-            <div class="row">
-                <div class="col-xs-6 dashboard-col">
+            <div class="two-column-section top-section">
+                <div class="column">
                     <div class="field-label">Title</div>
-                    <div class="font-medium">
+                    <div>
                         <input type="text"
                                data-ng-model="course.name"
                                class="form-control "
@@ -100,9 +97,9 @@
                     </div>
                 </div>
 
-                <div class="col-xs-6 dashboard-col">
+                <div class="column">
                     <div class="field-label">Description</div>
-                    <div class="font-medium">
+                    <div>
                         <input type="text"
                                data-ng-model="course.description"
                                class="form-control "
@@ -112,10 +109,10 @@
                 </div>
             </div>
 
-            <div class="row">
-                <div class="col-xs-6 dashboard-col">
+            <div class="two-column-section">
+                <div class="column">
                     <div class="field-label">Front</div>
-                    <div class="font-medium">
+                    <div>
                         <input type="text"
                                data-ng-model="course.front"
                                class="form-control "
@@ -124,9 +121,9 @@
                     </div>
                 </div>
 
-                <div class="col-xs-6 dashboard-col">
+                <div class="column">
                     <div class="field-label">Back</div>
-                    <div class="font-medium">
+                    <div>
                         <input type="text"
                                data-ng-model="course.back"
                                class="form-control "
@@ -137,10 +134,10 @@
             </div>
 
 
-            <div class="row">
-                <div class="col-xs-6 dashboard-col">
+            <div class="two-column-section">
+                <div class="column">
                     <div class="field-label">Published</div>
-                    <div class="font-medium">
+                    <div>
                         <input data-ng-model="course.published" type="radio" ng-value="true"
                                data-ng-click="update()"/> yes
                         <input style="margin-left: 10px" data-ng-model="course.published" type="radio"
@@ -149,9 +146,9 @@
                     </div>
                 </div>
 
-                <div class="col-xs-6 dashboard-col">
+                <div class="column">
                     <div class="field-label">Role</div>
-                    <div class="font-medium">
+                    <div>
                         <input data-ng-model="course.teaching" type="radio" ng-value="true"
                                data-ng-click="update()"/> Teacher
                         <input style="margin-left: 10px" data-ng-model="course.teaching" type="radio"
@@ -163,63 +160,62 @@
 
 
         </div>
-    </div>
 
-    <div class="info-card">
+        <div class="info-card-large">
 
-        <div class="title">
-            New card default settings
-        </div>
+            <div class="title">
+                New card default settings
+            </div>
 
-        <div class="flashcard-section">
+            <div class="two-column-section top-section">
 
-            <div class="row">
-                <div class="col-xs-4">
+
+                <div class="column">
 
 
                     <div class="field-label">
                         Language Front
                     </div>
-                    <div class="field-data">
-
-                        <div class="btn-group right-padded-l nowrap">
 
 
-                            <button type="button" class="btn btn-default standard-dropdown-width"
-                                    data-ng-if="course.cardDefaults.languageFront">
-                                {{course.cardDefaults.languageFront.name}}
-                            </button>
-                            <button type="button" class="btn btn-default standard-dropdown-width"
-                                    data-ng-if="!course.cardDefaults.languageFront">
-                                {{languages[0].name}}
-                            </button>
-                            <button type="button" class="btn btn-default dropdown-toggle">
-                                <span class="caret"></span>
-                                <span class="sr-only">Split button!</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
-                                    <a>{{lang.name}}</a>
-                                </li>
-                            </ul>
+                    <div class="btn-group">
 
-                        </div>
+
+                        <button type="button" class="btn btn-default"
+                                data-ng-if="course.cardDefaults.languageFront">
+                            {{course.cardDefaults.languageFront.name}}
+                        </button>
+                        <button type="button" class="btn btn-default"
+                                data-ng-if="!course.cardDefaults.languageFront">
+                            {{languages[0].name}}
+                        </button>
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
+                                <a>{{lang.name}}</a>
+                            </li>
+                        </ul>
+
                     </div>
+
                 </div>
 
 
-                <div class="col-xs-4">
+                <div class="column">
 
                     <div class="field-label">
                         Language Back
                     </div>
 
                     <div class="btn-group">
-                        <button type="button" class="btn btn-default standard-dropdown-width"
+                        <button type="button" class="btn btn-default"
                                 data-ng-if="course.cardDefaults.languageBack">
                             {{course.cardDefaults.languageBack.name }}
                         </button>
-                        <button type="button" class="btn btn-default standard-dropdown-width"
+                        <button type="button" class="btn btn-default"
                                 data-ng-if="!course.cardDefaults.languageBack">
                             {{languages[0].name }}
                         </button>
@@ -236,9 +232,11 @@
                     </div>
 
                 </div>
+            </div>
 
-                <div class="col-xs-4">
+            <div class="two-column-section">
 
+                <div class="column">
                     <div class="field-label">
                         Checks
                     </div>
@@ -258,18 +256,24 @@
                         </ul>
 
                     </div>
-
                 </div>
+
             </div>
+
         </div>
 
 
-        <div class="row">
-            <div class="col-xs-4">
-                <div class="flashcard-section">
+        <div class="info-card-large">
 
+            <div class="title">New card default modes</div>
+            <div class="two-column-section top-section">
+                <div class="column">
 
-                    <div class="field-data">
+                    <div class="field-label">
+                        Forward Mode
+                    </div>
+
+                    <div class="field-option">
                         <a href="" data-ng-click="toggleMode('forward')"
                            data-ng-if="course.cardDefaults.forward.enabled"><i
                                 class="glyphicon glyphicon-ok-circle"></i></a>
@@ -277,11 +281,12 @@
                            data-ng-if="!course.cardDefaults.forward.enabled"><i
                                 class="glyphicon glyphicon-off"></i></a>
 
-                        <span class="field-label" ng-class="{'text-muted': !course.cardDefaults.forward.enabled}">Forward Mode</span>
+                    <span class="field-label"
+                          ng-class="{'text-muted': !course.cardDefaults.forward.enabled}">Enabled</span>
                     </div>
 
 
-                    <div class="field-data" ng-if="course.cardDefaults.forward.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.forward.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('forward', 'readFront')"
@@ -294,7 +299,7 @@
                     </div>
 
 
-                    <div class="field-data" ng-if="course.cardDefaults.forward.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.forward.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('forward', 'readBack')"
@@ -306,7 +311,7 @@
                         <span ng-class="{'text-muted': !course.cardDefaults.forward.readBack}">Read Answers</span>
                     </div>
 
-                    <div class="field-data" ng-if="course.cardDefaults.forward.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.forward.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('forward', 'speechRecognition')"
@@ -318,7 +323,7 @@
                         <span ng-class="{'text-muted': !course.cardDefaults.forward.speechRecognition}">Speech Recognition</span>
                     </div>
 
-                    <div class="field-data" ng-if="course.cardDefaults.forward.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.forward.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('forward', 'timed')"
@@ -341,16 +346,14 @@
                         </div>
                     </div>
 
-
                 </div>
-            </div>
 
 
-            <div class="col-xs-4">
-                <div class="flashcard-section">
+                <div class="column">
 
+                    <div class="field-label">Reverse mode</div>
 
-                    <div class="field-data">
+                    <div class="field-option">
                         <a href="" data-ng-click="toggleMode('reverse')"
                            data-ng-if="course.cardDefaults.reverse.enabled"><i
                                 class="glyphicon glyphicon-ok-circle"></i></a>
@@ -358,11 +361,12 @@
                            data-ng-if="!course.cardDefaults.reverse.enabled"><i
                                 class="glyphicon glyphicon-off"></i></a>
 
-                        <span class="field-label" ng-class="{'text-muted': !course.cardDefaults.reverse.enabled}">Reverse Mode</span>
+                    <span class="field-label"
+                          ng-class="{'text-muted': !course.cardDefaults.reverse.enabled}">Enabled</span>
                     </div>
 
 
-                    <div class="field-data" ng-if="course.cardDefaults.reverse.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.reverse.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('reverse', 'readFront')"
@@ -375,7 +379,7 @@
                     </div>
 
 
-                    <div class="field-data" ng-if="course.cardDefaults.reverse.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.reverse.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('reverse', 'readBack')"
@@ -387,7 +391,7 @@
                         <span ng-class="{'text-muted': !course.cardDefaults.reverse.readBack}">Read Answers</span>
                     </div>
 
-                    <div class="field-data" ng-if="course.cardDefaults.reverse.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.reverse.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('reverse', 'speechRecognition')"
@@ -399,7 +403,7 @@
                         <span ng-class="{'text-muted': !course.cardDefaults.reverse.speechRecognition}">Speech Recognition</span>
                     </div>
 
-                    <div class="field-data" ng-if="course.cardDefaults.reverse.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.reverse.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('reverse', 'timed')"
@@ -424,14 +428,19 @@
 
 
                 </div>
+
+
             </div>
 
 
-            <div class="col-xs-4">
-                <div class="flashcard-section">
+            <div class="two-column-section">
 
 
-                    <div class="field-data">
+                <div class="column">
+
+                    <div class="field-label">Image mode</div>
+
+                    <div class="field-option">
                         <a href="" data-ng-click="toggleMode('images')"
                            data-ng-if="course.cardDefaults.images.enabled"><i
                                 class="glyphicon glyphicon-ok-circle"></i></a>
@@ -439,11 +448,12 @@
                            data-ng-if="!course.cardDefaults.images.enabled"><i
                                 class="glyphicon glyphicon-off"></i></a>
 
-                        <span class="field-label" ng-class="{'text-muted': !course.cardDefaults.images.enabled}">Images Mode</span>
+                    <span class="field-label"
+                          ng-class="{'text-muted': !course.cardDefaults.images.enabled}">Images Mode</span>
                     </div>
 
 
-                    <div class="field-data" ng-if="course.cardDefaults.images.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.images.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('images', 'readFront')"
@@ -456,7 +466,7 @@
                     </div>
 
 
-                    <div class="field-data" ng-if="course.cardDefaults.images.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.images.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('images', 'readBack')"
@@ -468,7 +478,7 @@
                         <span ng-class="{'text-muted': !course.cardDefaults.images.readBack}">Read Answers</span>
                     </div>
 
-                    <div class="field-data" ng-if="course.cardDefaults.images.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.images.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('images', 'speechRecognition')"
@@ -480,7 +490,7 @@
                         <span ng-class="{'text-muted': !course.cardDefaults.images.speechRecognition}">Speech Recognition</span>
                     </div>
 
-                    <div class="field-data" ng-if="course.cardDefaults.images.enabled">
+                    <div class="field-option" ng-if="course.cardDefaults.images.enabled">
 
 
                         <a href="" data-ng-click="toggleSetting('images', 'timed')"
@@ -507,120 +517,120 @@
                 </div>
             </div>
         </div>
-
-
-        <div class="row" style="position: absolute; bottom: 15px; left: 42%; text-align: center">
-            <button class="btn btn-rememberators" data-ng-click="updateSettings()">
-                Change all cards
-            </button>
-        </div>
     </div>
+    <!--<div class="row" style="position: absolute; bottom: 15px; left: 42%; text-align: center">-->
+    <!--<button class="btn btn-rememberators" data-ng-click="updateSettings()">-->
+    <!--Change all cards-->
+    <!--</button>-->
+    <!--</div>-->
 
 
-    <div data-ng-repeat="pack in course.packs"
-         data-ng-controller="PacksController" data-ng-init="findById(pack)">
+    <div class="page-section">
+
+        <div data-ng-repeat="pack in course.packs"
+             data-ng-controller="PacksController" data-ng-init="findById(pack)">
 
 
-        <div class="half-info-card font-large">
-            <div class="title">
-                {{pack.name}}
+            <div class="info-card-small">
+                <div class="title">
+                    {{pack.name}}
 
-                <div class="pull-right">
-
-
-                    <a href="#!/packs/{{pack._id}}"><i class="glyphicon glyphicon-edit"></i></a>
-
-                    <a href="" data-ng-click="areYouSureToDeletePack(pack)"><i
-                            class="glyphicon glyphicon-trash"></i></a>
-
-                </div>
+                    <div class="pull-right">
 
 
-            </div>
+                        <a href="#!/packs/{{pack._id}}"><i class="glyphicon glyphicon-edit"></i></a>
 
-            <div class="flashcard-section">
+                        <a href="" data-ng-click="areYouSureToDeletePack(pack)"><i
+                                class="glyphicon glyphicon-trash"></i></a>
 
-                <div class="col-xs-6 dashboard-col">
-                    <div class="field-label">Title</div>
-                    <div class="font-medium">
-                        {{pack.name}}
                     </div>
+
+
                 </div>
 
-                <div class="col-xs-6 dashboard-col">
-                    <div data-ng-if="pack.cards.length === 0">
-                        <div class="field-label-danger">Cards</div>
-                        <div class="font-medium danger">
-                            {{pack.cards.length}}
+                <div class="two-column-section">
+
+                    <div class="column">
+                        <div class="field-label">Title</div>
+                        <div class="field-data">
+                            {{pack.name}}
                         </div>
                     </div>
 
-                    <div data-ng-if="pack.cards.length > 0">
-                        <div class="field-label">Cards</div>
-                        <div class="font-medium">
-                            {{pack.cards.length}}
+                    <div class="column">
+                        <div data-ng-if="pack.cards.length === 0">
+                            <div class="field-label-danger">Cards</div>
+                            <div class="field-data danger">
+                                {{pack.cards.length}}
+                            </div>
+                        </div>
+
+                        <div data-ng-if="pack.cards.length > 0">
+                            <div class="field-label">Cards</div>
+                            <div class="field-data">
+                                {{pack.cards.length}}
+                            </div>
+                        </div>
+
+
+                    </div>
+                </div>
+                <div class="two-column-section">
+
+                    <div class="column">
+                        <div class="field-label">Created</div>
+                        <div class="field-data">
+                            {{pack.created | date:'shortDate'}}
+                        </div>
+                    </div>
+
+                    <div class="column" data-ng-if="pack.updated">
+                        <div class="field-label">Updated</div>
+                        <div class="field-data">
+                            {{pack.updated | date:'shortDate'}}
+                        </div>
+                    </div>
+
+                    <div class="column" data-ng-if="!pack.updated">
+                        <div class="field-label">Updated</div>
+                        <div class="field-data">
+                            {{pack.created | date:'shortDate'}}
                         </div>
                     </div>
 
 
                 </div>
-
-
-                <div class="col-xs-6 dashboard-col">
-                    <div class="field-label">Created</div>
-                    <div class="font-medium">
-                        {{pack.created | date:'shortDate'}}
-                    </div>
-                </div>
-
-                <div class="col-xs-6 dashboard-col" data-ng-if="pack.updated">
-                    <div class="field-label">Updated</div>
-                    <div class="font-medium">
-                        {{pack.updated | date:'shortDate'}}
-                    </div>
-                </div>
-
-                <div class="col-xs-6 dashboard-col" data-ng-if="!pack.updated">
-                    <div class="field-label">Updated</div>
-                    <div class="font-medium">
-                        {{pack.created | date:'shortDate'}}
-                    </div>
-                </div>
-
-
             </div>
+
+        </div>
+
+
+        <div class="action-postit">
+
+            <form data-ng-submit="addPackToCourse()" validate>
+
+                <div class="title">
+
+
+                    <div class="pull-right">
+
+
+                        <a href="" data-ng-click="addPackToCourse()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+
+
+                    </div>
+                    Add pack <input type="text" data-ng-model="newpack.name"
+                                    id="firstName" class="form-control focus"
+                                    placeholder="Name">
+
+
+                </div>
+
+            </form>
         </div>
 
     </div>
-
-
-    <div class="font-large info-card-header">
-
-        <form data-ng-submit="addPackToCourse()" validate>
-
-            <div class="title">
-
-
-                <div class="pull-right">
-
-
-                    <a href="" data-ng-click="addPackToCourse()"><i
-                            class="glyphicon glyphicon-plus-sign"></i></a>
-
-
-                </div>
-                Add pack <input type="text" data-ng-model="newpack.name"
-                                id="firstName" class="form-control focus"
-                                placeholder="Name">
-
-
-            </div>
-
-
-        </form>
-
-    </div>
-
 
     <div class="rememberators-footer col-xs-12">rememberators.com</div>
 

@@ -372,6 +372,7 @@ exports.delete = function (req, res) {
 exports.list = function (req, res) {
 
 
+
     if (req.query.teacher) {
 
         Schoolclass.find({'teachers': req.query.teacher}).populate('students', 'displayName').populate('courses').exec(function (err, schoolclasses) {
@@ -423,7 +424,8 @@ exports.list = function (req, res) {
  * Schoolclass middleware
  */
 exports.schoolclassByID = function (req, res, next, id) {
-    Schoolclass.findById(id).populate('user', 'displayName').populate('teachers', 'displayName').populate('students', 'displayName').exec(function (err, schoolclass) {
+
+    Schoolclass.findById(id).populate('user', 'displayName').populate('teachers', 'displayName').populate('students', 'displayName').populate('school', 'name').exec(function (err, schoolclass) {
         if (err) return next(err);
         if (!schoolclass) return next(new Error('Failed to load Schoolclass ' + id));
         req.schoolclass = schoolclass;

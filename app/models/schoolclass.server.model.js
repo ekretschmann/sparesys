@@ -44,7 +44,8 @@ var SchoolclassSchema = new Schema({
         ref: 'Course'
     }],
     school: {
-        type: Schema.ObjectId
+        type: Schema.ObjectId,
+        ref: 'School'
     }
 });
 

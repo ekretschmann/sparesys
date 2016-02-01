@@ -78,108 +78,117 @@
             </div>
 
 
-            <div class="section">
-                <div class="field-label">
-                    Courses
+            <div class="three-column-section top-section">
+
+                <div class="column">
+                    <div class="field-label">
+                        School
+                    </div>
+                    <div class="field-data">
+                        {{schoolclass.school.name}}
+                    </div>
                 </div>
 
+                <div class="column">
+                    <div class="field-label">
+                        Courses
+                    </div>
 
-                <div class="field-data" data-ng-if="schoolclass.courses.length === 0">
-                    none
-                </div>
+
+                    <div class="field-data" data-ng-if="schoolclass.courses.length === 0">
+                        none
+                    </div>
 
 
-
-                <div data-ng-if="schoolclass.courses.length > 0">
-                    <div class="row">
-                        <div class="col-xs-4"
-                             data-ng-repeat="c in schoolclass.courses" data-ng-if="$index%3===0">
-                            <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
-                                <a href="" data-ng-click="removeCourseFromClass(course)"><i
-                                        class="glyphicon glyphicon-minus-sign"></i></a>
-                                <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
+                    <div data-ng-if="schoolclass.courses.length > 0">
+                        <div class="row">
+                            <div class="col-xs-4"
+                                 data-ng-repeat="c in schoolclass.courses" data-ng-if="$index%3===0">
+                                <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
+                                    <a href="" data-ng-click="removeCourseFromClass(course)"><i
+                                            class="glyphicon glyphicon-minus-sign"></i></a>
+                                    <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-4"
-                             data-ng-repeat="c in schoolclass.courses" data-ng-if="$index%3===1">
-                            <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
-                                <a href="" data-ng-click="removeCourseFromClass(course)"><i
-                                        class="glyphicon glyphicon-minus-sign"></i></a>
-                                <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
+                            <div class="col-xs-4"
+                                 data-ng-repeat="c in schoolclass.courses" data-ng-if="$index%3===1">
+                                <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
+                                    <a href="" data-ng-click="removeCourseFromClass(course)"><i
+                                            class="glyphicon glyphicon-minus-sign"></i></a>
+                                    <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-xs-4"
-                             data-ng-repeat="c in schoolclass.courses" data-ng-if="$index%3===2">
-                            <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
-                                <a href="" data-ng-click="removeCourseFromClass(course)"><i
-                                        class="glyphicon glyphicon-minus-sign"></i></a>
-                                <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
+                            <div class="col-xs-4"
+                                 data-ng-repeat="c in schoolclass.courses" data-ng-if="$index%3===2">
+                                <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
+                                    <a href="" data-ng-click="removeCourseFromClass(course)"><i
+                                            class="glyphicon glyphicon-minus-sign"></i></a>
+                                    <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <div data-ng-if="coursesTeacher.length > 0">
-                    <div class="row">
-                        <div class="col-xs-12">
-                            <div class="btn-group" style="padding-top: 1em" dropdown
-                                 is-open="status.isopen">
-                                <button type="button" class="btn btn-primary dropdown-toggle"
-                                        ng-disabled="disabled">
-                                    Add a Course <span class="caret"></span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-                                    <li role="menuitem" data-ng-repeat="course in coursesTeacher"><a
-                                            href=""
-                                            data-ng-click="addCourseToClass(course)">{{course.name}}</a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
+                <div class="column">
+                    <div class="btn-group" dropdown
+                         is-open="status.isopen">
+                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                ng-disabled="disabled">
+                            Add a Course <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                            <li role="menuitem" data-ng-repeat="course in coursesTeacher"><a
+                                    href=""
+                                    data-ng-click="addCourseToClass(course)">{{course.name}}</a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
             </div>
 
 
-            <div class="section">
-                <div class="three-column-headers">
-                    <div class="column field-label">
+            <div class="three-column-headers">
+                <div class="column field-label">
 
-                        Teachers
-
-
-                    </div>
-                    <div class="column field-label">
-
-                        Students
+                    Teachers
 
 
-                    </div>
                 </div>
-                <div class="three-column-data">
-                    <div class="field-data">
+                <div class="column field-label">
+
+                    Students
 
 
-                        <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}}</div>
+                </div>
+            </div>
+            <div class="three-column-data">
+                <div class="column field-data">
 
 
+                    <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}}</div>
+
+
+                </div>
+                <div class="column field-data">
+
+
+                    <div data-ng-if="schoolclass.students.length === 0">
+                        none
                     </div>
-                    <div class="field-data">
 
+                    <div data-ng-if="schoolclass.students.length > 0">
                         <div data-ng-repeat="student in schoolclass.students">{{student.displayName}}</div>
-
                     </div>
                 </div>
-
-
             </div>
 
 
-            <div class="section" data-ng-if="coursesTeacher.length === 0" >
+            <div class="section" data-ng-if="coursesTeacher.length === 0">
                 <div class="field-label danger">
-                        You are not teaching any courses. Set the teacher role on at least one course so that
-                        you
-                        can assign it to your students.
+                    You are not teaching any courses. Set the teacher role on at least one course so that
+                    you
+                    can assign it to your students.
                 </div>
             </div>
 

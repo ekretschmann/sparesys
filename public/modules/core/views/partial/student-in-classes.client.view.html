@@ -1,127 +1,123 @@
 <div data-ng-if="authentication.user.studentInSchools.length > 0">
 
 
-
-        <div
-                data-ng-repeat="schoolId in authentication.user.studentInSchools"
-                data-ng-controller="SchoolsController"
-                data-ng-init="populateSchoolForUser(schoolId, authentication.user)">
-
-
-            <div data-ng-if="schoolclasses.length>0">
-                <div class="info-card" data-ng-repeat="sc in schoolclasses">
-                    <div class="title">My class: {{sc.name}}</div>
+    <div
+            data-ng-repeat="schoolId in authentication.user.studentInSchools"
+            data-ng-controller="SchoolsController"
+            data-ng-init="populateSchoolForUser(schoolId, authentication.user)">
 
 
-                    <div class="section">
-                        <div class="row">
+        <div data-ng-if="schoolclasses.length>0">
+            <div class="info-card" data-ng-repeat="sc in schoolclasses">
+                <div class="title">My class: {{sc.name}}</div>
 
-                            <div class="col-xs-4">
-                                <div class="field-label">School</div>
-                                <div class="field-data">
-                                    {{school.name}}
-                                </div>
-                            </div>
 
-                            <div class="col-xs-4">
-                                <div class="field-label">City</div>
-                                <div class="field-data">
-                                    {{school.city}}
+                <div class="three-column-section top-section">
 
-                                </div>
-                            </div>
+                    <div class="column">
+                        <div class="field-label">School</div>
+                        <div class="field-data">
+                            {{school.name}}
+                        </div>
+                    </div>
 
-                            <div class="col-xs-4">
-                                <div class="field-label">Country</div>
-                                <div class="field-data">
-                                    {{school.country}}
-
-                                </div>
-                            </div>
+                    <div class="column">
+                        <div class="field-label">City</div>
+                        <div class="field-data">
+                            {{school.city}}
 
                         </div>
                     </div>
 
-                    <div class="section">
-                        <div class="row">
-
-                            <div class="col-xs-4">
-                                <div class="field-label">Courses</div>
-                                <div class="field-data">
-                                    <div data-ng-if="!sc.courses || sc.courses.length === 0">
-                                        no courses
-                                    </div>
-
-                                    <div data-ng-if="sc.courses && sc.courses.length > 0">
-
-                                        <div data-ng-repeat="courseId in sc.courses">
-                                            <div data-ng-controller="CoursesController"
-                                                 data-ng-init="findById(courseId)">
-                                                {{course.name}}
-
-                                            </div>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="col-xs-4">
-                                <div class="field-label">Teachers</div>
-                                <div class="field-data">
-                                    <div data-ng-if="!sc.teachers || sc.teachers.length === 0">
-                                        no teachers
-                                    </div>
-
-                                    <div data-ng-if="sc.teachers && sc.teachers.length > 0">
-                                        <div data-ng-repeat="userId in sc.teachers">
-                                            <div data-ng-controller="UsersController" data-ng-init="findById(userId)">
-                                                {{displayName}}
-
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col-xs-4">
-                                <div class="field-label">Students</div>
-                                <div class="field-data">
-                                    <div data-ng-if="sc.students && sc.students.length > 0">
-
-                                        <div data-ng-repeat="userId in sc.students">
-                                            <div data-ng-controller="UsersController" data-ng-init="findById(userId)">
-                                                {{displayName}}
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                            </div>
+                    <div class="column">
+                        <div class="field-label">Country</div>
+                        <div class="field-data">
+                            {{school.country}}
 
                         </div>
                     </div>
-
 
                 </div>
-            </div>
+
+                <div class="three-column-section">
 
 
-            <div data-ng-if="schoolclasses.length === 0">
-                <div class=" info-card ribbon-card">
+                    <div class="column">
+                        <div class="field-label">Teachers</div>
+                        <div class="field-data">
+                            <div data-ng-if="!sc.teachers || sc.teachers.length === 0">
+                                no teachers
+                            </div>
 
+                            <div data-ng-if="sc.teachers && sc.teachers.length > 0">
+                                <div data-ng-repeat="userId in sc.teachers">
+                                    <div data-ng-controller="UsersController" data-ng-init="findById(userId)">
+                                        {{displayName}}
 
-                    <div class="learning-ribbon"><span>Learning</span></div>
+                                    </div>
+                                </div>
+                            </div>
 
-                    <div class="title">{{school.name}}</div>
-
-                    <div class="flashcard-section ">
-                    The School Administrator has not assigned you to your class
                         </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="field-label">Students</div>
+                        <div class="field-data">
+                            <div data-ng-if="sc.students && sc.students.length > 0">
+
+                                <div data-ng-repeat="userId in sc.students">
+                                    <div data-ng-controller="UsersController" data-ng-init="findById(userId)">
+                                        {{displayName}}
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+
+                <div class="section">
+                    <div class="field-label">Courses</div>
+                    <div >
+                        <div data-ng-if="!sc.courses || sc.courses.length === 0" class="field-data">
+                            no courses
+                        </div>
+
+                        <div data-ng-if="sc.courses && sc.courses.length > 0">
+
+                            <div data-ng-repeat="courseId in sc.courses" class="field-data">
+                                <div data-ng-controller="CoursesController"
+                                     data-ng-init="findById(courseId)">
+                                    {{course.name}}
+
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+        <div data-ng-if="schoolclasses.length === 0">
+            <div class=" info-card ribbon-card">
+
+
+                <div class="learning-ribbon"><span>Learning</span></div>
+
+                <div class="title">{{school.name}}</div>
+
+                <div class="flashcard-section ">
+                    The School Administrator has not assigned you to your class
                 </div>
             </div>
         </div>
+    </div>
 
 
 </div>

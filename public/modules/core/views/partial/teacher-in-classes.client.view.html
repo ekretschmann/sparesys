@@ -81,46 +81,12 @@
             <div class="three-column-section top-section">
 
 
-
                 <div class="column">
                     <div class="field-label">
                         Courses
                     </div>
 
 
-                    <div class="field-data" data-ng-if="schoolclass.courses.length === 0">
-                        none
-                    </div>
-
-
-                    <div data-ng-if="schoolclass.courses.length > 0">
-                        <div class="row">
-                            <div class="col-xs-4"
-                                 data-ng-repeat="c in schoolclass.courses" data-ng-if="$index%3===0">
-                                <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
-                                    <a href="" data-ng-click="removeCourseFromClass(course)"><i
-                                            class="glyphicon glyphicon-minus-sign"></i></a>
-                                    <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
-                                </div>
-                            </div>
-                            <div class="col-xs-4"
-                                 data-ng-repeat="c in schoolclass.courses" data-ng-if="$index%3===1">
-                                <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
-                                    <a href="" data-ng-click="removeCourseFromClass(course)"><i
-                                            class="glyphicon glyphicon-minus-sign"></i></a>
-                                    <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
-                                </div>
-                            </div>
-                            <div class="col-xs-4"
-                                 data-ng-repeat="c in schoolclass.courses" data-ng-if="$index%3===2">
-                                <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
-                                    <a href="" data-ng-click="removeCourseFromClass(course)"><i
-                                            class="glyphicon glyphicon-minus-sign"></i></a>
-                                    <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 
                 <div class="column">
@@ -136,6 +102,28 @@
                                     data-ng-click="addCourseToClass(course)">{{course.name}}</a>
                             </li>
                         </ul>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="section">
+                <div class="field-data" data-ng-if="schoolclass.courses.length === 0">
+                    none
+                </div>
+
+
+                <div data-ng-if="schoolclass.courses.length > 0">
+                    <div class="section">
+                        <div class="field-data"
+                             data-ng-repeat="c in schoolclass.courses">
+                            <div data-ng-controller="CoursesController" data-ng-init="findById(c)">
+                                <a href="" data-ng-click="removeCourseFromClass(course)"><i
+                                        class="glyphicon glyphicon-minus-sign"></i></a>
+                                <a href="/#!/courses/{{course._id}}/edit">{{course.name}}</a>
+                            </div>
+                        </div>
+
                     </div>
                 </div>
             </div>

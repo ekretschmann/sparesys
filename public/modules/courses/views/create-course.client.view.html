@@ -1,11 +1,10 @@
 <div data-ng-controller="CoursesCreateController">
 
 
-    <form data-ng-submit="create()" class="font-large" validate>
+    <form data-ng-submit="create()" validate>
 
-        <div class="col-xs-12 col-md-6 dashboard-col large-screen-only"
-             data-ng-if="authentication.user.roles.indexOf('help') > -1">
-            <div class="info-card ribbon-card">
+        <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
+            <div class="ribbon-card">
                 <div class="help-ribbon"><span>Help</span></div>
                 <div class="title">
                     Creating a new course
@@ -17,31 +16,40 @@
                     is done you will be able to add packs to your course and cards to the packs.
                 </infobox>
             </div>
-        </div>
 
-        <div class="col-xs-12 col-md-6 dashboard-col  large-screen-only "
-             data-ng-if="authentication.user.roles.indexOf('help') > -1">
-
-            <div class="info-card ribbon-card">
+            <div class="ribbon-card">
                 <div class="help-ribbon"><span>Help</span></div>
                 <div class="title">
-                    Course properties
+                    Course settings
                 </div>
                 <infobox logo="boy" position="left">
                     Rememberators can read questions and answer to the students of your course.
-                    If you want to use this, please define the languages to use. You can also define
-                    what modes your cards should be used in. Each card you create in this course will
-                    have these settings by default, but you will be able to change them later.
+                    If you want to use this, please define the languages to use. Self checks allow
+                    your user to rate their answers themselves. Computer checks will require typing
+                    an answer in.
+                </infobox>
+            </div>
+
+            <div class="ribbon-card">
+                <div class="help-ribbon"><span>Help</span></div>
+                <div class="title">
+                    Course settings
+                </div>
+                <infobox logo="guru" position="left">
+                    You can also configure
+                    what modes your cards should be used in by default. You can change these settings
+                    for each card individually later.
                 </infobox>
             </div>
         </div>
 
-        <div class="col-xs-12 col-md-6 dashboard-col ">
 
-            <div class="info-card">
-                <div class="title">
-                    New course
-                </div>
+        <div class="info-card">
+            <div class="title">
+                New course
+            </div>
+            <div class="section top-section">
+
                 <div class="flashcard-section">
                     <div class="field-label">Course Name</div>
                     <div>
@@ -52,295 +60,289 @@
                                required>
                     </div>
                 </div>
+            </div>
 
-                <div class="flashcard-section">
-                    <div class="field-label">Description</div>
+            <div class="section">
+                <div class="field-label">Description</div>
+                <div>
+                    <input type="text"
+                           data-ng-model="description"
+                           class="form-control"
+                           placeholder="Description"
+                           required>
+                </div>
+            </div>
+
+            <div class="two-column-section">
+                <div class="column">
+                    <div class="field-label">Card Front</div>
                     <div>
                         <input type="text"
-                               data-ng-model="description"
+                               data-ng-model="front"
                                class="form-control"
-                               placeholder="Description"
-                               required>
+                               placeholder="e.g. Countries">
                     </div>
                 </div>
 
-                <div class="flashcard-section">
-                    <div class="row">
-                        <div class="col-xs-6">
-                            <div class="field-label">Card Front</div>
-                            <div>
-                                <input type="text"
-                                       data-ng-model="front"
-                                       class="form-control"
-                                       placeholder="The Front of the Cards (e.g. Countries)">
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <div class="field-label">Card Back</div>
-                            <div>
-                                <input type="text"
-                                       data-ng-model="back"
-                                       class="form-control"
-                                       placeholder="The Back of the Cards (e.g. Capitals)">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
-                <div class="flashcard-section">
-                    <div class="field-label">My role</div>
+                <div class="column">
+                    <div class="field-label">Card Back</div>
                     <div>
-                        <input data-ng-model="teaching" type="radio" ng-value="true"/> Teacher
-                        <input style="margin-left: 10px" data-ng-model="teaching" type="radio" ng-value="false"/>
-                        Student
-
+                        <input type="text"
+                               data-ng-model="back"
+                               class="form-control"
+                               placeholder="e.g. Capitals">
                     </div>
                 </div>
-
-
             </div>
-        </div>
 
 
-        <div class="col-xs-12 col-md-6 dashboard-col">
-            <div class="info-card">
-                <div class="flashcard-section">
-                    <div class="col-xs-4">
+            <div class="section">
+                <div class="field-label">My role</div>
+                <div>
+                    <input data-ng-model="teaching" type="radio" ng-value="true"/> Teacher
+                    <input style="margin-left: 10px" data-ng-model="teaching" type="radio" ng-value="false"/>
+                    Student
 
-
-                        <div class="field-label">
-                            Language Front
-                        </div>
-                        <div class="field-data">
-
-                            <div class="btn-group right-padded-l nowrap">
-
-
-                                <button type="button" class="btn btn-default standard-dropdown-width">
-                                    {{languageFront.name}}
-                                </button>
-                                <button type="button" class="btn btn-default dropdown-toggle">
-                                    <span class="caret"></span>
-                                    <span class="sr-only">Split button!</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
-                                        <a>{{lang.name}}</a>
-                                    </li>
-                                </ul>
-
-                            </div>
-                        </div>
-                    </div>
-
-
-                    <div class="col-xs-4">
-
-                        <div class="field-label">
-                            Language Back
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default standard-dropdown-width">
-                                {{languageBack.name }}
-                            </button>
-                            <button type="button" class="btn btn-default dropdown-toggle">
-                                <span class="caret"></span>
-                                <span class="sr-only">Split button!</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
-                                    <a>{{lang.name}}</a>
-                                </li>
-                            </ul>
-
-                        </div>
-
-                    </div>
-
-                    <div class="col-xs-4">
-
-                        <div class="field-label">
-                            Checks
-                        </div>
-
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default standard-dropdown-width">
-                                {{check }}
-                            </button>
-                            <button type="button" class="btn btn-default dropdown-toggle">
-                                <span class="caret"></span>
-                                <span class="sr-only">Split button!</span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu">
-                                <li data-ng-repeat="check in checks" data-ng-click="setCheck(check)">
-                                    <a>{{check}}</a>
-                                </li>
-                            </ul>
-
-                        </div>
-
-                    </div>
-                </div>
-
-
-                <div class="flashcard-section">
-
-                    <div class="col-xs-4" style="margin-top: 1.5em">
-                        <div class="field-label">
-
-                            Forward
-                        </div>
-                        <div class="font-medium">
-
-                            <div>
-                                <input type="checkbox" ng-model="useForwardMode">
-                                Use Mode
-                            </div>
-
-
-                            <div ng-class="{'text-muted': !useForwardMode}">
-                                <input type="checkbox" ng-model="readQuestionsForward"
-                                       ng-disabled="!useForwardMode">
-                                Read Questions
-                            </div>
-
-                            <div ng-class="{'text-muted': !useForwardMode}">
-                                <input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">
-                                Read Answers
-                            </div>
-
-                            <div ng-class="{'text-muted': !useForwardMode}">
-                                <input type="checkbox" ng-model="timedForward" ng-disabled="!useForwardMode">
-                                Time penalty
-
-                                <div data-ng-if="timedForward && useForwardMode">
-
-                                    <input type="number"
-                                           style="display: inline; width: 40%; margin-left: 1.5em"
-
-                                           data-ng-model="limitForward"
-                                           class="form-control"
-                                            > sec
-                                </div>
-
-                            </div>
-
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4" style="margin-top: 1.5em">
-                        <div class="field-label">
-
-                            Reverse
-                        </div>
-
-                        <div class="field-data">
-
-                            <div>
-                                <input type="checkbox" ng-model="useReverseMode">
-                                Use Mode
-                            </div>
-
-
-                            <div ng-class="{'text-muted': !useReverseMode}">
-                                <input type="checkbox" ng-model="readQuestionsReverse"
-                                       ng-disabled="!useReverseMode">
-                                Read Questions
-                            </div>
-
-                            <div ng-class="{'text-muted': !useReverseMode}">
-                                <input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">
-                                Read Answers
-                            </div>
-
-                            <div ng-class="{'text-muted': !useReverseMode}">
-                                <input type="checkbox" ng-model="timedReverse" ng-disabled="!useReverseMode">
-                                Time penalty
-
-                                <div style="padding-left: 1em; padding-right: 1em" data-ng-if="timedReverse && useReverseMode">
-
-                                    <input type="number"
-                                           style="display: inline"
-
-                                           data-ng-model="limitReverse"
-                                           class="form-control"
-                                            > seconds
-                                </div>
-
-                            </div>
-
-
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4" style="margin-top: 1.5em">
-                        <div class="field-label">
-
-                            Images
-                        </div>
-                        <div class="field-data">
-
-                            <div>
-                                <input type="checkbox" ng-model="useImagesMode">
-                                Use Mode
-                            </div>
-
-
-                            <div ng-class="{'text-muted': !useImagesMode}">
-                                <input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">
-                                Read Questions
-                            </div>
-
-                            <div ng-class="{'text-muted': !useImagesMode}">
-                                <input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">
-                                Read Answers
-                            </div>
-
-                            <div ng-class="{'text-muted': !useImagesMode}">
-                                <input type="checkbox" ng-model="timedImages" ng-disabled="!useImagesMode">
-                                Time penalty
-
-                                <div style="padding-left: 1em; padding-right: 1em" data-ng-if="timedImages && useImagesMode">
-
-                                    <input type="number"
-                                           style="display: inline"
-
-                                           data-ng-model="limitImages"
-                                           class="form-control"
-                                            > seconds
-                                </div>
-
-                            </div>
-
-
-
-                        </div>
-                    </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="col-xs-12" style="text-align: center; padding-top: 2em">
-            <button ng-disabled="!name" type="button" class="btn btn-rememberators font-s"
-                    data-ng-click="createCourse()">
-                Create Course
-            </button>
+        <div class="info-card">
+
+            <div class="title">
+                Settings
+            </div>
+
+            <div class="two-column-section">
+                <div class="column">
+                    <div class="field-label">
+                        Language Front
+                    </div>
+
+                    <div class="btn-group">
+
+
+                        <button type="button" class="btn btn-default">
+                            {{languageFront.name}}
+                        </button>
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
+                                <a>{{lang.name}}</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+
+
+                <div class="column">
+                    <div class="field-label">
+                        Language Back
+                    </div>
+
+                    <div class="btn-group">
+                        <button type="button" class="btn btn-default">
+                            {{languageBack.name }}
+                        </button>
+                        <button type="button" class="btn btn-default dropdown-toggle">
+                            <span class="caret"></span>
+                            <span class="sr-only">Split button!</span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
+                                <a>{{lang.name}}</a>
+                            </li>
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+
+                <div class="field-label">
+                    Checks
+                </div>
+
+                <div class="btn-group">
+                    <button type="button" class="btn btn-default standard-dropdown-width">
+                        {{check }}
+                    </button>
+                    <button type="button" class="btn btn-default dropdown-toggle">
+                        <span class="caret"></span>
+                        <span class="sr-only">Split button!</span>
+                    </button>
+                    <ul class="dropdown-menu" role="menu">
+                        <li data-ng-repeat="check in checks" data-ng-click="setCheck(check)">
+                            <a>{{check}}</a>
+                        </li>
+                    </ul>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="info-card">
+            <div class="title">Modes</div>
+
+            <div class="two-column-section">
+                <div class="column">
+                    <div class="field-label">
+
+                        Forward
+                    </div>
+                    <div >
+                        <input type="checkbox" ng-model="useForwardMode">
+                        Use Mode
+                    </div>
+
+
+                    <div ng-class="{'text-muted': !useForwardMode}">
+                        <input type="checkbox" ng-model="readQuestionsForward"
+                               ng-disabled="!useForwardMode">
+                        Read Questions
+                    </div>
+
+                    <div ng-class="{'text-muted': !useForwardMode}">
+                        <input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">
+                        Read Answers
+                    </div>
+
+                    <div ng-class="{'text-muted': !useForwardMode}">
+                        <input type="checkbox" ng-model="timedForward" ng-disabled="!useForwardMode">
+                        Time penalty
+
+                        <div data-ng-if="timedForward && useForwardMode">
+
+                            <input type="number"
+                                   style="display: inline; width: 40%; margin-left: 1.5em"
+
+                                   data-ng-model="limitForward"
+                                   class="form-control"
+                                    > sec
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="column">
+                    <div class="field-label">
+
+                        Reverse
+                    </div>
+
+
+                    <div >
+                        <input type="checkbox" ng-model="useReverseMode">
+                        Use Mode
+                    </div>
+
+
+                    <div ng-class="{'text-muted': !useReverseMode}">
+                        <input type="checkbox" ng-model="readQuestionsReverse"
+                               ng-disabled="!useReverseMode">
+                        Read Questions
+                    </div>
+
+                    <div ng-class="{'text-muted': !useReverseMode}">
+                        <input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">
+                        Read Answers
+                    </div>
+
+                    <div ng-class="{'text-muted': !useReverseMode}">
+                        <input type="checkbox" ng-model="timedReverse" ng-disabled="!useReverseMode">
+                        Time penalty
+
+                        <div style="padding-left: 1em; padding-right: 1em"
+                             data-ng-if="timedReverse && useReverseMode">
+
+                            <input type="number"
+                                   style="display: inline"
+
+                                   data-ng-model="limitReverse"
+                                   class="form-control"
+                                    > seconds
+                        </div>
+
+                    </div>
+
+
+                </div>
+
+                <div class="two-column-section"></div>
+                <div class="column">
+                    <div class="field-label">
+
+                        Images
+                    </div>
+
+                    <div>
+                        <input type="checkbox" ng-model="useImagesMode">
+                        Use Mode
+                    </div>
+
+
+                    <div ng-class="{'text-muted': !useImagesMode}">
+                        <input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">
+                        Read Questions
+                    </div>
+
+                    <div ng-class="{'text-muted': !useImagesMode}">
+                        <input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">
+                        Read Answers
+                    </div>
+
+                    <div ng-class="{'text-muted': !useImagesMode}">
+                        <input type="checkbox" ng-model="timedImages" ng-disabled="!useImagesMode">
+                        Time penalty
+
+                        <div style="padding-left: 1em; padding-right: 1em"
+                             data-ng-if="timedImages && useImagesMode">
+
+                            <input type="number"
+                                   style="display: inline"
+
+                                   data-ng-model="limitImages"
+                                   class="form-control"
+                                    > seconds
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="action-card">
+            <div class="action-ribbon"><span>Action</span></div>
+
+            <div class="title">Create</div>
+            <div class="section" style="position: absolute; top:50%; text-align: center; width: 100%">
+                <button ng-if="name" type="button" class="btn btn-rememberators font-s"
+                        data-ng-click="createCourse()">
+                    Create Course
+                </button>
+                <div data-ng-if="!name" class="danger">
+                    Please define a course name
+                </div>
+            </div>
         </div>
 
     </form>
+
+
 </div>
 
+<!--<div class="rememberators-footer">-->
 
-</form>
-
-
-<div class="rememberators-footer col-xs-12">
-
-    rememberators.com
-</div>
-
-</div>
+<!--rememberators.com-->
+<!--</div>-->

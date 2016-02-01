@@ -6,9 +6,40 @@
   padding-top: 0.7em;
 }
 
+
+.two-column-headers {
+  .make-row(1em);
+  .column {
+    text-align: left;
+    padding: 0 0 0 0 !important;
+    .make-xs-column(6);
+  }
+}
+
+
+.two-column-data {
+  .make-row(1em);
+  .column {
+    text-align: left;
+    padding: 0 0 0 0  !important;
+    .make-xs-column(6);
+  }
+}
+
+.two-column-section {
+  .section;
+  .make-row(1em);
+  .column {
+    text-align: left;
+    padding: 0 1em 0 0 !important;
+    .make-xs-column(6);
+  }
+
+}
+
+
+
 .three-column-headers {
-  //.section;
-  //.three-column-section;
   .make-row(1em);
   .column {
     text-align: left;
@@ -19,7 +50,6 @@
 
 
 .three-column-data {
-  //.three-column-section;
   .make-row(1em);
   .column {
     text-align: left;

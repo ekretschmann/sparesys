@@ -4,7 +4,7 @@
 
 
     <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
-        <div class="ribbon-card">
+        <div class="ribbon-card-large">
 
 
             <div class="help-ribbon"><span>Help</span></div>
@@ -20,16 +20,15 @@
                         <a href="" class="nolink">
                             <i class="small glyphicon glyphicon-trash">
                             </i></a>
-                        next to each course to delete the courses you no longer need. You can
-                        edit, configure and change an existing course by clicking on the
+                        next to each course to delete courses. You can
+                        edit, configure and change existing courses by clicking on the
                         <a href="" class="nolink">
                             <i class="small glyphicon glyphicon-edit">
                             </i></a> icon.
 
-                        You can quickly edit the contents of the cards in a course by clicking
-                        on the <a href="" class="nolink">
+                        Click on the <a href="" class="nolink">
                         <i class="small glyphicon glyphicon-th">
-                        </i></a> icon.
+                        </i></a> icon to search and edit cards in a course.
                     </div>
 
 
@@ -52,7 +51,7 @@
 
     </div>
     <div data-ng-repeat="course in courses">
-        <div class="info-card">
+        <div class="info-card-large">
             <div class="title">
                 {{course.name}}
                 <div class="pull-right" data-ng-if="!course.supervised">
@@ -76,10 +75,10 @@
             </div>
 
 
-            <div class="col-xs-6">
-                <div class="flashcard-section">
+            <div class="two-column-section top-section">
+                <div class="column">
                     <div class="field-label">Description</div>
-                    <div class="font-medium">
+                    <div class="field-data">
                         <div data-ng-if="course.description">
                             {{course.description}}
                         </div>
@@ -89,12 +88,10 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-xs-6">
-                <div class="flashcard-section">
+                <div class="column">
                     <div class="field-label">Published</div>
-                    <div class="font-medium">
+                    <div class="field-data">
                         {{course.published}}
 
                     </div>
@@ -102,28 +99,29 @@
             </div>
 
 
-            <div class="col-xs-6">
-                <div class="flashcard-section">
+            <div class="two-column-section">
+                <div class="column">
                     <div class="field-label">Front</div>
                     <div class="field-data">
                         {{course.front}}
                     </div>
                 </div>
-            </div>
 
-            <div class="col-xs-6">
-                <div class="flashcard-section">
-                    <div class="field-label">Back</div>
-                    <div class="font-medium">
-                        {{course.back}}
+
+                <div class="column">
+                    <div class="flashcard-section">
+                        <div class="field-label">Back</div>
+                        <div class="field-data">
+                            {{course.back}}
+                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-xs-6">
-                <div class="flashcard-section">
+            <div class="two-column-section">
+                <div class="column">
                     <div class="field-label">Language Front</div>
-                    <div class="font-medium">
+                    <div class="field-data">
                         <div data-ng-if="course.cardDefaults.languageFront">
                             {{course.cardDefaults.languageFront.name}}
                         </div>
@@ -132,12 +130,11 @@
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-xs-6">
-                <div class="flashcard-section">
+
+                <div class="column">
                     <div class="field-label">Language Back</div>
-                    <div class="font-medium">
+                    <div class="field-data">
                         <div data-ng-if="course.cardDefaults.languageBack">
                             {{course.cardDefaults.languageBack.name}}
                         </div>
@@ -149,20 +146,18 @@
             </div>
 
 
-            <div class="col-xs-6">
-                <div class="flashcard-section">
+            <div class="two-column-section">
+                <div class="column">
                     <div class="field-label">My Role</div>
-                    <div class="font-medium">
+                    <div class="field-data">
                         <div data-ng-if="course.teaching">Teacher</div>
                         <div data-ng-if="!course.teaching">Student</div>
                     </div>
                 </div>
-            </div>
 
-            <div class="col-xs-6">
-                <div class="flashcard-section">
+                <div class="column">
                     <div class="field-label">Supervision</div>
-                    <div class="font-medium">
+                    <div class="field-data">
                         <div data-ng-if="course.supervised">This course is supervised</div>
                         <div data-ng-if="!course.supervised">You are managing this course yourself</div>
 
@@ -177,7 +172,7 @@
     </div>
 
 
-    <div class="rememberators-footer col-xs-12">
+    <div class="rememberators-footer">
 
         rememberators.com
     </div>

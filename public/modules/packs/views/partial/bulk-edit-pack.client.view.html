@@ -1,11 +1,11 @@
-<div class="row" style="margin-top: 0.5em">
+<div>
 
 
-    <div class="col-xs-4">
-        <div class="btn-group right-padded-l nowrap">
+    <div class="section">
+        <div class="btn-group">
 
 
-            <button type="button" class="btn btn-default standard-dropdown-width"
+            <button type="button" class="btn btn-default"
                     data-ng-if="!card.languageFront">
                 {{selectedSetting}}
             </button>
@@ -22,239 +22,222 @@
         </div>
     </div>
 
-    <div class="col-xs-5">
-        <div data-ng-if="selectedSetting === 'Language Front'">
-            <div class="font-medium">
-
-                <div class="btn-group right-padded-l nowrap">
+    <div class="section" data-ng-if="selectedSetting === 'Language Front'">
 
 
-                    <button type="button" class="btn btn-default standard-dropdown-width"
-                            data-ng-if="cardOptions.languageFront">
-                        {{cardOptions.languageFront.name}}
-                    </button>
-                    <button type="button" class="btn btn-default standard-dropdown-width"
-                            data-ng-if="!cardOptions.languageFront">
-                        {{languages[0].name}}
-                    </button>
-                    <button type="button" class="btn btn-default dropdown-toggle">
-                        <span class="caret"></span>
-                        <span class="sr-only">Split button!</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
-                            <a>{{lang.name}}</a>
+        <div class="btn-group">
 
-                        </li>
-                    </ul>
-                </div>
+
+            <button type="button" class="btn btn-default"
+                    data-ng-if="cardOptions.languageFront">
+                {{cardOptions.languageFront.name}}
+            </button>
+            <button type="button" class="btn btn-default"
+                    data-ng-if="!cardOptions.languageFront">
+                {{languages[0].name}}
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="lang in languages" data-ng-click="setLanguageFront(lang)">
+                    <a>{{lang.name}}</a>
+
+                </li>
+            </ul>
+        </div>
+
+    </div>
+
+    <div class="section" data-ng-if="selectedSetting === 'Language Back'">
+
+        <div class="btn-group">
+
+
+            <button type="button" class="btn btn-default"
+                    data-ng-if="cardOptions.languageBack">
+                {{cardOptions.languageBack.name}}
+            </button>
+            <button type="button" class="btn btn-default"
+                    data-ng-if="!cardOptions.languageBack">
+                {{languages[0].name}}
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
+                    <a>{{lang.name}}</a>
+
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" data-ng-if="selectedSetting === 'Priority'">
+
+        <div class="btn-group">
+
+
+            <button type="button" class="btn btn-default"
+                    data-ng-if="cardOptions.priority">
+                {{cardOptions.priority}}
+            </button>
+            <button type="button" class="btn btn-default"
+                    data-ng-if="!cardOptions.priority">
+                {{priorities[2]}}
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="p in priorities" data-ng-click="setPriority(p)">
+                    <a>{{p}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" data-ng-if="selectedSetting === 'Checks'">
+        <div class="btn-group">
+
+
+            <button type="button" class="btn btn-default"
+                    data-ng-if="cardOptions.checks">
+                {{cardOptions.checks}}
+            </button>
+            <button type="button" class="btn btn-default"
+                    data-ng-if="!cardOptions.checks">
+                {{checks[0]}}
+            </button>
+            <button type="button" class="btn btn-default dropdown-toggle">
+                <span class="caret"></span>
+                <span class="sr-only">Split button!</span>
+            </button>
+            <ul class="dropdown-menu" role="menu">
+                <li data-ng-repeat="c in checks" data-ng-click="setChecks(c)">
+                    <a>{{c}}</a>
+                </li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section" data-ng-if="selectedSetting === 'Start Date'">
+
+        <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   datepicker-popup="{{calendar.format}}"
+                   is-open="calendar.openStartDateCalendar"
+                   min-date="minDate"
+                   ng-required="false"
+                   close-text="Close"
+                   ng-change="setStartDate()"
+                   data-ng-model="cardOptions.startDate"/>
+
+
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default"
+                        ng-click="openStartDateCalendar($event)">
+                    <i class="glyphicon glyphicon-calendar"></i></button>
             </div>
         </div>
 
-        <div data-ng-if="selectedSetting === 'Language Back'">
-            <div class="font-medium">
+    </div>
 
-                <div class="btn-group right-padded-l nowrap">
+    <div class="section" data-ng-if="selectedSetting === 'Due Date'">
 
 
-                    <button type="button" class="btn btn-default standard-dropdown-width"
-                            data-ng-if="cardOptions.languageBack">
-                        {{cardOptions.languageBack.name}}
-                    </button>
-                    <button type="button" class="btn btn-default standard-dropdown-width"
-                            data-ng-if="!cardOptions.languageBack">
-                        {{languages[0].name}}
-                    </button>
-                    <button type="button" class="btn btn-default dropdown-toggle">
-                        <span class="caret"></span>
-                        <span class="sr-only">Split button!</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="lang in languages" data-ng-click="setLanguageBack(lang)">
-                            <a>{{lang.name}}</a>
+        <div class="input-group">
+            <input type="text"
+                   class="form-control"
+                   datepicker-popup="{{calendar.format}}"
+                   is-open="calendar.openDueDateCalendar"
+                   min-date="minDate"
+                   ng-required="false"
+                   close-text="Close"
+                   data-ng-model="cardOptions.dueDate"/>
 
-                        </li>
-                    </ul>
-                </div>
+
+            <div class="input-group-btn">
+                <button type="button" class="btn btn-default"
+                        ng-click="openDueDateCalendar($event)">
+                    <i class="glyphicon glyphicon-calendar"></i></button>
             </div>
         </div>
-
-        <div data-ng-if="selectedSetting === 'Priority'">
-            <div class="font-medium">
-
-                <div class="btn-group right-padded-l nowrap">
+    </div>
 
 
-                    <button type="button" class="btn btn-default standard-dropdown-width"
-                            data-ng-if="cardOptions.priority">
-                        {{cardOptions.priority}}
-                    </button>
-                    <button type="button" class="btn btn-default standard-dropdown-width"
-                            data-ng-if="!cardOptions.priority">
-                        {{priorities[2]}}
-                    </button>
-                    <button type="button" class="btn btn-default dropdown-toggle">
-                        <span class="caret"></span>
-                        <span class="sr-only">Split button!</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="p in priorities" data-ng-click="setPriority(p)">
-                            <a>{{p}}</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
+    <div class="section" data-ng-if="selectedSetting === 'Forward mode'">
+        <div ng-class="{'text-muted': !cardOptions.changeForwardEnabled}">
+            <a href=""
+               data-ng-click="toggleForward()"
+               data-ng-if="cardOptions.changeForwardEnabled">
+                <i class="glyphicon glyphicon-ok-circle"></i>
+            </a>
+            <a href=""
+               data-ng-click="toggleForward()"
+               data-ng-if="!cardOptions.changeForwardEnabled">
+                <i class="glyphicon glyphicon-off"></i>
+            </a>
+            Enabled
         </div>
 
-        <div data-ng-if="selectedSetting === 'Checks'">
-            <div class="font-medium">
-                <div class="btn-group right-padded-l nowrap">
-
-
-                    <button type="button" class="btn btn-default standard-dropdown-width"
-                            data-ng-if="cardOptions.checks">
-                        {{cardOptions.checks}}
-                    </button>
-                    <button type="button" class="btn btn-default standard-dropdown-width"
-                            data-ng-if="!cardOptions.checks">
-                        {{checks[0]}}
-                    </button>
-                    <button type="button" class="btn btn-default dropdown-toggle">
-                        <span class="caret"></span>
-                        <span class="sr-only">Split button!</span>
-                    </button>
-                    <ul class="dropdown-menu" role="menu">
-                        <li data-ng-repeat="c in checks" data-ng-click="setChecks(c)">
-                            <a>{{c}}</a>
-                        </li>
-                    </ul>
-                </div>
+        <div data-ng-if="cardOptions.changeForwardEnabled">
+            <div ng-class="{'text-muted': !cardOptions.forwardReadFront}">
+                <a href=""
+                   data-ng-click="toggleForwardReadFront()"
+                   data-ng-if="cardOptions.forwardReadFront">
+                    <i class="glyphicon glyphicon-ok-circle"></i>
+                </a>
+                <a href=""
+                   data-ng-click="toggleForwardReadFront()"
+                   data-ng-if="!cardOptions.forwardReadFront">
+                    <i class="glyphicon glyphicon-off"></i>
+                </a>
+                Read Front
             </div>
-        </div>
-
-        <div data-ng-if="selectedSetting === 'Start Date'">
-            <div class="font-medium">
-
-
-                <div class="input-group">
-                    <input type="text"
-                           class="form-control"
-                           datepicker-popup="{{calendar.format}}"
-                           is-open="calendar.openStartDateCalendar"
-                           min-date="minDate"
-                           ng-required="false"
-                           close-text="Close"
-                           ng-change="setStartDate()"
-                           data-ng-model="cardOptions.startDate"/>
-
-
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default"
-                                ng-click="openStartDateCalendar($event)">
-                            <i class="glyphicon glyphicon-calendar"></i></button>
-                    </div>
-                </div>
-
-
+            <div ng-class="{'text-muted': !cardOptions.forwardReadBack}">
+                <a href=""
+                   data-ng-click="toggleForwardReadBack()"
+                   data-ng-if="cardOptions.forwardReadBack">
+                    <i class="glyphicon glyphicon-ok-circle"></i>
+                </a>
+                <a href=""
+                   data-ng-click="toggleForwardReadBack()"
+                   data-ng-if="!cardOptions.forwardReadBack">
+                    <i class="glyphicon glyphicon-off"></i>
+                </a>
+                Read Back
             </div>
-        </div>
-
-        <div data-ng-if="selectedSetting === 'Due Date'">
-            <div class="font-medium">
-
-
-                <div class="input-group">
-                    <input type="text"
-                           class="form-control"
-                           datepicker-popup="{{calendar.format}}"
-                           is-open="calendar.openDueDateCalendar"
-                           min-date="minDate"
-                           ng-required="false"
-                           close-text="Close"
-                           data-ng-model="cardOptions.dueDate"/>
-
-
-                    <div class="input-group-btn">
-                        <button type="button" class="btn btn-default"
-                                ng-click="openDueDateCalendar($event)">
-                            <i class="glyphicon glyphicon-calendar"></i></button>
-                    </div>
-                </div>
-
-
+            <div ng-class="{'text-muted': !cardOptions.forwardSpeechRecognition}">
+                <a href=""
+                   data-ng-click="toggleForwardSpeechRecognition()"
+                   data-ng-if="cardOptions.forwardSpeechRecognition">
+                    <i class="glyphicon glyphicon-ok-circle"></i>
+                </a>
+                <a href=""
+                   data-ng-click="toggleForwardSpeechRecognition()"
+                   data-ng-if="!cardOptions.forwardSpeechRecognition">
+                    <i class="glyphicon glyphicon-off"></i>
+                </a>
+                Speech Recognition
             </div>
-        </div>
-
-
-        <div data-ng-if="selectedSetting === 'Forward mode'">
-            <div class="font-medium">
-
-                <div ng-class="{'text-muted': !cardOptions.changeForwardEnabled}">
-                    <a href=""
-                       data-ng-click="toggleForward()"
-                       data-ng-if="cardOptions.changeForwardEnabled">
-                        <i class="glyphicon glyphicon-ok-circle"></i>
-                    </a>
-                    <a href=""
-                       data-ng-click="toggleForward()"
-                       data-ng-if="!cardOptions.changeForwardEnabled">
-                        <i class="glyphicon glyphicon-off"></i>
-                    </a>
-                    Enabled
-                </div>
-
-                <div data-ng-if="cardOptions.changeForwardEnabled">
-                    <div ng-class="{'text-muted': !cardOptions.forwardReadFront}">
-                        <a href=""
-                           data-ng-click="toggleForwardReadFront()"
-                           data-ng-if="cardOptions.forwardReadFront">
-                            <i class="glyphicon glyphicon-ok-circle"></i>
-                        </a>
-                        <a href=""
-                           data-ng-click="toggleForwardReadFront()"
-                           data-ng-if="!cardOptions.forwardReadFront">
-                            <i class="glyphicon glyphicon-off"></i>
-                        </a>
-                        Read Front
-                    </div>
-                    <div ng-class="{'text-muted': !cardOptions.forwardReadBack}">
-                        <a href=""
-                           data-ng-click="toggleForwardReadBack()"
-                           data-ng-if="cardOptions.forwardReadBack">
-                            <i class="glyphicon glyphicon-ok-circle"></i>
-                        </a>
-                        <a href=""
-                           data-ng-click="toggleForwardReadBack()"
-                           data-ng-if="!cardOptions.forwardReadBack">
-                            <i class="glyphicon glyphicon-off"></i>
-                        </a>
-                        Read Back
-                    </div>
-                    <div ng-class="{'text-muted': !cardOptions.forwardSpeechRecognition}">
-                        <a href=""
-                           data-ng-click="toggleForwardSpeechRecognition()"
-                           data-ng-if="cardOptions.forwardSpeechRecognition">
-                            <i class="glyphicon glyphicon-ok-circle"></i>
-                        </a>
-                        <a href=""
-                           data-ng-click="toggleForwardSpeechRecognition()"
-                           data-ng-if="!cardOptions.forwardSpeechRecognition">
-                            <i class="glyphicon glyphicon-off"></i>
-                        </a>
-                        Speech Recognition
-                    </div>
-                    <div ng-class="{'text-muted': !cardOptions.forwardTimed}">
-                        <a href=""
-                           data-ng-click="toggleForwardTimed()"
-                           data-ng-if="cardOptions.forwardTimed">
-                            <i class="glyphicon glyphicon-ok-circle"></i>
-                        </a>
-                        <a href=""
-                           data-ng-click="toggleForwardTimed()"
-                           data-ng-if="!cardOptions.forwardTimed">
-                            <i class="glyphicon glyphicon-off"></i>
-                        </a>
-                        Timed
+            <div ng-class="{'text-muted': !cardOptions.forwardTimed}">
+                <a href=""
+                   data-ng-click="toggleForwardTimed()"
+                   data-ng-if="cardOptions.forwardTimed">
+                    <i class="glyphicon glyphicon-ok-circle"></i>
+                </a>
+                <a href=""
+                   data-ng-click="toggleForwardTimed()"
+                   data-ng-if="!cardOptions.forwardTimed">
+                    <i class="glyphicon glyphicon-off"></i>
+                </a>
+                Timed
                         <span data-ng-if="cardOptions.forwardTimed">:
                             <input type="number"
                                    style="display: inline; width: 30%; margin-left: 0.5em"
@@ -262,82 +245,79 @@
                                    data-ng-model="settingChanges.limitForward"
                                    class="form-control"> sec
                         </span>
-                    </div>
-                </div>
             </div>
         </div>
+    </div>
 
 
+    <div class="section" data-ng-if="selectedSetting === 'Reverse mode'">
 
-        <div data-ng-if="selectedSetting === 'Reverse mode'">
-            <div class="font-medium">
+        <div ng-class="{'text-muted': !cardOptions.changeReverseEnabled}">
+            <a href=""
+               data-ng-click="toggleReverse()"
+               data-ng-if="cardOptions.changeReverseEnabled">
+                <i class="glyphicon glyphicon-ok-circle"></i>
+            </a>
+            <a href=""
+               data-ng-click="toggleReverse()"
+               data-ng-if="!cardOptions.changeReverseEnabled">
+                <i class="glyphicon glyphicon-off"></i>
+            </a>
+            Enabled
+        </div>
 
-                <div ng-class="{'text-muted': !cardOptions.changeReverseEnabled}">
-                    <a href=""
-                       data-ng-click="toggleReverse()"
-                       data-ng-if="cardOptions.changeReverseEnabled">
-                        <i class="glyphicon glyphicon-ok-circle"></i>
-                    </a>
-                    <a href=""
-                       data-ng-click="toggleReverse()"
-                       data-ng-if="!cardOptions.changeReverseEnabled">
-                        <i class="glyphicon glyphicon-off"></i>
-                    </a>
-                    Enabled
-                </div>
-
-                <div data-ng-if="cardOptions.changeReverseEnabled">
-                    <div ng-class="{'text-muted': !cardOptions.reverseReadFront}">
-                        <a href=""
-                           data-ng-click="toggleReverseReadFront()"
-                           data-ng-if="cardOptions.reverseReadFront">
-                            <i class="glyphicon glyphicon-ok-circle"></i>
-                        </a>
-                        <a href=""
-                           data-ng-click="toggleReverseReadFront()"
-                           data-ng-if="!cardOptions.reverseReadFront">
-                            <i class="glyphicon glyphicon-off"></i>
-                        </a>
-                        Read Front
-                    </div>
-                    <div ng-class="{'text-muted': !cardOptions.reverseReadBack}">
-                        <a href=""
-                           data-ng-click="toggleReverseReadBack()"
-                           data-ng-if="cardOptions.reverseReadBack">
-                            <i class="glyphicon glyphicon-ok-circle"></i>
-                        </a>
-                        <a href=""
-                           data-ng-click="toggleReverseReadBack()"
-                           data-ng-if="!cardOptions.reverseReadBack">
-                            <i class="glyphicon glyphicon-off"></i>
-                        </a>
-                        Read Back
-                    </div>
-                    <div ng-class="{'text-muted': !cardOptions.reverseSpeechRecognition}">
-                        <a href=""
-                           data-ng-click="toggleReverseSpeechRecognition()"
-                           data-ng-if="cardOptions.reverseSpeechRecognition">
-                            <i class="glyphicon glyphicon-ok-circle"></i>
-                        </a>
-                        <a href=""
-                           data-ng-click="toggleReverseSpeechRecognition()"
-                           data-ng-if="!cardOptions.reverseSpeechRecognition">
-                            <i class="glyphicon glyphicon-off"></i>
-                        </a>
-                        Speech Recognition
-                    </div>
-                    <div ng-class="{'text-muted': !cardOptions.reverseTimed}">
-                        <a href=""
-                           data-ng-click="toggleReverseTimed()"
-                           data-ng-if="cardOptions.reverseTimed">
-                            <i class="glyphicon glyphicon-ok-circle"></i>
-                        </a>
-                        <a href=""
-                           data-ng-click="toggleReverseTimed()"
-                           data-ng-if="!cardOptions.reverseTimed">
-                            <i class="glyphicon glyphicon-off"></i>
-                        </a>
-                        Timed
+        <div data-ng-if="cardOptions.changeReverseEnabled">
+            <div ng-class="{'text-muted': !cardOptions.reverseReadFront}">
+                <a href=""
+                   data-ng-click="toggleReverseReadFront()"
+                   data-ng-if="cardOptions.reverseReadFront">
+                    <i class="glyphicon glyphicon-ok-circle"></i>
+                </a>
+                <a href=""
+                   data-ng-click="toggleReverseReadFront()"
+                   data-ng-if="!cardOptions.reverseReadFront">
+                    <i class="glyphicon glyphicon-off"></i>
+                </a>
+                Read Front
+            </div>
+            <div ng-class="{'text-muted': !cardOptions.reverseReadBack}">
+                <a href=""
+                   data-ng-click="toggleReverseReadBack()"
+                   data-ng-if="cardOptions.reverseReadBack">
+                    <i class="glyphicon glyphicon-ok-circle"></i>
+                </a>
+                <a href=""
+                   data-ng-click="toggleReverseReadBack()"
+                   data-ng-if="!cardOptions.reverseReadBack">
+                    <i class="glyphicon glyphicon-off"></i>
+                </a>
+                Read Back
+            </div>
+            <div ng-class="{'text-muted': !cardOptions.reverseSpeechRecognition}">
+                <a href=""
+                   data-ng-click="toggleReverseSpeechRecognition()"
+                   data-ng-if="cardOptions.reverseSpeechRecognition">
+                    <i class="glyphicon glyphicon-ok-circle"></i>
+                </a>
+                <a href=""
+                   data-ng-click="toggleReverseSpeechRecognition()"
+                   data-ng-if="!cardOptions.reverseSpeechRecognition">
+                    <i class="glyphicon glyphicon-off"></i>
+                </a>
+                Speech Recognition
+            </div>
+            <div ng-class="{'text-muted': !cardOptions.reverseTimed}">
+                <a href=""
+                   data-ng-click="toggleReverseTimed()"
+                   data-ng-if="cardOptions.reverseTimed">
+                    <i class="glyphicon glyphicon-ok-circle"></i>
+                </a>
+                <a href=""
+                   data-ng-click="toggleReverseTimed()"
+                   data-ng-if="!cardOptions.reverseTimed">
+                    <i class="glyphicon glyphicon-off"></i>
+                </a>
+                Timed
                         <span data-ng-if="cardOptions.reverseTimed">:
                             <input type="number"
                                    style="display: inline; width: 30%; margin-left: 0.5em"
@@ -345,13 +325,11 @@
                                    data-ng-model="settingChanges.limitReverse"
                                    class="form-control"> sec
                         </span>
-                    </div>
-                </div>
             </div>
         </div>
     </div>
 
-    <div class="col-xs-3" data-ng-if="selectedSetting !== 'Choose setting'">
+    <div class="section" data-ng-if="selectedSetting !== 'Choose setting'">
         <button class="btn btn-rememberators"
                 type="submit"
                 ng-click="changeDefaultSettings()"

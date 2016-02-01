@@ -4,7 +4,7 @@
     <form data-ng-submit="create()" validate>
 
         <div data-ng-if="authentication.user.roles.indexOf('help') > -1">
-            <div class="ribbon-card">
+            <div class="ribbon-card-large">
                 <div class="help-ribbon"><span>Help</span></div>
                 <div class="title">
                     Creating a new course
@@ -17,7 +17,7 @@
                 </infobox>
             </div>
 
-            <div class="ribbon-card">
+            <div class="ribbon-card-large">
                 <div class="help-ribbon"><span>Help</span></div>
                 <div class="title">
                     Course settings
@@ -30,7 +30,7 @@
                 </infobox>
             </div>
 
-            <div class="ribbon-card">
+            <div class="ribbon-card-large">
                 <div class="help-ribbon"><span>Help</span></div>
                 <div class="title">
                     Course settings
@@ -44,7 +44,7 @@
         </div>
 
 
-        <div class="info-card">
+        <div class="info-card-large">
             <div class="title">
                 New course
             </div>
@@ -108,13 +108,13 @@
         </div>
 
 
-        <div class="info-card">
+        <div class="info-card-large">
 
             <div class="title">
                 Settings
             </div>
 
-            <div class="two-column-section">
+            <div class="two-column-section top-section">
                 <div class="column">
                     <div class="field-label">
                         Language Front
@@ -188,33 +188,33 @@
         </div>
 
 
-        <div class="info-card">
+        <div class="info-card-large">
             <div class="title">Modes</div>
 
-            <div class="two-column-section">
+            <div class="two-column-section top-section">
                 <div class="column">
                     <div class="field-label">
 
                         Forward
                     </div>
-                    <div >
+                    <div class="field-option">
                         <input type="checkbox" ng-model="useForwardMode">
                         Use Mode
                     </div>
 
 
-                    <div ng-class="{'text-muted': !useForwardMode}">
+                    <div class="field-option" ng-class="{'text-muted': !useForwardMode}">
                         <input type="checkbox" ng-model="readQuestionsForward"
                                ng-disabled="!useForwardMode">
                         Read Questions
                     </div>
 
-                    <div ng-class="{'text-muted': !useForwardMode}">
+                    <div class="field-option" ng-class="{'text-muted': !useForwardMode}">
                         <input type="checkbox" ng-model="readAnswersForward" ng-disabled="!useForwardMode">
                         Read Answers
                     </div>
 
-                    <div ng-class="{'text-muted': !useForwardMode}">
+                    <div class="field-option" ng-class="{'text-muted': !useForwardMode}">
                         <input type="checkbox" ng-model="timedForward" ng-disabled="!useForwardMode">
                         Time penalty
 
@@ -240,24 +240,24 @@
                     </div>
 
 
-                    <div >
+                    <div class="field-option" >
                         <input type="checkbox" ng-model="useReverseMode">
                         Use Mode
                     </div>
 
 
-                    <div ng-class="{'text-muted': !useReverseMode}">
+                    <div class="field-option" ng-class="{'text-muted': !useReverseMode}">
                         <input type="checkbox" ng-model="readQuestionsReverse"
                                ng-disabled="!useReverseMode">
                         Read Questions
                     </div>
 
-                    <div ng-class="{'text-muted': !useReverseMode}">
+                    <div class="field-option" ng-class="{'text-muted': !useReverseMode}">
                         <input type="checkbox" ng-model="readAnswersReverse" ng-disabled="!useReverseMode">
                         Read Answers
                     </div>
 
-                    <div ng-class="{'text-muted': !useReverseMode}">
+                    <div class="field-option" ng-class="{'text-muted': !useReverseMode}">
                         <input type="checkbox" ng-model="timedReverse" ng-disabled="!useReverseMode">
                         Time penalty
 
@@ -284,23 +284,23 @@
                         Images
                     </div>
 
-                    <div>
+                    <div class="field-option" >
                         <input type="checkbox" ng-model="useImagesMode">
                         Use Mode
                     </div>
 
 
-                    <div ng-class="{'text-muted': !useImagesMode}">
+                    <div class="field-option" ng-class="{'text-muted': !useImagesMode}">
                         <input type="checkbox" ng-model="readQuestionsImages" ng-disabled="!useImagesMode">
                         Read Questions
                     </div>
 
-                    <div ng-class="{'text-muted': !useImagesMode}">
+                    <div class="field-option" ng-class="{'text-muted': !useImagesMode}">
                         <input type="checkbox" ng-model="readAnswersImages" ng-disabled="!useImagesMode">
                         Read Answers
                     </div>
 
-                    <div ng-class="{'text-muted': !useImagesMode}">
+                    <div class="field-option" ng-class="{'text-muted': !useImagesMode}">
                         <input type="checkbox" ng-model="timedImages" ng-disabled="!useImagesMode">
                         Time penalty
 
@@ -322,7 +322,7 @@
         </div>
 
 
-        <div class="action-card">
+        <div class="action-card-large">
             <div class="action-ribbon"><span>Action</span></div>
 
             <div class="title">Create</div>

@@ -73,7 +73,6 @@
   .make-xl-column-offset(1/5);
 }
 
-
 .info-card-small, .ribbon-card-small {
   .info-card;
   .small-card;
@@ -84,18 +83,32 @@
   .tiny-card;
 }
 
-.info-card-large, .ribbon-card-large {
-  .info-card;
+.large-card {
+
+  .make-xs-column(11);
+  .make-xs-column-offset(1 / 2);
+  .make-sm-column(11);
+  .make-sm-column-offset(1/2);
+  .make-md-column(11);
+  .make-md-column-offset(1/2);
+
+  .make-lg-column(11/2 + (1/8));
+  .make-lg-column-offset(1/4);
 
   .make-xl-column(11/2+ (1/8));
   .make-xl-column-offset(1/4);
 }
 
+.info-card-large, .ribbon-card-large {
+  .info-card;
+
+  .large-card
+}
+
 .admin-card-large {
   .admin-card;
 
-  .make-xl-column(11/2+ (1/8));
-  .make-xl-column-offset(1/4);
+  .large-card
 }
 
 .info-card-xl, .ribbon-card-xl {
@@ -112,10 +125,7 @@
   .make-xl-column-offset(1/4);
 }
 
-
-
 .info-card {
-
 
   .make-xs-column(12);
   .make-sm-column(11/2 + (1/8));
@@ -129,7 +139,6 @@
   .make-xl-column-offset(1/4);
   .generic-card;
 
-
   margin-top: 1em;
 
   min-height: 24em;
@@ -140,7 +149,7 @@
     @media (min-width: @screen-xs-min) {
       min-height: 24em;
       font-size: 1.5em;
-       line-height: 2em;
+      line-height: 2em;
     }
     @media (min-width: @screen-sm-min) {
       min-height: 24em;
@@ -165,17 +174,13 @@
   }
 }
 
-
 .admin-card {
   .info-card;
   .texture-admin;
 
 }
 
-
-
 .title-card {
-
 
   .make-xs-column(10);
   .make-xs-column-offset(1);
@@ -228,7 +233,6 @@
 
 .generic-card {
 
-
   .card-texture;
   .default-border;
 
@@ -254,8 +258,6 @@
     }
   }
 
-
-
   .button-row {
     width: 100%;
     position: absolute;
@@ -264,9 +266,7 @@
     z-index: 0;
   }
 
-
 }
-
 
 // banner
 .ribbon-card {
@@ -278,8 +278,6 @@
     font-size: small;
     display: inline;
   }
-
-
 
   .info {
     text-align: center;

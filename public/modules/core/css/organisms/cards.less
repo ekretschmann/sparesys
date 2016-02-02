@@ -1,7 +1,4 @@
-
-.info-card-small, .ribbon-card-small {
-  .info-card;
-
+.small-card {
   min-height: 12em;
   @media screen {
 
@@ -31,6 +28,60 @@
       line-height: 1.8em;
     }
   }
+}
+
+.tiny-card {
+  min-height: 8em;
+  @media screen {
+
+    @media (min-width: @screen-xs-min) {
+      min-height: 8em;
+      font-size: 1.5em;
+      line-height: 2em;
+    }
+    @media (min-width: @screen-sm-min) {
+      min-height: 8em;
+      font-size: 1.3em;
+      line-height: 1.3em;
+    }
+    @media (min-width: @screen-md-min) {
+      min-height: 8em;
+      font-size: 1.35em;
+      line-height: 1.5em;
+    }
+    @media (min-width: @screen-lg-min) {
+      min-height: 8em;
+      font-size: 1.4em;
+      line-height: 1.6em;
+    }
+    @media (min-width: @screen-xl-min) {
+      min-height: 8em;
+      font-size: 1.5em;
+      line-height: 1.8em;
+    }
+  }
+
+  .make-xs-column(11/4);
+  .make-xs-column-offset(1/5);
+  .make-sm-column(11/4);
+  .make-sm-column-offset(1/5);
+  .make-md-column(11/4);
+  .make-md-column-offset(1/5);
+  .make-lg-column(11/4);
+  .make-lg-column-offset(1/5);
+  .make-xl-column(11/4);
+  .make-xl-column-offset(1/5);
+}
+
+
+.info-card-small, .ribbon-card-small {
+  .info-card;
+  .small-card;
+}
+
+.admin-card-tiny {
+  .admin-card;
+  .tiny-card;
 }
 
 .info-card-large, .ribbon-card-large {

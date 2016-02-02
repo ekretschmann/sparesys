@@ -3,219 +3,157 @@
 
     <div ng-include="'/modules/users/views/partial/delete-user.modal.client.view.html'"></div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col ">
-        <div class="admin-card font-large">
-            <div class="title">Administer Users</div>
-            <div class="flashcard-section row">
 
-                <!--<div class="col-xs-6">-->
-                <!--<div class="field-label">Find User</div>-->
-
-                <!-- -->
-
-                <!--<div class="field-data" data-ng-controller="SchoolsController" data-ng-repeat="sid in authentication.user.studentInSchools" data-ng-init="findById(sid)">-->
-                <!--{{school.name}} <a href=""-->
-                <!--data-ng-click="unsubscribeStudentPopup(school._id)"><i-->
-                <!--class="glyphicon glyphicon-minus-sign"></i></a>-->
-                <!--</div>-->
-                <!--</div>-->
-
-                <div class="col-xs-12">
-                    <div class="field-label">Find User</div>
-                    <input type="text"
-                           ng-model="options.searchText"
-                           class="form-control search"
-                           data-ng-change="updateSearch()"
-                           placeholder="Name">
-                </div>
+    <div class="admin-card-large">
+        <div class="title">Administer Users</div>
+        <div class="section">
 
 
-            </div>
+            <div class="field-label">Find User</div>
+            <input type="text"
+                   ng-model="options.searchText"
+                   class="form-control search"
+                   data-ng-change="updateSearch()"
+                   placeholder="Name">
+
+
         </div>
     </div>
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="!users || users.length === 0">
+    <div data-ng-if="!users || users.length === 0">
 
-        <div class="admin-card font-large">
+        <div class="admin-card-large">
             <div class="title">No Users Found</div>
             <div class="danger">There are no users matching your search criteria</div>
         </div>
     </div>
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-repeat="user in users">
-        <div class="admin-card font-large">
+    <div data-ng-repeat="user in users">
+        <div class="admin-card-large">
             <div class="title">{{user.displayName}}
 
                 <div class="pull-right">
-                    <a href="" data-ng-click="areYouSureToDeleteUser(user)"><i class="glyphicon glyphicon-trash"></i></a>
-                <a href="/#!/users/{{user._id}}"><i class="glyphicon glyphicon-edit"></i></a>
+                    <a href="" data-ng-click="areYouSureToDeleteUser(user)"><i
+                            class="glyphicon glyphicon-trash"></i></a>
+                    <a href="/#!/users/{{user._id}}"><i class="glyphicon glyphicon-edit"></i></a>
                 </div>
 
             </div>
 
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+            <div class="three-column-section top-section">
+                <div class="column">
 
-                    <div class="col-xs-4">
-                        <div class="field-label">Username</div>
-                        <div class="field-data">
-                            {{user.username}}
-                        </div>
+                    <div class="field-label">Username</div>
+                    <div class="field-data">
+                        {{user.username}}
                     </div>
-
-                    <div class="col-xs-4">
-                        <div class="field-label">First Name</div>
-                        <div class="field-data">
-                            {{user.firstName}}
-                        </div>
-                    </div>
-
-                    <div class="col-xs-4">
-                        <div class="field-label">Last Name</div>
-                        <div class="field-data">
-                            {{user.lastName}}
-                        </div>
-                    </div>
-
                 </div>
+
+
+                <div class="column">
+                    <div class="field-label">First Name</div>
+                    <div class="field-data">
+                        {{user.firstName}}
+                    </div>
+                </div>
+
+                <div class="column">
+                    <div class="field-label">Last Name</div>
+                    <div class="field-data">
+                        {{user.lastName}}
+                    </div>
+                </div>
+
             </div>
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+            <div class="two-column-section">
 
 
-                    <div class="col-xs-6">
-                        <div class="field-label">Student in schools</div>
-                        <div class="field-data">
-                            <div data-ng-if="user.studentInSchools.length ===0">
-                                none
-                            </div>
+                <div class="column">
+                    <div class="field-label">Student in schools</div>
+                    <div class="field-data">
+                        <div data-ng-if="user.studentInSchools.length ===0">
+                            none
+                        </div>
 
-                            <div data-ng-repeat="s in user.studentInSchools">
-                                {{s}}
-                            </div>
+                        <div data-ng-repeat="s in user.studentInSchools">
+                            {{s}}
                         </div>
                     </div>
-
-                    <div class="col-xs-6">
-                        <div class="field-label">Student in classes</div>
-                        <div class="field-data">
-                            <div data-ng-if="user.studentInClasses.length ===0">
-                                none
-                            </div>
-
-                            <div data-ng-repeat="s in user.studentInClasses">
-                                {{s}}
-                            </div>
-
-                        </div>
-                    </div>
-
-
                 </div>
+
+                <div class="column">
+                    <div class="field-label">Student in classes</div>
+                    <div class="field-data">
+                        <div data-ng-if="user.studentInClasses.length ===0">
+                            none
+                        </div>
+
+                        <div data-ng-repeat="s in user.studentInClasses">
+                            {{s}}
+                        </div>
+
+                    </div>
+                </div>
+
+
             </div>
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+            <div class="two-column-section">
 
+                <div class="column">
+                    <div class="field-label">Teacher in schools</div>
+                    <div class="field-data">
+                        <div data-ng-if="user.teacherInSchools.length ===0">
+                            none
+                        </div>
 
-                    <div class="col-xs-6">
-                        <div class="field-label">Teacher in schools</div>
-                        <div class="field-data">
-                            <div data-ng-if="user.teacherInSchools.length ===0">
-                                none
-                            </div>
-
-                            <div data-ng-repeat="s in user.teacherInSchools">
-                                {{s}}
-                            </div>
+                        <div data-ng-repeat="s in user.teacherInSchools">
+                            {{s}}
                         </div>
                     </div>
-
-                    <div class="col-xs-4">
-                        <div class="field-label">Teacher in classes</div>
-                        <div class="field-data">
-                            <div data-ng-if="user.teachesClasses.length === 0">
-                                none
-                            </div>
-
-                            <div data-ng-repeat="cl in user.teachesClasses track by $index">
-
-                                <!--{{cl}}-->
-                                <a href="/#!/schoolclasses/{{cl}}/admin">{{cl}}</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-
-
-
-
                 </div>
+
+                <div class="column">
+                    <div class="field-label">Teacher in classes</div>
+                    <div class="field-data">
+                        <div data-ng-if="user.teachesClasses.length === 0">
+                            none
+                        </div>
+
+                        <div data-ng-repeat="cl in user.teachesClasses track by $index">
+
+                            <a href="/#!/schoolclasses/{{cl}}/admin">{{cl}}</a>
+                        </div>
+                    </div>
+                </div>
+
+
             </div>
 
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+            <div class="two-column-section">
 
 
+                <div class="column">
+                    <div class="field-label">Administers Schools</div>
+                    <div class="field-data">
+                        <div data-ng-if="user.administersSchools.length ===0">
+                            none
+                        </div>
 
-
-                    <div class="col-xs-6">
-                        <div class="field-label">Administers Schools</div>
-                        <div class="field-data">
-                            <div data-ng-if="user.administersSchools.length ===0">
-                                none
-                            </div>
-
-                            <div data-ng-repeat="s in user.administersSchools">
-                                {{s}}
-                            </div>
+                        <div data-ng-repeat="s in user.administersSchools">
+                            {{s}}
                         </div>
                     </div>
-
-
-
-
                 </div>
+
+
             </div>
 
         </div>
     </div>
-
-
-    <!--<table id="searchTextResults" class="table-striped" style="width: 100%" data-ng-if="users.length > 0">-->
-    <!--<thead>-->
-    <!--<tr>-->
-    <!--<th>User</th>-->
-    <!--<th>ID</th>-->
-    <!--</tr>-->
-    <!--</thead>-->
-    <!--<tbody>-->
-    <!--<tr data-ng-repeat="user in users | filter:searchText">-->
-    <!--<td class="top-padded-s nowrap right-padded-m top-aligned left-padded-s" >-->
-    <!--<a href="">-->
-    <!--<i data-ng-click="remove(user)"-->
-    <!--class="glyphicon glyphicon-remove-sign small">-->
-    <!--</i>-->
-    <!--</a>-->
-    <!--<a data-ng-href="#!/users/{{user._id}}/admin">{{user.displayName}}</a>-->
-    <!--</td>-->
-    <!--<td>-->
-    <!--{{user._id}}-->
-    <!--</td>-->
-
-    <!--</tr>-->
-    <!--</tbody>-->
-    <!--</table>-->
-
-
-    <!--<div class="center-aligned top-padded-m">-->
-    <!--<input ng-click="removeInventories()" value="Delete Inventories" class="btn btn-rememberators">-->
-
-    <!--</div>-->
 </section>

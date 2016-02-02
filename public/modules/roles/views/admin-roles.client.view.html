@@ -1,7 +1,7 @@
 <section data-ng-controller="RolesController" data-ng-init="find()">
 
-    <div class="col-xs-3 dashboard-col" data-ng-repeat="role in roles">
-        <div class="half-admin-card font-large">
+    <div data-ng-repeat="role in roles">
+        <div class="admin-card-tiny">
             <div class="title">
                 {{role.name}}
                 <div class="pull-right">
@@ -13,41 +13,34 @@
                 </div>
             </div>
 
-
         </div>
     </div>
 
-    <div class="col-xs-3 dashboard-col" >
-        <div class="half-admin-card font-large">
-            <div class="title">
-                Add a role
-                <div class="pull-right">
+    <div class="admin-card-tiny">
+        <div class="title">
+            Add a role
+            <div class="pull-right">
 
 
-                    <a href="" data-ng-click="create()"><i class="glyphicon glyphicon-plus-sign"></i></a>
-
-                </div>
-
+                <a href="" data-ng-click="create()"><i class="glyphicon glyphicon-plus-sign"></i></a>
 
             </div>
 
-            <div class="flashcard-section">
 
-                <form data-ng-submit="create()" validate>
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-xs-6 dashboard-col">
-                                <div class="field-label">Role</div>
-                                <div class="font-medium">
-                                    <input type="text"
-                                           data-ng-model="newRole.name"
-                                           class="form-control focus">
-                                </div>
-                            </div>
-                        </div>
-                    </fieldset>
-                </form>
-            </div>
+        </div>
+
+        <div class="flashcard-section">
+
+            <form data-ng-submit="create()" validate>
+                <fieldset>
+                    <div class="field-label">Role</div>
+                    <div>
+                        <input type="text"
+                               data-ng-model="newRole.name"
+                               class="form-control focus">
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 

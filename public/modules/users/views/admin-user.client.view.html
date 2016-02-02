@@ -7,314 +7,288 @@
     <div ng-include="'/modules/users/views/partial/remove-schoolclass-from-teacher.modal.client.view.html'"></div>
     <div ng-include="'/modules/schools/views/partial/remove-teacher.modal.client.view.html'"></div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col font-large">
-        <div class="admin-card">
-            <div class="title">{{otherUser.displayName}}</div>
+
+    <div class="admin-card-large">
+        <div class="title">{{otherUser.displayName}}</div>
 
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+        <div class="two-column-section top-section">
 
-                    <div class="col-xs-6">
-                        <div class="field-label">ID</div>
-                        <div class="field-data">
-                            {{otherUser._id}}
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6">
-                        <div class="field-label">Username</div>
-                        <div class="field-data">
-                            <input type="text"
-                                   data-ng-model="otherUser.username"
-                                   data-ng-blur="update()"
-                                   class="form-control"
-                                   placeholder="Username">
-                        </div>
-                    </div>
+            <div class="column">
+                <div class="field-label">ID</div>
+                <div class="field-data">
+                    {{otherUser._id}}
                 </div>
             </div>
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+            <div class="column">
+                <div class="field-label">Username</div>
+                <div class="field-data">
+                    <input type="text"
+                           data-ng-model="otherUser.username"
+                           data-ng-blur="update()"
+                           class="form-control"
+                           placeholder="Username">
+                </div>
+            </div>
+        </div>
 
-                    <div class="col-xs-6">
-                        <div class="field-label">First Name</div>
-                        <div class="field-data">
-                            <input type="text"
-                                   data-ng-model="otherUser.firstName"
-                                   data-ng-blur="update()"
-                                   class="form-control"
-                                   placeholder="First Name">
-                        </div>
-                    </div>
+        <div class="two-column-section">
 
-                    <div class="col-xs-6">
-                        <div class="field-label">Last Name</div>
-                        <div class="field-data">
-                            <input type="text"
-                                   data-ng-model="otherUser.lastName"
-                                   data-ng-blur="update()"
-                                   class="form-control"
-                                   placeholder="Last Name">
-                        </div>
-                    </div>
-
-
+            <div class="column">
+                <div class="field-label">First Name</div>
+                <div class="field-data">
+                    <input type="text"
+                           data-ng-model="otherUser.firstName"
+                           data-ng-blur="update()"
+                           class="form-control"
+                           placeholder="First Name">
                 </div>
             </div>
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
+            <div class="column">
+                <div class="field-label">Last Name</div>
+                <div class="field-data">
+                    <input type="text"
+                           data-ng-model="otherUser.lastName"
+                           data-ng-blur="update()"
+                           class="form-control"
+                           placeholder="Last Name">
+                </div>
+            </div>
 
-                    <div class="col-xs-6">
-                        <div class="field-label">email</div>
-                        <div class="field-data">
-                            <input type="text"
-                                   data-ng-model="otherUser.email"
-                                   data-ng-blur="update()"
-                                   class="form-control"
-                                   placeholder="email address">
-                        </div>
+
+        </div>
+
+        <div class="two-column-section">
+
+            <div class="column">
+                <div class="field-label">email</div>
+                <div class="field-data">
+                    <input type="text"
+                           data-ng-model="otherUser.email"
+                           data-ng-blur="update()"
+                           class="form-control"
+                           placeholder="email address">
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="field-label">Last login</div>
+                <div class="field-data">
+                    <!--{{otherUser}}-->
+                    <div data-ng-if="otherUser.lastLogin">
+
+
+                        {{otherUser.lastLogin | date:'short'}}
                     </div>
-
-                    <div class="col-xs-6">
-                        <div class="field-label">Last login</div>
-                        <div class="field-data">
-                            <!--{{otherUser}}-->
-                            <div data-ng-if="otherUser.lastLogin">
-
-
-                                {{otherUser.lastLogin | date:'short'}}
-                            </div>
-                            <div data-ng-if="!otherUser.lastLogin">
-                                never
-                            </div>
-                        </div>
+                    <div data-ng-if="!otherUser.lastLogin">
+                        never
                     </div>
-
                 </div>
             </div>
 
         </div>
+
     </div>
 
 
-    <div class="col-xs-12 col-md-6  ">
-        <div class="admin-card dashboard-col font-large">
-            <div class="title">&nbsp;</div>
+    <div class="admin-card-large">
+        <div class="title">&nbsp;</div>
 
 
-            <div class="flashcard-section row">
+        <div class="two-column-section top-section">
 
-                <div class="col-xs-12 col-md-6 dashboard-col">
+            <div class="column">
 
-                    <div class="field-label">
-                        Student in Schools
-                    </div>
+                <div class="field-label">
+                    Student in Schools
+                </div>
 
-                    <div class="field-data" data-ng-if="otherUser.studentInSchools.length === 0">
-                        none
-                    </div>
-
-                    <div data-ng-if="otherUser.studentInSchools.length > 0">
-                        <div data-ng-repeat="s in otherUser.studentInSchools"
-                             data-ng-controller="SchoolsController" data-ng-init="findById(s)">
-
-                            <div class="field-data">
-                                <a href="#!/schools/{{s}}/admin">{{school.name}}</a>
-                            </div>
-                        </div>
-                    </div>
-
-
+                <div class="field-data" data-ng-if="otherUser.studentInSchools.length === 0">
+                    none
                 </div>
 
 
-                <div class="col-xs-12 col-md-6 dashboard-col">
-
-
-                    <div class="field-label">
-                        Student in Classes
-                    </div>
-
-                    <div class="field-data" data-ng-if="otherUser.studentInClasses.length === 0">
-                        none
-                    </div>
-
-                    <div data-ng-if="otherUser.studentInClasses.length > 0">
-                        <div class="field-data" data-ng-repeat="s in otherUser.studentInClasses track by $index"
-                             data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
-
-                            {{schoolclass.name}} <a href=""
-                                                    data-ng-click="removeStudentFromClass(otherUser, s)"><i
-                                class="glyphicon glyphicon-minus-sign"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-
-
-            </div>
-
-            <div class="flashcard-section row">
-
-                <div class="col-xs-12 col-md-6 dashboard-col">
-
-                    <div class="field-label">
-                        Teacher in Schools
-                    </div>
-
-                    <div class="field-data" data-ng-if="otherUser.teacherInSchools.length === 0">
-                        none
-                    </div>
-
-                    <div data-ng-if="otherUser.teacherInSchools.length > 0">
-                        <div data-ng-repeat="s in otherUser.teacherInSchools"
-                             data-ng-controller="SchoolsController" data-ng-init="findById(s)">
-
-                            <div class="field-data">
-                                <a href="#!/schools/{{s}}/admin">{{school.name}}</a>
-                            </div>
-                        </div>
-                    </div>
-
-
-                </div>
-
-
-                <div class="col-xs-12 col-md-6 dashboard-col">
-
-
-                    <div class="field-label">
-                        Teacher in Classes
-                    </div>
-
-                    <div class="field-data" data-ng-if="otherUser.teachesClasses.length === 0">
-                        none
-                    </div>
-
-                    <div data-ng-if="otherUser.teachesClasses.length > 0">
-                        <div class="field-data" data-ng-repeat="sc in otherUser.teachesClasses track by $index"
-                             data-ng-controller="SchoolclassesController" data-ng-init="findById(sc)">
-
-                            {{schoolclass.name}} <a href=""
-                                                    data-ng-click="areYouSureToRemoveSchoolclassFromTeacher(schoolclass, otherUser)"><i
-                                class="glyphicon glyphicon-minus-sign"></i></a>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="flashcard-section row">
-
-                <div class="col-xs-12 col-md-6 dashboard-col">
-
-                    <div class="field-label">
-                        Administers Schools
-                    </div>
-
-                    <div class="field-data" data-ng-if="otherUser.administersSchools.length ===0">
-                        none
-                    </div>
-                    <div data-ng-repeat="s in otherUser.administersSchools"
+                <div data-ng-if="otherUser.studentInSchools.length > 0">
+                    <div data-ng-repeat="s in otherUser.studentInSchools"
                          data-ng-controller="SchoolsController" data-ng-init="findById(s)">
 
                         <div class="field-data">
                             <a href="#!/schools/{{s}}/admin">{{school.name}}</a>
                         </div>
                     </div>
-
                 </div>
+
+
             </div>
-        </div>
 
-    </div>
 
-    <div class="col-xs-12 col-md-6  ">
-        <div class="admin-card font-large">
-            <div class="title">Rewards</div>
-
-            <div class="flashcard-section">
+            <div class="column">
                 <div class="field-label">
-                    Trophies
-                </div>
-                <div class="field-data">
-                    <input type="text"
-                           data-ng-model="otherUser.trophies"
-                           data-ng-blur="update()"
-                           class="form-control"
-                           placeholder="Trophies">
-                </div>
-            </div>
-
-
-            <div class="flashcard-section">
-
-                <div class="field-label">
-                    Inventory
+                    Student in Classes
                 </div>
 
-                <div data-ng-if="otherUser.inventory.length === 0">
-                    no inventory
+                <div class="field-data" data-ng-if="otherUser.studentInClasses.length === 0">
+                    none
                 </div>
 
-                <div data-ng-repeat="item in otherUser.inventory">
+                <div data-ng-if="otherUser.studentInClasses.length > 0">
+                    <div class="field-data" data-ng-repeat="s in otherUser.studentInClasses track by $index"
+                         data-ng-controller="SchoolclassesController" data-ng-init="findById(s)">
 
-
-                    <a href=""
-                       data-ng-click="removeReward(item, otherUser)"><i
-                            class="glyphicon glyphicon-minus-sign"></i></a> {{item.amount}} {{item.name}}
-
-                </div>
-            </div>
-
-            <div class="flashcard-section" data-ng-if="otherUser.inventory.length > 0">
-
-                <button class="btn btn-rememberators" data-ng-click="clearInventory(otherUser)">Clear</button>
-
-
-
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xs-12 col-md-6  ">
-        <div class="admin-card font-large">
-            <div class="title">Roles</div>
-
-
-            <div class="flashcard-section">
-
-                <div data-ng-repeat="role in roles">
-
-                    <div class="col-xs-6">
-                        <input data-ng-click="updateUserRoles()" data-ng-model="userRoles[$index]" type="checkbox"/>
-                        {{role.name}}
+                        {{schoolclass.name}} <a href=""
+                                                data-ng-click="removeStudentFromClass(otherUser, s)"><i
+                            class="glyphicon glyphicon-minus-sign"></i></a>
                     </div>
                 </div>
             </div>
         </div>
+
+        <div class="two-column-section">
+            <div class="column">
+
+
+                <div class="field-label">
+                    Teacher in Schools
+                </div>
+
+                <div class="field-data" data-ng-if="otherUser.teacherInSchools.length === 0">
+                    none
+                </div>
+
+                <div data-ng-if="otherUser.teacherInSchools.length > 0">
+                    <div data-ng-repeat="s in otherUser.teacherInSchools"
+                         data-ng-controller="SchoolsController" data-ng-init="findById(s)">
+
+                        <div class="field-data">
+                            <a href="#!/schools/{{s}}/admin">{{school.name}}</a>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="column">
+
+                <div class="field-label">
+                    Teacher in Classes
+                </div>
+
+                <div class="field-data" data-ng-if="otherUser.teachesClasses.length === 0">
+                    none
+                </div>
+
+                <div data-ng-if="otherUser.teachesClasses.length > 0">
+                    <div class="field-data" data-ng-repeat="sc in otherUser.teachesClasses track by $index"
+                         data-ng-controller="SchoolclassesController" data-ng-init="findById(sc)">
+
+                        {{schoolclass.name}} <a href=""
+                                                data-ng-click="areYouSureToRemoveSchoolclassFromTeacher(schoolclass, otherUser)"><i
+                            class="glyphicon glyphicon-minus-sign"></i></a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <div class="two-column-section">
+
+            <div class="column">
+
+                <div class="field-label">
+                    Administers Schools
+                </div>
+
+                <div class="field-data" data-ng-if="otherUser.administersSchools.length ===0">
+                    none
+                </div>
+                <div data-ng-repeat="s in otherUser.administersSchools"
+                     data-ng-controller="SchoolsController" data-ng-init="findById(s)">
+
+                    <div class="field-data">
+                        <a href="#!/schools/{{s}}/admin">{{school.name}}</a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </div>
 
-    <div class="col-xs-12 col-md-6  ">
-        <div class="admin-card font-large">
+
+    <div class="admin-card-large">
+        <div class="title">Rewards</div>
+
+        <div class="section top-section">
+            <div class="field-label">
+                Trophies
+            </div>
+            <div class="field-data">
+                <input type="text"
+                       data-ng-model="otherUser.trophies"
+                       data-ng-blur="update()"
+                       class="form-control"
+                       placeholder="Trophies">
+            </div>
+        </div>
+
+
+        <div class="section ">
+
+            <div class="field-label">
+                Inventory
+            </div>
+
+            <div data-ng-if="otherUser.inventory.length === 0">
+                no inventory
+            </div>
+
+            <div data-ng-repeat="item in otherUser.inventory">
+
+
+                <a href=""
+                   data-ng-click="removeReward(item, otherUser)"><i
+                        class="glyphicon glyphicon-minus-sign"></i></a> {{item.amount}} {{item.name}}
+
+            </div>
+        </div>
+
+        <div class="section" data-ng-if="otherUser.inventory.length > 0">
+
+            <button class="btn btn-rememberators" data-ng-click="clearInventory(otherUser)">Clear</button>
+
+
+        </div>
+    </div>
+
+
+    <div class="admin-card-large">
+        <div class="title">Roles</div>
+
+
+        <div class="section top-section">
+
+            <div data-ng-repeat="role in roles">
+
+                <div class="col-xs-6">
+                    <input data-ng-click="updateUserRoles()" data-ng-model="userRoles[$index]" type="checkbox"/>
+                    {{role.name}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+        <div class="admin-card-large">
             <div class="title">Change password</div>
 
 
-            <!--<div class="flashcard-section ">-->
-            <!--<div class="field-label">Your password</div>-->
-            <!--<div class="field-data">-->
-            <!--<input type="text"-->
-            <!--data-ng-model="passwordDetails.admin"-->
-            <!--class="form-control"-->
-            <!--placeholder="New password">-->
-            <!--</div>-->
-            <!--</div>-->
 
-            <div class="flashcard-section">
+            <div class="section top-section">
 
                 <div class="field-label">New user password</div>
                 <div class="field-data">
@@ -327,12 +301,12 @@
 
             </div>
 
-            <div class="flashcard-section" style="text-align: center">
+            <div class="section">
 
                 <button class="btn btn-rememberators" data-ng-click="changeUserPassword(otherUser)">Update</button>
             </div>
         </div>
-    </div>
+
 
 
 </section>

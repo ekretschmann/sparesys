@@ -54,6 +54,13 @@
   .make-xl-column-offset(1/4);
 }
 
+.admin-card-large {
+  .admin-card;
+
+  .make-xl-column(11/2);
+  .make-xl-column-offset(1/4);
+}
+
 .info-card {
 
 
@@ -103,6 +110,13 @@
       line-height: 1.8em;
     }
   }
+}
+
+
+.admin-card {
+  .info-card;
+  .texture-admin;
+
 }
 
 
@@ -200,12 +214,6 @@
 
 }
 
-.admin-card {
-  .generic-card;
-  .texture-admin;
-  box-shadow: 5px 5px 5px #C99;
-  border: 1px solid darken(@background-color-admin, 5%);
-}
 
 // banner
 .ribbon-card {

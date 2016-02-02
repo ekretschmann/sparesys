@@ -21,7 +21,7 @@ angular.module('core').controller('LandingPageController', ['$window', '$scope',
         // Set of Photos
         $scope.slides = [
             {image: '/modules/core/img/brand/superhero-girl-medium.gif', text: 'You won\'t forget this. Ever.'},
-            {image: '/modules/core/img/brand/illuarator.png', text: 'I dare you to become a Rememberator!'},
+            {image: '/modules/core/img/brand/illustrator.png', text: 'I dare you to become a Rememberator!'},
             {image: '/modules/core/img/brand/philosopher-medium.gif', text: 'I remember, therefore I am.'},
             {image: '/modules/core/img/brand/gator-skater.png', text: 'Unleash your brainpower!'},
             {image: '/modules/core/img/brand/fish.png', text: 'Do something worth Remembering!'},

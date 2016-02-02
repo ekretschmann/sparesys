@@ -1,119 +1,114 @@
 <div data-ng-controller="CourseReportController" data-ng-init="init()">
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col ">
+    <div class="info-card-xl">
+        <div class="title">
+            <div>{{course.name}}</div>
 
-        <div class="info-card">
-            <div class="title">
-                <div>{{course.name}}</div>
+        </div>
 
-            </div>
 
+        <div>
 
             <div>
-
-                <div>
-                    <span id="practice-date"></span>&nbsp;<span id="number-of-cards"></span>
-                </div>
-
-                <div id="cal" class="diagram">
-
-                </div>
+                <span id="practice-date"></span>&nbsp;<span id="number-of-cards"></span>
             </div>
 
+            <div id="cal" class="diagram">
 
+            </div>
         </div>
+
+
     </div>
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col ">
-
-        <div class="info-card">
-            <div class="title">
-                <div>Time spent (<span id="spent-all-time"></span>)</div>
-
-            </div>
-
-
-            <div>
-                <span id="spent-practice-date"></span>&nbsp;<span id="spent-practice-time"></span>
-            </div>
-
-            <div class="timespent diagram" id="timespent">
-
-            </div>
-
+    <div class="info-card-xl">
+        <div class="title">
+            <div>Time spent (<span id="spent-all-time"></span>)</div>
 
         </div>
-    </div>
-
-    <div class="col-xs-12 col-md-6 dashboard-col ">
-
-        <div class="info-card">
-            <div class="title">
-                <div>Cards learned (<span id="total-cards-learned"></span>)</div>
-
-            </div>
 
 
-            <div id="inplay" class="diagram">
+        <div>
+            <span id="spent-practice-date"></span>&nbsp;<span id="spent-practice-time"></span>
+        </div>
 
-            </div>
-
+        <div class="timespent diagram" id="timespent">
 
         </div>
+
+
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col ">
 
-        <div class="info-card">
-            <div class="title">
-                <div>Time series </div>
+    <div class="info-card-xl">
+        <div class="title">
+            <div>Cards learned (<span id="total-cards-learned"></span>)</div>
 
-            </div>
+        </div>
 
-            <div class="col-xs-4">
-                <div class="field-label">Card 1</div>
-                <div class="field-data">
 
-                    <input type="text" ng-model="selectedCards[0]" typeahead-on-select="initTimeSeries($item, $model, $label)"
-                           typeahead="card as card.question for card in cards | filter:$viewValue | limitTo:8" class="form-control">
-                    <!--<pre>Model: {{card1 | json}}</pre>-->
-                </div>
-            </div>
+        <div id="inplay" class="diagram">
 
-            <div class="col-xs-4">
-                <div class="field-label">Card 2</div>
-                <div class="field-data">
-                    <input type="text" ng-model="selectedCards[1]" typeahead-on-select="initTimeSeries($item, $model, $label)"
-                           typeahead="card as card.question for card in cards | filter:$viewValue | limitTo:8" class="form-control">
+        </div>
 
-                </div>
-            </div>
 
-            <div class="col-xs-4">
-                <div class="field-label">Card 3</div>
-                <div class="field-data">
-                    <input type="text" ng-model="selectedCards[2]" typeahead-on-select="initTimeSeries($item, $model, $label)"
-                           typeahead="card as card.question for card in cards | filter:$viewValue | limitTo:8" class="form-control">
+    </div>
 
-                </div>
+    <!--<div class="info-card">-->
+        <!--<div class="title">-->
+            <!--<div>Time series</div>-->
 
-                <div id="timeseries" class="diagram">
+        <!--</div>-->
 
-                </div>
-            </div>
+        <!--<div class="col-xs-4">-->
+            <!--<div class="field-label">Card 1</div>-->
+            <!--<div class="field-data">-->
 
-            <!--<div id="inplay" class="diagram">-->
+                <!--<input type="text" ng-model="selectedCards[0]"-->
+                       <!--typeahead-on-select="initTimeSeries($item, $model, $label)"-->
+                       <!--typeahead="card as card.question for card in cards | filter:$viewValue | limitTo:8"-->
+                       <!--class="form-control">-->
+                <!--&lt;!&ndash;<pre>Model: {{card1 | json}}</pre>&ndash;&gt;-->
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-xs-4">-->
+            <!--<div class="field-label">Card 2</div>-->
+            <!--<div class="field-data">-->
+                <!--<input type="text" ng-model="selectedCards[1]"-->
+                       <!--typeahead-on-select="initTimeSeries($item, $model, $label)"-->
+                       <!--typeahead="card as card.question for card in cards | filter:$viewValue | limitTo:8"-->
+                       <!--class="form-control">-->
+
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--<div class="col-xs-4">-->
+            <!--<div class="field-label">Card 3</div>-->
+            <!--<div class="field-data">-->
+                <!--<input type="text" ng-model="selectedCards[2]"-->
+                       <!--typeahead-on-select="initTimeSeries($item, $model, $label)"-->
+                       <!--typeahead="card as card.question for card in cards | filter:$viewValue | limitTo:8"-->
+                       <!--class="form-control">-->
 
             <!--</div>-->
 
+            <!--<div id="timeseries" class="diagram">-->
 
-        </div>
-    </div>
+            <!--</div>-->
+        <!--</div>-->
+
+        <!--&lt;!&ndash;<div id="inplay" class="diagram">&ndash;&gt;-->
+
+        <!--&lt;!&ndash;</div>&ndash;&gt;-->
 
 
-    <div class="rememberators-footer col-xs-12">
+    <!--</div>-->
+
+
+    <div class="rememberators-footer">
 
         rememberators.com
     </div>

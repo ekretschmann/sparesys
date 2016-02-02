@@ -6,263 +6,249 @@
 
 
     <div data-ng-if="!school || !school._id">
-        <div class="col-xs-12 col-md-6 dashboard-col font-large">
-            <div class="info-card">
-                <div class="title danger">School does not exist</div>
+        <div class="admin-card-large">
+            <div class="title danger">School does not exist</div>
 
 
-                <div class="flashcard-section">
-                    There is no school with id {{stateParamId}}.
+            <div class="section danger">
+                There is no school with id {{stateParamId}}.
 
-                </div>
             </div>
         </div>
     </div>
 
     <div data-ng-if="school && school._id">
-        <div class="col-xs-12 col-md-6 dashboard-col font-large">
-            <div class="admin-card">
-                <div class="title">{{school.name}}</div>
+        <div class="admin-card-large">
+            <div class="title">{{school.name}}</div>
 
 
-                <div class="flashcard-section">
+            <div class="two-column-section top-section">
 
-                    <div class="row">
 
-                        <div class="col-xs-6">
-                            <div class="field-label">ID</div>
-                            <div class="field-data">
-                                {{school._id}}
-                            </div>
-                        </div>
-
-                        <div class="col-xs-6">
-                            <div class="field-label">Administrator</div>
-                            <div class="field-data">
-                                {{school.user.displayName}}
-
-                            </div>
-                        </div>
-
+                <div class="column">
+                    <div class="field-label">ID</div>
+                    <div class="field-data">
+                        {{school._id}}
                     </div>
                 </div>
 
-                <div class="flashcard-section">
-                    <div class="row ">
-
-                        <div class="col-xs-6">
-                            <div class="field-label">Name</div>
-                            <div class="field-data">
-                                <input type="text"
-                                       data-ng-model="school.name"
-                                       class="form-control"
-                                       placeholder="First Name">
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-
-                <div class="flashcard-section">
-                    <div class="row ">
-
-                        <div class="col-xs-6">
-                            <div class="field-label">Country</div>
-                            <div class="field-data">
-                                <input type="text"
-                                       data-ng-model="school.country"
-                                       class="form-control"
-                                       placeholder="First Name">
-                            </div>
-                        </div>
-
-
-                        <div class="col-xs-6">
-                            <div class="field-label">City</div>
-                            <div class="field-data">
-                                <input type="text"
-                                       data-ng-model="school.city"
-                                       class="form-control"
-                                       placeholder="Username">
-                            </div>
-                        </div>
+                <div class="column">
+                    <div class="field-label">Administrator</div>
+                    <div class="field-data">
+                        {{school.user.displayName}}
 
                     </div>
                 </div>
 
             </div>
+
+            <div class="two-column-section">
+
+                <div class="column">
+                    <div class="field-label">Name</div>
+                    <div class="field-data">
+                        <input type="text"
+                               data-ng-model="school.name"
+                               class="form-control"
+                               placeholder="First Name">
+                    </div>
+                </div>
+
+
+            </div>
+
+            <div class="two-column-section">
+
+                <div class="column">
+                    <div class="field-label">Country</div>
+                    <div class="field-data">
+                        <input type="text"
+                               data-ng-model="school.country"
+                               class="form-control"
+                               placeholder="First Name">
+                    </div>
+                </div>
+
+
+                <div class="column">
+                    <div class="field-label">City</div>
+                    <div class="field-data">
+                        <input type="text"
+                               data-ng-model="school.city"
+                               class="form-control"
+                               placeholder="Username">
+                    </div>
+                </div>
+            </div>
+
         </div>
 
 
-        <div class="col-xs-12 col-md-6 dashboard-col font-large">
-            <div class="admin-card">
-                <div class="title">Subscribed teachers and students</div>
+        <div class="admin-card-large">
+            <div class="title">Subscribed teachers and students</div>
 
 
-                <div class="flashcard-section">
-                    <div class="row">
-                        <div class="col-xs-6 field-label">Teachers</div>
-                        <div class="col-xs-6 field-label">Students</div>
+            <div class="two-column-headers top-section">
+                <div class="column">
+                    <div class="field-label">Teachers</div>
+                </div>
+
+                <div class="column">
+                    <div class="field-label">Students</div>
+                </div>
+            </div>
+
+
+            <div class="two-column-data">
+                <div class="column">
+                    <div class="field-data danger"
+                         data-ng-if="!school.teachers || school.teachers.length === 0">
+                        none
                     </div>
+                    <div data-ng-repeat="teacher in school.teachers">
 
 
-                    <div class="row ">
-                        <div class="col-xs-6">
-                            <div class="field-data danger"
-                                 data-ng-if="!school.teachers || school.teachers.length === 0">
-                                none
-                            </div>
-                            <div data-ng-repeat="teacher in school.teachers">
-
-
-                                <div data-ng-if="teacher.displayName">
-                                <div class="field-data">
-                                        <a href="" data-ng-click="areYouSureToRemoveTeacher(teacher)">
-                                            <i class="glyphicon glyphicon-trash"></i></a> {{teacher.displayName}}
-                                </div>
-                                </div>
-
-                                <div data-ng-if="!teacher.displayName">
-                                    <div class="field-data danger">
-                                        <a href="" data-ng-click="removeDeadTeacherId(teacher)">
-                                            <i class="glyphicon glyphicon-trash"></i></a> {{teacher}}
-                                    </div>
-                                </div>
+                        <div data-ng-if="teacher.displayName">
+                            <div class="field-data">
+                                <a href="" data-ng-click="areYouSureToRemoveTeacher(teacher)">
+                                    <i class="glyphicon glyphicon-trash"></i></a> {{teacher.displayName}}
                             </div>
                         </div>
 
-                        <div class="col-xs-6 ">
-                            <div class="field-data danger"
-                                 data-ng-if="!school.students || school.students.length === 0">
-                                none
-                            </div>
-                            <div data-ng-repeat="student in school.students">
-
-                                <div class="field-data">
-                                    <a href="" data-ng-click="areYouSureToRemoveStudent(student)">
-                                        <i class="glyphicon glyphicon-trash"></i></a> {{student.displayName}}
-                                </div>
+                        <div data-ng-if="!teacher.displayName">
+                            <div class="field-data danger">
+                                <a href="" data-ng-click="removeDeadTeacherId(teacher)">
+                                    <i class="glyphicon glyphicon-trash"></i></a> {{teacher}}
                             </div>
                         </div>
                     </div>
                 </div>
 
-            </div>
-        </div>
-
-
-        <div data-ng-repeat="sc in school.schoolclasses">
-
-            <div class="col-xs-12 col-md-6 dashboard-col " data-ng-controller="SchoolclassesController"
-                 data-ng-init="findById(sc._id)">
-                <div class="admin-card font-large">
-                    <div class="title">
-                        {{sc.name}}
-
-                        <div class="pull-right">
-                            <a href="#!/schoolclasses/{{sc._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
-                            <a href="" data-ng-click="areYouSureToDeleteClass(class, school)"><i
-                                    class="glyphicon glyphicon-trash"></i></a>
-
-
-                        </div>
+                <div class="column ">
+                    <div class="field-data danger"
+                         data-ng-if="!school.students || school.students.length === 0">
+                        none
                     </div>
+                    <div data-ng-repeat="student in school.students">
 
-
-                    <div class="flashcard-section">
-                        <div class="col-xs-6 field-label">
-
-                            Teachers
-
-
+                        <div class="field-data">
+                            <a href="" data-ng-click="areYouSureToRemoveStudent(student)">
+                                <i class="glyphicon glyphicon-trash"></i></a> {{student.displayName}}
                         </div>
-                        <div class="col-xs-6 field-label">
-
-                            Students
-
-
-                        </div>
-                        <div>
-                            <div class="col-xs-6 field-data">
-
-                                <div class="danger" data-ng-if="schoolclass.teachers.length ===0">
-                                    none
-                                </div>
-
-                                <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}} <a href=""
-                                                                                                                 data-ng-click="removeTeacherFromClass(teacher._id)"><i
-                                        class="glyphicon glyphicon-minus-sign"></i></a></div>
-
-                                <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
-                                    <button type="button" class="btn btn-primary dropdown-toggle"
-                                            ng-disabled="disabled">
-                                        Add a Teacher <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-                                        <li role="menuitem" data-ng-repeat="teacher in school.teachers"><a href=""
-                                                                                                           data-ng-click="addTeacherToClass(teacher)">{{teacher.displayName}}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                            <div class="col-xs-6 field-data">
-                                <div class="danger" data-ng-if="schoolclass.students.length ===0">
-                                    none
-                                </div>
-                                <div data-ng-repeat="student in schoolclass.students">{{student.displayName}} <a href=""
-                                                                                                                 data-ng-click="removeStudentFromClass(student._id)"><i
-                                        class="glyphicon glyphicon-minus-sign"></i></a></div>
-                                <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
-                                    <button type="button" class="btn btn-primary dropdown-toggle"
-                                            ng-disabled="disabled">
-                                        Add a Student <span class="caret"></span>
-                                    </button>
-                                    <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-                                        <li role="menuitem" data-ng-repeat="student in school.students"><a href=""
-                                                                                                           data-ng-click="addStudentToClass(student)">{{student.displayName}}</a>
-                                        </li>
-                                    </ul>
-                                </div>
-
-                            </div>
-                        </div>
-
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <div class="col-xs-6 dashboard-col">
-
-            <div class="font-large info-card-header">
-
-                <form data-ng-submit="addSchoolclassToSchool()" validate>
-
-                    <div class="title">
-
-
-                        <div class="pull-right">
-
-
-                            <a href="" data-ng-click="addSchoolclassToSchool()"><i
-                                    class="glyphicon glyphicon-plus-sign"></i></a>
-
-
-                        </div>
-                        Add another class <input type="text" data-ng-model="newClass.name"
-                                                 class="form-control focus"
-                                                 placeholder="Name">
-
-
-                    </div>
-
-
-                </form>
-
             </div>
         </div>
 
     </div>
+
+
+    <div data-ng-repeat="sc in school.schoolclasses">
+
+        <div data-ng-controller="SchoolclassesController"
+             data-ng-init="findById(sc._id)">
+            <div class="admin-card-large ">
+                <div class="title">
+                    {{sc.name}}
+
+                    <div class="pull-right">
+                        <a href="#!/schoolclasses/{{sc._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="" data-ng-click="areYouSureToDeleteClass(class, school)"><i
+                                class="glyphicon glyphicon-trash"></i></a>
+
+
+                    </div>
+                </div>
+
+
+                <div class="two-column-headers">
+                    <div class="column">
+                        <div class="field-label">
+                            Teachers
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="field-label">
+                            Students
+                        </div>
+                    </div>
+                </div>
+                <div class="two-column-data">
+                    <div class="column field-data">
+
+                        <div class="danger" data-ng-if="schoolclass.teachers.length ===0">
+                            none
+                        </div>
+
+                        <div data-ng-repeat="teacher in schoolclass.teachers">{{teacher.displayName}} <a href=""
+                                                                                                         data-ng-click="removeTeacherFromClass(teacher._id)"><i
+                                class="glyphicon glyphicon-minus-sign"></i></a></div>
+
+                        <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
+                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                    ng-disabled="disabled">
+                                Add a Teacher <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                                <li role="menuitem" data-ng-repeat="teacher in school.teachers"><a href=""
+                                                                                                   data-ng-click="addTeacherToClass(teacher)">{{teacher.displayName}}</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                    <div class="column field-data">
+                        <div class="danger" data-ng-if="schoolclass.students.length ===0">
+                            none
+                        </div>
+                        <div data-ng-repeat="student in schoolclass.students">{{student.displayName}} <a href=""
+                                                                                                         data-ng-click="removeStudentFromClass(student._id)"><i
+                                class="glyphicon glyphicon-minus-sign"></i></a></div>
+                        <div class="btn-group" style="padding-top: 1em" dropdown is-open="status.isopen">
+                            <button type="button" class="btn btn-primary dropdown-toggle"
+                                    ng-disabled="disabled">
+                                Add a Student <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                                <li role="menuitem" data-ng-repeat="student in school.students"><a href=""
+                                                                                                   data-ng-click="addStudentToClass(student)">{{student.displayName}}</a>
+                                </li>
+                            </ul>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="action-postit-large">
+
+
+            <form data-ng-submit="addSchoolclassToSchool()" validate>
+
+                <div class="title">
+
+
+                    <div class="pull-right">
+
+
+                        <a href="" data-ng-click="addSchoolclassToSchool()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+
+
+                    </div>
+                    Add another class <input type="text" data-ng-model="newClass.name"
+                                             class="form-control focus"
+                                             placeholder="Name">
+
+
+                </div>
+
+
+            </form>
+
+        </div>
+
 </section>

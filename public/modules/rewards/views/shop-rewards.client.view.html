@@ -38,366 +38,117 @@
         <div class="two-column-section top-section">
             <div class="column">
 
-                <div class="field-label">Skills</div>
+
+                <div class="section">
+                    <div class="field-label">Skills</div>
 
 
-                <div data-ng-if="skills.owned.length === 0" class="field-data">
-                    none
-                </div>
+                    <div data-ng-if="skills.owned.length === 0" class="field-data">
+                        none
+                    </div>
 
-                <div data-ng-repeat="skill in skills.owned" class="field-data">
-                    {{skill.name}}
-
-
-                </div>
+                    <div data-ng-repeat="skill in skills.owned" class="field-data">
+                        {{skill.name}}
 
 
-            </div>
-            <div class="column">
-
-                <div class="field-label">Goals</div>
-
-                <div data-ng-if="goals.length === 0" class="field-data">
-                    none
-                </div>
-
-                <div data-ng-repeat="goal in goals.owned track by $index" class="field-data hasIngredient">
-
-
-                    {{goal.name}}
-
-                    <!--<div data-ng-repeat="goal in skill.goals">-->
-                    <!--{{goal.name}}-->
-                    <!--</div>-->
-                </div>
-
-                <div data-ng-if="goals.challenge.length === 0" class="field-data">
-                    none
-                </div>
-
-                <div data-ng-repeat="goal in goals.challenge track by $index" class="field-data lacksIngredient">
-                    {{goal.name}}
-
-                    <!--<div data-ng-repeat="goal in skill.goals">-->
-                    <!--{{goal.name}}-->
-                    <!--</div>-->
-                </div>
-
-
-            </div>
-
-
-            <div class="section">
-
-                <div data-ng-if="skills.forSale.length === 0">
-                    <div class="field-label">Achieve your goals to unlock further skills
                     </div>
                 </div>
 
-                <div data-ng-if="skills.forSale.length > 0">
 
+                <div class="section">
 
-                    <div class="field-label">You can buy new skills:
-                    </div>
-
-                    <div data-ng-repeat="skill in skills.forSale track by $index" class="field-data">
-
-                        <div data-ng-if="authentication.user.trophies >= skill.price">
-                            <a href="" data-ng-click="purchaseSkill(skill)"><i
-                                    class="glyphicon glyphicon-plus-sign"></i></a>
-                            {{skill.name}} ({{skill.price}} <span
-                                data-ng-if="skill.price === 1">trophy</span><span
-                                data-ng-if="skill.price > 1">trophies</span>)
-
-
+                    <div data-ng-if="skills.forSale.length === 0">
+                        <div class="field-label">Achieve your goals to unlock further skills
                         </div>
-                        <div data-ng-if="authentication.user.trophies < skill.price" class="text-muted">
-                            <i class="glyphicon glyphicon-piggy-bank"></i>
-                            {{skill.name}} ({{skill.price}} <span
-                                data-ng-if="skill.price === 1">trophy</span><span
-                                data-ng-if="skill.price > 1">trophies</span>)
+                    </div>
+
+                    <div data-ng-if="skills.forSale.length > 0">
+
+
+                        <div class="field-label">You can buy new skills:
+                        </div>
+
+                        <div data-ng-repeat="skill in skills.forSale track by $index" class="field-data">
+
+                            <div data-ng-if="authentication.user.trophies >= skill.price">
+                                <a href="" data-ng-click="purchaseSkill(skill)"><i
+                                        class="glyphicon glyphicon-plus-sign"></i></a>
+                                {{skill.name}} ({{skill.price}} <span
+                                    data-ng-if="skill.price === 1">trophy</span><span
+                                    data-ng-if="skill.price > 1">trophies</span>)
+
+
+                            </div>
+                            <div data-ng-if="authentication.user.trophies < skill.price" class="text-muted">
+                                <i class="glyphicon glyphicon-piggy-bank"></i>
+                                {{skill.name}} ({{skill.price}} <span
+                                    data-ng-if="skill.price === 1">trophy</span><span
+                                    data-ng-if="skill.price > 1">trophies</span>)
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-        </div>
-    </div>
-
-
-    <div class="info-card-large ">
-
-
-        <div class="three-column-section top-section">
-            <div class="column">
-                <div>
-                    {{authentication.user.rewardlocation}}
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="title">Workbench</div>
-            </div>
-
-            <div class="column">
-                <div>
-                    {{authentication.user.trophies}} trophies
-                </div>
-            </div>
-        </div>
-
-
-        <div class="section" data-ng-if="items.forSale.length ===0">
-
-
-            <div class="field-label">You can buy</div>
-
-            <div class="field-data">
-                You have to buy skills first
-            </div>
-        </div>
-
-        <div class="three-column-section top-section" data-ng-if="items.forSale.length > 0">
-
-
             <div class="column">
 
-                <div class="field-label">You can buy</div>
+                <div class="section">
+                    <div class="field-label">Goals achieved</div>
 
-
-                <div data-ng-repeat="item in items.forSale track by $index" ng-if="$index % 3 === 0"
-                     class="field-data">
-
-                    <div data-ng-if="authentication.user.trophies >= item.price">
-                        <a href="" data-ng-click="purchaseItem(item)"><i
-                                class="glyphicon glyphicon-plus-sign"></i></a>
-                        {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span
-                            data-ng-if="item.price > 1">trophies</span>)
+                    <div data-ng-if="goals.owned.length === 0" class="field-data">
+                        none
                     </div>
-                    <div data-ng-if="authentication.user.trophies < item.price" class="text-muted">
-                        <i class="glyphicon glyphicon-plus-sign"></i>
-                        {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span
-                            data-ng-if="item.price > 1">trophies</span>)
+
+                    <div data-ng-repeat="goal in goals.owned track by $index" class="field-data hasIngredient">
+
+                        <div class="pull-left" style="padding-right: 5px; margin-top: 0.7em">
+
+
+                            <a href="" title="{{item.name}}">
+                                <img width="48px" src="{{goal.icon}}">
+
+                            </a>
+
+
+                        </div>
+                    </div>
+                </div>
+                <div class="section">
+                    <div class="field-label">Goals</div>
+                    <div data-ng-if="goals.challenge.length === 0" class="field-data">
+                        none
+                    </div>
+
+                    <div data-ng-repeat="goal in goals.challenge track by $index" class="field-data lacksIngredient">
+
+                        <div class="pull-left" style="padding-right: 5px; margin-top: 0.7em">
+
+
+                            <a href="" title="{{item.name}}">
+                                <img width="48px" src="{{goal.icon}}">
+                            </a>
+
+
+                        </div>
+
+
                     </div>
                 </div>
 
-            </div>
-
-            <div class="column">
-
-
-                <div class="field-label">&nbsp;</div>
-
-                <div data-ng-repeat="item in items.forSale track by $index" ng-if="$index % 3 === 1"
-                     class="field-data">
-
-
-                    <div data-ng-if="authentication.user.trophies >= item.price">
-                        <a href="" data-ng-click="purchaseItem(item)"><i
-                                class="glyphicon glyphicon-plus-sign"></i></a>
-                        {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span
-                            data-ng-if="item.price > 1">trophies</span>)
-                    </div>
-                    <div data-ng-if="authentication.user.trophies < item.price" class="text-muted">
-                        <i class="glyphicon glyphicon-plus-sign"></i>
-                        {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span
-                            data-ng-if="item.price > 1">trophies</span>)
-                    </div>
-                </div>
-
-            </div>
-
-            <div class="column">
-
-                <div class="field-label">&nbsp;</div>
-
-
-                <div data-ng-repeat="item in items.forSale track by $index" ng-if="$index % 3 === 2"
-                     class="field-data">
-
-                    <div data-ng-if="authentication.user.trophies >= item.price">
-                        <a href="" data-ng-click="purchaseItem(item)"><i
-                                class="glyphicon glyphicon-plus-sign"></i></a>
-                        {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span
-                            data-ng-if="item.price > 1">trophies</span>)
-                    </div>
-                    <div data-ng-if="authentication.user.trophies < item.price" class="text-muted">
-                        <i class="glyphicon glyphicon-plus-sign"></i>
-                        {{item.name}} ({{item.price}} <span data-ng-if="item.price === 1">trophy</span><span
-                            data-ng-if="item.price > 1">trophies</span>)
-                    </div>
-                </div>
 
             </div>
         </div>
-
-        <div class="three-column-section">
-            <div class="column">
-
-                <div class="field-label">Your Inventory</div>
-
-                <div data-ng-if="items.owned.length === 0" class="field-data">
-                    none
-                </div>
-
-
-                <div data-ng-repeat="item in items.owned | orderBy: 'name'" ng-if="$index % 3 === 0"
-                     class="field-data">
-
-                    <a href="" data-ng-click="useIngredient(item)"><i
-                            class="glyphicon glyphicon-plus-sign"></i></a>
-                    {{item.amount}} {{item.name}} <span
-                        data-ng-repeat="hp in getInventoryHealthPoints(item) track by $index"><i
-                        class="glyphicon glyphicon-heart hearts"></i></span>
-                </div>
-            </div>
-
-            <div class="column">
-
-                <div class="field-label">&nbsp;</div>
-
-
-                <div data-ng-repeat="item in items.owned | orderBy: 'name'" ng-if="$index % 3 === 1"
-                     class="field-data">
-                    <a href=""
-                       data-ng-click="useIngredient(item)"><i
-                            class="glyphicon glyphicon-plus-sign"></i></a>
-                    {{item.amount}} {{item.name}} <span
-                        data-ng-repeat="hp in getInventoryHealthPoints(item) track by $index"><i
-                        class="glyphicon glyphicon-heart hearts"></i></span>
-                </div>
-
-            </div>
-
-            <div class="column">
-
-                <div class="field-label">&nbsp;</div>
-
-
-                <div data-ng-repeat="item in items.owned | orderBy: 'name'" ng-if="$index % 3 === 2"
-                     class="field-data">
-                    <a href="" data-ng-click="useIngredient(item)"><i
-                            class="glyphicon glyphicon-plus-sign"></i></a>
-                    {{item.amount}} {{item.name}} <span
-                        data-ng-repeat="hp in getInventoryHealthPoints(item) track by $index"><i
-                        class="glyphicon glyphicon-heart hearts"></i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="three-column-section">
-            <div class="column">
-
-                <div class="field-label">Recipe</div>
-
-                <div data-ng-if="items.used.length === 0" class="field-data">
-                    none
-                </div>
-
-
-                <div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 0"
-                     class="field-data">
-                    <a href="" data-ng-click="unuseIngredient(item)"><i
-                            class="glyphicon glyphicon-minus-sign"></i></a>
-                    {{item.amount}} {{item.name}} <span
-                        data-ng-repeat="hp in getHealthPoints(item) track by $index"><i
-                        class="glyphicon glyphicon-heart hearts"></i></span>
-                </div>
-            </div>
-
-            <div class="column">
-
-                <div class="field-label">&nbsp;</div>
-
-
-                <div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 1"
-                     class="field-data">
-                    <a href="" data-ng-click="unuseIngredient(item)"><i
-                            class="glyphicon glyphicon-minus-sign"></i></a>
-                    {{item.amount}} {{item.name}} <span
-                        data-ng-repeat="hp in getHealthPoints(item) track by $index"><i
-                        class="glyphicon glyphicon-heart hearts"></i></span>
-                </div>
-
-            </div>
-
-            <div class="column">
-
-                <div class="field-label">&nbsp;</div>
-
-
-                <div data-ng-repeat="item in items.used | orderBy: 'name'" ng-if="$index % 3 === 2"
-                     class="field-data">
-                    <a href="" data-ng-click="unuseIngredient(item)"><i
-                            class="glyphicon glyphicon-minus-sign"></i></a>
-                    {{item.amount}} {{item.name}} <span
-                        data-ng-repeat="hp in getHealthPoints(item) track by $index"><i
-                        class="glyphicon glyphicon-heart hearts"></i></span>
-                </div>
-
-            </div>
-        </div>
-
-        <div class="three-column-section">
-            <div class="column">
-
-                <div class="field-label">Product</div>
-
-                <div data-ng-if="recipies.forSale.length === 0" class="field-data">
-                    none
-                </div>
-
-
-                <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 0"
-                     class="field-data">
-                    <a href="" data-ng-click="craft(item)"><i
-                            class="glyphicon glyphicon-plus-sign"></i></a>
-                    {{item.amount}} {{item.name}}
-                </div>
-            </div>
-
-            <div class="column">
-
-                <div class="field-label">&nbsp;</div>
-
-
-                <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 1"
-                     class="field-data">
-                    <a href="" data-ng-click="craft(item)"><i
-                            class="glyphicon glyphicon-plus-sign"></i></a>
-                    {{item.amount}} {{item.name}}
-                </div>
-
-            </div>
-
-            <div class="column">
-
-                <div class="field-label">&nbsp;</div>
-
-
-                <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'" ng-if="$index % 3 === 2"
-                     class="field-data">
-                    <a href="" data-ng-click="craft(item)"><i
-                            class="glyphicon glyphicon-plus-sign"></i></a>
-                    {{item.amount}} {{item.name}}
-                </div>
-
-            </div>
-        </div>
-
     </div>
 
 
     <div class="info-card-large">
 
 
-        <div class="three-column-section">
-            <div class="column">
+        <div class="three-column-section top-section">
+            <div class="column" style="text-align: left">
                 {{authentication.user.rewardlocation}}
             </div>
             <div class="column title">Workbench</div>
-            <div class="column">
+            <div class="column" style="text-align: right">
                 {{authentication.user.trophies}} trophies
             </div>
 
@@ -417,7 +168,7 @@
         <div class="two-column-section top-section" data-ng-if="items.forSale.length > 0">
 
 
-            <div class="column">
+            <div class="column-wide">
 
                 <div class="field-label">Your Inventory</div>
 
@@ -426,31 +177,29 @@
                 </div>
 
 
-                <div>
-                    <div data-ng-repeat="item in items.owned | orderBy: 'name'"
-                         class="pull-left" style="padding-right: 5px">
+                <div data-ng-repeat="item in items.owned | orderBy: 'name'"
+                     class="pull-left" style="padding-right: 5px; margin-top: -0.7em">
 
-                        <div style="text-align: center; font-size:small">{{item.amount}}x</div>
-                        <a href="" data-ng-click="useIngredient(item)" title="{{item.name}}">
-                            <img width="48px" src="{{item.icon}}">
-                        </a>
+                    <div style="text-align: center; font-size:small">{{item.amount}}x</div>
+                    <a href="" data-ng-click="useIngredient(item)" title="{{item.name}}">
+                        <img width="48px" src="{{item.icon}}">
+                    </a>
 
-                        <div>
+                    <div>
                         <span data-ng-repeat="hp in getInventoryHealthPoints(item) track by $index"><i
                                 class="glyphicon glyphicon-heart hearts"></i></span>
-                        </div>
                     </div>
                 </div>
             </div>
 
-            <div class="column">
+            <div class="column-narrow">
 
                 <div class="field-label">You can buy</div>
 
 
                 <div>
                     <div data-ng-repeat="item in items.forSale track by $index" class="pull-left"
-                         style="padding-right: 5px">
+                         style="padding-right: 5px; margin-top: -0.7em">
 
                         <div style="text-align: center; font-size:small">&nbsp;</div>
 
@@ -474,58 +223,62 @@
         </div>
 
 
-        <div class="section">
+        <div class="two-column-section">
 
-            <div class="field-label">Recipe</div>
+            <div class="column-wide">
 
-            <div data-ng-if="items.used.length === 0" class="field-data">
-                none
+                <div class="field-label">Recipe</div>
+
+                <div data-ng-if="items.used.length === 0" class="field-data">
+                    none
+                </div>
+
+
+                <div>
+                    <div data-ng-repeat="item in items.used | orderBy: 'name'"
+                         class="pull-left" style="padding-right: 5px; margin-top: -0.7em">
+
+                        <div style="text-align: center; font-size:small">{{item.amount}}x</div>
+                        <a href="" data-ng-click="unuseIngredient(item)" title="{{item.name}}">
+                            <img width="48px" src="{{item.icon}}">
+                        </a>
+
+                        <div>
+                        <span data-ng-repeat="hp in getInventoryHealthPoints(item) track by $index"><i
+                                class="glyphicon glyphicon-heart hearts"></i></span>
+                        </div>
+                    </div>
+                </div>
             </div>
 
 
-            <div>
-                <div data-ng-repeat="item in items.used | orderBy: 'name'"
-                     class="pull-left" style="padding-right: 5px">
+            <div class="column-narrow">
 
-                    <div style="text-align: center; font-size:small">{{item.amount}}x</div>
-                    <a href="" data-ng-click="unuseIngredient(item)" title="{{item.name}}">
+                <div class="field-label">Product</div>
+
+                <div data-ng-if="recipies.forSale.length === 0" class="field-data">
+                    none
+                </div>
+
+
+                <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'"
+                     class="pull-left" style="padding-right: 5px; margin-top: -0.7em">
+
+                    <div style="text-align: center; font-size:small">&nbsp;</div>
+                    <a href="" data-ng-click="craft(item)" title="{{item.name}}">
                         <img width="48px" src="{{item.icon}}">
                     </a>
 
                     <div>
-                        <span data-ng-repeat="hp in getInventoryHealthPoints(item) track by $index"><i
+                        <span data-ng-repeat="hp in getDefaultHealthPoints(item) track by $index"><i
                                 class="glyphicon glyphicon-heart hearts"></i></span>
                     </div>
                 </div>
-            </div>
-        </div>
 
-        <div class="section">
-
-            <div class="field-label">Product</div>
-
-            <div data-ng-if="recipies.forSale.length === 0" class="field-data">
-                none
             </div>
 
-
-            <div data-ng-repeat="item in recipies.forSale | orderBy: 'name'"
-                 class="pull-left" style="padding-right: 5px">
-
-                <div style="text-align: center; font-size:small">&nbsp;</div>
-                <a href="" data-ng-click="craft(item)" title="{{item.name}}">
-                    <img width="48px" src="{{item.icon}}">
-                </a>
-
-                <div>
-                        <span data-ng-repeat="hp in getDefaultHealthPoints(item) track by $index"><i
-                                class="glyphicon glyphicon-heart hearts"></i></span>
-                </div>
-            </div>
 
         </div>
-
-
     </div>
 
 
@@ -568,7 +321,7 @@
             <div class="title">
                 {{reward.name}}
 
-                <div class="pull-right">
+                <div data-ng-if="reward.icon" class="pull-right">
                     <img width="64px" src="{{reward.icon}}">
                 </div>
 
@@ -591,12 +344,19 @@
                 <div class="field-label">Ingredients</div>
                 <div data-ng-repeat="ingredient in reward.ingredients" class="field-data">
 
-                    <div>
-                        <!--<a class="hasIngredient" href="" data-ng-click="search(ingredient.name)"><i-->
-                        <!--class="glyphicon glyphicon-ok"></i></a>-->
-                        {{ingredient.amount}} <a href="" data-ng-click="search(ingredient.name)">
-                        {{ingredient.name}}</a>
+
+                    <div class="pull-left" style="padding-right: 5px; ">
+
+                        <div style="text-align: center; font-size:small">{{ingredient.amount}}x</div>
+                        <a href="" data-ng-click="search(ingredient.name)" title="{{ingredient.name}}">
+                            <img width="48px" src="{{getReward(ingredient.rewardId).icon}}">
+                        </a>
+
+
                     </div>
+
+
+
 
                 </div>
 
@@ -607,9 +367,18 @@
                      data-ng-if="reward.enables.length>0">
                     <div class="field-label">Enables</div>
 
-
                     <div data-ng-repeat="enabled in reward.enables" class="field-data">
-                        {{enabled.name}}
+                    <div class="pull-left" style="padding-right: 5px; ">
+
+                        <a href="" data-ng-click="search(enabled.name)" title="{{enabled.name}}">
+                            <img width="48px" src="{{enabled.icon}}">
+                        </a>
+
+
+                    </div>
+
+
+                        <!--{{enabled.name}}-->
                     </div>
                 </div>
 
@@ -619,7 +388,15 @@
 
 
                     <div data-ng-repeat="goal in reward.goals" class="field-data">
-                        {{goal.name}}
+                        <div class="pull-left" style="padding-right: 5px; ">
+
+                            <a href="" data-ng-click="search(goal.name)" title="{{goal.name}}">
+                                <img width="48px" src="{{goal.icon}}">
+                            </a>
+
+
+                        </div>
+
                     </div>
                 </div>
             </div>

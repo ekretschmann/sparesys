@@ -29,17 +29,17 @@
     <div data-ng-if="authentication.user.roles.indexOf('teacher') > -1 && coursesTeacher.length ===0">
 
 
-            <div class="action-card">
-                <div class="action-ribbon"><span>Action</span></div>
-                <div class="title">Teaching a course</div>
-                <infobox logo="man" position="left">
+        <div class="action-card">
+            <div class="action-ribbon"><span>Action</span></div>
+            <div class="title">Teaching a course</div>
+            <infobox logo="man" position="left">
 
-                    You have registered as a teacher, but you have not created or selected courses
-                    that you intend to teach. Either <a href="#!/courses/create">create a courses</a>
-                    or <a href="#!/courses/search">search for existing courses</a>
-                    and select those you want your for your students.
-                </infobox>
-            </div>
+                You have registered as a teacher, but you have not created or selected courses
+                that you intend to teach. Either <a href="#!/courses/create">create a courses</a>
+                or <a href="#!/courses/search">search for existing courses</a>
+                and select those you want your for your students.
+            </infobox>
+        </div>
 
 
     </div>
@@ -65,7 +65,8 @@
         </infobox>
     </div>
 
-    <div class="action-card" data-ng-if="authentication.user.roles.indexOf('nostudent') === -1 && (!coursesStudent || coursesStudent.length===0)">
+    <div class="action-card"
+         data-ng-if="authentication.user.roles.indexOf('nostudent') === -1 && (!coursesStudent || coursesStudent.length===0)">
 
         <div class="action-ribbon"><span>Action</span></div>
         <div class="title">What next?</div>
@@ -114,20 +115,41 @@
                 rewards with them.
             </div>
 
-            <div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 0"
-                 class="field-data">
-                <div class="inventory-item">{{item.amount}} {{item.name}}</div>
+            <div data-ng-controller="RewardsShopController" data-ng-init="find()">
+                <div data-ng-if="items.owned.length === 0" class="field-data">
+                    none
+                </div>
+
+
+                <div>
+                    <div data-ng-repeat="item in items.owned | orderBy: 'name'"
+                         class="pull-left" style="padding-right: 5px">
+
+                        <div style="text-align: center; font-size:small">{{item.amount}}x</div>
+                        <a href="" data-ng-click="useIngredient(item)" title="{{item.name}}">
+                            <img width="48px" src="{{item.icon}}">
+                        </a>
+
+
+                    </div>
+                </div>
             </div>
 
-            <div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 1"
-                 class="field-data">
-                <div class="inventory-item">{{item.amount}} {{item.name}}</div>
-            </div>
 
-            <div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 2"
-                 class="field-data">
-                <div class="inventory-item">{{item.amount}} {{item.name}}</div>
-            </div>
+            <!--<div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 0"-->
+            <!--class="field-data">-->
+            <!--<div class="inventory-item">{{item.amount}} {{item.name}}</div>-->
+            <!--</div>-->
+
+            <!--<div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 1"-->
+            <!--class="field-data">-->
+            <!--<div class="inventory-item">{{item.amount}} {{item.name}}</div>-->
+            <!--</div>-->
+
+            <!--<div data-ng-repeat="item in authentication.user.inventory " ng-if="$index % 3 === 2"-->
+            <!--class="field-data">-->
+            <!--<div class="inventory-item">{{item.amount}} {{item.name}}</div>-->
+            <!--</div>-->
 
             <div class="button-row" data-ng-if="authentication.user.trophies > 0">
 
@@ -155,8 +177,6 @@
     <!--</div>-->
 
 
-
-
     <div data-ng-if="authentication.user.roles.indexOf('nostudent') === -1">
         <div data-ng-if="!coursesStudent || coursesStudent.length===0">
             <section data-ng-if="authentication.user.roles.indexOf('help') > -1">
@@ -177,8 +197,6 @@
                         </div>
                     </infobox>
                 </div>
-
-
 
 
                 <div class="ribbon-card">
@@ -268,7 +286,6 @@
             </div>
         </div>
     </div>
-
 
 
 </section>

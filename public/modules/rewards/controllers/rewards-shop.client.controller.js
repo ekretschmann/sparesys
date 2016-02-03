@@ -509,6 +509,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                         if (found) {
                             $scope.goals.owned.push(reward.goals[j]);
                         } else {
+
                             $scope.goals.challenge.push(reward.goals[j]);
                         }
                     }

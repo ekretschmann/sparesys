@@ -435,7 +435,9 @@ angular.module('rewards').controller('RewardsController', ['$scope', '$state', '
                     for (i = 0; i < allRewards.length; i++) {
                         if (allRewards[i]._id === $stateParams.rewardId) {
                             $scope.reward = allRewards[i];
-
+                            if (!$scope.reward.icon) {
+                                $scope.reward.icon = '/modules/core/img/rewards/';
+                            }
 
 
                         }

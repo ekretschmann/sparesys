@@ -12,120 +12,114 @@
 
     <!--</div>-->
     <!--</div>-->
-    <div class="col-xs-12 col-md-6 dashboard-col font-large">
-        <div class="admin-card">
-            <div class="title">{{reward.name}}</div>
+    <div class="admin-card">
+        <div class="title">{{reward.name}}</div>
 
 
-            <div class="flashcard-section row">
+        <div class="two-column-section top-section">
 
-                <div class="col-xs-6">
-                    <div class="field-label">Name</div>
-                    <div class="field-data">
-                        <input type="text"
-                               data-ng-blur="update()"
-                               data-ng-model="reward.name"
-                               class="form-control"
-                                >
-                    </div>
+            <div class="column">
+                <div class="field-label">Name</div>
+                <div class="field-data">
+                    <input type="text"
+                           data-ng-blur="update()"
+                           data-ng-model="reward.name"
+                           class="form-control"
+                            >
                 </div>
-
-                <div class="col-xs-6">
-                    <div class="field-label">Type</div>
-                    <div class="field-data">
-                        <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Recipe"> Recipe
-                        <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Item"> Item
-                        <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Skill"> Skill
-
-
-                    </div>
-                </div>
-
-
             </div>
 
-            <div class="flashcard-section row">
+            <div class="column">
+                <div class="field-label">Type</div>
+                <div class="field-data">
+                    <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Recipe"> Recipe
+                    <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Item"> Item
+                    <input type="radio" data-ng-model="reward.type" ng-change="update()" value="Skill"> Skill
 
-                <div class="col-xs-3" data-ng-if="reward.type !== 'Skill'">
-                    <div class="field-label">Health</div>
-                    <div class="field-data">
-                        <!--{{reward.defaulthealthpoints}}-->
-                        <input type="number"
-                               data-ng-change="update()"
-                               data-ng-model="reward.defaulthealthpoints"
-                               class="form-control"
-                                >
-                    </div>
+
                 </div>
-
-                <div class="col-xs-3" data-ng-if="reward.type !== 'Recipe'">
-                    <div class="field-label">Location</div>
-                    <div class="field-data">
-                        <div class="btn-group" dropdown is-open="status.isopen">
-                            <button type="button" class="btn btn-primary dropdown-toggle"
-                                    ng-disabled="disabled">
-                                {{reward.location}} <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
-                                <li role="menuitem" data-ng-repeat="location in options.locations track by $index">
-                                    <a href="" data-ng-click="switchLocation(reward,location)">{{location}}</a>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-xs-3" data-ng-if="reward.type !== 'Recipe'">
-                    <div class="field-label">Price</div>
-                    <div class="field-data">
-                        <!--{{reward.defaulthealthpoints}}-->
-                        <input type="number"
-                               data-ng-change="update()"
-                               data-ng-model="reward.price"
-                               class="form-control"
-                                >
-                    </div>
-                </div>
-
-                <div class="col-xs-3" data-ng-if="reward.type !== 'Recipe'">
-                    <div class="field-label">&nbsp;</div>
-                    <div class="field-data">
-                        <input type="checkbox"
-                               data-ng-change="update()"
-                               data-ng-model="reward.basic"
-                                > Always on offer
-                    </div>
-                </div>
-
             </div>
 
-            <div class="flashcard-section">
-                <div class="row rememberators-form-group form-group">
-                    <div class="col-xs-12">
-                        <div class="field-label">Description</div>
-                        <div class="field-data">
+
+        </div>
+
+        <div class="two-column-section">
+
+            <div class="column" data-ng-if="reward.type !== 'Skill'">
+                <div class="field-label">Health</div>
+                <div class="field-data">
+                    <!--{{reward.defaulthealthpoints}}-->
+                    <input type="number"
+                           data-ng-change="update()"
+                           data-ng-model="reward.defaulthealthpoints"
+                           class="form-control"
+                            >
+                </div>
+            </div>
+
+            <div class="column" data-ng-if="reward.type !== 'Recipe'">
+                <div class="field-label">Location</div>
+                <div class="field-data">
+                    <div class="btn-group" dropdown is-open="status.isopen">
+                        <button type="button" class="btn btn-primary dropdown-toggle"
+                                ng-disabled="disabled">
+                            {{reward.location}} <span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" role="menu" aria-labelledby="single-button">
+                            <li role="menuitem" data-ng-repeat="location in options.locations track by $index">
+                                <a href="" data-ng-click="switchLocation(reward,location)">{{location}}</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="column" data-ng-if="reward.type !== 'Recipe'">
+                <div class="field-label">Price</div>
+                <div class="field-data">
+                    <!--{{reward.defaulthealthpoints}}-->
+                    <input type="number"
+                           data-ng-change="update()"
+                           data-ng-model="reward.price"
+                           class="form-control"
+                            >
+                </div>
+            </div>
+
+            <div class="column" data-ng-if="reward.type !== 'Recipe'">
+                <div class="field-label">&nbsp;</div>
+                <div class="field-data">
+                    <input type="checkbox"
+                           data-ng-change="update()"
+                           data-ng-model="reward.basic"
+                            > Always on offer
+                </div>
+            </div>
+
+        </div>
+
+        <div class="section">
+            <div class="field-label">Description</div>
+            <div class="field-data">
                             <textarea rows="5"
                                       data-ng-blur="update()"
                                       data-ng-model="reward.description"
                                       class="form-control"
                                     ></textarea>
-                        </div>
-                    </div>
-                </div>
             </div>
-
         </div>
+
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col font-large" data-ng-if="reward.type !== 'Item'">
-        <div class="admin-card">
+
+        <div class="admin-card" data-ng-if="reward.type !== 'Item'">
             <div class="title">&nbsp</div>
 
             <div class="flashcard-section">
-                <div class="rememberators-form-group form-group">
 
-                    <div class="row" data-ng-if="reward.type === 'Recipe'">
-                        <div class="col-xs-6">
+
+                    <div class="two-column-section top-section" data-ng-if="reward.type === 'Recipe'">
+                        <div class="column">
                             <div class="field-label">Ingredients</div>
 
                             <input type="text"
@@ -156,7 +150,7 @@
                         </div>
 
 
-                        <div class="col-xs-6" data-ng-if="reward.type === 'Recipe'">
+                        <div class="column">
                             <div class="field-label">Journey</div>
 
                             <input type="text"
@@ -165,7 +159,6 @@
                                    typeahead="location for location in options.locations | filter: $viewValue | limitTo:12"
                                    class="form-control">
 
-                            <!--typeahead="loc.name as location in options.locations | filter:{name: $viewValue} | limitTo:12"-->
 
                             <div class="field-data" data-ng-if="reward.journey">
                                 <a>
@@ -178,11 +171,11 @@
                             </div>
                         </div>
                     </div>
-                </div>
 
-                <div class="row" data-ng-if="reward.type !== 'Item'" style="margin-top: 1em">
 
-                    <div class="col-xs-6">
+                <div class="two-column-section top-section" data-ng-if="reward.type !== 'Item'" >
+
+                    <div class="column">
                         <div class="field-label">Enables</div>
                         <div class="field-data">
 
@@ -209,7 +202,7 @@
                     </div>
 
 
-                    <div class="col-xs-6" data-ng-if="reward.type === 'Skill'">
+                    <div class="column" data-ng-if="reward.type === 'Skill'">
                         <div class="field-label">Goals</div>
                         <div class="field-data">
 
@@ -236,7 +229,7 @@
                         </div>
                     </div>
 
-                    <div class="col-xs-6" data-ng-if="reward.type === 'Recipe'">
+                    <div class="column" data-ng-if="reward.type === 'Recipe'">
                         <div class="field-label">Basis</div>
                         <div class="field-data">
 
@@ -264,17 +257,15 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col font-large">
+
         <div class="admin-card">
             <div class="title">Image</div>
 
 
-            <div class="flashcard-section ">
+            <div class="section top-section">
 
-                <div>
                     <div class="field-label">URL</div>
                     <div class="field-data">
                         <input type="text"
@@ -285,7 +276,7 @@
                     </div>
                 </div>
 
-                <div>
+            <div class="section">
                     <div class="field-label">Preview</div>
                     <div class="field-data">
                         <img src="{{reward.icon}}">
@@ -293,9 +284,9 @@
                 </div>
             </div>
         </div>
-    </div>
 
 
-    <div class="rememberators-footer col-xs-12">rememberators.com</div>
+
+    <div class="rememberators-footer">rememberators.com</div>
 
 </div>

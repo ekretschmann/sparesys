@@ -6,34 +6,32 @@
     <div ng-include="'/modules/cards/views/partial/manage-images.modal.client.view.html'"></div>
 
 
-    <div class="col-xs-12 subtitle" style="text-align: center">
-        <div class="row">
+    <div class="pageing">
 
-            <div class="col-xs-2">
-                <div data-ng-if="prevPack">
-                    <a href="#!/packs/{{prevPack._id}}"><i
-                            class="glyphicon glyphicon-circle-arrow-left"></i> {{prevPack.name}}</a>
-                </div>
+        <div class="left">
+            <div data-ng-if="prevPack">
+                <a href="#!/packs/{{prevPack._id}}"><i
+                        class="glyphicon glyphicon-circle-arrow-left"></i> {{prevPack.name}}</a>
             </div>
+        </div>
 
 
-            <div class="col-xs-8">
-                <a href="" data-ng-click="scrollDown()"><i
-                        class="glyphicon glyphicon-circle-arrow-down"></i></a>
+        <div class="middle">
+            <a href="" data-ng-click="scrollDown()"><i
+                    class="glyphicon glyphicon-circle-arrow-down"></i></a>
 
-                <a href="" data-ng-click="scrollDown()">Scroll down to add more
-                    cards
-                </a>
-                <a href="" data-ng-click="scrollDown()"><i
-                        class="glyphicon glyphicon-circle-arrow-down"></i></a>
-            </div>
+            <a href="" data-ng-click="scrollDown()">Scroll down to add more
+                cards
+            </a>
+            <a href="" data-ng-click="scrollDown()"><i
+                    class="glyphicon glyphicon-circle-arrow-down"></i></a>
+        </div>
 
 
-            <div class="col-xs-2" style="text-align: right">
-                <div data-ng-if="nextPack">
-                    <a href="#!/packs/{{nextPack._id}}">{{nextPack.name}} <i
-                            class="glyphicon glyphicon-circle-arrow-right"></i></a>
-                </div>
+        <div class="right">
+            <div data-ng-if="nextPack">
+                <a href="#!/packs/{{nextPack._id}}">{{nextPack.name}} <i
+                        class="glyphicon glyphicon-circle-arrow-right"></i></a>
             </div>
         </div>
     </div>
@@ -207,15 +205,15 @@
             </div>
 
             <div data-ng-if="editMode === 'images'">
-                <div class="flashcard-section">
-                    <div class="field-label">Images <a href="" style="padding-left: 5px;"
+                <div class="section top-section">
+                    <div class="field-label">Images <a href=""
                                                        data-ng-click="manageImages(card)"><i
                             class="glyphicon glyphicon-plus-sign font-medium"></i></a></div>
-                    <div class="font-medium" style="padding-top: 1em">
+                    <div class="field-data">
                         <div data-ng-if="card.images.length === 0">
                             no images
                         </div>
-                                <span data-ng-repeat="img in card.images" style="padding: 5px">
+                                <span data-ng-repeat="img in card.images" >
                                     <img ng-src="{{img}}"
                                          style="max-width: 128px; max-height: 128px"/>
                                 </span>

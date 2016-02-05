@@ -1,10 +1,10 @@
-<div class="flashcard-section">
+<div class="three-column-section top-section">
 
 
 
 
-    <div class="row">
-        <div class="col-xs-4 dashboard-col">
+
+        <div class="column">
             <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Forward Mode
             </div>
             <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('forward') === -1">
@@ -32,7 +32,7 @@
             </div>
         </div>
 
-        <div class="col-xs-4 dashboard-col">
+        <div class="column">
             <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">Reverse Mode
             </div>
             <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('reverse') === -1">
@@ -60,7 +60,7 @@
             </div>
         </div>
 
-        <div class="col-xs-4 dashboard-col">
+        <div class="column">
             <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('images') === -1}">Image Mode</div>
             <div class="font-medium text-muted" data-ng-if="card.modes.indexOf('images') === -1">
                 not used
@@ -87,7 +87,6 @@
 
             </div>
         </div>
-    </div>
 
 
 </div>

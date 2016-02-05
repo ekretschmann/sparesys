@@ -12,32 +12,32 @@
 
         </div>
 
-        <div class="rememberators-modal-section" style="min-height: 4em;">
+        <div class="rememberators-modal-section">
 
-            <div class="col-xs-11">
-                <form class="form-horizontal" data-ng-submit="search()" novalidate>
-                    <fieldset>
-                        <input type="search"
-                               class="form-control focus search" ng-model="search.text">
-                    </fieldset>
-                </form>
-            </div>
+            <div class="searchbox">
+                <div class="input">
 
-            <div class="col-xs-1 font-large" style="position: relative">
+                    <form class="form-horizontal" data-ng-submit="search()" novalidate>
+                        <fieldset>
+                            <input type="search"
+                                   class="form-control focus search" ng-model="search.text">
+                        </fieldset>
+                    </form>
+                </div>
 
-                <div style="position: absolute; top:7px; right:30px">
-                    <a href="" data-ng-click="search()"><i
-                            class="glyphicon glyphicon-search"></i></a>
+                <div class="icon">
+                        <a href="" data-ng-click="search()"><i
+                                class="glyphicon glyphicon-search"></i></a>
                 </div>
             </div>
 
 
         </div>
 
+
         <div class="rememberators-modal-section">
             <div class="row">
 
-                <!--style="text-align:center;max-width:139px;padding: 3px 5px 24px 0px; border: 1px solid #666666"-->
 
 
                 <div class="col-xs-3 gallerypic"
@@ -67,9 +67,9 @@
 
         </div>
 
-        <div class="rememberators-modal-section">
+        <div class="rememberators-modal-section" data-ng-if="images.length > 0">
 
-            <div data-ng-if="images.length > 0">
+            <div >
                 <!--<div style="position: absolute; top:50%; font-size: x-large; left:3px">-->
                 <!--<span data-ng-if="images.length >0">-->
                 <!--<span data-ng-if="page > 1">-->
@@ -111,11 +111,11 @@
 
                                 <div style="vertical-align: middle; min-height: 132px; max-height: 132px; text-align: center; vertical-align: middle">
                                     <!--<span style="height: 100%; vertical-align: middle;display: inline-block;"></span>-->
-                                    <img ng-src="{{img}}" class="image-128" />
+                                    <img ng-src="{{img}}" class="image-128"/>
                                 </div>
 
                                 <!--<div class="add-icon" style="position: absolute; bottom:2px; left: 44%">-->
-                                    <!--Add-->
+                                <!--Add-->
                                 <!--</div>-->
                             </a>
 

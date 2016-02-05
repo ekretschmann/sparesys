@@ -104,7 +104,7 @@
 
 
                             <a href="" title="{{item.name}}">
-                                <img width="48px" src="{{goal.icon}}">
+                                <img class="image-small" src="{{goal.icon}}">
 
                             </a>
 
@@ -124,7 +124,7 @@
 
 
                             <a href="" title="{{item.name}}">
-                                <img width="48px" src="{{goal.icon}}">
+                                <img class="image-small" src="{{goal.icon}}">
                             </a>
 
 
@@ -182,7 +182,7 @@
 
                     <div style="text-align: center; font-size:small">{{item.amount}}x</div>
                     <a href="" data-ng-click="useIngredient(item)" title="{{item.name}}">
-                        <img width="48px" src="{{item.icon}}">
+                        <img class="image-small" src="{{item.icon}}">
                     </a>
 
                     <div>
@@ -207,13 +207,13 @@
 
                             <a href="" data-ng-click="purchaseItem(item)" title="{{item.name}} ({{item.price}})"
                                toggle="tooltip">
-                                <img width="48px" src="{{item.icon}}">
+                                <img class="image-small" src="{{item.icon}}">
                             </a>
                         </div>
                         <div data-ng-if="authentication.user.trophies < item.price" class="text-muted">
                             <a href="" title="{{item.name}} ({{item.price}}) - not enough trophies"
                                toggle="tooltip">
-                                <img width="48px" src="{{item.icon}}" style="opacity: 0.3">
+                                <img class="image-small" src="{{item.icon}}" style="opacity: 0.3">
                             </a>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
 
                         <div style="text-align: center; font-size:small">{{item.amount}}x</div>
                         <a href="" data-ng-click="unuseIngredient(item)" title="{{item.name}}">
-                            <img width="48px" src="{{item.icon}}">
+                            <img class="image-small" src="{{item.icon}}">
                         </a>
 
                         <div>
@@ -266,7 +266,7 @@
 
                     <div style="text-align: center; font-size:small">&nbsp;</div>
                     <a href="" data-ng-click="craft(item)" title="{{item.name}}">
-                        <img width="48px" src="{{item.icon}}">
+                        <img class="image-small" src="{{item.icon}}">
                     </a>
 
                     <div>
@@ -349,7 +349,7 @@
 
                         <div style="text-align: center; font-size:small">{{ingredient.amount}}x</div>
                         <a href="" data-ng-click="search(ingredient.name)" title="{{ingredient.name}}">
-                            <img width="48px" src="{{getReward(ingredient.rewardId).icon}}">
+                            <img class="image-small" src="{{getReward(ingredient.rewardId).icon}}">
                         </a>
 
 
@@ -371,7 +371,7 @@
                     <div class="pull-left" style="padding-right: 5px; ">
 
                         <a href="" data-ng-click="search(enabled.name)" title="{{enabled.name}}">
-                            <img width="48px" src="{{enabled.icon}}">
+                            <img class="image-small" src="{{enabled.icon}}">
                         </a>
 
 
@@ -391,7 +391,7 @@
                         <div class="pull-left" style="padding-right: 5px; ">
 
                             <a href="" data-ng-click="search(goal.name)" title="{{goal.name}}">
-                                <img width="48px" src="{{goal.icon}}">
+                                <img class="image-small" src="{{goal.icon}}">
                             </a>
 
 

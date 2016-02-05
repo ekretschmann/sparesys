@@ -88,7 +88,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
         //});
 
 
-        $scope.search_offline = function () {
+        $scope.search = function () {
 
 
             $scope.totalResults = 50;
@@ -154,7 +154,7 @@ angular.module('packs').controller('ManageImagesController', ['$scope', '$http',
             $scope.search();
         };
 
-        $scope.search = function () {
+        $scope.search_online = function () {
             //
             //if (!$scope.online) {
             //    $scope.search_offline();

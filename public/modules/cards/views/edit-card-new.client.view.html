@@ -826,7 +826,7 @@
 
                         <div class="item">
 
-                            <div class="icon"></div>
+                            <div class="icon">&nbsp;</div>
 
                             <div class="element">
                                 <div class="trash" data-ng-if="card.modes.indexOf('images') === -1">
@@ -852,17 +852,16 @@
         </div>
 
 
+        <div class="three-column-section">
 
-    <div class="three-column-section">
+            <div class="column">
 
-        <div class="column">
-
-            <div class="field-label">Extras</div>
+                <div class="field-label">Extras</div>
+            </div>
         </div>
-    </div>
 
-    <div class="three-column-section field-data">
-        <div class="column ">
+        <div class="three-column-section field-data">
+            <div class="column ">
 
                                     <span data-ng-if="card.modes.indexOf('images') === -1">
                                         <i class="glyphicon glyphicon-ok-circle"
@@ -879,11 +878,11 @@
                                             class="glyphicon glyphicon-off"></i></a>
                                     </span>
 
-            <span ng-class="{'text-muted': !card.imagesReadFront}">Read Question</span>
-        </div>
+                <span ng-class="{'text-muted': !card.imagesReadFront}">Read Question</span>
+            </div>
 
 
-        <div class="column">
+            <div class="column">
 
                                     <span data-ng-if="card.modes.indexOf('images') === -1">
                                         <i class="glyphicon glyphicon-ok-circle" data-ng-show="card.imagesReadBack"></i>
@@ -899,11 +898,11 @@
                                             class="glyphicon glyphicon-off"></i></a>
                                         </span>
 
-            <span ng-class="{'text-muted': !card.imagesReadBack}">Read Answer</span>
-        </div>
+                <span ng-class="{'text-muted': !card.imagesReadBack}">Read Answer</span>
+            </div>
 
 
-        <div class="column">
+            <div class="column">
                                     <span data-ng-if="card.modes.indexOf('images') === -1">
                                         <i class="glyphicon glyphicon-ok-circle"
                                            data-ng-show="card.speechRecognitionImages"></i>
@@ -919,12 +918,11 @@
                                        data-ng-show="!card.speechRecognitionImages"><i
                                             class="glyphicon glyphicon-off"></i></a>
                                         </span>
-            <span ng-class="{'text-muted': !card.speechRecognitionImages}">Speech Recognition</span>
+                <span ng-class="{'text-muted': !card.speechRecognitionImages}">Speech Recognition</span>
+            </div>
         </div>
-    </div>
 
 
-    </div>
     </div>
 
 

@@ -14,10 +14,10 @@ angular.module('core').directive('infobox',
 
 
                 switch (scope.logo) {
-                    case 'woman': scope.image = '/modules/core/img/brand/bear.png'; break;
+                    case 'woman': scope.image = '/modules/core/img/brand/hibernator.png'; break;
                     case 'girl': scope.image = '/modules/core/img/brand/superhero-girl-medium.gif'; break;
                     case 'boy': scope.image = '/modules/core/img/brand/illustrator.png'; break;
-                    case 'man': scope.image = '/modules/core/img/brand/fish.png'; break;
+                    case 'man': scope.image = '/modules/core/img/brand/illuminator.png'; break;
                     case 'guru': scope.image = '/modules/core/img/brand/gator-skater.png'; break;
                     case 'philosopher': scope.image = '/modules/core/img/brand/philosopher-medium.gif'; break;
                 }

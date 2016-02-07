@@ -90,7 +90,7 @@
                 </div>
 
 
-                <div class="two-column-section top-section">
+                <div class="three-column-section top-section">
                     <div class="column">
                         <div class="field-label">Type</div>
                         <div class="field-data">
@@ -99,11 +99,31 @@
                             <span data-ng-if="!reward.basic">(enabled)</span>
                         </div>
                     </div>
-                    <div class="column" data-ng-if="reward.type !== 'Recipe'">
-                        <div class="field-label">Price</div>
-                        <div class="field-data">
-                            {{reward.price}}
+                    <div class="column">
+                        <div data-ng-if="reward.type !== 'Recipe'">
+                            <div class="field-label">Price</div>
+                            <div class="field-data">
+                                {{reward.price}}
+                            </div>
                         </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="field-label">Image</div>
+                        <div class="field-data">
+                            <div data-ng-if="reward.icon">
+
+
+                                <img src="{{reward.icon}}" class="image-smaller">
+
+                            </div>
+
+                            <div data-ng-if="!reward.icon">
+
+                                no image
+                            </div>
+                        </div>
+
                     </div>
 
 

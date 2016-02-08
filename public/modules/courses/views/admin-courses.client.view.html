@@ -3,7 +3,6 @@
     <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col ">
         <div class="admin-card font-large">
             <div class="title">Administer Courses</div>
             <div class="flashcard-section row">
@@ -21,9 +20,8 @@
 
             </div>
         </div>
-    </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="!courses || courses.length === 0">
+    <div data-ng-if="!courses || courses.length === 0">
 
         <div class="admin-card font-large">
             <div class="title">No Courses Found</div>
@@ -32,7 +30,7 @@
     </div>
 
 
-    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-repeat="c in courses">
+    <div data-ng-repeat="c in courses">
         <div class="admin-card font-large">
             <div class="title">{{c.name}}
 

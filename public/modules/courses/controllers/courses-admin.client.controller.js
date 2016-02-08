@@ -40,7 +40,7 @@ angular.module('courses').controller('CoursesAdminController',
                 }
 
                 course.$update(function () {
-                    $location.path('courses/admin');
+
                 }, function (errorResponse) {
                     $scope.error = errorResponse.data.message;
                 });

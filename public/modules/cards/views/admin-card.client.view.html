@@ -3,43 +3,40 @@
     <div ng-include="'/modules/cards/views/partial/manage-images.modal.client.view.html'"></div>
 
 
-    <div class="col-xs-6 dashboard-col" data-ng-if="!card.question">
-        <div class="admin-card font-large danger">
+    <div data-ng-if="!card.question">
+        <div class="admin-card ">
             <div class="title">
                 Sorry, this card does not exist.
             </div>
         </div>
     </div>
 
-    <div class="col-xs-12 subtitle">
-        <div class="row">
+    <div class="pageing">
 
-            <div class="col-xs-6"  style="text-align: left">
-                <div data-ng-if="prevCard">
-                    <a href="#!/cards/{{prevCard._id}}/admin"><i
-                            class="glyphicon glyphicon-circle-arrow-left"></i> {{prevCard.question}}</a>
-                </div>
+        <div class="left">
+            <div data-ng-if="prevCard">
+                <a href="#!/cards/{{prevCard._id}}/admin"><i
+                        class="glyphicon glyphicon-circle-arrow-left"></i> {{prevCard.question}}</a>
             </div>
+        </div>
 
 
+        <div class="middle"></div>
 
 
-
-            <div class="col-xs-6" style="text-align: right">
-                <div data-ng-if="nextCard">
-                    <a href="#!/cards/{{nextCard._id}}/admin">{{nextCard.question}} <i
-                            class="glyphicon glyphicon-circle-arrow-right"></i></a>
-                </div>
+        <div class="right">
+            <div data-ng-if="nextCard">
+                <a href="#!/cards/{{nextCard._id}}/admin">{{nextCard.question}} <i
+                        class="glyphicon glyphicon-circle-arrow-right"></i></a>
             </div>
         </div>
     </div>
 
 
-
     <div data-ng-if="card.question">
 
-        <div class="col-xs-6 dashboard-col">
-            <div class="admin-card font-large">
+
+            <div class="admin-card">
                 <div class="title">
                     {{card.question}}
 
@@ -155,14 +152,13 @@
                     </div>
 
 
-
                 </div>
             </div>
-        </div>
 
 
-        <div class="col-xs-6 dashboard-col">
-            <div class="admin-card font-large">
+
+
+            <div class="admin-card">
                 <div class="title">
                     &nbsp;
                 </div>
@@ -288,10 +284,10 @@
 
                 </div>
             </div>
-        </div>
 
-        <div class="col-xs-6 dashboard-col">
-            <div class="admin-card font-large">
+
+
+            <div class="admin-card">
                 <div class="title">
                     Slaves
 
@@ -305,14 +301,14 @@
                     </div>
 
                     <div data-ng-repeat="slave in card.slaves">
-                            <a href="/#!/cards/{{slave}}">{{slave}}</a>
+                        <a href="/#!/cards/{{slave}}">{{slave}}</a>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <div class="col-xs-6 dashboard-col">
-            <div class="admin-card font-large">
+
+
+            <div class="admin-card">
                 <div class="title" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">
                     Forward mode
 
@@ -364,7 +360,6 @@
                         </div>
 
 
-
                     </div>
 
                     <div class="row">
@@ -403,7 +398,8 @@
 
                             </div>
 
-                            <div class="row font-medium" ng-repeat="aa in card.alternativeAnswersForward track by $index">
+                            <div class="row font-medium"
+                                 ng-repeat="aa in card.alternativeAnswersForward track by $index">
                                 <div class="col-xs-1" style="margin-top: 2px; text-align: left">
 
                                     <span data-ng-if="card.modes.indexOf('forward') === -1">
@@ -590,10 +586,10 @@
                 </div>
 
             </div>
-        </div>
 
-        <div class="col-xs-6 dashboard-col">
-            <div class="admin-card font-large">
+
+
+            <div class="admin-card">
                 <div class="title" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">
                     Reverse mode
 
@@ -731,11 +727,11 @@
                 </div>
 
             </div>
-        </div>
 
 
-        <div class="col-xs-6 dashboard-col">
-            <div class="admin-card font-large">
+
+
+            <div class="admin-card">
                 <div class="title" ng-class="{'text-muted': card.modes.indexOf('images') === -1}">
                     Images mode
 
@@ -867,22 +863,7 @@
 
 
             </div>
-        </div>
 
-
-        <!--<div class="col-xs-6 dashboard-col" data-ng-if="card.slaves && card.slaves.length > 0">-->
-            <!--<div class="admin-card font-large">-->
-                <!--<div class="title">-->
-                    <!--Slaves-->
-
-
-                <!--</div>-->
-
-                <!--<div data-ng-repeat="slave in card.slaves">-->
-                    <!--<a href="/#!/cards/{{slave}}">{{slave}}</a>-->
-                <!--</div>-->
-            <!--</div>-->
-        <!--</div>-->
     </div>
 
     <div class="rememberators-footer col-xs-12">rememberators.com</div>

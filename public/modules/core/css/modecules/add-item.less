@@ -1,42 +1,48 @@
 .add-item {
   .make-row(1em);
 
-  .icon {
+  .left-column {
 
     position: absolute;
     left: 0.5em;
     top: 0.5em;
-    .make-xs-column(1,0);
+    .make-xs-column(1, 0);
     text-align: left;
   }
 
-  .input {
-    .make-xs-column(11,0);
+  .right-column {
+    .make-xs-column(11, 0);
   }
 }
 
 .item-list {
   .field-data;
 
+  .make-row(0);
+  .right-column {
+    .make-xs-column(11, 0);
+
+
+  }
+
   .item {
-    .make-row(0);
-  }
-  .icon {
-    .make-xs-column(1,0);
+    margin-bottom: -1em;
   }
 
-  .element {
-
-    .make-xs-column(11,0);
-
-    .trash {
-      display: inline;
-    }
-
-    .text {
-      display: inline;
-    }
+  .left-column {
+    .make-xs-column(1, 0);
   }
 
+  .trash {
+    //position: absolute;
+    //top: -10px
+    padding-right: 0.5em;
+    display: inline;
+  }
+
+  .text {
+    display: inline;
+
+  }
 
 }

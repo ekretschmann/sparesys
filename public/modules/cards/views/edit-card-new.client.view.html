@@ -765,7 +765,7 @@
                             class="glyphicon glyphicon-plus-sign font-medium"></i></a></div>
                 </div>
 
-                <div class="font-medium">
+                <div class="field-data">
 
 
                     <div data-ng-if="card.images.length === 0">
@@ -786,7 +786,7 @@
 
             <div class="column">
                 <div class="field-label">Expected answer</div>
-                <div class="font-medium">
+                <div class="field-data">
                     {{card.answer}}
                 </div>
             </div>
@@ -797,17 +797,17 @@
 
                 <div class="add-item">
 
-                    <div class="icon field-data" data-ng-if="card.modes.indexOf('images') === -1">
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('images') === -1">
                         <i class="glyphicon glyphicon-plus-sign"></i>
                     </div>
 
-                    <div class="icon field-data" data-ng-if="card.modes.indexOf('images') > -1">
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('images') > -1">
                         <a href=""
                            data-ng-click="addAcceptedAnswerFront()"><i
                                 class="glyphicon glyphicon-plus-sign"></i></a>
                     </div>
 
-                    <div class="input">
+                    <div class="right-column">
                         <form class="form-horizontal" data-ng-submit="addAcceptedAnswerFront()" novalidate>
                             <fieldset>
                                 <input type="text"
@@ -822,23 +822,25 @@
                 </div>
 
                 <div class="item-list">
-                    <div ng-repeat="aa in card.acceptedAnswersForward track by $index">
+                    <div>
 
-                        <div class="item">
 
-                            <div class="icon">&nbsp;</div>
+                        <div class="left-column">&nbsp;</div>
 
-                            <div class="element">
-                                <div class="trash" data-ng-if="card.modes.indexOf('images') === -1">
-                                    <i class="glyphicon glyphicon-trash"></i>
-                                </div>
+                        <div class="right-column">
+                            <div ng-repeat="aa in card.acceptedAnswersForward track by $index">
+                                <div class="item">
+                                    <div class="trash" data-ng-if="card.modes.indexOf('images') === -1">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </div>
 
-                                <div class="trash" data-ng-if="card.modes.indexOf('images') > -1">
-                                    <a href="" data-ng-click="deleteAcceptedAnswerFront($index)"><i
-                                            class="glyphicon glyphicon-trash"></i></a>
-                                </div>
-                                <div class="text">
-                                    {{aa}}
+                                    <div class="trash" data-ng-if="card.modes.indexOf('images') > -1">
+                                        <a href="" data-ng-click="deleteAcceptedAnswerFront($index)"><i
+                                                class="glyphicon glyphicon-trash"></i></a>
+                                    </div>
+                                    <div class="text">
+                                        {{aa}}
+                                    </div>
                                 </div>
                             </div>
                         </div>

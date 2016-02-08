@@ -73,7 +73,7 @@
 
             <div class="column">
                 <div class="field-label">Name</div>
-                <div class="font-medium">
+                <div class="field-data">
                     <input type="text"
                            data-ng-model="pack.name"
                            class="form-control "
@@ -85,7 +85,7 @@
 
             <div class="column">
                 <div class="field-label">Course</div>
-                <div class="font-medium">
+                <div class="field-data">
                     <a href="#!/courses/{{pack.course._id}}/admin">{{pack.course.name}}</a>
                 </div>
             </div>
@@ -95,7 +95,7 @@
         <div class="two-column-section">
             <div class="column">
                 <div class="field-label">User</div>
-                <div class="font-medium">
+                <div class="field-data">
                     {{pack.user.displayName}}
                 </div>
             </div>
@@ -105,14 +105,14 @@
         <div class="two-column-section">
             <div class="column">
                 <div class="field-label">Created</div>
-                <div class="font-medium">
+                <div class="field-data">
                     {{pack.created | date:'shortDate'}}
                 </div>
             </div>
 
             <div class="column">
                 <div class="field-label">Updated</div>
-                <div class="font-medium">
+                <div class="field-data">
                     <div data-ng-if="card.updated">
 
                         {{pack.updated | date:'shortDate'}}
@@ -135,7 +135,7 @@
         </div>
         <div class="section top-section">
             <div class="field-label">Change settings of all cards in this pack</div>
-            <div class="font-medium">
+            <div class="field-data">
                 <div ng-include="'/modules/packs/views/partial/bulk-edit-pack.client.view.html'"></div>
             </div>
         </div>
@@ -227,8 +227,8 @@
                 <div class="flashcard-section" data-ng-if="editMode === 'images'">
                     <div class="field-label">Images <a href="" style="padding-left: 5px;"
                                                        data-ng-click="manageImages(card)"><i
-                            class="glyphicon glyphicon-plus-sign font-medium"></i></a></div>
-                    <div class="font-medium" style="padding-top: 1em">
+                            class="glyphicon glyphicon-plus-sign field-data"></i></a></div>
+                    <div class="field-data" style="padding-top: 1em">
                         <div data-ng-if="card.images.length === 0">
                             no images
                         </div>
@@ -259,14 +259,13 @@
 
         </div>
 
-        <div class="flashcard-section">
 
             <form data-ng-submit="addCardToPack()" validate>
                 <fieldset>
-                    <div class="row">
-                        <div class="col-xs-6 dashboard-col">
+                    <div class="two-column-section top-section">
+                        <div class="column">
                             <div class="field-label">{{pack.course.front}}</div>
-                            <div class="font-medium">
+                            <div>
                                 <input type="text"
                                        data-ng-model="newCard.question"
                                        class="form-control focus"
@@ -275,9 +274,9 @@
                         </div>
 
 
-                        <div class="col-xs-6 dashboard-col">
+                        <div class="column">
                             <div class="field-label">{{pack.course.back}}</div>
-                            <div class="font-medium">
+                            <div>
                                 <input type="text"
                                        data-ng-model="newCard.answer"
                                        class="form-control "
@@ -288,10 +287,10 @@
                     </div>
 
 
-                    <div class="row">
-                        <div class="col-xs-6 dashboard-col">
+                    <div class="two-column-section">
+                        <div class="column">
                             <div class="field-label">Additional info front</div>
-                            <div class="font-medium">
+                            <div >
                                 <input type="text"
                                        data-ng-model="newCard.questionExtension"
                                        class="form-control "
@@ -299,9 +298,9 @@
                             </div>
                         </div>
 
-                        <div class="col-xs-6 dashboard-col">
+                        <div class="column">
                             <div class="field-label">Additional info back</div>
-                            <div class="font-medium">
+                            <div >
                                 <input type="text"
                                        data-ng-model="newCard.answerExtension"
                                        class="form-control ">

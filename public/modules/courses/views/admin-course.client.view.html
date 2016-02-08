@@ -247,7 +247,7 @@
 
 
                     <div class="field-data"
-                         ng-class="{'text-muted': !course.cardDefaults.forward.enabled}" >
+                         ng-class="{'text-muted': !course.cardDefaults.forward.enabled}">
                         <a href="" data-ng-click="toggleMode('forward')"
                            data-ng-if="course.cardDefaults.forward.enabled"><i
                                 class="glyphicon glyphicon-ok-circle"></i></a>
@@ -381,7 +381,7 @@
                            data-ng-if="!course.cardDefaults.images.enabled"><i
                                 class="glyphicon glyphicon-off"></i></a>
 
-                    Images Mode
+                        Images Mode
                     </div>
 
 
@@ -470,92 +470,94 @@
     </div>
 
 
-    <div data-ng-repeat="pack in course.packs"
-         data-ng-controller="PacksController" data-ng-init="findById(pack)">
+    <div class="page-section">
+        <div data-ng-repeat="pack in course.packs"
+             data-ng-controller="PacksController" data-ng-init="findById(pack)">
 
-        <div class="admin-card-large">
-            <div class="title">
-                {{pack.name}}
+            <div class="admin-card-small">
+                <div class="title">
+                    {{pack.name}}
 
-                <div class="pull-right">
+                    <div class="pull-right">
 
 
-                    <a href="#!/packs/{{pack._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="#!/packs/{{pack._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
 
-                    <a href="" data-ng-click="areYouSureToDeletePack(pack)"><i
-                            class="glyphicon glyphicon-trash"></i></a>
+                        <a href="" data-ng-click="areYouSureToDeletePack(pack)"><i
+                                class="glyphicon glyphicon-trash"></i></a>
+
+                    </div>
+
 
                 </div>
 
+                <div class="three-column-section top-section">
 
-            </div>
-
-            <div class="three-column-section top-section">
-
-                <div class="column">
-                    <div class="field-label">Title</div>
-                    <div class="field-data">
-                        {{pack.name}}
-                    </div>
-                </div>
-
-                <div class="column">
-                    <div data-ng-if="pack.cards.length === 0">
-                        <div class="field-label-danger">Cards</div>
-                        <div class="field-data danger">
-                            {{pack.cards.length}}
-                        </div>
-                    </div>
-
-                    <div data-ng-if="pack.cards.length > 0">
-                        <div class="field-label">Cards</div>
+                    <div class="column">
+                        <div class="field-label">Title</div>
                         <div class="field-data">
-                            {{pack.cards.length}}
+                            {{pack.name}}
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div data-ng-if="pack.cards.length === 0">
+                            <div class="field-label-danger">Cards</div>
+                            <div class="field-data danger">
+                                {{pack.cards.length}}
+                            </div>
+                        </div>
+
+                        <div data-ng-if="pack.cards.length > 0">
+                            <div class="field-label">Cards</div>
+                            <div class="field-data">
+                                {{pack.cards.length}}
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="column">
+                        <div class="field-label">User</div>
+
+                        <div class="field-data">
+                            {{pack.user.displayName}}
                         </div>
                     </div>
 
 
                 </div>
-
-                <div class="column">
-                    <div class="field-label">User</div>
-
-                    <div class="field-data">
-                        {{pack.user.displayName}}
-                    </div>
-                </div>
-
-
             </div>
         </div>
-    </div>
 
 
-    <div class="admin-card-large">
+        <div class="admin-card-small">
 
-        <form data-ng-submit="addPackToCourse()" validate>
+            <form data-ng-submit="addPackToCourse()" validate>
 
-            <div class="title">
-
-
-                <div class="pull-right">
+                <div class="title">
 
 
-                    <a href="" data-ng-click="addPackToCourse()"><i
-                            class="glyphicon glyphicon-plus-sign"></i></a>
+                    <div class="pull-right">
+
+
+                        <a href="" data-ng-click="addPackToCourse()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+
+
+                    </div>
+                    Add pack <input type="text" data-ng-model="newpack.name"
+                                    id="firstName" class="form-control focus"
+                                    placeholder="Name">
 
 
                 </div>
-                Add pack <input type="text" data-ng-model="newpack.name"
-                                id="firstName" class="form-control focus"
-                                placeholder="Name">
 
 
-            </div>
+            </form>
 
-
-        </form>
-
+        </div>
     </div>
 
 

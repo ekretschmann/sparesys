@@ -3,152 +3,125 @@
     <div ng-include="'/modules/cards/views/partial/delete-card.modal.client.view.html'"></div>
 
 
-    <div class="col-xs-12 subtitle" style="text-align: center">
-        <div class="row">
+    <div class="pageing">
 
-            <div class="col-xs-2">
-                <div data-ng-if="prevPack">
-                    <a href="#!/packs/{{prevPack._id}}/admin"><i
-                            class="glyphicon glyphicon-circle-arrow-left"></i> {{prevPack.name}}</a>
-                </div>
-            </div>
+        <div class="left">
 
-
-            <div class="col-xs-8">
-                <a href="" data-ng-click="scrollDown()"><i
-                        class="glyphicon glyphicon-circle-arrow-down"></i></a>
-
-                <a href="" data-ng-click="scrollDown()">Scroll down to add more
-                    cards
-                </a>
-                <a href="" data-ng-click="scrollDown()"><i
-                        class="glyphicon glyphicon-circle-arrow-down"></i></a>
-            </div>
-
-
-            <div class="col-xs-2" style="text-align: right">
-                <div data-ng-if="nextPack">
-                    <a href="#!/packs/{{nextPack._id}}/admin">{{nextPack.name}} <i
-                            class="glyphicon glyphicon-circle-arrow-right"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="col-xs-6">
-
-
-        <div class="admin-card font-large">
-            <div class="title">
-                {{pack.name}}
-
-                <div class="pull-right">
-
-
-                    <!--<a href="#!/schools/{{school._id}}"><i class="glyphicon glyphicon-edit"></i></a>-->
-
-                    <a href="" data-ng-click="showMode('images')" data-ng-if="editMode !== 'images'"><i
-                            class="glyphicon glyphicon-picture"></i></a>
-
-                    <i class="glyphicon glyphicon-picture text-muted" data-ng-if="editMode === 'images'"></i>
-
-                    <a href="" data-ng-click="showMode('data')" data-ng-if="editMode !== 'data'"><i
-                            class="glyphicon glyphicon-list"></i></a>
-
-                    <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
-
-                    <a href="" data-ng-click="showMode('modes')" data-ng-if="editMode !== 'modes'"><i
-                            class="glyphicon glyphicon-option-horizontal"></i></a>
-
-                    <i class="glyphicon glyphicon-option-horizontal text-muted"
-                       data-ng-if="editMode === 'modes'"></i>
-
-                    <a href="" data-ng-click="areYouSureToDeletePack(pack)"><i
-                            class="glyphicon glyphicon-trash"></i></a>
-
-                </div>
-
-
-            </div>
-
-            <div class="flashcard-section">
-
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Name</div>
-                        <div class="font-medium">
-                            <input type="text"
-                                   data-ng-model="pack.name"
-                                   class="form-control "
-                                   ng-blur="update()"
-                                   placeholder="Name of the Pack">
-                        </div>
-                    </div>
-
-
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Course</div>
-                        <div class="font-medium">
-                            <a href="#!/courses/{{pack.course._id}}/admin">{{pack.course.name}}</a>
-                        </div>
-                    </div>
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">User</div>
-                        <div class="font-medium">
-                            {{pack.user.displayName}}
-                        </div>
-                    </div>
-
-                </div>
-
-                <div class="row">
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Created</div>
-                        <div class="font-medium">
-                            {{pack.created | date:'shortDate'}}
-                        </div>
-                    </div>
-
-                    <div class="col-xs-6 dashboard-col">
-                        <div class="field-label">Updated</div>
-                        <div class="font-medium">
-                            <div data-ng-if="card.updated">
-
-                                {{pack.updated | date:'shortDate'}}
-                            </div>
-
-
-                            <div data-ng-if="!card.updated">
-
-                                {{pack.created | date:'shortDate'}}
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-
+            <div data-ng-if="prevPack">
+                <a href="#!/packs/{{prevPack._id}}/admin"><i
+                        class="glyphicon glyphicon-circle-arrow-left"></i> {{prevPack.name}}</a>
             </div>
         </div>
 
 
+        <div class="middle">
+            <a href="" data-ng-click="scrollDown()"><i
+                    class="glyphicon glyphicon-circle-arrow-down"></i></a>
+
+            <a href="" data-ng-click="scrollDown()">Scroll down to add more
+                cards
+            </a>
+            <a href="" data-ng-click="scrollDown()"><i
+                    class="glyphicon glyphicon-circle-arrow-down"></i></a>
+        </div>
+
+
+        <div class="right">
+            <div data-ng-if="nextPack">
+                <a href="#!/packs/{{nextPack._id}}/admin">{{nextPack.name}} <i
+                        class="glyphicon glyphicon-circle-arrow-right"></i></a>
+            </div>
+        </div>
+    </div>
     </div>
 
-    <div class="col-xs-6">
+
+    <div class="admin-card-large">
+        <div class="title">
+            {{pack.name}}
+
+            <div class="pull-right">
 
 
-        <div class="admin-card font-large">
-            <div class="title">
-                Pack settings
+                <!--<a href="#!/schools/{{school._id}}"><i class="glyphicon glyphicon-edit"></i></a>-->
+
+                <a href="" data-ng-click="showMode('images')" data-ng-if="editMode !== 'images'"><i
+                        class="glyphicon glyphicon-picture"></i></a>
+
+                <i class="glyphicon glyphicon-picture text-muted" data-ng-if="editMode === 'images'"></i>
+
+                <a href="" data-ng-click="showMode('data')" data-ng-if="editMode !== 'data'"><i
+                        class="glyphicon glyphicon-list"></i></a>
+
+                <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
+
+                <a href="" data-ng-click="showMode('modes')" data-ng-if="editMode !== 'modes'"><i
+                        class="glyphicon glyphicon-option-horizontal"></i></a>
+
+                <i class="glyphicon glyphicon-option-horizontal text-muted"
+                   data-ng-if="editMode === 'modes'"></i>
+
+                <a href="" data-ng-click="areYouSureToDeletePack(pack)"><i
+                        class="glyphicon glyphicon-trash"></i></a>
+
             </div>
-            <div class="flashcard-section">
-                <div class="col-xs-12 dashboard-col">
-                    <div class="field-label">Change settings of all cards in this pack</div>
-                    <div class="font-medium">
-                        <div ng-include="'/modules/packs/views/partial/bulk-edit-pack.client.view.html'"></div>
+
+
+        </div>
+
+        <div class="two-column-section top-section">
+
+            <div class="column">
+                <div class="field-label">Name</div>
+                <div class="font-medium">
+                    <input type="text"
+                           data-ng-model="pack.name"
+                           class="form-control "
+                           ng-blur="update()"
+                           placeholder="Name of the Pack">
+                </div>
+            </div>
+
+
+            <div class="column">
+                <div class="field-label">Course</div>
+                <div class="font-medium">
+                    <a href="#!/courses/{{pack.course._id}}/admin">{{pack.course.name}}</a>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="two-column-section">
+            <div class="column">
+                <div class="field-label">User</div>
+                <div class="font-medium">
+                    {{pack.user.displayName}}
+                </div>
+            </div>
+        </div>
+
+
+        <div class="two-column-section">
+            <div class="column">
+                <div class="field-label">Created</div>
+                <div class="font-medium">
+                    {{pack.created | date:'shortDate'}}
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="field-label">Updated</div>
+                <div class="font-medium">
+                    <div data-ng-if="card.updated">
+
+                        {{pack.updated | date:'shortDate'}}
+                    </div>
+
+
+                    <div data-ng-if="!card.updated">
+
+                        {{pack.created | date:'shortDate'}}
                     </div>
                 </div>
             </div>
@@ -156,171 +129,190 @@
     </div>
 
 
+    <div class="admin-card-large">
+        <div class="title">
+            Pack settings
+        </div>
+        <div class="section top-section">
+            <div class="field-label">Change settings of all cards in this pack</div>
+            <div class="font-medium">
+                <div ng-include="'/modules/packs/views/partial/bulk-edit-pack.client.view.html'"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="admin-card-large">
+        <div class="title">
+            Hierarchy
 
 
+        </div>
+
+        <div class="two-column-section top-section">
+
+            <div class="column">
+                <div class="field-label">Slaves</div>
+
+                <div class="field-data" data-ng-if="!pack.slaves || pack.slaves.length === 0">
+                    none
+                </div>
+
+                <div class="field-data" data-ng-repeat="s in pack.slaves">
+                    <a href="/#!/packs/{{s}}/admin">{{s}}</a>
+                </div>
+            </div>
+
+
+            <div class="column">
+                <div class="field-label">Master</div>
+
+                <div class="field-data" data-ng-if="!pack.master || pack.master.length === 0">
+                    none
+                </div>
+
+                <div class="field-data" data-ng-repeat="m in pack.master">
+                    <a href="/#!/packs/{{m}}/admin">{{m}}</a>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
     <div data-ng-repeat="card in pack.cards">
-        <div class="col-xs-6">
-            <div class="admin-card font-large">
-                <div>
-                    <div class="title">
-                        {{card.question}}
 
-                        <div class="pull-right">
+        <div class="admin-card-large">
+            <div>
+                <div class="title">
+                    {{card.question}}
 
-
+                    <div class="pull-right">
 
 
-                            <a href="" data-ng-click="showMode('images')" data-ng-if="editMode !== 'images'"><i
-                                    class="glyphicon glyphicon-picture"></i></a>
+                        <a href="" data-ng-click="showMode('images')" data-ng-if="editMode !== 'images'"><i
+                                class="glyphicon glyphicon-picture"></i></a>
 
-                            <i class="glyphicon glyphicon-picture text-muted" data-ng-if="editMode === 'images'"></i>
+                        <i class="glyphicon glyphicon-picture text-muted" data-ng-if="editMode === 'images'"></i>
 
-                            <a href="" data-ng-click="showMode('data')" data-ng-if="editMode !== 'data'"><i
-                                    class="glyphicon glyphicon-list"></i></a>
+                        <a href="" data-ng-click="showMode('data')" data-ng-if="editMode !== 'data'"><i
+                                class="glyphicon glyphicon-list"></i></a>
 
-                            <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
+                        <i class="glyphicon glyphicon-list text-muted" data-ng-if="editMode === 'data'"></i>
 
-                            <a href="" data-ng-click="showMode('modes')" data-ng-if="editMode !== 'modes'"><i
-                                    class="glyphicon glyphicon-option-horizontal"></i></a>
+                        <a href="" data-ng-click="showMode('modes')" data-ng-if="editMode !== 'modes'"><i
+                                class="glyphicon glyphicon-option-horizontal"></i></a>
 
-                            <i class="glyphicon glyphicon-option-horizontal text-muted"
-                               data-ng-if="editMode === 'modes'"></i>
+                        <i class="glyphicon glyphicon-option-horizontal text-muted"
+                           data-ng-if="editMode === 'modes'"></i>
 
-                            <a href="#!/cards/{{card._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
+                        <a href="#!/cards/{{card._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
 
 
-                            <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i
-                                    class="glyphicon glyphicon-trash"></i></a>
+                        <a href="" data-ng-click="areYouSureToDeleteCard(card)"><i
+                                class="glyphicon glyphicon-trash"></i></a>
 
+                    </div>
+
+
+                </div>
+
+
+                <div data-ng-if="editMode === 'data'">
+                    <div ng-include="'/modules/cards/views/partial/view-card.client.view.html'"></div>
+                </div>
+
+                <div data-ng-if="editMode === 'modes'">
+                    <div ng-include="'/modules/cards/views/partial/view-modes.client.view.html'"></div>
+                </div>
+
+                <div class="flashcard-section" data-ng-if="editMode === 'images'">
+                    <div class="field-label">Images <a href="" style="padding-left: 5px;"
+                                                       data-ng-click="manageImages(card)"><i
+                            class="glyphicon glyphicon-plus-sign font-medium"></i></a></div>
+                    <div class="font-medium" style="padding-top: 1em">
+                        <div data-ng-if="card.images.length === 0">
+                            no images
                         </div>
-
-
-                    </div>
-
-
-                    <div data-ng-if="editMode === 'data'">
-                        <div ng-include="'/modules/cards/views/partial/view-card.client.view.html'"></div>
-                    </div>
-
-                    <div data-ng-if="editMode === 'modes'">
-                        <div ng-include="'/modules/cards/views/partial/view-modes.client.view.html'"></div>
-                    </div>
-
-                    <div class="flashcard-section" data-ng-if="editMode === 'images'">
-                        <div class="field-label">Images <a href="" style="padding-left: 5px;"
-                                                           data-ng-click="manageImages(card)"><i
-                                class="glyphicon glyphicon-plus-sign font-medium"></i></a></div>
-                        <div class="font-medium" style="padding-top: 1em">
-                            <div data-ng-if="card.images.length === 0">
-                                no images
-                            </div>
                                 <span data-ng-repeat="img in card.images" style="padding: 5px">
                                     <img ng-src="{{img}}"
                                          style="max-width: 128px; max-height: 128px"/>
                                 </span>
-                        </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
+    </div>
+
+
+    <div class="admin-card-large">
+        <div class="title">
+            Add card to this pack
+
+            <div class="pull-right">
+
+
+                <a href="" data-ng-click="addCardToPack(pack)"><i class="glyphicon glyphicon-plus-sign"></i></a>
+
+            </div>
 
 
         </div>
-    </div>
 
-    <div class="col-xs-6 dashboard-col">
-        <div class="admin-card font-large">
-            <div class="title">
-                Slaves
+        <div class="flashcard-section">
 
-
-            </div>
-
-            <div class="flashcard-section">
-
-                <div data-ng-if="!pack.slaves || pack.slaves.length === 0">
-                    none
-                </div>
-
-                <div data-ng-repeat="s in pack.slaves">
-                    {{s}}
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xs-6 dashboard-col" style="padding-top: 2em">
-        <div class=" font-large">
-            <div class="title">
-                Add card to this pack
-
-                <div class="pull-right">
-
-
-                    <a href="" data-ng-click="addCardToPack(pack)"><i class="glyphicon glyphicon-plus-sign"></i></a>
-
-                </div>
-
-
-            </div>
-
-            <div class="flashcard-section">
-
-                <form data-ng-submit="addCardToPack()" validate>
-                    <fieldset>
-                        <div class="row">
-                            <div class="col-xs-6 dashboard-col">
-                                <div class="field-label">{{pack.course.front}}</div>
-                                <div class="font-medium">
-                                    <input type="text"
-                                           data-ng-model="newCard.question"
-                                           class="form-control focus"
-                                            >
-                                </div>
-                            </div>
-
-
-                            <div class="col-xs-6 dashboard-col">
-                                <div class="field-label">{{pack.course.back}}</div>
-                                <div class="font-medium">
-                                    <input type="text"
-                                           data-ng-model="newCard.answer"
-                                           class="form-control "
-                                            >
-                                </div>
-                            </div>
-
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-xs-6 dashboard-col">
-                                <div class="field-label">Additional info front</div>
-                                <div class="font-medium">
-                                    <input type="text"
-                                           data-ng-model="newCard.questionExtension"
-                                           class="form-control "
-                                            >
-                                </div>
-                            </div>
-
-                            <div class="col-xs-6 dashboard-col">
-                                <div class="field-label">Additional info back</div>
-                                <div class="font-medium">
-                                    <input type="text"
-                                           data-ng-model="newCard.answerExtension"
-                                           class="form-control ">
-                                </div>
+            <form data-ng-submit="addCardToPack()" validate>
+                <fieldset>
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">{{pack.course.front}}</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       data-ng-model="newCard.question"
+                                       class="form-control focus"
+                                        >
                             </div>
                         </div>
-                        <div class="hidden">
-                            <button type="submit" class="btn btn-rememberators"></button>
+
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">{{pack.course.back}}</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       data-ng-model="newCard.answer"
+                                       class="form-control "
+                                        >
+                            </div>
                         </div>
-                    </fieldset>
-                </form>
-            </div>
+
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Additional info front</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       data-ng-model="newCard.questionExtension"
+                                       class="form-control "
+                                        >
+                            </div>
+                        </div>
+
+                        <div class="col-xs-6 dashboard-col">
+                            <div class="field-label">Additional info back</div>
+                            <div class="font-medium">
+                                <input type="text"
+                                       data-ng-model="newCard.answerExtension"
+                                       class="form-control ">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden">
+                        <button type="submit" class="btn btn-rememberators"></button>
+                    </div>
+                </fieldset>
+            </form>
         </div>
     </div>
 

@@ -8,25 +8,53 @@ angular.module('courses').controller('CoursesAdminController',
 
             $scope.authentication = Authentication;
 
+            $scope.languages = [
+                {name: '---', code: ''},
+                {name: 'Chinese', code: 'zh-CN'},
+                {name: 'English (GB)', code: 'en-GB'},
+                {name: 'English (US)', code: 'en-US'},
+                {name: 'French', code: 'fr-FR'},
+                {name: 'German', code: 'de-DE'},
+                {name: 'Italian', code: 'it-IT'},
+                {name: 'Japanese', code: 'ja-JP'},
+                {name: 'Korean', code: 'ko-KR'},
+                {name: 'Spanish', code: 'es-ES'}
+            ];
+
+            $scope.checks = {};
+            $scope.checks.self = 'self-checked';
+            $scope.checks.mixed = 'mixed';
+            $scope.checks.computer = 'computer-checked';
 
             $scope.packToAdd = '';
+
+            $scope.setLanguageFront = function (lang) {
+
+                $scope.course.cardDefaults.languageFront = lang;
+                $scope.course.$update();
+            };
+
+            $scope.setLanguageBack = function (lang) {
+                $scope.course.cardDefaults.languageBack = lang;
+                $scope.course.$update();
+            };
 
             if (!$scope.authentication.user) {
                 $location.path('/');
             }
 
-            $scope.removeSlave = function(slave, course) {
+            $scope.removeSlave = function (slave, course) {
                 var index = course.slaves.indexOf(slave);
                 course.slaves.splice(index, 1);
                 course.$update();
             };
 
 
-            $scope.addPack = function() {
+            $scope.addPack = function () {
                 $scope.course.packs.push($scope.packToAdd);
             };
 
-            $scope.removePack = function(pack) {
+            $scope.removePack = function (pack) {
                 $scope.course.packs.splice($scope.course.packs.indexOf(pack, 1));
             };
 
@@ -35,8 +63,8 @@ angular.module('courses').controller('CoursesAdminController',
             $scope.update = function () {
                 var course = $scope.course;
 
-                if(!course.slaves) {
-                    course.slaves=[];
+                if (!course.slaves) {
+                    course.slaves = [];
                 }
 
                 course.$update(function () {
@@ -45,7 +73,6 @@ angular.module('courses').controller('CoursesAdminController',
                     $scope.error = errorResponse.data.message;
                 });
             };
-
 
 
             $scope.otherUserCourses = [];
@@ -77,10 +104,10 @@ angular.module('courses').controller('CoursesAdminController',
                 });
             };
 
-            $scope.removeDanglingPackSlaves = function() {
-                $http.get('/courses/'+$scope.course._id+'/removeDanglingPackSlaves').success(function(x) {
+            $scope.removeDanglingPackSlaves = function () {
+                $http.get('/courses/' + $scope.course._id + '/removeDanglingPackSlaves').success(function (x) {
 
-                }).error(function(response) {
+                }).error(function (response) {
                     $scope.error = response.message;
 
                 });
@@ -131,8 +158,6 @@ angular.module('courses').controller('CoursesAdminController',
 
 
             };
-
-
 
 
         }

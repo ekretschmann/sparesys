@@ -1,9 +1,10 @@
 
 
 // modals
+
+@modal-padding: 0.7em;
 .rememberators-modal {
 
-  //padding: 1em;
   background-color: @background-color;
   border-radius: 6px;
   box-shadow: 5px 5px 5px #333;
@@ -14,14 +15,19 @@
   font-size: x-large;
   font-weight: bold;
   text-align: center;
-  //padding-bottom: 1em;
+  padding: @modal-padding;
   //margin-bottom: 1em;
 }
 
 .rememberators-modal-section {
 
   border-top: @default-border;
-  padding: 1em;
+
+  padding-bottom: @modal-padding;
+
+  .sub-section {
+    padding: @modal-padding @modal-padding 0 @modal-padding;
+  }
   //margin-bottom: 2*@default-padding-unit;
 }
 
@@ -32,8 +38,8 @@
 
 .rememberators-modal-footer {
   text-align: center;
-  padding-top: 1em;
-  padding-bottom: 1em;
+  padding-top: @modal-padding;
+  padding-bottom: @modal-padding;
   border-top: @default-border;
   //margin-top: @default-padding-unit;
 }

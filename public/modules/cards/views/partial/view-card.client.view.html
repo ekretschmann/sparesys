@@ -7,12 +7,18 @@
             <div class="field-data">
                 {{card.question}} <span data-ng-if="card.questionExtension">({{card.questionExtension}})</span>
             </div>
+            <div class="field-data" data-ng-repeat="answer in card.alternativeAnswersForward">
+                or {{answer}}
+                </div>
         </div>
 
         <div class="column">
             <div class="field-label">Answer</div>
             <div class="field-data">
                 {{card.answer}} <span data-ng-if="card.answerExtension">({{card.answerExtension}})</span>
+            </div>
+            <div class="field-data" data-ng-repeat="answer in card.alternativeAnswersReverse">
+                or {{answer}}
             </div>
         </div>
 

@@ -30,9 +30,13 @@
         <div class="question-box">
             <div class="question">
 
+                {{card.question}}
+                <span data-ng-if="card.questionExtension">({{card.questionExtension}})</span>
+                <div data-ng-repeat="alternative in card.alternativeAnswersForward">or {{alternative}}</div>
+
                 <playsound language="{{card.languageFront.code}}"
                            text="{{card.question}}"
-                           show-text="true"
+                           show-text="false"
                            extension="{{card.questionExtension}}"
                            playwhen="{{card.readFrontForward}}"
                            speed="speechRate"/>
@@ -41,9 +45,12 @@
 
             <div class="answer" data-ng-if="state === 'answer'">
 
+                {{card.answer}}
+                <span data-ng-if="card.answerExtension">({{card.answerExtension}})</span>
+
                 <playsound language="{{card.languageBack.code}}"
                            text="{{card.answer}}"
-                           show-text="true"
+                           show-text="false"
                            extension="{{card.answerExtension}}"
                            playwhen="{{card.readBackForward}}"
                            speed="speechRate"/>

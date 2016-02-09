@@ -283,9 +283,11 @@ exports.update = function (req, res) {
                         Course.findOne({'_id': id}).exec(function (err, cm) {
 
 
-                            for(var k=0; k< cm.slaves.length; k++) {
-                                lockCourse(cm.slaves[k], lock);
+                            if (cm.slaves) {
+                                for (var k = 0; k < cm.slaves.length; k++) {
+                                    lockCourse(cm.slaves[k], lock);
 
+                                }
                             }
                         });
                     };
@@ -296,9 +298,10 @@ exports.update = function (req, res) {
                             for (var j=0; j<currentStudentIds.length; j++) {
                                 courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
                             }
-                        } else {
-                            lockCourse(currentCourses[i], true);
                         }
+                        //else {
+                           // lockCourse(currentCourses[i], true);
+                        //}
                     }
 
                     for (i=0; i<originalCourses.length;i++) {

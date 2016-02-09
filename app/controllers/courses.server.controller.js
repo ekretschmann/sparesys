@@ -407,10 +407,13 @@ var copyCards = function (cardIds, userId, newCourseId, newPackId, isSupervised)
             copy.acceptedAnswersForward = original.acceptedAnswersForward;
             copy.alternativeAnswersForward = original.alternativeAnswersForward;
             copy.invalidAnswersForward = original.invalidAnswersForward;
+            copy.alternativeAnswersReverse = original.alternativeAnswersReverse;
             copy.acceptedAnswersReverse = original.acceptedAnswersReverse;
             copy.invalidAnswersReverse = original.invalidAnswersReverse;
             copy.question = original.question;
             copy.answer = original.answer;
+            copy.questionExtension = original.questionExtension;
+            copy.answerExtension = original.answerExtension;
 
             copy.check = original.check;
             copy.images = original.images;

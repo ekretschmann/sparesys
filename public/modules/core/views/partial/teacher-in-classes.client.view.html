@@ -164,15 +164,15 @@
 
 
                 </div>
-                <div class="column field-data">
+                <div class="column">
 
 
-                    <div data-ng-if="schoolclass.students.length === 0">
+                    <div class="field-date" data-ng-if="schoolclass.students.length === 0">
                         none
                     </div>
 
                     <div data-ng-if="schoolclass.students.length > 0">
-                        <div data-ng-repeat="student in schoolclass.students">{{student.displayName}}</div>
+                        <div class="field-data" data-ng-repeat="student in schoolclass.students">{{student.displayName}}</div>
                     </div>
                 </div>
             </div>

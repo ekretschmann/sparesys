@@ -10,26 +10,31 @@
         </div>
     </div>
 
+    <div class="pageing">
 
-    <div class="col-xs-12 subtitle">
-        <div class="row">
-
-            <div class="col-xs-6" style="text-align: left">
-                <div data-ng-if="prevCard">
-                    <a href="#!/cards/{{prevCard._id}}"><i
-                            class="glyphicon glyphicon-circle-arrow-left"></i> {{prevCard.question}}</a>
-                </div>
+        <div class="left">
+            <div data-ng-if="prevCard">
+                <a href="#!/cards/{{prevCard._id}}"><i
+                        class="glyphicon glyphicon-circle-arrow-left"></i> {{prevCard.question}}</a>
             </div>
+        </div>
 
 
-            <div class="col-xs-6" style="text-align: right">
-                <div data-ng-if="nextCard">
-                    <a href="#!/cards/{{nextCard._id}}">{{nextCard.question}} <i
-                            class="glyphicon glyphicon-circle-arrow-right"></i></a>
-                </div>
+        <div class="middle">
+           &nbsp;
+        </div>
+
+
+        <div class="right">
+            <div data-ng-if="nextCard">
+                <a href="#!/cards/{{nextCard._id}}">{{nextCard.question}} <i
+                        class="glyphicon glyphicon-circle-arrow-right"></i></a>
             </div>
         </div>
     </div>
+
+
+
 
 
     <div data-ng-if="card.question">
@@ -325,7 +330,6 @@
 
 
     <div class="info-card-large">
-
         <div class="title" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">
             Forward mode
 
@@ -347,10 +351,9 @@
         <div class="two-column-section top-section" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">
 
             <div class="column">
-
                 <div class="field-label">Question</div>
                 <div class="field-data">
-                    {{card.question}}
+                    {{card.answer}}
 
                 </div>
             </div>
@@ -358,148 +361,34 @@
 
             <div class="column">
                 <div class="field-label">Expected answer</div>
-                <div class="field-data">
-                    {{card.answer}}
+                <div class="font-medium">
+                    {{card.question}}
                 </div>
             </div>
-
 
         </div>
 
-        <div class="two-column-section">
+        <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">Extras</div>
 
-
-            <div class="column">
-                <div class="field-label">Alternative answers</div>
-
-
-                <div class="field-option row" style="padding-top: 0.5em">
-                    <div class="col-xs-1">
-                                    <span data-ng-if="card.modes.indexOf('forward') === -1">
-                                        <i class="glyphicon glyphicon-plus-sign"
-                                           style="top:8px; position: absolute"></i>
-                                        </span>
-                                    <span data-ng-if="card.modes.indexOf('forward') > -1">
-                                    <a href=""
-                                       data-ng-click="addAlternativeAnswerFront()"><i
-                                            style="top:8px; position: absolute"
-                                            class="glyphicon glyphicon-plus-sign"></i></a>
-                                    </span>
-                    </div>
-                    <div class="col-xs-10">
-                        <form class="form-horizontal" data-ng-submit="addAlternativeAnswerFront()"
-                              novalidate>
-                            <fieldset>
-                                <input type="text"
-                                       ng-disabled="card.modes.indexOf('forward') === -1"
-                                       data-ng-model="data.alternativeAnswerFront"
-                                       class="form-control "
-                                       placeholder="Add another answer">
-                            </fieldset>
-                        </form>
-                    </div>
-                </div>
-
-
-                <div class="row field-data"
-                     ng-repeat="aa in card.alternativeAnswersForward track by $index">
-                    <div class="col-xs-1" style="margin-bottom: -1em">
-
-                                    <span data-ng-if="card.modes.indexOf('forward') === -1">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                        </span>
-                                    <span data-ng-if="card.modes.indexOf('forward') > -1">
-                                    <a href=""
-                                       data-ng-click="deleteAlternativeAnswerFront($index)"><i
-                                            class="glyphicon glyphicon-trash"></i></a>
-                                        </span>
-                    </div>
-
-                    <div class="col-xs-10" style="margin-bottom: -1em">
-                        {{aa}}
-                    </div>
-
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="field-label">Also accepted as answer</div>
-
-                <div class="field-option row" style="padding-top: 0.5em">
-
-
-                    <div class="col-xs-1">
-                                    <span data-ng-if="card.modes.indexOf('forward') === -1">
-                                        <i class="glyphicon glyphicon-plus-sign"
-                                           style="top:8px; position: absolute"></i>
-                                        </span>
-                                    <span data-ng-if="card.modes.indexOf('forward') > -1">
-                                    <a href=""
-                                       data-ng-click="addAcceptedAnswerFront()"><i
-                                            style="top:8px; position: absolute"
-                                            class="glyphicon glyphicon-plus-sign"></i></a>
-                                    </span>
-                    </div>
-                    <div class="col-xs-10">
-                        <form class="form-horizontal" data-ng-submit="addAcceptedAnswerFront()"
-                              novalidate>
-                            <fieldset>
-                                <input type="text"
-                                       ng-disabled="card.modes.indexOf('forward') === -1"
-                                       data-ng-model="data.acceptedAnswerFront"
-                                       class="form-control "
-                                       placeholder="Add another answer">
-                            </fieldset>
-                        </form>
-                    </div>
-
-                </div>
-
-                <div class="field-data row"
-                     ng-repeat="aa in card.acceptedAnswersForward track by $index">
-                    <div class="col-xs-1" style="margin-bottom: -1em">
-                                    <span data-ng-if="card.modes.indexOf('forward') === -1">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                        </span>
-                                    <span data-ng-if="card.modes.indexOf('forward') > -1">
-                                    <a href=""
-                                       data-ng-click="deleteAcceptedAnswerFront($index)"><i
-                                            class="glyphicon glyphicon-trash"></i></a>
-                                        </span>
-                    </div>
-
-                    <div class="col-xs-10" style="margin-bottom: -1em">
-                        {{aa}}
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="three-column-section">
-
-            <div class="column">
-
-                <div class="field-label">Extras</div>
-            </div>
-        </div>
-        <div class="three-column-section field-data">
+        <div class="three-column-section field-data"
+             ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">
             <div class="column">
                                     <span data-ng-if="card.modes.indexOf('forward') === -1">
                                         <i class="glyphicon glyphicon-ok-circle"
                                            data-ng-show="card.readFrontForward"></i>
-                                        <i class="glyphicon glyphicon-off" data-ng-show="!card.readFrontForward"></i>
+                                        <i class="glyphicon glyphicon-off"
+                                           data-ng-show="!card.readFrontForward"></i>
                                     </span>
                                     <span data-ng-if="card.modes.indexOf('forward') > -1">
                                     <a href="" data-ng-click="toggleSetting(card, 'readFrontForward')"
+
                                        data-ng-show="card.readFrontForward"><i
                                             class="glyphicon glyphicon-ok-circle"></i></a>
                                     <a href="" data-ng-click="toggleSetting(card, 'readFrontForward')"
                                        data-ng-show="!card.readFrontForward"><i
                                             class="glyphicon glyphicon-off"></i></a>
-                                         </span>
+                                        </span>
                 <span ng-class="{'text-muted': !card.readFrontForward}">Read Question</span>
-
             </div>
 
 
@@ -507,8 +396,10 @@
                                     <span data-ng-if="card.modes.indexOf('forward') === -1">
                                         <i class="glyphicon glyphicon-ok-circle"
                                            data-ng-show="card.readBackForward"></i>
-                                        <i class="glyphicon glyphicon-off" data-ng-show="!card.readBackForward"></i>
+                                        <i class="glyphicon glyphicon-off"
+                                           data-ng-show="!card.readBackForward"></i>
                                     </span>
+
                                     <span data-ng-if="card.modes.indexOf('forward') > -1">
                                     <a href="" data-ng-click="toggleSetting(card, 'readBackForward')"
                                        data-ng-show="card.readBackForward"><i
@@ -528,7 +419,6 @@
                                         <i class="glyphicon glyphicon-off"
                                            data-ng-show="!card.speechRecognitionForward"></i>
                                     </span>
-
                                     <span data-ng-if="card.modes.indexOf('forward') > -1">
                                     <a href="" data-ng-click="toggleSetting(card, 'speechRecognitionForward')"
                                        data-ng-show="card.speechRecognitionForward"><i
@@ -541,35 +431,125 @@
             </div>
         </div>
 
-        <div class="three-column-section field-data">
+
+
+
+        <div class="two-column-section" ng-class="{'text-muted': card.modes.indexOf('forward') === -1}">
+
             <div class="column">
-                                    <span data-ng-if="card.modes.indexOf('forward') === -1">
-                                        <i class="glyphicon glyphicon-ok-circle" data-ng-show="card.timedForward"></i>
-                                        <i class="glyphicon glyphicon-off" data-ng-show="!card.timedForward"></i>
-                                    </span>
+                <div class="field-label">Alternative answers</div>
 
-                                    <span data-ng-if="card.modes.indexOf('forward') > -1">
-                                    <a href="" data-ng-click="toggleSetting(card, 'timedForward')"
-                                       data-ng-show="card.timedForward"><i
-                                            class="glyphicon glyphicon-ok-circle"></i></a>
-                                    <a href="" data-ng-click="toggleSetting(card, 'timedForward')"
-                                       data-ng-show="!card.timedForward"><i
-                                            class="glyphicon glyphicon-off"></i></a>
-                                        </span>
-                <span ng-class="{'text-muted': !card.timedForward}">Timed</span><span
-                    data-ng-if="card.timedForward">:
+                <div class="add-item">
 
-                                        <input type="number"
-                                               style="display: inline; width: 30%; margin-left: 0.5em"
-                                               data-ng-change="update()"
-                                               data-ng-model="card.limitForward"
-                                               class="form-control"
-                                                > sec
-                                    </span>
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('forward') === -1">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                    </div>
+
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('forward') > -1">
+                        <a href=""
+                           data-ng-click="addAlternativeAnswerFront()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                    </div>
+
+
+                    <div class="right-column">
+                        <form class="form-horizontal" data-ng-submit="addAlternativeAnswerFront()"
+                              novalidate>
+                            <fieldset>
+                                <input type="text"
+                                       ng-disabled="card.modes.indexOf('forward') === -1"
+                                       data-ng-model="data.alternativeAnswerFront"
+                                       class="form-control "
+                                       placeholder="Add another answer">
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    <div class="item-list">
+                        <div class="left-column">&nbsp;</div>
+
+                        <div class="right-column">
+
+                            <div ng-repeat="aa in card.alternativeAnswersForward track by $index">
+                                <div class="item">
+                                    <div class="trash" data-ng-if="card.modes.indexOf('forward') === -1">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </div>
+
+                                    <div class="trash" data-ng-if="card.modes.indexOf('forward') > -1">
+                                        <a href="" data-ng-click="deleteAlternativeAnswerFront($index)"><i
+                                                class="glyphicon glyphicon-trash"></i></a>
+                                    </div>
+                                    <div class="text">
+                                        {{aa}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
             </div>
 
+            <div class="column">
+                <div class="field-label">Also accepted as answer</div>
 
+                <div class="add-item">
+
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('forward') === -1">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                    </div>
+
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('forward') > -1">
+                        <a href=""
+                           data-ng-click="addAcceptedAnswerFront()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                    </div>
+
+
+                    <div class="right-column">
+                        <form class="form-horizontal" data-ng-submit="addAcceptedAnswerFront()"
+                              novalidate>
+                            <fieldset>
+                                <input type="text"
+                                       ng-disabled="card.modes.indexOf('forward') === -1"
+                                       data-ng-model="data.acceptedAnswerFront"
+                                       class="form-control "
+                                       placeholder="Add another answer">
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    <div class="item-list">
+                        <div class="left-column">&nbsp;</div>
+
+                        <div class="right-column">
+
+                            <div ng-repeat="aa in card.acceptedAnswersForward track by $index">
+                                <div class="item">
+                                    <div class="trash" data-ng-if="card.modes.indexOf('forward') === -1">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </div>
+
+                                    <div class="trash" data-ng-if="card.modes.indexOf('forward') > -1">
+                                        <a href="" data-ng-click="deleteAcceptedAnswerFront($index)"><i
+                                                class="glyphicon glyphicon-trash"></i></a>
+                                    </div>
+                                    <div class="text">
+                                        {{aa}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
         </div>
+
+
+
     </div>
 
 
@@ -609,65 +589,15 @@
                     {{card.question}}
                 </div>
             </div>
+
         </div>
-        <div class="two-column-section">
+
+
+        <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">Extras</div>
+
+        <div class="three-column-section field-data"
+             ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">
             <div class="column">
-                <div class="field-label" style="padding-bottom: 5px">Also accepted as answer</div>
-                <div class="field-data row" ng-repeat="aa in card.acceptedAnswersReverse track by $index">
-
-                    <div class="col-xs-1">
-                                    <span data-ng-if="card.modes.indexOf('reverse') === -1">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                        </span>
-                                    <span data-ng-if="card.modes.indexOf('reverse') > -1">
-                                    <a href=""
-                                       data-ng-click="deleteAlternativeAnswerBack($index)"><i
-                                            class="glyphicon glyphicon-trash"></i></a>
-                                        </span>
-                    </div>
-                    <div class="col-xs-10">{{aa}}</div>
-                </div>
-                <div class="font-medium row" style="padding-top: 5px">
-
-
-                    <div class="col-xs-1">
-                                    <span data-ng-if="card.modes.indexOf('reverse') === -1">
-                                        <i style="position: absolute; top: 8px"
-                                           class="glyphicon glyphicon-plus-sign"></i>
-                                        </span>
-                                    <span data-ng-if="card.modes.indexOf('reverse') > -1">
-                                    <a href="" data-ng-click="addAlternativeAnswerBack()"><i
-                                            style="position: absolute; top: 8px"
-                                            class="glyphicon glyphicon-plus-sign"></i></a>
-                                        </span>
-                    </div>
-                    <div class="col-xs-10">
-                        <form class="form-horizontal" data-ng-submit="addAlternativeAnswerBack()"
-                              novalidate>
-                            <fieldset>
-                                <input type="text"
-                                       ng-disabled="card.modes.indexOf('reverse') === -1"
-                                       data-ng-model="data.alternativeAnswerBack"
-                                       class="form-control "
-                                       placeholder="Add another answer">
-                            </fieldset>
-                        </form>
-                    </div>
-
-                </div>
-            </div>
-        </div>
-
-        <div class="three-column-section">
-
-            <div class="column">
-
-                <div class="field-label">Extras</div>
-            </div>
-        </div>
-
-        <div class="three-column-section">
-            <div class="column field-data">
                                     <span data-ng-if="card.modes.indexOf('reverse') === -1">
                                         <i class="glyphicon glyphicon-ok-circle"
                                            data-ng-show="card.readFrontReverse"></i>
@@ -687,7 +617,7 @@
             </div>
 
 
-            <div class="field-data column">
+            <div class="column">
                                     <span data-ng-if="card.modes.indexOf('reverse') === -1">
                                         <i class="glyphicon glyphicon-ok-circle"
                                            data-ng-show="card.readBackReverse"></i>
@@ -707,7 +637,7 @@
             </div>
 
 
-            <div class="field-data column">
+            <div class="column">
                                     <span data-ng-if="card.modes.indexOf('reverse') === -1">
                                         <i class="glyphicon glyphicon-ok-circle"
                                            data-ng-show="card.speechRecognitionReverse"></i>
@@ -725,6 +655,122 @@
                 <span ng-class="{'text-muted': !card.speechRecognitionReverse}">Speech Recognition</span>
             </div>
         </div>
+
+        <div class="two-column-section" ng-class="{'text-muted': card.modes.indexOf('reverse') === -1}">
+
+            <div class="column">
+                <div class="field-label">Alternative answers</div>
+
+                <div class="add-item">
+
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('reverse') === -1">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                    </div>
+
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('reverse') > -1">
+                        <a href=""
+                           data-ng-click="addAlternativeAnswerBack()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                    </div>
+
+
+                    <div class="right-column">
+                        <form class="form-horizontal" data-ng-submit="addAlternativeAnswerBack()"
+                              novalidate>
+                            <fieldset>
+                                <input type="text"
+                                       ng-disabled="card.modes.indexOf('reverse') === -1"
+                                       data-ng-model="data.alternativeAnswerBack"
+                                       class="form-control "
+                                       placeholder="Add another answer">
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    <div class="item-list">
+                        <div class="left-column">&nbsp;</div>
+
+                        <div class="right-column">
+
+                            <div ng-repeat="aa in card.alternativeAnswersReverse track by $index">
+                                <div class="item">
+                                    <div class="trash" data-ng-if="card.modes.indexOf('reverse') === -1">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </div>
+
+                                    <div class="trash" data-ng-if="card.modes.indexOf('reverse') > -1">
+                                        <a href="" data-ng-click="deleteAlternativeAnswerBack($index)"><i
+                                                class="glyphicon glyphicon-trash"></i></a>
+                                    </div>
+                                    <div class="text">
+                                        {{aa}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="field-label">Also accepted as answer</div>
+
+                <div class="add-item">
+
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('reverse') === -1">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                    </div>
+
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('reverse') > -1">
+                        <a href=""
+                           data-ng-click="addAcceptedAnswerBack()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                    </div>
+
+
+                    <div class="right-column">
+                        <form class="form-horizontal" data-ng-submit="addAcceptedAnswerBack()"
+                              novalidate>
+                            <fieldset>
+                                <input type="text"
+                                       ng-disabled="card.modes.indexOf('reverse') === -1"
+                                       data-ng-model="data.acceptedAnswerBack"
+                                       class="form-control "
+                                       placeholder="Add another answer">
+                            </fieldset>
+                        </form>
+                    </div>
+
+                    <div class="item-list">
+                        <div class="left-column">&nbsp;</div>
+
+                        <div class="right-column">
+
+                            <div ng-repeat="aa in card.acceptedAnswersReverse track by $index">
+                                <div class="item">
+                                    <div class="trash" data-ng-if="card.modes.indexOf('reverse') === -1">
+                                        <i class="glyphicon glyphicon-trash"></i>
+                                    </div>
+
+                                    <div class="trash" data-ng-if="card.modes.indexOf('reverse') > -1">
+                                        <a href="" data-ng-click="deleteAcceptedAnswerBack($index)"><i
+                                                class="glyphicon glyphicon-trash"></i></a>
+                                    </div>
+                                    <div class="text">
+                                        {{aa}}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
 
 
     </div>
@@ -781,88 +827,11 @@
         </div>
 
 
-        <div class="two-column-section">
+        <div class="field-label" ng-class="{'text-muted': card.modes.indexOf('images') === -1}">Extras</div>
 
+        <div class="three-column-section top-section field-data"
+             ng-class="{'text-muted': card.modes.indexOf('images') === -1}">
 
-            <div class="column">
-                <div class="field-label">Expected answer</div>
-                <div class="field-data">
-                    {{card.answer}}
-                </div>
-            </div>
-
-            <div class="column">
-                <div class="field-label">Also accepted as answer</div>
-
-
-                <div class="add-item">
-
-                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('images') === -1">
-                        <i class="glyphicon glyphicon-plus-sign"></i>
-                    </div>
-
-                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('images') > -1">
-                        <a href=""
-                           data-ng-click="addAcceptedAnswerFront()"><i
-                                class="glyphicon glyphicon-plus-sign"></i></a>
-                    </div>
-
-                    <div class="right-column">
-                        <form class="form-horizontal" data-ng-submit="addAcceptedAnswerFront()" novalidate>
-                            <fieldset>
-                                <input type="text"
-                                       ng-disabled="card.modes.indexOf('forward') === -1"
-                                       data-ng-model="data.acceptedAnswerFront"
-                                       class="form-control "
-                                       placeholder="Add another answer">
-                            </fieldset>
-                        </form>
-                    </div>
-
-                </div>
-
-                <div class="item-list">
-                    <div>
-
-
-                        <div class="left-column">&nbsp;</div>
-
-                        <div class="right-column">
-                            <div ng-repeat="aa in card.acceptedAnswersForward track by $index">
-                                <div class="item">
-                                    <div class="trash" data-ng-if="card.modes.indexOf('images') === -1">
-                                        <i class="glyphicon glyphicon-trash"></i>
-                                    </div>
-
-                                    <div class="trash" data-ng-if="card.modes.indexOf('images') > -1">
-                                        <a href="" data-ng-click="deleteAcceptedAnswerFront($index)"><i
-                                                class="glyphicon glyphicon-trash"></i></a>
-                                    </div>
-                                    <div class="text">
-                                        {{aa}}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-
-            </div>
-        </div>
-
-
-        <div class="three-column-section">
-
-            <div class="column">
-
-                <div class="field-label">Extras</div>
-            </div>
-        </div>
-
-        <div class="three-column-section field-data">
             <div class="column ">
 
                                     <span data-ng-if="card.modes.indexOf('images') === -1">
@@ -923,6 +892,79 @@
                 <span ng-class="{'text-muted': !card.speechRecognitionImages}">Speech Recognition</span>
             </div>
         </div>
+
+        <div class="two-column-section" ng-class="{'text-muted': card.modes.indexOf('images') === -1}">
+
+
+            <div class="column">
+                <div class="field-label">Expected answer</div>
+                <div class="field-data">
+                    {{card.answer}}
+                </div>
+            </div>
+
+            <div class="column">
+                <div class="field-label">Also accepted as answer</div>
+
+
+                <div class="add-item">
+
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('images') === -1">
+                        <i class="glyphicon glyphicon-plus-sign"></i>
+                    </div>
+
+                    <div class="left-column field-data" data-ng-if="card.modes.indexOf('images') > -1">
+                        <a href=""
+                           data-ng-click="addAcceptedAnswerFront()"><i
+                                class="glyphicon glyphicon-plus-sign"></i></a>
+                    </div>
+
+                    <div class="right-column">
+                        <form class="form-horizontal" data-ng-submit="addAcceptedAnswerFront()" novalidate>
+                            <fieldset>
+                                <input type="text"
+                                       ng-disabled="card.modes.indexOf('forward') === -1"
+                                       data-ng-model="data.acceptedAnswerFront"
+                                       class="form-control "
+                                       placeholder="Add another answer">
+                            </fieldset>
+                        </form>
+                    </div>
+
+                </div>
+
+                <div class="item-list">
+
+
+                    <div class="left-column">&nbsp;</div>
+
+                    <div class="right-column">
+                        <div ng-repeat="aa in card.acceptedAnswersForward track by $index">
+                            <div class="item">
+                                <div class="trash" data-ng-if="card.modes.indexOf('images') === -1">
+                                    <i class="glyphicon glyphicon-trash"></i>
+                                </div>
+
+                                <div class="trash" data-ng-if="card.modes.indexOf('images') > -1">
+                                    <a href="" data-ng-click="deleteAcceptedAnswerFront($index)"><i
+                                            class="glyphicon glyphicon-trash"></i></a>
+                                </div>
+                                <div class="text">
+                                    {{aa}}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+
+
+            </div>
+        </div>
+
+
+
 
 
     </div>

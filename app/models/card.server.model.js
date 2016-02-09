@@ -155,6 +155,10 @@ var CardSchema = new Schema({
         type: [String],
         default: []
     },
+    alternativeAnswersReverse: {
+        type: [String],
+        default: []
+    },
     invalidAnswersForward: {
         type: [String],
         default: []

@@ -83,7 +83,50 @@
 
 }
 
+.font-large {
+  @media (min-width: @screen-xs-min) {
+    font-size: 17px;
+  }
+  @media (min-width: @screen-sm-min) {
+    font-size: 18px;
+  }
+  @media (min-width: @screen-md-min) {
+    font-size: 19px;
+  }
+  @media (min-width: @screen-lg-min) {
+    font-size: 20px;
+  }
+
+}
+
+.font-medium {
+
+  @media (min-width: @screen-xs-min) {
+    font-size: 13px;
+  }
+  @media (min-width: @screen-sm-min) {
+    font-size: 14px;
+  }
+  @media (min-width: @screen-md-min) {
+    font-size: 15px;
+  }
+  @media (min-width: @screen-lg-min) {
+    font-size: 16px;
+  }
+
+
+}
+
+.font-small-childish {
+  font-family: 'Grinched';
+  font-size: 24px;
+  color: @inverse-background-color;
+}
+
+
 //@standard-font: 'Exo+2', sans-serif;
 @standard-font: 'Short Stack', sans-serif;
 @standard-font-size: 12pt;
+
+
 

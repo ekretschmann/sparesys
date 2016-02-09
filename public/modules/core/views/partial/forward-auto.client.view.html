@@ -59,6 +59,8 @@
         <div class="question-box">
             <div class="question">
 
+
+
                 <playsound language="{{card.languageFront.code}}"
                            text="{{card.question}}"
                            show-text="true"
@@ -70,7 +72,11 @@
 
             <div class="flashcard-input-box" data-ng-if="state === 'question'">
 
-                <!--{{answer}}-->
+                {{card.question}}
+                <span data-ng-if="card.questionExtension">({{card.questionExtension}})</span>
+                <div class="font-medium" data-ng-repeat="alternative in card.alternativeAnswersReverse">{{alternative}}</div>
+
+
                 <input type="text" required
                        id="focus-question"
                        class="focus-question expands flashcard-input answer"
@@ -86,14 +92,17 @@
                 </div>
             </div>
 
-            <div data-ng-if="interimResult">
-             {{interimResult}}
-            </div>
+            <!--<div data-ng-if="interimResult">-->
+             <!--{{interimResult}}-->
+            <!--</div>-->
 
 
 
             <div data-ng-if="state === 'answer'" class="answer">
 
+                {{card.answer}}
+                <span data-ng-if="card.answerExtension">({{card.answerExtension}})</span>
+                <div class="font-medium" data-ng-repeat="alternative in card.alternativeAnswersForward">{{alternative}}</div>
 
                 <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
 

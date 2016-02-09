@@ -51,6 +51,10 @@
 
             <div class="flashcard-input-box top-padded-m" data-ng-if="state === 'question'">
 
+                {{card.answer}}
+                <span data-ng-if="card.answerExtension">({{card.answerExtension}})</span>
+                <div class="font-medium" data-ng-repeat="alternative in card.alternativeAnswersForward">{{alternative}}</div>
+
                 <input type="text" required
                        id="focus-question-reverse"
                        class="focus-question expands flashcard-input answer"
@@ -66,6 +70,9 @@
 
             <div data-ng-if="state === 'answer'" class="answer">
 
+                {{card.question}}
+                <span data-ng-if="card.questionExtension">({{card.questionExtension}})</span>
+                <div class="font-medium" data-ng-repeat="alternative in card.alternativeAnswersReverse">{{alternative}}</div>
 
                 <div data-ng-if="answer.assessment === 'correct'" class="correct-answer">
 

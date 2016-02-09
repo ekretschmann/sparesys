@@ -27,11 +27,11 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
                     DiagramsCalendarService.drawCalendar(cards, '#cal', '#practice-date', '#number-of-cards', ($window.innerWidth / 2)-130);
 
                     var w = $window.innerWidth + 110;
-                    if ($window.innerWidth > 990){
-                        w = ($window.innerWidth / 2) + 60;
-                    }
+                    //if ($window.innerWidth > 990){
+                    //    w = ($window.innerWidth) + 60;
+                    //}
                     DiagramsCardsInPlayService.drawLineChart(cards, '#inplay', '#total-cards-learned', w);
-                    DiagramsTimeSpentService.drawBarChart(cards, '#timespent', '#spent-practice-date', '#spent-practice-time','#spent-all-time', ($window.innerWidth / 2)-130);
+                    DiagramsTimeSpentService.drawBarChart(cards, '#timespent', '#spent-practice-date', '#spent-practice-time','#spent-all-time', w);
                 });
             });
 
@@ -58,9 +58,9 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
                     $scope.diagramShown = true;
                 }
                 var w = $window.innerWidth + 110;
-                if ($window.innerWidth > 990){
-                    w = ($window.innerWidth / 2) + 60;
-                }
+                //if ($window.innerWidth > 990){
+                //    w = ($window.innerWidth) + 60;
+                //}
                 DiagramsCardsInPlayService.drawLineChart(cards, '#inplay'+index, undefined, w);
                 //DiagramsTimeSpentService.drawBarChart(cards, '#timespent'+index, '#spent-practice-date'+index, '#spent-practice-time'+index, ($window.innerWidth / 2)-130);
             });
@@ -76,9 +76,9 @@ angular.module('courses').controller('CourseReportController', ['$scope', '$stat
             //console.log(label);
 
             var w = $window.innerWidth + 110;
-            if ($window.innerWidth > 990){
-                w = ($window.innerWidth / 2) + 60;
-            }
+            //if ($window.innerWidth > 990){
+            //    w = ($window.innerWidth / 2) + 60;
+            //}
             DiagramsTimeSeriesService.drawTimeSeries($scope.selectedCards, '#timeseries', w);
         };
 

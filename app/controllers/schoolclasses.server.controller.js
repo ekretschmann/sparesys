@@ -113,13 +113,13 @@ exports.addTeacher = function (req, res) {
 
 };
 
-var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass) {
+var updateUsers = function (originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass) {
 
     var deferred = q.defer();
     var updates = 0;
     originalTeachers.forEach(function (originalTeacher) {
         if (currentTeacherIds.indexOf(originalTeacher._id + '') === -1) {
-           updates++;
+            updates++;
         }
     });
 
@@ -145,7 +145,7 @@ var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds
         if (currentTeacherIds.indexOf(originalTeacher._id + '') === -1) {
             User.findOne({_id: originalTeacher._id}, 'teachesClasses').exec(function (err, originalTeacher) {
                 originalTeacher.teachesClasses.splice(originalTeacher.teachesClasses.indexOf(schoolclass._id), 1);
-                originalTeacher.save(function() {
+                originalTeacher.save(function () {
                     updates--;
                     if (updates === 0) {
                         deferred.resolve();
@@ -178,7 +178,7 @@ var updateUsers = function(originalTeachers, originalStudents, currentTeacherIds
         if (currentStudentIds.indexOf(originalStudent._id + '') === -1) {
             User.findOne({_id: originalStudent._id}, 'studentInClasses').exec(function (err, originalStudent) {
                 originalStudent.studentInClasses.splice(originalStudent.studentInClasses.indexOf(schoolclass._id), 1);
-                originalStudent.save(function() {
+                originalStudent.save(function () {
                     updates--;
                     if (updates === 0) {
                         deferred.resolve();
@@ -222,7 +222,6 @@ exports.update = function (req, res) {
     var originalStudentIds = [];
 
 
-
     for (var i = 0; i < schoolclass.teachers.length; i++) {
         originalTeacherIds.push(schoolclass.teachers[i]._id + '');
 
@@ -233,8 +232,8 @@ exports.update = function (req, res) {
 
     }
 
-    for (i=0; i< schoolclass.courses.length; i++) {
-        originalCourses.push(schoolclass.courses[i]+'');
+    for (i = 0; i < schoolclass.courses.length; i++) {
+        originalCourses.push(schoolclass.courses[i] + '');
     }
     schoolclass = _.extend(schoolclass, req.body);
 
@@ -254,9 +253,15 @@ exports.update = function (req, res) {
         currentStudentIds.push(schoolclass.students[i]._id + '');
     }
 
-    for (i=0; i< schoolclass.courses.length; i++) {
-        currentCourses.push(schoolclass.courses[i]+'');
+    for (i = 0; i < schoolclass.courses.length; i++) {
+        currentCourses.push(schoolclass.courses[i] + '');
     }
+
+
+    console.log('originalCourses');
+    console.log(originalCourses);
+    console.log('currentCourses');
+    console.log(currentCourses);
 
 
     schoolclass.save(function (err, sc) {
@@ -267,10 +272,10 @@ exports.update = function (req, res) {
         } else {
 
             updateUsers(originalTeachers, originalStudents, currentTeacherIds, currentStudentIds, schoolclass).then(
-                function() {
+                function () {
 
 
-                    var lockCourse = function(id, lock) {
+                    var lockCourse = function (id, lock) {
                         Course.findOne({'_id': id}).exec(function (err, cs) {
 
 
@@ -279,13 +284,43 @@ exports.update = function (req, res) {
                         });
                     };
 
-                    var findAndLockCourse = function(id, lock) {
+                    var findAndLockSlavesFor = function (id, studentIds, lock) {
+                        Course.findOne({'_id': id}).exec(function (err, cs) {
+                            //console.log('locking');
+                            //console.log(cs.user);
+                            //console.log(studentIds);
+                            //console.log(studentIds.indexOf(cs.user+''));
+
+                            // student has a slave of our master
+                            if (studentIds.indexOf(cs.user + '') > -1) {
+                                lockCourse(cs._id, lock);
+                            }
+
+                        });
+
+                    };
+
+                    var handleAddedCourse = function (id, currentStudentIds) {
                         Course.findOne({'_id': id}).exec(function (err, cm) {
 
 
                             if (cm.slaves) {
-                                for (var k = 0; k < cm.slaves.length; k++) {
-                                    lockCourse(cm.slaves[k], lock);
+                                for (var i = 0; i < cm.slaves.length; i++) {
+                                    findAndLockSlavesFor(cm.slaves[i], currentStudentIds, true);
+
+                                }
+                            }
+                        });
+                    };
+
+                    var handleRemovedCourse = function (id, currentStudentIds) {
+                        Course.findOne({'_id': id}).exec(function (err, cm) {
+
+
+                            if (cm.slaves) {
+                                for (var i = 0; i < cm.slaves.length; i++) {
+                                    console.log('unlocking ',id);
+                                    findAndLockSlavesFor(cm.slaves[i], currentStudentIds, false);
 
                                 }
                             }
@@ -293,32 +328,37 @@ exports.update = function (req, res) {
                     };
 
 
-                    for (i=0; i<currentCourses.length;i++) {
-                        if (originalCourses.indexOf(currentCourses[i]+'') === -1) {
-                            for (var j=0; j<currentStudentIds.length; j++) {
-                                courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
-                            }
+                    for (i = 0; i < currentCourses.length; i++) {
+
+
+
+                        // is this is new course
+                        if (originalCourses.indexOf(currentCourses[i] + '') === -1) {
+                            handleAddedCourse(currentCourses[i], currentStudentIds);
+                            //for (var j = 0; j < currentStudentIds.length; j++) {
+                            //    console.log('copy new course for student ');
+                            //    console.log(currentStudentIds[j]);
+                            //    courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
+                            //}
+
                         }
-                        //else {
-                           // lockCourse(currentCourses[i], true);
-                        //}
                     }
 
                     for (i=0; i<originalCourses.length;i++) {
                         if (currentCourses.indexOf(originalCourses[i]+'') === -1) {
 
-                            findAndLockCourse(originalCourses[i], false);
-
+                            handleRemovedCourse(originalCourses[i], currentStudentIds);
+                    //        console.log('unlock course');
+                    //        console.log(currentCourses[i]);
+                    //        findAndLockCourse(originalCourses[i], false);
+                    //
                         }
                     }
-
 
 
                     res.jsonp(schoolclass);
                 }
             );
-
-
 
 
         }
@@ -373,7 +413,6 @@ exports.delete = function (req, res) {
  * List of Schoolclasses
  */
 exports.list = function (req, res) {
-
 
 
     if (req.query.teacher) {

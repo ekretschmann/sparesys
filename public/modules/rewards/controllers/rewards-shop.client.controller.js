@@ -296,7 +296,7 @@ angular.module('rewards').controller('RewardsShopController', ['$scope', '$state
                 }
 
             }
-            console.log($scope.items.owned);
+
         };
 
         $scope.userHasItem = function (reward) {

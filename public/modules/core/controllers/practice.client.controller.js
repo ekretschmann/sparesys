@@ -622,6 +622,7 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
 
 
 
+
             //if ($scope.authentication.user.roles.indexOf('receive-rewards') > -1) {
             //    $scope.receiveRewards = 'content-header';
             //}
@@ -630,12 +631,14 @@ angular.module('core').controller('PracticeController', ['$localForage', '$windo
                 $window.ga('send', 'event', 'start practicing');
             }
 
-            console.log($stateParams.courseId);
+
 
             var res = CoursesService.serverLoadCards();
             var promise = res.get({courseId: $stateParams.courseId});
             promise.$promise.then(function (cards) {
 
+                console.log('xxxx');
+                console.log(cards);
                 $scope.cards = cards;
                 ChallengeCalculatorService.init(cards);
                 $scope.inPlay = cards.length;

@@ -3,12 +3,26 @@
 
     <div ng-include="'/modules/core/views/partial/practice-options.modal.client.view.html'"></div>
 
+    <div data-ng-if="!cards || cards.length === 0">
+        <div class="info-card-large">
 
+            <div class="title">
+                Warning
+
+
+            </div>
+
+            <section>
+                This course does not have any cards.
+                {{course}}
+            </section>
+        </div>
+    </div>
 
     <div data-ng-if="cards && cards.length > 0">
 
 
-        <div class="flashcard-left" >
+        <div class="flashcard-left">
 
 
             <div class="flashbox">
@@ -28,10 +42,7 @@
             </div>
 
 
-
-
-            <div class="flashbox" >
-
+            <div class="flashbox">
 
 
                 <div class="font-l">
@@ -48,13 +59,12 @@
             </div>
             <!--receive-rewards-->
 
-                <a class="btn btn-rememberators" data-ng-click="stopPracitcing();">
-                    <i class="glyphicon glyphicon-stop"></i> Stop Practicing
-                </a>
+            <a class="btn btn-rememberators" data-ng-click="stopPracitcing();">
+                <i class="glyphicon glyphicon-stop"></i> Stop Practicing
+            </a>
 
 
         </div>
-
 
 
         <div class="col-xs-6">
@@ -248,7 +258,7 @@
                     {{card.retention}}% chance you remember this card
                 </div>
                 <div class="flashbox" data-ng-if="lastRepetition">
-                        Last repetition was on {{lastRepetition | date:'mediumDate'}}
+                    Last repetition was on {{lastRepetition | date:'mediumDate'}}
                 </div>
                 <div class="flashbox">Question mode is {{mode}}</div>
 
@@ -350,9 +360,9 @@
 
                 <div class="flashbox" data-ng-if="lastRepetition">
 
-                   Card History
+                    Card History
                     <div data-ng-repeat="entry in card.history" style="text-align: left">
-                        {{entry.assessment}} ({{entry.when  | date:'d/M/yy h:mm:ss'}}) {{prettyPrintHrt(entry.hrt)}}
+                        {{entry.assessment}} ({{entry.when | date:'d/M/yy h:mm:ss'}}) {{prettyPrintHrt(entry.hrt)}}
                     </div>
                 </div>
 
@@ -363,16 +373,14 @@
             <div class="section-right" data-ng-if="authentication.user.roles.indexOf('clear-course') !== -1">
 
 
-
-
-                    <div class="center-aligned top-padded-m">
-                        <button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card
-                            History
-                        </button>
-                        <button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course
-                            History
-                        </button>
-                    </div>
+                <div class="center-aligned top-padded-m">
+                    <button class="btn btn-rememberators" data-ng-click="clearHistory(card)">Clear Card
+                        History
+                    </button>
+                    <button class="btn btn-rememberators" data-ng-click="clearCourseHistory()">Clear Course
+                        History
+                    </button>
+                </div>
             </div>
         </div>
     </div>

@@ -104,7 +104,7 @@
 
 
                             <a href="" title="{{item.name}}">
-                                <img class="image-small" src="{{goal.icon}}">
+                                <img class="image-small" ng-src="{{goal.icon}}">
 
                             </a>
 
@@ -124,7 +124,7 @@
 
 
                             <a href="" title="{{item.name}}">
-                                <img class="image-small" src="{{goal.icon}}">
+                                <img class="image-small" ng-src="{{goal.icon}}">
                             </a>
 
 
@@ -182,7 +182,7 @@
 
                     <div style="text-align: center; font-size:small">{{item.amount}}x</div>
                     <a href="" data-ng-click="useIngredient(item)" title="{{item.name}}">
-                        <img class="image-small" src="{{item.icon}}">
+                        <img class="image-small" ng-src="{{item.icon}}">
                     </a>
 
                     <div>
@@ -207,13 +207,13 @@
 
                             <a href="" data-ng-click="purchaseItem(item)" title="{{item.name}} ({{item.price}})"
                                toggle="tooltip">
-                                <img class="image-small" src="{{item.icon}}">
+                                <img class="image-small" ng-src="{{item.icon}}">
                             </a>
                         </div>
                         <div data-ng-if="authentication.user.trophies < item.price" class="text-muted">
                             <a href="" title="{{item.name}} ({{item.price}}) - not enough trophies"
                                toggle="tooltip">
-                                <img class="image-small" src="{{item.icon}}" style="opacity: 0.3">
+                                <img class="image-small" ng-src="{{item.icon}}" style="opacity: 0.3">
                             </a>
                         </div>
                     </div>
@@ -240,7 +240,7 @@
 
                         <div style="text-align: center; font-size:small">{{item.amount}}x</div>
                         <a href="" data-ng-click="unuseIngredient(item)" title="{{item.name}}">
-                            <img class="image-small" src="{{item.icon}}">
+                            <img class="image-small" ng-src="{{item.icon}}">
                         </a>
 
                         <div>
@@ -266,7 +266,7 @@
 
                     <div style="text-align: center; font-size:small">&nbsp;</div>
                     <a href="" data-ng-click="craft(item)" title="{{item.name}}">
-                        <img class="image-small" src="{{item.icon}}">
+                        <img class="image-small" ng-src="{{item.icon}}">
                     </a>
 
                     <div>
@@ -322,7 +322,7 @@
                 {{reward.name}}
 
                 <div data-ng-if="reward.icon" class="pull-right">
-                    <img width="64px" src="{{reward.icon}}">
+                    <img width="64px" ng-src="{{reward.icon}}">
                 </div>
 
             </div>
@@ -349,7 +349,7 @@
 
                         <div style="text-align: center; font-size:small">{{ingredient.amount}}x</div>
                         <a href="" data-ng-click="search(ingredient.name)" title="{{ingredient.name}}">
-                            <img class="image-small" src="{{getReward(ingredient.rewardId).icon}}">
+                            <img class="image-small" ng-src="{{getReward(ingredient.rewardId).icon}}">
                         </a>
 
 
@@ -371,7 +371,7 @@
                     <div class="pull-left" style="padding-right: 5px; ">
 
                         <a href="" data-ng-click="search(enabled.name)" title="{{enabled.name}}">
-                            <img class="image-small" src="{{enabled.icon}}">
+                            <img class="image-small" ng-src="{{enabled.icon}}">
                         </a>
 
 
@@ -391,7 +391,7 @@
                         <div class="pull-left" style="padding-right: 5px; ">
 
                             <a href="" data-ng-click="search(goal.name)" title="{{goal.name}}">
-                                <img class="image-small" src="{{goal.icon}}">
+                                <img class="image-small" ng-src="{{goal.icon}}">
                             </a>
 
 

@@ -644,9 +644,6 @@ exports.getCardsForCourse = function (req, res, next, id) {
             loadPack.then(function (pack) {
 
 
-                console.log(pack.cards);
-
-
                 packOrder[pack._id] = pack.cards;
                 expectedCards += pack.cards.length;
                 pack.cards.forEach(function (cardId) {

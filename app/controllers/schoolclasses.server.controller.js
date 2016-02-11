@@ -391,14 +391,12 @@ exports.update = function (req, res) {
 
                     for (i = 0; i < currentCourses.length; i++) {
                         if (originalCourses.indexOf(currentCourses[i] + '') === -1) {
-                            console.log('handle added course');
                             handleAddedCourse(currentCourses[i], currentStudentIds);
                         }
                     }
 
                     for (i = 0; i < originalCourses.length; i++) {
                         if (currentCourses.indexOf(originalCourses[i] + '') === -1) {
-                            console.log('handle removed course');
                             handleRemovedCourse(originalCourses[i], currentStudentIds);
                         }
                     }
@@ -406,14 +404,12 @@ exports.update = function (req, res) {
                     for (i = 0; i < currentStudentIds.length; i++) {
 
                         if (originalStudentIds.indexOf(currentStudentIds[i] + '') === -1) {
-                            console.log('handle added student');
                             handleAddedStudent(currentStudentIds[i], currentCourses);
                         }
                     }
 
                     for (i = 0; i < originalStudentIds.length; i++) {
                         if (currentStudentIds.indexOf(originalStudentIds[i] + '') === -1) {
-                            console.log('handle removed student');
                             handleRemovedStudent(originalStudentIds[i], currentCourses);
                         }
                     }

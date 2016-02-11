@@ -172,7 +172,7 @@
 
                 <div class="column">
                     <div class="field-label">Extra Info</div>
-                    <div class="font-medium">
+                    <div class="field-data">
                         <input type="text"
                                data-ng-model="card.answerExtension"
                                class="form-control "
@@ -187,7 +187,7 @@
             <div class="two-column-section">
                 <div class="column">
                     <div class="field-label">Course</div>
-                    <div class="font-medium" data-ng-controller="CoursesController"
+                    <div class="field-data" data-ng-controller="CoursesController"
                          data-ng-init="findById(card.course)">
                         <a href="#!/courses/{{course._id}}/edit">{{course.name}}</a>
                     </div>
@@ -195,7 +195,7 @@
 
                 <div class="column">
                     <div class="field-label">Pack</div>
-                    <div class="font-medium" data-ng-controller="PacksController"
+                    <div class="field-data" data-ng-controller="PacksController"
                          data-ng-init="findById(card.packs[0])">
                         <a href="#!/packs/{{pack._id}}">{{pack.name}}</a>
                     </div>
@@ -361,7 +361,7 @@
 
             <div class="column">
                 <div class="field-label">Expected answer</div>
-                <div class="font-medium">
+                <div class="field-data">
                     {{card.answer}}
                 </div>
             </div>
@@ -585,7 +585,7 @@
 
             <div class="column">
                 <div class="field-label">Expected answer</div>
-                <div class="font-medium">
+                <div class="field-data">
                     {{card.question}}
                 </div>
             </div>
@@ -801,14 +801,14 @@
             <div class="column">
                 <div data-ng-if="card.modes.indexOf('images') === -1">
                     <div class="field-label">Images
-                        <i class="glyphicon glyphicon-plus-sign font-medium" style="padding-left: 5px;"></i>
+                        <i class="glyphicon glyphicon-plus-sign field-data" style="padding-left: 5px;"></i>
                     </div>
                 </div>
 
                 <div data-ng-if="card.modes.indexOf('images') > -1">
                     <div class="field-label">Images <a href="" style="padding-left: 5px;"
                                                        data-ng-click="manageImages()"><i
-                            class="glyphicon glyphicon-plus-sign font-medium"></i></a></div>
+                            class="glyphicon glyphicon-plus-sign field-data"></i></a></div>
                 </div>
 
                 <div class="field-data">

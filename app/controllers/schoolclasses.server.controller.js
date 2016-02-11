@@ -284,20 +284,22 @@ exports.update = function (req, res) {
                         });
                     };
 
-                    var findAndLockCourseFor = function (id, studentIds, lock) {
-                        Course.findOne({'_id': id}).exec(function (err, cs) {
-
-                            // student has a slave of our master
-                            if (studentIds.indexOf(cs.user + '') > -1) {
-                                lockCourse(cs._id, lock);
-                            }
-
-                        });
-
-                    };
 
 
                     var handleSlavesFor = function (courseId, studentIds, lock) {
+
+                        var findAndLockCourseFor = function (id, studentIds, lock) {
+                            Course.findOne({'_id': id}).exec(function (err, cs) {
+
+                                // student has a slave of our master
+                                if (studentIds.indexOf(cs.user + '') > -1) {
+                                    lockCourse(cs._id, lock);
+                                }
+
+                            });
+
+                        };
+
                         Course.findOne({'_id': courseId}).exec(function (err, cm) {
 
 

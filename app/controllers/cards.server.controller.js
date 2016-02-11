@@ -196,10 +196,18 @@ exports.update = function (req, res) {
 
     if (!req.body.answer) {
         card.answer = undefined;
+        return res.send(400, {
+
+            message: 'please set answer'
+        });
     }
 
     if (!req.body.question) {
         card.question = undefined;
+        return res.send(400, {
+
+            message: 'please set question'
+        });
     }
 
     if (!req.body.questionExtension) {

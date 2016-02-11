@@ -311,9 +311,55 @@ exports.update = function (req, res) {
                         });
                     };
 
-                    var handleAddedCourse = function (id, currentStudentIds) {
-                        handleSlavesFor(id, currentStudentIds, true);
+                    var handleAddedStudent = function (userId, classCourses) {
 
+                        var handleSlave = function (courseId, studentCourses, userId) {
+                            getSlaves(courseId).promise.then(function (slaves) {
+                                var found = false;
+                                for (var j = 0; j < studentCourses.length; j++) {
+                                    if (slaves.indexOf(studentCourses[j])) {
+                                        lockCourse(studentCourses[j]._id, true);
+                                        found = true;
+                                    }
+                                }
+                                if (!found) {
+                                    courses.copyCourse({query: {userId: userId}}, undefined, undefined, courseId);
+                                }
+                            });
+                        };
+
+                        Course.find({'user': userId}).exec(function (err, studentCourses) {
+                            for (var i = 0; i < classCourses.length; i++) {
+                                handleSlave(classCourses[i], studentCourses, userId);
+
+                            }
+                        });
+                    };
+
+                    var handleAddedCourse = function (courseId, currentStudentIds) {
+                        var handleStudent = function (userId, courseId) {
+
+                            Course.find({'user': userId}).exec(function (err, studentCourses) {
+                                getSlaves(courseId).promise.then(function (slaves) {
+                                    var found = false;
+                                    for (var i = 0; i < studentCourses.length; i++) {
+                                        if (slaves.indexOf(studentCourses[i]._id) > -1) {
+                                            lockCourse(studentCourses[i]._id, true);
+                                            found = true;
+                                        }
+                                    }
+                                    if (!found) {
+                                        courses.copyCourse({query: {userId: userId}}, undefined, undefined, courseId);
+                                    }
+                                });
+                            });
+
+
+                        };
+
+                        for (var i = 0; i < currentStudentIds.length; i++) {
+                            handleStudent(currentStudentIds[i], courseId);
+                        }
                     };
 
 
@@ -333,68 +379,18 @@ exports.update = function (req, res) {
                         return deferred;
                     };
 
-                    var handleAddedStudent = function (userId, classCourses) {
-
-                        var handleSlave = function(courseId, studentCourses, userId) {
-                            getSlaves(courseId).promise.then(function (slaves) {
-                                var found = false;
-                                for (var j = 0; j < studentCourses.length; j++) {
-                                    if (slaves.indexOf(studentCourses[j])) {
-                                        lockCourse(studentCourses[j]._id, true);
-                                        found = true;
-                                    }
-                                }
-                                if (!found) {
-
-                                    courses.copyCourse({query: {userId: userId}}, undefined, undefined, courseId);
-                                }
-                            });
-                        };
-
-
-                        Course.find({'user': userId}).exec(function (err, studentCourses) {
-
-
-                            for (var i = 0; i < classCourses.length; i++) {
-                                handleSlave(classCourses[i], studentCourses, userId);
-
-                            }
-                        });
-                    };
 
                     var handleRemovedStudent = function (id, classCourses) {
                         for (var i = 0; i < classCourses.length; i++) {
                             handleSlavesFor(classCourses[i], [id], false);
-
                         }
-                        //Course.find({'user': id}).exec(function (err, studentCourses) {
-                        //
-                        //    for (var i=0; i<classCourses.length; i++) {
-                        //        var found = false;
-                        //        for (var j=0; j<studentCourses.length; j++) {
-                        //            console.log(classCourses[i]);
-                        //            console.log(studentCourses[j]);
-                        //        }
-                        //        if (found) {
-                        //            console.log('unlock course');
-                        //            //courses.copyCourse({query: {userId: id}}, undefined, undefined, classCourses[i]);
-                        //        }
-                        //    }
-                        //
-                        //});
                     };
 
 
                     for (i = 0; i < currentCourses.length; i++) {
-
-
-
-                        // is this is new course
                         if (originalCourses.indexOf(currentCourses[i] + '') === -1) {
                             console.log('handle added course');
                             handleAddedCourse(currentCourses[i], currentStudentIds);
-
-
                         }
                     }
 
@@ -402,10 +398,6 @@ exports.update = function (req, res) {
                         if (currentCourses.indexOf(originalCourses[i] + '') === -1) {
                             console.log('handle removed course');
                             handleRemovedCourse(originalCourses[i], currentStudentIds);
-                            //        console.log('unlock course');
-                            //        console.log(currentCourses[i]);
-                            //        findAndLockCourse(originalCourses[i], false);
-                            //
                         }
                     }
 
@@ -415,20 +407,13 @@ exports.update = function (req, res) {
                             console.log('handle added student');
                             handleAddedStudent(currentStudentIds[i], currentCourses);
                         }
-                        //console.log('copy new course for student ');
-                        //console.log(currentStudentIds[j]);
-                        //
                     }
 
                     for (i = 0; i < originalStudentIds.length; i++) {
-
                         if (currentStudentIds.indexOf(originalStudentIds[i] + '') === -1) {
                             console.log('handle removed student');
                             handleRemovedStudent(originalStudentIds[i], currentCourses);
                         }
-                        //console.log('copy new course for student ');
-                        //console.log(currentStudentIds[j]);
-                        //courses.copyCourse({query: {userId: currentStudentIds[j]}}, undefined, undefined, currentCourses[i]);
                     }
 
 

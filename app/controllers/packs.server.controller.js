@@ -375,6 +375,80 @@ exports.removeDanglingPacks = function (req, res) {
     });
 };
 
+exports.removeDeadCards = function (req, res) {
+
+
+    var checkCard = function(pack, cardId) {
+        Card.findOne({'_id': cardId}).exec(function (err, card) {
+
+            if (!card) {
+                pack.cards.splice(pack.cards.indexOf(cardId, 1));
+                pack.save();
+            }
+
+        });
+    };
+
+    var checkCards = function (pack) {
+
+        for (var i=0; i<pack.cards.length; i++) {
+            checkCard(pack, pack.cards[i]);
+        }
+    };
+
+    Pack.find().exec(function (err, packs) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            //console.log(packs);
+            for (var i = 0; i < packs.length; i++) {
+                checkCards(packs[i]);
+
+            }
+            res.jsonp('ok');
+        }
+    });
+};
+
+exports.removeDeadSlaves = function (req, res) {
+
+
+    var checkSlave = function(pack, slaveId) {
+        Pack.findOne({'_id': slaveId}).exec(function (err, slave) {
+
+            if (!slave) {
+                pack.slaves.splice(pack.cards.indexOf(slaveId, 1));
+                pack.save();
+            }
+
+        });
+    };
+
+    var checkSlaves = function (pack) {
+
+        for (var i=0; i<pack.slaves.length; i++) {
+            checkSlave(pack, pack.slaves[i]);
+        }
+    };
+
+    Pack.find().exec(function (err, packs) {
+        if (err) {
+            return res.send(400, {
+                message: getErrorMessage(err)
+            });
+        } else {
+            //console.log(packs);
+            for (var i = 0; i < packs.length; i++) {
+                checkSlaves(packs[i]);
+
+            }
+            res.jsonp('ok');
+        }
+    });
+};
+
 /**
  * List of Packs
  */

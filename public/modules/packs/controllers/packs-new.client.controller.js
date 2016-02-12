@@ -282,20 +282,40 @@ angular.module('packs').controller('PacksControllerNew', ['$window', '$http', '$
             });
         };
 
+        $scope.info = '';
         $scope.removeDanglingPacks = function () {
             $http.get('/packs/removeDanglingPacks').success(function (x) {
-
+                $scope.info = x;
             }).error(function (response) {
                 $scope.error = response.message;
-//                console.log('ERROR');
-//                console.log(response);
+            });
+        };
 
+        $scope.removeDeadCards = function () {
+            $http.get('/packs/removeDeadCards').success(function (x) {
+                $scope.info = x;
+                $state.go($state.$current, null, { reload: true });
+            }).error(function (response) {
+                $scope.error = response.message;
+            });
+        };
+
+        $scope.removeDeadSlaves = function () {
+            $http.get('/packs/removeDeadSlaves').success(function (x) {
+                $scope.info = x;
+                $state.go($state.$current, null, { reload: true });
+            }).error(function (response) {
+                $scope.error = response.message;
             });
         };
 
 
         // Find existing Pack
         $scope.findOne = function () {
+
+            if(!$scope.authentication.user) {
+                return;
+            }
 
             if ($stateParams.tab) {
 

@@ -4,116 +4,137 @@
          ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
 
 
-    <div class="col-xs-12 dashboard-col">
-        <div class="half-admin-card font-large">
-            <div class="title">
-                Packs - Administration
+    <div class="admin-card">
+        <div class="title">
+            Packs - Administration
 
-            </div>
+        </div>
 
-            <div class="flashcard-section">
+        <div class="section top-section">
 
 
-                <button type="button" class="btn btn-course font-s"
-                        data-ng-click="removeDanglingPacks()">
-                    <div>Remove dangling packs</div>
+            <button type="button" class="btn btn-rememberators"
+                    data-ng-click="removeDanglingPacks()">
+                <div>Remove dangling packs</div>
 
-                </button>
+            </button>
+
+            <button type="button" class="btn btn-rememberators"
+                    data-ng-click="removeDeadCards()">
+                <div>Remove dead cards</div>
+
+            </button>
+
+            <button type="button" class="btn btn-rememberators"
+                    data-ng-click="removeDeadSlaves()">
+                <div>Remove dead slaves</div>
+
+            </button>
+        </div>
+        <div class="section">
+            <div class="info">
+                {{info}}
             </div>
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col ">
-        <div class="half-admin-card font-large">
-            <div class="title">Search</div>
-            <div class="flashcard-section row">
+    <div class="admin-card">
+        <div class="title">Search</div>
+        <div class="section top-section">
 
 
-                <div class="col-xs-12">
-                    <!--<div class="field-label">Find Pack</div>-->
-                    <input type="text"
-                           ng-model="options.searchText"
-                           class="form-control search"
-                           data-ng-change="updateSearch()"
-                           placeholder="Name">
-                </div>
+            <input type="text"
+                   ng-model="options.searchText"
+                   class="form-control search"
+                   data-ng-change="updateSearch()"
+                   placeholder="Name">
 
 
-            </div>
         </div>
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-if="!packs || packs.length === 0">
 
-        <div class="half-admin-card font-large">
-            <div class="title">No Packs Found</div>
-            <div class="danger">There are no packs matching your search criteria</div>
-        </div>
+    <div class="admin-card" data-ng-if="!packs || packs.length === 0">
+        <div class="title">No Packs Found</div>
+        <div class="danger">There are no packs matching your search criteria</div>
     </div>
 
-    <div class="col-xs-12 col-md-6 dashboard-col " data-ng-repeat="p in packs">
-        <div class="half-admin-card font-large">
-            <div class="title">{{p.name}}
+    <div class="page-section">
+        <div data-ng-repeat="p in packs">
+            <div class="admin-card-small">
+                <div class="title">{{p.name}}
 
-                <div class="pull-right">
-                    <a href="" data-ng-click="areYouSureToDeleteCourse(c)"><i class="glyphicon glyphicon-trash"></i></a>
+                    <div class="pull-right">
+                        <a href="" data-ng-click="areYouSureToDeleteCourse(c)"><i class="glyphicon glyphicon-trash"></i></a>
+                    </div>
+                    <div class="pull-right">
+                        <a href="/#!/packs/{{p._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
+                    </div>
+
                 </div>
-                <div class="pull-right">
-                    <a href="/#!/packs/{{p._id}}/admin"><i class="glyphicon glyphicon-edit"></i></a>
-                </div>
 
-            </div>
+                <div class="two-column-section" data-ng-controller="CoursesController"
+                     data-ng-init="findById(p.course)">
 
-            <div class="flashcard-section">
+                    <div class="column">
+                        <div class="field-label">Course</div>
+                        <div class="field-data">
+                            <div data-ng-if="course.name">
+                                {{course.name}}
+                            </div>
 
-                <div class="col-xs-4">
-                    <div class="field-label">Course</div>
-                    <div class="field-data" data-ng-controller="CoursesController" data-ng-init="findById(p.course)">
-                        <div data-ng-if="course.name">
-                            {{course.name}}
+                            <div data-ng-if="!course.name" class="danger">
+                                none
+                            </div>
+
                         </div>
+                    </div>
 
-                        <div data-ng-if="!course.name" class="danger">
-                            none
+                    <div class="column">
+                        <div class="field-label">User</div>
+                        <div class="field-data">
+                            <div data-ng-if="course.user">
+                                {{course.user.displayName}}
+                            </div>
+
+
                         </div>
-
                     </div>
                 </div>
 
-                <div class="col-xs-4">
-                    <div class="field-label">Cards</div>
-                    <div class="field-data">
-                        <div data-ng-if="p.cards && p.cards.length > 0">
-                            {{p.cards.length}}
-                        </div>
+                <div class="two-column-section">
+                    <div class="column">
+                        <div class="field-label">Cards</div>
+                        <div class="field-data">
+                            <div data-ng-if="p.cards && p.cards.length > 0">
+                                {{p.cards.length}}
+                            </div>
 
-                        <div data-ng-if="!p.cards || p.cards.length ===0" class="danger">
-                            none
-                        </div>
+                            <div data-ng-if="!p.cards || p.cards.length ===0" class="danger">
+                                none
+                            </div>
 
+                        </div>
+                    </div>
+
+                    <div class="column">
+                        <div class="field-label">Slaves</div>
+                        <div class="field-data">
+                            <div data-ng-if="p.slaves && p.slaves.length > 0">
+                                {{p.slaves.length}}
+                            </div>
+
+                            <div data-ng-if="!p.slaves || p.slaves.length ===0">
+                                none
+                            </div>
+
+                        </div>
                     </div>
                 </div>
 
-                <div class="col-xs-4">
-                    <div class="field-label">Slaves</div>
-                    <div class="field-data">
-                        <div data-ng-if="p.slaves && p.slaves.length > 0">
-                            {{p.slaves.length}}
-                        </div>
 
-                        <div data-ng-if="!p.slaves || p.cards.slaves ===0">
-                            none
-                        </div>
-
-                    </div>
-                </div>
             </div>
         </div>
-
-
-    </div>
-
-
 
 
 </section>

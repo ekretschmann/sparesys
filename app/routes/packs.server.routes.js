@@ -6,12 +6,18 @@ module.exports = function(app) {
 
 	// Packs Routes
 	app.route('/packs')
-		.get(packs.list)
+		.get(users.requiresLogin, packs.list)
 		.post(users.requiresLogin, packs.create);
 
 
 	app.route('/packs/removeDanglingPacks')
-		.get(packs.removeDanglingPacks);
+		.get(users.requiresLogin, users.hasAuthorization, packs.removeDanglingPacks);
+
+	app.route('/packs/removeDeadCards')
+		.get(users.requiresLogin, users.hasAuthorization, packs.removeDeadCards);
+
+	app.route('/packs/removeDeadSlaves')
+		.get(users.requiresLogin, users.hasAuthorization, packs.removeDeadSlaves);
 
 	app.route('/packs/:packId')
 		.get(packs.read)

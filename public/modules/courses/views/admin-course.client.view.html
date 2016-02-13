@@ -1,10 +1,10 @@
 <div data-ng-controller="CoursesController" data-ng-init="findOne()">
 
 
-    <div ng-include="'/modules/packs/views/partial/delete-pack.modal.client.view.html'"></div>
+    <div ng-include="'/modules/courses/views/partial/delete-course.modal.client.view.html'"></div>
 
 
-    <div class="half-admin-card-large font-large">
+    <div class="admin-card-large">
         <div class="title">
             {{course.name}} - Administration
             <div class="pull-right">
@@ -18,12 +18,13 @@
             </div>
         </div>
 
-        <div class="flashcard-section">
+        <div class="section top-section">
 
 
-            <button type="button" class="btn btn-course font-s"
-                    data-ng-click="removeDanglingPackSlaves()">
-                <div>Remove dangling pack slaves</div>
+
+            <button type="button" class="btn btn-rememberators"
+                    data-ng-click="removeDanglingCourseSlaves()">
+                <div>Remove dangling course slaves</div>
 
             </button>
         </div>
@@ -41,7 +42,7 @@
 
             <div class="column">
                 <div class="field-label">Title</div>
-                <div class="field-data">
+                <div>
                     <input type="text"
                            data-ng-model="course.name"
                            class="form-control "
@@ -52,7 +53,7 @@
 
             <div class="column">
                 <div class="field-label">Description</div>
-                <div class="field-data">
+                <div>
                     <input type="text"
                            data-ng-model="course.description"
                            class="form-control "
@@ -65,7 +66,7 @@
         <div class="two-column-section ">
             <div class="column">
                 <div class="field-label">Front</div>
-                <div class="field-data">
+                <div>
                     <input type="text"
                            data-ng-model="course.front"
                            class="form-control "
@@ -76,7 +77,7 @@
 
             <div class="column">
                 <div class="field-label">Back</div>
-                <div class="field-data">
+                <div>
                     <input type="text"
                            data-ng-model="course.back"
                            class="form-control "
@@ -89,7 +90,7 @@
         <div class="two-column-section ">
             <div class="column">
                 <div class="field-label">Published</div>
-                <div class="field-data">
+                <div>
                     <input data-ng-model="course.published" type="radio" ng-value="true"
                            data-ng-click="update()"/> yes
                     <input style="margin-left: 10px" data-ng-model="course.published" type="radio"
@@ -100,7 +101,7 @@
 
             <div class="column">
                 <div class="field-label">Role</div>
-                <div class="field-data">
+                <div>
                     <input data-ng-model="course.teaching" type="radio" ng-value="true"
                            data-ng-click="update()"/> Teacher
                     <input style="margin-left: 10px" data-ng-model="course.teaching" type="radio"
@@ -123,7 +124,7 @@
                 <div class="field-label">Supervised</div>
 
                 <div class="field-data">
-                    <div class="field-data">
+                    <div">
                         <input data-ng-model="course.supervised" type="radio" ng-value="true"
                                data-ng-click="update()"/> yes
                         <input style="margin-left: 10px" data-ng-model="course.supervised" type="radio"
@@ -136,7 +137,9 @@
 
         </div>
 
-    </div>
+
+
+
 
     <div class="admin-card-large">
 
@@ -153,7 +156,6 @@
                 <div class="field-label">
                     Language Front
                 </div>
-
 
                 <div class="btn-group right-padded-l nowrap">
 

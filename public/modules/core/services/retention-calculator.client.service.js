@@ -136,8 +136,10 @@ angular.module('core').service('RetentionCalculatorService', [
 
                 }
 
-
-                return this.initialAssessment(assessment);
+                console.log('assessment was 0');
+                var newHrt = this.initialAssessment(assessment);
+                console.log('new hrt ',newHrt);
+                return newHrt;
 
             }
         };

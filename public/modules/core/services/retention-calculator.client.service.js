@@ -89,7 +89,9 @@ angular.module('core').service('RetentionCalculatorService', [
                     console.log('  tw:',totalWeight);
                     endTime = entry.when;
 
-                    counter++;
+                    if (counter++ > 3) {
+                        break;
+                    }
                 }
 
 
